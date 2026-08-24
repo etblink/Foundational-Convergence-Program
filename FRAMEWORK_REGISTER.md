@@ -9,18 +9,19 @@ This register identifies frameworks eligible for future comparison and tracks re
 - `ADMITTED_NOT_AUDITED`
 - `SOURCE_INTAKE_OPEN`
 - `SOURCE_BOUND_READY`
-- `COMPARISON_OPEN`
-- `COMPARISON_COMPLETE`
+- `PAIRWISE_COMPARISON_COMPLETE`
 - `DEFERRED`
 - `REMOVED_WITH_REASON`
 
+A framework may participate in multiple pairwise or multi-framework comparisons. `PAIRWISE_COMPARISON_COMPLETE` therefore means only that at least one specifically identified comparison is complete; it does not mean the framework is globally or finally audited.
+
 ## Framework set
 
-| Framework ID | Working name | Role | Status | Scientific verdict |
+| Framework ID | Working name | Role | Status | Latest bounded scientific status |
 |---|---|---|---|---|
-| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `COMPARISON_COMPLETE` | **FCP-3 pairwise comparison complete; no overall winner; null remains empirically strong but foundationally incomplete** |
-| `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `COMPARISON_COMPLETE` | **FCP-3: no strong/moderate convergence with null at current source scope; no current foundational discriminator** |
-| `FW-OAQ` | Operational / algebraic quantum approaches | comparator family | `ADMITTED_NOT_AUDITED` | **NONE** |
+| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `PAIRWISE_COMPARISON_COMPLETE` | **FCP-3 pairwise comparison with Reduced NFC complete; empirically strong in tested regimes, foundationally incomplete, no overall winner** |
+| `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `PAIRWISE_COMPARISON_COMPLETE` | **FCP-3: no strong/moderate convergence with null at current source scope; no current foundational discriminator** |
+| `FW-OAQ` | Operational / algebraic quantum approaches | comparator family pending subdivision | `ADMITTED_NOT_AUDITED` | **NONE — FCP-4 source split/intake recommended before comparison** |
 | `FW-CAUSAL` | Causal-set / order-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | **NONE** |
 | `FW-LOOP` | Loop / spin-network / spinfoam approaches | comparator family | `ADMITTED_NOT_AUDITED` | **NONE** |
 | `FW-TENSOR` | Tensor-network / information-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | **NONE** |
@@ -46,7 +47,7 @@ FCP-2 froze before first competitor exposure:
 - `FCP_EQUIVALENCE_AND_CONVERGENCE_RULES_0_1_0`;
 - null reference matrix `FCP2_NULL_STRUCTURAL_DECOMPOSITION_0_1_0.md`.
 
-K1–K10, M1–M3, E1–E5, and convergence-credit rules remain controlling for FCP-3 and were not modified by it.
+K1–K10, M1–M3, E1–E5, and convergence-credit rules remain controlling for later comparisons unless superseded through the explicit governance-revision procedure.
 
 ## FCP-3 first cross-framework state
 
@@ -57,7 +58,8 @@ Controlling FCP-3 artifacts:
 - `frameworks/nfc_reduced/FCP3_NFC_REDUCED_SOURCE_BINDING_0_1_0.md`;
 - `comparisons/FCP3_NFC_REDUCED_VS_NULL_K1_K10_0_1_0.md`;
 - `convergence/FCP3_NFC_NULL_CONVERGENCE_LEDGER_0_1_0.md`;
-- `convergence/FCP3_NFC_NULL_DIVERGENCE_LEDGER_0_1_0.md`.
+- `convergence/FCP3_NFC_NULL_DIVERGENCE_LEDGER_0_1_0.md`;
+- `handoffs/FCP3_NFC_VS_NULL_HANDOFF_0_1_0.md`.
 
 FCP-3 result at current source scope:
 
@@ -70,7 +72,7 @@ FCP-3 result at current source scope:
 - key-extension candidates: `0`;
 - no overall numerical score or winner.
 
-The cross-framework verdict is bounded:
+Bounded verdict:
 
 > **NO NONTRIVIAL NFC–NULL CONVERGENCE FOUND AT CURRENT SOURCE SCOPE.**
 

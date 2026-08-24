@@ -16,6 +16,8 @@ Before substantive scoring begins for a framework or comparison:
 6. state the questions to be tested;
 7. state what would count as positive, negative, nonforcing, or unresolved evidence.
 
+FCP-2 additionally froze the framework-neutral K1–K10 coordinates, M1–M3 status metadata, E1–E5 equivalence classes, convergence-credit rules, and anti-retrofitting rule before the first cross-framework comparison. Later comparisons must use those versioned artifacts unless an explicit governance revision supersedes them.
+
 ## 3. Ten mandatory analysis layers
 
 ### Layer 1 — Primitive assumptions
@@ -87,13 +89,15 @@ A result contributes framework-specific convergence credit only if:
 5. any physical interpretation has an explicit bridge;
 6. any empirical claim has a declared comparator and falsification condition.
 
+Generic mathematics earns zero framework-specific convergence credit. Functional analogy does not qualify as strong convergence.
+
 ## 6. Comparison output
 
 A completed comparison should contain:
 
 - source register additions;
-- framework assumption ledger;
-- ten-layer analysis;
+- framework assumption/source-binding ledger;
+- ten-layer and/or K1–K10 analysis as applicable;
 - claim ledger rows;
 - countermodels/negative results where relevant;
 - convergence candidates;
@@ -101,6 +105,14 @@ A completed comparison should contain:
 - strict scope ceiling;
 - recommended next test.
 
-## 7. Initialization restriction
+## 7. Current operational state
 
-This protocol file creates no scientific result. All initial framework entries remain `ADMITTED_NOT_AUDITED` until separately authorized analysis begins.
+The protocol is active rather than initialization-only.
+
+Completed uses:
+
+- FCP-1 source-bound the null competitor;
+- FCP-2 froze comparison coordinates before competitor exposure;
+- FCP-3 completed the first cross-framework comparison under those frozen coordinates.
+
+Historical phase artifacts remain frozen as records of what was true at their phase. Live repository metadata must reflect the current project state without rewriting those historical records.

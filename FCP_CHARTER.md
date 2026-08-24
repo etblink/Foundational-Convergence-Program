@@ -39,7 +39,7 @@ FCP may compare, when separately admitted and source-bound:
 - categorical, process-theoretic, or topos-style foundational approaches;
 - additional frameworks admitted later under the same rules.
 
-Admission is not endorsement. Listing is not evidence. No framework receives a scientific score until a separately authorized source-bound comparison is completed.
+Admission is not endorsement. Listing is not evidence. A framework receives comparative credit only through separately authorized, source-bound analysis under the common protocol.
 
 ## 5. Core comparison burdens
 
@@ -55,6 +55,8 @@ Every framework must be examined under the same ten burdens:
 8. falsification conditions;
 9. unresolved selection problems;
 10. whether the same result follows in a weaker framework.
+
+FCP-2 further freezes K1–K10 comparison coordinates, M1–M3 status metadata, and E1–E5 equivalence/convergence rules. Those versioned artifacts control later comparisons unless explicitly superseded by a governance revision.
 
 ## 6. Prohibited promotions
 
@@ -72,6 +74,14 @@ The program must not infer physical truth from:
 
 ## 7. Current phase
 
-`INITIALIZATION_GOVERNANCE_ONLY`
+`ACTIVE_COMPARATIVE_RESEARCH`
 
-No substantive framework comparison is authorized by this charter's creation. The first scientific task must be separately opened after the initialization commit is verified.
+Completed milestones:
+
+- `FCP-1`: null competitor source-bound baseline;
+- `FCP-2`: preregistered comparison-key/equivalence freeze;
+- `FCP-3`: first cross-framework comparison, Reduced NFC vs. null baseline.
+
+FCP-3's bounded result is preserved as a negative/nonforcing scientific output: no strong or moderate NFC–null convergence was found at the current source scope.
+
+The next recommended phase is `FCP-4`, a framework-splitting and source-intake task for the operational/algebraic quantum family. FCP-4 does not receive scientific authorization merely from this charter text; each substantive task remains separately bounded by its task authorization and source window.
