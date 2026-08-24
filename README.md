@@ -2,9 +2,9 @@
 
 ## Status
 
-**Current completed phase:** FCP-9 — Causal-Set / Order-Theoretic Framework Source Intake and K1–K10 Baseline  
-**Current scientific state:** causal set theory proper is source-bound as a distinct CST subset of the over-broad `FW-CAUSAL` umbrella; core kinematics is mature relative to dynamics, continuum reconstruction reaches R2 framework-wide with sharper partial results, classical dynamics reaches D2 as a family, and framework-level empirical selection remains absent  
-**Next recommended task:** FCP-10 — Causal/Order Framework Split Resolution and CST Canonical Source Binding
+**Current completed phase:** FCP-10 — Causal/Order Framework Split Resolution and CST Canonical Source Binding  
+**Current scientific state:** causal set theory proper is now canonically registered as `FW-CST`; the historical `FW-CAUSAL` umbrella is superseded because it pooled source-bound CST with unspecified adjacent order-theoretic approaches; CST scientific levels remain R2 framework-wide, D2 at strongest bounded optional dynamics scope, and E2 model-specific with no framework-level empirical discriminator  
+**Next recommended task:** FCP-11 — CST vs. Null/GR: K1–K10 Emergence, Reformulation, and Empirical-Control Baseline
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language or model.
 
@@ -27,6 +27,7 @@ No framework receives evidentiary credit merely because it suggested the questio
 - **FCP-7:** decomposed GPTOPT into base operational structure, optional reconstruction axioms, quantum embedding, generalized/post-quantum possibilities and bounded empirical restrictions before any NFC–GPTOPT comparison.
 - **FCP-8:** source-bound post-quantum Bell/composite theory space, candidate quantum-boundary principles and empirical restrictions without performing any NFC–GPTOPT comparison.
 - **FCP-9:** source-bound causal set theory proper, separated minimal kinematics from dynamics/continuum/matter/phenomenology, and opened a framework-split candidate for the broader causal/order umbrella without performing any cross-framework comparison.
+- **FCP-10:** resolved that split, preserved historical `FW-CAUSAL` as a superseded umbrella, admitted canonical `FW-CST`, and deferred the unbound adjacent order-theoretic remainder without creating a placeholder framework or performing a cross-framework comparison.
 
 ## FCP-6 Reduced-NFC/AQFT control
 
@@ -62,7 +63,7 @@ Minimal CST core:
 Main results:
 
 - literal `FW-CAUSAL = causal-set / order-theoretic approaches` is too broad: `FRAMEWORK_SPLIT_CANDIDATE = 1`;
-- suggested future `FW-CST` ID is not enacted until a separate split-resolution phase;
+- suggested future `FW-CST` ID was not enacted until FCP-10;
 - classical sequential growth is an optional CST dynamics layer, not a separate framework;
 - quantum measure/QSG is a provisional quantum-dynamics layer, not minimal kinematics;
 - Poisson sprinkling is a continuum-approximation/sampling construction, not fundamental dynamics;
@@ -95,6 +96,31 @@ Permanent FCP-9 controls:
 
 > **MODEL-SPECIFIC PHENOMENOLOGY != FRAMEWORK-LEVEL PREDICTION.**
 
+## FCP-10 taxonomy result
+
+FCP-10 confirms the FCP-9 framework-split candidate without adding external scientific sources.
+
+Canonical result:
+
+- `FW-CAUSAL` → `SUPERSEDED_BY_FRAMEWORK_SPLIT`;
+- `FW-CST` → `SOURCE_BOUND_READY`;
+- core carrier: locally finite causal set / causal order;
+- core dynamics: none;
+- CSG remains optional `C2` dynamics;
+- quantum measure/QSG remains optional/provisional `C3` dynamics;
+- Lorentzian continuum remains a realization target rather than primitive input;
+- matter remains `C4` extension-level;
+- phenomenology remains model-specific;
+- R2/D2/E2 and the no-framework-level-discriminator result remain unchanged;
+- the unspecified adjacent causal/order remainder is deferred pending separate source intake;
+- no `FRAMEWORK_EXTENSION_CANDIDATE` and no `KEY_EXTENSION_CANDIDATE` is created.
+
+Taxonomic verdict:
+
+> **CAUSAL SET THEORY IS NOW A SCIENTIFICALLY COHERENT, SOURCE-BOUND FCP COMPETITOR DISTINCT FROM THE FORMER OVER-BROAD CAUSAL/ORDER UMBRELLA.**
+
+> **NO CROSS-FRAMEWORK COMPARISON PERFORMED IN FCP-10.**
+
 ## NFC provenance boundary
 
 The NFC canon is **not** imported into FCP. Reduced NFC enters only through the source-bound noncanonical reduction handoff.
@@ -122,8 +148,8 @@ Permanent rule:
 
 Recommended:
 
-**FCP-10 — Causal/Order Framework Split Resolution and CST Canonical Source Binding**.
+**FCP-11 — CST vs. Null/GR: K1–K10 Emergence, Reformulation, and Empirical-Control Baseline**.
 
-FCP-9 found that causal set theory proper is coherent but the literal `FW-CAUSAL` umbrella is not clean enough for cross-framework comparison. FCP-10 should resolve that taxonomy first: admit `FW-CST` if the split survives review, determine whether any adjacent order-theoretic family deserves a separate source-bound ID, and preserve CSG/QSG as named CST dynamics layers rather than distinct competitors.
+Now that `FW-CST` has one canonical source-bound identity, FCP-11 may ask which CST structures are genuinely additional to the null/GR baseline, which reconstruct supplied Lorentzian geometry, which are generic order/combinatorial mathematics, and which—if any—carry independent physical or empirical content.
 
-No CST-vs-null, NFC, GPTOPT, AQFT or other convergence comparison should occur until that identity is clean.
+FCP-11 should preserve the FCP-9/FCP-10 layer boundaries and begin no convergence credit before the null/reformulation control is applied.

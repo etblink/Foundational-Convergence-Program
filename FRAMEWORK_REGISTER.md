@@ -26,7 +26,8 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 | `FW-AQFT` | Algebraic / locally covariant quantum field theory | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-5/6 controls complete; core mostly reformulation/sharpening of QFT plus named AQFT-X extensions; no framework-level empirical discriminator |
 | `FW-GPTOPT` | Generalized probabilistic / operational-probabilistic theories | source-bound generalizing meta-framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-8: post-quantum Bell/composite theory space empirically and structurally bounded; no unique quantum-boundary principle; empirical evidence reaches bounded L2, not global L4 selection |
 | `FW-CQM` | Categorical quantum mechanics / quantum process theories | source-bound comparator | `SOURCE_BOUND_READY` | FCP-4 source intake complete; no cross-framework comparison yet |
-| `FW-CAUSAL` | Causal-set / order-theoretic approaches | historical/provisional causal-order umbrella | `SOURCE_INTAKE_OPEN` | **FCP-9 source-binds causal set theory proper as the controlled CST subset and opens `FRAMEWORK_SPLIT_CANDIDATE=1`: literal umbrella is too broad; CSG/QSG remain CST dynamics layers; adjacent causal/order approaches require separate intake before comparison** |
+| `FW-CAUSAL` | Causal-set / order-theoretic approaches | historical causal/order umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-9/FCP-10 found the literal umbrella scientifically over-broad; causal set theory proper is now `FW-CST`; unspecified adjacent causal/order approaches remain deferred pending separate source intake |
+| `FW-CST` | Causal Set Theory | source-bound discrete causal/order framework | `SOURCE_BOUND_READY` | FCP-9 source intake + FCP-10 canonical binding complete; no cross-framework comparison yet; continuum `R2` framework-wide, optional dynamics `D2` at strongest bounded layer, empirical `E2` model-specific; no framework-level empirical discriminator; major continuum/dynamics/matter-selection burdens remain open |
 | `FW-LOOP` | Loop / spin-network / spinfoam approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-TENSOR` | Tensor-network / information-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-AS` | Asymptotic safety | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
@@ -100,7 +101,28 @@ FCP-9 status:
 - `FRAMEWORK_SPLIT_CANDIDATE = 1` because generic/adjacent causal-order approaches must not be pooled with BLMS CST;
 - `KEY_EXTENSION_CANDIDATE = 0`.
 
-Suggested future ID `FW-CST` is **not enacted in FCP-9**. A bounded split-resolution task must decide it first.
+Suggested future ID `FW-CST` was **not enacted in FCP-9**. FCP-10 resolves that historical split candidate.
+
+## FCP-10 causal/order split resolution
+
+FCP-10 confirms that the literal historical `FW-CAUSAL` umbrella fails the FCP-4 separation rule as a single scientific competitor. It preserves the umbrella as provenance and admits `FW-CST` as the canonical source-bound Causal Set Theory comparator.
+
+Canonical `FW-CST` identity:
+
+- core carrier: locally finite causal order / causal set;
+- framework-level configurations: causal sets modulo order-isomorphism/relabeling redundancy;
+- primitive interpretation: discrete causal structure;
+- core dynamics: none;
+- CSG: optional `C2` classical dynamics extension;
+- quantum measure/QSG: optional/provisional `C3` quantum-dynamics layer;
+- Lorentzian spacetime/GR-like geometry: continuum realization target, not primitive carrier;
+- Standard Model matter: `C4` extension, not core;
+- framework-wide continuum level: `R2`;
+- strongest bounded optional dynamics level: `D2`;
+- empirical level: `E2` model-specific;
+- framework-level empirical discriminator: none identified.
+
+The unspecified “order-theoretic approaches” remainder is `DEFERRED_PENDING_SOURCE_INTAKE`; no `FW-ORDER` or other placeholder ID is created. FCP-10 adds zero external sources, creates zero `FRAMEWORK_EXTENSION_CANDIDATE`s and zero `KEY_EXTENSION_CANDIDATE`s, and performs no cross-framework comparison.
 
 ## Admission and credit rules
 

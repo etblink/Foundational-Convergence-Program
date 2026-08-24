@@ -104,6 +104,14 @@ This register records authoritative source locations and provenance bindings use
 | `SRC-FCP9-CST-PDS-2009` | controlled CST subset / `C5/C6` swerves/diffusion phenomenology | Philpott, Dowker & Sorkin, *Energy-momentum diffusion from spacetime discreteness*, Phys. Rev. D 79, 124047 (2009) | DOI `10.1103/PhysRevD.79.124047` | `SOURCE_BOUND` | Lorentz-invariant diffusion model and CMB blackbody bounds on phenomenological coefficients; not inevitable CST behavior. |
 | `SRC-FCP9-CST-CDP-2010` | controlled CST subset / `C5/C6` polarization diffusion | Contaldi, Dowker & Philpott, *Polarization Diffusion from Spacetime Uncertainty*, Class. Quantum Grav. 27, 172001 (2010) | DOI `10.1088/0264-9381/27/17/172001`; arXiv `1001.4545` | `SOURCE_BOUND` | Declared polarization-diffusion model confronted with CMB polarization; model-specific empirical constraint. |
 
+### FCP-9/FCP-10 — internal CST provenance bindings
+
+| Source ID | Framework / role | Authority | Location | Status | Notes |
+|---|---|---|---|---|---|
+| `SRC-FCP9-CST-INTAKE-001` | `FW-CST` provenance / FCP-9 source intake | Internal FCP source-binding artifact; no independent external authority | file `frameworks/causal_set/FCP9_CAUSAL_SOURCE_INTAKE_0_1_0.md`; exact commit `54e29392a18adfe612c3a2f5262eef472a8f66d2`; blob `89b80b830324a97cdcd5ee37fc473c22c802a7ac` | `REGISTERED_POINTER_ONLY` | Immutable pointer to the controlling 16-source CST intake inherited by FCP-10. |
+| `SRC-FCP9-CST-BASELINE-001` | `FW-CST` provenance / FCP-9 K1–K10 baseline | Internal FCP baseline artifact; no independent external authority | file `frameworks/causal_set/FCP9_CAUSAL_K1_K10_BASELINE_0_1_0.md`; exact commit `54e29392a18adfe612c3a2f5262eef472a8f66d2`; blob `dcac3f4f3f6ae63bddd1a1bed94c00342ae5b12c` | `REGISTERED_POINTER_ONLY` | Preserves R2/D2/E2, K1–K10 population, empirical-discriminator status, and the original eight-burden count including taxonomy. |
+| `SRC-FCP10-CST-BINDING-001` | `FW-CST` provenance / canonical taxonomy binding | Internal FCP taxonomy artifact derived only from frozen FCP-9 records | file `frameworks/causal_set/FCP10_CST_CANONICAL_FRAMEWORK_BINDING_0_1_0.md`; branch `research/fcp-10-causal-framework-split`; blob `787de09a267ee28429e8d80c11f237b7eacad3e8` | `REGISTERED_POINTER_ONLY` | Canonicalizes `FW-CST` without adding external scientific sources or changing FCP-9 K1–K10 conclusions. Exact enclosing candidate commit is recorded by FCP-10 qualification rather than self-referenced inside its own tree. |
+
 ## FCP-1 source-window note
 
 `FCP-1` uses the null records above as a bounded baseline retrieved/checked on 2026-08-24. PDG is a living annual review; future FCP tasks must not silently substitute later editions into `FCP-1` without a versioned update.
@@ -134,6 +142,10 @@ FCP-8 adds **6 theoretical primary/current-status sources and 1 empirical princi
 
 FCP-9 adds **16** external CST/order records, checked on **2026-08-24**: **14 foundational/primary**, **2 modern review/synthesis**, **4 dedicated dynamics**, and **3 direct empirical/observational constraint** records. Scientific-role categories overlap. The corpus source-binds causal set theory proper as a controlled subset of the over-broad `FW-CAUSAL` umbrella; it does not source-bind every causal/order-theoretic approach and authorizes no cross-framework convergence credit.
 
+## FCP-10 taxonomy/source note
+
+FCP-10 external source additions: **0**. FCP-10 taxonomy-only supplemental source additions: **0**. The FCP-9 16-source corpus remains the authoritative external source window for canonical `FW-CST`. FCP-10 changes framework identity/provenance only: historical `FW-CAUSAL` is superseded, `FW-CST` is source-bound and ready, and the unspecified adjacent causal/order remainder is deferred pending separate source intake.
+
 ## Branch-retention rule
 
 Scientific provenance must bind exact commits/blobs rather than rely on mutable branch names. A historical research branch may therefore be retired after its exact commit is reachable from the accepted `main` history and all material internal references identify immutable provenance.
@@ -145,11 +157,15 @@ Source-bound and ready:
 - `FW-AQFT`;
 - `FW-GPTOPT`;
 - `FW-CQM`;
-- causal set theory proper as the FCP-9-controlled subset of `FW-CAUSAL`.
+- `FW-CST`.
 
-Still pending/source-taxonomy unresolved:
+Historical superseded umbrella:
 
-- the `FW-CAUSAL` umbrella split and any adjacent causal/order-theoretic competitor distinct from CST;
+- `FW-CAUSAL` — retained for provenance; superseded by the FCP-10 framework split.
+
+Still pending/deferred source intake:
+
+- adjacent causal/order-theoretic approaches distinct from CST, with no single placeholder framework ID admitted;
 - loop/spinfoam approaches;
 - tensor/information approaches;
 - asymptotic safety;
