@@ -2,9 +2,9 @@
 
 ## Status
 
-**Current completed phase:** FCP-8 — GPTOPT Empirical Theory-Space Control  
-**Current scientific state:** GPTOPT's post-quantum Bell/composite possibility space is now source-bound against quantum limits, candidate principles and bounded experiment; experiment narrows generalized space but no unique quantum-boundary principle or globally unique quantum composite is selected at current scope  
-**Next recommended task:** FCP-9 — Causal-Set / Order-Theoretic Framework Source Intake and K1–K10 Baseline
+**Current completed phase:** FCP-9 — Causal-Set / Order-Theoretic Framework Source Intake and K1–K10 Baseline  
+**Current scientific state:** causal set theory proper is source-bound as a distinct CST subset of the over-broad `FW-CAUSAL` umbrella; core kinematics is mature relative to dynamics, continuum reconstruction reaches R2 framework-wide with sharper partial results, classical dynamics reaches D2 as a family, and framework-level empirical selection remains absent  
+**Next recommended task:** FCP-10 — Causal/Order Framework Split Resolution and CST Canonical Source Binding
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language or model.
 
@@ -26,6 +26,7 @@ No framework receives evidentiary credit merely because it suggested the questio
 - **FCP-6:** compared Reduced NFC with AQFT only after explicit AQFT subtraction; no strong/moderate convergence survived.
 - **FCP-7:** decomposed GPTOPT into base operational structure, optional reconstruction axioms, quantum embedding, generalized/post-quantum possibilities and bounded empirical restrictions before any NFC–GPTOPT comparison.
 - **FCP-8:** source-bound post-quantum Bell/composite theory space, candidate quantum-boundary principles and empirical restrictions without performing any NFC–GPTOPT comparison.
+- **FCP-9:** source-bound causal set theory proper, separated minimal kinematics from dynamics/continuum/matter/phenomenology, and opened a framework-split candidate for the broader causal/order umbrella without performing any cross-framework comparison.
 
 ## FCP-6 Reduced-NFC/AQFT control
 
@@ -35,64 +36,64 @@ Controlling verdict:
 
 > **NO NONTRIVIAL NFC–AQFT CONVERGENCE FOUND AFTER AQFT SUBTRACTION AT CURRENT SOURCE SCOPE.**
 
-## FCP-7 GPTOPT baseline
+## FCP-7/FCP-8 GPTOPT controls
 
-FCP-7 freezes:
+FCP-7 separates base GPTOPT from reconstruction axioms and quantum embedding. FCP-8 then bounds the broader post-quantum Bell/composite theory space and finds that experiment narrows generalized possibilities without uniquely selecting the quantum set or one foundational principle.
 
-- `G0` operational skeleton;
-- `G1` convex/probabilistic structure;
-- `G2` composite-system structure;
-- `G3` reconstruction axioms;
-- `G4` quantum embedding;
-- `G5` generalized/post-quantum theory space;
-- `G6` empirical/physical restriction.
-
-Controlling verdict:
-
-> **GPTOPT IS A GENERAL OPERATIONAL META-FRAMEWORK THAT CONTAINS QUANTUM THEORY AS A SPECIAL CASE BUT DOES NOT SELECT IT WITHOUT ADDITIONAL STRUCTURAL/RECONSTRUCTION PRINCIPLES OR EMPIRICAL RESTRICTION.**
-
-Permanent controls:
+Permanent controls include:
 
 > **BASE GPTOPT + OPTIONAL RECONSTRUCTION AXIOMS != BASE GPTOPT.**
-
-> **QUANTUM EMBEDDING != EMPIRICAL CONFIRMATION OF GPTOPT.**
-
-## FCP-8 GPTOPT empirical theory-space result
-
-FCP-8 analyzes a small bounded source layer for post-quantum correlations, quantum Bell bounds, Information Causality, Macroscopic Locality, almost-quantum correlations, current 2026 Information Causality status and one experimental IC implementation, while carrying forward the FCP-7 Mazurek GPT tomography.
-
-Main results:
-
-- bounded Bell-correlation hierarchy: `classical/local ⊂ quantum ⊂ nonsignalling`;
-- PR-box correlations show that no-signalling does not select quantum theory;
-- quantum Tsirelson bounds are stricter than the nonsignalling/algebraic maximum but are mathematical consequences of quantum theory, not by themselves explanations of why nature is quantum;
-- Information Causality and Macroscopic Locality are nontrivial partial selectors but do not uniquely characterize the complete quantum correlation set at the bounded source scope;
-- the almost-quantum set supplies a post-quantum countermodel to simple principle-uniqueness claims;
-- current 2026 Information Causality work continues to report some boundary gaps;
-- local tomography does not uniquely select the quantum composite cone;
-- Bell/correlation data constrain projections of composite structure, not complete GPT composite state spaces;
-- bounded model-independent GPT tomography can constrain low-dimensional deviations from quantum state/effect geometry, but tomography completeness remains a hard assumption;
-- experimental emulation of supraquantum statistics through postselection does not constitute observation of post-quantum physics;
-- highest justified empirical-selection level: **L2**;
-- principles sufficient for the complete bounded quantum set: **0**;
-- principles independently empirically selected as nature's unique boundary law: **0**;
-- framework-level GPTOPT empirical discriminator: **0**.
-
-Controlling verdict:
-
-> **EXPERIMENT NARROWS GPTOPT THEORY SPACE BUT DOES NOT UNIQUELY SELECT THE QUANTUM SET OR ONE FOUNDATIONAL PRINCIPLE AT CURRENT SOURCE SCOPE.**
-
-Permanent FCP-8 controls:
 
 > **NO-SIGNALLING != QUANTUM THEORY.**
 
 > **LOCAL TOMOGRAPHY != UNIQUE QUANTUM COMPOSITE.**
 
-> **PRINCIPLE EXCLUSION OF SOME POSTQUANTUM CORRELATIONS != DERIVATION OF QUANTUM THEORY.**
+## FCP-9 causal-set result
 
-> **BELL/CORRELATION PROJECTION != COMPLETE GPT COMPOSITE TOMOGRAPHY.**
+FCP-9 treats causal set theory (CST) as the specific BLMS lineage rather than pooling every causal/order proposal into one competitor.
 
-> **EMULATED SUPERQUANTUM STATISTICS != NATURAL POSTQUANTUM PHYSICS.**
+Minimal CST core:
+
+- locally finite causal order;
+- order interpreted as proto-causal structure;
+- discreteness/local finiteness;
+- continuum-approximation requirement linking order to continuum causality and number to volume.
+
+Main results:
+
+- literal `FW-CAUSAL = causal-set / order-theoretic approaches` is too broad: `FRAMEWORK_SPLIT_CANDIDATE = 1`;
+- suggested future `FW-CST` ID is not enacted until a separate split-resolution phase;
+- classical sequential growth is an optional CST dynamics layer, not a separate framework;
+- quantum measure/QSG is a provisional quantum-dynamics layer, not minimal kinematics;
+- Poisson sprinkling is a continuum-approximation/sampling construction, not fundamental dynamics;
+- Lorentz-compatible sprinkling does not yield an intrinsically extractable preferred inertial direction in the source theorem setting;
+- continuum reconstruction achieves meaningful order/number, estimator and operator/action results, but faithful embedding, continuum uniqueness and dynamical manifold selection remain distinct burdens;
+- the traditional finite Hauptvermutung is best recorded as `OPEN/REFINED`: newer precise mathematical formulations include theorem-level positive/negative results but do not justify an unqualified claim that the historical finite physical reconstruction problem is solved;
+- generic finite-poset structure is strongly nonmanifoldlike, so realistic spacetime is not kinematically inevitable;
+- framework-wide continuum recovery: **R2**, with source-specific partial/sharpened R3 results;
+- optional dynamics maturity: **D2**, not unique quantum dynamics or GR emergence;
+- highest empirical evidence: **E2 at model-specific scope**;
+- Everpresent-Lambda and diffusion/polarization phenomenology remain model-specific rather than forced framework predictions;
+- no framework-level causal-set empirical discriminator is identified;
+- `KEY_EXTENSION_CANDIDATE = 0`.
+
+Controlling verdict:
+
+> **CAUSAL SET THEORY PROVIDES A DISTINCT SOURCE-QUALIFIED DISCRETE CAUSAL/ORDER KINEMATIC ARCHITECTURE AND NONTRIVIAL CONTINUUM-RECONSTRUCTION TOOLS, WHILE FRAMEWORK TAXONOMY, FINITE CONTINUUM UNIQUENESS, MANIFOLDLIKENESS/DYNAMICAL SELECTION, COMPLETE QUANTUM DYNAMICS, MATTER REALIZATION, AND FRAMEWORK-LEVEL EMPIRICAL SELECTION REMAIN PARTIALLY OR SUBSTANTIALLY OPEN.**
+
+Permanent FCP-9 controls:
+
+> **PARTIAL ORDER != PHYSICAL LORENTZIAN SPACETIME.**
+
+> **POISSON SPRINKLING != FUNDAMENTAL DYNAMICS.**
+
+> **FAITHFUL EMBEDDING != UNIQUE CONTINUUM.**
+
+> **MANIFOLDLIKE INPUT != DYNAMICAL MANIFOLD SELECTION.**
+
+> **CSG FAMILY != UNIQUE PHYSICAL LAW.**
+
+> **MODEL-SPECIFIC PHENOMENOLOGY != FRAMEWORK-LEVEL PREDICTION.**
 
 ## NFC provenance boundary
 
@@ -121,8 +122,8 @@ Permanent rule:
 
 Recommended:
 
-**FCP-9 — Causal-Set / Order-Theoretic Framework Source Intake and K1–K10 Baseline**.
+**FCP-10 — Causal/Order Framework Split Resolution and CST Canonical Source Binding**.
 
-FCP-8 lands in the no-unique-principle/composite-underdetermination outcome. Rather than returning to NFC or stacking more GPT reconstruction principles, FCP should now source-bind a framework with materially different primitives. The currently broad `FW-CAUSAL` entry should be defined before comparison, with special attention to primitive causal/order carrier, actual dynamics/growth, continuum approximation, local-to-global structure, physical realization and empirical burden.
+FCP-9 found that causal set theory proper is coherent but the literal `FW-CAUSAL` umbrella is not clean enough for cross-framework comparison. FCP-10 should resolve that taxonomy first: admit `FW-CST` if the split survives review, determine whether any adjacent order-theoretic family deserves a separate source-bound ID, and preserve CSG/QSG as named CST dynamics layers rather than distinct competitors.
 
-No NFC/GPTOPT convergence comparison should occur during that source-intake phase.
+No CST-vs-null, NFC, GPTOPT, AQFT or other convergence comparison should occur until that identity is clean.

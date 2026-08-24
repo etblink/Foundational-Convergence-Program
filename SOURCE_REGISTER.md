@@ -83,6 +83,27 @@ This register records authoritative source locations and provenance bindings use
 | `SRC-FCP8-GPT-IC-2026` | `FW-GPTOPT` / current IC status | Yu & Scarani, *Information causality beyond the random-access-code model*, Phys. Rev. A 114, 012202 (2026) | DOI `10.1103/s52j-2jr7` | `SOURCE_BOUND` | Current primary source; closes some gaps but reports remaining gaps for some correlation families. |
 | `SRC-FCP8-GPT-RINGBAUER-2014` | `FW-GPTOPT` / empirical IC principle-test methodology | Ringbauer, Fedrizzi, Berry & White, *Information Causality in the Quantum and Post-Quantum Regime*, Sci. Rep. 4, 6955 (2014) | DOI `10.1038/srep06955` | `SOURCE_BOUND` | Supraquantum correlations are emulated through quantum-optical loss/postselection; not observation of natural post-quantum physics and not independent empirical selection of IC. |
 
+### FCP-9 — Causal set theory source layer
+
+| Source ID | Framework / role | Authority | Location | Status | Notes |
+|---|---|---|---|---|---|
+| `SRC-FCP9-CST-BLMS-1987` | controlled CST subset of `FW-CAUSAL` / `C0/C1` foundational definition | Bombelli, Lee, Meyer & Sorkin, *Space-Time as a Causal Set*, Phys. Rev. Lett. 59, 521–524 (1987) | DOI `10.1103/PhysRevLett.59.521` | `SOURCE_BOUND` | Foundational causal-set proposal; locally finite causal order and continuum motivation. Early quantum-dynamics remarks do not constitute a completed dynamics. |
+| `SRC-FCP9-CST-SURYA-2019` | controlled CST subset / `C0–C6` modern synthesis | Sumati Surya, *The causal set approach to quantum gravity*, Living Rev. Relativ. 22, 5 (2019) | DOI `10.1007/s41114-019-0023-1`; arXiv `1903.11544` | `SOURCE_BOUND` | Authoritative review used to delimit core, continuum results, dynamics, matter/phenomenology and open problems; not sole theorem authority. |
+| `SRC-FCP9-CST-SURYA-2025` | controlled CST subset / `C0–C6` current synthesis | Sumati Surya, *The Causal Set Approach to Quantum Gravity: An Introduction*, Lecture Notes in Physics 1036 (2025) | DOI `10.1007/978-3-031-84420-1`; ISBN `978-3-031-84420-1` | `SOURCE_BOUND` | Current monograph-level synthesis; maintains separation between kinematic CST, dynamics and phenomenology. |
+| `SRC-FCP9-CST-MALAMENT-1977` | controlled CST subset / `C1` continuum causal reconstruction | D. B. Malament, *The class of continuous timelike curves determines the topology of spacetime*, J. Math. Phys. 18, 1399–1404 (1977) | DOI `10.1063/1.523436` | `SOURCE_BOUND` | Continuum theorem supporting the causal-structure reconstruction motivation under hypotheses; not a theorem that arbitrary finite causal sets uniquely recover spacetime. |
+| `SRC-FCP9-CST-BHS-2009` | controlled CST subset / `C1` Lorentz-compatible discreteness | Bombelli, Henson & Sorkin, *Discreteness without symmetry breaking: a theorem*, Mod. Phys. Lett. A 24, 2579–2587 (2009) | DOI `10.1142/S0217732309031958`; arXiv `gr-qc/0605006` | `SOURCE_BOUND` | In the declared Poisson-sprinkling/Minkowski setting no equivariant measurable preferred-direction selector exists; does not make each realization pointwise Lorentz invariant or define dynamics. |
+| `SRC-FCP9-CST-MULLER-2025` | controlled CST subset / `C1` current Hauptvermutung refinement | Olaf Müller, *On the Hauptvermutung of Causal Set Theory* (2025), current v2 29 Dec 2025 | arXiv `2503.01719` | `SOURCE_BOUND` | Current preprint with precise positive/negative formulations and a countable injectivity theorem; author cautions that these do not automatically settle the full historical finite physical CST reconstruction target. |
+| `SRC-FCP9-CST-KR-1975` | controlled CST subset / `C1` generic-poset counterpressure | D. J. Kleitman & B. L. Rothschild, *Asymptotic Enumeration of Partial Orders on a Finite Set*, Trans. AMS 205, 205–220 (1975) | DOI `10.2307/1997200` | `SOURCE_BOUND` | Generic finite-poset asymptotics used only as a countermodel to kinematic inevitability of manifoldlikeness; not itself CST dynamics. |
+| `SRC-FCP9-CST-RS-2000` | controlled CST subset / `C2` classical sequential growth | Rideout & Sorkin, *Classical sequential growth dynamics for causal sets*, Phys. Rev. D 61, 024002 (1999/2000) | DOI `10.1103/PhysRevD.61.024002`; arXiv `gr-qc/9904062` | `SOURCE_BOUND` | Primary CSG source; named covariance/causality/Markov assumptions constrain a broad stochastic family, not one uniquely selected physical law. |
+| `SRC-FCP9-CST-OBS-2003` | controlled CST subset / `C2/K5` covariant observables | Brightwell, Dowker, García, Henson & Sorkin, *“Observables” in causal set cosmology*, Phys. Rev. D 67, 084031 (2003) | DOI `10.1103/PhysRevD.67.084031` | `SOURCE_BOUND` | Stem sets generate the covariant measurable algebra for a generic CSG family subject to stated measure-zero qualifications; not detector calibration. |
+| `SRC-FCP9-CST-BD-2010` | controlled CST subset / `C1/C2` discrete operator/action | Benincasa & Dowker, *The Scalar Curvature of a Causal Set*, Phys. Rev. Lett. 104, 181301 (2010) | DOI `10.1103/PhysRevLett.104.181301`; arXiv `1001.2725` | `SOURCE_BOUND` | Discrete d'Alembertian/curvature/action with controlled continuum behavior under manifoldlike/smooth-field assumptions; not complete quantum dynamics. |
+| `SRC-FCP9-CST-SZ-2020` | controlled CST subset / `C3` quantum sequential growth covariance | Surya & Zalel, *A criterion for covariance in complex sequential growth models*, Class. Quantum Grav. 37, 195030 (2020) | DOI `10.1088/1361-6382/ab987f`; arXiv `2003.11311` | `SOURCE_BOUND` | Primary covariance/measure-extension result for complex growth models; not unique quantum dynamics. |
+| `SRC-FCP9-CST-SS-2026` | controlled CST subset / `C3` current QSG status | Srivastava & Surya, *Implementing Bell causality in Quantum Sequential Growth* (2026) | arXiv `2603.25503` | `SOURCE_BOUND` | Current preprint constraining candidate noncommutative transition algebras; explicitly an early step, with no general transition-operator solution. |
+| `SRC-FCP9-CST-LAMBDA-2004` | controlled CST subset / `C5` cosmological phenomenology | Ahmed, Dodelson, Greene & Sorkin, *Everpresent Lambda*, Phys. Rev. D 69, 103523 (2004) | DOI `10.1103/PhysRevD.69.103523`; arXiv `astro-ph/0209274` | `SOURCE_BOUND` | Causal-set-inspired fluctuating-Lambda model using additional unimodular/stochastic assumptions; heuristic/model-specific, not core CST prediction. |
+| `SRC-FCP9-CST-ZUNTZ-2008` | controlled CST subset / `C6` cosmological model constraint | Joe Zuntz, *The cosmic microwave background in a causal set universe*, Phys. Rev. D 77, 043002 (2008) | DOI `10.1103/PhysRevD.77.043002` | `SOURCE_BOUND` | CMB constraint on a declared causal-set dark-energy implementation; does not test every CST dynamics. |
+| `SRC-FCP9-CST-PDS-2009` | controlled CST subset / `C5/C6` swerves/diffusion phenomenology | Philpott, Dowker & Sorkin, *Energy-momentum diffusion from spacetime discreteness*, Phys. Rev. D 79, 124047 (2009) | DOI `10.1103/PhysRevD.79.124047` | `SOURCE_BOUND` | Lorentz-invariant diffusion model and CMB blackbody bounds on phenomenological coefficients; not inevitable CST behavior. |
+| `SRC-FCP9-CST-CDP-2010` | controlled CST subset / `C5/C6` polarization diffusion | Contaldi, Dowker & Philpott, *Polarization Diffusion from Spacetime Uncertainty*, Class. Quantum Grav. 27, 172001 (2010) | DOI `10.1088/0264-9381/27/17/172001`; arXiv `1001.4545` | `SOURCE_BOUND` | Declared polarization-diffusion model confronted with CMB polarization; model-specific empirical constraint. |
+
 ## FCP-1 source-window note
 
 `FCP-1` uses the null records above as a bounded baseline retrieved/checked on 2026-08-24. PDG is a living annual review; future FCP tasks must not silently substitute later editions into `FCP-1` without a versioned update.
@@ -109,21 +130,26 @@ FCP-7 adds exactly one bounded empirical GPT source, `SRC-FCP7-GPT-MAZUREK-2021`
 
 FCP-8 adds **6 theoretical primary/current-status sources and 1 empirical principle-test source**. It reuses the FCP-7 Mazurek empirical source. No FCP-8 source authorizes a claim that the complete GPTOPT space is experimentally excluded or that one quantum-boundary principle is uniquely selected by nature.
 
+## FCP-9 source-window note
+
+FCP-9 adds **16** external CST/order records, checked on **2026-08-24**: **14 foundational/primary**, **2 modern review/synthesis**, **4 dedicated dynamics**, and **3 direct empirical/observational constraint** records. Scientific-role categories overlap. The corpus source-binds causal set theory proper as a controlled subset of the over-broad `FW-CAUSAL` umbrella; it does not source-bind every causal/order-theoretic approach and authorizes no cross-framework convergence credit.
+
 ## Branch-retention rule
 
 Scientific provenance must bind exact commits/blobs rather than rely on mutable branch names. A historical research branch may therefore be retired after its exact commit is reachable from the accepted `main` history and all material internal references identify immutable provenance.
 
 ## Pending source intake
 
-Source-bound and ready after FCP-4 candidate acceptance:
+Source-bound and ready:
 
 - `FW-AQFT`;
 - `FW-GPTOPT`;
-- `FW-CQM`.
+- `FW-CQM`;
+- causal set theory proper as the FCP-9-controlled subset of `FW-CAUSAL`.
 
-Still pending source intake:
+Still pending/source-taxonomy unresolved:
 
-- causal-set/order approaches;
+- the `FW-CAUSAL` umbrella split and any adjacent causal/order-theoretic competitor distinct from CST;
 - loop/spinfoam approaches;
 - tensor/information approaches;
 - asymptotic safety;
