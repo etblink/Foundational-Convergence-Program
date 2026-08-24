@@ -2,7 +2,7 @@
 
 ## Current state
 
-Scientific claim entries are now permitted following completion of the governance initialization. `FCP-1` adds the first bounded source-qualified rows for the null competitor only. **No cross-framework score or verdict is inferred from these rows.**
+Scientific claim entries began with FCP-1. FCP-3 adds the first bounded cross-framework claims under preregistered FCP-2 coordinates. **No overall numerical framework score or winner is inferred from these rows.**
 
 ## Claim record schema
 
@@ -216,10 +216,186 @@ Future claims should use the following fields:
 
 ---
 
+# FCP-3 cross-framework claim entries
+
+## FCP3-NFC-001 — Reduced-NFC comparative object is source-bound to the reduction
+
+- `framework_ids`: `FW-NFC-RED`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP3-NFC-BIND-001`
+- `claim_text`: FCP-3 admits Reduced NFC only as the reduced relational operational object `K_red=(C,T)` plus the bounded R1–R10 survivor set and six survivor questions; discarded historical NFC claims are excluded.
+- `assumptions`: FCP-3 provenance firewall and the noncanonical reduction continuity record.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: `2` as a comparative reduction record; no physical canonicity implied.
+- `weaker_framework_test`: not applicable to the provenance identity itself.
+- `physical_bridge`: `NONE`
+- `empirical_binding`: `NONE`
+- `falsification_condition`: a documented error in the reduction provenance or an explicit superseding reduction would require revision.
+- `countermodels`: `NONE`
+- `scope_ceiling`: comparative identity of Reduced NFC only, not renewed NFC canon or ToE status.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP3-CROSS-001 — K2 quotient/equivalence recurrence is generic
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP3-NFC-BIND-001`, `SRC-FCP2-NULL-DECOMP-001`, `SRC-FCP3-COMP-001`
+- `claim_text`: Reduced-NFC observational equivalence and null-baseline gauge/diffeomorphism redundancy share generic equivalence/quotient machinery, but FCP-3 does not establish that they encode the same physical equivalence relation.
+- `assumptions`: frozen K2 and E1–E5 rules.
+- `classification`: `GENERIC_MATHEMATICS`
+- `canonicity_level`: NFC `C2` relative to `T`; null `C2–C3` relative to component theory.
+- `weaker_framework_test`: PASSES — equivalence relations and quotients occur in substantially weaker frameworks.
+- `physical_bridge`: `NONE` connecting the two equivalence semantics.
+- `empirical_binding`: null redundancy has domain-level empirical support; no cross-framework empirical equivalence.
+- `falsification_condition`: an explicit E1/E2/E3/E4 correspondence preserving physical observables could upgrade the claim.
+- `countermodels`: generic existence of inequivalent physical theories using quotient structures blocks uniqueness.
+- `scope_ceiling`: `K2`; strongest correspondence `E5`; convergence `WEAK`; zero framework-specific credit.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: NFC M1 `MODEL_CHOICE/SOURCE_DERIVED`; null M1 mainly `SOURCE_DERIVED` after theory declaration.
+
+## FCP3-CROSS-002 — K3 transformation recurrence is generic
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP3-NFC-BIND-001`, `SRC-FCP2-NULL-DECOMP-001`, `SRC-FCP3-COMP-001`
+- `claim_text`: Both frameworks organize licensed/composable transformations, but no structure-preserving map identifies Reduced-NFC admissible processes with the null baseline's heterogeneous gauge, symmetry, interaction, intervention, representation, and RG transformations.
+- `assumptions`: frozen K3 distinction between transformation classes and dynamics.
+- `classification`: `GENERIC_MATHEMATICS`
+- `canonicity_level`: both at most `C2–C3` within declared frameworks.
+- `weaker_framework_test`: PASSES — categories/monoids of maps are generic.
+- `physical_bridge`: no cross-framework map.
+- `empirical_binding`: `NONE` for the generic cross-framework structure.
+- `falsification_condition`: explicit E1/E2/E3 map preserving material transformation roles could upgrade.
+- `countermodels`: many mathematical systems have composable transformations without shared physics.
+- `scope_ceiling`: `K3`; `E5`; `WEAK_CONVERGENCE`; zero framework-specific credit.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP3-CROSS-003 — K5 formal observable-family recurrence is generic
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP3-NFC-BIND-001`, `SRC-FCP2-NULL-DECOMP-001`, `SRC-FCP3-COMP-001`
+- `claim_text`: Reduced NFC and the null baseline both possess formal observable/test structures, but Reduced NFC does not presently match the null baseline's calibrated measurement interface and no cross-framework observable equivalence is established.
+- `assumptions`: frozen K5 separation of formal observables, physical interpretation, calibration, and exhaustion.
+- `classification`: `GENERIC_MATHEMATICS`
+- `canonicity_level`: NFC `C2` relative to `T`; null formal structures `C2–C3`, tested observables can reach `C5`.
+- `weaker_framework_test`: PASSES — formal observable families are generic.
+- `physical_bridge`: absent across frameworks; null has its own calibrated bridges.
+- `empirical_binding`: none for cross-framework equivalence.
+- `falsification_condition`: a source-bound E2/E3/E4 observable map with preserved calibration could upgrade.
+- `countermodels`: formal observation languages can share algebraic form while measuring different physical quantities.
+- `scope_ceiling`: `K5`; `E5`; `WEAK_CONVERGENCE` only at formal level.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP3-CROSS-004 — K8 local-to-global recurrence is generic
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP3-NFC-BIND-001`, `SRC-FCP2-NULL-DECOMP-001`, `SRC-FCP3-COMP-001`
+- `claim_text`: Both sides encounter local-to-global consistency burdens, but FCP-3 finds no shared non-generic obstruction invariant or E1–E4 correspondence; the common content is generic globalization logic.
+- `assumptions`: frozen K8 and source-bound reduced/null structures.
+- `classification`: `GENERIC_MATHEMATICS`
+- `canonicity_level`: mostly `C2–C3` relative to supplied structures.
+- `weaker_framework_test`: PASSES — patching/globalization problems are widespread across mathematics and physics.
+- `physical_bridge`: null has specific physical instances; no cross-framework physical bridge.
+- `empirical_binding`: `NONE` for the generic commonality.
+- `falsification_condition`: isolation of a specific independently derived shared obstruction with E1–E3/E4 support would upgrade.
+- `countermodels`: many inequivalent theories have local-to-global problems.
+- `scope_ceiling`: `K8`; `E5`; `WEAK_CONVERGENCE`; remains a high-value open comparison question.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP3-CROSS-005 — K1/K6/K7 similarities do not exceed functional analogy
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP3-COMP-001`, `SRC-FCP3-CONV-001`
+- `claim_text`: At current source scope, state-carrier role (K1), locality role (K6), and inter-description/scale role (K7) have no E1–E4 correspondence and remain functional analogies only.
+- `assumptions`: frozen equivalence rules and absence of explicit structure-preserving carrier, causal, or RG maps.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` cross-framework.
+- `weaker_framework_test`: role-level similarities occur in many unrelated frameworks.
+- `physical_bridge`: `NONE`
+- `empirical_binding`: `NONE`
+- `falsification_condition`: an explicit E1/E2/E3/E4 correspondence for any key would supersede the relevant part.
+- `countermodels`: generic modeling systems can have carriers/locality/scale descriptions without sharing physics.
+- `scope_ceiling`: `E5_FUNCTIONAL_ANALOGY`; no convergence credit.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP3-CROSS-006 — Reduced NFC lacks a counterpart to null sector dynamics
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP3-NFC-BIND-001`, `SRC-FCP2-NULL-DECOMP-001`
+- `claim_text`: Reduced NFC's admissible process structure does not presently supply a source-derived global physical-history selector comparable in evidentiary role to GR or SM/QFT sector dynamics.
+- `assumptions`: frozen K4 distinction between allowed transformations and actual dynamics.
+- `classification`: `NONFORCED`
+- `canonicity_level`: NFC no physical canonicity; null sector laws framework-canonical with empirically tested consequences.
+- `weaker_framework_test`: not a generic-similarity claim; it is a missing-selection result.
+- `physical_bridge`: absent for Reduced-NFC foundational dynamics.
+- `empirical_binding`: null sector dynamics bound by FCP-1; no NFC counterpart.
+- `falsification_condition`: source-binding a Reduced-NFC deterministic/stochastic/variational history selector with physical realization would require revision.
+- `countermodels`: multiple allowed NFC processes/selection policies recorded by the reduction.
+- `scope_ceiling`: K4 divergence; does not imply null UV completeness or unique cosmic history.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP3-CROSS-007 — Reduced NFC lacks comparable calibrated physical realization
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP3-NFC-BIND-001`, `SRC-FCP2-NULL-DECOMP-001`
+- `claim_text`: Reduced NFC presently lacks a general source-bound calibration bridge comparable to the null baseline's mappings from formal variables to measured time, length, masses, couplings, rates, spectra, gravitational-wave strain, and related observables.
+- `assumptions`: frozen K9 requirements.
+- `classification`: `NONFORCED`
+- `canonicity_level`: NFC physical canonicity/calibration not established; null operational realizations can reach `C5` at tested scope.
+- `weaker_framework_test`: not a generic-similarity claim.
+- `physical_bridge`: absent on Reduced-NFC foundational side.
+- `empirical_binding`: null calibration chains source-bound in FCP-1.
+- `falsification_condition`: a source-qualified Reduced-NFC realization/calibration map satisfying K9 would supersede.
+- `countermodels`: multiple historical branch realizations/choices prevent source selection.
+- `scope_ceiling`: K9 divergence; no claim that null ontology is uniquely fundamental.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP3-CROSS-008 — No current Reduced-NFC empirical discriminator against null baseline
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP3-COMP-001`
+- `claim_text`: At the FCP-3 source scope, no Reduced-NFC foundational prediction satisfies all frozen K10 requirements needed to discriminate it from the bounded GR+QFT+SM null baseline.
+- `assumptions`: K10 comparator/observable/uncertainty/decision-rule/provenance requirements.
+- `classification`: `OPEN`
+- `canonicity_level`: `N/A`.
+- `weaker_framework_test`: not applicable until a discriminator exists.
+- `physical_bridge`: insufficient for a foundational discriminator.
+- `empirical_binding`: `NONE` for Reduced NFC versus null.
+- `falsification_condition`: a preregistered source-bound Reduced-NFC prediction satisfying K10 would supersede the open status.
+- `countermodels`: `NONE`
+- `scope_ceiling`: `NO_CURRENT_EMPIRICAL_DISCRIMINATOR`; not impossibility of future prediction.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP3-CROSS-009 — Strong/moderate NFC–null convergence is not established
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP3-COMP-001`, `SRC-FCP3-CONV-001`, `SRC-FCP3-DIV-001`
+- `claim_text`: After applying frozen K1–K10, E1–E5, weaker-framework, selection, physical-bridge, and quantitative tests, FCP-3 establishes no strong or moderate NFC–null convergence candidate at current source scope.
+- `assumptions`: FCP-2 comparison rules and FCP-3 source bindings.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` cross-framework.
+- `weaker_framework_test`: the apparent correspondences that survive are generic or functional analogies.
+- `physical_bridge`: no E1–E4 cross-framework physical bridge established.
+- `empirical_binding`: no Reduced-NFC K10 discriminator.
+- `falsification_condition`: a future source-qualified non-generic E1–E4 correspondence would supersede the relevant negative result.
+- `countermodels`: genericization/vocabulary-erasure and differing physical semantics defeat the stronger inference.
+- `scope_ceiling`: bounded negative/nonforcing result; not proof that future nontrivial convergence is impossible.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: strong `0`; moderate `0`; weak/generic `4`; functional analogy only `3`; no correspondence `3`; material divergences `9`.
+
+---
+
 ## Rules
 
 - One primary classification per claim.
 - A claim may not exceed the authority of its sources and bridges.
 - Negative and nonforcing results remain preserved when later work supersedes a stronger claim.
-- No framework-level score is inferred automatically from individual claim rows.
-- Cross-framework convergence credit may not be assigned until the comparator has independently completed the same protocol.
+- No framework-level numerical score is inferred automatically from individual claim rows.
+- Cross-framework convergence credit requires the frozen FCP-2 correspondence and weaker-framework rules.

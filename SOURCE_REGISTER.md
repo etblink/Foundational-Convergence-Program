@@ -16,7 +16,7 @@ This register records authoritative source locations and provenance bindings use
 
 | Source ID | Framework / role | Authority | Location | Status | Notes |
 |---|---|---|---|---|---|
-| `SRC-NFC-RED-001` | Reduced NFC handoff | Noncanonical research continuity derived from separately frozen NFC canon | repo `etblink/Nested-Fibrational-Cosmology`; branch `research/foundational-reduction-continuity`; file `research/NFC_FOUNDATIONAL_REDUCTION_CONTINUITY.md` | `REGISTERED_POINTER_ONLY` | NFC canon is **not imported** into FCP. This pointer is the controlling handoff to the reduction work. |
+| `SRC-NFC-RED-001` | Reduced NFC handoff | Noncanonical research continuity derived from separately frozen NFC canon | repo `etblink/Nested-Fibrational-Cosmology`; branch `research/foundational-reduction-continuity`; file `research/NFC_FOUNDATIONAL_REDUCTION_CONTINUITY.md` | `SOURCE_BOUND` | Source-bound **only for the reduced comparative object** used in FCP-3. NFC canon is not imported or modified; this remains a noncanonical diagnostic/continuity source. |
 | `SRC-NULL-PDG-2026-ROOT` | Null competitor / particle-physics master review | Particle Data Group, F. Takahashi et al., *Review of Particle Physics* (2026), Int. J. Mod. Phys. A 41, 2630011 (2026) | `https://pdg.lbl.gov/2026/` | `SOURCE_BOUND` | Current 2026 PDG edition used as the source spine for the bounded null baseline. |
 | `SRC-NULL-PDG-EW-2026` | Null competitor / electroweak SM and QFT renormalization | PDG 2026, J. de Blas, S. Dittmaier, R. Kogler, *Electroweak Model and Constraints on New Physics*, revised May 2026 | `https://pdg.lbl.gov/2026/reviews/rpp2026-rev-standard-model.pdf` | `SOURCE_BOUND` | Defines electroweak SM as renormalizable `SU(2)×U(1)` gauge QFT; covers renormalization, input schemes, precision fits. |
 | `SRC-NULL-PDG-QCD-2026` | Null competitor / strong interactions | PDG 2026, J. Huston, K. Rabbertz, G. Zanderighi, *Quantum Chromodynamics*, revised Aug. 2025 | `https://pdg.lbl.gov/2026/reviews/rpp2026-rev-qcd.pdf` | `SOURCE_BOUND` | Defines QCD as the `SU(3)` component of the SM; covers running coupling and experimental tests. |
@@ -29,18 +29,26 @@ This register records authoritative source locations and provenance bindings use
 | `SRC-FCP2-KEYS-001` | FCP-2 / preregistered comparison coordinates | Internal FCP governance/research artifact derived from FCP charter/protocol and FCP-1 baseline only | `comparison_keys/FCP_COMPARISON_KEYS_0_1_0.md` on `research/fcp-2-comparison-key-freeze` | `REGISTERED_POINTER_ONLY` | Defines K1–K10 and M1–M3 before first cross-framework comparison; not an external scientific authority. |
 | `SRC-FCP2-EQUIV-001` | FCP-2 / equivalence and convergence rules | Internal FCP governance/research artifact | `comparison_keys/FCP_EQUIVALENCE_AND_CONVERGENCE_RULES_0_1_0.md` on `research/fcp-2-comparison-key-freeze` | `REGISTERED_POINTER_ONLY` | Freezes E1–E5 and convergence-credit rules before first competitor exposure. |
 | `SRC-FCP2-NULL-DECOMP-001` | FCP-2 / null reference decomposition | Internal FCP decomposition of already source-bound FCP-1 material | `frameworks/null_gr_qft_sm/FCP2_NULL_STRUCTURAL_DECOMPOSITION_0_1_0.md` on `research/fcp-2-comparison-key-freeze` | `REGISTERED_POINTER_ONLY` | Adds no new external scientific source and no cross-framework verdict. |
+| `SRC-FCP3-NFC-BIND-001` | FCP-3 / Reduced-NFC source binding | Internal FCP binding derived only from `SRC-NFC-RED-001` and the pre-existing FCP handoff | `frameworks/nfc_reduced/FCP3_NFC_REDUCED_SOURCE_BINDING_0_1_0.md` on `research/fcp-3-nfc-vs-null` | `REGISTERED_POINTER_ONLY` | Fixes R1–R10 before FCP-3 correspondence assignment; no full NFC canon imported. |
+| `SRC-FCP3-COMP-001` | FCP-3 / first cross-framework K1–K10 comparison | Internal FCP comparative artifact using frozen FCP-2 rules | `comparisons/FCP3_NFC_REDUCED_VS_NULL_K1_K10_0_1_0.md` on `research/fcp-3-nfc-vs-null` | `REGISTERED_POINTER_ONLY` | First NFC-reduced/null comparison; internal analysis, not independent scientific authority. |
+| `SRC-FCP3-CONV-001` | FCP-3 / convergence ledger | Internal FCP comparative artifact | `convergence/FCP3_NFC_NULL_CONVERGENCE_LEDGER_0_1_0.md` on `research/fcp-3-nfc-vs-null` | `REGISTERED_POINTER_ONLY` | Records E-class and convergence classifications. |
+| `SRC-FCP3-DIV-001` | FCP-3 / divergence ledger | Internal FCP comparative artifact | `convergence/FCP3_NFC_NULL_DIVERGENCE_LEDGER_0_1_0.md` on `research/fcp-3-nfc-vs-null` | `REGISTERED_POINTER_ONLY` | Records material differences without treating every difference as a defect. |
 
 ## FCP-1 source-window note
 
-`FCP-1` uses the source records above as a bounded baseline retrieved/checked on 2026-08-24. PDG is a living annual review; future FCP tasks must not silently substitute later editions into `FCP-1` without a versioned update.
+`FCP-1` uses the null records above as a bounded baseline retrieved/checked on 2026-08-24. PDG is a living annual review; future FCP tasks must not silently substitute later editions into `FCP-1` without a versioned update.
 
 ## FCP-2 provenance note
 
-`FCP-2` adds **no new external scientific source claims**. It freezes comparison coordinates and decomposes the source-bound FCP-1 null baseline through those coordinates. Its internal files are registered for provenance only and must not be treated as independent empirical/theoretical authority.
+`FCP-2` adds no new external scientific source claims. It freezes comparison coordinates and decomposes the source-bound FCP-1 null baseline through those coordinates. Its internal files are registered for provenance only and must not be treated as independent empirical/theoretical authority.
+
+## FCP-3 provenance note
+
+`FCP-3` source-binds Reduced NFC from the noncanonical continuity record at `SRC-NFC-RED-001` and compares it with the already source-bound null baseline under byte-frozen FCP-2 rules. No older NFC-source excursion was required, no full NFC canon was imported, and no new external null source was added. Internal FCP-3 artifacts are provenance records, not independent scientific authorities.
 
 ## Pending source intake
 
-No authoritative source corpus has yet been bound for reduced NFC inside FCP beyond the noncanonical handoff pointer, nor for operational/algebraic quantum approaches, causal-set/order approaches, loop/spinfoam approaches, tensor/information approaches, asymptotic safety, string/holography, or categorical/process approaches.
+No authoritative source corpus has yet been bound for operational/algebraic quantum approaches, causal-set/order approaches, loop/spinfoam approaches, tensor/information approaches, asymptotic safety, string/holography, or categorical/process approaches.
 
 ## Provenance requirements for future entries
 
