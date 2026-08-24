@@ -18,7 +18,7 @@ This register identifies frameworks eligible for future comparison and tracks re
 
 | Framework ID | Working name | Role | Status | Scientific verdict |
 |---|---|---|---|---|
-| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `SOURCE_BOUND_READY` | **NO CROSS-FRAMEWORK VERDICT — FCP-1 baseline only** |
+| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `SOURCE_BOUND_READY` | **NO CROSS-FRAMEWORK VERDICT — FCP-1/FCP-2 baseline only** |
 | `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `ADMITTED_NOT_AUDITED` | **NONE** |
 | `FW-OAQ` | Operational / algebraic quantum approaches | comparator family | `ADMITTED_NOT_AUDITED` | **NONE** |
 | `FW-CAUSAL` | Causal-set / order-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | **NONE** |
@@ -30,19 +30,30 @@ This register identifies frameworks eligible for future comparison and tracks re
 
 ## FCP-1 null-baseline state
 
-`FW-NULL-GRQFTSM` has completed a bounded source intake and ten-layer baseline audit under `FCP-1`. This status means:
+`FW-NULL-GRQFTSM` completed a bounded source intake and ten-layer baseline audit under `FCP-1`.
 
-- a high-authority 2026 source spine has been registered;
-- the null competitor's assumptions, dynamics, observables, empirical successes and open frontiers have been separated at baseline level;
-- claim-ledger rows may now be created for this framework;
-- **no comparison to NFC or any other framework has occurred**;
-- no framework-level score has been assigned.
-
-The controlling candidate document is:
+The controlling FCP-1 candidate document is:
 
 `frameworks/null_gr_qft_sm/FCP1_NULL_COMPETITOR_BASELINE_0_1_0.md`
 
-on research branch `research/fcp-1-null-baseline` until separately reviewed/integrated.
+FCP-1 establishes a high-authority source spine and separates assumptions, dynamics, observables, empirical successes and open frontiers. It assigns no cross-framework score.
+
+## FCP-2 structural-reference state
+
+`FCP-2` does **not** change the null competitor's framework status or scientific verdict. It adds a framework-neutral reference decomposition under preregistered comparison coordinates:
+
+- comparison-key version: `FCP_COMPARISON_KEYS_0_1_0`;
+- equivalence/convergence version: `FCP_EQUIVALENCE_AND_CONVERGENCE_RULES_0_1_0`;
+- null reference matrix: `frameworks/null_gr_qft_sm/FCP2_NULL_STRUCTURAL_DECOMPOSITION_0_1_0.md`.
+
+This means:
+
+- K1–K10 are frozen before any other framework is audited against the null baseline;
+- M1 selection status, M2 canonicity level and M3 scope ceiling are mandatory for later key answers;
+- E1–E5 equivalence classes and convergence-credit rules are frozen before first competitor exposure;
+- `FW-NULL-GRQFTSM` remains a first-class competitor, not the default winner;
+- **no comparison to reduced NFC or any other admitted framework has occurred**;
+- no framework-level score has been assigned.
 
 ## Admission rule
 
