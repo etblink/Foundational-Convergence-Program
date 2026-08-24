@@ -2,9 +2,9 @@
 
 ## Status
 
-**Current completed phase:** FCP-10 — Causal/Order Framework Split Resolution and CST Canonical Source Binding  
-**Current scientific state:** causal set theory proper is now canonically registered as `FW-CST`; the historical `FW-CAUSAL` umbrella is superseded because it pooled source-bound CST with unspecified adjacent order-theoretic approaches; CST scientific levels remain R2 framework-wide, D2 at strongest bounded optional dynamics scope, and E2 model-specific with no framework-level empirical discriminator  
-**Next recommended task:** FCP-11 — CST vs. Null/GR: K1–K10 Emergence, Reformulation, and Empirical-Control Baseline
+**Current completed phase:** FCP-11 — CST vs. Null/GR: K1–K10 Emergence, Reformulation, and Empirical-Control Baseline  
+**Current scientific state:** canonical causal set theory is not a mere reformulation of GR: its locally finite causal-set carrier, primitive causal order and fundamental spacetime discreteness are additional foundational commitments, while its strongest GR-like results at current source scope are predominantly target-conditioned continuum reconstruction/compatibility; continuum remains R2 framework-wide, optional dynamics D2, empirical evidence E2 model-specific, with no framework-level CST empirical discriminator  
+**Next recommended task:** FCP-12 — Reduced NFC vs. CST: K1–K10 Controlled Structural Comparison
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language or model.
 
@@ -28,6 +28,7 @@ No framework receives evidentiary credit merely because it suggested the questio
 - **FCP-8:** source-bound post-quantum Bell/composite theory space, candidate quantum-boundary principles and empirical restrictions without performing any NFC–GPTOPT comparison.
 - **FCP-9:** source-bound causal set theory proper, separated minimal kinematics from dynamics/continuum/matter/phenomenology, and opened a framework-split candidate for the broader causal/order umbrella without performing any cross-framework comparison.
 - **FCP-10:** resolved that split, preserved historical `FW-CAUSAL` as a superseded umbrella, admitted canonical `FW-CST`, and deferred the unbound adjacent order-theoretic remainder without creating a placeholder framework or performing a cross-framework comparison.
+- **FCP-11:** compared canonical CST against the null/GR baseline, separated additional CST primitives from target-conditioned GR reconstruction, generic mathematics and optional extensions, and found no strong/moderate independent CST–null convergence or framework-level CST empirical discriminator.
 
 ## FCP-6 Reduced-NFC/AQFT control
 
@@ -103,7 +104,7 @@ FCP-10 confirms the FCP-9 framework-split candidate without adding external scie
 Canonical result:
 
 - `FW-CAUSAL` → `SUPERSEDED_BY_FRAMEWORK_SPLIT`;
-- `FW-CST` → `SOURCE_BOUND_READY`;
+- `FW-CST` → `SOURCE_BOUND_READY` at the completion of FCP-10;
 - core carrier: locally finite causal set / causal order;
 - core dynamics: none;
 - CSG remains optional `C2` dynamics;
@@ -119,7 +120,47 @@ Taxonomic verdict:
 
 > **CAUSAL SET THEORY IS NOW A SCIENTIFICALLY COHERENT, SOURCE-BOUND FCP COMPETITOR DISTINCT FROM THE FORMER OVER-BROAD CAUSAL/ORDER UMBRELLA.**
 
-> **NO CROSS-FRAMEWORK COMPARISON PERFORMED IN FCP-10.**
+## FCP-11 CST/null-GR control
+
+FCP-11 applies the already-frozen null baseline to canonical `FW-CST` before any Reduced-NFC–CST comparison.
+
+Primary K-key partition:
+
+- additional foundational commitments: **K1, K6, K7**;
+- target-conditioned reconstruction: **K5, K8, K9**;
+- generic/representational: **K2**;
+- extension-dependent: **K3, K4**;
+- empirically distinct framework key: **0**;
+- open: **K10**.
+
+Permanent FCP-11 controls:
+
+> **TARGET-CONDITIONED RECONSTRUCTION != INDEPENDENT EMERGENCE.**
+
+> **SUCCESSFUL RECONSTRUCTION FROM A MANIFOLDLIKE OR SPRINKLED INPUT != DYNAMICAL EMERGENCE OF MANIFOLDLIKE GR SPACETIME.**
+
+> **CONTINUUM ACTION/OPERATOR LIMIT != CST DYNAMICS SELECTS GR HISTORIES.**
+
+> **NULL OPEN PROBLEM != CST SOLUTION.**
+
+Main result:
+
+- CST is not a mere reformulation of GR: the causal-set carrier, primitive causal order and fundamental spacetime discreteness are additional commitments;
+- generic poset/combinatorial and relabelling mathematics are subtracted from CST-specific credit;
+- faithful embedding/sprinkling are continuum realization bridges rather than fundamental dynamics;
+- selected faithful-embedding and continuum operator/action relations may carry bounded E2/E3 substructure status under their exact assumptions, without becoming framework-wide GR equivalence;
+- the Lorentz-compatible sprinkling theorem remains a positive compatibility result, not derivation of Lorentzian geometry or empirical selection;
+- CSG remains D2 at optional-family scope, QSG remains incomplete, and no manifold-selecting GR+matter dynamics is source-bound;
+- realistic Standard Model matter/calibration remains an extension/open burden;
+- framework-level CST empirical discriminator: none identified;
+- independent `STRONG_CONVERGENCE`: **0**;
+- independent `MODERATE_CONVERGENCE`: **0**;
+- framework-wide levels remain **R2 / D2 / E2 model-specific**;
+- seven major scientific selection burdens remain.
+
+Bounded verdict:
+
+> **CAUSAL SET THEORY IS NOT A MERE REFORMULATION OF GR: ITS LOCALLY FINITE CAUSAL-SET CARRIER, FUNDAMENTAL CAUSAL ORDER, AND SPACETIME DISCRETENESS ARE ADDITIONAL FOUNDATIONAL COMMITMENTS. HOWEVER, AT THE FCP-11 SOURCE SCOPE, ITS STRONGEST GR-LIKE RESULTS ARE PREDOMINANTLY TARGET-CONDITIONED CONTINUUM RECONSTRUCTION OR COMPATIBILITY RESULTS, OPTIONAL DYNAMICS DO NOT YET SELECT MANIFOLDLIKE GR + MATTER, AND NO FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR IS IDENTIFIED.**
 
 ## NFC provenance boundary
 
@@ -136,11 +177,11 @@ Permanent rule:
 - [`SOURCE_REGISTER.md`](SOURCE_REGISTER.md) — source/provenance registry
 - [`FRAMEWORK_REGISTER.md`](FRAMEWORK_REGISTER.md) — admitted frameworks and research status
 - [`COMPARISON_PROTOCOL.md`](COMPARISON_PROTOCOL.md) — common evaluation procedure
-- [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) — central claim ledger
+- [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) — central historical claim ledger
 - [`comparison_keys/`](comparison_keys/) — frozen comparison/equivalence rules
 - [`frameworks/`](frameworks/) — framework-specific source-bound packets
 - [`comparisons/`](comparisons/) — pairwise/baseline comparisons
-- [`convergence/`](convergence/) — relationship/convergence/divergence records
+- [`convergence/`](convergence/) — relationship/convergence/divergence records, including versioned phase claim ledgers
 - [`countermodels/`](countermodels/) — negative witnesses
 - [`handoffs/`](handoffs/) — phase handoffs
 
@@ -148,8 +189,8 @@ Permanent rule:
 
 Recommended:
 
-**FCP-11 — CST vs. Null/GR: K1–K10 Emergence, Reformulation, and Empirical-Control Baseline**.
+**FCP-12 — Reduced NFC vs. CST: K1–K10 Controlled Structural Comparison**.
 
-Now that `FW-CST` has one canonical source-bound identity, FCP-11 may ask which CST structures are genuinely additional to the null/GR baseline, which reconstruct supplied Lorentzian geometry, which are generic order/combinatorial mathematics, and which—if any—carry independent physical or empirical content.
+FCP-12 should compare Reduced NFC only against the **FCP-11-qualified CST residue** while retaining full K1–K10 context. It must prohibit convergence credit for generic order/combinatorial mathematics, Lorentzian/manifold structure supplied through the continuum target, GR/QFT empirical success inherited through reconstruction, and optional CST dynamics/phenomenology unless the exact extension is explicitly the comparison object.
 
-FCP-11 should preserve the FCP-9/FCP-10 layer boundaries and begin no convergence credit before the null/reformulation control is applied.
+The highest-information keys are expected to be K1, K6, K8 and K9, with K4 dynamics and K10 empirical burden retained as mandatory controls.

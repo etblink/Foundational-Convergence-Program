@@ -20,14 +20,14 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 
 | Framework ID | Working name | Role | Status | Latest bounded scientific status |
 |---|---|---|---|---|
-| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `PAIRWISE_COMPARISON_COMPLETE` | FCP-3 Reduced-NFC comparison, FCP-5 AQFT control and FCP-7 GPTOPT/QM generalization control complete; empirical strength remains scoped to tested component theories |
+| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `PAIRWISE_COMPARISON_COMPLETE` | FCP-3 Reduced-NFC comparison, FCP-5 AQFT control, FCP-7 GPTOPT/QM generalization control, and FCP-11 CST/null-GR emergence/reconstruction control complete; empirical strength remains scoped to tested component theories |
 | `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `PAIRWISE_COMPARISON_COMPLETE` | FCP-6: no strong/moderate NFC–AQFT convergence after subtraction; Interface Sufficiency/Globalization remain discovery questions; Realization/Dynamics remain burden checks |
 | `FW-OAQ` | Operational / algebraic quantum approaches | historical umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-4 split into `FW-AQFT`, `FW-GPTOPT`, `FW-CQM` |
 | `FW-AQFT` | Algebraic / locally covariant quantum field theory | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-5/6 controls complete; core mostly reformulation/sharpening of QFT plus named AQFT-X extensions; no framework-level empirical discriminator |
 | `FW-GPTOPT` | Generalized probabilistic / operational-probabilistic theories | source-bound generalizing meta-framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-8: post-quantum Bell/composite theory space empirically and structurally bounded; no unique quantum-boundary principle; empirical evidence reaches bounded L2, not global L4 selection |
 | `FW-CQM` | Categorical quantum mechanics / quantum process theories | source-bound comparator | `SOURCE_BOUND_READY` | FCP-4 source intake complete; no cross-framework comparison yet |
 | `FW-CAUSAL` | Causal-set / order-theoretic approaches | historical causal/order umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-9/FCP-10 found the literal umbrella scientifically over-broad; causal set theory proper is now `FW-CST`; unspecified adjacent causal/order approaches remain deferred pending separate source intake |
-| `FW-CST` | Causal Set Theory | source-bound discrete causal/order framework | `SOURCE_BOUND_READY` | FCP-9 source intake + FCP-10 canonical binding complete; no cross-framework comparison yet; continuum `R2` framework-wide, optional dynamics `D2` at strongest bounded layer, empirical `E2` model-specific; no framework-level empirical discriminator; major continuum/dynamics/matter-selection burdens remain open |
+| `FW-CST` | Causal Set Theory | source-bound discrete causal/order framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-11 null/GR control complete: the causal-set carrier/order/discreteness are additional foundational commitments, while strongest GR-like results are predominantly target-conditioned reconstruction/compatibility; continuum `R2`, optional dynamics `D2`, empirical `E2` model-specific; no framework-level empirical discriminator |
 | `FW-LOOP` | Loop / spin-network / spinfoam approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-TENSOR` | Tensor-network / information-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-AS` | Asymptotic safety | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
@@ -123,6 +123,38 @@ Canonical `FW-CST` identity:
 - framework-level empirical discriminator: none identified.
 
 The unspecified “order-theoretic approaches” remainder is `DEFERRED_PENDING_SOURCE_INTAKE`; no `FW-ORDER` or other placeholder ID is created. FCP-10 adds zero external sources, creates zero `FRAMEWORK_EXTENSION_CANDIDATE`s and zero `KEY_EXTENSION_CANDIDATE`s, and performs no cross-framework comparison.
+
+## FCP-11 CST/null-GR emergence/reformulation control
+
+FCP-11 compares canonical `FW-CST` only against the already source-bound null baseline, using GR as the primary continuum/dynamics comparator and QFT/SM for matter, calibration and empirical controls.
+
+Primary K-key classification:
+
+- `ADDITIONAL_FOUNDATIONAL_COMMITMENT`: **3** — K1, K6, K7;
+- `TARGET_CONDITIONED_RECONSTRUCTION`: **3** — K5, K8, K9;
+- `GENERIC_OR_REPRESENTATIONAL`: **1** — K2;
+- `EXTENSION_DEPENDENT`: **2** — K3, K4;
+- `EMPIRICALLY_DISTINCT`: **0**;
+- `OPEN`: **1** — K10.
+
+Main controls:
+
+- CST is not a mere GR reformulation: the locally finite causal-set carrier, primitive causal order and fundamental discreteness are additional foundational commitments;
+- generic poset/combinatorial and relabelling mathematics receive zero distinctive credit by themselves;
+- faithful embedding and Poisson sprinkling are continuum realization/representation bridges, not fundamental dynamics or dynamical manifold emergence;
+- selected geometric/operator/action results may support bounded E2/E3 substructure relations under declared assumptions, but do not establish framework-wide GR dynamics;
+- the BHS Lorentz result is a nontrivial compatibility theorem on a supplied Minkowski target, not derivation or empirical selection of Lorentzian spacetime;
+- CSG remains an optional D2 dynamics family and QSG remains incomplete;
+- Standard Model matter/calibration remain extension/open burdens;
+- model-specific CST phenomenology does not supply a framework-level discriminator;
+- strong independent CST–null convergence: **0**;
+- moderate independent CST–null convergence: **0**;
+- `R2`, `D2`, `E2`, seven post-taxonomy burdens, and `NO_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR_IDENTIFIED` remain unchanged;
+- `FRAMEWORK_EXTENSION_CANDIDATE = 0`; `KEY_EXTENSION_CANDIDATE = 0`.
+
+Bounded verdict:
+
+> **CAUSAL SET THEORY IS NOT A MERE REFORMULATION OF GR: ITS LOCALLY FINITE CAUSAL-SET CARRIER, FUNDAMENTAL CAUSAL ORDER, AND SPACETIME DISCRETENESS ARE ADDITIONAL FOUNDATIONAL COMMITMENTS. HOWEVER, AT THE FCP-11 SOURCE SCOPE, ITS STRONGEST GR-LIKE RESULTS ARE PREDOMINANTLY TARGET-CONDITIONED CONTINUUM RECONSTRUCTION OR COMPATIBILITY RESULTS, OPTIONAL DYNAMICS DO NOT YET SELECT MANIFOLDLIKE GR + MATTER, AND NO FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR IS IDENTIFIED.**
 
 ## Admission and credit rules
 
