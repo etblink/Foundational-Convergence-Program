@@ -2,7 +2,7 @@
 
 ## Current state
 
-Scientific claim entries began with FCP-1. FCP-3 adds the first bounded cross-framework claims under preregistered FCP-2 coordinates. **No overall numerical framework score or winner is inferred from these rows.**
+Scientific claim entries began with FCP-1. FCP-3 added the first bounded cross-framework claims under preregistered FCP-2 coordinates. FCP-5 adds the AQFT/null reformulation-extension control while preserving the distinction between reformulation relations and independent convergence. **No overall numerical framework score or winner is inferred from these rows.**
 
 ## Claim record schema
 
@@ -392,6 +392,129 @@ Future claims should use the following fields:
 
 ---
 
+# FCP-5 AQFT/null reformulation-extension claims
+
+## FCP5-AQFT-001 — Core AQFT/QFT agreement is primarily a reformulation relation
+
+- `framework_ids`: `FW-AQFT`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP4-AQFT-HK-1964`, `SRC-FCP4-AQFT-FV-2015`, `SRC-FCP2-NULL-DECOMP-001`
+- `claim_text`: At the bounded source scope, core AQFT's abstract observable/state and representation-independent organization substantially reformulates and sharpens physical content already belonging to relativistic QFT rather than constituting an independently derived competing theory.
+- `assumptions`: FCP-4 source boundary and frozen FCP-2 equivalence/convergence rules.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: `C2–C3` relative to the AQFT/QFT formulations; no ontological uniqueness.
+- `weaker_framework_test`: abstract operator algebras and representations are generic; the AQFT physical specialization is source-qualified but historically lineage-related to QFT.
+- `physical_bridge`: same relativistic QFT domain in concrete realizations.
+- `empirical_binding`: successful concrete QFT predictions are `EMPIRICALLY_INHERITED`, not independent AQFT selection.
+- `falsification_condition`: a source-qualified AQFT structure with independent derivation and discriminating physical consequences could supersede the relevant reformulation classification.
+- `countermodels`: empirically equivalent alternative QFT formulations block inference from formal representation to independent empirical theory.
+- `scope_ceiling`: `REFORMULATION_RELATION`; no independent strong/moderate convergence credit.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP5-AQFT-002 — LCQFT supplies a source-qualified model-class extension but not quantum gravity
+
+- `framework_ids`: `FW-AQFT`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP4-AQFT-BFV-2003`, `SRC-FCP4-AQFT-FV-2015`, `SRC-FCP2-NULL-DECOMP-001`
+- `claim_text`: Locally covariant QFT extends fixed-background AQFT by organizing a theory functorially over globally hyperbolic spacetimes and admissible embeddings; this is additional structural/model-class content relative to the bounded null presentation, while Lorentzian metric/causal geometry remains supplied rather than derived.
+- `assumptions`: LCQFT source category, functorial axioms and stated supplementary conditions.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: `C2–C3` within LCQFT; no physical canonicity of the background category inferred.
+- `weaker_framework_test`: category/functor mathematics is generic, but the physical specialization to locally covariant QFT is not exhausted by the generic shell.
+- `physical_bridge`: QFT on supplied classical globally hyperbolic spacetimes.
+- `empirical_binding`: inherited through concrete QFT models; no independent framework-level discriminator.
+- `falsification_condition`: showing the bounded null baseline already source-binds an equivalent cross-background structure would downgrade the 'additional relative to bounded null' wording; deriving the metric from LCQFT would require new sources beyond this claim.
+- `countermodels`: generic functors without QFT semantics defeat any claim that functoriality alone is physically distinctive.
+- `scope_ceiling`: `MODEL_CLASS_EXTENSION`; explicitly **not quantum gravity** and not derivation of spacetime.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP5-AQFT-003 — AQFT encodes and sharpens locality; it does not derive causal geometry from weaker foundations
+
+- `framework_ids`: `FW-AQFT`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP4-AQFT-HK-1964`, `SRC-FCP4-AQFT-BFV-2003`, `SRC-FCP4-AQFT-FV-2015`, `SRC-FCP2-NULL-DECOMP-001`
+- `claim_text`: AQFT makes relativistic locality structurally explicit through spacetime-indexed local algebras and causal/locality conditions, but the relevant spacetime causal structure and locality axiom are inputs to the framework rather than a derivation of physical locality from a nonspatiotemporal substrate.
+- `assumptions`: source-specified spacetime background/category and AQFT locality/causality conditions.
+- `classification`: `NONFORCED`
+- `canonicity_level`: locality structure `C2–C3` within the supplied framework; tested causal propagation in concrete QFT belongs to the null empirical record.
+- `weaker_framework_test`: commutation and net structure are generic; physical relativistic localization depends on supplied spacetime semantics.
+- `physical_bridge`: spacelike separation and localized QFT observables.
+- `empirical_binding`: inherited from relativistic QFT/model realizations; no independent AQFT locality discriminator.
+- `falsification_condition`: a source-qualified derivation of spacetime causal structure from weaker AQFT primitives would supersede the nonforcing part.
+- `countermodels`: algebraic/net systems can satisfy analogous formal locality relations without encoding physical Lorentzian causality.
+- `scope_ceiling`: structural sharpening and consequences of locality, not origin of spacetime causality.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP5-AQFT-004 — Localized AQFT measurement theory supplies a physical bridge without independent empirical distinction
+
+- `framework_ids`: `FW-AQFT`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP4-AQFT-FV-MEAS-2020`, `SRC-FCP2-NULL-DECOMP-001`
+- `claim_text`: The Fewster–Verch localized system–probe construction supplies source-qualified physical measurement architecture, including localized couplings, induced system observables and causally consistent instrument composition under stated hypotheses; it does not by itself calibrate all detectors or yield an AQFT-vs-null empirical discriminator.
+- `assumptions`: system/probe theories, bounded coupling region, scattering construction and causal-factorization conditions of the cited source.
+- `classification`: `PHYSICAL_BRIDGE`
+- `canonicity_level`: up to `C4` as physically interpreted framework architecture; no independent `C5` selection.
+- `weaker_framework_test`: completely positive maps/instruments are generic; the locally covariant system–probe realization is the source-specific content.
+- `physical_bridge`: explicit system, probe, interaction region and induced observable semantics.
+- `empirical_binding`: `NONE` as an independent comparison discriminator.
+- `falsification_condition`: failure of the source construction under its stated hypotheses would invalidate; a distinct AQFT experimental prediction would require a separate empirical claim.
+- `countermodels`: generic instrument formalisms show that abstract CP-map structure alone is non-distinctive.
+- `scope_ceiling`: physical measurement framework, not universal calibration or empirical selection of AQFT.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP5-AQFT-005 — Abstract AQFT does not supply one universal physical history selector
+
+- `framework_ids`: `FW-AQFT`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP4-AQFT-BFV-2003`, `SRC-FCP4-AQFT-FV-2015`, `SRC-FCP4-AQFT-BFR-2025`, `SRC-FCP2-NULL-DECOMP-001`
+- `claim_text`: Concrete AQFT/pAQFT models may possess genuine dynamics and LCQFT may supply relative Cauchy evolution under extra conditions, but the bounded abstract AQFT framework does not select one universal physical history across all models and spacetimes comparable to the concrete SM/QFT sector laws of the null baseline.
+- `assumptions`: separation of core AQFT, LCQFT/time-slice structure, pAQFT model construction and concrete model dynamics.
+- `classification`: `NONFORCED`
+- `canonicity_level`: model dynamics `C2–C3`; framework-wide history selection underdetermined.
+- `weaker_framework_test`: automorphisms and response maps do not generically select physical histories.
+- `physical_bridge`: concrete model-dependent dynamics; no universal framework bridge.
+- `empirical_binding`: concrete QFT model predictions inherit the null empirical record.
+- `falsification_condition`: a source-qualified universal AQFT dynamical-selection law would supersede.
+- `countermodels`: distinct AQFT models with different dynamics suffice to block universal selection.
+- `scope_ceiling`: K4 scope difference; does not deny real dynamics in concrete AQFT models.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP5-AQFT-006 — AQFT has no source-bound framework-level empirical discriminator against the null QFT baseline
+
+- `framework_ids`: `FW-AQFT`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP4-AQFT-HK-1964`, `SRC-FCP4-AQFT-BFV-2003`, `SRC-FCP4-AQFT-FV-MEAS-2020`, `SRC-FCP4-AQFT-BFR-2025`, `SRC-FCP2-NULL-DECOMP-001`
+- `claim_text`: At the FCP-5 source scope, no abstract AQFT prediction satisfies all frozen K10 requirements needed to distinguish AQFT empirically from the bounded successful QFT/SM sector; quantitative success of concrete AQFT representations is therefore recorded as empirical inheritance unless independently discriminating evidence is supplied.
+- `assumptions`: frozen K10 comparator/observable/uncertainty/decision/provenance requirements.
+- `classification`: `OPEN`
+- `canonicity_level`: `N/A` at framework-comparison level.
+- `weaker_framework_test`: reproducing an already successful model does not independently select one formal representation.
+- `physical_bridge`: present through concrete QFT models and the measurement framework, but no distinct AQFT observable is identified.
+- `empirical_binding`: `EMPIRICALLY_INHERITED`; no independent dataset/source record.
+- `falsification_condition`: a preregistered source-bound AQFT-specific prediction satisfying K10 would supersede this open status.
+- `countermodels`: empirically equivalent formulations block inference from reproduction to independent empirical selection.
+- `scope_ceiling`: `NO_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR_IDENTIFIED`; not proof that none can ever exist.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP5-AQFT-007 — AQFT/null structural agreement does not count as independent foundational convergence
+
+- `framework_ids`: `FW-AQFT`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP4-AQFT-HK-1964`, `SRC-FCP4-AQFT-BFV-2003`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: Because the bounded AQFT tradition is explicitly an algebraic reformulation/extension lineage of QFT, close AQFT–null structural agreement is not counted as `INDEPENDENT_CONVERGENCE`; core agreement is labeled `REFORMULATION_RELATION`, while additional LCQFT/pAQFT/measurement structures are evaluated separately on their own source-qualified merits.
+- `assumptions`: historical/mathematical dependence of the formulations plus frozen FCP convergence-credit rules.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` cross-framework.
+- `weaker_framework_test`: expected agreement between a theory and its reformulation cannot establish independent recurrence from separate primitives.
+- `physical_bridge`: inherited through shared QFT models.
+- `empirical_binding`: no independent AQFT selection.
+- `falsification_condition`: demonstration that a specific compared structure arose independently under the FCP independence criterion and satisfies non-generic E1–E4 requirements would permit reevaluation of that structure only.
+- `countermodels`: alternate empirically equivalent reformulations show why agreement alone is insufficient.
+- `scope_ceiling`: no strong/moderate **independent** AQFT–null convergence credit from expected reformulation agreement.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+---
+
 ## Rules
 
 - One primary classification per claim.
@@ -399,3 +522,4 @@ Future claims should use the following fields:
 - Negative and nonforcing results remain preserved when later work supersedes a stronger claim.
 - No framework-level numerical score is inferred automatically from individual claim rows.
 - Cross-framework convergence credit requires the frozen FCP-2 correspondence and weaker-framework rules.
+- Reformulation relations must not be counted as independent convergence unless the independence burden is explicitly discharged.

@@ -22,10 +22,10 @@ A framework may participate in multiple pairwise or multi-framework comparisons.
 
 | Framework ID | Working name | Role | Status | Latest bounded scientific status |
 |---|---|---|---|---|
-| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `PAIRWISE_COMPARISON_COMPLETE` | **FCP-3 pairwise comparison with Reduced NFC complete; empirically strong in tested regimes, foundationally incomplete, no overall winner** |
+| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `PAIRWISE_COMPARISON_COMPLETE` | **FCP-3 comparison with Reduced NFC and FCP-5 AQFT reformulation/extension control complete; empirical strength remains scoped to tested component theories; no overall winner** |
 | `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `PAIRWISE_COMPARISON_COMPLETE` | **FCP-3: no strong/moderate convergence with null at current source scope; no current foundational discriminator** |
 | `FW-OAQ` | Operational / algebraic quantum approaches | historical umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | **FCP-4: scientifically heterogeneous; replaced for future comparison by `FW-AQFT`, `FW-GPTOPT`, and `FW-CQM`** |
-| `FW-AQFT` | Algebraic / locally covariant quantum field theory | source-bound comparator | `SOURCE_BOUND_READY` | **FCP-4 taxonomy/source intake complete; no cross-framework comparison yet** |
+| `FW-AQFT` | Algebraic / locally covariant quantum field theory | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | **FCP-5: core AQFT primarily reformulates/sharpens QFT; LCQFT/pAQFT add source-qualified model-class structure; localized measurement framework adds physical architecture; no independent framework-level empirical discriminator** |
 | `FW-GPTOPT` | Generalized probabilistic / operational-probabilistic theories | source-bound comparator family | `SOURCE_BOUND_READY` | **FCP-4 combines GPT and OPT at current intake scope while preserving subtraditions; no cross-framework comparison yet** |
 | `FW-CQM` | Categorical quantum mechanics / quantum process theories | source-bound comparator | `SOURCE_BOUND_READY` | **FCP-4 source intake complete; narrower than `FW-CAT`; no cross-framework comparison yet** |
 | `FW-CAUSAL` | Causal-set / order-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | **NONE** |
@@ -100,11 +100,7 @@ Reason: it improperly combines at least three materially different traditions.
 
 ### `FW-AQFT`
 
-Status: `SOURCE_BOUND_READY`.
-
-Core role: algebraic/local formulation of relativistic QFT with spacetime-indexed observable algebras, locality/causality conditions and state/representation structure. Locally covariant and perturbative AQFT are explicit extensions rather than silently merged core assumptions.
-
-Framework type at FCP-4 scope: primarily `REFORMULATION_OF_ESTABLISHED_THEORY`, with mixed extension/model-construction roles.
+FCP-4 source-bound core AQFT plus separately named LCQFT, pAQFT/model-construction and measurement extensions. Its FCP-4 framework type is primarily `REFORMULATION_OF_ESTABLISHED_THEORY` with mixed extension roles.
 
 ### `FW-GPTOPT`
 
@@ -122,15 +118,34 @@ Narrow quantum/process categorical tradition with systems/processes and monoidal
 
 Framework type: `FOUNDATIONAL_META_FRAMEWORK + REFORMULATION_OF_ESTABLISHED_THEORY` (`MIXED`).
 
-### Empirical status
-
 FCP-4 source-binds zero independent framework-level empirical discriminators for `FW-AQFT`, `FW-GPTOPT`, or `FW-CQM`. Concrete QM/QFT model success is treated as empirical inheritance unless a framework-specific prediction is independently established.
 
-### Adjacent-family disposition
-
-Effectus and topos approaches remain deferred to later `FW-CAT` intake. Process-matrix/indefinite-causal-order frameworks may warrant later causal-quantum intake but are not required for this split.
-
 No `KEY_EXTENSION_CANDIDATE` is opened by FCP-4.
+
+## FCP-5 AQFT/null reformulation-extension state
+
+FCP-5 compares only `FW-AQFT` with the source-bound QFT/SM sector of `FW-NULL-GRQFTSM` under the frozen FCP-2 coordinates.
+
+Primary K-key descriptors:
+
+- reformulation: `2` (`K1`, `K9`);
+- structural refinement: `3` (`K2`, `K4`, `K6`);
+- model-class extension: `3` (`K3`, `K7`, `K8`);
+- physical extension: `1` (`K5`);
+- empirically distinct: `0`;
+- open: `1` (`K10`).
+
+Additional controls:
+
+- generic-only substructures excluded from distinctive AQFT credit: `4`;
+- material AQFT/null scope divergences: `4`;
+- key-extension candidates: `0`.
+
+Controlling verdict:
+
+> **AQFT IS PRIMARILY A STRUCTURAL REFORMULATION/SHARPENING OF QFT AT CORE SCOPE, WITH SOURCE-QUALIFIED LCQFT/pAQFT MODEL-CLASS EXTENSIONS AND A LOCALIZED PHYSICAL MEASUREMENT EXTENSION, BUT NO INDEPENDENT FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR AT CURRENT SOURCE SCOPE.**
+
+Expected agreement between ordinary QFT and core AQFT is classified `REFORMULATION_RELATION`, not independent foundational convergence. LCQFT's functorial extension across classical curved spacetimes is source-qualified additional structure but does not derive spacetime or constitute quantum gravity. Concrete numerical QFT success remains `EMPIRICALLY_INHERITED` by abstract AQFT unless an AQFT-specific discriminator is independently established.
 
 ## Admission rule
 

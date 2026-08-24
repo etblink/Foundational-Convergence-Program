@@ -2,9 +2,9 @@
 
 ## Status
 
-**Current completed phase:** FCP-4 — Operational/Algebraic Quantum Framework Split and Source Intake  
-**Current scientific state:** `FW-OAQ` superseded by source-bound `FW-AQFT`, `FW-GPTOPT`, and `FW-CQM`; no FCP-4 cross-framework comparison performed  
-**Next recommended task:** FCP-5 — AQFT vs. Null Baseline: K1–K10 Reformulation/Extension Control
+**Current completed phase:** FCP-5 — AQFT vs. Null Baseline Reformulation/Extension Control  
+**Current scientific state:** AQFT/null relationship classified under frozen FCP-2 coordinates before any NFC–AQFT comparison  
+**Next recommended task:** FCP-6 — Reduced NFC vs. AQFT: K1–K10 Controlled Structural Comparison
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which structures are genuinely forced by successful physics, and which are artifacts of a chosen formal language or model.
 
@@ -21,9 +21,12 @@ No framework receives evidentiary credit merely because it suggested the questio
 - **FCP-1:** source-bound the bounded GR + QFT + Standard Model null baseline.
 - **FCP-2:** froze framework-neutral K1–K10 comparison coordinates, M1–M3 status metadata, and E1–E5 equivalence/convergence rules before first competitor exposure.
 - **FCP-3:** source-bound Reduced NFC and performed the first cross-framework comparison under those preregistered coordinates.
-- **FCP-4:** split the over-broad operational/algebraic umbrella into source-bound competitors before any further comparison.
+- **FCP-4:** split the over-broad operational/algebraic umbrella into source-bound `FW-AQFT`, `FW-GPTOPT`, and `FW-CQM` before further comparison.
+- **FCP-5:** classified the AQFT–null relationship as reformulation/sharpening plus named extensions, preventing expected QFT–AQFT agreement from being double-counted as independent convergence.
 
-FCP-3 found, at its bounded source scope:
+## FCP-3 Reduced-NFC/null result
+
+At its bounded source scope FCP-3 found:
 
 - strong convergence candidates: **0**;
 - moderate convergence candidates: **0**;
@@ -33,7 +36,7 @@ FCP-3 found, at its bounded source scope:
 - material divergence entries: **9**;
 - key-extension candidates: **0**.
 
-Controlling FCP-3 bounded verdict:
+Controlling FCP-3 verdict:
 
 > **NO NONTRIVIAL NFC–NULL CONVERGENCE FOUND AT CURRENT SOURCE SCOPE.**
 
@@ -41,13 +44,7 @@ This is a negative/nonforcing comparative result, not a claim that future framew
 
 ## FCP-4 framework taxonomy
 
-The provisional umbrella:
-
-`FW-OAQ` — Operational / algebraic quantum approaches
-
-is now:
-
-`SUPERSEDED_BY_FRAMEWORK_SPLIT`.
+The historical umbrella `FW-OAQ` is now `SUPERSEDED_BY_FRAMEWORK_SPLIT`.
 
 FCP-4 source-binds:
 
@@ -57,9 +54,28 @@ FCP-4 source-binds:
 
 `FW-CAT` remains a broader admitted-but-not-yet-source-bound category for categorical/process/topos/effectus and related structural approaches. It is not replaced by `FW-CQM`.
 
-FCP-4 added 15 authoritative external source records and identified **no independent framework-level empirical discriminator** for the three abstract framework entries. Empirical success inherited from concrete QM/QFT models is not counted as independent confirmation of an abstract reformulation or meta-framework.
+## FCP-5 AQFT/null control
 
-No E1–E5 equivalence or convergence class was assigned in FCP-4.
+FCP-5 asks what AQFT adds beyond the already-successful QFT sector rather than treating AQFT and QFT as historically independent theories.
+
+Primary K-key result:
+
+- `REFORMULATION`: **2** — K1, K9;
+- `STRUCTURAL_REFINEMENT`: **3** — K2, K4, K6;
+- `MODEL_CLASS_EXTENSION`: **3** — K3, K7, K8;
+- `PHYSICAL_EXTENSION`: **1** — K5;
+- `EMPIRICALLY_DISTINCT`: **0**;
+- `OPEN`: **1** — K10.
+
+Controlling verdict:
+
+> **AQFT IS PRIMARILY A STRUCTURAL REFORMULATION/SHARPENING OF QFT AT CORE SCOPE, WITH SOURCE-QUALIFIED LCQFT/pAQFT MODEL-CLASS EXTENSIONS AND A LOCALIZED PHYSICAL MEASUREMENT EXTENSION, BUT NO INDEPENDENT FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR AT CURRENT SOURCE SCOPE.**
+
+Important control:
+
+> **EXPECTED QFT–AQFT AGREEMENT IS A REFORMULATION RELATION, NOT INDEPENDENT CONVERGENCE.**
+
+LCQFT broadens the model organization across globally hyperbolic classical spacetimes but does not derive spacetime and is not quantum gravity. Concrete Standard Model/QFT numerical success is `EMPIRICALLY_INHERITED` by abstract AQFT unless a framework-specific empirical discriminator is independently established.
 
 ## NFC provenance boundary
 
@@ -94,6 +110,8 @@ Permanent rule:
 
 The recommended next task is:
 
-**FCP-5 — AQFT vs. Null Baseline: K1–K10 Reformulation/Extension Control**.
+**FCP-6 — Reduced NFC vs. AQFT: K1–K10 Controlled Structural Comparison**.
 
-AQFT should first be compared with the already source-bound GR+QFT+SM null baseline before it is used as a comparator for Reduced NFC or another speculative framework. This control should determine which AQFT structures are merely equivalent/reformulational relative to ordinary QFT, which arise only in locally covariant or perturbative extensions, and whether any non-generic structure deserves independent scientific credit.
+FCP-6 should compare Reduced NFC only against the FCP-5-qualified AQFT residue. It must exclude from framework-specific convergence credit every AQFT feature classified in FCP-5 as ordinary QFT content, reformulational, generic mathematics, empirically inherited, or merely supplied as an AQFT axiom.
+
+The highest-information questions are expected to concern K2/K5/K6/K8, with Realization and Dynamics retained as mandatory burden checks.
