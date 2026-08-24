@@ -65,6 +65,24 @@ This register records authoritative source locations and provenance bindings use
 | `SRC-FCP4-CQM-CK-2017` | `FW-CQM` / modern monograph | Coecke & Kissinger, *Picturing Quantum Processes* (Cambridge, 2017) | DOI `10.1017/9781316219317`; ISBN `9781107104228` | `SOURCE_BOUND` | Systematic process-first/diagrammatic synthesis of quantum theory and classical-quantum interaction. |
 | `SRC-FCP4-CQM-GS-2018` | `FW-CQM` / CQM–OPT bridge | Gogioso & Scandolo, *Categorical Probabilistic Theories*, EPTCS 266 (2018) 367–385 | DOI `10.4204/EPTCS.266.23`; arXiv `1701.08075` | `SOURCE_BOUND` | Primary bridge documenting similarities and differences between CQM and OPT; does not identify the full framework families. |
 
+### FCP-7 — GPTOPT empirical supplement
+
+| Source ID | Framework / role | Authority | Location | Status | Notes |
+|---|---|---|---|---|---|
+| `SRC-FCP7-GPT-MAZUREK-2021` | `FW-GPTOPT` / direct model-independent GPT tomography | Mazurek, Pusey, Resch & Spekkens, *Experimentally Bounding Deviations From Quantum Theory in the Landscape of Generalized Probabilistic Theories*, PRX Quantum 2, 020302 (2021) | DOI `10.1103/PRXQuantum.2.020302`; arXiv `1710.05948` | `SOURCE_BOUND` | Self-consistent GPT tomography for single-photon polarization; quantitatively bounds deviations from qubit geometry and inferred stronger-than-quantum CHSH capability; principal caveat is tomographic completeness. This pointer registers the source already frozen by the immutable FCP-7 empirical-supplement artifact and does not rewrite that history. |
+
+### FCP-8 — GPTOPT quantum-boundary source layer
+
+| Source ID | Framework / role | Authority | Location | Status | Notes |
+|---|---|---|---|---|---|
+| `SRC-FCP8-GPT-PR-1994` | `FW-GPTOPT` / post-quantum nonsignalling witness | Popescu & Rohrlich, *Quantum nonlocality as an axiom*, Found. Phys. 24, 379–385 (1994) | DOI `10.1007/BF02058098` | `SOURCE_BOUND` | Primary source for superquantum nonsignalling correlations; mathematical possibility, not observed reality. |
+| `SRC-FCP8-GPT-TSIRELSON-1980` | `FW-GPTOPT` / quantum Bell bound | B. S. Cirel'son, *Quantum generalizations of Bell's inequality*, Lett. Math. Phys. 4, 93–100 (1980) | DOI `10.1007/BF00417500` | `SOURCE_BOUND` | Primary theorem source for quantum Bell-correlation restrictions. |
+| `SRC-FCP8-GPT-IC-2009` | `FW-GPTOPT` / Information Causality | Pawłowski et al., *Information causality as a physical principle*, Nature 461, 1101–1104 (2009) | DOI `10.1038/nature08400`; arXiv `0905.2292` | `SOURCE_BOUND` | Strong partial post-quantum restriction; not complete quantum-set characterization. |
+| `SRC-FCP8-GPT-ML-2010` | `FW-GPTOPT` / Macroscopic Locality | Navascués & Wunderlich, *A glance beyond the quantum model*, Proc. R. Soc. A 466, 881–890 (2010) | DOI `10.1098/rspa.2009.0453`; arXiv `0907.0372` | `SOURCE_BOUND` | Macroscopic classical-limit principle; permits post-quantum correlations. |
+| `SRC-FCP8-GPT-AQ-2015` | `FW-GPTOPT` / principle-insufficiency countermodel | Navascués, Guryanova, Hoban & Acín, *Almost quantum correlations*, Nat. Commun. 6, 6288 (2015) | DOI `10.1038/ncomms7288`; arXiv `1403.4621` | `SOURCE_BOUND` | Strict post-quantum superset satisfying many proposed principles; not physically realized by source evidence. |
+| `SRC-FCP8-GPT-IC-2026` | `FW-GPTOPT` / current IC status | Yu & Scarani, *Information causality beyond the random-access-code model*, Phys. Rev. A 114, 012202 (2026) | DOI `10.1103/s52j-2jr7` | `SOURCE_BOUND` | Current primary source; closes some gaps but reports remaining gaps for some correlation families. |
+| `SRC-FCP8-GPT-RINGBAUER-2014` | `FW-GPTOPT` / empirical IC principle-test methodology | Ringbauer, Fedrizzi, Berry & White, *Information Causality in the Quantum and Post-Quantum Regime*, Sci. Rep. 4, 6955 (2014) | DOI `10.1038/srep06955` | `SOURCE_BOUND` | Supraquantum correlations are emulated through quantum-optical loss/postselection; not observation of natural post-quantum physics and not independent empirical selection of IC. |
+
 ## FCP-1 source-window note
 
 `FCP-1` uses the null records above as a bounded baseline retrieved/checked on 2026-08-24. PDG is a living annual review; future FCP tasks must not silently substitute later editions into `FCP-1` without a versioned update.
@@ -82,6 +100,14 @@ This register records authoritative source locations and provenance bindings use
 `FCP-4` freezes the AQFT/GPTOPT/CQM source window at **2026-08-24**. It adds 15 authoritative external source records: 7 foundational/primary framework sources, 7 review/synthesis sources, and 1 specialized primary physical-realization source. It adds **zero independent framework-level empirical source records**. Reproduction of standard QM/QFT empirical results is treated as inherited model evidence unless a framework-specific discriminator is separately source-bound.
 
 No source in FCP-4 authorizes cross-framework convergence credit.
+
+## FCP-7 source-window note
+
+FCP-7 adds exactly one bounded empirical GPT source, `SRC-FCP7-GPT-MAZUREK-2021`, to answer its K10-B theory-space constraint question. The source's exact interpretation remains frozen by `frameworks/gpt_opt/FCP7_GPTOPT_EMPIRICAL_SOURCE_SUPPLEMENT_0_1_0.md`.
+
+## FCP-8 source-window note
+
+FCP-8 adds **6 theoretical primary/current-status sources and 1 empirical principle-test source**. It reuses the FCP-7 Mazurek empirical source. No FCP-8 source authorizes a claim that the complete GPTOPT space is experimentally excluded or that one quantum-boundary principle is uniquely selected by nature.
 
 ## Branch-retention rule
 

@@ -2,9 +2,9 @@
 
 ## Status
 
-**Current completed phase:** FCP-7 — GPTOPT Comparative Baseline  
-**Current scientific state:** GPTOPT G0–G6 layers decomposed; base operational framework separated from optional reconstruction axioms, quantum embedding, broader-than-quantum theory space, and bounded empirical restrictions  
-**Next recommended task:** FCP-8 — GPTOPT Empirical Theory-Space Control: Post-Quantum Correlations, Composite-System Selection, and Quantum-Boundary Constraints
+**Current completed phase:** FCP-8 — GPTOPT Empirical Theory-Space Control  
+**Current scientific state:** GPTOPT's post-quantum Bell/composite possibility space is now source-bound against quantum limits, candidate principles and bounded experiment; experiment narrows generalized space but no unique quantum-boundary principle or globally unique quantum composite is selected at current scope  
+**Next recommended task:** FCP-9 — Causal-Set / Order-Theoretic Framework Source Intake and K1–K10 Baseline
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language or model.
 
@@ -25,46 +25,27 @@ No framework receives evidentiary credit merely because it suggested the questio
 - **FCP-5:** classified AQFT–null as core reformulation/sharpening plus named source-qualified extensions, preventing QFT inheritance from being counted as independent AQFT convergence.
 - **FCP-6:** compared Reduced NFC with AQFT only after explicit AQFT subtraction; no strong/moderate convergence survived.
 - **FCP-7:** decomposed GPTOPT into base operational structure, optional reconstruction axioms, quantum embedding, generalized/post-quantum possibilities and bounded empirical restrictions before any NFC–GPTOPT comparison.
+- **FCP-8:** source-bound post-quantum Bell/composite theory space, candidate quantum-boundary principles and empirical restrictions without performing any NFC–GPTOPT comparison.
 
 ## FCP-6 Reduced-NFC/AQFT control
 
-FCP-6 froze AQFT-side provenance buckets before comparison and found:
-
-- strong convergence: **0**;
-- moderate convergence: **0**;
-- weak/generic correspondences: **3**;
-- functional analogies: **4**;
-- no-correspondence keys: **3**.
+FCP-6 found zero strong and zero moderate NFC–AQFT convergence after subtracting AQFT reformulation, generic mathematics, supplied axioms and inherited QFT success.
 
 Controlling verdict:
 
 > **NO NONTRIVIAL NFC–AQFT CONVERGENCE FOUND AFTER AQFT SUBTRACTION AT CURRENT SOURCE SCOPE.**
 
-## FCP-7 GPTOPT result
+## FCP-7 GPTOPT baseline
 
-FCP-7 freezes seven provenance layers:
+FCP-7 freezes:
 
-- `G0` — operational skeleton;
-- `G1` — convex/probabilistic structure;
-- `G2` — composite-system structure;
-- `G3` — reconstruction axioms;
-- `G4` — quantum embedding;
-- `G5` — generalized/post-quantum theory space;
-- `G6` — empirical/physical restriction.
-
-The bounded family remains coherent as `FW-GPTOPT`; no GPT-versus-OPT split is presently warranted.
-
-Key findings:
-
-- base GPTOPT natively organizes preparations/states, effects/measurements, transformations/processes and probabilities;
-- quantum theory is one member of the broader theory space, not a generic theorem of the base framework;
-- allowed transformations remain distinct from actual dynamics;
-- no-signalling, operational causality, local tomography and Lorentzian causality remain distinct;
-- even with local tomography, local state spaces do not uniquely determine a global composite state space;
-- quantum reconstructions are conditional on named additional principles and are not independent predictions of the already-known target;
-- GPTOPT has strong abstract operational semantics but incomplete framework-wide physical calibration;
-- one bounded empirical GPT-tomography source shows that experiment can constrain deviations from the quantum description without assuming quantum tomography;
-- no framework-level GPTOPT empirical discriminator is identified.
+- `G0` operational skeleton;
+- `G1` convex/probabilistic structure;
+- `G2` composite-system structure;
+- `G3` reconstruction axioms;
+- `G4` quantum embedding;
+- `G5` generalized/post-quantum theory space;
+- `G6` empirical/physical restriction.
 
 Controlling verdict:
 
@@ -76,7 +57,42 @@ Permanent controls:
 
 > **QUANTUM EMBEDDING != EMPIRICAL CONFIRMATION OF GPTOPT.**
 
-> **EXPERIMENTAL EXCLUSION OF SOME GPTS != CONFIRMATION OF ALL GPTOPT.**
+## FCP-8 GPTOPT empirical theory-space result
+
+FCP-8 analyzes a small bounded source layer for post-quantum correlations, quantum Bell bounds, Information Causality, Macroscopic Locality, almost-quantum correlations, current 2026 Information Causality status and one experimental IC implementation, while carrying forward the FCP-7 Mazurek GPT tomography.
+
+Main results:
+
+- bounded Bell-correlation hierarchy: `classical/local ⊂ quantum ⊂ nonsignalling`;
+- PR-box correlations show that no-signalling does not select quantum theory;
+- quantum Tsirelson bounds are stricter than the nonsignalling/algebraic maximum but are mathematical consequences of quantum theory, not by themselves explanations of why nature is quantum;
+- Information Causality and Macroscopic Locality are nontrivial partial selectors but do not uniquely characterize the complete quantum correlation set at the bounded source scope;
+- the almost-quantum set supplies a post-quantum countermodel to simple principle-uniqueness claims;
+- current 2026 Information Causality work continues to report some boundary gaps;
+- local tomography does not uniquely select the quantum composite cone;
+- Bell/correlation data constrain projections of composite structure, not complete GPT composite state spaces;
+- bounded model-independent GPT tomography can constrain low-dimensional deviations from quantum state/effect geometry, but tomography completeness remains a hard assumption;
+- experimental emulation of supraquantum statistics through postselection does not constitute observation of post-quantum physics;
+- highest justified empirical-selection level: **L2**;
+- principles sufficient for the complete bounded quantum set: **0**;
+- principles independently empirically selected as nature's unique boundary law: **0**;
+- framework-level GPTOPT empirical discriminator: **0**.
+
+Controlling verdict:
+
+> **EXPERIMENT NARROWS GPTOPT THEORY SPACE BUT DOES NOT UNIQUELY SELECT THE QUANTUM SET OR ONE FOUNDATIONAL PRINCIPLE AT CURRENT SOURCE SCOPE.**
+
+Permanent FCP-8 controls:
+
+> **NO-SIGNALLING != QUANTUM THEORY.**
+
+> **LOCAL TOMOGRAPHY != UNIQUE QUANTUM COMPOSITE.**
+
+> **PRINCIPLE EXCLUSION OF SOME POSTQUANTUM CORRELATIONS != DERIVATION OF QUANTUM THEORY.**
+
+> **BELL/CORRELATION PROJECTION != COMPLETE GPT COMPOSITE TOMOGRAPHY.**
+
+> **EMULATED SUPERQUANTUM STATISTICS != NATURAL POSTQUANTUM PHYSICS.**
 
 ## NFC provenance boundary
 
@@ -105,8 +121,8 @@ Permanent rule:
 
 Recommended:
 
-**FCP-8 — GPTOPT Empirical Theory-Space Control: Post-Quantum Correlations, Composite-System Selection, and Quantum-Boundary Constraints**.
+**FCP-9 — Causal-Set / Order-Theoretic Framework Source Intake and K1–K10 Baseline**.
 
-FCP-7 shows that GPTOPT's highest-information residue is the explicit wider theory space and its selection burden—especially composite-system ambiguity and post-quantum possibilities—not an immediate resemblance to NFC. FCP-8 should therefore source-bind a small, independent empirical/theoretical corpus for which generalized possibilities are actually constrained and which proposed quantum-selecting principles are themselves independently supported.
+FCP-8 lands in the no-unique-principle/composite-underdetermination outcome. Rather than returning to NFC or stacking more GPT reconstruction principles, FCP should now source-bind a framework with materially different primitives. The currently broad `FW-CAUSAL` entry should be defined before comparison, with special attention to primitive causal/order carrier, actual dynamics/growth, continuum approximation, local-to-global structure, physical realization and empirical burden.
 
-Do not default back to NFC before that control exists.
+No NFC/GPTOPT convergence comparison should occur during that source-intake phase.

@@ -24,9 +24,9 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 | `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `PAIRWISE_COMPARISON_COMPLETE` | FCP-6: no strong/moderate NFC–AQFT convergence after subtraction; Interface Sufficiency/Globalization remain discovery questions; Realization/Dynamics remain burden checks |
 | `FW-OAQ` | Operational / algebraic quantum approaches | historical umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-4 split into `FW-AQFT`, `FW-GPTOPT`, `FW-CQM` |
 | `FW-AQFT` | Algebraic / locally covariant quantum field theory | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-5/6 controls complete; core mostly reformulation/sharpening of QFT plus named AQFT-X extensions; no framework-level empirical discriminator |
-| `FW-GPTOPT` | Generalized probabilistic / operational-probabilistic theories | source-bound generalizing meta-framework | `PAIRWISE_COMPARISON_COMPLETE` | **FCP-7: G0–G6 decomposition complete; quantum theory is an embedded special case, not selected by base GPTOPT without additional reconstruction/selection principles; one bounded GPT experimental constraint family added; no framework-level empirical discriminator** |
+| `FW-GPTOPT` | Generalized probabilistic / operational-probabilistic theories | source-bound generalizing meta-framework | `PAIRWISE_COMPARISON_COMPLETE` | **FCP-8: post-quantum Bell/composite theory space empirically and structurally bounded; no-signalling, Information Causality and Macroscopic Locality do not uniquely select the complete quantum boundary; empirical evidence reaches bounded L2, not global L4 selection; no framework-level GPTOPT discriminator** |
 | `FW-CQM` | Categorical quantum mechanics / quantum process theories | source-bound comparator | `SOURCE_BOUND_READY` | FCP-4 source intake complete; no cross-framework comparison yet |
-| `FW-CAUSAL` | Causal-set / order-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
+| `FW-CAUSAL` | Causal-set / order-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | **Next recommended source-intake target after FCP-8 because it provides an independent primitive basis for K6/K8/K4/K9** |
 | `FW-LOOP` | Loop / spin-network / spinfoam approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-TENSOR` | Tensor-network / information-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-AS` | Asymptotic safety | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
@@ -55,32 +55,38 @@ FCP-6 compared Reduced NFC only after subtracting AQFT reformulation, generic ma
 
 ## FCP-7 GPTOPT baseline
 
-FCP-7 decomposes `FW-GPTOPT` into:
-
-- `G0` operational skeleton;
-- `G1` convex/probabilistic structure;
-- `G2` composite-system structure;
-- `G3` reconstruction axioms;
-- `G4` quantum embedding;
-- `G5` generalized/post-quantum theory space;
-- `G6` empirical restriction.
+FCP-7 decomposes `FW-GPTOPT` into `G0` operational skeleton, `G1` convex/probabilistic structure, `G2` composite-system structure, `G3` reconstruction axioms, `G4` quantum embedding, `G5` generalized/post-quantum theory space and `G6` empirical restriction.
 
 The family remains coherent as one bounded FCP entry. No `FRAMEWORK_SPLIT_CANDIDATE` is opened.
 
-Main FCP-7 results:
+Its bounded verdict is:
 
-- base GPTOPT contains states/preparations, effects/measurements, transformations/processes and operational probabilities, with convex representation in standard GPT formulations;
-- allowed transformations do not supply one universal actual-dynamics selector;
-- local tomography is optional and does not uniquely select the global composite state space;
-- quantum reconstruction requires named additional principles and is not independent prediction merely because it recovers the known target;
-- GPTOPT has native operational semantics but incomplete framework-wide physical calibration;
-- quantum theory is one admitted model inside a wider theory space, so the family-level relation is `GENERALIZATION_RELATION`, not independent convergence;
-- one bounded empirical GPT-tomography source constrains deviations from the quantum description for single-photon polarization without selecting the full GPTOPT theory space or a unique reconstruction package;
-- no framework-level GPTOPT empirical discriminator is identified.
+> **GPTOPT IS A GENERAL OPERATIONAL META-FRAMEWORK THAT CONTAINS QUANTUM THEORY AS A SPECIAL CASE BUT DOES NOT SELECT IT WITHOUT ADDITIONAL STRUCTURAL/RECONSTRUCTION PRINCIPLES OR EMPIRICAL RESTRICTION.**
+
+## FCP-8 GPTOPT empirical theory-space control
+
+FCP-8 source-binds a deliberately small quantum-boundary layer and preserves the FCP-7 G0–G6 decomposition.
+
+Main findings:
+
+- in bounded Bell scenarios, `classical/local ⊂ quantum ⊂ nonsignalling`;
+- PR-box correlations witness that no-signalling is insufficient to select quantum theory;
+- Information Causality and Macroscopic Locality remove nontrivial supraquantum regions but do not source-select the complete quantum set;
+- the almost-quantum set provides a reusable countermodel to overclaiming principle sufficiency;
+- current 2026 Information Causality work still reports gaps for some families;
+- local tomography does not uniquely select the quantum composite cone;
+- Bell/correlation tests constrain projections/slices of composite structure rather than uniquely fixing the full GPT composite state space;
+- Mazurek-style model-independent GPT tomography yields bounded low-dimensional empirical narrowing with a tomography-completeness caveat;
+- Ringbauer's experimental Information Causality implementation uses emulated supraquantum statistics and therefore does not observe natural post-quantum physics;
+- highest justified empirical-selection ladder level is `L2`, not `L3` or `L4`;
+- framework-level GPTOPT empirical discriminator: `0`;
+- principles independently selected as a unique quantum-boundary law: `0`;
+- `FRAMEWORK_SPLIT_CANDIDATE`: `0`;
+- `KEY_EXTENSION_CANDIDATE`: `0`.
 
 Bounded verdict:
 
-> **GPTOPT IS A GENERAL OPERATIONAL META-FRAMEWORK THAT CONTAINS QUANTUM THEORY AS A SPECIAL CASE BUT DOES NOT SELECT IT WITHOUT ADDITIONAL STRUCTURAL/RECONSTRUCTION PRINCIPLES OR EMPIRICAL RESTRICTION.**
+> **EXPERIMENT NARROWS GPTOPT THEORY SPACE BUT DOES NOT UNIQUELY SELECT THE QUANTUM SET OR ONE FOUNDATIONAL PRINCIPLE AT CURRENT SOURCE SCOPE.**
 
 ## Admission and credit rules
 
