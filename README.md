@@ -2,9 +2,9 @@
 
 ## Status
 
-**Current completed phase:** FCP-3 — first source-bound cross-framework comparison  
-**Current scientific state:** Reduced NFC vs. GR + QFT + Standard Model comparison completed under preregistered FCP-2 coordinates  
-**Next recommended task:** FCP-4 — Operational/Algebraic Quantum Framework Split and Source Intake
+**Current completed phase:** FCP-4 — Operational/Algebraic Quantum Framework Split and Source Intake  
+**Current scientific state:** `FW-OAQ` superseded by source-bound `FW-AQFT`, `FW-GPTOPT`, and `FW-CQM`; no FCP-4 cross-framework comparison performed  
+**Next recommended task:** FCP-5 — AQFT vs. Null Baseline: K1–K10 Reformulation/Extension Control
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which structures are genuinely forced by successful physics, and which are artifacts of a chosen formal language or model.
 
@@ -21,6 +21,7 @@ No framework receives evidentiary credit merely because it suggested the questio
 - **FCP-1:** source-bound the bounded GR + QFT + Standard Model null baseline.
 - **FCP-2:** froze framework-neutral K1–K10 comparison coordinates, M1–M3 status metadata, and E1–E5 equivalence/convergence rules before first competitor exposure.
 - **FCP-3:** source-bound Reduced NFC and performed the first cross-framework comparison under those preregistered coordinates.
+- **FCP-4:** split the over-broad operational/algebraic umbrella into source-bound competitors before any further comparison.
 
 FCP-3 found, at its bounded source scope:
 
@@ -32,11 +33,33 @@ FCP-3 found, at its bounded source scope:
 - material divergence entries: **9**;
 - key-extension candidates: **0**.
 
-Controlling bounded verdict:
+Controlling FCP-3 bounded verdict:
 
 > **NO NONTRIVIAL NFC–NULL CONVERGENCE FOUND AT CURRENT SOURCE SCOPE.**
 
 This is a negative/nonforcing comparative result, not a claim that future frameworks or new source-qualified bridges can never produce nontrivial convergence.
+
+## FCP-4 framework taxonomy
+
+The provisional umbrella:
+
+`FW-OAQ` — Operational / algebraic quantum approaches
+
+is now:
+
+`SUPERSEDED_BY_FRAMEWORK_SPLIT`.
+
+FCP-4 source-binds:
+
+- `FW-AQFT` — Algebraic / locally covariant quantum field theory;
+- `FW-GPTOPT` — Generalized probabilistic / operational-probabilistic theories;
+- `FW-CQM` — Categorical quantum mechanics / quantum process theories.
+
+`FW-CAT` remains a broader admitted-but-not-yet-source-bound category for categorical/process/topos/effectus and related structural approaches. It is not replaced by `FW-CQM`.
+
+FCP-4 added 15 authoritative external source records and identified **no independent framework-level empirical discriminator** for the three abstract framework entries. Empirical success inherited from concrete QM/QFT models is not counted as independent confirmation of an abstract reformulation or meta-framework.
+
+No E1–E5 equivalence or convergence class was assigned in FCP-4.
 
 ## NFC provenance boundary
 
@@ -69,6 +92,8 @@ Permanent rule:
 
 ## Next scientific task
 
-The recommended next task is **FCP-4 — Operational/Algebraic Quantum Framework Split and Source Intake**.
+The recommended next task is:
 
-`FW-OAQ` is currently an admitted family rather than one uniquely defined framework. FCP-4 should determine whether algebraic QFT, general probabilistic/operational theories, and categorical/process formulations require separate framework IDs, bind a high-authority source set for each admitted component, and stop before the next cross-framework comparison.
+**FCP-5 — AQFT vs. Null Baseline: K1–K10 Reformulation/Extension Control**.
+
+AQFT should first be compared with the already source-bound GR+QFT+SM null baseline before it is used as a comparator for Reduced NFC or another speculative framework. This control should determine which AQFT structures are merely equivalent/reformulational relative to ordinary QFT, which arise only in locally covariant or perturbative extensions, and whether any non-generic structure deserves independent scientific credit.

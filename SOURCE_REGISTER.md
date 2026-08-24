@@ -35,6 +35,36 @@ This register records authoritative source locations and provenance bindings use
 | `SRC-FCP3-DIV-001` | FCP-3 / divergence ledger | Internal FCP comparative artifact | file `convergence/FCP3_NFC_NULL_DIVERGENCE_LEDGER_0_1_0.md`; exact commit `53ff61acc28ebecddd5f83d614cf003e58e45377`; blob `555d30c2205de402cfdd5a2a2063523639987f4e` | `REGISTERED_POINTER_ONLY` | Records material differences without treating every difference as a defect. |
 | `SRC-FCP3-HANDOFF-001` | FCP-3 / continuity handoff | Internal FCP handoff | file `handoffs/FCP3_NFC_VS_NULL_HANDOFF_0_1_0.md`; exact commit `53ff61acc28ebecddd5f83d614cf003e58e45377`; blob `6e0312b7a6f7e65cf74f140d9617c0b46b424141` | `REGISTERED_POINTER_ONLY` | Preserves bounded verdict and next-task rationale independently of branch-retention policy. |
 
+### FCP-4 — AQFT source corpus
+
+| Source ID | Framework / role | Authority | Location | Status | Notes |
+|---|---|---|---|---|---|
+| `SRC-FCP4-AQFT-HK-1964` | `FW-AQFT` / foundational algebraic QFT | Haag & Kastler, *An Algebraic Approach to Quantum Field Theory*, J. Math. Phys. 5 (1964) 848–861 | DOI `10.1063/1.1704187` | `SOURCE_BOUND` | Foundational primary source; later AQFT extensions are not back-projected into this core. |
+| `SRC-FCP4-AQFT-BFV-2003` | `FW-AQFT` / locally covariant extension | Brunetti, Fredenhagen & Verch, *The generally covariant locality principle — A new paradigm for local quantum physics*, CMP 237 (2003) 31–68 | DOI `10.1007/s00220-003-0815-7`; arXiv `math-ph/0112041` | `SOURCE_BOUND` | Primary source for locally covariant QFT, functorial spacetime/algebra structure and relative Cauchy evolution; not minimal Haag–Kastler core. |
+| `SRC-FCP4-AQFT-FV-2015` | `FW-AQFT` / modern synthesis | Fewster & Verch, *Algebraic quantum field theory in curved spacetimes* (2015) | DOI `10.1007/978-3-319-21353-8_4`; arXiv `1504.00586` | `SOURCE_BOUND` | Modern review of locally covariant AQFT, state selection and global/gauge structure. |
+| `SRC-FCP4-AQFT-FV-MEAS-2020` | `FW-AQFT` / physical-realization theory | Fewster & Verch, *Quantum Fields and Local Measurements*, CMP 378 (2020) 851–889 | DOI `10.1007/s00220-020-03800-6`; arXiv `1810.06512` | `SOURCE_BOUND` | Specialized primary source for localized system–probe measurement schemes; not an empirical dataset. |
+| `SRC-FCP4-AQFT-BFR-2025` | `FW-AQFT` / current pAQFT synthesis | Brunetti, Fredenhagen & Rejzner, *Perturbative algebraic quantum field theory and beyond* (2025) | arXiv `2512.14227` | `SOURCE_BOUND` | Current review used to delimit pAQFT/interacting-model extensions; pAQFT results are not minimal AQFT axioms. |
+
+### FCP-4 — GPT / OPT source corpus
+
+| Source ID | Framework / role | Authority | Location | Status | Notes |
+|---|---|---|---|---|---|
+| `SRC-FCP4-GPT-HARDY-2001` | `FW-GPTOPT` / foundational reconstruction | Hardy, *Quantum Theory From Five Reasonable Axioms* (2001) | arXiv `quant-ph/0101012` | `SOURCE_BOUND` | Primary reconstruction lineage; its additional axioms do not define all GPT/OPT frameworks. |
+| `SRC-FCP4-GPT-BARRETT-2007` | `FW-GPTOPT` / foundational GPT | Barrett, *Information processing in generalized probabilistic theories*, PRA 75, 032304 (2007) | DOI `10.1103/PhysRevA.75.032304`; arXiv `quant-ph/0508211` | `SOURCE_BOUND` | Primary GPT source including classical, quantum and post-quantum models. |
+| `SRC-FCP4-GPT-CDP-PUR-2010` | `FW-GPTOPT` / optional purification principle | Chiribella, D’Ariano & Perinotti, *Probabilistic theories with purification*, PRA 81, 062348 (2010) | DOI `10.1103/PhysRevA.81.062348`; arXiv `0908.1583` | `SOURCE_BOUND` | Purification is an added principle, not base GPT/OPT structure. |
+| `SRC-FCP4-OPT-CHIRIBELLA-2014` | `FW-GPTOPT` / OPT framework synthesis | Chiribella, *Dilation of states and processes in operational-probabilistic theories* (2014) | DOI `10.4204/EPTCS.172.1`; arXiv `1412.8539` | `SOURCE_BOUND` | Concise source for OPT systems/processes/probabilities; dilation conclusions require named hypotheses. |
+| `SRC-FCP4-GPT-MULLER-2021` | `FW-GPTOPT` / modern reconstruction synthesis | Müller, *Probabilistic Theories and Reconstructions of Quantum Theory*, SciPost Phys. Lect. Notes 28 (2021) | DOI `10.21468/SciPostPhysLectNotes.28`; arXiv `2011.01286` | `SOURCE_BOUND` | Separates broad GPT framework from additional reconstruction principles. |
+| `SRC-FCP4-GPT-PLAVALA-2023` | `FW-GPTOPT` / modern GPT review | Plávala, *General probabilistic theories: An introduction*, Phys. Rep. 1033 (2023) 1–64 | DOI `10.1016/j.physrep.2023.09.001`; arXiv `2103.07469` | `SOURCE_BOUND` | Current broad review of convex GPT states, effects, measurements, transformations and theory models. |
+
+### FCP-4 — CQM source corpus
+
+| Source ID | Framework / role | Authority | Location | Status | Notes |
+|---|---|---|---|---|---|
+| `SRC-FCP4-CQM-AC-2004` | `FW-CQM` / foundational categorical quantum protocols | Abramsky & Coecke, *A categorical semantics of quantum protocols* (2004) | arXiv `quant-ph/0402130` | `SOURCE_BOUND` | Foundational primary source for the CQM tradition. |
+| `SRC-FCP4-CQM-AC-2009` | `FW-CQM` / handbook synthesis | Abramsky & Coecke, *Categorical Quantum Mechanics*, Handbook of Quantum Logic and Quantum Structures, pp. 261–323 | arXiv `0808.1023` | `SOURCE_BOUND` | Mature early synthesis; not every monoidal category is a physical quantum theory. |
+| `SRC-FCP4-CQM-CK-2017` | `FW-CQM` / modern monograph | Coecke & Kissinger, *Picturing Quantum Processes* (Cambridge, 2017) | DOI `10.1017/9781316219317`; ISBN `9781107104228` | `SOURCE_BOUND` | Systematic process-first/diagrammatic synthesis of quantum theory and classical-quantum interaction. |
+| `SRC-FCP4-CQM-GS-2018` | `FW-CQM` / CQM–OPT bridge | Gogioso & Scandolo, *Categorical Probabilistic Theories*, EPTCS 266 (2018) 367–385 | DOI `10.4204/EPTCS.266.23`; arXiv `1701.08075` | `SOURCE_BOUND` | Primary bridge documenting similarities and differences between CQM and OPT; does not identify the full framework families. |
+
 ## FCP-1 source-window note
 
 `FCP-1` uses the null records above as a bounded baseline retrieved/checked on 2026-08-24. PDG is a living annual review; future FCP tasks must not silently substitute later editions into `FCP-1` without a versioned update.
@@ -47,13 +77,32 @@ This register records authoritative source locations and provenance bindings use
 
 `FCP-3` source-binds Reduced NFC from the noncanonical continuity record at `SRC-NFC-RED-001` and compares it with the already source-bound null baseline under byte-frozen FCP-2 rules. No older NFC-source excursion was required, no full NFC canon was imported, and no new external null source was added. Internal FCP-3 artifacts are provenance records, not independent scientific authorities.
 
+## FCP-4 source-window note
+
+`FCP-4` freezes the AQFT/GPTOPT/CQM source window at **2026-08-24**. It adds 15 authoritative external source records: 7 foundational/primary framework sources, 7 review/synthesis sources, and 1 specialized primary physical-realization source. It adds **zero independent framework-level empirical source records**. Reproduction of standard QM/QFT empirical results is treated as inherited model evidence unless a framework-specific discriminator is separately source-bound.
+
+No source in FCP-4 authorizes cross-framework convergence credit.
+
 ## Branch-retention rule
 
 Scientific provenance must bind exact commits/blobs rather than rely on mutable branch names. A historical research branch may therefore be retired after its exact commit is reachable from the accepted `main` history and all material internal references identify immutable provenance.
 
 ## Pending source intake
 
-No authoritative source corpus has yet been bound for operational/algebraic quantum approaches, causal-set/order approaches, loop/spinfoam approaches, tensor/information approaches, asymptotic safety, string/holography, or categorical/process approaches.
+Source-bound and ready after FCP-4 candidate acceptance:
+
+- `FW-AQFT`;
+- `FW-GPTOPT`;
+- `FW-CQM`.
+
+Still pending source intake:
+
+- causal-set/order approaches;
+- loop/spinfoam approaches;
+- tensor/information approaches;
+- asymptotic safety;
+- string/holography;
+- broader `FW-CAT` categorical/process/topos/effectus approaches.
 
 ## Provenance requirements for future entries
 
