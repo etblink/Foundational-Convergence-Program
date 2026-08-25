@@ -20,12 +20,12 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 
 | Framework ID | Working name | Role | Status | Latest bounded scientific status |
 |---|---|---|---|---|
-| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `PAIRWISE_COMPARISON_COMPLETE` | FCP-3 Reduced-NFC comparison, FCP-5 AQFT control, FCP-7 GPTOPT/QM generalization control, and FCP-11 CST/null-GR emergence/reconstruction control complete; empirical strength remains scoped to tested component theories |
+| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `PAIRWISE_COMPARISON_COMPLETE` | FCP-13 CQM/null-QM control added to prior null comparisons; quantum empirical success remains attributed to concrete tested quantum/QFT models rather than independently to categorical reformulations |
 | `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `PAIRWISE_COMPARISON_COMPLETE` | FCP-12: no E1–E4 or strong/moderate NFC–CST convergence after dual subtraction; K2/K5/K8 weak-generic, K1/K3/K6 functional only; Congruence/Viability/FIS remain unresolved discovery questions while Realization/Dynamics remain material asymmetries |
 | `FW-OAQ` | Operational / algebraic quantum approaches | historical umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-4 split into `FW-AQFT`, `FW-GPTOPT`, `FW-CQM` |
 | `FW-AQFT` | Algebraic / locally covariant quantum field theory | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-5/6 controls complete; core mostly reformulation/sharpening of QFT plus named AQFT-X extensions; no framework-level empirical discriminator |
 | `FW-GPTOPT` | Generalized probabilistic / operational-probabilistic theories | source-bound generalizing meta-framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-8: post-quantum Bell/composite theory space empirically and structurally bounded; no unique quantum-boundary principle; empirical evidence reaches bounded L2, not global L4 selection |
-| `FW-CQM` | Categorical quantum mechanics / quantum process theories | source-bound comparator | `SOURCE_BOUND_READY` | FCP-4 source intake complete; no cross-framework comparison yet; next ready framework for null/QM reformulation/process-structure control after FCP-12 returns to the framework queue |
+| `FW-CQM` | Categorical quantum mechanics / quantum process theories | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-13 null/QM control complete: K1/K4/K9 primarily reformulation, K3/K8 structural refinement, K5 extension-dependent; bounded E2 model relations but zero independent strong/moderate convergence and no framework-level empirical discriminator; retained residue is process-first plus explicitly optional dagger/compact/classical/CPM and probabilistic-bridge structure |
 | `FW-CAUSAL` | Causal-set / order-theoretic approaches | historical causal/order umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-9/FCP-10 found the literal umbrella scientifically over-broad; causal set theory proper is now `FW-CST`; unspecified adjacent causal/order approaches remain deferred pending separate source intake |
 | `FW-CST` | Causal Set Theory | source-bound discrete causal/order framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-12 NFC comparison complete after FCP-11 null/GR subtraction: no E1–E4 NFC relation survives; CST causal/discrete carrier, manifold-selection burden and partial realization lack source-bound Reduced-NFC counterparts; R2/D2/E2 and no-framework-discriminator status unchanged |
 | `FW-LOOP` | Loop / spin-network / spinfoam approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
@@ -40,7 +40,7 @@ FCP-1 source-bound the modular GR+QFT+SM null baseline. FCP-2 froze K1–K10, M1
 
 ## FCP-4 framework taxonomy
 
-FCP-4 froze the separation rule:
+FCP-4 froze before the split verdict:
 
 > **Separate frameworks when their primitive commitments, allowed model class, physical scope, or empirical burden differ materially under the FCP keys.**
 
@@ -197,7 +197,60 @@ Bounded verdict:
 
 > **NO NONTRIVIAL REDUCED-NFC/CST CONVERGENCE IS ESTABLISHED AFTER BOTH PROVENANCE AND CST NULL/GR SUBTRACTION AT CURRENT SOURCE SCOPE.**
 
-FCP-12 therefore returns to the ready framework queue rather than forcing another Reduced-NFC comparison. `FW-CQM` remains source-bound and has not yet received a cross-framework null/QM control.
+## FCP-13 CQM/null-QM reformulation and process-structure control
+
+FCP-13 compares source-bound `FW-CQM` only against the established quantum/QFT component already contained in the null baseline. It subtracts generic category/process mathematics, diagrammatic presentation and inherited quantum empirical success before assigning CQM-specific credit.
+
+Primary K-key classification:
+
+- `REFORMULATION`: **3** — K1, K4, K9;
+- `GENERIC_OR_PRESENTATIONAL`: **2** — K2, K6;
+- `STRUCTURAL_REFINEMENT`: **2** — K3, K8;
+- `EXTENSION_DEPENDENT`: **1** — K5;
+- `PHYSICAL_EXTENSION`: **0**;
+- `EMPIRICALLY_DISTINCT`: **0**;
+- `OPEN`: **2** — K7, K10.
+
+Strongest key-level E-class:
+
+- E1: **0**;
+- E2: **6** — K1, K3, K4, K5, K8, K9;
+- E3: **0**;
+- E4: **0**;
+- E5-only: **2** — K2, K6;
+- none: **2** — K7, K10.
+
+All E2 relations are bounded concrete-model or named-extension representation relations. Because CQM is a lineage-related reformulation/process theory of quantum mechanics, they receive zero independent strong/moderate convergence credit.
+
+Main controls:
+
+- state-as-morphism is not a new quantum ontology;
+- generic category composition/string-diagram coherence receives zero physical credit by itself;
+- process-first compositional organization survives as CQM's clearest structural refinement;
+- process composition is not a physical history selector;
+- nontrivial measurement/classical-interface/mixed-state structures are optional/model-dependent;
+- monoidal parallel composition is not spacetime locality;
+- no framework-wide CQM RG/EFT doctrine is source-bound;
+- categorical coherence is not physical globalization;
+- calibration and standard quantum empirical success are inherited through concrete models;
+- no framework-level CQM empirical discriminator is identified.
+
+Retained CQM residue:
+
+- process-first compositional abstraction;
+- representation-independent protocol theorem schemas under explicit categorical hypotheses;
+- optional dagger/compact structure;
+- optional classical/Frobenius interfaces;
+- optional CPM/mixed-state construction;
+- source-bound categorical probabilistic bridge.
+
+`FRAMEWORK_SPLIT_CANDIDATE = 0`, `FRAMEWORK_EXTENSION_CANDIDATE = 0`, `KEY_EXTENSION_CANDIDATE = 0`.
+
+Bounded verdict:
+
+> **CQM IS A LINEAGE-RELATED PROCESS/COMPOSITIONAL REFORMULATION AND STRUCTURAL REFINEMENT OF ORDINARY QUANTUM THEORY AT CURRENT SOURCE SCOPE. ITS STRONG E2 MODEL RELATIONS ARE SCIENTIFICALLY REAL BUT NOT INDEPENDENT CONVERGENCE; ITS RETAINED RESIDUE IS STRUCTURAL/OPTIONAL-EXTENSION LEVEL, WITH NO FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR.**
+
+The highest-information next comparison is CQM against already source-bound GPTOPT because FCP-4 explicitly preserved their separation while the CQM source corpus contains a categorical-probabilistic bridge.
 
 ## Admission and credit rules
 

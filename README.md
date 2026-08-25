@@ -2,9 +2,9 @@
 
 ## Status
 
-**Current completed phase:** FCP-12 — Reduced NFC vs. CST: K1–K10 Controlled Structural Comparison  
-**Current scientific state:** after both the Reduced-NFC provenance firewall and the FCP-11 CST null/GR subtraction, no E1–E4 or strong/moderate Reduced-NFC/CST convergence survives; six keys retain only E5 generic/functional relations and four have no correspondence; Congruence, Viability and Interface Sufficiency remain unresolved discovery questions rather than established pairwise results  
-**Next recommended task:** FCP-13 — CQM vs. Null/QM: K1–K10 Reformulation, Process-Structure, and Empirical-Control Baseline
+**Current completed phase:** FCP-13 — CQM vs. Null/QM: K1–K10 Reformulation, Process-Structure, and Empirical-Control Baseline  
+**Current scientific state:** CQM has bounded E2 structural representation relations to ordinary quantum theory in concrete models, but the core agreement is lineage-related reformulation rather than independent convergence; generic category/process/diagram mathematics and inherited quantum empirical success are subtracted, leaving process-first structural refinement plus explicitly optional dagger/compact/classical/CPM and categorical-probabilistic bridge residue, with no framework-level CQM empirical discriminator  
+**Next recommended task:** FCP-14 — CQM vs. GPTOPT: K1–K10 Controlled Process-Composition, Probabilistic-Bridge, and Framework-Separation Comparison
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language or model.
 
@@ -30,6 +30,7 @@ No framework receives evidentiary credit merely because it suggested the questio
 - **FCP-10:** resolved that split, preserved historical `FW-CAUSAL` as a superseded umbrella, admitted canonical `FW-CST`, and deferred the unbound adjacent order-theoretic remainder without creating a placeholder framework or performing a cross-framework comparison.
 - **FCP-11:** compared canonical CST against the null/GR baseline, separated additional CST primitives from target-conditioned GR reconstruction, generic mathematics and optional extensions, and found no strong/moderate independent CST–null convergence or framework-level CST empirical discriminator.
 - **FCP-12:** compared Reduced NFC only against the FCP-11-qualified CST residue; no E1–E4 or strong/moderate convergence survived, while FIS/Congruence/Viability remained discovery questions without source-bound CST counterparts.
+- **FCP-13:** compared CQM against the established null quantum/QFT sector, classified bounded E2 model relations as reformulation/structural refinement rather than independent convergence, subtracted generic categorical machinery and empirical inheritance, and retained only a source-qualified structural/optional-extension residue.
 
 ## FCP-6 Reduced-NFC/AQFT control
 
@@ -220,6 +221,64 @@ Controlling verdict:
 
 CST remains R2/D2/E2 model-specific with no framework-level empirical discriminator. Reduced NFC remains the FCP-3 comparative object with no selected physical dynamics, general K9 realization or empirical discriminator.
 
+## FCP-13 CQM/null-QM control
+
+FCP-13 treats `Null/QM` only as shorthand for the established quantum/QFT sector already inside `FW-NULL-GRQFTSM`; no new comparator ID is created.
+
+Primary K-key classification:
+
+- reformulation: **K1, K4, K9**;
+- generic/presentational: **K2, K6**;
+- structural refinement: **K3, K8**;
+- extension-dependent: **K5**;
+- physical extension: **0**;
+- empirically distinct: **0**;
+- open: **K7, K10**.
+
+E-class accounting:
+
+- E1: **0**;
+- E2: **6** — K1, K3, K4, K5, K8, K9;
+- E3: **0**;
+- E4: **0**;
+- E5-only: **2** — K2, K6;
+- none: **2** — K7, K10.
+
+The E2 relations are concrete-model or named-extension representations of ordinary quantum structure and are scientifically substantive, but they do not satisfy the independence rule because CQM was developed as a categorical/process reformulation of quantum theory.
+
+Permanent FCP-13 controls:
+
+> **CATEGORY THEORY != QUANTUM PHYSICS.**
+
+> **GENERIC PROCESS COMPOSITION != CQM-SPECIFIC PHYSICAL CONTENT.**
+
+> **STATE-AS-MORPHISM != NEW QUANTUM ONTOLOGY.**
+
+> **DIAGRAMMATIC EQUALITY != PHYSICAL GAUGE REDUNDANCY.**
+
+> **MONOIDAL PARALLEL COMPOSITION != SPACETIME LOCALITY.**
+
+> **PROCESS COMPOSITION != HISTORY SELECTION.**
+
+> **COMPOSITIONAL COHERENCE != PHYSICAL GLOBALIZATION.**
+
+> **REPRODUCED QUANTUM EMPIRICAL SUCCESS != INDEPENDENT CQM EMPIRICAL EVIDENCE.**
+
+Retained source-qualified CQM residue:
+
+- process-first compositional abstraction;
+- representation-independent protocol theorem schemas under named categorical hypotheses;
+- optional dagger/compact package;
+- optional classical/Frobenius quantum-classical interface structures;
+- optional CPM/mixed-state construction;
+- categorical probabilistic bridge.
+
+Generic category theory, generic string-diagram syntax, ordinary quantum empirical success and un-generalized `FHilb` results are excluded from future CQM-specific credit.
+
+Controlling verdict:
+
+> **CQM IS A LINEAGE-RELATED PROCESS/COMPOSITIONAL REFORMULATION AND STRUCTURAL REFINEMENT OF ORDINARY QUANTUM THEORY AT CURRENT SOURCE SCOPE. CONCRETE QUANTUM MODELS SUPPORT BOUNDED E2 STRUCTURAL RELATIONS, BUT THESE ARE NOT INDEPENDENT CONVERGENCE; THE SURVIVING CQM RESIDUE IS STRUCTURAL/OPTIONAL-EXTENSION LEVEL, WITH NO FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR.**
+
 ## NFC provenance boundary
 
 The NFC canon is **not** imported into FCP. Reduced NFC enters only through the source-bound noncanonical reduction handoff.
@@ -247,8 +306,8 @@ Permanent rule:
 
 Recommended:
 
-**FCP-13 — CQM vs. Null/QM: K1–K10 Reformulation, Process-Structure, and Empirical-Control Baseline**.
+**FCP-14 — CQM vs. GPTOPT: K1–K10 Controlled Process-Composition, Probabilistic-Bridge, and Framework-Separation Comparison**.
 
-FCP-12 is substantially negative as a Reduced-NFC convergence comparison. Congruence, Viability and FIS remain legitimate discovery questions, but the frozen CST packet supplies no non-generic theorem that converts them into pairwise evidence. The higher-information move is therefore to return to the ready framework queue rather than force another NFC comparison.
+FCP-13 retains a meaningful structural CQM residue, so the next phase should stress-test that residue rather than immediately force a Reduced-NFC comparison or move to an entirely new source intake.
 
-`FW-CQM` is already source-bound by FCP-4 and has not yet received a cross-framework comparison. FCP-13 should first determine which CQM structures are ordinary quantum-theory reformulation, which are generic category/process/diagram mathematics, which are genuinely additional source-qualified process structures, and whether any independent empirical content remains after null/QM subtraction.
+`FW-GPTOPT` is already source-bound and already has FCP-7/FCP-8 controls separating its operational skeleton, composite structure, quantum embedding, optional reconstruction axioms and empirical theory-space restrictions. FCP-4 also deliberately kept CQM and GPTOPT separate, while `SRC-FCP4-CQM-GS-2018` provides an explicit bridge and records differences. FCP-14 should therefore test whether the retained CQM process-first/probabilistic bridge represents generic translation, bounded structural equivalence, model-class extension or a material framework distinction after generic process/category/probability mathematics and inherited quantum content are removed from both sides.
