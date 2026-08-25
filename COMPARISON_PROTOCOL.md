@@ -16,7 +16,7 @@ Before substantive scoring begins for a framework or comparison:
 6. state the questions to be tested;
 7. state what would count as positive, negative, nonforcing, or unresolved evidence.
 
-FCP-2 additionally froze the framework-neutral K1–K10 coordinates, M1–M3 status metadata, E1–E5 equivalence classes, convergence-credit rules, and anti-retrofitting rule before the first cross-framework comparison. Later comparisons must use those versioned artifacts unless an explicit governance revision supersedes them.
+FCP-2 historically froze the framework-neutral K1–K10 coordinates, M1–M3 status metadata, E1–E5 equivalence classes, convergence-credit rules, and anti-retrofitting rule before the first cross-framework comparison. Those artifacts remain controlling for the historical semantics of FCP-1 through FCP-21. After explicit integration authorization, Method 0.2.0 governs future comparisons prospectively; it retains K1–K10 as required reporting coordinates and applies the active versioned relation/evidence/governance rules in `comparison_keys/` and `governance/`.
 
 ## 3. Ten mandatory analysis layers
 
@@ -78,6 +78,8 @@ Every result receives exactly one primary classification:
 - `COUNTERMODELED` — explicit lawful countermodel defeats the strong claim;
 - `OPEN` — materially unresolved at the declared source scope.
 
+For prospective Method 0.2.0 work, these primary labels are accompanied by the separate relation/evidence/provenance/scope/lineage/target-conditioning/physical-realization/calibration/viability/independence/empirical/maturity axes defined in the active Method 0.2.0 governance files. The historical primary labels are not retroactively reinterpreted.
+
 ## 5. Credit discipline
 
 A result contributes framework-specific convergence credit only if:
@@ -90,6 +92,8 @@ A result contributes framework-specific convergence credit only if:
 6. any empirical claim has a declared comparator and falsification condition.
 
 Generic mathematics earns zero framework-specific convergence credit. Functional analogy does not qualify as strong convergence.
+
+For prospective Method 0.2.0 analyses, this historical credit language is operationalized through separate axes rather than a scalar convergence score; consult the active Method 0.2.0 comparison architecture and relation/evidence rules.
 
 ## 6. Comparison output
 
@@ -105,10 +109,12 @@ A completed comparison should contain:
 - strict scope ceiling;
 - recommended next test.
 
+Prospective Method 0.2.0 comparisons must additionally include the active multi-axis claim record, typed comparator role(s), and both overclaim and over-subtraction checks required by the versioned governance specification.
+
 ## 7. Current operational state
 
-The protocol remains active. FCP-2's versioned K1–K10 coordinates, M1–M3 status metadata, E1–E5 equivalence classes, convergence-credit rules and anti-retrofitting rule remain controlling unless explicitly superseded by a governance revision.
+The protocol remains active. Historical FCP-1 through FCP-21 retain the FCP-2/Method 0.1.0 semantics under which they were produced. Method 0.2.0 is now active prospectively after exact integration on canonical `main` and controls future comparison methodology unless later superseded through explicit governance.
 
-Subsequent source-intake, framework-taxonomy and pairwise-comparison phases have repeatedly applied this protocol. Detailed current phase, framework and source state is maintained in `README.md`, `FRAMEWORK_REGISTER.md` and `SOURCE_REGISTER.md`; detailed scientific conclusions and provenance remain in their qualified versioned phase artifacts and handoffs.
+Detailed current phase, framework and source state is maintained in `README.md`, `FRAMEWORK_REGISTER.md` and `SOURCE_REGISTER.md`; current Method 0.2.0 activation is recorded in `governance/FCP_METHOD_0_2_0_ACTIVATION.md`; detailed historical scientific conclusions and provenance remain in their qualified versioned phase artifacts and handoffs.
 
 Historical phase artifacts remain frozen as records of what was true at their phase. Live repository metadata must reflect the current project state without rewriting those historical records.

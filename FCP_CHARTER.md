@@ -20,7 +20,7 @@ Within that broader truth-seeking purpose, FCP's central comparative question is
 
 The program is not organized around defending, replacing, or completing any preferred Theory of Everything. Its task is to distinguish results that survive across frameworks from structures that depend on a particular language, ontology, model choice, or realization map.
 
-This clarification is prospective program-purpose governance. It does not reinterpret or modify the scientific conclusions of FCP-1 through FCP-21, nor does it alter the frozen FCP-2 comparison keys or equivalence/convergence rules.
+This charter does not reinterpret or modify the scientific conclusions of FCP-1 through FCP-21. Their frozen FCP-2 comparison semantics remain historical provenance. Method 0.2.0, integrated after FCP-21 through explicit governance authorization, governs future comparisons prospectively unless later superseded through the truth-seeking revision protocol.
 
 ## 2. Neutrality contract
 
@@ -72,7 +72,7 @@ Every framework must be examined under the same ten burdens:
 9. unresolved selection problems;
 10. whether the same result follows in a weaker framework.
 
-FCP-2 further freezes K1–K10 comparison coordinates, M1–M3 status metadata, and E1–E5 equivalence/convergence rules. Those versioned artifacts control later comparisons unless explicitly superseded by a governance revision.
+FCP-2 historically froze K1–K10 comparison coordinates, M1–M3 status metadata, and E1–E5 equivalence/convergence rules before the first competitor exposure. Those artifacts remain immutable historical controls for FCP-1 through FCP-21. For future work, integrated Method 0.2.0 retains K1–K10 as required reporting coordinates while prospectively separating relation type, evidence strength, provenance, scope, lineage, target conditioning, physical realization, calibration, viability, independence, empirical status, and framework maturity.
 
 ## 6. Prohibited promotions
 
@@ -90,15 +90,16 @@ The program must not infer physical truth from:
 
 ## 7. Current phase
 
-`ACTIVE_COMPARATIVE_RESEARCH`
+`ACTIVE_COMPARATIVE_RESEARCH — METHOD_0_2_0_ACTIVE_PROSPECTIVELY`
 
-FCP-2's versioned K1–K10 comparison coordinates, M1–M3 status metadata and E1–E5 equivalence/convergence rules remain controlling unless explicitly superseded by a separately authorized governance revision.
+Method 0.2.0 is the controlling prospective governance architecture for future FCP comparisons after its exact integration on canonical `main`. Historical FCP-1 through FCP-21 artifacts retain their original FCP-2/Method 0.1.0 meanings and are not rewritten by activation of the new method.
 
-Multiple source-intake, framework-taxonomy and pairwise-comparison phases have subsequently been completed under those rules. Detailed canonical and current research state is maintained in:
+Multiple source-intake, framework-taxonomy and pairwise-comparison phases were completed under the historical rules. Detailed canonical and current research state is maintained in:
 
 - `README.md` — integrated-versus-qualified research continuity and next-task state;
-- `FRAMEWORK_REGISTER.md` — live framework identities and bounded research status;
+- `FRAMEWORK_REGISTER.md` — live framework identities and bounded research status, with formal historical-result propagation requiring separate authorization where applicable;
 - `SOURCE_REGISTER.md` — live source/provenance bindings;
+- `governance/FCP_METHOD_0_2_0_ACTIVATION.md` — current Method 0.2.0 activation and precedence record;
 - qualified versioned handoffs — immutable phase conclusions and provenance.
 
 Historical/versioned phase artifacts remain records of what was true at their phase and are not rewritten merely to track later program state.

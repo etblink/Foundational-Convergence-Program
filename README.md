@@ -2,10 +2,10 @@
 
 ## Status
 
-**Canonical integrated phase:** FCP-21 — Reduced NFC vs. Null-Subtracted `FW-AS` Controlled Comparison  
-**Current qualified research phase:** FCP-21 — Reduced NFC vs. Null-Subtracted `FW-AS` Controlled Comparison  
-**Current qualified research state:** FCP-20 found that `FW-AS` is not merely a GR/QFT reformulation: a six-item null-subtracted AS-specific residue survives, while pairwise E1–E4 remain zero, E5-only = 9, NONE = 1, and independent strong/moderate convergence and AS E4 remain zero. FCP-21 then compared the exact FCP-3 Reduced-NFC object only against AS-R1 through AS-R6 and found E1–E4 = 0, E5-only = 4, NONE = 6, `FCP21_SURVIVOR_PASS_NON_GENERIC = 0`; K7 fixed/finite/scale similarities are type-mismatched after the dual firewall, and AS partial physical realization remains a material asymmetry. Canonical `main` is integrated through FCP-21.  
-**Next recommended task:** separately authorize a program-gap review to select the next admitted-but-unaudited framework intake; FCP-22 has not begun.
+**Canonical integrated scientific phase:** FCP-21 — Reduced NFC vs. Null-Subtracted `FW-AS` Controlled Comparison; historical FCP-1–FCP-21 artifacts retain their original Method 0.1.0 semantics.  
+**Canonical prospective method:** FCP Method 0.2.0, integrated exactly at commit `fe8101a2e0602ea6a226bfcb8fe9bbbd1357a14a`, tree `1d5efec368b5e8d8ab095e9caa83fed2480888f9`.  
+**Current qualified research state:** post-FCP-21 adversarial adjudication and equal-standard reanalysis are qualified on their preserved audit branches. The equal-standard reanalysis leaves AQFT/CQM bounded E2 and the CQM↔GPTOPT E2 zero unchanged (with the FCP-14 rationale corrected), preserves bounded CST E3, and changes selected LOOP and AS target-conditioned recovery relations from historical E3 zero to bounded nonzero E3. Independent strong convergence, independent moderate convergence, and independent framework E4 remain zero at that bounded audit scope. Method 0.2.0 is now the controlling prospective method for future comparisons; it does not retroactively rewrite FCP-1–FCP-21.  
+**Next recommended task:** separately authorize targeted source strengthening under Method 0.2.0, prioritizing the already-identified AQFT split/nuclearity re-audit, broader LOOP continuum/physical-recovery evidence, and broader AS physical/Lorentzian/observable-recovery evidence. New framework intake, FCP-22, historical-result remediation, and full recurrence recomputation remain separately authorized work.
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language or model.
 
@@ -48,6 +48,9 @@ No framework receives evidentiary credit merely because it suggested the questio
 - **FCP-19:** source-bound `FW-AS` as one coherent Asymptotic Safety framework from 18 external works; fixed-point evidence reaches `AS-L3` multi-truncation robustness scope, while exact complete-theory fixed-point control, exact physical critical-surface dimension, complete Lorentzian/physical realization, and a compulsory framework-level empirical discriminator remain open.
 - **FCP-20:** compared source-bound `FW-AS` against the frozen null/GR baseline after generic RG/QFT, GR-lineage/target, model/optionality and empirical-inheritance subtraction; retained a six-item AS-specific residue, while pairwise E1–E4 = 0, E5-only = 9, NONE = 1, and independent strong/moderate convergence and AS E4 remain zero.
 - **FCP-21:** compared the exact FCP-3 Reduced-NFC object only against AS-R1 through AS-R6 under the dual firewall; found E1–E4 = 0, E5-only = 4, NONE = 6, zero independent strong/moderate convergence, `FCP21_SURVIVOR_PASS_NON_GENERIC = 0`, decisive K7 type mismatches, and a material AS/NFC physical-realization asymmetry.
+- **Post-FCP-21 adversarial audit:** the preserved Grok W1–W18 adjudication identified confirmed application, provenance, method, and governance defects without rewriting FCP-1–FCP-21.
+- **Equal-standard E2/E3 reanalysis:** one frozen E2 burden and one frozen E3 burden were applied consistently to AQFT/CQM/GPTOPT and CST/LOOP/AS. The E2 score dispositions remained unchanged; LOOP and AS gained bounded target-conditioned E3 at selected substructure/trajectory scope; the independent-convergence and framework-E4 zeros survived.
+- **Method 0.2.0:** the prospective method/governance revision was qualified and then integrated exactly. Relation type, independence, viability, empirical selection, provenance, scope, lineage, target conditioning, physical realization, and calibration are now reported as separate axes for future work; historical FCP-1–FCP-21 semantics remain immutable.
 
 ## FCP-6 Reduced-NFC/AQFT control
 
@@ -312,19 +315,23 @@ Permanent rule:
 - [`FRAMEWORK_REGISTER.md`](FRAMEWORK_REGISTER.md) — admitted frameworks and research status
 - [`COMPARISON_PROTOCOL.md`](COMPARISON_PROTOCOL.md) — common evaluation procedure
 - [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) — central historical claim ledger
-- [`comparison_keys/`](comparison_keys/) — frozen comparison/equivalence rules
+- [`comparison_keys/`](comparison_keys/) — historical and active versioned comparison/evidence rules
+- [`governance/`](governance/) — active prospective Method 0.2.0 governance and activation state
+- [`audits/`](audits/) — adversarial, equal-standard, and method-qualification audit artifacts
 - [`frameworks/`](frameworks/) — framework-specific source-bound packets
 - [`comparisons/`](comparisons/) — pairwise/baseline comparisons
 - [`convergence/`](convergence/) — relationship/convergence/divergence records, including versioned phase claim ledgers
 - [`countermodels/`](countermodels/) — negative witnesses
-- [`handoffs/`](handoffs/) — phase handoffs
+- [`handoffs/`](handoffs/) — immutable phase and audit handoffs
 
 ## Next scientific task
 
 Recommended:
 
-**Program-gap review and next admitted-framework intake selection** — separately authorize selection of the next admitted-but-unaudited framework intake; FCP-22 has not begun.
+**Targeted source strengthening under Method 0.2.0** — separately authorize a bounded source-strengthening phase using the now-active prospective method. The highest-priority previously identified targets are:
 
-FCP-19 leaves a source-bound Asymptotic Safety object centered on an interacting gravitational UV fixed point and finite-dimensional UV critical surface, with `AS-L3` multi-truncation robustness evidence but incomplete complete-theory, Lorentzian/physical-realization, and empirical-selection closure.
+1. AQFT split/nuclearity re-audit;
+2. broader LOOP continuum/physical-recovery source strengthening;
+3. broader AS physical/Lorentzian/observable-recovery source strengthening.
 
-The next comparison should test `FW-AS` first against the frozen null/GR baseline and subtract generic QFT/RG machinery, perturbative/EFT lineage, supplied classical-GR target content, target-conditioned IR/GR recovery, inherited GR/QFT empirical success, and optional matter/cosmology/black-hole phenomenology before any later Reduced-NFC/AS comparison. This recommendation is research prioritization only; FCP-20 requires separate authorization.
+This recommendation does not itself authorize source intake or rescoring. Historical result remediation, new framework intake, FCP-22, empirical/no-go work, and full program recurrence recomputation remain separate tasks requiring explicit authorization.
