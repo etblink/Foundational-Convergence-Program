@@ -897,6 +897,46 @@ Future claims should use the following fields:
 - `status`: `ACCEPTED`
 - `supersedes`: `NONE`
 
+# FCP-16 Loop/null-GR control claims
+
+## FCP16-LOOPNULL-001 — Loop retains non-generic quantum structure after null/GR subtraction without independent E1–E4 convergence
+
+- `framework_ids`: `FW-LOOP`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP15-LOOP-RS-1995`, `SRC-FCP15-LOOP-AL-1997`, `SRC-FCP15-LOOP-AL-2004`, `SRC-FCP15-LOOP-QSD-1998`, `SRC-FCP15-LOOP-AB-2021`, `SRC-FCP15-LOOP-EPRL-2008`, `SRC-FCP15-LOOP-PEREZ-2013`, `SRC-FCP15-LOOP-STEINHAUS-2020`, `SRC-FCP15-LOOP-BCMR-2026`, `SRC-FCP2-NULL-DECOMP-001`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: FCP-16 finds that `FW-LOOP` is not merely a reformulation of GR: after subtracting generic mathematics, classical-GR lineage, optional/model-specific structure, target-conditioned GR recovery and empirical inheritance, a non-generic residue remains in loop quantum-geometric kinematics, canonical/covariant quantum-dynamics programs, their bounded internal bridge, continuum/coarse-graining structure and the Barbero–Immirzi selection burden. However, the closed packet freezes no explicit loop↔GR E2 map and no complete E3 limit/error record, so no independent E1–E4 loop/GR convergence is established.
+- `assumptions`: the exact FCP-15 loop source packet, FCP-1/FCP-2 null/GR baseline, and frozen FCP-2 generic-math, independence, physical-bridge and E1–E5 rules.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` cross-framework; retained loop structures are framework/model relative at their declared scopes.
+- `weaker_framework_test`: PASSES for generic graph/representation/constraint/path-integral machinery and classical-GR lineage; those structures are removed before the loop-specific quantum residue is retained.
+- `physical_bridge`: partial quantum-geometric and semiclassical/continuum bridges exist, but complete physical-state, observable/calibration and continuum-GR bridges remain open.
+- `empirical_binding`: recovered GR success is `EMPIRICALLY_INHERITED`; no independent loop E4 discriminator.
+- `falsification_condition`: an explicit source-qualified loop↔GR E1/E2/E3/E4 relation satisfying the frozen map/limit/physical/empirical burdens could supersede the relevant provenance ceiling, while a source audit showing the retained residue is wholly generic or classical-GR reformulation would require revision.
+- `countermodels`: spin-network mathematics without selected dynamics; kinematical spectra without detector bridge; model-dependent canonical/covariant dynamics; fixed-complex asymptotics and open continuum selection.
+- `scope_ceiling`: E1 `0`, E2 `0`, E3 `0`, E4 `0`, E5-only `9`, NONE `1`; independent strong convergence `0`, moderate convergence `0`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: `FW-LOOP` remains one family with persistent `LOOP-CANON` / `LOOP-COVAR` labels; no taxonomy change.
+
+## FCP16-LOOPNULL-002 — Loop dynamics, continuum recovery, calibration and framework-level empirical selection remain open after null control
+
+- `framework_ids`: `FW-LOOP`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP15-LOOP-QSD-1998`, `SRC-FCP15-LOOP-TG-2024`, `SRC-FCP15-LOOP-EPRL-2008`, `SRC-FCP15-LOOP-PEREZ-2013`, `SRC-FCP15-LOOP-BARRETT-2010`, `SRC-FCP15-LOOP-BMP-2009`, `SRC-FCP15-LOOP-STEINHAUS-2020`, `SRC-FCP15-LOOP-BCMR-2026`, `SRC-FCP15-LOOP-GHM-2012`, `SRC-FCP15-LOOP-AB-2021`, `SRC-NULL-PDG-GR-2026`, `SRC-NULL-LVK-GWTC5-TGR-2026`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: After FCP-16 null/GR subtraction, canonical and covariant loop dynamics remain substantive but nonunique/incomplete; fixed-complex Regge asymptotics, low-order metric correlations and continuum-limit structures remain partial and target-conditioned rather than complete GR recovery; the Barbero–Immirzi parameter and detector/observable calibration remain physical-selection burdens; and no unavoidable base-`FW-LOOP` empirical discriminator is source-bound.
+- `assumptions`: FCP-15 separation of kinematics, dynamics, optional structures, continuum and phenomenology plus FCP-16 empirical-inheritance and provenance ceilings.
+- `classification`: `OPEN`
+- `canonicity_level`: framework-wide dynamics, continuum, calibration and empirical selection unresolved.
+- `weaker_framework_test`: a constraint operator, named spinfoam amplitude, asymptotic match, refinement structure, fitted parameter or optional phenomenological model does not force a unique physical loop theory or framework discriminator.
+- `physical_bridge`: partial/conditional; no complete selected 4D continuum + matter + detector calibration chain.
+- `empirical_binding`: `FCP16_INDEPENDENT_LOOP_E4 = 0`; `NO_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR_IDENTIFIED`.
+- `falsification_condition`: a source-qualified selected loop dynamics with controlled regulator-independent GR+matter recovery, calibrated physical observables and an unavoidable discriminating prediction would supersede the corresponding open statuses.
+- `countermodels`: Hamiltonian regularization freedom, spinfoam model/two-complex dependence, fixed-simplex asymptotics, low-order truncation, continuum-universality gap, gamma calibration and model-specific phenomenology.
+- `scope_ceiling`: `FRAMEWORK_WIDE_UNIQUE_DYNAMICS_OPEN`; `COMPLETE_LOOP_GR_CONTINUUM_RECOVERY = OPEN`; `FRAMEWORK_LEVEL_LOOP_PHYSICAL_CALIBRATION = OPEN`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: null quantum-gravity incompleteness is not positive loop evidence; no new external source is added.
+
+
+
 ---
 
 ## Rules
