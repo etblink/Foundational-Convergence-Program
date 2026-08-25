@@ -76,12 +76,15 @@ The program must not infer physical truth from:
 
 `ACTIVE_COMPARATIVE_RESEARCH`
 
-Completed milestones:
+FCP-2's versioned K1–K10 comparison coordinates, M1–M3 status metadata and E1–E5 equivalence/convergence rules remain controlling unless explicitly superseded by a separately authorized governance revision.
 
-- `FCP-1`: null competitor source-bound baseline;
-- `FCP-2`: preregistered comparison-key/equivalence freeze;
-- `FCP-3`: first cross-framework comparison, Reduced NFC vs. null baseline.
+Multiple source-intake, framework-taxonomy and pairwise-comparison phases have subsequently been completed under those rules. Detailed canonical and current research state is maintained in:
 
-FCP-3's bounded result is preserved as a negative/nonforcing scientific output: no strong or moderate NFC–null convergence was found at the current source scope.
+- `README.md` — integrated-versus-qualified research continuity and next-task state;
+- `FRAMEWORK_REGISTER.md` — live framework identities and bounded research status;
+- `SOURCE_REGISTER.md` — live source/provenance bindings;
+- qualified versioned handoffs — immutable phase conclusions and provenance.
 
-The next recommended phase is `FCP-4`, a framework-splitting and source-intake task for the operational/algebraic quantum family. FCP-4 does not receive scientific authorization merely from this charter text; each substantive task remains separately bounded by its task authorization and source window.
+Historical/versioned phase artifacts remain records of what was true at their phase and are not rewritten merely to track later program state.
+
+Every substantive future phase requires separate bounded authorization and an explicit source/provenance window; no future task receives scientific authorization from this charter text alone.

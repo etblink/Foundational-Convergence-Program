@@ -2,9 +2,10 @@
 
 ## Status
 
-**Current completed phase:** FCP-13 — CQM vs. Null/QM: K1–K10 Reformulation, Process-Structure, and Empirical-Control Baseline  
-**Current scientific state:** CQM has bounded E2 structural representation relations to ordinary quantum theory in concrete models, but the core agreement is lineage-related reformulation rather than independent convergence; generic category/process/diagram mathematics and inherited quantum empirical success are subtracted, leaving process-first structural refinement plus explicitly optional dagger/compact/classical/CPM and categorical-probabilistic bridge residue, with no framework-level CQM empirical discriminator  
-**Next recommended task:** FCP-14 — CQM vs. GPTOPT: K1–K10 Controlled Process-Composition, Probabilistic-Bridge, and Framework-Separation Comparison
+**Canonical integrated phase:** FCP-13 — CQM vs. Null/QM: K1–K10 Reformulation, Process-Structure, and Empirical-Control Baseline  
+**Current qualified research phase:** FCP-15 — Loop / Spin-Network / Spinfoam Framework Source Intake and K1–K10 Baseline  
+**Current qualified research state:** FCP-14 preserved a real source-bound CQM/GPTOPT categorical-probabilistic bridge but, after provenance remediation, did not source-qualify the explicit pairwise map required for E2; no independent non-generic CQM/GPTOPT convergence survived and FCP-4 framework separation remained preserved. FCP-15 then source-bound `FW-LOOP` from 13 external works as one top-level family with persistent `LOOP-CANON` and `LOOP-COVAR` labels, mature kinematical quantum geometry, formulation-dependent/open framework-wide dynamics, partial continuum/GR realization, and no framework-level empirical discriminator. FCP-15 performed no cross-framework E1–E5 comparison. Canonical `main` remains integrated only through FCP-13.  
+**Next recommended task:** FCP-16 — `FW-LOOP` vs. Null/GR: K1–K10 Quantum-Geometry, Dynamics, Continuum-Recovery, and Empirical-Inheritance Control
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language or model.
 
@@ -31,6 +32,8 @@ No framework receives evidentiary credit merely because it suggested the questio
 - **FCP-11:** compared canonical CST against the null/GR baseline, separated additional CST primitives from target-conditioned GR reconstruction, generic mathematics and optional extensions, and found no strong/moderate independent CST–null convergence or framework-level CST empirical discriminator.
 - **FCP-12:** compared Reduced NFC only against the FCP-11-qualified CST residue; no E1–E4 or strong/moderate convergence survived, while FIS/Congruence/Viability remained discovery questions without source-bound CST counterparts.
 - **FCP-13:** compared CQM against the established null quantum/QFT sector, classified bounded E2 model relations as reformulation/structural refinement rather than independent convergence, subtracted generic categorical machinery and empirical inheritance, and retained only a source-qualified structural/optional-extension residue.
+- **FCP-14:** compared source-bound CQM with GPTOPT after dual subtraction; preserved the categorical-probabilistic bridge, withheld pairwise E2 because the frozen packet did not source-qualify the explicit required map, retained only E5-level positive relations at current scope, found no independent non-generic convergence, and preserved `FCP4_FRAMEWORK_SEPARATION`.
+- **FCP-15:** source-bound `FW-LOOP` from 13 external works and selected `OUTCOME_B_INTERNAL_SUBFRAMEWORK_DISTINCTION`: one top-level `FW-LOOP` with persistent `LOOP-CANON` / `LOOP-COVAR`, mature kinematical quantum geometry, formulation-dependent/open framework-wide dynamics, partial continuum/GR realization, no framework-level empirical discriminator, and no cross-framework E1–E5 assignment.
 
 ## FCP-6 Reduced-NFC/AQFT control
 
@@ -306,8 +309,8 @@ Permanent rule:
 
 Recommended:
 
-**FCP-14 — CQM vs. GPTOPT: K1–K10 Controlled Process-Composition, Probabilistic-Bridge, and Framework-Separation Comparison**.
+**FCP-16 — `FW-LOOP` vs. Null/GR: K1–K10 Quantum-Geometry, Dynamics, Continuum-Recovery, and Empirical-Inheritance Control**.
 
-FCP-13 retains a meaningful structural CQM residue, so the next phase should stress-test that residue rather than immediately force a Reduced-NFC comparison or move to an entirely new source intake.
+FCP-15 leaves a substantial source-bound loop-specific residue: mature quantum-geometric kinematics, nontrivial canonical and covariant dynamics programs, and partial semiclassical/continuum bridges, together with unresolved dynamics-selection, continuum/globalization, physical-realization and empirical burdens.
 
-`FW-GPTOPT` is already source-bound and already has FCP-7/FCP-8 controls separating its operational skeleton, composite structure, quantum embedding, optional reconstruction axioms and empirical theory-space restrictions. FCP-4 also deliberately kept CQM and GPTOPT separate, while `SRC-FCP4-CQM-GS-2018` provides an explicit bridge and records differences. FCP-14 should therefore test whether the retained CQM process-first/probabilistic bridge represents generic translation, bounded structural equivalence, model-class extension or a material framework distinction after generic process/category/probability mathematics and inherited quantum content are removed from both sides.
+The next control should therefore compare `FW-LOOP` first against the already established null/GR baseline, subtracting generic graph/representation/constrained-system mathematics and target-conditioned GR recovery before any Reduced-NFC comparison. This recommendation is research prioritization only; FCP-16 requires separate authorization.

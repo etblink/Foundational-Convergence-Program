@@ -107,12 +107,8 @@ A completed comparison should contain:
 
 ## 7. Current operational state
 
-The protocol is active rather than initialization-only.
+The protocol remains active. FCP-2's versioned K1–K10 coordinates, M1–M3 status metadata, E1–E5 equivalence classes, convergence-credit rules and anti-retrofitting rule remain controlling unless explicitly superseded by a governance revision.
 
-Completed uses:
-
-- FCP-1 source-bound the null competitor;
-- FCP-2 froze comparison coordinates before competitor exposure;
-- FCP-3 completed the first cross-framework comparison under those frozen coordinates.
+Subsequent source-intake, framework-taxonomy and pairwise-comparison phases have repeatedly applied this protocol. Detailed current phase, framework and source state is maintained in `README.md`, `FRAMEWORK_REGISTER.md` and `SOURCE_REGISTER.md`; detailed scientific conclusions and provenance remain in their qualified versioned phase artifacts and handoffs.
 
 Historical phase artifacts remain frozen as records of what was true at their phase. Live repository metadata must reflect the current project state without rewriting those historical records.

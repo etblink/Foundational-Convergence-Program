@@ -24,8 +24,8 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 | `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `PAIRWISE_COMPARISON_COMPLETE` | FCP-12: no E1–E4 or strong/moderate NFC–CST convergence after dual subtraction; K2/K5/K8 weak-generic, K1/K3/K6 functional only; Congruence/Viability/FIS remain unresolved discovery questions while Realization/Dynamics remain material asymmetries |
 | `FW-OAQ` | Operational / algebraic quantum approaches | historical umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-4 split into `FW-AQFT`, `FW-GPTOPT`, `FW-CQM` |
 | `FW-AQFT` | Algebraic / locally covariant quantum field theory | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-5/6 controls complete; core mostly reformulation/sharpening of QFT plus named AQFT-X extensions; no framework-level empirical discriminator |
-| `FW-GPTOPT` | Generalized probabilistic / operational-probabilistic theories | source-bound generalizing meta-framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-8: post-quantum Bell/composite theory space empirically and structurally bounded; no unique quantum-boundary principle; empirical evidence reaches bounded L2, not global L4 selection |
-| `FW-CQM` | Categorical quantum mechanics / quantum process theories | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-13 null/QM control complete: K1/K4/K9 primarily reformulation, K3/K8 structural refinement, K5 extension-dependent; bounded E2 model relations but zero independent strong/moderate convergence and no framework-level empirical discriminator; retained residue is process-first plus explicitly optional dagger/compact/classical/CPM and probabilistic-bridge structure |
+| `FW-GPTOPT` | Generalized probabilistic / operational-probabilistic theories | source-bound generalizing meta-framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-14 CQM comparison complete: GPTOPT retains convex/probabilistic operational structure, physical composite-selection burden and broader post-quantum theory space; a source-bound CQM/GPTOPT bridge exists, but no independently justified non-generic convergence survives and FCP-4 framework separation is preserved |
+| `FW-CQM` | Categorical quantum mechanics / quantum process theories | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-14 GPTOPT comparison complete: the source-bound categorical-probabilistic bridge is real, but the frozen packet does not source-qualify an explicit pairwise E2 map; positive relations top out at E5, independent strong/moderate convergence remains zero, material CQM/GPTOPT differences remain, and FCP-4 framework separation is preserved |
 | `FW-CAUSAL` | Causal-set / order-theoretic approaches | historical causal/order umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-9/FCP-10 found the literal umbrella scientifically over-broad; causal set theory proper is now `FW-CST`; unspecified adjacent causal/order approaches remain deferred pending separate source intake |
 | `FW-CST` | Causal Set Theory | source-bound discrete causal/order framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-12 NFC comparison complete after FCP-11 null/GR subtraction: no E1–E4 NFC relation survives; CST causal/discrete carrier, manifold-selection burden and partial realization lack source-bound Reduced-NFC counterparts; R2/D2/E2 and no-framework-discriminator status unchanged |
 | `FW-LOOP` | Loop / spin-network / spinfoam approaches | source-bound quantum-gravity comparator family | `SOURCE_BOUND_READY` | FCP-15 source intake complete: one top-level family retained with persistent `LOOP-CANON` and `LOOP-COVAR` labels; mature kinematical quantum geometry, formulation-dependent/open framework-wide dynamics, partial semiclassical/continuum bridges, and no framework-level empirical discriminator |
@@ -251,6 +251,33 @@ Bounded verdict:
 > **CQM IS A LINEAGE-RELATED PROCESS/COMPOSITIONAL REFORMULATION AND STRUCTURAL REFINEMENT OF ORDINARY QUANTUM THEORY AT CURRENT SOURCE SCOPE. ITS STRONG E2 MODEL RELATIONS ARE SCIENTIFICALLY REAL BUT NOT INDEPENDENT CONVERGENCE; ITS RETAINED RESIDUE IS STRUCTURAL/OPTIONAL-EXTENSION LEVEL, WITH NO FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR.**
 
 The highest-information next comparison is CQM against already source-bound GPTOPT because FCP-4 explicitly preserved their separation while the CQM source corpus contains a categorical-probabilistic bridge.
+
+## FCP-14 CQM/GPTOPT controlled framework-separation comparison
+
+FCP-14 compares source-bound `FW-CQM` and `FW-GPTOPT` after generic, quantum-inheritance, bridge-dependence and optional-structure subtraction.
+
+The source-bound categorical-probabilistic bridge is retained, but the frozen FCP packet does not contain the explicit pairwise map/functor/representation data required by FCP-2 to source-qualify E2. FCP-14 therefore records the bridge without promoting it beyond the available provenance ceiling.
+
+Key-level E-class accounting:
+
+- E1: **0**;
+- E2: **0**;
+- E3: **0**;
+- E4: **0**;
+- E5-only: **6**;
+- none: **4**;
+- independent strong convergence: **0**;
+- independent moderate convergence: **0**.
+
+Provenance ceiling:
+
+- `SOURCE_BOUND_BRIDGE = YES`;
+- `BRIDGE_MEDIATED = YES`;
+- `E2_NOT_SOURCE_QUALIFIABLE_AT_CURRENT_PACKET = YES`.
+
+GPTOPT retains distinct convex/probabilistic operational structure, physical composite-system selection burden and broader theory space; CQM retains its process-first and explicitly optional categorical structures. No independently justified non-generic convergence survives.
+
+`FCP4_FRAMEWORK_SEPARATION = PRESERVED`.
 
 ## FCP-15 loop-family source intake
 
