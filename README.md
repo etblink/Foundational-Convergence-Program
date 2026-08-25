@@ -11,8 +11,16 @@ The **Foundational Convergence Program (FCP)** is a neutral comparative-foundati
 
 The program begins from no preferred Theory of Everything. Established General Relativity + quantum field theory + the Standard Model, without a deeper ontology, is a first-class null competitor.
 
+## Ultimate purpose
+
+The ultimate purpose of FCP is to contribute to the search for truth about physical reality. Foundational convergence is one investigative strategy within that broader aim, not the aim itself. No framework—including Reduced NFC, the null baseline, any other admitted framework, or FCP's own methodology—is entitled to preservation if stronger evidence points elsewhere.
+
+A positive convergence result identifies a structure deserving deeper mathematical and empirical scrutiny; it does not by itself establish physical truth. A null convergence result is equally valid and does not imply that no deeper reality exists.
+
 ## Governing principle
 
+> **Seek truth about reality.**
+>
 > **Preserve results, not theories.**
 
 No framework receives evidentiary credit merely because it suggested the question being tested. Mathematical canonicity, internal consistency, elegance or explanatory ambition are not by themselves evidence that a framework describes nature.

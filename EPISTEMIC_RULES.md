@@ -1,5 +1,13 @@
 # FCP Epistemic Rules
 
+## 0. Truth-seeking supremacy
+
+The ultimate purpose of FCP is to improve our justified understanding of physical reality. Its methods, comparison keys, subtraction rules, framework taxonomy, and accumulated conclusions are instruments rather than protected commitments.
+
+If evidence or reasoning shows that any FCP method systematically obstructs accurate inference about reality, it should be revised or abandoned through explicit prospective governance rather than defended for continuity's sake. Such revision does not silently rewrite historical results.
+
+Convergence is evidence only to the degree justified by independence, specificity, physical realization, and empirical support. Non-convergence is not evidence that no deeper reality exists. No mathematical or comparative result is promoted to physical truth without the bridges required by the rules below.
+
 ## 1. No-framework privilege
 
 All frameworks, including reduced NFC and the null competitor, are evaluated under the same evidentiary standard. A framework's vocabulary may define a question but may not define the answer in its own favor.

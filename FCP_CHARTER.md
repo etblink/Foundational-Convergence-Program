@@ -2,11 +2,25 @@
 
 ## 1. Mission
 
-The Foundational Convergence Program (FCP) is a neutral comparative research program whose central question is:
+### Ultimate purpose
+
+The ultimate purpose of the Foundational Convergence Program (FCP) is to contribute to the search for truth about physical reality: to determine, as far as rigorous reasoning, mathematics, observation, and experiment permit, what nature is actually like.
+
+Foundational convergence is not itself the ultimate objective. It is one investigative strategy. Independently developed frameworks that are forced toward the same non-generic structures may identify especially valuable candidates for deeper mathematical and empirical investigation.
+
+Failure to find convergence is also a valid result. It may show that proposed common structures are generic, lineage-dependent, target-conditioned, optional, empirically inherited, or absent at the current source scope.
+
+No framework—including Reduced NFC, the null baseline, any other admitted framework, or FCP's own methodology—is entitled to preservation if stronger evidence points elsewhere.
+
+### Operative comparative question
+
+Within that broader truth-seeking purpose, FCP's central comparative question is:
 
 > **Which structures recur independently across viable foundational theories, and which are genuinely forced by successful physics?**
 
 The program is not organized around defending, replacing, or completing any preferred Theory of Everything. Its task is to distinguish results that survive across frameworks from structures that depend on a particular language, ontology, model choice, or realization map.
+
+This clarification is prospective program-purpose governance. It does not reinterpret or modify the scientific conclusions of FCP-1 through FCP-21, nor does it alter the frozen FCP-2 comparison keys or equivalence/convergence rules.
 
 ## 2. Neutrality contract
 
@@ -20,9 +34,11 @@ The null competitor must be allowed to win whenever deeper foundational machiner
 
 ## 3. Governing scientific principle
 
+> **Seek truth about reality.**
+>
 > **Preserve results, not theories.**
 
-The program may retain a theorem, countermodel, invariant, obstruction, empirical result, or useful formal architecture while rejecting the framework-level interpretation originally attached to it.
+The second principle serves the first. The program may retain a theorem, countermodel, invariant, obstruction, empirical result, or useful formal architecture while rejecting the framework-level interpretation originally attached to it. Neither a theory nor the FCP methodology itself is protected from revision when stronger evidence or reasoning points elsewhere.
 
 ## 4. Scope
 
