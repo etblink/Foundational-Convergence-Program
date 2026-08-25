@@ -2,7 +2,7 @@
 
 ## Current state
 
-Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 through FCP-18 appended the later controls/meta-audit, and FCP-19 appends the Asymptotic Safety source-intake findings without altering prior durable claim rows. The ledger now contains **58 durable rows through FCP-19**. **No overall numerical framework score or winner is inferred from these rows.**
+Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 through FCP-18 appended the later controls/meta-audit, FCP-19 appended the Asymptotic Safety source-intake findings, and FCP-20 appends the AS/null-GR subtraction/control result without altering prior durable claim rows. The ledger now contains **60 durable rows through FCP-20**. **No overall numerical framework score or winner is inferred from these rows.**
 
 ## Claim record schema
 
@@ -1100,6 +1100,45 @@ Future claims should use the following fields:
 - `falsification_condition`: a source-bound compulsory AS prediction with detector observable, parameter treatment, uncertainty and decision rule would reopen K10; a complete Lorentzian realistic trajectory could strengthen K9.
 - `countermodels`: RG-improved black holes, trajectory-calibrated scales and approximation-dependent matter bounds show why optional/model results cannot bind the base framework.
 - `scope_ceiling`: `COMPLETE_LORENTZIAN_UNITARY_REALIZATION = OPEN`; framework empirical selection open.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+
+---
+
+# FCP-20 Asymptotic Safety/null-GR control claims
+
+## FCP20-ASNULL-001 — Asymptotic Safety retains a non-generic null-subtracted residue without independent E1–E4 convergence
+
+- `framework_ids`: `FW-AS`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP19-AS-WEINBERG-1979`, `SRC-FCP19-AS-REUTER-1998`, `SRC-FCP19-AS-CPR-2009`, `SRC-FCP19-AS-FLNR-2016`, `SRC-FCP19-AS-FKLR-2018`, `SRC-FCP19-AS-DBOPT-2018`, `SRC-FCP2-NULL-DECOMP-001`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: FCP-20 finds that `FW-AS` is not merely a reformulation of the null GR/QFT baseline: after subtracting generic RG mathematics, QFT/RG lineage, classical-GR lineage/target content, model/truncation dependence, optional phenomenology and empirical inheritance, a six-item AS-specific residue survives around the interacting gravitational UV fixed-point hypothesis, finite-dimensional UV-critical-surface architecture, AS-L3 multi-truncation robustness evidence, fixed-point-defined continuum/trajectory program, partial Lorentzian/gravity-matter realization and the remaining physical-trajectory/calibration/empirical-selection burden. The closed packet nevertheless source-qualifies no pairwise E1, E2, E3 or E4 relation; K1–K9 top out at E5 and K10 is NONE.
+- `assumptions`: exact FCP-19 18-source AS packet, exact FCP-1/FCP-2 null baseline, frozen FCP-2 K1–K10/E1–E5 rules, and ordered generic/lineage/target/model/optionality/empirical subtraction.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` cross-framework; residue items retain the FCP-19 hypothesis/evidence/realization ceilings.
+- `weaker_framework_test`: generic effective-action/RG/fixed-point mathematics, QFT RG machinery, GR variables and GR-like infrared targets are removed before the gravitational fixed-point/critical-surface residue is retained.
+- `physical_bridge`: partial; selected UV–IR, Lorentzian and gravity–matter bridges exist, but no complete framework-wide calibrated physical map is source-bound.
+- `empirical_binding`: `FCP20_INDEPENDENT_AS_E4 = 0`; recovered GR/QFT success and fitted low-energy inputs remain inherited/calibrational rather than independent AS evidence.
+- `falsification_condition`: a future source-qualified AS↔null E1/E2/E3/E4 relation satisfying the frozen map/limit/physical/empirical burdens could supersede the corresponding pairwise ceiling; evidence showing the retained residue is wholly generic or inherited would require revision.
+- `countermodels`: exact flow equation without exact solution; repeated truncation fixed points without complete-theory theorem; shared RG machinery without AS; GR-like IR recovery without independent empirical credit.
+- `scope_ceiling`: `FCP20_NULL_SUBTRACTED_AS_RESIDUE_NONEMPTY = YES`; residue items = 6; E1 `0`, E2 `0`, E3 `0`, E4 `0`, E5-only `9`, NONE `1`; independent strong convergence `0`, moderate convergence `0`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP20-ASNULL-002 — Complete AS fixed-point closure, physical trajectory selection, realization and framework-level empirical selection remain open
+
+- `framework_ids`: `FW-AS`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP19-AS-MRS-2011`, `SRC-FCP19-AS-SW-2025`, `SRC-FCP19-AS-DEP-2014`, `SRC-FCP19-AS-MPR-2016`, `SRC-FCP19-AS-GRS-2019`, `SRC-FCP19-AS-PR-2024`, `SRC-FCP19-AS-EICHHORN-2026`, `SRC-NULL-PDG-GR-2026`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: After FCP-20 null/GR subtraction, the strongest gravitational fixed-point evidence remains `AS-L3_MULTI_TRUNCATION_ROBUSTNESS`; an exact complete-theory fixed-point theorem, exact physical UV-critical-surface dimension, complete scheme/gauge/parametrization independence, unique realistic UV–IR trajectory, full Lorentzian nonperturbative unitarity/causal-observable realization, complete realistic gravity–matter calibration and an unavoidable base-framework empirical discriminator remain open. Selected GR-like recovery is target-conditioned and does not supply independent AS E3/E4 credit at the closed-packet provenance ceiling.
+- `assumptions`: FCP-19 evidence ladder and optionality firewalls remain unchanged; FCP-20 does not reopen the source window or reconstruct missing E2/E3 records from general knowledge.
+- `classification`: `OPEN`
+- `canonicity_level`: complete-theory, realization and empirical-selection status unresolved.
+- `weaker_framework_test`: multi-truncation robustness is stronger than a single-model result but weaker than complete theory-space control; compatibility/recovery can be achieved with fitted/selected inputs and therefore does not force framework selection.
+- `physical_bridge`: nonempty and substantive but partial/conditional; no complete detector-calibrated chain from AS-H to unavoidable observables.
+- `empirical_binding`: `DIRECT_EMPIRICAL_SOURCE_COUNT = 0`; `AS-L5 = NONE`; `FCP20_INDEPENDENT_AS_E4 = 0`.
+- `falsification_condition`: a complete source-qualified physical AS construction with controlled GR+matter realization, calibrated observables and an unavoidable discriminating prediction could strengthen these open statuses.
+- `countermodels`: parametrization-dependent relevant-direction counts; multiple critical-surface trajectories; Lorentzian truncation without full unitarity; approximation-dependent matter bounds; optional RG-improved phenomenology.
+- `scope_ceiling`: `COMPLETE_THEORY_FIXED_POINT_THEOREM = NO`; `EXACT_PHYSICAL_CRITICAL_SURFACE_DIMENSION = OPEN`; `COMPLETE_LORENTZIAN_UNITARY_REALIZATION = OPEN`; `NO_CURRENT_BASE_FRAMEWORK_DISCRIMINATOR`.
 - `status`: `ACCEPTED`
 - `supersedes`: `NONE`
 
