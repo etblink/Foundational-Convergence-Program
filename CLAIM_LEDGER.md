@@ -2,7 +2,7 @@
 
 ## Current state
 
-Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 through FCP-18 appended the later controls/meta-audit, FCP-19 appended the Asymptotic Safety source-intake findings, and FCP-20 appends the AS/null-GR subtraction/control result without altering prior durable claim rows. The ledger now contains **60 durable rows through FCP-20**. **No overall numerical framework score or winner is inferred from these rows.**
+Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 through FCP-18 appended the later controls/meta-audit, FCP-19 appended the Asymptotic Safety source-intake findings, FCP-20 appended the AS/null-GR subtraction/control result, and FCP-21 appends the Reduced-NFC/null-subtracted-AS controlled comparison without altering prior durable claim rows. The ledger now contains **62 durable rows through FCP-21**. **No overall numerical framework score or winner is inferred from these rows.**
 
 ## Claim record schema
 
@@ -1139,6 +1139,45 @@ Future claims should use the following fields:
 - `falsification_condition`: a complete source-qualified physical AS construction with controlled GR+matter realization, calibrated observables and an unavoidable discriminating prediction could strengthen these open statuses.
 - `countermodels`: parametrization-dependent relevant-direction counts; multiple critical-surface trajectories; Lorentzian truncation without full unitarity; approximation-dependent matter bounds; optional RG-improved phenomenology.
 - `scope_ceiling`: `COMPLETE_THEORY_FIXED_POINT_THEOREM = NO`; `EXACT_PHYSICAL_CRITICAL_SURFACE_DIMENSION = OPEN`; `COMPLETE_LORENTZIAN_UNITARY_REALIZATION = OPEN`; `NO_CURRENT_BASE_FRAMEWORK_DISCRIMINATOR`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+
+---
+
+# FCP-21 Reduced NFC / null-subtracted Asymptotic-Safety comparison claims
+
+## FCP21-NFCAS-001 — Dual-firewall comparison yields no independently non-generic NFC/AS E1–E4 relation
+
+- `framework_ids`: `FW-NFC-RED`, `FW-AS`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP19-AS-WEINBERG-1979`, `SRC-FCP19-AS-REUTER-1998`, `SRC-FCP19-AS-CPR-2009`, `SRC-FCP19-AS-FLNR-2016`, `SRC-FCP19-AS-FKLR-2018`, `SRC-FCP19-AS-DBOPT-2018`
+- `claim_text`: FCP-21 compares the exact FCP-3 Reduced-NFC object only against AS-R1 through AS-R6 from the FCP-20 null-subtracted Asymptotic-Safety residue and finds no independently non-generic E1, E2, E3 or E4 relation. Four K-keys retain only E5 functional relations and six are NONE; independent strong and moderate convergence are zero; `FCP21_INDEPENDENT_E4 = 0`; and all six Reduced-NFC survivor questions have `PASS_NON_GENERIC = NO`, so `FCP21_SURVIVOR_PASS_NON_GENERIC = 0`.
+- `assumptions`: exact FCP-3 Reduced-NFC source binding and genericity firewall; exact FCP-20 six-item AS residue and null/GR-subtraction firewall; frozen FCP-2 K1–K10/E1–E5 rules; closed packet with no new source intake.
+- `classification`: `NONFORCED`
+- `canonicity_level`: pairwise comparison only; no program-level rescoring or claim that either framework is false.
+- `weaker_framework_test`: generic quotient/process/finite/stability/colimit mathematics on the NFC side and generic RG/QFT/GR-lineage structures on the AS side are removed before convergence credit; surviving relations do not meet E1–E4 independence requirements.
+- `physical_bridge`: Reduced NFC lacks a general calibrated physical-realization map; AS has partial physical realization but incomplete trajectory/calibration closure.
+- `empirical_binding`: neither side supplies a pairwise foundational discriminator at the frozen scope; shared absence does not constitute E4.
+- `falsification_condition`: a future source-qualified NFC↔AS E1/E2/E3/E4 relation satisfying the frozen object-type, provenance, independence, physical-bridge and empirical burdens could supersede the corresponding pairwise ceiling.
+- `countermodels`: fixed point without partition stabilization; partition stabilization without fixed point; colimit without physical continuum limit; shared empirical absence without E4.
+- `scope_ceiling`: E1 `0`, E2 `0`, E3 `0`, E4 `0`, E5-only `4`, NONE `6`; independent strong convergence `0`; moderate convergence `0`; `FCP21_SURVIVOR_PASS_NON_GENERIC = 0`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP21-NFCAS-002 — K7 fixed/finite/scale similarities are type-mismatched and AS partial realization remains materially asymmetric
+
+- `framework_ids`: `FW-NFC-RED`, `FW-AS`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP19-AS-REUTER-1998`, `SRC-FCP19-AS-CPR-2009`, `SRC-FCP19-AS-FLNR-2016`, `SRC-FCP19-AS-FKLR-2018`, `SRC-FCP19-AS-DBOPT-2018`, `SRC-FCP19-AS-MRS-2011`, `SRC-FCP19-AS-SW-2025`, `SRC-FCP19-AS-EICHHORN-2026`
+- `claim_text`: FCP-21's focused K7 and realization audits find that the AS gravitational RG fixed point is not NFC fixed-carrier partition stabilization, the finite-dimensional UV critical surface is not interface capacity or Interface Sufficiency, relevant RG directions are not interface-visible novelty distinctions, AS multi-truncation robustness is evidence rather than NFC process congruence or weak-coupling stability, and the AS UV→IR trajectory program is not categorical colimit completion. FCP-20's nonempty partial Lorentzian/gravity-matter AS realization therefore creates a material asymmetry with the Reduced-NFC core, whose general physical realization and selected physical-history law remain unestablished.
+- `assumptions`: object types are preserved; AS-R3 is evidence, AS-R6 is an open burden, and no FCP-20-subtracted generic RG/QFT/GR shell or rejected NFC physical interpretation is restored.
+- `classification`: `NONFORCED`
+- `canonicity_level`: bounded type/realization comparison; no claim that future mappings are impossible.
+- `weaker_framework_test`: identical words such as fixed, stable, finite, trajectory, global or completion receive no credit without shared typed structure; each apparent K7/K8 upgrade is defeated by explicit countermodels.
+- `physical_bridge`: AS partial physical bridge = nonempty but incomplete; Reduced-NFC general physical bridge = not established.
+- `empirical_binding`: `FCP21_INDEPENDENT_E4 = 0`; no detector-level pairwise discriminator is source-bound.
+- `falsification_condition`: an explicit provenance-qualified map/limit showing material structure preservation between the relevant NFC and AS objects, or a source-bound Reduced-NFC physical realization matching AS at the required scope, could strengthen the relation.
+- `countermodels`: RG fixed point without finite partition stabilization; finite critical surface without interface factorization; relevant eigendirections without novelty bits; colimit without RG trajectory; partial AS Lorentzian realization without Reduced-NFC realization.
+- `scope_ceiling`: K7 `TYPE_MISMATCH_AFTER_GENERICITY_SUBTRACTION`, NONE; K8 E5-only functional analogy with type mismatch; K9 `MATERIAL_ASYMMETRY`, NONE.
 - `status`: `ACCEPTED`
 - `supersedes`: `NONE`
 
