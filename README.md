@@ -2,10 +2,10 @@
 
 ## Status
 
-**Canonical integrated phase:** FCP-13 — CQM vs. Null/QM: K1–K10 Reformulation, Process-Structure, and Empirical-Control Baseline  
+**Canonical integrated phase:** FCP-16 — `FW-LOOP` vs. Null/GR: K1–K10 Quantum-Geometry, Dynamics, Continuum-Recovery, and Empirical-Inheritance Control  
 **Current qualified research phase:** FCP-16 — `FW-LOOP` vs. Null/GR: K1–K10 Quantum-Geometry, Dynamics, Continuum-Recovery, and Empirical-Inheritance Control  
-**Current qualified research state:** FCP-16 establishes that `FW-LOOP` is not merely a reformulation of GR: after generic-mathematics, classical-GR-lineage, optional/model, target-conditioned-recovery and empirical-inheritance subtraction, six non-generic loop residue items remain across quantum-geometric kinematics, formulation-dependent canonical/covariant dynamics, the bounded internal bridge, continuum/coarse-graining structure and the Barbero–Immirzi selection burden. Pairwise loop↔GR E2/E3 are withheld at the closed-packet provenance ceiling, independent E1–E4 convergence remains zero, and `FCP16_INDEPENDENT_LOOP_E4 = 0`. Canonical `main` is still integrated only through FCP-13 pending the separately qualified fast-forward.  
-**Next recommended task:** exact canonical fast-forward integration through the qualified FCP-16 continuity head, then FCP-17 — Reduced NFC vs. `FW-LOOP`
+**Current qualified research state:** FCP-16 establishes that `FW-LOOP` is not merely a reformulation of GR: after generic-mathematics, classical-GR-lineage, optional/model, target-conditioned-recovery and empirical-inheritance subtraction, six non-generic loop residue items remain across quantum-geometric kinematics, formulation-dependent canonical/covariant dynamics, the bounded internal bridge, continuum/coarse-graining structure and the Barbero–Immirzi selection burden. Pairwise loop↔GR E2/E3 are withheld at the closed-packet provenance ceiling, independent E1–E4 convergence remains zero, and `FCP16_INDEPENDENT_LOOP_E4 = 0`. Canonical `main` is now integrated through the qualified FCP-16 continuity state.  
+**Next recommended task:** FCP-17 — Reduced NFC vs. `FW-LOOP`: K1–K10 Controlled Quantum-Geometry, Dynamics, and Globalization Comparison
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language or model.
 
