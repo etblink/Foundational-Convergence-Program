@@ -20,8 +20,8 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 
 | Framework ID | Working name | Role | Status | Latest bounded scientific status |
 |---|---|---|---|---|
-| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `PAIRWISE_COMPARISON_COMPLETE` | FCP-16 loop/null-GR control is the latest null/GR comparison: recovered GR success remains inherited rather than independent loop evidence, pairwise loop↔GR E2/E3 remain unqualified at the closed-packet provenance ceiling, and no independent loop E4 discriminator is identified |
-| `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `PAIRWISE_COMPARISON_COMPLETE` | FCP-17 loop comparison complete after FCP-16 loop/null-GR subtraction: no E1–E4 Reduced-NFC/loop relation; E5-only = 6, none = 4, no independent strong/moderate convergence and no non-generic survivor pass; loop dynamics and physical realization remain materially more specific than Reduced NFC |
+| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `PAIRWISE_COMPARISON_COMPLETE` | FCP-20 Asymptotic-Safety/null-GR control is the latest null comparison: six non-generic AS residue items survive generic/QFT-RG/GR-target/model/empirical subtraction, while pairwise AS↔null E1–E4 = 0, E5-only = 9, NONE = 1, independent strong/moderate convergence = 0, and no independent AS E4 discriminator is identified |
+| `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `PAIRWISE_COMPARISON_COMPLETE` | FCP-21 AS comparison complete against only AS-R1–AS-R6 after both firewalls: E1–E4 = 0, E5-only = 4, NONE = 6, independent strong/moderate convergence = 0, `FCP21_SURVIVOR_PASS_NON_GENERIC = 0`; K7 fixed/finite/scale similarities are type-mismatched and AS partial physical realization remains materially asymmetric |
 | `FW-OAQ` | Operational / algebraic quantum approaches | historical umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-4 split into `FW-AQFT`, `FW-GPTOPT`, `FW-CQM` |
 | `FW-AQFT` | Algebraic / locally covariant quantum field theory | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-5/6 controls complete; core mostly reformulation/sharpening of QFT plus named AQFT-X extensions; no framework-level empirical discriminator |
 | `FW-GPTOPT` | Generalized probabilistic / operational-probabilistic theories | source-bound generalizing meta-framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-14 CQM comparison complete: GPTOPT retains convex/probabilistic operational structure, physical composite-selection burden and broader post-quantum theory space; a source-bound CQM/GPTOPT bridge exists, but no independently justified non-generic convergence survives and FCP-4 framework separation is preserved |
@@ -30,7 +30,7 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 | `FW-CST` | Causal Set Theory | source-bound discrete causal/order framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-12 NFC comparison complete after FCP-11 null/GR subtraction: no E1–E4 NFC relation survives; CST causal/discrete carrier, manifold-selection burden and partial realization lack source-bound Reduced-NFC counterparts; R2/D2/E2 and no-framework-discriminator status unchanged |
 | `FW-LOOP` | Loop / spin-network / spinfoam approaches | source-bound quantum-gravity comparator family | `PAIRWISE_COMPARISON_COMPLETE` | FCP-17 Reduced-NFC comparison complete after FCP-16 null/GR control: the six-item null-subtracted loop residue is preserved; no E1–E4 Reduced-NFC relation survives, E5-only = 6, none = 4, independent strong/moderate convergence remains zero, and loop quantum geometry/dynamics/partial realization appear as asymmetries rather than convergence; no new framework-level empirical discriminator is identified |
 | `FW-TENSOR` | Tensor-network / information-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
-| `FW-AS` | Asymptotic safety | source-bound continuum/RG fixed-point quantum-gravity comparator | `SOURCE_BOUND_READY` | FCP-19 source intake complete: one coherent framework; broad `AS-L3` multi-truncation fixed-point/robustness evidence, partial Lorentzian/matter/UV–IR realization, exact complete-theory fixed point and physical critical-surface dimension open, and no unavoidable framework-level empirical discriminator |
+| `FW-AS` | Asymptotic safety | source-bound continuum/RG fixed-point quantum-gravity comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-20 preserves a six-item null-subtracted AS-specific residue with fixed-point evidence ceiling `AS-L3` and no pairwise E1–E4/null convergence; FCP-21 then finds no independently non-generic Reduced-NFC/AS E1–E4 relation, E5-only = 4, NONE = 6, zero survivor passes, decisive K7 type mismatches, and a material physical-realization asymmetry; no framework-level empirical discriminator is identified |
 | `FW-STRING` | String-theoretic / holographic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-CAT` | Broader categorical / process-theoretic / topos / related structural approaches | comparator family pending subdivision/source intake | `ADMITTED_NOT_AUDITED` | FCP-4 leaves this broader family distinct from `FW-CQM` |
 
@@ -421,6 +421,40 @@ Bounded verdict:
 
 > **`FW-AS` IS SOURCE-BOUND AS ONE ASYMPTOTIC-SAFETY FRAMEWORK WITH A DISTINCTIVE GRAVITATIONAL UV FIXED-POINT / FINITE-CRITICAL-SURFACE COMMITMENT AND SUBSTANTIAL MULTI-TRUNCATION ROBUSTNESS EVIDENCE. THE COMPLETE-THEORY FIXED POINT, EXACT PHYSICAL CRITICAL-SURFACE DIMENSION, FULL SCHEME/GAUGE/PARAMETRIZATION INDEPENDENCE, COMPLETED LORENTZIAN UNITARY REALIZATION, COMPLETE REALISTIC UV–IR TRAJECTORY, AND UNAVOIDABLE FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR REMAIN OPEN AT CURRENT SOURCE SCOPE.**
 
+## FCP-20 Asymptotic Safety/null-GR control
+
+FCP-20 compares source-bound `FW-AS` against the frozen null/GR baseline using GR as the primary gravity comparator and QFT/SM only for RG/QFT lineage, matter, calibration and empirical-inheritance control.
+
+Main result:
+
+- `FW-AS` is not merely a GR/QFT reformulation;
+- a six-item null-subtracted AS residue survives around the interacting gravitational UV-fixed-point hypothesis, finite-dimensional UV-critical-surface architecture, AS-L3 multi-truncation robustness evidence, fixed-point-defined continuum/trajectory program, partial Lorentzian/gravity-matter realization, and the remaining trajectory/calibration/empirical-selection burden;
+- E1 = **0**, E2 = **0**, E3 = **0**, E4 = **0**;
+- E5-only = **9**, none = **1**;
+- independent strong convergence = **0**, independent moderate convergence = **0**;
+- `FCP20_INDEPENDENT_AS_E4 = 0`;
+- no pairwise AS↔null E2 map or E3 controlled limit is source-qualified at the closed-packet provenance ceiling;
+- the strongest fixed-point evidence remains `AS-L3_MULTI_TRUNCATION_ROBUSTNESS`, not a complete-theory theorem.
+
+FCP-20 therefore preserves substantive AS-specific structure without converting generic RG/QFT machinery, target-conditioned GR recovery, optional phenomenology, or inherited GR/QFT success into independent convergence credit.
+
+## FCP-21 Reduced-NFC/Asymptotic Safety controlled comparison
+
+FCP-21 compares the exact FCP-3 Reduced-NFC object only against AS-R1 through AS-R6 from the FCP-20 null-subtracted residue.
+
+Main result:
+
+- E1 = **0**, E2 = **0**, E3 = **0**, E4 = **0**;
+- E5-only = **4**, none = **6**;
+- independent strong convergence = **0**, independent moderate convergence = **0**;
+- `FCP21_INDEPENDENT_E4 = 0`;
+- `FCP21_SURVIVOR_PASS_NON_GENERIC = 0` across Congruence, Viability, Interface Sufficiency, Globalization, Realization and Dynamics;
+- K7 is a decisive negative control: gravitational RG fixed point != finite-carrier partition stabilization, finite UV critical-surface dimension != interface capacity, relevant RG directions != novelty/interface bits, and multi-truncation robustness != NFC congruence/weak-coupling structure;
+- K8 retains only E5 role analogy: categorical colimit/universal completion != physical RG continuum/global trajectory;
+- AS partial Lorentzian/gravity-matter realization remains a material asymmetry with the Reduced-NFC core rather than convergence;
+- neither side supplies pairwise E4.
+
+FCP-21 therefore creates no new common NFC/AS foundational object and does not update the FCP-18 program-level meta-audit retrospectively.
 ## Admission and credit rules
 
 Admission reserves a comparison slot; it is not endorsement. A framework may require later subdivision, but subdivision must precede favorable scoring.

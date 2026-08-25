@@ -2,10 +2,10 @@
 
 ## Status
 
-**Canonical integrated phase:** FCP-19 — `FW-AS` Asymptotic Safety Source Intake, Framework Delimitation, and K1–K10 Baseline  
-**Current qualified research phase:** FCP-19 — `FW-AS` Asymptotic Safety Source Intake, Framework Delimitation, and K1–K10 Baseline  
-**Current qualified research state:** FCP-17 found no independently non-generic E1–E4 Reduced-NFC/loop convergence (E5-only = 6, NONE = 4, `PASS_NON_GENERIC = 0`); FCP-18 found no independently non-generic multi-framework recurrence in the closed corpus and no repeated independent Reduced-NFC support at the frozen burden; FCP-19 source-binds `FW-AS` as one coherent framework with `AS-L3` multi-truncation fixed-point/robustness evidence, while an exact complete-theory fixed-point theorem, exact physical critical-surface dimension, complete Lorentzian/physical realization, and an unavoidable base-framework empirical discriminator remain open. Canonical `main` is integrated through FCP-19.  
-**Next recommended task:** FCP-20 — `FW-AS` vs. Null/GR: RG-Lineage, Fixed-Point, Continuum-Recovery, and Empirical-Inheritance Control
+**Canonical integrated phase:** FCP-21 — Reduced NFC vs. Null-Subtracted `FW-AS` Controlled Comparison  
+**Current qualified research phase:** FCP-21 — Reduced NFC vs. Null-Subtracted `FW-AS` Controlled Comparison  
+**Current qualified research state:** FCP-20 found that `FW-AS` is not merely a GR/QFT reformulation: a six-item null-subtracted AS-specific residue survives, while pairwise E1–E4 remain zero, E5-only = 9, NONE = 1, and independent strong/moderate convergence and AS E4 remain zero. FCP-21 then compared the exact FCP-3 Reduced-NFC object only against AS-R1 through AS-R6 and found E1–E4 = 0, E5-only = 4, NONE = 6, `FCP21_SURVIVOR_PASS_NON_GENERIC = 0`; K7 fixed/finite/scale similarities are type-mismatched after the dual firewall, and AS partial physical realization remains a material asymmetry. Canonical `main` is integrated through FCP-21.  
+**Next recommended task:** separately authorize a program-gap review to select the next admitted-but-unaudited framework intake; FCP-22 has not begun.
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language or model.
 
@@ -38,6 +38,8 @@ No framework receives evidentiary credit merely because it suggested the questio
 - **FCP-17:** compared Reduced NFC only against the six-item FCP-16 null-subtracted loop residue; found E1–E4 = 0, E5-only = 6, NONE = 4, zero independent strong/moderate convergence, and no non-generic survivor pass, with loop dynamics/realization producing material asymmetries rather than convergence.
 - **FCP-18:** performed a closed-corpus program meta-audit; found zero independently non-generic multi-framework recurrence at E1–E4, zero repeated independent Reduced-NFC support at the frozen burden, and zero independent framework-level E4, while finding no governance-review or prior-result-remediation candidate.
 - **FCP-19:** source-bound `FW-AS` as one coherent Asymptotic Safety framework from 18 external works; fixed-point evidence reaches `AS-L3` multi-truncation robustness scope, while exact complete-theory fixed-point control, exact physical critical-surface dimension, complete Lorentzian/physical realization, and a compulsory framework-level empirical discriminator remain open.
+- **FCP-20:** compared source-bound `FW-AS` against the frozen null/GR baseline after generic RG/QFT, GR-lineage/target, model/optionality and empirical-inheritance subtraction; retained a six-item AS-specific residue, while pairwise E1–E4 = 0, E5-only = 9, NONE = 1, and independent strong/moderate convergence and AS E4 remain zero.
+- **FCP-21:** compared the exact FCP-3 Reduced-NFC object only against AS-R1 through AS-R6 under the dual firewall; found E1–E4 = 0, E5-only = 4, NONE = 6, zero independent strong/moderate convergence, `FCP21_SURVIVOR_PASS_NON_GENERIC = 0`, decisive K7 type mismatches, and a material AS/NFC physical-realization asymmetry.
 
 ## FCP-6 Reduced-NFC/AQFT control
 
@@ -313,7 +315,7 @@ Permanent rule:
 
 Recommended:
 
-**FCP-20 — `FW-AS` vs. Null/GR: RG-Lineage, Fixed-Point, Continuum-Recovery, and Empirical-Inheritance Control**.
+**Program-gap review and next admitted-framework intake selection** — separately authorize selection of the next admitted-but-unaudited framework intake; FCP-22 has not begun.
 
 FCP-19 leaves a source-bound Asymptotic Safety object centered on an interacting gravitational UV fixed point and finite-dimensional UV critical surface, with `AS-L3` multi-truncation robustness evidence but incomplete complete-theory, Lorentzian/physical-realization, and empirical-selection closure.
 
