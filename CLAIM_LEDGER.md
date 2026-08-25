@@ -2,7 +2,7 @@
 
 ## Current state
 
-Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 and FCP-17 appended the loop/null-GR and Reduced-NFC/loop controls, and FCP-18 appends the closed-corpus program meta-audit without altering prior durable claim rows. The ledger now contains **55 durable rows through FCP-18**. **No overall numerical framework score or winner is inferred from these rows.**
+Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 through FCP-18 appended the later controls/meta-audit, and FCP-19 appends the Asymptotic Safety source-intake findings without altering prior durable claim rows. The ledger now contains **58 durable rows through FCP-19**. **No overall numerical framework score or winner is inferred from these rows.**
 
 ## Claim record schema
 
@@ -1047,6 +1047,61 @@ Future claims should use the following fields:
 - `status`: `ACCEPTED`
 - `supersedes`: `NONE`
 
+
+---
+
+# FCP-19 Asymptotic Safety source-intake claims
+
+## FCP19-AS-001 — `FW-AS` is source-bound as one coherent framework
+
+- `framework_ids`: `FW-AS`
+- `source_ids`: `SRC-FCP19-AS-WEINBERG-1979`, `SRC-FCP19-AS-REUTER-1998`, `SRC-FCP19-AS-NR-2006`, `SRC-FCP19-AS-CRIT-2020`, `SRC-FCP19-AS-EICHHORN-2026`
+- `claim_text`: FCP-19 source-binds `FW-AS` as one coherent asymptotic-safety framework centered on the hypothesis that a physically appropriate interacting gravitational UV RG fixed point with a finite-dimensional UV critical surface provides a continuum quantum-gravity completion; functional-RG machinery, finite truncations, robustness studies, gravity-matter systems, Lorentzian constructions and phenomenology are retained as implementation/evidence layers rather than separate top-level frameworks.
+- `assumptions`: bounded 18-source FCP-19 corpus and frozen FCP-4 framework-separation rule.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: framework identity only; no cross-framework convergence class.
+- `weaker_framework_test`: generic RG/QFT fixed-point mathematics is insufficient; the AS-specific commitment is the gravitational interacting fixed-point/critical-surface hypothesis plus its source-bound evidence.
+- `physical_bridge`: partial; Lorentzian and UV–IR realization programs are nonempty but incomplete.
+- `empirical_binding`: no unavoidable framework-level discriminator is source-bound.
+- `falsification_condition`: source evidence demonstrating materially distinct AS programs with different primitive commitments/model classes/physical scopes/empirical burdens would reopen taxonomy.
+- `countermodels`: different calculational implementations alone do not force framework splitting.
+- `scope_ceiling`: `FCP19_AS_TAXONOMY = OUTCOME_A_ONE_FRAMEWORK`; `FRAMEWORK_SPLIT_CANDIDATE = 0`; no E1–E5 comparison.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP19-AS-002 — Gravitational fixed-point evidence reaches multi-truncation robustness scope but not an exact complete-theory theorem
+
+- `framework_ids`: `FW-AS`
+- `source_ids`: `SRC-FCP19-AS-REUTER-1998`, `SRC-FCP19-AS-LR-2002`, `SRC-FCP19-AS-CPR-2009`, `SRC-FCP19-AS-FLNR-2016`, `SRC-FCP19-AS-FKLR-2018`, `SRC-FCP19-AS-DBOPT-2018`, `SRC-FCP19-AS-EICHHORN-2026`
+- `claim_text`: The bounded corpus contains broad recurring non-Gaussian gravitational UV fixed-point evidence across increasingly large Euclidean truncations/operator bases and nontrivial regulator/truncation robustness checks, sufficient for `FCP19_STRONGEST_FIXED_POINT_EVIDENCE = AS-L3_MULTI_TRUNCATION_ROBUSTNESS`; it does not source-qualify an exact complete-theory fixed-point theorem or exact physical UV-critical-surface dimension, and explicit parametrization dependence prevents promotion of small truncation-level relevant-direction counts to one exact physical integer.
+- `assumptions`: evidence ladder is source-scope bookkeeping only; exact/formal flow equations are distinguished from projected truncation solutions.
+- `classification`: `NONFORCED`
+- `canonicity_level`: bounded evidence statement, not proof of universal AS validity.
+- `weaker_framework_test`: persistence across multiple truncations is stronger than a single-model fixed point but remains weaker than complete theory-space control.
+- `physical_bridge`: continuum interpretation is conditional on persistence and a suitable global physical trajectory.
+- `empirical_binding`: none directly.
+- `falsification_condition`: exact complete-theory construction could strengthen the ceiling; systematic disappearance under controlled enlargement could weaken it.
+- `countermodels`: field-parametrization dependence, omitted operator sectors and background/dynamical distinctions block exactification.
+- `scope_ceiling`: `COMPLETE_THEORY_FIXED_POINT_THEOREM = NO`; `EXACT_PHYSICAL_CRITICAL_SURFACE_DIMENSION = OPEN`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP19-AS-003 — Physical realization is partial and no unavoidable base-framework empirical discriminator is source-bound
+
+- `framework_ids`: `FW-AS`
+- `source_ids`: `SRC-FCP19-AS-MRS-2011`, `SRC-FCP19-AS-SW-2025`, `SRC-FCP19-AS-DEP-2014`, `SRC-FCP19-AS-MPR-2016`, `SRC-FCP19-AS-PR-2024`, `SRC-FCP19-AS-GRS-2019`, `SRC-FCP19-AS-PLATANIA-2024`, `SRC-FCP19-AS-EICHHORN-2026`
+- `claim_text`: FCP-19 source-binds substantive Lorentzian fixed-point/signature-robustness work, gravity-matter fixed-point studies, selected UV–IR/GR-like trajectories and nonempty particle/cosmology/black-hole phenomenology, while retaining implementation/trajectory/calibration dependence; completed Lorentzian unitary realization, unique realistic gravity-matter trajectory, complete physical-observable calibration and an unavoidable detector-level base-`FW-AS` empirical discriminator remain open.
+- `assumptions`: compatibility, trajectory selection, parameter fitting and optional phenomenology are not promoted to compulsory framework predictions.
+- `classification`: `OPEN`
+- `canonicity_level`: physical-realization/empirical-boundary status.
+- `weaker_framework_test`: recovery of successful GR/QFT behavior or existence of optional phenomenology does not independently select AS.
+- `physical_bridge`: nonempty but partial (`AS-L4` maximum at FCP-19 scope).
+- `empirical_binding`: `DIRECT_EMPIRICAL_SOURCE_COUNT = 0`; `AS-L5 = NONE`; `FCP19_AS_K10 = NO_CURRENT_BASE_FRAMEWORK_DISCRIMINATOR`.
+- `falsification_condition`: a source-bound compulsory AS prediction with detector observable, parameter treatment, uncertainty and decision rule would reopen K10; a complete Lorentzian realistic trajectory could strengthen K9.
+- `countermodels`: RG-improved black holes, trajectory-calibrated scales and approximation-dependent matter bounds show why optional/model results cannot bind the base framework.
+- `scope_ceiling`: `COMPLETE_LORENTZIAN_UNITARY_REALIZATION = OPEN`; framework empirical selection open.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
 
 ---
 

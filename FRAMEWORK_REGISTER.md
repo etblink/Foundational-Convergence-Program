@@ -30,7 +30,7 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 | `FW-CST` | Causal Set Theory | source-bound discrete causal/order framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-12 NFC comparison complete after FCP-11 null/GR subtraction: no E1–E4 NFC relation survives; CST causal/discrete carrier, manifold-selection burden and partial realization lack source-bound Reduced-NFC counterparts; R2/D2/E2 and no-framework-discriminator status unchanged |
 | `FW-LOOP` | Loop / spin-network / spinfoam approaches | source-bound quantum-gravity comparator family | `PAIRWISE_COMPARISON_COMPLETE` | FCP-16 null/GR control complete: `FW-LOOP` is not merely GR reformulation; six non-generic residue items survive subtraction, pairwise loop↔GR E2/E3 remain unqualified at the closed-packet provenance ceiling, E1–E4 and independent strong/moderate convergence remain zero, physical calibration and complete continuum recovery remain open, and no framework-level loop empirical discriminator is identified |
 | `FW-TENSOR` | Tensor-network / information-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
-| `FW-AS` | Asymptotic safety | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
+| `FW-AS` | Asymptotic safety | source-bound continuum/RG fixed-point quantum-gravity comparator | `SOURCE_BOUND_READY` | FCP-19 source intake complete: one coherent framework; broad `AS-L3` multi-truncation fixed-point/robustness evidence, partial Lorentzian/matter/UV–IR realization, exact complete-theory fixed point and physical critical-surface dimension open, and no unavoidable framework-level empirical discriminator |
 | `FW-STRING` | String-theoretic / holographic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-CAT` | Broader categorical / process-theoretic / topos / related structural approaches | comparator family pending subdivision/source intake | `ADMITTED_NOT_AUDITED` | FCP-4 leaves this broader family distinct from `FW-CQM` |
 
@@ -340,6 +340,54 @@ Main result:
 - `FCP16_INDEPENDENT_LOOP_E4 = 0` and no framework-level loop empirical discriminator is identified.
 
 FCP-16 therefore leaves a bounded null-subtracted loop residue suitable for a separately authorized Reduced-NFC comparison without carrying generic GR lineage, target-conditioned GR recovery or inherited GR empirical success forward as independent loop content.
+
+## FCP-19 Asymptotic Safety source intake
+
+FCP-19 source-binds the previously admitted `FW-AS` comparator as one coherent framework.
+
+Taxonomy:
+
+`FCP19_AS_TAXONOMY = OUTCOME_A_ONE_FRAMEWORK`.
+
+The framework-level hypothesis is that a physically appropriate interacting/non-Gaussian gravitational UV RG fixed point with a finite-dimensional UV critical surface provides a continuum quantum-gravity completion. Functional/effective-average-action RG, finite truncations, robustness studies, gravity-matter systems, Lorentzian constructions and phenomenology are retained as implementation/evidence layers rather than new framework IDs.
+
+Bounded source status:
+
+- 18 external sources bound: 12 foundational/primary and 6 review/synthesis;
+- broad multi-truncation Euclidean pure-gravity fixed-point evidence reaches `AS-L3` robustness scope;
+- high-order `f(R)` and beyond-Ricci-scalar truncations support persistence of the interacting fixed-point picture;
+- field-parametrization dependence prevents promotion of truncation-level relevant-direction counts to one exact physical critical-surface dimension;
+- gravity-matter evidence is substantial but implementation dependent;
+- Lorentzian fixed-point/signature-robustness evidence is nonempty and materially advanced, while complete Lorentzian unitarity/causal-observable realization remains open;
+- selected UV–IR/GR-like trajectories and phenomenological programs exist, but complete physical realization/calibration remains partial;
+- no unavoidable framework-level empirical discriminator is source-bound;
+- no cross-framework E1–E5 classification is performed.
+
+Permanent controls include:
+
+> **ASYMPTOTIC-SAFETY HYPOTHESIS != FUNCTIONAL-RG IMPLEMENTATION.**
+
+> **RG FLOW != PHYSICAL TIME EVOLUTION.**
+
+> **FIXED POINT IN A TRUNCATION != FIXED POINT OF THE COMPLETE THEORY.**
+
+> **FINITE RELEVANT DIRECTIONS IN A TRUNCATION != COMPLETE PREDICTIVITY THEOREM.**
+
+> **EUCLIDEAN FIXED-POINT EVIDENCE != COMPLETED LORENTZIAN QUANTUM GRAVITY.**
+
+> **IR GR RECOVERY != INDEPENDENT EMPIRICAL SELECTION OF ASYMPTOTIC SAFETY.**
+
+FCP-19 therefore records:
+
+- `FRAMEWORK_SPLIT_CANDIDATE = 0`;
+- `KEY_EXTENSION_CANDIDATE = 0`;
+- `PRIOR_RESULT_REMEDIATION_CANDIDATE = 0`;
+- `NO_CURRENT_BASE_FRAMEWORK_DISCRIMINATOR`;
+- no score/winner.
+
+Bounded verdict:
+
+> **`FW-AS` IS SOURCE-BOUND AS ONE ASYMPTOTIC-SAFETY FRAMEWORK WITH A DISTINCTIVE GRAVITATIONAL UV FIXED-POINT / FINITE-CRITICAL-SURFACE COMMITMENT AND SUBSTANTIAL MULTI-TRUNCATION ROBUSTNESS EVIDENCE. THE COMPLETE-THEORY FIXED POINT, EXACT PHYSICAL CRITICAL-SURFACE DIMENSION, FULL SCHEME/GAUGE/PARAMETRIZATION INDEPENDENCE, COMPLETED LORENTZIAN UNITARY REALIZATION, COMPLETE REALISTIC UV–IR TRAJECTORY, AND UNAVOIDABLE FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR REMAIN OPEN AT CURRENT SOURCE SCOPE.**
 
 ## Admission and credit rules
 

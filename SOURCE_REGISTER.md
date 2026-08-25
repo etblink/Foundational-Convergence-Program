@@ -130,6 +130,29 @@ This register records authoritative source locations and provenance bindings use
 | `SRC-FCP15-LOOP-BCMR-2026` | `FW-LOOP` / `L4/K7/K8` current continuum-limit structure | M. Bruno, E. Colafranceschi, F. M. Mele & C. Rovelli, *The Structure of the Continuum Limit of Spin Foams*, Phys. Rev. D, accepted 5 Aug 2026 | DOI `10.1103/7493-9nb7`; arXiv `2603.16999` | `SOURCE_BOUND` | Current primary structural paper: strong-limit obstruction and weaker distributional/rigging-map construction under axioms; does not prove physical 4D EPRL continuum GR recovery. |
 | `SRC-FCP15-LOOP-GHM-2012` | `FW-LOOP` / `L6/K10` phenomenology boundary | F. Girelli, F. Hinterleitner & S. A. Major, *Loop Quantum Gravity Phenomenology: Linking Loops to Observational Physics*, SIGMA 8, 098 (2012) | DOI `10.3842/SIGMA.2012.098`; arXiv `1210.1485` | `SOURCE_BOUND` | Reviews proposed/constrained Planck-scale phenomenology and explicitly preserves the incomplete link from fundamental LQG to specific phenomenological models; not a direct framework empirical record. |
 
+### FCP-19 — Asymptotic Safety source layer
+
+| Source ID | Framework / role | Authority | Location | Status | Notes |
+|---|---|---|---|---|---|
+| `SRC-FCP19-AS-WEINBERG-1979` | `FW-AS` / `AS-H` foundational hypothesis | S. Weinberg, *Ultraviolet Divergences in Quantum Theories of Gravitation*, in *General Relativity: An Einstein Centenary Survey* (1979), pp. 790–831 | Cambridge University Press; ISBN `0-521-22285-0` | `SOURCE_BOUND` | Foundational fixed-point / finite-relevant-direction conception; definition is not evidence that gravity realizes the hypothesis. |
+| `SRC-FCP19-AS-REUTER-1998` | `FW-AS` / `AS-RG`, `AS-TRUNC` | M. Reuter, *Nonperturbative evolution equation for quantum gravity*, Phys. Rev. D 57, 971 (1998) | DOI `10.1103/PhysRevD.57.971`; arXiv `hep-th/9605030` | `SOURCE_BOUND` | Effective-average-action functional flow and simple truncation; exact-form flow machinery does not make the truncation solution exact. |
+| `SRC-FCP19-AS-SOUMA-1999` | `FW-AS` / early fixed-point evidence | W. Souma, *Non-Trivial Ultraviolet Fixed Point in Quantum Gravity*, Prog. Theor. Phys. 102, 181–195 (1999) | DOI `10.1143/PTP.102.181`; arXiv `hep-th/9907027` | `SOURCE_BOUND` | Early d-dimensional fixed-point evidence reaching d=4; not complete theory-space control. |
+| `SRC-FCP19-AS-LR-2002` | `FW-AS` / scheme robustness | O. Lauscher & M. Reuter, *Ultraviolet fixed point and generalized flow equation of quantum gravity*, Phys. Rev. D 65, 025013 (2002) | DOI `10.1103/PhysRevD.65.025013`; arXiv `hep-th/0108040` | `SOURCE_BOUND` | Einstein-Hilbert fixed-point and scheme-dependence study; robustness in the approximation is not exact scheme independence. |
+| `SRC-FCP19-AS-CPR-2009` | `FW-AS` / enlarged truncations | A. Codello, R. Percacci & C. Rahmede, *Investigating the Ultraviolet Properties of Gravity with a Wilsonian Renormalization Group Equation*, Ann. Phys. 324, 414–469 (2009) | DOI `10.1016/j.aop.2008.08.008`; arXiv `0805.2909` | `SOURCE_BOUND` | Higher-derivative/polynomial-curvature and cutoff-scheme study; small relevant-direction count remains truncation scoped. |
+| `SRC-FCP19-AS-FLNR-2016` | `FW-AS` / high-order `f(R)` evidence | K. Falls, D. F. Litim, K. Nikolakopoulos & C. Rahmede, *Further evidence for asymptotic safety of quantum gravity*, Phys. Rev. D 93, 104022 (2016) | DOI `10.1103/PhysRevD.93.104022`; arXiv `1410.4815` | `SOURCE_BOUND` | High polynomial order and bootstrap/convergence evidence; one operator family does not exhaust theory space. |
+| `SRC-FCP19-AS-FKLR-2018` | `FW-AS` / beyond-Ricci-scalar evidence | K. G. Falls, C. R. King, D. F. Litim, K. Nikolakopoulos & C. Rahmede, *Asymptotic safety of quantum gravity beyond Ricci scalars*, Phys. Rev. D 97, 086006 (2018) | DOI `10.1103/PhysRevD.97.086006`; arXiv `1801.00162` | `SOURCE_BOUND` | Ricci-tensor invariants stabilize the studied fixed point; not complete operator-basis convergence. |
+| `SRC-FCP19-AS-DBOPT-2018` | `FW-AS` / parametrization limitation | G. P. de Brito, N. Ohta, A. D. Pereira, A. A. Tomaz & M. Yamada, *Asymptotic safety and field parametrization dependence in the f(R) truncation*, Phys. Rev. D 98, 026027 (2018) | DOI `10.1103/PhysRevD.98.026027`; arXiv `1805.09656` | `SOURCE_BOUND` | Parametrization can change fixed-point class/relevant-direction count; blocks exactification of truncation counts. |
+| `SRC-FCP19-AS-MRS-2011` | `FW-AS` / Lorentzian truncation | E. Manrique, S. Rechenberger & F. Saueressig, *Asymptotically Safe Lorentzian Gravity*, Phys. Rev. Lett. 106, 251302 (2011) | DOI `10.1103/PhysRevLett.106.251302`; arXiv `1102.5012` | `SOURCE_BOUND` | Euclidean/Lorentzian fixed points in foliated Einstein-Hilbert approximation; not completed Lorentzian QG. |
+| `SRC-FCP19-AS-SW-2025` | `FW-AS` / current Lorentzian signature robustness | F. Saueressig & J. Wang, *Foliated asymptotically safe gravity: Lorentzian signature fluctuations from the Wick rotation*, Phys. Rev. D 111, 106007 (2025) | DOI `10.1103/PhysRevD.111.106007`; arXiv `2501.03752` | `SOURCE_BOUND` | Euclidean/Lorentzian flow agreement for studied two-point Einstein-Hilbert setup; not full unitarity/causality completion. |
+| `SRC-FCP19-AS-DEP-2014` | `FW-AS` / gravity-matter constraints | P. Donà, A. Eichhorn & R. Percacci, *Matter matters in asymptotically safe quantum gravity*, Phys. Rev. D 89, 084035 (2014) | DOI `10.1103/PhysRevD.89.084035`; arXiv `1311.2898` | `SOURCE_BOUND` | Approximation-dependent matter bounds and SM compatibility; compatibility is not derivation. |
+| `SRC-FCP19-AS-MPR-2016` | `FW-AS` / dynamical gravity-matter robustness | J. Meibohm, J. M. Pawlowski & M. Reichert, *Asymptotic safety of gravity-matter systems*, Phys. Rev. D 93, 084035 (2016) | DOI `10.1103/PhysRevD.93.084035`; arXiv `1510.07018` | `SOURCE_BOUND` | Dynamical setup finds broad matter stability within validity bounds; retained in tension with background-style matter restrictions. |
+| `SRC-FCP19-AS-NR-2006` | `FW-AS` / foundational review and continuum criteria | M. Niedermaier & M. Reuter, *The Asymptotic Safety Scenario in Quantum Gravity*, Living Rev. Relativ. 9, 5 (2006) | DOI `10.12942/lrr-2006-5`; arXiv `gr-qc/0610018` | `SOURCE_BOUND` | Review explicitly separates fixed-point evidence, global trajectories, and stability/positivity/unitarity requirements. |
+| `SRC-FCP19-AS-CRIT-2020` | `FW-AS` / critical modern synthesis | A. Bonanno et al., *Critical Reflections on Asymptotically Safe Gravity*, Front. Phys. 8, 269 (2020) | DOI `10.3389/fphy.2020.00269`; arXiv `2004.06810` | `SOURCE_BOUND` | Critical review of progress and unresolved technical/conceptual issues; prevents completion-by-consensus. |
+| `SRC-FCP19-AS-PR-2024` | `FW-AS` / dynamical-fluctuation synthesis | J. M. Pawlowski & M. Reichert, *Quantum Gravity from Dynamical Metric Fluctuations*, in *Handbook of Quantum Gravity* (2024) | DOI `10.1007/978-981-19-3079-9_17-1`; arXiv `2309.10785` | `SOURCE_BOUND` | Reviews background/fluctuation separation, vertices, UV–IR trajectories and Lorentzian spectral work; not an exact fixed-point theorem. |
+| `SRC-FCP19-AS-EICHHORN-2026` | `FW-AS` / current synthesis and phenomenology boundary | A. Eichhorn, *Asymptotically safe quantum gravity and its phenomenology — a review* (2026) | arXiv `2606.21522` | `SOURCE_BOUND_REVIEW_PREPRINT` | Current synthesis reports robust Euclidean evidence and advancing matter/Lorentzian/phenomenology work; review-level status judgments are not independent theorem authority. |
+| `SRC-FCP19-AS-GRS-2019` | `FW-AS` / scales, trajectories and predictivity | G. Gubitosi, C. Ripken & F. Saueressig, *Scales and Hierarchies in Asymptotically Safe Quantum Gravity: A Review*, Found. Phys. 49, 972–990 (2019) | DOI `10.1007/s10701-019-00263-1`; arXiv `1901.01731` | `SOURCE_BOUND` | Reviews finite-critical-surface predictivity and selected realistic trajectories; observed low-energy parameters remain calibration where used. |
+| `SRC-FCP19-AS-PLATANIA-2024` | `FW-AS` / black-hole phenomenology boundary | A. Platania, *Black Holes in Asymptotically Safe Gravity*, in *Handbook of Quantum Gravity* (2024), pp. 1031–1095 | DOI `10.1007/978-981-99-7681-2_24`; arXiv `2302.04272` | `SOURCE_BOUND` | Reviews RG-improved models, ambiguities and first-principles efforts; optional black-hole phenomenology is not a mandatory base-framework prediction. |
+
 ## FCP-1 source-window note
 
 `FCP-1` uses the null records above as a bounded baseline retrieved/checked on 2026-08-24. PDG is a living annual review; future FCP tasks must not silently substitute later editions into `FCP-1` without a versioned update.
@@ -168,6 +191,10 @@ FCP-10 external source additions: **0**. FCP-10 taxonomy-only supplemental sourc
 
 FCP-15 adds exactly **13** external `FW-LOOP` works, checked on **2026-08-24**: **7 foundational/primary** and **6 review/synthesis** works, including **1 phenomenology-boundary review**. It adds **zero direct empirical/observational source records**. The corpus source-binds one loop-quantum-gravity family with persistent internal `LOOP-CANON` and `LOOP-COVAR` labels, partial/conditional continuum results, and no framework-level empirical discriminator. It performs no cross-framework E1–E5 comparison.
 
+## FCP-19 source-window note
+
+FCP-19 adds exactly **18** external `FW-AS` works, checked on **2026-08-24**: **12 foundational/primary** and **6 review/synthesis** records, including **2 phenomenology-boundary review roles** and **zero direct empirical/observational source records**. The source window deliberately retains implementation-sensitive evidence on field parametrization and gravity–matter restrictions rather than deciding by source count. It source-binds one coherent Asymptotic Safety framework, distinguishes the UV fixed-point hypothesis from functional-RG implementations/truncations, and performs no cross-framework E1–E5 comparison.
+
 ## Branch-retention rule
 
 Scientific provenance must bind exact commits/blobs rather than rely on mutable branch names. A historical research branch may therefore be retired after its exact commit is reachable from the accepted `main` history and all material internal references identify immutable provenance.
@@ -180,7 +207,8 @@ Source-bound and ready:
 - `FW-GPTOPT`;
 - `FW-CQM`;
 - `FW-CST`;
-- `FW-LOOP`.
+- `FW-LOOP`;
+- `FW-AS`.
 
 Historical superseded umbrella:
 
@@ -190,7 +218,6 @@ Still pending/deferred source intake:
 
 - adjacent causal/order-theoretic approaches distinct from CST, with no single placeholder framework ID admitted;
 - tensor/information approaches;
-- asymptotic safety;
 - string/holography;
 - broader `FW-CAT` categorical/process/topos/effectus approaches.
 
