@@ -2,7 +2,7 @@
 
 ## Current state
 
-Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 appended the loop/null-GR control, and FCP-17 appends the current Reduced-NFC/loop controlled comparison without altering prior claim rows. The ledger now contains **51 durable rows through FCP-17**. **No overall numerical framework score or winner is inferred from these rows.**
+Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 and FCP-17 appended the loop/null-GR and Reduced-NFC/loop controls, and FCP-18 appends the closed-corpus program meta-audit without altering prior durable claim rows. The ledger now contains **55 durable rows through FCP-18**. **No overall numerical framework score or winner is inferred from these rows.**
 
 ## Claim record schema
 
@@ -974,6 +974,79 @@ Future claims should use the following fields:
 - `scope_ceiling`: `PASS_NON_GENERIC = 0`; Congruence `NO_SOURCE_BOUND_COUNTERPART`; Viability `WEAK_GENERIC`; Interface Sufficiency `NO_SOURCE_BOUND_COUNTERPART`; Globalization `FUNCTIONAL_ANALOGY`; Realization/Dynamics `DEFEATED_AS_CONVERGENCE`.
 - `status`: `ACCEPTED`
 - `supersedes`: `NONE`
+
+---
+
+# FCP-18 program meta-audit claims
+
+## FCP18-META-001 — No independently non-generic multi-framework recurrence survives the closed-corpus subtraction audit
+
+- `framework_ids`: `FW-NFC-RED`, `FW-AQFT`, `FW-GPTOPT`, `FW-CQM`, `FW-CST`, `FW-LOOP`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP2-KEYS-001`, `SRC-FCP2-EQUIV-001`, `SRC-FCP3-COMP-001`, `SRC-FCP3-NFC-BIND-001`, `SRC-FCP10-CST-BINDING-001`
+- `claim_text`: Across the nine completed pairwise comparison phases through FCP-17, broad recurrences in carriers, quotients, process structure, observables, locality, scale and globalization do not yield an independently motivated non-generic common structure at E1–E4 strength after generic-mathematics, lineage/reformulation, target-conditioned-recovery and empirical-inheritance controls; independent multi-framework strong and moderate convergence recurrence counts are both zero.
+- `assumptions`: the exact closed FCP corpus through FCP-17, nine-phase pairwise denominator, frozen FCP-2 independence/equivalence rules and anti-double-counting method of FCP-18.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` program-level meta-result.
+- `weaker_framework_test`: PASSES for the recurring generic shells; framework-specific residues remain scientifically substantive but do not coincide independently at the required strength across multiple distinct families.
+- `physical_bridge`: no multi-family common physical bridge survives at E1–E4 scope.
+- `empirical_binding`: independent framework-level pairwise E4 remains zero.
+- `falsification_condition`: a later source-qualified independently motivated non-generic E1/E2/E3/E4 relation recurring across at least two distinct framework families would supersede the bounded zero-recurrence conclusion.
+- `countermodels`: AQFT/QFT and CQM/QM lineage relations, CST/GR target-conditioned recovery, LOOP/GR target/lineage relations, and generic Reduced-NFC correspondences demonstrate why raw recurrence is insufficient.
+- `scope_ceiling`: closed-corpus result through FCP-17; `INDEPENDENTLY_NONGENERIC_MULTI_FRAMEWORK_RECURRENCE_COUNT = 0`; strong recurrence `0`; moderate recurrence `0`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP18-META-002 — Reduced NFC has not accumulated repeated independent positive support at the frozen comparative scope
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`, `FW-AQFT`, `FW-CST`, `FW-LOOP`
+- `source_ids`: `SRC-FCP3-NFC-BIND-001`, `SRC-FCP3-COMP-001`, `SRC-FCP2-KEYS-001`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: The four completed Reduced-NFC pairwise comparisons—against the null baseline, AQFT residue, CST residue and LOOP residue—each establish E1=E2=E3=E4=0 and independent strong/moderate convergence=0; surviving positive relations are E5 generic/functional, Interface Sufficiency repeatedly remains a discovery/no-counterpart question, and Dynamics/Realization repeatedly appear as asymmetries. Reduced NFC therefore does not satisfy the FCP-18 burden for repeated independent positive support.
+- `assumptions`: Reduced NFC exactly as frozen in FCP-3 and the explicit repeated-support burden requiring the same non-generic structure to recur independently in at least two comparator families at E1/E2/E3 or sufficiently specific E4 strength.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` program-level evidentiary result.
+- `weaker_framework_test`: E5 quotient, relational, interface and globalization similarities occur in weaker or unrelated frameworks and cannot discharge the non-generic support burden.
+- `physical_bridge`: no repeated two-sided Reduced-NFC physical bridge is source-qualified.
+- `empirical_binding`: `REDUCED_NFC_INDEPENDENT_E4 = 0` across the four completed comparisons.
+- `falsification_condition`: two or more independent comparator families source-qualifying the same non-generic Reduced-NFC structure at E1/E2/E3 or sufficiently specific E4 would reopen the result.
+- `countermodels`: repeated E5-only recurrence and repeated absence of a comparator FIS theorem show why repeated questions or vocabulary are not repeated support.
+- `scope_ceiling`: `HAS_REDUCED_NFC_ACCUMULATED_REPEATED_INDEPENDENT_SUPPORT = NO`; not a claim that Reduced NFC is false or incapable of future stronger evidence.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP18-META-003 — Framework-level empirical selection is the most universal current bottleneck
+
+- `framework_ids`: `FW-NULL-GRQFTSM`, `FW-NFC-RED`, `FW-AQFT`, `FW-GPTOPT`, `FW-CQM`, `FW-CST`, `FW-LOOP`
+- `source_ids`: `SRC-FCP2-KEYS-001`, `SRC-FCP2-EQUIV-001`, `SRC-FCP7-GPT-MAZUREK-2021`, `SRC-FCP8-GPT-RINGBAUER-2014`
+- `claim_text`: Independent framework-level E4 is zero across all nine completed pairwise phases; K10 has no independent pairwise framework discriminator in 9/9 phases, while empirical-inheritance control materially affects 8/9 and GPTOPT, CST and LOOP contain bounded/model-specific empirical structures that do not select the base framework. The null baseline's established empirical success remains genuine comparator evidence but is not transferable as independent competitor credit.
+- `assumptions`: frozen K10/E4 requirements and separation of direct framework-level prediction from inheritance, parameter fitting and optional/model-specific phenomenology.
+- `classification`: `OPEN`
+- `canonicity_level`: framework-level empirical selection remains unresolved across the competitor corpus.
+- `weaker_framework_test`: compatibility with tested GR/QM/QFT or exclusion of an optional phenomenological model does not uniquely select a base foundational framework.
+- `physical_bridge`: varies by framework; absence of a compulsory base-framework-to-detector chain is part of the bottleneck.
+- `empirical_binding`: null direct evidence is preserved; bounded GPTOPT/CST evidence is preserved at its actual scope; no independent framework-level pairwise E4 relation is promoted.
+- `falsification_condition`: an unavoidable framework-level prediction with comparator, observable, parameter treatment, uncertainty, data and decision rule satisfying K10 would supersede the corresponding open status.
+- `countermodels`: empirical inheritance through reformulation/recovery and optional phenomenology demonstrate why observed compatibility is insufficient for framework selection.
+- `scope_ceiling`: `INDEPENDENT_FRAMEWORK_LEVEL_E4_COUNT = 0`; `FRAMEWORK_LEVEL_EMPIRICAL_SELECTION = MOST_UNIVERSAL_CURRENT_BOTTLENECK`; dynamics and realization remain separate major burdens.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP18-META-004 — Frozen provenance and subtraction controls materially affect conclusions without establishing a governance defect
+
+- `framework_ids`: `FW-NULL-GRQFTSM`, `FW-NFC-RED`, `FW-AQFT`, `FW-GPTOPT`, `FW-CQM`, `FW-CST`, `FW-LOOP`
+- `source_ids`: `SRC-FCP2-KEYS-001`, `SRC-FCP2-EQUIV-001`, `SRC-FCP3-COMP-001`
+- `claim_text`: The closed-corpus self-audit finds that preregistered genericity, lineage/reformulation, target-conditioned-recovery, empirical-inheritance, countermodel and provenance controls repeatedly change or limit scientific interpretations while still permitting bounded stronger relations when their records are explicit. FCP-14's E2 downgrade is a direct self-correction case; FCP-5/FCP-11/FCP-13 show that E2/E3 are not categorically prohibited; FCP-16/FCP-17 preserve valid underlying structures while withholding stronger pairwise labels. No framework-neutral governance defect or unremediated prior scientific error is established.
+- `assumptions`: historical candidates/remediations are preserved as evidence, phase roles are separated before aggregation, and no numerical rescoring or retroactive rule change is performed.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: methodological record of the frozen FCP corpus; no claim of universal optimality.
+- `weaker_framework_test`: not a convergence claim; the relevant test is whether the controls discriminate among reformulation, genericity, target recovery, additional structure and open burdens rather than deleting all positive relations.
+- `physical_bridge`: `N/A` program-method result.
+- `empirical_binding`: `NONE`; no claim that methodological performance empirically validates a framework.
+- `falsification_condition`: discovery of a framework-neutral missing dimension, systematic contradiction, or rule that blocks source-qualified relations despite complete E1–E5 records would motivate a separately authorized governance review or remediation.
+- `countermodels`: qualified FCP-5/FCP-11/FCP-13 relations are negative witnesses against the claim that the rules automatically force all relations to E5/NONE.
+- `scope_ceiling`: `GOVERNANCE_REVIEW_CANDIDATE = 0`; `PRIOR_RESULT_REMEDIATION_CANDIDATE = 0`; no key weighting, ranking or governance v0.2 authorized.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
 
 ---
 
