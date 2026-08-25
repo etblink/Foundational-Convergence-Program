@@ -112,6 +112,24 @@ This register records authoritative source locations and provenance bindings use
 | `SRC-FCP9-CST-BASELINE-001` | `FW-CST` provenance / FCP-9 K1–K10 baseline | Internal FCP baseline artifact; no independent external authority | file `frameworks/causal_set/FCP9_CAUSAL_K1_K10_BASELINE_0_1_0.md`; exact commit `54e29392a18adfe612c3a2f5262eef472a8f66d2`; blob `dcac3f4f3f6ae63bddd1a1bed94c00342ae5b12c` | `REGISTERED_POINTER_ONLY` | Preserves R2/D2/E2, K1–K10 population, empirical-discriminator status, and the original eight-burden count including taxonomy. |
 | `SRC-FCP10-CST-BINDING-001` | `FW-CST` provenance / canonical taxonomy binding | Internal FCP taxonomy artifact derived only from frozen FCP-9 records | file `frameworks/causal_set/FCP10_CST_CANONICAL_FRAMEWORK_BINDING_0_1_0.md`; branch `research/fcp-10-causal-framework-split`; blob `787de09a267ee28429e8d80c11f237b7eacad3e8` | `REGISTERED_POINTER_ONLY` | Canonicalizes `FW-CST` without adding external scientific sources or changing FCP-9 K1–K10 conclusions. Exact enclosing candidate commit is recorded by FCP-10 qualification rather than self-referenced inside its own tree. |
 
+### FCP-15 — Loop / spin-network / spinfoam source layer
+
+| Source ID | Framework / role | Authority | Location | Status | Notes |
+|---|---|---|---|---|---|
+| `SRC-FCP15-LOOP-RS-1995` | `FW-LOOP` / `L1` spin-network basis | C. Rovelli & L. Smolin, *Spin networks and quantum gravity*, Phys. Rev. D 52, 5743–5759 (1995) | DOI `10.1103/PhysRevD.52.5743`; arXiv `gr-qc/9505006` | `SOURCE_BOUND` | Primary early spin-network/quantum-geometry source. Historical constraint-solution remarks are not promoted to current complete-dynamics status. |
+| `SRC-FCP15-LOOP-AL-1997` | `FW-LOOP` / `L1/K5` quantum area operator | A. Ashtekar & J. Lewandowski, *Quantum Theory of Geometry I: Area Operators*, Class. Quantum Grav. 14, A55–A81 (1997) | DOI `10.1088/0264-9381/14/1A/006`; arXiv `gr-qc/9602046` | `SOURCE_BOUND` | Primary discrete-spectrum theorem on the kinematical Hilbert space; not detector-level evidence for directly observed minimum area. |
+| `SRC-FCP15-LOOP-AL-2004` | `FW-LOOP` / canonical synthesis | A. Ashtekar & J. Lewandowski, *Background independent quantum gravity: A status report*, Class. Quantum Grav. 21, R53–R152 (2004) | DOI `10.1088/0264-9381/21/15/R01`; arXiv `gr-qc/0404018` | `SOURCE_BOUND` | Authoritative canonical review used to delimit quantum geometry, constraints, dynamics and realization burdens; not sole theorem authority. |
+| `SRC-FCP15-LOOP-QSD-1998` | `FW-LOOP` / `LOOP-CANON` canonical constraint dynamics | T. Thiemann, *Quantum Spin Dynamics (QSD)*, Class. Quantum Grav. 15, 839–873 (1998) | DOI `10.1088/0264-9381/15/4/011`; arXiv `gr-qc/9606089` | `SOURCE_BOUND` | Primary Hamiltonian/Wheeler–DeWitt constraint-operator construction; does not by itself settle unique dynamics, physical Hilbert space or all constraint-algebra questions. |
+| `SRC-FCP15-LOOP-TG-2024` | `FW-LOOP` / current canonical dynamics synthesis | T. Thiemann & K. Giesel, *Hamiltonian Theory: Dynamics*, in *Handbook of Quantum Gravity*, pp. 3777–3828 (2024) | DOI `10.1007/978-981-99-7681-2_97`; arXiv `2303.18172` | `SOURCE_BOUND` | Current structural review of quantum Einstein equations, physical-Hilbert interpretation, observables and physical Hamiltonian; not a theorem of uniquely completed dynamics. |
+| `SRC-FCP15-LOOP-AB-2021` | `FW-LOOP` / modern family synthesis | A. Ashtekar & E. Bianchi, *A Short Review of Loop Quantum Gravity*, Rep. Prog. Phys. 84, 042001 (2021) | DOI `10.1088/1361-6633/abed91`; arXiv `2104.04394` | `SOURCE_BOUND` | Modern synthesis used for canonical/covariant scope, Barbero–Immirzi ambiguity and dynamics-status ceiling. |
+| `SRC-FCP15-LOOP-EPRL-2008` | `FW-LOOP` / `LOOP-COVAR` finite-γ vertex and canonical bridge | J. Engle, E. Livine, R. Pereira & C. Rovelli, *LQG vertex with finite Immirzi parameter*, Nucl. Phys. B 799, 136–149 (2008) | DOI `10.1016/j.nuclphysb.2008.02.018`; arXiv `0711.0146` | `SOURCE_BOUND` | Primary named spinfoam model; fixed-graph boundary state/area-spectrum bridge to canonical LQG. Model variants and fixed-triangulation scope block whole-family identity. |
+| `SRC-FCP15-LOOP-PEREZ-2013` | `FW-LOOP` / `LOOP-COVAR` spinfoam synthesis | A. Perez, *The Spin-Foam Approach to Quantum Gravity*, Living Rev. Relativ. 16, 3 (2013) | DOI `10.12942/lrr-2013-3`; arXiv `1205.2019` | `SOURCE_BOUND` | Authoritative review of 4D spinfoam construction and open dynamics issues; source-binds covariant sector without declaring one completed unique dynamics. |
+| `SRC-FCP15-LOOP-BARRETT-2010` | `FW-LOOP` / `L4` Lorentzian spinfoam asymptotics | J. W. Barrett, R. J. Dowdall, W. J. Fairbairn, F. Hellmann & R. Pereira, *Lorentzian spin foam amplitudes: graphical calculus and asymptotics*, Class. Quantum Grav. 27, 165009 (2010) | DOI `10.1088/0264-9381/27/16/165009`; arXiv `0907.2440` | `SOURCE_BOUND` | Large-representation 4-simplex result yielding Lorentzian Regge-action phases for suitable boundary data; not full continuum GR recovery. |
+| `SRC-FCP15-LOOP-BMP-2009` | `FW-LOOP` / `L4` metric correlations | E. Bianchi, E. Magliaro & C. Perini, *LQG propagator from the new spin foams*, Nucl. Phys. B 822, 245–269 (2009) | DOI `10.1016/j.nuclphysb.2009.07.016`; arXiv `0905.4082` | `SOURCE_BOUND` | Lowest vertex-expansion / leading large-spin metric-correlation calculation compared with perturbative graviton behavior; not complete low-energy limit. |
+| `SRC-FCP15-LOOP-STEINHAUS-2020` | `FW-LOOP` / `L4/K7/K8` coarse graining and RG | S. Steinhaus, *Coarse Graining Spin Foam Quantum Gravity—A Review*, Front. Phys. 8, 295 (2020) | DOI `10.3389/fphy.2020.00295`; arXiv `2007.01315` | `SOURCE_BOUND` | Reviews background-independent boundary-data coarse graining; uniqueness, universality, full 4D coarse graining and continuum questions remain open. |
+| `SRC-FCP15-LOOP-BCMR-2026` | `FW-LOOP` / `L4/K7/K8` current continuum-limit structure | M. Bruno, E. Colafranceschi, F. M. Mele & C. Rovelli, *The Structure of the Continuum Limit of Spin Foams*, Phys. Rev. D, accepted 5 Aug 2026 | DOI `10.1103/7493-9nb7`; arXiv `2603.16999` | `SOURCE_BOUND` | Current primary structural paper: strong-limit obstruction and weaker distributional/rigging-map construction under axioms; does not prove physical 4D EPRL continuum GR recovery. |
+| `SRC-FCP15-LOOP-GHM-2012` | `FW-LOOP` / `L6/K10` phenomenology boundary | F. Girelli, F. Hinterleitner & S. A. Major, *Loop Quantum Gravity Phenomenology: Linking Loops to Observational Physics*, SIGMA 8, 098 (2012) | DOI `10.3842/SIGMA.2012.098`; arXiv `1210.1485` | `SOURCE_BOUND` | Reviews proposed/constrained Planck-scale phenomenology and explicitly preserves the incomplete link from fundamental LQG to specific phenomenological models; not a direct framework empirical record. |
+
 ## FCP-1 source-window note
 
 `FCP-1` uses the null records above as a bounded baseline retrieved/checked on 2026-08-24. PDG is a living annual review; future FCP tasks must not silently substitute later editions into `FCP-1` without a versioned update.
@@ -146,6 +164,10 @@ FCP-9 adds **16** external CST/order records, checked on **2026-08-24**: **14 fo
 
 FCP-10 external source additions: **0**. FCP-10 taxonomy-only supplemental source additions: **0**. The FCP-9 16-source corpus remains the authoritative external source window for canonical `FW-CST`. FCP-10 changes framework identity/provenance only: historical `FW-CAUSAL` is superseded, `FW-CST` is source-bound and ready, and the unspecified adjacent causal/order remainder is deferred pending separate source intake.
 
+## FCP-15 source-window note
+
+FCP-15 adds exactly **13** external `FW-LOOP` works, checked on **2026-08-24**: **7 foundational/primary** and **6 review/synthesis** works, including **1 phenomenology-boundary review**. It adds **zero direct empirical/observational source records**. The corpus source-binds one loop-quantum-gravity family with persistent internal `LOOP-CANON` and `LOOP-COVAR` labels, partial/conditional continuum results, and no framework-level empirical discriminator. It performs no cross-framework E1–E5 comparison.
+
 ## Branch-retention rule
 
 Scientific provenance must bind exact commits/blobs rather than rely on mutable branch names. A historical research branch may therefore be retired after its exact commit is reachable from the accepted `main` history and all material internal references identify immutable provenance.
@@ -157,7 +179,8 @@ Source-bound and ready:
 - `FW-AQFT`;
 - `FW-GPTOPT`;
 - `FW-CQM`;
-- `FW-CST`.
+- `FW-CST`;
+- `FW-LOOP`.
 
 Historical superseded umbrella:
 
@@ -166,7 +189,6 @@ Historical superseded umbrella:
 Still pending/deferred source intake:
 
 - adjacent causal/order-theoretic approaches distinct from CST, with no single placeholder framework ID admitted;
-- loop/spinfoam approaches;
 - tensor/information approaches;
 - asymptotic safety;
 - string/holography;

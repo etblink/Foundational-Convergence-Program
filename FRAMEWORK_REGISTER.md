@@ -28,7 +28,7 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 | `FW-CQM` | Categorical quantum mechanics / quantum process theories | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-13 null/QM control complete: K1/K4/K9 primarily reformulation, K3/K8 structural refinement, K5 extension-dependent; bounded E2 model relations but zero independent strong/moderate convergence and no framework-level empirical discriminator; retained residue is process-first plus explicitly optional dagger/compact/classical/CPM and probabilistic-bridge structure |
 | `FW-CAUSAL` | Causal-set / order-theoretic approaches | historical causal/order umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-9/FCP-10 found the literal umbrella scientifically over-broad; causal set theory proper is now `FW-CST`; unspecified adjacent causal/order approaches remain deferred pending separate source intake |
 | `FW-CST` | Causal Set Theory | source-bound discrete causal/order framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-12 NFC comparison complete after FCP-11 null/GR subtraction: no E1–E4 NFC relation survives; CST causal/discrete carrier, manifold-selection burden and partial realization lack source-bound Reduced-NFC counterparts; R2/D2/E2 and no-framework-discriminator status unchanged |
-| `FW-LOOP` | Loop / spin-network / spinfoam approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
+| `FW-LOOP` | Loop / spin-network / spinfoam approaches | source-bound quantum-gravity comparator family | `SOURCE_BOUND_READY` | FCP-15 source intake complete: one top-level family retained with persistent `LOOP-CANON` and `LOOP-COVAR` labels; mature kinematical quantum geometry, formulation-dependent/open framework-wide dynamics, partial semiclassical/continuum bridges, and no framework-level empirical discriminator |
 | `FW-TENSOR` | Tensor-network / information-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-AS` | Asymptotic safety | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-STRING` | String-theoretic / holographic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
@@ -251,6 +251,52 @@ Bounded verdict:
 > **CQM IS A LINEAGE-RELATED PROCESS/COMPOSITIONAL REFORMULATION AND STRUCTURAL REFINEMENT OF ORDINARY QUANTUM THEORY AT CURRENT SOURCE SCOPE. ITS STRONG E2 MODEL RELATIONS ARE SCIENTIFICALLY REAL BUT NOT INDEPENDENT CONVERGENCE; ITS RETAINED RESIDUE IS STRUCTURAL/OPTIONAL-EXTENSION LEVEL, WITH NO FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR.**
 
 The highest-information next comparison is CQM against already source-bound GPTOPT because FCP-4 explicitly preserved their separation while the CQM source corpus contains a categorical-probabilistic bridge.
+
+## FCP-15 loop-family source intake
+
+FCP-15 source-binds the previously unaudited loop / spin-network / spinfoam family under one top-level framework ID while preserving internal formulation differences.
+
+Taxonomy:
+
+`FCP15_LOOP_TAXONOMY = OUTCOME_B_INTERNAL_SUBFRAMEWORK_DISTINCTION`.
+
+Persistent internal labels:
+
+- `LOOP-CANON` — canonical holonomy-flux / spin-network / constraint formulation;
+- `LOOP-COVAR` — covariant/spinfoam amplitude formulation.
+
+Source-bound common/core structure:
+
+- background-independent connection/holonomy-flux quantum geometry in the canonical lineage;
+- spin-network kinematical/boundary-state structure;
+- geometric operators with discrete spectra at kinematical scope;
+- nontrivial canonical constraint dynamics programs;
+- nontrivial covariant spinfoam amplitude models;
+- EPRL fixed-graph/boundary-space bridge between canonical and covariant sectors;
+- partial semiclassical/continuum bridges including Regge asymptotics, low-order metric correlations and coarse-graining/continuum-limit programs.
+
+Main burdens:
+
+- physical-state/physical-inner-product completion;
+- unique or universal dynamics selection;
+- whole-sector canonical/covariant relation;
+- regulator/two-complex/refinement independence;
+- continuum 3+1 GR + matter recovery;
+- physical-observable and detector calibration;
+- Barbero–Immirzi parameter calibration/selection;
+- framework-level empirical discrimination.
+
+FCP-15 records:
+
+- `FRAMEWORK_SPLIT_CANDIDATE = 0`;
+- `FRAMEWORK_EXTENSION_CANDIDATE = 0`;
+- `KEY_EXTENSION_CANDIDATE = 0`;
+- `NO_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR_IDENTIFIED`;
+- no cross-framework E1–E5 classification.
+
+Bounded verdict:
+
+> **`FW-LOOP` IS SOURCE-BOUND AS ONE LOOP-QUANTUM-GRAVITY FAMILY WITH PERSISTENT CANONICAL/COVARIANT SUBLABELS. ITS KINEMATICAL QUANTUM GEOMETRY IS MATURE, WHILE FRAMEWORK-WIDE DYNAMICS, CONTINUUM/GR RECOVERY, COMPLETE PHYSICAL REALIZATION AND EMPIRICAL DISCRIMINATION REMAIN OPEN OR PARTIAL AT CURRENT SOURCE SCOPE.**
 
 ## Admission and credit rules
 
