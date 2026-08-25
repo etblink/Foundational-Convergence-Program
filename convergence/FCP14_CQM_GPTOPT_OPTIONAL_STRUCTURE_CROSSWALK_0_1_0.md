@@ -1,166 +1,97 @@
 # FCP-14 — CQM/GPTOPT Optional-Structure Crosswalk
 
 **Version:** 0.1.0  
-**Status:** OPTIONAL-STRUCTURE CROSSWALK CANDIDATE
+**Status:** OPTIONAL-STRUCTURE CROSSWALK CANDIDATE — E2 QUALIFICATION REMEDIATED
 
 ## 0. Rule
 
-Optional structures are compared only at their exact source-bound hypothesis scope. No optional structure is back-projected into minimal CQM or base GPTOPT, and no cross-framework equivalence is inferred from functional resemblance alone.
+Optional structures are compared only at exact source-bound scope. No optional structure is back-projected into minimal CQM or base GPTOPT. E1/E2 is not assigned without an explicit frozen map/functor.
 
 ## 1. Dagger versus reversibility
 
-### CQM side
+**CQM:** optional dagger.  
+**GPTOPT:** reversible transformations are model data; continuous reversibility is a named reconstruction principle.
 
-`CQM-X1`: optional dagger structure. In ordinary quantum models it can represent adjoint-like structure and supports dagger-specific categorical theorems.
+No framework-wide implication in either direction is source-bound. Ordinary unitary examples are quantum-inherited common targets.
 
-### GPTOPT side
-
-Reversible transformations are model data; continuous reversibility is an additional reconstruction principle in named lineages such as Hardy/Müller.
-
-### Crosswalk
-
-- exact implication dagger -> physical reversibility: **not source-bound framework-wide**;
-- exact implication reversible transformation -> dagger: **not source-bound framework-wide**;
-- continuous reversibility is a state-space/reconstruction condition, not a generic dagger axiom;
-- ordinary unitary examples are quantum-inherited common targets.
-
-**Strongest FCP-14 status:** `E5_FUNCTIONAL_ANALOGY` / `EXTENSION_DEPENDENT`.
+**Status:** E5 functional analogy / extension-dependent.
 
 > **DAGGER != PHYSICAL REVERSIBILITY.**
 
 ## 2. Compactness versus purification/dilation
 
-### CQM side
+**CQM:** optional compact structure, cups/caps/map-state duality.  
+**GPTOPT:** optional purification; reversible dilation follows conditionally in named lineage.
 
-`CQM-X1`: optional compact structure, including cups/caps, map-state duality and protocol/entanglement topology under named assumptions.
-
-### GPTOPT side
-
-Purification is an added principle; reversible dilation follows conditionally in the named purification lineage with ancillary hypotheses.
-
-### Crosswalk
-
-- compact closure -> GPTOPT purification: **not established**;
-- purification -> compact closure: **not established**;
-- ordinary quantum purification/map-state correspondences are common-target inheritance where represented;
-- no framework-wide bridge equates the structures.
+- compactness -> purification: not established;
+- purification -> compactness: not established;
+- ordinary quantum common examples: inherited.
 
 **Status:** `NO_SOURCE_BOUND_EQUIVALENCE`.
 
 > **COMPACTNESS != PURIFICATION.**
 
-## 3. Frobenius/classical structures versus GPTOPT classical systems
+## 3. Frobenius/classical versus GPTOPT classical systems
 
-### CQM side
+CQM Frobenius/classical structures are optional algebraic structure. GPTOPT classical systems/simplex models belong to its broader model family.
 
-`CQM-X2`: optional Frobenius/classical structures used for classical data, observable-like structure and classical/quantum interaction.
+No whole-family exact relation is frozen.
 
-### GPTOPT side
-
-Classical probabilistic systems are admitted models; distinguishability, effects/measurements and convex simplex structure arise in standard classical GPT models.
-
-### Crosswalk
-
-- functional correspondence between categorical classical data and operational classical systems: **source-plausible but not whole-family exact**;
-- a Frobenius algebra is additional algebraic structure, not the definition of every GPTOPT classical model;
-- classical simplex models need not import CQM Frobenius machinery.
-
-**Strongest framework-level status:** E5; named model relations may be stronger but remain model-specific.
+**Status:** E5/model-specific functional relation only.
 
 ## 4. CPM/mixed-state construction versus GPTOPT transformations
 
-### CQM side
+CQM CPM is optional. GPTOPT transformations/channels are base framework/model data. Ordinary quantum CP maps are a common quantum target, not direct pairwise E2 evidence.
 
-`CQM-X3`: optional categorical construction for mixed/completely-positive processes.
+**Status:** quantum-inherited overlap + material whole-family divergence; no pairwise E2 assigned.
 
-### GPTOPT side
+## 5. Categorical probabilistic bridge
 
-Transformations/channels/events are base framework/model data; ordinary quantum CP maps occur in the `G4` quantum embedding, while broader operational models admit other transformation sets.
+`CQM-X4` / `SRC-FCP4-CQM-GS-2018` is source-bound as a bridge demonstrating translatable process/probabilistic structure and preserving important differences.
 
-### Crosswalk
+FCP-13 explicitly left its CQM↔GPTOPT E-class unassigned. The closed FCP packet does not freeze enough exact source-defined map data to state a domain/codomain functor and preservation theorem satisfying the frozen E2 rule.
 
-- ordinary quantum CP map relation: bounded E2, `QUANTUM_INHERITED_OVERLAP`;
-- CPM construction = all GPTOPT transformations: **false/not source-bound**;
-- GPTOPT transformation set selection remains independent model data.
+Therefore:
 
-**Status:** quantum-inherited E2 subrelation plus material whole-family divergence.
+- bridge existence: `SOURCE_DERIVED`;
+- bridge dependence: `BRIDGE_MEDIATED = 1`;
+- qualified E-class: E5 maximum;
+- `E2_NOT_SOURCE_QUALIFIABLE_AT_CURRENT_PACKET`;
+- full/faithful/essentially-surjective whole-family relation: not established;
+- whole-family identity: not established.
 
-## 5. Probabilistic enrichment / categorical probabilistic bridge
-
-### CQM side
-
-`CQM-X4`: source-bound categorical probabilistic bridge; probabilistic enrichment is not minimal CQM.
-
-### GPTOPT side
-
-Outcome probabilities, effects/tests and operational process structure are core/near-core.
-
-### Crosswalk
-
-Restricted bridge map at source-bound scope:
-
-- categorical system -> operational system;
-- state/effect processes -> operational states/effects;
-- process morphisms -> operational events/transformations;
-- sequential/parallel composition -> circuit/process composition;
-- declared scalar/probability evaluation -> operational outcome probability.
-
-Preserved: typed composition and probability semantics under bridge hypotheses.
-
-Not established:
-
-- full or faithful whole-family equivalence;
-- essential surjectivity;
-- all GPT convex/cone structure from minimal CQM;
-- all CQM dagger/compact structure from GPTOPT;
-- physical calibration.
-
-**Status:** restricted `E2_FUNCTORIAL_REPRESENTATION`, `BRIDGE_MEDIATED = 1`, independent convergence = 0.
+This ceiling reflects FCP provenance discipline, not an external judgment about what the GS-2018 paper might prove beyond the frozen intake record.
 
 ## 6. Local tomography versus categorical coherence
 
-### CQM side
+CQM coherence governs formal composition. GPTOPT local tomography is an optional principle about determination of global state representations from local statistics. GPTOPT composite nonuniqueness persists even under local tomography.
 
-Monoidal/coherence structure governs consistency of composition and diagrams.
-
-### GPTOPT side
-
-Local tomography is an optional principle saying local measurement statistics determine the global state representation at the declared scope.
-
-### Crosswalk
-
-No source-bound equivalence is established. FCP-7 explicitly preserves composite nonuniqueness even when local tomography is assumed.
-
-**Status:** no positive E1–E4 relation.
+**Status:** no E1–E4 relation; at most loose E5 functional comparison.
 
 > **LOCAL TOMOGRAPHY != CATEGORICAL COHERENCE.**
 
-## 7. Continuous reversibility versus CQM symmetry structure
+## 7. Continuous reversibility versus CQM symmetry
 
-Continuous reversibility in GPT reconstruction lineages is an added physical/mathematical state-space symmetry principle. CQM may represent reversible/unitary processes in named models, but the frozen corpus does not establish continuous reversibility as a minimal CQM axiom or consequence.
+Continuous reversibility is an added GPT reconstruction/state-space symmetry principle. Reversible/unitary processes can occur in CQM models, but no minimal-CQM equivalence is source-bound.
 
-**Status:** extension-dependent functional relation only.
+**Status:** E5 only.
 
-## 8. Reconstruction-axiom firewall
+## 8. Reconstruction firewall
 
-The following inference is prohibited:
+Prohibited inference:
 
-`CQM dagger/compact/Frobenius/CPM`
-`=`
-`GPTOPT purification/local tomography/continuous reversibility/subspace assumptions`.
+`CQM dagger/compact/Frobenius/CPM = GPTOPT purification/local tomography/continuous reversibility/subspace assumptions`.
 
-Likewise, no successful GPTOPT quantum reconstruction may be used to back-project its selecting axioms into CQM merely because the reconstructed target has a CQM representation.
+Likewise, a GPTOPT reconstruction of quantum theory does not back-project its selecting axioms into CQM because the reconstructed target has a CQM representation.
 
-## 9. Optional-structure outcome
+## 9. Crosswalk accounting
 
-Crosswalk rows:
-
-1. dagger/reversibility — E5 only;
+1. dagger/reversibility — E5;
 2. compactness/purification — no source-bound equivalence;
 3. Frobenius/classical — E5/model-specific;
-4. CPM/transformations — quantum-inherited E2 in quantum submodel only;
-5. categorical probabilistic bridge — restricted bridge-mediated E2;
-6. local tomography/coherence — no positive relation;
-7. continuous reversibility/CQM symmetry — E5 only.
+4. CPM/transformations — inherited common-target overlap, no direct E2;
+5. categorical probabilistic bridge — source-derived bridge, E5 maximum under frozen packet;
+6. local tomography/coherence — no E1–E4; at most E5;
+7. continuous reversibility/CQM symmetry — E5.
 
-No optional-structure relation establishes independent strong or moderate convergence.
+Independent strong/moderate convergence from optional structures: **0**.

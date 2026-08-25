@@ -1,182 +1,121 @@
 # FCP-14 — CQM/GPTOPT Countermodels and Anti-Laundering Tests
 
 **Version:** 0.1.0  
-**Status:** COUNTERMODEL PACKET CANDIDATE
+**Status:** COUNTERMODEL PACKET CANDIDATE — E2 QUALIFICATION REMEDIATED
 
 ## 0. Purpose
 
-These witnesses block stronger CQM/GPTOPT claims while preserving genuine restricted bridge relations. A countermodel defeats necessity or uniqueness; it does not by itself select a replacement framework.
+These witnesses block stronger CQM/GPTOPT claims while preserving the genuine source-bound fact that a categorical-probabilistic bridge exists. A countermodel defeats necessity/uniqueness; it does not select a replacement framework.
 
 ## C1 — Generic symmetric-monoidal process witness
 
-**Witness:** nonquantum/classical process theories can support systems, processes, sequential composition and parallel/monoidal composition.
+Classical/nonquantum process theories can support systems, processes, sequential and parallel composition.
 
-**Defeats:**
-
-> “Because CQM and GPTOPT both compose processes, the shared process structure is non-generic convergence.”
-
-**Disposition:** bare K3/K8 process composition is `GENERIC_MATHEMATICS`.
+**Defeats:** bare process composition as distinctive convergence.
 
 ## C2 — Classical stochastic/operational witness
 
-**Witness:** classical probabilistic/stochastic theories support states, effects, transformations and outcome probabilities with sequential/parallel composition.
+Classical stochastic theories support states, effects, processes and probabilities.
 
-**Defeats:**
-
-> “Shared operational process/probability structure uniquely indicates quantum foundations.”
-
-**Disposition:** probabilistic process structure alone does not select quantum theory or CQM.
+**Defeats:** shared operational process structure as uniquely quantum/foundational.
 
 ## C3 — Quantum common-target witness
 
-**Witness:** the same ordinary quantum state/channel/effect/composite can be represented in a CQM quantum model and in GPTOPT's `G4` quantum embedding.
+The same ordinary quantum model can be represented in CQM and in GPTOPT's quantum embedding.
 
-**Defeats:**
-
-> “Exact agreement on ordinary quantum structure is independent CQM/GPTOPT convergence.”
-
-**Disposition:** `QUANTUM_INHERITED_OVERLAP`; zero independent convergence credit.
+**Defeats:** common quantum agreement as independent pairwise convergence. FCP-14 does not infer a direct E2 map by composing separate relations through the common target.
 
 ## C4 — CQM toy/non-Hilbert witness
 
-**Witness:** the frozen CQM intake explicitly records toy/non-Hilbert categorical models.
-
-**Defeats:**
-
-> “Minimal categorical/process structure uniquely determines ordinary quantum mechanics.”
-
-**Disposition:** categorical shell is broader than ordinary quantum physics.
+Substantial categorical/process structure need not uniquely determine ordinary quantum theory.
 
 ## C5 — GPTOPT postquantum witness
 
-**Witness:** Barrett/boxworld/PR-type and later FCP-8 postquantum possibilities inhabit the bounded GPTOPT theory space.
+GPTOPT admits source-bound nonquantum/postquantum possibilities.
 
-**Defeats:**
-
-> “The whole GPTOPT family is identical to quantum-targeted CQM because both can express quantum processes.”
-
-**Disposition:** allowed model classes materially differ; GPTOPT contains source-bound broader-than-quantum possibilities.
+**Defeats:** whole-family identity with quantum-targeted CQM structure.
 
 ## C6 — Composite nonuniqueness witness
 
-**Witness:** fixed local GPT state spaces can admit inequivalent minimal, maximal and intermediate composites; local tomography does not uniquely select the quantum composite.
+Fixed local GPT spaces can support inequivalent minimal/maximal/intermediate composites; local tomography does not uniquely select the quantum composite.
 
-**Defeats:**
-
-> “A monoidal product or local tomography uniquely determines the physical composite state space.”
-
-**Disposition:** `COMPOSITE_SYSTEM_SELECTION_OPEN`; K8 material divergence.
+**Defeats:** monoidal composition or local tomography as unique physical composite selector.
 
 ## C7 — Allowed-process/no-dynamics witness
 
-**Witness:** both framework families can contain many licensed processes without a rule selecting which actually occurs.
+Both families may contain many allowed processes without a law selecting actual histories.
 
-**Defeats:** K3 -> K4 promotion.
-
-**Disposition:** shared absence of a universal selector earns no convergence credit.
+**Defeats:** K3-to-K4 promotion.
 
 ## C8 — Operational-equivalence/equality witness
 
-**Witness:** categorical equality is fixed by equations/coherence of a mathematical presentation, while GPTOPT operational equivalence is relative to outcome probabilities against an admitted effect/test family.
+Categorical equality is determined by equations/coherence; operational equivalence is relative to probabilities against admitted tests/effects.
 
-**Defeats:**
-
-> “Categorical equality is automatically the same as operational indistinguishability.”
-
-**Disposition:** K2 at most E5 without an explicit separation/completeness theorem.
+**Defeats:** automatic K2 identity.
 
 ## C9 — No-signalling/parallel-composition witness
 
-**Witness:** parallel composition can exist without a no-signalling principle, and no-signalling can be formulated without deriving Lorentzian spacetime geometry.
+Parallel composition can exist without no-signalling/Lorentzian semantics; no-signalling does not derive spacetime geometry.
 
-**Defeats:**
+## C10 — Bridge-existence/E2 qualification witness
 
-> “Monoidal parallelism, no-signalling, operational causality and relativistic causality are one structure.”
+`SRC-FCP4-CQM-GS-2018` is source-bound as a bridge documenting translatable process/probabilistic structure and important differences. FCP-13 deliberately assigned no CQM↔GPTOPT E-class.
 
-**Disposition:** no positive K6 pairwise relation established.
+**Defeats two distinct overclaims:**
 
-## C10 — Bridge-mediated witness
+1. bridge existence -> independent convergence;
+2. bridge existence summary -> E2 without an explicit map/functor frozen in the bounded packet.
 
-**Witness:** `SRC-FCP4-CQM-GS-2018` was explicitly constructed to analyze/connect categorical quantum and operational probabilistic traditions.
-
-**Defeats:**
-
-> “A strong explicit bridge is evidence that two historically connected formalisms independently rediscovered the same structure.”
-
-**Disposition:** restricted E2 may be real; `BRIDGE_MEDIATED = 1`; independence fails.
+**Disposition:** `SOURCE_DERIVED / BRIDGE_MEDIATED`; current FCP-14 E-class at most E5; `E2_NOT_SOURCE_QUALIFIABLE_AT_CURRENT_PACKET`.
 
 ## C11 — Empirical-narrowing witness
 
-**Witness:** FCP-7/FCP-8 experiments constrain bounded GPT/postquantum regions to L2 while neither selecting all GPTOPT nor distinguishing CQM as a framework family.
+FCP-7/FCP-8 constrain bounded GPT/postquantum regions to L2 without selecting all GPTOPT or CQM.
 
-**Defeats:**
-
-> “Experimental rejection of some postquantum models empirically selects CQM over GPTOPT.”
-
-**Disposition:** no pairwise E4.
+**Defeats:** rejection of some generalized models as pairwise CQM empirical selection.
 
 ## C12 — Reconstruction-axiom witness
 
-**Witness:** Hardy continuity/reversibility, purification and Müller local-tomography/continuous-reversibility/subspace packages are explicitly optional, lineage-specific selection principles.
+Hardy continuity/reversibility, purification and Müller local-tomography/continuous-reversibility/subspace packages are optional lineage-specific assumptions.
 
-**Defeats:**
-
-> “Because reconstructed quantum theory admits a CQM representation, GPTOPT reconstruction axioms are also minimal CQM axioms.”
-
-**Disposition:** axiom pooling prohibited.
+**Defeats:** back-projecting GPTOPT reconstruction axioms into CQM because the target quantum theory has a CQM representation.
 
 ## C13 — Dagger/reversibility separation witness
 
-**Witness:** dagger is an optional categorical operation; physical reversible transformations/continuous reversibility are separate operational/model/reconstruction notions.
-
-**Defeats:** framework-wide dagger = reversibility identification absent an exact theorem.
+Dagger is optional categorical structure; physical reversibility/continuous reversibility are distinct operational/model/reconstruction notions.
 
 ## C14 — Compactness/purification separation witness
 
-**Witness:** compact closure and purification are separately optional structures with no source-bound implication in either direction at framework level.
-
-**Defeats:** compactness = purification laundering.
+Compact closure and purification are separately optional and no source-bound implication is frozen in either direction.
 
 ## C15 — Probability-enrichment witness
 
-**Witness:** minimal CQM source intake explicitly lists probabilistic enrichment as optional, while GPTOPT core includes outcome probabilities and standard GPT convex mixing.
+Minimal CQM source intake lists probabilistic enrichment as optional, while GPTOPT core contains outcome probabilities and standard GPT mixing.
 
-**Defeats:**
-
-> “Minimal CQM already contains the full probabilistic/convex GPTOPT core.”
+**Defeats:** minimal CQM = full GPTOPT probabilistic core.
 
 ## C16 — Monoidal-product/composite-cone witness
 
-**Witness:** a monoidal product supplies formal composition while GPTOPT still requires selection of which composite states/effects are physically admitted.
-
-**Defeats:** formal composition -> physical composite selection.
+Formal monoidal composition does not determine which bipartite states/effects are physically admitted.
 
 ## C17 — Operational-semantics/calibration witness
 
-**Witness:** GPTOPT has native laboratory-facing preparation/effect/process/probability semantics but still requires concrete physical model/calibration; CQM gains similar semantics through selected model/bridge instantiations.
-
-**Defeats:** either framework possessing complete K9 calibration by abstract structure alone.
+GPTOPT has native laboratory-facing operational semantics but still lacks complete framework-wide calibration; CQM obtains comparable semantics only through selected models/enrichment.
 
 ## C18 — Whole-family containment witness
 
-**Witness:** the frozen corpus explicitly documents a bridge while preserving important differences; GPTOPT includes broad postquantum convex theory space, whereas CQM carries quantum-motivated dagger/compact/etc. structures not imposed on base GPTOPT.
+The frozen corpus records a bridge plus important differences; GPTOPT includes broad postquantum convex theory space, while CQM carries optional dagger/compact/classical/CPM structures not imposed on base GPTOPT.
 
-**Defeats:**
+**Defeats:** `all CQM = GPTOPT` and `all GPTOPT = CQM`.
 
-> “The bridge proves all CQM is GPTOPT”
-
-and
-
-> “The bridge proves all GPTOPT is CQM.”
-
-**Disposition:** `INTERSECTING_MODEL_FAMILIES_WITH_BRIDGE_SUBFRAMEWORK; NO_WHOLE_FAMILY_CONTAINMENT_THEOREM_SOURCE_BOUND`.
-
-## 1. Countermodel summary
+## 1. Summary
 
 The packet blocks:
 
 - generic-process uniqueness;
-- quantum-target double counting;
+- common-quantum double counting;
+- bridge-to-E2 promotion without an explicit frozen map;
+- bridge-to-independence promotion;
 - K3-to-K4 promotion;
 - equality/equivalence laundering;
 - causal-concept laundering;
@@ -185,7 +124,6 @@ The packet blocks:
 - monoidal/composite-selection laundering;
 - reconstruction-axiom pooling;
 - empirical double counting;
-- bridge-to-independence promotion;
 - whole-family identity claims.
 
-No countermodel invalidates the restricted categorical-probabilistic bridge itself. It constrains the bridge to its proper scope.
+The source-bound bridge itself is preserved as a legitimate result at its provenance ceiling.

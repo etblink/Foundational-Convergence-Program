@@ -2,7 +2,7 @@
 
 **Version:** 0.1.0  
 **Frameworks:** `FW-CQM` vs. `FW-GPTOPT`  
-**Status:** COMPARATIVE BINDING CANDIDATE  
+**Status:** COMPARATIVE BINDING CANDIDATE — E2 QUALIFICATION REMEDIATED  
 **Exact base commit:** `6600e0e086378c72096dd6022db98ff7b9d21629`  
 **Exact base tree:** `c5a3259b57a854e25949e7d129bd3f2a89b57fe1`
 
@@ -14,146 +14,119 @@ Principal question:
 
 > **After subtracting generic process/category/probability mathematics, ordinary-quantum inheritance, explicit bridge constructions, optional CQM structures, optional GPTOPT reconstruction assumptions and model-specific realizations, what independently source-bound structural relationship—if any—remains between `FW-CQM` and `FW-GPTOPT`?**
 
-This packet does not perform source intake, does not compare Reduced NFC or AQFT, does not merge framework IDs and does not revise frozen FCP governance.
+No source intake, Reduced-NFC/AQFT/CST comparison, framework-ID mutation or frozen-governance revision is authorized.
 
 ## 1. Frozen governance
 
-Required immutable artifacts:
+Immutable:
 
-- `comparison_keys/FCP_COMPARISON_KEYS_0_1_0.md` — blob `b7ab7f547fa875bd8e63fbb8343f571d7f9fdc00`;
-- `comparison_keys/FCP_EQUIVALENCE_AND_CONVERGENCE_RULES_0_1_0.md` — blob `d7ef04becaf26c0f58500aab690e7f0c8adb9998`.
+- comparison keys blob `b7ab7f547fa875bd8e63fbb8343f571d7f9fdc00`;
+- equivalence/convergence rules blob `d7ef04becaf26c0f58500aab690e7f0c8adb9998`.
 
-E1/E2 requires an explicit map/representation with declared domain, codomain and preserved structure. Generic mathematics, common quantum targets and bridge constructions do not receive independent convergence credit merely because the correspondence is mathematically strong.
+FCP-2 requires an explicit map/functor/representation with declared domain, codomain and preserved structure before E1/E2 is assigned. A source-bound statement that two formalisms are bridged or translatable is not enough by itself to reconstruct missing map data.
 
 ## 2. Frozen CQM object
 
-Controlling intake:
+Controlling intake blob:
 
-- `frameworks/categorical_quantum/FCP4_CATEGORICAL_QUANTUM_SOURCE_INTAKE_0_1_0.md` — blob `75653c6f6cb33438d96c3edaa2fb653143bce818`.
+`75653c6f6cb33438d96c3edaa2fb653143bce818`.
 
-Exact external source count: **4**.
+External CQM source count: **4**.
 
-FCP-13 subtraction controls:
+FCP-13 controls:
 
-- comparative binding — `57c88a965a94f9b9a60717b8ee8c26d05c280bf2`;
-- K1–K10 comparison — `3ce60d4c0f38751d42a970eea7ebaa18db964537`;
-- relationship ledger — `445af2f492a3e8315fa05ca1cacab0daaafe6e67`;
-- optional-structure ledger — `7119b9e1a1f8abeac9979cafe007d35a24fdfb86`;
-- handoff — `cf1b3eb70ae07ffb714681c0be3a751ad0f54446`.
+- comparative binding `57c88a965a94f9b9a60717b8ee8c26d05c280bf2`;
+- K1–K10 comparison `3ce60d4c0f38751d42a970eea7ebaa18db964537`;
+- relationship ledger `445af2f492a3e8315fa05ca1cacab0daaafe6e67`;
+- optional ledger `7119b9e1a1f8abeac9979cafe007d35a24fdfb86`;
+- handoff `cf1b3eb70ae07ffb714681c0be3a751ad0f54446`.
 
-Only the source-qualified residue may receive CQM-specific credit:
+Carry only:
 
 - `CQM-S1` process-first compositional abstraction;
-- `CQM-S2` representation-independent protocol theorem schemas under named categorical hypotheses;
-- `CQM-X1` optional dagger/compact package;
-- `CQM-X2` optional categorical classical/Frobenius interface structure;
-- `CQM-X3` optional CPM/mixed-state construction;
+- `CQM-S2` representation-independent protocol theorem schemas under named hypotheses;
+- `CQM-X1` dagger/compact package;
+- `CQM-X2` classical/Frobenius interface structure;
+- `CQM-X3` CPM/mixed-state construction;
 - `CQM-X4` categorical probabilistic bridge.
 
-Generic category composition, generic monoidal coherence, generic string diagrams, ordinary quantum empirical success and unqualified `FHilb` facts are already subtracted.
+Generic category/process mathematics, generic string diagrams, ordinary quantum content and inherited empirical success remain subtracted.
 
 ## 3. Frozen GPTOPT object
 
-Controlling intake:
+Controlling FCP-4 intake blob:
 
-- `frameworks/gpt_opt/FCP4_GPT_OPT_SOURCE_INTAKE_0_1_0.md` — blob `232e28b36e334aa73879075f6e4dc01a4bc25248`.
+`232e28b36e334aa73879075f6e4dc01a4bc25248`.
 
 FCP-7 controls:
 
-- comparative baseline — `653b2997c8c96f63dffff182ad8121c9a137e7d8`;
-- empirical supplement — `a04556ff1c6141b82e7622545246c742b535ddef`;
-- reconstruction ledger — `4f4b86eee445d89de9a8d246b260e917ba2a3b7d`;
-- handoff — `28a03a6812d58ffc5fabe3d858a27bc0b2dc9f83`.
+- baseline `653b2997c8c96f63dffff182ad8121c9a137e7d8`;
+- empirical supplement `a04556ff1c6141b82e7622545246c742b535ddef`;
+- reconstruction ledger `4f4b86eee445d89de9a8d246b260e917ba2a3b7d`;
+- handoff `28a03a6812d58ffc5fabe3d858a27bc0b2dc9f83`.
 
 FCP-8 controls:
 
-- empirical theory-space binding — `39035a67bf6654b304e5ef350f5dd9940c98f9b7`;
-- handoff — `f15e4f22c23731cc49f947eefa44fd0c61f55f95`.
+- empirical theory-space binding `39035a67bf6654b304e5ef350f5dd9940c98f9b7`;
+- handoff `f15e4f22c23731cc49f947eefa44fd0c61f55f95`.
 
-Exact external-source union entering FCP-14:
+Frozen GPTOPT layers remain `G0` operational skeleton, `G1` convex/probabilistic structure, `G2` composite structure, `G3` optional reconstruction axioms, `G4` quantum embedding, `G5` generalized/postquantum theory space and `G6` empirical restriction.
 
-- FCP-4 GPTOPT: **6**;
-- FCP-7 new empirical source: **1**;
-- FCP-8 new sources: **7**;
-- total unique GPTOPT external records: **14**.
+FCP-8 ceilings remain `QUANTUM_BOUNDARY_SELECTION_OPEN`, `QUANTUM_BOUNDARY_PRINCIPLE_UNDERDETERMINATION`, `COMPOSITE_SYSTEM_SELECTION_OPEN`, highest empirical-selection level `L2`.
 
-Frozen GPTOPT layers:
+## 4. Source window
 
-- `G0` operational skeleton;
-- `G1` convex/probabilistic structure;
-- `G2` composite-system structure;
-- `G3` optional reconstruction axioms;
-- `G4` quantum embedding;
-- `G5` generalized/post-quantum theory space;
-- `G6` empirical/physical restriction.
+- CQM external records: **4**;
+- GPTOPT external records: **14**;
+- bounded union: **18**;
+- new FCP-14 external sources: **0**.
 
-The FCP-8 ceilings remain `QUANTUM_BOUNDARY_SELECTION_OPEN`, `QUANTUM_BOUNDARY_PRINCIPLE_UNDERDETERMINATION`, `COMPOSITE_SYSTEM_SELECTION_OPEN`, with highest empirical-selection level `L2`.
-
-## 4. Source-window freeze
-
-Authorized external scientific records:
-
-- CQM: **4**;
-- GPTOPT: **14**;
-- total bounded union: **18**;
-- new external scientific sources in FCP-14: **0**.
-
-No effectus, topos, process-matrix, tensor-network, new reconstruction, new categorical-probabilistic or other adjacent literature may be imported.
+No outside literature may be used to recover missing bridge-map details.
 
 ## 5. Dual subtraction
 
-Before pairwise credit, remove from CQM:
+Subtract from CQM: generic category/process/monoidal/coherence machinery, graphical presentation, ordinary quantum content, unqualified `FHilb` facts and inherited quantum empirical success.
 
-- generic category/process mathematics;
-- generic monoidal composition/coherence;
-- diagrammatic presentation alone;
-- ordinary quantum content;
-- model-specific `FHilb` content without generalized hypotheses;
-- inherited quantum empirical success.
+Subtract from GPTOPT: generic probability/convex/process mathematics, `G4` ordinary quantum content, unnamed reconstruction assumptions, unphysical postquantum possibility and inherited quantum success.
 
-Before pairwise credit, remove from GPTOPT:
+## 6. Bridge firewall and E2 qualification ceiling
 
-- generic probability/convex mathematics;
-- generic process/circuit composition;
-- ordinary quantum content inherited through `G4`;
-- optional reconstruction axioms unless explicitly named;
-- post-quantum mathematical possibility without physical realization;
-- ordinary quantum empirical success.
+`SRC-FCP4-CQM-GS-2018` is source-bound as a bridge that analyzes similarities/differences and demonstrates translatable process/probabilistic structure. FCP-13 explicitly retained it as `MODEL_CLASS_BRIDGE` but assigned **no cross-framework E-class** because GPTOPT was not then the comparator.
 
-## 6. Bridge firewall
+FCP-14's frozen internal packet does **not** contain enough exact source-defined functor/map data to establish the domain, codomain, fullness/faithfulness or preserved structures required for E2 without importing the external paper itself, which is forbidden by the source-window authorization.
 
-`SRC-FCP4-CQM-GS-2018` is the only frozen CQM source explicitly designated as a categorical-probabilistic bridge. FCP-4 records that it analyzes similarities and important differences and proposes a categorical bridge.
+Therefore:
 
-Any relation depending materially on that bridge is tagged:
-
-`BRIDGE_MEDIATED = 1`.
-
-A bridge may support E2 at a restricted enriched process/probabilistic subframework when the map and preserved structure are explicit. It does not establish framework-wide identity or independent convergence.
+- bridge existence: `SOURCE_DERIVED`;
+- `BRIDGE_MEDIATED = 1` for bridge-supported relations;
+- strongest current pairwise E-class: at most `E5_FUNCTIONAL_ANALOGY`/source-bound translation resemblance;
+- `E2_NOT_SOURCE_QUALIFIABLE_AT_CURRENT_PACKET`;
+- no E1/E2 pairwise claim is assigned in FCP-14.
 
 > **DIRECT BRIDGE CONSTRUCTION != INDEPENDENT CONVERGENCE.**
 
+> **SOURCE-BOUND BRIDGE EXISTENCE != SOURCE-BOUND E2 MAP WHEN THE EXACT MAP IS NOT FROZEN IN THE PACKET.**
+
 ## 7. Quantum-inheritance firewall
 
-Where both sides reproduce the same ordinary quantum model, the relation is tagged:
-
-`QUANTUM_INHERITED_OVERLAP`.
-
-This includes model-level density-state, quantum-effect/Born-rule, CP-channel and standard quantum-composite correspondences where source-bound.
+Ordinary quantum state/channel/effect/composite agreement on both sides is `QUANTUM_INHERITED_OVERLAP`. FCP-14 does not compose separate framework-to-QM representations into an unstated direct CQM↔GPTOPT E2 map.
 
 > **TWO FRAMEWORKS REPRESENTING THE SAME QUANTUM MODEL != INDEPENDENT FRAMEWORK CONVERGENCE.**
 
 ## 8. Framework-separation test
 
-FCP-4 froze the rule:
+FCP-4 rule:
 
 > **Separate frameworks when their primitive commitments, allowed model class, physical scope, or empirical burden differ materially under the FCP keys.**
 
-FCP-14 must therefore test, rather than assume, the existing separation `FW-CQM != FW-GPTOPT` across primitive carrier emphasis, probability structure, allowed model class, optional structure, composite doctrine, quantum-target role, dynamics burden, realization burden and empirical-theory-space role.
+FCP-14 tests primitive emphasis, probability structure, model class, optional structures, composite doctrine, quantum-target role, dynamics, physical realization and empirical-theory-space role.
 
-No taxonomy change is authorized. Allowed final statuses are:
+Allowed statuses only:
 
 - `FCP4_FRAMEWORK_SEPARATION = PRESERVED`;
 - `FCP4_FRAMEWORK_SEPARATION = REVIEW_REQUIRED`.
+
+No taxonomy change is authorized.
 
 ## 9. Permanent firewalls
 
@@ -176,9 +149,5 @@ No taxonomy change is authorized. Allowed final statuses are:
 - `FRAMEWORK_SPLIT_CANDIDATE_GPTOPT = 0`;
 - `FRAMEWORK_EXTENSION_CANDIDATE = 0`;
 - `KEY_EXTENSION_CANDIDATE = 0`.
-
-These are to be changed only if the bounded comparison itself establishes a governance defect.
-
-Continuity rule:
 
 > **Preserve results, not theories.**

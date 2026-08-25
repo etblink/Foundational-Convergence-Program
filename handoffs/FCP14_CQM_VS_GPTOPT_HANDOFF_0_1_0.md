@@ -1,219 +1,193 @@
 # FCP-14 — CQM vs. GPTOPT Handoff
 
 **Version:** 0.1.0  
-**Status:** HANDOFF CANDIDATE  
+**Status:** HANDOFF CANDIDATE — E2 QUALIFICATION REMEDIATED  
 **Branch:** `research/fcp-14-cqm-vs-gptopt`  
-**Exact parent:** `6600e0e086378c72096dd6022db98ff7b9d21629`  
-**Parent tree:** `c5a3259b57a854e25949e7d129bd3f2a89b57fe1`
+**Exact FCP-14 base:** `6600e0e086378c72096dd6022db98ff7b9d21629`  
+**Base tree:** `c5a3259b57a854e25949e7d129bd3f2a89b57fe1`
 
 ## 0. Scope
 
-FCP-14 performs a dual-subtraction comparison of the FCP-13-qualified `FW-CQM` residue against the FCP-7/FCP-8-qualified `FW-GPTOPT` object.
+FCP-14 performs the authorized dual-subtraction comparison of FCP-13-qualified `FW-CQM` against FCP-7/FCP-8-qualified `FW-GPTOPT`.
 
-No new external scientific source is introduced. No Reduced-NFC, AQFT, CST or adjacent categorical framework is imported. No framework ID is changed.
+New external scientific sources: **0**. No Reduced-NFC/AQFT/CST/adjacent-framework import. No framework ID change.
 
-## 1. Controlling verdict
+## 1. Qualification-remediation note
 
-> **CQM AND GPTOPT SHARE A GENERIC PROCESS SHELL AND A SOURCE-BOUND CATEGORICAL-PROBABILISTIC BRIDGE, BUT AFTER GENERIC, QUANTUM-INHERITANCE AND OPTIONAL-STRUCTURE SUBTRACTION NO INDEPENDENT NON-GENERIC CONVERGENCE REMAINS. THE BRIDGE SUPPORTS RESTRICTED E2 REPRESENTATIONS WITHOUT FULL FRAMEWORK EQUIVALENCE; GPTOPT RETAINS DISTINCT CONVEX/PROBABILISTIC, COMPOSITE-SELECTION AND EMPIRICAL-THEORY-SPACE STRUCTURE, SO FCP-4 FRAMEWORK SEPARATION IS PRESERVED.**
+The first FCP-14 candidate correctly identified the source-bound categorical-probabilistic bridge but provisionally labeled K1/K3/K5/K8 as E2. Qualification found that this exceeded the frozen packet: FCP-13 source-binds the bridge and translatable process/probabilistic structure but explicitly assigned no CQM↔GPTOPT E-class, while FCP-2 requires an explicit map/functor/representation for E2.
 
-## 2. Source window
+Because FCP-14 authorizes **zero** new external sources and forbids widening the source window, the correct remediation is to preserve the bridge while withholding E2 rather than reconstruct missing map details from the external paper.
 
-CQM external source records: **4**.
+Final candidate rule:
 
-GPTOPT external source records:
+`SOURCE_BOUND_BRIDGE = YES`
 
-- FCP-4: 6;
-- FCP-7: 1 new empirical source;
-- FCP-8: 7 new sources;
-- total unique GPTOPT: **14**.
+`BRIDGE_MEDIATED = YES`
 
-Total bounded external-source union: **18**.
+`E2_NOT_SOURCE_QUALIFIABLE_AT_CURRENT_PACKET = YES`
 
-New FCP-14 external scientific sources: **0**.
+## 2. Controlling verdict
 
-## 3. Primary K1–K10 relationship classification
+> **THE FROZEN FCP CORPUS ESTABLISHES A REAL CQM/GPTOPT CATEGORICAL-PROBABILISTIC BRIDGE, BUT DOES NOT FREEZE THE EXPLICIT PAIRWISE MAP REQUIRED FOR E2. ALL POSITIVE FCP-14 KEY RELATIONS THEREFORE TOP OUT AT E5. AFTER GENERIC, QUANTUM-INHERITANCE, BRIDGE-DEPENDENCE AND OPTIONAL-STRUCTURE SUBTRACTION, NO INDEPENDENT NON-GENERIC CONVERGENCE REMAINS; GPTOPT RETAINS DISTINCT CONVEX/PROBABILISTIC, COMPOSITE-SELECTION AND EMPIRICAL-THEORY-SPACE STRUCTURE, SO FCP-4 FRAMEWORK SEPARATION IS PRESERVED.**
+
+## 3. Source window
+
+- CQM external source records: **4**;
+- GPTOPT external source records: **14** (FCP-4 6 + FCP-7 1 + FCP-8 7);
+- total bounded union: **18**;
+- new FCP-14 external sources: **0**.
+
+## 4. Primary K1–K10 classification
 
 - `BRIDGE_OR_TRANSLATION_RELATION`: **2** — K1, K3;
 - `EXTENSION_DEPENDENT_RELATION`: **1** — K5;
 - `MATERIAL_DIVERGENCE`: **3** — K2, K8, K9;
 - `OPEN_OR_NO_SOURCE_BOUND_RELATION`: **4** — K4, K6, K7, K10;
-- `GENERIC_SHARED_SHELL`: **0** primary keys;
-- `QUANTUM_INHERITED_OVERLAP`: **0** primary keys;
-- `NON_GENERIC_SHARED_STRUCTURE`: **0** primary keys;
-- `EMPIRICALLY_DISTINCT`: **0**.
+- primary generic shared: **0**;
+- primary quantum-inherited: **0**;
+- primary independently non-generic shared: **0**;
+- empirically distinct: **0**.
 
-Generic and quantum-inherited subrelations are recorded in the relationship ledger rather than used to mask each key's residual scientific status.
-
-## 4. Strongest key-level E1–E5 accounting
+## 5. Qualified E1–E5 accounting
 
 - E1: **0**;
-- E2: **4** — K1, K3, K5, K8;
+- E2: **0**;
 - E3: **0**;
 - E4: **0**;
-- E5-only: **2** — K2, K9;
+- E5-only: **6** — K1, K2, K3, K5, K8, K9;
 - none: **4** — K4, K6, K7, K10.
 
-All four E2 key relations are restricted and bridge-mediated.
+Pairwise bridge-mediated E1/E2: **0**.
 
-## 5. Relationship-ledger accounting
+Pairwise quantum-inherited E1/E2: **0**.
 
-- generic shared shell rows: **5**;
-- bridge/translation rows: **4**;
-- quantum-inherited E1/E2 rows: **4**;
-- independently justified non-generic shared rows: **0**;
-- extension-dependent rows: **5**;
-- material-divergence rows: **7**;
-- open/no-positive-relation rows: **4**;
-- empirically distinct rows: **0**.
-
-Bridge-mediated E1/E2 rows: **4**.
-
-Quantum-inherited E1/E2 rows: **4**.
-
-Independently justified E1/E2 rows: **0**.
+Independently justified E1/E2: **0**.
 
 Independent convergence:
 
-- `STRONG_CONVERGENCE`: **0**;
-- `MODERATE_CONVERGENCE`: **0**.
+- strong: **0**;
+- moderate: **0**.
 
-## 6. Highest-information results
+## 6. Relationship-ledger accounting
 
-### K1 — state/effect bridge but no carrier identity
+- generic shared-shell rows: **5**;
+- source-bound bridge/translation rows: **4**;
+- quantum-inherited common-target rows: **4**;
+- independently justified non-generic shared rows: **0**;
+- extension-dependent rows: **5**;
+- material divergences: **7**;
+- open/no-positive rows: **4**;
+- empirically distinct rows: **0**.
 
-Probabilistically enriched categorical state/effect processes can translate to operational states/effects at restricted bridge scope. Minimal CQM does not select GPTOPT's convex state/effect geometry or broader model family.
+None of the bridge/common-target rows qualifies as pairwise E1/E2 under the current closed packet.
 
-### K2 — equivalence doctrines remain distinct
+## 7. Highest-information results
 
-Categorical equality/coherence is not source-bound as operational indistinguishability relative to an exhaustive effect/test family.
+### K1
+State/effect process structure is source-bound as translatable through the categorical-probabilistic bridge, but minimal CQM does not select GPTOPT convex state/effect geometry. Exact E2 map not frozen.
 
-### K3 — bridge after generic subtraction
+### K2
+Categorical equality/coherence remains distinct from operational indistinguishability relative to effects/tests.
 
-Bare process composition is generic. The source-bound bridge adds probabilistic operational semantics and supports a restricted E2 translation, but no full/faithful/essentially-surjective whole-family equivalence is established.
+### K3
+Bare process composition is generic. The bridge is a real source-derived relation, but current FCP provenance supports E5 rather than E2 because the exact map is not frozen.
 
-### K5 — GPTOPT is stronger at base operational probability scope
+### K5
+GPTOPT effects/tests/probabilities are core/near-core; minimal CQM requires probabilistic enrichment or named optional structures.
 
-GPTOPT effects/tests/outcome probabilities are core/near-core. Minimal CQM requires probabilistic enrichment or named measurement/classical/mixed-state extensions.
+### K8
+This remains the decisive divergence. A monoidal product does not select the physical GPT composite cone. Minimal/maximal/intermediate composite ambiguity persists; local tomography does not uniquely select the quantum composite.
 
-### K8 — decisive composite-system asymmetry
+`COMPOSITE_SYSTEM_SELECTION_OPEN` preserved.
 
-The monoidal product does not select a physical composite cone. GPTOPT's minimal/maximal/intermediate composite ambiguity survives categorical reformulation, and local tomography remains insufficient to uniquely select the quantum composite.
+### K9
+GPTOPT has stronger base operational semantics; neither framework has complete framework-wide physical calibration.
 
-`COMPOSITE_SYSTEM_SELECTION_OPEN` is preserved.
+### K10
+GPTOPT's L2 empirical narrowing does not select CQM. No pairwise E4 discriminator.
 
-### K9 — operational semantics do not equal complete calibration
+## 8. Optional-structure result
 
-GPTOPT has stronger base operational semantics; CQM reaches comparable laboratory-facing semantics through concrete quantum or enriched bridge models. Neither supplies complete framework-wide physical calibration.
-
-### K10 — no pairwise discriminator
-
-GPTOPT's bounded L2 empirical narrowing of generalized theory space does not empirically select CQM. No CQM-vs-GPTOPT E4 relation is identified.
-
-## 7. Optional-structure result
-
-No optional pair collapses the framework boundary:
+No optional crosswalk collapses the frameworks:
 
 - dagger != physical reversibility;
 - compactness != purification;
-- Frobenius/classical structure != all GPTOPT classical systems;
+- Frobenius/classical != all GPTOPT classical systems;
 - CPM != all GPTOPT transformations;
 - local tomography != categorical coherence;
-- continuous reversibility is not a minimal CQM axiom.
+- continuous reversibility is not minimal CQM;
+- categorical probabilistic bridge is source-derived but E2-unqualified at current frozen packet.
 
-The categorical-probabilistic bridge is the strongest optional/extension-level crosswalk and remains `BRIDGE_MEDIATED`.
+## 9. Model-class result
 
-## 8. Model-class result
+`INTERSECTING_MODEL_FAMILIES_WITH_SOURCE_BOUND_BRIDGE; NO_WHOLE_FAMILY_CONTAINMENT_THEOREM_SOURCE_BOUND`.
 
-The source-bound conclusion is:
+GPTOPT explicitly contains broad classical/quantum/postquantum operational model space and multiple physical composite rules. CQM remains a quantum-motivated categorical/process family with toy/non-Hilbert models and named optional dagger/compact/classical/CPM structures.
 
-`INTERSECTING_MODEL_FAMILIES_WITH_BRIDGE_SUBFRAMEWORK; NO_WHOLE_FAMILY_CONTAINMENT_THEOREM_SOURCE_BOUND`.
+## 10. Residue after GPTOPT subtraction
 
-GPTOPT explicitly contains broad classical/quantum/postquantum operational model space and multiple composites. CQM remains a quantum-motivated categorical/process family with toy/non-Hilbert models and named dagger/compact/classical/CPM extensions. The bridge establishes an intersection/common enriched territory rather than whole-family identity.
+### CQM-specific residue retained
 
-## 9. Residue after dual subtraction
-
-### CQM-specific residue surviving GPTOPT comparison
-
-`CQM-S1` process-first compositional abstraction is **not retained as distinctive by itself**: its bare shell is generic and its probabilistically enriched form is shared through the bridge.
+`CQM-S1` bare process-first composition is **not distinctive by itself**; generic shell subtracted.
 
 Retain:
 
-1. **`CQM-S2` representation-independent protocol theorem schemas** under exact categorical hypotheses — CQM-specific structural organization, quantum-lineage, non-empirical;
-2. **`CQM-X1` dagger/compact package** — optional, not matched by base GPTOPT, no reversibility/purification identity;
-3. **`CQM-X2` Frobenius/classical interface package** — optional algebraic organization, only functional/model-level GPTOPT relation;
-4. **`CQM-X3` CPM/mixed-state categorical construction** — categorical construction remains distinctive even though ordinary quantum CP-map content is inherited;
-5. **`CQM-X4` categorical probabilistic bridge** — retain as a translation/interface result, not as independent CQM-specific convergence evidence.
+1. `CQM-S2` representation-independent protocol theorem schemas under exact categorical hypotheses;
+2. `CQM-X1` dagger/compact package — optional, no reversibility/purification identity;
+3. `CQM-X2` Frobenius/classical interface package — optional algebraic organization;
+4. `CQM-X3` CPM/mixed-state categorical construction — ordinary quantum CP content itself inherited;
+5. `CQM-X4` categorical probabilistic bridge — retained as source-derived translation/interface residue, E2 not assigned under current frozen packet.
 
-### GPTOPT-specific residue surviving CQM comparison
+### GPTOPT-specific residue retained
 
-Retain:
+1. `G1` convex/probabilistic state/effect geometry, mixing and normalization burdens;
+2. `G2` physical composite-system theory space and composite-selection ambiguity;
+3. `G3` named reconstruction-principle selection burdens;
+4. operational-equivalence doctrine relative to effects/tests;
+5. `G5` broader-than-quantum/postquantum theory space;
+6. `G6` bounded empirical narrowing to L2;
+7. stronger base K5/K9 operational semantics without complete calibration.
 
-1. **`G1` convex/probabilistic state/effect geometry and mixing/normalization burdens** — not minimal CQM;
-2. **`G2` physical composite-system theory space and composite-selection ambiguity** — not discharged by monoidal composition;
-3. **`G3` reconstruction-principle selection burden** — purification/local tomography/continuous reversibility etc. remain named optional principles;
-4. **operational-equivalence doctrine relative to tests/effects** — distinct from categorical equality;
-5. **`G5` broader-than-quantum/postquantum theory space** — not identified with CQM's model family;
-6. **`G6` bounded empirical narrowing to L2** — real operational evidence about theory space, not a CQM discriminator;
-7. **stronger base operational semantics at K5/K9** without complete physical calibration.
+## 11. Framework separation and governance
 
-## 10. Framework separation
-
-FCP-4 separation criterion remains satisfied by material differences in:
-
-- primitive organizational emphasis;
-- base probability/convex structure;
-- allowed model class;
-- optional assumptions;
-- composite-system selection;
-- quantum-reformulation versus generalization/reconstruction role;
-- operational realization burden;
-- empirical-theory-space role.
+Material differences remain in primitive emphasis, probability structure, allowed model class, optional structures, composite selection, quantum-target role, operational semantics and empirical-theory-space role.
 
 `FCP4_FRAMEWORK_SEPARATION = PRESERVED`.
-
-Governance:
 
 - `FRAMEWORK_SPLIT_CANDIDATE_CQM = 0`;
 - `FRAMEWORK_SPLIT_CANDIDATE_GPTOPT = 0`;
 - `FRAMEWORK_EXTENSION_CANDIDATE = 0`;
 - `KEY_EXTENSION_CANDIDATE = 0`.
 
-## 11. No-score statement
+No framework score/winner.
 
-No framework score, winner or numerical ranking is produced.
+## 12. Metadata disposition
 
-## 12. Live metadata disposition
+`FRAMEWORK_REGISTER.md`, `README.md`, `SOURCE_REGISTER.md` and historical `CLAIM_LEDGER.md` remain byte-unchanged during source qualification. FCP-14 creates only versioned scientific artifacts.
 
-FCP-14 creates only versioned scientific artifacts. `FRAMEWORK_REGISTER.md`, `README.md`, `SOURCE_REGISTER.md` and historical `CLAIM_LEDGER.md` remain byte-unchanged during source qualification. This avoids changing canonical live metadata before integration is separately authorized.
+## 13. Evidence-driven next recommendation
 
-## 13. Evidence-driven next-task recommendation
+The strongest positive relations are generic, bridge-mediated or common-quantum-target and none qualifies as independent E1/E2. Framework separation remains preserved.
 
-FCP-14 lands in the decision-rule branch where the strongest positive relations are generic, bridge-mediated or quantum-inherited, with zero independent non-generic convergence and preserved framework separation.
-
-The recommended next move is therefore to return to the framework queue rather than compare Reduced NFC immediately.
-
-Recommended:
+Recommended next phase:
 
 > **FCP-15 — Loop / Spin-Network / Spinfoam Framework Source Intake and K1–K10 Baseline**
 
-Reason: `FW-LOOP` is already admitted but unaudited. Moving to a new source-intake family maximizes primitive-basis diversity after the operational/categorical lineage has been controlled. This is a task-prioritization recommendation only; no scientific claim about `FW-LOOP` is made before source intake.
+Rationale: `FW-LOOP` is already admitted but unaudited; a new primitive-basis source intake provides higher information gain than immediately returning to Reduced NFC or extending the operational/categorical lineage. This is task prioritization only, not a pre-intake scientific claim.
 
 ## 14. Qualification contract
 
-Before qualification verify:
+Verify final remediation candidate:
 
-- candidate sole parent = exact FCP-13 commit;
-- one FCP-14 commit;
-- main remains exact FCP-13;
-- frozen governance/CQM/GPTOPT blobs remain exact;
-- source counts remain CQM 4 / GPTOPT 14 / new 0;
-- no source/claim register rewrite;
-- all bridge E2 relations tagged `BRIDGE_MEDIATED`;
-- all ordinary quantum common-target E2 relations tagged inherited;
-- no independent E1/E2 relation created by generic or bridge structure;
-- no E4 pairwise claim;
-- no framework taxonomy mutation.
-
-Continuity rule:
+- ancestry remains exact FCP-13 -> original FCP-14 -> one narrow remediation child;
+- no merge/squash/rebase/amend;
+- frozen governance/CQM/GPTOPT blobs exact;
+- source counts 4/14/new 0;
+- source and historical claim registers unchanged;
+- E1/E2 count = 0;
+- bridge existence preserved without invented map;
+- no E4;
+- no taxonomy mutation;
+- `main` remains exact FCP-13.
 
 > **Preserve results, not theories.**

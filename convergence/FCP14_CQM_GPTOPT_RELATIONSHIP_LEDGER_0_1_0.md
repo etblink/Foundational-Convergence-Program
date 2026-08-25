@@ -1,268 +1,147 @@
 # FCP-14 — CQM/GPTOPT Relationship Ledger
 
 **Version:** 0.1.0  
-**Frameworks:** `FW-CQM` vs. `FW-GPTOPT`  
-**Status:** RELATIONSHIP LEDGER CANDIDATE
+**Status:** RELATIONSHIP LEDGER CANDIDATE — E2 QUALIFICATION REMEDIATED
 
 ## 0. Rule
 
-Every positive relation is classified separately by structural strength, bridge dependence, quantum inheritance, optional-extension status and independence. A relation may be mathematically strong while receiving zero independent convergence credit.
+Positive relations are classified separately by genericity, bridge dependence, quantum inheritance, optional structure and independence. Under frozen FCP-2 rules, E1/E2 requires an explicit source-bound map/functor/representation. FCP-14 does not reconstruct absent bridge details from outside the closed packet.
 
-Local buckets:
+Local buckets: `CG-G` generic shell, `CG-T` bridge/translation, `CG-I` quantum-inherited overlap, `CG-N` independently shared non-generic, `CG-X` extension-dependent, `CG-D` material divergence, `CG-E` empirical, `CG-O` open/no positive relation.
 
-- `CG-G` generic shared shell;
-- `CG-T` bridge/translation relation;
-- `CG-I` quantum-inherited overlap;
-- `CG-N` non-generic independently shared structure;
-- `CG-X` extension-dependent relation;
-- `CG-D` material divergence;
-- `CG-E` empirically distinct;
-- `CG-O` open/no source-bound relation.
+## 1. Generic shared shell — 5 rows
 
-## 1. Generic shared shell
+### `CG-G1` system/process typing
+Objects/systems and morphisms/processes. Weaker witness: generic process categories. Zero distinctive credit.
 
-### `CG-G1` — system/process typing
+### `CG-G2` sequential composition
+Ordinary category/circuit composition. Zero distinctive credit.
 
-**Keys:** K1, K3  
-**CQM:** objects and morphisms  
-**GPTOPT:** systems and processes/events/transformations  
-**Weaker-framework witness:** generic process categories/classical circuits  
-**E-class:** none for distinctive credit  
-**Disposition:** `GENERIC_MATHEMATICS`
+### `CG-G3` parallel/composite typing
+Monoidal/parallel composition. Weaker witness: symmetric-monoidal nonquantum process theories. Does not select physical composites.
 
-The broad correspondence is real but too weak to identify either framework.
+### `CG-G4` generic state/effect syntax
+Unit-to/from-system process typing. Does not by itself supply probability/convex geometry.
 
-### `CG-G2` — sequential composition
+### `CG-G5` compositional diagram/circuit reasoning
+Generic representational infrastructure; no empirical credit.
 
-**Key:** K3  
-**CQM:** morphism composition  
-**GPTOPT:** sequential process/circuit composition  
-**Weaker-framework witness:** ordinary category theory, circuits, stochastic processes  
-**Disposition:** zero distinctive credit.
+## 2. Bridge/translation rows — 4
 
-### `CG-G3` — parallel/composite typing
+All materially use `SRC-FCP4-CQM-GS-2018`, so `BRIDGE_MEDIATED = 1`.
 
-**Keys:** K3, K8  
-**CQM:** monoidal composition  
-**GPTOPT:** declared parallel/composite-system composition  
-**Weaker-framework witness:** symmetric monoidal process theories  
-**Disposition:** generic shell only; does not select physical composite state space.
+FCP-13 source-binds that the categorical-probabilistic bridge demonstrates translatable process/probabilistic structure while preserving material differences. It did not assign a cross-framework E-class. The frozen internal packet does not contain the explicit source-defined map/functor needed for E2.
 
-### `CG-G4` — generic state/effect process syntax
+### `CG-T1` state/effect bridge
+**Keys:** K1, K5.  
+**Source-bound result:** state/effect process structure participates in a categorical-probabilistic bridge to operational/probabilistic structure.  
+**E-class:** `E5_FUNCTIONAL_ANALOGY` maximum under current packet; `E2_NOT_SOURCE_QUALIFIABLE_AT_CURRENT_PACKET`.  
+**Not established:** exact domain/codomain map, whole GPT convex geometry, whole physical effect set, framework equivalence.
 
-**Keys:** K1, K5  
-**CQM:** `I -> A`, `A -> I`  
-**GPTOPT/OPT:** preparations/states and effects  
-**Weaker-framework witness:** generic process theory with a unit  
-**Disposition:** generic typing until probability/operational structure is added.
+### `CG-T2` process bridge
+**Key:** K3.  
+**Source-bound result:** process/compositional structures are translatable through the named bridge.  
+**E-class:** E5 maximum at current packet.  
+**Not established:** full/faithful/essentially-surjective direct framework functor.
 
-### `CG-G5` — circuit/diagram compositional reasoning
+### `CG-T3` measurement/probability bridge
+**Key:** K5.  
+**Source-bound result:** categorical probabilistic structure bridges CQM and operational probabilistic formalisms.  
+**E-class:** E5 maximum.  
+**Limitation:** probabilistic enrichment is optional relative to minimal CQM.
 
-**Keys:** K3, K8  
-**Disposition:** presentation/compositional shell. Diagrammatic convenience receives no physical credit.
+### `CG-T4` composition bridge
+**Key:** K8.  
+**Source-bound result:** formal process/compositional comparison is legitimate.  
+**E-class:** E5 maximum.  
+**Not established:** unique GPT composite cone or local-tomography equivalence.
 
-Generic shared relation rows: **5**.
+Bridge rows qualifying E1/E2: **0**.
 
-## 2. Bridge/translation relations
+## 3. Quantum-inherited overlap — 4 rows
 
-All rows in this section materially use `SRC-FCP4-CQM-GS-2018` and therefore carry `BRIDGE_MEDIATED = 1`.
+The same ordinary quantum target can appear in both framework families, but FCP-14 does not manufacture a direct CQM↔GPTOPT map by composing separate relations through quantum theory.
 
-### `CG-T1` — enriched state/effect translation
+### `CG-I1` ordinary quantum states — K1
+Common target only; `QUANTUM_INHERITED_OVERLAP`; no direct pairwise E1/E2 assigned.
 
-**Keys:** K1, K5  
-**CQM side:** probabilistically enriched/categorical-probabilistic state/effect processes  
-**GPTOPT side:** operational states/effects with probability semantics  
-**Map:** state process -> operational preparation/state; effect process -> operational effect  
-**Preserved:** typing; declared probability semantics under bridge hypotheses  
-**Not established:** all convex state geometry, all physical effect sets, all CQM/GPTOPT models  
-**E-class:** restricted `E2_FUNCTORIAL_REPRESENTATION`  
-**Independence:** bridge-mediated; zero independent convergence.
+### `CG-I2` ordinary quantum processes/dynamics — K3/K4
+Common target only; dynamics comes from selected quantum model.
 
-### `CG-T2` — enriched process translation
+### `CG-I3` quantum effects/Born probabilities — K5
+Empirical success belongs to ordinary quantum theory.
 
-**Key:** K3  
-**Map:** CQM process morphism -> operational transformation/event  
-**Preserved:** sequential composition; declared parallel composition; probability evaluation where supplied  
-**Not established:** full/faithful/essentially-surjective whole-family equivalence  
-**E-class:** restricted `E2`  
-**Independence:** bridge-mediated.
+### `CG-I4` standard quantum composites — K8
+Does not establish framework-wide composite selection.
 
-### `CG-T3` — measurement/probability translation
+Quantum-inherited pairwise E1/E2 rows: **0**.
 
-**Key:** K5  
-**Map:** categorical-probabilistic effects/tests/scalars -> operational tests/outcome probabilities at named bridge scope  
-**E-class:** restricted `E2`  
-**Limitation:** probabilistic enrichment is not minimal CQM; exhaustive physical effect-set selection remains open.
+## 4. Independently shared non-generic structure
 
-### `CG-T4` — compositional bridge
+No row survives all tests: non-genericity, no common quantum target, no bridge dependence, explicit map, aligned physical semantics.
 
-**Key:** K8  
-**Map:** monoidal/compositional structure -> declared operational composite/process composition  
-**Preserved:** formal compositional typing  
-**Not preserved/selected:** unique GPT composite cone; local-tomography sufficiency; physical global state space  
-**E-class:** restricted `E2`  
-**Independence:** bridge-mediated.
+`CG-N` rows: **0**.
 
-Bridge/translation relation rows: **4**.
+## 5. Optional/extension-dependent rows — 5
 
-## 3. Quantum-inherited overlap
+### `CG-X1` dagger versus reversibility
+At most E5. Dagger is optional CQM; reversible transformations/continuous reversibility are GPTOPT model/reconstruction structures.
 
-These rows arise when both framework families instantiate ordinary quantum theory. They are not evidence of independent framework convergence.
+### `CG-X2` compactness versus purification/dilation
+`NO_SOURCE_BOUND_EQUIVALENCE`; no implication in either direction is frozen.
 
-### `CG-I1` — ordinary quantum states
+### `CG-X3` Frobenius/classical versus operational classical systems
+Functional/model-level analogy only; optional algebraic CQM structure versus GPTOPT classical models.
 
-**Key:** K1  
-**Relation:** CQM quantum models and GPTOPT `G4` quantum embedding represent ordinary quantum states.  
-**E-class:** bounded model-level `E2`  
-**Status:** `QUANTUM_INHERITED_OVERLAP`.
+### `CG-X4` CPM versus operational transformations
+Ordinary quantum CP overlap is inherited common target; GPTOPT transformation classes are broader model data.
 
-### `CG-I2` — quantum channels/processes
+### `CG-X5` categorical probabilistic bridge
+Source-derived `MODEL_CLASS_BRIDGE`, E5 maximum under current closed packet, bridge-mediated, not independent.
 
-**Keys:** K3, K4  
-**Relation:** ordinary unitary/CP quantum processes can be represented on both sides.  
-**E-class:** bounded model-level `E2`  
-**Status:** common-target inheritance; actual dynamics comes from the quantum model.
+## 6. Material divergences — 7
 
-### `CG-I3` — quantum effects/Born probabilities
-
-**Key:** K5  
-**E-class:** bounded model-level `E2`  
-**Status:** empirical support belongs to ordinary quantum theory.
-
-### `CG-I4` — standard quantum composites
-
-**Key:** K8  
-**Relation:** standard quantum tensor/composite structure appears in named quantum realizations on both sides.  
-**E-class:** bounded model-level `E2`  
-**Status:** does not establish a framework-wide composite-selection theorem.
-
-Quantum-inherited E1/E2 relation rows: **4**.
-
-## 4. Non-generic independently shared structure
-
-No relation satisfies all of:
-
-1. non-generic after weaker-framework subtraction;
-2. not merely ordinary-quantum inheritance;
-3. not bridge-mediated/retrospectively constructed;
-4. physical semantics sufficiently aligned;
-5. source-bound on both sides with an explicit map.
-
-`CG-N` independently justified relation rows: **0**.
-
-## 5. Optional/extension-dependent relations
-
-### `CG-X1` — dagger versus reversibility
-
-**CQM:** optional dagger  
-**GPTOPT:** reversible transformations/continuous reversibility in named models or reconstruction packages  
-**Strongest relation:** at most E5 functional analogy  
-**Control:** `DAGGER != PHYSICAL REVERSIBILITY`.
-
-No theorem in the frozen corpus establishes either implication framework-wide.
-
-### `CG-X2` — compactness versus purification/dilation
-
-**CQM:** optional compact closure/cups/caps/map-state duality  
-**GPTOPT:** optional purification and reversible dilation  
-**Strongest relation:** `NO_SOURCE_BOUND_EQUIVALENCE`; functional analogy only where physically motivated  
-**Control:** `COMPACTNESS != PURIFICATION`.
-
-### `CG-X3` — Frobenius/classical structures versus operational classical systems
-
-**CQM:** optional categorical classical structures  
-**GPTOPT:** classical operational models, distinguishability/effect structure  
-**Strongest relation:** E5 unless a named model supplies stronger correspondence  
-**Limitation:** optional algebraic structure versus model-class member.
-
-### `CG-X4` — CPM versus operational transformations
-
-**CQM:** optional CPM/mixed-state construction  
-**GPTOPT:** general transformation classes  
-**Quantum subrelation:** CP maps are `CG-I2`, quantum-inherited  
-**Whole-family relation:** no equivalence; GPTOPT transformation classes can be broader model data.
-
-### `CG-X5` — categorical probabilistic bridge
-
-**CQM:** `CQM-X4` bridge residue  
-**GPTOPT:** probabilistic operational process structure  
-**E-class:** restricted E2  
-**Status:** `CG-T` + `CG-X`; bridge-mediated, not independent.
-
-Extension-dependent relation rows: **5**.
-
-## 6. Material divergences
-
-### `CG-D1` — equivalence doctrine
-
-Categorical equality/coherence is not the same framework doctrine as operational indistinguishability relative to a test/effect family.
-
-### `CG-D2` — probability and convex structure
-
-GPTOPT carries normalized operational probabilities and standard GPT convex state/effect geometry at core family scope. Minimal CQM does not.
-
-### `CG-D3` — allowed model class
-
-GPTOPT explicitly includes classical, quantum and postquantum/nonquantum operational models and multiple composites. CQM is quantum-motivated categorical/process theory with toy/non-Hilbert categorical models but no source-bound theorem identifying its whole model family with GPTOPT.
-
-### `CG-D4` — optional-structure burdens
-
-CQM dagger/compact/Frobenius/CPM structures and GPTOPT purification/local-tomography/continuous-reversibility/reconstruction principles are distinct named assumptions. No pooling is permitted.
-
-### `CG-D5` — composite-system selection
-
-GPTOPT explicitly exposes minimal/maximal/intermediate composite ambiguity. A CQM monoidal product does not discharge that physical state/effect selection burden.
-
-### `CG-D6` — quantum-target role
-
-CQM is primarily a quantum reformulation/structural refinement at bounded scope. GPTOPT is a broader generalization/reconstruction possibility framework containing quantum theory as one model.
-
-### `CG-D7` — empirical-theory-space role
-
-GPTOPT has source-bound empirical narrowing of bounded generalized regions to L2. CQM has no framework-level empirical discriminator and inherits ordinary quantum success through concrete models.
-
-Material-divergence ledger rows: **7**.
-
-## 7. Open/no-positive-relation results
-
-### `CG-O1` — K4 dynamics
-
-Both base frameworks lack a universal history selector. Shared absence earns zero convergence credit.
-
-### `CG-O2` — K6 spacetime causality
-
-No source-bound framework-level identity among monoidal parallelism, no-signalling, operational causality and Lorentzian causality.
-
-### `CG-O3` — K7 RG/scale
-
-No pairwise source-bound scale relation.
-
-### `CG-O4` — K10 pairwise empirical discriminator
-
-No observable source-bound as a CQM-vs-GPTOPT framework discriminator.
-
-Open/no-positive-relation rows: **4**.
-
-## 8. Empirical result
-
-`CG-E` rows: **0**.
-
-FCP-8 L2 empirical narrowing is real GPTOPT theory-space evidence, but it does not select CQM over GPTOPT and does not transform the bridge into an E4 relation.
-
-## 9. Independent-convergence accounting
-
-- bridge-mediated E1/E2 rows: **4**;
-- quantum-inherited E1/E2 rows: **4**;
-- independently justified E1/E2 rows: **0**;
-- independent `STRONG_CONVERGENCE`: **0**;
-- independent `MODERATE_CONVERGENCE`: **0**.
-
-## 10. Framework-separation result
-
-The bridge defines a scientifically useful intersection/common enriched process territory, not full framework identity. Material differences remain in probability structure, model class, optional assumptions, composite selection, operational semantics and empirical role.
+1. **equivalence doctrine:** categorical equality/coherence versus operational indistinguishability;
+2. **probability/convex structure:** GPTOPT base/near-base; not minimal CQM;
+3. **allowed model class:** GPTOPT explicit classical/quantum/postquantum operational space versus CQM quantum-motivated categorical family with toy/non-Hilbert models;
+4. **optional burdens:** dagger/compact/Frobenius/CPM versus purification/local tomography/continuous reversibility/reconstruction packages;
+5. **composite selection:** GPTOPT minimal/maximal/intermediate ambiguity is not discharged by a monoidal product;
+6. **quantum-target role:** CQM reformulation/refinement versus GPTOPT generalization/reconstruction;
+7. **empirical-theory-space role:** GPTOPT bounded L2 narrowing versus no CQM framework discriminator.
+
+## 7. Open/no-positive-relation rows — 4
+
+- `CG-O1` K4 dynamics: shared lack of universal selector earns zero convergence;
+- `CG-O2` K6 causality: no exact relation among monoidal parallelism/no-signalling/operational/Lorentzian causality;
+- `CG-O3` K7 RG: no pairwise scale theorem;
+- `CG-O4` K10: no framework-level pairwise discriminator.
+
+## 8. Empirical rows
+
+`CG-E`: **0**.
+
+GPTOPT's L2 empirical narrowing is scientifically real but does not select CQM.
+
+## 9. Accounting
+
+- generic shared shell rows: **5**;
+- bridge/translation rows: **4**;
+- quantum-inherited overlap rows: **4**;
+- independently justified non-generic shared rows: **0**;
+- extension-dependent rows: **5**;
+- material divergences: **7**;
+- open/no-positive rows: **4**;
+- empirically distinct: **0**;
+- bridge-mediated E1/E2: **0**;
+- quantum-inherited direct pairwise E1/E2: **0**;
+- independently justified E1/E2: **0**;
+- independent strong convergence: **0**;
+- independent moderate convergence: **0**.
+
+## 10. Framework separation
 
 `FCP4_FRAMEWORK_SEPARATION = PRESERVED`.
 
-Continuity rule:
+The source-bound bridge establishes scientifically useful intersection/translation, while probability structure, model class, optional assumptions, composite selection, operational semantics and empirical role remain materially different.
 
 > **Preserve results, not theories.**
