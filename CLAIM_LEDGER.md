@@ -2,7 +2,7 @@
 
 ## Current state
 
-Scientific claim entries began with FCP-1. FCP-3 added the first bounded cross-framework claims under preregistered FCP-2 coordinates. FCP-5 adds the AQFT/null reformulation-extension control while preserving the distinction between reformulation relations and independent convergence. **No overall numerical framework score or winner is inferred from these rows.**
+Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, and FCP-16 appended the current loop/null-GR control without altering prior claim rows. The ledger now contains **49 durable rows through FCP-16**. **No overall numerical framework score or winner is inferred from these rows.**
 
 ## Claim record schema
 

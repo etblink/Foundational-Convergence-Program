@@ -3,9 +3,9 @@
 ## Status
 
 **Canonical integrated phase:** FCP-13 — CQM vs. Null/QM: K1–K10 Reformulation, Process-Structure, and Empirical-Control Baseline  
-**Current qualified research phase:** FCP-15 — Loop / Spin-Network / Spinfoam Framework Source Intake and K1–K10 Baseline  
-**Current qualified research state:** FCP-14 preserved a real source-bound CQM/GPTOPT categorical-probabilistic bridge but, after provenance remediation, did not source-qualify the explicit pairwise map required for E2; no independent non-generic CQM/GPTOPT convergence survived and FCP-4 framework separation remained preserved. FCP-15 then source-bound `FW-LOOP` from 13 external works as one top-level family with persistent `LOOP-CANON` and `LOOP-COVAR` labels, mature kinematical quantum geometry, formulation-dependent/open framework-wide dynamics, partial continuum/GR realization, and no framework-level empirical discriminator. FCP-15 performed no cross-framework E1–E5 comparison. Canonical `main` remains integrated only through FCP-13.  
-**Next recommended task:** FCP-16 — `FW-LOOP` vs. Null/GR: K1–K10 Quantum-Geometry, Dynamics, Continuum-Recovery, and Empirical-Inheritance Control
+**Current qualified research phase:** FCP-16 — `FW-LOOP` vs. Null/GR: K1–K10 Quantum-Geometry, Dynamics, Continuum-Recovery, and Empirical-Inheritance Control  
+**Current qualified research state:** FCP-16 establishes that `FW-LOOP` is not merely a reformulation of GR: after generic-mathematics, classical-GR-lineage, optional/model, target-conditioned-recovery and empirical-inheritance subtraction, six non-generic loop residue items remain across quantum-geometric kinematics, formulation-dependent canonical/covariant dynamics, the bounded internal bridge, continuum/coarse-graining structure and the Barbero–Immirzi selection burden. Pairwise loop↔GR E2/E3 are withheld at the closed-packet provenance ceiling, independent E1–E4 convergence remains zero, and `FCP16_INDEPENDENT_LOOP_E4 = 0`. Canonical `main` is still integrated only through FCP-13 pending the separately qualified fast-forward.  
+**Next recommended task:** exact canonical fast-forward integration through the qualified FCP-16 continuity head, then FCP-17 — Reduced NFC vs. `FW-LOOP`
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language or model.
 
@@ -34,6 +34,7 @@ No framework receives evidentiary credit merely because it suggested the questio
 - **FCP-13:** compared CQM against the established null quantum/QFT sector, classified bounded E2 model relations as reformulation/structural refinement rather than independent convergence, subtracted generic categorical machinery and empirical inheritance, and retained only a source-qualified structural/optional-extension residue.
 - **FCP-14:** compared source-bound CQM with GPTOPT after dual subtraction; preserved the categorical-probabilistic bridge, withheld pairwise E2 because the frozen packet did not source-qualify the explicit required map, retained only E5-level positive relations at current scope, found no independent non-generic convergence, and preserved `FCP4_FRAMEWORK_SEPARATION`.
 - **FCP-15:** source-bound `FW-LOOP` from 13 external works and selected `OUTCOME_B_INTERNAL_SUBFRAMEWORK_DISTINCTION`: one top-level `FW-LOOP` with persistent `LOOP-CANON` / `LOOP-COVAR`, mature kinematical quantum geometry, formulation-dependent/open framework-wide dynamics, partial continuum/GR realization, no framework-level empirical discriminator, and no cross-framework E1–E5 assignment.
+- **FCP-16:** compared the FCP-15-qualified loop family against the frozen null/GR baseline after generic, lineage, optional/model, target-conditioned and empirical-inheritance subtraction; retained six non-generic loop residue items, withheld pairwise E2/E3 at the closed-packet provenance ceiling, found E1–E4 = 0, E5-only = 9, NONE = 1, and identified no independent loop E4 discriminator.
 
 ## FCP-6 Reduced-NFC/AQFT control
 
