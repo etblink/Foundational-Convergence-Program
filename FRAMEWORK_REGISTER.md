@@ -21,14 +21,14 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 | Framework ID | Working name | Role | Status | Latest bounded scientific status |
 |---|---|---|---|---|
 | `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `PAIRWISE_COMPARISON_COMPLETE` | FCP-16 loop/null-GR control is the latest null/GR comparison: recovered GR success remains inherited rather than independent loop evidence, pairwise loop↔GR E2/E3 remain unqualified at the closed-packet provenance ceiling, and no independent loop E4 discriminator is identified |
-| `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `PAIRWISE_COMPARISON_COMPLETE` | FCP-12: no E1–E4 or strong/moderate NFC–CST convergence after dual subtraction; K2/K5/K8 weak-generic, K1/K3/K6 functional only; Congruence/Viability/FIS remain unresolved discovery questions while Realization/Dynamics remain material asymmetries |
+| `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `PAIRWISE_COMPARISON_COMPLETE` | FCP-17 loop comparison complete after FCP-16 loop/null-GR subtraction: no E1–E4 Reduced-NFC/loop relation; E5-only = 6, none = 4, no independent strong/moderate convergence and no non-generic survivor pass; loop dynamics and physical realization remain materially more specific than Reduced NFC |
 | `FW-OAQ` | Operational / algebraic quantum approaches | historical umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-4 split into `FW-AQFT`, `FW-GPTOPT`, `FW-CQM` |
 | `FW-AQFT` | Algebraic / locally covariant quantum field theory | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-5/6 controls complete; core mostly reformulation/sharpening of QFT plus named AQFT-X extensions; no framework-level empirical discriminator |
 | `FW-GPTOPT` | Generalized probabilistic / operational-probabilistic theories | source-bound generalizing meta-framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-14 CQM comparison complete: GPTOPT retains convex/probabilistic operational structure, physical composite-selection burden and broader post-quantum theory space; a source-bound CQM/GPTOPT bridge exists, but no independently justified non-generic convergence survives and FCP-4 framework separation is preserved |
 | `FW-CQM` | Categorical quantum mechanics / quantum process theories | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-14 GPTOPT comparison complete: the source-bound categorical-probabilistic bridge is real, but the frozen packet does not source-qualify an explicit pairwise E2 map; positive relations top out at E5, independent strong/moderate convergence remains zero, material CQM/GPTOPT differences remain, and FCP-4 framework separation is preserved |
 | `FW-CAUSAL` | Causal-set / order-theoretic approaches | historical causal/order umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-9/FCP-10 found the literal umbrella scientifically over-broad; causal set theory proper is now `FW-CST`; unspecified adjacent causal/order approaches remain deferred pending separate source intake |
 | `FW-CST` | Causal Set Theory | source-bound discrete causal/order framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-12 NFC comparison complete after FCP-11 null/GR subtraction: no E1–E4 NFC relation survives; CST causal/discrete carrier, manifold-selection burden and partial realization lack source-bound Reduced-NFC counterparts; R2/D2/E2 and no-framework-discriminator status unchanged |
-| `FW-LOOP` | Loop / spin-network / spinfoam approaches | source-bound quantum-gravity comparator family | `PAIRWISE_COMPARISON_COMPLETE` | FCP-16 null/GR control complete: `FW-LOOP` is not merely GR reformulation; six non-generic residue items survive subtraction, pairwise loop↔GR E2/E3 remain unqualified at the closed-packet provenance ceiling, E1–E4 and independent strong/moderate convergence remain zero, physical calibration and complete continuum recovery remain open, and no framework-level loop empirical discriminator is identified |
+| `FW-LOOP` | Loop / spin-network / spinfoam approaches | source-bound quantum-gravity comparator family | `PAIRWISE_COMPARISON_COMPLETE` | FCP-17 Reduced-NFC comparison complete after FCP-16 null/GR control: the six-item null-subtracted loop residue is preserved; no E1–E4 Reduced-NFC relation survives, E5-only = 6, none = 4, independent strong/moderate convergence remains zero, and loop quantum geometry/dynamics/partial realization appear as asymmetries rather than convergence; no new framework-level empirical discriminator is identified |
 | `FW-TENSOR` | Tensor-network / information-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-AS` | Asymptotic safety | source-bound continuum/RG fixed-point quantum-gravity comparator | `SOURCE_BOUND_READY` | FCP-19 source intake complete: one coherent framework; broad `AS-L3` multi-truncation fixed-point/robustness evidence, partial Lorentzian/matter/UV–IR realization, exact complete-theory fixed point and physical critical-surface dimension open, and no unavoidable framework-level empirical discriminator |
 | `FW-STRING` | String-theoretic / holographic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
@@ -340,6 +340,38 @@ Main result:
 - `FCP16_INDEPENDENT_LOOP_E4 = 0` and no framework-level loop empirical discriminator is identified.
 
 FCP-16 therefore leaves a bounded null-subtracted loop residue suitable for a separately authorized Reduced-NFC comparison without carrying generic GR lineage, target-conditioned GR recovery or inherited GR empirical success forward as independent loop content.
+
+## FCP-17 Reduced-NFC/loop controlled comparison
+
+FCP-17 compares Reduced NFC exactly as frozen by FCP-3 against only the six-item FCP-16 null-subtracted loop residue.
+
+Main result:
+
+- E1 = **0**, E2 = **0**, E3 = **0**, E4 = **0**;
+- E5-only = **6**, none = **4**;
+- independent strong convergence = **0** and independent moderate convergence = **0**;
+- `PASS_NON_GENERIC = 0` across the six Reduced-NFC survivor questions;
+- Congruence and Interface Sufficiency have no source-bound loop-residue counterpart, Viability is weak-generic, Globalization is functional only, and Realization/Dynamics are defeated as convergence by material asymmetry;
+- loop quantum-geometric kinematics, concrete canonical/covariant dynamics programs and partial realization remain more specific than the Reduced-NFC object;
+- no independent pairwise E4 discriminator is source-bound.
+
+FCP-17 therefore preserves the six-item loop residue without converting relational/network/process/globalization vocabulary into non-generic Reduced-NFC/loop convergence.
+
+## FCP-18 program meta-audit
+
+FCP-18 audits the closed program corpus through FCP-17 without changing FCP-2 governance.
+
+Main result:
+
+- independently non-generic multi-framework recurrence at E1–E4 = **0**;
+- strong-convergence recurrence = **0** and moderate-convergence recurrence = **0**;
+- independent framework-level E4 = **0**;
+- Reduced NFC has not accumulated repeated independent positive support under the frozen burden;
+- provenance/genericity/lineage/target-conditioning/empirical-inheritance controls materially affect conclusions while still allowing stronger relations when explicit records exist;
+- `GOVERNANCE_REVIEW_CANDIDATE = 0`;
+- `PRIOR_RESULT_REMEDIATION_CANDIDATE = 0`.
+
+FCP-18 treats framework-level empirical selection as the most universal current bottleneck while preserving dynamics and physical realization as separate major burdens.
 
 ## FCP-19 Asymptotic Safety source intake
 

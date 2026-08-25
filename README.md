@@ -2,10 +2,10 @@
 
 ## Status
 
-**Canonical integrated phase:** FCP-16 — `FW-LOOP` vs. Null/GR: K1–K10 Quantum-Geometry, Dynamics, Continuum-Recovery, and Empirical-Inheritance Control  
-**Current qualified research phase:** FCP-16 — `FW-LOOP` vs. Null/GR: K1–K10 Quantum-Geometry, Dynamics, Continuum-Recovery, and Empirical-Inheritance Control  
-**Current qualified research state:** FCP-16 establishes that `FW-LOOP` is not merely a reformulation of GR: after generic-mathematics, classical-GR-lineage, optional/model, target-conditioned-recovery and empirical-inheritance subtraction, six non-generic loop residue items remain across quantum-geometric kinematics, formulation-dependent canonical/covariant dynamics, the bounded internal bridge, continuum/coarse-graining structure and the Barbero–Immirzi selection burden. Pairwise loop↔GR E2/E3 are withheld at the closed-packet provenance ceiling, independent E1–E4 convergence remains zero, and `FCP16_INDEPENDENT_LOOP_E4 = 0`. Canonical `main` is now integrated through the qualified FCP-16 continuity state.  
-**Next recommended task:** FCP-17 — Reduced NFC vs. `FW-LOOP`: K1–K10 Controlled Quantum-Geometry, Dynamics, and Globalization Comparison
+**Canonical integrated phase:** FCP-19 — `FW-AS` Asymptotic Safety Source Intake, Framework Delimitation, and K1–K10 Baseline  
+**Current qualified research phase:** FCP-19 — `FW-AS` Asymptotic Safety Source Intake, Framework Delimitation, and K1–K10 Baseline  
+**Current qualified research state:** FCP-17 found no independently non-generic E1–E4 Reduced-NFC/loop convergence (E5-only = 6, NONE = 4, `PASS_NON_GENERIC = 0`); FCP-18 found no independently non-generic multi-framework recurrence in the closed corpus and no repeated independent Reduced-NFC support at the frozen burden; FCP-19 source-binds `FW-AS` as one coherent framework with `AS-L3` multi-truncation fixed-point/robustness evidence, while an exact complete-theory fixed-point theorem, exact physical critical-surface dimension, complete Lorentzian/physical realization, and an unavoidable base-framework empirical discriminator remain open. Canonical `main` is integrated through FCP-19.  
+**Next recommended task:** FCP-20 — `FW-AS` vs. Null/GR: RG-Lineage, Fixed-Point, Continuum-Recovery, and Empirical-Inheritance Control
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language or model.
 
@@ -35,6 +35,9 @@ No framework receives evidentiary credit merely because it suggested the questio
 - **FCP-14:** compared source-bound CQM with GPTOPT after dual subtraction; preserved the categorical-probabilistic bridge, withheld pairwise E2 because the frozen packet did not source-qualify the explicit required map, retained only E5-level positive relations at current scope, found no independent non-generic convergence, and preserved `FCP4_FRAMEWORK_SEPARATION`.
 - **FCP-15:** source-bound `FW-LOOP` from 13 external works and selected `OUTCOME_B_INTERNAL_SUBFRAMEWORK_DISTINCTION`: one top-level `FW-LOOP` with persistent `LOOP-CANON` / `LOOP-COVAR`, mature kinematical quantum geometry, formulation-dependent/open framework-wide dynamics, partial continuum/GR realization, no framework-level empirical discriminator, and no cross-framework E1–E5 assignment.
 - **FCP-16:** compared the FCP-15-qualified loop family against the frozen null/GR baseline after generic, lineage, optional/model, target-conditioned and empirical-inheritance subtraction; retained six non-generic loop residue items, withheld pairwise E2/E3 at the closed-packet provenance ceiling, found E1–E4 = 0, E5-only = 9, NONE = 1, and identified no independent loop E4 discriminator.
+- **FCP-17:** compared Reduced NFC only against the six-item FCP-16 null-subtracted loop residue; found E1–E4 = 0, E5-only = 6, NONE = 4, zero independent strong/moderate convergence, and no non-generic survivor pass, with loop dynamics/realization producing material asymmetries rather than convergence.
+- **FCP-18:** performed a closed-corpus program meta-audit; found zero independently non-generic multi-framework recurrence at E1–E4, zero repeated independent Reduced-NFC support at the frozen burden, and zero independent framework-level E4, while finding no governance-review or prior-result-remediation candidate.
+- **FCP-19:** source-bound `FW-AS` as one coherent Asymptotic Safety framework from 18 external works; fixed-point evidence reaches `AS-L3` multi-truncation robustness scope, while exact complete-theory fixed-point control, exact physical critical-surface dimension, complete Lorentzian/physical realization, and a compulsory framework-level empirical discriminator remain open.
 
 ## FCP-6 Reduced-NFC/AQFT control
 
@@ -310,8 +313,8 @@ Permanent rule:
 
 Recommended:
 
-**FCP-17 — Reduced NFC vs. `FW-LOOP`: K1–K10 Controlled Quantum-Geometry, Dynamics, and Globalization Comparison**.
+**FCP-20 — `FW-AS` vs. Null/GR: RG-Lineage, Fixed-Point, Continuum-Recovery, and Empirical-Inheritance Control**.
 
-FCP-16 leaves a six-item null-subtracted loop residue spanning quantum-geometric kinematics, canonical and covariant dynamics programs, the bounded canonical/covariant bridge, continuum/coarse-graining structure, and the Barbero–Immirzi physical-selection burden.
+FCP-19 leaves a source-bound Asymptotic Safety object centered on an interacting gravitational UV fixed point and finite-dimensional UV critical surface, with `AS-L3` multi-truncation robustness evidence but incomplete complete-theory, Lorentzian/physical-realization, and empirical-selection closure.
 
-The next comparison should test Reduced NFC only against that FCP-16-qualified residue, preserve `LOOP-CANON` / `LOOP-COVAR` scope, and keep generic GR lineage, target-conditioned GR recovery, inherited empirical success and optional model-specific loop extensions outside independent convergence credit. This recommendation is research prioritization only; FCP-17 requires separate authorization.
+The next comparison should test `FW-AS` first against the frozen null/GR baseline and subtract generic QFT/RG machinery, perturbative/EFT lineage, supplied classical-GR target content, target-conditioned IR/GR recovery, inherited GR/QFT empirical success, and optional matter/cosmology/black-hole phenomenology before any later Reduced-NFC/AS comparison. This recommendation is research prioritization only; FCP-20 requires separate authorization.
