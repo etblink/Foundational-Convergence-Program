@@ -2,9 +2,9 @@
 
 ## Status
 
-**Current completed phase:** FCP-11 — CST vs. Null/GR: K1–K10 Emergence, Reformulation, and Empirical-Control Baseline  
-**Current scientific state:** canonical causal set theory is not a mere reformulation of GR: its locally finite causal-set carrier, primitive causal order and fundamental spacetime discreteness are additional foundational commitments, while its strongest GR-like results at current source scope are predominantly target-conditioned continuum reconstruction/compatibility; continuum remains R2 framework-wide, optional dynamics D2, empirical evidence E2 model-specific, with no framework-level CST empirical discriminator  
-**Next recommended task:** FCP-12 — Reduced NFC vs. CST: K1–K10 Controlled Structural Comparison
+**Current completed phase:** FCP-12 — Reduced NFC vs. CST: K1–K10 Controlled Structural Comparison  
+**Current scientific state:** after both the Reduced-NFC provenance firewall and the FCP-11 CST null/GR subtraction, no E1–E4 or strong/moderate Reduced-NFC/CST convergence survives; six keys retain only E5 generic/functional relations and four have no correspondence; Congruence, Viability and Interface Sufficiency remain unresolved discovery questions rather than established pairwise results  
+**Next recommended task:** FCP-13 — CQM vs. Null/QM: K1–K10 Reformulation, Process-Structure, and Empirical-Control Baseline
 
 The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language or model.
 
@@ -29,6 +29,7 @@ No framework receives evidentiary credit merely because it suggested the questio
 - **FCP-9:** source-bound causal set theory proper, separated minimal kinematics from dynamics/continuum/matter/phenomenology, and opened a framework-split candidate for the broader causal/order umbrella without performing any cross-framework comparison.
 - **FCP-10:** resolved that split, preserved historical `FW-CAUSAL` as a superseded umbrella, admitted canonical `FW-CST`, and deferred the unbound adjacent order-theoretic remainder without creating a placeholder framework or performing a cross-framework comparison.
 - **FCP-11:** compared canonical CST against the null/GR baseline, separated additional CST primitives from target-conditioned GR reconstruction, generic mathematics and optional extensions, and found no strong/moderate independent CST–null convergence or framework-level CST empirical discriminator.
+- **FCP-12:** compared Reduced NFC only against the FCP-11-qualified CST residue; no E1–E4 or strong/moderate convergence survived, while FIS/Congruence/Viability remained discovery questions without source-bound CST counterparts.
 
 ## FCP-6 Reduced-NFC/AQFT control
 
@@ -162,6 +163,63 @@ Bounded verdict:
 
 > **CAUSAL SET THEORY IS NOT A MERE REFORMULATION OF GR: ITS LOCALLY FINITE CAUSAL-SET CARRIER, FUNDAMENTAL CAUSAL ORDER, AND SPACETIME DISCRETENESS ARE ADDITIONAL FOUNDATIONAL COMMITMENTS. HOWEVER, AT THE FCP-11 SOURCE SCOPE, ITS STRONGEST GR-LIKE RESULTS ARE PREDOMINANTLY TARGET-CONDITIONED CONTINUUM RECONSTRUCTION OR COMPATIBILITY RESULTS, OPTIONAL DYNAMICS DO NOT YET SELECT MANIFOLDLIKE GR + MATTER, AND NO FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR IS IDENTIFIED.**
 
+## FCP-12 Reduced-NFC/CST control
+
+FCP-12 applies both required firewalls before considering pairwise correspondence:
+
+1. Reduced NFC is restricted to `K_red=(C,T)`, R1–R10 and the six survivor questions;
+2. CST is restricted to the FCP-11-qualified residue after generic mathematics, supplied target geometry and inherited null success are removed.
+
+Key-level result:
+
+- E1: **0**;
+- E2: **0**;
+- E3: **0**;
+- E4: **0**;
+- E5-only: **6** — K1, K2, K3, K5, K6, K8;
+- no correspondence: **4** — K4, K7, K9, K10;
+- strong convergence: **0**;
+- moderate convergence: **0**.
+
+The E5-only relations divide into:
+
+- weak/generic: K2, K5, K8;
+- functional analogy: K1, K3, K6.
+
+Six survivor tests:
+
+- non-generic passes: **0**;
+- unresolved discovery questions: **Congruence, Viability, Interface Sufficiency**;
+- defeated current convergence candidates: **Globalization, Realization, Dynamics**.
+
+Specific bounded negative results:
+
+> **NO_SOURCE_BOUND_CST_CONGRUENCE_ANALOGUE_AT_CURRENT_SCOPE**
+
+> **NO_SOURCE_BOUND_CST_MANIFOLD_VIABILITY_THEOREM_AT_CURRENT_SCOPE**
+
+> **NO_SOURCE_BOUND_CST_FIS_ANALOGUE_AT_CURRENT_SCOPE**
+
+Permanent FCP-12 controls:
+
+> **GENERIC RELATIONAL MATHEMATICS != FOUNDATIONAL CONVERGENCE.**
+
+> **FINITE DESCRIPTION != FUNDAMENTAL SPACETIME DISCRETENESS.**
+
+> **OBSERVATIONAL QUOTIENT != CAUSAL-SET ORDER ISOMORPHISM.**
+
+> **INTERFACE STRUCTURE != PHYSICAL CAUSAL ORDER.**
+
+> **LOCAL-TO-GLOBAL QUESTION != SHARED GLOBALIZATION THEOREM.**
+
+> **A SHARED QUESTION IS NOT A SHARED RESULT.**
+
+Controlling verdict:
+
+> **NO NONTRIVIAL REDUCED-NFC/CST CONVERGENCE IS ESTABLISHED AFTER BOTH PROVENANCE AND CST NULL/GR SUBTRACTION AT CURRENT SOURCE SCOPE. THE SURVIVING RESEMBLANCES ARE GENERIC OR FUNCTIONAL, WHILE CST'S PHYSICAL CAUSAL/DISCRETE CARRIER, MANIFOLD-SELECTION BURDEN AND PARTIAL REALIZATION HAVE NO SOURCE-BOUND REDUCED-NFC COUNTERPART.**
+
+CST remains R2/D2/E2 model-specific with no framework-level empirical discriminator. Reduced NFC remains the FCP-3 comparative object with no selected physical dynamics, general K9 realization or empirical discriminator.
+
 ## NFC provenance boundary
 
 The NFC canon is **not** imported into FCP. Reduced NFC enters only through the source-bound noncanonical reduction handoff.
@@ -189,8 +247,8 @@ Permanent rule:
 
 Recommended:
 
-**FCP-12 — Reduced NFC vs. CST: K1–K10 Controlled Structural Comparison**.
+**FCP-13 — CQM vs. Null/QM: K1–K10 Reformulation, Process-Structure, and Empirical-Control Baseline**.
 
-FCP-12 should compare Reduced NFC only against the **FCP-11-qualified CST residue** while retaining full K1–K10 context. It must prohibit convergence credit for generic order/combinatorial mathematics, Lorentzian/manifold structure supplied through the continuum target, GR/QFT empirical success inherited through reconstruction, and optional CST dynamics/phenomenology unless the exact extension is explicitly the comparison object.
+FCP-12 is substantially negative as a Reduced-NFC convergence comparison. Congruence, Viability and FIS remain legitimate discovery questions, but the frozen CST packet supplies no non-generic theorem that converts them into pairwise evidence. The higher-information move is therefore to return to the ready framework queue rather than force another NFC comparison.
 
-The highest-information keys are expected to be K1, K6, K8 and K9, with K4 dynamics and K10 empirical burden retained as mandatory controls.
+`FW-CQM` is already source-bound by FCP-4 and has not yet received a cross-framework comparison. FCP-13 should first determine which CQM structures are ordinary quantum-theory reformulation, which are generic category/process/diagram mathematics, which are genuinely additional source-qualified process structures, and whether any independent empirical content remains after null/QM subtraction.

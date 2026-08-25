@@ -21,13 +21,13 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 | Framework ID | Working name | Role | Status | Latest bounded scientific status |
 |---|---|---|---|---|
 | `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `PAIRWISE_COMPARISON_COMPLETE` | FCP-3 Reduced-NFC comparison, FCP-5 AQFT control, FCP-7 GPTOPT/QM generalization control, and FCP-11 CST/null-GR emergence/reconstruction control complete; empirical strength remains scoped to tested component theories |
-| `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `PAIRWISE_COMPARISON_COMPLETE` | FCP-6: no strong/moderate NFC–AQFT convergence after subtraction; Interface Sufficiency/Globalization remain discovery questions; Realization/Dynamics remain burden checks |
+| `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `PAIRWISE_COMPARISON_COMPLETE` | FCP-12: no E1–E4 or strong/moderate NFC–CST convergence after dual subtraction; K2/K5/K8 weak-generic, K1/K3/K6 functional only; Congruence/Viability/FIS remain unresolved discovery questions while Realization/Dynamics remain material asymmetries |
 | `FW-OAQ` | Operational / algebraic quantum approaches | historical umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-4 split into `FW-AQFT`, `FW-GPTOPT`, `FW-CQM` |
 | `FW-AQFT` | Algebraic / locally covariant quantum field theory | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-5/6 controls complete; core mostly reformulation/sharpening of QFT plus named AQFT-X extensions; no framework-level empirical discriminator |
 | `FW-GPTOPT` | Generalized probabilistic / operational-probabilistic theories | source-bound generalizing meta-framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-8: post-quantum Bell/composite theory space empirically and structurally bounded; no unique quantum-boundary principle; empirical evidence reaches bounded L2, not global L4 selection |
-| `FW-CQM` | Categorical quantum mechanics / quantum process theories | source-bound comparator | `SOURCE_BOUND_READY` | FCP-4 source intake complete; no cross-framework comparison yet |
+| `FW-CQM` | Categorical quantum mechanics / quantum process theories | source-bound comparator | `SOURCE_BOUND_READY` | FCP-4 source intake complete; no cross-framework comparison yet; next ready framework for null/QM reformulation/process-structure control after FCP-12 returns to the framework queue |
 | `FW-CAUSAL` | Causal-set / order-theoretic approaches | historical causal/order umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-9/FCP-10 found the literal umbrella scientifically over-broad; causal set theory proper is now `FW-CST`; unspecified adjacent causal/order approaches remain deferred pending separate source intake |
-| `FW-CST` | Causal Set Theory | source-bound discrete causal/order framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-11 null/GR control complete: the causal-set carrier/order/discreteness are additional foundational commitments, while strongest GR-like results are predominantly target-conditioned reconstruction/compatibility; continuum `R2`, optional dynamics `D2`, empirical `E2` model-specific; no framework-level empirical discriminator |
+| `FW-CST` | Causal Set Theory | source-bound discrete causal/order framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-12 NFC comparison complete after FCP-11 null/GR subtraction: no E1–E4 NFC relation survives; CST causal/discrete carrier, manifold-selection burden and partial realization lack source-bound Reduced-NFC counterparts; R2/D2/E2 and no-framework-discriminator status unchanged |
 | `FW-LOOP` | Loop / spin-network / spinfoam approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-TENSOR` | Tensor-network / information-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-AS` | Asymptotic safety | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
@@ -115,7 +115,7 @@ Canonical `FW-CST` identity:
 - core dynamics: none;
 - CSG: optional `C2` classical dynamics extension;
 - quantum measure/QSG: optional/provisional `C3` quantum-dynamics layer;
-- Lorentzian spacetime/GR-like geometry: continuum realization target, not primitive carrier;
+- Lorentzian spacetime/GR-like geometry: continuum realization target, not primitive input;
 - Standard Model matter: `C4` extension, not core;
 - framework-wide continuum level: `R2`;
 - strongest bounded optional dynamics level: `D2`;
@@ -155,6 +155,49 @@ Main controls:
 Bounded verdict:
 
 > **CAUSAL SET THEORY IS NOT A MERE REFORMULATION OF GR: ITS LOCALLY FINITE CAUSAL-SET CARRIER, FUNDAMENTAL CAUSAL ORDER, AND SPACETIME DISCRETENESS ARE ADDITIONAL FOUNDATIONAL COMMITMENTS. HOWEVER, AT THE FCP-11 SOURCE SCOPE, ITS STRONGEST GR-LIKE RESULTS ARE PREDOMINANTLY TARGET-CONDITIONED CONTINUUM RECONSTRUCTION OR COMPATIBILITY RESULTS, OPTIONAL DYNAMICS DO NOT YET SELECT MANIFOLDLIKE GR + MATTER, AND NO FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR IS IDENTIFIED.**
+
+## FCP-12 Reduced-NFC/CST dual-subtraction comparison
+
+FCP-12 compares Reduced NFC only against the FCP-11-qualified CST residue and applies both provenance/subtraction firewalls before correspondence classification.
+
+Key-level result:
+
+- E1: **0**;
+- E2: **0**;
+- E3: **0**;
+- E4: **0**;
+- E5-only: **6** — K1, K2, K3, K5, K6, K8;
+- no correspondence: **4** — K4, K7, K9, K10;
+- strong convergence: **0**;
+- moderate convergence: **0**.
+
+The E5-only relations split into three weak/generic recurrences (K2, K5, K8) and three functional analogies (K1, K3, K6). None earns distinctive convergence credit.
+
+Six survivor-question tests produce:
+
+- `PASS_NON_GENERIC`: **0**;
+- `UNRESOLVED_DISCOVERY`: **3** — Congruence, Viability, Interface Sufficiency;
+- `DEFEATED_AS_CONVERGENCE`: **3** — Globalization, Realization, Dynamics.
+
+Permanent controls include:
+
+> **FINITE DESCRIPTION != FUNDAMENTAL SPACETIME DISCRETENESS.**
+
+> **OBSERVATIONAL QUOTIENT != CAUSAL-SET ORDER ISOMORPHISM.**
+
+> **INTERFACE STRUCTURE != PHYSICAL CAUSAL ORDER.**
+
+> **A SHARED QUESTION IS NOT A SHARED RESULT.**
+
+FCP-12 identifies no source-bound CST FIS theorem, no selected-dynamics manifold-viability theorem and no non-generic CST congruence factorization at current frozen source scope. These remain discovery questions, not pairwise convergence.
+
+CST R2/D2/E2 and its no-framework-level-discriminator status remain unchanged. Reduced NFC remains exactly the FCP-3 comparative object.
+
+Bounded verdict:
+
+> **NO NONTRIVIAL REDUCED-NFC/CST CONVERGENCE IS ESTABLISHED AFTER BOTH PROVENANCE AND CST NULL/GR SUBTRACTION AT CURRENT SOURCE SCOPE.**
+
+FCP-12 therefore returns to the ready framework queue rather than forcing another Reduced-NFC comparison. `FW-CQM` remains source-bound and has not yet received a cross-framework null/QM control.
 
 ## Admission and credit rules
 
