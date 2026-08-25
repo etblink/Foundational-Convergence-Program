@@ -115,6 +115,6 @@ Prospective Method 0.2.0 comparisons must additionally include the active multi-
 
 The protocol remains active. Historical FCP-1 through FCP-21 retain the FCP-2/Method 0.1.0 semantics under which they were produced. Method 0.2.0 is now active prospectively after exact integration on canonical `main` and controls future comparison methodology unless later superseded through explicit governance.
 
-Detailed current phase, framework and source state is maintained in `README.md`, `FRAMEWORK_REGISTER.md` and `SOURCE_REGISTER.md`; current Method 0.2.0 activation is recorded in `governance/FCP_METHOD_0_2_0_ACTIVATION.md`; detailed historical scientific conclusions and provenance remain in their qualified versioned phase artifacts and handoffs.
+Current live scientific/routing state is maintained primarily in `CURRENT_STATE.md`. `README.md` is the durable repository landing page; `FRAMEWORK_REGISTER.md` tracks live framework identities and bounded status; `SOURCE_REGISTER.md` tracks source/provenance bindings; `governance/FCP_METHOD_0_2_0_ACTIVATION.md` records the Method 0.2.0 activation event and activation-time routing context. Detailed historical scientific conclusions and provenance remain in their qualified versioned phase artifacts and handoffs.
 
 Historical phase artifacts remain frozen as records of what was true at their phase. Live repository metadata must reflect the current project state without rewriting those historical records.

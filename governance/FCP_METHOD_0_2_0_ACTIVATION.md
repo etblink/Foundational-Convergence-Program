@@ -74,34 +74,38 @@ Formal propagation of those audit conclusions into historical comparison cells, 
 
 `HISTORICAL_RESULT_PROPAGATION = DEFERRED_PENDING_SEPARATE_AUTHORIZATION`
 
-## 4. Live-state precedence
+## 4. Current routing precedence
 
-For current routing and task selection, use:
+For present-tense routing and task selection, use:
 
-1. `README.md`;
-2. this activation record;
-3. the live charter/protocol;
-4. current framework/source registers subject to explicit historical-propagation boundaries.
+1. `CURRENT_STATE.md`;
+2. `README.md` for durable repository orientation;
+3. this activation record for the Method 0.2.0 activation event and activation-time context;
+4. the live charter/protocol and current framework/source registers subject to explicit historical-propagation boundaries.
 
 Historical phase handoffs and historical recommendation prose remain valid records of what was recommended at their phase even when later work has overtaken those recommendations.
 
 ```text
 HISTORICAL_RECOMMENDATION_NOW_STALE = PRESERVE
 LIVE_CURRENT_STATE_NOW_STALE = UPDATE
+CURRENT_ROUTING_SURFACE = CURRENT_STATE.md
 ```
 
-## 5. Next dependency
+## 5. Historical next dependency at Method 0.2.0 activation
 
-The next recommended scientific phase is targeted source strengthening under active Method 0.2.0, with the previously identified high-priority targets:
+At the moment Method 0.2.0 was activated, the next recommended scientific phase was targeted source strengthening, with the then-identified high-priority targets:
 
 1. AQFT split/nuclearity re-audit;
 2. broader LOOP continuum/physical-recovery source strengthening;
 3. broader AS physical/Lorentzian/observable-recovery source strengthening.
 
-This record does not itself authorize source strengthening, historical remediation, new framework intake, FCP-22, empirical/no-go work, or full recurrence recomputation.
+The following labels are therefore retained as **activation-time state**, not present-tense routing:
 
 ```text
+AS_OF_METHOD_0_2_0_ACTIVATION:
 READY_FOR_TARGETED_SOURCE_STRENGTHENING = YES
 TARGETED_SOURCE_STRENGTHENING_STARTED = NO
 FCP22_STARTED = NO
 ```
+
+Targeted source strengthening and FCP-22 were later completed and canonically integrated. Their current status and the current next-task state are maintained in `CURRENT_STATE.md`. This activation record does not itself authorize any later scientific phase.

@@ -1,337 +1,93 @@
 # Foundational Convergence Program
 
-## Status
+The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research program for testing which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language, model, or realization.
 
-**Canonical integrated scientific phase:** FCP-21 — Reduced NFC vs. Null-Subtracted `FW-AS` Controlled Comparison; historical FCP-1–FCP-21 artifacts retain their original Method 0.1.0 semantics.  
-**Canonical prospective method:** FCP Method 0.2.0, integrated exactly at commit `fe8101a2e0602ea6a226bfcb8fe9bbbd1357a14a`, tree `1d5efec368b5e8d8ab095e9caa83fed2480888f9`.  
-**Current qualified research state:** post-FCP-21 adversarial adjudication and equal-standard reanalysis are qualified on their preserved audit branches. The equal-standard reanalysis leaves AQFT/CQM bounded E2 and the CQM↔GPTOPT E2 zero unchanged (with the FCP-14 rationale corrected), preserves bounded CST E3, and changes selected LOOP and AS target-conditioned recovery relations from historical E3 zero to bounded nonzero E3. Independent strong convergence, independent moderate convergence, and independent framework E4 remain zero at that bounded audit scope. Method 0.2.0 is now the controlling prospective method for future comparisons; it does not retroactively rewrite FCP-1–FCP-21.  
-**Next recommended task:** separately authorize targeted source strengthening under Method 0.2.0, prioritizing the already-identified AQFT split/nuclearity re-audit, broader LOOP continuum/physical-recovery evidence, and broader AS physical/Lorentzian/observable-recovery evidence. New framework intake, FCP-22, historical-result remediation, and full recurrence recomputation remain separately authorized work.
-
-The **Foundational Convergence Program (FCP)** is a neutral comparative-foundations research environment for asking which structures recur independently across viable foundational theories, which are forced by successful physics, and which are artifacts of a chosen formal language or model.
-
-The program begins from no preferred Theory of Everything. Established General Relativity + quantum field theory + the Standard Model, without a deeper ontology, is a first-class null competitor.
-
-## Ultimate purpose
-
-The ultimate purpose of FCP is to contribute to the search for truth about physical reality. Foundational convergence is one investigative strategy within that broader aim, not the aim itself. No framework—including Reduced NFC, the null baseline, any other admitted framework, or FCP's own methodology—is entitled to preservation if stronger evidence points elsewhere.
-
-A positive convergence result identifies a structure deserving deeper mathematical and empirical scrutiny; it does not by itself establish physical truth. A null convergence result is equally valid and does not imply that no deeper reality exists.
-
-## Governing principle
-
-> **Seek truth about reality.**
->
+> **Seek truth about reality.**  
 > **Preserve results, not theories.**
 
-No framework receives evidentiary credit merely because it suggested the question being tested. Mathematical canonicity, internal consistency, elegance or explanatory ambition are not by themselves evidence that a framework describes nature.
+No framework—including Reduced NFC, the null baseline, any admitted comparator, or FCP's own methodology—is entitled to preservation if stronger evidence points elsewhere.
 
-## Completed program state
+## Current status
 
-- **FCP-1:** source-bound the bounded GR + QFT + Standard Model null baseline.
-- **FCP-2:** froze framework-neutral K1–K10 coordinates, M1–M3 metadata and E1–E5 correspondence rules before first competitor exposure.
-- **FCP-3:** source-bound Reduced NFC and performed the first cross-framework comparison; no strong/moderate NFC–null convergence was found at the bounded source scope.
-- **FCP-4:** split the over-broad operational/algebraic umbrella into source-bound `FW-AQFT`, `FW-GPTOPT`, and `FW-CQM`.
-- **FCP-5:** classified AQFT–null as core reformulation/sharpening plus named source-qualified extensions, preventing QFT inheritance from being counted as independent AQFT convergence.
-- **FCP-6:** compared Reduced NFC with AQFT only after explicit AQFT subtraction; no strong/moderate convergence survived.
-- **FCP-7:** decomposed GPTOPT into base operational structure, optional reconstruction axioms, quantum embedding, generalized/post-quantum possibilities and bounded empirical restrictions before any NFC–GPTOPT comparison.
-- **FCP-8:** source-bound post-quantum Bell/composite theory space, candidate quantum-boundary principles and empirical restrictions without performing any NFC–GPTOPT comparison.
-- **FCP-9:** source-bound causal set theory proper, separated minimal kinematics from dynamics/continuum/matter/phenomenology, and opened a framework-split candidate for the broader causal/order umbrella without performing any cross-framework comparison.
-- **FCP-10:** resolved that split, preserved historical `FW-CAUSAL` as a superseded umbrella, admitted canonical `FW-CST`, and deferred the unbound adjacent order-theoretic remainder without creating a placeholder framework or performing a cross-framework comparison.
-- **FCP-11:** compared canonical CST against the null/GR baseline, separated additional CST primitives from target-conditioned GR reconstruction, generic mathematics and optional extensions, and found no strong/moderate independent CST–null convergence or framework-level CST empirical discriminator.
-- **FCP-12:** compared Reduced NFC only against the FCP-11-qualified CST residue; no E1–E4 or strong/moderate convergence survived, while FIS/Congruence/Viability remained discovery questions without source-bound CST counterparts.
-- **FCP-13:** compared CQM against the established null quantum/QFT sector, classified bounded E2 model relations as reformulation/structural refinement rather than independent convergence, subtracted generic categorical machinery and empirical inheritance, and retained only a source-qualified structural/optional-extension residue.
-- **FCP-14:** compared source-bound CQM with GPTOPT after dual subtraction; preserved the categorical-probabilistic bridge, withheld pairwise E2 because the frozen packet did not source-qualify the explicit required map, retained only E5-level positive relations at current scope, found no independent non-generic convergence, and preserved `FCP4_FRAMEWORK_SEPARATION`.
-- **FCP-15:** source-bound `FW-LOOP` from 13 external works and selected `OUTCOME_B_INTERNAL_SUBFRAMEWORK_DISTINCTION`: one top-level `FW-LOOP` with persistent `LOOP-CANON` / `LOOP-COVAR`, mature kinematical quantum geometry, formulation-dependent/open framework-wide dynamics, partial continuum/GR realization, no framework-level empirical discriminator, and no cross-framework E1–E5 assignment.
-- **FCP-16:** compared the FCP-15-qualified loop family against the frozen null/GR baseline after generic, lineage, optional/model, target-conditioned and empirical-inheritance subtraction; retained six non-generic loop residue items, withheld pairwise E2/E3 at the closed-packet provenance ceiling, found E1–E4 = 0, E5-only = 9, NONE = 1, and identified no independent loop E4 discriminator.
-- **FCP-17:** compared Reduced NFC only against the six-item FCP-16 null-subtracted loop residue; found E1–E4 = 0, E5-only = 6, NONE = 4, zero independent strong/moderate convergence, and no non-generic survivor pass, with loop dynamics/realization producing material asymmetries rather than convergence.
-- **FCP-18:** performed a closed-corpus program meta-audit; found zero independently non-generic multi-framework recurrence at E1–E4, zero repeated independent Reduced-NFC support at the frozen burden, and zero independent framework-level E4, while finding no governance-review or prior-result-remediation candidate.
-- **FCP-19:** source-bound `FW-AS` as one coherent Asymptotic Safety framework from 18 external works; fixed-point evidence reaches `AS-L3` multi-truncation robustness scope, while exact complete-theory fixed-point control, exact physical critical-surface dimension, complete Lorentzian/physical realization, and a compulsory framework-level empirical discriminator remain open.
-- **FCP-20:** compared source-bound `FW-AS` against the frozen null/GR baseline after generic RG/QFT, GR-lineage/target, model/optionality and empirical-inheritance subtraction; retained a six-item AS-specific residue, while pairwise E1–E4 = 0, E5-only = 9, NONE = 1, and independent strong/moderate convergence and AS E4 remain zero.
-- **FCP-21:** compared the exact FCP-3 Reduced-NFC object only against AS-R1 through AS-R6 under the dual firewall; found E1–E4 = 0, E5-only = 4, NONE = 6, zero independent strong/moderate convergence, `FCP21_SURVIVOR_PASS_NON_GENERIC = 0`, decisive K7 type mismatches, and a material AS/NFC physical-realization asymmetry.
-- **Post-FCP-21 adversarial audit:** the preserved Grok W1–W18 adjudication identified confirmed application, provenance, method, and governance defects without rewriting FCP-1–FCP-21.
-- **Equal-standard E2/E3 reanalysis:** one frozen E2 burden and one frozen E3 burden were applied consistently to AQFT/CQM/GPTOPT and CST/LOOP/AS. The E2 score dispositions remained unchanged; LOOP and AS gained bounded target-conditioned E3 at selected substructure/trajectory scope; the independent-convergence and framework-E4 zeros survived.
-- **Method 0.2.0:** the prospective method/governance revision was qualified and then integrated exactly. Relation type, independence, viability, empirical selection, provenance, scope, lineage, target conditioning, physical realization, and calibration are now reported as separate axes for future work; historical FCP-1–FCP-21 semantics remain immutable.
+- **Latest canonical scientific phase:** FCP-22 — Prospective Reduced NFC ↔ Strengthened AQFT Reanalysis under Method 0.2.0.
+- **Active prospective method:** FCP Method 0.2.0.
+- **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
+- **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
-## FCP-6 Reduced-NFC/AQFT control
+FCP-22 establishes a current, mathematically generic `E5_FUNCTIONAL_RELATION` between Reduced-NFC Interface Sufficiency and AQFT split/nuclearity at formal substructure scope, while establishing no pairwise E1–E4 relation, no non-generic independent foundational relation, and no pairwise empirical selection. Historical FCP-6 remains immutable as a source-bounded result; FCP-22 partially supersedes only its current FIS-analogue interpretation after the AQFT source gap was repaired.
 
-FCP-6 found zero strong and zero moderate NFC–AQFT convergence after subtracting AQFT reformulation, generic mathematics, supplied axioms and inherited QFT success.
+## Program architecture
 
-Controlling verdict:
+FCP separates several questions that are easy to conflate:
 
-> **NO NONTRIVIAL NFC–AQFT CONVERGENCE FOUND AFTER AQFT SUBTRACTION AT CURRENT SOURCE SCOPE.**
+- **framework identity and source binding** — what a framework actually asserts and which sources support it;
+- **relation type** — exact structure, representation, controlled recovery, operational prediction, functional relation, or no established relation;
+- **independence and provenance** — whether a relation is independently motivated, lineage-related, target-conditioned, imported, or unresolved;
+- **physical realization** — whether formal structure has a qualified bridge to physical variables or observables;
+- **empirical status** — inherited success, compatibility, model constraint, or direct framework discrimination;
+- **program-level recurrence** — whether non-generic structures recur independently across multiple frameworks.
 
-## FCP-7/FCP-8 GPTOPT controls
+Method 0.2.0 reports these axes separately. It does not use a scalar framework-winner score.
 
-FCP-7 separates base GPTOPT from reconstruction axioms and quantum embedding. FCP-8 then bounds the broader post-quantum Bell/composite theory space and finds that experiment narrows generalized possibilities without uniquely selecting the quantum set or one foundational principle.
+## Compact milestone index
 
-Permanent controls include:
+- **FCP-1–FCP-3:** null baseline, common comparison keys, Reduced NFC source binding and first comparison.
+- **FCP-4–FCP-14:** operational/algebraic framework split; AQFT, GPTOPT, CQM and CST source binding and controlled comparisons.
+- **FCP-15–FCP-18:** LOOP source intake, null/NFC controls, and the closed-corpus recurrence meta-audit.
+- **FCP-19–FCP-21:** Asymptotic Safety source intake, null control, and Reduced-NFC comparison.
+- **Post-FCP-21 audit:** Grok W1–W18 adversarial review, equal-standard E2/E3 reanalysis, and prospective Method 0.2.0 activation.
+- **Targeted source strengthening:** AQFT split/nuclearity gap closed with qualification; LOOP and AS physical/recovery evidence materially strengthened at bounded scope.
+- **FCP-22:** prospective Reduced NFC ↔ strengthened AQFT reanalysis; historical FCP-6 FIS source-scope caveat materially resolved, yielding a generic E5 functional relation but no E1–E4 or empirical selection.
 
-> **BASE GPTOPT + OPTIONAL RECONSTRUCTION AXIOMS != BASE GPTOPT.**
+Detailed scientific findings live in the versioned phase, comparison, audit, and handoff artifacts rather than in this landing page.
 
-> **NO-SIGNALLING != QUANTUM THEORY.**
+## Historical FCP-6 vs current FCP-22
 
-> **LOCAL TOMOGRAPHY != UNIQUE QUANTUM COMPOSITE.**
+Historical FCP-6 reported:
 
-## FCP-9 causal-set result
+```text
+NO_SOURCE_BOUND_AQFT_FIS_ANALOGUE_AT_THAT_SCOPE
+```
 
-FCP-9 treats causal set theory (CST) as the specific BLMS lineage rather than pooling every causal/order proposal into one competitor.
+because split/nuclearity material was outside its frozen AQFT corpus.
 
-Minimal CST core:
+Current FCP-22 reports:
 
-- locally finite causal order;
-- order interpreted as proto-causal structure;
-- discreteness/local finiteness;
-- continuum-approximation requirement linking order to continuum causality and number to volume.
+```text
+NFC_AQFT_FIS_RELATION = E5_FUNCTIONAL_RELATION
+GENERICITY = MATHEMATICALLY_GENERIC
+PAIRWISE_E1 = NONE_ESTABLISHED
+PAIRWISE_E2 = NONE_ESTABLISHED
+PAIRWISE_E3 = NONE_ESTABLISHED
+PAIRWISE_E4 = NONE_ESTABLISHED
+NON_GENERIC_STRUCTURAL_RELATION = NO
+INDEPENDENT_FOUNDATIONAL_RELATION = NO
+PAIRWISE_EMPIRICAL_SELECTION = NO
+```
 
-Main results:
+These are different time-indexed claims. FCP-22 does not rewrite FCP-6.
 
-- literal `FW-CAUSAL = causal-set / order-theoretic approaches` is too broad: `FRAMEWORK_SPLIT_CANDIDATE = 1`;
-- suggested future `FW-CST` ID was not enacted until FCP-10;
-- classical sequential growth is an optional CST dynamics layer, not a separate framework;
-- quantum measure/QSG is a provisional quantum-dynamics layer, not minimal kinematics;
-- Poisson sprinkling is a continuum-approximation/sampling construction, not fundamental dynamics;
-- Lorentz-compatible sprinkling does not yield an intrinsically extractable preferred inertial direction in the source theorem setting;
-- continuum reconstruction achieves meaningful order/number, estimator and operator/action results, but faithful embedding, continuum uniqueness and dynamical manifold selection remain distinct burdens;
-- the traditional finite Hauptvermutung is best recorded as `OPEN/REFINED`: newer precise mathematical formulations include theorem-level positive/negative results but do not justify an unqualified claim that the historical finite physical reconstruction problem is solved;
-- generic finite-poset structure is strongly nonmanifoldlike, so realistic spacetime is not kinematically inevitable;
-- framework-wide continuum recovery: **R2**, with source-specific partial/sharpened R3 results;
-- optional dynamics maturity: **D2**, not unique quantum dynamics or GR emergence;
-- highest empirical evidence: **E2 at model-specific scope**;
-- Everpresent-Lambda and diffusion/polarization phenomenology remain model-specific rather than forced framework predictions;
-- no framework-level causal-set empirical discriminator is identified;
-- `KEY_EXTENSION_CANDIDATE = 0`.
+## Repository navigation
 
-Controlling verdict:
+- [`CURRENT_STATE.md`](CURRENT_STATE.md) — mutable live scientific/routing state and open dependencies.
+- [`FCP_CHARTER.md`](FCP_CHARTER.md) — mission, neutrality contract, scope, and governance principles.
+- [`COMPARISON_PROTOCOL.md`](COMPARISON_PROTOCOL.md) — common comparison protocol and Method 0.2.0 operating requirements.
+- [`FRAMEWORK_REGISTER.md`](FRAMEWORK_REGISTER.md) — live framework identities and latest bounded framework status.
+- [`SOURCE_REGISTER.md`](SOURCE_REGISTER.md) — source/provenance bindings.
+- [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) — detailed claim records; current-state supersession may require separately authorized propagation.
+- [`comparison_keys/`](comparison_keys/) — historical and current relation/evidence rules.
+- [`governance/`](governance/) — Method 0.2.0 and governance artifacts.
+- [`frameworks/`](frameworks/) — source-bound framework packets and strengthening records.
+- [`comparisons/`](comparisons/) — bounded pairwise comparison artifacts.
+- [`audits/`](audits/) — adversarial, equal-standard, source-strengthening, and qualification audits.
+- [`handoffs/`](handoffs/) — immutable phase handoffs and provenance summaries.
 
-> **CAUSAL SET THEORY PROVIDES A DISTINCT SOURCE-QUALIFIED DISCRETE CAUSAL/ORDER KINEMATIC ARCHITECTURE AND NONTRIVIAL CONTINUUM-RECONSTRUCTION TOOLS, WHILE FRAMEWORK TAXONOMY, FINITE CONTINUUM UNIQUENESS, MANIFOLDLIKENESS/DYNAMICAL SELECTION, COMPLETE QUANTUM DYNAMICS, MATTER REALIZATION, AND FRAMEWORK-LEVEL EMPIRICAL SELECTION REMAIN PARTIALLY OR SUBSTANTIALLY OPEN.**
+## Historical immutability
 
-Permanent FCP-9 controls:
+Versioned FCP artifacts are records of what was concluded under their declared source window and method. Later work may qualify, partially supersede, or scientifically supersede their **current interpretation**, but does not silently rewrite the historical artifact.
 
-> **PARTIAL ORDER != PHYSICAL LORENTZIAN SPACETIME.**
+Candidate-era labels such as `CANDIDATE`, `PROSPECTIVE CANDIDATE`, or `NOT YET INTEGRATED` may therefore remain inside exact qualified artifacts after later integration. Current operational status belongs in `CURRENT_STATE.md`, not in retroactive byte edits to historical/qualification records.
 
-> **POISSON SPRINKLING != FUNDAMENTAL DYNAMICS.**
+## Participation standard
 
-> **FAITHFUL EMBEDDING != UNIQUE CONTINUUM.**
-
-> **MANIFOLDLIKE INPUT != DYNAMICAL MANIFOLD SELECTION.**
-
-> **CSG FAMILY != UNIQUE PHYSICAL LAW.**
-
-> **MODEL-SPECIFIC PHENOMENOLOGY != FRAMEWORK-LEVEL PREDICTION.**
-
-## FCP-10 taxonomy result
-
-FCP-10 confirms the FCP-9 framework-split candidate without adding external scientific sources.
-
-Canonical result:
-
-- `FW-CAUSAL` → `SUPERSEDED_BY_FRAMEWORK_SPLIT`;
-- `FW-CST` → `SOURCE_BOUND_READY` at the completion of FCP-10;
-- core carrier: locally finite causal set / causal order;
-- core dynamics: none;
-- CSG remains optional `C2` dynamics;
-- quantum measure/QSG remains optional/provisional `C3` dynamics;
-- Lorentzian continuum remains a realization target rather than primitive input;
-- matter remains `C4` extension-level;
-- phenomenology remains model-specific;
-- R2/D2/E2 and the no-framework-level-discriminator result remain unchanged;
-- the unspecified adjacent causal/order remainder is deferred pending separate source intake;
-- no `FRAMEWORK_EXTENSION_CANDIDATE` and no `KEY_EXTENSION_CANDIDATE` is created.
-
-Taxonomic verdict:
-
-> **CAUSAL SET THEORY IS NOW A SCIENTIFICALLY COHERENT, SOURCE-BOUND FCP COMPETITOR DISTINCT FROM THE FORMER OVER-BROAD CAUSAL/ORDER UMBRELLA.**
-
-## FCP-11 CST/null-GR control
-
-FCP-11 applies the already-frozen null baseline to canonical `FW-CST` before any Reduced-NFC–CST comparison.
-
-Primary K-key partition:
-
-- additional foundational commitments: **K1, K6, K7**;
-- target-conditioned reconstruction: **K5, K8, K9**;
-- generic/representational: **K2**;
-- extension-dependent: **K3, K4**;
-- empirically distinct framework key: **0**;
-- open: **K10**.
-
-Permanent FCP-11 controls:
-
-> **TARGET-CONDITIONED RECONSTRUCTION != INDEPENDENT EMERGENCE.**
-
-> **SUCCESSFUL RECONSTRUCTION FROM A MANIFOLDLIKE OR SPRINKLED INPUT != DYNAMICAL EMERGENCE OF MANIFOLDLIKE GR SPACETIME.**
-
-> **CONTINUUM ACTION/OPERATOR LIMIT != CST DYNAMICS SELECTS GR HISTORIES.**
-
-> **NULL OPEN PROBLEM != CST SOLUTION.**
-
-Main result:
-
-- CST is not a mere reformulation of GR: the causal-set carrier, primitive causal order and fundamental spacetime discreteness are additional commitments;
-- generic poset/combinatorial and relabelling mathematics are subtracted from CST-specific credit;
-- faithful embedding/sprinkling are continuum realization bridges rather than fundamental dynamics;
-- selected faithful-embedding and continuum operator/action relations may carry bounded E2/E3 substructure status under their exact assumptions, without becoming framework-wide GR equivalence;
-- the Lorentz-compatible sprinkling theorem remains a positive compatibility result, not derivation of Lorentzian geometry or empirical selection;
-- CSG remains D2 at optional-family scope, QSG remains incomplete, and no manifold-selecting GR+matter dynamics is source-bound;
-- realistic Standard Model matter/calibration remains an extension/open burden;
-- framework-level CST empirical discriminator: none identified;
-- independent `STRONG_CONVERGENCE`: **0**;
-- independent `MODERATE_CONVERGENCE`: **0**;
-- framework-wide levels remain **R2 / D2 / E2 model-specific**;
-- seven major scientific selection burdens remain.
-
-Bounded verdict:
-
-> **CAUSAL SET THEORY IS NOT A MERE REFORMULATION OF GR: ITS LOCALLY FINITE CAUSAL-SET CARRIER, FUNDAMENTAL CAUSAL ORDER, AND SPACETIME DISCRETENESS ARE ADDITIONAL FOUNDATIONAL COMMITMENTS. HOWEVER, AT THE FCP-11 SOURCE SCOPE, ITS STRONGEST GR-LIKE RESULTS ARE PREDOMINANTLY TARGET-CONDITIONED CONTINUUM RECONSTRUCTION OR COMPATIBILITY RESULTS, OPTIONAL DYNAMICS DO NOT YET SELECT MANIFOLDLIKE GR + MATTER, AND NO FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR IS IDENTIFIED.**
-
-## FCP-12 Reduced-NFC/CST control
-
-FCP-12 applies both required firewalls before considering pairwise correspondence:
-
-1. Reduced NFC is restricted to `K_red=(C,T)`, R1–R10 and the six survivor questions;
-2. CST is restricted to the FCP-11-qualified residue after generic mathematics, supplied target geometry and inherited null success are removed.
-
-Key-level result:
-
-- E1: **0**;
-- E2: **0**;
-- E3: **0**;
-- E4: **0**;
-- E5-only: **6** — K1, K2, K3, K5, K6, K8;
-- no correspondence: **4** — K4, K7, K9, K10;
-- strong convergence: **0**;
-- moderate convergence: **0**.
-
-The E5-only relations divide into:
-
-- weak/generic: K2, K5, K8;
-- functional analogy: K1, K3, K6.
-
-Six survivor tests:
-
-- non-generic passes: **0**;
-- unresolved discovery questions: **Congruence, Viability, Interface Sufficiency**;
-- defeated current convergence candidates: **Globalization, Realization, Dynamics**.
-
-Specific bounded negative results:
-
-> **NO_SOURCE_BOUND_CST_CONGRUENCE_ANALOGUE_AT_CURRENT_SCOPE**
-
-> **NO_SOURCE_BOUND_CST_MANIFOLD_VIABILITY_THEOREM_AT_CURRENT_SCOPE**
-
-> **NO_SOURCE_BOUND_CST_FIS_ANALOGUE_AT_CURRENT_SCOPE**
-
-Permanent FCP-12 controls:
-
-> **GENERIC RELATIONAL MATHEMATICS != FOUNDATIONAL CONVERGENCE.**
-
-> **FINITE DESCRIPTION != FUNDAMENTAL SPACETIME DISCRETENESS.**
-
-> **OBSERVATIONAL QUOTIENT != CAUSAL-SET ORDER ISOMORPHISM.**
-
-> **INTERFACE STRUCTURE != PHYSICAL CAUSAL ORDER.**
-
-> **LOCAL-TO-GLOBAL QUESTION != SHARED GLOBALIZATION THEOREM.**
-
-> **A SHARED QUESTION IS NOT A SHARED RESULT.**
-
-Controlling verdict:
-
-> **NO NONTRIVIAL REDUCED-NFC/CST CONVERGENCE IS ESTABLISHED AFTER BOTH PROVENANCE AND CST NULL/GR SUBTRACTION AT CURRENT SOURCE SCOPE. THE SURVIVING RESEMBLANCES ARE GENERIC OR FUNCTIONAL, WHILE CST'S PHYSICAL CAUSAL/DISCRETE CARRIER, MANIFOLD-SELECTION BURDEN AND PARTIAL REALIZATION HAVE NO SOURCE-BOUND REDUCED-NFC COUNTERPART.**
-
-CST remains R2/D2/E2 model-specific with no framework-level empirical discriminator. Reduced NFC remains the FCP-3 comparative object with no selected physical dynamics, general K9 realization or empirical discriminator.
-
-## FCP-13 CQM/null-QM control
-
-FCP-13 treats `Null/QM` only as shorthand for the established quantum/QFT sector already inside `FW-NULL-GRQFTSM`; no new comparator ID is created.
-
-Primary K-key classification:
-
-- reformulation: **K1, K4, K9**;
-- generic/presentational: **K2, K6**;
-- structural refinement: **K3, K8**;
-- extension-dependent: **K5**;
-- physical extension: **0**;
-- empirically distinct: **0**;
-- open: **K7, K10**.
-
-E-class accounting:
-
-- E1: **0**;
-- E2: **6** — K1, K3, K4, K5, K8, K9;
-- E3: **0**;
-- E4: **0**;
-- E5-only: **2** — K2, K6;
-- none: **2** — K7, K10.
-
-The E2 relations are concrete-model or named-extension representations of ordinary quantum structure and are scientifically substantive, but they do not satisfy the independence rule because CQM was developed as a categorical/process reformulation of quantum theory.
-
-Permanent FCP-13 controls:
-
-> **CATEGORY THEORY != QUANTUM PHYSICS.**
-
-> **GENERIC PROCESS COMPOSITION != CQM-SPECIFIC PHYSICAL CONTENT.**
-
-> **STATE-AS-MORPHISM != NEW QUANTUM ONTOLOGY.**
-
-> **DIAGRAMMATIC EQUALITY != PHYSICAL GAUGE REDUNDANCY.**
-
-> **MONOIDAL PARALLEL COMPOSITION != SPACETIME LOCALITY.**
-
-> **PROCESS COMPOSITION != HISTORY SELECTION.**
-
-> **COMPOSITIONAL COHERENCE != PHYSICAL GLOBALIZATION.**
-
-> **REPRODUCED QUANTUM EMPIRICAL SUCCESS != INDEPENDENT CQM EMPIRICAL EVIDENCE.**
-
-Retained source-qualified CQM residue:
-
-- process-first compositional abstraction;
-- representation-independent protocol theorem schemas under named categorical hypotheses;
-- optional dagger/compact package;
-- optional classical/Frobenius quantum-classical interface structures;
-- optional CPM/mixed-state construction;
-- categorical probabilistic bridge.
-
-Generic category theory, generic string-diagram syntax, ordinary quantum empirical success and un-generalized `FHilb` results are excluded from future CQM-specific credit.
-
-Controlling verdict:
-
-> **CQM IS A LINEAGE-RELATED PROCESS/COMPOSITIONAL REFORMULATION AND STRUCTURAL REFINEMENT OF ORDINARY QUANTUM THEORY AT CURRENT SOURCE SCOPE. CONCRETE QUANTUM MODELS SUPPORT BOUNDED E2 STRUCTURAL RELATIONS, BUT THESE ARE NOT INDEPENDENT CONVERGENCE; THE SURVIVING CQM RESIDUE IS STRUCTURAL/OPTIONAL-EXTENSION LEVEL, WITH NO FRAMEWORK-LEVEL EMPIRICAL DISCRIMINATOR.**
-
-## NFC provenance boundary
-
-The NFC canon is **not** imported into FCP. Reduced NFC enters only through the source-bound noncanonical reduction handoff.
-
-Permanent rule:
-
-> **Frozen NFC canon + later diagnostic research ≠ expanded NFC canon.**
-
-## Navigation
-
-- [`FCP_CHARTER.md`](FCP_CHARTER.md) — scientific objective and neutrality contract
-- [`EPISTEMIC_RULES.md`](EPISTEMIC_RULES.md) — evidence hierarchy and anti-smuggling rules
-- [`SOURCE_REGISTER.md`](SOURCE_REGISTER.md) — source/provenance registry
-- [`FRAMEWORK_REGISTER.md`](FRAMEWORK_REGISTER.md) — admitted frameworks and research status
-- [`COMPARISON_PROTOCOL.md`](COMPARISON_PROTOCOL.md) — common evaluation procedure
-- [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) — central historical claim ledger
-- [`comparison_keys/`](comparison_keys/) — historical and active versioned comparison/evidence rules
-- [`governance/`](governance/) — active prospective Method 0.2.0 governance and activation state
-- [`audits/`](audits/) — adversarial, equal-standard, and method-qualification audit artifacts
-- [`frameworks/`](frameworks/) — framework-specific source-bound packets
-- [`comparisons/`](comparisons/) — pairwise/baseline comparisons
-- [`convergence/`](convergence/) — relationship/convergence/divergence records, including versioned phase claim ledgers
-- [`countermodels/`](countermodels/) — negative witnesses
-- [`handoffs/`](handoffs/) — immutable phase and audit handoffs
-
-## Next scientific task
-
-Recommended:
-
-**Targeted source strengthening under Method 0.2.0** — separately authorize a bounded source-strengthening phase using the now-active prospective method. The highest-priority previously identified targets are:
-
-1. AQFT split/nuclearity re-audit;
-2. broader LOOP continuum/physical-recovery source strengthening;
-3. broader AS physical/Lorentzian/observable-recovery source strengthening.
-
-This recommendation does not itself authorize source intake or rescoring. Historical result remediation, new framework intake, FCP-22, empirical/no-go work, and full program recurrence recomputation remain separate tasks requiring explicit authorization.
+Every substantive future phase requires separate bounded authorization, an explicit source/provenance window, and qualification under the controlling method. No framework receives credit because it motivated the question, resembles another framework terminologically, or reproduces physics that was supplied as an input.

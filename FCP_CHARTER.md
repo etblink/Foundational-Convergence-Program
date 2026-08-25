@@ -94,12 +94,13 @@ The program must not infer physical truth from:
 
 Method 0.2.0 is the controlling prospective governance architecture for future FCP comparisons after its exact integration on canonical `main`. Historical FCP-1 through FCP-21 artifacts retain their original FCP-2/Method 0.1.0 meanings and are not rewritten by activation of the new method.
 
-Multiple source-intake, framework-taxonomy and pairwise-comparison phases were completed under the historical rules. Detailed canonical and current research state is maintained in:
+Multiple source-intake, framework-taxonomy and pairwise-comparison phases have been completed. Durable orientation and current routing are deliberately separated:
 
-- `README.md` — integrated-versus-qualified research continuity and next-task state;
+- `README.md` — durable repository introduction and navigation;
+- `CURRENT_STATE.md` — primary live scientific/routing state, latest canonical phase, open dependencies, and next-task status;
 - `FRAMEWORK_REGISTER.md` — live framework identities and bounded research status, with formal historical-result propagation requiring separate authorization where applicable;
 - `SOURCE_REGISTER.md` — live source/provenance bindings;
-- `governance/FCP_METHOD_0_2_0_ACTIVATION.md` — current Method 0.2.0 activation and precedence record;
+- `governance/FCP_METHOD_0_2_0_ACTIVATION.md` — Method 0.2.0 activation event and its activation-time routing context;
 - qualified versioned handoffs — immutable phase conclusions and provenance.
 
 Historical/versioned phase artifacts remain records of what was true at their phase and are not rewritten merely to track later program state.
