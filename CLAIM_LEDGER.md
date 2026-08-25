@@ -515,6 +515,390 @@ Future claims should use the following fields:
 
 ---
 
+# FCP-6 Reduced-NFC/AQFT controlled-comparison claims
+
+## FCP6-CROSS-001 — No nontrivial Reduced-NFC/AQFT convergence survives AQFT subtraction
+
+- `framework_ids`: `FW-NFC-RED`, `FW-AQFT`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP3-NFC-BIND-001`, `SRC-FCP4-AQFT-HK-1964`, `SRC-FCP4-AQFT-BFV-2003`, `SRC-FCP4-AQFT-FV-2015`, `SRC-FCP4-AQFT-FV-MEAS-2020`, `SRC-FCP4-AQFT-BFR-2025`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: After subtracting AQFT reformulational content, generic mathematics, supplied axioms and empirically inherited QFT success, FCP-6 establishes no strong or moderate Reduced-NFC/AQFT convergence at its bounded source scope; surviving similarities are weak/generic or functional, while dynamics, realization and pairwise empirical selection remain material asymmetries or open burdens.
+- `assumptions`: the FCP-5-qualified AQFT residue, the FCP-3 Reduced-NFC binding, and frozen FCP-2 K1–K10/E1–E5 and independence rules.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` cross-framework.
+- `weaker_framework_test`: PASSES for surviving quotient/observable/globalization commonalities; generic or role-level recurrence cannot establish framework-specific convergence.
+- `physical_bridge`: No E1–E4 two-sided physical bridge is source-bound between Reduced NFC and the FCP-5-qualified AQFT residue.
+- `empirical_binding`: `NO_CURRENT_PAIRWISE_EMPIRICAL_DISCRIMINATOR`; shared absence is not empirical equivalence.
+- `falsification_condition`: A future source-qualified non-generic E1–E4 Reduced-NFC/AQFT correspondence satisfying the frozen independence and physical-bridge burdens would supersede the relevant negative scope.
+- `countermodels`: FCP-6 subtraction controls plus semantic differences in equivalence, locality, measurement, dynamics and realization block the stronger inference.
+- `scope_ceiling`: bounded negative/nonforcing FCP-6 result; not a theorem that no future correspondence can exist.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: strong `0`; moderate `0`; weak/generic `3`; functional analogy `4`; no correspondence `3`.
+
+---
+
+# FCP-7 GPTOPT baseline claims
+
+## FCP7-GPTOPT-001 — GPTOPT is a general operational meta-framework and does not select quantum theory by itself
+
+- `framework_ids`: `FW-GPTOPT`
+- `source_ids`: `SRC-FCP4-GPT-HARDY-2001`, `SRC-FCP4-GPT-BARRETT-2007`, `SRC-FCP4-GPT-CDP-PUR-2010`, `SRC-FCP4-OPT-CHIRIBELLA-2014`, `SRC-FCP4-GPT-MULLER-2021`, `SRC-FCP4-GPT-PLAVALA-2023`
+- `claim_text`: At the FCP-7 source scope, GPTOPT is a coherent operational/probabilistic meta-framework containing classical, quantum and broader-than-quantum models; quantum theory is an embedded/special model class and is not selected by the base framework without additional reconstruction principles or empirical restriction.
+- `assumptions`: the FCP-4 GPT/OPT source window and the FCP-7 separation of G0–G6 layers.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: `C2–C3` relative to declared GPT/OPT framework structure; no physical uniqueness.
+- `weaker_framework_test`: Generic convexity, composition and operational syntax are not distinctive by themselves; the physically interpreted GPTOPT theory-space structure is source-qualified.
+- `physical_bridge`: Operational preparation/effect/transformation semantics provide laboratory-facing interpretation, while complete calibration remains model dependent.
+- `empirical_binding`: Quantum empirical success belongs to the selected quantum model; it is not automatic empirical confirmation of the whole GPTOPT family.
+- `falsification_condition`: A source-qualified result showing that base GPTOPT alone uniquely fixes the quantum state/effect/composite/transformation structure would supersede the nonselection statement.
+- `countermodels`: Classical and post-quantum GPT models inside the admitted family block unique quantum selection from the base framework.
+- `scope_ceiling`: `GENERALIZATION_RELATION` to quantum theory at whole-family level; not independent convergence or quantum reconstruction from the base alone.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP7-GPTOPT-002 — Composite, dynamics and reconstruction selection remain additional GPTOPT burdens
+
+- `framework_ids`: `FW-GPTOPT`
+- `source_ids`: `SRC-FCP4-GPT-HARDY-2001`, `SRC-FCP4-GPT-BARRETT-2007`, `SRC-FCP4-GPT-CDP-PUR-2010`, `SRC-FCP4-OPT-CHIRIBELLA-2014`, `SRC-FCP4-GPT-MULLER-2021`, `SRC-FCP4-GPT-PLAVALA-2023`, `SRC-FCP2-KEYS-001`
+- `claim_text`: FCP-7 finds that local GPT state spaces do not by themselves uniquely determine the physical composite theory, native transformations describe allowed processes rather than one universal physical history law, and quantum-reconstruction principles such as continuity/reversibility, purification or other named axiom packages are additional selection assumptions rather than base GPTOPT theorems.
+- `assumptions`: the FCP-7 G0–G6 decomposition and frozen distinctions among K3 transformations, K4 dynamics, K8 composition and K9 realization.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` for unique physical selection.
+- `weaker_framework_test`: Convex/process/composite mathematics permits multiple lawful models and tensor/composite choices; no base-level uniqueness follows.
+- `physical_bridge`: Operational probabilities/tests supply physical semantics but do not select one global composite cone, one dynamics, or one reconstruction package.
+- `empirical_binding`: No framework-level discriminator validates one reconstruction package or the whole GPTOPT family at FCP-7 scope.
+- `falsification_condition`: A source-qualified theorem deriving a unique physical composite, actual dynamics and quantum structure from the admitted base GPTOPT assumptions would supersede the corresponding burdens.
+- `countermodels`: Minimal/maximal/intermediate composites, post-quantum nonsignalling models and alternative reconstruction packages witness nonuniqueness.
+- `scope_ceiling`: durable GPTOPT selection-burden result; does not deny strong conditional consequences of named extra axioms.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+---
+
+# FCP-8 GPTOPT empirical theory-space claims
+
+## FCP8-GPTOPT-001 — Quantum-boundary and composite-system selection remain open in GPTOPT
+
+- `framework_ids`: `FW-GPTOPT`
+- `source_ids`: `SRC-FCP8-GPT-PR-1994`, `SRC-FCP8-GPT-TSIRELSON-1980`, `SRC-FCP8-GPT-IC-2009`, `SRC-FCP8-GPT-ML-2010`, `SRC-FCP8-GPT-AQ-2015`, `SRC-FCP8-GPT-IC-2026`, `SRC-FCP4-GPT-BARRETT-2007`, `SRC-FCP4-GPT-PLAVALA-2023`
+- `claim_text`: At the FCP-8 source scope, no-signalling is too weak to select quantum correlations; Information Causality and Macroscopic Locality substantially restrict post-quantum possibilities but do not uniquely characterize the complete quantum set; almost-quantum correlations provide a reusable insufficiency witness; and local state spaces plus local tomography do not uniquely select the quantum composite cone.
+- `assumptions`: the declared Bell scenarios, GPT composite constructions and exact principle hypotheses in the frozen FCP-8 source window.
+- `classification`: `OPEN`
+- `canonicity_level`: `N/A` for unique physical/foundational selection.
+- `weaker_framework_test`: Multiple post-quantum models satisfy substantial subsets of the proposed constraints, so the principles do not force the desired unique boundary.
+- `physical_bridge`: Bell correlations and operational composite structures are physically interpretable, but complete global GPT composite tomography/selection is not source-bound.
+- `empirical_binding`: No principle is independently selected as nature's unique foundational law at this scope.
+- `falsification_condition`: A source-qualified complete characterization plus independent physical selection of the relevant quantum boundary/composite rule would supersede the open status.
+- `countermodels`: PR-box and almost-quantum correlations; minimal/maximal/intermediate composite possibilities.
+- `scope_ceiling`: `QUANTUM_BOUNDARY_SELECTION_OPEN`; `QUANTUM_BOUNDARY_PRINCIPLE_UNDERDETERMINATION`; `COMPOSITE_SYSTEM_SELECTION_OPEN`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP8-GPTOPT-002 — Experiment narrows bounded GPT theory space without globally selecting quantum theory
+
+- `framework_ids`: `FW-GPTOPT`
+- `source_ids`: `SRC-FCP7-GPT-MAZUREK-2021`, `SRC-FCP8-GPT-RINGBAUER-2014`
+- `claim_text`: FCP-8 source-binds genuine experimental narrowing of bounded GPT possibilities: model-independent single-photon GPT tomography constrains deviations from qubit state/effect geometry, while the Information-Causality laboratory task probes the principle using emulated/postselected supraquantum statistics; these results do not globally select quantum theory from the full GPTOPT space or confirm GPTOPT as a fundamental theory.
+- `assumptions`: the tomography-completeness caveat of the Mazurek analysis and the loss/postselection construction used in the Ringbauer Information-Causality experiment.
+- `classification`: `EMPIRICAL`
+- `canonicity_level`: up to bounded empirical selection level `L2`; no global `L3/L4` selection.
+- `weaker_framework_test`: Excluding particular low-dimensional deviations or exercising an emulated task does not uniquely select the full quantum framework.
+- `physical_bridge`: Laboratory preparation/measurement statistics within the declared photon-polarization and Information-Causality tasks.
+- `empirical_binding`: Positive bounded empirical constraint, not observation of natural post-quantum physics and not unique principle/framework selection.
+- `falsification_condition`: Broader complete tomography or a discriminating experiment selecting a unique quantum boundary could raise the empirical ceiling; failure of the cited analyses would invalidate the bounded constraint.
+- `countermodels`: Tomography incompleteness and emulated supraquantum statistics block global-selection inference.
+- `scope_ceiling`: highest FCP-8 empirical-selection level `L2`; no `L3/L4` global quantum selection.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+---
+
+# FCP-9 causal-set source-intake claims
+
+## FCP9-CST-001 — Causal set theory has a source-bound discrete causal-order core
+
+- `framework_ids`: `FW-CAUSAL`
+- `source_ids`: `SRC-FCP9-CST-BLMS-1987`, `SRC-FCP9-CST-SURYA-2019`, `SRC-FCP9-CST-SURYA-2025`
+- `claim_text`: FCP-9 source-binds causal set theory proper as a locally finite causal order with primitive causal/discrete physical interpretation and an explicit continuum-approximation burden linking order to continuum causality and cardinality to volume; the broader historical `FW-CAUSAL` causal/order umbrella is too broad and therefore opens a framework-split candidate.
+- `assumptions`: the BLMS causal-set lineage and the bounded FCP-9 source taxonomy; adjacent causal/order programs are not silently pooled.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: `C2–C3` within the controlled CST lineage; no unique physical theory selection.
+- `weaker_framework_test`: Generic partial-order mathematics alone is insufficient; the causal/discrete physical interpretation and continuum burden are the source-qualified CST content.
+- `physical_bridge`: Order/causality and number/volume are continuum-realization semantics under declared approximation conditions.
+- `empirical_binding`: No framework-level empirical selection follows from defining the causal-set carrier.
+- `falsification_condition`: A source audit showing that the claimed core is not shared by the controlled CST lineage, or that the umbrella is scientifically coherent under the frozen separation rule, would require revision.
+- `countermodels`: Adjacent causal/order approaches with materially different commitments block treating the historical umbrella as one source-bound competitor.
+- `scope_ceiling`: FCP-9 source-intake/taxonomy result; suggested `FW-CST` successor not yet enacted until FCP-10.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP9-CST-002 — CST kinematics does not determine unique continuum or physical dynamics
+
+- `framework_ids`: `FW-CAUSAL`
+- `source_ids`: `SRC-FCP9-CST-SURYA-2019`, `SRC-FCP9-CST-SURYA-2025`, `SRC-FCP9-CST-MULLER-2025`, `SRC-FCP9-CST-KR-1975`, `SRC-FCP9-CST-RS-2000`, `SRC-FCP9-CST-SZ-2020`, `SRC-FCP9-CST-SS-2026`, `SRC-FCP9-CST-BD-2010`
+- `claim_text`: FCP-9 finds no framework-wide derivation of a unique realistic continuum, manifoldlikeness, 3+1 dimension, topology or complete quantum dynamics from minimal CST kinematics. Core CST is D0; classical sequential growth reaches a bounded D2 family with coupling freedom; quantum sequential-growth programs are nontrivial but incomplete; continuum recovery remains R2 framework-wide with sharper conditional subresults.
+- `assumptions`: the FCP-9 separation of minimal kinematics, optional CSG/QSG dynamics, manifoldlike continuum inputs and controlled reconstruction results.
+- `classification`: `OPEN`
+- `canonicity_level`: framework-level physical selection unresolved.
+- `weaker_framework_test`: Generic poset abundance and multiple lawful growth/quantum-growth constructions show that kinematics alone does not force the desired physical sector.
+- `physical_bridge`: Faithful embedding, order/number semantics and discrete operator/action limits provide conditional realization bridges, not dynamics selecting the bridge target.
+- `empirical_binding`: No empirical selection of one CST dynamics or continuum is source-bound.
+- `falsification_condition`: A source-qualified selected CST dynamics yielding robust manifoldlike 3+1 GR plus matter with controlled continuum uniqueness would supersede the relevant open burdens.
+- `countermodels`: Kleitman–Rothschild generic-poset counterpressure; CSG coupling freedom; incomplete QSG families.
+- `scope_ceiling`: `TRADITIONAL_FINITE_CONTINUUM_UNIQUENESS_OPEN_REFINED`; `MANIFOLDLIKENESS_SELECTION_OPEN`; R2/D2 ceiling at FCP-9.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP9-CST-003 — CST empirical constraints are model-specific rather than framework-selecting
+
+- `framework_ids`: `FW-CAUSAL`
+- `source_ids`: `SRC-FCP9-CST-LAMBDA-2004`, `SRC-FCP9-CST-ZUNTZ-2008`, `SRC-FCP9-CST-PDS-2009`, `SRC-FCP9-CST-CDP-2010`, `SRC-FCP9-CST-SURYA-2019`
+- `claim_text`: FCP-9 source-binds observational constraints on declared causal-set-inspired cosmological and diffusion phenomenology, but these tests constrain additional parameterized models rather than an unavoidable prediction of minimal CST; no framework-level CST empirical discriminator is identified.
+- `assumptions`: the explicit additional assumptions and phenomenological parameterizations of Everpresent-Lambda, swerves/energy diffusion and polarization diffusion models.
+- `classification`: `EMPIRICAL`
+- `canonicity_level`: bounded `E2` model-specific empirical scope; no framework-level selection.
+- `weaker_framework_test`: Different CST-compatible dynamics/phenomenology can avoid the exact constrained model, so model exclusion does not select or falsify the entire framework.
+- `physical_bridge`: CMB and related observable quantities in the declared phenomenological implementations.
+- `empirical_binding`: Real observational constraints at model scope; no E3 positive framework discriminator or E4 framework selection.
+- `falsification_condition`: A source-qualified unavoidable CST prediction satisfying the full K10 framework-discriminator burden would supersede the framework-level open ceiling.
+- `countermodels`: Multiplicity of optional CST phenomenology blocks inheritance from one tested model to the full framework.
+- `scope_ceiling`: `NO_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR_IDENTIFIED`; highest FCP-9 empirical level E2 model-specific.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+---
+
+# FCP-10 CST taxonomy-resolution claim
+
+## FCP10-CST-001 — FW-CAUSAL is superseded and FW-CST is the canonical source-bound successor
+
+- `framework_ids`: `FW-CAUSAL`, `FW-CST`
+- `source_ids`: `SRC-FCP9-CST-INTAKE-001`, `SRC-FCP9-CST-BASELINE-001`, `SRC-FCP10-CST-BINDING-001`
+- `claim_text`: FCP-10 resolves the FCP-9 taxonomy defect by preserving historical `FW-CAUSAL` as `SUPERSEDED_BY_FRAMEWORK_SPLIT` and admitting `FW-CST` as the canonical source-bound Causal Set Theory comparator; the unspecified adjacent order-theoretic remainder is deferred pending separate source intake, with no empty placeholder framework created.
+- `assumptions`: the frozen FCP-4 framework-separation rule and the unchanged FCP-9 scientific packet.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: repository/framework taxonomy canonicity only; no physical uniqueness.
+- `weaker_framework_test`: A taxonomy label alone provides no scientific credit; the split is justified only by the source-bound difference between CST proper and the unbound adjacent remainder.
+- `physical_bridge`: No new physical bridge is introduced by the taxonomy action.
+- `empirical_binding`: FCP-9 R2/D2/E2 and no-framework-discriminator status remain unchanged.
+- `falsification_condition`: A later source intake showing the deferred remainder forms the same framework under the frozen separation rule could motivate a separately authorized taxonomy revision.
+- `countermodels`: The FCP-9 over-broad umbrella itself is the negative witness against silent pooling.
+- `scope_ceiling`: taxonomy/provenance result only; CSG remains optional C2, QSG provisional C3, sprinkling a continuum-sampling construction, and matter/phenomenology extension-level.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: FCP-10 added zero external scientific sources and performed no cross-framework comparison.
+
+---
+
+# FCP-11 CST/null-GR control claims
+
+## FCP11-CSTNULL-001 — CST is not a GR reformulation, but GR-like recovery is predominantly target-conditioned
+
+- `framework_ids`: `FW-CST`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP9-CST-INTAKE-001`, `SRC-FCP9-CST-BASELINE-001`, `SRC-FCP10-CST-BINDING-001`, `SRC-FCP2-NULL-DECOMP-001`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: FCP-11 finds that CST's locally finite carrier, primitive causal order and fundamental spacetime discreteness are additional foundational commitments rather than a mere representation of GR; however, its strongest GR-like faithful-embedding, operator/action and continuum results are predominantly target-conditioned reconstruction or compatibility results and therefore do not constitute independent emergence or independent strong/moderate convergence with GR.
+- `assumptions`: canonical `FW-CST` from FCP-10, the FCP-9 source window, the bounded null/GR decomposition, and frozen FCP-2 equivalence/independence rules.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` cross-framework; exact substructure E2/E3 relations remain conditional on their named bridges/limits.
+- `weaker_framework_test`: Generic order/combinatorial mathematics and supplied Lorentzian/manifoldlike targets are insufficient for CST-specific emergence credit.
+- `physical_bridge`: Faithful embedding/order-preserving and selected continuum-limit bridges exist at bounded substructure scope; they do not provide whole-framework equivalence or dynamics selection.
+- `empirical_binding`: GR/QFT empirical success in recovered/target regimes is inherited, not independent CST evidence.
+- `falsification_condition`: A source-qualified, non-target-conditioned derivation of manifoldlike GR dynamics from selected CST dynamics satisfying frozen independence criteria would supersede the relevant negative classification.
+- `countermodels`: Sprinkling into a chosen Lorentzian manifold and manifold-conditioned continuum limits demonstrate why reconstruction need not be dynamical emergence.
+- `scope_ceiling`: CST is a genuine additional foundational proposal, but FCP-11 independent strong convergence `0`, moderate convergence `0`; target-conditioned E2/E3 subrelations remain local.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP11-CSTNULL-002 — CST dynamics, matter realization and framework-level empirical selection remain open after null control
+
+- `framework_ids`: `FW-CST`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP9-CST-BASELINE-001`, `SRC-FCP10-CST-BINDING-001`, `SRC-FCP9-CST-RS-2000`, `SRC-FCP9-CST-SZ-2020`, `SRC-FCP9-CST-SS-2026`, `SRC-FCP9-CST-ZUNTZ-2008`, `SRC-FCP9-CST-PDS-2009`, `SRC-FCP9-CST-CDP-2010`, `SRC-FCP2-NULL-DECOMP-001`
+- `claim_text`: After FCP-11 null/GR subtraction, optional CST dynamics do not source-bind a selected manifoldlike GR-plus-matter history law, realistic Standard Model matter/calibration remains extension/open, and model-specific phenomenology does not supply a framework-level CST empirical discriminator.
+- `assumptions`: FCP-9/FCP-10 CST identity and levels R2/D2/E2, with null QFT/SM calibration used only as comparator rather than inherited CST evidence.
+- `classification`: `OPEN`
+- `canonicity_level`: framework-level dynamics/realization/empirical selection unresolved.
+- `weaker_framework_test`: Possessing a stochastic/quantum-growth family or phenomenological model does not force one physical law or framework-wide empirical signature.
+- `physical_bridge`: Order/number and selected continuum/operator bridges exist; complete matter/detector calibration from one selected CST quantum dynamics does not.
+- `empirical_binding`: `NO_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR_IDENTIFIED`; empirical ladder remains E2 model-specific.
+- `falsification_condition`: A source-qualified selected CST quantum dynamics recovering calibrated GR+SM observables and yielding a discriminating prediction would supersede the relevant open status.
+- `countermodels`: CSG coupling freedom, incomplete QSG and optional phenomenology block whole-framework promotion.
+- `scope_ceiling`: R2 framework-wide continuum; strongest bounded optional dynamics D2; E2 model-specific; null UV incompleteness is not positive CST evidence.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+---
+
+# FCP-12 Reduced-NFC/CST comparison claims
+
+## FCP12-CROSS-001 — No nontrivial Reduced-NFC/CST convergence survives dual subtraction
+
+- `framework_ids`: `FW-NFC-RED`, `FW-CST`
+- `source_ids`: `SRC-FCP3-NFC-BIND-001`, `SRC-FCP9-CST-BASELINE-001`, `SRC-FCP10-CST-BINDING-001`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: After both Reduced-NFC provenance restriction and FCP-11 CST null/GR subtraction, FCP-12 establishes no E1–E4 pairwise relation and no strong or moderate convergence; six surviving E5 relations are only generic or functional, while CST's causal/discrete carrier, manifold-selection burden and partial realization have no source-bound Reduced-NFC counterpart.
+- `assumptions`: Reduced NFC exactly as frozen in FCP-3, canonical CST only after FCP-11 subtraction, and frozen FCP-2 correspondence/independence rules.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` cross-framework.
+- `weaker_framework_test`: Generic relational, quotient, observation and local/global structures occur in substantially weaker systems and therefore do not earn distinctive convergence credit.
+- `physical_bridge`: No two-sided source-bound E1–E4 physical bridge is established.
+- `empirical_binding`: No current Reduced-NFC/CST pairwise empirical discriminator.
+- `falsification_condition`: A future source-qualified non-generic E1–E4 relation surviving both provenance and null/GR subtraction would supersede the relevant negative result.
+- `countermodels`: Finite description is not CST spacetime discreteness; observational quotient is not order isomorphism; interface structure is not primitive causal order.
+- `scope_ceiling`: E1 `0`, E2 `0`, E3 `0`, E4 `0`, E5-only `6`, none `4`; strong `0`, moderate `0`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP12-CROSS-002 — Congruence, Viability and Interface Sufficiency remain discovery questions rather than convergence results
+
+- `framework_ids`: `FW-NFC-RED`, `FW-CST`
+- `source_ids`: `SRC-FCP3-NFC-BIND-001`, `SRC-FCP9-CST-BASELINE-001`, `SRC-FCP10-CST-BINDING-001`, `SRC-FCP2-KEYS-001`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: FCP-12 identifies no source-bound CST theorem playing the Reduced-NFC Congruence, manifold-Viability or finite Interface-Sufficiency roles; these three remain unresolved discovery questions, while Globalization, Realization and Dynamics are defeated as present convergence candidates by genericity or material asymmetry.
+- `assumptions`: the six FCP-3 Reduced-NFC survivor questions and the FCP-11-qualified CST residue.
+- `classification`: `OPEN`
+- `canonicity_level`: `N/A` for unresolved pairwise discovery questions.
+- `weaker_framework_test`: A shared question, generic underdetermination or finite local data does not itself supply a shared theorem.
+- `physical_bridge`: No source-bound CST factorization/invariance theorem matching the stated Reduced-NFC roles is identified.
+- `empirical_binding`: `NONE` for the three discovery questions.
+- `falsification_condition`: A source-bound CST theorem with the exact non-generic logical role of one survivor question could close that discovery item and support a new separately authorized comparison.
+- `countermodels`: Current CST stems/intervals/manifoldlikeness definitions and optional dynamics do not force the claimed factorization or viability properties.
+- `scope_ceiling`: `UNRESOLVED_DISCOVERY`: Congruence, Viability, Interface Sufficiency; `DEFEATED_AS_CONVERGENCE`: Globalization, Realization, Dynamics.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+---
+
+# FCP-13 CQM/null-QM control claims
+
+## FCP13-CQMNULL-001 — CQM/ordinary-QM agreement is lineage-related reformulation and structural refinement, not independent convergence
+
+- `framework_ids`: `FW-CQM`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP4-CQM-AC-2004`, `SRC-FCP4-CQM-AC-2009`, `SRC-FCP4-CQM-CK-2017`, `SRC-FCP4-CQM-GS-2018`, `SRC-FCP2-NULL-DECOMP-001`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: FCP-13 classifies CQM as a lineage-related process/compositional reformulation and structural refinement of ordinary quantum theory: concrete quantum models support bounded E2 representation relations, but generic category/process/diagram mathematics and lineage-related quantum structure do not count as independently discovered convergence.
+- `assumptions`: the four-source CQM window, the established quantum/QFT null sector, and frozen FCP-2 E1–E5/independence rules.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` for independent convergence; representation canonicity remains model/hypothesis relative.
+- `weaker_framework_test`: Generic categories, monoidal composition and string diagrams occur far beyond quantum physics; expected agreement between a theory and its reformulation does not establish independent recurrence.
+- `physical_bridge`: Concrete quantum representations provide E2 structure at bounded model/named-extension scope, not whole-family equivalence.
+- `empirical_binding`: Standard quantum empirical success is `EMPIRICALLY_INHERITED`, not independent CQM evidence.
+- `falsification_condition`: A source-qualified CQM result independently derived under the FCP independence criterion and carrying non-generic physical/empirical consequences could supersede that result's nonconvergence classification.
+- `countermodels`: Toy/non-Hilbert categorical models and generic categorical structures block uniqueness and framework-wide identity with ordinary QM.
+- `scope_ceiling`: FCP-13 E2 count `6` at bounded representation scope, but independent strong convergence `0`, moderate convergence `0`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP13-CQMNULL-002 — CQM retains structural and optional-extension residue but no framework-level empirical discriminator
+
+- `framework_ids`: `FW-CQM`
+- `source_ids`: `SRC-FCP4-CQM-AC-2004`, `SRC-FCP4-CQM-AC-2009`, `SRC-FCP4-CQM-CK-2017`, `SRC-FCP4-CQM-GS-2018`, `SRC-FCP2-KEYS-001`
+- `claim_text`: After FCP-13 subtraction, the durable CQM residue is process-first compositional abstraction, representation-independent protocol theorem schemas under named hypotheses, and explicitly optional dagger/compact/classical-interface/CPM/probabilistic-bridge structures; no source-bound framework-level CQM empirical discriminator is identified.
+- `assumptions`: generic categorical machinery, diagrammatic presentation and ordinary quantum empirical success are excluded from CQM-specific credit; optional structures are not promoted into minimal core.
+- `classification`: `OPEN`
+- `canonicity_level`: structural results up to framework/model-relative levels; empirical selection absent.
+- `weaker_framework_test`: Generic composition/diagram syntax is available in weaker frameworks; only additional named categorical hypotheses support the retained non-generic schemas.
+- `physical_bridge`: Physical semantics/calibration arrives through selected concrete quantum/probabilistic models.
+- `empirical_binding`: `NO_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR_IDENTIFIED`; reproduced quantum success remains inherited.
+- `falsification_condition`: A source-qualified CQM-specific K10 discriminator or proof that an optional package is universally forced by the framework would supersede the corresponding ceiling.
+- `countermodels`: Toy/non-Hilbert models and optional-package variation demonstrate that minimal CQM does not uniquely select all ordinary quantum physical structure.
+- `scope_ceiling`: structural/optional-extension residue only; no independent CQM E4 relation.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+---
+
+# FCP-14 CQM/GPTOPT qualification-remediated claims
+
+## FCP14-CQMGPT-001 — A source-bound CQM/GPTOPT bridge does not qualify for pairwise E2 in the frozen packet
+
+- `framework_ids`: `FW-CQM`, `FW-GPTOPT`
+- `source_ids`: `SRC-FCP4-CQM-GS-2018`, `SRC-FCP4-CQM-AC-2004`, `SRC-FCP4-CQM-AC-2009`, `SRC-FCP4-CQM-CK-2017`, `SRC-FCP4-GPT-BARRETT-2007`, `SRC-FCP4-GPT-PLAVALA-2023`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: Final qualification-remediated FCP-14 preserves a real categorical-probabilistic CQM/GPTOPT bridge but withholds pairwise E2 because the frozen internal packet does not contain the explicit map/functor/representation data required by FCP-2; all positive FCP-14 key relations therefore top out at E5.
+- `assumptions`: the closed FCP-14 source window, final remediation-qualified packet, and the frozen FCP-2 requirement that E2 be supported by an explicit declared map/representation preserving the relevant structure.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` pairwise; provenance ceiling controls classification.
+- `weaker_framework_test`: Bridge existence and translatable roles do not by themselves establish the exact structure-preserving pairwise representation demanded for E2.
+- `physical_bridge`: `SOURCE_BOUND_BRIDGE = YES`; `BRIDGE_MEDIATED = YES`; exact pairwise E2 map not frozen.
+- `empirical_binding`: No pairwise E4 discriminator.
+- `falsification_condition`: A separately authorized source-strengthening phase freezing the required explicit map data could permit reevaluation; the current packet cannot.
+- `countermodels`: The qualification defect in the provisional candidate is the direct negative witness against inferring E2 from bridge existence alone.
+- `scope_ceiling`: `E2_NOT_SOURCE_QUALIFIABLE_AT_CURRENT_PACKET = YES`; FCP14 pairwise E2 backfill forbidden.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: Final E-class counts: E1 `0`, E2 `0`, E3 `0`, E4 `0`, E5-only `6`, none `4`.
+
+## FCP14-CQMGPT-002 — CQM and GPTOPT remain materially distinct after dual subtraction
+
+- `framework_ids`: `FW-CQM`, `FW-GPTOPT`
+- `source_ids`: `SRC-FCP4-CQM-GS-2018`, `SRC-FCP4-CQM-AC-2004`, `SRC-FCP4-CQM-AC-2009`, `SRC-FCP4-CQM-CK-2017`, `SRC-FCP4-GPT-BARRETT-2007`, `SRC-FCP4-GPT-PLAVALA-2023`, `SRC-FCP7-GPT-MAZUREK-2021`, `SRC-FCP8-GPT-AQ-2015`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: After generic, quantum-inheritance, bridge-dependence and optional-structure subtraction, FCP-14 finds zero independently justified non-generic CQM/GPTOPT convergence: GPTOPT retains distinct convex/probabilistic geometry, composite-selection burden and broader empirical theory space, while CQM retains named process-theoretic/optional categorical residue; FCP-4 framework separation is preserved.
+- `assumptions`: final FCP-13 CQM residue, FCP-7/FCP-8 GPTOPT residue, and final remediation-qualified FCP-14 relationship accounting.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` cross-framework.
+- `weaker_framework_test`: Generic process/probability/composition shells and common quantum targets do not discharge independent-convergence burden.
+- `physical_bridge`: The source-bound bridge is retained as translation/interface residue, not a merger or whole-family containment theorem.
+- `empirical_binding`: GPTOPT's bounded L2 narrowing does not select CQM; no pairwise empirical discriminator.
+- `falsification_condition`: A future source-qualified independent non-generic E1–E4 relation or whole-family equivalence theorem could supersede the relevant separation result.
+- `countermodels`: Physical composite-cone ambiguity, operational-equivalence semantics and differing optional/base structures block framework collapse.
+- `scope_ceiling`: independent strong convergence `0`; moderate convergence `0`; `FCP4_FRAMEWORK_SEPARATION = PRESERVED`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+---
+
+# FCP-15 loop-family source-intake claims
+
+## FCP15-LOOP-001 — FW-LOOP is source-bound as one family with persistent canonical/covariant subframework labels
+
+- `framework_ids`: `FW-LOOP`
+- `source_ids`: `SRC-FCP15-LOOP-RS-1995`, `SRC-FCP15-LOOP-AL-2004`, `SRC-FCP15-LOOP-AB-2021`, `SRC-FCP15-LOOP-EPRL-2008`, `SRC-FCP15-LOOP-PEREZ-2013`
+- `claim_text`: FCP-15 source-binds one top-level loop-quantum-gravity family while requiring persistent `LOOP-CANON` and `LOOP-COVAR` internal labels: common loop quantum-geometry/spin-network lineage and a fixed-graph EPRL boundary bridge are source-bound, but canonical Hamiltonian and covariant spinfoam dynamics remain materially distinct constructions without complete whole-sector equivalence.
+- `assumptions`: the exact 13-source FCP-15 window and the FCP-4 framework-separation rule applied without importing adjacent GFT/CDT/tensor/LQC programs into base `FW-LOOP`.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: framework taxonomy/source-binding level; no physical uniqueness.
+- `weaker_framework_test`: Shared graphs/representations alone would be generic; the loop-specific quantum-geometric lineage and named canonical/covariant bridge supply the source-bound family relation.
+- `physical_bridge`: EPRL-type fixed-graph spin-network boundary relation is conditional/model scoped; whole physical-Hilbert/dynamics equivalence remains open.
+- `empirical_binding`: No empirical selection follows from retaining one framework family.
+- `falsification_condition`: A future source intake demonstrating materially different primitive/model-class/physical burdens requiring separate top-level IDs, or a complete equivalence collapsing the sublabels, could motivate separate taxonomy revision.
+- `countermodels`: Distinct canonical constraint and covariant amplitude constructions block treating the internal sectors as merely notation.
+- `scope_ceiling`: `OUTCOME_B_INTERNAL_SUBFRAMEWORK_DISTINCTION`; `FRAMEWORK_SPLIT_CANDIDATE = 0`; no cross-framework E1–E5 assignment.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP15-LOOP-002 — Mature loop kinematics does not establish unique framework-wide dynamics or continuum GR recovery
+
+- `framework_ids`: `FW-LOOP`
+- `source_ids`: `SRC-FCP15-LOOP-AL-1997`, `SRC-FCP15-LOOP-QSD-1998`, `SRC-FCP15-LOOP-TG-2024`, `SRC-FCP15-LOOP-EPRL-2008`, `SRC-FCP15-LOOP-BARRETT-2010`, `SRC-FCP15-LOOP-BMP-2009`, `SRC-FCP15-LOOP-STEINHAUS-2020`, `SRC-FCP15-LOOP-BCMR-2026`, `SRC-FCP15-LOOP-AB-2021`
+- `claim_text`: FCP-15 finds mature source-bound spin-network/quantum-geometric kinematics and substantive canonical constraint and covariant spinfoam dynamics programs, but no unique framework-wide physical history law, complete canonical/covariant dynamics equivalence, regulator-independent continuum selection, full physical-observable calibration, or complete 3+1 GR recovery is source-bound.
+- `assumptions`: strict separation of L1 kinematics, L2 constraints, L3 formulation-dependent dynamics and L4 semiclassical/coarse-graining/continuum results.
+- `classification`: `OPEN`
+- `canonicity_level`: framework-wide dynamics, continuum and calibration selection unresolved.
+- `weaker_framework_test`: A discrete operator spectrum, graph structure, constraint operator, fixed-complex amplitude or asymptotic expansion does not by itself force physical spacetime discreteness, dynamics or continuum GR.
+- `physical_bridge`: Area/volume spectra, EPRL boundary structure, Regge asymptotics, low-order correlations and continuum/coarse-graining constructions provide partial conditional bridges.
+- `empirical_binding`: Recovered GR-target behavior is not independent loop empirical confirmation.
+- `falsification_condition`: A source-qualified selected loop dynamics with controlled regulator-independent continuum limit, complete physical observables and calibrated GR+matter recovery would supersede the corresponding open burdens.
+- `countermodels`: Kinematical spectra without detector bridge; distinct constraint/amplitude choices; fixed-complex gluing; asymptotic/low-order results; open coarse-graining universality.
+- `scope_ceiling`: `FRAMEWORK_WIDE_UNIQUE_DYNAMICS_OPEN`; `DISCRETE_COMPOSITION_SOURCE_BOUND / PHYSICAL_GLOBALIZATION_OPEN`; `PARTIAL_REALIZATION / FRAMEWORK_CALIBRATION_OPEN`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: Parameter firewall preserved: Barbero–Immirzi dependence/fitting is not converted into an independent prediction.
+
+## FCP15-LOOP-003 — No framework-level loop empirical discriminator is source-bound
+
+- `framework_ids`: `FW-LOOP`
+- `source_ids`: `SRC-FCP15-LOOP-GHM-2012`, `SRC-FCP15-LOOP-AB-2021`, `SRC-FCP15-LOOP-TG-2024`
+- `claim_text`: FCP-15 identifies no direct empirical/observational source satisfying the frozen K10 burden for an unavoidable base-`FW-LOOP` discriminator; loop-inspired phenomenology remains intermediate/model dependent and agreement with recovered GR or parameter fitting is not independent framework evidence.
+- `assumptions`: base `FW-LOOP` is separated from optional matter/cosmology/black-hole/phenomenology extensions, and empirical inheritance/parameter firewalls are enforced.
+- `classification`: `OPEN`
+- `canonicity_level`: no framework-level empirical selection.
+- `weaker_framework_test`: Phenomenological models can add assumptions not forced by base LQG, so constraining them cannot automatically confirm or exclude the whole framework.
+- `physical_bridge`: Proposed Planck-scale phenomenological links exist, but the source record does not establish a compulsory base-framework-to-detector chain.
+- `empirical_binding`: `NO_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR_IDENTIFIED`; FCP-15 direct empirical source count `0`.
+- `falsification_condition`: A source-qualified unavoidable loop prediction with comparator, observable, parameter treatment, uncertainty, experiment and decision criterion satisfying K10 would supersede.
+- `countermodels`: Model-dependent dispersion/Lorentz-violation and other loop-inspired phenomenology illustrate the extra-assumption gap.
+- `scope_ceiling`: no framework-level K10 evidence; no cross-framework E4 or other E1–E5 relation assigned in FCP-15.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+---
+
 ## Rules
 
 - One primary classification per claim.
