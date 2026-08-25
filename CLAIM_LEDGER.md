@@ -2,7 +2,7 @@
 
 ## Current state
 
-Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, and FCP-16 appended the current loop/null-GR control without altering prior claim rows. The ledger now contains **49 durable rows through FCP-16**. **No overall numerical framework score or winner is inferred from these rows.**
+Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 appended the loop/null-GR control, and FCP-17 appends the current Reduced-NFC/loop controlled comparison without altering prior claim rows. The ledger now contains **51 durable rows through FCP-17**. **No overall numerical framework score or winner is inferred from these rows.**
 
 ## Claim record schema
 
@@ -936,6 +936,44 @@ Future claims should use the following fields:
 - `notes`: null quantum-gravity incompleteness is not positive loop evidence; no new external source is added.
 
 
+
+---
+
+# FCP-17 Reduced-NFC/loop controlled comparison claims
+
+## FCP17-NFCLOOP-001 — No nontrivial Reduced-NFC/loop convergence survives the dual firewall
+
+- `framework_ids`: `FW-NFC-RED`, `FW-LOOP`
+- `source_ids`: `SRC-FCP3-NFC-BIND-001`, `SRC-FCP15-LOOP-RS-1995`, `SRC-FCP15-LOOP-AL-1997`, `SRC-FCP15-LOOP-AL-2004`, `SRC-FCP15-LOOP-QSD-1998`, `SRC-FCP15-LOOP-AB-2021`, `SRC-FCP15-LOOP-EPRL-2008`, `SRC-FCP15-LOOP-PEREZ-2013`, `SRC-FCP15-LOOP-STEINHAUS-2020`, `SRC-FCP15-LOOP-BCMR-2026`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: After restricting Reduced NFC to the exact FCP-3 comparative object and `FW-LOOP` to the six-item FCP-16 null-subtracted residue, FCP-17 establishes no independently non-generic E1–E4 pairwise convergence. Six keys retain only E5 generic or functional relations, while K2, K4, K9 and K10 have no qualified pairwise correspondence; the closed packet freezes no NFC↔loop E2 map, no NFC↔loop E3 controlled limit, and no pairwise E4 discriminator.
+- `assumptions`: frozen FCP-3 Reduced-NFC provenance/genericity ceilings, the FCP-16 loop null/GR subtraction firewall, and unchanged FCP-2 K1–K10/E1–E5 rules.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` cross-framework; all positive relations remain role/scope bounded.
+- `weaker_framework_test`: PASSES for generic relational carriers, quotienting, formal observables, adjacency, composition, refinement and local/global organization; those features occur in substantially weaker systems.
+- `physical_bridge`: no two-sided source-bound NFC↔loop physical map is established; loop partial realization remains unmatched by a general Reduced-NFC realization.
+- `empirical_binding`: `FCP17_INDEPENDENT_E4 = 0`; inherited GR/QM success and optional phenomenology are excluded.
+- `falsification_condition`: a future source-qualified non-generic NFC↔loop E1/E2/E3/E4 relation satisfying the frozen map/limit/physical/empirical burdens would supersede the relevant negative classification.
+- `countermodels`: generic relational/network carrier without loop quantum geometry; loop quantum geometry without `T`-relative observational quotient; composition without dynamics; boundary data without FIS; loop-internal bridge without NFC involvement.
+- `scope_ceiling`: E1 `0`, E2 `0`, E3 `0`, E4 `0`, E5-only `6`, NONE `4`; independent strong convergence `0`, moderate convergence `0`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+
+## FCP17-NFCLOOP-002 — Survivor questions produce no non-generic pass and expose dynamics/realization asymmetry
+
+- `framework_ids`: `FW-NFC-RED`, `FW-LOOP`
+- `source_ids`: `SRC-FCP3-NFC-BIND-001`, `SRC-FCP15-LOOP-QSD-1998`, `SRC-FCP15-LOOP-TG-2024`, `SRC-FCP15-LOOP-EPRL-2008`, `SRC-FCP15-LOOP-PEREZ-2013`, `SRC-FCP15-LOOP-STEINHAUS-2020`, `SRC-FCP15-LOOP-BCMR-2026`, `SRC-FCP15-LOOP-AB-2021`, `SRC-FCP2-KEYS-001`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: FCP-17 finds no non-generic pass among the six Reduced-NFC survivor questions: Congruence and Interface Sufficiency have no frozen loop-residue counterpart, Viability is only weak-generic, Globalization is only a functional analogy, and Realization and Dynamics are defeated as convergence by material asymmetry because loop retains partial physical bridges and substantive quantum-dynamics programs while Reduced NFC supplies neither a general calibrated realization nor a selected physical history law.
+- `assumptions`: the FCP-3 six-survivor-question set and only `LOOP-R1` through `LOOP-R6` after FCP-16 subtraction.
+- `classification`: `NONFORCED`
+- `canonicity_level`: `N/A` for pairwise survivor status.
+- `weaker_framework_test`: shared open questions, invariant-set logic, boundary language and local/global organization are available in weaker frameworks and do not constitute a common theorem.
+- `physical_bridge`: loop partial/target-conditioned realization exists at bounded scope; no matching general Reduced-NFC bridge.
+- `empirical_binding`: `NONE`; survivor-question outcomes are structural/provenance results.
+- `falsification_condition`: a future source-bound loop theorem matching an NFC survivor's exact non-generic logical role, or a source-bound Reduced-NFC physical dynamics/realization matching loop structure, could reopen the corresponding disposition.
+- `countermodels`: loop dynamics without NFC congruence; boundary state without finite-interface sufficiency; category-relative colimit without physical continuum; shared realization incompleteness without a pairwise map.
+- `scope_ceiling`: `PASS_NON_GENERIC = 0`; Congruence `NO_SOURCE_BOUND_COUNTERPART`; Viability `WEAK_GENERIC`; Interface Sufficiency `NO_SOURCE_BOUND_COUNTERPART`; Globalization `FUNCTIONAL_ANALOGY`; Realization/Dynamics `DEFEATED_AS_CONVERGENCE`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
 
 ---
 
