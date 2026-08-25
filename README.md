@@ -310,8 +310,8 @@ Permanent rule:
 
 Recommended:
 
-**FCP-16 — `FW-LOOP` vs. Null/GR: K1–K10 Quantum-Geometry, Dynamics, Continuum-Recovery, and Empirical-Inheritance Control**.
+**FCP-17 — Reduced NFC vs. `FW-LOOP`: K1–K10 Controlled Quantum-Geometry, Dynamics, and Globalization Comparison**.
 
-FCP-15 leaves a substantial source-bound loop-specific residue: mature quantum-geometric kinematics, nontrivial canonical and covariant dynamics programs, and partial semiclassical/continuum bridges, together with unresolved dynamics-selection, continuum/globalization, physical-realization and empirical burdens.
+FCP-16 leaves a six-item null-subtracted loop residue spanning quantum-geometric kinematics, canonical and covariant dynamics programs, the bounded canonical/covariant bridge, continuum/coarse-graining structure, and the Barbero–Immirzi physical-selection burden.
 
-The next control should therefore compare `FW-LOOP` first against the already established null/GR baseline, subtracting generic graph/representation/constrained-system mathematics and target-conditioned GR recovery before any Reduced-NFC comparison. This recommendation is research prioritization only; FCP-16 requires separate authorization.
+The next comparison should test Reduced NFC only against that FCP-16-qualified residue, preserve `LOOP-CANON` / `LOOP-COVAR` scope, and keep generic GR lineage, target-conditioned GR recovery, inherited empirical success and optional model-specific loop extensions outside independent convergence credit. This recommendation is research prioritization only; FCP-17 requires separate authorization.

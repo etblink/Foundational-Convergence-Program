@@ -20,7 +20,7 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 
 | Framework ID | Working name | Role | Status | Latest bounded scientific status |
 |---|---|---|---|---|
-| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `PAIRWISE_COMPARISON_COMPLETE` | FCP-13 CQM/null-QM control added to prior null comparisons; quantum empirical success remains attributed to concrete tested quantum/QFT models rather than independently to categorical reformulations |
+| `FW-NULL-GRQFTSM` | GR + QFT + Standard Model, no deeper ontology assumed | first-class null competitor | `PAIRWISE_COMPARISON_COMPLETE` | FCP-16 loop/null-GR control is the latest null/GR comparison: recovered GR success remains inherited rather than independent loop evidence, pairwise loop↔GR E2/E3 remain unqualified at the closed-packet provenance ceiling, and no independent loop E4 discriminator is identified |
 | `FW-NFC-RED` | Reduced NFC | reduced comparative object only | `PAIRWISE_COMPARISON_COMPLETE` | FCP-12: no E1–E4 or strong/moderate NFC–CST convergence after dual subtraction; K2/K5/K8 weak-generic, K1/K3/K6 functional only; Congruence/Viability/FIS remain unresolved discovery questions while Realization/Dynamics remain material asymmetries |
 | `FW-OAQ` | Operational / algebraic quantum approaches | historical umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-4 split into `FW-AQFT`, `FW-GPTOPT`, `FW-CQM` |
 | `FW-AQFT` | Algebraic / locally covariant quantum field theory | source-bound comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-5/6 controls complete; core mostly reformulation/sharpening of QFT plus named AQFT-X extensions; no framework-level empirical discriminator |
@@ -324,6 +324,22 @@ FCP-15 records:
 Bounded verdict:
 
 > **`FW-LOOP` IS SOURCE-BOUND AS ONE LOOP-QUANTUM-GRAVITY FAMILY WITH PERSISTENT CANONICAL/COVARIANT SUBLABELS. ITS KINEMATICAL QUANTUM GEOMETRY IS MATURE, WHILE FRAMEWORK-WIDE DYNAMICS, CONTINUUM/GR RECOVERY, COMPLETE PHYSICAL REALIZATION AND EMPIRICAL DISCRIMINATION REMAIN OPEN OR PARTIAL AT CURRENT SOURCE SCOPE.**
+
+## FCP-16 loop/null-GR control
+
+FCP-16 compares only the FCP-15-qualified loop family against the frozen null/GR baseline after generic-mathematics, classical-GR-lineage, optional/model, target-conditioned-recovery and empirical-inheritance subtraction.
+
+Main result:
+
+- `FW-LOOP` is not merely a reformulation of GR;
+- six non-generic loop residue items survive subtraction across quantum-geometric kinematics, canonical and covariant dynamics programs, the bounded internal canonical/covariant bridge, continuum/coarse-graining structure and the Barbero–Immirzi selection burden;
+- pairwise loop↔GR E2 and E3 remain unqualified at the closed-packet provenance ceiling rather than being reconstructed from general LQG knowledge;
+- key-level E1–E4 = **0**, E5-only = **9**, none = **1**;
+- independent strong convergence = **0** and independent moderate convergence = **0**;
+- physical-observable calibration and complete continuum/GR recovery remain open;
+- `FCP16_INDEPENDENT_LOOP_E4 = 0` and no framework-level loop empirical discriminator is identified.
+
+FCP-16 therefore leaves a bounded null-subtracted loop residue suitable for a separately authorized Reduced-NFC comparison without carrying generic GR lineage, target-conditioned GR recovery or inherited GR empirical success forward as independent loop content.
 
 ## Admission and credit rules
 
