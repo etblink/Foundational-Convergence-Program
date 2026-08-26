@@ -189,20 +189,71 @@ FCP24_SELECTED = YES
 FCP24_STATUS = CANONICALLY_COMPLETE
 FCP25_SELECTED = NO
 POST_FCP24_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED
-NEXT_RECOMMENDED_OPERATION = INDEPENDENT_POST_FCP24_GROK_FINDING_ADJUDICATION
-POST_FCP24_GROK_AUDIT = RESPONSE_FROZEN_PENDING_INDEPENDENT_ADJUDICATION
+NEXT_RECOMMENDED_OPERATION = PROJECT_LEAD_REVIEW_OF_POST_FCP24_GROK_ADJUDICATION_CANDIDATE
+POST_FCP24_GROK_AUDIT = INDEPENDENT_ADJUDICATION_CANDIDATE_COMPLETE_NOT_INTEGRATED
 POST_FCP24_GROK_AUDIT_PACKET = EXPOSED_EXACTLY
 POST_FCP24_GROK_AUDIT_PROMPT = SENT_EXACTLY
 GROK_CONTACTED = YES
 GROK_OUTPUT_ACQUIRED = YES
 GROK_RESPONSE_FROZEN = YES
 GROK_RESPONSE_COMPLETENESS = PASS
-POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = NOT_STARTED
-NEXT_EXECUTION_STEP = SEPARATE_INDEPENDENT_GROK_FINDING_ADJUDICATION_AUTHORIZATION
-NEXT_SCIENTIFIC_PHASE = NONE__EXTERNAL_AUDIT_RESPONSE_PENDING_INDEPENDENT_ADJUDICATION
+POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANDIDATE_COMPLETE_NOT_INTEGRATED
+NEXT_EXECUTION_STEP = PROJECT_LEAD_REVIEW_OF_ADJUDICATION_CANDIDATE
+NEXT_SCIENTIFIC_PHASE = NONE__ADJUDICATION_CANDIDATE_AWAITING_REVIEW
 ```
 
-No next substantive scientific phase is selected. The accepted post-FCP-24 routing selects a preregistered external adversarial audit before any separately authorized downstream scientific phase.
+No next substantive scientific phase is selected. The candidate adjudication does not become canonical current FCP truth unless separately integrated into `main`.
+
+## Post-FCP-24 Grok independent adjudication candidate
+
+This section records the result on candidate branch `audit/post-fcp24-grok-independent-adjudication`. It is an adjudication-candidate state, not an assertion that `main` has accepted or integrated the result.
+
+```text
+FINDING_001_STATUS = CONFIRMED_WITH_QUALIFICATION
+FINDING_002_STATUS = CONFIRMED_WITH_QUALIFICATION
+FINDING_003_STATUS = SUPERSEDED_BY_BETTER_FORMULATION
+FINDING_004_STATUS = NOT_CONFIRMED
+FINDING_005_STATUS = PARTIALLY_CONFIRMED
+FINDING_006_STATUS = NOT_CONFIRMED
+FINDING_007_STATUS = REQUIRES_SOURCE_REAUDIT
+FINDING_008_STATUS = CONFIRMED_WITH_QUALIFICATION
+
+INDEPENDENT_PROGRAM_METHOD_STATUS = ROBUST_WITH_LOCAL_DEFECTS
+INDEPENDENT_FCP22_STATUS = SURVIVES
+INDEPENDENT_FCP23_STATUS = SURVIVES
+INDEPENDENT_FCP24_STATUS = SURVIVES_WITH_QUALIFICATION
+INDEPENDENT_RECURRENCE_READINESS = NOT_READY
+
+MATERIAL_BLOCKER_COUNT = 0
+REMEDIATION_REQUIRED = YES
+REMEDIATION_EXECUTED = NO
+
+FINDING_003_REMEDIATION_ROUTE = DOCUMENTATION_RECONCILIATION
+FINDING_005_REMEDIATION_ROUTE = DOCUMENTATION_RECONCILIATION
+FINDING_007_REMEDIATION_ROUTE = CONDITIONAL_TARGETED_SOURCE_REAUDIT
+
+SOURCE_REAUDIT_EXECUTED = NO
+METHOD_REANALYSIS_EXECUTED = NO
+TAXONOMY_REANALYSIS_EXECUTED = NO
+RECURRENCE_RECOMPUTATION_STARTED = NO
+FCP25_STARTED = NO
+```
+
+Candidate scientific interpretation:
+
+- Findings 001, 002, and 008 preserve bounded structural cautions but do not establish current Method 0.2.0 defects.
+- Finding 003 is better stated as an epistemic source-scope limit: FCP-24 source-binds `FW-STRING-M` and justifies non-pooling/deferral, but does not need a positive theorem that all broader holography forms one heterogeneous object.
+- Finding 005 identifies a real stale present-tense `SOURCE_REGISTER.md` pending/source-ready summary; the claim-ledger lag remains explicitly scope-limited and historical FCP-24 Stage-1 language remains historical by design.
+- Findings 004 and 006 are not confirmed.
+- Finding 007 requires separately authorized targeted source re-audit to test proposition-level redundancy of named rejected FCP-24 candidates; no external source was reinspected here.
+
+The controlling candidate artifacts are:
+
+- `audits/POST_FCP24_GROK_FINDING_EVIDENCE_LEDGER_0_1_0.md`;
+- `audits/POST_FCP24_GROK_FINDING_ADJUDICATION_0_1_0.md`;
+- `handoffs/POST_FCP24_GROK_FINDING_ADJUDICATION_HANDOFF_0_1_0.md`.
+
+Recommended next operation, if this candidate is accepted, is a **separately authorized** bounded remediation/routing operation for Findings 003 and 005 plus a Project Lead decision on whether to authorize the targeted Finding-007 source re-audit. It does not automatically authorize source-window reopening, Method 0.2.0 repair, framework taxonomy changes, claim-ledger propagation, recurrence recomputation, pairwise work, broader holography intake, or FCP-25.
 
 ## Authoritative navigation
 
