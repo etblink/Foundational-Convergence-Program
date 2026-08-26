@@ -177,14 +177,14 @@ POST_FCP24_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED
 POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
-FINDING_007_TARGETED_SOURCE_REAUDIT = SELECTED_NOT_STARTED
-FW_STRING_M_NULL_CONTROL = DEFER_UNTIL_FINDING_007_TARGETED_SOURCE_REAUDIT
+FINDING_007_TARGETED_SOURCE_REAUDIT = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
+FW_STRING_M_NULL_CONTROL = DEFER_PENDING_FINDING_007_QUALIFIED_CANDIDATE_INTEGRATION
 POST_FCP23_REMAINING_ORDER_AUTOMATICALLY_INHERITED = NO
 ```
 
 `RECURRENCE_IMPACT_CANDIDATE = YES` means later recurrence analysis must account for the current FCP-22 relation and later current relations; it is not authorization to recompute recurrence now.
 
-The accepted post-FCP-23 sequencing dependency state records that recurrence is premature pending both prospective NFC↔strengthened-AS and NFC↔strengthened-LOOP reanalyses; claim-ledger propagation is not a prerequisite for either reanalysis or recurrence; and LOOP taxonomy review is not a prerequisite for the prospective NFC↔LOOP reanalysis. FCP-24 materially changes the framework inventory, so the unexecuted remainder of the old sequencing order is not automatically inherited as the post-FCP-24 order. The canonical Grok adjudication additionally routes a narrow Finding-007 targeted source re-audit before the first `FW-STRING-M` null control.
+The accepted post-FCP-23 sequencing dependency state records that recurrence is premature pending both prospective NFC↔strengthened-AS and NFC↔strengthened-LOOP reanalyses; claim-ledger propagation is not a prerequisite for either reanalysis or recurrence; and LOOP taxonomy review is not a prerequisite for the prospective NFC↔LOOP reanalysis. FCP-24 materially changes the framework inventory, so the unexecuted remainder of the old sequencing order is not automatically inherited as the post-FCP-24 order. The canonical Grok adjudication additionally routes the narrow Finding-007 targeted source re-audit before the first `FW-STRING-M` null control. This candidate completes that re-audit scientifically but is not canonical until Project Lead integration.
 
 ## Next-task status
 
@@ -195,7 +195,7 @@ FCP24_SELECTED = YES
 FCP24_STATUS = CANONICALLY_COMPLETE
 FCP25_SELECTED = NO
 POST_FCP24_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED
-NEXT_RECOMMENDED_OPERATION = FINDING_007_TARGETED_SOURCE_REAUDIT
+NEXT_RECOMMENDED_OPERATION = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
 POST_FCP24_GROK_AUDIT = INDEPENDENT_ADJUDICATION_CANONICALLY_COMPLETE
 POST_FCP24_GROK_AUDIT_PACKET = EXPOSED_EXACTLY
 POST_FCP24_GROK_AUDIT_PROMPT = SENT_EXACTLY
@@ -206,16 +206,58 @@ GROK_RESPONSE_COMPLETENESS = PASS
 POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
-FINDING_007_TARGETED_SOURCE_REAUDIT = SELECTED_NOT_STARTED
-NEXT_EXECUTION_STEP = SEPARATE_FINDING_007_TARGETED_SOURCE_REAUDIT_AUTHORIZATION
-NEXT_SCIENTIFIC_PHASE = NONE__TARGETED_SOURCE_REAUDIT_SELECTED_PENDING_SEPARATE_AUTHORIZATION
+FINDING_007_TARGETED_SOURCE_REAUDIT = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
+NEXT_EXECUTION_STEP = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
+NEXT_SCIENTIFIC_PHASE = NONE__QUALIFIED_FINDING_007_CANDIDATE_PENDING_INTEGRATION
 ```
 
-The Grok audit and independent adjudication are canonically complete. The accepted Findings 003/005 documentation reconciliations are complete in the present-tense live surfaces. The Finding-007 targeted source re-audit is selected but has not started; no next substantive source inspection occurs without separate authorization.
+The Grok audit and independent adjudication are canonically complete. Findings 003/005 reconciliation is complete. On this candidate branch only, the Finding-007 targeted source re-audit is scientifically complete and qualified after exact Green–Schwarz full-text remediation. This result is not canonical until Project Lead integration.
+
+## Finding-007 targeted source re-audit — qualified replacement candidate (not integrated)
+
+This section records only the result proposed by branch `audit/fcp24-finding007-targeted-source-reaudit-remediation`. It does not alter canonical `main` before Project Lead review.
+
+```text
+FINDING_007_TARGETED_SOURCE_REAUDIT = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
+FINDING_007_REAUDIT_OUTCOME_CANDIDATE = PARTIAL_SOURCE_SELECTION_DEFECT_NO_MATERIAL_FCP24_CHANGE
+
+ELIGIBLE_CANDIDATE_COUNT = 11
+IDENTITY_RESOLVED_COUNT = 11
+IDENTITY_UNRESOLVED_COUNT = 0
+FULL_TEXT_SUFFICIENT_COUNT = 11
+SOURCE_TEXT_INSUFFICIENT_COUNT = 0
+
+REDUNDANCY_UPHELD_COUNT = 2
+PARTIALLY_REDUNDANT_NONMATERIAL_COUNT = 2
+NONREDUNDANT_NO_MATERIAL_CHANGE_COUNT = 7
+NONREDUNDANT_MATERIAL_COUNT = 0
+ORIGINAL_REJECTION_NOT_AUDITABLE_COUNT = 0
+
+F007_CAND_01_PROPOSITION_REDUNDANCY_CANDIDATE = NOT_REDUNDANT
+F007_CAND_01_PRIMARY_DISPOSITION_CANDIDATE = NONREDUNDANT_BUT_NO_MATERIAL_FCP24_CHANGE
+
+FCP24_CURRENT_STATUS_CANDIDATE = SURVIVES_WITH_SOURCE_SELECTION_QUALIFICATION
+FW_STRING_M_STATUS_EFFECT_CANDIDATE = UNCHANGED
+FW_STRING_M_K1_K10_EFFECT_CANDIDATE = UNCHANGED
+SWAMPLAND_CEILING_EFFECT_CANDIDATE = UNCHANGED
+DE_SITTER_REALIZATION_EFFECT_CANDIDATE = UNCHANGED
+EMPIRICAL_CEILING_EFFECT_CANDIDATE = UNCHANGED
+
+CURRENT_PROSPECTIVE_SOURCE_SUPPLEMENT_REQUIRED_CANDIDATE = NO
+TARGETED_FCP24_REANALYSIS_REQUIRED_CANDIDATE = NO
+FW_STRING_M_NULL_CONTROL_READINESS_CANDIDATE = READY_AFTER_QUALIFIED_FINDING_007_INTEGRATION
+
+NEXT_RECOMMENDED_OPERATION_CANDIDATE = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
+FCP25_SELECTED = NO
+```
+
+The exact purchased Green–Schwarz journal body resolves the sole access defect. It is nonredundant primary evidence relative to the Agmon review because it supplies the original one-loop anomaly factorization/local-interaction mechanism, mixed-anomaly treatment, and exact caveats. That additional evidence is nonmaterial to the existing FCP-24 conclusions. The completed eleven-candidate audit therefore identifies a partial source-selection defect without a material FCP-24 change.
+
+The candidate preserves the eleven-candidate and fifteen-comparator freeze. It admits no source, mutates no historical FCP-24 artifact, starts no reanalysis or null control, and makes no canonical claim before integration. The prior access-limited sibling `3e2e39bf2cb0fe5f40f1836b2dd40a8745b74c57` remains noncanonical and outside this candidate's ancestry.
 
 ## Post-FCP-24 Grok independent adjudication — canonical status
 
-This section records the canonically integrated independent adjudication and its post-adjudication routing state.
+This section records the canonically integrated independent adjudication and its post-adjudication routing state. Historical routing labels remain historical provenance until a later qualified result is integrated.
 
 ```text
 FINDING_001_STATUS = CONFIRMED_WITH_QUALIFICATION
@@ -251,7 +293,7 @@ Canonical scientific interpretation:
 - Finding 003 is stated at the epistemic source-scope level: FCP-24 source-binds `FW-STRING-M` and justifies non-pooling/deferral; it does not claim a positive theorem that all broader holography forms one intrinsically heterogeneous object.
 - Finding 005's stale present-tense `SOURCE_REGISTER.md` pending/source-ready summary is reconciled; the claim-ledger lag remains explicitly scope-limited and historical FCP-24 Stage-1 language remains historical by design.
 - Findings 004 and 006 are not confirmed.
-- Finding 007 requires the separately authorized targeted source re-audit now selected as the next scientific operation; no external source was reinspected here.
+- Finding 007 historically required a separately authorized targeted source re-audit. The qualified candidate above proposes completion but is not canonical until integration.
 
 The controlling canonical adjudication artifacts are:
 
@@ -259,7 +301,7 @@ The controlling canonical adjudication artifacts are:
 - `audits/POST_FCP24_GROK_FINDING_ADJUDICATION_0_1_0.md`;
 - `handoffs/POST_FCP24_GROK_FINDING_ADJUDICATION_HANDOFF_0_1_0.md`.
 
-The post-adjudication routing record is `governance/POST_FCP24_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md`. No source-window reopening, Method 0.2.0 repair, framework taxonomy change, claim-ledger propagation, recurrence recomputation, pairwise work, broader holography intake, or FCP-25 is authorized by this reconciliation.
+The post-adjudication routing record is `governance/POST_FCP24_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md`. No source-window reopening, Method 0.2.0 repair, framework taxonomy change, claim-ledger propagation, recurrence recomputation, pairwise work, broader holography intake, or FCP-25 is authorized by this candidate.
 
 ## Authoritative navigation
 
