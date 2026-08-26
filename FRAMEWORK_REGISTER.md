@@ -31,7 +31,8 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 | `FW-LOOP` | Loop / spin-network / spinfoam approaches | source-bound quantum-gravity comparator family | `PAIRWISE_COMPARISON_COMPLETE` | Targeted source strengthening partially closes the continuum/physical-recovery gap: fixed-building-block E3-S and selected model-level E3-M recovery are source-qualified, while E3-F, E3-P, framework-level calibrated observables and EMP4 remain unestablished. LQC remains an adjacent extension source and is not imported into `FW-LOOP` credit; historical FCP-17 remains the latest Reduced-NFC/LOOP comparison |
 | `FW-TENSOR` | Tensor-network / information-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
 | `FW-AS` | Asymptotic safety | source-bound continuum/RG fixed-point quantum-gravity comparator | `PAIRWISE_COMPARISON_COMPLETE` | FCP-23 is the latest bounded AS status: source-qualified scattering, ghost, spectral, pole and positivity evidence constrains selected models, truncations and parameters with strongest exclusion scope `EXCL-M`; explicit model/gauge/truncation/trajectory escapes block framework exclusion and no framework-level no-go candidate is established. Targeted source strengthening's selected E3-M recovery, Lorentzian spectral realization and timelike model observable remain qualified; historical FCP-21 remains the latest Reduced-NFC/AS comparison |
-| `FW-STRING` | String-theoretic / holographic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
+| `FW-STRING` | String-theoretic / holographic approaches | historical string/holography umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-24 found the literal umbrella scientifically over-broad; `FW-STRING-M` is the sole stable source-bound successor, AdS/CFT is retained as a declared-domain dual description, and the broader holographic remainder is deferred pending separate source intake |
+| `FW-STRING-M` | String/M-theory framework family | source-bound quantum-gravity comparator family | `SOURCE_BOUND_READY` | FCP-24 source-binds one formulation- and domain-layered string/M-theory family with nonempty perturbative, string-field, D-brane, duality, and candidate M-theory content; compactification/vacuum, landscape, swampland, and phenomenology remain model/realization/conjectural layers, no universal complete nonperturbative definition or vacuum selector is established, and the empirical ceiling is a model-parameter constraint rather than framework discrimination |
 | `FW-CAT` | Broader categorical / process-theoretic / topos / related structural approaches | comparator family pending subdivision/source intake | `ADMITTED_NOT_AUDITED` | FCP-4 leaves this broader family distinct from `FW-CQM` |
 
 ## FCP-1 through FCP-3 state
@@ -455,6 +456,43 @@ Main result:
 - neither side supplies pairwise E4.
 
 FCP-21 therefore creates no new common NFC/AS foundational object and does not update the FCP-18 program-level meta-audit retrospectively.
+
+## FCP-24 string/holographic taxonomy and source binding
+
+FCP-24 resolves the historical `FW-STRING = string-theoretic / holographic approaches` umbrella through a separately frozen 24-source corpus and selects:
+
+`FCP24_TAXONOMY_OUTCOME = C — FRAMEWORK_SPLIT_REQUIRED`.
+
+The historical umbrella is retained for provenance and set to `SUPERSEDED_BY_FRAMEWORK_SPLIT`. One stable successor is admitted:
+
+`FW-STRING-M` — String/M-theory framework family — `SOURCE_BOUND_READY`.
+
+Canonical bounded identity:
+
+- core carrier: a family of perturbative string and string-field carriers, with declared-domain D-brane and candidate matrix/M-theory sectors;
+- core dynamics: formulation-dependent quantum amplitude, field, or restricted matrix dynamics;
+- equivalence/duality: gauge redundancy plus source-qualified dual descriptions in declared coupling, dimension, supersymmetry, compactification, or AdS model domains;
+- persistent internal labels: `STRING-PERT`, `STRING-SUSY`, `STRING-SFT`, `STRING-NP`, `M-THEORY`, and `ADS-CFT-DUAL`;
+- spacetime: formulation-, background-, compactification-, and duality-domain dependent; four-dimensional spacetime is a realization outcome, not one core input;
+- nonperturbative status: nonempty and materially source-qualified, but no universal complete all-background definition;
+- realization: compactification, vacuum, flux/brane, moduli-stabilization, supersymmetry-breaking, and low-energy model choice;
+- empirical status: model phenomenology and one model-parameter constraint; no framework-level discriminator.
+
+Taxonomy firewalls:
+
+- AdS/CFT is a `DUAL_DESCRIPTION` in declared models, not all string theory and not all holography;
+- gauge/gravity duality beyond declared domains remains a `CONJECTURAL_EXTENSION`;
+- broader holographic programs are `ADJACENT_BUT_DISTINCT_FRAMEWORK` material, but the frozen corpus does not define one stable `FW-HOLO` carrier/dynamics and no such ID is created;
+- compactification/vacuum constructions are `COMPACTIFICATION_OR_VACUUM_CHOICE` and `REALIZATION_CHOICE`, not framework-level predictions;
+- landscape counting in specified ensembles does not supply a measure, dynamics, or empirical vacuum selector;
+- swampland material remains heuristic, conjectural-with-evidence, or tension-level; theorem-level framework constraints are not established;
+- BFSS remains a conjectural large-`N`/kinematic candidate, not a universal complete M-theory definition;
+- the LVK cosmic-string result constrains stated network models and does not identify cosmic superstrings or discriminate `FW-STRING-M`.
+
+The broader holographic remainder is `DEFERRED_PENDING_SEPARATE_SOURCE_INTAKE`. This is an accounting boundary, not admission of one unnamed holographic framework.
+
+FCP-24 adds no cross-framework E1–E5 classifications, no convergence credit, no framework winner, no scalar score, and no NFC comparison.
+
 ## Admission and credit rules
 
 Admission reserves a comparison slot; it is not endorsement. A framework may require later subdivision, but subdivision must precede favorable scoring.
