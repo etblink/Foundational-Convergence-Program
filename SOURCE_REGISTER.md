@@ -304,17 +304,19 @@ Source-bound and ready:
 - `FW-CQM`;
 - `FW-CST`;
 - `FW-LOOP`;
-- `FW-AS`.
+- `FW-AS`;
+- `FW-STRING-M`.
 
 Historical superseded umbrella:
 
 - `FW-CAUSAL` — retained for provenance; superseded by the FCP-10 framework split.
+- `FW-STRING` — retained for provenance; superseded by the FCP-24 framework split into source-bound `FW-STRING-M`, while broader holographic material remains deferred pending separate source intake.
 
 Still pending/deferred source intake:
 
 - adjacent causal/order-theoretic approaches distinct from CST, with no single placeholder framework ID admitted;
 - tensor/information approaches;
-- string/holography;
+- broader holographic approaches outside the source-bound `FW-STRING-M` family — no `FW-HOLO` framework ID is currently admitted; separate source intake remains deferred;
 - broader `FW-CAT` categorical/process/topos/effectus approaches.
 
 ## Provenance requirements for future entries
