@@ -1,0 +1,123 @@
+# Post-FCP-24 Grok Response Custody 0.1.0
+
+## Capture identity
+
+```text
+AUDITOR = GROK
+CAPTURE_SOURCE = USER_RETURNED_CHAT_ATTACHMENT
+CAPTURE_MODE = USER_PASTED_GROK_OUTPUT_MATERIALIZED_AS_CHAT_ATTACHMENT
+
+RAW_RESPONSE_PATH =
+audits/external/GROK_POSTFCP24_ADVERSARIAL_AUDIT_RESPONSE_0_1_0.md
+
+RAW_RESPONSE_SHA256 =
+c378c3d703503d17342bd40d5f297224c0919a5c399e273a662361ee451bd11c
+
+RAW_RESPONSE_EXPECTED_GIT_BLOB =
+f8fb57c21224bce4bd7c826580f5aa23ed990e10
+
+RAW_RESPONSE_BYTE_COUNT =
+48116
+
+RAW_RESPONSE_ENCODING =
+UTF-8
+
+RAW_RESPONSE_LINE_ENDINGS =
+CRLF
+
+UPSTREAM_NATIVE_RESPONSE_BYTES_OBSERVABLE =
+NO
+
+CAPTURED_RESPONSE_ARTIFACT_BYTES_EXACTLY_PRESERVED =
+YES
+```
+
+The bytes frozen here are exactly the bytes returned to ChatGPT in the user's attached Markdown/paste artifact. This custody record does not claim access to Grok's hidden transport bytes or internal server representation.
+
+## Frozen prompt and packet bindings
+
+```text
+AUDIT_PROMPT_GIT_BLOB =
+5b835b39641e7adfa9442cb867f7f627ddc753fb
+
+AUDIT_PROMPT_SHA256 =
+4d8931ebd8f4be3f4656e89fa217bce4d12198fdd619b240065ce0b2e7e492c3
+
+AUDIT_PACKET_MANIFEST_GIT_BLOB =
+1ea44e716a696206f9ec58f5843ccb17a61db225
+
+AUDIT_PACKET_MANIFEST_SHA256 =
+f3c0bb8a988dc1c9cb7521c9e2ba8aab372513b5576b5ddad4223ff0be7dca6f
+```
+
+## Structural completeness only
+
+```text
+RESPONSE_NOT_TRUNCATED =
+YES__NO_VISIBLE_TRUNCATION
+
+ALL_REQUESTED_SECTIONS_PRESENT =
+YES
+
+FINDING_NAMESPACE_PARSEABLE =
+YES
+
+FINDING_COUNT =
+8
+
+FINDING_IDS =
+GROK_POSTFCP24_FINDING_001
+THROUGH
+GROK_POSTFCP24_FINDING_008
+
+ALL_REQUIRED_MATERIAL_FINDING_FIELDS_PRESENT =
+YES
+```
+
+The response includes the requested executive summary, material findings, strongest-case challenges, required steelman, program-wide external verdicts, and sequencing implications.
+
+## External verdicts as returned
+
+These remain external recommendations only and are not FCP adjudications.
+
+```text
+PROGRAM_METHOD_STATUS =
+ROBUST_WITH_LOCAL_DEFECTS
+
+FCP22_STATUS =
+SURVIVES_WITH_QUALIFICATION
+
+FCP23_STATUS =
+SURVIVES_WITH_QUALIFICATION
+
+FCP24_STATUS =
+SURVIVES_WITH_QUALIFICATION
+
+RECURRENCE_READINESS =
+NOT_READY
+```
+
+## No-adjudication firewall
+
+```text
+GROK_FINDINGS_ADJUDICATED = 0
+GROK_FINDINGS_ACCEPTED = 0
+GROK_FINDINGS_REJECTED = 0
+GROK_FINDINGS_PARTIALLY_ACCEPTED = 0
+
+NEW_SCIENTIFIC_ADJUDICATIONS = 0
+NEW_TAXONOMY_ADJUDICATIONS = 0
+NEW_E1_E5_ASSIGNMENTS = 0
+NEW_EMPIRICAL_ADJUDICATIONS = 0
+
+METHOD_0_2_0_STATUS_CHANGE = NO
+FCP22_STATUS_CHANGE = NO
+FCP23_STATUS_CHANGE = NO
+FCP24_STATUS_CHANGE = NO
+FRAMEWORK_STATUS_CHANGE = NO
+RECURRENCE_READINESS_STATUS_CHANGE = NO
+```
+
+## Repository status
+
+No repository write is performed by this local custody freeze. Canonical Git integration of the response and custody record requires separate explicit authorization.
