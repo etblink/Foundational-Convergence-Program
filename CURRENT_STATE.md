@@ -75,11 +75,12 @@ CLAIM_LEDGER_CURRENT_SUPERSESSION = NOT_STARTED
 ## Next-task status
 
 ```text
-FCP23_SELECTED = NO
-NEXT_SCIENTIFIC_PHASE = UNSELECTED_PENDING_SEPARATE_SEQUENCING_DECISION
+FCP23_SELECTED = YES
+FCP23_STATUS = SELECTED_NOT_YET_EXECUTED
+NEXT_SCIENTIFIC_PHASE = FCP23_EMPIRICAL_NO_GO_DISCRIMINATOR_FEASIBILITY
 ```
 
-No new scientific phase is authorized by this file. A fresh sequencing decision is required before empirical/no-go work, remaining NFC pairwise reanalysis, recurrence, new framework intake, or FCP-23.
+FCP-23 has been selected and preregistered as the next scientific phase, but substantive execution has not started. The preregistration freezes its framework scope, forced-commitment burden, framework-vs-model exclusion discipline, source-admission rules, staged stop rule, E4/EMP4 burdens, bounded null-result wording, and one-target maximum before any new FCP-23 literature is admitted or scored.
 
 ## Authoritative navigation
 
@@ -90,6 +91,7 @@ No new scientific phase is authorized by this file. A fresh sequencing decision 
 - `SOURCE_REGISTER.md` — live source/provenance bindings.
 - `CLAIM_LEDGER.md` — detailed claim records; later current-supersession propagation requires separate authorization.
 - `governance/FCP_METHOD_0_2_0_ACTIVATION.md` — Method 0.2.0 activation event and historical activation-time routing context.
+- `governance/FCP23_PHASE_OPENING_AND_PREREGISTRATION_0_1_0.md` — frozen FCP-23 scope, search architecture, exclusion burden, and execution boundary.
 - `audits/FCP_TARGETED_SOURCE_STRENGTHENING_ADJUDICATION_0_1_0.md` — canonical targeted-source-strengthening adjudication.
 - `comparisons/FCP22_NFC_REDUCED_VS_STRENGTHENED_AQFT_METHOD_0_2_0_0_1_0.md` — canonical FCP-22 comparison.
 - `audits/FCP22_NFC_AQFT_PROSPECTIVE_REANALYSIS_ADJUDICATION_0_1_0.md` — FCP-22 qualification/adjudication.
