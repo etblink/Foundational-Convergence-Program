@@ -9,12 +9,14 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 
 ## Current status
 
-- **Latest canonical scientific phase:** FCP-23 — Framework-Level Empirical / No-Go Discriminator Feasibility and Target Selection.
+- **Latest canonical scientific phase:** FCP-24 — String-Theoretic / Holographic Source Intake, Taxonomy Gate, and K1–K10 Baseline.
 - **Active prospective method:** FCP Method 0.2.0.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
-FCP-23 finds no current framework-level empirical or no-go discriminator at its declared source scope. Real constraints survive below framework scope: Causal Set Theory reaches realization scope (`EXCL-R`) and Asymptotic Safety reaches model scope (`EXCL-M`), with explicit core-preserving escapes blocking framework exclusion in both cases. No framework exclusion and no follow-on discriminator target were selected. This is a bounded source-window result, not a claim that future framework-level discrimination is impossible.
+FCP-24 tested the historical `FW-STRING = String-theoretic / holographic approaches` umbrella against a separately frozen 24-source corpus. Its qualified taxonomy result is `FCP24_TAXONOMY_OUTCOME = C`: the historical umbrella is scientifically over-broad and is superseded by framework split. One stable source-bound successor, `FW-STRING-M` — String/M-theory framework family — is established as `SOURCE_BOUND_READY`. Broader holography is not imported into that framework and is `DEFERRED_PENDING_SEPARATE_SOURCE_INTAKE`; no `FW-HOLO` is created. AdS/CFT remains a declared-domain dual description. The source-bound String/M-theory family has nonempty perturbative, string-field, D-brane, duality, and candidate M-theory structure, but the frozen corpus establishes neither a universal complete nonperturbative definition nor a unique vacuum/realization selector. Its highest current empirical scope is `PARAMETER_CONSTRAINT_AT_MODEL_SCOPE`, with `FRAMEWORK_LEVEL_EMPIRICAL_SELECTION = NO`.
+
+`FRAMEWORK_SPLIT_REQUIRED` in FCP-24 does not imply that two successor framework IDs had to be immediately admitted: the result source-binds one stable successor while scientifically separating a broader holographic remainder that is not yet source-bound as one framework.
 
 ## Program architecture
 
@@ -39,6 +41,7 @@ Method 0.2.0 reports these axes separately. It does not use a scalar framework-w
 - **Targeted source strengthening:** AQFT split/nuclearity gap closed with qualification; LOOP and AS physical/recovery evidence materially strengthened at bounded scope.
 - **FCP-22:** prospective Reduced NFC ↔ strengthened AQFT reanalysis; historical FCP-6 FIS source-scope caveat materially resolved, yielding a generic E5 functional relation but no E1–E4 or empirical selection.
 - **FCP-23:** preregistered framework-level empirical/no-go feasibility audit; no framework-level discriminator identified at the declared source scope, while CST retains `EXCL-R` realization constraints and AS retains `EXCL-M` model constraints; zero follow-on targets selected.
+- **FCP-24:** frozen 24-source string/holography intake; historical umbrella split; `FW-STRING-M` source-bound as the stable String/M-theory successor; broader holography deferred pending separate intake; K1–K10 baseline completed; no framework-level empirical discriminator established.
 
 Detailed scientific findings live in the versioned phase, comparison, audit, and handoff artifacts rather than in this landing page.
 
@@ -77,8 +80,8 @@ These are different time-indexed claims. FCP-22 does not rewrite FCP-6, and FCP-
 - [`SOURCE_REGISTER.md`](SOURCE_REGISTER.md) — source/provenance bindings.
 - [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) — detailed claim records; current-state supersession may require separately authorized propagation.
 - [`comparison_keys/`](comparison_keys/) — historical and current relation/evidence rules.
-- [`governance/`](governance/) — Method 0.2.0 and governance artifacts, including the frozen FCP-23 preregistration.
-- [`frameworks/`](frameworks/) — source-bound framework packets and strengthening records.
+- [`governance/`](governance/) — Method 0.2.0 and governance artifacts, including the frozen FCP-23 and FCP-24 preregistrations.
+- [`frameworks/`](frameworks/) — source-bound framework packets and strengthening records, including the FCP-24 String/M-theory source intake and K1–K10 baseline.
 - [`comparisons/`](comparisons/) — bounded pairwise comparison artifacts.
 - [`audits/`](audits/) — adversarial, equal-standard, source-strengthening, FCP-23 screening/evidence, and qualification audits.
 - [`handoffs/`](handoffs/) — immutable phase handoffs and provenance summaries.

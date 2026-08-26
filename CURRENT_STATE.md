@@ -5,9 +5,9 @@
 ## Current canonical scientific state
 
 ```text
-LATEST_CANONICAL_SCIENTIFIC_PHASE = FCP-23
-LATEST_CANONICAL_SCIENTIFIC_COMMIT = 0c10e7a2e6a9eb3f10434eaa621f03060cfaf733
-LATEST_CANONICAL_SCIENTIFIC_TREE = 23d6fb601204cd93e459df7a83f99e34243d0f8f
+LATEST_CANONICAL_SCIENTIFIC_PHASE = FCP-24
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = b777b0c5b3c8b0853aafd2f16952d4de357f0587
+LATEST_CANONICAL_SCIENTIFIC_TREE = 6231b00ef58aa81fba54f42af445d2a254decdf2
 CANONICAL_COMMIT_AT_STATE_SPLIT = 115e88f578d3d9f761d870c3cb569bd72b61c559
 CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.0_ACTIVE_PROSPECTIVELY
@@ -25,9 +25,11 @@ FCP22 = CANONICALLY_COMPLETE
 FCP23 = CANONICALLY_COMPLETE
 FCP23_STATUS = CANONICALLY_COMPLETE
 POST_FCP23_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED
-FCP24 = SELECTED_NOT_YET_EXECUTED
-FCP24_STATUS = SELECTED_NOT_YET_EXECUTED
-FW_STRING_INTAKE = SELECTED_NOT_YET_EXECUTED
+FCP24 = CANONICALLY_COMPLETE
+FCP24_STATUS = CANONICALLY_COMPLETE
+FCP24_STAGE1 = CANONICALLY_COMPLETE
+FCP24_STAGE2 = CANONICALLY_COMPLETE
+FW_STRING_INTAKE = CANONICALLY_COMPLETE
 ```
 
 Targeted source strengthening established, at bounded scope:
@@ -74,7 +76,25 @@ FCP23_AS_FRAMEWORK_EXCLUSION = NO
 
 This is a source-window-bounded ceiling. It does not establish empirical underdetermination in principle, framework truth/falsity, or impossibility of future discrimination.
 
-The accepted post-FCP-23 sequencing adjudication selects a new primitive-basis intake for the historical `FW-STRING` umbrella as the highest-information next operation. This is a task-ordering decision, not a framework ranking or a scientific claim about string theory. FCP-24 is opened and preregistered but substantive execution has not started.
+The accepted post-FCP-23 sequencing adjudication selected a new primitive-basis intake for the historical `FW-STRING` umbrella. FCP-24 then completed a separately frozen 24-source intake, taxonomy gate, K1–K10 baseline, realization/phenomenology adjudication, and handoff. Its bounded taxonomy result is:
+
+```text
+FCP24_SOURCE_CORPUS_FROZEN = YES
+FCP24_SOURCE_FREEZE_COMMIT = a70370c21b03c667fb41a046a219686daf260ef3
+FCP24_SOURCE_FREEZE_TREE = 22a55a3d7613b9f6425d7f547403853325940d53
+FCP24_FROZEN_EXTERNAL_SOURCE_COUNT = 24
+FCP24_NEW_EXTERNAL_SOURCES_DURING_STAGE2 = 0
+
+FCP24_TAXONOMY_OUTCOME = C__FRAMEWORK_SPLIT_REQUIRED
+FW_STRING_CURRENT_STATUS = SUPERSEDED_BY_FRAMEWORK_SPLIT
+FW_STRING_M_CURRENT_STATUS = SOURCE_BOUND_READY
+FCP24_SUCCESSOR_FRAMEWORK_COUNT = 1
+FCP24_SUCCESSOR_FRAMEWORK_IDS = FW-STRING-M
+BROADER_HOLOGRAPHIC_REMAINDER = DEFERRED_PENDING_SEPARATE_SOURCE_INTAKE
+FW_HOLO_CREATED = NO
+```
+
+The historical string/holography umbrella is therefore retained as provenance but is not a current unified framework. One stable String/M-theory successor is source-bound; broader holographic material is scientifically separated but remains unbound as one framework pending any separately selected intake.
 
 ## Current framework-impact summary
 
@@ -94,6 +114,50 @@ Current source-strengthened LOOP status includes source-qualified fixed-building
 
 Current source-strengthened AS status includes selected global UV→IR E3-M recovery, Lorentzian spectral E3-M realization, and a source-qualified timelike model observable with positive viability content. FCP-23 additionally finds real scattering, ghost, spectral, pole and positivity constraints at model/truncation/parameter scope, with strongest qualified exclusion scope `EXCL-M`. No adverse result in the frozen FCP-23 corpus covers every physically admissible UV-fixed-point realization, so no `FW-AS` framework exclusion or framework-level no-go candidate is established.
 
+### String/M theory and holography boundary
+
+FCP-24 supersedes the historical `FW-STRING` string/holography umbrella by taxonomy split and source-binds `FW-STRING-M` as a String/M-theory framework family. Its current bounded status is:
+
+```text
+FW_STRING_M_CORE = SOURCE_BOUND_STRING_M_THEORY_FRAMEWORK_FAMILY
+
+FW_STRING_M_NONPERTURBATIVE_STATUS =
+NONEMPTY_AND_SOURCE_QUALIFIED_IN_DECLARED_DOMAINS;
+UNIVERSAL_COMPLETE_DEFINITION_NOT_ESTABLISHED
+
+FW_STRING_M_REALIZATION_STATUS =
+MODEL_AND_VACUUM_DEPENDENT;
+GENERIC_DYNAMICAL_REALIZATION_NOT_ESTABLISHED
+
+FW_STRING_M_VACUUM_SELECTION = NOT_ESTABLISHED
+FW_STRING_M_FRAMEWORK_LEVEL_EMPIRICAL_SELECTION = NO
+FW_STRING_M_HIGHEST_EMPIRICAL_SCOPE = PARAMETER_CONSTRAINT_AT_MODEL_SCOPE
+
+ADS_CFT_ROLE = DUAL_DESCRIPTION_IN_DECLARED_MODELS
+BROADER_HOLOGRAPHY_ROLE = ADJACENT_BUT_DISTINCT_MATERIAL
+BROADER_HOLOGRAPHY_SOURCE_BOUND_FRAMEWORK = NO
+BROADER_HOLOGRAPHY_FOLLOW_ON_INTAKE = DEFERRED_NOT_SELECTED
+
+DIRECT_FW_STRING_M_EMPIRICAL_DISCRIMINATOR = NO
+FCP24_HIGHEST_EMPIRICAL_SCOPE = PARAMETER_CONSTRAINT_AT_MODEL_SCOPE
+FCP24_FRAMEWORK_LEVEL_EMPIRICAL_SELECTION = NO
+```
+
+The FCP-24 result preserves the boundaries:
+
+```text
+STRING_THEORY != AUTOMATICALLY_ADS_CFT
+ADS_CFT != AUTOMATICALLY_ALL_HOLOGRAPHY
+
+COSMIC_STRING_MODEL_CONSTRAINT
+!= IDENTIFICATION_OF_COSMIC_SUPERSTRINGS
+
+COSMIC_STRING_MODEL_CONSTRAINT
+!= FRAMEWORK_LEVEL_STRING_DISCRIMINATION
+```
+
+A source-bound framework family is not equivalent to a complete nonperturbative definition, and model-level phenomenology is not framework-level empirical selection.
+
 ## Open dependencies
 
 ```text
@@ -107,11 +171,14 @@ CLAIM_LEDGER_CURRENT_SUPERSESSION = NOT_STARTED
 SUPERSESSION_PROPAGATION_TIMING = DEFER_LATER
 SUPERSESSION_PROPAGATION_IS_PREREQUISITE = NO
 NEW_EMPIRICAL_NO_GO_PHASE = NOT_STARTED
+BROADER_HOLOGRAPHIC_SOURCE_INTAKE = DEFERRED_NOT_SELECTED
+POST_FCP24_SEQUENCING_ADJUDICATION = NOT_STARTED
+POST_FCP23_REMAINING_ORDER_AUTOMATICALLY_INHERITED = NO
 ```
 
 `RECURRENCE_IMPACT_CANDIDATE = YES` means later recurrence analysis must account for the current FCP-22 relation and later current relations; it is not authorization to recompute recurrence now.
 
-The accepted sequencing dependency state additionally records that recurrence is premature pending both prospective NFC↔strengthened-AS and NFC↔strengthened-LOOP reanalyses; claim-ledger propagation is not a prerequisite for either reanalysis or recurrence; and LOOP taxonomy review is not a prerequisite for the prospective NFC↔LOOP reanalysis.
+The accepted post-FCP-23 sequencing dependency state records that recurrence is premature pending both prospective NFC↔strengthened-AS and NFC↔strengthened-LOOP reanalyses; claim-ledger propagation is not a prerequisite for either reanalysis or recurrence; and LOOP taxonomy review is not a prerequisite for the prospective NFC↔LOOP reanalysis. FCP-24 materially changes the framework inventory, so the unexecuted remainder of the old sequencing order is not automatically inherited as the post-FCP-24 order.
 
 ## Next-task status
 
@@ -119,13 +186,13 @@ The accepted sequencing dependency state additionally records that recurrence is
 FCP23_SELECTED = YES
 FCP23_STATUS = CANONICALLY_COMPLETE
 FCP24_SELECTED = YES
-FCP24_STATUS = SELECTED_NOT_YET_EXECUTED
-FCP24_SUBSTANTIVE_EXECUTION = NOT_STARTED
-FW_STRING_INTAKE = SELECTED_NOT_YET_EXECUTED
-NEXT_SCIENTIFIC_PHASE = FCP24_FW_STRING_SOURCE_INTAKE_TAXONOMY_GATE_K1_K10_BASELINE
+FCP24_STATUS = CANONICALLY_COMPLETE
+FCP25_SELECTED = NO
+POST_FCP24_SEQUENCING_ADJUDICATION = NOT_STARTED
+NEXT_SCIENTIFIC_PHASE = UNSELECTED_PENDING_SEPARATE_POST_FCP24_SEQUENCING_DECISION
 ```
 
-The historical `FW-STRING` label is an intake umbrella, not a prejudged single-framework conclusion. The FCP-24 preregistration freezes a source-driven taxonomy gate and requires separate Project Lead authorization before external source intake begins.
+No next substantive scientific phase is currently selected. A separate post-FCP-24 scientific sequencing adjudication must decide among the remaining and newly exposed directions without automatically advancing the post-FCP-23 ranking.
 
 ## Authoritative navigation
 
@@ -143,6 +210,11 @@ The historical `FW-STRING` label is an intake umbrella, not a prejudged single-f
 - `handoffs/FCP23_EMPIRICAL_NO_GO_DISCRIMINATOR_FEASIBILITY_HANDOFF_0_1_0.md` — canonical FCP-23 handoff.
 - `governance/POST_FCP23_SCIENTIFIC_SEQUENCING_DECISION_0_1_0.md` — accepted post-FCP-23 research-task sequencing and dependency decision.
 - `governance/FCP24_STRING_SOURCE_INTAKE_PREREGISTRATION_0_1_0.md` — frozen FCP-24 string/holographic intake taxonomy, source, and execution rules.
+- `frameworks/string/FCP24_STRING_SOURCE_INTAKE_0_1_0.md` — frozen FCP-24 24-source intake and evidence-coverage checkpoint.
+- `frameworks/string/FCP24_STRING_TAXONOMY_GATE_0_1_0.md` — canonical FCP-24 taxonomy adjudication.
+- `frameworks/string/FCP24_STRING_K1_K10_BASELINE_0_1_0.md` — canonical `FW-STRING-M` K1–K10 baseline.
+- `frameworks/string/FCP24_STRING_OPTIONAL_REALIZATION_AND_PHENOMENOLOGY_LEDGER_0_1_0.md` — canonical FCP-24 realization and empirical ceilings.
+- `handoffs/FCP24_STRING_SOURCE_INTAKE_HANDOFF_0_1_0.md` — canonical FCP-24 handoff and provenance summary.
 - `audits/FCP_TARGETED_SOURCE_STRENGTHENING_ADJUDICATION_0_1_0.md` — canonical targeted-source-strengthening adjudication.
 - `comparisons/FCP22_NFC_REDUCED_VS_STRENGTHENED_AQFT_METHOD_0_2_0_0_1_0.md` — canonical FCP-22 comparison.
 - `audits/FCP22_NFC_AQFT_PROSPECTIVE_REANALYSIS_ADJUDICATION_0_1_0.md` — FCP-22 qualification/adjudication.
