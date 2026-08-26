@@ -9,12 +9,12 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 
 ## Current status
 
-- **Latest canonical scientific phase:** FCP-22 — Prospective Reduced NFC ↔ Strengthened AQFT Reanalysis under Method 0.2.0.
+- **Latest canonical scientific phase:** FCP-23 — Framework-Level Empirical / No-Go Discriminator Feasibility and Target Selection.
 - **Active prospective method:** FCP Method 0.2.0.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
-FCP-22 establishes a current, mathematically generic `E5_FUNCTIONAL_RELATION` between Reduced-NFC Interface Sufficiency and AQFT split/nuclearity at formal substructure scope, while establishing no pairwise E1–E4 relation, no non-generic independent foundational relation, and no pairwise empirical selection. Historical FCP-6 remains immutable as a source-bounded result; FCP-22 partially supersedes only its current FIS-analogue interpretation after the AQFT source gap was repaired.
+FCP-23 finds no current framework-level empirical or no-go discriminator at its declared source scope. Real constraints survive below framework scope: Causal Set Theory reaches realization scope (`EXCL-R`) and Asymptotic Safety reaches model scope (`EXCL-M`), with explicit core-preserving escapes blocking framework exclusion in both cases. No framework exclusion and no follow-on discriminator target were selected. This is a bounded source-window result, not a claim that future framework-level discrimination is impossible.
 
 ## Program architecture
 
@@ -38,10 +38,11 @@ Method 0.2.0 reports these axes separately. It does not use a scalar framework-w
 - **Post-FCP-21 audit:** Grok W1–W18 adversarial review, equal-standard E2/E3 reanalysis, and prospective Method 0.2.0 activation.
 - **Targeted source strengthening:** AQFT split/nuclearity gap closed with qualification; LOOP and AS physical/recovery evidence materially strengthened at bounded scope.
 - **FCP-22:** prospective Reduced NFC ↔ strengthened AQFT reanalysis; historical FCP-6 FIS source-scope caveat materially resolved, yielding a generic E5 functional relation but no E1–E4 or empirical selection.
+- **FCP-23:** preregistered framework-level empirical/no-go feasibility audit; no framework-level discriminator identified at the declared source scope, while CST retains `EXCL-R` realization constraints and AS retains `EXCL-M` model constraints; zero follow-on targets selected.
 
 Detailed scientific findings live in the versioned phase, comparison, audit, and handoff artifacts rather than in this landing page.
 
-## Historical FCP-6 vs current FCP-22
+## Historical FCP-6 and FCP-22 relation update
 
 Historical FCP-6 reported:
 
@@ -51,7 +52,7 @@ NO_SOURCE_BOUND_AQFT_FIS_ANALOGUE_AT_THAT_SCOPE
 
 because split/nuclearity material was outside its frozen AQFT corpus.
 
-Current FCP-22 reports:
+FCP-22 prospectively reports:
 
 ```text
 NFC_AQFT_FIS_RELATION = E5_FUNCTIONAL_RELATION
@@ -65,7 +66,7 @@ INDEPENDENT_FOUNDATIONAL_RELATION = NO
 PAIRWISE_EMPIRICAL_SELECTION = NO
 ```
 
-These are different time-indexed claims. FCP-22 does not rewrite FCP-6.
+These are different time-indexed claims. FCP-22 does not rewrite FCP-6, and FCP-23 does not alter this pairwise result.
 
 ## Repository navigation
 
@@ -76,17 +77,17 @@ These are different time-indexed claims. FCP-22 does not rewrite FCP-6.
 - [`SOURCE_REGISTER.md`](SOURCE_REGISTER.md) — source/provenance bindings.
 - [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) — detailed claim records; current-state supersession may require separately authorized propagation.
 - [`comparison_keys/`](comparison_keys/) — historical and current relation/evidence rules.
-- [`governance/`](governance/) — Method 0.2.0 and governance artifacts.
+- [`governance/`](governance/) — Method 0.2.0 and governance artifacts, including the frozen FCP-23 preregistration.
 - [`frameworks/`](frameworks/) — source-bound framework packets and strengthening records.
 - [`comparisons/`](comparisons/) — bounded pairwise comparison artifacts.
-- [`audits/`](audits/) — adversarial, equal-standard, source-strengthening, and qualification audits.
+- [`audits/`](audits/) — adversarial, equal-standard, source-strengthening, FCP-23 screening/evidence, and qualification audits.
 - [`handoffs/`](handoffs/) — immutable phase handoffs and provenance summaries.
 
 ## Historical immutability
 
 Versioned FCP artifacts are records of what was concluded under their declared source window and method. Later work may qualify, partially supersede, or scientifically supersede their **current interpretation**, but does not silently rewrite the historical artifact.
 
-Candidate-era labels such as `CANDIDATE`, `PROSPECTIVE CANDIDATE`, or `NOT YET INTEGRATED` may therefore remain inside exact qualified artifacts after later integration. Current operational status belongs in `CURRENT_STATE.md`, not in retroactive byte edits to historical/qualification records.
+Candidate-era labels such as `CANDIDATE`, `PROSPECTIVE CANDIDATE`, `SELECTED_NOT_YET_EXECUTED`, `READY_FOR_INTEGRATION = NO`, or `NOT YET INTEGRATED` may therefore remain inside exact qualified artifacts after later integration. Current operational status belongs in `CURRENT_STATE.md`, not in retroactive byte edits to historical/qualification records.
 
 ## Participation standard
 
