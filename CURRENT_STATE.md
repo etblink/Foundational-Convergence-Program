@@ -24,6 +24,10 @@ TARGETED_SOURCE_STRENGTHENING = CANONICALLY_COMPLETE
 FCP22 = CANONICALLY_COMPLETE
 FCP23 = CANONICALLY_COMPLETE
 FCP23_STATUS = CANONICALLY_COMPLETE
+POST_FCP23_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED
+FCP24 = SELECTED_NOT_YET_EXECUTED
+FCP24_STATUS = SELECTED_NOT_YET_EXECUTED
+FW_STRING_INTAKE = SELECTED_NOT_YET_EXECUTED
 ```
 
 Targeted source strengthening established, at bounded scope:
@@ -70,6 +74,8 @@ FCP23_AS_FRAMEWORK_EXCLUSION = NO
 
 This is a source-window-bounded ceiling. It does not establish empirical underdetermination in principle, framework truth/falsity, or impossibility of future discrimination.
 
+The accepted post-FCP-23 sequencing adjudication selects a new primitive-basis intake for the historical `FW-STRING` umbrella as the highest-information next operation. This is a task-ordering decision, not a framework ranking or a scientific claim about string theory. FCP-24 is opened and preregistered but substantive execution has not started.
+
 ## Current framework-impact summary
 
 ### Reduced NFC / AQFT
@@ -98,20 +104,28 @@ EMPIRICAL_NO_GO_WORKSTREAM = CANONICALLY_COMPLETE
 FOLLOW_ON_DISCRIMINATOR_INVESTIGATION = NOT_SELECTED
 LOOP_TAXONOMY_REVIEW = NOT_STARTED
 CLAIM_LEDGER_CURRENT_SUPERSESSION = NOT_STARTED
+SUPERSESSION_PROPAGATION_TIMING = DEFER_LATER
+SUPERSESSION_PROPAGATION_IS_PREREQUISITE = NO
+NEW_EMPIRICAL_NO_GO_PHASE = NOT_STARTED
 ```
 
 `RECURRENCE_IMPACT_CANDIDATE = YES` means later recurrence analysis must account for the current FCP-22 relation and later current relations; it is not authorization to recompute recurrence now.
+
+The accepted sequencing dependency state additionally records that recurrence is premature pending both prospective NFC↔strengthened-AS and NFC↔strengthened-LOOP reanalyses; claim-ledger propagation is not a prerequisite for either reanalysis or recurrence; and LOOP taxonomy review is not a prerequisite for the prospective NFC↔LOOP reanalysis.
 
 ## Next-task status
 
 ```text
 FCP23_SELECTED = YES
 FCP23_STATUS = CANONICALLY_COMPLETE
-FCP24_SELECTED = NO
-NEXT_SCIENTIFIC_PHASE = UNSELECTED_PENDING_SEPARATE_POST_FCP23_SEQUENCING_DECISION
+FCP24_SELECTED = YES
+FCP24_STATUS = SELECTED_NOT_YET_EXECUTED
+FCP24_SUBSTANTIVE_EXECUTION = NOT_STARTED
+FW_STRING_INTAKE = SELECTED_NOT_YET_EXECUTED
+NEXT_SCIENTIFIC_PHASE = FCP24_FW_STRING_SOURCE_INTAKE_TAXONOMY_GATE_K1_K10_BASELINE
 ```
 
-FCP-23 selected no follow-on empirical/no-go target. The earlier post-FCP-22 priority ordering is historical sequencing evidence, not a new authorization after the FCP-23 result. A separate post-FCP-23 sequencing decision is required before the next scientific phase is selected.
+The historical `FW-STRING` label is an intake umbrella, not a prejudged single-framework conclusion. The FCP-24 preregistration freezes a source-driven taxonomy gate and requires separate Project Lead authorization before external source intake begins.
 
 ## Authoritative navigation
 
@@ -127,6 +141,8 @@ FCP-23 selected no follow-on empirical/no-go target. The earlier post-FCP-22 pri
 - `audits/FCP23_EMPIRICAL_NO_GO_EVIDENCE_LEDGER_0_1_0.md` — frozen FCP-23 Stage-2 evidence/source corpus.
 - `audits/FCP23_EMPIRICAL_NO_GO_DISCRIMINATOR_FEASIBILITY_ADJUDICATION_0_1_0.md` — canonical FCP-23 qualification/adjudication.
 - `handoffs/FCP23_EMPIRICAL_NO_GO_DISCRIMINATOR_FEASIBILITY_HANDOFF_0_1_0.md` — canonical FCP-23 handoff.
+- `governance/POST_FCP23_SCIENTIFIC_SEQUENCING_DECISION_0_1_0.md` — accepted post-FCP-23 research-task sequencing and dependency decision.
+- `governance/FCP24_STRING_SOURCE_INTAKE_PREREGISTRATION_0_1_0.md` — frozen FCP-24 string/holographic intake taxonomy, source, and execution rules.
 - `audits/FCP_TARGETED_SOURCE_STRENGTHENING_ADJUDICATION_0_1_0.md` — canonical targeted-source-strengthening adjudication.
 - `comparisons/FCP22_NFC_REDUCED_VS_STRENGTHENED_AQFT_METHOD_0_2_0_0_1_0.md` — canonical FCP-22 comparison.
 - `audits/FCP22_NFC_AQFT_PROSPECTIVE_REANALYSIS_ADJUDICATION_0_1_0.md` — FCP-22 qualification/adjudication.
