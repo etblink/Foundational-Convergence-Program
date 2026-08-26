@@ -200,6 +200,17 @@ All records in this and the next two targeted-strengthening sections were retrie
 | `SRC-FCP-TSS-AS-KNORR-2026` | `FW-AS` / analytic scattering limitation | B. Knorr, *Asymptotically (un)safe scattering amplitudes from scratch: a deep dive into the IR jungle* | arXiv `2602.21285v2` dated 2026-03-17 | `SOURCE_BOUND` | Primary limiting preprint. Analytic scalar-gravity model shows fixed-point existence alone does not ensure bounded amplitudes; not a whole-framework disproof. |
 | `SRC-FCP-TSS-AS-ALR-2026` | `FW-AS` / current Lorentzian spectral UV→IR flow | G. Assant, D. F. Litim, M. Reichert, *Spectral Functions of Lorentzian Quantum Gravity* | arXiv `2606.19321v1` dated 2026-06-17 | `SOURCE_BOUND` | Primary preprint. Normalizable spectral functions in a quadratic-curvature/truncated Lorentzian setup; not complete causality or unitarity. |
 
+### FCP-23 — target-bound empirical/no-go feasibility sources
+
+| Source ID | Framework / role | Authority | Location | Status | Notes |
+|---|---|---|---|---|---|
+| `SRC-FCP23-CST-GOS-2018` | `FW-CST` / dimensionally restricted continuum-phase evidence | L. Glaser, D. O'Connor, S. Surya, *Finite Size Scaling in 2d Causal Set Quantum Gravity* | DOI `10.1088/1361-6382/aa9540`; arXiv `1706.06432v2` dated 2017-06-22 | `SOURCE_BOUND` | Primary finite-size/MCMC result for a dimensionally restricted 2D causal-set ensemble. The declared phase and scaling results do not cover the unrestricted four-dimensional Lorentzian path sum. |
+| `SRC-FCP23-CST-CCS-2023` | `FW-CST` / KR-order path-sum suppression | P. Carlip, S. Carlip, S. Surya, *Path integral suppression of badly behaved causal sets* | DOI `10.1088/1361-6382/acc50c`; arXiv `2209.00327v1` dated 2022-09-01 | `SOURCE_BOUND` | Primary asymptotic result for Kleitman–Rothschild orders under the full Benincasa–Dowker action and a stated coupling/discreteness condition; other non-manifoldlike classes remain outside that result. |
+| `SRC-FCP23-CST-CCS-2024` | `FW-CST` / layered-order path-sum suppression | P. Carlip, S. Carlip, S. Surya, *The Einstein–Hilbert Action for Entropically Dominant Causal Sets* | DOI `10.1088/1361-6382/ad506e`; arXiv `2311.18238v2` dated 2024-06-19 | `SOURCE_BOUND` | Primary leading-order result for typical `K`-layered causal sets with `K << n` under the BDG action and a stated discreteness-scale condition; it is not a dominance theorem for all manifoldlike causal sets. |
+| `SRC-FCP23-AS-PW-2020` | `FW-AS` / finite-derivative ghost limitation | A. Platania, C. Wetterich, *Non-perturbative unitarity and fictitious ghosts in quantum gravity* | DOI `10.1016/j.physletb.2020.135911`; arXiv `2009.06637v2` dated 2020-11-19 | `SOURCE_BOUND` | Primary examples and residue-decoupling argument showing that poles introduced by finite derivative truncations can be fictitious; the work does not establish unitarity of a complete AS gravitational effective action. |
+| `SRC-FCP23-AS-EPS-2025` | `FW-AS` / gravity–photon positivity-bound test | A. Eichhorn, A. O. Pedersen, M. Schiffer, *Application of positivity bounds in asymptotically safe gravity* | DOI `10.1140/epjc/s10052-025-14449-7`; arXiv `2405.08862v1` dated 2024-05-14 | `SOURCE_BOUND` | Primary functional-RG result for four-photon Wilson-coefficient positivity in a selected gravity–photon system through sixth order in field strength; the tested truncation, trajectory, gauge and operator set delimit its scope. |
+| `SRC-FCP23-AS-KNORR-PROP-2026` | `FW-AS` / analytical graviton-propagator consistency | B. Knorr, *The pole truth: an analytical graviton propagator from Asymptotic Safety* | arXiv `2606.18343v1` dated 2026-06-16 | `SOURCE_BOUND` | Primary analytical-approximation result for the flat-background graviton propagator. Pole, spectral and residue conclusions are sector-, gauge-, parameter- and approximation-scoped rather than a complete AS unitarity theorem. |
+
 ## FCP-1 source-window note
 
 `FCP-1` uses the null records above as a bounded baseline retrieved/checked on 2026-08-24. PDG is a living annual review; future FCP tasks must not silently substitute later editions into `FCP-1` without a versioned update.
@@ -241,6 +252,10 @@ FCP-15 adds exactly **13** external `FW-LOOP` works, checked on **2026-08-24**: 
 ## FCP-19 source-window note
 
 FCP-19 adds exactly **18** external `FW-AS` works, checked on **2026-08-24**: **12 foundational/primary** and **6 review/synthesis** records, including **2 phenomenology-boundary review roles** and **zero direct empirical/observational source records**. The source window deliberately retains implementation-sensitive evidence on field parametrization and gravity–matter restrictions rather than deciding by source count. It source-binds one coherent Asymptotic Safety framework, distinguishes the UV fixed-point hypothesis from functional-RG implementations/truncations, and performs no cross-framework E1–E5 comparison.
+
+## FCP-23 source-window note
+
+FCP-23 adds exactly **6** target-bound primary sources, checked on **2026-08-26**: **3** for the frozen `FW-CST` manifoldlikeness-obstruction target and **3** for the frozen `FW-AS` UV-fixed-point physical-consistency target. Registration records the propositions and declared domains of those sources; final FCP-23 adjudication is carried only by the separately frozen evidence ledger and adjudication artifacts.
 
 ## Branch-retention rule
 
