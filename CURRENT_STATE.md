@@ -179,13 +179,14 @@ FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
 FW_STRING_M_NULL_CONTROL = CANONICALLY_COMPLETE
-NFC_STRING_M_COMPARISON = READY_NOT_STARTED
+NFC_STRING_M_COMPARISON = CANONICALLY_COMPLETE
+POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION = READY_NOT_STARTED
 POST_FCP23_REMAINING_ORDER_AUTOMATICALLY_INHERITED = NO
 ```
 
 `RECURRENCE_IMPACT_CANDIDATE = YES` means later recurrence analysis must account for the current FCP-22 relation and later current relations; it is not authorization to recompute recurrence now.
 
-The accepted post-FCP-23 sequencing dependency state records that recurrence is premature pending both prospective NFC↔strengthened-AS and NFC↔strengthened-LOOP reanalyses; claim-ledger propagation is not a prerequisite for either reanalysis or recurrence; and LOOP taxonomy review is not a prerequisite for the prospective NFC↔LOOP reanalysis. FCP-24 materially changes the framework inventory, so the unexecuted remainder of the old sequencing order is not automatically inherited as the post-FCP-24 order. The canonical Grok adjudication routed the narrow Finding-007 targeted source re-audit before the first `FW-STRING-M` null control. Finding-007 and the remediated `FW-STRING-M` null control are now canonically complete. The null control adds a bounded source-qualified `E3-S` recovery relation and a nonempty String/M-specific residue without framework-level empirical selection; the NFC↔String/M comparison is scientifically ready but remains not started pending separate authorization.
+The accepted post-FCP-23 sequencing dependency state records that recurrence is premature pending both prospective NFC↔strengthened-AS and NFC↔strengthened-LOOP reanalyses; claim-ledger propagation is not a prerequisite for either reanalysis or recurrence; and LOOP taxonomy review is not a prerequisite for the prospective NFC↔LOOP reanalysis. FCP-24 materially changed the framework inventory, so the unexecuted remainder of the old sequencing order is not automatically inherited as the post-FCP-24 order. Finding-007, the remediated `FW-STRING-M` null control, and the bounded NFC↔String/M comparison are now canonically complete. The NFC↔String/M result adds three mathematically generic, independently instantiated S0 E5 functional relations, zero E1–E4, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and nonempty material asymmetry. Recurrence remains unrecomputed and downstream ordering now requires a separate post-NFC/String-M scientific sequencing adjudication.
 
 ## Next-task status
 
@@ -196,7 +197,7 @@ FCP24_SELECTED = YES
 FCP24_STATUS = CANONICALLY_COMPLETE
 FCP25_SELECTED = NO
 POST_FCP24_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED
-NEXT_RECOMMENDED_OPERATION = NFC_STRING_M_COMPARISON
+NEXT_RECOMMENDED_OPERATION = POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION
 POST_FCP24_GROK_AUDIT = INDEPENDENT_ADJUDICATION_CANONICALLY_COMPLETE
 POST_FCP24_GROK_AUDIT_PACKET = EXPOSED_EXACTLY
 POST_FCP24_GROK_AUDIT_PROMPT = SENT_EXACTLY
@@ -208,11 +209,11 @@ POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = SEPARATE_NFC_STRING_M_COMPARISON_AUTHORIZATION
-NEXT_SCIENTIFIC_PHASE = NONE__NFC_STRING_M_COMPARISON_READY_PENDING_SEPARATE_AUTHORIZATION
+NEXT_EXECUTION_STEP = SEPARATE_POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION_AUTHORIZATION
+NEXT_SCIENTIFIC_PHASE = NONE__POST_NFC_STRING_M_SEQUENCING_ADJUDICATION_READY_PENDING_SEPARATE_AUTHORIZATION
 ```
 
-The Grok audit and independent adjudication are canonically complete. Findings 003/005 reconciliation is complete. The Finding-007 targeted source re-audit and the first `FW-STRING-M` null control are now canonically complete. The null-control result preserves the FCP-24 empirical ceiling, establishes one bounded `E3-S` low-energy Einstein-metric substructure recovery relation, and leaves a nonempty six-incidence String/M-specific residue. The NFC↔String/M comparison is scientifically ready but remains not started pending separate authorization.
+The Grok audit and independent adjudication are canonically complete. Findings 003/005 reconciliation is complete. The Finding-007 targeted source re-audit, the first `FW-STRING-M` null control, and the bounded NFC↔String/M comparison are now canonically complete. The NFC↔String/M result preserves zero E1–E4 and zero non-generic relations, retains three mathematically generic S0 E5 functional relations whose instances are `IND-I` independent at frozen-object scope, establishes no pairwise empirical selection or NFC empirical support, and records nonempty material asymmetry. No recurrence or downstream comparison is started by this integration.
 
 ## Finding-007 targeted source re-audit — canonical result
 
@@ -383,11 +384,11 @@ FW_STRING_M_RESIDUE_CORE_STATUS = CORE_OR_FRAMEWORK_LEVEL
 DIRECT_FW_STRING_M_EMPIRICAL_DISCRIMINATOR_AFTER_NULL = NO
 FRAMEWORK_LEVEL_EMPIRICAL_SELECTION_AFTER_NULL = NO
 
-NFC_STRING_M_COMPARISON_READINESS = READY
-NFC_STRING_M_COMPARISON = READY_NOT_STARTED
+NFC_STRING_M_COMPARISON = CANONICALLY_COMPLETE
+POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION = READY_NOT_STARTED
 RECURRENCE_IMPACT = INFORMATION_ADDED_NOT_RECOMPUTED
 
-NFC_STRING_M_COMPARISON_STARTED = NO
+NFC_STRING_M_COMPARISON_COMPLETED = YES
 NFC_AS_REANALYSIS_STARTED = NO
 NFC_LOOP_REANALYSIS_STARTED = NO
 RECURRENCE_RECOMPUTATION_STARTED = NO
@@ -397,22 +398,22 @@ NEW_EMPIRICAL_NO_GO_PHASE_STARTED = NO
 FCP25_SELECTED = NO
 FCP25_STARTED = NO
 
-NEXT_RECOMMENDED_OPERATION = NFC_STRING_M_COMPARISON
-NEXT_EXECUTION_STEP = SEPARATE_NFC_STRING_M_COMPARISON_AUTHORIZATION
-NEXT_SCIENTIFIC_PHASE = NONE__NFC_STRING_M_COMPARISON_READY_PENDING_SEPARATE_AUTHORIZATION
+NEXT_RECOMMENDED_OPERATION = POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_EXECUTION_STEP = SEPARATE_POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION_AUTHORIZATION
+NEXT_SCIENTIFIC_PHASE = NONE__POST_NFC_STRING_M_SEQUENCING_ADJUDICATION_READY_PENDING_SEPARATE_AUTHORIZATION
 ```
 
 The remediated relation ledger is claim-level: one `E3-S` relation is established at low-energy Einstein-metric substructure scope, six strict E5 functional relations survive, and thirteen material claims have no qualifying pairwise relation. The same six core String/M-specific additional commitments survive null subtraction at a bounded family-level `S3_FRAMEWORK_WIDE` ceiling. The E3-S recovery carries positive viability but only inherited empirical success and does not create framework-level empirical selection.
 
 This canonical result adds no external scientific source, admits no source, mutates no historical FCP-24 or FCP-1/FCP-2 scientific artifact, imports no rejected Finding-007 source, performs no NFC look-ahead, and starts no downstream comparison or recurrence work.
 
-## NFC ↔ FW-STRING-M comparison — branch-local qualified candidate
+## NFC ↔ FW-STRING-M comparison — canonical result
 
-This section is candidate state on `research/nfc-string-m-comparison` only. It does not canonicalize the result. Until an explicit later integration decision, the canonical state above remains `NFC_STRING_M_COMPARISON = READY_NOT_STARTED`.
+This section records the canonically integrated bounded NFC↔`FW-STRING-M` comparison. The scientific artifacts remain exactly as qualified; this routing reconciliation changes present-tense canonical state only and starts no downstream scientific work.
 
 ```text
-NFC_STRING_M_COMPARISON = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
-NFC_STRING_M_COMPARISON_RESULT_CANDIDATE =
+NFC_STRING_M_COMPARISON = CANONICALLY_COMPLETE
+NFC_STRING_M_COMPARISON_RESULT =
 THREE_GENERIC_INDEPENDENT_S0_E5_FUNCTIONAL_RELATIONS;
 ZERO_E1_E2_E3_E4;
 ZERO_NON_GENERIC_RELATIONS;
@@ -450,6 +451,7 @@ NFC_STRING_M_PAIRWISE_E4_STATUS = NONE_ESTABLISHED
 NFC_STRING_M_PAIRWISE_EMPIRICAL_SELECTION = NO
 NFC_EMPIRICAL_SUPPORT_FROM_STRING_M_COMPARISON = NO
 NFC_STRING_M_MATERIAL_ASYMMETRY = NONEMPTY
+POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION = READY_NOT_STARTED
 
 RECURRENCE_IMPACT = INFORMATION_ADDED_NOT_RECOMPUTED
 RECURRENCE_RECOMPUTATION_STARTED = NO
@@ -461,12 +463,13 @@ NEW_EMPIRICAL_NO_GO_PHASE_STARTED = NO
 FCP25_SELECTED = NO
 FCP25_STARTED = NO
 
-NEXT_RECOMMENDED_OPERATION_CANDIDATE = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
-NEXT_EXECUTION_STEP = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
+NEXT_RECOMMENDED_OPERATION = POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_EXECUTION_STEP = SEPARATE_POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION_AUTHORIZATION
+NEXT_SCIENTIFIC_PHASE = NONE__POST_NFC_STRING_M_SEQUENCING_ADJUDICATION_READY_PENDING_SEPARATE_AUTHORIZATION
 ```
 
-The three positive candidate records are `NSM-R02-DESCRIPTIVE-COORDINATION`, `NSM-R03-ADMISSIBLE-TRANSFORMATION`, and `NSM-R08-GLOBAL-COHERENCE`. They are independent on the Method independence axis because neither frozen object imports or targets the other, but their pairwise common content is mathematically generic. Independence therefore creates neither non-generic foundational support nor empirical credit.
+The three positive records are `NSM-R02-DESCRIPTIVE-COORDINATION`, `NSM-R03-ADMISSIBLE-TRANSFORMATION`, and `NSM-R08-GLOBAL-COHERENCE`. They are independent on the Method independence axis because neither frozen object imports or targets the other, but their pairwise common content is mathematically generic. Independence therefore creates neither non-generic foundational support nor empirical credit.
 
 Five other material candidates are `NONE_ESTABLISHED`. String/M's more concrete carrier, quantum, formulation-dynamics, dimensional/duality, realization, low-energy-recovery, and EMP3 model-constraint content remains material asymmetry rather than support for Reduced NFC.
 
-This candidate mutates no source register, historical comparison, FCP-24 scientific artifact, null-control scientific artifact, claim ledger, comparison protocol, charter, or Method artifact. It starts no recurrence computation or downstream comparison.
+This canonical result mutates no source register, historical comparison, FCP-24 scientific artifact, null-control scientific artifact, claim ledger, comparison protocol, charter, or Method artifact. It starts no recurrence computation or downstream comparison.
