@@ -11,10 +11,10 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 
 - **Latest numbered phase:** FCP-24 — String-Theoretic / Holographic Source Intake, Taxonomy Gate, and K1–K10 Baseline.
 - **Latest canonical scientific operation:** program-level recurrence recomputation under Method 0.2.0 (`46300a1fde35ccf1ebfa63807e5a203f13cd6498`; tree `5c9411ed70909e70d308afa53a44d070d35c16c3`).
-- **Latest canonical maintenance operation:** Repository Housekeeping + Current-State Supersession (`b57a8617bb5818f3f3ab540ce63e0d82cde743b0`; tree `13ba67fcebb23efbab5d6f55eb4ade953f6b548d`), produced from pre-housekeeping canonical routing baseline `09aaf0ba4f9c570310150532c7e7ac4e42d868f8`.
+- **Latest canonical maintenance operation:** Claim Ledger current-supersession propagation (`0bd8bffa236ea1352925f6ce5e60141af7ccadb6`; tree `312e7013eb884e984abc42deed26a675958af0df`), reconciling the durable ledger to the accepted current scientific state without new science.
 - **Active prospective method:** FCP Method 0.2.0.
 - **Housekeeping status:** canonically complete.
-- **Next recommended program operation:** Claim Ledger current-supersession propagation under a separate authorization.
+- **Next recommended program operation:** read-only post-recurrence scientific sequencing adjudication under a separate authorization.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
@@ -57,7 +57,8 @@ Method 0.2.0 reports these axes separately. It does not use a scalar framework-w
 - **Repository housekeeping:** current-state supersession and branch/PR lifecycle audit is canonically complete; it performs no new science and leaves Claim Ledger propagation deferred.
 - **NFC ↔ strengthened LOOP:** seven generic S0 E5 relations and twenty-two NONE records across 29 atomic candidates; zero E1–E4, zero non-generic relations, no pairwise empirical selection or NFC support, and strengthened LOOP dynamics/continuum/realization asymmetry.
 - **Program-level recurrence recomputation:** canonically complete; no independent non-generic multi-family foundational recurrence, framework-level EMP4 recurrence, or repeated independent Reduced-NFC support is identified at the current canonical source window.
-- **Next program operation:** Claim Ledger current-supersession propagation, pending separate authorization.
+- **Claim Ledger current-supersession propagation:** canonically complete; 62 historical durable rows are preserved, 24 current rows are appended for 86 total, no historical row is marked wholly superseded, seven partial-current supersession links are explicit, and the complete post-FCP-21 macro-operation inventory is 20 (10 with durable-row additions, 10 with no ledger change).
+- **Next program operation:** read-only post-recurrence scientific sequencing adjudication, pending separate authorization.
 
 Detailed scientific findings live in the versioned phase, comparison, audit, and handoff artifacts rather than in this landing page.
 
@@ -94,7 +95,7 @@ These are different time-indexed claims. FCP-22 does not rewrite FCP-6, and FCP-
 - [`COMPARISON_PROTOCOL.md`](COMPARISON_PROTOCOL.md) — common comparison protocol and Method 0.2.0 operating requirements.
 - [`FRAMEWORK_REGISTER.md`](FRAMEWORK_REGISTER.md) — live framework identities and latest bounded framework status.
 - [`SOURCE_REGISTER.md`](SOURCE_REGISTER.md) — source/provenance bindings.
-- [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) — detailed claim records; current-state supersession may require separately authorized propagation.
+- [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) — detailed durable claim records; current-state supersession propagation is canonically complete at 86 rows.
 - [`comparison_keys/`](comparison_keys/) — historical and current relation/evidence rules.
 - [`governance/`](governance/) — Method 0.2.0 and governance artifacts, including the frozen FCP-23 and FCP-24 preregistrations.
 - [`frameworks/`](frameworks/) — source-bound framework packets and strengthening records, including the FCP-24 String/M-theory source intake and K1–K10 baseline.
