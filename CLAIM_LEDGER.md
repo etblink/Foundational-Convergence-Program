@@ -2,7 +2,7 @@
 
 ## Current state
 
-Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 through FCP-18 appended the later controls/meta-audit, FCP-19 appended the Asymptotic Safety source-intake findings, FCP-20 appended the AS/null-GR subtraction/control result, and FCP-21 appends the Reduced-NFC/null-subtracted-AS controlled comparison without altering prior durable claim rows. The ledger now contains **62 durable rows through FCP-21**. **No overall numerical framework score or winner is inferred from these rows.**
+Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 through FCP-18 appended the later controls/meta-audit, FCP-19 appended the Asymptotic Safety source-intake findings, FCP-20 appended the AS/null-GR subtraction/control result, and FCP-21 appended the Reduced-NFC/null-subtracted-AS controlled comparison. The 62 historical durable rows through FCP-21 remain preserved in their original order and wording. Current-state supersession propagation appends 24 durable rows for already-canonical post-FCP-21 science, yielding **86 durable rows**. No historical row is deleted or reordered, and no historical non-status field is rewritten. **No overall numerical framework score or winner is inferred from these rows.**
 
 ## Claim record schema
 
@@ -1191,3 +1191,444 @@ Future claims should use the following fields:
 - No framework-level numerical score is inferred automatically from individual claim rows.
 - Cross-framework convergence credit requires the frozen FCP-2 correspondence and weaker-framework rules.
 - Reformulation relations must not be counted as independent convergence unless the independence burden is explicitly discharged.
+
+
+---
+
+# Post-FCP-21 current-state propagation claims
+
+## FCP-TSS-AQFT-001 — AQFT split/nuclearity source gap is closed at bounded formal/physical scope
+
+- `framework_ids`: `FW-AQFT`
+- `source_ids`: `SRC-FCP-TSS-AQFT-DL-1984`, `SRC-FCP-TSS-AQFT-BW-1986`, `SRC-FCP-TSS-AQFT-FEWSTER-2016`, `SRC-FCP-TSS-AQFT-SUMMERS-2009`
+- `claim_text`: Targeted source strengthening source-qualifies the AQFT split property and nuclearity chain at declared inclusion/model scopes: a split inclusion interposes a type-I factor and supports a spatial tensor-product/product-state separation structure, while named nuclearity conditions provide source-qualified sufficient routes and phase-space control. This closes the bounded research gap without making split universal, identifying a finite interface, or establishing a framework-level empirical discriminator.
+- `assumptions`: exact targeted-strengthening AQFT source packet; positive-separation/split-inclusion and variant-specific nuclearity hypotheses; no promotion from model/inclusion scope to minimal AQFT axioms.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: source-qualified at named inclusion/model scope; no universal framework canonicity claimed.
+- `weaker_framework_test`: tensor factorization and phase-space/nuclearity mathematics are not uniquely AQFT; the physically specialized split/nuclearity theorem chain is retained only at its source-qualified scope.
+- `physical_bridge`: AQFT local-algebra and state-separation semantics; no finite-interface or detector-calibration identity.
+- `empirical_binding`: `NONE` as an independent AQFT framework discriminator.
+- `falsification_condition`: failure of the split/nuclearity implications under their stated hypotheses or a source audit showing the admitted sources do not support the claimed scope would downgrade the row.
+- `countermodels`: distal/non-split examples and model/covariance cases without split block universality.
+- `scope_ceiling`: `AQFT_SPLIT_NUCLEARITY_GAP = CLOSED`; no universal split theorem, finite-interface theorem, or EMP4 promotion.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: targeted source strengthening commit `d9663a9a85d4ec6e0da4a0d82d4a8bba054d922c`; adjudication blob `ad527b6c40e258110d4c2ac23e77ebcddc8b529d`; handoff blob `cad553e8f2323a4de7bd3cc6e3d151fa72a04d61`.
+
+## FCP-TSS-LOOP-001 — Strengthened LOOP has bounded target-conditioned continuum/GR recovery without framework EMP4
+
+- `framework_ids`: `FW-LOOP`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP15-LOOP-BARRETT-2010`, `SRC-FCP15-LOOP-BMP-2009`, `SRC-FCP-TSS-LOOP-HHZ-2019`, `SRC-FCP-TSS-LOOP-HLL-2020`, `SRC-FCP-TSS-LOOP-HAN-2017`, `SRC-FCP-TSS-LOOP-BAHR-STEINHAUS-2016`
+- `claim_text`: The strengthened LOOP corpus contains source-qualified fixed-building-block `E3-S` and selected model-level `E3-M` recovery toward Einstein/GR behavior, including refined/regularized, linearized-spin-2 and bounded perturbative/continuum results. These are positive target-conditioned recovery relations and viability evidence, while framework-level `E3-F`, `E3-P`, operational calibration and EMP4 remain unestablished.
+- `assumptions`: exact strengthened LOOP source packet; recovery target is supplied GR/Einstein content; model/building-block/domain restrictions are preserved.
+- `classification`: `VALID_CONDITIONAL`
+- `canonicity_level`: bounded substructure/model recovery only; no framework-wide recovery canonicity.
+- `weaker_framework_test`: recovering a supplied GR target can occur in multiple frameworks and does not by itself establish independent foundational convergence.
+- `physical_bridge`: partial target-conditioned semiclassical/continuum bridge; no complete framework-to-detector calibration chain.
+- `empirical_binding`: recovered GR success is inherited; `LOOP_FRAMEWORK_LEVEL_EMP4 = NONE`.
+- `falsification_condition`: failure of the stated controlled limits/recovery records would weaken the positive E3 content; a complete framework-wide calibrated recovery could strengthen the ceiling.
+- `countermodels`: fixed-complex/building-block recovery without framework continuum uniqueness; model recovery without selected dynamics.
+- `scope_ceiling`: `LOOP_CONTINUUM_PHYSICAL_RECOVERY_GAP = PARTIALLY_CLOSED`; `E3-S` and selected `E3-M` nonempty; `E3-F = NONE`; `E3-P = NONE`; EMP4 none.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: current-successor content for the E3-zero subclaim of `FCP16-LOOPNULL-001`; historical FCP-16 remains accepted at its frozen scope. Canonical provenance: equal-standard audit blob `44eba6d79b06a96c67cfd6dd78cf3a0af6d45df1`; targeted-strengthening adjudication blob `ad527b6c40e258110d4c2ac23e77ebcddc8b529d`.
+
+## FCP-TSS-AS-001 — Strengthened AS has bounded target-conditioned and Lorentzian model recovery without framework EMP4
+
+- `framework_ids`: `FW-AS`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP-TSS-AS-PPRR-2025`, `SRC-FCP-TSS-AS-ALR-2026`, `SRC-FCP-TSS-AS-PPR-2023`, `SRC-FCP-TSS-AS-KNORR-2026`, `SRC-FCP19-AS-MRS-2011`, `SRC-FCP19-AS-SW-2025`
+- `claim_text`: The strengthened AS corpus source-qualifies selected global UV-to-IR and Lorentzian model-level `E3-M` recovery/realization results and a timelike model observable, while preserving trajectory, truncation, gauge, parameter and calibration dependence. These results provide positive target-conditioned recovery/viability content but no framework-wide EMP4 or unavoidable AS discriminator.
+- `assumptions`: exact strengthened AS source packet; model/truncation and trajectory qualifications are retained; GR/QFT/SM recovery targets are supplied rather than independently rediscovered.
+- `classification`: `VALID_CONDITIONAL`
+- `canonicity_level`: bounded model/trajectory recovery and Lorentzian realization only.
+- `weaker_framework_test`: target recovery and model observables do not uniquely select the AS framework or establish complete-theory control.
+- `physical_bridge`: nonempty model-level Lorentzian/trajectory bridge; framework-wide calibration remains incomplete.
+- `empirical_binding`: timelike model prediction and consistency evidence do not satisfy framework EMP4; inherited low-energy success is not independent AS selection.
+- `falsification_condition`: failure of the admitted model calculations or controlled recovery records would downgrade; a compulsory calibrated framework prediction could strengthen the empirical ceiling.
+- `countermodels`: alternative truncations/trajectories and parameter-sensitive realizations block framework-wide promotion.
+- `scope_ceiling`: selected `E3-M` nonempty; timelike model observable nonempty; `FRAMEWORK_EMP4 = NONE`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: current-successor content for the E3-zero subclaim of `FCP20-ASNULL-001`; historical FCP-20 remains accepted at its frozen scope. Canonical provenance: equal-standard audit blob `44eba6d79b06a96c67cfd6dd78cf3a0af6d45df1`; targeted-strengthening adjudication blob `ad527b6c40e258110d4c2ac23e77ebcddc8b529d`.
+
+## FCP22-NFCAQFT-001 — Strengthened AQFT supplies a generic FIS factorization/separation analogue only
+
+- `framework_ids`: `FW-NFC-RED`, `FW-AQFT`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP3-NFC-BIND-001`, `SRC-FCP-TSS-AQFT-DL-1984`, `SRC-FCP-TSS-AQFT-FEWSTER-2016`, `SRC-FCP-TSS-AQFT-SUMMERS-2009`
+- `claim_text`: Under Method 0.2.0, Reduced-NFC Interface Sufficiency and strengthened AQFT split/nuclearity share a bounded formal factorization/separation role at `E5`, but there is no exact FIS identity, pairwise E2 map, controlled pairwise E3 recovery, pairwise E4 discriminator, finite-interface identity, or non-generic foundational relation.
+- `assumptions`: exact FCP-3 Reduced-NFC object; exact targeted-strengthened AQFT object; FCP-22 claim-sensitive comparison and genericity controls.
+- `classification`: `GENERIC_MATHEMATICS`
+- `canonicity_level`: `S0` generic formal-role relation only.
+- `weaker_framework_test`: condition-dependent factorization/separation occurs in substantially weaker mathematics and therefore cannot establish distinctive foundational convergence.
+- `physical_bridge`: no common calibrated physical interface or locality bridge.
+- `empirical_binding`: `PAIRWISE_EMPIRICAL_SELECTION = NO`.
+- `falsification_condition`: a source-qualified non-generic map/limit or operational relation preserving the relevant FIS structure could supersede the generic ceiling.
+- `countermodels`: split without selected-query sufficiency; FIS without AQFT type-I split structure; infinite-dimensional AQFT local algebras without finite interface.
+- `scope_ceiling`: one generic `E5_FUNCTIONAL_RELATION`; pairwise E1–E4 none; no NFC empirical support.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: partial current-subclaim successor to `FCP6-CROSS-001`; unaffected FCP-6 generic relations remain current. Canonical provenance: FCP-22 comparison blob `bdd99d3fc46b22e24771905e3587ad0e5e5fa23e`; handoff blob `e807bf9e6731bb928039836d53768aa0b3f2fab7`.
+
+## FCP23-EMP-001 — No current framework-level discriminator or no-go survives the bounded FCP-23 screen
+
+- `framework_ids`: `FW-CST`, `FW-AS`
+- `source_ids`: `SRC-FCP23-CST-CCS-2023`, `SRC-FCP23-CST-CCS-2024`, `SRC-FCP23-CST-GOS-2018`, `SRC-FCP23-AS-EPS-2025`, `SRC-FCP23-AS-KNORR-PROP-2026`, `SRC-FCP23-AS-PW-2020`
+- `claim_text`: FCP-23 identifies no source-qualified framework-level empirical discriminator and no framework-level no-go candidate at the declared source scope. The strongest tested adverse results remain below framework scope because core-preserving realization/model/truncation/parameter escapes remain available.
+- `assumptions`: exact preregistered FCP-23 targets and frozen 19-source adjudicative corpus; framework-level exclusion requires coverage of all core-preserving realizations or a compulsory operational discriminator.
+- `classification`: `NONFORCED`
+- `canonicity_level`: bounded current feasibility conclusion only.
+- `weaker_framework_test`: exclusion of a model, truncation, parameter region or realization does not exclude a whole framework.
+- `physical_bridge`: target-specific and incomplete at framework scope.
+- `empirical_binding`: `FRAMEWORK_LEVEL_DISCRIMINATOR_IDENTIFIED = NO`; `FRAMEWORK_LEVEL_NO_GO_CANDIDATE_IDENTIFIED = NO`.
+- `falsification_condition`: a theorem covering every core-preserving realization or a compulsory calibrated framework prediction could supersede this current bounded result.
+- `countermodels`: CST action-weighted/restricted continuum escapes and AS model/truncation/gauge/trajectory variation block framework-wide promotion.
+- `scope_ceiling`: `NO_CURRENT_FRAMEWORK_LEVEL_DISCRIMINATOR_IDENTIFIED_AT_THE_DECLARED_SOURCE_SCOPE`; not impossibility in principle.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: FCP-23 adjudication blob `f2a034e55c14e73db34cbfe15566457aea9e5ce2`; handoff blob `dd0067c1e8199968ef556e70039abb592a0571b5`.
+
+## FCP23-EMP-002 — FCP-23 preserves real model/parameter constraints below framework exclusion
+
+- `framework_ids`: `FW-CST`, `FW-AS`
+- `source_ids`: `SRC-FCP9-CST-BLMS-1987`, `SRC-FCP9-CST-SURYA-2019`, `SRC-FCP23-CST-GOS-2018`, `SRC-FCP23-CST-CCS-2023`, `SRC-FCP23-CST-CCS-2024`, `SRC-FCP-TSS-AS-KNORR-2026`, `SRC-FCP23-AS-PW-2020`, `SRC-FCP-TSS-AS-FLPR-2023`, `SRC-FCP-TSS-AS-PRW-2025`, `SRC-FCP-TSS-AS-ALR-2026`, `SRC-FCP23-AS-KNORR-PROP-2026`, `SRC-FCP23-AS-EPS-2025`
+- `claim_text`: The bounded FCP-23 corpus contains real model-level discriminators and parameter/realization constraints: CST generic-order non-manifoldlikeness is a serious realization pressure with strongest qualified exclusion scope `EXCL-R`, while AS scattering/ghost/spectral/pole/positivity results reach strongest qualified scope `EXCL-M`. Neither result is promoted to framework exclusion.
+- `assumptions`: exact target-specific model and realization assumptions in the FCP-23 frozen corpus.
+- `classification`: `VALID_CONDITIONAL`
+- `canonicity_level`: model/realization constraint scope only; not framework selection.
+- `weaker_framework_test`: bounded adverse evidence is retained even when it cannot discriminate the full framework.
+- `physical_bridge`: target/model dependent.
+- `empirical_binding`: `NONE_DIRECT`; `FCP23_EMPIRICAL_STATUS = EMP0_NONE`. The retained results are theoretical/model/parameter/realization constraints, not direct observational or experimental support and not framework-level empirical selection.
+- `falsification_condition`: failure of the admitted model analyses would weaken the constraint; broader compulsory coverage could strengthen exclusion scope.
+- `countermodels`: explicit core-preserving escape constructions prevent framework-wide generalization.
+- `scope_ceiling`: `MODEL_LEVEL_DISCRIMINATORS = YES`; `PARAMETER_OR_REALIZATION_CONSTRAINTS = YES`; bounded underdetermination only.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: FCP-23 adjudication blob `f2a034e55c14e73db34cbfe15566457aea9e5ce2`; bounded remediation preserves `EMP0_NONE`, direct empirical credit `0`, and binds the complete CST obstruction/escape plus AS scattering/ghost/spectral/pole/positivity source set.
+
+## FCP24-STRING-001 — Historical FW-STRING umbrella is superseded by one source-bound String/M successor plus deferred holographic remainder
+
+- `framework_ids`: `FW-STRING`, `FW-STRING-M`
+- `source_ids`: `SRC-FCP24-FOUNDATION-AGMON-2023`, `SRC-FCP24-FORMULATION-SEN-ZWIEBACH-2024`, `SRC-FCP24-DUALITY-WITTEN-1995`, `SRC-FCP24-HOLO-MALDACENA-1998`, `SRC-FCP24-HOLO-BOUSSO-2002`, `SRC-FCP24-HOLO-ANNINOS-2025`
+- `claim_text`: FCP-24 finds the historical string/holography umbrella too broad for one scientific competitor and source-binds exactly one stable successor, `FW-STRING-M`, for the String/M-theory framework family. Broader holographic material is retained as adjacent but is deferred pending separate source intake; `FW-HOLO` is not created.
+- `assumptions`: exact frozen 24-source FCP-24 corpus and the framework-separation rule; AdS/CFT is treated as a declared-domain dual description rather than automatically all holography.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: framework taxonomy/source-binding level only.
+- `weaker_framework_test`: shared vocabulary does not establish one carrier, dynamics or model class across String/M theory and all broader holography.
+- `physical_bridge`: taxonomy result; physical realization assessed separately.
+- `empirical_binding`: no empirical framework selection follows from taxonomy.
+- `falsification_condition`: a future separately frozen corpus establishing a stable broader holographic framework or a different taxonomy could supersede the current framework boundary.
+- `countermodels`: broader holographic programs with different primitives/domains block internal-formulation treatment under the frozen corpus.
+- `scope_ceiling`: `FCP24_TAXONOMY_OUTCOME = C`; `FW_STRING_CURRENT_STATUS = SUPERSEDED_BY_FRAMEWORK_SPLIT`; `FW_STRING_M_CURRENT_STATUS = SOURCE_BOUND_READY`; `FW_HOLO_CREATED = NO`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: FCP-24 taxonomy blob `205975e97e7126f425374a4c3598acf01ed4c98b`; handoff blob `83cebd500cab24b8e19e15b81b0acac8bd872040`.
+
+## FCP24-STRING-002 — String/M nonperturbative and realization content is nonempty but incomplete and selection-dependent
+
+- `framework_ids`: `FW-STRING-M`
+- `source_ids`: `SRC-FCP24-FOUNDATION-AGMON-2023`, `SRC-FCP24-NONPERT-POLCHINSKI-1995`, `SRC-FCP24-NONPERT-BFSS-1997`, `SRC-FCP24-VACUA-CHSW-1985`, `SRC-FCP24-VACUA-GKP-2002`, `SRC-FCP24-VACUA-KKLT-2003`, `SRC-FCP24-REALIZATION-MCALLISTER-QUEVEDO-2023`
+- `claim_text`: FCP-24 source-qualifies nonempty perturbative, D-brane, string-field and declared-domain candidate nonperturbative String/M content plus concrete compactification/vacuum/model families, while a universal complete nonperturbative definition, generic dynamical 4D realization, complete vacuum/history selector and framework-wide calibration remain unestablished.
+- `assumptions`: formulation, background, compactification, large-N/duality-domain and model assumptions are retained rather than universalized.
+- `classification`: `NONFORCED`
+- `canonicity_level`: source-bound family/model content with open framework-wide completion/selection.
+- `weaker_framework_test`: existence of many controlled constructions does not force one realized world or one all-background formulation.
+- `physical_bridge`: nonempty model/compactification/low-energy bridges; generic selected realization remains open.
+- `empirical_binding`: model compatibility/parameter constraints only; no framework-level selection.
+- `falsification_condition`: a universal complete construction with selected physical realization could strengthen the current ceiling; failure of admitted constructions would weaken corresponding model claims.
+- `countermodels`: multiple vacua/formulations and domain-limited dualities block unique realization and universal completion.
+- `scope_ceiling`: nonperturbative content nonempty/source-qualified in declared domains; universal complete definition and vacuum selection not established.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: FCP-24 K1–K10 baseline blob `a4a166cbe9546d72ecf7622e6c4dd6948cb361e1`; handoff blob `83cebd500cab24b8e19e15b81b0acac8bd872040`.
+
+## FCP24-STRING-003 — String/M phenomenology reaches model/parameter constraint scope but not framework selection
+
+- `framework_ids`: `FW-STRING-M`
+- `source_ids`: `SRC-FCP24-PHENOM-MARCHESANO-SHIU-WEIGAND-2024`, `SRC-FCP24-COSMO-BAUMANN-MCALLISTER-2015`, `SRC-FCP24-EMPIRICAL-LVK-2021`
+- `claim_text`: FCP-24 retains nonempty String/M phenomenology and observational constraints at model/network/parameter scope, including cosmic-string-network constraints, but identifies no direct unavoidable `FW-STRING-M` framework discriminator and no framework-level empirical selection.
+- `assumptions`: model-specific compactification/cosmology/network assumptions are not promoted to the base framework; cosmic-string constraints are not treated as identification of cosmic superstrings.
+- `classification`: `EMPIRICAL`
+- `canonicity_level`: parameter/model constraint scope only.
+- `weaker_framework_test`: excluding or constraining optional models does not select or exclude the entire framework.
+- `physical_bridge`: model-dependent cosmology/phenomenology to observational data.
+- `empirical_binding`: `PARAMETER_CONSTRAINT_AT_MODEL_SCOPE`; framework-level empirical selection `NO`.
+- `falsification_condition`: a compulsory String/M prediction with calibrated comparator/uncertainty/decision rule could strengthen the framework-level ceiling.
+- `countermodels`: ordinary cosmic-string networks and multiple String/M realizations block framework identification from the admitted constraints.
+- `scope_ceiling`: model/parameter constraint only; no direct framework discriminator.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: FCP-24 realization/phenomenology adjudication in handoff blob `83cebd500cab24b8e19e15b81b0acac8bd872040`.
+
+## FCP-STRINGM-NULL-001 — String/M versus null contains one target-conditioned E3-S and six strict E5 relations without framework selection
+
+- `framework_ids`: `FW-STRING-M`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP24-FOUNDATION-AGMON-2023`, `SRC-FCP24-FORMULATION-SEN-ZWIEBACH-2024`, `SRC-FCP24-DUALITY-WITTEN-1995`, `SRC-FCP24-NONPERT-POLCHINSKI-1995`, `SRC-FCP24-NONPERT-BFSS-1997`, `SRC-NULL-PDG-GR-2026`
+- `claim_text`: The Method-0.2.0 `FW-STRING-M`/null control finds 20 material records with E1=0, E2=0, one bounded target-conditioned `E3-S` low-energy Einstein recovery relation, E4=0, six strict E5 functional relations and thirteen NONE. A nonempty six-item String/M-specific residue survives null subtraction, but no direct framework discriminator or framework-level empirical selection follows.
+- `assumptions`: exact FCP-24 String/M object; exact null GR+QFT+SM control; claim-level relation/residue separation and target/empirical-inheritance firewalls.
+- `classification`: `NONFORCED`
+- `canonicity_level`: pairwise control result with bounded E3-S substructure recovery.
+- `weaker_framework_test`: generic gauge/dynamics/scale/consistency roles and recovery of supplied Einstein behavior do not establish independent foundational convergence.
+- `physical_bridge`: bounded low-energy Einstein recovery; no all-framework calibrated realization.
+- `empirical_binding`: inherited GR success and model constraints do not yield framework selection.
+- `falsification_condition`: a stronger source-qualified pairwise map/recovery/prediction could supersede the corresponding relation ceiling.
+- `countermodels`: String/M-specific residue without null correspondence; target recovery without independent origin; model phenomenology without framework selection.
+- `scope_ceiling`: E1 0; E2 0; E3 1 (`E3-S`); E4 0; E5 6; NONE 13; framework empirical selection `NO`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: comparison blob `7cd7bc3ccaf8f13cc2e756e9cee7816a49695f8e`; handoff blob `8e54e593eb6da894d7c9652b983ae3c37aa3df30`.
+
+## FCP-NFCSTRINGM-001 — Reduced NFC and String/M share three independent-origin but generic E5 roles only
+
+- `framework_ids`: `FW-NFC-RED`, `FW-STRING-M`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP3-NFC-BIND-001`, `SRC-FCP24-FOUNDATION-AGMON-2023`, `SRC-FCP24-DUALITY-WITTEN-1995`, `SRC-FCP24-FORMULATION-SEN-ZWIEBACH-2024`, `SRC-FCP24-NONPERT-BFSS-1997`
+- `claim_text`: The Method-0.2.0 Reduced-NFC/String-M comparison finds eight material candidates: E1=E2=E3=E4=0, three `IND-I` but mathematically generic `S0` E5 roles, and five NONE. No non-generic relation, pairwise empirical selection, or empirical support for Reduced NFC is established; material asymmetry is nonempty.
+- `assumptions`: exact FCP-3 Reduced-NFC object and exact six-item null-subtracted String/M residue; no broader holography import.
+- `classification`: `GENERIC_MATHEMATICS`
+- `canonicity_level`: three generic E5 roles only.
+- `weaker_framework_test`: descriptive coordination, admissible transformation and global-coherence roles occur in weaker mathematics; independent origin does not remove genericity.
+- `physical_bridge`: no pairwise physical map/controlled limit.
+- `empirical_binding`: pairwise E4 none; `NFC_EMPIRICAL_SUPPORT = NO`.
+- `falsification_condition`: a non-generic typed map, controlled limit or operational discriminator could strengthen the current pairwise ceiling.
+- `countermodels`: String/M dynamics/recovery without NFC counterpart; NFC partition stabilization without String/M scale architecture.
+- `scope_ceiling`: E1–E4 zero; E5 3; NONE 5; non-generic 0; pairwise empirical selection `NO`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: comparison blob `a3185d58614e28a99c128c4fa4fee44e1e80811d`; handoff blob `f2dff7b761521e9c1db538301f3bb65420ae314c`.
+
+## FCP-NFCAS-CURRENT-001 — Strengthened NFC/AS comparison remains E1–E4 zero with three generic E5 roles and no NFC support
+
+- `framework_ids`: `FW-NFC-RED`, `FW-AS`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP3-NFC-BIND-001`, `SRC-FCP-TSS-AS-PPRR-2025`, `SRC-FCP-TSS-AS-ALR-2026`, `SRC-FCP19-AS-REUTER-1998`, `SRC-FCP19-AS-WEINBERG-1979`
+- `claim_text`: The prospective Method-0.2.0 Reduced-NFC/strengthened-AS reanalysis evaluates 17 material candidates and finds E1=E2=E3=E4=0, three mathematically generic `S0` E5 relations, fourteen NONE, zero non-generic relations, no pairwise empirical selection and no empirical support for Reduced NFC.
+- `assumptions`: exact FCP-3 Reduced-NFC object; exact strengthened AS comparator including FCP-20 residue, targeted-strengthening delta and FCP-23 `EXCL-M` control.
+- `classification`: `GENERIC_MATHEMATICS`
+- `canonicity_level`: three generic pairwise E5 roles only.
+- `weaker_framework_test`: admissible-trajectory, observable-selection and global-coherence roles are generic and do not establish common foundational structure.
+- `physical_bridge`: no cross-framework source/target/control/calibration map.
+- `empirical_binding`: `PAIRWISE_EMPIRICAL_SELECTION = NO`; `NFC_EMPIRICAL_SUPPORT_FROM_AS_REANALYSIS = NO`.
+- `falsification_condition`: a source-qualified non-generic E1–E4 pairwise relation could supersede the current ceiling.
+- `countermodels`: AS internal target recovery/model observables without any Reduced-NFC source/target/observable counterpart.
+- `scope_ceiling`: 17 atomic candidates; E1–E4 zero; E5 3; NONE 14; non-generic 0.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: partial current successor to `FCP21-NFCAS-001`; canonical provenance: comparison blob `f8a78bed134d36e1cea5cd90de29447f0348cb5a`; handoff blob `3771ee8de5e0390eba3e9eb0a4cb1643765056da`.
+
+## FCP-NFCAS-CURRENT-002 — Strengthened AS realization advances relative to Reduced NFC without evidentiary transfer
+
+- `framework_ids`: `FW-NFC-RED`, `FW-AS`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP-TSS-AS-PPRR-2025`, `SRC-FCP-TSS-AS-ALR-2026`, `SRC-FCP-TSS-AS-PPR-2023`, `SRC-FCP19-AS-MRS-2011`
+- `claim_text`: Strengthened AS has selected model-level UV-to-IR and Lorentzian realization/recovery content and a source-qualified timelike model observable that Reduced NFC does not match with a general calibrated physical realization or selected physical-history law. This is a material asymmetry, not convergence and not evidence for Reduced NFC.
+- `assumptions`: strengthened AS model/trajectory limitations and exact Reduced-NFC realization ceiling are preserved.
+- `classification`: `NONFORCED`
+- `canonicity_level`: bounded pairwise asymmetry only.
+- `weaker_framework_test`: greater comparator maturity does not transfer evidence to the compared framework or define a scalar ranking.
+- `physical_bridge`: AS nonempty partial bridge versus Reduced-NFC general bridge unestablished.
+- `empirical_binding`: AS model observable remains below framework EMP4; no pairwise E4.
+- `falsification_condition`: a source-qualified Reduced-NFC realization matching the relevant AS scope or a stronger pairwise map could alter the asymmetry.
+- `countermodels`: AS realization without NFC relation; NFC formal structure without AS physical trajectory.
+- `scope_ceiling`: `MATERIAL_ASYMMETRY = NONEMPTY__STRENGTHENED`; no framework winner.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: partial current successor to `FCP21-NFCAS-002`; canonical provenance: handoff blob `3771ee8de5e0390eba3e9eb0a4cb1643765056da`.
+
+## FCP-NFCLOOP-CURRENT-001 — Strengthened NFC/LOOP comparison remains E1–E4 zero with seven generic E5 roles and no NFC support
+
+- `framework_ids`: `FW-NFC-RED`, `FW-LOOP`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP3-NFC-BIND-001`, `SRC-FCP15-LOOP-AL-2004`, `SRC-FCP15-LOOP-EPRL-2008`, `SRC-FCP-TSS-LOOP-HHZ-2019`, `SRC-FCP-TSS-LOOP-HLL-2020`
+- `claim_text`: The prospective Method-0.2.0 Reduced-NFC/strengthened-LOOP reanalysis evaluates 29 atomic candidates and finds E1=E2=E3=E4=0, seven mathematically generic `S0` E5 roles, twenty-two NONE, zero non-generic relations, no pairwise empirical selection and no empirical support for Reduced NFC.
+- `assumptions`: exact FCP-3 Reduced-NFC object; exact historical LOOP residue plus targeted-strengthening delta; LQC excluded; atomic claim-level decomposition.
+- `classification`: `GENERIC_MATHEMATICS`
+- `canonicity_level`: seven generic pairwise E5 roles only.
+- `weaker_framework_test`: carrier organization, admissible transformations, viability filtering, observable mediation, localization, coarse/fine organization and globalization roles occur in weaker mathematics.
+- `physical_bridge`: no NFC↔LOOP typed physical map, controlled limit or calibrated operational relation.
+- `empirical_binding`: `PAIRWISE_EMPIRICAL_SELECTION = NO`; `NFC_EMPIRICAL_SUPPORT_FROM_LOOP_REANALYSIS = NO`.
+- `falsification_condition`: a source-qualified non-generic E1–E4 relation could supersede the current pairwise ceiling.
+- `countermodels`: LOOP quantum geometry/recovery without NFC structure; NFC carrier/process/globalization without LOOP quantum dynamics.
+- `scope_ceiling`: 29 atomic candidates; E1–E4 zero; E5 7; NONE 22; non-generic 0.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: partial current successor to `FCP17-NFCLOOP-001`; generic viability is K3 while K4 is reserved for physical dynamics. Canonical provenance: comparison blob `a379a8dbe42ecb5404bbd5fe2240591f1cb5d6f6`; handoff blob `8d773b731bfe9f15c34ecdfe42c34ca705eb61e9`.
+
+## FCP-NFCLOOP-CURRENT-002 — Strengthened LOOP dynamics/continuum/realization is materially asymmetric to Reduced NFC without evidentiary transfer
+
+- `framework_ids`: `FW-NFC-RED`, `FW-LOOP`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP15-LOOP-QSD-1998`, `SRC-FCP15-LOOP-EPRL-2008`, `SRC-FCP15-LOOP-BARRETT-2010`, `SRC-FCP-TSS-LOOP-HHZ-2019`, `SRC-FCP-TSS-LOOP-HAN-2017`
+- `claim_text`: Strengthened LOOP retains substantive canonical/covariant dynamics programs and bounded E3-S/E3-M continuum/GR recovery evidence that Reduced NFC does not match with a selected physical-history law or general calibrated realization. This creates nonempty strengthened-side dynamics/continuum/realization asymmetry without pairwise E3/E4 or evidence transfer to Reduced NFC.
+- `assumptions`: LOOP-internal canonical/covariant bridges and GR-target recovery remain distinct from pairwise NFC↔LOOP relations; generic viability remains K3 and physical dynamics remains K4.
+- `classification`: `NONFORCED`
+- `canonicity_level`: bounded pairwise asymmetry only.
+- `weaker_framework_test`: comparator-side dynamics/recovery is scientifically substantive but cannot be relabeled as a cross-framework relation merely because the other framework lacks it.
+- `physical_bridge`: LOOP partial target-conditioned recovery versus Reduced-NFC general bridge unestablished.
+- `empirical_binding`: inherited GR success; no pairwise or LOOP framework EMP4.
+- `falsification_condition`: a source-qualified Reduced-NFC dynamics/realization counterpart or a genuine cross-framework controlled limit could alter the asymmetry.
+- `countermodels`: LOOP-internal E3 with no NFC source/target; canonical/covariant bridge with no NFC involvement.
+- `scope_ceiling`: `MATERIAL_LOOP_ASYMMETRY = NONEMPTY__STRENGTHENED`; no framework winner.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: partial current successor to `FCP17-NFCLOOP-002`; canonical provenance: handoff blob `8d773b731bfe9f15c34ecdfe42c34ca705eb61e9`.
+
+---
+
+# Program-level current recurrence claims
+
+## FCP-REC-001 — Current recurrence corpus contains 16 historical operations, 13 effective slots and six Reduced-NFC slots
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`, `FW-AQFT`, `FW-CST`, `FW-CQM`, `FW-GPTOPT`, `FW-LOOP`, `FW-AS`, `FW-STRING-M`
+- `source_ids`: `SRC-FCP2-KEYS-001`, `SRC-FCP2-EQUIV-001`, `SRC-FCP3-COMP-001`, `SRC-FCP3-NFC-BIND-001`
+- `claim_text`: The canonical Method-0.2.0 recurrence reconstruction distinguishes 16 historical pairwise operations from 13 supersession-adjusted current pairwise slots and six current Reduced-NFC comparator slots. FCP-6/FCP-22 compose one current NFC/AQFT slot with partial subclaim supersession; historical NFC/LOOP and NFC/AS slots are replaced for current interpretation by their later prospective reanalyses.
+- `assumptions`: exact canonical corpus through the program-level recurrence recomputation; operation chronology and current pairwise-slot identity are not treated as the same denominator.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: current program-level bookkeeping/provenance result.
+- `weaker_framework_test`: denominator identity is not a convergence claim and carries no framework credit.
+- `physical_bridge`: `NONE` required for denominator bookkeeping.
+- `empirical_binding`: `NONE`.
+- `falsification_condition`: discovery of an omitted/duplicated canonical pairwise operation or incorrect supersession identity would require denominator revision.
+- `countermodels`: repeated analyses of one pair demonstrate why operation count cannot be used as the current independence denominator.
+- `scope_ceiling`: historical operations 16; current effective slots 13; current Reduced-NFC slots 6; no scoring implication.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: current program-level successor context for historical FCP-18 denominator statements. Canonical provenance: recurrence meta-ledger blob `441d6d10f9bf12c74a1f1dbe90d2b95c5b077be7`; handoff blob `dc20e786340d505d6302bbbecf56305aa65cc3fe`.
+
+## FCP-REC-002 — GR/classical recovery recurs across four families only as target-conditioned R3 recovery
+
+- `framework_ids`: `FW-CST`, `FW-LOOP`, `FW-AS`, `FW-STRING-M`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP9-CST-SURYA-2019`, `SRC-FCP-TSS-LOOP-HHZ-2019`, `SRC-FCP-TSS-AS-PPRR-2025`, `SRC-FCP24-FOUNDATION-AGMON-2023`, `SRC-NULL-PDG-GR-2026`
+- `claim_text`: Bounded E3 recovery of GR/Einstein/classical/low-energy target content recurs across CST, LOOP, AS and String/M, but the shared endpoint is supplied by the declared recovery target and implementation/control remain framework-specific. The recurrence is therefore `R3_TARGET_CONDITIONED_E1_E4_RECOVERY_RECURRENCE`, not independent foundational rediscovery of GR.
+- `assumptions`: exact current E3 records and their target-conditioning; endpoint commonality is separated from implementation and control.
+- `classification`: `VALID_CONDITIONAL`
+- `canonicity_level`: one current R3 recurrence family.
+- `weaker_framework_test`: multiple frameworks can be engineered/selected to recover the same successful target, so endpoint recurrence does not establish common independent foundations.
+- `physical_bridge`: nonempty bounded target-recovery bridges varying by framework.
+- `empirical_binding`: recovered GR success is inherited, not independent EMP4.
+- `falsification_condition`: independent non-target-derived recurrence of the same non-generic structure at E1–E4 could require reclassification.
+- `countermodels`: distinct framework-specific recovery mechanisms reaching the same supplied GR endpoint.
+- `scope_ceiling`: `R3 = 1`; target-conditioned recovery retained without R1/R2 promotion.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: recurrence meta-ledger `441d6d10f9bf12c74a1f1dbe90d2b95c5b077be7`.
+
+## FCP-REC-003 — AQFT/QFT and CQM/QM E2 recurrence is lineage/reformulation R4 rather than independent convergence
+
+- `framework_ids`: `FW-AQFT`, `FW-CQM`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP4-AQFT-HK-1964`, `SRC-FCP4-CQM-AC-2004`, `SRC-FCP4-CQM-AC-2009`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: Bounded E2 representation/reformulation relations recur in AQFT/QFT and CQM/QM. Because shared historical/formal lineage explains the agreement, the program-level recurrence is `R4_LINEAGE_OR_REFORMULATION_E1_E4_RECURRENCE`, not independent foundational convergence.
+- `assumptions`: current equal-standard E2 status and historical lineage controls.
+- `classification`: `NONFORCED`
+- `canonicity_level`: one current R4 recurrence family.
+- `weaker_framework_test`: agreement between a theory and its reformulation is expected and cannot establish independent origin by itself.
+- `physical_bridge`: inherited through corresponding QFT/QM concrete realizations.
+- `empirical_binding`: empirical success is inherited rather than independent framework selection.
+- `falsification_condition`: a specific E2 structure shown to have independent non-lineage origin and non-generic physical content could be reconsidered separately.
+- `countermodels`: empirically equivalent or structurally related reformulations demonstrate the lineage confound.
+- `scope_ceiling`: `R4 = 1`; no independent foundational credit from lineage E2.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: recurrence handoff blob `dc20e786340d505d6302bbbecf56305aa65cc3fe`.
+
+## FCP-REC-004 — Seven generic E5 functional families recur across the current framework corpus without foundational promotion
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`, `FW-AQFT`, `FW-CST`, `FW-CQM`, `FW-GPTOPT`, `FW-LOOP`, `FW-AS`, `FW-STRING-M`
+- `source_ids`: `SRC-FCP3-NFC-BIND-001`, `SRC-FCP4-AQFT-HK-1964`, `SRC-FCP9-CST-BLMS-1987`, `SRC-FCP15-LOOP-AL-2004`, `SRC-FCP19-AS-WEINBERG-1979`, `SRC-FCP24-FOUNDATION-AGMON-2023`, `SRC-FCP2-EQUIV-001`
+- `claim_text`: Seven genuine multi-family `R5_GENERIC_E5_FUNCTIONAL_RECURRENCE` roles recur in the current corpus: carrier/state organization; quotient/equivalence; admissible transformations/process organization; observable/interface mediation; locality/causality/localization; scale/refinement/coarse-graining/RG; and globalization/local-to-global coherence. Their recurrence is mathematically generic and does not establish independent foundational convergence.
+- `assumptions`: exact current pairwise slot corpus; E5 is retained as a real relation class but genericity and independence are separate axes.
+- `classification`: `GENERIC_MATHEMATICS`
+- `canonicity_level`: seven R5 generic recurrence families.
+- `weaker_framework_test`: each listed role occurs in substantially weaker or unrelated formal systems.
+- `physical_bridge`: no common multi-family calibrated physical bridge follows from the generic roles.
+- `empirical_binding`: `EMP0`/no independent framework-level selection from the generic roles.
+- `falsification_condition`: discovery that a listed recurrence is materially non-generic and satisfies E1–E4 plus independence/bridge burdens could require reclassification of that family.
+- `countermodels`: generic formal systems instantiate these roles without the specific foundational commitments of the compared frameworks.
+- `scope_ceiling`: `R5 = 7`; `INDEPENDENT_FOUNDATIONAL_RECURRENCE_FROM_GENERIC_E5 = NO`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: recurrence meta-ledger blob `441d6d10f9bf12c74a1f1dbe90d2b95c5b077be7`.
+
+## FCP-REC-005 — Empirical success recurs primarily through inheritance/shared targets and yields no framework EMP4 recurrence
+
+- `framework_ids`: `FW-NULL-GRQFTSM`, `FW-AQFT`, `FW-CQM`, `FW-CST`, `FW-LOOP`, `FW-AS`, `FW-STRING-M`
+- `source_ids`: `SRC-NULL-PDG-GR-2026`, `SRC-NULL-PDG-EW-2026`, `SRC-FCP4-AQFT-HK-1964`, `SRC-FCP4-CQM-AC-2004`, `SRC-FCP-TSS-LOOP-HHZ-2019`, `SRC-FCP-TSS-AS-PPRR-2025`, `SRC-FCP24-EMPIRICAL-LVK-2021`
+- `claim_text`: Current multi-family empirical compatibility is explained by reformulation inheritance, shared recovery targets, or model/parameter constraints rather than independent framework-level pairwise EMP4. The program contains one `R7_EMPIRICALLY_INHERITED_OR_SHARED_TARGET_RECURRENCE` family, zero current independent framework-level EMP4 slots and zero multi-family EMP4 recurrence.
+- `assumptions`: empirical inheritance, target conditioning, model/parameter scope and framework-level discriminator requirements remain separated.
+- `classification`: `NONFORCED`
+- `canonicity_level`: one R7 recurrence family; EMP4 zero at current framework level.
+- `weaker_framework_test`: compatibility with successful GR/QM/QFT or constraints on optional models can occur without selecting a foundational framework.
+- `physical_bridge`: varies by framework and is often target/model conditioned.
+- `empirical_binding`: real inherited/model evidence retained; `CURRENT_MULTI_FAMILY_EMP4_RECURRENCE_COUNT = 0`.
+- `falsification_condition`: one or more compulsory framework-level operational relations satisfying EMP4 could supersede the zero-EMP4 result.
+- `countermodels`: same-model/reformulation success and target recovery without independent prediction.
+- `scope_ceiling`: `R7 = 1`; independent framework-level EMP4 slots 0; multi-family EMP4 recurrence 0.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: current successor context for `FCP18-META-003`; historical row remains accepted through FCP-17. Canonical provenance: recurrence handoff `dc20e786340d505d6302bbbecf56305aa65cc3fe`.
+
+## FCP-REC-006 — No independent non-generic multi-family foundational recurrence survives Method 0.2.0 controls
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`, `FW-AQFT`, `FW-CST`, `FW-CQM`, `FW-GPTOPT`, `FW-LOOP`, `FW-AS`, `FW-STRING-M`
+- `source_ids`: `SRC-FCP2-KEYS-001`, `SRC-FCP2-EQUIV-001`, `SRC-FCP3-COMP-001`, `SRC-FCP9-CST-BLMS-1987`, `SRC-FCP15-LOOP-AL-2004`, `SRC-FCP19-AS-WEINBERG-1979`, `SRC-FCP24-FOUNDATION-AGMON-2023`
+- `claim_text`: After genericity, lineage/reformulation, target-conditioning, empirical-inheritance, anti-double-counting, physical-bridge and calibration controls, no recurrence family satisfies the current Method-0.2.0 R1 or R2 burden across multiple distinct framework families.
+- `assumptions`: exact 13-slot current corpus and preregistered recurrence criteria; positive R3/R4/R5/R7 relations are retained rather than erased.
+- `classification`: `NONFORCED`
+- `canonicity_level`: current program-level evidentiary result.
+- `weaker_framework_test`: generic or explained recurrence cannot be promoted merely by repetition.
+- `physical_bridge`: no common multi-family E1–E4 physical bridge survives the required controls.
+- `empirical_binding`: no current independent framework-level EMP4 recurrence.
+- `falsification_condition`: a source-qualified independently motivated materially non-generic E1–E4 relation recurring across at least two distinct framework families would reopen the result.
+- `countermodels`: lineage E2, target-conditioned E3, generic E5 and inherited empirical success demonstrate why raw recurrence is insufficient.
+- `scope_ceiling`: `R1 = 0`; `R2 = 0`; no framework winner or scalar score.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: current program-level successor context for `FCP18-META-001`; historical FCP-18 remains accepted at its through-FCP17 scope. Canonical provenance: recurrence meta-ledger `441d6d10f9bf12c74a1f1dbe90d2b95c5b077be7`.
+
+## FCP-REC-007 — Reduced NFC has no repeated independent support across its six current comparator slots
+
+- `framework_ids`: `FW-NFC-RED`, `FW-NULL-GRQFTSM`, `FW-AQFT`, `FW-CST`, `FW-LOOP`, `FW-AS`, `FW-STRING-M`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP3-NFC-BIND-001`, `SRC-FCP4-AQFT-HK-1964`, `SRC-FCP9-CST-BLMS-1987`, `SRC-FCP15-LOOP-AL-2004`, `SRC-FCP19-AS-WEINBERG-1979`, `SRC-FCP24-FOUNDATION-AGMON-2023`
+- `claim_text`: Across the six current Reduced-NFC comparator slots—null, AQFT, CST, LOOP, AS and String/M—the exact FCP-3 Reduced-NFC object has E1=E2=E3=E4=0 in every slot. Positive pairwise content is generic E5 only; therefore zero recurrence families provide qualifying repeated independent support for Reduced NFC.
+- `assumptions`: exact FCP-3 Reduced-NFC object; FCP-6/FCP-22 partial slot composition; current prospective AS/LOOP and String/M comparisons; repeated-support burden requires materially same non-generic E1–E4 structure across at least two distinct comparator families.
+- `classification`: `NONFORCED`
+- `canonicity_level`: current six-slot program-level result.
+- `weaker_framework_test`: repeated generic roles, repeated open burdens and comparator maturity do not satisfy non-generic support.
+- `physical_bridge`: no repeated two-sided Reduced-NFC physical bridge is source-qualified.
+- `empirical_binding`: `REDUCED_NFC_SUPPORTING_RECURRENCE_FAMILY_COUNT = 0`.
+- `falsification_condition`: qualifying independent non-generic Reduced-NFC E1–E4 relations in at least two distinct comparator families would reopen the conclusion.
+- `countermodels`: repeated generic E5 roles and repeated comparator asymmetry without structural support transfer.
+- `scope_ceiling`: `HAS_REDUCED_NFC_ACCUMULATED_REPEATED_INDEPENDENT_SUPPORT = NO`; not a claim that Reduced NFC is false.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: current program-level successor context for `FCP18-META-002`; historical FCP-18 remains accepted at its four-slot scope. Canonical provenance: recurrence handoff `dc20e786340d505d6302bbbecf56305aa65cc3fe`.
+
+## FCP-REC-008 — Material asymmetry recurs across frameworks without constituting a score or convergence relation
+
+- `framework_ids`: `FW-NFC-RED`, `FW-AQFT`, `FW-CST`, `FW-LOOP`, `FW-AS`, `FW-STRING-M`, `FW-GPTOPT`, `FW-CQM`
+- `source_ids`: `SRC-FCP3-NFC-BIND-001`, `SRC-FCP4-AQFT-HK-1964`, `SRC-FCP9-CST-BLMS-1987`, `SRC-FCP15-LOOP-QSD-1998`, `SRC-FCP19-AS-REUTER-1998`, `SRC-FCP24-FORMULATION-SEN-ZWIEBACH-2024`
+- `claim_text`: The current program exhibits nonempty material asymmetry across carrier specificity, dynamics, continuum recovery, physical realization, calibration and empirical contact. These differences are scientifically substantive but are not a framework score, winner, convergence relation or evidentiary transfer to a framework lacking the stronger content.
+- `assumptions`: pairwise asymmetries and framework-specific maturity are retained at their exact scopes without scalar aggregation.
+- `classification`: `NONFORCED`
+- `canonicity_level`: program-level qualitative asymmetry pattern.
+- `weaker_framework_test`: greater specificity or maturity along one axis does not force global framework superiority.
+- `physical_bridge`: varies materially across frameworks.
+- `empirical_binding`: varies by framework; no scoring or transfer follows.
+- `falsification_condition`: future scientific work could change individual asymmetries or supply shared relations; the no-score rule remains methodological unless separately revised.
+- `countermodels`: frameworks can be stronger on one axis and weaker/open on another, defeating scalar inference.
+- `scope_ceiling`: `PROGRAM_LEVEL_MATERIAL_ASYMMETRY_PATTERN = NONEMPTY`; `MATERIAL_ASYMMETRY != FRAMEWORK_SCORE`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: recurrence handoff blob `dc20e786340d505d6302bbbecf56305aa65cc3fe`.
+
+## FCP-REC-009 — Unique dynamics, full realization, calibration, selection and framework empirical discrimination recur as open burdens
+
+- `framework_ids`: `FW-NFC-RED`, `FW-AQFT`, `FW-CST`, `FW-CQM`, `FW-GPTOPT`, `FW-LOOP`, `FW-AS`, `FW-STRING-M`
+- `source_ids`: `SRC-FCP3-NFC-BIND-001`, `SRC-FCP4-AQFT-BFV-2003`, `SRC-FCP9-CST-SURYA-2019`, `SRC-FCP4-CQM-AC-2004`, `SRC-FCP15-LOOP-QSD-1998`, `SRC-FCP19-AS-EICHHORN-2026`, `SRC-FCP24-REALIZATION-MCALLISTER-QUEVEDO-2023`
+- `claim_text`: Multiple framework families retain recurring open burdens in unique dynamics, full physical realization, calibration, model/trajectory/vacuum selection and framework-level empirical discrimination. These shared absences are a program-level bottleneck pattern, not positive E1–E5 convergence.
+- `assumptions`: each framework's open burden is preserved at its own source-qualified scope; shared absence is not treated as a common structure.
+- `classification`: `OPEN`
+- `canonicity_level`: current program-level open-burden pattern.
+- `weaker_framework_test`: many unrelated theories can share unresolved problems, so common absence does not imply common foundation.
+- `physical_bridge`: incompleteness varies by framework and burden.
+- `empirical_binding`: framework-level discrimination remains absent in the current recurrence corpus.
+- `falsification_condition`: closing individual burdens would shrink the pattern; a common positive structure would require separate E1–E5 qualification.
+- `countermodels`: distinct reasons for incompleteness across frameworks block inference from shared labels alone.
+- `scope_ceiling`: `PROGRAM_LEVEL_RECURRENT_OPEN_BURDEN_PATTERN = NONEMPTY`; `SHARED_OPEN_BURDEN != POSITIVE_RELATION`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: recurrence handoff blob `dc20e786340d505d6302bbbecf56305aa65cc3fe`.

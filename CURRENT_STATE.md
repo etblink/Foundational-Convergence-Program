@@ -717,3 +717,27 @@ NEXT_IF_ACCEPTED_AND_INTEGRATED = NONE__ALREADY_CANONICALLY_INTEGRATED
 ```
 
 No Claim Ledger propagation, post-recurrence scientific sequencing, new framework selection, or FCP-25 work is performed by this canonical routing step. Claim Ledger current-supersession propagation remains a separate next operation.
+
+## Claim Ledger current-supersession propagation — qualified local candidate
+
+This branch-local section records the bounded provenance reconciliation candidate only. Canonical `main` remains `43e530c083b0f61c37faaa717e0b3e655b85781c` / tree `3431aa12b625376d42473efabd1103b5401a55c8`; no remote mutation or integration has occurred.
+
+```text
+CLAIM_LEDGER_CURRENT_SUPERSESSION_PROPAGATION = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
+CLAIM_LEDGER_CURRENT_SUPERSESSION = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
+PROGRAM_LEVEL_RECURRENCE_RECOMPUTATION = CANONICALLY_COMPLETE
+RECURRENCE_RECOMPUTATION = CANONICALLY_COMPLETE
+OLD_DURABLE_ROW_COUNT = 62
+CURRENT_CANDIDATE_DURABLE_ROW_COUNT = 86
+ROWS_APPENDED = 24
+ROWS_MARKED_SUPERSEDED = 0
+NEW_EXTERNAL_SOURCES = 0
+NEW_SCIENTIFIC_ANALYSIS = 0
+FCP25_SELECTED = NO
+FCP25_STARTED = NO
+NEXT_RECOMMENDED_OPERATION = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
+NEXT_EXECUTION_STEP = SEPARATE_PUBLICATION_AND_INTEGRATION_DECISION
+NEXT_IF_ACCEPTED_AND_INTEGRATED = POST_RECURRENCE_SCIENTIFIC_SEQUENCING_ADJUDICATION
+```
+
+No post-recurrence scientific sequencing outcome, new framework intake, framework winner, scalar score, branch cleanup, publication, or integration is selected or performed in this candidate.
