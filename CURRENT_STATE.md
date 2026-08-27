@@ -9,14 +9,17 @@ LATEST_NUMBERED_PHASE = FCP-24
 LATEST_CANONICAL_SCIENTIFIC_OPERATION = NFC_AS_PROSPECTIVE_REANALYSIS
 LATEST_CANONICAL_SCIENTIFIC_COMMIT = 83fd56af3515d92c198289c945c8e7f15234d197
 LATEST_CANONICAL_SCIENTIFIC_TREE = f9e1777347ccc15640eb0731b2879983350b015b
-LATEST_CANONICAL_ROUTING_COMMIT = 09aaf0ba4f9c570310150532c7e7ac4e42d868f8
-LATEST_CANONICAL_ROUTING_TREE = ab4254076939787b019a5aa4f5d8889985ac8608
+LATEST_CANONICAL_MAINTENANCE_OPERATION = REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT
+LATEST_CANONICAL_MAINTENANCE_COMMIT = b57a8617bb5818f3f3ab540ce63e0d82cde743b0
+LATEST_CANONICAL_MAINTENANCE_TREE = 13ba67fcebb23efbab5d6f55eb4ade953f6b548d
+PRE_HOUSEKEEPING_CANONICAL_ROUTING_COMMIT = 09aaf0ba4f9c570310150532c7e7ac4e42d868f8
+PRE_HOUSEKEEPING_CANONICAL_ROUTING_TREE = ab4254076939787b019a5aa4f5d8889985ac8608
 CANONICAL_COMMIT_AT_STATE_SPLIT = 115e88f578d3d9f761d870c3cb569bd72b61c559
 CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.0_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` preserves the numbered phase sequence without relabeling the later prospective reanalysis as FCP-25. The latest-scientific fields identify the accepted scientific operation, while the latest-routing fields identify the subsequent canonical integration/routing commit. `CANONICAL_COMMIT_AT_STATE_SPLIT` and `CANONICAL_TREE_AT_STATE_SPLIT` remain provenance markers for the earlier live-state split.
+`LATEST_NUMBERED_PHASE` preserves the numbered phase sequence without relabeling the later prospective reanalysis as FCP-25. The latest-scientific fields identify the accepted scientific operation. The latest-maintenance fields identify the subsequently accepted housekeeping result. The pre-housekeeping routing fields preserve the exact canonical routing baseline from which that maintenance candidate was produced; the current canonical Git head is resolved from `main` rather than embedded self-referentially in the file that determines its own commit hash. `CANONICAL_COMMIT_AT_STATE_SPLIT` and `CANONICAL_TREE_AT_STATE_SPLIT` remain provenance markers for the earlier live-state split.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.0 governs prospective work unless explicitly superseded through the truth-seeking revision protocol.
 
@@ -190,13 +193,13 @@ FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
 FW_STRING_M_NULL_CONTROL = CANONICALLY_COMPLETE
 NFC_STRING_M_COMPARISON = CANONICALLY_COMPLETE
 POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
-REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
+REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT = CANONICALLY_COMPLETE
 POST_FCP23_REMAINING_ORDER_AUTOMATICALLY_INHERITED = NO
 ```
 
 `RECURRENCE_IMPACT_CANDIDATE = YES` means later recurrence analysis must account for the current FCP-22 relation and later current relations; it is not authorization to recompute recurrence now.
 
-The post-NFC/String-M read-only sequencing adjudication selected the prospective Reduced-NFC↔strengthened-AS reanalysis first, then a bounded repository-housekeeping/current-state-supersession checkpoint before the still-required prospective NFC↔strengthened-LOOP reanalysis. The AS reanalysis is now canonically complete: 17 atomic records yield three mathematically generic, independently instantiated S0 E5 functional relations, zero E1–E4, fourteen NONE, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and strengthened material realization asymmetry. FCP-21 is partially superseded only in current realization/observable interpretation; its historical K-key relation topology remains unchanged. Recurrence remains unrecomputed and still requires the prospective NFC↔strengthened-LOOP reanalysis. The immediate routing task is the separately authorized housekeeping checkpoint; that maintenance operation is not started by this integration.
+The post-NFC/String-M read-only sequencing adjudication selected the prospective Reduced-NFC↔strengthened-AS reanalysis first, then a bounded repository-housekeeping/current-state-supersession checkpoint before the still-required prospective NFC↔strengthened-LOOP reanalysis. The AS reanalysis is canonically complete: 17 atomic records yield three mathematically generic, independently instantiated S0 E5 functional relations, zero E1–E4, fourteen NONE, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and strengthened material realization asymmetry. FCP-21 is partially superseded only in current realization/observable interpretation; its historical K-key relation topology remains unchanged. The housekeeping checkpoint is now canonically complete and changed no scientific result, source binding, framework-register row, or claim-ledger row. Recurrence remains unrecomputed and still requires the prospective NFC↔strengthened-LOOP reanalysis, which is the next scientific operation pending separate authorization.
 
 ## Next-task status
 
@@ -209,10 +212,11 @@ FCP25_SELECTED = NO
 POST_FCP24_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED
 POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
 NFC_AS_REANALYSIS = CANONICALLY_COMPLETE
-REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
-HOUSEKEEPING_CANDIDATE_BASE = 09aaf0ba4f9c570310150532c7e7ac4e42d868f8
-HOUSEKEEPING_CANDIDATE_NEXT_IF_ACCEPTED = PROSPECTIVE_NFC_LOOP_REANALYSIS
-NEXT_RECOMMENDED_OPERATION = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
+REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT = CANONICALLY_COMPLETE
+HOUSEKEEPING_CANONICAL_COMMIT = b57a8617bb5818f3f3ab540ce63e0d82cde743b0
+HOUSEKEEPING_CANONICAL_TREE = 13ba67fcebb23efbab5d6f55eb4ade953f6b548d
+HOUSEKEEPING_CANONICAL_BASE = 09aaf0ba4f9c570310150532c7e7ac4e42d868f8
+NEXT_RECOMMENDED_OPERATION = PROSPECTIVE_NFC_LOOP_REANALYSIS
 POST_FCP24_GROK_AUDIT = INDEPENDENT_ADJUDICATION_CANONICALLY_COMPLETE
 POST_FCP24_GROK_AUDIT_PACKET = EXPOSED_EXACTLY
 POST_FCP24_GROK_AUDIT_PROMPT = SENT_EXACTLY
@@ -224,11 +228,11 @@ POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = PROJECT_LEAD_REVIEW_AND_SEPARATE_PUBLICATION_INTEGRATION_DECISION
-NEXT_SCIENTIFIC_PHASE = NONE__HOUSEKEEPING_CANDIDATE_REVIEW_PENDING_BEFORE_NFC_LOOP_REANALYSIS
+NEXT_EXECUTION_STEP = SEPARATE_PROSPECTIVE_NFC_LOOP_REANALYSIS_AUTHORIZATION
+NEXT_SCIENTIFIC_PHASE = PROSPECTIVE_NFC_LOOP_REANALYSIS__PENDING_SEPARATE_AUTHORIZATION
 ```
 
-The Grok audit and independent adjudication, Finding-007 targeted source re-audit, first `FW-STRING-M` null control, bounded NFC↔String/M comparison, post-NFC/String-M read-only sequencing decision, and prospective NFC↔strengthened-AS reanalysis are now complete at their declared scopes. The AS reanalysis preserves zero pairwise E1–E4 and zero non-generic relations, retains three mathematically generic S0 E5 functional relations whose instances are `IND-I`, establishes no pairwise empirical selection or NFC empirical support, and strengthens AS-to-NFC realization asymmetry. No recurrence, housekeeping execution, NFC↔LOOP reanalysis, claim-ledger propagation, source mutation, or FCP-25 is started by this integration.
+The Grok audit and independent adjudication, Finding-007 targeted source re-audit, first `FW-STRING-M` null control, bounded NFC↔String/M comparison, post-NFC/String-M read-only sequencing decision, prospective NFC↔strengthened-AS reanalysis, and bounded repository housekeeping/current-state supersession are now complete at their declared scopes. The AS reanalysis preserves zero pairwise E1–E4 and zero non-generic relations, retains three mathematically generic S0 E5 functional relations whose instances are `IND-I`, establishes no pairwise empirical selection or NFC empirical support, and strengthens AS-to-NFC realization asymmetry. Housekeeping changes only live metadata/navigation and records branch/PR lifecycle state. No recurrence, NFC↔LOOP reanalysis, claim-ledger propagation, source mutation, or FCP-25 is started by this canonicalization.
 
 ## Finding-007 targeted source re-audit — canonical result
 

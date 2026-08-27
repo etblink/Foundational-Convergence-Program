@@ -11,9 +11,9 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 
 - **Latest numbered phase:** FCP-24 — String-Theoretic / Holographic Source Intake, Taxonomy Gate, and K1–K10 Baseline.
 - **Latest canonical scientific operation:** prospective Reduced NFC ↔ strengthened Asymptotic Safety reanalysis under Method 0.2.0 (`83fd56af3515d92c198289c945c8e7f15234d197`; tree `f9e1777347ccc15640eb0731b2879983350b015b`).
-- **Latest canonical routing tip:** `09aaf0ba4f9c570310150532c7e7ac4e42d868f8` (tree `ab4254076939787b019a5aa4f5d8889985ac8608`).
+- **Latest canonical maintenance operation:** Repository Housekeeping + Current-State Supersession (`b57a8617bb5818f3f3ab540ce63e0d82cde743b0`; tree `13ba67fcebb23efbab5d6f55eb4ade953f6b548d`), produced from pre-housekeeping canonical routing baseline `09aaf0ba4f9c570310150532c7e7ac4e42d868f8`.
 - **Active prospective method:** FCP Method 0.2.0.
-- **Housekeeping candidate state:** qualified candidate complete, not integrated; Project Lead review and a separate publication/integration decision are next.
+- **Housekeeping status:** canonically complete; the next scientific operation is prospective Reduced NFC ↔ strengthened LOOP under a separate authorization.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
@@ -53,7 +53,7 @@ Method 0.2.0 reports these axes separately. It does not use a scalar framework-w
 - **NFC ↔ `FW-STRING-M`:** three generic S0 E5 relations and five NONE records; zero E1–E4, zero non-generic relations, and no pairwise empirical selection or NFC support.
 - **Post-NFC/String-M sequencing:** prospective NFC↔strengthened-AS selected before housekeeping, followed prospectively by NFC↔strengthened-LOOP.
 - **NFC ↔ strengthened AS:** three generic S0 E5 relations and fourteen NONE records; zero E1–E4, zero non-generic relations, no pairwise empirical selection or NFC support, and strengthened material asymmetry.
-- **Repository housekeeping:** current-state supersession and branch/PR lifecycle audit is a qualified candidate, not integrated; it performs no new science.
+- **Repository housekeeping:** current-state supersession and branch/PR lifecycle audit is canonically complete; it performs no new science and leaves Claim Ledger propagation deferred.
 
 Detailed scientific findings live in the versioned phase, comparison, audit, and handoff artifacts rather than in this landing page.
 
