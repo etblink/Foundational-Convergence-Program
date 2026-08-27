@@ -163,7 +163,7 @@ A source-bound framework family is not equivalent to a complete nonperturbative 
 
 ```text
 RECURRENCE_RECOMPUTATION = NOT_STARTED
-NFC_AS_REANALYSIS = NOT_STARTED
+NFC_AS_REANALYSIS = CANONICALLY_COMPLETE
 NFC_LOOP_REANALYSIS = NOT_STARTED
 EMPIRICAL_NO_GO_WORKSTREAM = CANONICALLY_COMPLETE
 FOLLOW_ON_DISCRIMINATOR_INVESTIGATION = NOT_SELECTED
@@ -180,13 +180,14 @@ FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
 FW_STRING_M_NULL_CONTROL = CANONICALLY_COMPLETE
 NFC_STRING_M_COMPARISON = CANONICALLY_COMPLETE
-POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION = READY_NOT_STARTED
+POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT = READY_NOT_STARTED
 POST_FCP23_REMAINING_ORDER_AUTOMATICALLY_INHERITED = NO
 ```
 
 `RECURRENCE_IMPACT_CANDIDATE = YES` means later recurrence analysis must account for the current FCP-22 relation and later current relations; it is not authorization to recompute recurrence now.
 
-The accepted post-FCP-23 sequencing dependency state records that recurrence is premature pending both prospective NFC↔strengthened-AS and NFC↔strengthened-LOOP reanalyses; claim-ledger propagation is not a prerequisite for either reanalysis or recurrence; and LOOP taxonomy review is not a prerequisite for the prospective NFC↔LOOP reanalysis. FCP-24 materially changed the framework inventory, so the unexecuted remainder of the old sequencing order is not automatically inherited as the post-FCP-24 order. Finding-007, the remediated `FW-STRING-M` null control, and the bounded NFC↔String/M comparison are now canonically complete. The NFC↔String/M result adds three mathematically generic, independently instantiated S0 E5 functional relations, zero E1–E4, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and nonempty material asymmetry. Recurrence remains unrecomputed and downstream ordering now requires a separate post-NFC/String-M scientific sequencing adjudication.
+The post-NFC/String-M read-only sequencing adjudication selected the prospective Reduced-NFC↔strengthened-AS reanalysis first, then a bounded repository-housekeeping/current-state-supersession checkpoint before the still-required prospective NFC↔strengthened-LOOP reanalysis. The AS reanalysis is now canonically complete: 17 atomic records yield three mathematically generic, independently instantiated S0 E5 functional relations, zero E1–E4, fourteen NONE, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and strengthened material realization asymmetry. FCP-21 is partially superseded only in current realization/observable interpretation; its historical K-key relation topology remains unchanged. Recurrence remains unrecomputed and still requires the prospective NFC↔strengthened-LOOP reanalysis. The immediate routing task is the separately authorized housekeeping checkpoint; that maintenance operation is not started by this integration.
 
 ## Next-task status
 
@@ -197,7 +198,10 @@ FCP24_SELECTED = YES
 FCP24_STATUS = CANONICALLY_COMPLETE
 FCP25_SELECTED = NO
 POST_FCP24_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED
-NEXT_RECOMMENDED_OPERATION = POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION
+POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+NFC_AS_REANALYSIS = CANONICALLY_COMPLETE
+REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT = READY_NOT_STARTED
+NEXT_RECOMMENDED_OPERATION = REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT
 POST_FCP24_GROK_AUDIT = INDEPENDENT_ADJUDICATION_CANONICALLY_COMPLETE
 POST_FCP24_GROK_AUDIT_PACKET = EXPOSED_EXACTLY
 POST_FCP24_GROK_AUDIT_PROMPT = SENT_EXACTLY
@@ -209,11 +213,11 @@ POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = SEPARATE_POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION_AUTHORIZATION
-NEXT_SCIENTIFIC_PHASE = NONE__POST_NFC_STRING_M_SEQUENCING_ADJUDICATION_READY_PENDING_SEPARATE_AUTHORIZATION
+NEXT_EXECUTION_STEP = SEPARATE_REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT_AUTHORIZATION
+NEXT_SCIENTIFIC_PHASE = NONE__HOUSEKEEPING_CHECKPOINT_BEFORE_NFC_LOOP_REANALYSIS_PENDING_SEPARATE_AUTHORIZATION
 ```
 
-The Grok audit and independent adjudication are canonically complete. Findings 003/005 reconciliation is complete. The Finding-007 targeted source re-audit, the first `FW-STRING-M` null control, and the bounded NFC↔String/M comparison are now canonically complete. The NFC↔String/M result preserves zero E1–E4 and zero non-generic relations, retains three mathematically generic S0 E5 functional relations whose instances are `IND-I` independent at frozen-object scope, establishes no pairwise empirical selection or NFC empirical support, and records nonempty material asymmetry. No recurrence or downstream comparison is started by this integration.
+The Grok audit and independent adjudication, Finding-007 targeted source re-audit, first `FW-STRING-M` null control, bounded NFC↔String/M comparison, post-NFC/String-M read-only sequencing decision, and prospective NFC↔strengthened-AS reanalysis are now complete at their declared scopes. The AS reanalysis preserves zero pairwise E1–E4 and zero non-generic relations, retains three mathematically generic S0 E5 functional relations whose instances are `IND-I`, establishes no pairwise empirical selection or NFC empirical support, and strengthens AS-to-NFC realization asymmetry. No recurrence, housekeeping execution, NFC↔LOOP reanalysis, claim-ledger propagation, source mutation, or FCP-25 is started by this integration.
 
 ## Finding-007 targeted source re-audit — canonical result
 
@@ -474,12 +478,12 @@ Five other material candidates are `NONE_ESTABLISHED`. String/M's more concrete 
 
 This canonical result mutates no source register, historical comparison, FCP-24 scientific artifact, null-control scientific artifact, claim ledger, comparison protocol, charter, or Method artifact. It starts no recurrence computation or downstream comparison.
 
-## Reduced-NFC ↔ strengthened-AS prospective reanalysis — branch-local qualified candidate
+## Reduced-NFC ↔ strengthened-AS prospective reanalysis — canonical result
 
-This section is branch-local candidate state only. Canonical `main` remains at `4951cacc1d9018a5b2ec0a3d98c982356902836c`, where the reanalysis is not yet integrated.
+This section records the canonically integrated prospective Reduced-NFC↔strengthened-AS reanalysis. The four scientific artifacts remain exactly as qualified; this routing reconciliation changes present-tense canonical state only and starts no downstream scientific or maintenance execution.
 
 ```text
-NFC_AS_REANALYSIS = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
+NFC_AS_REANALYSIS = CANONICALLY_COMPLETE
 NFC_AS_REANALYSIS_METHOD = 0.2.0
 NFC_AS_NEW_EXTERNAL_SOURCES = 0
 NFC_AS_SOURCE_WINDOW_EXPANSION = 0
@@ -511,7 +515,7 @@ FCP21_CURRENT_INTERPRETATION_STATUS = PARTIALLY_SUPERSEDED
 
 NFC_LOOP_REANALYSIS = NOT_STARTED
 RECURRENCE_RECOMPUTATION = NOT_STARTED
-REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT = NOT_STARTED
+REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT = READY_NOT_STARTED
 CLAIM_LEDGER_CURRENT_SUPERSESSION = NOT_STARTED
 LOOP_TAXONOMY_REVIEW = NOT_STARTED
 BROADER_HOLOGRAPHIC_SOURCE_INTAKE = DEFERRED_NOT_SELECTED
@@ -519,8 +523,10 @@ NEW_EMPIRICAL_NO_GO_PHASE = NOT_STARTED
 FCP25_SELECTED = NO
 FCP25_STARTED = NO
 
-NEXT_RECOMMENDED_OPERATION = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
-POST_INTEGRATION_SEQUENCING_IF_ACCEPTED = HOUSEKEEPING_CHECKPOINT_BEFORE_NFC_LOOP_REANALYSIS
+POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+NEXT_RECOMMENDED_OPERATION = REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT
+NEXT_EXECUTION_STEP = SEPARATE_REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT_AUTHORIZATION
+NEXT_SCIENTIFIC_PHASE = NONE__HOUSEKEEPING_CHECKPOINT_BEFORE_NFC_LOOP_REANALYSIS_PENDING_SEPARATE_AUTHORIZATION
 ```
 
 Scientific interpretation:
@@ -549,4 +555,4 @@ SCALAR_FRAMEWORK_SCORE = FORBIDDEN
 
 The three current E5 records are `NAS-R03-ADMISSIBLE-TRAJECTORY`, `NAS-R05-OBSERVABLE-SELECTION`, and `NAS-R08-GLOBAL-COHERENCE`. Their pairwise common roles are mathematically generic and EMP0. The strengthened AS global `E3-M`, Lorentzian spectral `E3-M`, timelike model observable, positive model viability and `EXCL-M` consistency pressure remain real AS-side content and create stronger material asymmetry rather than support for Reduced NFC.
 
-This branch-local state authorizes no integration, housekeeping, NFC/LOOP execution, recurrence computation, claim-ledger propagation, source mutation, framework-ID change, new empirical/no-go work or FCP-25.
+This canonical result starts no housekeeping execution, NFC/LOOP reanalysis, recurrence computation, claim-ledger propagation, source mutation, framework-ID change, new empirical/no-go work or FCP-25. The next operation remains separately authorized housekeeping before the prospective NFC↔LOOP reanalysis.
