@@ -347,7 +347,7 @@ The post-adjudication routing record is `governance/POST_FCP24_GROK_POST_ADJUDIC
 - `COMPARISON_PROTOCOL.md` — common comparison protocol.
 - `FRAMEWORK_REGISTER.md` — live framework identities and bounded current framework status.
 - `SOURCE_REGISTER.md` — live source/provenance bindings.
-- `CLAIM_LEDGER.md` — detailed claim records; later current-supersession propagation requires separate authorization.
+- `CLAIM_LEDGER.md` — detailed durable claim records; current-state supersession propagation is canonically complete at 86 rows.
 - `governance/FCP_METHOD_0_2_0_ACTIVATION.md` — Method 0.2.0 activation event and historical activation-time routing context.
 - `governance/FCP23_PHASE_OPENING_AND_PREREGISTRATION_0_1_0.md` — frozen FCP-23 scope, search architecture, exclusion burden, and execution boundary.
 - `audits/FCP23_CANONICAL_CORPUS_FORCED_COMMITMENT_SCREEN_0_1_0.md` — frozen FCP-23 Stage-1 target docket.
