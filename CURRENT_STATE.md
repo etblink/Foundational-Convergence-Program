@@ -178,13 +178,14 @@ POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
-FW_STRING_M_NULL_CONTROL = READY_NOT_STARTED
+FW_STRING_M_NULL_CONTROL = CANONICALLY_COMPLETE
+NFC_STRING_M_COMPARISON = READY_NOT_STARTED
 POST_FCP23_REMAINING_ORDER_AUTOMATICALLY_INHERITED = NO
 ```
 
 `RECURRENCE_IMPACT_CANDIDATE = YES` means later recurrence analysis must account for the current FCP-22 relation and later current relations; it is not authorization to recompute recurrence now.
 
-The accepted post-FCP-23 sequencing dependency state records that recurrence is premature pending both prospective NFC↔strengthened-AS and NFC↔strengthened-LOOP reanalyses; claim-ledger propagation is not a prerequisite for either reanalysis or recurrence; and LOOP taxonomy review is not a prerequisite for the prospective NFC↔LOOP reanalysis. FCP-24 materially changes the framework inventory, so the unexecuted remainder of the old sequencing order is not automatically inherited as the post-FCP-24 order. The canonical Grok adjudication routed the narrow Finding-007 targeted source re-audit before the first `FW-STRING-M` null control. Finding-007 is now canonically complete, so that specific sequencing block is cleared while the null control itself remains not started and separately authorized.
+The accepted post-FCP-23 sequencing dependency state records that recurrence is premature pending both prospective NFC↔strengthened-AS and NFC↔strengthened-LOOP reanalyses; claim-ledger propagation is not a prerequisite for either reanalysis or recurrence; and LOOP taxonomy review is not a prerequisite for the prospective NFC↔LOOP reanalysis. FCP-24 materially changes the framework inventory, so the unexecuted remainder of the old sequencing order is not automatically inherited as the post-FCP-24 order. The canonical Grok adjudication routed the narrow Finding-007 targeted source re-audit before the first `FW-STRING-M` null control. Finding-007 and the remediated `FW-STRING-M` null control are now canonically complete. The null control adds a bounded source-qualified `E3-S` recovery relation and a nonempty String/M-specific residue without framework-level empirical selection; the NFC↔String/M comparison is scientifically ready but remains not started pending separate authorization.
 
 ## Next-task status
 
@@ -195,7 +196,7 @@ FCP24_SELECTED = YES
 FCP24_STATUS = CANONICALLY_COMPLETE
 FCP25_SELECTED = NO
 POST_FCP24_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED
-NEXT_RECOMMENDED_OPERATION = FW_STRING_M_NULL_CONTROL
+NEXT_RECOMMENDED_OPERATION = NFC_STRING_M_COMPARISON
 POST_FCP24_GROK_AUDIT = INDEPENDENT_ADJUDICATION_CANONICALLY_COMPLETE
 POST_FCP24_GROK_AUDIT_PACKET = EXPOSED_EXACTLY
 POST_FCP24_GROK_AUDIT_PROMPT = SENT_EXACTLY
@@ -207,11 +208,11 @@ POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = SEPARATE_FW_STRING_M_NULL_CONTROL_AUTHORIZATION
-NEXT_SCIENTIFIC_PHASE = NONE__FW_STRING_M_NULL_CONTROL_READY_PENDING_SEPARATE_AUTHORIZATION
+NEXT_EXECUTION_STEP = SEPARATE_NFC_STRING_M_COMPARISON_AUTHORIZATION
+NEXT_SCIENTIFIC_PHASE = NONE__NFC_STRING_M_COMPARISON_READY_PENDING_SEPARATE_AUTHORIZATION
 ```
 
-The Grok audit and independent adjudication are canonically complete. Findings 003/005 reconciliation is complete. The Finding-007 targeted source re-audit is now canonically complete after exact Green–Schwarz full-text remediation. Its partial source-selection defect does not materially change the FCP-24 scientific conclusions, and the first `FW-STRING-M` null control is scientifically unblocked but remains not started pending separate authorization.
+The Grok audit and independent adjudication are canonically complete. Findings 003/005 reconciliation is complete. The Finding-007 targeted source re-audit and the first `FW-STRING-M` null control are now canonically complete. The null-control result preserves the FCP-24 empirical ceiling, establishes one bounded `E3-S` low-energy Einstein-metric substructure recovery relation, and leaves a nonempty six-incidence String/M-specific residue. The NFC↔String/M comparison is scientifically ready but remains not started pending separate authorization.
 
 ## Finding-007 targeted source re-audit — canonical result
 
@@ -347,43 +348,44 @@ CURRENT_ROUTING_STATE
 
 Historical and pre-integration labels may remain inside exact qualified artifacts as provenance. This file is the intended mutable surface for present-tense program state.
 
-## FW-STRING-M null control — branch-local remediated qualified candidate (not integrated)
+## FW-STRING-M null control — canonical remediated result
 
-This section records the remediated state of the unintegrated `research/fw-string-m-null-control` candidate. It supersedes earlier `READY_NOT_STARTED` routing only on this candidate branch; canonical `main` remains unchanged until separately authorized integration.
+This section records the canonically integrated remediated `FW-STRING-M` null/control-baseline result. The scientific artifacts remain exactly as qualified; this routing reconciliation changes present-tense canonical state only and starts no downstream comparison.
 
 ```text
-FW_STRING_M_NULL_CONTROL = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
+FW_STRING_M_NULL_CONTROL = CANONICALLY_COMPLETE
 PROJECT_LEAD_METHOD_REMEDIATION = PASS
-FW_STRING_M_NULL_CONTROL_RESULT_CANDIDATE = NONEMPTY_NULL_SUBTRACTED_RESIDUE
-FW_STRING_M_PAIRWISE_STATUS_CANDIDATE = PAIRWISE_COMPARISON_COMPLETE
+FW_STRING_M_NULL_CONTROL_RESULT = NONEMPTY_NULL_SUBTRACTED_RESIDUE
+FW_STRING_M_PAIRWISE_STATUS = PAIRWISE_COMPARISON_COMPLETE
 
-FW_STRING_M_MATERIAL_CLAIM_RECORD_COUNT_CANDIDATE = 20
-FW_STRING_M_PAIRWISE_E1_RELATION_COUNT_CANDIDATE = 0
-FW_STRING_M_PAIRWISE_E2_RELATION_COUNT_CANDIDATE = 0
-FW_STRING_M_PAIRWISE_E3_RELATION_COUNT_CANDIDATE = 1
-FW_STRING_M_PAIRWISE_E4_RELATION_COUNT_CANDIDATE = 0
-FW_STRING_M_PAIRWISE_E5_RELATION_COUNT_CANDIDATE = 6
-FW_STRING_M_PAIRWISE_NONE_RELATION_COUNT_CANDIDATE = 13
-FW_STRING_M_PAIRWISE_UNRESOLVED_RELATION_COUNT_CANDIDATE = 0
+FW_STRING_M_MATERIAL_CLAIM_RECORD_COUNT = 20
+FW_STRING_M_PAIRWISE_E1_RELATION_COUNT = 0
+FW_STRING_M_PAIRWISE_E2_RELATION_COUNT = 0
+FW_STRING_M_PAIRWISE_E3_RELATION_COUNT = 1
+FW_STRING_M_PAIRWISE_E4_RELATION_COUNT = 0
+FW_STRING_M_PAIRWISE_E5_RELATION_COUNT = 6
+FW_STRING_M_PAIRWISE_NONE_RELATION_COUNT = 13
+FW_STRING_M_PAIRWISE_UNRESOLVED_RELATION_COUNT = 0
 
-FW_STRING_M_K_KEYS_WITH_E1_CANDIDATE = 0
-FW_STRING_M_K_KEYS_WITH_E2_CANDIDATE = 0
-FW_STRING_M_K_KEYS_WITH_E3_CANDIDATE = 2
-FW_STRING_M_K_KEYS_WITH_E4_CANDIDATE = 0
-FW_STRING_M_K_KEYS_WITH_E5_CANDIDATE = 6
+FW_STRING_M_K_KEYS_WITH_E1 = 0
+FW_STRING_M_K_KEYS_WITH_E2 = 0
+FW_STRING_M_K_KEYS_WITH_E3 = 2
+FW_STRING_M_K_KEYS_WITH_E4 = 0
+FW_STRING_M_K_KEYS_WITH_E5 = 6
 
-FW_STRING_M_E3_S_RELATION_CANDIDATE =
+FW_STRING_M_E3_S_RELATION =
 LOW_ENERGY_EINSTEIN_METRIC_SUBSTRUCTURE_RECOVERY__SMNC_K4K7_01
 
-FW_STRING_M_NULL_SUBTRACTED_RESIDUE_CANDIDATE = NONEMPTY
-FW_STRING_M_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE_CANDIDATE = 6
-FW_STRING_M_RESIDUE_HIGHEST_SCOPE_CANDIDATE = S3_FRAMEWORK_WIDE
-FW_STRING_M_RESIDUE_CORE_STATUS_CANDIDATE = CORE_OR_FRAMEWORK_LEVEL
-DIRECT_FW_STRING_M_EMPIRICAL_DISCRIMINATOR_AFTER_NULL_CANDIDATE = NO
-FRAMEWORK_LEVEL_EMPIRICAL_SELECTION_AFTER_NULL_CANDIDATE = NO
+FW_STRING_M_NULL_SUBTRACTED_RESIDUE = NONEMPTY
+FW_STRING_M_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 6
+FW_STRING_M_RESIDUE_HIGHEST_SCOPE = S3_FRAMEWORK_WIDE
+FW_STRING_M_RESIDUE_CORE_STATUS = CORE_OR_FRAMEWORK_LEVEL
+DIRECT_FW_STRING_M_EMPIRICAL_DISCRIMINATOR_AFTER_NULL = NO
+FRAMEWORK_LEVEL_EMPIRICAL_SELECTION_AFTER_NULL = NO
 
-NFC_STRING_M_COMPARISON_READINESS_CANDIDATE = READY
-RECURRENCE_IMPACT_CANDIDATE = INFORMATION_ADDED_NOT_RECOMPUTED
+NFC_STRING_M_COMPARISON_READINESS = READY
+NFC_STRING_M_COMPARISON = READY_NOT_STARTED
+RECURRENCE_IMPACT = INFORMATION_ADDED_NOT_RECOMPUTED
 
 NFC_STRING_M_COMPARISON_STARTED = NO
 NFC_AS_REANALYSIS_STARTED = NO
@@ -395,10 +397,11 @@ NEW_EMPIRICAL_NO_GO_PHASE_STARTED = NO
 FCP25_SELECTED = NO
 FCP25_STARTED = NO
 
-NEXT_RECOMMENDED_OPERATION_CANDIDATE = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
-NEXT_EXECUTION_STEP = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
+NEXT_RECOMMENDED_OPERATION = NFC_STRING_M_COMPARISON
+NEXT_EXECUTION_STEP = SEPARATE_NFC_STRING_M_COMPARISON_AUTHORIZATION
+NEXT_SCIENTIFIC_PHASE = NONE__NFC_STRING_M_COMPARISON_READY_PENDING_SEPARATE_AUTHORIZATION
 ```
 
-The remediated relation ledger is claim-level: one `E3-S` relation is established at low-energy Einstein-metric substructure scope, six strict E5 functional relations survive, and thirteen material claims have no qualifying pairwise relation. The same six core String/M-specific additional commitments survive null subtraction. The E3-S recovery carries positive viability but only inherited empirical success and does not create framework-level empirical selection.
+The remediated relation ledger is claim-level: one `E3-S` relation is established at low-energy Einstein-metric substructure scope, six strict E5 functional relations survive, and thirteen material claims have no qualifying pairwise relation. The same six core String/M-specific additional commitments survive null subtraction at a bounded family-level `S3_FRAMEWORK_WIDE` ceiling. The E3-S recovery carries positive viability but only inherited empirical success and does not create framework-level empirical selection.
 
-The candidate adds no external scientific source, admits no source, mutates no historical FCP-24 or FCP-1/FCP-2 scientific artifact, imports no rejected Finding-007 source, performs no NFC look-ahead, and starts no downstream comparison or recurrence work.
+This canonical result adds no external scientific source, admits no source, mutates no historical FCP-24 or FCP-1/FCP-2 scientific artifact, imports no rejected Finding-007 source, performs no NFC look-ahead, and starts no downstream comparison or recurrence work.
