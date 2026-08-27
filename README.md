@@ -10,11 +10,11 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 ## Current status
 
 - **Latest numbered phase:** FCP-24 — String-Theoretic / Holographic Source Intake, Taxonomy Gate, and K1–K10 Baseline.
-- **Latest canonical scientific operation:** prospective Reduced NFC ↔ strengthened LOOP reanalysis under Method 0.2.0 (`71949044f1b6f67e42c7c564931c9e1eeff37887`; tree `978099647100ab04439ad04638e6d5b66b950695`).
+- **Latest canonical scientific operation:** program-level recurrence recomputation under Method 0.2.0 (`46300a1fde35ccf1ebfa63807e5a203f13cd6498`; tree `5c9411ed70909e70d308afa53a44d070d35c16c3`).
 - **Latest canonical maintenance operation:** Repository Housekeeping + Current-State Supersession (`b57a8617bb5818f3f3ab540ce63e0d82cde743b0`; tree `13ba67fcebb23efbab5d6f55eb4ade953f6b548d`), produced from pre-housekeeping canonical routing baseline `09aaf0ba4f9c570310150532c7e7ac4e42d868f8`.
 - **Active prospective method:** FCP Method 0.2.0.
-- **Housekeeping status:** canonically complete; Claim Ledger propagation remains deferred.
-- **Next recommended program operation:** program-level recurrence recomputation under a separate authorization.
+- **Housekeeping status:** canonically complete.
+- **Next recommended program operation:** Claim Ledger current-supersession propagation under a separate authorization.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
@@ -22,7 +22,7 @@ FCP-24 tested the historical `FW-STRING = String-theoretic / holographic approac
 
 `FRAMEWORK_SPLIT_REQUIRED` in FCP-24 does not imply that two successor framework IDs had to be immediately admitted: the result source-binds one stable successor while scientifically separating a broader holographic remainder that is not yet source-bound as one framework.
 
-After FCP-24, the independent Grok adjudication preserved FCP-24 with qualification, and the targeted Finding-007 re-audit found a partial source-selection defect with no material FCP-24 scientific change. The first `FW-STRING-M` null control then established a nonempty null-subtracted residue; the NFC↔String/M comparison found three mathematically generic S0 E5 relations, zero E1–E4, and no pairwise empirical selection or NFC support. The prospective NFC↔strengthened-AS reanalysis then found three generic S0 E5 relations among 17 atomic candidates, with zero E1–E4 and strengthened AS realization asymmetry. After the bounded housekeeping checkpoint, the prospective NFC↔strengthened-LOOP reanalysis found seven generic S0 E5 relations among 29 atomic candidates, zero E1–E4, 22 `NONE_ESTABLISHED`, no non-generic relation, no empirical selection or NFC support, and strengthened LOOP dynamics/continuum/realization asymmetry. Historical FCP-17 remains immutable while its current interpretation is partially superseded by claim-level decomposition and the stronger LOOP-side record.
+After FCP-24, the independent Grok adjudication preserved FCP-24 with qualification, and the targeted Finding-007 re-audit found a partial source-selection defect with no material FCP-24 scientific change. The first `FW-STRING-M` null control then established a nonempty null-subtracted residue; the NFC↔String/M comparison found three mathematically generic S0 E5 relations, zero E1–E4, and no pairwise empirical selection or NFC support. The prospective NFC↔strengthened-AS reanalysis then found three generic S0 E5 relations among 17 atomic candidates, with zero E1–E4 and strengthened AS realization asymmetry. After the bounded housekeeping checkpoint, the prospective NFC↔strengthened-LOOP reanalysis found seven generic S0 E5 relations among 29 atomic candidates, zero E1–E4, 22 `NONE_ESTABLISHED`, no non-generic relation, no empirical selection or NFC support, and strengthened LOOP dynamics/continuum/realization asymmetry. The subsequent Method-0.2.0 program-level recurrence recomputation finds 13 recurrence candidate families: zero independent or qualified-independence non-generic E1–E4 foundational recurrence, one target-conditioned E1–E4 recovery recurrence, one lineage/reformulation E1–E4 recurrence, seven generic E5 functional recurrence families, one empirically inherited/shared-target recurrence family, and three recurrent parallel burdens. No framework-level EMP4 recurrence or repeated independent Reduced-NFC support is established. Historical FCP-18 remains immutable while its current interpretation is partially superseded.
 
 ## Program architecture
 
@@ -56,7 +56,8 @@ Method 0.2.0 reports these axes separately. It does not use a scalar framework-w
 - **NFC ↔ strengthened AS:** three generic S0 E5 relations and fourteen NONE records; zero E1–E4, zero non-generic relations, no pairwise empirical selection or NFC support, and strengthened material asymmetry.
 - **Repository housekeeping:** current-state supersession and branch/PR lifecycle audit is canonically complete; it performs no new science and leaves Claim Ledger propagation deferred.
 - **NFC ↔ strengthened LOOP:** seven generic S0 E5 relations and twenty-two NONE records across 29 atomic candidates; zero E1–E4, zero non-generic relations, no pairwise empirical selection or NFC support, and strengthened LOOP dynamics/continuum/realization asymmetry.
-- **Next program operation:** program-level recurrence recomputation, pending separate authorization.
+- **Program-level recurrence recomputation:** canonically complete; no independent non-generic multi-family foundational recurrence, framework-level EMP4 recurrence, or repeated independent Reduced-NFC support is identified at the current canonical source window.
+- **Next program operation:** Claim Ledger current-supersession propagation, pending separate authorization.
 
 Detailed scientific findings live in the versioned phase, comparison, audit, and handoff artifacts rather than in this landing page.
 
