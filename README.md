@@ -9,14 +9,19 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 
 ## Current status
 
-- **Latest canonical scientific phase:** FCP-24 — String-Theoretic / Holographic Source Intake, Taxonomy Gate, and K1–K10 Baseline.
+- **Latest numbered phase:** FCP-24 — String-Theoretic / Holographic Source Intake, Taxonomy Gate, and K1–K10 Baseline.
+- **Latest canonical scientific operation:** prospective Reduced NFC ↔ strengthened Asymptotic Safety reanalysis under Method 0.2.0 (`83fd56af3515d92c198289c945c8e7f15234d197`; tree `f9e1777347ccc15640eb0731b2879983350b015b`).
+- **Latest canonical routing tip:** `09aaf0ba4f9c570310150532c7e7ac4e42d868f8` (tree `ab4254076939787b019a5aa4f5d8889985ac8608`).
 - **Active prospective method:** FCP Method 0.2.0.
+- **Housekeeping candidate state:** qualified candidate complete, not integrated; Project Lead review and a separate publication/integration decision are next.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
-FCP-24 tested the historical `FW-STRING = String-theoretic / holographic approaches` umbrella against a separately frozen 24-source corpus. Its qualified taxonomy result is `FCP24_TAXONOMY_OUTCOME = C`: the historical umbrella is scientifically over-broad and is superseded by framework split. One stable source-bound successor, `FW-STRING-M` — String/M-theory framework family — is established as `SOURCE_BOUND_READY`. Broader holography is not imported into that framework and is `DEFERRED_PENDING_SEPARATE_SOURCE_INTAKE`; no `FW-HOLO` is created. AdS/CFT remains a declared-domain dual description. The source-bound String/M-theory family has nonempty perturbative, string-field, D-brane, duality, and candidate M-theory structure, but the frozen corpus establishes neither a universal complete nonperturbative definition nor a unique vacuum/realization selector. Its highest current empirical scope is `PARAMETER_CONSTRAINT_AT_MODEL_SCOPE`, with `FRAMEWORK_LEVEL_EMPIRICAL_SELECTION = NO`.
+FCP-24 tested the historical `FW-STRING = String-theoretic / holographic approaches` umbrella against a separately frozen 24-source corpus. Its qualified taxonomy result is `FCP24_TAXONOMY_OUTCOME = C`: the historical umbrella is scientifically over-broad and is superseded by framework split. One stable source-bound successor, `FW-STRING-M` — String/M-theory framework family — is established; broader holography remains deferred pending separate source intake and no `FW-HOLO` is created.
 
 `FRAMEWORK_SPLIT_REQUIRED` in FCP-24 does not imply that two successor framework IDs had to be immediately admitted: the result source-binds one stable successor while scientifically separating a broader holographic remainder that is not yet source-bound as one framework.
+
+After FCP-24, the independent Grok adjudication preserved FCP-24 with qualification, and the targeted Finding-007 re-audit found a partial source-selection defect with no material FCP-24 scientific change. The first `FW-STRING-M` null control then established a nonempty null-subtracted residue; the NFC↔String/M comparison found three mathematically generic S0 E5 relations, zero E1–E4, and no pairwise empirical selection or NFC support. A read-only sequencing decision selected the prospective NFC↔strengthened-AS reanalysis next. That reanalysis is now canonical: three generic S0 E5 relations survive among 17 atomic candidates, E1–E4 remain zero, 14 relations are `NONE_ESTABLISHED`, no empirical selection or NFC support is established, and the material AS realization asymmetry is strengthened. FCP-21 is partially superseded only in current realization/observable interpretation; its historical pairwise topology remains unchanged.
 
 ## Program architecture
 
@@ -42,6 +47,13 @@ Method 0.2.0 reports these axes separately. It does not use a scalar framework-w
 - **FCP-22:** prospective Reduced NFC ↔ strengthened AQFT reanalysis; historical FCP-6 FIS source-scope caveat materially resolved, yielding a generic E5 functional relation but no E1–E4 or empirical selection.
 - **FCP-23:** preregistered framework-level empirical/no-go feasibility audit; no framework-level discriminator identified at the declared source scope, while CST retains `EXCL-R` realization constraints and AS retains `EXCL-M` model constraints; zero follow-on targets selected.
 - **FCP-24:** frozen 24-source string/holography intake; historical umbrella split; `FW-STRING-M` source-bound as the stable String/M-theory successor; broader holography deferred pending separate intake; K1–K10 baseline completed; no framework-level empirical discriminator established.
+- **Post-FCP-24 Grok adjudication:** independent review completed; FCP-24 survives with qualification and the bounded Finding-007 source-re-audit route was selected.
+- **Finding-007 targeted source re-audit:** partial source-selection defect confirmed without material FCP-24 scientific change.
+- **`FW-STRING-M` null control:** nonempty null-subtracted residue established; one E3-S, six E5, and thirteen NONE claim-level relations, with no framework-level empirical selection.
+- **NFC ↔ `FW-STRING-M`:** three generic S0 E5 relations and five NONE records; zero E1–E4, zero non-generic relations, and no pairwise empirical selection or NFC support.
+- **Post-NFC/String-M sequencing:** prospective NFC↔strengthened-AS selected before housekeeping, followed prospectively by NFC↔strengthened-LOOP.
+- **NFC ↔ strengthened AS:** three generic S0 E5 relations and fourteen NONE records; zero E1–E4, zero non-generic relations, no pairwise empirical selection or NFC support, and strengthened material asymmetry.
+- **Repository housekeeping:** current-state supersession and branch/PR lifecycle audit is a qualified candidate, not integrated; it performs no new science.
 
 Detailed scientific findings live in the versioned phase, comparison, audit, and handoff artifacts rather than in this landing page.
 
