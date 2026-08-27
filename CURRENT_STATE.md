@@ -346,3 +346,59 @@ CURRENT_ROUTING_STATE
 ```
 
 Historical and pre-integration labels may remain inside exact qualified artifacts as provenance. This file is the intended mutable surface for present-tense program state.
+
+## FW-STRING-M null control — branch-local remediated qualified candidate (not integrated)
+
+This section records the remediated state of the unintegrated `research/fw-string-m-null-control` candidate. It supersedes earlier `READY_NOT_STARTED` routing only on this candidate branch; canonical `main` remains unchanged until separately authorized integration.
+
+```text
+FW_STRING_M_NULL_CONTROL = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
+PROJECT_LEAD_METHOD_REMEDIATION = PASS
+FW_STRING_M_NULL_CONTROL_RESULT_CANDIDATE = NONEMPTY_NULL_SUBTRACTED_RESIDUE
+FW_STRING_M_PAIRWISE_STATUS_CANDIDATE = PAIRWISE_COMPARISON_COMPLETE
+
+FW_STRING_M_MATERIAL_CLAIM_RECORD_COUNT_CANDIDATE = 20
+FW_STRING_M_PAIRWISE_E1_RELATION_COUNT_CANDIDATE = 0
+FW_STRING_M_PAIRWISE_E2_RELATION_COUNT_CANDIDATE = 0
+FW_STRING_M_PAIRWISE_E3_RELATION_COUNT_CANDIDATE = 1
+FW_STRING_M_PAIRWISE_E4_RELATION_COUNT_CANDIDATE = 0
+FW_STRING_M_PAIRWISE_E5_RELATION_COUNT_CANDIDATE = 6
+FW_STRING_M_PAIRWISE_NONE_RELATION_COUNT_CANDIDATE = 13
+FW_STRING_M_PAIRWISE_UNRESOLVED_RELATION_COUNT_CANDIDATE = 0
+
+FW_STRING_M_K_KEYS_WITH_E1_CANDIDATE = 0
+FW_STRING_M_K_KEYS_WITH_E2_CANDIDATE = 0
+FW_STRING_M_K_KEYS_WITH_E3_CANDIDATE = 2
+FW_STRING_M_K_KEYS_WITH_E4_CANDIDATE = 0
+FW_STRING_M_K_KEYS_WITH_E5_CANDIDATE = 6
+
+FW_STRING_M_E3_S_RELATION_CANDIDATE =
+LOW_ENERGY_EINSTEIN_METRIC_SUBSTRUCTURE_RECOVERY__SMNC_K4K7_01
+
+FW_STRING_M_NULL_SUBTRACTED_RESIDUE_CANDIDATE = NONEMPTY
+FW_STRING_M_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE_CANDIDATE = 6
+FW_STRING_M_RESIDUE_HIGHEST_SCOPE_CANDIDATE = S3_FRAMEWORK_WIDE
+FW_STRING_M_RESIDUE_CORE_STATUS_CANDIDATE = CORE_OR_FRAMEWORK_LEVEL
+DIRECT_FW_STRING_M_EMPIRICAL_DISCRIMINATOR_AFTER_NULL_CANDIDATE = NO
+FRAMEWORK_LEVEL_EMPIRICAL_SELECTION_AFTER_NULL_CANDIDATE = NO
+
+NFC_STRING_M_COMPARISON_READINESS_CANDIDATE = READY
+RECURRENCE_IMPACT_CANDIDATE = INFORMATION_ADDED_NOT_RECOMPUTED
+
+NFC_STRING_M_COMPARISON_STARTED = NO
+NFC_AS_REANALYSIS_STARTED = NO
+NFC_LOOP_REANALYSIS_STARTED = NO
+RECURRENCE_RECOMPUTATION_STARTED = NO
+CLAIM_LEDGER_PROPAGATION_STARTED = NO
+BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STARTED = NO
+NEW_EMPIRICAL_NO_GO_PHASE_STARTED = NO
+FCP25_SELECTED = NO
+FCP25_STARTED = NO
+
+NEXT_RECOMMENDED_OPERATION_CANDIDATE = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
+NEXT_EXECUTION_STEP = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
+```
+
+The remediated relation ledger is claim-level: one `E3-S` relation is established at low-energy Einstein-metric substructure scope, six strict E5 functional relations survive, and thirteen material claims have no qualifying pairwise relation. The same six core String/M-specific additional commitments survive null subtraction. The E3-S recovery carries positive viability but only inherited empirical success and does not create framework-level empirical selection.
+
+The candidate adds no external scientific source, admits no source, mutates no historical FCP-24 or FCP-1/FCP-2 scientific artifact, imports no rejected Finding-007 source, performs no NFC look-ahead, and starts no downstream comparison or recurrence work.
