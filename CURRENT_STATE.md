@@ -405,3 +405,68 @@ NEXT_SCIENTIFIC_PHASE = NONE__NFC_STRING_M_COMPARISON_READY_PENDING_SEPARATE_AUT
 The remediated relation ledger is claim-level: one `E3-S` relation is established at low-energy Einstein-metric substructure scope, six strict E5 functional relations survive, and thirteen material claims have no qualifying pairwise relation. The same six core String/M-specific additional commitments survive null subtraction at a bounded family-level `S3_FRAMEWORK_WIDE` ceiling. The E3-S recovery carries positive viability but only inherited empirical success and does not create framework-level empirical selection.
 
 This canonical result adds no external scientific source, admits no source, mutates no historical FCP-24 or FCP-1/FCP-2 scientific artifact, imports no rejected Finding-007 source, performs no NFC look-ahead, and starts no downstream comparison or recurrence work.
+
+## NFC ↔ FW-STRING-M comparison — branch-local qualified candidate
+
+This section is candidate state on `research/nfc-string-m-comparison` only. It does not canonicalize the result. Until an explicit later integration decision, the canonical state above remains `NFC_STRING_M_COMPARISON = READY_NOT_STARTED`.
+
+```text
+NFC_STRING_M_COMPARISON = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
+NFC_STRING_M_COMPARISON_RESULT_CANDIDATE =
+THREE_GENERIC_INDEPENDENT_S0_E5_FUNCTIONAL_RELATIONS;
+ZERO_E1_E2_E3_E4;
+ZERO_NON_GENERIC_RELATIONS;
+NO_PAIRWISE_EMPIRICAL_SELECTION;
+NO_NFC_EMPIRICAL_SUPPORT;
+MATERIAL_ASYMMETRY_NONEMPTY
+
+NFC_STRING_M_METHOD = 0.2.0
+NFC_STRING_M_NEW_EXTERNAL_SOURCES = 0
+NFC_STRING_M_SOURCE_WINDOW_EXPANSION = 0
+NFC_STRING_M_K1_K10_COVERAGE = 10/10
+NFC_STRING_M_MATERIAL_RELATION_CANDIDATE_COUNT = 8
+
+NFC_STRING_M_PAIRWISE_E1_RELATION_COUNT = 0
+NFC_STRING_M_PAIRWISE_E2_RELATION_COUNT = 0
+NFC_STRING_M_PAIRWISE_E3_RELATION_COUNT = 0
+NFC_STRING_M_PAIRWISE_E4_RELATION_COUNT = 0
+NFC_STRING_M_PAIRWISE_E5_RELATION_COUNT = 3
+NFC_STRING_M_NONE_ESTABLISHED_RELATION_COUNT = 5
+NFC_STRING_M_UNRESOLVED_RELATION_COUNT = 0
+
+NFC_STRING_M_NON_GENERIC_RELATION_COUNT = 0
+NFC_STRING_M_INDEPENDENT_RELATION_COUNT = 3
+NFC_STRING_M_QUALIFIED_INDEPENDENCE_RELATION_COUNT = 0
+NFC_STRING_M_LINEAGE_DEFEATED_COUNT = 0
+NFC_STRING_M_TARGET_CONDITIONED_COUNT = 0
+NFC_STRING_M_GENERIC_ONLY_COUNT = 3
+
+NFC_STRING_M_SURVIVOR_PASS_NON_GENERIC_COUNT = 0
+NFC_STRING_M_SURVIVOR_FUNCTIONAL_OR_GENERIC_ONLY_COUNT = 1
+NFC_STRING_M_SURVIVOR_DEFEATED_COUNT = 2
+NFC_STRING_M_SURVIVOR_NO_COUNTERPART_COUNT = 3
+
+NFC_STRING_M_PAIRWISE_E4_STATUS = NONE_ESTABLISHED
+NFC_STRING_M_PAIRWISE_EMPIRICAL_SELECTION = NO
+NFC_EMPIRICAL_SUPPORT_FROM_STRING_M_COMPARISON = NO
+NFC_STRING_M_MATERIAL_ASYMMETRY = NONEMPTY
+
+RECURRENCE_IMPACT = INFORMATION_ADDED_NOT_RECOMPUTED
+RECURRENCE_RECOMPUTATION_STARTED = NO
+NFC_AS_REANALYSIS_STARTED = NO
+NFC_LOOP_REANALYSIS_STARTED = NO
+CLAIM_LEDGER_PROPAGATION_STARTED = NO
+BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STARTED = NO
+NEW_EMPIRICAL_NO_GO_PHASE_STARTED = NO
+FCP25_SELECTED = NO
+FCP25_STARTED = NO
+
+NEXT_RECOMMENDED_OPERATION_CANDIDATE = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
+NEXT_EXECUTION_STEP = PROJECT_LEAD_REVIEW_AND_INTEGRATION_DECISION
+```
+
+The three positive candidate records are `NSM-R02-DESCRIPTIVE-COORDINATION`, `NSM-R03-ADMISSIBLE-TRANSFORMATION`, and `NSM-R08-GLOBAL-COHERENCE`. They are independent on the Method independence axis because neither frozen object imports or targets the other, but their pairwise common content is mathematically generic. Independence therefore creates neither non-generic foundational support nor empirical credit.
+
+Five other material candidates are `NONE_ESTABLISHED`. String/M's more concrete carrier, quantum, formulation-dynamics, dimensional/duality, realization, low-energy-recovery, and EMP3 model-constraint content remains material asymmetry rather than support for Reduced NFC.
+
+This candidate mutates no source register, historical comparison, FCP-24 scientific artifact, null-control scientific artifact, claim ledger, comparison protocol, charter, or Method artifact. It starts no recurrence computation or downstream comparison.
