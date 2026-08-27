@@ -9,18 +9,20 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 
 ## Current status
 
-- **Latest numbered phase:** FCP-24 — String-Theoretic / Holographic Source Intake, Taxonomy Gate, and K1–K10 Baseline.
-- **Latest canonical scientific operation:** program-level recurrence recomputation under Method 0.2.0 (`46300a1fde35ccf1ebfa63807e5a203f13cd6498`; tree `5c9411ed70909e70d308afa53a44d070d35c16c3`).
+- **Latest numbered phase:** FCP-25 — Tensor-Network / Information-Theoretic Framework; Stage-1 source intake is canonically complete and Stage 2 is not started.
+- **Latest canonical scientific operation:** FCP-25 Stage-1 Tensor-Network / Information-Theoretic source intake (`8dbf89da25076b3036ca6592f6dfbd7e6d8b5152`; tree `8e2968ee23d25b60728bf342c20d3b7a7214be06`).
 - **Latest canonical maintenance operation:** Claim Ledger current-supersession propagation (`0bd8bffa236ea1352925f6ce5e60141af7ccadb6`; tree `312e7013eb884e984abc42deed26a675958af0df`), reconciling the durable ledger to the accepted current scientific state without new science.
 - **Active prospective method:** FCP Method 0.2.0.
 - **Housekeeping status:** canonically complete.
-- **Next recommended program operation:** read-only post-recurrence scientific sequencing adjudication under a separate authorization.
+- **Next recommended program operation:** FCP-25 Stage 2 tensor/information taxonomy gate and K1–K10 baseline under separate authorization.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
 FCP-24 tested the historical `FW-STRING = String-theoretic / holographic approaches` umbrella against a separately frozen 24-source corpus. Its qualified taxonomy result is `FCP24_TAXONOMY_OUTCOME = C`: the historical umbrella is scientifically over-broad and is superseded by framework split. One stable source-bound successor, `FW-STRING-M` — String/M-theory framework family — is established; broader holography remains deferred pending separate source intake and no `FW-HOLO` is created.
 
 `FRAMEWORK_SPLIT_REQUIRED` in FCP-24 does not imply that two successor framework IDs had to be immediately admitted: the result source-binds one stable successor while scientifically separating a broader holographic remainder that is not yet source-bound as one framework.
+
+FCP-25 Stage 1 reviewed 62 source candidates across all nine preregistered search lanes and froze a 29-source corpus: 27 new Source Register rows plus two reused pre-existing holographic boundary sources. Twenty-two candidates were rejected, eleven were deferred, and no source-coverage gap remains for Stage 2. The historical `FW-TENSOR` umbrella remains `ADMITTED_NOT_AUDITED`; taxonomy, successor-framework count, K1–K10, cross-framework comparison, and recurrence are not adjudicated by Stage 1.
 
 After FCP-24, the independent Grok adjudication preserved FCP-24 with qualification, and the targeted Finding-007 re-audit found a partial source-selection defect with no material FCP-24 scientific change. The first `FW-STRING-M` null control then established a nonempty null-subtracted residue; the NFC↔String/M comparison found three mathematically generic S0 E5 relations, zero E1–E4, and no pairwise empirical selection or NFC support. The prospective NFC↔strengthened-AS reanalysis then found three generic S0 E5 relations among 17 atomic candidates, with zero E1–E4 and strengthened AS realization asymmetry. After the bounded housekeeping checkpoint, the prospective NFC↔strengthened-LOOP reanalysis found seven generic S0 E5 relations among 29 atomic candidates, zero E1–E4, 22 `NONE_ESTABLISHED`, no non-generic relation, no empirical selection or NFC support, and strengthened LOOP dynamics/continuum/realization asymmetry. The subsequent Method-0.2.0 program-level recurrence recomputation finds 13 recurrence candidate families: zero independent or qualified-independence non-generic E1–E4 foundational recurrence, one target-conditioned E1–E4 recovery recurrence, one lineage/reformulation E1–E4 recurrence, seven generic E5 functional recurrence families, one empirically inherited/shared-target recurrence family, and three recurrent parallel burdens. No framework-level EMP4 recurrence or repeated independent Reduced-NFC support is established. Historical FCP-18 remains immutable while its current interpretation is partially superseded.
 
@@ -58,7 +60,8 @@ Method 0.2.0 reports these axes separately. It does not use a scalar framework-w
 - **NFC ↔ strengthened LOOP:** seven generic S0 E5 relations and twenty-two NONE records across 29 atomic candidates; zero E1–E4, zero non-generic relations, no pairwise empirical selection or NFC support, and strengthened LOOP dynamics/continuum/realization asymmetry.
 - **Program-level recurrence recomputation:** canonically complete; no independent non-generic multi-family foundational recurrence, framework-level EMP4 recurrence, or repeated independent Reduced-NFC support is identified at the current canonical source window.
 - **Claim Ledger current-supersession propagation:** canonically complete; 62 historical durable rows are preserved, 24 current rows are appended for 86 total, no historical row is marked wholly superseded, seven partial-current supersession links are explicit, and the complete post-FCP-21 macro-operation inventory is 20 (10 with durable-row additions, 10 with no ledger change).
-- **Next program operation:** read-only post-recurrence scientific sequencing adjudication, pending separate authorization.
+- **FCP-25 Stage 1:** tensor-network / information-theoretic source intake canonically complete; 62 candidates reviewed, 29-source corpus frozen, 27 new Source Register rows appended, two pre-existing boundary sources reused, 22 rejected and 11 deferred; all nine search lanes covered with no source-coverage gap. `FW-TENSOR` taxonomy and K1–K10 remain unadjudicated.
+- **Next program operation:** FCP-25 Stage 2 tensor/information taxonomy gate and K1–K10 baseline, pending separate authorization.
 
 Detailed scientific findings live in the versioned phase, comparison, audit, and handoff artifacts rather than in this landing page.
 
