@@ -29,7 +29,7 @@ This register identifies frameworks eligible for FCP comparison and tracks resea
 | `FW-CAUSAL` | Causal-set / order-theoretic approaches | historical causal/order umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-9/FCP-10 found the literal umbrella scientifically over-broad; causal set theory proper is now `FW-CST`; unspecified adjacent causal/order approaches remain deferred pending separate source intake |
 | `FW-CST` | Causal Set Theory | source-bound discrete causal/order framework | `PAIRWISE_COMPARISON_COMPLETE` | FCP-23 is the latest bounded CST status: generic-order non-manifoldlikeness is source-qualified as a real realization constraint with strongest exclusion scope `EXCL-R`; action-weighted suppression and restricted continuumlike phases provide explicit core-preserving escapes, so no framework-level CST exclusion or framework-level no-go candidate is established. Historical FCP-12 remains the latest Reduced-NFC/CST comparison |
 | `FW-LOOP` | Loop / spin-network / spinfoam approaches | source-bound quantum-gravity comparator family | `PAIRWISE_COMPARISON_COMPLETE` | Prospective Reduced-NFC/strengthened-LOOP reanalysis is canonically complete. Fixed-building-block E3-S and refined/regularized, linearized, and cosmological E3-M recovery remain positive target-conditioned LOOP-internal evidence while E3-F, E3-P, framework-level calibrated observables, and EMP4 remain unestablished. The internal E3 records create no pairwise E3, the canonical/covariant internal bridge creates no pairwise E2, seven generic S0 E5 roles survive, and stronger LOOP realization content yields `NONEMPTY__STRENGTHENED` material asymmetry. LQC remains excluded and historical FCP-17 remains immutable with current interpretation `PARTIALLY_SUPERSEDED` |
-| `FW-TENSOR` | Tensor-network / information-theoretic approaches | comparator family | `ADMITTED_NOT_AUDITED` | NONE |
+| `FW-TENSOR` | Tensor-network / information-theoretic approaches | historical intake umbrella / provenance only | `REMOVED_WITH_REASON` | FCP-25 Stage 2 finds no stable source-bound foundational competitor at the frozen 29-source scope: the core network literature is adequately classified as state representation, computational/variational or RG architecture; holographic tensor-network and QEC results are model-, dual-description- or target-conditioned principally within supplied AdS/CFT/RT/code structure; and the information-first sources are heterogeneous proposals without a common carrier, equivalence rule, internal dynamics, realization bridge or empirical discriminator. No successor framework ID is created; all scientifically meaningful representational, model, reconstruction, adjacent and deferred material is retained at its source-qualified level |
 | `FW-AS` | Asymptotic safety | source-bound continuum/RG fixed-point quantum-gravity comparator | `PAIRWISE_COMPARISON_COMPLETE` | Prospective Reduced-NFC/strengthened-AS reanalysis is canonically complete. FCP-23's AS model/truncation/parameter constraints still top out at `EXCL-M`, core-preserving escapes block framework exclusion, selected global and Lorentzian `E3-M` recovery remains qualified, and the timelike model observable supplies positive viability without Method-0.2.0 E4 or EMP4. The stronger AS realization record creates no pairwise NFC↔AS E2–E4 or non-generic relation, preserves three generic S0 E5 roles, and strengthens material realization asymmetry; FCP-21's current interpretation is therefore `PARTIALLY_SUPERSEDED` while its historical pairwise topology remains intact |
 | `FW-STRING` | String-theoretic / holographic approaches | historical string/holography umbrella | `SUPERSEDED_BY_FRAMEWORK_SPLIT` | FCP-24 found the literal umbrella scientifically over-broad; `FW-STRING-M` is the sole stable source-bound successor, AdS/CFT is retained as a declared-domain dual description, and the broader holographic remainder is deferred pending separate source intake |
 | `FW-STRING-M` | String/M-theory framework family | source-bound quantum-gravity comparator family | `PAIRWISE_COMPARISON_COMPLETE` | NFC/String-M comparison is canonically complete: the exact six-incidence residue produces three mathematically generic S0 E5 functional relations and five NONE records across eight claim-level candidates, with zero E1–E4 and zero non-generic relations. The three positive instances are `IND-I` independent at frozen-object scope, but their pairwise common content remains generic; no convergence credit, pairwise empirical selection, or NFC empirical support follows. String/M's carrier, quantum, dynamical, dimensional/duality, realization, low-energy-recovery, and limited empirical content remain material asymmetries; the remediated null control and its nonempty bounded S3 residue remain canonically complete |
@@ -527,6 +527,28 @@ Taxonomy firewalls:
 The broader holographic remainder is `DEFERRED_PENDING_SEPARATE_SOURCE_INTAKE`. This is an accounting boundary, not admission of one unnamed holographic framework.
 
 FCP-24 adds no cross-framework E1–E5 classifications, no convergence credit, no framework winner, no scalar score, and no NFC comparison.
+
+## FCP-25 tensor-network / information-theoretic taxonomy gate
+
+FCP-25 Stage 2 resolves the historical `FW-TENSOR` intake umbrella through the exact frozen 29-source Stage-1 corpus and selects:
+
+`FCP25_TAXONOMY_OUTCOME = D — NO_STABLE_FOUNDATIONAL_COMPETITOR_AT_CURRENT_SOURCE_SCOPE`.
+
+The historical umbrella is retained for provenance and set to `REMOVED_WITH_REASON`. No successor framework ID is created.
+
+The result preserves three scientifically important but nonunified bodies of material:
+
+- MPS, PEPS, DMRG, entanglement renormalization/MERA, tensor RG, TDVP and cMERA as state-representation, computational, variational or RG architectures for supplied quantum, statistical or QFT objects;
+- perfect/random holographic tensor networks, QEC codes and bulk-reconstruction results as model, code, dual-description or target-conditioned structures principally using supplied AdS/CFT, CFT, RT-like, semiclassical-bulk or code inputs; and
+- heterogeneous information-first and entanglement/geometry proposals as adjacent principle sets or reconstruction devices whose carriers, background assumptions, targets, dynamics and realization burdens differ materially.
+
+The frozen corpus does not source-bind one common primitive carrier, model class, physical equivalence relation, internal dynamics, network-to-spacetime bridge, physical code selection, calibration interface or direct framework-level empirical discriminator. It likewise does not source-bind any one cluster as an independent stable foundational successor. A pooled K1–K10 baseline is therefore not instantiated.
+
+The two simulator sources establish prepared tensor/code systems and model-internal observables, not empirical evidence that physical spacetime is constituted by a tensor network. Area-law compatibility, broad representability, graph geometry, RG layering, QEC structure, AdS/CFT target recovery and numerical success receive no automatic foundational promotion.
+
+The broader holographic remainder retains the FCP-24 boundary and is not silently resolved or absorbed. Adjacent information-first and distinct-primitives proposals remain scientifically visible without placeholder framework IDs.
+
+FCP-25 Stage 2 performs no cross-framework comparison, NFC comparison, E1–E5 classification, convergence assignment, recurrence recomputation, framework-winner selection or scalar scoring.
 
 ## Admission and credit rules
 
