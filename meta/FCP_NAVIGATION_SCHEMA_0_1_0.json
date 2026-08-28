@@ -1,0 +1,363 @@
+{
+  "$defs": {
+    "ARTIFACT_RECORD": {
+      "additionalProperties": true,
+      "description": "Exact Git fact for one tracked blob in the indexed scientific baseline.",
+      "properties": {
+        "artifact_role": {
+          "type": "string"
+        },
+        "blob": {
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        },
+        "byte_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "git_mode": {
+          "type": "string"
+        },
+        "object_type": {
+          "const": "blob"
+        },
+        "operation_id": {
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "0.1.0"
+        },
+        "semantic_id": {
+          "type": "string"
+        },
+        "top_level_class": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "path",
+        "blob",
+        "byte_count",
+        "git_mode",
+        "object_type",
+        "top_level_class"
+      ],
+      "type": "object"
+    },
+    "CANONICAL_INDEX": {
+      "additionalProperties": true,
+      "description": "Compact derived navigation root bound to one exact scientific baseline.",
+      "properties": {
+        "authority_model": {
+          "additionalProperties": false,
+          "properties": {
+            "canonical_markdown": {
+              "const": "SCIENTIFIC_AND_GOVERNANCE_AUTHORITY"
+            },
+            "conflict_rule": {
+              "const": "UNDERLYING_CANONICAL_ARTIFACT_WINS"
+            },
+            "git": {
+              "const": "PROVENANCE_AUTHORITY"
+            },
+            "structured_navigation": {
+              "const": "DERIVED_NAVIGATION_ONLY"
+            }
+          },
+          "required": [
+            "git",
+            "canonical_markdown",
+            "structured_navigation",
+            "conflict_rule"
+          ],
+          "type": "object"
+        },
+        "core_authorities": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "authority_id": {
+                "type": "string"
+              },
+              "blob": {
+                "pattern": "^[0-9a-f]{40}$",
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "authority_id",
+              "path",
+              "blob"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "current_method": {
+          "type": "object"
+        },
+        "indexed_scientific_baseline": {
+          "additionalProperties": false,
+          "properties": {
+            "commit": {
+              "pattern": "^[0-9a-f]{40}$",
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            },
+            "repository": {
+              "type": "string"
+            },
+            "tree": {
+              "pattern": "^[0-9a-f]{40}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "commit",
+            "tree",
+            "message"
+          ],
+          "type": "object"
+        },
+        "navigation_coverage": {
+          "type": "object"
+        },
+        "open_dockets": {
+          "type": "array"
+        },
+        "program_state": {
+          "type": "object"
+        },
+        "read_profiles": {
+          "type": "object"
+        },
+        "registries": {
+          "type": "object"
+        },
+        "schema_version": {
+          "const": "0.1.0"
+        }
+      },
+      "required": [
+        "schema_version",
+        "authority_model",
+        "indexed_scientific_baseline",
+        "navigation_coverage",
+        "core_authorities",
+        "current_method",
+        "program_state",
+        "open_dockets",
+        "read_profiles",
+        "registries"
+      ],
+      "type": "object"
+    },
+    "HANDOFF_CAPSULE": {
+      "additionalProperties": true,
+      "description": "Prospective machine-readable capsule embedded between exact handoff sentinels.",
+      "properties": {
+        "capsule_schema_version": {
+          "const": "0.1.0"
+        },
+        "forbidden_next_actions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "indexed_scientific_baseline_commit": {
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        },
+        "method_version": {
+          "type": "string"
+        },
+        "must_read": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "next_recommended_operation": {
+          "type": "string"
+        },
+        "open_dockets": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "operation_id": {
+          "type": "string"
+        },
+        "outputs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "capsule_schema_version",
+        "operation_id",
+        "status",
+        "indexed_scientific_baseline_commit",
+        "method_version",
+        "must_read",
+        "outputs",
+        "open_dockets",
+        "next_recommended_operation",
+        "forbidden_next_actions"
+      ],
+      "type": "object"
+    },
+    "OPERATION_RECORD": {
+      "additionalProperties": true,
+      "description": "Curated semantic operation record supported by canonical repository evidence.",
+      "properties": {
+        "base_commit": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{40}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "canonical_evidence_paths": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "downstream_consumers": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "handoff_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "input_paths": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "method_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "next_operations": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "operation_class": {
+          "type": "string"
+        },
+        "operation_id": {
+          "type": "string"
+        },
+        "output_paths": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "result_commit": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{40}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "routing_commit": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{40}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "schema_version": {
+          "const": "0.1.0"
+        },
+        "status": {
+          "type": "string"
+        },
+        "superseded_by": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "supersedes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema_version",
+        "operation_id",
+        "display_name",
+        "operation_class",
+        "status",
+        "method_version",
+        "base_commit",
+        "result_commit",
+        "routing_commit",
+        "input_paths",
+        "output_paths",
+        "canonical_evidence_paths",
+        "handoff_path",
+        "supersedes",
+        "superseded_by",
+        "downstream_consumers",
+        "next_operations"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://foundational-convergence-program.invalid/schema/navigation/0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Documentation schema for the derived FCP navigation layer. Runtime validation is implemented with the Python standard library.",
+  "schema_version": "0.1.0",
+  "title": "FCP Navigation Layer Record Families"
+}

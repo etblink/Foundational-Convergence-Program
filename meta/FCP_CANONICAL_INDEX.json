@@ -1,0 +1,199 @@
+{
+  "authority_model": {
+    "canonical_markdown": "SCIENTIFIC_AND_GOVERNANCE_AUTHORITY",
+    "conflict_rule": "UNDERLYING_CANONICAL_ARTIFACT_WINS",
+    "git": "PROVENANCE_AUTHORITY",
+    "structured_navigation": "DERIVED_NAVIGATION_ONLY"
+  },
+  "core_authorities": [
+    {
+      "authority_id": "CLAIM_LEDGER",
+      "blob": "58898e5be12f1ebca06c5d2e0d30e4be1ae1b1fb",
+      "path": "CLAIM_LEDGER.md"
+    },
+    {
+      "authority_id": "COMPARISON_PROTOCOL",
+      "blob": "190ce97bde2d43d6b1c6c30f5d9ed032939b3308",
+      "path": "COMPARISON_PROTOCOL.md"
+    },
+    {
+      "authority_id": "CURRENT_METHOD_ARTIFACT",
+      "blob": "d6fd6c2f4813a00efdd97e03c03d71f50ce2a598",
+      "path": "governance/FCP_METHOD_0_2_0_ACTIVATION.md"
+    },
+    {
+      "authority_id": "CURRENT_STATE",
+      "blob": "79d2e3ecec4a98b462bb956f2af131be22033410",
+      "path": "CURRENT_STATE.md"
+    },
+    {
+      "authority_id": "EPISTEMIC_RULES",
+      "blob": "76c9a8f2b3c00896160a16a184213250bca703ce",
+      "path": "EPISTEMIC_RULES.md"
+    },
+    {
+      "authority_id": "FCP_CHARTER",
+      "blob": "579819121d1733e1746868941a3a282de2cf1ac9",
+      "path": "FCP_CHARTER.md"
+    },
+    {
+      "authority_id": "FRAMEWORK_REGISTER",
+      "blob": "29d0a4ad7ad8c35f9155ff0c9ecc58c56aa1d72e",
+      "path": "FRAMEWORK_REGISTER.md"
+    },
+    {
+      "authority_id": "SOURCE_REGISTER",
+      "blob": "5b089494b1ffc152c284e22538368cd53777182c",
+      "path": "SOURCE_REGISTER.md"
+    }
+  ],
+  "current_method": {
+    "artifact": {
+      "blob": "d6fd6c2f4813a00efdd97e03c03d71f50ce2a598",
+      "path": "governance/FCP_METHOD_0_2_0_ACTIVATION.md"
+    },
+    "evidence_paths": [
+      "governance/FCP_METHOD_0_2_0_ACTIVATION.md",
+      "governance/FCP_METHOD_0_2_0_COMPARISON_ARCHITECTURE.md",
+      "governance/FCP_METHOD_0_2_0_RELATION_EVIDENCE_INDEPENDENCE_TAXONOMY.md",
+      "comparison_keys/FCP_EQUIVALENCE_AND_EVIDENCE_RULES_0_2_0.md",
+      "governance/FCP_METHOD_0_2_0_COMPARATOR_ROLE_SPECIFICATION.md",
+      "governance/FCP_METHOD_0_2_0_TRUTH_SEEKING_REVISION_PROTOCOL.md"
+    ],
+    "status": "ACTIVE_PROSPECTIVELY",
+    "version": "0.2.0"
+  },
+  "indexed_scientific_baseline": {
+    "commit": "b5bc05ea6b82346e856d5dca4f91b98bbbc802ba",
+    "message": "Canonicalize post-FCP-25 reconciliation routing",
+    "repository": "etblink/Foundational-Convergence-Program",
+    "tree": "23d5f4a0f988cefebbf6c5b8a4dff98a8a7eaab8"
+  },
+  "navigation_coverage": {
+    "absence_from_operation_registry_means_scientific_absence": false,
+    "artifact_inventory_scope": "ENTIRE_TRACKED_INDEXED_BASELINE_TREE_EXCLUDING_SELF_REFERENTIAL_NAVIGATION_FILES",
+    "artifact_record_count": 224,
+    "historical_operation_completeness_claimed": false,
+    "operation_record_count": 38,
+    "operation_registry_scope": "CURRENT_DEPENDENCY_CLOSURE",
+    "self_excluded_paths": [
+      "meta/FCP_ARTIFACT_REGISTRY.jsonl",
+      "meta/FCP_CANONICAL_INDEX.json",
+      "meta/FCP_OPERATION_REGISTRY.jsonl"
+    ]
+  },
+  "open_dockets": [
+    {
+      "docket_id": "CROSS_PAIR_RESIDUAL_E5_CONSISTENCY_CHECK",
+      "evidence_paths": [
+        "audits/POST_FCP25_GROK_INDEPENDENT_FINDING_ADJUDICATION_0_1_0.md",
+        "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md"
+      ],
+      "status": "DOCKETED_NOT_EXECUTED"
+    },
+    {
+      "docket_id": "LOOP_CLAIM_TRANSCRIPTION_CHECK",
+      "evidence_paths": [
+        "audits/POST_FCP25_GROK_INDEPENDENT_FINDING_ADJUDICATION_0_1_0.md",
+        "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md"
+      ],
+      "status": "DOCKETED_NOT_EXECUTED"
+    },
+    {
+      "docket_id": "NFC_AQFT_SLOT_METHOD_NORMALIZATION",
+      "evidence_paths": [
+        "audits/POST_FCP25_GROK_INDEPENDENT_FINDING_ADJUDICATION_0_1_0.md",
+        "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md"
+      ],
+      "status": "DOCKETED_NOT_EXECUTED"
+    },
+    {
+      "docket_id": "REDUCED_NFC_PAIRWISE_INFORMATION_CEILING_LABELING",
+      "evidence_paths": [
+        "audits/POST_FCP25_GROK_INDEPENDENT_FINDING_ADJUDICATION_0_1_0.md",
+        "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md"
+      ],
+      "status": "DOCKETED_NOT_EXECUTED"
+    }
+  ],
+  "program_state": {
+    "broader_holographic_source_intake": "NOT_STARTED",
+    "current_handoff_path": null,
+    "current_operation": "POST_FCP25_GROK_RECONCILIATION",
+    "current_routing_path": "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md",
+    "fcp26_selected": false,
+    "fcp26_started": false,
+    "framework_winner": "NONE",
+    "latest_completed_external_audit_chain": "POST_FCP25_GROK_AUDIT",
+    "latest_completed_maintenance_operation": "POST_FCP25_GROK_RECONCILIATION",
+    "latest_completed_science_operation": "FCP25_STAGE2_TENSOR_TAXONOMY_GATE_AND_K1_K10_BASELINE",
+    "latest_numbered_phase": "FCP-25",
+    "next_recommended_operation": "BROADER_HOLOGRAPHIC_SOURCE_INTAKE",
+    "post_fcp25_grok_audit": "CANONICALLY_COMPLETE",
+    "post_fcp25_grok_independent_adjudication": "CANONICALLY_COMPLETE",
+    "post_fcp25_grok_reconciliation": "CANONICALLY_COMPLETE",
+    "predecessor_operation": "POST_FCP25_GROK_INDEPENDENT_FINDING_ADJUDICATION_RECORD",
+    "scalar_framework_score": "FORBIDDEN"
+  },
+  "read_profiles": {
+    "EXTERNAL_AUDIT": [
+      "CURRENT_STATE.md",
+      "governance/POST_FCP25_GROK_AUDIT_PREREGISTRATION_0_1_0.md",
+      "audits/external/POST_FCP25_GROK_AUDIT_PACKET_MANIFEST_0_1_0.md",
+      "audits/external/POST_FCP25_GROK_ADVERSARIAL_AUDIT_PROMPT_0_1_0.md",
+      "audits/external/POST_FCP25_GROK_RESPONSE_CUSTODY_0_1_0.md",
+      "audits/external/GROK_POSTFCP25_ADVERSARIAL_AUDIT_RESPONSE_0_1_0.md",
+      "audits/POST_FCP25_GROK_INDEPENDENT_FINDING_EVIDENCE_LEDGER_0_1_0.md",
+      "audits/POST_FCP25_GROK_INDEPENDENT_FINDING_ADJUDICATION_0_1_0.md",
+      "handoffs/POST_FCP25_GROK_INDEPENDENT_ADJUDICATION_HANDOFF_0_1_0.md",
+      "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md"
+    ],
+    "FRAMEWORK_TAXONOMY": [
+      "CURRENT_STATE.md",
+      "FRAMEWORK_REGISTER.md",
+      "SOURCE_REGISTER.md",
+      "frameworks/string/FCP24_STRING_TAXONOMY_GATE_0_1_0.md",
+      "audits/FCP25_TENSOR_TAXONOMY_ADJUDICATION_0_1_0.md",
+      "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md"
+    ],
+    "GENERAL_PROJECT_ORIENTATION": [
+      "CURRENT_STATE.md",
+      "README.md",
+      "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md",
+      "FRAMEWORK_REGISTER.md",
+      "meta/FCP_CANONICAL_INDEX.json",
+      "governance/FCP_METHOD_0_2_0_ACTIVATION.md",
+      "handoffs/POST_FCP25_GROK_INDEPENDENT_ADJUDICATION_HANDOFF_0_1_0.md"
+    ],
+    "PAIRWISE_COMPARISON": [
+      "CURRENT_STATE.md",
+      "COMPARISON_PROTOCOL.md",
+      "governance/FCP_METHOD_0_2_0_ACTIVATION.md",
+      "governance/FCP_METHOD_0_2_0_COMPARISON_ARCHITECTURE.md",
+      "governance/FCP_METHOD_0_2_0_RELATION_EVIDENCE_INDEPENDENCE_TAXONOMY.md",
+      "governance/FCP_METHOD_0_2_0_COMPARATOR_ROLE_SPECIFICATION.md",
+      "meta/CLAIM_LEDGER_CURRENT_SUPERSESSION_MAP_0_1_0.md"
+    ],
+    "RECURRENCE": [
+      "CURRENT_STATE.md",
+      "meta/PROGRAM_LEVEL_RECURRENCE_RECOMPUTATION_METHOD_0_2_0_0_1_0.md",
+      "audits/PROGRAM_LEVEL_RECURRENCE_RECOMPUTATION_ADJUDICATION_0_1_0.md",
+      "handoffs/PROGRAM_LEVEL_RECURRENCE_RECOMPUTATION_HANDOFF_0_1_0.md",
+      "meta/CLAIM_LEDGER_CURRENT_SUPERSESSION_MAP_0_1_0.md"
+    ],
+    "SOURCE_INTAKE": [
+      "CURRENT_STATE.md",
+      "FCP_CHARTER.md",
+      "EPISTEMIC_RULES.md",
+      "SOURCE_REGISTER.md",
+      "governance/FCP_METHOD_0_2_0_ACTIVATION.md",
+      "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md"
+    ]
+  },
+  "registries": {
+    "artifacts": "meta/FCP_ARTIFACT_REGISTRY.jsonl",
+    "operations": "meta/FCP_OPERATION_REGISTRY.jsonl",
+    "schema": "meta/FCP_NAVIGATION_SCHEMA_0_1_0.json"
+  },
+  "schema_version": "0.1.0"
+}
