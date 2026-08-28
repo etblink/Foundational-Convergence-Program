@@ -11,10 +11,11 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 
 - **Latest numbered phase:** FCP-25 — Tensor-Network / Information-Theoretic Framework; Stage 1 and Stage 2 are canonically complete.
 - **Latest canonical scientific operation:** FCP-25 Stage-2 Tensor-Network / Information-Theoretic taxonomy and K1–K10 adjudication (`8dad9132fc017090ca7f752f9c240aa2110c48cf`; tree `1ca1435dd6f0b9d1162e4cfe1c23f473b5d65e9a`).
-- **Latest canonical maintenance operation:** Claim Ledger current-supersession propagation (`0bd8bffa236ea1352925f6ce5e60141af7ccadb6`; tree `312e7013eb884e984abc42deed26a675958af0df`), reconciling the durable ledger to the accepted current scientific state without new science.
+- **Latest canonical maintenance operation:** post-FCP-25 Grok reconciliation (`2b2be93254d07f62fa8c6253a45f4aeb17cdcba2`; tree `fd99d9eea0a9699ebb9478bf20e9a6d87b5c6714`), preserving the accepted adjudication consequences without new science.
 - **Active prospective method:** FCP Method 0.2.0.
 - **Housekeeping status:** canonically complete.
-- **Next recommended program operation:** read-only post-FCP-25 scientific sequencing adjudication under separate authorization.
+- **Post-FCP-25 Grok status:** audit, independent adjudication, and reconciliation are canonically complete.
+- **Next recommended program operation:** broader holographic source intake, not started and requiring separate authorization; no `FW-HOLO` is created and FCP-26 is neither selected nor started.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
@@ -62,7 +63,7 @@ Method 0.2.0 reports these axes separately. It does not use a scalar framework-w
 - **Claim Ledger current-supersession propagation:** canonically complete; 62 historical durable rows are preserved, 24 current rows are appended for 86 total, no historical row is marked wholly superseded, seven partial-current supersession links are explicit, and the complete post-FCP-21 macro-operation inventory is 20 (10 with durable-row additions, 10 with no ledger change).
 - **FCP-25 Stage 1:** tensor-network / information-theoretic source intake canonically complete; 62 candidates reviewed, 29-source corpus frozen, 27 new Source Register rows appended, two pre-existing boundary sources reused, 22 rejected and 11 deferred; all nine search lanes covered with no source-coverage gap.
 - **FCP-25 Stage 2:** canonically complete; `FW-TENSOR` does not survive as a stable source-bound foundational competitor at the frozen source scope, no successor framework is admitted, K1–K10 is not instantiated, and the strongest empirical scope is simulator/analogue realization of supplied tensor/code models rather than framework-level discrimination.
-- **Next program operation:** read-only post-FCP-25 scientific sequencing adjudication, pending separate authorization.
+- **Next program operation:** broader holographic source intake, not started and pending separate authorization.
 
 Detailed scientific findings live in the versioned phase, comparison, audit, and handoff artifacts rather than in this landing page.
 
@@ -99,7 +100,7 @@ These are different time-indexed claims. FCP-22 does not rewrite FCP-6, and FCP-
 - [`COMPARISON_PROTOCOL.md`](COMPARISON_PROTOCOL.md) — common comparison protocol and Method 0.2.0 operating requirements.
 - [`FRAMEWORK_REGISTER.md`](FRAMEWORK_REGISTER.md) — live framework identities and latest bounded framework status.
 - [`SOURCE_REGISTER.md`](SOURCE_REGISTER.md) — source/provenance bindings.
-- [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) — detailed durable claim records; the Post-FCP-25 reconciliation candidate extends the durable temporal ceiling through FCP-25 at 89 rows and explicitly separates historical acceptance from latest present-tense interpretation.
+- [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) — detailed durable claim records; the canonical post-FCP-25 reconciliation extends the durable temporal ceiling through FCP-25 at 89 rows and explicitly separates historical acceptance from latest present-tense interpretation.
 - [`comparison_keys/`](comparison_keys/) — historical and current relation/evidence rules.
 - [`governance/`](governance/) — Method 0.2.0 and governance artifacts, including the frozen FCP-23 and FCP-24 preregistrations.
 - [`frameworks/`](frameworks/) — source-bound framework packets and strengthening records, including the FCP-24 String/M-theory source intake and K1–K10 baseline.

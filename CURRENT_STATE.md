@@ -9,9 +9,9 @@ LATEST_NUMBERED_PHASE = FCP-25
 LATEST_CANONICAL_SCIENTIFIC_OPERATION = FCP25_TENSOR_STAGE2_TAXONOMY_AND_K1K10_ADJUDICATION
 LATEST_CANONICAL_SCIENTIFIC_COMMIT = 8dad9132fc017090ca7f752f9c240aa2110c48cf
 LATEST_CANONICAL_SCIENTIFIC_TREE = 1ca1435dd6f0b9d1162e4cfe1c23f473b5d65e9a
-LATEST_CANONICAL_MAINTENANCE_OPERATION = CLAIM_LEDGER_CURRENT_SUPERSESSION_PROPAGATION
-LATEST_CANONICAL_MAINTENANCE_COMMIT = 0bd8bffa236ea1352925f6ce5e60141af7ccadb6
-LATEST_CANONICAL_MAINTENANCE_TREE = 312e7013eb884e984abc42deed26a675958af0df
+LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FCP25_GROK_RECONCILIATION
+LATEST_CANONICAL_MAINTENANCE_COMMIT = 2b2be93254d07f62fa8c6253a45f4aeb17cdcba2
+LATEST_CANONICAL_MAINTENANCE_TREE = fd99d9eea0a9699ebb9478bf20e9a6d87b5c6714
 PRE_HOUSEKEEPING_CANONICAL_ROUTING_COMMIT = 09aaf0ba4f9c570310150532c7e7ac4e42d868f8
 PRE_HOUSEKEEPING_CANONICAL_ROUTING_TREE = ab4254076939787b019a5aa4f5d8889985ac8608
 CANONICAL_COMMIT_AT_STATE_SPLIT = 115e88f578d3d9f761d870c3cb569bd72b61c559
@@ -19,7 +19,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.0_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` records FCP-25 because both its frozen source intake and Stage-2 taxonomy adjudication are canonically integrated. The latest-scientific fields identify the accepted Stage-2 scientific operation. The latest-maintenance fields continue to identify the accepted Claim Ledger maintenance result. The pre-housekeeping routing fields preserve the exact canonical routing baseline from which that maintenance candidate was produced; the current canonical Git head is resolved from `main` rather than embedded self-referentially in the file that determines its own commit hash. `CANONICAL_COMMIT_AT_STATE_SPLIT` and `CANONICAL_TREE_AT_STATE_SPLIT` remain provenance markers for the earlier live-state split.
+`LATEST_NUMBERED_PHASE` records FCP-25 because both its frozen source intake and Stage-2 taxonomy adjudication are canonically integrated. The latest-scientific fields identify the accepted Stage-2 scientific operation. The latest-maintenance fields identify the canonical post-FCP-25 Grok reconciliation result, which preserves the accepted Claim Ledger propagation and framework-separation/admission clarification without introducing new science. The pre-housekeeping routing fields preserve the exact canonical routing baseline from which the earlier maintenance candidate was produced; the current canonical Git head is resolved from `main` rather than embedded self-referentially in the file that determines its own commit hash. `CANONICAL_COMMIT_AT_STATE_SPLIT` and `CANONICAL_TREE_AT_STATE_SPLIT` remain provenance markers for the earlier live-state split.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.0 governs prospective work unless explicitly superseded through the truth-seeking revision protocol.
 
@@ -51,8 +51,9 @@ POST_NFC_STRING_M_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ
 NFC_AS_PROSPECTIVE_REANALYSIS = CANONICALLY_COMPLETE
 NFC_LOOP_PROSPECTIVE_REANALYSIS = CANONICALLY_COMPLETE
 CLAIM_LEDGER_CURRENT_SUPERSESSION_PROPAGATION = CANONICALLY_COMPLETE
-POST_FCP25_GROK_INDEPENDENT_ADJUDICATION = PROJECT_LEAD_ACCEPTED_LOCAL_NOT_YET_CANONICAL
-POST_FCP25_GROK_RECONCILIATION = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
+POST_FCP25_GROK_AUDIT = CANONICALLY_COMPLETE
+POST_FCP25_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
+POST_FCP25_GROK_RECONCILIATION = CANONICALLY_COMPLETE
 ```
 
 Targeted source strengthening established, at bounded scope:
@@ -215,10 +216,12 @@ CLAIM_LEDGER_CURRENT_SUPERSESSION_PROPAGATION = CANONICALLY_COMPLETE
 SUPERSESSION_PROPAGATION_TIMING = COMPLETE
 SUPERSESSION_PROPAGATION_IS_PREREQUISITE = NO
 NEW_EMPIRICAL_NO_GO_PHASE = NOT_STARTED
-BROADER_HOLOGRAPHIC_SOURCE_INTAKE = DEFERRED_NOT_SELECTED
+BROADER_HOLOGRAPHIC_SOURCE_INTAKE = NOT_STARTED
 POST_FCP24_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED
 POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
-POST_FCP25_GROK_AUDIT = RESPONSE_AND_ADJUDICATION_FROZEN_LOCAL_NOT_YET_CANONICAL
+POST_FCP25_GROK_AUDIT = CANONICALLY_COMPLETE
+POST_FCP25_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
+POST_FCP25_GROK_RECONCILIATION = CANONICALLY_COMPLETE
 POST_FCP25_GROK_RESPONSE_FREEZE_COMMIT = a9a02b69fba01160c51ab309a8819b40e51a6cff
 POST_FCP25_GROK_INDEPENDENT_ADJUDICATION_COMMIT = 81d19967420ad2fa401223efb780d92d908a04ba
 POST_FCP25_GROK_FINDINGS = 1_CONFIRMED__2_CONFIRMED_WITH_QUALIFICATION__3_PARTIALLY_CONFIRMED__2_NOT_CONFIRMED
@@ -237,7 +240,7 @@ POST_FCP23_REMAINING_ORDER_AUTOMATICALLY_INHERITED = NO
 
 `RECURRENCE_IMPACT_CANDIDATE = YES` means later recurrence analysis must account for the current FCP-22 relation and later current relations; it is not authorization to recompute recurrence now.
 
-The post-NFC/String-M sequencing route through prospective Reduced-NFC↔strengthened-AS reanalysis, bounded repository housekeeping, and prospective Reduced-NFC↔strengthened-LOOP reanalysis is now canonically complete at each declared scope. The AS reanalysis found three mathematically generic S0 E5 relations among 17 atomic candidates with zero E1–E4 and strengthened AS realization asymmetry. The LOOP reanalysis finds seven mathematically generic S0 E5 relations among 29 atomic candidates, zero E1–E4, twenty-two NONE, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and strengthened LOOP dynamics/continuum/realization asymmetry. Historical FCP-17 remains immutable while its current interpretation is `PARTIALLY_SUPERSEDED`. Program-level recurrence and Claim Ledger current-supersession propagation are canonically complete. The subsequent read-only post-recurrence scientific sequencing adjudication selected FCP-25 tensor-network / information-theoretic source intake as the highest-information next primitive-basis test. FCP-25 is now canonically complete: Stage 1 froze the 29-source corpus, and Stage 2 finds no stable source-bound foundational competitor under the historical `FW-TENSOR` umbrella at the frozen source scope. `FW-TENSOR` is retained only as historical provenance with status `REMOVED_WITH_REASON`; no successor framework is created, no K1–K10 baseline is instantiated, and no cross-framework comparison or recurrence recomputation is performed. The next recommended operation is a separate read-only post-FCP-25 scientific sequencing adjudication.
+The post-NFC/String-M sequencing route through prospective Reduced-NFC↔strengthened-AS reanalysis, bounded repository housekeeping, and prospective Reduced-NFC↔strengthened-LOOP reanalysis is now canonically complete at each declared scope. The AS reanalysis found three mathematically generic S0 E5 relations among 17 atomic candidates with zero E1–E4 and strengthened AS realization asymmetry. The LOOP reanalysis finds seven mathematically generic S0 E5 relations among 29 atomic candidates, zero E1–E4, twenty-two NONE, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and strengthened LOOP dynamics/continuum/realization asymmetry. Historical FCP-17 remains immutable while its current interpretation is `PARTIALLY_SUPERSEDED`. Program-level recurrence and Claim Ledger current-supersession propagation are canonically complete. The subsequent read-only post-recurrence scientific sequencing adjudication selected FCP-25 tensor-network / information-theoretic source intake as the highest-information next primitive-basis test. FCP-25 is now canonically complete: Stage 1 froze the 29-source corpus, and Stage 2 finds no stable source-bound foundational competitor under the historical `FW-TENSOR` umbrella at the frozen source scope. `FW-TENSOR` is retained only as historical provenance with status `REMOVED_WITH_REASON`; no successor framework is created, no K1–K10 baseline is instantiated, and no cross-framework comparison or recurrence recomputation is performed. The post-FCP-25 Grok audit, independent adjudication, and reconciliation are canonically complete. The next recommended operation is `BROADER_HOLOGRAPHIC_SOURCE_INTAKE`, which is not started and requires separate authorization.
 
 ## Next-task status
 
@@ -276,15 +279,19 @@ NFC_LOOP_REANALYSIS = CANONICALLY_COMPLETE
 NFC_LOOP_PROSPECTIVE_REANALYSIS = CANONICALLY_COMPLETE
 RECURRENCE_RECOMPUTATION = CANONICALLY_COMPLETE
 PROGRAM_LEVEL_RECURRENCE_RECOMPUTATION = CANONICALLY_COMPLETE
-CLAIM_LEDGER_CURRENT_SUPERSESSION = RECONCILED_THROUGH_FCP25_IN_THIS_CANDIDATE
+CLAIM_LEDGER_CURRENT_SUPERSESSION = RECONCILED_THROUGH_FCP25_CANONICALLY
 CLAIM_LEDGER_CURRENT_SUPERSESSION_PROPAGATION = CANONICALLY_COMPLETE
 CLAIM_LEDGER_DURABLE_ROW_COUNT = 89
 CLAIM_LEDGER_TEMPORAL_CEILING = FCP25
-POST_FCP25_GROK_INDEPENDENT_ADJUDICATION = PROJECT_LEAD_ACCEPTED_LOCAL_NOT_YET_CANONICAL
-POST_FCP25_GROK_RECONCILIATION = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
-FRAMEWORK_SEPARATION_ADMISSION_CLARIFICATION = COMPLETE_IN_THIS_CANDIDATE
+POST_FCP25_GROK_AUDIT = CANONICALLY_COMPLETE
+POST_FCP25_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
+POST_FCP25_GROK_RECONCILIATION = CANONICALLY_COMPLETE
+FRAMEWORK_SEPARATION_ADMISSION_CLARIFICATION = CANONICALLY_COMPLETE
 CATEGORY_B_RECURRENCE_DOCKET = RECORDED_NOT_EXECUTED
-BROADER_HOLOGRAPHIC_SOURCE_INTAKE = SELECTED_AFTER_RECONCILIATION_NOT_STARTED
+BROADER_HOLOGRAPHIC_SOURCE_INTAKE = NOT_STARTED
+FW_HOLO_CREATED = NO
+FCP26_SELECTED = NO
+FCP26_STARTED = NO
 REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT = CANONICALLY_COMPLETE
 HOUSEKEEPING_CANONICAL_COMMIT = b57a8617bb5818f3f3ab540ce63e0d82cde743b0
 HOUSEKEEPING_CANONICAL_TREE = 13ba67fcebb23efbab5d6f55eb4ade953f6b548d
@@ -307,20 +314,34 @@ NEXT_SCIENTIFIC_PHASE = NONE__BROADER_HOLOGRAPHIC_SOURCE_INTAKE_SELECTED_PENDING
 
 The Grok audit and independent adjudication, Finding-007 targeted source re-audit, first `FW-STRING-M` null control, bounded NFC↔String/M comparison, post-NFC/String-M read-only sequencing decision, prospective NFC↔strengthened-AS reanalysis, bounded repository housekeeping/current-state supersession, prospective NFC↔strengthened-LOOP reanalysis, program-level recurrence recomputation, Claim Ledger reconciliation, the read-only post-recurrence scientific sequencing decision, and both stages of FCP-25 are complete at their declared scopes. FCP-25 Stage 2 finds `D_NO_STABLE_FOUNDATIONAL_COMPETITOR_AT_CURRENT_SOURCE_SCOPE`: `FW-TENSOR` does not survive, no successor framework is source-bound, and K1–K10 is therefore not instantiated. The strongest empirical contact is simulator/analogue realization of supplied tensor/code models, with no framework-level discriminator or empirical selection at the frozen scope. This routing reconciliation does not perform a cross-framework comparison, assign convergence credit, recompute recurrence, begin a new source intake, or begin FCP-26.
 
-## Post-FCP-25 Grok reconciliation — qualified local candidate
+## Post-FCP-25 Grok reconciliation — canonical result
 
-This local candidate records the Project Lead-accepted post-FCP-25 Grok adjudication consequences without reopening any scientific result. It performs only the two authorized Category-A repairs: FCP-25 Claim Ledger propagation/temporal-semantics reconciliation and prospective framework-separation-versus-admission governance clarification.
+The canonical post-FCP-25 Grok reconciliation records the Project Lead-accepted adjudication consequences without reopening any scientific result. It performs only the two authorized Category-A repairs: FCP-25 Claim Ledger propagation/temporal-semantics reconciliation and prospective framework-separation-versus-admission governance clarification.
 
 ```text
-POST_FCP25_GROK_INDEPENDENT_ADJUDICATION = PROJECT_LEAD_ACCEPTED_LOCAL_NOT_YET_CANONICAL
-POST_FCP25_GROK_RECONCILIATION = QUALIFIED_CANDIDATE_COMPLETE_NOT_INTEGRATED
-CLAIM_LEDGER_FCP25_PROPAGATION = COMPLETE_IN_CANDIDATE
+POST_FCP25_GROK_AUDIT = CANONICALLY_COMPLETE
+POST_FCP25_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
+POST_FCP25_GROK_RECONCILIATION = CANONICALLY_COMPLETE
+CLAIM_LEDGER_FCP25_PROPAGATION = CANONICALLY_COMPLETE
 CLAIM_LEDGER_DURABLE_ROW_COUNT = 89
 CLAIM_LEDGER_TEMPORAL_CEILING = FCP25
-FRAMEWORK_SEPARATION_VS_ADMISSION_GOVERNANCE_CLARIFICATION = COMPLETE_IN_CANDIDATE
+FRAMEWORK_SEPARATION_VS_ADMISSION_GOVERNANCE_CLARIFICATION = CANONICALLY_COMPLETE
 METHOD_0_2_0_REVISION = NO
 FCP25_REANALYSIS = NO
 RECURRENCE_RECOMPUTATION = NO
+SCIENTIFIC_CLAIM_CHANGE = NONE
+METHOD_0_2_0_CHANGE = NONE
+FRAMEWORK_REGISTER_CHANGE = NONE
+SOURCE_REGISTER_CHANGE = NONE
+CLAIM_LEDGER_CHANGE = NONE
+COMPARISON_CHANGE = NONE
+RECURRENCE_CHANGE = NONE
+FRAMEWORK_STATUS_CHANGE = NONE
+SOURCE_ADMISSION = NONE
+BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STARTED = NO
+FW_HOLO_CREATED = NO
+FCP26_SELECTED = NO
+FCP26_STARTED = NO
 ```
 
 The prospective taxonomy distinction is:
@@ -331,10 +352,10 @@ FRAMEWORK_ADMISSION_TEST = IS_THE_WEAKEST_ADEQUATE_CLASSIFICATION_ACTUALLY_A_FOU
 FRAMEWORK_SEPARATION_TEST != FRAMEWORK_ADMISSION_TEST
 ```
 
-Category-B recurrence-epoch work is docketed but not executed: Reduced-NFC pairwise information-ceiling labeling, NFC/AQFT slot method normalization, cross-pair residual-E5 consistency review, and LOOP claim-transcription review. The next substantive science after canonical acceptance of this reconciliation is a separately authorized broader-holography source intake, with no presumption that one, several, or zero source-bound holographic frameworks will survive.
+Category-B recurrence-epoch work is docketed but not executed: Reduced-NFC pairwise information-ceiling labeling, NFC/AQFT slot method normalization, cross-pair residual-E5 consistency review, and LOOP claim-transcription review. The next substantive science is a separately authorized broader-holography source intake, which is not started, with no presumption that one, several, or zero source-bound holographic frameworks will survive.
 
 ```text
-BROADER_HOLOGRAPHIC_SOURCE_INTAKE = SELECTED_AFTER_RECONCILIATION_NOT_STARTED
+BROADER_HOLOGRAPHIC_SOURCE_INTAKE = NOT_STARTED
 FW_HOLO_CREATED = NO
 FCP26_SELECTED = NO
 FCP26_STARTED = NO
@@ -443,7 +464,7 @@ The post-adjudication routing record is `governance/POST_FCP24_GROK_POST_ADJUDIC
 - `COMPARISON_PROTOCOL.md` — common comparison protocol.
 - `FRAMEWORK_REGISTER.md` — live framework identities and bounded current framework status.
 - `SOURCE_REGISTER.md` — live source/provenance bindings.
-- `CLAIM_LEDGER.md` — detailed durable claim records; this reconciliation candidate extends the durable temporal ceiling through FCP-25 at 89 rows and makes historical-versus-current interpretation semantics explicit.
+- `CLAIM_LEDGER.md` — detailed durable claim records; the canonical post-FCP-25 reconciliation extends the durable temporal ceiling through FCP-25 at 89 rows and makes historical-versus-current interpretation semantics explicit.
 - `governance/FCP_METHOD_0_2_0_ACTIVATION.md` — Method 0.2.0 activation event and historical activation-time routing context.
 - `governance/FCP23_PHASE_OPENING_AND_PREREGISTRATION_0_1_0.md` — frozen FCP-23 scope, search architecture, exclusion burden, and execution boundary.
 - `audits/FCP23_CANONICAL_CORPUS_FORCED_COMMITMENT_SCREEN_0_1_0.md` — frozen FCP-23 Stage-1 target docket.
