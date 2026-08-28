@@ -607,7 +607,7 @@ def check(repo: Path, ref: str) -> int:
     index: Any = None
     artifact_records: list[dict[str, Any]] = []
     operation_records: list[dict[str, Any]] = []
-    capsule: dict[str, Any] | None = None
+    capsules: dict[str, dict[str, Any]] = {}
 
     try:
         schema = load_json(repo / SCHEMA_PATH)
@@ -637,11 +637,20 @@ def check(repo: Path, ref: str) -> int:
     except (OSError, UnicodeError, json.JSONDecodeError, NavigationError) as exc:
         categories["OPERATION_REGISTRY"].append(str(exc))
 
-    try:
-        capsule = parse_handoff_capsule(repo / HANDOFF_PATH)
-        categories["HANDOFF_CAPSULE"].extend(validate_capsule(capsule))
-    except (OSError, UnicodeError, json.JSONDecodeError, NavigationError) as exc:
-        categories["HANDOFF_CAPSULE"].append(str(exc))
+    handoff_paths = [HANDOFF_PATH]
+    if isinstance(index, dict):
+        current_handoff_path = index.get("program_state", {}).get("current_handoff_path")
+        if isinstance(current_handoff_path, str) and current_handoff_path and current_handoff_path not in handoff_paths:
+            handoff_paths.append(current_handoff_path)
+
+    for handoff_path in handoff_paths:
+        try:
+            capsule = parse_handoff_capsule(repo / handoff_path)
+            capsules[handoff_path] = capsule
+            for error in validate_capsule(capsule):
+                categories["HANDOFF_CAPSULE"].append(f"{handoff_path}: {error}")
+        except (OSError, UnicodeError, json.JSONDecodeError, NavigationError) as exc:
+            categories["HANDOFF_CAPSULE"].append(f"{handoff_path}: {exc}")
 
     if isinstance(index, dict):
         try:
@@ -755,16 +764,90 @@ def check(repo: Path, ref: str) -> int:
                 for path in docket.get("evidence_paths", []):
                     _require(path in artifact_paths, categories["REFERENTIAL_INTEGRITY"], f"unknown docket evidence path: {path}")
 
-            if capsule is not None:
-                _require(capsule.get("indexed_scientific_baseline_commit") == indexed_commit, categories["REFERENTIAL_INTEGRITY"], "capsule baseline differs from index")
-                _require(capsule.get("method_version") == index.get("current_method", {}).get("version"), categories["REFERENTIAL_INTEGRITY"], "capsule method differs from index")
-                _require(capsule.get("next_recommended_operation") in operation_ids, categories["REFERENTIAL_INTEGRITY"], "capsule next operation is unknown")
-                for docket_id in capsule.get("open_dockets", []):
-                    _require(docket_id in docket_ids, categories["REFERENTIAL_INTEGRITY"], f"capsule open docket is unknown: {docket_id}")
+            current_handoff_path = program_state.get("current_handoff_path")
+            current_operation = program_state.get("current_operation")
+            current_next_operation = program_state.get("next_recommended_operation")
+
+            for handoff_path, capsule in capsules.items():
+                capsule_baseline = capsule.get("indexed_scientific_baseline_commit")
+                if isinstance(capsule_baseline, str) and SHA1_RE.fullmatch(capsule_baseline) is not None:
+                    try:
+                        _require(
+                            resolve_commit(repo, capsule_baseline) == capsule_baseline,
+                            categories["REFERENTIAL_INTEGRITY"],
+                            f"capsule baseline does not resolve exactly: {handoff_path}",
+                        )
+                        _require(
+                            git_is_ancestor(repo, capsule_baseline, indexed_commit),
+                            categories["GIT_ANCESTRY"],
+                            f"capsule baseline is not an ancestor of indexed baseline: {handoff_path}",
+                        )
+                    except NavigationError as exc:
+                        categories["REFERENTIAL_INTEGRITY"].append(str(exc))
+
+                capsule_operation = capsule.get("operation_id")
+                operation_record = operation_by_id.get(capsule_operation)
+                if operation_record is not None:
+                    _require(
+                        capsule.get("method_version") == operation_record.get("method_version"),
+                        categories["REFERENTIAL_INTEGRITY"],
+                        f"capsule method differs from operation record: {handoff_path}",
+                    )
+                    recorded_next = operation_record.get("next_operations", [])
+                    capsule_next = capsule.get("next_recommended_operation")
+                    if recorded_next:
+                        _require(
+                            capsule_next in recorded_next,
+                            categories["REFERENTIAL_INTEGRITY"],
+                            f"capsule next operation differs from operation record: {handoff_path}",
+                        )
+
+                is_current_handoff = isinstance(current_handoff_path, str) and handoff_path == current_handoff_path
+                if is_current_handoff:
+                    _require(
+                        capsule_operation == current_operation,
+                        categories["REFERENTIAL_INTEGRITY"],
+                        "current handoff operation differs from program state",
+                    )
+                    _require(
+                        capsule_operation in operation_ids,
+                        categories["REFERENTIAL_INTEGRITY"],
+                        "current handoff operation is unknown",
+                    )
+                    _require(
+                        capsule.get("method_version") == index.get("current_method", {}).get("version"),
+                        categories["REFERENTIAL_INTEGRITY"],
+                        "current handoff method differs from current Method",
+                    )
+                    _require(
+                        capsule.get("next_recommended_operation") == current_next_operation,
+                        categories["REFERENTIAL_INTEGRITY"],
+                        "current handoff next operation differs from program state",
+                    )
+                    _require(
+                        current_next_operation in operation_ids,
+                        categories["REFERENTIAL_INTEGRITY"],
+                        "current handoff next operation is unknown",
+                    )
+                    for docket_id in capsule.get("open_dockets", []):
+                        _require(
+                            docket_id in docket_ids,
+                            categories["REFERENTIAL_INTEGRITY"],
+                            f"current handoff open docket is unknown: {docket_id}",
+                        )
+
                 for field in ("must_read", "outputs"):
                     for path in capsule.get(field, []):
-                        _require(path in artifact_paths or path in NAVIGATION_LAYER_PATHS, categories["REFERENTIAL_INTEGRITY"], f"capsule path is unknown: {path}")
-                        _require((repo / path).is_file(), categories["REFERENTIAL_INTEGRITY"], f"capsule path is absent from working tree: {path}")
+                        _require(
+                            path in artifact_paths or path in NAVIGATION_LAYER_PATHS,
+                            categories["REFERENTIAL_INTEGRITY"],
+                            f"capsule path is unknown in {handoff_path}: {path}",
+                        )
+                        _require(
+                            (repo / path).is_file(),
+                            categories["REFERENTIAL_INTEGRITY"],
+                            f"capsule path is absent from working tree in {handoff_path}: {path}",
+                        )
         except (KeyError, TypeError, NavigationError) as exc:
             categories["REFERENTIAL_INTEGRITY"].append(str(exc))
 
