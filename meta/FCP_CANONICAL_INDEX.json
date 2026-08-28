@@ -23,7 +23,7 @@
     },
     {
       "authority_id": "CURRENT_STATE",
-      "blob": "0f427de48c61f43f9e6127a936cb3ef1e8e7dfb7",
+      "blob": "d3a473b66c0638c755f984a8a00d3fe35b8292d6",
       "path": "CURRENT_STATE.md"
     },
     {
@@ -64,17 +64,17 @@
     "version": "0.2.0"
   },
   "indexed_scientific_baseline": {
-    "commit": "7dcdcc5ffcf25240555e98501e43a0f8aadd59aa",
-    "message": "Reconcile broader holographic Stage 1 routing",
+    "commit": "9fb536c4cc3b717b518bca2b8affca64806e3db7",
+    "message": "Reconcile broader holographic Stage 2 routing",
     "repository": "etblink/Foundational-Convergence-Program",
-    "tree": "3ae5910656f40c19c30494f8d5a0f22d179cfe1b"
+    "tree": "5581066d0549c436fab77494db5a4a056336b4b6"
   },
   "navigation_coverage": {
     "absence_from_operation_registry_means_scientific_absence": false,
     "artifact_inventory_scope": "ENTIRE_TRACKED_INDEXED_BASELINE_TREE_EXCLUDING_SELF_REFERENTIAL_NAVIGATION_FILES",
-    "artifact_record_count": 234,
+    "artifact_record_count": 240,
     "historical_operation_completeness_claimed": false,
-    "operation_record_count": 39,
+    "operation_record_count": 40,
     "operation_registry_scope": "CURRENT_DEPENDENCY_CLOSURE",
     "self_excluded_paths": [
       "meta/FCP_ARTIFACT_REGISTRY.jsonl",
@@ -83,6 +83,15 @@
     ]
   },
   "open_dockets": [
+    {
+      "docket_id": "BISWAS_2026_AUTHOR_METADATA_TRANSCRIPTION_RECONCILIATION",
+      "evidence_paths": [
+        "frameworks/holography/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_0_1_0.md",
+        "frameworks/tensor/FCP25_TENSOR_SOURCE_INTAKE_0_1_0.md",
+        "governance/BROADER_HOLOGRAPHIC_STAGE2_POST_INTEGRATION_ROUTING_0_1_0.md"
+      ],
+      "status": "DOCKETED_NOT_EXECUTED"
+    },
     {
       "docket_id": "CROSS_PAIR_RESIDUAL_E5_CONSISTENCY_CHECK",
       "evidence_paths": [
@@ -117,27 +126,41 @@
     }
   ],
   "program_state": {
+    "biswas_2026_author_metadata_transcription_reconciliation": "DOCKETED_NOT_EXECUTED",
+    "broader_holographic_existing_framework_assignment_count": 1,
+    "broader_holographic_existing_framework_assignment_ids": [
+      "FW-STRING-M"
+    ],
+    "broader_holographic_highest_direct_intervention_realization_scope": "SIMULATOR_OR_ANALOGUE_REALIZATION_OF_SUPPLIED_HOLOGRAPHIC_CODE_MODELS",
+    "broader_holographic_highest_empirical_scope": "MODEL_LEVEL_EMP2_COMPATIBILITY_WITH_OBSERVATIONAL_CONSTRAINTS_IN_HOLOGRAPHIC_COSMOLOGY",
+    "broader_holographic_k1_k10_baseline_status": "NONINSTANTIATED_NO_NEW_FRAMEWORK_SURVIVES__FW_STRING_M_BASELINE_UNCHANGED",
     "broader_holographic_new_source_count": 32,
+    "broader_holographic_newly_admitted_framework_count": 0,
+    "broader_holographic_newly_admitted_framework_ids": [],
     "broader_holographic_reused_source_count": 18,
+    "broader_holographic_scientific_object_count_before_admission": 12,
     "broader_holographic_source_corpus": "FROZEN",
     "broader_holographic_source_count": 50,
     "broader_holographic_source_intake": "CANONICALLY_COMPLETE",
     "broader_holographic_source_intake_stage1": "CANONICALLY_COMPLETE",
-    "current_handoff_path": "handoffs/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1_HANDOFF_0_1_0.md",
-    "current_operation": "BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1",
-    "current_routing_path": "governance/BROADER_HOLOGRAPHIC_STAGE1_POST_INTEGRATION_ROUTING_0_1_0.md",
+    "broader_holographic_taxonomy_gate_stage2": "CANONICALLY_COMPLETE",
+    "broader_holographic_taxonomy_verdict": "EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_REMAINDER__NO_NEW_STABLE_FOUNDATIONAL_HOLOGRAPHIC_FRAMEWORK_AT_CURRENT_SOURCE_SCOPE",
+    "current_handoff_path": null,
+    "current_operation": "BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2",
+    "current_routing_path": "governance/BROADER_HOLOGRAPHIC_STAGE2_POST_INTEGRATION_ROUTING_0_1_0.md",
     "fcp26_selected": false,
     "fcp26_started": false,
     "framework_winner": "NONE",
     "latest_completed_external_audit_chain": "POST_FCP25_GROK_AUDIT",
     "latest_completed_maintenance_operation": "POST_FCP25_GROK_RECONCILIATION",
-    "latest_completed_science_operation": "BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1",
+    "latest_completed_science_operation": "BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2",
     "latest_numbered_phase": "FCP-25",
-    "next_recommended_operation": "BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2",
+    "latest_science_handoff_path": "handoffs/BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md",
+    "next_recommended_operation": "POST_BROADER_HOLOGRAPHIC_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION",
     "post_fcp25_grok_audit": "CANONICALLY_COMPLETE",
     "post_fcp25_grok_independent_adjudication": "CANONICALLY_COMPLETE",
     "post_fcp25_grok_reconciliation": "CANONICALLY_COMPLETE",
-    "predecessor_operation": "POST_FCP25_GROK_RECONCILIATION",
+    "predecessor_operation": "BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1",
     "scalar_framework_score": "FORBIDDEN"
   },
   "read_profiles": {
@@ -159,16 +182,22 @@
       "SOURCE_REGISTER.md",
       "frameworks/holography/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_0_1_0.md",
       "frameworks/holography/BROADER_HOLOGRAPHIC_SOURCE_SELECTION_AUDIT_0_1_0.md",
-      "handoffs/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1_HANDOFF_0_1_0.md",
+      "governance/BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2_PREREGISTRATION_0_1_0.md",
+      "audits/BROADER_HOLOGRAPHIC_TAXONOMY_ADJUDICATION_0_1_0.md",
+      "frameworks/holography/BROADER_HOLOGRAPHIC_K1_K10_BASELINE_0_1_0.md",
+      "audits/BROADER_HOLOGRAPHIC_REALIZATION_EMPIRICAL_CEILING_0_1_0.md",
+      "handoffs/BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md",
+      "governance/BROADER_HOLOGRAPHIC_STAGE2_POST_INTEGRATION_ROUTING_0_1_0.md",
       "frameworks/string/FCP24_STRING_TAXONOMY_GATE_0_1_0.md",
-      "audits/FCP25_TENSOR_TAXONOMY_ADJUDICATION_0_1_0.md",
-      "governance/BROADER_HOLOGRAPHIC_STAGE1_POST_INTEGRATION_ROUTING_0_1_0.md"
+      "audits/FCP25_TENSOR_TAXONOMY_ADJUDICATION_0_1_0.md"
     ],
     "GENERAL_PROJECT_ORIENTATION": [
       "CURRENT_STATE.md",
       "README.md",
-      "governance/BROADER_HOLOGRAPHIC_STAGE1_POST_INTEGRATION_ROUTING_0_1_0.md",
-      "handoffs/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1_HANDOFF_0_1_0.md",
+      "governance/BROADER_HOLOGRAPHIC_STAGE2_POST_INTEGRATION_ROUTING_0_1_0.md",
+      "audits/BROADER_HOLOGRAPHIC_TAXONOMY_ADJUDICATION_0_1_0.md",
+      "audits/BROADER_HOLOGRAPHIC_REALIZATION_EMPIRICAL_CEILING_0_1_0.md",
+      "handoffs/BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md",
       "FRAMEWORK_REGISTER.md",
       "meta/FCP_CANONICAL_INDEX.json",
       "governance/FCP_METHOD_0_2_0_ACTIVATION.md"
@@ -195,7 +224,7 @@
       "EPISTEMIC_RULES.md",
       "SOURCE_REGISTER.md",
       "governance/FCP_METHOD_0_2_0_ACTIVATION.md",
-      "governance/BROADER_HOLOGRAPHIC_STAGE1_POST_INTEGRATION_ROUTING_0_1_0.md",
+      "governance/BROADER_HOLOGRAPHIC_STAGE2_POST_INTEGRATION_ROUTING_0_1_0.md",
       "governance/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_PREREGISTRATION_0_1_0.md",
       "frameworks/holography/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_0_1_0.md",
       "frameworks/holography/BROADER_HOLOGRAPHIC_SOURCE_SELECTION_AUDIT_0_1_0.md",
