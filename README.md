@@ -9,15 +9,26 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 
 ## Current status
 
-- **Latest numbered phase:** FCP-25 — Tensor-Network / Information-Theoretic Framework; Stage 1 and Stage 2 are canonically complete.
-- **Latest canonical scientific operation:** broader holographic Stage-2 taxonomy gate (`fc0c1d22020fe8cf51c1ad8656df1668b960f4a7`; tree `216385d44ad279fd105116857c5279aa409e4715`), using the frozen 50-source corpus and finding no new stable foundational holographic framework at the current source scope.
+- **Latest numbered phase:** FCP-26; Stage 1 is canonically complete and Stage 2 is `NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE`.
+- **Latest canonical scientific operation:** `FCP26_STAGE1_DELTA_EMPIRICAL_DISCRIMINATOR_CANONICAL_SCREEN` (`9733e2a3671ca81e5f8696f625f60eb59cc0e8e8`; tree `5d8465ee26c7867610dfb275c6bd0f961d1969a2`).
 - **Latest canonical maintenance operation:** post-FCP-25 Grok reconciliation (`2b2be93254d07f62fa8c6253a45f4aeb17cdcba2`; tree `fd99d9eea0a9699ebb9478bf20e9a6d87b5c6714`), preserving the accepted adjudication consequences without new science.
 - **Active prospective method:** FCP Method 0.2.0.
 - **Housekeeping status:** canonically complete.
 - **Post-FCP-25 Grok status:** audit, independent adjudication, and reconciliation are canonically complete.
-- **Next recommended program operation:** `POST_BROADER_HOLOGRAPHIC_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION`, a separately authorized read-only sequencing decision; `FW-HOLO` is not created and FCP-26 is neither selected nor started.
+- **FCP-26 Stage-1 outcome:** `B__ONLY_MODEL_PARAMETER_OR_REALIZATION_LEVEL_TESTABILITY_SURVIVES`; zero framework-level Stage-2 targets, no external empirical source search justified, and no atomic-clock target advanced.
+- **Next recommended program operation:** `POST_FCP26_STAGE1_SCIENTIFIC_SEQUENCING_ADJUDICATION`, a separately authorized read-only sequencing decision; no next numbered phase is selected.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
+
+```text
+LATEST_NUMBERED_PHASE = FCP-26
+LATEST_CANONICAL_SCIENCE = FCP26_STAGE1_DELTA_EMPIRICAL_DISCRIMINATOR_CANONICAL_SCREEN
+FCP26_STAGE1_STATUS = CANONICALLY_COMPLETE
+FCP26_STAGE1_OUTCOME = B__ONLY_MODEL_PARAMETER_OR_REALIZATION_LEVEL_TESTABILITY_SURVIVES
+FCP26_STAGE2 = NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE
+FCP26_STAGE2_TARGET_COUNT = 0
+NEXT_RECOMMENDED_OPERATION = POST_FCP26_STAGE1_SCIENTIFIC_SEQUENCING_ADJUDICATION
+```
 
 FCP-24 tested the historical `FW-STRING = String-theoretic / holographic approaches` umbrella against a separately frozen 24-source corpus. Its qualified taxonomy result is `FCP24_TAXONOMY_OUTCOME = C`: the historical umbrella is scientifically over-broad and is superseded by framework split. One stable source-bound successor, `FW-STRING-M` — String/M-theory framework family — is established. At FCP-24, broader holography remained deferred pending separate source intake. That Stage-1 intake and the later Stage-2 taxonomy gate are now canonically complete: declared String/M holographic content maps to existing `FW-STRING-M`, while the remainder does not support a new stable foundational holographic framework at the frozen source scope; no `FW-HOLO` is created.
 
@@ -26,6 +37,8 @@ FCP-24 tested the historical `FW-STRING = String-theoretic / holographic approac
 FCP-25 Stage 1 reviewed 62 source candidates across all nine preregistered search lanes and froze a 29-source corpus: 27 new Source Register rows plus two reused pre-existing holographic boundary sources. Twenty-two candidates were rejected and eleven deferred. Stage 2 then resolves the historical `FW-TENSOR` umbrella as `D_NO_STABLE_FOUNDATIONAL_COMPETITOR_AT_CURRENT_SOURCE_SCOPE`: `FW-TENSOR` does not survive as a source-bound foundational competitor, no successor framework is created, and K1–K10 is not instantiated. The literature remains preserved at its supported representational, computational, variational/RG, holographic-model/QEC, reconstruction, simulator, adjacent, or deferred levels. No framework-level empirical discriminator or empirical selection is established at the frozen source scope.
 
 The broader holographic Stage-1 intake subsequently reviewed 80 candidates and froze a 50-source corpus: 32 new Source Register rows and 18 reused canonical sources. Stage 2 accounts for all 50 sources and resolves the taxonomy as `EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_REMAINDER__NO_NEW_STABLE_FOUNDATIONAL_HOLOGRAPHIC_FRAMEWORK_AT_CURRENT_SOURCE_SCOPE`. One existing-framework mapping is retained to `FW-STRING-M`, zero new frameworks are admitted, `FW-HOLO` is not created, and no pooled K1–K10 baseline is instantiated. The strongest empirical/data-contact result is model-level `EMP2` compatibility in holographic cosmology; the strongest direct intervention realization is a supplied holographic code model. Neither supplies framework-level empirical discrimination or selection.
+
+The accepted read-only post-broader-holography sequencing decision selected the separately authorized FCP-26 Stage-1 canonical-only post-FCP-23 delta screen. FCP-26 accounts for 14 current framework IDs, identifies five material post-FCP-23 deltas, and screens `FW-STRING-M`, `FW-AS`, and `FW-LOOP` through the ordered realization/empirical bridge. Their strongest current classes are `EC2`, `EC2`, and `EC1`, respectively. No framework-level Stage-2 target survives, external empirical source search is not justified, and the informal atomic-clock hypothesis does not advance.
 
 After FCP-24, the independent Grok adjudication preserved FCP-24 with qualification, and the targeted Finding-007 re-audit found a partial source-selection defect with no material FCP-24 scientific change. The first `FW-STRING-M` null control then established a nonempty null-subtracted residue; the NFC↔String/M comparison found three mathematically generic S0 E5 relations, zero E1–E4, and no pairwise empirical selection or NFC support. The prospective NFC↔strengthened-AS reanalysis then found three generic S0 E5 relations among 17 atomic candidates, with zero E1–E4 and strengthened AS realization asymmetry. After the bounded housekeeping checkpoint, the prospective NFC↔strengthened-LOOP reanalysis found seven generic S0 E5 relations among 29 atomic candidates, zero E1–E4, 22 `NONE_ESTABLISHED`, no non-generic relation, no empirical selection or NFC support, and strengthened LOOP dynamics/continuum/realization asymmetry. The subsequent Method-0.2.0 program-level recurrence recomputation finds 13 recurrence candidate families: zero independent or qualified-independence non-generic E1–E4 foundational recurrence, one target-conditioned E1–E4 recovery recurrence, one lineage/reformulation E1–E4 recurrence, seven generic E5 functional recurrence families, one empirically inherited/shared-target recurrence family, and three recurrent parallel burdens. No framework-level EMP4 recurrence or repeated independent Reduced-NFC support is established. Historical FCP-18 remains immutable while its current interpretation is partially superseded.
 
@@ -67,7 +80,9 @@ Method 0.2.0 reports these axes separately. It does not use a scalar framework-w
 - **FCP-25 Stage 2:** canonically complete; `FW-TENSOR` does not survive as a stable source-bound foundational competitor at the frozen source scope, no successor framework is admitted, K1–K10 is not instantiated, and the strongest empirical scope is simulator/analogue realization of supplied tensor/code models rather than framework-level discrimination.
 - **Broader holographic Stage 1:** canonically complete; 50-source corpus frozen (32 new, 18 reused).
 - **Broader holographic Stage 2:** canonically complete; 12 pre-admission scientific objects are resolved into one existing `FW-STRING-M` assignment plus nonframework remainder, zero new frameworks are admitted, `FW-HOLO` is not created, and no new K1–K10 baseline is instantiated.
-- **Next program operation:** `POST_BROADER_HOLOGRAPHIC_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION`, recommended but not started and pending separate read-only authorization.
+- **Post-broader-holography sequencing:** accepted read-only routing decision selecting the separately authorized FCP-26 Stage-1 canonical screen.
+- **FCP-26 Stage 1:** canonically complete; 14 framework IDs accounted for, five material post-FCP-23 deltas, three bridge-screen frameworks (`FW-STRING-M` `EC2`, `FW-AS` `EC2`, `FW-LOOP` `EC1`), zero Stage-2 targets, no external empirical search justified, and no atomic-clock target advanced.
+- **Next program operation:** `POST_FCP26_STAGE1_SCIENTIFIC_SEQUENCING_ADJUDICATION`, recommended but not started and requiring separate read-only authorization.
 
 Detailed scientific findings live in the versioned phase, comparison, audit, and handoff artifacts rather than in this landing page.
 
