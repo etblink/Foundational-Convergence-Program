@@ -99,7 +99,7 @@ These are different time-indexed claims. FCP-22 does not rewrite FCP-6, and FCP-
 - [`COMPARISON_PROTOCOL.md`](COMPARISON_PROTOCOL.md) — common comparison protocol and Method 0.2.0 operating requirements.
 - [`FRAMEWORK_REGISTER.md`](FRAMEWORK_REGISTER.md) — live framework identities and latest bounded framework status.
 - [`SOURCE_REGISTER.md`](SOURCE_REGISTER.md) — source/provenance bindings.
-- [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) — detailed durable claim records; current-state supersession propagation is canonically complete at 86 rows.
+- [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) — detailed durable claim records; the Post-FCP-25 reconciliation candidate extends the durable temporal ceiling through FCP-25 at 89 rows and explicitly separates historical acceptance from latest present-tense interpretation.
 - [`comparison_keys/`](comparison_keys/) — historical and current relation/evidence rules.
 - [`governance/`](governance/) — Method 0.2.0 and governance artifacts, including the frozen FCP-23 and FCP-24 preregistrations.
 - [`frameworks/`](frameworks/) — source-bound framework packets and strengthening records, including the FCP-24 String/M-theory source intake and K1–K10 baseline.

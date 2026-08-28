@@ -2,7 +2,7 @@
 
 ## Current state
 
-Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 through FCP-18 appended the later controls/meta-audit, FCP-19 appended the Asymptotic Safety source-intake findings, FCP-20 appended the AS/null-GR subtraction/control result, and FCP-21 appended the Reduced-NFC/null-subtracted-AS controlled comparison. The 62 historical durable rows through FCP-21 remain preserved in their original order and wording. Current-state supersession propagation appends 24 durable rows for already-canonical post-FCP-21 science, yielding **86 durable rows**. No historical row is deleted or reordered, and no historical non-status field is rewritten. **No overall numerical framework score or winner is inferred from these rows.**
+Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 through FCP-18 appended the later controls/meta-audit, FCP-19 appended the Asymptotic Safety source-intake findings, FCP-20 appended the AS/null-GR subtraction/control result, and FCP-21 appended the Reduced-NFC/null-subtracted-AS controlled comparison. The 62 historical durable rows through FCP-21 remain preserved in their original order and wording. The earlier current-state supersession propagation appended 24 durable rows for already-canonical post-FCP-21 science, yielding 86 rows. The Post-FCP-25 Grok reconciliation appends three FCP-25 durable rows, yielding **89 durable rows through FCP-25**. No historical claim row is deleted, reordered, or rewritten by this reconciliation. `status: ACCEPTED` means that a row remains an accepted record at its declared source window and scope; it does **not** mean that the row is always the latest applicable present-tense interpretation. Current interpretation is resolved from the latest applicable durable rows together with `CURRENT_STATE.md` and `FRAMEWORK_REGISTER.md`. The durable-claim temporal ceiling of this reconciliation is FCP-25; later audit/governance records are not silently converted into scientific claim rows. **No overall numerical framework score or winner is inferred from these rows.**
 
 ## Claim record schema
 
@@ -1191,6 +1191,8 @@ Future claims should use the following fields:
 - No framework-level numerical score is inferred automatically from individual claim rows.
 - Cross-framework convergence credit requires the frozen FCP-2 correspondence and weaker-framework rules.
 - Reformulation relations must not be counted as independent convergence unless the independence burden is explicitly discharged.
+- `ACCEPTED` records scope-time acceptance, not immunity from later qualification or partial supersession; present-tense use must follow the latest applicable durable row and live current-state surfaces.
+- Partial supersession does not require destructive historical-row mutation. A later accepted row may narrow or replace only the affected current subclaim while the historical row remains preserved for provenance.
 
 
 ---
@@ -1632,3 +1634,61 @@ Future claims should use the following fields:
 - `status`: `ACCEPTED`
 - `supersedes`: `NONE`
 - `notes`: canonical provenance: recurrence handoff blob `dc20e786340d505d6302bbbecf56305aa65cc3fe`.
+
+---
+
+# FCP-25 tensor-network / information-theoretic current claims
+
+## FCP25-TENSOR-001 — Historical FW-TENSOR umbrella has no surviving source-bound foundational competitor at the frozen source scope
+
+- `framework_ids`: `FW-TENSOR`
+- `source_ids`: `SRC-FCP25-TENSOR-SCHOLLWOECK-2011`, `SRC-FCP25-TENSOR-VERSTRAETE-CIRAC-2004`, `SRC-FCP25-TENSOR-VIDAL-ER-2007`, `SRC-FCP25-TENSOR-PASTAWSKI-2015`, `SRC-FCP25-TENSOR-HARLOW-2017`, `SRC-FCP25-TENSOR-VAN-RAAMSDONK-2010`, `SRC-FCP25-TENSOR-JACOBSON-2016`, `SRC-FCP25-TENSOR-CAO-CARROLL-MICHALAKIS-2017`, `SRC-FCP25-TENSOR-BAO-2015`, `SRC-FCP25-TENSOR-JAHN-EISERT-2021`
+- `claim_text`: Under the exact frozen 29-source FCP-25 corpus, the historical tensor-network / information-theoretic umbrella does not bind one stable foundational competitor and does not yield any source-bound successor framework. `FW-TENSOR` is therefore retained only as historical provenance with `REMOVED_WITH_REASON`; representation, computational, variational, RG, holographic-model, QEC/reconstruction, simulator, adjacent, and deferred material remains scientifically retained at its weaker source-qualified classification.
+- `assumptions`: taxonomy precedes K1–K10; the exact frozen Stage-1 corpus is preserved; shared tensor diagrams, entanglement language, scale vocabulary, holographic motivation, representability, algorithms, and target-conditioned code structures do not by themselves establish a common foundational physical framework.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: framework taxonomy/source-binding level at the declared frozen source scope only.
+- `weaker_framework_test`: the admitted clusters are adequately described by representation/tool/RG/model/QEC/reconstruction/proposal classes without positing a new common physical ontology or history selector.
+- `physical_bridge`: no common framework-wide bridge from the historical umbrella to physical spacetime is source-bound.
+- `empirical_binding`: no direct framework-level discriminator or framework-level empirical selection is established.
+- `falsification_condition`: a future separately frozen source intake that source-binds one or more stable foundational physical objects from the deferred/adjacent material could supersede the current taxonomy boundary prospectively.
+- `countermodels`: MPS/PEPS/DMRG methods, holographic tensor/code models, and heterogeneous information-first reconstruction proposals have materially different carriers, dynamics status, target dependence, realization burdens, and empirical burdens.
+- `scope_ceiling`: `FCP25_TAXONOMY_OUTCOME = D_NO_STABLE_FOUNDATIONAL_COMPETITOR_AT_CURRENT_SOURCE_SCOPE`; `FW_TENSOR_SURVIVES = NO`; `FW_TENSOR_CURRENT_STATUS = REMOVED_WITH_REASON`; `SUCCESSOR_FRAMEWORK_COUNT = 0`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical FCP-25 provenance: taxonomy adjudication blob `a415e89bc3fb0f1d76e88119d84f92e6fd6c91d8`; Stage-2 handoff blob `9dc6be064e102a6c337c46c3f23e36c9b0ce2b60`. This bounded result does not assert that tensor networks, QEC, holography, or information-first proposals are scientifically unimportant or impossible foundations in principle.
+
+## FCP25-TENSOR-002 — K1–K10 is not instantiated because no source-bound FCP-25 framework object survives taxonomy
+
+- `framework_ids`: `FW-TENSOR`
+- `source_ids`: `SRC-FCP25-TENSOR-PEREZ-GARCIA-2007`, `SRC-FCP25-TENSOR-SCHUCH-2008`, `SRC-FCP25-TENSOR-GE-EISERT-2016`, `SRC-FCP25-TENSOR-HAEGEMAN-TDVP-2016`, `SRC-FCP25-TENSOR-ALMHEIRI-DONG-HARLOW-2015`, `SRC-FCP25-TENSOR-DONG-HARLOW-WALL-2016`, `SRC-FCP25-TENSOR-HARLOW-2017`, `SRC-FCP25-TENSOR-MILSTED-VIDAL-2018`
+- `claim_text`: Because FCP-25 Stage 2 finds no surviving source-bound foundational object, no positive pooled `FW-TENSOR` K1–K10 baseline is instantiated. The K1–K10 artifact is a non-instantiation/object-specificity record: the frozen corpus contains scientifically real state representations, transformations, RG flows, code/reconstruction structures, geometry proposals, and realizations, but their materially different carriers, equivalence doctrines, dynamics, locality meanings, scale roles, globalization mechanisms, and calibration burdens cannot be converted into one framework-wide baseline.
+- `assumptions`: K1–K10 applies to a source-bound scientific object; taxonomy-first ordering and successor-ID discipline are binding; absence of a surviving framework does not erase proposition-level scientific content.
+- `classification`: `NONFORCED`
+- `canonicity_level`: object-specific baseline gate; no framework-wide K-key value is asserted for the removed umbrella.
+- `weaker_framework_test`: representation, computational, model, QEC, and target-conditioned classifications are sufficient for the retained propositions and block unnecessary foundational promotion.
+- `physical_bridge`: proposition-specific mathematical/model/simulator bridges only; no common foundational spacetime bridge.
+- `empirical_binding`: no K10 framework discriminator because no surviving foundational object has a comparator/prediction/uncertainty/decision-rule package.
+- `falsification_condition`: a future source-bound successor object would permit its own separately frozen K1–K10 baseline and supersede this non-instantiation only for that new object.
+- `countermodels`: pooling supplied-Hamiltonian evolution, algorithmic RG, code reconstruction, target-conditioned bulk dynamics, and proposal-specific emergence would fabricate a unified history selector that the sources do not establish.
+- `scope_ceiling`: `K1_K10_BASELINE_STATUS = NOT_INSTANTIATED_NO_SURVIVING_SOURCE_BOUND_FRAMEWORK`; `OBJECT_SPECIFIC_BASELINE_COUNT = 0`; `POOLED_UMBRELLA_BASELINE_CREATED = NO`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: K1–K10 non-instantiation blob `c42fc9b59b72f0baff066ea3d26504c1dcf6081b`; taxonomy preregistration blob `c9f035fc840ab83ddf68582d648cedbc0eb7a007`.
+
+## FCP25-TENSOR-003 — FCP-25 empirical contact reaches prepared-model simulator/analogue realization, not foundational framework selection
+
+- `framework_ids`: `FW-TENSOR`
+- `source_ids`: `SRC-FCP25-TENSOR-LI-2019`, `SRC-FCP25-TENSOR-BISWAS-2026`, `SRC-FCP25-TENSOR-SCHOLLWOECK-2011`, `SRC-FCP25-TENSOR-HAEGEMAN-TDVP-2016`, `SRC-FCP25-TENSOR-PASTAWSKI-2015`, `SRC-FCP25-TENSOR-HAYDEN-2016`, `SRC-FCP25-TENSOR-JAHN-EISERT-2021`
+- `claim_text`: The strongest FCP-25 empirical contact is laboratory/simulator realization of supplied finite tensor/code models, including prepared perfect-tensor and holographic-code systems. These experiments and numerical successes validate implemented models and represented theories at their declared scopes; they do not observe physical spacetime emergence, identify a tensor/information ontology in nature, or provide a direct framework-level discriminator.
+- `assumptions`: laboratory calibration applies to the prepared simulator/device and supplied code/model; represented-theory success and target-conditioned holographic behavior are not transferred to an unbound foundational framework.
+- `classification`: `EMPIRICAL`
+- `canonicity_level`: empirical realization of declared prepared models only; no foundational selection canonicity.
+- `weaker_framework_test`: ordinary quantum simulation, numerical representation, and model-specific code behavior explain the observed evidence without requiring a new foundational spacetime framework.
+- `physical_bridge`: calibrated device-to-prepared-model bridge; `PHYSICAL_SPACETIME_REALIZATION = NOT_ESTABLISHED`.
+- `empirical_binding`: `HIGHEST_EMPIRICAL_SCOPE = SIMULATOR_OR_ANALOGUE_REALIZATION_OF_SUPPLIED_TENSOR_AND_CODE_MODELS`; `DIRECT_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR = NO_AT_CURRENT_SOURCE_SCOPE`; `FRAMEWORK_LEVEL_EMPIRICAL_SELECTION = NO_AT_CURRENT_SOURCE_SCOPE`.
+- `falsification_condition`: failure to reproduce the declared prepared-model results would weaken the corresponding realization claims; a future independently calibrated natural-spacetime prediction with a material comparator and decision rule could supersede the present empirical ceiling.
+- `countermodels`: the same prepared-state/code observations are explained as quantum-device realization of supplied models and therefore do not discriminate a foundational ontology.
+- `scope_ceiling`: simulator/analogue and numerical/model empirical contact only; no framework winner, no physical-spacetime realization, no EMP4-level framework selection.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: realization/empirical ledger blob `9eaeeec6231a205d7975bf840624af235fa0acb7`; Stage-2 handoff blob `9dc6be064e102a6c337c46c3f23e36c9b0ce2b60`.
