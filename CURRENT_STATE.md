@@ -6,9 +6,9 @@
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-25
-LATEST_CANONICAL_SCIENTIFIC_OPERATION = FCP25_TENSOR_SOURCE_INTAKE
-LATEST_CANONICAL_SCIENTIFIC_COMMIT = 8dbf89da25076b3036ca6592f6dfbd7e6d8b5152
-LATEST_CANONICAL_SCIENTIFIC_TREE = 8e2968ee23d25b60728bf342c20d3b7a7214be06
+LATEST_CANONICAL_SCIENTIFIC_OPERATION = FCP25_TENSOR_STAGE2_TAXONOMY_AND_K1K10_ADJUDICATION
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = 8dad9132fc017090ca7f752f9c240aa2110c48cf
+LATEST_CANONICAL_SCIENTIFIC_TREE = 1ca1435dd6f0b9d1162e4cfe1c23f473b5d65e9a
 LATEST_CANONICAL_MAINTENANCE_OPERATION = CLAIM_LEDGER_CURRENT_SUPERSESSION_PROPAGATION
 LATEST_CANONICAL_MAINTENANCE_COMMIT = 0bd8bffa236ea1352925f6ce5e60141af7ccadb6
 LATEST_CANONICAL_MAINTENANCE_TREE = 312e7013eb884e984abc42deed26a675958af0df
@@ -19,7 +19,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.0_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` now records FCP-25 because its Stage-1 source-intake operation is canonically integrated; Stage 2 remains not started. The latest-scientific fields identify the accepted Stage-1 scientific operation. The latest-maintenance fields continue to identify the accepted Claim Ledger maintenance result. The pre-housekeeping routing fields preserve the exact canonical routing baseline from which that maintenance candidate was produced; the current canonical Git head is resolved from `main` rather than embedded self-referentially in the file that determines its own commit hash. `CANONICAL_COMMIT_AT_STATE_SPLIT` and `CANONICAL_TREE_AT_STATE_SPLIT` remain provenance markers for the earlier live-state split.
+`LATEST_NUMBERED_PHASE` records FCP-25 because both its frozen source intake and Stage-2 taxonomy adjudication are canonically integrated. The latest-scientific fields identify the accepted Stage-2 scientific operation. The latest-maintenance fields continue to identify the accepted Claim Ledger maintenance result. The pre-housekeeping routing fields preserve the exact canonical routing baseline from which that maintenance candidate was produced; the current canonical Git head is resolved from `main` rather than embedded self-referentially in the file that determines its own commit hash. `CANONICAL_COMMIT_AT_STATE_SPLIT` and `CANONICAL_TREE_AT_STATE_SPLIT` remain provenance markers for the earlier live-state split.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.0 governs prospective work unless explicitly superseded through the truth-seeking revision protocol.
 
@@ -36,11 +36,12 @@ FCP24_STATUS = CANONICALLY_COMPLETE
 FCP24_STAGE1 = CANONICALLY_COMPLETE
 FCP24_STAGE2 = CANONICALLY_COMPLETE
 POST_RECURRENCE_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
-FCP25 = IN_PROGRESS
-FCP25_STATUS = STAGE1_CANONICALLY_COMPLETE_STAGE2_NOT_STARTED
+FCP25 = CANONICALLY_COMPLETE
+FCP25_STATUS = CANONICALLY_COMPLETE
 FCP25_STAGE1 = CANONICALLY_COMPLETE
-FCP25_STAGE2 = READY_NOT_STARTED
+FCP25_STAGE2 = CANONICALLY_COMPLETE
 FW_TENSOR_SOURCE_INTAKE = CANONICALLY_COMPLETE
+FW_TENSOR_TAXONOMY_ADJUDICATION = CANONICALLY_COMPLETE
 FW_STRING_INTAKE = CANONICALLY_COMPLETE
 POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
@@ -179,6 +180,24 @@ COSMIC_STRING_MODEL_CONSTRAINT
 
 A source-bound framework family is not equivalent to a complete nonperturbative definition, and model-level phenomenology is not framework-level empirical selection.
 
+### Tensor-network / information-theoretic historical umbrella
+
+FCP-25 Stage 2 resolves the historical `FW-TENSOR` intake umbrella under the exact frozen 29-source corpus. No stable source-bound foundational competitor survives and no successor framework ID is created. Tensor-network material is retained at representation, computational, variational, RG, model, QEC/reconstruction, simulator, adjacent, or deferred scope as supported by the frozen sources. The canonical bounded result is:
+
+```text
+FCP25_TAXONOMY_OUTCOME = D_NO_STABLE_FOUNDATIONAL_COMPETITOR_AT_CURRENT_SOURCE_SCOPE
+FW_TENSOR_SURVIVES = NO
+FW_TENSOR_CURRENT_STATUS = REMOVED_WITH_REASON
+FCP25_SUCCESSOR_FRAMEWORK_COUNT = 0
+FCP25_SUCCESSOR_FRAMEWORK_IDS = NONE
+FCP25_K1_K10_BASELINE = NOT_INSTANTIATED_NO_SURVIVING_SOURCE_BOUND_FRAMEWORK
+FCP25_HIGHEST_EMPIRICAL_SCOPE = SIMULATOR_OR_ANALOGUE_REALIZATION_OF_SUPPLIED_TENSOR_AND_CODE_MODELS
+FCP25_DIRECT_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR = NO_AT_CURRENT_SOURCE_SCOPE
+FCP25_FRAMEWORK_LEVEL_EMPIRICAL_SELECTION = NO_AT_CURRENT_SOURCE_SCOPE
+```
+
+This is a bounded taxonomy result at the frozen source scope, not a claim that tensor networks, holographic codes, information-theoretic reconstruction, or adjacent proposals are scientifically unimportant or impossible foundations in principle.
+
 ## Open dependencies
 
 ```text
@@ -209,7 +228,7 @@ POST_FCP23_REMAINING_ORDER_AUTOMATICALLY_INHERITED = NO
 
 `RECURRENCE_IMPACT_CANDIDATE = YES` means later recurrence analysis must account for the current FCP-22 relation and later current relations; it is not authorization to recompute recurrence now.
 
-The post-NFC/String-M sequencing route through prospective Reduced-NFC↔strengthened-AS reanalysis, bounded repository housekeeping, and prospective Reduced-NFC↔strengthened-LOOP reanalysis is now canonically complete at each declared scope. The AS reanalysis found three mathematically generic S0 E5 relations among 17 atomic candidates with zero E1–E4 and strengthened AS realization asymmetry. The LOOP reanalysis finds seven mathematically generic S0 E5 relations among 29 atomic candidates, zero E1–E4, twenty-two NONE, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and strengthened LOOP dynamics/continuum/realization asymmetry. Historical FCP-17 remains immutable while its current interpretation is `PARTIALLY_SUPERSEDED`. Program-level recurrence and Claim Ledger current-supersession propagation are canonically complete. The subsequent read-only post-recurrence scientific sequencing adjudication selected FCP-25 tensor-network / information-theoretic source intake as the highest-information next primitive-basis test. FCP-25 Stage 1 is now canonically complete with 62 candidates reviewed, 29 sources frozen, 27 new Source Register rows, two reused pre-existing sources, 22 rejected candidates, 11 deferred candidates, all nine search lanes covered, and no source-coverage gap. Taxonomy, successor-framework count, K1–K10, cross-framework comparison, and recurrence remain unadjudicated or not started. The next recommended operation is FCP-25 Stage 2 under separate authorization.
+The post-NFC/String-M sequencing route through prospective Reduced-NFC↔strengthened-AS reanalysis, bounded repository housekeeping, and prospective Reduced-NFC↔strengthened-LOOP reanalysis is now canonically complete at each declared scope. The AS reanalysis found three mathematically generic S0 E5 relations among 17 atomic candidates with zero E1–E4 and strengthened AS realization asymmetry. The LOOP reanalysis finds seven mathematically generic S0 E5 relations among 29 atomic candidates, zero E1–E4, twenty-two NONE, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and strengthened LOOP dynamics/continuum/realization asymmetry. Historical FCP-17 remains immutable while its current interpretation is `PARTIALLY_SUPERSEDED`. Program-level recurrence and Claim Ledger current-supersession propagation are canonically complete. The subsequent read-only post-recurrence scientific sequencing adjudication selected FCP-25 tensor-network / information-theoretic source intake as the highest-information next primitive-basis test. FCP-25 is now canonically complete: Stage 1 froze the 29-source corpus, and Stage 2 finds no stable source-bound foundational competitor under the historical `FW-TENSOR` umbrella at the frozen source scope. `FW-TENSOR` is retained only as historical provenance with status `REMOVED_WITH_REASON`; no successor framework is created, no K1–K10 baseline is instantiated, and no cross-framework comparison or recurrence recomputation is performed. The next recommended operation is a separate read-only post-FCP-25 scientific sequencing adjudication.
 
 ## Next-task status
 
@@ -220,18 +239,24 @@ FCP24_SELECTED = YES
 FCP24_STATUS = CANONICALLY_COMPLETE
 FCP25_SELECTED = YES
 FCP25_STARTED = YES
-FCP25_STATUS = STAGE1_CANONICALLY_COMPLETE_STAGE2_NOT_STARTED
+FCP25_STATUS = CANONICALLY_COMPLETE
 FCP25_STAGE1 = CANONICALLY_COMPLETE
-FCP25_STAGE2 = READY_NOT_STARTED
+FCP25_STAGE2 = CANONICALLY_COMPLETE
 FW_TENSOR_SOURCE_INTAKE = CANONICALLY_COMPLETE
+FW_TENSOR_TAXONOMY_ADJUDICATION = CANONICALLY_COMPLETE
 FCP25_FROZEN_SOURCE_COUNT = 29
 FCP25_NEW_SOURCE_REGISTER_ROWS = 27
 FCP25_REUSED_PREEXISTING_SOURCES = 2
 FCP25_FROZEN_CORPUS_READY_FOR_STAGE2 = YES
-FCP25_TAXONOMY_OUTCOME = NOT_ADJUDICATED
-FW_TENSOR_SURVIVES = NOT_ADJUDICATED
-FCP25_SUCCESSOR_FRAMEWORK_COUNT = NOT_ADJUDICATED
-FCP25_K1_K10_BASELINE = NOT_STARTED
+FCP25_TAXONOMY_OUTCOME = D_NO_STABLE_FOUNDATIONAL_COMPETITOR_AT_CURRENT_SOURCE_SCOPE
+FW_TENSOR_SURVIVES = NO
+FW_TENSOR_CURRENT_STATUS = REMOVED_WITH_REASON
+FCP25_SUCCESSOR_FRAMEWORK_COUNT = 0
+FCP25_SUCCESSOR_FRAMEWORK_IDS = NONE
+FCP25_K1_K10_BASELINE = NOT_INSTANTIATED_NO_SURVIVING_SOURCE_BOUND_FRAMEWORK
+FCP25_HIGHEST_EMPIRICAL_SCOPE = SIMULATOR_OR_ANALOGUE_REALIZATION_OF_SUPPLIED_TENSOR_AND_CODE_MODELS
+FCP25_DIRECT_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR = NO_AT_CURRENT_SOURCE_SCOPE
+FCP25_FRAMEWORK_LEVEL_EMPIRICAL_SELECTION = NO_AT_CURRENT_SOURCE_SCOPE
 FCP25_CROSS_FRAMEWORK_COMPARISON = NOT_STARTED
 FCP25_RECURRENCE_RECOMPUTATION = NOT_STARTED
 POST_RECURRENCE_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
@@ -248,7 +273,7 @@ REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT = CANONICALLY_COMPL
 HOUSEKEEPING_CANONICAL_COMMIT = b57a8617bb5818f3f3ab540ce63e0d82cde743b0
 HOUSEKEEPING_CANONICAL_TREE = 13ba67fcebb23efbab5d6f55eb4ade953f6b548d
 HOUSEKEEPING_CANONICAL_BASE = 09aaf0ba4f9c570310150532c7e7ac4e42d868f8
-NEXT_RECOMMENDED_OPERATION = FCP25_STAGE2_TENSOR_TAXONOMY_GATE_AND_K1_K10_BASELINE
+NEXT_RECOMMENDED_OPERATION = POST_FCP25_SCIENTIFIC_SEQUENCING_ADJUDICATION
 POST_FCP24_GROK_AUDIT = INDEPENDENT_ADJUDICATION_CANONICALLY_COMPLETE
 POST_FCP24_GROK_AUDIT_PACKET = EXPOSED_EXACTLY
 POST_FCP24_GROK_AUDIT_PROMPT = SENT_EXACTLY
@@ -260,11 +285,11 @@ POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = SEPARATE_FCP25_STAGE2_EXECUTION_AUTHORIZATION
-NEXT_SCIENTIFIC_PHASE = FCP25_STAGE2_PENDING_SEPARATE_AUTHORIZATION
+NEXT_EXECUTION_STEP = SEPARATE_POST_FCP25_SCIENTIFIC_SEQUENCING_ADJUDICATION_AUTHORIZATION
+NEXT_SCIENTIFIC_PHASE = NONE__POST_FCP25_SEQUENCING_ADJUDICATION_READY_PENDING_SEPARATE_AUTHORIZATION
 ```
 
-The Grok audit and independent adjudication, Finding-007 targeted source re-audit, first `FW-STRING-M` null control, bounded NFC↔String/M comparison, post-NFC/String-M read-only sequencing decision, prospective NFC↔strengthened-AS reanalysis, bounded repository housekeeping/current-state supersession, prospective NFC↔strengthened-LOOP reanalysis, program-level recurrence recomputation, Claim Ledger reconciliation, and the read-only post-recurrence scientific sequencing decision are complete at their declared scopes. FCP-25 Stage 1 is now canonically complete at its frozen source-intake scope. This routing canonicalization does not start Stage 2, adjudicate `FW-TENSOR` taxonomy, assign K1–K10, modify the Framework Register, perform a cross-framework comparison, assign convergence credit, recompute recurrence, or begin FCP-26.
+The Grok audit and independent adjudication, Finding-007 targeted source re-audit, first `FW-STRING-M` null control, bounded NFC↔String/M comparison, post-NFC/String-M read-only sequencing decision, prospective NFC↔strengthened-AS reanalysis, bounded repository housekeeping/current-state supersession, prospective NFC↔strengthened-LOOP reanalysis, program-level recurrence recomputation, Claim Ledger reconciliation, the read-only post-recurrence scientific sequencing decision, and both stages of FCP-25 are complete at their declared scopes. FCP-25 Stage 2 finds `D_NO_STABLE_FOUNDATIONAL_COMPETITOR_AT_CURRENT_SOURCE_SCOPE`: `FW-TENSOR` does not survive, no successor framework is source-bound, and K1–K10 is therefore not instantiated. The strongest empirical contact is simulator/analogue realization of supplied tensor/code models, with no framework-level discriminator or empirical selection at the frozen scope. This routing reconciliation does not perform a cross-framework comparison, assign convergence credit, recompute recurrence, begin a new source intake, or begin FCP-26.
 
 ## Finding-007 targeted source re-audit — canonical result
 
