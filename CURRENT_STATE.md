@@ -6,9 +6,9 @@
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-25
-LATEST_CANONICAL_SCIENTIFIC_OPERATION = BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1
-LATEST_CANONICAL_SCIENTIFIC_COMMIT = 1c2becc9ce77555b767dedb045ff2d097b611074
-LATEST_CANONICAL_SCIENTIFIC_TREE = cfef6813d2fc0f2965e8e7263aaf836f6b0744d9
+LATEST_CANONICAL_SCIENTIFIC_OPERATION = BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = fc0c1d22020fe8cf51c1ad8656df1668b960f4a7
+LATEST_CANONICAL_SCIENTIFIC_TREE = 216385d44ad279fd105116857c5279aa409e4715
 LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FCP25_GROK_RECONCILIATION
 LATEST_CANONICAL_MAINTENANCE_COMMIT = 2b2be93254d07f62fa8c6253a45f4aeb17cdcba2
 LATEST_CANONICAL_MAINTENANCE_TREE = fd99d9eea0a9699ebb9478bf20e9a6d87b5c6714
@@ -19,7 +19,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.0_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` remains FCP-25 because the broader holographic intake is an unnumbered Stage-1 operation and FCP-26 is not selected. The latest-scientific fields identify the canonically integrated broader-holographic Stage-1 source intake and corpus freeze; they do not imply a taxonomy outcome, framework admission, K1–K10 result, comparison, or recurrence update. The latest-maintenance fields identify the prior canonical post-FCP-25 Grok reconciliation result, which preserves the accepted Claim Ledger propagation and framework-separation/admission clarification without introducing new science. The pre-housekeeping routing fields preserve the exact canonical routing baseline from which the earlier maintenance candidate was produced; the current canonical Git head is resolved from `main` rather than embedded self-referentially in the file that determines its own commit hash. `CANONICAL_COMMIT_AT_STATE_SPLIT` and `CANONICAL_TREE_AT_STATE_SPLIT` remain provenance markers for the earlier live-state split.
+`LATEST_NUMBERED_PHASE` remains FCP-25 because the broader-holographic Stage-2 taxonomy gate is an unnumbered follow-on operation and FCP-26 is not selected. The latest-scientific fields identify the canonically integrated broader-holographic Stage-2 taxonomy result: no new stable foundational holographic framework survives admission at the frozen 50-source scope, no `FW-HOLO` is created, and the existing `FW-STRING-M` baseline remains unchanged. The latest-maintenance fields retain the last non-self-referential canonical maintenance identity; this live routing/navigation reconciliation is represented by its routing artifact and the canonical Git head rather than embedding its own enclosing commit identity in this file. The pre-housekeeping routing fields preserve the exact canonical routing baseline from which the earlier maintenance candidate was produced; the current canonical Git head is resolved from `main` rather than embedded self-referentially in the file that determines its own commit hash. `CANONICAL_COMMIT_AT_STATE_SPLIT` and `CANONICAL_TREE_AT_STATE_SPLIT` remain provenance markers for the earlier live-state split.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.0 governs prospective work unless explicitly superseded through the truth-seeking revision protocol.
 
@@ -57,6 +57,7 @@ POST_FCP25_GROK_RECONCILIATION = CANONICALLY_COMPLETE
 BROADER_HOLOGRAPHIC_SOURCE_INTAKE = CANONICALLY_COMPLETE
 BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
 BROADER_HOLOGRAPHIC_SOURCE_CORPUS = FROZEN
+BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2 = CANONICALLY_COMPLETE
 ```
 
 Targeted source strengthening established, at bounded scope:
@@ -162,8 +163,10 @@ FW_STRING_M_HIGHEST_EMPIRICAL_SCOPE = PARAMETER_CONSTRAINT_AT_MODEL_SCOPE
 
 ADS_CFT_ROLE = DUAL_DESCRIPTION_IN_DECLARED_MODELS
 BROADER_HOLOGRAPHY_ROLE = ADJACENT_BUT_DISTINCT_MATERIAL
-BROADER_HOLOGRAPHY_SOURCE_BOUND_FRAMEWORK = NOT_ADJUDICATED_AFTER_STAGE1
+BROADER_HOLOGRAPHY_SOURCE_BOUND_FRAMEWORK = NO_NEW_STABLE_FOUNDATIONAL_HOLOGRAPHIC_FRAMEWORK_AT_CURRENT_SOURCE_SCOPE
 BROADER_HOLOGRAPHY_FOLLOW_ON_INTAKE = CANONICALLY_COMPLETE_STAGE1
+BROADER_HOLOGRAPHY_TAXONOMY_GATE_STAGE2 = CANONICALLY_COMPLETE
+FW_HOLO_CREATED = NO
 BROADER_HOLOGRAPHY_HETEROGENEITY_THEOREM = NOT_CLAIMED
 
 DIRECT_FW_STRING_M_EMPIRICAL_DISCRIMINATOR = NO
@@ -225,7 +228,10 @@ BROADER_HOLOGRAPHIC_SOURCE_CORPUS = FROZEN
 BROADER_HOLOGRAPHIC_SOURCE_COUNT = 50
 BROADER_HOLOGRAPHIC_NEW_SOURCE_COUNT = 32
 BROADER_HOLOGRAPHIC_REUSED_SOURCE_COUNT = 18
-BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2 = RECOMMENDED_NOT_STARTED_REQUIRES_SEPARATE_AUTHORIZATION
+BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2 = CANONICALLY_COMPLETE
+BROADER_HOLOGRAPHIC_NEWLY_ADMITTED_FRAMEWORK_COUNT = 0
+FW_HOLO_CREATED = NO
+BISWAS_2026_AUTHOR_METADATA_TRANSCRIPTION_RECONCILIATION = DOCKETED_NOT_EXECUTED
 POST_FCP24_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED
 POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 POST_FCP25_GROK_AUDIT = CANONICALLY_COMPLETE
@@ -249,7 +255,7 @@ POST_FCP23_REMAINING_ORDER_AUTOMATICALLY_INHERITED = NO
 
 `RECURRENCE_IMPACT_CANDIDATE = YES` means later recurrence analysis must account for the current FCP-22 relation and later current relations; it is not authorization to recompute recurrence now.
 
-The post-NFC/String-M sequencing route through prospective Reduced-NFC↔strengthened-AS reanalysis, bounded repository housekeeping, and prospective Reduced-NFC↔strengthened-LOOP reanalysis is now canonically complete at each declared scope. The AS reanalysis found three mathematically generic S0 E5 relations among 17 atomic candidates with zero E1–E4 and strengthened AS realization asymmetry. The LOOP reanalysis finds seven mathematically generic S0 E5 relations among 29 atomic candidates, zero E1–E4, twenty-two NONE, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and strengthened LOOP dynamics/continuum/realization asymmetry. Historical FCP-17 remains immutable while its current interpretation is `PARTIALLY_SUPERSEDED`. Program-level recurrence and Claim Ledger current-supersession propagation are canonically complete. The subsequent read-only post-recurrence scientific sequencing adjudication selected FCP-25 tensor-network / information-theoretic source intake as the highest-information next primitive-basis test. FCP-25 is now canonically complete: Stage 1 froze the 29-source corpus, and Stage 2 finds no stable source-bound foundational competitor under the historical `FW-TENSOR` umbrella at the frozen source scope. `FW-TENSOR` is retained only as historical provenance with status `REMOVED_WITH_REASON`; no successor framework is created, no K1–K10 baseline is instantiated, and no cross-framework comparison or recurrence recomputation is performed. The post-FCP-25 Grok audit, independent adjudication, and reconciliation are canonically complete. The separately authorized broader-holographic Stage-1 intake is now canonically complete with a frozen 50-source corpus (32 new Source Register rows and 18 reused canonical sources) sufficient for a later taxonomy gate at the declared search scope. No `FW-HOLO` or successor framework has been created. The next recommended operation is `BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2`, which is not started and requires separate authorization.
+The post-NFC/String-M sequencing route through prospective Reduced-NFC↔strengthened-AS reanalysis, bounded repository housekeeping, and prospective Reduced-NFC↔strengthened-LOOP reanalysis is now canonically complete at each declared scope. The AS reanalysis found three mathematically generic S0 E5 relations among 17 atomic candidates with zero E1–E4 and strengthened AS realization asymmetry. The LOOP reanalysis finds seven mathematically generic S0 E5 relations among 29 atomic candidates, zero E1–E4, twenty-two NONE, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and strengthened LOOP dynamics/continuum/realization asymmetry. Historical FCP-17 remains immutable while its current interpretation is `PARTIALLY_SUPERSEDED`. Program-level recurrence and Claim Ledger current-supersession propagation are canonically complete. The subsequent read-only post-recurrence scientific sequencing adjudication selected FCP-25 tensor-network / information-theoretic source intake as the highest-information next primitive-basis test. FCP-25 is now canonically complete: Stage 1 froze the 29-source corpus, and Stage 2 finds no stable source-bound foundational competitor under the historical `FW-TENSOR` umbrella at the frozen source scope. `FW-TENSOR` is retained only as historical provenance with status `REMOVED_WITH_REASON`; no successor framework is created and no K1–K10 baseline is instantiated. The post-FCP-25 Grok audit, independent adjudication, and reconciliation are canonically complete. The separately authorized broader-holographic Stage-1 intake froze 50 sources (32 new and 18 reused), and the now-canonical Stage-2 taxonomy gate accounts for all 50 while admitting no new foundational framework. Declared String/M material maps to existing `FW-STRING-M`; the remaining holographic material is retained at weaker source-qualified principle, duality, reconstruction, model, realization, mechanism, or research-program scope. `FW-HOLO` is not created. No comparison, convergence credit, recurrence recomputation, or FCP-26 selection follows automatically. The next recommended operation is the separately authorized read-only `POST_BROADER_HOLOGRAPHIC_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION`.
 
 ## Next-task status
 
@@ -305,18 +311,28 @@ BROADER_HOLOGRAPHIC_NEW_SOURCE_COUNT = 32
 BROADER_HOLOGRAPHIC_REUSED_SOURCE_COUNT = 18
 BROADER_HOLOGRAPHIC_SOURCE_CORPUS_SUFFICIENT_FOR_LATER_TAXONOMY = YES_AT_CURRENT_DECLARED_SEARCH_SCOPE
 BROADER_HOLOGRAPHIC_KNOWN_SOURCE_GAPS = NONE_AT_CURRENT_DECLARED_SEARCH_SCOPE
-BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2 = RECOMMENDED_NOT_STARTED_REQUIRES_SEPARATE_AUTHORIZATION
-FRAMEWORK_TAXONOMY_ADJUDICATED = NO
-K1_K10_INSTANTIATED = NO
+BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2 = CANONICALLY_COMPLETE
+BROADER_HOLOGRAPHIC_TAXONOMY_VERDICT = EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_REMAINDER__NO_NEW_STABLE_FOUNDATIONAL_HOLOGRAPHIC_FRAMEWORK_AT_CURRENT_SOURCE_SCOPE
+BROADER_HOLOGRAPHIC_SCIENTIFIC_OBJECT_COUNT_BEFORE_ADMISSION = 12
+BROADER_HOLOGRAPHIC_EXISTING_FRAMEWORK_ASSIGNMENT_COUNT = 1
+BROADER_HOLOGRAPHIC_EXISTING_FRAMEWORK_ASSIGNMENT_IDS = FW-STRING-M
+BROADER_HOLOGRAPHIC_NEWLY_ADMITTED_FRAMEWORK_COUNT = 0
+BROADER_HOLOGRAPHIC_NEWLY_ADMITTED_FRAMEWORK_IDS = NONE
+BROADER_HOLOGRAPHIC_K1_K10_BASELINE_STATUS = NONINSTANTIATED_NO_NEW_FRAMEWORK_SURVIVES__FW_STRING_M_BASELINE_UNCHANGED
+BROADER_HOLOGRAPHIC_HIGHEST_EMPIRICAL_SCOPE = MODEL_LEVEL_EMP2_COMPATIBILITY_WITH_OBSERVATIONAL_CONSTRAINTS_IN_HOLOGRAPHIC_COSMOLOGY
+BROADER_HOLOGRAPHIC_HIGHEST_DIRECT_INTERVENTION_REALIZATION_SCOPE = SIMULATOR_OR_ANALOGUE_REALIZATION_OF_SUPPLIED_HOLOGRAPHIC_CODE_MODELS
+FRAMEWORK_TAXONOMY_ADJUDICATED = YES
+K1_K10_INSTANTIATED = NO_NEW_FRAMEWORK_SURVIVES
 CROSS_FRAMEWORK_COMPARISON = NO
 FW_HOLO_CREATED = NO
+BISWAS_2026_AUTHOR_METADATA_TRANSCRIPTION_RECONCILIATION = DOCKETED_NOT_EXECUTED
 FCP26_SELECTED = NO
 FCP26_STARTED = NO
 REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT = CANONICALLY_COMPLETE
 HOUSEKEEPING_CANONICAL_COMMIT = b57a8617bb5818f3f3ab540ce63e0d82cde743b0
 HOUSEKEEPING_CANONICAL_TREE = 13ba67fcebb23efbab5d6f55eb4ade953f6b548d
 HOUSEKEEPING_CANONICAL_BASE = 09aaf0ba4f9c570310150532c7e7ac4e42d868f8
-NEXT_RECOMMENDED_OPERATION = BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2
+NEXT_RECOMMENDED_OPERATION = POST_BROADER_HOLOGRAPHIC_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION
 POST_FCP24_GROK_AUDIT = INDEPENDENT_ADJUDICATION_CANONICALLY_COMPLETE
 POST_FCP24_GROK_AUDIT_PACKET = EXPOSED_EXACTLY
 POST_FCP24_GROK_AUDIT_PROMPT = SENT_EXACTLY
@@ -328,8 +344,8 @@ POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = SEPARATE_BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2_AUTHORIZATION
-NEXT_SCIENTIFIC_PHASE = NONE__BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2_RECOMMENDED_PENDING_SEPARATE_AUTHORIZATION
+NEXT_EXECUTION_STEP = SEPARATE_POST_BROADER_HOLOGRAPHIC_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION_AUTHORIZATION
+NEXT_SCIENTIFIC_PHASE = NONE__POST_BROADER_HOLOGRAPHIC_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION_PENDING_SEPARATE_READ_ONLY_AUTHORIZATION
 ```
 
 The Grok audit and independent adjudication, Finding-007 targeted source re-audit, first `FW-STRING-M` null control, bounded NFC↔String/M comparison, post-NFC/String-M read-only sequencing decision, prospective NFC↔strengthened-AS reanalysis, bounded repository housekeeping/current-state supersession, prospective NFC↔strengthened-LOOP reanalysis, program-level recurrence recomputation, Claim Ledger reconciliation, the read-only post-recurrence scientific sequencing decision, and both stages of FCP-25 are complete at their declared scopes. FCP-25 Stage 2 finds `D_NO_STABLE_FOUNDATIONAL_COMPETITOR_AT_CURRENT_SOURCE_SCOPE`: `FW-TENSOR` does not survive, no successor framework is source-bound, and K1–K10 is therefore not instantiated. The strongest empirical contact is simulator/analogue realization of supplied tensor/code models, with no framework-level discriminator or empirical selection at the frozen scope. This routing reconciliation does not perform a cross-framework comparison, assign convergence credit, recompute recurrence, begin a new source intake, or begin FCP-26.
@@ -362,6 +378,55 @@ BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2 = RECOMMENDED_NOT_STARTED_REQUIRES_SEPA
 ```
 
 The exact Stage-1 result is commit `1c2becc9ce77555b767dedb045ff2d097b611074`, tree `cfef6813d2fc0f2965e8e7263aaf836f6b0744d9`. The source freeze contains 50 admitted sources: 32 newly registered and 18 reused canonical sources. Any later taxonomy result requires a separate Stage-2 authorization and must use the frozen corpus unless a separately authorized source-reopening operation occurs.
+
+## Broader holographic Stage-2 taxonomy gate — canonical result
+
+The separately authorized Stage-2 taxonomy gate is canonically integrated at commit `fc0c1d22020fe8cf51c1ad8656df1668b960f4a7`, tree `216385d44ad279fd105116857c5279aa409e4715`. It uses the exact frozen 50-source Stage-1 corpus and introduces no new external source.
+
+```text
+BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2 = CANONICALLY_COMPLETE
+FROZEN_SOURCE_COUNT = 50
+NEW_EXTERNAL_SOURCES = 0
+ALL_50_SOURCES_ACCOUNTED_FOR = YES
+
+TAXONOMY_VERDICT =
+EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_REMAINDER__NO_NEW_STABLE_FOUNDATIONAL_HOLOGRAPHIC_FRAMEWORK_AT_CURRENT_SOURCE_SCOPE
+
+SCIENTIFIC_OBJECT_COUNT_BEFORE_ADMISSION = 12
+EXISTING_FRAMEWORK_ASSIGNMENT_COUNT = 1
+EXISTING_FRAMEWORK_ASSIGNMENT_IDS = FW-STRING-M
+NEWLY_ADMITTED_FRAMEWORK_COUNT = 0
+NEWLY_ADMITTED_FRAMEWORK_IDS = NONE
+FW_HOLO_CREATED = NO
+
+K1_K10_BASELINE_STATUS =
+NONINSTANTIATED_NO_NEW_FRAMEWORK_SURVIVES__FW_STRING_M_BASELINE_UNCHANGED
+
+HIGHEST_EMPIRICAL_SCOPE =
+MODEL_LEVEL_EMP2_COMPATIBILITY_WITH_OBSERVATIONAL_CONSTRAINTS_IN_HOLOGRAPHIC_COSMOLOGY
+
+HIGHEST_DIRECT_INTERVENTION_REALIZATION_SCOPE =
+SIMULATOR_OR_ANALOGUE_REALIZATION_OF_SUPPLIED_HOLOGRAPHIC_CODE_MODELS
+
+DIRECT_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR = NOT_APPLICABLE_NO_SURVIVING_FRAMEWORK
+FRAMEWORK_LEVEL_EMPIRICAL_SELECTION = NOT_APPLICABLE_NO_SURVIVING_FRAMEWORK
+FRAMEWORK_REGISTER_CHANGE = NONE
+FW_STRING_M_SUBSTANTIVE_STATUS_CHANGE = NONE
+PAIRWISE_COMPARISON = NONE
+CONVERGENCE_CREDIT = NONE
+RECURRENCE_RECOMPUTATION = NONE
+FCP26_SELECTED = NO
+FCP26_STARTED = NO
+```
+
+The twelve pre-admission objects are retained as an accounting taxonomy. Only declared String/M content maps to an already admitted framework (`FW-STRING-M`); every other object is retained at a weaker source-qualified classification. No pooled broader-holography K1–K10 baseline is created. The strongest Stage-2 empirical/data contact is model-level `EMP2` compatibility in holographic cosmology, while the strongest direct intervention realization is a supplied holographic code model on quantum hardware; neither is framework-level discrimination or selection.
+
+The inherited first-author transcription defect for `SRC-FCP25-TENSOR-BISWAS-2026` is nonmaterial, remains uncorrected in the immutable Stage-1 freeze, and is docketed for a separately authorized metadata reconciliation.
+
+```text
+NEXT_RECOMMENDED_OPERATION = POST_BROADER_HOLOGRAPHIC_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_OPERATION_AUTHORIZED = NO
+```
 
 ## Post-FCP-25 Grok reconciliation — canonical result
 
