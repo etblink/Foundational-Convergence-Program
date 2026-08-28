@@ -1,0 +1,7 @@
+meta/FCP_NAVIGATION_SCHEMA_0_1_0.json text eol=lf
+meta/FCP_CANONICAL_INDEX.json text eol=lf
+meta/FCP_OPERATION_REGISTRY.jsonl text eol=lf
+meta/FCP_ARTIFACT_REGISTRY.jsonl text eol=lf
+tools/fcp_navigation.py text eol=lf
+governance/FCP_REPOSITORY_NAVIGATION_LAYER_PREREGISTRATION_0_1_0.md text eol=lf
+handoffs/FCP_REPOSITORY_NAVIGATION_LAYER_HANDOFF_0_1_0.md text eol=lf
