@@ -23,7 +23,7 @@
     },
     {
       "authority_id": "CURRENT_STATE",
-      "blob": "79d2e3ecec4a98b462bb956f2af131be22033410",
+      "blob": "0f427de48c61f43f9e6127a936cb3ef1e8e7dfb7",
       "path": "CURRENT_STATE.md"
     },
     {
@@ -43,7 +43,7 @@
     },
     {
       "authority_id": "SOURCE_REGISTER",
-      "blob": "5b089494b1ffc152c284e22538368cd53777182c",
+      "blob": "d70fd4de1d618a75431c059243bd8855e2bff8a3",
       "path": "SOURCE_REGISTER.md"
     }
   ],
@@ -64,17 +64,17 @@
     "version": "0.2.0"
   },
   "indexed_scientific_baseline": {
-    "commit": "b5bc05ea6b82346e856d5dca4f91b98bbbc802ba",
-    "message": "Canonicalize post-FCP-25 reconciliation routing",
+    "commit": "7dcdcc5ffcf25240555e98501e43a0f8aadd59aa",
+    "message": "Reconcile broader holographic Stage 1 routing",
     "repository": "etblink/Foundational-Convergence-Program",
-    "tree": "23d5f4a0f988cefebbf6c5b8a4dff98a8a7eaab8"
+    "tree": "3ae5910656f40c19c30494f8d5a0f22d179cfe1b"
   },
   "navigation_coverage": {
     "absence_from_operation_registry_means_scientific_absence": false,
     "artifact_inventory_scope": "ENTIRE_TRACKED_INDEXED_BASELINE_TREE_EXCLUDING_SELF_REFERENTIAL_NAVIGATION_FILES",
-    "artifact_record_count": 224,
+    "artifact_record_count": 234,
     "historical_operation_completeness_claimed": false,
-    "operation_record_count": 38,
+    "operation_record_count": 39,
     "operation_registry_scope": "CURRENT_DEPENDENCY_CLOSURE",
     "self_excluded_paths": [
       "meta/FCP_ARTIFACT_REGISTRY.jsonl",
@@ -117,22 +117,27 @@
     }
   ],
   "program_state": {
-    "broader_holographic_source_intake": "NOT_STARTED",
-    "current_handoff_path": null,
-    "current_operation": "POST_FCP25_GROK_RECONCILIATION",
-    "current_routing_path": "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md",
+    "broader_holographic_new_source_count": 32,
+    "broader_holographic_reused_source_count": 18,
+    "broader_holographic_source_corpus": "FROZEN",
+    "broader_holographic_source_count": 50,
+    "broader_holographic_source_intake": "CANONICALLY_COMPLETE",
+    "broader_holographic_source_intake_stage1": "CANONICALLY_COMPLETE",
+    "current_handoff_path": "handoffs/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1_HANDOFF_0_1_0.md",
+    "current_operation": "BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1",
+    "current_routing_path": "governance/BROADER_HOLOGRAPHIC_STAGE1_POST_INTEGRATION_ROUTING_0_1_0.md",
     "fcp26_selected": false,
     "fcp26_started": false,
     "framework_winner": "NONE",
     "latest_completed_external_audit_chain": "POST_FCP25_GROK_AUDIT",
     "latest_completed_maintenance_operation": "POST_FCP25_GROK_RECONCILIATION",
-    "latest_completed_science_operation": "FCP25_STAGE2_TENSOR_TAXONOMY_GATE_AND_K1_K10_BASELINE",
+    "latest_completed_science_operation": "BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1",
     "latest_numbered_phase": "FCP-25",
-    "next_recommended_operation": "BROADER_HOLOGRAPHIC_SOURCE_INTAKE",
+    "next_recommended_operation": "BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2",
     "post_fcp25_grok_audit": "CANONICALLY_COMPLETE",
     "post_fcp25_grok_independent_adjudication": "CANONICALLY_COMPLETE",
     "post_fcp25_grok_reconciliation": "CANONICALLY_COMPLETE",
-    "predecessor_operation": "POST_FCP25_GROK_INDEPENDENT_FINDING_ADJUDICATION_RECORD",
+    "predecessor_operation": "POST_FCP25_GROK_RECONCILIATION",
     "scalar_framework_score": "FORBIDDEN"
   },
   "read_profiles": {
@@ -152,18 +157,21 @@
       "CURRENT_STATE.md",
       "FRAMEWORK_REGISTER.md",
       "SOURCE_REGISTER.md",
+      "frameworks/holography/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_0_1_0.md",
+      "frameworks/holography/BROADER_HOLOGRAPHIC_SOURCE_SELECTION_AUDIT_0_1_0.md",
+      "handoffs/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1_HANDOFF_0_1_0.md",
       "frameworks/string/FCP24_STRING_TAXONOMY_GATE_0_1_0.md",
       "audits/FCP25_TENSOR_TAXONOMY_ADJUDICATION_0_1_0.md",
-      "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md"
+      "governance/BROADER_HOLOGRAPHIC_STAGE1_POST_INTEGRATION_ROUTING_0_1_0.md"
     ],
     "GENERAL_PROJECT_ORIENTATION": [
       "CURRENT_STATE.md",
       "README.md",
-      "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md",
+      "governance/BROADER_HOLOGRAPHIC_STAGE1_POST_INTEGRATION_ROUTING_0_1_0.md",
+      "handoffs/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1_HANDOFF_0_1_0.md",
       "FRAMEWORK_REGISTER.md",
       "meta/FCP_CANONICAL_INDEX.json",
-      "governance/FCP_METHOD_0_2_0_ACTIVATION.md",
-      "handoffs/POST_FCP25_GROK_INDEPENDENT_ADJUDICATION_HANDOFF_0_1_0.md"
+      "governance/FCP_METHOD_0_2_0_ACTIVATION.md"
     ],
     "PAIRWISE_COMPARISON": [
       "CURRENT_STATE.md",
@@ -187,7 +195,11 @@
       "EPISTEMIC_RULES.md",
       "SOURCE_REGISTER.md",
       "governance/FCP_METHOD_0_2_0_ACTIVATION.md",
-      "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md"
+      "governance/BROADER_HOLOGRAPHIC_STAGE1_POST_INTEGRATION_ROUTING_0_1_0.md",
+      "governance/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_PREREGISTRATION_0_1_0.md",
+      "frameworks/holography/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_0_1_0.md",
+      "frameworks/holography/BROADER_HOLOGRAPHIC_SOURCE_SELECTION_AUDIT_0_1_0.md",
+      "handoffs/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1_HANDOFF_0_1_0.md"
     ]
   },
   "registries": {
