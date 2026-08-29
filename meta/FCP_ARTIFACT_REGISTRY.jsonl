@@ -1,11 +1,11 @@
 {"blob":"2226b7d987c379f5faa3a67d9330c5f4ec2488a4","byte_count":369,"git_mode":"100644","object_type":"blob","path":".gitattributes","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"58898e5be12f1ebca06c5d2e0d30e4be1ae1b1fb","byte_count":172066,"git_mode":"100644","object_type":"blob","path":"CLAIM_LEDGER.md","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"190ce97bde2d43d6b1c6c30f5d9ed032939b3308","byte_count":7108,"git_mode":"100644","object_type":"blob","path":"COMPARISON_PROTOCOL.md","schema_version":"0.1.0","top_level_class":"ROOT"}
-{"blob":"d3a473b66c0638c755f984a8a00d3fe35b8292d6","byte_count":56122,"git_mode":"100644","object_type":"blob","path":"CURRENT_STATE.md","schema_version":"0.1.0","top_level_class":"ROOT"}
+{"blob":"6cd5e58e2e9b91db96b49e8edeedacd1671c602c","byte_count":59216,"git_mode":"100644","object_type":"blob","path":"CURRENT_STATE.md","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"76c9a8f2b3c00896160a16a184213250bca703ce","byte_count":5081,"git_mode":"100644","object_type":"blob","path":"EPISTEMIC_RULES.md","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"579819121d1733e1746868941a3a282de2cf1ac9","byte_count":6767,"git_mode":"100644","object_type":"blob","path":"FCP_CHARTER.md","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"29d0a4ad7ad8c35f9155ff0c9ecc58c56aa1d72e","byte_count":42594,"git_mode":"100644","object_type":"blob","path":"FRAMEWORK_REGISTER.md","schema_version":"0.1.0","top_level_class":"ROOT"}
-{"blob":"984f8832216d73c05877475b682bdb8ad1143e2d","byte_count":15371,"git_mode":"100644","object_type":"blob","path":"README.md","schema_version":"0.1.0","top_level_class":"ROOT"}
+{"blob":"23852c47be8627849c5671fa209ac000539bb93d","byte_count":16873,"git_mode":"100644","object_type":"blob","path":"README.md","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"d70fd4de1d618a75431c059243bd8855e2bff8a3","byte_count":99860,"git_mode":"100644","object_type":"blob","path":"SOURCE_REGISTER.md","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"7d9bd049adc9231d04b87f9914ef6baa3c55e263","byte_count":11444,"git_mode":"100644","object_type":"blob","path":"audits/BROADER_HOLOGRAPHIC_REALIZATION_EMPIRICAL_CEILING_0_1_0.md","schema_version":"0.1.0","top_level_class":"audits"}
 {"blob":"afb210c3b644ae158231dcf1daccb1a134ce29a4","byte_count":42587,"git_mode":"100644","object_type":"blob","path":"audits/BROADER_HOLOGRAPHIC_TAXONOMY_ADJUDICATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"audits"}
@@ -20,6 +20,8 @@
 {"blob":"9eaeeec6231a205d7975bf840624af235fa0acb7","byte_count":14157,"git_mode":"100644","object_type":"blob","path":"audits/FCP25_TENSOR_REALIZATION_EMPIRICAL_LEDGER_0_1_0.md","schema_version":"0.1.0","top_level_class":"audits"}
 {"blob":"98e61dbc85a74dbba427d597a42b58bb2b973a5d","byte_count":27064,"git_mode":"100644","object_type":"blob","path":"audits/FCP25_TENSOR_SOURCE_SELECTION_LEDGER_0_1_0.md","schema_version":"0.1.0","top_level_class":"audits"}
 {"blob":"a415e89bc3fb0f1d76e88119d84f92e6fd6c91d8","byte_count":25599,"git_mode":"100644","object_type":"blob","path":"audits/FCP25_TENSOR_TAXONOMY_ADJUDICATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"audits"}
+{"blob":"48cf7ba38df791443daefe6807b3c2a91575359d","byte_count":14111,"git_mode":"100644","object_type":"blob","path":"audits/FCP26_POST_FCP23_DELTA_FRAMEWORK_SCREEN_0_1_0.md","schema_version":"0.1.0","top_level_class":"audits"}
+{"blob":"63a8024e11e60c7b116b21c116ab1119bfe37366","byte_count":28178,"git_mode":"100644","object_type":"blob","path":"audits/FCP26_REALIZATION_BRIDGE_AND_EMPIRICAL_TARGET_ADJUDICATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"audits"}
 {"blob":"44eba6d79b06a96c67cfd6dd78cf3a0af6d45df1","byte_count":7372,"git_mode":"100644","object_type":"blob","path":"audits/FCP_EQUAL_STANDARD_E2_E3_ADJUDICATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"audits"}
 {"blob":"e93a1c4ece05d64c313030a60bb588c539f129f9","byte_count":6428,"git_mode":"100644","object_type":"blob","path":"audits/FCP_EQUAL_STANDARD_E2_E3_EVIDENCE_LEDGER_0_1_0.md","schema_version":"0.1.0","top_level_class":"audits"}
 {"blob":"86bd5e29105f05af8e11dd1f946fcc75e0d1dc01","byte_count":6479,"git_mode":"100644","object_type":"blob","path":"audits/FCP_EQUAL_STANDARD_E2_E3_RULE_SPECIFICATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"audits"}
@@ -168,6 +170,8 @@
 {"blob":"4283c37472f96c671fba9178b88acf5b81f8548d","byte_count":13013,"git_mode":"100644","object_type":"blob","path":"governance/FCP24_STRING_SOURCE_INTAKE_PREREGISTRATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"governance"}
 {"blob":"771b84c83e43dcdf600fa2f0e47ce5151b7a40a9","byte_count":16819,"git_mode":"100644","object_type":"blob","path":"governance/FCP25_TENSOR_SOURCE_INTAKE_PREREGISTRATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"governance"}
 {"blob":"c9f035fc840ab83ddf68582d648cedbc0eb7a007","byte_count":11464,"git_mode":"100644","object_type":"blob","path":"governance/FCP25_TENSOR_STAGE2_TAXONOMY_K1K10_PREREGISTRATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"governance"}
+{"blob":"c716d07f379905273b70fa9ee8381f79a6eacd9f","byte_count":17515,"git_mode":"100644","object_type":"blob","path":"governance/FCP26_EMPIRICAL_DISCRIMINATOR_STAGE1_PREREGISTRATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"governance"}
+{"blob":"ad15ccb587052c1f48fb2181a1afa789c0e78fac","byte_count":7826,"git_mode":"100644","object_type":"blob","path":"governance/FCP26_STAGE1_POST_INTEGRATION_ROUTING_0_1_0.md","schema_version":"0.1.0","top_level_class":"governance"}
 {"blob":"c3f89e5bb06e25a8d25187a952fb76bb2afa35f6","byte_count":3767,"git_mode":"100644","object_type":"blob","path":"governance/FCP_AUDIT_EVIDENCE_CANONICALIZATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"governance"}
 {"blob":"d6fd6c2f4813a00efdd97e03c03d71f50ce2a598","byte_count":4693,"git_mode":"100644","object_type":"blob","path":"governance/FCP_METHOD_0_2_0_ACTIVATION.md","schema_version":"0.1.0","top_level_class":"governance"}
 {"blob":"b440f5954865b77a2df1e544b56afa8dbf5e8de7","byte_count":3449,"git_mode":"100644","object_type":"blob","path":"governance/FCP_METHOD_0_2_0_COMPARATOR_ROLE_SPECIFICATION.md","schema_version":"0.1.0","top_level_class":"governance"}
@@ -208,6 +212,7 @@
 {"blob":"83cebd500cab24b8e19e15b81b0acac8bd872040","byte_count":17354,"git_mode":"100644","object_type":"blob","path":"handoffs/FCP24_STRING_SOURCE_INTAKE_HANDOFF_0_1_0.md","schema_version":"0.1.0","top_level_class":"handoffs"}
 {"blob":"2659e9e3e942b6e930ee70a1f152a0ed82093afd","byte_count":9549,"git_mode":"100644","object_type":"blob","path":"handoffs/FCP25_TENSOR_SOURCE_INTAKE_HANDOFF_0_1_0.md","schema_version":"0.1.0","top_level_class":"handoffs"}
 {"blob":"9dc6be064e102a6c337c46c3f23e36c9b0ce2b60","byte_count":9210,"git_mode":"100644","object_type":"blob","path":"handoffs/FCP25_TENSOR_STAGE2_HANDOFF_0_1_0.md","schema_version":"0.1.0","top_level_class":"handoffs"}
+{"blob":"03ecc8a3ac407e3b51eb75fa49a7a5e83736bd87","byte_count":11432,"git_mode":"100644","object_type":"blob","path":"handoffs/FCP26_EMPIRICAL_DISCRIMINATOR_STAGE1_HANDOFF_0_1_0.md","schema_version":"0.1.0","top_level_class":"handoffs"}
 {"blob":"5cfe3adbcccfaf6669f0027fd8354c5bc4c62f6a","byte_count":5091,"git_mode":"100644","object_type":"blob","path":"handoffs/FCP2_COMPARISON_KEY_FREEZE_HANDOFF_0_1_0.md","schema_version":"0.1.0","top_level_class":"handoffs"}
 {"blob":"6e0312b7a6f7e65cf74f140d9617c0b46b424141","byte_count":4191,"git_mode":"100644","object_type":"blob","path":"handoffs/FCP3_NFC_VS_NULL_HANDOFF_0_1_0.md","schema_version":"0.1.0","top_level_class":"handoffs"}
 {"blob":"6184a084f9ca45c8affb7ff5b332920f039f098c","byte_count":6334,"git_mode":"100644","object_type":"blob","path":"handoffs/FCP4_OPERATIONAL_ALGEBRAIC_SOURCE_INTAKE_HANDOFF_0_1_0.md","schema_version":"0.1.0","top_level_class":"handoffs"}

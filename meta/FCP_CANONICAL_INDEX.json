@@ -23,7 +23,7 @@
     },
     {
       "authority_id": "CURRENT_STATE",
-      "blob": "d3a473b66c0638c755f984a8a00d3fe35b8292d6",
+      "blob": "6cd5e58e2e9b91db96b49e8edeedacd1671c602c",
       "path": "CURRENT_STATE.md"
     },
     {
@@ -64,17 +64,17 @@
     "version": "0.2.0"
   },
   "indexed_scientific_baseline": {
-    "commit": "9fb536c4cc3b717b518bca2b8affca64806e3db7",
-    "message": "Reconcile broader holographic Stage 2 routing",
+    "commit": "cd9d7b3c00d6f8b909155421bc272bd63fe39f2b",
+    "message": "Reconcile FCP-26 Stage 1 routing",
     "repository": "etblink/Foundational-Convergence-Program",
-    "tree": "5581066d0549c436fab77494db5a4a056336b4b6"
+    "tree": "937f9294e843970d99618dc82ff5a9c2009beb69"
   },
   "navigation_coverage": {
     "absence_from_operation_registry_means_scientific_absence": false,
     "artifact_inventory_scope": "ENTIRE_TRACKED_INDEXED_BASELINE_TREE_EXCLUDING_SELF_REFERENTIAL_NAVIGATION_FILES",
-    "artifact_record_count": 240,
+    "artifact_record_count": 245,
     "historical_operation_completeness_claimed": false,
-    "operation_record_count": 40,
+    "operation_record_count": 42,
     "operation_registry_scope": "CURRENT_DEPENDENCY_CLOSURE",
     "self_excluded_paths": [
       "meta/FCP_ARTIFACT_REGISTRY.jsonl",
@@ -126,6 +126,7 @@
     }
   ],
   "program_state": {
+    "atomic_clock_target_advances": false,
     "biswas_2026_author_metadata_transcription_reconciliation": "DOCKETED_NOT_EXECUTED",
     "broader_holographic_existing_framework_assignment_count": 1,
     "broader_holographic_existing_framework_assignment_ids": [
@@ -145,23 +146,41 @@
     "broader_holographic_source_intake_stage1": "CANONICALLY_COMPLETE",
     "broader_holographic_taxonomy_gate_stage2": "CANONICALLY_COMPLETE",
     "broader_holographic_taxonomy_verdict": "EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_REMAINDER__NO_NEW_STABLE_FOUNDATIONAL_HOLOGRAPHIC_FRAMEWORK_AT_CURRENT_SOURCE_SCOPE",
+    "candidate_target_count": 0,
+    "canonical_framework_to_clock_bridge": "NOT_ESTABLISHED",
     "current_handoff_path": null,
-    "current_operation": "BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2",
-    "current_routing_path": "governance/BROADER_HOLOGRAPHIC_STAGE2_POST_INTEGRATION_ROUTING_0_1_0.md",
-    "fcp26_selected": false,
-    "fcp26_started": false,
+    "current_operation": "FCP26_STAGE1_DELTA_EMPIRICAL_DISCRIMINATOR_CANONICAL_SCREEN",
+    "current_routing_path": "governance/FCP26_STAGE1_POST_INTEGRATION_ROUTING_0_1_0.md",
+    "fcp26_selected": true,
+    "fcp26_stage1": "CANONICALLY_COMPLETE",
+    "fcp26_stage1_outcome": "B__ONLY_MODEL_PARAMETER_OR_REALIZATION_LEVEL_TESTABILITY_SURVIVES",
+    "fcp26_stage1_started": true,
+    "fcp26_stage2": "NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE",
+    "fcp26_stage2_started": false,
+    "fcp26_started": true,
     "framework_winner": "NONE",
+    "frameworks_advancing_to_empirical_target_screen": 3,
+    "frameworks_reviewed": 14,
+    "frameworks_with_material_post_fcp23_delta": 5,
+    "fw_as_fcp26_empirical_class": "EC2",
+    "fw_loop_fcp26_empirical_class": "EC1",
+    "fw_string_m_fcp26_empirical_class": "EC2",
     "latest_completed_external_audit_chain": "POST_FCP25_GROK_AUDIT",
     "latest_completed_maintenance_operation": "POST_FCP25_GROK_RECONCILIATION",
-    "latest_completed_science_operation": "BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2",
-    "latest_numbered_phase": "FCP-25",
-    "latest_science_handoff_path": "handoffs/BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md",
-    "next_recommended_operation": "POST_BROADER_HOLOGRAPHIC_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION",
+    "latest_completed_science_operation": "FCP26_STAGE1_DELTA_EMPIRICAL_DISCRIMINATOR_CANONICAL_SCREEN",
+    "latest_numbered_phase": "FCP-26",
+    "latest_science_handoff_path": "handoffs/FCP26_EMPIRICAL_DISCRIMINATOR_STAGE1_HANDOFF_0_1_0.md",
+    "next_numbered_phase_selected": false,
+    "next_operation_authorized": false,
+    "next_operation_class": "READ_ONLY_SEQUENCING_ADJUDICATION",
+    "next_recommended_operation": "POST_FCP26_STAGE1_SCIENTIFIC_SEQUENCING_ADJUDICATION",
     "post_fcp25_grok_audit": "CANONICALLY_COMPLETE",
     "post_fcp25_grok_independent_adjudication": "CANONICALLY_COMPLETE",
     "post_fcp25_grok_reconciliation": "CANONICALLY_COMPLETE",
-    "predecessor_operation": "BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1",
-    "scalar_framework_score": "FORBIDDEN"
+    "predecessor_operation": "POST_BROADER_HOLOGRAPHIC_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION",
+    "scalar_framework_score": "FORBIDDEN",
+    "stage2_external_empirical_source_search_justified": false,
+    "stage2_target_count": 0
   },
   "read_profiles": {
     "EXTERNAL_AUDIT": [
@@ -194,10 +213,11 @@
     "GENERAL_PROJECT_ORIENTATION": [
       "CURRENT_STATE.md",
       "README.md",
-      "governance/BROADER_HOLOGRAPHIC_STAGE2_POST_INTEGRATION_ROUTING_0_1_0.md",
-      "audits/BROADER_HOLOGRAPHIC_TAXONOMY_ADJUDICATION_0_1_0.md",
-      "audits/BROADER_HOLOGRAPHIC_REALIZATION_EMPIRICAL_CEILING_0_1_0.md",
-      "handoffs/BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md",
+      "governance/FCP26_STAGE1_POST_INTEGRATION_ROUTING_0_1_0.md",
+      "governance/FCP26_EMPIRICAL_DISCRIMINATOR_STAGE1_PREREGISTRATION_0_1_0.md",
+      "audits/FCP26_POST_FCP23_DELTA_FRAMEWORK_SCREEN_0_1_0.md",
+      "audits/FCP26_REALIZATION_BRIDGE_AND_EMPIRICAL_TARGET_ADJUDICATION_0_1_0.md",
+      "handoffs/FCP26_EMPIRICAL_DISCRIMINATOR_STAGE1_HANDOFF_0_1_0.md",
       "FRAMEWORK_REGISTER.md",
       "meta/FCP_CANONICAL_INDEX.json",
       "governance/FCP_METHOD_0_2_0_ACTIVATION.md"
