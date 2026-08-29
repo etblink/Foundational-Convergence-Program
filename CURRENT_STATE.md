@@ -9,7 +9,7 @@ LATEST_NUMBERED_PHASE = FCP-26
 LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_CAT_TAXONOMY_GATE_STAGE2
 LATEST_CANONICAL_SCIENTIFIC_COMMIT = faa63b8073fdd0fc41cec4ec4e6b0957918ab3ec
 LATEST_CANONICAL_SCIENTIFIC_TREE = f3c1dfccddcc6f106701d7661f4e16b7d0afe5c0
-LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_CAT_TAXONOMY_GATE_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION
+LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION
 LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
 PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = 25c75cc200b35244fc7db81ba925b8e2063c442e
 PREVIOUS_CANONICAL_MAINTENANCE_TREE = 779cd9752943172e8c6a542d1a158fbf7abf6b26
@@ -20,7 +20,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.0_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` remains FCP-26 because FW-CAT Stage 2 is an unnumbered taxonomy operation and FCP-27 has not been selected. The latest-scientific fields identify the independently accepted FW-CAT Stage-2 result: the historical umbrella is removed with reason, twelve source-bound objects are accounted for, four map to existing frameworks, six remain nonframework material, two remain deferred, and no successor framework is admitted. The latest-maintenance field names this post-Stage-2 routing/navigation reconciliation; exact enclosing identities remain recoverable from Git rather than by embedding a self-referential maintenance SHA in this file.
+`LATEST_NUMBERED_PHASE` remains FCP-26 because FW-CAT Stage 2 is an unnumbered taxonomy operation and FCP-27 has not been selected. The latest-scientific fields still identify the independently accepted FW-CAT Stage-2 result. The latest-maintenance field now names the post-ledger routing/navigation reconciliation after the canonical 93-row Claim Ledger and Biswas metadata repair; exact enclosing identities remain recoverable from Git rather than by embedding a self-referential maintenance SHA in this file.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.0 governs prospective work unless explicitly superseded through the truth-seeking revision protocol.
 
@@ -84,6 +84,10 @@ FW_CAT_K1_K10_BASELINE_STATUS = NONINSTANTIATED_NO_SURVIVING_NEW_FRAMEWORK
 FW_CAT_HIGHEST_EMPIRICAL_SCOPE = MODEL_IMPLEMENTATION_LEVEL_EMP3__CAUSAL_WITNESS_FOR_PHOTONIC_QUANTUM_SWITCH
 FW_CAT_DIRECT_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR = NOT_APPLICABLE
 POST_FW_CAT_TAXONOMY_GATE_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
+POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION = CANONICALLY_COMPLETE
+POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
+BISWAS_2026_AUTHOR_METADATA_TRANSCRIPTION_RECONCILIATION = COMPLETE
 ```
 
 Targeted source strengthening established, at bounded scope:
@@ -317,7 +321,7 @@ POST_FCP23_REMAINING_ORDER_AUTOMATICALLY_INHERITED = NO
 
 `RECURRENCE_IMPACT_CANDIDATE = YES` means later recurrence analysis must account for the current FCP-22 relation and later current relations; it is not authorization to recompute recurrence now.
 
-The post-NFC/String-M sequencing route through prospective Reduced-NFC↔strengthened-AS reanalysis, bounded repository housekeeping, and prospective Reduced-NFC↔strengthened-LOOP reanalysis is now canonically complete at each declared scope. The AS reanalysis found three mathematically generic S0 E5 relations among 17 atomic candidates with zero E1–E4 and strengthened AS realization asymmetry. The LOOP reanalysis finds seven mathematically generic S0 E5 relations among 29 atomic candidates, zero E1–E4, twenty-two NONE, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and strengthened LOOP dynamics/continuum/realization asymmetry. Historical FCP-17 remains immutable while its current interpretation is `PARTIALLY_SUPERSEDED`. Program-level recurrence and Claim Ledger current-supersession propagation are canonically complete. The subsequent read-only post-recurrence scientific sequencing adjudication selected FCP-25 tensor-network / information-theoretic source intake as the highest-information next primitive-basis test. FCP-25 is canonically complete, as are the post-FCP-25 Grok chain and the broader-holographic intake/taxonomy sequence. The accepted post-broader-holography sequencing decision selected FCP-26 Stage 1, which is canonically complete with Outcome B and zero Stage-2 framework-level targets. The separately authorized post-FCP-26 read-only sequencing adjudication then selected repository publication-provenance/ref-lifecycle housekeeping before the next substantive science. That housekeeping is now the controlling maintenance boundary: publication identity semantics and remote-ref lifecycle rules are canonically defined without scientific mutation. The strongest substantive candidate after housekeeping is an unnumbered `FW-CAT` source intake; it remains unauthorized and does not select FCP-27.
+The post-NFC/String-M sequencing route, current program recurrence, FCP-25, the post-FCP-25 Grok chain, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stage 1, and FW-CAT Stage 2 are canonically complete at their declared scopes. The post-FW-CAT read-only sequencing adjudication then selected a bounded current-ledger and metadata reconciliation before further science. That reconciliation is now canonically complete: all 89 prior durable claim rows remain preserved, four current rows were appended for 93 total through FW-CAT Stage 2, and the nonmaterial Biswas author transcription docket is closed. The four Category-B recurrence-epoch consistency dockets remain unexecuted. A fresh external adversarial audit is the leading post-maintenance scientific candidate, but a separate read-only sequencing gate remains required before audit opening or FCP-27 selection.
 
 ## Next-task status
 
@@ -356,10 +360,10 @@ NFC_LOOP_REANALYSIS = CANONICALLY_COMPLETE
 NFC_LOOP_PROSPECTIVE_REANALYSIS = CANONICALLY_COMPLETE
 RECURRENCE_RECOMPUTATION = CANONICALLY_COMPLETE
 PROGRAM_LEVEL_RECURRENCE_RECOMPUTATION = CANONICALLY_COMPLETE
-CLAIM_LEDGER_CURRENT_SUPERSESSION = RECONCILED_THROUGH_FCP25_CANONICALLY
+CLAIM_LEDGER_CURRENT_SUPERSESSION = RECONCILED_THROUGH_FW_CAT_STAGE2_CANONICALLY
 CLAIM_LEDGER_CURRENT_SUPERSESSION_PROPAGATION = CANONICALLY_COMPLETE
-CLAIM_LEDGER_DURABLE_ROW_COUNT = 89
-CLAIM_LEDGER_TEMPORAL_CEILING = FCP25
+CLAIM_LEDGER_DURABLE_ROW_COUNT = 93
+CLAIM_LEDGER_TEMPORAL_CEILING = FW_CAT_TAXONOMY_GATE_STAGE2
 POST_FCP25_GROK_AUDIT = CANONICALLY_COMPLETE
 POST_FCP25_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 POST_FCP25_GROK_RECONCILIATION = CANONICALLY_COMPLETE
@@ -387,7 +391,7 @@ FRAMEWORK_TAXONOMY_ADJUDICATED = YES
 K1_K10_INSTANTIATED = NO_NEW_FRAMEWORK_SURVIVES
 CROSS_FRAMEWORK_COMPARISON = NO
 FW_HOLO_CREATED = NO
-BISWAS_2026_AUTHOR_METADATA_TRANSCRIPTION_RECONCILIATION = DOCKETED_NOT_EXECUTED
+BISWAS_2026_AUTHOR_METADATA_TRANSCRIPTION_RECONCILIATION = COMPLETE
 POST_BROADER_HOLOGRAPHIC_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_RECONCILED_ACCEPTED_READ_ONLY_DECISION
 SEQUENCING_DECISION_SELECTED_NEXT_SCIENCE = FCP26_STAGE1_DELTA_EMPIRICAL_DISCRIMINATOR_CANONICAL_SCREEN
 FCP26_NATURAL_PHASE_ID = YES
@@ -445,7 +449,14 @@ FW_CAT_STAGE2_TAXONOMY_GATE_JUSTIFIED = FULFILLED_BY_CANONICAL_STAGE2
 FW_CAT_TAXONOMY_ADJUDICATED = YES
 FW_CAT_SUCCESSOR_FRAMEWORK_COUNT = 0
 NEW_FW_CAT_FRAMEWORK_ID = NONE
-NEXT_RECOMMENDED_OPERATION = POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION
+POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+SEQUENCING_SELECTED_NEXT_OPERATION = POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION
+POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION = CANONICALLY_COMPLETE
+POST_FW_CAT_LEDGER_RECONCILIATION_ROUTING = CANONICALLY_COMPLETE
+OPEN_DOCKET_COUNT = 4
+POST_MAINTENANCE_HIGH_PRIORITY_CANDIDATE = NEW_EXTERNAL_ADVERSARIAL_AUDIT
+EXTERNAL_AUDIT_AUTHORIZED = NO
+NEXT_RECOMMENDED_OPERATION = POST_FW_CAT_LEDGER_RECONCILIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION
 NEXT_OPERATION_CLASS = READ_ONLY_SEQUENCING_ADJUDICATION
 NEXT_OPERATION_AUTHORIZED = NO
 NEXT_NUMBERED_PHASE_SELECTED = NO
@@ -461,11 +472,38 @@ POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = SEPARATE_POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION
-NEXT_SCIENTIFIC_PHASE = NONE__READ_ONLY_POST_FW_CAT_STAGE2_SEQUENCING_RECOMMENDED_BUT_NOT_YET_EXECUTED
+NEXT_EXECUTION_STEP = SEPARATE_POST_FW_CAT_LEDGER_RECONCILIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_SCIENTIFIC_PHASE = NONE__READ_ONLY_POST_LEDGER_RECONCILIATION_SEQUENCING_RECOMMENDED_BUT_NOT_YET_EXECUTED
 ```
 
-The Grok audit and independent adjudication, Finding-007 targeted source re-audit, first `FW-STRING-M` null control, bounded NFC↔String/M comparison, post-NFC/String-M read-only sequencing decision, prospective NFC↔strengthened-AS reanalysis, earlier current-state housekeeping, prospective NFC↔strengthened-LOOP reanalysis, program-level recurrence recomputation, Claim Ledger reconciliation, the read-only post-recurrence scientific sequencing decision, both stages of FCP-25, both broader-holographic stages, FCP-26 Stage 1, the post-FCP-26 read-only sequencing adjudication, publication-provenance/ref-lifecycle housekeeping, FW-CAT Stage 1, and FW-CAT Stage 2 are complete at their declared scopes. FW-CAT Stage 2 resolves the historical umbrella by verdict B: four existing-framework assignments, six nonframework remainders, two deferred proposals, zero new frameworks, and no pooled K1–K10 baseline. The next recommended operation is the separate read-only `POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION`; FCP-27 remains unselected.
+The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT read-only sequencing decision, and the selected program-ledger/metadata reconciliation are complete at their declared scopes. The durable Claim Ledger now contains 93 rows through FW-CAT Stage 2, the Biswas metadata docket is closed, and four recurrence-epoch consistency dockets remain open. The next recommended operation is the separate read-only `POST_FW_CAT_LEDGER_RECONCILIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION`; FCP-27 and a new external audit both remain unauthorized.
+
+## Post-FW-CAT program-ledger and metadata reconciliation — canonical result
+
+The maintenance operation selected by the accepted post-FW-CAT sequencing adjudication is canonically complete. It updates the durable current-state ledger and one mutable bibliographic transcription without changing scientific results.
+
+```text
+POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+SEQUENCING_SELECTED_NEXT_OPERATION = POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION
+POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION = CANONICALLY_COMPLETE
+CLAIM_LEDGER_OLD_DURABLE_ROW_COUNT = 89
+CLAIM_LEDGER_OLD_ROWS_BYTE_PRESERVED = YES
+CLAIM_LEDGER_APPENDED_ROW_COUNT = 4
+CLAIM_LEDGER_DURABLE_ROW_COUNT = 93
+CLAIM_LEDGER_TEMPORAL_CEILING = FW_CAT_TAXONOMY_GATE_STAGE2
+NEW_DURABLE_ROW_IDS = FCP26-EMP-001;FWCAT-001;FWCAT-002;FWCAT-003
+BISWAS_2026_AUTHOR_METADATA_TRANSCRIPTION_RECONCILIATION = COMPLETE
+BISWAS_CORRECT_FIRST_AUTHOR = Debopriyo Biswas
+OPEN_DOCKET_COUNT = 4
+RECURRENCE_VECTOR_CHANGE = NONE
+CONVERGENCE_CREDIT_CHANGE = NONE
+SCIENTIFIC_RESULT_CHANGE = NONE
+NEXT_RECOMMENDED_OPERATION = POST_FW_CAT_LEDGER_RECONCILIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_OPERATION_AUTHORIZED = NO
+FCP27_SELECTED = NO
+```
+
+A new external adversarial audit is the leading post-maintenance candidate, not an authorized operation. Repository live-working-set archival is likewise only a future governance candidate until a separate lifecycle policy protects canonical path resolution and immutable provenance.
 
 ## Publication-provenance and ref-lifecycle housekeeping — canonical result
 

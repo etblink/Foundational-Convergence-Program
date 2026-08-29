@@ -11,7 +11,7 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 
 - **Latest numbered phase:** FCP-26; Stage 1 is canonically complete and Stage 2 is `NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE`.
 - **Latest canonical scientific operation:** `FW_CAT_TAXONOMY_GATE_STAGE2` (`faa63b8073fdd0fc41cec4ec4e6b0957918ab3ec`; tree `f3c1dfccddcc6f106701d7661f4e16b7d0afe5c0`).
-- **Latest canonical maintenance operation:** `FCP_REPOSITORY_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_HOUSEKEEPING`; its enclosing commit identity is intentionally resolved from live `main` rather than embedded self-referentially in mutable state.
+- **Latest canonical maintenance operation:** `POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION`; the 93-row ledger/metadata result is canonical and its enclosing routing identity is resolved from live `main` rather than embedded self-referentially in mutable state.
 - **Active prospective method:** FCP Method 0.2.0.
 - **Housekeeping status:** canonically complete.
 - **Post-FCP-25 Grok status:** audit, independent adjudication, and reconciliation are canonically complete.
@@ -19,7 +19,8 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 - **Post-FCP-26 sequencing:** the accepted read-only adjudication selected bounded publication-provenance/ref-lifecycle housekeeping before further science; that housekeeping is now canonically complete.
 - **Publication governance:** qualification identity and canonical publication identity are explicitly distinguished; content-equivalent publication and deterministic navigation rebinding are permitted under `governance/FCP_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_POLICY_0_1_0.md`.
 - **FW-CAT:** Stage 1 and Stage 2 are canonically complete; the 32-source corpus resolves into 12 objects, with four existing-framework assignments, six nonframework remainders, two deferred proposals, zero new frameworks, and historical `FW-CAT` removed with reason.
-- **Next recommended program operation:** `POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION`; read-only sequencing is recommended but not yet authorized, no next numbered phase is selected, and FCP-27 remains unselected.
+- **Current durable ledger:** 93 rows through FW-CAT Stage 2; all prior 89 rows preserved, four rows appended, Biswas author metadata corrected, and four recurrence-epoch consistency dockets remain open.
+- **Next recommended program operation:** `POST_FW_CAT_LEDGER_RECONCILIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION`; a fresh external adversarial audit is the leading candidate but remains unauthorized, no next numbered phase is selected, and FCP-27 remains unselected.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
@@ -40,7 +41,12 @@ FW_CAT_TAXONOMY_GATE_STAGE2 = CANONICALLY_COMPLETE
 FW_CAT_TAXONOMY_VERDICT = B_EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_REMAINDER
 FW_CAT_FINAL_STATUS = REMOVED_WITH_REASON
 FW_CAT_SUCCESSOR_FRAMEWORK_COUNT = 0
-NEXT_RECOMMENDED_OPERATION = POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION
+POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION = CANONICALLY_COMPLETE
+CLAIM_LEDGER_DURABLE_ROW_COUNT = 93
+CLAIM_LEDGER_TEMPORAL_CEILING = FW_CAT_TAXONOMY_GATE_STAGE2
+BISWAS_2026_AUTHOR_METADATA_TRANSCRIPTION_RECONCILIATION = COMPLETE
+NEXT_RECOMMENDED_OPERATION = POST_FW_CAT_LEDGER_RECONCILIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION
 NEXT_OPERATION_AUTHORIZED = NO
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
@@ -102,7 +108,9 @@ Method 0.2.0 reports these axes separately. It does not use a scalar framework-w
 - **Publication-provenance/ref-lifecycle housekeeping:** canonically complete; qualification/publication identities and content-equivalent publication are governed explicitly, bundle + guarded PowerShell is a permitted fallback, and completed remote branches are governed by archive-before-delete rules where unique history exists.
 - **FW-CAT Stage 1:** canonically complete; 50 candidates reviewed, 32 admitted (24 new, 8 reused), 18 rejected/deferred, and all 13 lanes passed.
 - **FW-CAT Stage 2:** canonically complete and independently accepted; verdict B removes the historical umbrella with reason, maps four objects to existing frameworks, retains six nonframework remainders and two deferred proposals, admits zero successors, and instantiates no pooled K1–K10 framework baseline.
-- **Next program operation:** read-only `POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION`; FCP-27 is not selected.
+- **Post-FW-CAT sequencing:** accepted read-only decision selecting bounded program-ledger and metadata reconciliation before further science.
+- **Program-ledger/metadata reconciliation:** canonically complete; 89 prior durable rows preserved, four appended for 93 total through FW-CAT Stage 2, and the Biswas author transcription docket is closed.
+- **Next program operation:** read-only `POST_FW_CAT_LEDGER_RECONCILIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION`; a fresh external adversarial audit is the leading candidate, while FCP-27 remains unselected.
 
 Detailed scientific findings live in the versioned phase, comparison, audit, and handoff artifacts rather than in this landing page.
 
