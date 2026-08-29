@@ -6,9 +6,9 @@
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-26
-LATEST_CANONICAL_SCIENTIFIC_OPERATION = FCP26_STAGE1_DELTA_EMPIRICAL_DISCRIMINATOR_CANONICAL_SCREEN
-LATEST_CANONICAL_SCIENTIFIC_COMMIT = 9733e2a3671ca81e5f8696f625f60eb59cc0e8e8
-LATEST_CANONICAL_SCIENTIFIC_TREE = 5d8465ee26c7867610dfb275c6bd0f961d1969a2
+LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_CAT_SOURCE_INTAKE_STAGE1
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = 8bb50599e276029ac3e275710fcd2cb99735a9ec
+LATEST_CANONICAL_SCIENTIFIC_TREE = cec3880b8c08e7eb1d64d7c3c0466eac9803a9db
 LATEST_CANONICAL_MAINTENANCE_OPERATION = FCP_REPOSITORY_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_HOUSEKEEPING
 LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
 PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = 25c75cc200b35244fc7db81ba925b8e2063c442e
@@ -20,7 +20,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.0_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` is FCP-26 because the separately authorized Stage-1 canonical-only delta screen is now canonically integrated. The latest-scientific fields identify that accepted result: only model-, parameter-, or realization-level testability survives, zero framework-level Stage-2 targets advance, and FCP-26 Stage 2 is not justified at the current canonical scope. The latest-maintenance fields now name the active publication-provenance/ref-lifecycle housekeeping operation while deliberately resolving its enclosing canonical identity from live `main` rather than embedding a self-referential commit literal. `PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY` preserves the exact post-FCP-26 routing/navigation boundary immediately before this housekeeping operation; older pre-housekeeping routing fields and state-split markers remain historical provenance.
+`LATEST_NUMBERED_PHASE` remains FCP-26 because the newly integrated `FW_CAT_SOURCE_INTAKE_STAGE1` is an unnumbered source-intake operation and FCP-27 has not been selected. The latest-scientific fields identify the accepted FW-CAT Stage-1 corpus freeze: 50 candidates reviewed, 32 sources frozen (24 new and 8 reused), all 13 discovery lanes covered, and a later taxonomy gate judged source-ready without adjudicating the historical umbrella. The latest-maintenance fields continue to name the publication-provenance/ref-lifecycle housekeeping operation; this post-Stage-1 routing reconciliation is identified by its routing artifact, Git ancestry, and refreshed derived navigation rather than by embedding a self-referential maintenance SHA in this file.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.0 governs prospective work unless explicitly superseded through the truth-seeking revision protocol.
 
@@ -66,6 +66,9 @@ FCP26_STAGE2 = NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE
 POST_FCP26_STAGE1_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_RECONCILED_ACCEPTED_READ_ONLY_DECISION
 FCP_REPOSITORY_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_HOUSEKEEPING = CANONICALLY_COMPLETE
 FCP_PUBLICATION_TRANSPORT_POLICY = CONTENT_API_EQUIVALENT_PUBLICATION_ALLOWED
+FW_CAT_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
+FW_CAT_STAGE1_SOURCE_CORPUS = FROZEN
+FW_CAT_STAGE2_TAXONOMY_GATE_JUSTIFIED = YES
 ```
 
 Targeted source strengthening established, at bounded scope:
@@ -407,8 +410,20 @@ FCP_PUBLICATION_TRANSPORT_POLICY = CONTENT_API_EQUIVALENT_PUBLICATION_ALLOWED
 EXACT_PREPUBLICATION_COMMIT_OBJECT_PRESERVATION = PREFERRED_NOT_REQUIRED
 BUNDLE_POWERSHELL_FALLBACK = CANONICALLY_PERMITTED
 REMOTE_REF_LIFECYCLE_POLICY = ACTIVE
-NEXT_RECOMMENDED_OPERATION = FW_CAT_SOURCE_INTAKE_STAGE1
-NEXT_OPERATION_CLASS = SOURCE_INTAKE
+FW_CAT_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
+FW_CAT_STAGE1_SOURCE_CORPUS = FROZEN
+FW_CAT_CANDIDATE_SOURCE_COUNT_REVIEWED = 50
+FW_CAT_FROZEN_SOURCE_COUNT = 32
+FW_CAT_NEW_EXTERNAL_SOURCE_COUNT = 24
+FW_CAT_REUSED_CANONICAL_SOURCE_COUNT = 8
+FW_CAT_MEANINGFUL_REJECTED_OR_DEFERRED_COUNT = 18
+FW_CAT_DISCOVERY_LANE_COUNT_PASS = 13
+FW_CAT_STAGE2_TAXONOMY_GATE_JUSTIFIED = YES
+FW_CAT_TAXONOMY_ADJUDICATED = NO
+FW_CAT_SUCCESSOR_FRAMEWORK_COUNT = NOT_ADJUDICATED
+NEW_FW_CAT_FRAMEWORK_ID = NONE
+NEXT_RECOMMENDED_OPERATION = FW_CAT_TAXONOMY_GATE_STAGE2
+NEXT_OPERATION_CLASS = FRAMEWORK_TAXONOMY_ADJUDICATION
 NEXT_OPERATION_AUTHORIZED = NO
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
@@ -423,11 +438,11 @@ POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = SEPARATE_FW_CAT_SOURCE_INTAKE_STAGE1_AUTHORIZATION
-NEXT_SCIENTIFIC_PHASE = NONE__FW_CAT_SOURCE_INTAKE_RECOMMENDED_BUT_UNAUTHORIZED_AND_UNNUMBERED
+NEXT_EXECUTION_STEP = SEPARATE_FW_CAT_TAXONOMY_GATE_STAGE2_AUTHORIZATION
+NEXT_SCIENTIFIC_PHASE = NONE__FW_CAT_TAXONOMY_GATE_STAGE2_RECOMMENDED_BUT_UNAUTHORIZED_AND_UNNUMBERED
 ```
 
-The Grok audit and independent adjudication, Finding-007 targeted source re-audit, first `FW-STRING-M` null control, bounded NFC↔String/M comparison, post-NFC/String-M read-only sequencing decision, prospective NFC↔strengthened-AS reanalysis, earlier current-state housekeeping, prospective NFC↔strengthened-LOOP reanalysis, program-level recurrence recomputation, Claim Ledger reconciliation, the read-only post-recurrence scientific sequencing decision, both stages of FCP-25, both broader-holographic stages, FCP-26 Stage 1, the post-FCP-26 read-only sequencing adjudication, and the present publication-provenance/ref-lifecycle housekeeping are complete at their declared scopes. FCP-26 Stage 1 preserves model-, parameter-, and realization-level testability without identifying a framework-level target for external Stage-2 search. The present housekeeping changes repository governance and ref lifecycle only; it performs no new scientific adjudication, comparison, convergence assignment, recurrence recomputation, source search, Stage-2 initiation, or atomic-clock calculation. `FW_CAT_SOURCE_INTAKE_STAGE1` is the next recommended substantive operation, but it is unauthorized and FCP-27 remains unselected.
+The Grok audit and independent adjudication, Finding-007 targeted source re-audit, first `FW-STRING-M` null control, bounded NFC↔String/M comparison, post-NFC/String-M read-only sequencing decision, prospective NFC↔strengthened-AS reanalysis, earlier current-state housekeeping, prospective NFC↔strengthened-LOOP reanalysis, program-level recurrence recomputation, Claim Ledger reconciliation, the read-only post-recurrence scientific sequencing decision, both stages of FCP-25, both broader-holographic stages, FCP-26 Stage 1, the post-FCP-26 read-only sequencing adjudication, publication-provenance/ref-lifecycle housekeeping, and `FW_CAT_SOURCE_INTAKE_STAGE1` are complete at their declared scopes. The FW-CAT Stage-1 intake reviewed 50 candidates and froze 32 sources (24 new, 8 reused) with all 13 discovery lanes covered. Its readiness verdict justifies a later taxonomy gate but does not adjudicate `FW-CAT`, create a successor framework, instantiate K1–K10, or select FCP-27. `FW_CAT_TAXONOMY_GATE_STAGE2` is the next recommended scientific operation and remains unauthorized.
 
 ## Publication-provenance and ref-lifecycle housekeeping — canonical result
 
@@ -454,6 +469,31 @@ NEXT_NUMBERED_PHASE_SELECTED = NO
 ```
 
 Remote branch cleanup is governed by `governance/FCP_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_POLICY_0_1_0.md`: integrated redundant branches may be removed after exact-tip verification, while unique diverged or failed/rejected candidate tips require immutable `archive/` refs before branch deletion. Live remote ref state is Git-controlled and must not be inferred solely from this markdown snapshot.
+
+## FW-CAT Stage-1 source intake — canonical freeze
+
+The broader categorical / process-theoretic / topos intake is canonically complete at Stage 1. It freezes a taxonomy-discriminating source corpus without deciding whether the historical `FW-CAT` umbrella survives, splits, maps to existing frameworks, or yields no stable foundational competitor.
+
+```text
+FW_CAT_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
+FW_CAT_STAGE1_SOURCE_CORPUS = FROZEN
+CANDIDATE_SOURCE_COUNT_REVIEWED = 50
+FROZEN_SOURCE_COUNT = 32
+NEW_EXTERNAL_SOURCE_COUNT = 24
+REUSED_CANONICAL_SOURCE_COUNT = 8
+MEANINGFUL_REJECTED_OR_DEFERRED_COUNT = 18
+DISCOVERY_LANE_COUNT_PASS = 13
+STAGE2_TAXONOMY_GATE_JUSTIFIED = YES
+FW_CAT_TAXONOMY_ADJUDICATED = NO
+FW_CAT_SUCCESSOR_FRAMEWORK_COUNT = NOT_ADJUDICATED
+NEW_FRAMEWORK_ID = NONE
+K1_K10_INSTANTIATED = NO
+FCP27_SELECTED = NO
+NEXT_RECOMMENDED_OPERATION = FW_CAT_TAXONOMY_GATE_STAGE2
+NEXT_OPERATION_AUTHORIZED = NO
+```
+
+The source freeze is authoritative through `frameworks/categorical/FW_CAT_SOURCE_INTAKE_0_1_0.md`, its source-selection audit, accepted Source Register state, and Stage-1 handoff. `FRAMEWORK_REGISTER.md` remains unchanged until a separately authorized taxonomy adjudication.
 
 ## Broader holographic Stage-1 source intake — canonical freeze
 

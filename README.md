@@ -10,7 +10,7 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 ## Current status
 
 - **Latest numbered phase:** FCP-26; Stage 1 is canonically complete and Stage 2 is `NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE`.
-- **Latest canonical scientific operation:** `FCP26_STAGE1_DELTA_EMPIRICAL_DISCRIMINATOR_CANONICAL_SCREEN` (`9733e2a3671ca81e5f8696f625f60eb59cc0e8e8`; tree `5d8465ee26c7867610dfb275c6bd0f961d1969a2`).
+- **Latest canonical scientific operation:** `FW_CAT_SOURCE_INTAKE_STAGE1` (`8bb50599e276029ac3e275710fcd2cb99735a9ec`; tree `cec3880b8c08e7eb1d64d7c3c0466eac9803a9db`).
 - **Latest canonical maintenance operation:** `FCP_REPOSITORY_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_HOUSEKEEPING`; its enclosing commit identity is intentionally resolved from live `main` rather than embedded self-referentially in mutable state.
 - **Active prospective method:** FCP Method 0.2.0.
 - **Housekeeping status:** canonically complete.
@@ -18,13 +18,14 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 - **FCP-26 Stage-1 outcome:** `B__ONLY_MODEL_PARAMETER_OR_REALIZATION_LEVEL_TESTABILITY_SURVIVES`; zero framework-level Stage-2 targets, no external empirical source search justified, and no atomic-clock target advanced.
 - **Post-FCP-26 sequencing:** the accepted read-only adjudication selected bounded publication-provenance/ref-lifecycle housekeeping before further science; that housekeeping is now canonically complete.
 - **Publication governance:** qualification identity and canonical publication identity are explicitly distinguished; content-equivalent publication and deterministic navigation rebinding are permitted under `governance/FCP_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_POLICY_0_1_0.md`.
-- **Next recommended program operation:** `FW_CAT_SOURCE_INTAKE_STAGE1`, recommended but not authorized; no next numbered phase is selected and FCP-27 remains unselected.
+- **FW-CAT Stage 1:** canonically complete; 50 candidates reviewed, 32-source corpus frozen (24 new, 8 reused), all 13 discovery lanes passed, and `STAGE2_TAXONOMY_GATE_JUSTIFIED=YES` without a taxonomy verdict.
+- **Next recommended program operation:** `FW_CAT_TAXONOMY_GATE_STAGE2`, recommended but not authorized; no next numbered phase is selected and FCP-27 remains unselected.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-26
-LATEST_CANONICAL_SCIENCE = FCP26_STAGE1_DELTA_EMPIRICAL_DISCRIMINATOR_CANONICAL_SCREEN
+LATEST_CANONICAL_SCIENCE = FW_CAT_SOURCE_INTAKE_STAGE1
 FCP26_STAGE1_STATUS = CANONICALLY_COMPLETE
 FCP26_STAGE1_OUTCOME = B__ONLY_MODEL_PARAMETER_OR_REALIZATION_LEVEL_TESTABILITY_SURVIVES
 FCP26_STAGE2 = NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE
@@ -32,7 +33,10 @@ FCP26_STAGE2_TARGET_COUNT = 0
 POST_FCP26_STAGE1_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_RECONCILED_ACCEPTED_READ_ONLY_DECISION
 FCP_REPOSITORY_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_HOUSEKEEPING = CANONICALLY_COMPLETE
 FCP_PUBLICATION_TRANSPORT_POLICY = CONTENT_API_EQUIVALENT_PUBLICATION_ALLOWED
-NEXT_RECOMMENDED_OPERATION = FW_CAT_SOURCE_INTAKE_STAGE1
+FW_CAT_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
+FW_CAT_STAGE1_SOURCE_CORPUS = FROZEN
+FW_CAT_STAGE2_TAXONOMY_GATE_JUSTIFIED = YES
+NEXT_RECOMMENDED_OPERATION = FW_CAT_TAXONOMY_GATE_STAGE2
 NEXT_OPERATION_AUTHORIZED = NO
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
@@ -46,7 +50,7 @@ FCP-25 Stage 1 reviewed 62 source candidates across all nine preregistered searc
 
 The broader holographic Stage-1 intake subsequently reviewed 80 candidates and froze a 50-source corpus: 32 new Source Register rows and 18 reused canonical sources. Stage 2 accounts for all 50 sources and resolves the taxonomy as `EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_REMAINDER__NO_NEW_STABLE_FOUNDATIONAL_HOLOGRAPHIC_FRAMEWORK_AT_CURRENT_SOURCE_SCOPE`. One existing-framework mapping is retained to `FW-STRING-M`, zero new frameworks are admitted, `FW-HOLO` is not created, and no pooled K1–K10 baseline is instantiated. The strongest empirical/data-contact result is model-level `EMP2` compatibility in holographic cosmology; the strongest direct intervention realization is a supplied holographic code model. Neither supplies framework-level empirical discrimination or selection.
 
-The accepted read-only post-broader-holography sequencing decision selected the separately authorized FCP-26 Stage-1 canonical-only post-FCP-23 delta screen. FCP-26 accounts for 14 current framework IDs, identifies five material post-FCP-23 deltas, and screens `FW-STRING-M`, `FW-AS`, and `FW-LOOP` through the ordered realization/empirical bridge. Their strongest current classes are `EC2`, `EC2`, and `EC1`, respectively. No framework-level Stage-2 target survives, external empirical source search is not justified, and the informal atomic-clock hypothesis does not advance. The later post-FCP-26 read-only sequencing adjudication selected a bounded repository-governance housekeeping pass before further substantive science. That pass formalizes publication identity/content-equivalence rules and remote-ref lifecycle policy without changing any scientific result; its strongest subsequent scientific recommendation is an unnumbered `FW-CAT` source intake.
+The accepted read-only post-broader-holography sequencing decision selected the separately authorized FCP-26 Stage-1 canonical-only post-FCP-23 delta screen. FCP-26 accounts for 14 current framework IDs, identifies five material post-FCP-23 deltas, and screens `FW-STRING-M`, `FW-AS`, and `FW-LOOP` through the ordered realization/empirical bridge. Their strongest current classes are `EC2`, `EC2`, and `EC1`, respectively. No framework-level Stage-2 target survives, external empirical source search is not justified, and the informal atomic-clock hypothesis does not advance. The later post-FCP-26 read-only sequencing adjudication selected a bounded repository-governance housekeeping pass before further substantive science. That pass formalizes publication identity/content-equivalence rules and remote-ref lifecycle policy without changing any scientific result; that recommendation has now been executed: `FW_CAT_SOURCE_INTAKE_STAGE1` is canonically complete, freezes 32 sources from 50 reviewed candidates, and finds the frozen corpus sufficient for a later taxonomy gate without adjudicating the umbrella.
 
 After FCP-24, the independent Grok adjudication preserved FCP-24 with qualification, and the targeted Finding-007 re-audit found a partial source-selection defect with no material FCP-24 scientific change. The first `FW-STRING-M` null control then established a nonempty null-subtracted residue; the NFC↔String/M comparison found three mathematically generic S0 E5 relations, zero E1–E4, and no pairwise empirical selection or NFC support. The prospective NFC↔strengthened-AS reanalysis then found three generic S0 E5 relations among 17 atomic candidates, with zero E1–E4 and strengthened AS realization asymmetry. After the bounded housekeeping checkpoint, the prospective NFC↔strengthened-LOOP reanalysis found seven generic S0 E5 relations among 29 atomic candidates, zero E1–E4, 22 `NONE_ESTABLISHED`, no non-generic relation, no empirical selection or NFC support, and strengthened LOOP dynamics/continuum/realization asymmetry. The subsequent Method-0.2.0 program-level recurrence recomputation finds 13 recurrence candidate families: zero independent or qualified-independence non-generic E1–E4 foundational recurrence, one target-conditioned E1–E4 recovery recurrence, one lineage/reformulation E1–E4 recurrence, seven generic E5 functional recurrence families, one empirically inherited/shared-target recurrence family, and three recurrent parallel burdens. No framework-level EMP4 recurrence or repeated independent Reduced-NFC support is established. Historical FCP-18 remains immutable while its current interpretation is partially superseded.
 
@@ -92,7 +96,8 @@ Method 0.2.0 reports these axes separately. It does not use a scalar framework-w
 - **FCP-26 Stage 1:** canonically complete; 14 framework IDs accounted for, five material post-FCP-23 deltas, three bridge-screen frameworks (`FW-STRING-M` `EC2`, `FW-AS` `EC2`, `FW-LOOP` `EC1`), zero Stage-2 targets, no external empirical search justified, and no atomic-clock target advanced.
 - **Post-FCP-26 sequencing:** accepted read-only decision; repository publication-provenance/ref-lifecycle housekeeping selected before the next substantive science.
 - **Publication-provenance/ref-lifecycle housekeeping:** canonically complete; qualification/publication identities and content-equivalent publication are governed explicitly, bundle + guarded PowerShell is a permitted fallback, and completed remote branches are governed by archive-before-delete rules where unique history exists.
-- **Next program operation:** `FW_CAT_SOURCE_INTAKE_STAGE1`, recommended but not started; FCP-27 is not selected.
+- **FW-CAT Stage 1:** canonically complete; 50 candidates reviewed, 32 admitted (24 new, 8 reused), 18 rejected/deferred, and all 13 lanes passed; the frozen corpus is sufficient for a later taxonomy gate but no taxonomy outcome is selected.
+- **Next program operation:** `FW_CAT_TAXONOMY_GATE_STAGE2`, recommended but not started; FCP-27 is not selected.
 
 Detailed scientific findings live in the versioned phase, comparison, audit, and handoff artifacts rather than in this landing page.
 
