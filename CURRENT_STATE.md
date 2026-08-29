@@ -9,9 +9,10 @@ LATEST_NUMBERED_PHASE = FCP-26
 LATEST_CANONICAL_SCIENTIFIC_OPERATION = FCP26_STAGE1_DELTA_EMPIRICAL_DISCRIMINATOR_CANONICAL_SCREEN
 LATEST_CANONICAL_SCIENTIFIC_COMMIT = 9733e2a3671ca81e5f8696f625f60eb59cc0e8e8
 LATEST_CANONICAL_SCIENTIFIC_TREE = 5d8465ee26c7867610dfb275c6bd0f961d1969a2
-LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FCP25_GROK_RECONCILIATION
-LATEST_CANONICAL_MAINTENANCE_COMMIT = 2b2be93254d07f62fa8c6253a45f4aeb17cdcba2
-LATEST_CANONICAL_MAINTENANCE_TREE = fd99d9eea0a9699ebb9478bf20e9a6d87b5c6714
+LATEST_CANONICAL_MAINTENANCE_OPERATION = FCP_REPOSITORY_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_HOUSEKEEPING
+LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
+PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = 25c75cc200b35244fc7db81ba925b8e2063c442e
+PREVIOUS_CANONICAL_MAINTENANCE_TREE = 779cd9752943172e8c6a542d1a158fbf7abf6b26
 PRE_HOUSEKEEPING_CANONICAL_ROUTING_COMMIT = 09aaf0ba4f9c570310150532c7e7ac4e42d868f8
 PRE_HOUSEKEEPING_CANONICAL_ROUTING_TREE = ab4254076939787b019a5aa4f5d8889985ac8608
 CANONICAL_COMMIT_AT_STATE_SPLIT = 115e88f578d3d9f761d870c3cb569bd72b61c559
@@ -19,7 +20,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.0_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` is FCP-26 because the separately authorized Stage-1 canonical-only delta screen is now canonically integrated. The latest-scientific fields identify that accepted result: only model-, parameter-, or realization-level testability survives, zero framework-level Stage-2 targets advance, and FCP-26 Stage 2 is not justified at the current canonical scope. The latest-maintenance fields retain the last non-self-referential canonical maintenance identity; this routing/navigation reconciliation is represented by its routing artifact, Git ancestry, final maintenance branch tip, and refreshed navigation layer rather than by embedding its own enclosing commit identity in this file. The pre-housekeeping routing fields and state-split markers remain historical provenance.
+`LATEST_NUMBERED_PHASE` is FCP-26 because the separately authorized Stage-1 canonical-only delta screen is now canonically integrated. The latest-scientific fields identify that accepted result: only model-, parameter-, or realization-level testability survives, zero framework-level Stage-2 targets advance, and FCP-26 Stage 2 is not justified at the current canonical scope. The latest-maintenance fields now name the active publication-provenance/ref-lifecycle housekeeping operation while deliberately resolving its enclosing canonical identity from live `main` rather than embedding a self-referential commit literal. `PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY` preserves the exact post-FCP-26 routing/navigation boundary immediately before this housekeeping operation; older pre-housekeeping routing fields and state-split markers remain historical provenance.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.0 governs prospective work unless explicitly superseded through the truth-seeking revision protocol.
 
@@ -62,6 +63,9 @@ POST_BROADER_HOLOGRAPHIC_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY
 FCP26 = STAGE1_CANONICALLY_COMPLETE
 FCP26_STAGE1 = CANONICALLY_COMPLETE
 FCP26_STAGE2 = NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE
+POST_FCP26_STAGE1_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_RECONCILED_ACCEPTED_READ_ONLY_DECISION
+FCP_REPOSITORY_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_HOUSEKEEPING = CANONICALLY_COMPLETE
+FCP_PUBLICATION_TRANSPORT_POLICY = CONTENT_API_EQUIVALENT_PUBLICATION_ALLOWED
 ```
 
 Targeted source strengthening established, at bounded scope:
@@ -295,7 +299,7 @@ POST_FCP23_REMAINING_ORDER_AUTOMATICALLY_INHERITED = NO
 
 `RECURRENCE_IMPACT_CANDIDATE = YES` means later recurrence analysis must account for the current FCP-22 relation and later current relations; it is not authorization to recompute recurrence now.
 
-The post-NFC/String-M sequencing route through prospective Reduced-NFC↔strengthened-AS reanalysis, bounded repository housekeeping, and prospective Reduced-NFC↔strengthened-LOOP reanalysis is now canonically complete at each declared scope. The AS reanalysis found three mathematically generic S0 E5 relations among 17 atomic candidates with zero E1–E4 and strengthened AS realization asymmetry. The LOOP reanalysis finds seven mathematically generic S0 E5 relations among 29 atomic candidates, zero E1–E4, twenty-two NONE, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and strengthened LOOP dynamics/continuum/realization asymmetry. Historical FCP-17 remains immutable while its current interpretation is `PARTIALLY_SUPERSEDED`. Program-level recurrence and Claim Ledger current-supersession propagation are canonically complete. The subsequent read-only post-recurrence scientific sequencing adjudication selected FCP-25 tensor-network / information-theoretic source intake as the highest-information next primitive-basis test. FCP-25 is now canonically complete: Stage 1 froze the 29-source corpus, and Stage 2 finds no stable source-bound foundational competitor under the historical `FW-TENSOR` umbrella at the frozen source scope. `FW-TENSOR` is retained only as historical provenance with status `REMOVED_WITH_REASON`; no successor framework is created and no K1–K10 baseline is instantiated. The post-FCP-25 Grok audit, independent adjudication, and reconciliation are canonically complete. The separately authorized broader-holographic Stage-1 intake froze 50 sources (32 new and 18 reused), and the canonical Stage-2 taxonomy gate accounts for all 50 while admitting no new foundational framework. Declared String/M material maps to existing `FW-STRING-M`; the remaining holographic material stays below framework scope and `FW-HOLO` is not created. The accepted read-only post-broader-holography sequencing decision selected the separately authorized FCP-26 Stage-1 canonical delta screen. FCP-26 Stage 1 is now canonically complete with Outcome B: only model-, parameter-, or realization-level testability survives, no framework-level Stage-2 target advances, and the informal atomic-clock hypothesis remains unsupported by a canonical framework-to-clock bridge. The next recommended operation is the separately authorized read-only `POST_FCP26_STAGE1_SCIENTIFIC_SEQUENCING_ADJUDICATION`.
+The post-NFC/String-M sequencing route through prospective Reduced-NFC↔strengthened-AS reanalysis, bounded repository housekeeping, and prospective Reduced-NFC↔strengthened-LOOP reanalysis is now canonically complete at each declared scope. The AS reanalysis found three mathematically generic S0 E5 relations among 17 atomic candidates with zero E1–E4 and strengthened AS realization asymmetry. The LOOP reanalysis finds seven mathematically generic S0 E5 relations among 29 atomic candidates, zero E1–E4, twenty-two NONE, zero non-generic relations, no pairwise empirical selection, no NFC empirical support, and strengthened LOOP dynamics/continuum/realization asymmetry. Historical FCP-17 remains immutable while its current interpretation is `PARTIALLY_SUPERSEDED`. Program-level recurrence and Claim Ledger current-supersession propagation are canonically complete. The subsequent read-only post-recurrence scientific sequencing adjudication selected FCP-25 tensor-network / information-theoretic source intake as the highest-information next primitive-basis test. FCP-25 is canonically complete, as are the post-FCP-25 Grok chain and the broader-holographic intake/taxonomy sequence. The accepted post-broader-holography sequencing decision selected FCP-26 Stage 1, which is canonically complete with Outcome B and zero Stage-2 framework-level targets. The separately authorized post-FCP-26 read-only sequencing adjudication then selected repository publication-provenance/ref-lifecycle housekeeping before the next substantive science. That housekeeping is now the controlling maintenance boundary: publication identity semantics and remote-ref lifecycle rules are canonically defined without scientific mutation. The strongest substantive candidate after housekeeping is an unnumbered `FW-CAT` source intake; it remains unauthorized and does not select FCP-27.
 
 ## Next-task status
 
@@ -396,10 +400,18 @@ REPOSITORY_HOUSEKEEPING_AND_CURRENT_STATE_SUPERSESSION_AUDIT = CANONICALLY_COMPL
 HOUSEKEEPING_CANONICAL_COMMIT = b57a8617bb5818f3f3ab540ce63e0d82cde743b0
 HOUSEKEEPING_CANONICAL_TREE = 13ba67fcebb23efbab5d6f55eb4ade953f6b548d
 HOUSEKEEPING_CANONICAL_BASE = 09aaf0ba4f9c570310150532c7e7ac4e42d868f8
-NEXT_RECOMMENDED_OPERATION = POST_FCP26_STAGE1_SCIENTIFIC_SEQUENCING_ADJUDICATION
-NEXT_OPERATION_CLASS = READ_ONLY_SEQUENCING_ADJUDICATION
+POST_FCP26_STAGE1_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_RECONCILED_ACCEPTED_READ_ONLY_DECISION
+SEQUENCING_SELECTED_NEXT_OPERATION = FCP_REPOSITORY_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_HOUSEKEEPING
+FCP_REPOSITORY_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_HOUSEKEEPING = CANONICALLY_COMPLETE
+FCP_PUBLICATION_TRANSPORT_POLICY = CONTENT_API_EQUIVALENT_PUBLICATION_ALLOWED
+EXACT_PREPUBLICATION_COMMIT_OBJECT_PRESERVATION = PREFERRED_NOT_REQUIRED
+BUNDLE_POWERSHELL_FALLBACK = CANONICALLY_PERMITTED
+REMOTE_REF_LIFECYCLE_POLICY = ACTIVE
+NEXT_RECOMMENDED_OPERATION = FW_CAT_SOURCE_INTAKE_STAGE1
+NEXT_OPERATION_CLASS = SOURCE_INTAKE
 NEXT_OPERATION_AUTHORIZED = NO
 NEXT_NUMBERED_PHASE_SELECTED = NO
+FCP27_SELECTED = NO
 POST_FCP24_GROK_AUDIT = INDEPENDENT_ADJUDICATION_CANONICALLY_COMPLETE
 POST_FCP24_GROK_AUDIT_PACKET = EXPOSED_EXACTLY
 POST_FCP24_GROK_AUDIT_PROMPT = SENT_EXACTLY
@@ -411,11 +423,37 @@ POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = SEPARATE_POST_FCP26_STAGE1_SCIENTIFIC_SEQUENCING_ADJUDICATION_AUTHORIZATION
-NEXT_SCIENTIFIC_PHASE = NONE__POST_FCP26_STAGE1_SCIENTIFIC_SEQUENCING_ADJUDICATION_PENDING_SEPARATE_READ_ONLY_AUTHORIZATION
+NEXT_EXECUTION_STEP = SEPARATE_FW_CAT_SOURCE_INTAKE_STAGE1_AUTHORIZATION
+NEXT_SCIENTIFIC_PHASE = NONE__FW_CAT_SOURCE_INTAKE_RECOMMENDED_BUT_UNAUTHORIZED_AND_UNNUMBERED
 ```
 
-The Grok audit and independent adjudication, Finding-007 targeted source re-audit, first `FW-STRING-M` null control, bounded NFC↔String/M comparison, post-NFC/String-M read-only sequencing decision, prospective NFC↔strengthened-AS reanalysis, bounded repository housekeeping/current-state supersession, prospective NFC↔strengthened-LOOP reanalysis, program-level recurrence recomputation, Claim Ledger reconciliation, the read-only post-recurrence scientific sequencing decision, both stages of FCP-25, both broader-holographic stages, and FCP-26 Stage 1 are complete at their declared scopes. FCP-26 Stage 1 preserves model-, parameter-, and realization-level testability without identifying a framework-level target for external Stage-2 search. This routing reconciliation performs no new sequencing adjudication, cross-framework comparison, convergence assignment, recurrence recomputation, source search, Stage-2 initiation, or atomic-clock calculation. The next decision is the separately authorized read-only post-FCP-26 Stage-1 scientific sequencing adjudication.
+The Grok audit and independent adjudication, Finding-007 targeted source re-audit, first `FW-STRING-M` null control, bounded NFC↔String/M comparison, post-NFC/String-M read-only sequencing decision, prospective NFC↔strengthened-AS reanalysis, earlier current-state housekeeping, prospective NFC↔strengthened-LOOP reanalysis, program-level recurrence recomputation, Claim Ledger reconciliation, the read-only post-recurrence scientific sequencing decision, both stages of FCP-25, both broader-holographic stages, FCP-26 Stage 1, the post-FCP-26 read-only sequencing adjudication, and the present publication-provenance/ref-lifecycle housekeeping are complete at their declared scopes. FCP-26 Stage 1 preserves model-, parameter-, and realization-level testability without identifying a framework-level target for external Stage-2 search. The present housekeeping changes repository governance and ref lifecycle only; it performs no new scientific adjudication, comparison, convergence assignment, recurrence recomputation, source search, Stage-2 initiation, or atomic-clock calculation. `FW_CAT_SOURCE_INTAKE_STAGE1` is the next recommended substantive operation, but it is unauthorized and FCP-27 remains unselected.
+
+## Publication-provenance and ref-lifecycle housekeeping — canonical result
+
+The repository-governance housekeeping selected by the accepted post-FCP-26 read-only sequencing adjudication is canonically complete at its bounded scope. It formalizes publication identity and remote-ref lifecycle semantics without changing scientific content.
+
+```text
+FCP_REPOSITORY_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_HOUSEKEEPING = CANONICALLY_COMPLETE
+FCP_PUBLICATION_TRANSPORT_POLICY = CONTENT_API_EQUIVALENT_PUBLICATION_ALLOWED
+QUALIFICATION_IDENTITY_AND_CANONICAL_PUBLICATION_IDENTITY = EXPLICITLY_DISTINGUISHED
+EXACT_PREPUBLICATION_COMMIT_OBJECT_PRESERVATION = PREFERRED_NOT_REQUIRED
+INTERMEDIATE_PUBLICATION_TRANSPORT_COMMITS_HAVE_SCIENTIFIC_MEANING = NO
+DERIVED_NAVIGATION_REBINDING = PERMITTED_AND_REQUIRED_WHEN_NEEDED
+CANDIDATE_TO_PUBLICATION_IDENTITY_MAPPING = REQUIRED
+BUNDLE_POWERSHELL_FALLBACK = CANONICALLY_PERMITTED
+REMOTE_REF_LIFECYCLE_POLICY = ACTIVE
+
+OPEN_DOCKET_COUNT = 5
+OPEN_DOCKET_EXECUTION = NONE
+FCP26_STAGE2_STARTED = NO
+FCP27_SELECTED = NO
+NEXT_RECOMMENDED_OPERATION = FW_CAT_SOURCE_INTAKE_STAGE1
+NEXT_OPERATION_AUTHORIZED = NO
+NEXT_NUMBERED_PHASE_SELECTED = NO
+```
+
+Remote branch cleanup is governed by `governance/FCP_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_POLICY_0_1_0.md`: integrated redundant branches may be removed after exact-tip verification, while unique diverged or failed/rejected candidate tips require immutable `archive/` refs before branch deletion. Live remote ref state is Git-controlled and must not be inferred solely from this markdown snapshot.
 
 ## Broader holographic Stage-1 source intake — canonical freeze
 
