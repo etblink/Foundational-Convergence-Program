@@ -8,7 +8,7 @@
   "core_authorities": [
     {
       "authority_id": "CLAIM_LEDGER",
-      "blob": "58898e5be12f1ebca06c5d2e0d30e4be1ae1b1fb",
+      "blob": "c2db0af82b8d0ad96e7f7dd039280c929e9ba0a9",
       "path": "CLAIM_LEDGER.md"
     },
     {
@@ -23,7 +23,7 @@
     },
     {
       "authority_id": "CURRENT_STATE",
-      "blob": "7cc4b237bacfe1f14f14735eb7e4761e370f0090",
+      "blob": "b0451df0a7a992df10d77f244e90c31cc3d05f93",
       "path": "CURRENT_STATE.md"
     },
     {
@@ -43,7 +43,7 @@
     },
     {
       "authority_id": "SOURCE_REGISTER",
-      "blob": "b0aee275b81c4b21ec94ea5c34b023d15366fb18",
+      "blob": "cec689975f11e23cdf38bd8eaadf3166c0c9a80d",
       "path": "SOURCE_REGISTER.md"
     }
   ],
@@ -64,17 +64,17 @@
     "version": "0.2.0"
   },
   "indexed_scientific_baseline": {
-    "commit": "3d82fa2770d10270878316d295d060b22f929e1c",
-    "message": "Reconcile routing after FW-CAT Stage 2",
+    "commit": "58da76772a3ef4012ee3e370633af7dbd90c5508",
+    "message": "Reconcile routing after program ledger update",
     "repository": "etblink/Foundational-Convergence-Program",
-    "tree": "e097cae33c48a45f8ecd40b76d241d1dc5d03bec"
+    "tree": "9e49811524dcb6d83ba0ea2240259d29487865d5"
   },
   "navigation_coverage": {
     "absence_from_operation_registry_means_scientific_absence": false,
     "artifact_inventory_scope": "ENTIRE_TRACKED_INDEXED_BASELINE_TREE_EXCLUDING_SELF_REFERENTIAL_NAVIGATION_FILES",
-    "artifact_record_count": 259,
+    "artifact_record_count": 265,
     "historical_operation_completeness_claimed": false,
-    "operation_record_count": 47,
+    "operation_record_count": 50,
     "operation_registry_scope": "CURRENT_DEPENDENCY_CLOSURE",
     "self_excluded_paths": [
       "meta/FCP_ARTIFACT_REGISTRY.jsonl",
@@ -83,15 +83,6 @@
     ]
   },
   "open_dockets": [
-    {
-      "docket_id": "BISWAS_2026_AUTHOR_METADATA_TRANSCRIPTION_RECONCILIATION",
-      "evidence_paths": [
-        "frameworks/holography/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_0_1_0.md",
-        "frameworks/tensor/FCP25_TENSOR_SOURCE_INTAKE_0_1_0.md",
-        "governance/BROADER_HOLOGRAPHIC_STAGE2_POST_INTEGRATION_ROUTING_0_1_0.md"
-      ],
-      "status": "DOCKETED_NOT_EXECUTED"
-    },
     {
       "docket_id": "CROSS_PAIR_RESIDUAL_E5_CONSISTENCY_CHECK",
       "evidence_paths": [
@@ -127,7 +118,7 @@
   ],
   "program_state": {
     "atomic_clock_target_advances": false,
-    "biswas_2026_author_metadata_transcription_reconciliation": "DOCKETED_NOT_EXECUTED",
+    "biswas_2026_author_metadata_transcription_reconciliation": "COMPLETE",
     "broader_holographic_existing_framework_assignment_count": 1,
     "broader_holographic_existing_framework_assignment_ids": [
       "FW-STRING-M"
@@ -149,10 +140,14 @@
     "bundle_powershell_fallback": "CANONICALLY_PERMITTED",
     "candidate_target_count": 0,
     "canonical_framework_to_clock_bridge": "NOT_ESTABLISHED",
-    "current_handoff_path": "governance/FW_CAT_STAGE2_POST_INTEGRATION_ROUTING_0_1_0.md",
-    "current_operation": "POST_FW_CAT_TAXONOMY_GATE_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION",
-    "current_routing_path": "governance/FW_CAT_STAGE2_POST_INTEGRATION_ROUTING_0_1_0.md",
+    "claim_ledger_current_supersession": "RECONCILED_THROUGH_FW_CAT_STAGE2_CANONICALLY",
+    "claim_ledger_durable_row_count": 93,
+    "claim_ledger_temporal_ceiling": "FW_CAT_TAXONOMY_GATE_STAGE2",
+    "current_handoff_path": "governance/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_POST_INTEGRATION_ROUTING_0_1_0.md",
+    "current_operation": "POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION",
+    "current_routing_path": "governance/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_POST_INTEGRATION_ROUTING_0_1_0.md",
     "exact_prepublication_commit_object_preservation": "PREFERRED_NOT_REQUIRED",
+    "external_audit_authorized": false,
     "fcp26_selected": true,
     "fcp26_stage1": "CANONICALLY_COMPLETE",
     "fcp26_stage1_outcome": "B__ONLY_MODEL_PARAMETER_OR_REALIZATION_LEVEL_TESTABILITY_SURVIVES",
@@ -201,20 +196,25 @@
     "fw_loop_fcp26_empirical_class": "EC1",
     "fw_string_m_fcp26_empirical_class": "EC2",
     "latest_completed_external_audit_chain": "POST_FCP25_GROK_AUDIT",
-    "latest_completed_maintenance_operation": "POST_FW_CAT_TAXONOMY_GATE_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION",
+    "latest_completed_maintenance_operation": "POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION",
     "latest_completed_science_operation": "FW_CAT_TAXONOMY_GATE_STAGE2",
     "latest_numbered_phase": "FCP-26",
     "latest_science_handoff_path": "handoffs/FW_CAT_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md",
     "next_numbered_phase_selected": false,
     "next_operation_authorized": false,
     "next_operation_class": "READ_ONLY_SEQUENCING_ADJUDICATION",
-    "next_recommended_operation": "POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION",
+    "next_recommended_operation": "POST_FW_CAT_LEDGER_RECONCILIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION",
+    "open_docket_count": 4,
     "post_fcp25_grok_audit": "CANONICALLY_COMPLETE",
     "post_fcp25_grok_independent_adjudication": "CANONICALLY_COMPLETE",
     "post_fcp25_grok_reconciliation": "CANONICALLY_COMPLETE",
     "post_fcp26_stage1_scientific_sequencing_adjudication": "CANONICALLY_RECONCILED_ACCEPTED_READ_ONLY_DECISION",
-    "predecessor_operation": "FW_CAT_TAXONOMY_GATE_STAGE2",
+    "post_fw_cat_program_ledger_and_metadata_reconciliation": "CANONICALLY_COMPLETE",
+    "post_fw_cat_stage2_scientific_sequencing_adjudication": "CANONICALLY_ACCEPTED_READ_ONLY_DECISION",
+    "post_maintenance_high_priority_candidate": "NEW_EXTERNAL_ADVERSARIAL_AUDIT",
+    "predecessor_operation": "POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION",
     "remote_ref_lifecycle_policy": "ACTIVE",
+    "repository_live_working_set_archive_policy": "FUTURE_GOVERNANCE_CANDIDATE_ONLY",
     "scalar_framework_score": "FORBIDDEN",
     "stage2_external_empirical_source_search_justified": false,
     "stage2_target_count": 0
@@ -230,7 +230,13 @@
       "audits/POST_FCP25_GROK_INDEPENDENT_FINDING_EVIDENCE_LEDGER_0_1_0.md",
       "audits/POST_FCP25_GROK_INDEPENDENT_FINDING_ADJUDICATION_0_1_0.md",
       "handoffs/POST_FCP25_GROK_INDEPENDENT_ADJUDICATION_HANDOFF_0_1_0.md",
-      "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md"
+      "governance/POST_FCP25_GROK_POST_ADJUDICATION_RECONCILIATION_AND_ROUTING_0_1_0.md",
+      "governance/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_POST_INTEGRATION_ROUTING_0_1_0.md",
+      "governance/POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_DECISION_0_1_0.md",
+      "audits/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_0_1_0.md",
+      "handoffs/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_HANDOFF_0_1_0.md",
+      "CLAIM_LEDGER.md",
+      "SOURCE_REGISTER.md"
     ],
     "FRAMEWORK_TAXONOMY": [
       "CURRENT_STATE.md",
@@ -251,7 +257,9 @@
       "audits/FW_CAT_TAXONOMY_ADJUDICATION_0_1_0.md",
       "frameworks/categorical/FW_CAT_K1_K10_BASELINE_0_1_0.md",
       "audits/FW_CAT_REALIZATION_EMPIRICAL_CEILING_0_1_0.md",
-      "handoffs/FW_CAT_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md"
+      "handoffs/FW_CAT_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md",
+      "governance/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_POST_INTEGRATION_ROUTING_0_1_0.md",
+      "audits/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_0_1_0.md"
     ],
     "GENERAL_PROJECT_ORIENTATION": [
       "CURRENT_STATE.md",
@@ -270,7 +278,11 @@
       "audits/FW_CAT_TAXONOMY_ADJUDICATION_0_1_0.md",
       "frameworks/categorical/FW_CAT_K1_K10_BASELINE_0_1_0.md",
       "audits/FW_CAT_REALIZATION_EMPIRICAL_CEILING_0_1_0.md",
-      "handoffs/FW_CAT_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md"
+      "handoffs/FW_CAT_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md",
+      "governance/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_POST_INTEGRATION_ROUTING_0_1_0.md",
+      "governance/POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_DECISION_0_1_0.md",
+      "audits/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_0_1_0.md",
+      "handoffs/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_HANDOFF_0_1_0.md"
     ],
     "PAIRWISE_COMPARISON": [
       "CURRENT_STATE.md",
