@@ -2,7 +2,7 @@
 
 ## Current state
 
-Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 through FCP-18 appended the later controls/meta-audit, FCP-19 appended the Asymptotic Safety source-intake findings, FCP-20 appended the AS/null-GR subtraction/control result, and FCP-21 appended the Reduced-NFC/null-subtracted-AS controlled comparison. The 62 historical durable rows through FCP-21 remain preserved in their original order and wording. The earlier current-state supersession propagation appended 24 durable rows for already-canonical post-FCP-21 science, yielding 86 rows. The Post-FCP-25 Grok reconciliation appends three FCP-25 durable rows, yielding **89 durable rows through FCP-25**. No historical claim row is deleted, reordered, or rewritten by this reconciliation. `status: ACCEPTED` means that a row remains an accepted record at its declared source window and scope; it does **not** mean that the row is always the latest applicable present-tense interpretation. Current interpretation is resolved from the latest applicable durable rows together with `CURRENT_STATE.md` and `FRAMEWORK_REGISTER.md`. The durable-claim temporal ceiling of this reconciliation is FCP-25; later audit/governance records are not silently converted into scientific claim rows. **No overall numerical framework score or winner is inferred from these rows.**
+Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 through FCP-18 appended the later controls/meta-audit, FCP-19 appended the Asymptotic Safety source-intake findings, FCP-20 appended the AS/null-GR subtraction/control result, and FCP-21 appended the Reduced-NFC/null-subtracted-AS controlled comparison. The 62 historical durable rows through FCP-21 remain preserved in their original order and wording. The earlier current-state supersession propagation appended 24 durable rows for already-canonical post-FCP-21 science, yielding 86 rows. The Post-FCP-25 reconciliation appended three FCP-25 durable rows, yielding 89 rows. This post-FW-CAT reconciliation appends exactly four further durable rows—one FCP-26 Stage-1 empirical-screen row and three FW-CAT Stage-2 rows—yielding **93 durable rows through FW-CAT Taxonomy Gate Stage 2**. No historical claim row is deleted, reordered, or rewritten. `status: ACCEPTED` means that a row remains an accepted record at its declared source window and scope; it does **not** mean that the row is always the latest applicable present-tense interpretation. Current interpretation is resolved from the latest applicable durable rows together with `CURRENT_STATE.md` and `FRAMEWORK_REGISTER.md`. Canonical post-FCP-25 operations that create no distinct framework-indexed durable proposition remain authoritative in their own artifacts without being converted into artificial ledger rows. **No overall numerical framework score or winner is inferred from these rows.**
 
 ## Claim record schema
 
@@ -1692,3 +1692,79 @@ Future claims should use the following fields:
 - `status`: `ACCEPTED`
 - `supersedes`: `NONE`
 - `notes`: canonical provenance: realization/empirical ledger blob `9eaeeec6231a205d7975bf840624af235fa0acb7`; Stage-2 handoff blob `9dc6be064e102a6c337c46c3f23e36c9b0ce2b60`.
+
+---
+
+# Post-FCP-25 current-state durable claims
+
+## FCP26-EMP-001 — Post-FCP-23 deltas retain model-level testability but yield no framework-level Stage-2 target
+
+- `framework_ids`: `FW-STRING-M`, `FW-AS`, `FW-LOOP`
+- `source_ids`: `SRC-FCP24-PHENOM-MARCHESANO-SHIU-WEIGAND-2024`, `SRC-FCP24-COSMO-BAUMANN-MCALLISTER-2015`, `SRC-FCP24-EMPIRICAL-LVK-2021`, `SRC-FCP-TSS-AS-PPRR-2025`, `SRC-FCP-TSS-AS-ALR-2026`, `SRC-FCP-TSS-AS-PPR-2023`, `SRC-FCP-TSS-AS-KNORR-2026`, `SRC-FCP19-AS-MRS-2011`, `SRC-FCP19-AS-SW-2025`, `SRC-FCP15-LOOP-BARRETT-2010`, `SRC-FCP15-LOOP-BMP-2009`, `SRC-FCP-TSS-LOOP-HHZ-2019`, `SRC-FCP-TSS-LOOP-HLL-2020`, `SRC-FCP-TSS-LOOP-HAN-2017`, `SRC-FCP-TSS-LOOP-BAHR-STEINHAUS-2016`
+- `claim_text`: FCP-26 Stage 1 finds real post-FCP-23 realization and empirical content in the current String/M, asymptotic-safety, and LOOP records, but no source-qualified framework-level candidate target survives the preregistered bridge burden. `FW-STRING-M` and `FW-AS` reach model/parameter-level `EC2` testability, `FW-LOOP` reaches inherited/target-conditioned `EC1`, candidate-target count is zero, and an external Stage-2 empirical search is not justified at the current canonical scope.
+- `assumptions`: exact FCP-26 canonical-only delta screen; Method 0.2.0 framework-first B1–B6 burden; post-FCP-23 novelty is not fabricated from pre-existing source evidence; model/trajectory/realization choices are not promoted to framework-forced signatures.
+- `classification`: `NONFORCED`
+- `canonicity_level`: current bounded program-level empirical-feasibility conclusion; no universal impossibility claim.
+- `weaker_framework_test`: model or parameter constraints can be real without selecting the full foundational framework; absence of a compulsory bridge prevents framework-level promotion.
+- `physical_bridge`: partial and framework-specific; model/vacuum/trajectory dependent for String/M and AS, target-conditioned recovery for LOOP.
+- `empirical_binding`: `FW-STRING-M = EC2`; `FW-AS = EC2`; `FW-LOOP = EC1`; `CANDIDATE_TARGET_COUNT = 0`; `STAGE2_TARGET_COUNT = 0`; `FCP26_STAGE2 = NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE`.
+- `falsification_condition`: a later canonical framework-first bridge establishing a compulsory operational observable, framework-constrained signature, and qualified test conditions could supersede this bounded zero-target conclusion.
+- `countermodels`: core-preserving model, realization, compactification, trajectory, truncation and calibration freedoms that retain the framework while changing the candidate observable block framework-level inference.
+- `scope_ceiling`: successful zero-target screen at the exact post-FCP-23 delta window; no framework is falsified and future discrimination is not ruled out in principle.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: FCP-26 Stage-1 scientific commit `9733e2a3671ca81e5f8696f625f60eb59cc0e8e8`; delta-screen blob `48cf7ba38df791443daefe6807b3c2a91575359d`; bridge/adjudication blob `63a8024e11e60c7b116b21c116ab1119bfe37366`. The informal atomic-clock idea received no target advancement and no canonical framework-to-clock bridge; it is not elevated to an independent durable row.
+
+## FWCAT-001 — Historical FW-CAT umbrella is removed with reason and yields no successor framework
+
+- `framework_ids`: `FW-CAT`, `FW-CQM`, `FW-GPTOPT`, `FW-AQFT`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FCP4-CQM-AC-2004`, `SRC-FCP4-CQM-AC-2009`, `SRC-FCP4-CQM-CK-2017`, `SRC-FCP4-CQM-GS-2018`, `SRC-FCP4-GPT-BARRETT-2007`, `SRC-FCP4-OPT-CHIRIBELLA-2014`, `SRC-FCP4-GPT-PLAVALA-2023`, `SRC-FCP4-AQFT-BFV-2003`, `SRC-FW-CAT-STAGE1-BAEZ-STAY-2011`, `SRC-FW-CAT-STAGE1-TULL-2020`, `SRC-FW-CAT-STAGE1-SELBY-SCANDOLO-COECKE-2021`, `SRC-FW-CAT-STAGE1-CHO-EFFECTUS-2019`, `SRC-FW-CAT-STAGE1-ISHAM-BUTTERFIELD-1998`, `SRC-FW-CAT-STAGE1-DORING-ISHAM-2011`, `SRC-FW-CAT-STAGE1-HEUNEN-LANDSMAN-SPITTERS-2009`, `SRC-FW-CAT-STAGE1-WOLTERS-2013`, `SRC-FW-CAT-STAGE1-FLORI-2018`, `SRC-FW-CAT-STAGE1-DORING-2015`, `SRC-FW-CAT-STAGE1-FRITZ-2020`, `SRC-FW-CAT-STAGE1-COECKE-SPEKKENS-2012`, `SRC-FW-CAT-STAGE1-ATIYAH-1988`, `SRC-FW-CAT-STAGE1-BAEZ-DOLAN-1995`, `SRC-FW-CAT-STAGE1-FREED-2013`, `SRC-FW-CAT-STAGE1-OECKL-2003`, `SRC-FW-CAT-STAGE1-CRANE-1995`, `SRC-FW-CAT-STAGE1-BAEZ-HUERTA-2011`, `SRC-FW-CAT-STAGE1-COECKE-LAL-2013`, `SRC-FW-CAT-STAGE1-KISSINGER-UIJLEN-2019`, `SRC-FW-CAT-STAGE1-HARDY-2016`, `SRC-FW-CAT-STAGE1-ORESHKOV-COSTA-BRUKNER-2012`, `SRC-FW-CAT-STAGE1-RUBINO-2017`, `SRC-FW-CAT-STAGE1-ROZEMA-2024`
+- `claim_text`: Under the exact frozen 32-source FW-CAT corpus, the historical categorical/process/topos umbrella does not bind one stable foundational competitor. Twelve source-bound scientific objects are separated before admission; four map to existing `FW-CQM`, `FW-GPTOPT`, `FW-AQFT`, or the GR sector represented by `FW-NULL-GRQFTSM`, six remain nonframework material, two remain deferred proposals, and no new successor framework is admitted. `FW-CAT` is therefore retained only as historical provenance with `REMOVED_WITH_REASON`.
+- `assumptions`: taxonomy precedes K1–K10; framework separation and weakest-adequate admission are distinct; common categorical syntax, composition, reconstruction language, functoriality, or process notation do not by themselves establish one physical ontology, dynamics, scope, or empirical program.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: framework taxonomy/source-binding level at the exact frozen source scope only.
+- `weaker_framework_test`: existing-framework, toolkit, representational, mathematical-infrastructure, model-family and research-program classifications adequately describe the retained source-bound objects without a new umbrella competitor.
+- `physical_bridge`: object-specific only; no common FW-CAT physical bridge survives taxonomy.
+- `empirical_binding`: no framework-wide empirical binding because no retained/new FW-CAT framework exists.
+- `falsification_condition`: a future separately frozen source intake that binds a genuinely distinct foundational object from currently deferred or nonframework material could supersede this taxonomy boundary prospectively.
+- `countermodels`: the frozen corpus contains materially distinct CQM/GPTOPT processes, topos reformulations, functorial AQFT, TQFT/classification, higher-gauge/QG proposals, causal-process models, and operational GR with different carriers, dynamics and empirical burdens.
+- `scope_ceiling`: `TAXONOMY_VERDICT = B_EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_REMAINDER`; `FW_CAT_SURVIVES = NO`; `NEWLY_ADMITTED_FRAMEWORK_COUNT = 0`.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: FW-CAT Stage-2 scientific commit `faa63b8073fdd0fc41cec4ec4e6b0957918ab3ec`; taxonomy blob `dfdaac236040da8ca3c752a3fc82b2362627de7c`.
+
+## FWCAT-002 — FW-CAT K1–K10 baseline is not instantiated because no new framework survives taxonomy
+
+- `framework_ids`: `FW-CAT`
+- `source_ids`: `SRC-FCP4-CQM-AC-2004`, `SRC-FCP4-CQM-AC-2009`, `SRC-FCP4-CQM-CK-2017`, `SRC-FCP4-CQM-GS-2018`, `SRC-FCP4-GPT-BARRETT-2007`, `SRC-FCP4-OPT-CHIRIBELLA-2014`, `SRC-FCP4-GPT-PLAVALA-2023`, `SRC-FCP4-AQFT-BFV-2003`, `SRC-FW-CAT-STAGE1-BAEZ-STAY-2011`, `SRC-FW-CAT-STAGE1-TULL-2020`, `SRC-FW-CAT-STAGE1-SELBY-SCANDOLO-COECKE-2021`, `SRC-FW-CAT-STAGE1-CHO-EFFECTUS-2019`, `SRC-FW-CAT-STAGE1-ISHAM-BUTTERFIELD-1998`, `SRC-FW-CAT-STAGE1-DORING-ISHAM-2011`, `SRC-FW-CAT-STAGE1-HEUNEN-LANDSMAN-SPITTERS-2009`, `SRC-FW-CAT-STAGE1-WOLTERS-2013`, `SRC-FW-CAT-STAGE1-FLORI-2018`, `SRC-FW-CAT-STAGE1-DORING-2015`, `SRC-FW-CAT-STAGE1-FRITZ-2020`, `SRC-FW-CAT-STAGE1-COECKE-SPEKKENS-2012`, `SRC-FW-CAT-STAGE1-ATIYAH-1988`, `SRC-FW-CAT-STAGE1-BAEZ-DOLAN-1995`, `SRC-FW-CAT-STAGE1-FREED-2013`, `SRC-FW-CAT-STAGE1-OECKL-2003`, `SRC-FW-CAT-STAGE1-CRANE-1995`, `SRC-FW-CAT-STAGE1-BAEZ-HUERTA-2011`, `SRC-FW-CAT-STAGE1-COECKE-LAL-2013`, `SRC-FW-CAT-STAGE1-KISSINGER-UIJLEN-2019`, `SRC-FW-CAT-STAGE1-HARDY-2016`, `SRC-FW-CAT-STAGE1-ORESHKOV-COSTA-BRUKNER-2012`, `SRC-FW-CAT-STAGE1-RUBINO-2017`, `SRC-FW-CAT-STAGE1-ROZEMA-2024`
+- `claim_text`: Because FW-CAT Stage 2 yields no retained or newly admitted categorical/process/topos foundational framework, no positive pooled K1–K10 baseline is instantiated for the historical umbrella. Existing-framework K1–K10 baselines remain unchanged and the object-specific formal, representational, reconstruction, model and proposal content is preserved only at its own source-qualified scope.
+- `assumptions`: K1–K10 applies to a source-bound scientific framework object; taxonomy-first ordering and no-double-counting discipline are binding.
+- `classification`: `NONFORCED`
+- `canonicity_level`: object-specific baseline gate; no umbrella K-key value is asserted.
+- `weaker_framework_test`: pooling heterogeneous CQM, GPT/OPT, AQFT, topos, TQFT, higher-gauge, causal-process and operational-GR content would fabricate a unified carrier/history selector absent from the sources.
+- `physical_bridge`: none common to the removed umbrella.
+- `empirical_binding`: none at FW-CAT framework scope.
+- `falsification_condition`: a future source-bound successor framework would receive its own separately frozen K1–K10 baseline and could supersede this noninstantiation only for that new object.
+- `countermodels`: multiple source-bound objects in the frozen corpus realize categorical structure while differing materially in dynamics, measurement, causal structure and physical scope.
+- `scope_ceiling`: `K1_K10_BASELINE_STATUS = NONINSTANTIATED_NO_SURVIVING_NEW_FRAMEWORK`; existing framework baselines are not rewritten.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: FW-CAT K1–K10 noninstantiation blob `074e6d6f9bb2af0324a3f849053719e418b0fe71`; Stage-2 taxonomy blob `dfdaac236040da8ca3c752a3fc82b2362627de7c`.
+
+## FWCAT-003 — Quantum-switch experiment reaches implementation-level EMP3 without FW-CAT framework selection
+
+- `framework_ids`: `FW-CAT`, `FW-CQM`, `FW-GPTOPT`
+- `source_ids`: `SRC-FW-CAT-STAGE1-ORESHKOV-COSTA-BRUKNER-2012`, `SRC-FW-CAT-STAGE1-COECKE-LAL-2013`, `SRC-FW-CAT-STAGE1-KISSINGER-UIJLEN-2019`, `SRC-FW-CAT-STAGE1-RUBINO-2017`, `SRC-FW-CAT-STAGE1-ROZEMA-2024`
+- `claim_text`: The strongest direct empirical contact in the frozen FW-CAT corpus is the photonic quantum-switch causal-witness experiment at a specified quantum-process implementation. This reaches `REAL4` physical-system realization and `EMP3` direct model/implementation-level evidence, but it does not empirically select category theory, the historical FW-CAT umbrella, a general process-matrix ontology, or a quantum-gravity causal structure.
+- `assumptions`: the reported photonic implementation, operational characterization and causal-witness analysis are kept at their declared model scope; model/extension evidence is not back-projected to an umbrella framework.
+- `classification`: `EMPIRICAL`
+- `canonicity_level`: direct experiment at specified implementation/model scope only; no foundational framework selection canonicity.
+- `weaker_framework_test`: ordinary quantum mechanics/GPTOPT process models already describe the implemented system; categorical representation is not uniquely selected by the measurement.
+- `physical_bridge`: calibrated photonic quantum-switch implementation with specified inputs, operations, controls and readout.
+- `empirical_binding`: approximately seven-standard-deviation causal-nonseparability witness for the reported implementation; `HIGHEST_EMPIRICAL_SCOPE = MODEL_IMPLEMENTATION_LEVEL_EMP3`; `DIRECT_FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR = NOT_APPLICABLE`.
+- `falsification_condition`: failure to reproduce the reported causal-witness result would weaken this implementation claim; a future framework-level result would require a retained/new framework plus a compulsory decision rule linking the framework to observations.
+- `countermodels`: the same implementation-level evidence is naturally accommodated as a quantum-information/process-model experiment without committing to category theory as physical ontology.
+- `scope_ceiling`: direct model/implementation experiment only; no FW-CAT revival, category-theory confirmation, quantum-gravity inference, or framework winner.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical provenance: FW-CAT empirical-ceiling blob `badff8e3599b697f21000dc0d9343ed7b279a573`; quantum-switch evidence is explicitly firewall-protected from umbrella back-projection.

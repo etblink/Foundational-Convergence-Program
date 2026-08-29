@@ -243,3 +243,32 @@ POST_FCP21_OPERATION_INVENTORY_RECONSTRUCTED = YES
 RECURRENCE_VECTOR_CHANGED = NO
 FINAL_DURABLE_ROW_COUNT = 86
 ```
+
+## 11. Post-FCP-25 current-state extension through FW-CAT Stage 2
+
+This extension is an append-only current-supersession inventory. It does not alter the 20-operation post-FCP-21 inventory above or any historical claim-row disposition.
+
+| Canonical operation family after FCP-25 | Ledger disposition | Durable rows |
+|---|---|---|
+| Post-FCP-25 Grok audit/adjudication/reconciliation | `NO_DISTINCT_NEW_ROW` | none; operative consequences are governance/dockets and later canonical science |
+| Broader holographic Stage 1 source intake | `SOURCE_INTAKE_ONLY` | none |
+| Broader holographic Stage 2 taxonomy | `NO_FRAMEWORK_INDEXED_NEW_ROW` | none; no `FW-HOLO`, no new framework, no substantive `FW-STRING-M` change |
+| Post-holography sequencing/routing/navigation | `SEQUENCING_OR_MAINTENANCE_ONLY` | none |
+| FCP-26 Stage 1 delta empirical screen | `APPEND_DURABLE_CLAIM_ROW` | `FCP26-EMP-001` |
+| Post-FCP-26 sequencing/publication housekeeping | `SEQUENCING_OR_MAINTENANCE_ONLY` | none |
+| FW-CAT Stage 1 source intake | `SOURCE_INTAKE_ONLY` | none |
+| FW-CAT Stage 2 taxonomy/K1/empirical ceiling | `APPEND_DURABLE_CLAIM_ROWS` | `FWCAT-001`, `FWCAT-002`, `FWCAT-003` |
+| Post-FW-CAT routing/navigation and read-only sequencing | `SEQUENCING_OR_MAINTENANCE_ONLY` | none |
+
+```text
+PRE_EXTENSION_DURABLE_ROW_COUNT = 89
+ROWS_APPENDED_BY_THIS_EXTENSION = 4
+CURRENT_DURABLE_ROW_COUNT = 93
+CURRENT_DURABLE_TEMPORAL_CEILING = FW_CAT_TAXONOMY_GATE_STAGE2
+DIRECT_SUPERSESSION_MAP_CHANGE = NONE
+PARTIAL_SUPERSESSION_MAP_CHANGE = NONE
+RECURRENCE_VECTOR_CHANGE = NONE
+CONVERGENCE_CREDIT_CHANGE = NONE
+```
+
+The four new rows supplement current durable coverage without changing any earlier row's historical scope. Broader-holography results remain fully canonical in their own artifacts despite creating no artificial framework-indexed Claim Ledger row.
