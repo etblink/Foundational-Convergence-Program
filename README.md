@@ -10,7 +10,7 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 ## Current status
 
 - **Latest numbered phase:** FCP-26; Stage 1 is canonically complete and Stage 2 is `NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE`.
-- **Latest canonical scientific operation:** `FW_CAT_SOURCE_INTAKE_STAGE1` (`8bb50599e276029ac3e275710fcd2cb99735a9ec`; tree `cec3880b8c08e7eb1d64d7c3c0466eac9803a9db`).
+- **Latest canonical scientific operation:** `FW_CAT_TAXONOMY_GATE_STAGE2` (`faa63b8073fdd0fc41cec4ec4e6b0957918ab3ec`; tree `f3c1dfccddcc6f106701d7661f4e16b7d0afe5c0`).
 - **Latest canonical maintenance operation:** `FCP_REPOSITORY_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_HOUSEKEEPING`; its enclosing commit identity is intentionally resolved from live `main` rather than embedded self-referentially in mutable state.
 - **Active prospective method:** FCP Method 0.2.0.
 - **Housekeeping status:** canonically complete.
@@ -18,14 +18,14 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 - **FCP-26 Stage-1 outcome:** `B__ONLY_MODEL_PARAMETER_OR_REALIZATION_LEVEL_TESTABILITY_SURVIVES`; zero framework-level Stage-2 targets, no external empirical source search justified, and no atomic-clock target advanced.
 - **Post-FCP-26 sequencing:** the accepted read-only adjudication selected bounded publication-provenance/ref-lifecycle housekeeping before further science; that housekeeping is now canonically complete.
 - **Publication governance:** qualification identity and canonical publication identity are explicitly distinguished; content-equivalent publication and deterministic navigation rebinding are permitted under `governance/FCP_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_POLICY_0_1_0.md`.
-- **FW-CAT Stage 1:** canonically complete; 50 candidates reviewed, 32-source corpus frozen (24 new, 8 reused), all 13 discovery lanes passed, and `STAGE2_TAXONOMY_GATE_JUSTIFIED=YES` without a taxonomy verdict.
-- **Next recommended program operation:** `FW_CAT_TAXONOMY_GATE_STAGE2`, recommended but not authorized; no next numbered phase is selected and FCP-27 remains unselected.
+- **FW-CAT:** Stage 1 and Stage 2 are canonically complete; the 32-source corpus resolves into 12 objects, with four existing-framework assignments, six nonframework remainders, two deferred proposals, zero new frameworks, and historical `FW-CAT` removed with reason.
+- **Next recommended program operation:** `POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION`; read-only sequencing is recommended but not yet authorized, no next numbered phase is selected, and FCP-27 remains unselected.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-26
-LATEST_CANONICAL_SCIENCE = FW_CAT_SOURCE_INTAKE_STAGE1
+LATEST_CANONICAL_SCIENCE = FW_CAT_TAXONOMY_GATE_STAGE2
 FCP26_STAGE1_STATUS = CANONICALLY_COMPLETE
 FCP26_STAGE1_OUTCOME = B__ONLY_MODEL_PARAMETER_OR_REALIZATION_LEVEL_TESTABILITY_SURVIVES
 FCP26_STAGE2 = NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE
@@ -35,8 +35,12 @@ FCP_REPOSITORY_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_HOUSEKEEPING = CANONICAL
 FCP_PUBLICATION_TRANSPORT_POLICY = CONTENT_API_EQUIVALENT_PUBLICATION_ALLOWED
 FW_CAT_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
 FW_CAT_STAGE1_SOURCE_CORPUS = FROZEN
-FW_CAT_STAGE2_TAXONOMY_GATE_JUSTIFIED = YES
-NEXT_RECOMMENDED_OPERATION = FW_CAT_TAXONOMY_GATE_STAGE2
+FW_CAT_STAGE2_TAXONOMY_GATE_JUSTIFIED = FULFILLED_BY_CANONICAL_STAGE2
+FW_CAT_TAXONOMY_GATE_STAGE2 = CANONICALLY_COMPLETE
+FW_CAT_TAXONOMY_VERDICT = B_EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_REMAINDER
+FW_CAT_FINAL_STATUS = REMOVED_WITH_REASON
+FW_CAT_SUCCESSOR_FRAMEWORK_COUNT = 0
+NEXT_RECOMMENDED_OPERATION = POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION
 NEXT_OPERATION_AUTHORIZED = NO
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
@@ -96,8 +100,9 @@ Method 0.2.0 reports these axes separately. It does not use a scalar framework-w
 - **FCP-26 Stage 1:** canonically complete; 14 framework IDs accounted for, five material post-FCP-23 deltas, three bridge-screen frameworks (`FW-STRING-M` `EC2`, `FW-AS` `EC2`, `FW-LOOP` `EC1`), zero Stage-2 targets, no external empirical search justified, and no atomic-clock target advanced.
 - **Post-FCP-26 sequencing:** accepted read-only decision; repository publication-provenance/ref-lifecycle housekeeping selected before the next substantive science.
 - **Publication-provenance/ref-lifecycle housekeeping:** canonically complete; qualification/publication identities and content-equivalent publication are governed explicitly, bundle + guarded PowerShell is a permitted fallback, and completed remote branches are governed by archive-before-delete rules where unique history exists.
-- **FW-CAT Stage 1:** canonically complete; 50 candidates reviewed, 32 admitted (24 new, 8 reused), 18 rejected/deferred, and all 13 lanes passed; the frozen corpus is sufficient for a later taxonomy gate but no taxonomy outcome is selected.
-- **Next program operation:** `FW_CAT_TAXONOMY_GATE_STAGE2`, recommended but not started; FCP-27 is not selected.
+- **FW-CAT Stage 1:** canonically complete; 50 candidates reviewed, 32 admitted (24 new, 8 reused), 18 rejected/deferred, and all 13 lanes passed.
+- **FW-CAT Stage 2:** canonically complete and independently accepted; verdict B removes the historical umbrella with reason, maps four objects to existing frameworks, retains six nonframework remainders and two deferred proposals, admits zero successors, and instantiates no pooled K1–K10 framework baseline.
+- **Next program operation:** read-only `POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION`; FCP-27 is not selected.
 
 Detailed scientific findings live in the versioned phase, comparison, audit, and handoff artifacts rather than in this landing page.
 
