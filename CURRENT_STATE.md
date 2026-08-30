@@ -6,10 +6,10 @@
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-26
-LATEST_CANONICAL_SCIENTIFIC_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_ACCEPTED_FINDINGS_REPAIR
-LATEST_CANONICAL_SCIENTIFIC_COMMIT = 1da10fbb5dfad84b294a65a03cbcd911b13ad8fd
-LATEST_CANONICAL_SCIENTIFIC_TREE = ae3d1fd0c8a561245b66459fa0a7e462bea696e2
-LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_REPAIR_ROUTING_AND_NAVIGATION_RECONCILIATION
+LATEST_CANONICAL_SCIENTIFIC_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_REPAIR_SCIENTIFIC_SEQUENCING_ADJUDICATION
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = 599aaa5ebf3f0acfed76946afa787f784bf32662
+LATEST_CANONICAL_SCIENTIFIC_TREE = 7a69b4d6b2d45921502e65e636e5fdd4ee40dbb5
+LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_REPAIR_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION
 LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
 PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = e2fa96fe2fe2a686385a1f968f95a5eb9c2c68b5
 PREVIOUS_CANONICAL_MAINTENANCE_TREE = f29720957baa127a75ed086a88a46dda17c0252b
@@ -20,7 +20,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.1_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix admission-audit, sequencing, null-control, targeted realizability source-strengthening, and physical-selection Stage-2 operations are unnumbered and FCP-27 has not been selected. The latest substantive scientific chain is the accepted-findings repair of `FW-PROCESS-MATRIX` Stage 2 after a frozen external adversarial audit and independent Project Lead adjudication. The exact 27-source corpus and all Stage-2 AX1–AX10 / A–F values are unchanged: general `W`-scope probabilistic/postselected representation remains established; general deterministic standard-QM realization, a complete physical-selection criterion, unrestricted composition/globalization closure, and general classical-spacetime embedding remain unestablished; restricted positive classes and broad assumption-scoped exclusions remain nonempty; and framework-level empirical selection remains none. The audit response is frozen, the Project Lead independently accepted F1, F2, and F4 and accepted F3 with a narrower rationale, and the four local repairs are now canonical through superseding Stage-2 `0.1.1` artifacts. No pairwise relation or count was re-adjudicated: the earlier null-control records were left administratively unchanged, while their scientific invariance under AX3 is explicitly `NOT_ADJUDICATED`. The next scientific step is a fresh read-only post-repair sequencing decision, not an automatic pairwise reanalysis. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
+`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix admission-audit, sequencing, null-control, targeted realizability source-strengthening, and physical-selection Stage-2 operations are unnumbered and FCP-27 has not been selected. The repaired `FW-PROCESS-MATRIX` Stage-2 result remains the latest mutating scientific result, with all AX1–AX10 and A–F values preserved after external audit. The latest canonical scientific decision is the fresh post-repair sequencing adjudication: it identifies one bounded new-information dependency and selects a prospective closed-corpus **K9-only null-control pairwise reanalysis preregistration**. No K9 relation has yet been re-adjudicated. The current E2/NONE/unresolved counts, null-subtracted residue, and `PMNC-K9-01` through `PMNC-K9-03` remain exactly the pre-reanalysis baseline. The selected next step is only to freeze outcome-neutral K9 reanalysis rules; new sources, comparator changes, K1–K8 or K10 substantive reopening, convergence credit, recurrence, empirical escalation, and FCP-27 remain forbidden or unselected. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.1 now governs prospective work as a narrow delta over Method 0.2.0: framework-admission criterion C tests source-bound physical law, constraint, or dynamical architecture rather than requiring intrinsic dynamics. All unaffected Method 0.2.0 rules remain inherited.
 
@@ -624,52 +624,39 @@ FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2 = CANONIC
 POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
 POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
 POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_SCIENTIFIC_SEQUENCING_SELECTED_ROUTE = R7__EXTERNAL_ADVERSARIAL_AUDIT
-NO_IMMEDIATE_NEW_SUBSTANTIVE_SCIENCE = YES__PRE_AUDIT_SEQUENCING_RESULT_PRESERVED_PENDING_FRESH_POST_REPAIR_SEQUENCING
-SELECTED_NEXT_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_ADVERSARIAL_AUDIT
-POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_ADVERSARIAL_AUDIT = CANONICALLY_COMPLETE__RESPONSE_ACQUIRED_CUSTODY_FROZEN_INDEPENDENTLY_ADJUDICATED_AND_ACCEPTED_FINDINGS_REPAIRED
-POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_PREREGISTRATION_COMMIT = 063e453c6e0924682d0a09257bcee7e530ec3088
-POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_PACKET_FREEZE_COMMIT = 99fa6fb51db8ea23a8e065a8f94ef656d7f2cdac
-POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_EVIDENCE_BASE = b435aa513a72e38b8e50d8cb8bf9d79464d6c15a
-POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_EVIDENCE_COMPONENT_COUNT = 22
-POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_FAILED_BINDING_INCLUDED = YES
-POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_REPAIR_INCLUDED = YES
-POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_PACKET_QUALIFICATION = PASS
-EXTERNAL_AUDITOR_IDENTITY = GROK__USER_REPORTED__MODEL_VERSION_UNEVIDENCED
-EXTERNAL_AUDITOR_CONTACTED = YES
-EXTERNAL_AUDIT_PROMPT_SENT = YES__USER_EXTERNAL_ACTION__SERVICE_SIDE_TRANSPORT_NOT_INDEPENDENTLY_VERIFIED
-EXTERNAL_AUDIT_PACKET_EXPOSED = YES__RETURNED_RESPONSE_SELF_IDENTIFIES_FROZEN_22_FILE_EVIDENCE_UNIVERSE
-EXTERNAL_AUDIT_RESPONSE_ACQUIRED = YES
-EXTERNAL_AUDIT_RESPONSE_BLOB = bd199e3c9f3b0c78af3345f3d623500350e01310
-EXTERNAL_AUDIT_RESPONSE_CUSTODY_COMMIT = a4b63bc40199ffd735898bc7b331b3fdf39e8633
-EXTERNAL_AUDIT_RESPONSE_CUSTODY_BLOB = 0a832127d4dcb16428053a1280981d33eb01bb9e
-EXTERNAL_AUDIT_INDEPENDENT_ADJUDICATION_COMMIT = aa6dacd7c6fe1d35c3df1233b19373f4e1c4c612
-EXTERNAL_AUDIT_INDEPENDENT_ADJUDICATION_BLOB = 1d5db6973a2510d808cc009c7e096fb7520ed5b7
-EXTERNAL_AUDIT_PROJECT_LEAD_FINDINGS = F1_ACCEPTED;F2_ACCEPTED;F3_ACCEPTED_WITH_NARROWER_RATIONALE;F4_ACCEPTED
-EXTERNAL_AUDIT_PROJECT_LEAD_MEDIUM_FINDINGS = 2
-EXTERNAL_AUDIT_PROJECT_LEAD_LOW_FINDINGS = 2
-EXTERNAL_AUDIT_PROJECT_LEAD_CRITICAL_OR_HIGH_FINDINGS = 0
-EXTERNAL_AUDIT_ACCEPTED_FINDINGS_REPAIR_COMMIT = 1da10fbb5dfad84b294a65a03cbcd911b13ad8fd
-EXTERNAL_AUDIT_ACCEPTED_FINDINGS_REPAIR_TREE = ae3d1fd0c8a561245b66459fa0a7e462bea696e2
-EXTERNAL_AUDIT_ACCEPTED_FINDINGS_REPAIR_QUALIFICATION = PASS
-STAGE2_AX1_AX10_CHANGE_AFTER_AUDIT = NO
-STAGE2_A_F_CHANGE_AFTER_AUDIT = NO
-FRAMEWORK_IDENTITY_CHANGE_AFTER_AUDIT = NO
-FRAMEWORK_STATUS_CHANGE_AFTER_AUDIT = NO
-PAIRWISE_RELATION_CHANGE_AFTER_AUDIT = NOT_ADJUDICATED
-CONVERGENCE_CREDIT_CHANGE_AFTER_AUDIT = NO
-RECURRENCE_CHANGE_AFTER_AUDIT = NO
-FRAMEWORK_LEVEL_EMPIRICAL_SELECTION_CHANGE_AFTER_AUDIT = NO
-NEXT_EXECUTION_STEP = FRESH_POST_REPAIR_READ_ONLY_SCIENTIFIC_SEQUENCING
-NEXT_RECOMMENDED_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_REPAIR_SCIENTIFIC_SEQUENCING_ADJUDICATION
-NEXT_OPERATION_CLASS = READ_ONLY_SEQUENCING_ADJUDICATION
+POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_REPAIR_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_REPAIR_SCIENTIFIC_SEQUENCING_COMMIT = 599aaa5ebf3f0acfed76946afa787f784bf32662
+POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_REPAIR_SCIENTIFIC_SEQUENCING_BLOB = 2c3d1727981c96392b5bb7b2aeb702645899a35a
+NO_IMMEDIATE_NEW_SUBSTANTIVE_SCIENCE = NO__ONE_BOUNDED_K9_PAIRWISE_REANALYSIS_IS_JUSTIFIED
+POST_REPAIR_SELECTED_ROUTE = R2__TARGETED_K9_NULL_CONTROL_PAIRWISE_REANALYSIS
+TARGETED_K9_PAIRWISE_REANALYSIS_JUSTIFIED = YES
+FULL_NULL_CONTROL_RESTAGE_JUSTIFIED = NO
+NON_NULL_PAIRWISE_COMPARATOR_SELECTED = NO
+NEW_SOURCE_SEARCH_SELECTED = NO
+EMPIRICAL_ESCALATION_SELECTED = NO
+RECURRENCE_RECOMPUTATION_SELECTED = NO
+METHOD_REVISION_SELECTED = NO
+TARGETED_K9_PAIRWISE_REANALYSIS_PREREGISTRATION = SELECTED_NOT_STARTED
+TARGETED_K9_PAIRWISE_READJUDICATION = NOT_STARTED
+TARGETED_K9_CURRENT_EXISTING_RECORDS = PMNC-K9-01;PMNC-K9-02;PMNC-K9-03
+TARGETED_K9_CURRENT_PAIRWISE_E2_COUNT = 3
+TARGETED_K9_CURRENT_NONE_ESTABLISHED_COUNT = 13
+TARGETED_K9_CURRENT_UNRESOLVED_COUNT = 1
+TARGETED_K9_CURRENT_NULL_SUBTRACTED_RESIDUE = NONEMPTY
+TARGETED_K9_CURRENT_RESIDUE_HIGHEST_SCOPE = S3_FRAMEWORK_WIDE
+TARGETED_K9_AX3_NEW_LOAD_BEARING_PROPOSITION = SRC-FWPM-REAL-SILVA-MULTITIME-2017__GENERAL_W_CONDITIONAL_POSTSELECTED_REPRESENTATION
+TARGETED_K9_PAIRWISE_RESULT = NONE_NOT_YET_READJUDICATED
+NEXT_EXECUTION_STEP = FREEZE_TARGETED_K9_PAIRWISE_REANALYSIS_PREREGISTRATION
+NEXT_RECOMMENDED_OPERATION = FW_PROCESS_MATRIX_NULL_CONTROL_K9_TARGETED_PAIRWISE_REANALYSIS_PREREGISTRATION
+NEXT_OPERATION_CLASS = PROSPECTIVE_CLOSED_CORPUS_PAIRWISE_REANALYSIS_PREREGISTRATION
 NEXT_OPERATION_AUTHORIZED = YES__STANDING_PROJECT_LEAD_DELEGATION
-NEXT_OPERATION_AUTHORIZATION_BOUNDARY = NONE__NO_NEW_EXTERNAL_ACTION_OR_SCIENTIFIC_MUTATION
+NEXT_OPERATION_AUTHORIZATION_BOUNDARY = NONE__PREREGISTRATION_ONLY__PAIRWISE_RESULT_STILL_FORBIDDEN_BEFORE_FREEZE
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
-NEXT_SCIENTIFIC_PHASE = NONE__PENDING_FRESH_POST_REPAIR_SEQUENCING
+NEXT_SCIENTIFIC_PHASE = NONE__TARGETED_K9_PREREGISTRATION_SELECTED
 ```
 
-The process-matrix Stage-2 external adversarial-audit chain is now complete through response custody, independent Project Lead adjudication, and the bounded accepted-findings repair. Grok is recorded only as the user-reported external auditor; no exact model/version or hidden service metadata is claimed. The response is frozen as received through chat, with the pre-paste raw-byte limitation explicitly preserved. The Project Lead independently accepted F1, F2, and F4 and accepted F3 with a narrower rationale. Superseding Stage-2 `0.1.1` adjudication/profile/handoff artifacts repair the required tables, two source-role issues, and the unauthorized pairwise-invariance gloss without changing AX1–AX10, A–F, framework identity/status, or framework-level empirical selection. No pairwise result, E-count, convergence credit, recurrence slot, empirical target, or FCP-27 selection was adjudicated by the repair. The next operation is a fresh read-only post-repair sequencing decision; any targeted null-control K9 reanalysis would require separate prospective selection and preregistration.
+The process-matrix Stage-2 external-audit chain remains complete through custody, independent adjudication, and accepted-findings repair. A fresh post-repair sequencing decision has now identified a specific pairwise-information delta: AX3 is a source-bound general-`W` conditional/postselected representation proposition of a type that may qualify as E2 against the already-selected null comparator. This does **not** resolve the complete physical-selection question encoded by `PMNC-K9-03`, and it does not establish that any pairwise relation changes. The next operation is therefore only a prospective, closed-corpus, K9-only reanalysis preregistration. Until that preregistration is frozen and separately applied, both pairwise change and pairwise invariance remain unadjudicated.
 
 ## Post-FW-CAT program-ledger and metadata reconciliation — canonical result
 
