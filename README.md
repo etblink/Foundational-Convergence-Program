@@ -10,8 +10,8 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 ## Current status
 
 - **Latest numbered phase:** FCP-26; Stage 1 is canonically complete and Stage 2 is `NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE`.
-- **Latest canonical scientific operation:** `FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT` (`46e7e76c081189cea7f2aa8335c56c8a3d89c5d2`; tree `4ee84f7296e572e8e2a8faa2d9cb919bb1c3c582`). Outcome A preserves the narrow `FW-PROCESS-MATRIX` admission after hostile A–H replay, physical-law/syntax attack, existing-framework subtraction, realizability, weakest-classification, and nonredundancy controls. This strengthens taxonomy confidence only: framework-level empirical selection remains absent, universal process-matrix realizability remains unestablished, and the general Method-0.2.1 reformulation/meta-framework ambiguity remains open.
-- **Latest canonical maintenance operation:** `POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION`; this bounded reconciliation records the accepted post-audit sequencing decision and routes to null-control preregistration without changing `FW-PROCESS-MATRIX` status, Method 0.2.1, the source corpus, empirical standing, realizability standing, Claim Ledger, pairwise results, convergence, or recurrence.
+- **Latest canonical scientific operation:** `FW_PROCESS_MATRIX_NULL_CONTROL` (`c391b42d3aa4043045d7e3a566a26b9f3aac6070`; tree `e8c7af0932cb0e4557edf258aa1396094509a63d`). Closed-corpus subtraction against `FW-NULL-GRQFTSM` leaves three bounded E2 relations, thirteen `NONE_ESTABLISHED`, one framework-wide realizability `UNRESOLVED_UNDER_FROZEN_CORPUS`, and four process-matrix-specific additional commitments at an S3 ceiling. No E1/E3/E4/E5, universal realizability, framework-level empirical discriminator, convergence credit, or recurrence change is established.
+- **Latest canonical maintenance operation:** `POST_FW_PROCESS_MATRIX_NULL_CONTROL_ROUTING_AND_NAVIGATION_RECONCILIATION`; this bounded reconciliation records the already-integrated null-control result and routes only to a fresh read-only post-null sequencing adjudication.
 - **Active prospective method:** FCP Method 0.2.1, a narrow prospective admission-law delta over Method 0.2.0.
 - **Housekeeping status:** canonically complete.
 - **Post-FCP-25 Grok status:** audit, independent adjudication, and reconciliation are canonically complete.
@@ -22,13 +22,13 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 - **Current durable ledger:** 94 rows through the bounded `OBJ-CAT-11` re-adjudication; the prior 93 rows are byte-preserved, `FWCAT-004` supplies the current partial supersession, Biswas author metadata is reconciled, and four recurrence-epoch consistency dockets remain open.
 - **Causal-process / ICO Stage 1:** canonically complete; 44 meaningful candidates reviewed and a 33-source corpus frozen (28 new + 5 reused).
 - **Causal-process / ICO Stage 2:** canonically complete under Method 0.2.1; ten scientific objects are preserved and exactly one new framework (`FW-PROCESS-MATRIX`) passes A–H. Its separate K1–K10 baseline is now canonically complete, while pairwise comparison, convergence credit, recurrence change, empirical target selection, and FCP-27 remain absent.
-- **Next recommended program operation:** `FW_PROCESS_MATRIX_NULL_CONTROL`; first freeze an outcome-neutral closed-corpus preregistration against `FW-NULL-GRQFTSM`. No null-subtracted residue, non-null pairwise relation, recurrence consequence, empirical selection, Method-0.2.1 change, or FCP-27 selection is yet established.
+- **Next recommended program operation:** `POST_FW_PROCESS_MATRIX_NULL_CONTROL_SCIENTIFIC_SEQUENCING_ADJUDICATION`; reassess dependency order after null subtraction before selecting realizability strengthening, any non-null comparator, recurrence work, or empirical escalation.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-26
-LATEST_CANONICAL_SCIENCE = FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT
+LATEST_CANONICAL_SCIENCE = FW_PROCESS_MATRIX_NULL_CONTROL
 FCP26_STAGE1_STATUS = CANONICALLY_COMPLETE
 FCP26_STAGE1_OUTCOME = B__ONLY_MODEL_PARAMETER_OR_REALIZATION_LEVEL_TESTABILITY_SURVIVES
 FCP26_STAGE2 = NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE
@@ -58,9 +58,17 @@ FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT = CANONICALLY_COMPLETE
 FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_OUTCOME = A__ADMISSION_SURVIVES_ADVERSARIAL_AUDIT
 FW_PROCESS_MATRIX_INDEPENDENT_POST_ADMISSION_AUDIT = CANONICALLY_COMPLETE
 POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
-FW_PROCESS_MATRIX_NULL_CONTROL = AUTHORIZED_NOT_STARTED_REQUIRES_SEPARATE_PREREGISTRATION
+FW_PROCESS_MATRIX_NULL_CONTROL = CANONICALLY_COMPLETE
 FW_PROCESS_MATRIX_NULL_COMPARATOR = FW-NULL-GRQFTSM
-NEXT_RECOMMENDED_OPERATION = FW_PROCESS_MATRIX_NULL_CONTROL
+FW_PROCESS_MATRIX_NULL_CONTROL_RESULT = NONEMPTY_NULL_SUBTRACTED_RESIDUE
+FW_PROCESS_MATRIX_NULL_CONTROL_PAIRWISE_E2_COUNT = 3
+FW_PROCESS_MATRIX_NULL_CONTROL_NONE_ESTABLISHED_COUNT = 13
+FW_PROCESS_MATRIX_NULL_CONTROL_UNRESOLVED_COUNT = 1
+FW_PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 4
+FW_PROCESS_MATRIX_NULL_SUBTRACTED_RESIDUE_HIGHEST_SCOPE = S3_FRAMEWORK_WIDE
+FW_PROCESS_MATRIX_UNIVERSAL_REALIZABILITY = NOT_ESTABLISHED
+FW_PROCESS_MATRIX_DIRECT_EMPIRICAL_DISCRIMINATOR_AFTER_NULL = NO
+NEXT_RECOMMENDED_OPERATION = POST_FW_PROCESS_MATRIX_NULL_CONTROL_SCIENTIFIC_SEQUENCING_ADJUDICATION
 POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
 CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
 CAUSAL_PROCESS_ICO_SOURCE_CORPUS = FROZEN

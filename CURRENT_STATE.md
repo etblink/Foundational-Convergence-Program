@@ -6,13 +6,13 @@
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-26
-LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT
-LATEST_CANONICAL_SCIENTIFIC_COMMIT = 46e7e76c081189cea7f2aa8335c56c8a3d89c5d2
-LATEST_CANONICAL_SCIENTIFIC_TREE = 4ee84f7296e572e8e2a8faa2d9cb919bb1c3c582
-LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION
+LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_PROCESS_MATRIX_NULL_CONTROL
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = c391b42d3aa4043045d7e3a566a26b9f3aac6070
+LATEST_CANONICAL_SCIENTIFIC_TREE = e8c7af0932cb0e4557edf258aa1396094509a63d
+LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_PROCESS_MATRIX_NULL_CONTROL_ROUTING_AND_NAVIGATION_RECONCILIATION
 LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
-PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = 25c75cc200b35244fc7db81ba925b8e2063c442e
-PREVIOUS_CANONICAL_MAINTENANCE_TREE = 779cd9752943172e8c6a542d1a158fbf7abf6b26
+PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = a0749f3ff7bcbc0a376edc214853a2821bde4bfd
+PREVIOUS_CANONICAL_MAINTENANCE_TREE = 6d3e296c8b145858e184e8eeebf2dea55bb1543f
 PRE_HOUSEKEEPING_CANONICAL_ROUTING_COMMIT = 09aaf0ba4f9c570310150532c7e7ac4e42d868f8
 PRE_HOUSEKEEPING_CANONICAL_ROUTING_TREE = ab4254076939787b019a5aa4f5d8889985ac8608
 CANONICAL_COMMIT_AT_STATE_SPLIT = 115e88f578d3d9f761d870c3cb569bd72b61c559
@@ -20,7 +20,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.1_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix admission-audit, and read-only sequencing operations are unnumbered and FCP-27 has not been selected. The latest-scientific fields continue to identify the completed `FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT`; its Outcome-A scope and empirical/realizability ceilings are unchanged. The now-canonical post-audit sequencing decision selects `FW_PROCESS_MATRIX_NULL_CONTROL` as the next dependency-clean operation before any non-null pairwise or recurrence use. That selection does not execute the null control, predict its residue, or demote the high-value realizability/physical-selection burden. The present maintenance operation records only that route and requires a separate prospective null-control preregistration before substantive adjudication. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
+`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix admission-audit, sequencing, and null-control operations are unnumbered and FCP-27 has not been selected. The latest scientific operation is now the completed `FW_PROCESS_MATRIX_NULL_CONTROL`. Against `FW-NULL-GRQFTSM`, three bounded E2 representation/realization relations survive, thirteen material records establish no pairwise relation, and one framework-wide physical-realizability relation remains unresolved under the frozen corpus. Four process-matrix-specific additional commitments survive null/generic/lineage/inherited-empirical subtraction at an S3 framework-wide ceiling, while no E1, E3, E4, E5, framework-level empirical discriminator, or universal realizability result is established. The present maintenance operation records only those already-earned consequences and routes to a fresh read-only post-null scientific sequencing adjudication. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.1 now governs prospective work as a narrow delta over Method 0.2.0: framework-admission criterion C tests source-bound physical law, constraint, or dynamical architecture rather than requiring intrinsic dynamics. All unaffected Method 0.2.0 rules remain inherited.
 
@@ -121,7 +121,24 @@ FW_PROCESS_MATRIX_ADMISSION_AUDIT_EMPIRICAL_CEILING = NO_FRAMEWORK_LEVEL_DISCRIM
 FW_PROCESS_MATRIX_ADMISSION_AUDIT_REALIZABILITY_CEILING = UNIVERSAL_REALIZABILITY_NOT_ESTABLISHED
 POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_SEQUENCING_DECISION_STATUS = ACCEPTED__R2_FW_PROCESS_MATRIX_NULL_CONTROL_SELECTED
 POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_SEQUENCING_SELECTED_ROUTE = R2__FW_PROCESS_MATRIX_NULL_CONTROL
-FW_PROCESS_MATRIX_NULL_CONTROL_SELECTION_STATUS = SELECTED_NOT_STARTED_REQUIRES_SEPARATE_PREREGISTRATION
+FW_PROCESS_MATRIX_NULL_CONTROL = CANONICALLY_COMPLETE
+FW_PROCESS_MATRIX_NULL_CONTROL_PREREGISTRATION_COMMIT = 50332564d2339c8a048e1b44dd06b13f8580f7ff
+FW_PROCESS_MATRIX_NULL_CONTROL_RESULT_COMMIT = c391b42d3aa4043045d7e3a566a26b9f3aac6070
+FW_PROCESS_MATRIX_NULL_CONTROL_RESULT = NONEMPTY_NULL_SUBTRACTED_RESIDUE
+FW_PROCESS_MATRIX_NULL_CONTROL_PAIRWISE_E1_COUNT = 0
+FW_PROCESS_MATRIX_NULL_CONTROL_PAIRWISE_E2_COUNT = 3
+FW_PROCESS_MATRIX_NULL_CONTROL_PAIRWISE_E3_COUNT = 0
+FW_PROCESS_MATRIX_NULL_CONTROL_PAIRWISE_E4_COUNT = 0
+FW_PROCESS_MATRIX_NULL_CONTROL_PAIRWISE_E5_COUNT = 0
+FW_PROCESS_MATRIX_NULL_CONTROL_NONE_ESTABLISHED_COUNT = 13
+FW_PROCESS_MATRIX_NULL_CONTROL_UNRESOLVED_COUNT = 1
+FW_PROCESS_MATRIX_NULL_CONTROL_TARGET_CONDITIONED_COUNT = 0
+FW_PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 4
+FW_PROCESS_MATRIX_CORE_ADDITIONAL_COMMITMENT_INCIDENCE = 3
+FW_PROCESS_MATRIX_STRUCTURAL_LIMITATION_INCIDENCE = 1
+FW_PROCESS_MATRIX_NULL_SUBTRACTED_RESIDUE_HIGHEST_SCOPE = S3_FRAMEWORK_WIDE
+FW_PROCESS_MATRIX_UNIVERSAL_REALIZABILITY = NOT_ESTABLISHED
+FW_PROCESS_MATRIX_DIRECT_EMPIRICAL_DISCRIMINATOR_AFTER_NULL = NO
 ```
 
 Targeted source strengthening established, at bounded scope:
@@ -527,20 +544,22 @@ ADMISSION_AUDIT_METHOD_SCOPE_SENSITIVITY_FIREWALL = SATISFIED__OUTCOME_INDEPENDE
 POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
 POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
 SEQUENCING_SELECTED_NEXT_OPERATION = FW_PROCESS_MATRIX_NULL_CONTROL
-FW_PROCESS_MATRIX_NULL_CONTROL = AUTHORIZED_NOT_STARTED_REQUIRES_SEPARATE_PREREGISTRATION
+FW_PROCESS_MATRIX_NULL_CONTROL = CANONICALLY_COMPLETE
 FW_PROCESS_MATRIX_NULL_COMPARATOR = FW-NULL-GRQFTSM
 FW_PROCESS_MATRIX_NULL_CONTROL_NEW_SOURCE_SEARCH_REQUIRED = NO
-POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = FW_PROCESS_MATRIX_NULL_CONTROL_PREREGISTRATION
-NEXT_RECOMMENDED_OPERATION = FW_PROCESS_MATRIX_NULL_CONTROL
-NEXT_OPERATION_CLASS = PAIRWISE_NULL_CONTROL
+FW_PROCESS_MATRIX_NULL_CONTROL_RESULT = NONEMPTY_NULL_SUBTRACTED_RESIDUE
+FW_PROCESS_MATRIX_NULL_CONTROL_UNRESOLVED_FRAMEWORK_WIDE_REALIZABILITY = YES
+POST_FW_PROCESS_MATRIX_NULL_CONTROL_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
+NEXT_EXECUTION_STEP = POST_FW_PROCESS_MATRIX_NULL_CONTROL_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_RECOMMENDED_OPERATION = POST_FW_PROCESS_MATRIX_NULL_CONTROL_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_OPERATION_CLASS = READ_ONLY_SEQUENCING_ADJUDICATION
 NEXT_OPERATION_AUTHORIZED = YES
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
-NEXT_SCIENTIFIC_PHASE = NONE__FW_PROCESS_MATRIX_NULL_CONTROL_NEXT
+NEXT_SCIENTIFIC_PHASE = NONE__POST_FW_PROCESS_MATRIX_NULL_CONTROL_SEQUENCING_NEXT
 ```
 
-The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, causal-process Stage-2 taxonomy, the Method-0.2.1 result-independence audit, and the dedicated `FW-PROCESS-MATRIX` admission adversarial audit are complete at their declared scopes. Stage 2 fragments the 33-source discovery umbrella into ten scientific objects and admits exactly one new source-bound framework, `FW-PROCESS-MATRIX`; the hostile post-admission audit now independently preserves that narrow admission as Outcome A. The audit does not promote ICO, the quantum switch, causal nonseparability, causal-inequality violation, indefinite spacetime, or quantum gravity into framework identity; it preserves no framework-level empirical discriminator and no universal realizability claim. Its result is invariant under both preregistered views of the unresolved Method-0.2.1 reformulation/meta-framework ambiguity, so the admission survives without resolving that general policy. Method 0.2.1 and `FW-PROCESS-MATRIX = SOURCE_BOUND_READY` remain unchanged. The next epistemic step is a read-only post-admission-audit scientific sequencing adjudication, not an automatically selected comparison or empirical program.
+The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, causal-process Stage-2 taxonomy, the Method-0.2.1 result-independence audit, the dedicated `FW-PROCESS-MATRIX` admission adversarial audit, and the closed-corpus `FW_PROCESS_MATRIX_NULL_CONTROL` are complete at their declared scopes. The null control leaves a nonempty S3 formal-operational residue but does not establish universal physical realization or framework-level empirical selection. The sole unresolved pairwise record is the framework-wide K9 physical-realizability/selection burden. No non-null comparator, recurrence consequence, or FCP-27 route is selected by that result. The next epistemic step is therefore a fresh read-only post-null scientific sequencing adjudication.
 
 ## Post-FW-CAT program-ledger and metadata reconciliation — canonical result
 
