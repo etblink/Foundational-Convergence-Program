@@ -28,8 +28,8 @@ jobs:
           from pathlib import Path
           p=Path('governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_0.md')
           s=p.read_text(encoding='utf-8')
-          old='**Status:** `FROZEN_CANDIDATE__ADJUDICATION_NOT_STARTED`'
-          new='**Status:** `FROZEN_PREREGISTRATION__ADJUDICATION_NOT_STARTED`'
+          old='**Status:** `FROZEN_CANDIDATE__ADJUDICATION_NOT_STARTED`  \n'
+          new='**Status:** `FROZEN_PREREGISTRATION__ADJUDICATION_NOT_STARTED`\n'
           assert old in s
           s=s.replace(old,new,1)
           oldc='- `C = SUPPORTED` requires AX4 = `NONEMPTY` and no positive `SCOPE_W` physical realization result at the claimed realization layer; probabilistic representation alone cannot defeat C for deterministic or spacetime realizability.\n'
