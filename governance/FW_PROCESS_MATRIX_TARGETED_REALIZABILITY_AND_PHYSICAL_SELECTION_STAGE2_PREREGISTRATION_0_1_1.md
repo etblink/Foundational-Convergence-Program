@@ -1,0 +1,140 @@
+# FW-PROCESS-MATRIX Targeted Realizability / Physical-Selection — Stage 2 Adjudication Preregistration
+
+**Version:** 0.1.1  
+**Status:** `FROZEN_PREREGISTRATION__ADJUDICATION_NOT_STARTED`  
+**Operation ID:** `FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2`  
+**Operation class:** `CLOSED_CORPUS_PHYSICAL_SELECTION_ADJUDICATION`  
+**Method:** FCP Method 0.2.1  
+**Form:** result-independent input-identity repair delta over version 0.1.0
+
+## 1. Controlling inheritance
+
+This artifact is a narrow delta over the already-frozen Stage-2 rule set:
+
+```text
+PARENT_PREREGISTRATION = governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_0.md
+PARENT_PREREGISTRATION_BLOB = db6ec71608f09b734a36130d1ee0743e4111daf7
+PARENT_RULE_TEXT_INHERITED_VERBATIM = YES
+PARENT_OUTCOME_CATEGORIES_INHERITED_VERBATIM = YES
+PARENT_SEMANTIC_FIREWALLS_INHERITED_VERBATIM = YES
+PARENT_PROPOSITION_SCOPE_ASSUMPTION_VOCABULARY_INHERITED_VERBATIM = YES
+PARENT_R0_R6_RULES_INHERITED_VERBATIM = YES
+PARENT_G1_G8_BURDEN_INHERITED_VERBATIM = YES
+PARENT_AX1_AX10_INHERITED_VERBATIM = YES
+PARENT_A_F_SYNTHESIS_RULES_INHERITED_VERBATIM = YES
+PARENT_SOURCE_ACCOUNTING_REQUIREMENT_INHERITED_VERBATIM = YES
+PARENT_REQUIRED_OUTPUTS_INHERITED_VERBATIM = YES
+PARENT_FORBIDDEN_AUTOMATIC_CONSEQUENCES_INHERITED_VERBATIM = YES
+```
+
+No scientific adjudication rule is changed by version 0.1.1.
+
+## 2. Why version 0.1.1 exists
+
+Pre-application integrity checking found that version 0.1.0 bound the Stage-1 source-intake path to a blob that is not the blob present at the canonical Stage-1 scientific result commit.
+
+The bounded diagnosis is recorded in:
+
+```text
+audits/FW_PROCESS_MATRIX_STAGE2_INPUT_IDENTITY_REPAIR_0_1_0.md
+```
+
+Version 0.1.0 therefore remains historical provenance but is not executable for Stage-2 adjudication.
+
+## 3. Sole corrected evidence identity
+
+The only changed frozen field is:
+
+```text
+STAGE1_SOURCE_INTAKE = frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md
+
+VERSION_0_1_0_INCORRECT_BLOB = e0d0fc67760818974590bdb92f2fb67b49ec9094
+VERSION_0_1_1_CANONICAL_BLOB = 4a594a67f2189f1663740cc76d5ae56e8b931ebc
+```
+
+The corrected identity is fixed by immutable canonical provenance:
+
+```text
+STAGE1_SCIENTIFIC_RESULT_COMMIT = 5675f75621125bdbac3755d88e57768afcc949c9
+STAGE1_SCIENTIFIC_RESULT_TREE = 1cb2403c2ad84f050ed451a69ddbdfee0f3f7637
+STAGE1_SOURCE_INTAKE_BLOB_AT_RESULT_COMMIT = 4a594a67f2189f1663740cc76d5ae56e8b931ebc
+
+POST_STAGE1_ACCEPTED_BASELINE_COMMIT = e30784fffc1e49e497289c9c9da151762c613596
+POST_STAGE1_SOURCE_INTAKE_BLOB = 4a594a67f2189f1663740cc76d5ae56e8b931ebc
+```
+
+This is not a discretionary source substitution. It binds Stage 2 to the exact intake object actually committed as the canonical Stage-1 scientific result.
+
+## 4. All other frozen evidence identities remain unchanged
+
+```text
+STAGE1_SELECTION_AUDIT = frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_SELECTION_AUDIT_STAGE1_0_1_0.md
+STAGE1_SELECTION_AUDIT_BLOB = 0ad00fcc1529b6382d30ba93203b9ebc71858b1b
+
+STAGE1_SEARCH_LOG = frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_SEARCH_EXECUTION_LOG_0_1_0.md
+STAGE1_SEARCH_LOG_BLOB = e2afe1adf740bdd8320f31797e8ac8e77d35d616
+
+STAGE1_HANDOFF = handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md
+STAGE1_HANDOFF_BLOB = fc8f5014b4d2ee1eb981105b9d086ac19e698096
+
+K1_K10_BASELINE = frameworks/causal_process/FW_PROCESS_MATRIX_K1_K10_BASELINE_0_1_0.md
+METHOD_0_2_1 = governance/FCP_METHOD_0_2_1_FRAMEWORK_ADMISSION_LAW_ARCHITECTURE_REVISION.md
+COMPARISON_PROTOCOL = COMPARISON_PROTOCOL.md
+FRAMEWORK_REGISTER = FRAMEWORK_REGISTER.md
+```
+
+Rejected and deferred Stage-1 candidates remain provenance only and may not be promoted into Stage-2 evidence.
+
+## 5. Unchanged hard prohibitions
+
+```text
+FROZEN_TARGETED_SOURCE_COUNT = 27
+REUSED_CANONICAL_SOURCE_COUNT = 16
+NEW_EXTERNAL_SOURCE_COUNT = 11
+
+STAGE2_RULES_FROZEN_BEFORE_CORPUS_APPLICATION = YES
+STAGE2_ADJUDICATION_STARTED = NO
+NEW_EXTERNAL_SOURCE_SEARCH = FORBIDDEN
+NEW_SOURCE_ADMISSION = FORBIDDEN
+SOURCE_REMOVAL_OR_REPLACEMENT = FORBIDDEN
+SOURCE_REGISTER_MUTATION = FORBIDDEN
+PAIRWISE_COMPARISON = FORBIDDEN
+CONVERGENCE_CREDIT = FORBIDDEN
+RECURRENCE_RECOMPUTATION = FORBIDDEN
+EMPIRICAL_TARGET_SELECTION = FORBIDDEN
+METHOD_REVISION = FORBIDDEN
+FRAMEWORK_ADMISSION_RESCORING = FORBIDDEN
+FCP27_SELECTION = FORBIDDEN
+```
+
+## 6. Result-independence statement
+
+The repair target is determined only by the immutable Stage-1 scientific commit and path identity.
+
+```text
+OUTCOME_DEPENDENT_SOURCE_SELECTION = NO
+OUTCOME_DEPENDENT_RULE_CHANGE = NO
+POST_HOC_THRESHOLD_CHANGE = NO
+SOURCE_UNIVERSE_CHANGE = NO
+SOURCE_COUNT_CHANGE = NO
+SOURCE_TEXT_EDIT = NO
+STAGE1_RESULT_REINTERPRETATION = NO
+```
+
+The corrected canonical blob may alter how a Stage-2 proposition is classified relative to the noncanonical blob because the canonical Stage-1 role labels are controlling. That is precisely why the identity defect had to be repaired before adjudication rather than ignored.
+
+## 7. Executable Stage-2 boundary
+
+Version 0.1.1 and parent blob `db6ec71608f09b734a36130d1ee0743e4111daf7` jointly form the frozen Stage-2 adjudication law.
+
+```text
+STAGE2_PREREGISTRATION = FROZEN_PREREGISTRATION
+CONTROLLING_VERSION = 0.1.1
+PARENT_RULESET = 0.1.0_BLOB_db6ec71608f09b734a36130d1ee0743e4111daf7
+CORRECTED_STAGE1_SOURCE_INTAKE_BLOB = 4a594a67f2189f1663740cc76d5ae56e8b931ebc
+STAGE2_CORPUS_APPLICATION = NOT_STARTED
+NEXT_STEP_IF_INPUT_IDENTITIES_REVERIFY = APPLY_EXACT_FROZEN_27_SOURCE_CORPUS_UNDER_PARENT_RULESET_PLUS_THIS_IDENTITY_DELTA
+NEW_SOURCE_SEARCH = NO
+```
+
+No Stage-2 scientific outcome is stated or implied by this repair delta.
