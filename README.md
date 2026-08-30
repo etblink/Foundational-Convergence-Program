@@ -100,7 +100,7 @@ Canonical scientific and governance state lives on `main`. Git history is treate
 python tools/fcp_navigation.py check
 ```
 
-Repository publication, content-equivalence, and remote-ref lifecycle rules are defined in [`governance/FCP_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_POLICY_0_1_0.md`](governance/FCP_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_POLICY_0_1_0.md).
+Repository publication, content-equivalence, and remote-ref lifecycle rules are defined by [`governance/FCP_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_POLICY_0_1_0.md`](governance/FCP_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_POLICY_0_1_0.md), as prospectively amended by [`governance/FCP_REMOTE_REF_LIFECYCLE_POLICY_AMENDMENT_0_1_1.md`](governance/FCP_REMOTE_REF_LIFECYCLE_POLICY_AMENDMENT_0_1_1.md).
 
 ## Scientific posture
 
