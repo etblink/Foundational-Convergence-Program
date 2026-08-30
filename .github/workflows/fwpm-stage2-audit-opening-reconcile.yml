@@ -1,0 +1,83 @@
+name: FWPM Stage-2 audit-opening reconciliation
+
+on:
+  push:
+    branches:
+      - automation/fwpm-stage2-audit-opening-reconcile
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      semantic_sha: ${{ steps.ids.outputs.semantic_sha }}
+      nav_sha: ${{ steps.ids.outputs.nav_sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Preserve automation-only builder
+        shell: bash
+        run: cp .github/scripts/fwpm_stage2_audit_opening_reconcile.py /tmp/fwpm_stage2_audit_opening_reconcile.py
+
+      - name: Reset to exact canonical audit-opening base
+        shell: bash
+        run: |
+          git checkout --detach 99fa6fb51db8ea23a8e065a8f94ef656d7f2cdac
+          test "$(git rev-parse HEAD)" = "99fa6fb51db8ea23a8e065a8f94ef656d7f2cdac"
+          test "$(git show -s --format=%T HEAD)" = "f9476c8198461ac39abf1e1472b068884f34e8ea"
+          git config user.name "FCP Project Lead Automation"
+          git config user.email "actions@users.noreply.github.com"
+
+      - name: Build semantic reconciliation
+        shell: bash
+        run: |
+          python /tmp/fwpm_stage2_audit_opening_reconcile.py
+          git add CURRENT_STATE.md README.md governance/POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_OPENING_POST_INTEGRATION_ROUTING_0_1_0.md meta/FCP_CANONICAL_INDEX.json meta/FCP_OPERATION_REGISTRY.jsonl
+          git commit -m "Reconcile post-Stage-2 external audit opening"
+          echo "SEMANTIC_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Refresh and check derived navigation
+        shell: bash
+        run: |
+          python tools/fcp_navigation.py refresh --ref "$SEMANTIC_SHA"
+          python tools/fcp_navigation.py check --ref "$SEMANTIC_SHA"
+          python tools/fcp_navigation.py summary
+          test "$(git status --porcelain | wc -l)" -eq 2
+          git status --porcelain | grep 'meta/FCP_ARTIFACT_REGISTRY.jsonl'
+          git status --porcelain | grep 'meta/FCP_CANONICAL_INDEX.json'
+          git add meta/FCP_ARTIFACT_REGISTRY.jsonl meta/FCP_CANONICAL_INDEX.json
+          git commit -m "Refresh navigation after external audit opening"
+
+      - name: Publish clean qualified branch
+        id: ids
+        shell: bash
+        run: |
+          NAV_SHA=$(git rev-parse HEAD)
+          git push --force-with-lease origin HEAD:refs/heads/maintenance/fwpm-stage2-audit-opening-reconcile-qualified
+          echo "semantic_sha=$SEMANTIC_SHA" >> "$GITHUB_OUTPUT"
+          echo "nav_sha=$NAV_SHA" >> "$GITHUB_OUTPUT"
+          test -z "$(git status --porcelain)"
+          echo "SEMANTIC_SHA=$SEMANTIC_SHA"
+          echo "NAV_SHA=$NAV_SHA"
+
+  windows-portability:
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: maintenance/fwpm-stage2-audit-opening-reconcile-qualified
+          fetch-depth: 0
+      - name: Re-check under core.autocrlf=true
+        shell: pwsh
+        env:
+          SEMANTIC_SHA: ${{ needs.build.outputs.semantic_sha }}
+        run: |
+          git config core.autocrlf true
+          git reset --hard HEAD
+          python tools/fcp_navigation.py check --ref $env:SEMANTIC_SHA
+          if ((git status --porcelain).Length -ne 0) { throw "Windows checkout is dirty after navigation check" }
