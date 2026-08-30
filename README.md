@@ -10,23 +10,23 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 ## Current status
 
 - **Latest numbered phase:** FCP-26; Stage 1 is canonically complete and Stage 2 is `NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE`.
-- **Latest canonical scientific operation:** `FW_CAT_TAXONOMY_GATE_STAGE2` (`faa63b8073fdd0fc41cec4ec4e6b0957918ab3ec`; tree `f3c1dfccddcc6f106701d7661f4e16b7d0afe5c0`).
-- **Latest canonical maintenance operation:** `POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION`; the 93-row ledger/metadata result is canonical and its enclosing routing identity is resolved from live `main` rather than embedded self-referentially in mutable state.
+- **Latest canonical scientific operation:** `FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION` (`4f73ea29cf4b89e42bf52876b4ad7c782030edbc`; tree `060c94bf08e926aad8bc3ee355b553665c8bba7d`).
+- **Latest canonical maintenance operation:** `POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION`; the 94-row post-audit correction and its routing/navigation state are canonical, with enclosing maintenance identity resolved from Git rather than embedded self-referentially.
 - **Active prospective method:** FCP Method 0.2.0.
 - **Housekeeping status:** canonically complete.
 - **Post-FCP-25 Grok status:** audit, independent adjudication, and reconciliation are canonically complete.
 - **FCP-26 Stage-1 outcome:** `B__ONLY_MODEL_PARAMETER_OR_REALIZATION_LEVEL_TESTABILITY_SURVIVES`; zero framework-level Stage-2 targets, no external empirical source search justified, and no atomic-clock target advanced.
 - **Post-FCP-26 sequencing:** the accepted read-only adjudication selected bounded publication-provenance/ref-lifecycle housekeeping before further science; that housekeeping is now canonically complete.
 - **Publication governance:** qualification identity and canonical publication identity are explicitly distinguished; content-equivalent publication and deterministic navigation rebinding are permitted under `governance/FCP_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_POLICY_0_1_0.md`.
-- **FW-CAT:** Stage 1 and Stage 2 are canonically complete; the 32-source corpus resolves into 12 objects, with four existing-framework assignments, six nonframework remainders, two deferred proposals, zero new frameworks, and historical `FW-CAT` removed with reason.
-- **Current durable ledger:** 93 rows through FW-CAT Stage 2; all prior 89 rows preserved, four rows appended, Biswas author metadata corrected, and four recurrence-epoch consistency dockets remain open.
-- **Next recommended program operation:** `POST_FW_CAT_LEDGER_RECONCILIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION`; a fresh external adversarial audit is the leading candidate but remains unauthorized, no next numbered phase is selected, and FCP-27 remains unselected.
+- **FW-CAT:** Stage 1 and Stage 2 remain canonical, and the post-audit bounded re-adjudication corrects `OBJ-CAT-11` to a deferred remainder: current taxonomy is three existing-framework assignment objects, six nonframework remainders, three deferred proposals, zero successors, with historical `FW-CAT` still removed with reason.
+- **Current durable ledger:** 94 rows through the bounded `OBJ-CAT-11` re-adjudication; the prior 93 rows are byte-preserved, `FWCAT-004` supplies the current partial supersession, Biswas author metadata is reconciled, and four recurrence-epoch consistency dockets remain open.
+- **Next recommended program operation:** `POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION`; it is a read-only sequencing gate and remains unauthorized, no next numbered phase is selected, and FCP-27 remains unselected.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-26
-LATEST_CANONICAL_SCIENCE = FW_CAT_TAXONOMY_GATE_STAGE2
+LATEST_CANONICAL_SCIENCE = FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION
 FCP26_STAGE1_STATUS = CANONICALLY_COMPLETE
 FCP26_STAGE1_OUTCOME = B__ONLY_MODEL_PARAMETER_OR_REALIZATION_LEVEL_TESTABILITY_SURVIVES
 FCP26_STAGE2 = NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE
@@ -43,10 +43,10 @@ FW_CAT_FINAL_STATUS = REMOVED_WITH_REASON
 FW_CAT_SUCCESSOR_FRAMEWORK_COUNT = 0
 POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
 POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION = CANONICALLY_COMPLETE
-CLAIM_LEDGER_DURABLE_ROW_COUNT = 93
-CLAIM_LEDGER_TEMPORAL_CEILING = FW_CAT_TAXONOMY_GATE_STAGE2
+CLAIM_LEDGER_DURABLE_ROW_COUNT = 94
+CLAIM_LEDGER_TEMPORAL_CEILING = FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION
 BISWAS_2026_AUTHOR_METADATA_TRANSCRIPTION_RECONCILIATION = COMPLETE
-NEXT_RECOMMENDED_OPERATION = POST_FW_CAT_LEDGER_RECONCILIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_RECOMMENDED_OPERATION = POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION
 NEXT_OPERATION_AUTHORIZED = NO
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
