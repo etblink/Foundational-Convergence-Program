@@ -9,7 +9,7 @@ LATEST_NUMBERED_PHASE = FCP-26
 LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2
 LATEST_CANONICAL_SCIENTIFIC_COMMIT = fdb1ff04fc5c4a494da9c44822cac277a819d8c0
 LATEST_CANONICAL_SCIENTIFIC_TREE = b348c91e73e95e552f16a067ed595e0d35ac7fc6
-LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION
+LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_OPENING_ROUTING_AND_NAVIGATION_RECONCILIATION
 LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
 PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = e2fa96fe2fe2a686385a1f968f95a5eb9c2c68b5
 PREVIOUS_CANONICAL_MAINTENANCE_TREE = f29720957baa127a75ed086a88a46dda17c0252b
@@ -20,7 +20,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.1_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix admission-audit, sequencing, null-control, targeted realizability source-strengthening, and physical-selection Stage-2 operations are unnumbered and FCP-27 has not been selected. The latest substantive scientific operation remains the completed `FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2`. Under the exact frozen 27-source corpus, a general `W`-scope probabilistic/postselected representation is established, while a general deterministic standard-QM realization, a complete general physical-selection criterion, unrestricted composition/globalization closure, and general classical-spacetime embedding are not established. Positive restricted realization classes and broad assumption-scoped exclusion boundaries are both nonempty, and the framework-wide physical-realizability remainder remains nonempty. No framework-level empirical selection follows. The fresh post-Stage-2 read-only sequencing adjudication is now complete and selects no immediate new substantive science; it selects a bounded independent external adversarial audit of the layered Stage-2 result and visible custody repair as the next epistemic-validation operation. External auditor contact remains a separate real authorization boundary. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
+`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix admission-audit, sequencing, null-control, targeted realizability source-strengthening, and physical-selection Stage-2 operations are unnumbered and FCP-27 has not been selected. The latest substantive scientific operation remains the completed `FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2`. Under the exact frozen 27-source corpus, a general `W`-scope probabilistic/postselected representation is established, while a general deterministic standard-QM realization, a complete general physical-selection criterion, unrestricted composition/globalization closure, and general classical-spacetime embedding are not established. Positive restricted realization classes and broad assumption-scoped exclusion boundaries are both nonempty, and the framework-wide physical-realizability remainder remains nonempty. No framework-level empirical selection follows. The fresh post-Stage-2 sequencing decision selects no immediate new substantive science. Its bounded external adversarial-audit opening is now frozen and qualified: the failed Stage-2 `0.1.0` evidence binding, separate result-independent repair, exact 22-file packet, frozen two-sided prompt, and packet qualification are canonical. No auditor has been contacted. The next real boundary is separate authorization for external auditor contact. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.1 now governs prospective work as a narrow delta over Method 0.2.0: framework-admission criterion C tests source-bound physical law, constraint, or dynamical architecture rather than requiring intrinsic dynamics. All unaffected Method 0.2.0 rules remain inherited.
 
@@ -620,17 +620,30 @@ POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_SCIENTIFIC_SEQUENCING_ADJUD
 POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_SCIENTIFIC_SEQUENCING_SELECTED_ROUTE = R7__EXTERNAL_ADVERSARIAL_AUDIT
 NO_IMMEDIATE_NEW_SUBSTANTIVE_SCIENCE = YES
 SELECTED_NEXT_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_ADVERSARIAL_AUDIT
-NEXT_EXECUTION_STEP = PROSPECTIVELY_FREEZE_POST_STAGE2_EXTERNAL_AUDIT_OPENING
-NEXT_RECOMMENDED_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_ADVERSARIAL_AUDIT
-NEXT_OPERATION_CLASS = EXTERNAL_ADVERSARIAL_AUDIT
-NEXT_OPERATION_AUTHORIZED = YES__AUDIT_OPENING_PACKET_FREEZE_ONLY
-NEXT_OPERATION_AUTHORIZATION_BOUNDARY = FREEZE_AUDIT_PREREGISTRATION_AND_PACKET__STOP_BEFORE_EXTERNAL_CONTACT
+POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_ADVERSARIAL_AUDIT = OPENING_PACKET_FROZEN_QUALIFIED__EXTERNAL_CONTACT_NOT_STARTED
+POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_PREREGISTRATION_COMMIT = 063e453c6e0924682d0a09257bcee7e530ec3088
+POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_PACKET_FREEZE_COMMIT = 99fa6fb51db8ea23a8e065a8f94ef656d7f2cdac
+POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_EVIDENCE_BASE = b435aa513a72e38b8e50d8cb8bf9d79464d6c15a
+POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_EVIDENCE_COMPONENT_COUNT = 22
+POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_FAILED_BINDING_INCLUDED = YES
+POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_REPAIR_INCLUDED = YES
+POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDIT_PACKET_QUALIFICATION = PASS
+EXTERNAL_AUDITOR_IDENTITY = UNBOUND
+EXTERNAL_AUDITOR_CONTACTED = NO
+EXTERNAL_AUDIT_PROMPT_SENT = NO
+EXTERNAL_AUDIT_PACKET_EXPOSED = NO
+EXTERNAL_AUDIT_RESPONSE_ACQUIRED = NO
+NEXT_EXECUTION_STEP = EXTERNAL_AUDITOR_CONTACT_REQUIRES_SEPARATE_REAL_AUTHORIZATION
+NEXT_RECOMMENDED_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDITOR_CONTACT
+NEXT_OPERATION_CLASS = EXTERNAL_AUDIT_CONTACT
+NEXT_OPERATION_AUTHORIZED = NO__SEPARATE_REAL_AUTHORIZATION_REQUIRED
+NEXT_OPERATION_AUTHORIZATION_BOUNDARY = EXTERNAL_AUDITOR_CONTACT
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
 NEXT_SCIENTIFIC_PHASE = NONE__NO_IMMEDIATE_NEW_SUBSTANTIVE_SCIENCE
 ```
 
-The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, causal-process Stage-2 taxonomy, the Method-0.2.1 result-independence audit, the dedicated `FW-PROCESS-MATRIX` admission adversarial audit, the closed-corpus `FW_PROCESS_MATRIX_NULL_CONTROL`, the post-null read-only sequencing adjudication, targeted realizability / physical-selection Stage 1, the result-independent Stage-2 input-identity repair, the closed-corpus Stage-2 physical-selection adjudication, and the fresh post-Stage-2 read-only sequencing decision are complete at their declared scopes. The sequencing decision selects no immediate new substantive science. It selects `POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_ADVERSARIAL_AUDIT` as the highest-value next epistemic-validation operation and authorizes only prospective audit-opening preregistration/packet freeze under the current delegation; external auditor contact remains a separate real authorization boundary.
+The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, causal-process Stage-2 taxonomy, the Method-0.2.1 result-independence audit, the dedicated `FW-PROCESS-MATRIX` admission adversarial audit, the closed-corpus `FW_PROCESS_MATRIX_NULL_CONTROL`, the post-null read-only sequencing adjudication, targeted realizability / physical-selection Stage 1, the result-independent Stage-2 input-identity repair, the closed-corpus Stage-2 physical-selection adjudication, and the fresh post-Stage-2 read-only sequencing decision are complete at their declared scopes. The selected external adversarial-audit opening is also frozen and qualified, with the provenance failure and repair both exposed. No external auditor has been contacted and no response exists. The next real boundary is `POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_EXTERNAL_AUDITOR_CONTACT`, which is not authorized by the present state and requires separate real authorization.
 
 ## Post-FW-CAT program-ledger and metadata reconciliation — canonical result
 
