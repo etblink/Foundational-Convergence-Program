@@ -8,7 +8,7 @@
   "core_authorities": [
     {
       "authority_id": "CLAIM_LEDGER",
-      "blob": "c2db0af82b8d0ad96e7f7dd039280c929e9ba0a9",
+      "blob": "e6546b0dcba4da6dab9311d0f14c82830adee745",
       "path": "CLAIM_LEDGER.md"
     },
     {
@@ -23,7 +23,7 @@
     },
     {
       "authority_id": "CURRENT_STATE",
-      "blob": "b0451df0a7a992df10d77f244e90c31cc3d05f93",
+      "blob": "6b3e61837769e93ec905340cb09b0063ba8c55fb",
       "path": "CURRENT_STATE.md"
     },
     {
@@ -38,7 +38,7 @@
     },
     {
       "authority_id": "FRAMEWORK_REGISTER",
-      "blob": "96ec8160ee080ea0d28d5cbdee1eafe80bf57429",
+      "blob": "1af1bd791663242caffe635b5856a88c86017b5d",
       "path": "FRAMEWORK_REGISTER.md"
     },
     {
@@ -64,17 +64,17 @@
     "version": "0.2.0"
   },
   "indexed_scientific_baseline": {
-    "commit": "58da76772a3ef4012ee3e370633af7dbd90c5508",
-    "message": "Reconcile routing after program ledger update",
+    "commit": "4321e9ba74286edb9b3870cb017d4674bed85b68",
+    "message": "Bind post-audit routing handoff capsule",
     "repository": "etblink/Foundational-Convergence-Program",
-    "tree": "9e49811524dcb6d83ba0ea2240259d29487865d5"
+    "tree": "7c546c0767ebff8790f584158b068933ab0623f1"
   },
   "navigation_coverage": {
     "absence_from_operation_registry_means_scientific_absence": false,
     "artifact_inventory_scope": "ENTIRE_TRACKED_INDEXED_BASELINE_TREE_EXCLUDING_SELF_REFERENTIAL_NAVIGATION_FILES",
-    "artifact_record_count": 265,
+    "artifact_record_count": 286,
     "historical_operation_completeness_claimed": false,
-    "operation_record_count": 50,
+    "operation_record_count": 57,
     "operation_registry_scope": "CURRENT_DEPENDENCY_CLOSURE",
     "self_excluded_paths": [
       "meta/FCP_ARTIFACT_REGISTRY.jsonl",
@@ -140,12 +140,13 @@
     "bundle_powershell_fallback": "CANONICALLY_PERMITTED",
     "candidate_target_count": 0,
     "canonical_framework_to_clock_bridge": "NOT_ESTABLISHED",
-    "claim_ledger_current_supersession": "RECONCILED_THROUGH_FW_CAT_STAGE2_CANONICALLY",
-    "claim_ledger_durable_row_count": 93,
-    "claim_ledger_temporal_ceiling": "FW_CAT_TAXONOMY_GATE_STAGE2",
-    "current_handoff_path": "governance/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_POST_INTEGRATION_ROUTING_0_1_0.md",
-    "current_operation": "POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION",
-    "current_routing_path": "governance/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_POST_INTEGRATION_ROUTING_0_1_0.md",
+    "claim_ledger_current_supersession": "RECONCILED_THROUGH_OBJ_CAT_11_READJUDICATION_CANONICALLY",
+    "claim_ledger_durable_row_count": 94,
+    "claim_ledger_temporal_ceiling": "FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION",
+    "current_handoff_path": "governance/POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION_POST_INTEGRATION_ROUTING_0_1_0.md",
+    "current_operation": "POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION",
+    "current_routing_path": "governance/POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION_POST_INTEGRATION_ROUTING_0_1_0.md",
+    "empirical_realization_namespace_alias_table": "ACTIVE_PROSPECTIVELY",
     "exact_prepublication_commit_object_preservation": "PREFERRED_NOT_REQUIRED",
     "external_audit_authorized": false,
     "fcp26_selected": true,
@@ -164,13 +165,13 @@
     "frameworks_with_material_post_fcp23_delta": 5,
     "fw_as_fcp26_empirical_class": "EC2",
     "fw_cat_candidate_source_count_reviewed": 50,
-    "fw_cat_deferred_remainder_count": 2,
+    "fw_cat_current_taxonomy_correction_row": "FWCAT-004",
+    "fw_cat_deferred_remainder_count": 3,
     "fw_cat_direct_framework_level_empirical_discriminator": "NOT_APPLICABLE",
     "fw_cat_discovery_lane_count_pass": 13,
-    "fw_cat_existing_framework_assignment_count": 4,
+    "fw_cat_existing_framework_assignment_count": 3,
     "fw_cat_existing_framework_assignment_ids": [
       "FW-CQM",
-      "FW-GPTOPT",
       "FW-AQFT",
       "FW-NULL-GRQFTSM"
     ],
@@ -182,6 +183,7 @@
     "fw_cat_new_external_source_count": 24,
     "fw_cat_newly_admitted_framework_count": 0,
     "fw_cat_nonframework_remainder_count": 6,
+    "fw_cat_obj_cat_11_existing_framework_mapping_bounded_readjudication": "CANONICALLY_COMPLETE",
     "fw_cat_register_status": "REMOVED_WITH_REASON",
     "fw_cat_reused_canonical_source_count": 8,
     "fw_cat_scientific_object_count_before_admission": 12,
@@ -195,24 +197,29 @@
     "fw_cat_unresolved_taxonomy_count": 0,
     "fw_loop_fcp26_empirical_class": "EC1",
     "fw_string_m_fcp26_empirical_class": "EC2",
-    "latest_completed_external_audit_chain": "POST_FCP25_GROK_AUDIT",
-    "latest_completed_maintenance_operation": "POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION",
-    "latest_completed_science_operation": "FW_CAT_TAXONOMY_GATE_STAGE2",
+    "latest_completed_external_audit_chain": "POST_FW_CAT_CURRENT_STATE_EXTERNAL_AUDIT_INDEPENDENT_FINDING_ADJUDICATION",
+    "latest_completed_maintenance_operation": "POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION",
+    "latest_completed_science_operation": "FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION",
     "latest_numbered_phase": "FCP-26",
-    "latest_science_handoff_path": "handoffs/FW_CAT_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md",
+    "latest_science_handoff_path": "handoffs/FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION_HANDOFF_0_1_0.md",
     "next_numbered_phase_selected": false,
     "next_operation_authorized": false,
     "next_operation_class": "READ_ONLY_SEQUENCING_ADJUDICATION",
-    "next_recommended_operation": "POST_FW_CAT_LEDGER_RECONCILIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION",
+    "next_recommended_operation": "POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION",
+    "obj_cat_11_current_disposition": "DEFERRED_REMAINDER",
     "open_docket_count": 4,
     "post_fcp25_grok_audit": "CANONICALLY_COMPLETE",
     "post_fcp25_grok_independent_adjudication": "CANONICALLY_COMPLETE",
     "post_fcp25_grok_reconciliation": "CANONICALLY_COMPLETE",
     "post_fcp26_stage1_scientific_sequencing_adjudication": "CANONICALLY_RECONCILED_ACCEPTED_READ_ONLY_DECISION",
+    "post_fw_cat_current_state_external_adversarial_audit": "CANONICALLY_COMPLETE",
+    "post_fw_cat_current_state_external_audit_independent_finding_adjudication": "CANONICALLY_COMPLETE",
+    "post_fw_cat_external_audit_and_obj_cat_11_readjudication_reconciliation": "CANONICALLY_COMPLETE",
+    "post_fw_cat_external_audit_and_obj_cat_11_readjudication_reconciliation_routing_and_navigation_reconciliation": "CANONICALLY_COMPLETE",
     "post_fw_cat_program_ledger_and_metadata_reconciliation": "CANONICALLY_COMPLETE",
     "post_fw_cat_stage2_scientific_sequencing_adjudication": "CANONICALLY_ACCEPTED_READ_ONLY_DECISION",
-    "post_maintenance_high_priority_candidate": "NEW_EXTERNAL_ADVERSARIAL_AUDIT",
-    "predecessor_operation": "POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION",
+    "post_maintenance_high_priority_candidate": "FULFILLED_BY_CANONICAL_EXTERNAL_AUDIT",
+    "predecessor_operation": "POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION",
     "remote_ref_lifecycle_policy": "ACTIVE",
     "repository_live_working_set_archive_policy": "FUTURE_GOVERNANCE_CANDIDATE_ONLY",
     "scalar_framework_score": "FORBIDDEN",
@@ -236,7 +243,24 @@
       "audits/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_0_1_0.md",
       "handoffs/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_HANDOFF_0_1_0.md",
       "CLAIM_LEDGER.md",
-      "SOURCE_REGISTER.md"
+      "SOURCE_REGISTER.md",
+      "governance/POST_FW_CAT_CURRENT_STATE_EXTERNAL_ADVERSARIAL_AUDIT_PREREGISTRATION_0_1_0.md",
+      "audits/external/POST_FW_CAT_CURRENT_STATE_EXTERNAL_AUDIT_PACKET_MANIFEST_0_1_0.md",
+      "audits/external/POST_FW_CAT_CURRENT_STATE_EXTERNAL_ADVERSARIAL_AUDIT_PROMPT_0_1_0.md",
+      "audits/external/GROK_POST_FW_CAT_CURRENT_STATE_EXTERNAL_ADVERSARIAL_AUDIT_RESPONSE_0_1_0.md",
+      "audits/external/POST_FW_CAT_CURRENT_STATE_EXTERNAL_AUDIT_RESPONSE_CUSTODY_0_1_0.md",
+      "governance/POST_FW_CAT_CURRENT_STATE_EXTERNAL_AUDIT_INDEPENDENT_ADJUDICATION_PREREGISTRATION_0_1_0.md",
+      "audits/POST_FW_CAT_CURRENT_STATE_EXTERNAL_AUDIT_INDEPENDENT_FINDING_EVIDENCE_LEDGER_0_1_0.md",
+      "audits/POST_FW_CAT_CURRENT_STATE_EXTERNAL_AUDIT_INDEPENDENT_FINDING_ADJUDICATION_0_1_0.md",
+      "handoffs/POST_FW_CAT_CURRENT_STATE_EXTERNAL_AUDIT_INDEPENDENT_ADJUDICATION_HANDOFF_0_1_0.md",
+      "governance/FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION_PREREGISTRATION_0_1_0.md",
+      "audits/FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION_0_1_0.md",
+      "handoffs/FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION_HANDOFF_0_1_0.md",
+      "governance/POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION_PREREGISTRATION_0_1_0.md",
+      "audits/POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION_0_1_0.md",
+      "handoffs/POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION_HANDOFF_0_1_0.md",
+      "governance/FCP_EMPIRICAL_REALIZATION_NAMESPACE_ALIAS_TABLE_0_1_0.md",
+      "governance/POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION_POST_INTEGRATION_ROUTING_0_1_0.md"
     ],
     "FRAMEWORK_TAXONOMY": [
       "CURRENT_STATE.md",
@@ -259,7 +283,12 @@
       "audits/FW_CAT_REALIZATION_EMPIRICAL_CEILING_0_1_0.md",
       "handoffs/FW_CAT_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md",
       "governance/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_POST_INTEGRATION_ROUTING_0_1_0.md",
-      "audits/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_0_1_0.md"
+      "audits/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_0_1_0.md",
+      "governance/FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION_PREREGISTRATION_0_1_0.md",
+      "audits/FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION_0_1_0.md",
+      "handoffs/FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION_HANDOFF_0_1_0.md",
+      "governance/FCP_EMPIRICAL_REALIZATION_NAMESPACE_ALIAS_TABLE_0_1_0.md",
+      "CLAIM_LEDGER.md"
     ],
     "GENERAL_PROJECT_ORIENTATION": [
       "CURRENT_STATE.md",
