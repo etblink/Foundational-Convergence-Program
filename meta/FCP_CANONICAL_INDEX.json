@@ -23,7 +23,7 @@
     },
     {
       "authority_id": "CURRENT_STATE",
-      "blob": "6b3e61837769e93ec905340cb09b0063ba8c55fb",
+      "blob": "d5f4ad162b34a4b1c7206d6654daca46d722df54",
       "path": "CURRENT_STATE.md"
     },
     {
@@ -64,17 +64,17 @@
     "version": "0.2.0"
   },
   "indexed_scientific_baseline": {
-    "commit": "4321e9ba74286edb9b3870cb017d4674bed85b68",
-    "message": "Bind post-audit routing handoff capsule",
+    "commit": "7d68e99ae97a6fc8e6974ce6641c6290198bedbc",
+    "message": "Reconcile post-sequencing routing state",
     "repository": "etblink/Foundational-Convergence-Program",
-    "tree": "7c546c0767ebff8790f584158b068933ab0623f1"
+    "tree": "d37f59370ab774881d558bcd0bb3bd64a1bc2402"
   },
   "navigation_coverage": {
     "absence_from_operation_registry_means_scientific_absence": false,
     "artifact_inventory_scope": "ENTIRE_TRACKED_INDEXED_BASELINE_TREE_EXCLUDING_SELF_REFERENTIAL_NAVIGATION_FILES",
-    "artifact_record_count": 286,
+    "artifact_record_count": 288,
     "historical_operation_completeness_claimed": false,
-    "operation_record_count": 57,
+    "operation_record_count": 59,
     "operation_registry_scope": "CURRENT_DEPENDENCY_CLOSURE",
     "self_excluded_paths": [
       "meta/FCP_ARTIFACT_REGISTRY.jsonl",
