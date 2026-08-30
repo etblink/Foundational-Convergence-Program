@@ -503,16 +503,19 @@ POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = POST_FW_PROCESS_MATRIX_BASELINE_SCIENTIFIC_SEQUENCING_ADJUDICATION
-NEXT_RECOMMENDED_OPERATION = POST_FW_PROCESS_MATRIX_BASELINE_SCIENTIFIC_SEQUENCING_ADJUDICATION
-NEXT_OPERATION_CLASS = READ_ONLY_SEQUENCING_ADJUDICATION
+POST_FW_PROCESS_MATRIX_BASELINE_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+SEQUENCING_SELECTED_NEXT_OPERATION = METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT
+METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT = AUTHORIZED_NOT_STARTED
+NEXT_EXECUTION_STEP = METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_PREREGISTRATION
+NEXT_RECOMMENDED_OPERATION = METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT
+NEXT_OPERATION_CLASS = BOUNDED_INTERNAL_METHOD_AUDIT
 NEXT_OPERATION_AUTHORIZED = YES
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
-NEXT_SCIENTIFIC_PHASE = NONE__READ_ONLY_POST_BASELINE_SEQUENCING_ADJUDICATION_NEXT
+NEXT_SCIENTIFIC_PHASE = NONE__METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_NEXT
 ```
 
-The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, and causal-process Stage-2 taxonomy are complete at their declared scopes. Stage 2 fragments the 33-source discovery umbrella into ten scientific objects and admits exactly one new source-bound framework, `FW-PROCESS-MATRIX`; quantum switch/QC-QC, causal-nonseparability/resource structure, causal inequalities, cyclic models, causaloid, post-quantum models, QG-motivated models, and categorical semantics remain separately scoped. The `FW-PROCESS-MATRIX` K1–K10 baseline is now canonically complete. It supplies characterization rather than independent admission validation, establishes no framework-level empirical discriminator, and creates no pairwise relation, convergence credit, recurrence change, empirical target, or FCP-27 selection. The next epistemic step is a read-only post-baseline scientific sequencing adjudication.
+The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, and causal-process Stage-2 taxonomy are complete at their declared scopes. Stage 2 fragments the 33-source discovery umbrella into ten scientific objects and admits exactly one new source-bound framework, `FW-PROCESS-MATRIX`; quantum switch/QC-QC, causal-nonseparability/resource structure, causal inequalities, cyclic models, causaloid, post-quantum models, QG-motivated models, and categorical semantics remain separately scoped. The `FW-PROCESS-MATRIX` K1–K10 baseline is canonically complete and supplies characterization rather than separate admission validation. The accepted read-only post-baseline sequencing decision selects `METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT` as the next bounded operation because the method revision is upstream of the positive admission and can be tested against pre-causal-process canonical evidence. No method-audit result, framework-status change, pairwise relation, convergence credit, recurrence change, empirical target, or FCP-27 selection follows from the sequencing decision itself.
 
 ## Post-FW-CAT program-ledger and metadata reconciliation — canonical result
 

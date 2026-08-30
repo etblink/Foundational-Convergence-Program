@@ -22,7 +22,7 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 - **Current durable ledger:** 94 rows through the bounded `OBJ-CAT-11` re-adjudication; the prior 93 rows are byte-preserved, `FWCAT-004` supplies the current partial supersession, Biswas author metadata is reconciled, and four recurrence-epoch consistency dockets remain open.
 - **Causal-process / ICO Stage 1:** canonically complete; 44 meaningful candidates reviewed and a 33-source corpus frozen (28 new + 5 reused).
 - **Causal-process / ICO Stage 2:** canonically complete under Method 0.2.1; ten scientific objects are preserved and exactly one new framework (`FW-PROCESS-MATRIX`) passes A–H. Its separate K1–K10 baseline is now canonically complete, while pairwise comparison, convergence credit, recurrence change, empirical target selection, and FCP-27 remain absent.
-- **Next recommended program operation:** `POST_FW_PROCESS_MATRIX_BASELINE_SCIENTIFIC_SEQUENCING_ADJUDICATION`, a read-only gate that must make method-independence review, admission audit, realizability/empirical work, pairwise comparison, recurrence-docket preparation, archive/live-working-set governance, and no-immediate-operation compete on marginal information value.
+- **Next recommended program operation:** `METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT`; the accepted post-baseline read-only sequencing decision selects a bounded internal audit of whether criterion C has a pre-existing FCP-wide justification independent of the causal-process result. The audit must be preregistered before execution and may not revise Method 0.2.1 or change framework status inside itself.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
@@ -48,7 +48,9 @@ POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION = CANONICALLY_COMPLETE
 CLAIM_LEDGER_DURABLE_ROW_COUNT = 94
 CLAIM_LEDGER_TEMPORAL_CEILING = FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION
 BISWAS_2026_AUTHOR_METADATA_TRANSCRIPTION_RECONCILIATION = COMPLETE
-NEXT_RECOMMENDED_OPERATION = POST_FW_PROCESS_MATRIX_BASELINE_SCIENTIFIC_SEQUENCING_ADJUDICATION
+POST_FW_PROCESS_MATRIX_BASELINE_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT = AUTHORIZED_NOT_STARTED
+NEXT_RECOMMENDED_OPERATION = METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT
 POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
 CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
 CAUSAL_PROCESS_ICO_SOURCE_CORPUS = FROZEN
