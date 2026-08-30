@@ -22,7 +22,7 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 - **Current durable ledger:** 94 rows through the bounded `OBJ-CAT-11` re-adjudication; the prior 93 rows are byte-preserved, `FWCAT-004` supplies the current partial supersession, Biswas author metadata is reconciled, and four recurrence-epoch consistency dockets remain open.
 - **Causal-process / ICO Stage 1:** canonically complete; 44 meaningful candidates reviewed and a 33-source corpus frozen (28 new + 5 reused).
 - **Causal-process / ICO Stage 2:** canonically complete under Method 0.2.1; ten scientific objects are preserved and exactly one new framework (`FW-PROCESS-MATRIX`) passes A–H. Its separate K1–K10 baseline is now canonically complete, while pairwise comparison, convergence credit, recurrence change, empirical target selection, and FCP-27 remain absent.
-- **Next recommended program operation:** `POST_METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION`; the completed result-independence audit leaves a localized method ambiguity rather than a clean validation or failure. The next read-only gate must decide whether resolving reformulation/meta-framework admission scope is an upstream prerequisite to the still-pending `FW-PROCESS-MATRIX` admission audit, or whether another route has higher marginal information value. No method revision or framework-status change is authorized by this reconciliation.
+- **Next recommended program operation:** `FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT`; the accepted post-Method-0.2.1-audit sequencing decision selects a bounded hostile re-audit of the positive process-matrix admission under unchanged Method 0.2.1 and the frozen 33-source corpus. The audit must apply a weakest-adequate-classification control and must return a method-scope-dependent result rather than silently resolving the outstanding reformulation/meta-framework ambiguity if that ambiguity becomes outcome-determinative.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
@@ -53,7 +53,9 @@ METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT = CANONICALLY_COMPLETE
 METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_OUTCOME = B__PARTIAL_GENERAL_JUSTIFICATION_WITH_MATERIAL_METHOD_AMBIGUITY
 METHOD_0_2_1_FULL_GENERAL_SCOPE = NOT_ESTABLISHED
 METHOD_0_2_1_PROCESS_MATRIX_RESCUE_RULE_FINDING = NOT_SUPPORTED
-NEXT_RECOMMENDED_OPERATION = POST_METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION
+POST_METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT = AUTHORIZED_NOT_STARTED
+NEXT_RECOMMENDED_OPERATION = FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT
 POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
 CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
 CAUSAL_PROCESS_ICO_SOURCE_CORPUS = FROZEN
