@@ -1,0 +1,113 @@
+name: Qualify FW-PROCESS-MATRIX admission adversarial audit
+on:
+  push:
+    branches: [automation/fwpm-admission-audit-qualifier]
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: automation/fwpm-admission-audit-qualifier
+      - name: Verify exact scientific candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          TARGET=4d913be9a0dd83d68951afd4bf27581a23bebc82
+          PRE=1c6c2c86320249a8a4738d1b48c1421fbe0fd236
+          RESULT=audits/FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_0_1_0.md
+          HANDOFF=handoffs/FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_HANDOFF_0_1_0.md
+          PREREG=governance/FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_PREREGISTRATION_0_1_0.md
+
+          test "$(git rev-parse "$TARGET^")" = "$PRE"
+          test "$(git diff --name-only "$PRE".."$TARGET" | sort | tr '\n' ' ')" = "audits/FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_0_1_0.md handoffs/FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_HANDOFF_0_1_0.md "
+          git diff --check "$PRE".."$TARGET"
+
+          git diff --exit-code "$PRE".."$TARGET" -- FRAMEWORK_REGISTER.md CURRENT_STATE.md README.md SOURCE_REGISTER.md CLAIM_LEDGER.md COMPARISON_PROTOCOL.md EPISTEMIC_RULES.md FCP_CHARTER.md governance frameworks comparison_keys comparisons convergence countermodels meta tools ':!governance/FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_PREREGISTRATION_0_1_0.md'
+
+          git show "$TARGET:$RESULT" > /tmp/result.md
+          git show "$TARGET:$HANDOFF" > /tmp/handoff.md
+          git show "$PRE:$PREREG" > /tmp/prereg.md
+
+          grep -q '^FINAL_OUTCOME = A$' /tmp/result.md
+          grep -q '^FINAL_DISPOSITION = ADMISSION_SURVIVES_ADVERSARIAL_AUDIT$' /tmp/result.md
+          grep -q '^A_THROUGH_H_HOSTILE_REPLAY = PASS_WITH_NO_MANDATORY_FAIL_OR_UNRESOLVED_AMBIGUITY$' /tmp/result.md
+          grep -q '^PHYSICAL_LAW_VS_SYNTAX_ATTACK = PASS$' /tmp/result.md
+          grep -q '^EXISTING_FRAMEWORK_SUBTRACTION = PASS_FOR_NEW_IDENTITY$' /tmp/result.md
+          grep -q '^ONE_OBJECT_UNITY = PASS$' /tmp/result.md
+          grep -q '^REALIZABILITY_SCOPE = COHERENT_WITH_DECLARED_FRAMEWORK_SCOPE$' /tmp/result.md
+          grep -q '^FRAMEWORK_LABEL_MATERIALLY_REQUIRED = YES$' /tmp/result.md
+          grep -q '^NONREDUNDANCY_AUDIT = PASS_WITH_NONFATAL_PARTIAL_OVERLAP$' /tmp/result.md
+          grep -q '^METHOD_SCOPE_SENSITIVITY = INDEPENDENT_OF_REFORMULATION_META_FRAMEWORK_AMBIGUITY$' /tmp/result.md
+          grep -q '^OUTCOME_UNDER_VIEW_N = A__ADMISSION_SURVIVES_ADVERSARIAL_AUDIT$' /tmp/result.md
+          grep -q '^OUTCOME_UNDER_VIEW_I = A__ADMISSION_SURVIVES_ADVERSARIAL_AUDIT$' /tmp/result.md
+          grep -q '^NEW_SCOPE_QUALIFICATION_REQUIRED = NO$' /tmp/result.md
+          grep -q '^FRAMEWORK_LEVEL_EMPIRICAL_SELECTION = NO$' /tmp/result.md
+          grep -q '^FRAMEWORK_LEVEL_DISCRIMINATOR = NONE_AT_FROZEN_SCOPE$' /tmp/result.md
+          grep -q '^UNIVERSAL_PROCESS_MATRIX_REALIZABILITY = NOT_ESTABLISHED$' /tmp/result.md
+          grep -q '^NEXT_OPERATION = NOT_SELECTED$' /tmp/result.md
+
+          for key in A B C D E F G H; do
+            grep -q "### 5\.[2-9] $key —" /tmp/result.md
+          done
+          for section in \
+            '## 3. Exact evidence/blob verification' \
+            '## 4. Candidate-object identity reconstruction' \
+            '## 5. A–H hostile replay' \
+            '## 6. Criterion-C physical-law-versus-syntax adjudication' \
+            '## 7. CQM subtraction ledger' \
+            '## 8. GPTOPT subtraction ledger' \
+            '## 9. One-object versus family-fragmentation test' \
+            '## 10. Realizability scope test' \
+            '## 11. Weakest-adequate-classification counterfactual' \
+            '## 12. Empirical-burden test' \
+            '## 13. Nonredundancy matrix' \
+            '## 14. Method-scope sensitivity analysis' \
+            '## 15. Bias audit' \
+            '## 16. Decision-rule application' \
+            '## 17. Why Outcomes B–G are not controlling' \
+            '## 20. Non-effects and stop boundary'; do
+            grep -qF "$section" /tmp/result.md
+          done
+
+          grep -q '^FINAL_OUTCOME = A$' /tmp/handoff.md
+          grep -q '^FINAL_DISPOSITION = ADMISSION_SURVIVES_ADVERSARIAL_AUDIT$' /tmp/handoff.md
+          grep -q '^NEXT_OPERATION = NOT_SELECTED$' /tmp/handoff.md
+          grep -q '^FW_PROCESS_MATRIX_STATUS_CHANGE = NONE$' /tmp/handoff.md
+          grep -q '^METHOD_0_2_1_CHANGE = NONE$' /tmp/handoff.md
+
+          python - <<'PY'
+          from pathlib import Path
+          for f in ['/tmp/result.md','/tmp/handoff.md']:
+              b=Path(f).read_bytes()
+              if b'\r' in b:
+                  raise SystemExit(f'NON_LF_LINE_ENDING={f}')
+              b.decode('utf-8')
+          print('UTF8_LF=PASS')
+          PY
+
+          declare -A expected
+          expected['frameworks/causal_process/CAUSAL_PROCESS_ICO_SOURCE_INTAKE_0_1_0.md']=061ff07bdac6d784e6f8294891d4838e394d0346
+          expected['frameworks/causal_process/CAUSAL_PROCESS_ICO_SOURCE_SELECTION_AUDIT_0_1_0.md']=68aa281a1edc2fc3c59db0f38ae66bc0b1d9dbf1
+          expected['SOURCE_REGISTER.md']=1aa9613db1b054b766b1475e6dbd2a0a8a9b19ff
+          expected['governance/CAUSAL_PROCESS_ICO_TAXONOMY_GATE_STAGE2_PREREGISTRATION_0_1_1.md']=79dbcf6df91c6bb023fd4a3bb31117d24d7639ce
+          expected['audits/CAUSAL_PROCESS_ICO_TAXONOMY_ADJUDICATION_0_1_0.md']=218ee80cbc6bea6fcb3e1b931d3b5151422329b1
+          expected['frameworks/causal_process/FW_PROCESS_MATRIX_K1_K10_BASELINE_0_1_0.md']=42a991dcdb250f305e47ac4360fc780bb4e78a7b
+          expected['governance/FCP_METHOD_0_2_1_FRAMEWORK_ADMISSION_LAW_ARCHITECTURE_REVISION.md']=98a0c64ea0da0986715144cec4015c3151442ef7
+          expected['audits/METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_0_1_0.md']=60863074a95654febb50556022c9acf843e47802
+          expected['frameworks/categorical_quantum/FCP4_CATEGORICAL_QUANTUM_SOURCE_INTAKE_0_1_0.md']=75653c6f6cb33438d96c3edaa2fb653143bce818
+          expected['frameworks/categorical_quantum/FCP14_CQM_GPTOPT_COMPARATIVE_BINDING_0_1_0.md']=62bfb11d3bf2c9158287d2db5fdea7b52b4ea259
+          expected['frameworks/gpt_opt/FCP4_GPT_OPT_SOURCE_INTAKE_0_1_0.md']=232e28b36e334aa73879075f6e4dc01a4bc25248
+          expected['frameworks/gpt_opt/FCP7_GPTOPT_COMPARATIVE_BASELINE_0_1_0.md']=653b2997c8c96f63dffff182ad8121c9a137e7d8
+          expected['FRAMEWORK_REGISTER.md']=ecd8d2759921507e0d51f5efb74e67978244cf11
+          for p in "${!expected[@]}"; do
+            got=$(git rev-parse "$TARGET:$p")
+            test "$got" = "${expected[$p]}" || { echo "BLOB_FAIL $p $got ${expected[$p]}"; exit 1; }
+          done
+          echo EVIDENCE_BLOB_VERIFICATION=PASS
+          echo EXACT_TWO_FILE_TOPOLOGY=PASS
+          echo OUTCOME_A_TOKEN_SET=PASS
+          echo FORBIDDEN_MUTATION_GATE=PASS
