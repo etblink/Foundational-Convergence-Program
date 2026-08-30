@@ -1,0 +1,74 @@
+name: Final clean-rebuild FW-PROCESS-MATRIX realizability Stage-1
+on:
+  push:
+    branches: [automation/fwpm-realizability-stage1-freeze]
+permissions:
+  contents: write
+jobs:
+  rebuild:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: automation/fwpm-realizability-stage1-freeze
+      - name: Recover builder and apply final semantic layer repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin automation/fwpm-realizability-stage1-freeze-v3 main research/fw-process-matrix-realizability-source-strengthening-stage1
+          test "$(git rev-parse origin/main)" = "ee0a3776a08221361e3c0eb3bb4747e92ded7aa4"
+          test "$(git rev-parse origin/research/fw-process-matrix-realizability-source-strengthening-stage1)" = "9c2c6ea0a586eaa2683502ca530b235f243d99c4"
+          git show origin/automation/fwpm-realizability-stage1-freeze-v3:.github/scripts/build_fwpm_realizability_stage1.py >/tmp/build.py
+          sed -i \
+            -e 's/R1\/R6 subclass/R1 process-family boundary/g' \
+            -e 's/R1\/R4 adverse boundary/R1 no-go boundary/g' \
+            -e 's/R1\/R4\/R5 subclass/R1 realizable higher-order subclass/g' \
+            -e 's/R6 conditional test/R5-assumption certification boundary/g' \
+            -e 's/R1\/R6 simulation boundary/R1 simulation boundary/g' \
+            -e 's/R6 implementation\/model boundary/R1→R6 implementation-model constraint/g' \
+            -e 's/R1\/R2 pure-process interpretation/R0 pure-process realizability interpretation/g' \
+            /tmp/build.py
+      - name: Reconstruct from immutable opening commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "FCP Project Lead"
+          git config user.email "etblink@users.noreply.github.com"
+          git switch -C rebuild 5e5e028100801a2da49ed18075fd3b577ea3ffdd
+          python /tmp/build.py
+      - name: Final semantic and scope qualification
+        shell: bash
+        run: |
+          set -euo pipefail
+          I=frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md
+          A=frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_SELECTION_AUDIT_STAGE1_0_1_0.md
+          grep -Fq 'SRC-FWPM-REAL-GUERIN-CRF-2018` | NEW_EXTERNAL | R0 pure-process realizability interpretation' "$I"
+          grep -Fq 'SRC-CPICO-VANDERLUGT-DI-2023` | REUSED_CANONICAL | R5-assumption certification boundary' "$I"
+          ! grep -Fq 'R1/R2 pure-process interpretation' "$I"
+          ! grep -Fq 'R6 conditional test' "$I"
+          test "$(grep -c '| PASS_1;PASS_2;PASS_3 |' frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_SEARCH_EXECUTION_LOG_0_1_0.md)" = 208
+          grep -Fq 'TOTAL_FROZEN_TARGETED_SOURCE_COUNT = 27' "$I"
+          grep -Fq 'REUSED_CANONICAL_SOURCE_COUNT = 16' "$I"
+          grep -Fq 'NEW_EXTERNAL_SOURCE_COUNT = 11' "$I"
+          grep -Fq 'CORPUS_SUFFICIENT_FOR_LATER_PHYSICAL_SELECTION_ADJUDICATION = YES_AT_CURRENT_DECLARED_SEARCH_SCOPE' "$I"
+          grep -Fq 'PHYSICAL_SELECTION_ADJUDICATION = NOT_STARTED' "$I"
+          test "$(git status --short | awk '{print $2}' | sort | tr '\n' ' ')" = 'SOURCE_REGISTER.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_SELECTION_AUDIT_STAGE1_0_1_0.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_SEARCH_EXECUTION_LOG_0_1_0.md handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md '
+          echo FINAL_HUMAN_SEMANTIC_GUARDS=PASS
+      - name: Commit and replace unintegrated candidate with lease
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add SOURCE_REGISTER.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_SELECTION_AUDIT_STAGE1_0_1_0.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_SEARCH_EXECUTION_LOG_0_1_0.md handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md
+          git commit -m "Freeze FW-PROCESS-MATRIX realizability Stage-1 corpus"
+          C=$(git rev-parse HEAD)
+          T=$(git show -s --format=%T HEAD)
+          P=$(git show -s --format=%P HEAD)
+          test "$P" = "5e5e028100801a2da49ed18075fd3b577ea3ffdd"
+          git fetch origin main research/fw-process-matrix-realizability-source-strengthening-stage1
+          test "$(git rev-parse origin/main)" = "ee0a3776a08221361e3c0eb3bb4747e92ded7aa4"
+          test "$(git rev-parse origin/research/fw-process-matrix-realizability-source-strengthening-stage1)" = "9c2c6ea0a586eaa2683502ca530b235f243d99c4"
+          git push --force-with-lease=refs/heads/research/fw-process-matrix-realizability-source-strengthening-stage1:9c2c6ea0a586eaa2683502ca530b235f243d99c4 origin HEAD:research/fw-process-matrix-realizability-source-strengthening-stage1
+          echo FINAL_CANDIDATE_COMMIT=$C
+          echo FINAL_CANDIDATE_TREE=$T
+          echo FINAL_CANDIDATE_PARENT=$P
