@@ -272,3 +272,27 @@ CONVERGENCE_CREDIT_CHANGE = NONE
 ```
 
 The four new rows supplement current durable coverage without changing any earlier row's historical scope. Broader-holography results remain fully canonical in their own artifacts despite creating no artificial framework-indexed Claim Ledger row.
+
+
+## 12. Post-FW-CAT external audit and OBJ-CAT-11 current correction
+
+The canonical external audit and independent adjudication identified one material local science defect in the `OBJ-CAT-11` existing-framework mapping. The separately preregistered bounded re-adjudication corrected only criterion G and the dependent disposition, leaving the historical Stage-2 row intact at its original scope.
+
+```text
+PRE_CORRECTION_DURABLE_ROW_COUNT = 93
+ROWS_APPENDED_BY_THIS_CORRECTION = 1
+CURRENT_DURABLE_ROW_COUNT = 94
+CURRENT_DURABLE_TEMPORAL_CEILING = FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION
+
+PARTIAL_CURRENT_SUPERSESSION_MAP_EXTENSION =
+FWCAT-001 -> FWCAT-004
+
+FWCAT_001_HISTORICAL_STATUS = ACCEPTED_AT_ORIGINAL_STAGE2_SCOPE
+FWCAT_001_CURRENT_OBJ_CAT_11_MAPPING = SUPERSEDED_BY_FWCAT_004
+FWCAT_002 = UNCHANGED
+FWCAT_003 = UNCHANGED_IN_SCIENTIFIC_CONTENT
+RECURRENCE_VECTOR_CHANGE = NONE
+CONVERGENCE_CREDIT_CHANGE = NONE
+```
+
+The correction is partial and present-tense only: umbrella removal, verdict B, K1–K10 noninstantiation, and the quantum-switch implementation result all survive. The current counts are three existing-framework assignment objects, six nonframework remainders, and three deferred remainders, with `OBJ-CAT-11` in the deferred set.
