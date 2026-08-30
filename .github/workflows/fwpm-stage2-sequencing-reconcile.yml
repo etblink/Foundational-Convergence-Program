@@ -19,9 +19,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Preserve automation-only builder
+      - name: Preserve automation-only builders
         shell: bash
-        run: cp .github/scripts/fwpm_stage2_sequencing_reconcile.py /tmp/fwpm_stage2_sequencing_reconcile.py
+        run: |
+          cp .github/scripts/fwpm_stage2_sequencing_reconcile.py /tmp/fwpm_stage2_sequencing_reconcile.py
+          cp .github/scripts/fwpm_stage2_sequencing_reconcile_patch.py /tmp/fwpm_stage2_sequencing_reconcile_patch.py
 
       - name: Reset to exact canonical sequencing base
         shell: bash
@@ -35,6 +37,7 @@ jobs:
         shell: bash
         run: |
           python /tmp/fwpm_stage2_sequencing_reconcile.py
+          python /tmp/fwpm_stage2_sequencing_reconcile_patch.py
           git add CURRENT_STATE.md README.md governance/POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_SCIENTIFIC_SEQUENCING_POST_INTEGRATION_ROUTING_0_1_0.md meta/FCP_CANONICAL_INDEX.json meta/FCP_OPERATION_REGISTRY.jsonl
           git commit -m "Reconcile post-Stage-2 sequencing state"
           echo "SEMANTIC_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
@@ -56,7 +59,7 @@ jobs:
         shell: bash
         run: |
           NAV_SHA=$(git rev-parse HEAD)
-          git push origin HEAD:refs/heads/maintenance/fwpm-stage2-sequencing-reconcile-qualified
+          git push --force-with-lease origin HEAD:refs/heads/maintenance/fwpm-stage2-sequencing-reconcile-qualified
           echo "semantic_sha=$SEMANTIC_SHA" >> "$GITHUB_OUTPUT"
           echo "nav_sha=$NAV_SHA" >> "$GITHUB_OUTPUT"
           test -z "$(git status --porcelain)"
