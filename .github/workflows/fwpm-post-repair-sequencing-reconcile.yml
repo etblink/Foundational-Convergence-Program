@@ -1,0 +1,33 @@
+name: FWPM post-repair sequencing reconciliation
+
+on:
+  push:
+    branches:
+      - automation/fwpm-post-repair-sequencing-reconcile
+
+permissions:
+  contents: write
+
+jobs:
+  reconcile:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout runner
+        uses: actions/checkout@v4
+        with:
+          ref: automation/fwpm-post-repair-sequencing-reconcile
+          path: runner
+          fetch-depth: 0
+      - name: Checkout target
+        uses: actions/checkout@v4
+        with:
+          ref: maintenance/fwpm-post-repair-sequencing-routing
+          path: target
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Reconcile and qualify
+        working-directory: target
+        env:
+          TARGET_BRANCH: maintenance/fwpm-post-repair-sequencing-routing
+        run: python ../runner/.github/scripts/reconcile_fwpm_post_repair_sequencing.py
