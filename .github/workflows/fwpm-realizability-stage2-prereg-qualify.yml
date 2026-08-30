@@ -1,0 +1,80 @@
+name: Qualify FWPM realizability Stage2 prereg
+on:
+  push:
+    branches:
+      - automation/fwpm-realizability-stage2-prereg-qualify
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: automation/fwpm-realizability-stage2-prereg-qualify
+      - name: Qualify prospective gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main research/fw-process-matrix-realizability-physical-selection-stage2
+          test "$(git rev-parse origin/main)" = "e30784fffc1e49e497289c9c9da151762c613596"
+          test "$(git rev-parse origin/research/fw-process-matrix-realizability-physical-selection-stage2)" = "6cd63fdedb9ff1cbb41f659848e068e710711c16"
+          test "$(git show -s --format=%P origin/research/fw-process-matrix-realizability-physical-selection-stage2)" = "e30784fffc1e49e497289c9c9da151762c613596"
+          P=governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_0.md
+          test "$(git diff --name-only origin/main..origin/research/fw-process-matrix-realizability-physical-selection-stage2 | tr '\n' ' ')" = "$P "
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_0.md').read_text(encoding='utf-8')
+          required=[
+          'STAGE2_RULES_FROZEN_BEFORE_CORPUS_APPLICATION = YES',
+          'STAGE2_ADJUDICATION_STARTED = NO',
+          'FROZEN_TARGETED_SOURCE_COUNT = 27',
+          'NEW_EXTERNAL_SOURCE_SEARCH = FORBIDDEN',
+          'SOURCE_REGISTER_MUTATION = FORBIDDEN',
+          'PAIRWISE_COMPARISON = FORBIDDEN',
+          'FORMAL_PROCESS_VALIDITY != PHYSICAL_REALIZABILITY',
+          'PROBABILISTIC_PRE_POSTSELECTION_REPRESENTATION != DETERMINISTIC_PHYSICAL_REALIZATION',
+          'QC_QC_REALIZABILITY != GENERAL_W_DOMAIN_REALIZABILITY',
+          'NECESSARY_CONDITION != SUFFICIENT_CONDITION',
+          'COMPOSITION_FAILURE != INDIVIDUAL_PROCESS_INVALIDITY',
+          'SPACETIME_NO_GO_UNDER_NAMED_ASSUMPTIONS != WHOLE_FRAMEWORK_IMPOSSIBILITY',
+          'AX1_GENERAL_COMPLETE_SELECTION_CRITERION',
+          'AX2_GENERAL_DETERMINISTIC_STANDARD_QM_REALIZATION',
+          'AX3_GENERAL_PROBABILISTIC_OR_POSTSELECTED_REPRESENTATION',
+          'AX4_POSITIVE_RESTRICTED_REALIZATION_CLASSES',
+          'AX5_BROAD_SOURCE_BOUND_NO_GO_OR_EXCLUSION_BOUNDARIES',
+          'AX6_GENERAL_COMPOSITION_OR_GLOBALIZATION_CLOSURE',
+          'AX7_CLASSICAL_SPACETIME_EMBEDDING_OF_GENERAL_W_DOMAIN',
+          'AX8_UNRESOLVED_PHYSICAL_REALIZABILITY_REMAINDER',
+          'AX9_CONCRETE_IMPLEMENTATION_EVIDENCE',
+          'AX10_NEW_STAGE1_SOURCES_ADD_MATERIAL_PROPOSITIONAL_INFORMATION_BEYOND_LEGACY_CORPUS',
+          'A = GENERAL_SOURCE_BOUND_SELECTION_OR_REALIZATION_CRITERION_ESTABLISHED',
+          'B = MULTIPLE_ASSUMPTION_DEPENDENT_REALIZABILITY_CLASSES_WITH_NO_SINGLE_GENERAL_CRITERION',
+          'C = ONLY_SELECTED_SUBCLASSES_HAVE_POSITIVE_REALIZATION_RESULTS',
+          'D = STRONG_NO_GO_OR_EXCLUSION_BOUNDARY_FOR_BROAD_FORMAL_SUBSETS',
+          'E = REALIZABILITY_REMAINS_MIXED_OR_UNRESOLVED_AT_DECLARED_SCOPE',
+          'F = EXISTING_33_SOURCE_CORPUS_ALREADY_EXHAUSTS_MATERIAL_RESULT_AND_NEW_STRENGTHENING_ADDS_NO_MATERIAL_INFORMATION',
+          'Universal-positive control',
+          'Fragmented-positive control',
+          'Adverse-boundary control',
+          'Mixed control',
+          'Null-strengthening control',
+          'Representation control',
+          'Framework-neutrality control',
+          'Every one of the 27 frozen sources must appear',
+          'FW_PROCESS_MATRIX_FRAMEWORK_STATUS_CHANGE = FORBIDDEN_IN_STAGE2',
+          ]
+          for x in required: assert x in p, x
+          assert p.count('PC') >= 15
+          assert p.count('AX') >= 25
+          assert '\r' not in p
+          # No Stage-2 outcome assignment is allowed in the preregistration.
+          forbidden_assignments=['AX1 = ESTABLISHED','AX2 = ESTABLISHED','AX3 = ESTABLISHED','A = SUPPORTED\n','B = SUPPORTED\n','C = SUPPORTED\n','D = SUPPORTED\n','E = SUPPORTED\n','F = SUPPORTED\n']
+          for x in forbidden_assignments: assert x not in p, x
+          print('PROSPECTIVE_BOUNDARY=PASS')
+          print('OUTCOME_VECTOR=PASS')
+          print('SEMANTIC_FIREWALLS=PASS')
+          print('INVARIANCE_CONTROLS=PASS')
+          print('SOURCE_ACCOUNTING_REQUIREMENT=PASS')
+          print('STAGE2_SCOPE_FIREWALL=PASS')
+          PY
+          echo PREREG_QUALIFICATION=PASS
