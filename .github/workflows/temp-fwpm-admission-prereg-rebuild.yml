@@ -35,7 +35,7 @@ jobs:
           git switch -C "$CLEAN" "$BASE"
           cp /tmp/prereg.md "$FILE"
           git diff --check
-          test "$(git diff --name-only | tr '\n' ' ')" = "$FILE "
+          test "$(git status --porcelain -- "$FILE")" = "?? $FILE"
           grep -q '^BLOB = ecd8d2759921507e0d51f5efb74e67978244cf11$' "$FILE"
           grep -q '^NEW_EXTERNAL_SOURCE_SEARCH = NONE$' "$FILE"
           grep -q '^METHOD_0_2_1_REVISION = FORBIDDEN$' "$FILE"
