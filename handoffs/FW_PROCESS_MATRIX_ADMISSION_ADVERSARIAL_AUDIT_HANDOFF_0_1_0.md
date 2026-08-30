@@ -1,7 +1,7 @@
 # FW-PROCESS-MATRIX Admission Adversarial Audit — Handoff
 
 **Version:** 0.1.0
-**Status:** QUALIFIED_SCIENTIFIC_CANDIDATE_PENDING_PROJECT_LEAD_INTEGRATION_REVIEW
+**Status:** CANONICALLY_INTEGRATED__POST_INTEGRATION_ROUTING_RECONCILED
 **Operation ID:** `FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT`
 
 ## 1. Controlling result
@@ -109,7 +109,7 @@ EVIDENCE_IDENTITY_VERIFICATION = PASS
 
 Exact evidence identities are recorded in `audits/FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_0_1_0.md`.
 
-## 7. Non-effects
+## 7. Audit-operation non-effects (historical result scope)
 
 ```text
 FW_PROCESS_MATRIX_STATUS_CHANGE = NONE
@@ -127,7 +127,7 @@ EMPIRICAL_TARGET_SELECTION = NONE
 FCP27 = UNSELECTED
 ```
 
-## 8. Next boundary
+## 8. Result-freeze boundary (historical)
 
 ```text
 AUDIT_RESULT = FROZEN_CANDIDATE
@@ -137,4 +137,64 @@ POST_AUDIT_ROUTING = NOT_YET_PERFORMED
 NEXT_OPERATION = NOT_SELECTED
 ```
 
-If accepted, any current-state/Framework-Register consequence and any post-audit scientific sequencing decision require a separate bounded routing step. The audit result itself does not create a downstream science pipeline.
+At result freeze, any current-state/Framework-Register consequence and any post-audit scientific sequencing decision required a separate bounded routing step. That integration review has now accepted the audit result, and the present reconciliation records only its already-earned live-state consequences; the audit result itself still does not create a downstream science pipeline.
+
+
+## 9. Post-integration routing
+
+```text
+AUDIT_RESULT = CANONICALLY_COMPLETE
+FINAL_OUTCOME = A
+FINAL_DISPOSITION = ADMISSION_SURVIVES_ADVERSARIAL_AUDIT
+FW_PROCESS_MATRIX_STATUS = SOURCE_BOUND_READY
+FRAMEWORK_LEVEL_EMPIRICAL_DISCRIMINATOR = NONE_AT_FROZEN_SCOPE
+UNIVERSAL_PROCESS_MATRIX_REALIZABILITY = NOT_ESTABLISHED
+METHOD_0_2_1_REFORMULATION_META_FRAMEWORK_SCOPE = MATERIAL_AMBIGUITY
+NEXT_RECOMMENDED_OPERATION = POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_OPERATION_CLASS = READ_ONLY_SEQUENCING_ADJUDICATION
+FCP27_SELECTED = NO
+```
+
+<!-- FCP_HANDOFF_CAPSULE_BEGIN -->
+```json
+{
+  "capsule_schema_version": "0.1.0",
+  "operation_id": "POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_ROUTING_AND_NAVIGATION_RECONCILIATION",
+  "status": "CANONICALLY_COMPLETE",
+  "indexed_scientific_baseline_commit": "46e7e76c081189cea7f2aa8335c56c8a3d89c5d2",
+  "method_version": "0.2.1",
+  "must_read": [
+    "CURRENT_STATE.md",
+    "handoffs/FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_HANDOFF_0_1_0.md",
+    "audits/FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_0_1_0.md",
+    "FRAMEWORK_REGISTER.md",
+    "audits/METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_0_1_0.md",
+    "governance/FCP_METHOD_0_2_1_FRAMEWORK_ADMISSION_LAW_ARCHITECTURE_REVISION.md",
+    "frameworks/causal_process/FW_PROCESS_MATRIX_K1_K10_BASELINE_0_1_0.md"
+  ],
+  "outputs": [
+    "CURRENT_STATE.md",
+    "README.md",
+    "FRAMEWORK_REGISTER.md",
+    "handoffs/FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_HANDOFF_0_1_0.md"
+  ],
+  "open_dockets": [
+    "CROSS_PAIR_RESIDUAL_E5_CONSISTENCY_CHECK",
+    "LOOP_CLAIM_TRANSCRIPTION_CHECK",
+    "NFC_AQFT_SLOT_METHOD_NORMALIZATION",
+    "REDUCED_NFC_PAIRWISE_INFORMATION_CEILING_LABELING"
+  ],
+  "next_recommended_operation": "POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION",
+  "forbidden_next_actions": [
+    "PAIRWISE_COMPARISON_BEFORE_SEQUENCING",
+    "RECURRENCE_RECOMPUTATION_BEFORE_SEQUENCING",
+    "EMPIRICAL_TARGET_SELECTION_BEFORE_SEQUENCING",
+    "METHOD_0_2_1_REVISION_AS_AUTOMATIC_AUDIT_CONSEQUENCE",
+    "FW_PROCESS_MATRIX_STATUS_PROMOTION_BEYOND_SOURCE_BOUND_READY",
+    "UNIVERSAL_REALIZABILITY_CLAIM",
+    "FRAMEWORK_LEVEL_EMPIRICAL_SELECTION_CLAIM",
+    "FCP27_SELECTION_OR_EXECUTION"
+  ]
+}
+```
+<!-- FCP_HANDOFF_CAPSULE_END -->
