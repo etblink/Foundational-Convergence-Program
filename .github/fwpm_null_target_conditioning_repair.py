@@ -3,10 +3,10 @@ from pathlib import Path
 p = Path('comparisons/FW_PROCESS_MATRIX_VS_NULL_GRQFTSM_METHOD_0_2_1_0_1_0.md')
 s = p.read_text(encoding='utf-8')
 
-old = 'TARGET_CONDITIONED_INCIDENCE = 2'
-if s.count(old) != 2:
-    raise SystemExit(f'TARGET_COUNT_BLOCK_FAIL={s.count(old)}')
-s = s.replace(old, 'TARGET_CONDITIONED_INCIDENCE = 0')
+old_line = '\nTARGET_CONDITIONED_INCIDENCE = 2\n'
+if s.count(old_line) != 2:
+    raise SystemExit(f'TARGET_MACHINE_COUNT_BLOCK_FAIL={s.count(old_line)}')
+s = s.replace(old_line, '\nTARGET_CONDITIONED_INCIDENCE = 0\n')
 
 repls = [
 ('LINEAGE_STATUS = DIRECT_STANDARD_QUANTUM_ANCESTRY\nTARGET_CONDITIONING = YES__LOCAL_QUANTUM_MECHANICS_IS_AN_EXPLICIT_INPUT_PREMISE',
