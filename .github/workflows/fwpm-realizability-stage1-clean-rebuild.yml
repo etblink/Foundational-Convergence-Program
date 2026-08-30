@@ -1,0 +1,79 @@
+name: Clean-rebuild FW-PROCESS-MATRIX realizability Stage-1
+on:
+  push:
+    branches: [automation/fwpm-realizability-stage1-freeze-v2]
+permissions:
+  contents: write
+jobs:
+  rebuild:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: automation/fwpm-realizability-stage1-freeze-v2
+      - name: Recover builder and apply semantic layer repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin automation/fwpm-realizability-stage1-freeze-v3 main research/fw-process-matrix-realizability-source-strengthening-stage1
+          test "$(git rev-parse origin/main)" = "ee0a3776a08221361e3c0eb3bb4747e92ded7aa4"
+          test "$(git rev-parse origin/research/fw-process-matrix-realizability-source-strengthening-stage1)" = "7d6716cd0a83c82d304f4e1a69470690a8e6d9e9"
+          git show origin/automation/fwpm-realizability-stage1-freeze-v3:.github/scripts/build_fwpm_realizability_stage1.py >/tmp/build.py
+          sed -i \
+            -e 's/R1\/R6 subclass/R1 process-family boundary/g' \
+            -e 's/R1\/R4 adverse boundary/R1 no-go boundary/g' \
+            -e 's/R1\/R4\/R5 subclass/R1 realizable higher-order subclass/g' \
+            -e 's/R6 conditional test/R5 conditional certification architecture/g' \
+            -e 's/R1\/R6 simulation boundary/R1 simulation boundary/g' \
+            -e 's/R6 implementation\/model boundary/R1→R6 implementation-model constraint/g' \
+            /tmp/build.py
+      - name: Reconstruct clean candidate directly on opening commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "FCP Project Lead"
+          git config user.email "etblink@users.noreply.github.com"
+          git switch -C rebuild 5e5e028100801a2da49ed18075fd3b577ea3ffdd
+          python /tmp/build.py
+          EXPECT='SOURCE_REGISTER.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_SELECTION_AUDIT_STAGE1_0_1_0.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_SEARCH_EXECUTION_LOG_0_1_0.md handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md '
+          GOT="$(git status --short | awk '{print $2}' | sort | tr '\n' ' ')"
+          test "$GOT" = "$EXPECT"
+      - name: Human-diagnostic machine guards for R0-R6 semantics
+        shell: bash
+        run: |
+          set -euo pipefail
+          I=frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md
+          A=frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_SELECTION_AUDIT_STAGE1_0_1_0.md
+          for OLD in 'R1/R6 subclass' 'R1/R4 adverse boundary' 'R1/R4/R5 subclass' 'R6 conditional test' 'R1/R6 simulation boundary' 'R6 implementation/model boundary'; do
+            ! grep -Fq "$OLD" "$I"
+            ! grep -Fq "$OLD" "$A"
+          done
+          grep -Fq 'SRC-CPICO-CHIRIBELLA-SWITCH-2013` | REUSED_CANONICAL | R1 process-family boundary' "$I"
+          grep -Fq 'SRC-CPICO-VANDERLUGT-DI-2023` | REUSED_CANONICAL | R5 conditional certification architecture' "$I"
+          grep -Fq 'SRC-CPICO-BAVARESCO-SIMULATION-2025` | REUSED_CANONICAL | R1 simulation boundary' "$I"
+          grep -Fq 'SRC-FWPM-REAL-FELLOUS-ASIANI-ENERGY-2023` | NEW_EXTERNAL | R1→R6 implementation-model constraint' "$I"
+          grep -Fq 'SRC-CPICO-GUO-VBC-2026` | REUSED_CANONICAL | R6 implementation' "$I"
+          grep -Fq 'SRC-CPICO-QU-BELLLIKE-2026` | REUSED_CANONICAL | R6 implementation' "$I"
+          test "$(grep -c '| PASS_1;PASS_2;PASS_3 |' frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_SEARCH_EXECUTION_LOG_0_1_0.md)" = 208
+          grep -Fq 'TOTAL_FROZEN_TARGETED_SOURCE_COUNT = 27' "$I"
+          grep -Fq 'CORPUS_SUFFICIENT_FOR_LATER_PHYSICAL_SELECTION_ADJUDICATION = YES_AT_CURRENT_DECLARED_SEARCH_SCOPE' "$I"
+          grep -Fq 'PHYSICAL_SELECTION_ADJUDICATION = NOT_STARTED' "$I"
+          echo REALIZABILITY_LAYER_INFLATION_REPAIR=PASS
+      - name: Commit clean replacement and publish with lease
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add SOURCE_REGISTER.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_SELECTION_AUDIT_STAGE1_0_1_0.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_SEARCH_EXECUTION_LOG_0_1_0.md handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md
+          git commit -m "Freeze FW-PROCESS-MATRIX realizability Stage-1 corpus"
+          C=$(git rev-parse HEAD)
+          T=$(git show -s --format=%T HEAD)
+          P=$(git show -s --format=%P HEAD)
+          test "$P" = "5e5e028100801a2da49ed18075fd3b577ea3ffdd"
+          git fetch origin main research/fw-process-matrix-realizability-source-strengthening-stage1
+          test "$(git rev-parse origin/main)" = "ee0a3776a08221361e3c0eb3bb4747e92ded7aa4"
+          test "$(git rev-parse origin/research/fw-process-matrix-realizability-source-strengthening-stage1)" = "7d6716cd0a83c82d304f4e1a69470690a8e6d9e9"
+          git push --force-with-lease=refs/heads/research/fw-process-matrix-realizability-source-strengthening-stage1:7d6716cd0a83c82d304f4e1a69470690a8e6d9e9 origin HEAD:research/fw-process-matrix-realizability-source-strengthening-stage1
+          echo CLEAN_CANDIDATE_COMMIT=$C
+          echo CLEAN_CANDIDATE_TREE=$T
+          echo CLEAN_CANDIDATE_PARENT=$P
