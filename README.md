@@ -11,7 +11,7 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 
 - **Latest numbered phase:** FCP-26; Stage 1 is canonically complete and Stage 2 is `NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE`.
 - **Latest canonical scientific operation:** `FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION` (`4f73ea29cf4b89e42bf52876b4ad7c782030edbc`; tree `060c94bf08e926aad8bc3ee355b553665c8bba7d`).
-- **Latest canonical maintenance operation:** `POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION`; the 94-row post-audit correction and its routing/navigation state are canonical, with enclosing maintenance identity resolved from Git rather than embedded self-referentially.
+- **Latest canonical maintenance operation:** `POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION`; the canonical sequencing decision is now reconciled into current routing without starting the selected source intake.
 - **Active prospective method:** FCP Method 0.2.0.
 - **Housekeeping status:** canonically complete.
 - **Post-FCP-25 Grok status:** audit, independent adjudication, and reconciliation are canonically complete.
@@ -20,7 +20,7 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 - **Publication governance:** qualification identity and canonical publication identity are explicitly distinguished; content-equivalent publication and deterministic navigation rebinding are permitted under `governance/FCP_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_POLICY_0_1_0.md`.
 - **FW-CAT:** Stage 1 and Stage 2 remain canonical, and the post-audit bounded re-adjudication corrects `OBJ-CAT-11` to a deferred remainder: current taxonomy is three existing-framework assignment objects, six nonframework remainders, three deferred proposals, zero successors, with historical `FW-CAT` still removed with reason.
 - **Current durable ledger:** 94 rows through the bounded `OBJ-CAT-11` re-adjudication; the prior 93 rows are byte-preserved, `FWCAT-004` supplies the current partial supersession, Biswas author metadata is reconciled, and four recurrence-epoch consistency dockets remain open.
-- **Next recommended program operation:** `POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION`; it is a read-only sequencing gate and remains unauthorized, no next numbered phase is selected, and FCP-27 remains unselected.
+- **Next recommended program operation:** `CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1`; it is selected but not started, requires a separately frozen prospective Stage-1 preregistration before source search, no next numbered phase is selected, and FCP-27 remains unselected.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
@@ -38,7 +38,7 @@ FW_CAT_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
 FW_CAT_STAGE1_SOURCE_CORPUS = FROZEN
 FW_CAT_STAGE2_TAXONOMY_GATE_JUSTIFIED = FULFILLED_BY_CANONICAL_STAGE2
 FW_CAT_TAXONOMY_GATE_STAGE2 = CANONICALLY_COMPLETE
-FW_CAT_TAXONOMY_VERDICT = B_EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_REMAINDER
+FW_CAT_TAXONOMY_VERDICT = B_EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_AND_DEFERRED_REMAINDER
 FW_CAT_FINAL_STATUS = REMOVED_WITH_REASON
 FW_CAT_SUCCESSOR_FRAMEWORK_COUNT = 0
 POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
@@ -46,7 +46,9 @@ POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION = CANONICALLY_COMPLETE
 CLAIM_LEDGER_DURABLE_ROW_COUNT = 94
 CLAIM_LEDGER_TEMPORAL_CEILING = FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION
 BISWAS_2026_AUTHOR_METADATA_TRANSCRIPTION_RECONCILIATION = COMPLETE
-NEXT_RECOMMENDED_OPERATION = POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_RECOMMENDED_OPERATION = CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1
+POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1 = SELECTED_NOT_STARTED_REQUIRES_SEPARATE_PREREGISTRATION
 NEXT_OPERATION_AUTHORIZED = NO
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO

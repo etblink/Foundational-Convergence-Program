@@ -9,7 +9,7 @@ LATEST_NUMBERED_PHASE = FCP-26
 LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION
 LATEST_CANONICAL_SCIENTIFIC_COMMIT = 4f73ea29cf4b89e42bf52876b4ad7c782030edbc
 LATEST_CANONICAL_SCIENTIFIC_TREE = 060c94bf08e926aad8bc3ee355b553665c8bba7d
-LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION
+LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION
 LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
 PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = 25c75cc200b35244fc7db81ba925b8e2063c442e
 PREVIOUS_CANONICAL_MAINTENANCE_TREE = 779cd9752943172e8c6a542d1a158fbf7abf6b26
@@ -20,7 +20,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.0_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, audit, and re-adjudication operations are unnumbered and FCP-27 has not been selected. The latest-scientific fields identify the bounded `OBJ-CAT-11` re-adjudication, which corrected only its existing-framework distinction/disposition. The latest-maintenance field names the post-audit reconciliation routing/navigation operation after the canonical 94-row Claim Ledger, namespace firewall, register cleanup, and Biswas consistency repair; exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
+`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, audit, and re-adjudication operations are unnumbered and FCP-27 has not been selected. The latest-scientific fields identify the bounded `OBJ-CAT-11` re-adjudication, which corrected only its existing-framework distinction/disposition. The latest-maintenance field names the post-sequencing routing/navigation reconciliation that records the canonical R1 selection without starting the selected source intake; exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.0 governs prospective work unless explicitly superseded through the truth-seeking revision protocol.
 
@@ -70,7 +70,7 @@ FW_CAT_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
 FW_CAT_STAGE1_SOURCE_CORPUS = FROZEN
 FW_CAT_STAGE2_TAXONOMY_GATE_JUSTIFIED = FULFILLED_BY_CANONICAL_STAGE2
 FW_CAT_TAXONOMY_GATE_STAGE2 = CANONICALLY_COMPLETE
-FW_CAT_TAXONOMY_VERDICT = B_EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_REMAINDER
+FW_CAT_TAXONOMY_VERDICT = B_EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_AND_DEFERRED_REMAINDER
 FW_CAT_SCIENTIFIC_OBJECT_COUNT_BEFORE_ADMISSION = 12
 FW_CAT_EXISTING_FRAMEWORK_ASSIGNMENT_COUNT = 3
 FW_CAT_EXISTING_FRAMEWORK_ASSIGNMENT_IDS = FW-CQM;FW-AQFT;FW-NULL-GRQFTSM
@@ -96,6 +96,9 @@ FW_CAT_CURRENT_TAXONOMY_CORRECTION_ROW = FWCAT-004
 EMPIRICAL_REALIZATION_NAMESPACE_ALIAS_TABLE = ACTIVE_PROSPECTIVELY
 POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION = CANONICALLY_COMPLETE
 POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
+POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
+CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1 = SELECTED_NOT_STARTED_REQUIRES_SEPARATE_PREREGISTRATION
 ```
 
 Targeted source strengthening established, at bounded scope:
@@ -329,7 +332,7 @@ POST_FCP23_REMAINING_ORDER_AUTOMATICALLY_INHERITED = NO
 
 `RECURRENCE_IMPACT_CANDIDATE = YES` means later recurrence analysis must account for the current FCP-22 relation and later current relations; it is not authorization to recompute recurrence now.
 
-The post-NFC/String-M sequencing route, current program recurrence, FCP-25, the post-FCP-25 Grok chain, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stage 1, and FW-CAT Stage 2 are canonically complete at their declared scopes. The post-FW-CAT read-only sequencing adjudication then selected a bounded current-ledger and metadata reconciliation before further science. That reconciliation is now canonically complete: all 89 prior durable claim rows remain preserved, four current rows were appended for 93 total through FW-CAT Stage 2, and the nonmaterial Biswas author transcription docket is closed. The four Category-B recurrence-epoch consistency dockets remain unexecuted. The fresh external adversarial audit and independent adjudication are now canonically complete, and the bounded `OBJ-CAT-11` re-adjudication is canonical. The governance/provenance reconciliation and its routing/navigation reconciliation are now canonically complete. A fresh read-only sequencing adjudication is the next recommended gate; it is not authorized by this maintenance operation, and FCP-27 remains unselected.
+The post-NFC/String-M sequencing route, current program recurrence, FCP-25, the post-FCP-25 Grok chain, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stage 1, and FW-CAT Stage 2 are canonically complete at their declared scopes. The post-FW-CAT read-only sequencing adjudication then selected a bounded current-ledger and metadata reconciliation before further science. That reconciliation is now canonically complete: all 89 prior durable claim rows remain preserved, four current rows were appended for 93 total through FW-CAT Stage 2, and the nonmaterial Biswas author transcription docket is closed. The four Category-B recurrence-epoch consistency dockets remain unexecuted. The fresh external adversarial audit and independent adjudication are now canonically complete, and the bounded `OBJ-CAT-11` re-adjudication is canonical. The governance/provenance reconciliation and its routing/navigation reconciliation are canonically complete. The subsequent read-only remediation sequencing adjudication is now canonical and selects a separate prospective causal-process / indefinite-causal-order Stage-1 source intake. This routing reconciliation records that selection without beginning its preregistration, source search, source admission, or taxonomy; FCP-27 remains unselected.
 
 ## Next-task status
 
@@ -446,7 +449,7 @@ FW_CAT_REUSED_CANONICAL_SOURCE_COUNT = 8
 FW_CAT_MEANINGFUL_REJECTED_OR_DEFERRED_COUNT = 18
 FW_CAT_DISCOVERY_LANE_COUNT_PASS = 13
 FW_CAT_TAXONOMY_GATE_STAGE2 = CANONICALLY_COMPLETE
-FW_CAT_TAXONOMY_VERDICT = B_EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_REMAINDER
+FW_CAT_TAXONOMY_VERDICT = B_EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_AND_DEFERRED_REMAINDER
 FW_CAT_FINAL_STATUS = REMOVED_WITH_REASON
 FW_CAT_EXISTING_FRAMEWORK_ASSIGNMENT_COUNT = 3
 FW_CAT_NEWLY_ADMITTED_FRAMEWORK_COUNT = 0
@@ -464,8 +467,11 @@ POST_FW_CAT_LEDGER_RECONCILIATION_ROUTING = CANONICALLY_COMPLETE
 OPEN_DOCKET_COUNT = 4
 POST_MAINTENANCE_HIGH_PRIORITY_CANDIDATE = FULFILLED_BY_CANONICAL_EXTERNAL_AUDIT
 EXTERNAL_AUDIT_AUTHORIZED = FULFILLED_BY_CANONICAL_AUDIT
-NEXT_RECOMMENDED_OPERATION = POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION
-NEXT_OPERATION_CLASS = READ_ONLY_SEQUENCING_ADJUDICATION
+POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+SEQUENCING_SELECTED_NEXT_OPERATION = CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1
+CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1 = SELECTED_NOT_STARTED_REQUIRES_SEPARATE_PREREGISTRATION
+NEXT_RECOMMENDED_OPERATION = CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1
+NEXT_OPERATION_CLASS = SOURCE_INTAKE_STAGE1
 NEXT_OPERATION_AUTHORIZED = NO
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
@@ -480,11 +486,11 @@ POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = SEPARATE_POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION
-NEXT_SCIENTIFIC_PHASE = NONE__READ_ONLY_POST_AUDIT_REMEDIATION_SEQUENCING_RECOMMENDED_BUT_NOT_YET_EXECUTED
+NEXT_EXECUTION_STEP = SEPARATE_CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1_PREREGISTRATION
+NEXT_SCIENTIFIC_PHASE = NONE__CAUSAL_PROCESS_ICO_STAGE1_PREREGISTRATION_SELECTED_NOT_STARTED
 ```
 
-The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, and the subsequent governance/provenance reconciliation are complete at their declared scopes. The durable Claim Ledger now contains 94 rows through the `OBJ-CAT-11` re-adjudication, the Biswas metadata docket is closed, and four recurrence-epoch consistency dockets remain open. The next recommended operation is the separate read-only `POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION`; it is unauthorized, and FCP-27 remains unselected.
+The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, and the subsequent governance/provenance reconciliation are complete at their declared scopes. The durable Claim Ledger contains 94 rows through the `OBJ-CAT-11` re-adjudication, the Biswas metadata docket is closed, and four recurrence-epoch consistency dockets remain open. The now-canonical remediation sequencing decision selects `CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1` as the next scientific route. It remains not started and requires its own prospective preregistration before any external literature search; FCP-27 remains unselected.
 
 ## Post-FW-CAT program-ledger and metadata reconciliation — canonical result
 
