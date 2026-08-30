@@ -1,0 +1,49 @@
+name: Rebuild FW-PROCESS-MATRIX admission preregistration
+on:
+  push:
+    branches: [automation/fwpm-admission-prereg-rebuild]
+permissions:
+  contents: write
+jobs:
+  rebuild:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: automation/fwpm-admission-prereg-rebuild
+      - name: Rebuild clean preregistration
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE=governance/FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_PREREGISTRATION_0_1_0.md
+          BASE=fe52b17225a50c6af6781185e4e397a02f2e26c0
+          CLEAN=audit/fw-process-matrix-admission-adversarial
+          cp "$FILE" /tmp/prereg.md
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('/tmp/prereg.md')
+          s=p.read_text(encoding='utf-8')
+          old='### 4.6 Current register as status authority only\n\n`FRAMEWORK_REGISTER.md` may be read only to confirm current identities/statuses. Its current `FW-PROCESS-MATRIX` row is not independent admission evidence.\n'
+          new='### 4.6 Current register as status authority only\n\n```text\nFRAMEWORK_REGISTER.md\nBLOB = ecd8d2759921507e0d51f5efb74e67978244cf11\n```\n\nThe frozen register may be read only to confirm current identities/statuses. Its current `FW-PROCESS-MATRIX` row is not independent admission evidence.\n'
+          if s.count(old)!=1:
+              raise SystemExit(f'REGISTER_FREEZE_TARGET=FAIL count={s.count(old)}')
+          p.write_text(s.replace(old,new,1),encoding='utf-8',newline='\n')
+          PY
+          git config user.name "FCP Project Lead Audit"
+          git config user.email "etblink@users.noreply.github.com"
+          git switch -C "$CLEAN" "$BASE"
+          cp /tmp/prereg.md "$FILE"
+          git diff --check
+          test "$(git diff --name-only | tr '\n' ' ')" = "$FILE "
+          grep -q '^BLOB = ecd8d2759921507e0d51f5efb74e67978244cf11$' "$FILE"
+          grep -q '^NEW_EXTERNAL_SOURCE_SEARCH = NONE$' "$FILE"
+          grep -q '^METHOD_0_2_1_REVISION = FORBIDDEN$' "$FILE"
+          grep -q '^FW_PROCESS_MATRIX_STATUS_CHANGE_INSIDE_AUDIT = FORBIDDEN$' "$FILE"
+          grep -q '^G = RESULT_DEPENDS_ON_UNRESOLVED_METHOD_0_2_1_REFORMULATION_META_FRAMEWORK_SCOPE$' "$FILE"
+          git add "$FILE"
+          git commit -m "Preregister FW-PROCESS-MATRIX admission adversarial audit"
+          git push --force-with-lease origin HEAD:"$CLEAN"
+          echo PREREG_COMMIT=$(git rev-parse HEAD)
+          echo PREREG_TREE=$(git show -s --format=%T HEAD)
+          echo PREREG_PARENT=$(git rev-parse HEAD^)
