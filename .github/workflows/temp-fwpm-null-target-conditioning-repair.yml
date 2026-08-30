@@ -1,0 +1,75 @@
+name: Repair FWPM null-control target conditioning
+on:
+  push:
+    branches: [automation/fwpm-null-target-conditioning-repair]
+permissions:
+  contents: write
+jobs:
+  repair-qualify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: automation/fwpm-null-target-conditioning-repair
+      - name: Repair exact research candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          EXPECTED_PRE_REPAIR=61a752142f400fe1eed7235ac2c22d697a63670d
+          PREREG=50332564d2339c8a048e1b44dd06b13f8580f7ff
+          BRANCH=research/fw-process-matrix-null-control
+          cp .github/fwpm_null_target_conditioning_repair.py /tmp/repair.py
+          git config user.name "FCP Project Lead Null Control"
+          git config user.email "etblink@users.noreply.github.com"
+          git switch -C "$BRANCH" "origin/$BRANCH"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_PRE_REPAIR"
+          python /tmp/repair.py
+          git diff --check
+          test "$(git diff --name-only | tr '\n' ' ')" = "comparisons/FW_PROCESS_MATRIX_VS_NULL_GRQFTSM_METHOD_0_2_1_0_1_0.md "
+          git add comparisons/FW_PROCESS_MATRIX_VS_NULL_GRQFTSM_METHOD_0_2_1_0_1_0.md
+          git commit -m "Repair FW-PROCESS-MATRIX target-conditioning semantics"
+          echo "RESULT_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          echo "RESULT_TREE=$(git show -s --format=%T HEAD)" >> "$GITHUB_ENV"
+          test "$(git rev-parse "$PREREG:governance/FW_PROCESS_MATRIX_NULL_CONTROL_PREREGISTRATION_0_1_0.md")" = "$(git rev-parse "HEAD:governance/FW_PROCESS_MATRIX_NULL_CONTROL_PREREGISTRATION_0_1_0.md")"
+      - name: Requalify scientific ledger
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('comparisons/FW_PROCESS_MATRIX_VS_NULL_GRQFTSM_METHOD_0_2_1_0_1_0.md').read_text(encoding='utf-8')
+          claims=re.findall(r'^CLAIM_ID = (PMNC-[^\n]+)$',s,re.M)
+          rels=re.findall(r'^RELATION_STATE = ([A-Z0-9_]+)$',s,re.M)
+          assert len(claims)==len(set(claims))==17
+          assert len(rels)==17 and rels.count('E2_REPRESENTATION')==3 and rels.count('NONE_ESTABLISHED')==13 and rels.count('UNRESOLVED_UNDER_FROZEN_CORPUS')==1
+          assert not any(r.startswith(('E1_','E3_','E4_','E5_')) for r in rels)
+          keys=set()
+          for x in re.findall(r'^K_KEY = ([^\n]+)$',s,re.M): keys.update(re.findall(r'K(?:10|[1-9])',x))
+          assert keys=={f'K{i}' for i in range(1,11)}
+          assert s.count('TARGET_CONDITIONED_INCIDENCE = 0')==2
+          assert 'TARGET_CONDITIONED_INCIDENCE = 2' not in s
+          assert 'TARGET_CONDITIONING = YES__LOCAL_QUANTUM_MECHANICS_IS_AN_EXPLICIT_INPUT_PREMISE' not in s
+          assert 'TARGET_CONDITIONING = YES__KNOWN_CAUSAL_QUANTUM_SITUATIONS_ARE_EXPLICITLY_RETAINED' not in s
+          assert 'INDEPENDENCE_STATUS = IND-N_DIRECT_IMPORT' in s
+          assert 'PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 4' in s
+          assert 'CORE_PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 3' in s
+          assert 'PROCESS_MATRIX_SPECIFIC_STRUCTURAL_LIMITATION_INCIDENCE = 1' in s
+          assert 'NULL_SUBTRACTED_RESIDUE = NONEMPTY' in s
+          assert 'UNIVERSAL_PROCESS_MATRIX_REALIZABILITY = NOT_ESTABLISHED' in s
+          assert 'DIRECT_FW_PROCESS_MATRIX_EMPIRICAL_DISCRIMINATOR_AFTER_NULL = NO' in s
+          assert 'FCP27_SELECTED = NO' in s
+          print('TARGET_CONDITIONING_SEMANTICS=PASS')
+          print('FULL_LEDGER_REQUALIFICATION=PASS')
+          PY
+          git diff --check HEAD~1..HEAD
+      - name: Verify canonical main unchanged and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "50332564d2339c8a048e1b44dd06b13f8580f7ff"
+          git push origin HEAD:research/fw-process-matrix-null-control
+          echo RESULT_COMMIT="$RESULT_SHA"
+          echo RESULT_TREE="$RESULT_TREE"
