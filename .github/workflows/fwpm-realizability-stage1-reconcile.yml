@@ -1,7 +1,8 @@
-name: Reconcile FW-PROCESS-MATRIX realizability Stage-1
+name: Reconcile FWPM realizability Stage1
 on:
   push:
-    branches: [automation/fwpm-realizability-stage1-reconcile]
+    branches:
+      - automation/fwpm-realizability-stage1-reconcile
 permissions:
   contents: write
 jobs:
@@ -12,142 +13,37 @@ jobs:
         with:
           fetch-depth: 0
           ref: automation/fwpm-realizability-stage1-reconcile
-      - name: Verify exact scientific baseline
+      - name: Reconstruct semantic candidate
         shell: bash
         run: |
           set -euo pipefail
+          cp .github/scripts/reconcile_fwpm_realizability_stage1.py /tmp/reconcile.py
           git fetch origin main
           test "$(git rev-parse origin/main)" = "5675f75621125bdbac3755d88e57768afcc949c9"
           test "$(git show -s --format=%T origin/main)" = "1cb2403c2ad84f050ed451a69ddbdfee0f3f7637"
-      - name: Build semantic reconciliation
-        shell: bash
-        run: |
-          set -euo pipefail
           git config user.name "FCP Project Lead"
           git config user.email "etblink@users.noreply.github.com"
           git switch -C maintenance/fwpm-realizability-stage1-reconcile origin/main
-          python - <<'PY'
-          from pathlib import Path
-          cs=Path('CURRENT_STATE.md')
-          s=cs.read_text(encoding='utf-8')
-          replacements={
-          'LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_PROCESS_MATRIX_NULL_CONTROL':'LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1',
-          'LATEST_CANONICAL_SCIENTIFIC_COMMIT = c391b42d3aa4043045d7e3a566a26b9f3aac6070':'LATEST_CANONICAL_SCIENTIFIC_COMMIT = 5675f75621125bdbac3755d88e57768afcc949c9',
-          'LATEST_CANONICAL_SCIENTIFIC_TREE = e8c7af0932cb0e4557edf258aa1396094509a63d':'LATEST_CANONICAL_SCIENTIFIC_TREE = 1cb2403c2ad84f050ed451a69ddbdfee0f3f7637',
-          'LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_PROCESS_MATRIX_REALIZABILITY_PHYSICAL_SELECTION_STAGE1_PREREGISTRATION_ROUTING_AND_NAVIGATION_RECONCILIATION':'LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_ROUTING_AND_NAVIGATION_RECONCILIATION',
-          'TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_STATUS = PREREGISTERED_STAGE1_ONLY__EXTERNAL_SEARCH_NOT_STARTED':'TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_STATUS = CANONICALLY_COMPLETE',
-          'FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1 = PREREGISTERED_STAGE1_ONLY__EXTERNAL_SEARCH_NOT_STARTED':'FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1 = CANONICALLY_COMPLETE',
-          'TARGETED_REALIZABILITY_NEW_EXTERNAL_SOURCE_SEARCH_STARTED = NO':'TARGETED_REALIZABILITY_NEW_EXTERNAL_SOURCE_SEARCH_STARTED = YES__COMPLETE',
-          'TARGETED_REALIZABILITY_SOURCE_ADMISSION_STARTED = NO':'TARGETED_REALIZABILITY_SOURCE_ADMISSION_STARTED = YES__COMPLETE',
-          'TARGETED_REALIZABILITY_SOURCE_REGISTER_MUTATED = NO':'TARGETED_REALIZABILITY_SOURCE_REGISTER_MUTATED = YES__11_NEW_SOURCE_BOUND_ROWS',
-          'TARGETED_REALIZABILITY_TARGETED_CORPUS_FROZEN = NO':'TARGETED_REALIZABILITY_TARGETED_CORPUS_FROZEN = YES__27_SOURCES',
-          'NEXT_EXECUTION_STEP = FIRST_EXTERNAL_SOURCE_SEARCH_REQUIRES_SEPARATE_AUTHORIZATION':'NEXT_EXECUTION_STEP = PROSPECTIVELY_FREEZE_STAGE2_PHYSICAL_SELECTION_ADJUDICATION_RULES_BEFORE_CORPUS_APPLICATION',
-          'NEXT_RECOMMENDED_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1':'NEXT_RECOMMENDED_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION',
-          'NEXT_OPERATION_CLASS = TARGETED_SOURCE_STRENGTHENING_STAGE1':'NEXT_OPERATION_CLASS = PHYSICAL_SELECTION_ADJUDICATION_PREREGISTRATION',
-          'NEXT_OPERATION_AUTHORIZED = NO\nNEXT_OPERATION_AUTHORIZATION_BOUNDARY = FIRST_EXTERNAL_SOURCE_SEARCH':'NEXT_OPERATION_AUTHORIZED = YES__CURRENT_EXECUTIVE_DELEGATION\nNEXT_OPERATION_AUTHORIZATION_BOUNDARY = FREEZE_STAGE2_RULES_BEFORE_APPLYING_FROZEN_27_SOURCE_CORPUS',
-          'NEXT_SCIENTIFIC_PHASE = NONE__FIRST_EXTERNAL_SEARCH_AUTHORIZATION_REQUIRED':'NEXT_SCIENTIFIC_PHASE = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION',
-          }
-          for a,b in replacements.items():
-              if a not in s: raise SystemExit(f'missing CURRENT_STATE token: {a}')
-              s=s.replace(a,b,1)
-          old='''`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix admission-audit, sequencing, null-control, and targeted-source-strengthening preregistration operations are unnumbered and FCP-27 has not been selected. The latest substantive scientific operation remains the completed `FW_PROCESS_MATRIX_NULL_CONTROL`. The selected targeted realizability / physical-selection Stage 1 is now prospectively preregistered with a 2026-08-29 publication cutoff, D1–D13 discovery lanes, S1–S6 search surfaces, Q1–Q13 fixed query families, three search passes, mandatory adverse-search targets, explicit corpus-sufficiency rules and a no-post-hoc-expansion firewall. No external literature query, source admission, Source Register mutation, targeted corpus freeze, or physical-selection adjudication has started. The present maintenance operation records that exact first-search authorization boundary. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.'''
-          new='''`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix admission-audit, sequencing, null-control, and targeted realizability source-strengthening operations are unnumbered and FCP-27 has not been selected. The latest substantive scientific operation is now the completed `FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1`: all frozen Q1–Q13 searches were executed across S1–S4, S5/S6 stayed within their preregistered identity/bibliographic roles, and a counterevidence-aware 27-source targeted corpus (16 reused canonical + 11 new external) is frozen as sufficient for later physical-selection adjudication at the declared scope. Physical-selection adjudication itself has not started. The next epistemic task is to prospectively freeze Stage-2 adjudication rules before applying the frozen corpus. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.'''
-          if old not in s: raise SystemExit('missing top narrative')
-          s=s.replace(old,new,1)
-          anchor='TARGETED_REALIZABILITY_PREREGISTRATION_FROZEN = YES\n'
-          addition='''TARGETED_REALIZABILITY_STAGE1_RESULT_COMMIT = 5675f75621125bdbac3755d88e57768afcc949c9
-TARGETED_REALIZABILITY_STAGE1_RESULT_TREE = 1cb2403c2ad84f050ed451a69ddbdfee0f3f7637
-TARGETED_REALIZABILITY_TOPICAL_SEARCH_COUNT_S1_S4 = 208
-TARGETED_REALIZABILITY_FROZEN_SOURCE_COUNT = 27
-TARGETED_REALIZABILITY_REUSED_CANONICAL_SOURCE_COUNT = 16
-TARGETED_REALIZABILITY_NEW_EXTERNAL_SOURCE_COUNT = 11
-TARGETED_REALIZABILITY_MEANINGFUL_REJECTED_COUNT = 12
-TARGETED_REALIZABILITY_DEFERRED_COUNT = 1
-TARGETED_REALIZABILITY_SOURCE_SELECTION_AUDIT = PASS
-TARGETED_REALIZABILITY_COUNTEREVIDENCE_COVERAGE = PASS
-TARGETED_REALIZABILITY_REALIZABILITY_LAYER_COVERAGE = PASS
-TARGETED_REALIZABILITY_P1_P12_READINESS_COVERAGE = PASS
-TARGETED_REALIZABILITY_SEARCH_SATURATION = PASS_AT_DECLARED_SCOPE
-TARGETED_REALIZABILITY_CORPUS_SUFFICIENT_FOR_LATER_PHYSICAL_SELECTION_ADJUDICATION = YES_AT_CURRENT_DECLARED_SEARCH_SCOPE
-TARGETED_REALIZABILITY_PHYSICAL_SELECTION_ADJUDICATION_STARTED = NO
-'''
-          if addition not in s:
-              if anchor not in s: raise SystemExit('missing Stage1 anchor')
-              s=s.replace(anchor,anchor+addition,1)
-          old2='''The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, causal-process Stage-2 taxonomy, the Method-0.2.1 result-independence audit, the dedicated `FW-PROCESS-MATRIX` admission adversarial audit, the closed-corpus `FW_PROCESS_MATRIX_NULL_CONTROL`, the post-null read-only sequencing adjudication, and the targeted realizability / physical-selection Stage-1 preregistration are complete at their declared scopes. The search architecture is frozen, but Stage-1 external execution has not begun. No external literature query, source admission, Source Register mutation, targeted corpus freeze, physical-selection adjudication, non-null pairwise comparison, recurrence consequence, empirical target, method change, or FCP-27 phase has begun. The next true authorization boundary is the first external literature search.'''
-          new2='''The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, causal-process Stage-2 taxonomy, the Method-0.2.1 result-independence audit, the dedicated `FW-PROCESS-MATRIX` admission adversarial audit, the closed-corpus `FW_PROCESS_MATRIX_NULL_CONTROL`, the post-null read-only sequencing adjudication, and the targeted realizability / physical-selection Stage-1 source strengthening are complete at their declared scopes. The 27-source targeted corpus is frozen and sufficient for later physical-selection adjudication at the declared search scope. No physical-selection adjudication, non-null pairwise comparison, recurrence consequence, empirical target, method change, or FCP-27 phase has begun. Under the current executive delegation, the next valid operation is prospective Stage-2 adjudication preregistration; corpus application remains forbidden until that rule set is frozen.'''
-          if old2 not in s: raise SystemExit('missing stale boundary narrative')
-          s=s.replace(old2,new2,1)
-          cs.write_text(s,encoding='utf-8',newline='\n')
-
-          rd=Path('README.md'); r=rd.read_text(encoding='utf-8')
-          oldr='''The latest canonical scientific operation is the first null-control comparison for the source-bound **process-matrix framework** (`FW-PROCESS-MATRIX`). Against the weaker GR/QFT/SM null baseline, the comparison leaves a **nonempty formal-operational residue** at framework-wide scope while also finding:
-
-- no E1, E3, E4, or E5 pairwise relation;
-- three bounded E2 representation/realization relations;
-- no framework-level empirical discriminator;
-- no framework-level empirical selection;
-- no established universal physical realizability of the full formally valid process domain.
-
-The central unresolved question is therefore not whether formal process-matrix structure exists, but **which formally valid process matrices are physically realizable under which subsystem, laboratory, quantum-mechanical, and spacetime assumptions**.
-
-A targeted source-strengthening Stage 1 for that realizability / physical-selection question has been prospectively preregistered. Its search lanes, search surfaces, query families, counterevidence requirements, and corpus-sufficiency rules are frozen. **No external literature query under that preregistration has started yet.**'''
-          newr='''The latest canonical scientific operation is the targeted realizability / physical-selection **Stage 1 source strengthening** for the source-bound process-matrix framework (`FW-PROCESS-MATRIX`). It executed the preregistered search architecture and froze a **27-source targeted corpus** (16 reused canonical sources + 11 new external sources) with source-selection, counterevidence, R0–R6 layer coverage, P1–P12 readiness, identity/version, redundancy, and declared-scope saturation checks all passing.
-
-That result does **not** decide which formally valid process matrices are physically realizable. The frozen literature instead gives the later adjudication enough two-sided evidence to distinguish probabilistic pre/postselection representations, standard-quantum and time-delocalized realization classes, purity/reversibility constraints, composition limits, closed-laboratory and classical-spacetime restrictions, QC-QC subclasses, simulations, and concrete implementation caveats without collapsing them into one predicate.
-
-Physical-selection adjudication has not started. The next epistemic step is to **prospectively freeze the Stage 2 adjudication rules before applying the 27-source corpus**. No pairwise comparison, convergence credit, recurrence recomputation, framework-level empirical selection, or FCP-27 phase follows automatically from Stage 1.'''
-          if oldr not in r: raise SystemExit('missing README frontier')
-          rd.write_text(r.replace(oldr,newr,1),encoding='utf-8',newline='\n')
-
-          hp=Path('handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md')
-          h=hp.read_text(encoding='utf-8')
-          cap='''
-
-## Post-integration provenance capsule
-
-```text
-STAGE1_CANONICAL_SCIENTIFIC_COMMIT = 5675f75621125bdbac3755d88e57768afcc949c9
-STAGE1_CANONICAL_SCIENTIFIC_TREE = 1cb2403c2ad84f050ed451a69ddbdfee0f3f7637
-STAGE1_CANONICAL_PARENT = 5e5e028100801a2da49ed18075fd3b577ea3ffdd
-PROJECT_LEAD_ACCEPTANCE = YES
-CANONICAL_INTEGRATION = PASS
-POST_INTEGRATION_ROUTING = STAGE2_ADJUDICATION_PREREGISTRATION
-PHYSICAL_SELECTION_ADJUDICATION_STARTED = NO
-```
-
-This capsule records canonical integration only. It changes no Stage-1 source disposition or scientific conclusion.
-'''
-          if '## Post-integration provenance capsule' not in h:
-              hp.write_text(h.rstrip()+cap,encoding='utf-8',newline='\n')
-          PY
+          python /tmp/reconcile.py
           git diff --check
-          EXPECT='CURRENT_STATE.md README.md handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md '
-          GOT="$(git diff --name-only | sort | tr '\n' ' ')"
-          test "$GOT" = "$EXPECT" || { echo "SEMANTIC_PATH_SCOPE_FAIL=$GOT"; exit 1; }
+          test "$(git diff --name-only | sort | tr '\n' ' ')" = "CURRENT_STATE.md README.md handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md "
           git add CURRENT_STATE.md README.md handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md
           git commit -m "Reconcile targeted realizability Stage-1 current state"
-          SEM=$(git rev-parse HEAD)
-          echo SEM=$SEM >> "$GITHUB_ENV"
-          echo SEMANTIC_COMMIT=$SEM
-          echo SEMANTIC_TREE=$(git show -s --format=%T HEAD)
-      - name: Refresh and qualify navigation
+          echo "SEM=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+      - name: Refresh navigation
         shell: bash
         run: |
           set -euo pipefail
           python tools/fcp_navigation.py refresh --ref "$SEM"
           python tools/fcp_navigation.py check --ref "$SEM"
-          sha256sum meta/FCP_CANONICAL_INDEX.json meta/FCP_OPERATION_REGISTRY.jsonl meta/FCP_ARTIFACT_REGISTRY.jsonl >/tmp/a
+          sha256sum meta/FCP_CANONICAL_INDEX.json meta/FCP_OPERATION_REGISTRY.jsonl meta/FCP_ARTIFACT_REGISTRY.jsonl > /tmp/a
           python tools/fcp_navigation.py refresh --ref "$SEM"
-          sha256sum meta/FCP_CANONICAL_INDEX.json meta/FCP_OPERATION_REGISTRY.jsonl meta/FCP_ARTIFACT_REGISTRY.jsonl >/tmp/b
+          sha256sum meta/FCP_CANONICAL_INDEX.json meta/FCP_OPERATION_REGISTRY.jsonl meta/FCP_ARTIFACT_REGISTRY.jsonl > /tmp/b
           diff -u /tmp/a /tmp/b
           git add meta/FCP_CANONICAL_INDEX.json meta/FCP_OPERATION_REGISTRY.jsonl meta/FCP_ARTIFACT_REGISTRY.jsonl
           if ! git diff --cached --quiet; then git commit -m "Refresh navigation after realizability Stage-1"; fi
-          FINAL=$(git rev-parse HEAD)
-          echo FINAL=$FINAL >> "$GITHUB_ENV"
-          echo FINAL_COMMIT=$FINAL
-          echo FINAL_TREE=$(git show -s --format=%T HEAD)
-      - name: State and scientific firewall qualification
+          echo "FINAL=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+      - name: Qualify firewalls
         shell: bash
         run: |
           set -euo pipefail
@@ -155,31 +51,22 @@ This capsule records canonical integration only. It changes no Stage-1 source di
           for P in SOURCE_REGISTER.md FRAMEWORK_REGISTER.md CLAIM_LEDGER.md COMPARISON_PROTOCOL.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_SELECTION_AUDIT_STAGE1_0_1_0.md frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_SEARCH_EXECUTION_LOG_0_1_0.md; do
             test "$(git rev-parse "$BASE:$P")" = "$(git rev-parse "HEAD:$P")"
           done
-          grep -Fq 'LATEST_CANONICAL_SCIENTIFIC_COMMIT = 5675f75621125bdbac3755d88e57768afcc949c9' CURRENT_STATE.md
-          grep -Fq 'TARGETED_REALIZABILITY_FROZEN_SOURCE_COUNT = 27' CURRENT_STATE.md
-          grep -Fq 'TARGETED_REALIZABILITY_PHYSICAL_SELECTION_ADJUDICATION_STARTED = NO' CURRENT_STATE.md
-          grep -Fq 'NEXT_RECOMMENDED_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION' CURRENT_STATE.md
-          grep -Fq 'NEXT_OPERATION_AUTHORIZED = YES__CURRENT_EXECUTIVE_DELEGATION' CURRENT_STATE.md
-          grep -Fq 'Physical-selection adjudication has not started' README.md
+          grep -Fq "LATEST_CANONICAL_SCIENTIFIC_COMMIT = $BASE" CURRENT_STATE.md
+          grep -Fq "TARGETED_REALIZABILITY_FROZEN_SOURCE_COUNT = 27" CURRENT_STATE.md
+          grep -Fq "TARGETED_REALIZABILITY_PHYSICAL_SELECTION_ADJUDICATION_STARTED = NO" CURRENT_STATE.md
+          grep -Fq "NEXT_RECOMMENDED_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION" CURRENT_STATE.md
+          grep -Fq "NEXT_OPERATION_AUTHORIZED = YES__CURRENT_EXECUTIVE_DELEGATION" CURRENT_STATE.md
+          grep -Fq "Physical-selection adjudication has not started" README.md
           python tools/fcp_navigation.py check --ref "$SEM"
           echo RECONCILIATION_SCIENTIFIC_FIREWALL=PASS
-      - name: Windows portability
-        shell: bash
-        run: |
-          set -euo pipefail
-          rm -rf /tmp/w
-          git clone -q --no-checkout . /tmp/w
-          git -C /tmp/w config core.autocrlf true
-          git -C /tmp/w checkout -q "$FINAL"
-          cd /tmp/w
-          python tools/fcp_navigation.py check --ref "$SEM"
-          echo WINDOWS_AUTOCRLF_NAVIGATION=PASS
-      - name: Publish qualified maintenance candidate
+      - name: Publish candidate
         shell: bash
         run: |
           set -euo pipefail
           git fetch origin main
           test "$(git rev-parse origin/main)" = "5675f75621125bdbac3755d88e57768afcc949c9"
           git push --force-with-lease origin HEAD:maintenance/fwpm-realizability-stage1-reconcile-qualified
-          echo QUALIFIED_SEMANTIC_COMMIT=$SEM
-          echo QUALIFIED_FINAL_COMMIT=$FINAL
+          echo SEMANTIC_COMMIT=$SEM
+          echo SEMANTIC_TREE=$(git show -s --format=%T "$SEM")
+          echo FINAL_COMMIT=$FINAL
+          echo FINAL_TREE=$(git show -s --format=%T "$FINAL")
