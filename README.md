@@ -11,7 +11,7 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 
 - **Latest numbered phase:** FCP-26; Stage 1 is canonically complete and Stage 2 is `NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE`.
 - **Latest canonical scientific operation:** `FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT` (`46e7e76c081189cea7f2aa8335c56c8a3d89c5d2`; tree `4ee84f7296e572e8e2a8faa2d9cb919bb1c3c582`). Outcome A preserves the narrow `FW-PROCESS-MATRIX` admission after hostile A–H replay, physical-law/syntax attack, existing-framework subtraction, realizability, weakest-classification, and nonredundancy controls. This strengthens taxonomy confidence only: framework-level empirical selection remains absent, universal process-matrix realizability remains unestablished, and the general Method-0.2.1 reformulation/meta-framework ambiguity remains open.
-- **Latest canonical maintenance operation:** `POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_ROUTING_AND_NAVIGATION_RECONCILIATION`; this bounded reconciliation records the already-canonical Outcome-A audit consequence in live state and derived navigation without changing the audit result, Method 0.2.1, framework status, source corpus, Claim Ledger, pairwise results, convergence, or recurrence.
+- **Latest canonical maintenance operation:** `POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION`; this bounded reconciliation records the accepted post-audit sequencing decision and routes to null-control preregistration without changing `FW-PROCESS-MATRIX` status, Method 0.2.1, the source corpus, empirical standing, realizability standing, Claim Ledger, pairwise results, convergence, or recurrence.
 - **Active prospective method:** FCP Method 0.2.1, a narrow prospective admission-law delta over Method 0.2.0.
 - **Housekeeping status:** canonically complete.
 - **Post-FCP-25 Grok status:** audit, independent adjudication, and reconciliation are canonically complete.
@@ -22,7 +22,7 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 - **Current durable ledger:** 94 rows through the bounded `OBJ-CAT-11` re-adjudication; the prior 93 rows are byte-preserved, `FWCAT-004` supplies the current partial supersession, Biswas author metadata is reconciled, and four recurrence-epoch consistency dockets remain open.
 - **Causal-process / ICO Stage 1:** canonically complete; 44 meaningful candidates reviewed and a 33-source corpus frozen (28 new + 5 reused).
 - **Causal-process / ICO Stage 2:** canonically complete under Method 0.2.1; ten scientific objects are preserved and exactly one new framework (`FW-PROCESS-MATRIX`) passes A–H. Its separate K1–K10 baseline is now canonically complete, while pairwise comparison, convergence credit, recurrence change, empirical target selection, and FCP-27 remain absent.
-- **Next recommended program operation:** `POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION`; perform a read-only route comparison after the completed admission audit. No pairwise comparison, recurrence recomputation, empirical target campaign, Method-0.2.1 revision, or FCP-27 selection is implied by Outcome A itself.
+- **Next recommended program operation:** `FW_PROCESS_MATRIX_NULL_CONTROL`; first freeze an outcome-neutral closed-corpus preregistration against `FW-NULL-GRQFTSM`. No null-subtracted residue, non-null pairwise relation, recurrence consequence, empirical selection, Method-0.2.1 change, or FCP-27 selection is yet established.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
@@ -57,7 +57,10 @@ POST_METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION =
 FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT = CANONICALLY_COMPLETE
 FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_OUTCOME = A__ADMISSION_SURVIVES_ADVERSARIAL_AUDIT
 FW_PROCESS_MATRIX_INDEPENDENT_POST_ADMISSION_AUDIT = CANONICALLY_COMPLETE
-NEXT_RECOMMENDED_OPERATION = POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION
+POST_FW_PROCESS_MATRIX_ADMISSION_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+FW_PROCESS_MATRIX_NULL_CONTROL = AUTHORIZED_NOT_STARTED_REQUIRES_SEPARATE_PREREGISTRATION
+FW_PROCESS_MATRIX_NULL_COMPARATOR = FW-NULL-GRQFTSM
+NEXT_RECOMMENDED_OPERATION = FW_PROCESS_MATRIX_NULL_CONTROL
 POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
 CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
 CAUSAL_PROCESS_ICO_SOURCE_CORPUS = FROZEN
