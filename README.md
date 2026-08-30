@@ -25,7 +25,7 @@ The latest canonical scientific operation is the targeted realizability / physic
 
 Positive realization results remain nonempty for selected classes and implementations, while broad assumption-scoped exclusion boundaries are also nonempty. General composition/globalization closure and general classical-spacetime embedding are not established, and a framework-wide physical-realizability remainder remains unresolved. Concrete implementation evidence remains subclass-only and does not amount to framework-level empirical selection.
 
-The 11-source strengthening added material information beyond the legacy corpus. The next step is a **fresh read-only scientific sequencing decision**; Stage 2 does not automatically authorize a pairwise comparison, convergence credit, recurrence recomputation, empirical campaign, framework-status change, or FCP-27.
+The 11-source strengthening added material information beyond the legacy corpus. A fresh post-Stage-2 read-only sequencing decision now selects **no immediate new substantive science**. The next operation is a bounded independent external adversarial audit of the layered Stage-2 result and its visible custody repair; pairwise comparison, convergence credit, recurrence recomputation, empirical escalation, framework-status change, method change, and FCP-27 remain unselected.
 
 For the exact live state and authorization boundary, see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
