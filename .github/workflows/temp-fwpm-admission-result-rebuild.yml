@@ -1,0 +1,59 @@
+name: Rebuild FW-PROCESS-MATRIX admission audit result
+on:
+  push:
+    branches: [automation/fwpm-admission-result-rebuild]
+permissions:
+  contents: write
+jobs:
+  rebuild:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: automation/fwpm-admission-result-rebuild
+      - name: Reconstruct clean two-file result
+        shell: bash
+        run: |
+          set -euo pipefail
+          REJECTED=4d913be9a0dd83d68951afd4bf27581a23bebc82
+          PRE=1c6c2c86320249a8a4738d1b48c1421fbe0fd236
+          CLEAN=audit/fw-process-matrix-admission-adversarial
+          RESULT=audits/FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_0_1_0.md
+          HANDOFF=handoffs/FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT_HANDOFF_0_1_0.md
+          git show "$REJECTED:$RESULT" > /tmp/result.md
+          git show "$REJECTED:$HANDOFF" > /tmp/handoff.md
+          python - <<'PY'
+          from pathlib import Path
+          for name in ['/tmp/result.md','/tmp/handoff.md']:
+              p=Path(name)
+              lines=p.read_text(encoding='utf-8').splitlines()
+              p.write_text('\n'.join(line.rstrip() for line in lines)+'\n',encoding='utf-8',newline='\n')
+          PY
+          git config user.name "FCP Project Lead Audit"
+          git config user.email "etblink@users.noreply.github.com"
+          git switch -C "$CLEAN" "$PRE"
+          test ! -e "$RESULT"
+          test ! -e "$HANDOFF"
+          mkdir -p audits handoffs
+          cp /tmp/result.md "$RESULT"
+          cp /tmp/handoff.md "$HANDOFF"
+          test "$(git status --porcelain -- "$RESULT" "$HANDOFF" | sort | tr '\n' ' ')" = "?? $RESULT ?? $HANDOFF "
+          git diff --check --no-index /dev/null "$RESULT" || test $? = 1
+          git diff --check --no-index /dev/null "$HANDOFF" || test $? = 1
+          grep -q '^FINAL_OUTCOME = A$' "$RESULT"
+          grep -q '^FINAL_DISPOSITION = ADMISSION_SURVIVES_ADVERSARIAL_AUDIT$' "$RESULT"
+          grep -q '^METHOD_SCOPE_SENSITIVITY = INDEPENDENT_OF_REFORMULATION_META_FRAMEWORK_AMBIGUITY$' "$RESULT"
+          grep -q '^NEXT_OPERATION = NOT_SELECTED$' "$RESULT"
+          grep -q '^FINAL_OUTCOME = A$' "$HANDOFF"
+          grep -q '^NEXT_OPERATION = NOT_SELECTED$' "$HANDOFF"
+          git add "$RESULT" "$HANDOFF"
+          git diff --cached --check
+          git commit -m "Audit FW-PROCESS-MATRIX admission"
+          test "$(git rev-parse HEAD^)" = "$PRE"
+          test "$(git diff --name-only "$PRE"..HEAD | sort | tr '\n' ' ')" = "$RESULT $HANDOFF "
+          git push --force-with-lease origin HEAD:"$CLEAN"
+          echo CLEAN_RESULT_COMMIT=$(git rev-parse HEAD)
+          echo CLEAN_RESULT_TREE=$(git show -s --format=%T HEAD)
+          echo CLEAN_RESULT_PARENT=$(git rev-parse HEAD^)
+          echo CLEAN_RESULT_MESSAGE=$(git show -s --format=%s HEAD)
