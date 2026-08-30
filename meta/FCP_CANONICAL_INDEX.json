@@ -23,7 +23,7 @@
     },
     {
       "authority_id": "CURRENT_STATE",
-      "blob": "25ad6376636cf2c19f697e48fc5e77cec63558df",
+      "blob": "e4f597a76ed913bc482137245d964b92b59fbf4a",
       "path": "CURRENT_STATE.md"
     },
     {
@@ -65,17 +65,17 @@
     "version": "0.2.1"
   },
   "indexed_scientific_baseline": {
-    "commit": "85c3964cea5a64fea36576a19bb12b31b7dcfc87",
-    "message": "Reconcile Method 0.2.1 audit state",
+    "commit": "49e025625838506bc4669fb028f23a6e7921fbf6",
+    "message": "Reconcile post-Method-audit sequencing state",
     "repository": "etblink/Foundational-Convergence-Program",
-    "tree": "12f7a854f715d489c8f10f5f545273792bb5aae4"
+    "tree": "acd6d5c1074d8ce3ba74605a758e94a41be14a90"
   },
   "navigation_coverage": {
     "absence_from_operation_registry_means_scientific_absence": false,
     "artifact_inventory_scope": "ENTIRE_TRACKED_INDEXED_BASELINE_TREE_EXCLUDING_SELF_REFERENTIAL_NAVIGATION_FILES",
-    "artifact_record_count": 303,
+    "artifact_record_count": 304,
     "historical_operation_completeness_claimed": false,
-    "operation_record_count": 67,
+    "operation_record_count": 68,
     "operation_registry_scope": "CURRENT_DEPENDENCY_CLOSURE",
     "self_excluded_paths": [
       "meta/FCP_ARTIFACT_REGISTRY.jsonl",
@@ -118,6 +118,7 @@
     }
   ],
   "program_state": {
+    "admission_audit_method_scope_sensitivity_firewall": "REQUIRED",
     "atomic_clock_target_advances": false,
     "biswas_2026_author_metadata_transcription_reconciliation": "COMPLETE",
     "broader_holographic_existing_framework_assignment_count": 1,
@@ -160,9 +161,9 @@
     "claim_ledger_current_supersession": "RECONCILED_THROUGH_OBJ_CAT_11_READJUDICATION_CANONICALLY",
     "claim_ledger_durable_row_count": 94,
     "claim_ledger_temporal_ceiling": "FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION",
-    "current_handoff_path": "handoffs/METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_HANDOFF_0_1_0.md",
-    "current_operation": "METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT",
-    "current_routing_path": "handoffs/METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_HANDOFF_0_1_0.md",
+    "current_handoff_path": "governance/POST_METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_SCIENTIFIC_SEQUENCING_DECISION_0_1_0.md",
+    "current_operation": "POST_METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION",
+    "current_routing_path": "governance/POST_METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_SCIENTIFIC_SEQUENCING_DECISION_0_1_0.md",
     "empirical_realization_namespace_alias_table": "ACTIVE_PROSPECTIVELY",
     "exact_prepublication_commit_object_preservation": "PREFERRED_NOT_REQUIRED",
     "external_audit_authorized": false,
@@ -214,6 +215,7 @@
     "fw_cat_taxonomy_verdict": "B_EXISTING_FRAMEWORK_ASSIGNMENT_PLUS_NONFRAMEWORK_AND_DEFERRED_REMAINDER",
     "fw_cat_unresolved_taxonomy_count": 0,
     "fw_loop_fcp26_empirical_class": "EC1",
+    "fw_process_matrix_admission_adversarial_audit": "AUTHORIZED_NOT_STARTED",
     "fw_process_matrix_current_status": "SOURCE_BOUND_READY",
     "fw_process_matrix_independent_post_admission_audit": "NOT_PERFORMED",
     "fw_process_matrix_k1_k10_baseline": "CANONICALLY_COMPLETE",
@@ -230,8 +232,8 @@
     "method_0_2_1_result_independence_audit_outcome": "B__PARTIAL_GENERAL_JUSTIFICATION_WITH_MATERIAL_METHOD_AMBIGUITY",
     "next_numbered_phase_selected": false,
     "next_operation_authorized": true,
-    "next_operation_class": "READ_ONLY_SEQUENCING_ADJUDICATION",
-    "next_recommended_operation": "POST_METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION",
+    "next_operation_class": "BOUNDED_FRAMEWORK_ADMISSION_ADVERSARIAL_AUDIT",
+    "next_recommended_operation": "FW_PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT",
     "obj_cat_11_current_disposition": "SUPERSEDED_BY_CAUSAL_PROCESS_ICO_STAGE2_FRAGMENTATION",
     "obj_cat_11_historical_readjudication_disposition": "DEFERRED_REMAINDER",
     "open_docket_count": 4,
@@ -249,8 +251,8 @@
     "post_fw_cat_stage2_scientific_sequencing_adjudication": "CANONICALLY_ACCEPTED_READ_ONLY_DECISION",
     "post_fw_process_matrix_baseline_scientific_sequencing_adjudication": "CANONICALLY_ACCEPTED_READ_ONLY_DECISION",
     "post_maintenance_high_priority_candidate": "FULFILLED_BY_CANONICAL_EXTERNAL_AUDIT",
-    "post_method_0_2_1_result_independence_audit_scientific_sequencing_adjudication": "AUTHORIZED_NOT_STARTED",
-    "predecessor_operation": "POST_FW_PROCESS_MATRIX_BASELINE_SCIENTIFIC_SEQUENCING_ADJUDICATION",
+    "post_method_0_2_1_result_independence_audit_scientific_sequencing_adjudication": "CANONICALLY_ACCEPTED_READ_ONLY_DECISION",
+    "predecessor_operation": "METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT",
     "remote_ref_lifecycle_policy": "ACTIVE",
     "repository_live_working_set_archive_policy": "DEFERRED_HIGH_VALUE_GOVERNANCE_CANDIDATE",
     "scalar_framework_score": "FORBIDDEN",
@@ -327,12 +329,14 @@
     ],
     "GENERAL_PROJECT_ORIENTATION": [
       "CURRENT_STATE.md",
-      "handoffs/METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_HANDOFF_0_1_0.md",
+      "governance/POST_METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_SCIENTIFIC_SEQUENCING_DECISION_0_1_0.md",
       "audits/METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_0_1_0.md",
-      "governance/METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_PREREGISTRATION_0_1_0.md",
       "governance/FCP_METHOD_0_2_1_FRAMEWORK_ADMISSION_LAW_ARCHITECTURE_REVISION.md",
-      "FRAMEWORK_REGISTER.md",
+      "audits/CAUSAL_PROCESS_ICO_TAXONOMY_ADJUDICATION_0_1_0.md",
       "frameworks/causal_process/FW_PROCESS_MATRIX_K1_K10_BASELINE_0_1_0.md",
+      "FRAMEWORK_REGISTER.md",
+      "handoffs/METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_HANDOFF_0_1_0.md",
+      "governance/METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_PREREGISTRATION_0_1_0.md",
       "governance/POST_FW_PROCESS_MATRIX_BASELINE_SCIENTIFIC_SEQUENCING_DECISION_0_1_0.md",
       "handoffs/FW_PROCESS_MATRIX_K1_K10_BASELINE_HANDOFF_0_1_0.md",
       "README.md",
