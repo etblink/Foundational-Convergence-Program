@@ -1,0 +1,512 @@
+name: FWPM Stage-2 post-result reconciliation
+
+on:
+  push:
+    branches:
+      - automation/fwpm-stage2-postresult-reconcile
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      semantic_sha: ${{ steps.ids.outputs.semantic_sha }}
+      nav_sha: ${{ steps.ids.outputs.nav_sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fdb1ff04fc5c4a494da9c44822cac277a819d8c0
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "FCP Project Lead Automation"
+          git config user.email "actions@users.noreply.github.com"
+
+      - name: Build semantic reconciliation
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          EXPECTED_BASE = "fdb1ff04fc5c4a494da9c44822cac277a819d8c0"
+          RESULT_TREE = "b348c91e73e95e552f16a067ed595e0d35ac7fc6"
+          REPAIR_COMMIT = "11700fa17ae42c915a45b6534aa21e3b56567b99"
+          ROUTING_OP = "POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION"
+          SEQUENCING_OP = "POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION"
+          STAGE2_OP = "FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2"
+          ROUTING_PATH = "governance/POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION_0_1_0.md"
+          STAGE2_HANDOFF = "handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_PHYSICAL_SELECTION_STAGE2_HANDOFF_0_1_0.md"
+          STAGE2_ADJ = "audits/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_PHYSICAL_SELECTION_STAGE2_ADJUDICATION_0_1_0.md"
+          STAGE2_PROFILE = "frameworks/causal_process/FW_PROCESS_MATRIX_PHYSICAL_REALIZABILITY_PROFILE_0_1_0.md"
+
+          import subprocess
+          head = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+          assert head == EXPECTED_BASE, (head, EXPECTED_BASE)
+
+          def replace_once(text, old, new, label):
+              count = text.count(old)
+              assert count == 1, f"{label}: expected one match, found {count}"
+              return text.replace(old, new, 1)
+
+          current_path = Path("CURRENT_STATE.md")
+          current = current_path.read_text(encoding="utf-8")
+
+          old_top = """LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = 5675f75621125bdbac3755d88e57768afcc949c9
+LATEST_CANONICAL_SCIENTIFIC_TREE = 1cb2403c2ad84f050ed451a69ddbdfee0f3f7637
+LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_ROUTING_AND_NAVIGATION_RECONCILIATION"""
+          new_top = f"""LATEST_CANONICAL_SCIENTIFIC_OPERATION = {STAGE2_OP}
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = {EXPECTED_BASE}
+LATEST_CANONICAL_SCIENTIFIC_TREE = {RESULT_TREE}
+LATEST_CANONICAL_MAINTENANCE_OPERATION = {ROUTING_OP}"""
+          current = replace_once(current, old_top, new_top, "current-state top identity")
+
+          old_intro = """`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix admission-audit, sequencing, null-control, and targeted realizability source-strengthening operations are unnumbered and FCP-27 has not been selected. The latest substantive scientific operation is now the completed `FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1`: all frozen Q1–Q13 searches were executed across S1–S4, S5/S6 stayed within their preregistered identity/bibliographic roles, and a counterevidence-aware 27-source targeted corpus (16 reused canonical + 11 new external) is frozen as sufficient for later physical-selection adjudication at the declared scope. Physical-selection adjudication itself has not started. The next epistemic task is to prospectively freeze Stage-2 adjudication rules before applying the frozen corpus. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially."""
+          new_intro = f"""`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix admission-audit, sequencing, null-control, targeted realizability source-strengthening, and physical-selection Stage-2 operations are unnumbered and FCP-27 has not been selected. The latest substantive scientific operation is the completed `{STAGE2_OP}`. Under the exact frozen 27-source corpus, a general `W`-scope probabilistic/postselected representation is established, while a general deterministic standard-QM realization, a complete general physical-selection criterion, unrestricted composition/globalization closure, and general classical-spacetime embedding are not established. Positive restricted realization classes and broad assumption-scoped exclusion boundaries are both nonempty, and the framework-wide physical-realizability remainder remains nonempty. No framework-level empirical selection follows. The next epistemic task is a fresh read-only post-Stage-2 scientific sequencing adjudication; no downstream scientific route is preselected. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially."""
+          current = replace_once(current, old_intro, new_intro, "current-state opening narrative")
+
+          marker = "TARGETED_REALIZABILITY_PHYSICAL_SELECTION_ADJUDICATION_STARTED = NO"
+          assert current.count(marker) == 2, f"expected two Stage-1-era adjudication markers, found {current.count(marker)}"
+          milestone = """TARGETED_REALIZABILITY_PHYSICAL_SELECTION_ADJUDICATION_STARTED = YES__COMPLETE
+TARGETED_REALIZABILITY_STAGE2_INPUT_IDENTITY_REPAIR = CANONICALLY_COMPLETE
+TARGETED_REALIZABILITY_STAGE2_INPUT_IDENTITY_REPAIR_COMMIT = 11700fa17ae42c915a45b6534aa21e3b56567b99
+TARGETED_REALIZABILITY_STAGE2_RESULT_COMMIT = fdb1ff04fc5c4a494da9c44822cac277a819d8c0
+TARGETED_REALIZABILITY_STAGE2_RESULT_TREE = b348c91e73e95e552f16a067ed595e0d35ac7fc6
+TARGETED_REALIZABILITY_STAGE2_FROZEN_SOURCE_COUNT = 27
+TARGETED_REALIZABILITY_STAGE2_AX1_GENERAL_COMPLETE_SELECTION_CRITERION = NOT_ESTABLISHED
+TARGETED_REALIZABILITY_STAGE2_AX2_GENERAL_DETERMINISTIC_STANDARD_QM_REALIZATION = NOT_ESTABLISHED
+TARGETED_REALIZABILITY_STAGE2_AX3_GENERAL_PROBABILISTIC_OR_POSTSELECTED_REPRESENTATION = ESTABLISHED
+TARGETED_REALIZABILITY_STAGE2_AX4_POSITIVE_RESTRICTED_REALIZATION_CLASSES = NONEMPTY
+TARGETED_REALIZABILITY_STAGE2_AX5_BROAD_SOURCE_BOUND_NO_GO_OR_EXCLUSION_BOUNDARIES = NONEMPTY
+TARGETED_REALIZABILITY_STAGE2_AX6_GENERAL_COMPOSITION_OR_GLOBALIZATION_CLOSURE = NOT_ESTABLISHED
+TARGETED_REALIZABILITY_STAGE2_AX7_CLASSICAL_SPACETIME_EMBEDDING_OF_GENERAL_W_DOMAIN = NOT_ESTABLISHED
+TARGETED_REALIZABILITY_STAGE2_AX8_UNRESOLVED_PHYSICAL_REALIZABILITY_REMAINDER = NONEMPTY
+TARGETED_REALIZABILITY_STAGE2_AX9_CONCRETE_IMPLEMENTATION_EVIDENCE = NONEMPTY_SUBCLASS_ONLY
+TARGETED_REALIZABILITY_STAGE2_AX10_NEW_STAGE1_SOURCES_ADD_MATERIAL_PROPOSITIONAL_INFORMATION = YES
+TARGETED_REALIZABILITY_STAGE2_SYNTHESIS_A = NOT_SUPPORTED
+TARGETED_REALIZABILITY_STAGE2_SYNTHESIS_B = SUPPORTED
+TARGETED_REALIZABILITY_STAGE2_SYNTHESIS_C = SUPPORTED__DETERMINISTIC_R1_AND_STRONGER_R2_R6_ONLY
+TARGETED_REALIZABILITY_STAGE2_SYNTHESIS_D = SUPPORTED
+TARGETED_REALIZABILITY_STAGE2_SYNTHESIS_E = SUPPORTED
+TARGETED_REALIZABILITY_STAGE2_SYNTHESIS_F = NOT_SUPPORTED
+TARGETED_REALIZABILITY_STAGE2_FRAMEWORK_LEVEL_EMPIRICAL_SELECTION = NONE"""
+          current = current.replace(marker, milestone, 1)
+
+          old_live = """SEQUENCING_SELECTED_NEXT_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1
+FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1 = CANONICALLY_COMPLETE
+TARGETED_REALIZABILITY_PREREGISTRATION_FROZEN = YES
+TARGETED_REALIZABILITY_PREREGISTRATION_COMMIT = ceb582bac0554a310f8968fa19b13c39f0837b63
+TARGETED_REALIZABILITY_PUBLICATION_CUTOFF = 2026-08-29_INCLUSIVE
+TARGETED_REALIZABILITY_NEW_EXTERNAL_SOURCE_SEARCH_STARTED = YES__COMPLETE
+TARGETED_REALIZABILITY_SOURCE_ADMISSION_STARTED = YES__COMPLETE
+TARGETED_REALIZABILITY_SOURCE_REGISTER_MUTATED = YES__11_NEW_SOURCE_BOUND_ROWS
+TARGETED_REALIZABILITY_TARGETED_CORPUS_FROZEN = YES__27_SOURCES
+TARGETED_REALIZABILITY_PHYSICAL_SELECTION_ADJUDICATION_STARTED = NO
+POST_FW_PROCESS_MATRIX_REALIZABILITY_PHYSICAL_SELECTION_STAGE1_PREREGISTRATION_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
+NEXT_EXECUTION_STEP = PROSPECTIVELY_FREEZE_STAGE2_PHYSICAL_SELECTION_ADJUDICATION_RULES_BEFORE_CORPUS_APPLICATION
+NEXT_RECOMMENDED_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION
+NEXT_OPERATION_CLASS = PHYSICAL_SELECTION_ADJUDICATION_PREREGISTRATION
+NEXT_OPERATION_AUTHORIZED = YES__CURRENT_EXECUTIVE_DELEGATION
+NEXT_OPERATION_AUTHORIZATION_BOUNDARY = FREEZE_STAGE2_RULES_BEFORE_APPLYING_FROZEN_27_SOURCE_CORPUS
+NEXT_NUMBERED_PHASE_SELECTED = NO
+FCP27_SELECTED = NO
+NEXT_SCIENTIFIC_PHASE = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION"""
+          new_live = f"""SEQUENCING_SELECTED_NEXT_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1
+FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1 = CANONICALLY_COMPLETE
+TARGETED_REALIZABILITY_PREREGISTRATION_FROZEN = YES
+TARGETED_REALIZABILITY_PREREGISTRATION_COMMIT = ceb582bac0554a310f8968fa19b13c39f0837b63
+TARGETED_REALIZABILITY_PUBLICATION_CUTOFF = 2026-08-29_INCLUSIVE
+TARGETED_REALIZABILITY_NEW_EXTERNAL_SOURCE_SEARCH_STARTED = YES__COMPLETE
+TARGETED_REALIZABILITY_SOURCE_ADMISSION_STARTED = YES__COMPLETE
+TARGETED_REALIZABILITY_SOURCE_REGISTER_MUTATED = YES__11_NEW_SOURCE_BOUND_ROWS
+TARGETED_REALIZABILITY_TARGETED_CORPUS_FROZEN = YES__27_SOURCES
+TARGETED_REALIZABILITY_PHYSICAL_SELECTION_ADJUDICATION_STARTED = YES__COMPLETE
+POST_FW_PROCESS_MATRIX_REALIZABILITY_PHYSICAL_SELECTION_STAGE1_PREREGISTRATION_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
+FW_PROCESS_MATRIX_STAGE2_INPUT_IDENTITY_REPAIR = CANONICALLY_COMPLETE
+FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2 = CANONICALLY_COMPLETE
+POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
+NEXT_EXECUTION_STEP = READ_ONLY_POST_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_RECOMMENDED_OPERATION = {SEQUENCING_OP}
+NEXT_OPERATION_CLASS = READ_ONLY_SEQUENCING_ADJUDICATION
+NEXT_OPERATION_AUTHORIZED = YES__CURRENT_EXECUTIVE_DELEGATION
+NEXT_OPERATION_AUTHORIZATION_BOUNDARY = READ_ONLY_SEQUENCING_ONLY__NO_DOWNSTREAM_SCIENCE_PRESELECTED
+NEXT_NUMBERED_PHASE_SELECTED = NO
+FCP27_SELECTED = NO
+NEXT_SCIENTIFIC_PHASE = NONE__PENDING_READ_ONLY_POST_STAGE2_SEQUENCING"""
+          current = replace_once(current, old_live, new_live, "current-state live routing block")
+
+          old_tail = """The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, causal-process Stage-2 taxonomy, the Method-0.2.1 result-independence audit, the dedicated `FW-PROCESS-MATRIX` admission adversarial audit, the closed-corpus `FW_PROCESS_MATRIX_NULL_CONTROL`, the post-null read-only sequencing adjudication, and the targeted realizability / physical-selection Stage-1 source strengthening are complete at their declared scopes. The 27-source targeted corpus is frozen and sufficient for later physical-selection adjudication at the declared search scope. No physical-selection adjudication, non-null pairwise comparison, recurrence consequence, empirical target, method change, or FCP-27 phase has begun. Under the current executive delegation, the next valid operation is prospective Stage-2 adjudication preregistration; corpus application remains forbidden until that rule set is frozen."""
+          new_tail = f"""The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, causal-process Stage-2 taxonomy, the Method-0.2.1 result-independence audit, the dedicated `FW-PROCESS-MATRIX` admission adversarial audit, the closed-corpus `FW_PROCESS_MATRIX_NULL_CONTROL`, the post-null read-only sequencing adjudication, targeted realizability / physical-selection Stage 1, the result-independent Stage-2 input-identity repair, and the closed-corpus Stage-2 physical-selection adjudication are complete at their declared scopes. Stage 2 establishes a general probabilistic/postselected representation but not a general deterministic realization or complete physical-selection criterion; selected positive classes, broad assumption-scoped exclusions, and a nonempty unresolved framework-wide remainder coexist. No non-null pairwise comparison, convergence-credit change, recurrence consequence, empirical-target campaign, framework-status change, method change, or FCP-27 phase follows automatically. The next valid operation is `{SEQUENCING_OP}`, a fresh read-only sequencing decision with no downstream scientific route preselected."""
+          current = replace_once(current, old_tail, new_tail, "current-state live summary")
+          current_path.write_text(current, encoding="utf-8", newline="\n")
+
+          readme_path = Path("README.md")
+          readme = readme_path.read_text(encoding="utf-8")
+          old_frontier = """The latest canonical scientific operation is the targeted realizability / physical-selection **Stage 1 source strengthening** for the source-bound process-matrix framework (`FW-PROCESS-MATRIX`). It executed the preregistered search architecture and froze a **27-source targeted corpus** (16 reused canonical sources + 11 new external sources) with source-selection, counterevidence, R0–R6 layer coverage, P1–P12 readiness, identity/version, redundancy, and declared-scope saturation checks all passing.
+
+That result does **not** decide which formally valid process matrices are physically realizable. The frozen literature instead gives the later adjudication enough two-sided evidence to distinguish probabilistic pre/postselection representations, standard-quantum and time-delocalized realization classes, purity/reversibility constraints, composition limits, closed-laboratory and classical-spacetime restrictions, QC-QC subclasses, simulations, and concrete implementation caveats without collapsing them into one predicate.
+
+Physical-selection adjudication has not started. The next epistemic step is to **prospectively freeze the Stage 2 adjudication rules before applying the 27-source corpus**. No pairwise comparison, convergence credit, recurrence recomputation, framework-level empirical selection, or FCP-27 phase follows automatically from Stage 1."""
+          new_frontier = """The latest canonical scientific operation is the targeted realizability / physical-selection **Stage 2 adjudication** for the source-bound process-matrix framework (`FW-PROCESS-MATRIX`). Applied to the prospectively frozen 27-source corpus, it finds a layered rather than binary physicality picture: a general `W`-scope probabilistic/postselected representation is established, while a general deterministic standard-quantum realization and a complete general physical-selection criterion are not established.
+
+Positive realization results remain nonempty for selected classes and implementations, while broad assumption-scoped exclusion boundaries are also nonempty. General composition/globalization closure and general classical-spacetime embedding are not established, and a framework-wide physical-realizability remainder remains unresolved. Concrete implementation evidence remains subclass-only and does not amount to framework-level empirical selection.
+
+The 11-source strengthening added material information beyond the legacy corpus. The next step is a **fresh read-only scientific sequencing decision**; Stage 2 does not automatically authorize a pairwise comparison, convergence credit, recurrence recomputation, empirical campaign, framework-status change, or FCP-27."""
+          readme = replace_once(readme, old_frontier, new_frontier, "README frontier")
+          readme_path.write_text(readme, encoding="utf-8", newline="\n")
+
+          routing_text = f'''# Post-FW-PROCESS-MATRIX Targeted Realizability Stage-2 — Routing and Navigation Reconciliation
+
+**Version:** 0.1.0  
+**Status:** CANONICALLY_COMPLETE  
+**Operation ID:** `{ROUTING_OP}`  
+**Method context:** FCP Method 0.2.1
+
+## 1. Accepted scientific boundary
+
+```text
+STAGE2_SCIENTIFIC_RESULT_COMMIT = {EXPECTED_BASE}
+STAGE2_SCIENTIFIC_RESULT_TREE = {RESULT_TREE}
+STAGE2_INPUT_IDENTITY_REPAIR_COMMIT = {REPAIR_COMMIT}
+STAGE2_FROZEN_SOURCE_COUNT = 27
+AX1_GENERAL_COMPLETE_SELECTION_CRITERION = NOT_ESTABLISHED
+AX2_GENERAL_DETERMINISTIC_STANDARD_QM_REALIZATION = NOT_ESTABLISHED
+AX3_GENERAL_PROBABILISTIC_OR_POSTSELECTED_REPRESENTATION = ESTABLISHED
+AX4_POSITIVE_RESTRICTED_REALIZATION_CLASSES = NONEMPTY
+AX5_BROAD_SOURCE_BOUND_NO_GO_OR_EXCLUSION_BOUNDARIES = NONEMPTY
+AX6_GENERAL_COMPOSITION_OR_GLOBALIZATION_CLOSURE = NOT_ESTABLISHED
+AX7_CLASSICAL_SPACETIME_EMBEDDING_OF_GENERAL_W_DOMAIN = NOT_ESTABLISHED
+AX8_UNRESOLVED_PHYSICAL_REALIZABILITY_REMAINDER = NONEMPTY
+AX9_CONCRETE_IMPLEMENTATION_EVIDENCE = NONEMPTY_SUBCLASS_ONLY
+AX10_NEW_STAGE1_SOURCES_ADD_MATERIAL_PROPOSITIONAL_INFORMATION = YES
+FRAMEWORK_LEVEL_EMPIRICAL_SELECTION = NONE
+FRAMEWORK_STATUS_CHANGE = NONE
+PAIRWISE_COMPARISON = NONE
+CONVERGENCE_CREDIT_CHANGE = NONE
+RECURRENCE_RECOMPUTATION = NONE
+EMPIRICAL_TARGET_SELECTION = NONE
+FCP27_SELECTED = NO
+```
+
+This reconciliation records the accepted Stage-2 result without extending it. The Stage-2 scientific artifacts remain the authority for proposition-level detail.
+
+## 2. Next epistemic operation
+
+```text
+NEXT_RECOMMENDED_OPERATION = {SEQUENCING_OP}
+NEXT_OPERATION_CLASS = READ_ONLY_SEQUENCING_ADJUDICATION
+NEXT_OPERATION_AUTHORIZED = YES__CURRENT_EXECUTIVE_DELEGATION
+DOWNSTREAM_SCIENTIFIC_ROUTE_PRESELECTED = NO
+```
+
+The sequencing decision must evaluate information value and dependency after Stage 2. It may recommend a later bounded operation, but this reconciliation does not pre-authorize one.
+
+## 3. Handoff capsule
+
+<!-- FCP_HANDOFF_CAPSULE_BEGIN -->
+```json
+{{
+  "capsule_schema_version": "0.1.0",
+  "operation_id": "{ROUTING_OP}",
+  "status": "CANONICALLY_COMPLETE",
+  "indexed_scientific_baseline_commit": "{EXPECTED_BASE}",
+  "method_version": "0.2.1",
+  "must_read": [
+    "CURRENT_STATE.md",
+    "{ROUTING_PATH}",
+    "{STAGE2_ADJ}",
+    "{STAGE2_PROFILE}",
+    "{STAGE2_HANDOFF}",
+    "audits/FW_PROCESS_MATRIX_STAGE2_INPUT_IDENTITY_REPAIR_0_1_0.md",
+    "governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_0.md",
+    "governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_1.md",
+    "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md"
+  ],
+  "outputs": [
+    "CURRENT_STATE.md",
+    "README.md",
+    "{ROUTING_PATH}"
+  ],
+  "open_dockets": [
+    "CROSS_PAIR_RESIDUAL_E5_CONSISTENCY_CHECK",
+    "LOOP_CLAIM_TRANSCRIPTION_CHECK",
+    "NFC_AQFT_SLOT_METHOD_NORMALIZATION",
+    "REDUCED_NFC_PAIRWISE_INFORMATION_CEILING_LABELING"
+  ],
+  "next_recommended_operation": "{SEQUENCING_OP}",
+  "forbidden_next_actions": [
+    "NEW_STAGE2_SOURCE_SEARCH",
+    "RETROACTIVE_STAGE2_RULE_CHANGE",
+    "AUTOMATIC_FRAMEWORK_STATUS_CHANGE",
+    "AUTOMATIC_NON_NULL_PAIRWISE_COMPARISON",
+    "AUTOMATIC_CONVERGENCE_CREDIT_CHANGE",
+    "AUTOMATIC_RECURRENCE_RECOMPUTATION",
+    "AUTOMATIC_EMPIRICAL_TARGET_SELECTION",
+    "AUTOMATIC_FCP27_SELECTION_OR_EXECUTION"
+  ]
+}}
+```
+<!-- FCP_HANDOFF_CAPSULE_END -->
+'''
+          Path(ROUTING_PATH).write_text(routing_text, encoding="utf-8", newline="\n")
+
+          index_path = Path("meta/FCP_CANONICAL_INDEX.json")
+          index = json.loads(index_path.read_text(encoding="utf-8"))
+          state = index["program_state"]
+          state.update({
+              "current_handoff_path": ROUTING_PATH,
+              "current_operation": ROUTING_OP,
+              "current_routing_path": ROUTING_PATH,
+              "latest_completed_maintenance_operation": ROUTING_OP,
+              "latest_completed_science_operation": STAGE2_OP,
+              "latest_completed_scientific_operation": STAGE2_OP,
+              "latest_completed_scientific_commit": EXPECTED_BASE,
+              "latest_science_handoff_path": STAGE2_HANDOFF,
+              "next_recommended_operation": SEQUENCING_OP,
+              "next_operation_class": "READ_ONLY_SEQUENCING_ADJUDICATION",
+              "next_operation_authorized": True,
+              "next_operation_authorization_boundary": "READ_ONLY_SEQUENCING_ONLY__NO_DOWNSTREAM_SCIENCE_PRESELECTED",
+              "next_numbered_phase_selected": False,
+              "fcp27_selected": False,
+              "targeted_realizability_new_external_source_search_started": True,
+              "targeted_realizability_source_admission_started": True,
+              "targeted_realizability_source_register_mutated": True,
+              "targeted_realizability_targeted_corpus_frozen": True,
+              "targeted_realizability_source_strengthening_stage1_status": "CANONICALLY_COMPLETE",
+              "targeted_realizability_physical_selection_adjudication_started": True,
+              "fw_process_matrix_stage2_input_identity_repair": "CANONICALLY_COMPLETE",
+              "fw_process_matrix_stage2_input_identity_repair_commit": REPAIR_COMMIT,
+              "fw_process_matrix_targeted_realizability_stage2": "CANONICALLY_COMPLETE",
+              "fw_process_matrix_targeted_realizability_stage2_result_commit": EXPECTED_BASE,
+              "fw_process_matrix_targeted_realizability_stage2_result_tree": RESULT_TREE,
+              "fw_process_matrix_stage2_general_complete_selection_criterion": "NOT_ESTABLISHED",
+              "fw_process_matrix_stage2_general_deterministic_standard_qm_realization": "NOT_ESTABLISHED",
+              "fw_process_matrix_stage2_general_probabilistic_or_postselected_representation": "ESTABLISHED",
+              "fw_process_matrix_stage2_positive_restricted_realization_classes": "NONEMPTY",
+              "fw_process_matrix_stage2_broad_no_go_or_exclusion_boundaries": "NONEMPTY",
+              "fw_process_matrix_stage2_general_composition_or_globalization_closure": "NOT_ESTABLISHED",
+              "fw_process_matrix_stage2_general_classical_spacetime_embedding": "NOT_ESTABLISHED",
+              "fw_process_matrix_stage2_unresolved_physical_realizability_remainder": "NONEMPTY",
+              "fw_process_matrix_stage2_concrete_implementation_evidence": "NONEMPTY_SUBCLASS_ONLY",
+              "fw_process_matrix_stage2_new_sources_material_information": "YES",
+              "fw_process_matrix_framework_level_empirical_selection": "NONE_AT_FROZEN_STAGE2_SCOPE",
+              "fw_process_matrix_universal_realizability": "NOT_ESTABLISHED"
+          })
+          index_path.write_text(json.dumps(index, indent=2, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
+
+          op_path = Path("meta/FCP_OPERATION_REGISTRY.jsonl")
+          records = [json.loads(line) for line in op_path.read_text(encoding="utf-8").splitlines() if line]
+          by_id = {r["operation_id"]: r for r in records}
+
+          stage1_id = "FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1"
+          assert stage1_id in by_id
+          by_id[stage1_id].update({
+              "status": "CANONICALLY_COMPLETE",
+              "result_commit": "5675f75621125bdbac3755d88e57768afcc949c9",
+              "routing_commit": "e30784fffc1e49e497289c9c9da151762c613596",
+              "handoff_path": "handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md",
+              "output_paths": [
+                  "governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1_PREREGISTRATION_0_1_0.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_SELECTION_AUDIT_STAGE1_0_1_0.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_SEARCH_EXECUTION_LOG_0_1_0.md",
+                  "handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md",
+                  "SOURCE_REGISTER.md"
+              ],
+              "canonical_evidence_paths": [
+                  "CURRENT_STATE.md",
+                  "governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1_PREREGISTRATION_0_1_0.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_SELECTION_AUDIT_STAGE1_0_1_0.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_SEARCH_EXECUTION_LOG_0_1_0.md",
+                  "handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md",
+                  "SOURCE_REGISTER.md"
+              ],
+              "downstream_consumers": [STAGE2_OP],
+              "next_operations": [STAGE2_OP]
+          })
+
+          repair_id = "FW_PROCESS_MATRIX_STAGE2_INPUT_IDENTITY_REPAIR"
+          by_id[repair_id] = {
+              "base_commit": "0eb74a2b880b5b16f9158c461d05c7340f4b9e43",
+              "canonical_evidence_paths": [
+                  "audits/FW_PROCESS_MATRIX_STAGE2_INPUT_IDENTITY_REPAIR_0_1_0.md",
+                  "governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_0.md",
+                  "governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_1.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md"
+              ],
+              "display_name": "FW-PROCESS-MATRIX Stage-2 input-identity repair",
+              "downstream_consumers": [STAGE2_OP],
+              "handoff_path": None,
+              "input_paths": [
+                  "governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_0.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md"
+              ],
+              "method_version": "0.2.1",
+              "next_operations": [STAGE2_OP],
+              "operation_class": "BOUNDED_PROVENANCE_CUSTODY_REPAIR",
+              "operation_id": repair_id,
+              "output_paths": [
+                  "audits/FW_PROCESS_MATRIX_STAGE2_INPUT_IDENTITY_REPAIR_0_1_0.md",
+                  "governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_1.md"
+              ],
+              "result_commit": REPAIR_COMMIT,
+              "routing_commit": REPAIR_COMMIT,
+              "schema_version": "0.1.0",
+              "status": "CANONICALLY_COMPLETE",
+              "superseded_by": [],
+              "supersedes": []
+          }
+
+          by_id[STAGE2_OP] = {
+              "base_commit": REPAIR_COMMIT,
+              "canonical_evidence_paths": [
+                  STAGE2_ADJ, STAGE2_PROFILE, STAGE2_HANDOFF,
+                  "audits/FW_PROCESS_MATRIX_STAGE2_INPUT_IDENTITY_REPAIR_0_1_0.md",
+                  "governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_0.md",
+                  "governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_1.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_SELECTION_AUDIT_STAGE1_0_1_0.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_SEARCH_EXECUTION_LOG_0_1_0.md",
+                  "handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md"
+              ],
+              "display_name": "FW-PROCESS-MATRIX targeted realizability and physical-selection Stage 2",
+              "downstream_consumers": [ROUTING_OP],
+              "handoff_path": STAGE2_HANDOFF,
+              "input_paths": [
+                  "governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_0.md",
+                  "governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_1.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_INTAKE_STAGE1_0_1_0.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_SELECTION_AUDIT_STAGE1_0_1_0.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_SEARCH_EXECUTION_LOG_0_1_0.md",
+                  "handoffs/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_HANDOFF_0_1_0.md",
+                  "frameworks/causal_process/FW_PROCESS_MATRIX_K1_K10_BASELINE_0_1_0.md",
+                  "governance/FCP_METHOD_0_2_1_FRAMEWORK_ADMISSION_LAW_ARCHITECTURE_REVISION.md",
+                  "COMPARISON_PROTOCOL.md",
+                  "FRAMEWORK_REGISTER.md"
+              ],
+              "method_version": "0.2.1",
+              "next_operations": [ROUTING_OP],
+              "operation_class": "CLOSED_CORPUS_PHYSICAL_SELECTION_ADJUDICATION",
+              "operation_id": STAGE2_OP,
+              "output_paths": [STAGE2_ADJ, STAGE2_PROFILE, STAGE2_HANDOFF],
+              "result_commit": EXPECTED_BASE,
+              "routing_commit": None,
+              "schema_version": "0.1.0",
+              "status": "CANONICALLY_COMPLETE",
+              "superseded_by": [],
+              "supersedes": []
+          }
+
+          by_id[ROUTING_OP] = {
+              "base_commit": EXPECTED_BASE,
+              "canonical_evidence_paths": ["CURRENT_STATE.md", "README.md", ROUTING_PATH, STAGE2_ADJ, STAGE2_PROFILE, STAGE2_HANDOFF],
+              "display_name": "Post-FW-PROCESS-MATRIX targeted-realizability Stage-2 routing and navigation reconciliation",
+              "downstream_consumers": [SEQUENCING_OP],
+              "handoff_path": ROUTING_PATH,
+              "input_paths": ["CURRENT_STATE.md", "README.md", STAGE2_ADJ, STAGE2_PROFILE, STAGE2_HANDOFF],
+              "method_version": "0.2.1",
+              "next_operations": [SEQUENCING_OP],
+              "operation_class": "REPOSITORY_MAINTENANCE",
+              "operation_id": ROUTING_OP,
+              "output_paths": ["CURRENT_STATE.md", "README.md", ROUTING_PATH],
+              "result_commit": None,
+              "routing_commit": None,
+              "schema_version": "0.1.0",
+              "status": "CANONICALLY_COMPLETE",
+              "superseded_by": [],
+              "supersedes": []
+          }
+
+          by_id[SEQUENCING_OP] = {
+              "base_commit": None,
+              "canonical_evidence_paths": ["CURRENT_STATE.md", ROUTING_PATH, STAGE2_ADJ, STAGE2_PROFILE, STAGE2_HANDOFF],
+              "display_name": "Post-FW-PROCESS-MATRIX targeted-realizability Stage-2 scientific sequencing adjudication",
+              "downstream_consumers": [],
+              "handoff_path": None,
+              "input_paths": ["CURRENT_STATE.md", ROUTING_PATH, STAGE2_ADJ, STAGE2_PROFILE, STAGE2_HANDOFF],
+              "method_version": "0.2.1",
+              "next_operations": [],
+              "operation_class": "READ_ONLY_SEQUENCING_ADJUDICATION",
+              "operation_id": SEQUENCING_OP,
+              "output_paths": [],
+              "result_commit": None,
+              "routing_commit": None,
+              "schema_version": "0.1.0",
+              "status": "AUTHORIZED_READ_ONLY_NOT_STARTED",
+              "superseded_by": [],
+              "supersedes": []
+          }
+
+          ordered = [by_id[k] for k in sorted(by_id)]
+          op_path.write_text("".join(json.dumps(r, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n" for r in ordered), encoding="utf-8", newline="\n")
+
+          expected = {
+              "CURRENT_STATE.md",
+              "README.md",
+              ROUTING_PATH,
+              "meta/FCP_CANONICAL_INDEX.json",
+              "meta/FCP_OPERATION_REGISTRY.jsonl"
+          }
+          status = subprocess.check_output(["git", "status", "--porcelain=v1"], text=True)
+          changed = {line[3:] for line in status.splitlines() if line}
+          assert changed == expected, (changed, expected)
+          PY
+
+          git add CURRENT_STATE.md README.md \
+            governance/POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION_0_1_0.md \
+            meta/FCP_CANONICAL_INDEX.json meta/FCP_OPERATION_REGISTRY.jsonl
+          git diff --cached --check
+          git commit -m "Reconcile FW-PROCESS-MATRIX Stage-2 current state"
+          echo "SEMANTIC_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Refresh and check derived navigation
+        shell: bash
+        run: |
+          python tools/fcp_navigation.py refresh --ref "$SEMANTIC_SHA"
+          python tools/fcp_navigation.py check --ref "$SEMANTIC_SHA"
+          python tools/fcp_navigation.py summary
+          python - <<'PY'
+          import subprocess
+          allowed = {"meta/FCP_ARTIFACT_REGISTRY.jsonl", "meta/FCP_CANONICAL_INDEX.json"}
+          status = subprocess.check_output(["git", "status", "--porcelain=v1"], text=True)
+          changed = {line[3:] for line in status.splitlines() if line}
+          assert changed == allowed, (changed, allowed)
+          PY
+          git add meta/FCP_ARTIFACT_REGISTRY.jsonl meta/FCP_CANONICAL_INDEX.json
+          git diff --cached --check
+          git commit -m "Refresh navigation after FW-PROCESS-MATRIX Stage-2"
+
+      - name: Publish clean qualified branch
+        id: ids
+        shell: bash
+        run: |
+          NAV_SHA=$(git rev-parse HEAD)
+          git push origin HEAD:refs/heads/maintenance/fwpm-stage2-postresult-reconcile-qualified
+          echo "semantic_sha=$SEMANTIC_SHA" >> "$GITHUB_OUTPUT"
+          echo "nav_sha=$NAV_SHA" >> "$GITHUB_OUTPUT"
+          test -z "$(git status --porcelain)"
+          echo "SEMANTIC_SHA=$SEMANTIC_SHA"
+          echo "NAV_SHA=$NAV_SHA"
+
+  windows-portability:
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: maintenance/fwpm-stage2-postresult-reconcile-qualified
+          fetch-depth: 0
+      - name: Re-check under core.autocrlf=true
+        shell: pwsh
+        env:
+          SEMANTIC_SHA: ${{ needs.build.outputs.semantic_sha }}
+        run: |
+          git config core.autocrlf true
+          git reset --hard HEAD
+          python tools/fcp_navigation.py check --ref $env:SEMANTIC_SHA
+          if ((git status --porcelain).Length -ne 0) { throw "Windows checkout is dirty after navigation check" }
