@@ -38,8 +38,9 @@ GENERIC_OR_LINEAGE_INCIDENCE = 7
 TARGET_CONDITIONED_INCIDENCE = 2
 EMPIRICALLY_INHERITED_INCIDENCE = 3
 MODEL_OR_REALIZATION_DEPENDENT_INCIDENCE = 6
-PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 5
-CORE_PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 4
+PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 4
+CORE_PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 3
+PROCESS_MATRIX_SPECIFIC_STRUCTURAL_LIMITATION_INCIDENCE = 1
 REALIZABILITY_OPEN_INCIDENCE = 5
 
 NULL_SUBTRACTED_RESIDUE = NONEMPTY
@@ -137,7 +138,7 @@ REALIZABILITY_FAILURE_OR_UNKNOWN != NULL_SUBSUMPTION
 | `PMNC-K6-01` | K6 | `NONE_ESTABLISHED` | CR-CB; qualified CR-FC | process-statistical signalling, causal separability and nonseparability architecture exceeds null causal-order structure | core additional commitment |
 | `PMNC-K7-01` | K7 | `NONE_ESTABLISHED` | CR-CB | null has mature RG/EFT/scale structure; candidate has no framework-wide scale relation | none; candidate open burden |
 | `PMNC-K8-01` | K8 | `NONE_ESTABLISHED` | CR-CB; qualified CR-FC | global `W` validity against arbitrary allowed local interventions is process-matrix-specific after generic positivity/normalization subtraction | core additional commitment |
-| `PMNC-K8-02` | K8 | `NONE_ESTABLISHED` | CR-CB; qualified CR-FC | nontrivial failure of arbitrary process tensor-product closure is an object-specific globalization/composition restriction | core additional commitment |
+| `PMNC-K8-02` | K8 | `NONE_ESTABLISHED` | CR-CB; qualified CR-FC | nontrivial failure of arbitrary process tensor-product closure is an object-specific globalization/composition restriction | core structural limitation |
 | `PMNC-K9-01` | K9 | `E2_REPRESENTATION` | CR-CB; CR-RT; CR-EI for inheritance only | selected indefinite-order/isometric processes admit standard-QM realization on time-delocalized subsystems | none; positive model-level realization/viability only |
 | `PMNC-K9-02` | K9 | `NONE_ESTABLISHED` | CR-CB | classical-spacetime closed-lab and subsystem assumptions restrict realizable subclasses without reducing the whole formal domain to null content | none; realization-boundary information |
 | `PMNC-K9-03` | K9 | `UNRESOLVED_UNDER_FROZEN_CORPUS` | CR-CB; qualified CR-FC | no universal physical-realization map for all valid process matrices is established | none; framework-wide realizability burden remains open |
@@ -452,7 +453,8 @@ RESIDUE_CONTRIBUTION = YES__CORE_ADDITIONAL_COMMITMENT
 CLAIM_ID = PMNC-K7-01
 K_KEY = K7
 CANDIDATE_PROPOSITION = No framework-wide RG, coarse-graining or physical interscale flow is source-bound in the frozen process-matrix corpus.
-CANDIDATE_SOURCE_IDS = FROZEN_CORPUS_ABSENCE_RECORD_AS_SYNTHESIZED_IN_CAUSAL_PROCESS_STAGE2_AND_K1_K10_BASELINE
+CANDIDATE_SOURCE_IDS = NONE__CORPUS_LEVEL_ABSENCE_FINDING
+CORPUS_SCOPE_AUTHORITIES = frameworks/causal_process/CAUSAL_PROCESS_ICO_SOURCE_INTAKE_0_1_0.md;frameworks/causal_process/FW_PROCESS_MATRIX_K1_K10_BASELINE_0_1_0.md
 NULL_PROPOSITION = QFT supplies mature renormalization, running couplings and EFT/scale organization in its declared domains.
 NULL_SOURCE_IDS = FCP1_NULL_COMPETITOR_BASELINE;SRC-NULL-PDG-QCD-2026;SRC-NULL-PDG-EW-2026
 COMPARATOR_ROLE = CR-CB_CONTROL_BASELINE
@@ -527,7 +529,7 @@ PROVENANCE_STATUS = P5_CLAIM_SOURCE_QUALIFIED
 SCOPE_LEVEL = S3_FRAMEWORK_WIDE__NEGATIVE_UNIVERSAL_CLOSURE_STATEMENT
 OBJECT_TYPE = COMPOSITION_GLOBALIZATION_RESTRICTION
 ASSUMPTIONS = DECLARED_PROCESS_MATRIX_TENSOR_COMPOSITION_SETTING
-GENERICITY_PROVENANCE_TAGS = PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT;REALIZABILITY_OPEN
+GENERICITY_PROVENANCE_TAGS = PROCESS_MATRIX_SPECIFIC_STRUCTURAL_LIMITATION;REALIZABILITY_OPEN
 LINEAGE_STATUS = DISTINCT_PROCESS_MATRIX_COMPOSITION_CONSTRAINT
 TARGET_CONDITIONING = NO
 PHYSICAL_REALIZATION_STATUS = PR1_INTERPRETIVE
@@ -539,7 +541,7 @@ MODEL_OR_FORMULATION_DEPENDENCE = YES_FOR_EXACT_COMPOSITION_SETTING__FRAMEWORK_W
 OVERCLAIM_TEST = PASS__DOES_NOT_IMPLY_NO_COMPOSITION_OR_FRAGMENTATION
 OVER_SUBTRACTION_TEST = PASS__GENERIC_TENSOR_LANGUAGE_DOES_NOT_ERASE_A_SOURCE_BOUND_FAILURE_OF_UNIVERSAL_CLOSURE
 UNRESOLVED_REASON_IF_ANY = NONE
-RESIDUE_CONTRIBUTION = YES__CORE_ADDITIONAL_COMMITMENT
+RESIDUE_CONTRIBUTION = YES__CORE_STRUCTURAL_LIMITATION
 ```
 
 The S3 ceiling refers only to the framework-wide **negative** conclusion that arbitrary tensor-product closure is not a universal law of the domain; it does not claim that one replacement composition law is already source-bound framework-wide.
@@ -552,7 +554,7 @@ K_KEY = K9
 CANDIDATE_PROPOSITION = A source-bound class of isometric indefinite-causal processes, including the quantum switch as a special case, admits a physical realization within standard quantum mechanics on time-delocalized subsystems.
 CANDIDATE_SOURCE_IDS = SRC-CPICO-ORESHKOV-TIME-DELOCALIZED-2019;SRC-CPICO-WECHS-TIME-DELOCALIZED-2023
 NULL_PROPOSITION = Standard quantum mechanics supplies the host physical Hilbert-space/unitary/subsystem machinery for those selected realizations.
-NULL_SOURCE_IDS = FCP1_NULL_COMPETITOR_BASELINE__QUANTUM_COMPONENT
+NULL_SOURCE_IDS = FCP1_NULL_COMPETITOR_BASELINE
 COMPARATOR_ROLE = CR-CB_CONTROL_BASELINE;CR-RT_RECOVERY_TARGET;CR-EI_EMPIRICAL_INCUMBENT__INHERITANCE_ONLY
 MATERIAL_EQUIVALENCE_TEST = PASS_FOR_SELECTED_REALIZABLE_CLASS__NOT_GENERAL_W_DOMAIN
 RELATION_STATE = E2_REPRESENTATION
@@ -682,7 +684,8 @@ RESIDUE_CONTRIBUTION = NONE__NO_FRAMEWORK_EMPIRICAL_RESIDUE
 CLAIM_ID = PMNC-K10-02
 K_KEY = K10
 CANDIDATE_PROPOSITION = No source-bound observation at the frozen scope distinguishes the full process-matrix framework from the materially weaker comparator with a compulsory framework prediction, uncertainty model and decision rule.
-CANDIDATE_SOURCE_IDS = SRC-CPICO-COSTA-REVIEW-2026;FW_PROCESS_MATRIX_K1_K10_BASELINE
+CANDIDATE_SOURCE_IDS = SRC-CPICO-COSTA-REVIEW-2026;SRC-FW-CAT-STAGE1-RUBINO-2017;SRC-CPICO-PURVES-SHORT-2021;SRC-CPICO-VANDERLUGT-DI-2023;SRC-CPICO-GUO-VBC-2026;SRC-CPICO-QU-BELLLIKE-2026
+CORPUS_SCOPE_AUTHORITY = frameworks/causal_process/FW_PROCESS_MATRIX_K1_K10_BASELINE_0_1_0.md
 NULL_PROPOSITION = The null retains extensive calibrated empirical success in its tested GR/QFT/SM domains.
 NULL_SOURCE_IDS = FCP1_NULL_COMPETITOR_BASELINE
 COMPARATOR_ROLE = CR-EI_EMPIRICAL_INCUMBENT;CR-CB_CONTROL_BASELINE;CR-FC_FOUNDATIONAL_COMPETITOR__QUALIFIED_ASYMMETRIC
@@ -770,21 +773,27 @@ E5 is therefore not used as a residual bucket.
 
 ## 7. Null-subtracted residue
 
-Five claim records retain process-matrix-specific additional commitments after null, genericity, standard-QM-lineage, target-conditioning and inherited-empirical subtraction:
+Four claim records retain process-matrix-specific additional commitments after null, genericity, standard-QM-lineage, target-conditioning and inherited-empirical subtraction:
 
 ```text
 PMNC-K1-01 = generalized global W carrier/domain
 PMNC-K3-01 = process-matrix-typed transformation restrictions beyond generic supermap machinery__SECTOR_OR_EXTENSION_SCOPE
 PMNC-K6-01 = generalized operational causal/signalling/separability architecture
 PMNC-K8-01 = global W validity/consistency architecture against arbitrary allowed local interventions
+```
+
+One further claim records a process-matrix-specific structural limitation rather than an assumption or commitment:
+
+```text
 PMNC-K8-02 = nontrivial restriction on arbitrary process tensor-product closure
 ```
 
-Four of these define the core/framework-level residue. `PMNC-K3-01` is retained as a sector/extension-level additional commitment only.
+Three of the four additional commitments define core/framework-level residue; `PMNC-K3-01` is sector/extension level. `PMNC-K8-02` independently contributes a core S3 structural limitation to the residue.
 
 ```text
-PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 5
-CORE_PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 4
+PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 4
+CORE_PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 3
+PROCESS_MATRIX_SPECIFIC_STRUCTURAL_LIMITATION_INCIDENCE = 1
 NULL_SUBTRACTED_RESIDUE = NONEMPTY
 RESIDUE_HIGHEST_SCOPE = S3_FRAMEWORK_WIDE
 RESIDUE_CORE_STATUS = CORE_OR_FRAMEWORK_LEVEL
@@ -834,8 +843,9 @@ GENERIC_OR_LINEAGE_INCIDENCE = 7
 TARGET_CONDITIONED_INCIDENCE = 2
 EMPIRICALLY_INHERITED_INCIDENCE = 3
 MODEL_OR_REALIZATION_DEPENDENT_INCIDENCE = 6
-PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 5
-CORE_PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 4
+PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 4
+CORE_PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 3
+PROCESS_MATRIX_SPECIFIC_STRUCTURAL_LIMITATION_INCIDENCE = 1
 REALIZABILITY_OPEN_INCIDENCE = 5
 ```
 
@@ -846,6 +856,8 @@ Definitions for this result:
 - `TARGET_CONDITIONED_INCIDENCE = 2` counts the explicit retention of local quantum mechanics and ordinary causal quantum situations in `PMNC-QM-01` and `PMNC-CAUSAL-01`.
 - `EMPIRICALLY_INHERITED_INCIDENCE = 3` counts `PMNC-QM-01`, `PMNC-K9-01` and `PMNC-K10-01`.
 - `MODEL_OR_REALIZATION_DEPENDENT_INCIDENCE = 6` counts `PMNC-K3-01`, `PMNC-K5-01`, `PMNC-K8-02`, `PMNC-K9-01`, `PMNC-K9-02`, and `PMNC-K10-01`.
+- `PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 4` counts `PMNC-K1-01`, `PMNC-K3-01`, `PMNC-K6-01`, and `PMNC-K8-01`; three are core S3 commitments and `PMNC-K3-01` is sector/extension level.
+- `PROCESS_MATRIX_SPECIFIC_STRUCTURAL_LIMITATION_INCIDENCE = 1` counts `PMNC-K8-02`, a source-bound counterexample to arbitrary tensor-product closure rather than an assumed commitment.
 - `REALIZABILITY_OPEN_INCIDENCE = 5` counts `PMNC-K1-01`, `PMNC-K6-01`, `PMNC-K8-01`, `PMNC-K8-02`, and `PMNC-K9-03`.
 
 These are descriptive incidences, not scores. The same record may appear in multiple incidence categories.
