@@ -21,17 +21,11 @@ FCP separates questions that are often conflated:
 
 ## Current scientific frontier
 
-The latest canonical scientific operation is the first null-control comparison for the source-bound **process-matrix framework** (`FW-PROCESS-MATRIX`). Against the weaker GR/QFT/SM null baseline, the comparison leaves a **nonempty formal-operational residue** at framework-wide scope while also finding:
+The latest canonical scientific operation is the targeted realizability / physical-selection **Stage 1 source strengthening** for the source-bound process-matrix framework (`FW-PROCESS-MATRIX`). It executed the preregistered search architecture and froze a **27-source targeted corpus** (16 reused canonical sources + 11 new external sources) with source-selection, counterevidence, R0–R6 layer coverage, P1–P12 readiness, identity/version, redundancy, and declared-scope saturation checks all passing.
 
-- no E1, E3, E4, or E5 pairwise relation;
-- three bounded E2 representation/realization relations;
-- no framework-level empirical discriminator;
-- no framework-level empirical selection;
-- no established universal physical realizability of the full formally valid process domain.
+That result does **not** decide which formally valid process matrices are physically realizable. The frozen literature instead gives the later adjudication enough two-sided evidence to distinguish probabilistic pre/postselection representations, standard-quantum and time-delocalized realization classes, purity/reversibility constraints, composition limits, closed-laboratory and classical-spacetime restrictions, QC-QC subclasses, simulations, and concrete implementation caveats without collapsing them into one predicate.
 
-The central unresolved question is therefore not whether formal process-matrix structure exists, but **which formally valid process matrices are physically realizable under which subsystem, laboratory, quantum-mechanical, and spacetime assumptions**.
-
-A targeted source-strengthening Stage 1 for that realizability / physical-selection question has been prospectively preregistered. Its search lanes, search surfaces, query families, counterevidence requirements, and corpus-sufficiency rules are frozen. **No external literature query under that preregistration has started yet.**
+Physical-selection adjudication has not started. The next epistemic step is to **prospectively freeze the Stage 2 adjudication rules before applying the 27-source corpus**. No pairwise comparison, convergence credit, recurrence recomputation, framework-level empirical selection, or FCP-27 phase follows automatically from Stage 1.
 
 For the exact live state and authorization boundary, see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
