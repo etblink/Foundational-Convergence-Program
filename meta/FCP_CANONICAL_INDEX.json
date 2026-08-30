@@ -23,7 +23,7 @@
     },
     {
       "authority_id": "CURRENT_STATE",
-      "blob": "020f10877cb51ad15f27431a733698e8458aef9b",
+      "blob": "507e901a3ddf123c7e94dd6a8666f867cf1d35bf",
       "path": "CURRENT_STATE.md"
     },
     {
@@ -43,7 +43,7 @@
     },
     {
       "authority_id": "SOURCE_REGISTER",
-      "blob": "1aa9613db1b054b766b1475e6dbd2a0a8a9b19ff",
+      "blob": "a16ad9be3d30ae9fad6d94c8c6d89dc4bfe9711e",
       "path": "SOURCE_REGISTER.md"
     }
   ],
@@ -65,15 +65,15 @@
     "version": "0.2.1"
   },
   "indexed_scientific_baseline": {
-    "commit": "2b17a4d83026f9710a205456a2acad4240e2b904",
-    "message": "Amend remote-ref lifecycle policy",
+    "commit": "1c68afc30371d9721da62f6de7acaca7390c8ce2",
+    "message": "Reconcile targeted realizability Stage-1 current state",
     "repository": "etblink/Foundational-Convergence-Program",
-    "tree": "1108f34d7b24a6cc227c1e7cf2f239f6f8834afb"
+    "tree": "47f72df688cc8f8b23858603efb31b0cdbf09963"
   },
   "navigation_coverage": {
     "absence_from_operation_registry_means_scientific_absence": false,
     "artifact_inventory_scope": "ENTIRE_TRACKED_INDEXED_BASELINE_TREE_EXCLUDING_SELF_REFERENTIAL_NAVIGATION_FILES",
-    "artifact_record_count": 316,
+    "artifact_record_count": 320,
     "historical_operation_completeness_claimed": false,
     "operation_record_count": 77,
     "operation_registry_scope": "CURRENT_DEPENDENCY_CLOSURE",
