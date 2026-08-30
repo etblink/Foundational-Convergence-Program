@@ -48,8 +48,8 @@ jobs:
           keys=set()
           for x in re.findall(r'^K_KEY = ([^\n]+)$',s,re.M): keys.update(re.findall(r'K(?:10|[1-9])',x))
           assert keys=={f'K{i}' for i in range(1,11)}
-          assert s.count('TARGET_CONDITIONED_INCIDENCE = 0')==2
-          assert 'TARGET_CONDITIONED_INCIDENCE = 2' not in s
+          assert len(re.findall(r'^TARGET_CONDITIONED_INCIDENCE = 0$',s,re.M))==2
+          assert not re.search(r'^TARGET_CONDITIONED_INCIDENCE = 2$',s,re.M)
           assert 'TARGET_CONDITIONING = YES__LOCAL_QUANTUM_MECHANICS_IS_AN_EXPLICIT_INPUT_PREMISE' not in s
           assert 'TARGET_CONDITIONING = YES__KNOWN_CAUSAL_QUANTUM_SITUATIONS_ARE_EXPLICITLY_RETAINED' not in s
           assert 'INDEPENDENCE_STATUS = IND-N_DIRECT_IMPORT' in s
