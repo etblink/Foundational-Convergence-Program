@@ -1,0 +1,100 @@
+name: Repair and qualify FWPM null-control result
+on:
+  push:
+    branches: [automation/fwpm-null-result-repair]
+permissions:
+  contents: write
+jobs:
+  repair-qualify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: automation/fwpm-null-result-repair
+      - name: Repair exact research candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          EXPECTED_PRE_REPAIR=56729015b99892b2884b0cd37d077beef41f300f
+          PREREG=50332564d2339c8a048e1b44dd06b13f8580f7ff
+          BRANCH=research/fw-process-matrix-null-control
+          cp .github/fwpm_null_result_repair.py /tmp/repair.py
+          git config user.name "FCP Project Lead Null Control"
+          git config user.email "etblink@users.noreply.github.com"
+          git switch -C "$BRANCH" "origin/$BRANCH"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_PRE_REPAIR"
+          python /tmp/repair.py
+          git diff --check
+          test "$(git diff --name-only | tr '\n' ' ')" = "comparisons/FW_PROCESS_MATRIX_VS_NULL_GRQFTSM_METHOD_0_2_1_0_1_0.md "
+          git add comparisons/FW_PROCESS_MATRIX_VS_NULL_GRQFTSM_METHOD_0_2_1_0_1_0.md
+          git commit -m "Repair FW-PROCESS-MATRIX null-control provenance semantics"
+          echo "RESULT_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          echo "RESULT_TREE=$(git show -s --format=%T HEAD)" >> "$GITHUB_ENV"
+          test "$(git rev-parse "$PREREG:governance/FW_PROCESS_MATRIX_NULL_CONTROL_PREREGISTRATION_0_1_0.md")" = "$(git rev-parse "HEAD:governance/FW_PROCESS_MATRIX_NULL_CONTROL_PREREGISTRATION_0_1_0.md")"
+          test "$(git diff --name-only "$PREREG"..HEAD | tr '\n' ' ')" = "comparisons/FW_PROCESS_MATRIX_VS_NULL_GRQFTSM_METHOD_0_2_1_0_1_0.md "
+      - name: Qualify scientific ledger
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('comparisons/FW_PROCESS_MATRIX_VS_NULL_GRQFTSM_METHOD_0_2_1_0_1_0.md')
+          s=p.read_text(encoding='utf-8')
+          assert '\r' not in s
+          claims=re.findall(r'^CLAIM_ID = (PMNC-[^\n]+)$',s,re.M)
+          assert len(claims)==17, len(claims)
+          assert len(set(claims))==17
+          rels=re.findall(r'^RELATION_STATE = ([A-Z0-9_]+)$',s,re.M)
+          assert len(rels)==17, rels
+          assert rels.count('E2_REPRESENTATION')==3, rels
+          assert rels.count('NONE_ESTABLISHED')==13, rels
+          assert rels.count('UNRESOLVED_UNDER_FROZEN_CORPUS')==1, rels
+          assert not any(r.startswith('E1_') or r.startswith('E3_') or r.startswith('E4_') or r.startswith('E5_') for r in rels)
+          keys=set()
+          for x in re.findall(r'^K_KEY = ([^\n]+)$',s,re.M):
+              keys.update(re.findall(r'K(?:10|[1-9])',x))
+          assert keys=={f'K{i}' for i in range(1,11)}, keys
+          exact = {
+            'FW_PROCESS_MATRIX_NULL_CONTROL = QUALIFIED': 2,
+            'NULL_SUBTRACTED_RESIDUE = NONEMPTY': 3,
+            'RESIDUE_HIGHEST_SCOPE = S3_FRAMEWORK_WIDE': 3,
+            'DIRECT_FW_PROCESS_MATRIX_EMPIRICAL_DISCRIMINATOR_AFTER_NULL = NO': 3,
+            'FRAMEWORK_LEVEL_EMPIRICAL_SELECTION_AFTER_NULL = NO': 3,
+            'NON_NULL_PAIRWISE_READINESS = CONDITIONAL': 3,
+          }
+          for token,min_n in exact.items():
+              n=s.count(token)
+              if n < min_n: raise SystemExit(f'TOKEN_MISSING {token} count={n}')
+          assert 'PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 4' in s
+          assert 'CORE_PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 3' in s
+          assert 'PROCESS_MATRIX_SPECIFIC_STRUCTURAL_LIMITATION_INCIDENCE = 1' in s
+          assert 'CANDIDATE_SOURCE_IDS = FROZEN_CORPUS_ABSENCE_RECORD' not in s
+          assert 'FCP1_NULL_COMPETITOR_BASELINE__QUANTUM_COMPONENT' not in s
+          assert 'CANDIDATE_SOURCE_IDS = SRC-CPICO-COSTA-REVIEW-2026;FW_PROCESS_MATRIX_K1_K10_BASELINE' not in s
+          assert 'RESIDUE_CONTRIBUTION = YES__CORE_STRUCTURAL_LIMITATION' in s
+          assert 'CANONICAL_BASELINE_CONTRADICTION_IDENTIFIED = NO' in s
+          assert 'NEW_EXTERNAL_SOURCE_SEARCH = 0' in s
+          assert 'FCP27_SELECTED = NO' in s
+          print('CLAIM_LEDGER_COUNTS=PASS')
+          print('K1_K10_COVERAGE=PASS')
+          print('PROVENANCE_REPAIR=PASS')
+          print('RESULT_NEUTRALITY_FIREWALL=PASS')
+          PY
+          git diff --check HEAD~1..HEAD
+          echo SCIENTIFIC_CANDIDATE_QUALIFICATION=PASS
+      - name: Verify canonical main unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "50332564d2339c8a048e1b44dd06b13f8580f7ff"
+          echo CANONICAL_MAIN_UNCHANGED=PASS
+      - name: Push repaired research candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git push origin HEAD:research/fw-process-matrix-null-control
+          echo RESULT_COMMIT="$RESULT_SHA"
+          echo RESULT_TREE="$RESULT_TREE"
