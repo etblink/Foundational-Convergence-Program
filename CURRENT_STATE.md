@@ -6,9 +6,9 @@
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-26
-LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_PROCESS_MATRIX_K1_K10_BASELINE
-LATEST_CANONICAL_SCIENTIFIC_COMMIT = 999bef51aec42db9e6795fe5cfe2f4e80d84585d
-LATEST_CANONICAL_SCIENTIFIC_TREE = 2d6007d7ba5f1187c2518e4877e0ffedfa305cbe
+LATEST_CANONICAL_SCIENTIFIC_OPERATION = METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = 23c2020af788fa97dba678977f595551d618a278
+LATEST_CANONICAL_SCIENTIFIC_TREE = b1a077af8897f1a6c22cb35f24a077d10881451a
 LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION
 LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
 PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = 25c75cc200b35244fc7db81ba925b8e2063c442e
@@ -20,7 +20,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.1_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT and causal-process operations are unnumbered and FCP-27 has not been selected. The latest-scientific fields identify the completed `FW-PROCESS-MATRIX` K1–K10 baseline. The preceding causal-process Stage-2 taxonomy fragmented the discovery umbrella into ten scientific objects and admitted only the generalized process-matrix operational object. The baseline characterizes that admitted object without independently validating admission: K1/K3/K5/K6/K8 are strongly native, K2/K9 are scope-qualified, and K4/K7/K10 remain open or nonforced. Pairwise comparison, convergence, recurrence, and empirical-target selection remain unperformed. The latest-maintenance field remains the earlier post-sequencing routing/navigation reconciliation; exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
+`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, and method-audit operations are unnumbered and FCP-27 has not been selected. The latest-scientific fields identify the completed `METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT`. That audit returns Outcome B: the move away from mandatory intrinsic/framework-level dynamics has a genuine pre-causal-process justification and retains specificity on the strongest removed/nonframework controls, but full Method-0.2.1 invariance is not established because `FW-CQM` exposes a material reformulation/meta-framework scope ambiguity. The immediately preceding `FW-PROCESS-MATRIX` K1–K10 baseline remains the current framework characterization; its admission has not been independently validated or reversed. Pairwise comparison, convergence, recurrence, and empirical-target selection remain unperformed. The latest-maintenance field remains the earlier post-sequencing routing/navigation reconciliation; exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.1 now governs prospective work as a narrow delta over Method 0.2.0: framework-admission criterion C tests source-bound physical law, constraint, or dynamical architecture rather than requiring intrinsic dynamics. All unaffected Method 0.2.0 rules remain inherited.
 
@@ -505,17 +505,22 @@ FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
 POST_FW_PROCESS_MATRIX_BASELINE_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
 SEQUENCING_SELECTED_NEXT_OPERATION = METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT
-METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT = AUTHORIZED_NOT_STARTED
-NEXT_EXECUTION_STEP = METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_PREREGISTRATION
-NEXT_RECOMMENDED_OPERATION = METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT
-NEXT_OPERATION_CLASS = BOUNDED_INTERNAL_METHOD_AUDIT
+METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT = CANONICALLY_COMPLETE
+METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_OUTCOME = B__PARTIAL_GENERAL_JUSTIFICATION_WITH_MATERIAL_METHOD_AMBIGUITY
+METHOD_0_2_1_FULL_GENERAL_SCOPE = NOT_ESTABLISHED
+METHOD_0_2_1_PROCESS_MATRIX_RESCUE_RULE_FINDING = NOT_SUPPORTED
+METHOD_0_2_1_REFORMULATION_META_FRAMEWORK_SCOPE = MATERIAL_AMBIGUITY
+FW_PROCESS_MATRIX_INDEPENDENT_POST_ADMISSION_AUDIT = NOT_PERFORMED
+NEXT_EXECUTION_STEP = POST_METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_RECOMMENDED_OPERATION = POST_METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_OPERATION_CLASS = READ_ONLY_SEQUENCING_ADJUDICATION
 NEXT_OPERATION_AUTHORIZED = YES
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
-NEXT_SCIENTIFIC_PHASE = NONE__METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT_NEXT
+NEXT_SCIENTIFIC_PHASE = NONE__READ_ONLY_POST_METHOD_RESULT_INDEPENDENCE_SEQUENCING_ADJUDICATION_NEXT
 ```
 
-The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, and causal-process Stage-2 taxonomy are complete at their declared scopes. Stage 2 fragments the 33-source discovery umbrella into ten scientific objects and admits exactly one new source-bound framework, `FW-PROCESS-MATRIX`; quantum switch/QC-QC, causal-nonseparability/resource structure, causal inequalities, cyclic models, causaloid, post-quantum models, QG-motivated models, and categorical semantics remain separately scoped. The `FW-PROCESS-MATRIX` K1–K10 baseline is canonically complete and supplies characterization rather than separate admission validation. The accepted read-only post-baseline sequencing decision selects `METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT` as the next bounded operation because the method revision is upstream of the positive admission and can be tested against pre-causal-process canonical evidence. No method-audit result, framework-status change, pairwise relation, convergence credit, recurrence change, empirical target, or FCP-27 selection follows from the sequencing decision itself.
+The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, and causal-process Stage-2 taxonomy are complete at their declared scopes. Stage 2 fragments the 33-source discovery umbrella into ten scientific objects and admits exactly one new source-bound framework, `FW-PROCESS-MATRIX`; quantum switch/QC-QC, causal-nonseparability/resource structure, causal inequalities, cyclic models, causaloid, post-quantum models, QG-motivated models, and categorical semantics remain separately scoped. The `FW-PROCESS-MATRIX` K1–K10 baseline is canonically complete and remains characterization rather than separate admission validation. The subsequently completed `METHOD_0_2_1_RESULT_INDEPENDENCE_AUDIT` returns Outcome B: mandatory intrinsic/framework-level dynamics is not a framework-neutral admission requirement, and the Method-0.2.1 direction is independently justified, but the exact C-new boundary remains materially ambiguous for reformulation/meta-framework comparators. Method 0.2.1 and `FW-PROCESS-MATRIX = SOURCE_BOUND_READY` remain unchanged; the process-matrix admission has neither been independently validated nor reversed. The next epistemic step is a read-only post-audit scientific sequencing adjudication.
 
 ## Post-FW-CAT program-ledger and metadata reconciliation — canonical result
 
