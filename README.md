@@ -10,24 +10,25 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 ## Current status
 
 - **Latest numbered phase:** FCP-26; Stage 1 is canonically complete and Stage 2 is `NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE`.
-- **Latest canonical scientific operation:** `CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1` (`02d5a03976d6836e491deb37ec79c86066898f77`; tree `64ca0f58b269e17f0b91af3f73602657d516bcf9`). Stage 1 freezes a taxonomy-ready causal-process / indefinite-causal-order corpus without adjudicating framework taxonomy.
-- **Latest canonical maintenance operation:** `POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION`; this remains the latest maintenance operation. The later causal-process / ICO Stage-1 intake is scientific work and is now canonically complete.
-- **Active prospective method:** FCP Method 0.2.0.
+- **Latest canonical scientific operation:** `CAUSAL_PROCESS_ICO_TAXONOMY_GATE_STAGE2` (`de3a362ae1cc55ebbe7881d41d5bcae5ab505b89`; tree `0f4e878f4b042a290d0b3d2fd7f23ce708faac5b`). Stage 2 fragments the causal-process / ICO discovery umbrella and admits one new source-bound framework, `FW-PROCESS-MATRIX`, without performing K1–K10 or pairwise/convergence work.
+- **Latest canonical maintenance operation:** `POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION`; this remains the latest named maintenance operation. The later causal-process Stage-1 and Stage-2 operations are scientific work and are now canonically complete.
+- **Active prospective method:** FCP Method 0.2.1, a narrow prospective admission-law delta over Method 0.2.0.
 - **Housekeeping status:** canonically complete.
 - **Post-FCP-25 Grok status:** audit, independent adjudication, and reconciliation are canonically complete.
 - **FCP-26 Stage-1 outcome:** `B__ONLY_MODEL_PARAMETER_OR_REALIZATION_LEVEL_TESTABILITY_SURVIVES`; zero framework-level Stage-2 targets, no external empirical source search justified, and no atomic-clock target advanced.
 - **Post-FCP-26 sequencing:** the accepted read-only adjudication selected bounded publication-provenance/ref-lifecycle housekeeping before further science; that housekeeping is now canonically complete.
 - **Publication governance:** qualification identity and canonical publication identity are explicitly distinguished; content-equivalent publication and deterministic navigation rebinding are permitted under `governance/FCP_PUBLICATION_PROVENANCE_AND_REF_LIFECYCLE_POLICY_0_1_0.md`.
-- **FW-CAT:** Stage 1 and Stage 2 remain canonical, and the post-audit bounded re-adjudication corrects `OBJ-CAT-11` to a deferred remainder: current taxonomy is three existing-framework assignment objects, six nonframework remainders, three deferred proposals, zero successors, with historical `FW-CAT` still removed with reason.
+- **FW-CAT:** its historical Stage-2 umbrella removal remains canonical. The later `OBJ-CAT-11` re-adjudication first moved causal-process / ICO material to a deferred remainder; that present-tense disposition is now superseded by the dedicated causal-process Stage-2 taxonomy, which fragments the material and admits only the generalized process-matrix object as `FW-PROCESS-MATRIX`.
 - **Current durable ledger:** 94 rows through the bounded `OBJ-CAT-11` re-adjudication; the prior 93 rows are byte-preserved, `FWCAT-004` supplies the current partial supersession, Biswas author metadata is reconciled, and four recurrence-epoch consistency dockets remain open.
-- **Causal-process / ICO Stage 1:** canonically complete; 44 meaningful candidates reviewed, 33-source corpus frozen (28 new + 5 reused), counterevidence and CQM/GPTOPT overlap audits pass, and taxonomy remains unadjudicated.
-- **Next recommended program operation:** `CAUSAL_PROCESS_ICO_TAXONOMY_GATE_STAGE2_PREREGISTRATION`; it is authorized under standing Project Lead delegation to freeze the taxonomy rule before Stage-2 adjudication, no next numbered phase is selected, and FCP-27 remains unselected.
+- **Causal-process / ICO Stage 1:** canonically complete; 44 meaningful candidates reviewed and a 33-source corpus frozen (28 new + 5 reused).
+- **Causal-process / ICO Stage 2:** canonically complete under Method 0.2.1; ten scientific objects are preserved, exactly one new framework (`FW-PROCESS-MATRIX`) passes A–H, and no framework-level empirical selection, K1–K10 baseline, pairwise comparison, convergence credit, recurrence change, or FCP-27 follows.
+- **Next recommended program operation:** `FW_PROCESS_MATRIX_K1_K10_BASELINE_PREREGISTRATION`; it is authorized under standing Project Lead delegation to freeze the new framework's baseline rule before K1–K10 construction.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-26
-LATEST_CANONICAL_SCIENCE = CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1
+LATEST_CANONICAL_SCIENCE = CAUSAL_PROCESS_ICO_TAXONOMY_GATE_STAGE2
 FCP26_STAGE1_STATUS = CANONICALLY_COMPLETE
 FCP26_STAGE1_OUTCOME = B__ONLY_MODEL_PARAMETER_OR_REALIZATION_LEVEL_TESTABILITY_SURVIVES
 FCP26_STAGE2 = NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE
@@ -47,7 +48,7 @@ POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION = CANONICALLY_COMPLETE
 CLAIM_LEDGER_DURABLE_ROW_COUNT = 94
 CLAIM_LEDGER_TEMPORAL_CEILING = FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION
 BISWAS_2026_AUTHOR_METADATA_TRANSCRIPTION_RECONCILIATION = COMPLETE
-NEXT_RECOMMENDED_OPERATION = CAUSAL_PROCESS_ICO_TAXONOMY_GATE_STAGE2_PREREGISTRATION
+NEXT_RECOMMENDED_OPERATION = FW_PROCESS_MATRIX_K1_K10_BASELINE_PREREGISTRATION
 POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
 CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
 CAUSAL_PROCESS_ICO_SOURCE_CORPUS = FROZEN
@@ -55,7 +56,13 @@ CAUSAL_PROCESS_ICO_FROZEN_SOURCE_COUNT = 33
 CAUSAL_PROCESS_ICO_NEW_EXTERNAL_SOURCE_COUNT = 28
 CAUSAL_PROCESS_ICO_REUSED_CANONICAL_SOURCE_COUNT = 5
 CAUSAL_PROCESS_ICO_SOURCE_CORPUS_SUFFICIENT_FOR_LATER_TAXONOMY = YES_AT_CURRENT_DECLARED_SEARCH_SCOPE
-CAUSAL_PROCESS_ICO_TAXONOMY_ADJUDICATED = NO
+CAUSAL_PROCESS_ICO_TAXONOMY_GATE_STAGE2 = CANONICALLY_COMPLETE
+CAUSAL_PROCESS_ICO_TAXONOMY_ADJUDICATED = YES
+CAUSAL_PROCESS_ICO_SCIENTIFIC_OBJECT_COUNT = 10
+CAUSAL_PROCESS_ICO_NEW_FOUNDATIONAL_FRAMEWORK_IDS = FW-PROCESS-MATRIX
+FW_PROCESS_MATRIX_STATUS = ADMITTED_NOT_AUDITED
+FW_PROCESS_MATRIX_K1_K10_BASELINE = NOT_STARTED
+FCP_CURRENT_METHOD = 0.2.1_ACTIVE_PROSPECTIVELY
 NEXT_OPERATION_AUTHORIZED = YES
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
@@ -84,7 +91,7 @@ FCP separates several questions that are easy to conflate:
 - **empirical status** — inherited success, compatibility, model constraint, or direct framework discrimination;
 - **program-level recurrence** — whether non-generic structures recur independently across multiple frameworks.
 
-Method 0.2.0 reports these axes separately. It does not use a scalar framework-winner score.
+Method 0.2.1 inherits these unaffected Method 0.2.0 axes and continues to report them separately. It does not use a scalar framework-winner score.
 
 ## Compact milestone index
 

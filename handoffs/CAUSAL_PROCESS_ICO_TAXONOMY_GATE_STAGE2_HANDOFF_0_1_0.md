@@ -113,3 +113,47 @@ FW_PROCESS_MATRIX_REGISTRATION_AND_K1_K10_BASELINE_PREREGISTRATION
 Maintenance may update `FRAMEWORK_REGISTER.md`, `CURRENT_STATE.md`, README orientation if needed, and derived navigation after Project Lead acceptance. No standalone routing/capsule artifact is presumed necessary.
 
 The next scientific operation must preserve the distinctions established here and may not recombine quantum switch/resource/causal-inequality/QG material into `FW-PROCESS-MATRIX` identity without new source-bound justification.
+
+## Current navigation capsule
+
+<!-- FCP_HANDOFF_CAPSULE_BEGIN -->
+```json
+{
+  "capsule_schema_version": "0.1.0",
+  "operation_id": "CAUSAL_PROCESS_ICO_TAXONOMY_GATE_STAGE2",
+  "status": "CANONICALLY_COMPLETE",
+  "indexed_scientific_baseline_commit": "3437a903220be17ef8b05360102ff102939d446f",
+  "method_version": "0.2.1",
+  "must_read": [
+    "governance/FCP_METHOD_0_2_1_FRAMEWORK_ADMISSION_LAW_ARCHITECTURE_REVISION.md",
+    "governance/CAUSAL_PROCESS_ICO_TAXONOMY_GATE_STAGE2_PREREGISTRATION_0_1_1.md",
+    "frameworks/causal_process/CAUSAL_PROCESS_ICO_SOURCE_INTAKE_0_1_0.md",
+    "frameworks/causal_process/CAUSAL_PROCESS_ICO_SOURCE_SELECTION_AUDIT_0_1_0.md",
+    "SOURCE_REGISTER.md",
+    "frameworks/categorical_quantum/FCP4_CATEGORICAL_QUANTUM_SOURCE_INTAKE_0_1_0.md",
+    "frameworks/gpt_opt/FCP7_GPTOPT_COMPARATIVE_BASELINE_0_1_0.md",
+    "FRAMEWORK_REGISTER.md"
+  ],
+  "outputs": [
+    "audits/CAUSAL_PROCESS_ICO_TAXONOMY_ADJUDICATION_0_1_0.md",
+    "handoffs/CAUSAL_PROCESS_ICO_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md"
+  ],
+  "open_dockets": [
+    "CROSS_PAIR_RESIDUAL_E5_CONSISTENCY_CHECK",
+    "LOOP_CLAIM_TRANSCRIPTION_CHECK",
+    "NFC_AQFT_SLOT_METHOD_NORMALIZATION",
+    "REDUCED_NFC_PAIRWISE_INFORMATION_CEILING_LABELING"
+  ],
+  "next_recommended_operation": "FW_PROCESS_MATRIX_K1_K10_BASELINE_PREREGISTRATION",
+  "forbidden_next_actions": [
+    "K1_K10_CONSTRUCTION_BEFORE_BASELINE_PREREGISTRATION",
+    "PAIRWISE_COMPARISON",
+    "CONVERGENCE_CREDIT",
+    "RECURRENCE_DOCKET_EXECUTION",
+    "RECURRENCE_RECOMPUTATION",
+    "EMPIRICAL_TARGET_SELECTION",
+    "FCP27_SELECTION_OR_EXECUTION"
+  ]
+}
+```
+<!-- FCP_HANDOFF_CAPSULE_END -->
