@@ -1,7 +1,7 @@
 # FW-PROCESS-MATRIX Targeted Realizability / Physical-Selection — Stage 2 Adjudication Preregistration
 
 **Version:** 0.1.0  
-**Status:** `FROZEN_CANDIDATE__ADJUDICATION_NOT_STARTED`  
+**Status:** `FROZEN_PREREGISTRATION__ADJUDICATION_NOT_STARTED`
 **Operation ID:** `FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2`  
 **Operation class:** `CLOSED_CORPUS_PHYSICAL_SELECTION_ADJUDICATION`  
 **Method:** FCP Method 0.2.1
@@ -283,6 +283,7 @@ Rules:
 - `A = SUPPORTED` requires AX1 = `ESTABLISHED`; neither AX3 alone nor a proper-subclass result can support A.
 - `B = SUPPORTED` requires at least two materially different source-bound realization/selection classes or assumption regimes, AX1 != `ESTABLISHED`, and explicit preservation of their assumption differences.
 - `C = SUPPORTED` requires AX4 = `NONEMPTY` and no positive `SCOPE_W` physical realization result at the claimed realization layer; probabilistic representation alone cannot defeat C for deterministic or spacetime realizability.
+- Any `C = SUPPORTED` result must state `C_REALIZATION_LAYER_SCOPE`; if AX3 is established, C may not be reported as an unqualified claim that no general conditional/probabilistic representation exists.
 - `D = SUPPORTED` requires AX5 = `NONEMPTY` with at least one exclusion whose scope is broader than a single implementation/model; every named assumption and escape remains attached.
 - `E = SUPPORTED` requires AX8 = `NONEMPTY` or an axis-level `UNRESOLVED` that materially prevents a complete physical-selection account.
 - `F = SUPPORTED` requires AX10 = `NO`.
@@ -367,7 +368,7 @@ Failure of any invariance test requires preregistration repair **before** Stage-
 ## 22. Hard boundary after preregistration
 
 ```text
-STAGE2_PREREGISTRATION = FROZEN_CANDIDATE
+STAGE2_PREREGISTRATION = FROZEN_PREREGISTRATION
 STAGE2_CORPUS_APPLICATION = NOT_STARTED
 NEXT_STEP_IF_ACCEPTED = APPLY_EXACT_FROZEN_27_SOURCE_CORPUS_UNDER_THIS_RULESET
 NEW_SOURCE_SEARCH = NO
