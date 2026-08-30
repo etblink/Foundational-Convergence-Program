@@ -1,0 +1,54 @@
+name: Finalize FWPM Stage2 prereg
+on:
+  push:
+    branches:
+      - automation/fwpm-realizability-stage2-prereg-qualify
+permissions:
+  contents: write
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: automation/fwpm-realizability-stage2-prereg-qualify
+      - name: Apply prospective human-review repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main research/fw-process-matrix-realizability-physical-selection-stage2
+          test "$(git rev-parse origin/main)" = "e30784fffc1e49e497289c9c9da151762c613596"
+          test "$(git rev-parse origin/research/fw-process-matrix-realizability-physical-selection-stage2)" = "6cd63fdedb9ff1cbb41f659848e068e710711c16"
+          git config user.name "FCP Project Lead"
+          git config user.email "etblink@users.noreply.github.com"
+          git switch -C repair origin/research/fw-process-matrix-realizability-physical-selection-stage2
+          P=governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_0.md
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('governance/FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION_0_1_0.md')
+          s=p.read_text(encoding='utf-8')
+          old='**Status:** `FROZEN_CANDIDATE__ADJUDICATION_NOT_STARTED`'
+          new='**Status:** `FROZEN_PREREGISTRATION__ADJUDICATION_NOT_STARTED`'
+          assert old in s
+          s=s.replace(old,new,1)
+          oldc='- `C = SUPPORTED` requires AX4 = `NONEMPTY` and no positive `SCOPE_W` physical realization result at the claimed realization layer; probabilistic representation alone cannot defeat C for deterministic or spacetime realizability.\n'
+          newc=oldc+'- Any `C = SUPPORTED` result must state `C_REALIZATION_LAYER_SCOPE`; if AX3 is established, C may not be reported as an unqualified claim that no general conditional/probabilistic representation exists.\n'
+          assert oldc in s
+          s=s.replace(oldc,newc,1)
+          oldh='STAGE2_PREREGISTRATION = FROZEN_CANDIDATE'
+          assert oldh in s
+          s=s.replace(oldh,'STAGE2_PREREGISTRATION = FROZEN_PREREGISTRATION',1)
+          p.write_text(s,encoding='utf-8',newline='\n')
+          PY
+          git diff --check
+          test "$(git diff --name-only | tr '\n' ' ')" = "$P "
+          grep -Fq 'FROZEN_PREREGISTRATION__ADJUDICATION_NOT_STARTED' "$P"
+          grep -Fq 'C_REALIZATION_LAYER_SCOPE' "$P"
+          grep -Fq 'STAGE2_ADJUDICATION_STARTED = NO' "$P"
+          git add "$P"
+          git commit -m "Freeze FW-PROCESS-MATRIX Stage-2 adjudication rules"
+          FINAL=$(git rev-parse HEAD)
+          git push origin HEAD:research/fw-process-matrix-realizability-physical-selection-stage2
+          echo FINAL_PREREG_COMMIT=$FINAL
+          echo FINAL_PREREG_TREE=$(git show -s --format=%T HEAD)
