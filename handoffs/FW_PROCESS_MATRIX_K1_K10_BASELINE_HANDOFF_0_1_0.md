@@ -99,3 +99,46 @@ That decision should compare the marginal information value of:
 - no immediate operation.
 
 No route is preselected here.
+
+
+<!-- FCP_HANDOFF_CAPSULE_BEGIN -->
+```json
+{
+  "capsule_schema_version": "0.1.0",
+  "operation_id": "FW_PROCESS_MATRIX_K1_K10_BASELINE",
+  "status": "CANONICALLY_COMPLETE",
+  "indexed_scientific_baseline_commit": "0ef33cde4439f55a4ef19dfa6fec30855a1aa243",
+  "method_version": "0.2.1",
+  "must_read": [
+    "governance/FCP_METHOD_0_2_1_FRAMEWORK_ADMISSION_LAW_ARCHITECTURE_REVISION.md",
+    "governance/FW_PROCESS_MATRIX_K1_K10_BASELINE_PREREGISTRATION_0_1_0.md",
+    "frameworks/causal_process/FW_PROCESS_MATRIX_K1_K10_BASELINE_0_1_0.md",
+    "audits/CAUSAL_PROCESS_ICO_TAXONOMY_ADJUDICATION_0_1_0.md",
+    "frameworks/causal_process/CAUSAL_PROCESS_ICO_SOURCE_INTAKE_0_1_0.md",
+    "frameworks/causal_process/CAUSAL_PROCESS_ICO_SOURCE_SELECTION_AUDIT_0_1_0.md",
+    "SOURCE_REGISTER.md",
+    "FRAMEWORK_REGISTER.md"
+  ],
+  "outputs": [
+    "frameworks/causal_process/FW_PROCESS_MATRIX_K1_K10_BASELINE_0_1_0.md",
+    "handoffs/FW_PROCESS_MATRIX_K1_K10_BASELINE_HANDOFF_0_1_0.md"
+  ],
+  "open_dockets": [
+    "CROSS_PAIR_RESIDUAL_E5_CONSISTENCY_CHECK",
+    "LOOP_CLAIM_TRANSCRIPTION_CHECK",
+    "NFC_AQFT_SLOT_METHOD_NORMALIZATION",
+    "REDUCED_NFC_PAIRWISE_INFORMATION_CEILING_LABELING"
+  ],
+  "next_recommended_operation": "POST_FW_PROCESS_MATRIX_BASELINE_SCIENTIFIC_SEQUENCING_ADJUDICATION",
+  "forbidden_next_actions": [
+    "AUTOMATIC_EMPIRICAL_PHASE",
+    "PAIRWISE_COMPARISON_BEFORE_SEQUENCING_DECISION",
+    "CONVERGENCE_CREDIT",
+    "RECURRENCE_DOCKET_EXECUTION",
+    "RECURRENCE_RECOMPUTATION",
+    "EMPIRICAL_TARGET_SELECTION",
+    "FCP27_SELECTION_OR_EXECUTION"
+  ]
+}
+```
+<!-- FCP_HANDOFF_CAPSULE_END -->
