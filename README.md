@@ -11,7 +11,7 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 
 - **Latest numbered phase:** FCP-26; Stage 1 is canonically complete and Stage 2 is `NOT_JUSTIFIED_AT_CURRENT_CANONICAL_SCOPE`.
 - **Latest canonical scientific operation:** `FW_PROCESS_MATRIX_NULL_CONTROL` (`c391b42d3aa4043045d7e3a566a26b9f3aac6070`; tree `e8c7af0932cb0e4557edf258aa1396094509a63d`). Closed-corpus subtraction against `FW-NULL-GRQFTSM` leaves three bounded E2 relations, thirteen `NONE_ESTABLISHED`, one framework-wide realizability `UNRESOLVED_UNDER_FROZEN_CORPUS`, and four process-matrix-specific additional commitments at an S3 ceiling. No E1/E3/E4/E5, universal realizability, framework-level empirical discriminator, convergence credit, or recurrence change is established.
-- **Latest canonical maintenance operation:** `POST_FW_PROCESS_MATRIX_NULL_CONTROL_ROUTING_AND_NAVIGATION_RECONCILIATION`; this bounded reconciliation records the already-integrated null-control result and routes only to a fresh read-only post-null sequencing adjudication.
+- **Latest canonical maintenance operation:** `POST_FW_PROCESS_MATRIX_NULL_CONTROL_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION`; this bounded reconciliation records the accepted post-null sequencing decision and routes to targeted realizability / physical-selection Stage-1 preregistration without starting source search or changing framework status.
 - **Active prospective method:** FCP Method 0.2.1, a narrow prospective admission-law delta over Method 0.2.0.
 - **Housekeeping status:** canonically complete.
 - **Post-FCP-25 Grok status:** audit, independent adjudication, and reconciliation are canonically complete.
@@ -22,7 +22,7 @@ No framework—including Reduced NFC, the null baseline, any admitted comparator
 - **Current durable ledger:** 94 rows through the bounded `OBJ-CAT-11` re-adjudication; the prior 93 rows are byte-preserved, `FWCAT-004` supplies the current partial supersession, Biswas author metadata is reconciled, and four recurrence-epoch consistency dockets remain open.
 - **Causal-process / ICO Stage 1:** canonically complete; 44 meaningful candidates reviewed and a 33-source corpus frozen (28 new + 5 reused).
 - **Causal-process / ICO Stage 2:** canonically complete under Method 0.2.1; ten scientific objects are preserved and exactly one new framework (`FW-PROCESS-MATRIX`) passes A–H. Its separate K1–K10 baseline is now canonically complete, while pairwise comparison, convergence credit, recurrence change, empirical target selection, and FCP-27 remain absent.
-- **Next recommended program operation:** `POST_FW_PROCESS_MATRIX_NULL_CONTROL_SCIENTIFIC_SEQUENCING_ADJUDICATION`; reassess dependency order after null subtraction before selecting realizability strengthening, any non-null comparator, recurrence work, or empirical escalation.
+- **Next recommended program operation:** `FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1`; first freeze its outcome-neutral Stage-1 source-strengthening preregistration. No external literature query has started.
 - **Historical FCP-1–FCP-21 semantics:** preserved under the Method 0.1.0 / FCP-2 rules under which they were produced.
 - **Live routing / next-task state:** see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
@@ -68,7 +68,10 @@ FW_PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 4
 FW_PROCESS_MATRIX_NULL_SUBTRACTED_RESIDUE_HIGHEST_SCOPE = S3_FRAMEWORK_WIDE
 FW_PROCESS_MATRIX_UNIVERSAL_REALIZABILITY = NOT_ESTABLISHED
 FW_PROCESS_MATRIX_DIRECT_EMPIRICAL_DISCRIMINATOR_AFTER_NULL = NO
-NEXT_RECOMMENDED_OPERATION = POST_FW_PROCESS_MATRIX_NULL_CONTROL_SCIENTIFIC_SEQUENCING_ADJUDICATION
+POST_FW_PROCESS_MATRIX_NULL_CONTROL_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+POST_FW_PROCESS_MATRIX_NULL_CONTROL_SEQUENCING_SELECTED_NEXT_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1
+TARGETED_REALIZABILITY_SOURCE_STRENGTHENING_STAGE1_STATUS = SELECTED_NOT_STARTED_REQUIRES_SEPARATE_PREREGISTRATION
+NEXT_RECOMMENDED_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1
 POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
 CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
 CAUSAL_PROCESS_ICO_SOURCE_CORPUS = FROZEN
