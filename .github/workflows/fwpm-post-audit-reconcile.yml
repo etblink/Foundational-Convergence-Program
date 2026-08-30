@@ -1,0 +1,35 @@
+name: FWPM post-audit repair reconciliation
+
+on:
+  push:
+    branches:
+      - automation/fwpm-post-audit-reconcile-runner
+
+permissions:
+  contents: write
+
+jobs:
+  reconcile:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout runner
+        uses: actions/checkout@v4
+        with:
+          ref: automation/fwpm-post-audit-reconcile-runner
+          path: runner
+          fetch-depth: 0
+
+      - name: Checkout target branch
+        uses: actions/checkout@v4
+        with:
+          ref: maintenance/fwpm-stage2-post-audit-repair-routing
+          path: target
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Reconcile semantic state and refresh navigation
+        working-directory: target
+        env:
+          TARGET_BRANCH: maintenance/fwpm-stage2-post-audit-repair-routing
+        run: python ../runner/.github/scripts/reconcile_fwpm_post_audit_repair.py
