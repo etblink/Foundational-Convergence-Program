@@ -65,15 +65,15 @@
     "version": "0.2.1"
   },
   "indexed_scientific_baseline": {
-    "commit": "0ead3d22d6dac498343cb3af0bc827af47195949",
-    "message": "Make README public-facing",
+    "commit": "2b17a4d83026f9710a205456a2acad4240e2b904",
+    "message": "Amend remote-ref lifecycle policy",
     "repository": "etblink/Foundational-Convergence-Program",
-    "tree": "589925379028573b695e5dcf66220782c1bc5f05"
+    "tree": "1108f34d7b24a6cc227c1e7cf2f239f6f8834afb"
   },
   "navigation_coverage": {
     "absence_from_operation_registry_means_scientific_absence": false,
     "artifact_inventory_scope": "ENTIRE_TRACKED_INDEXED_BASELINE_TREE_EXCLUDING_SELF_REFERENTIAL_NAVIGATION_FILES",
-    "artifact_record_count": 315,
+    "artifact_record_count": 316,
     "historical_operation_completeness_claimed": false,
     "operation_record_count": 77,
     "operation_registry_scope": "CURRENT_DEPENDENCY_CLOSURE",
