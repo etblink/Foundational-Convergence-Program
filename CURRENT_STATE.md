@@ -6,9 +6,9 @@
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-26
-LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION
-LATEST_CANONICAL_SCIENTIFIC_COMMIT = 4f73ea29cf4b89e42bf52876b4ad7c782030edbc
-LATEST_CANONICAL_SCIENTIFIC_TREE = 060c94bf08e926aad8bc3ee355b553665c8bba7d
+LATEST_CANONICAL_SCIENTIFIC_OPERATION = CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = 02d5a03976d6836e491deb37ec79c86066898f77
+LATEST_CANONICAL_SCIENTIFIC_TREE = 64ca0f58b269e17f0b91af3f73602657d516bcf9
 LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION
 LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
 PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = 25c75cc200b35244fc7db81ba925b8e2063c442e
@@ -20,7 +20,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.0_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, audit, and re-adjudication operations are unnumbered and FCP-27 has not been selected. The latest-scientific fields identify the bounded `OBJ-CAT-11` re-adjudication, which corrected only its existing-framework distinction/disposition. The latest-maintenance field names the post-sequencing routing/navigation reconciliation that records the canonical R1 selection without starting the selected source intake; exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
+`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, audit, and re-adjudication operations are unnumbered and FCP-27 has not been selected. The latest-scientific fields identify the completed causal-process / indefinite-causal-order Stage-1 source intake and frozen corpus. Stage 1 establishes corpus sufficiency only: taxonomy, framework admission, K1–K10, pairwise comparison, convergence, and recurrence remain unperformed. The latest-maintenance field remains the earlier post-sequencing routing/navigation reconciliation; exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.0 governs prospective work unless explicitly superseded through the truth-seeking revision protocol.
 
@@ -98,7 +98,17 @@ POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION = CANONI
 POST_FW_CAT_EXTERNAL_AUDIT_AND_OBJ_CAT_11_READJUDICATION_RECONCILIATION_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
 POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
 POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
-CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1 = SELECTED_NOT_STARTED_REQUIRES_SEPARATE_PREREGISTRATION
+CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
+CAUSAL_PROCESS_ICO_SOURCE_CORPUS = FROZEN
+CAUSAL_PROCESS_ICO_CANDIDATE_SOURCE_COUNT_REVIEWED = 44
+CAUSAL_PROCESS_ICO_FROZEN_SOURCE_COUNT = 33
+CAUSAL_PROCESS_ICO_NEW_EXTERNAL_SOURCE_COUNT = 28
+CAUSAL_PROCESS_ICO_REUSED_CANONICAL_SOURCE_COUNT = 5
+CAUSAL_PROCESS_ICO_MEANINGFUL_REJECTED_COUNT = 10
+CAUSAL_PROCESS_ICO_DEFERRED_COUNT = 1
+CAUSAL_PROCESS_ICO_SOURCE_CORPUS_SUFFICIENT_FOR_LATER_TAXONOMY = YES_AT_CURRENT_DECLARED_SEARCH_SCOPE
+CAUSAL_PROCESS_ICO_TAXONOMY_ADJUDICATED = NO
+CAUSAL_PROCESS_ICO_NEW_FRAMEWORK_CREATED = NO
 ```
 
 Targeted source strengthening established, at bounded scope:
@@ -469,10 +479,15 @@ POST_MAINTENANCE_HIGH_PRIORITY_CANDIDATE = FULFILLED_BY_CANONICAL_EXTERNAL_AUDIT
 EXTERNAL_AUDIT_AUTHORIZED = FULFILLED_BY_CANONICAL_AUDIT
 POST_FW_CAT_EXTERNAL_AUDIT_REMEDIATION_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
 SEQUENCING_SELECTED_NEXT_OPERATION = CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1
-CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1 = SELECTED_NOT_STARTED_REQUIRES_SEPARATE_PREREGISTRATION
-NEXT_RECOMMENDED_OPERATION = CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1
-NEXT_OPERATION_CLASS = SOURCE_INTAKE_STAGE1
-NEXT_OPERATION_AUTHORIZED = NO
+CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1 = CANONICALLY_COMPLETE
+CAUSAL_PROCESS_ICO_SOURCE_CORPUS = FROZEN
+CAUSAL_PROCESS_ICO_FROZEN_SOURCE_COUNT = 33
+CAUSAL_PROCESS_ICO_NEW_EXTERNAL_SOURCE_COUNT = 28
+CAUSAL_PROCESS_ICO_REUSED_CANONICAL_SOURCE_COUNT = 5
+CAUSAL_PROCESS_ICO_SOURCE_CORPUS_SUFFICIENT_FOR_LATER_TAXONOMY = YES_AT_CURRENT_DECLARED_SEARCH_SCOPE
+NEXT_RECOMMENDED_OPERATION = CAUSAL_PROCESS_ICO_TAXONOMY_GATE_STAGE2_PREREGISTRATION
+NEXT_OPERATION_CLASS = FRAMEWORK_TAXONOMY_PREREGISTRATION
+NEXT_OPERATION_AUTHORIZED = YES
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
 POST_FCP24_GROK_AUDIT = INDEPENDENT_ADJUDICATION_CANONICALLY_COMPLETE
@@ -486,11 +501,11 @@ POST_FCP24_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 FINDING_003_DOCUMENTATION_RECONCILIATION = COMPLETE
 FINDING_005_SOURCE_REGISTER_RECONCILIATION = COMPLETE
 FINDING_007_TARGETED_SOURCE_REAUDIT = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = SEPARATE_CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1_PREREGISTRATION
-NEXT_SCIENTIFIC_PHASE = NONE__CAUSAL_PROCESS_ICO_STAGE1_PREREGISTRATION_SELECTED_NOT_STARTED
+NEXT_EXECUTION_STEP = FREEZE_CAUSAL_PROCESS_ICO_TAXONOMY_GATE_STAGE2_PREREGISTRATION
+NEXT_SCIENTIFIC_PHASE = NONE__CAUSAL_PROCESS_ICO_STAGE2_TAXONOMY_PREREGISTRATION_NEXT__TAXONOMY_NOT_STARTED
 ```
 
-The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, and the subsequent governance/provenance reconciliation are complete at their declared scopes. The durable Claim Ledger contains 94 rows through the `OBJ-CAT-11` re-adjudication, the Biswas metadata docket is closed, and four recurrence-epoch consistency dockets remain open. The now-canonical remediation sequencing decision selects `CAUSAL_PROCESS_ICO_SOURCE_INTAKE_STAGE1` as the next scientific route. It remains not started and requires its own prospective preregistration before any external literature search; FCP-27 remains unselected.
+The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the subsequent governance/provenance reconciliation, and the causal-process / indefinite-causal-order Stage-1 source intake are complete at their declared scopes. The Stage-1 intake reviewed 44 meaningful candidates and freezes a 33-source corpus (28 new, five reused), with ten meaningful rejections and one deferral. The corpus is sufficient at the declared search scope for a later taxonomy gate but does not adjudicate taxonomy or admit a framework. The next epistemic step is to freeze the Stage-2 taxonomy rule before interpreting the now-exposed corpus; FCP-27 remains unselected.
 
 ## Post-FW-CAT program-ledger and metadata reconciliation — canonical result
 
