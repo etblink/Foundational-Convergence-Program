@@ -23,7 +23,7 @@
     },
     {
       "authority_id": "CURRENT_STATE",
-      "blob": "6f28a34d00ac59b75fb49b83da82a7a01ed8e5fd",
+      "blob": "0a2ad9814034f6ebc01da1a34fba7de18e311595",
       "path": "CURRENT_STATE.md"
     },
     {
@@ -65,17 +65,17 @@
     "version": "0.2.1"
   },
   "indexed_scientific_baseline": {
-    "commit": "2fded8965b34941e7933cea60ab91546ea56f2c3",
-    "message": "Reconcile post-Stage-2 sequencing state",
+    "commit": "caeb9aeee766e91baa3ce937b058935b683993ca",
+    "message": "Reconcile post-Stage-2 external audit opening",
     "repository": "etblink/Foundational-Convergence-Program",
-    "tree": "0faa76def23fec81582ebaa98e8ea1e75c67b976"
+    "tree": "b889e5d38cd92c3b634c1c75a9fd413ecb0e7a54"
   },
   "navigation_coverage": {
     "absence_from_operation_registry_means_scientific_absence": false,
     "artifact_inventory_scope": "ENTIRE_TRACKED_INDEXED_BASELINE_TREE_EXCLUDING_SELF_REFERENTIAL_NAVIGATION_FILES",
-    "artifact_record_count": 329,
+    "artifact_record_count": 335,
     "historical_operation_completeness_claimed": false,
-    "operation_record_count": 83,
+    "operation_record_count": 86,
     "operation_registry_scope": "CURRENT_DEPENDENCY_CLOSURE",
     "self_excluded_paths": [
       "meta/FCP_ARTIFACT_REGISTRY.jsonl",
