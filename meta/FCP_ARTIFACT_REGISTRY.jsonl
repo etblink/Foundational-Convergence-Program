@@ -1,11 +1,11 @@
 {"blob":"2226b7d987c379f5faa3a67d9330c5f4ec2488a4","byte_count":369,"git_mode":"100644","object_type":"blob","path":".gitattributes","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"e6546b0dcba4da6dab9311d0f14c82830adee745","byte_count":188991,"git_mode":"100644","object_type":"blob","path":"CLAIM_LEDGER.md","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"190ce97bde2d43d6b1c6c30f5d9ed032939b3308","byte_count":7108,"git_mode":"100644","object_type":"blob","path":"COMPARISON_PROTOCOL.md","schema_version":"0.1.0","top_level_class":"ROOT"}
-{"blob":"2c1709a45c05c2923d95d5d88aa1fd5894f79c2d","byte_count":71144,"git_mode":"100644","object_type":"blob","path":"CURRENT_STATE.md","schema_version":"0.1.0","top_level_class":"ROOT"}
+{"blob":"f9b67532f1ddc5038e482e0362c3a8ac73bc7f80","byte_count":71533,"git_mode":"100644","object_type":"blob","path":"CURRENT_STATE.md","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"76c9a8f2b3c00896160a16a184213250bca703ce","byte_count":5081,"git_mode":"100644","object_type":"blob","path":"EPISTEMIC_RULES.md","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"579819121d1733e1746868941a3a282de2cf1ac9","byte_count":6767,"git_mode":"100644","object_type":"blob","path":"FCP_CHARTER.md","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"ecd8d2759921507e0d51f5efb74e67978244cf11","byte_count":44494,"git_mode":"100644","object_type":"blob","path":"FRAMEWORK_REGISTER.md","schema_version":"0.1.0","top_level_class":"ROOT"}
-{"blob":"0b8db5953438f8cd510501517fd9b80985f53a77","byte_count":23212,"git_mode":"100644","object_type":"blob","path":"README.md","schema_version":"0.1.0","top_level_class":"ROOT"}
+{"blob":"a5b7d2d3ea7517d660614693b94f4393518983df","byte_count":23387,"git_mode":"100644","object_type":"blob","path":"README.md","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"1aa9613db1b054b766b1475e6dbd2a0a8a9b19ff","byte_count":125181,"git_mode":"100644","object_type":"blob","path":"SOURCE_REGISTER.md","schema_version":"0.1.0","top_level_class":"ROOT"}
 {"blob":"7d9bd049adc9231d04b87f9914ef6baa3c55e263","byte_count":11444,"git_mode":"100644","object_type":"blob","path":"audits/BROADER_HOLOGRAPHIC_REALIZATION_EMPIRICAL_CEILING_0_1_0.md","schema_version":"0.1.0","top_level_class":"audits"}
 {"blob":"afb210c3b644ae158231dcf1daccb1a134ce29a4","byte_count":42587,"git_mode":"100644","object_type":"blob","path":"audits/BROADER_HOLOGRAPHIC_TAXONOMY_ADJUDICATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"audits"}
@@ -232,6 +232,7 @@
 {"blob":"df6c3cf98e5f7825799b1605bb8da304aab0419d","byte_count":6741,"git_mode":"100644","object_type":"blob","path":"governance/POST_FW_CAT_PROGRAM_LEDGER_AND_METADATA_RECONCILIATION_PREREGISTRATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"governance"}
 {"blob":"2bfc9bfbb73aee3329b580bfde7887e72bb6930f","byte_count":7066,"git_mode":"100644","object_type":"blob","path":"governance/POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_DECISION_0_1_0.md","schema_version":"0.1.0","top_level_class":"governance"}
 {"blob":"7be33cb7922e3d411f2d340642a69e356af6244b","byte_count":3696,"git_mode":"100644","object_type":"blob","path":"governance/POST_FW_CAT_STAGE2_SCIENTIFIC_SEQUENCING_PREREGISTRATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"governance"}
+{"blob":"be4415cbe739ca49c9fdd73088a597f858e4bfb5","byte_count":15189,"git_mode":"100644","object_type":"blob","path":"governance/POST_FW_PROCESS_MATRIX_BASELINE_SCIENTIFIC_SEQUENCING_DECISION_0_1_0.md","schema_version":"0.1.0","top_level_class":"governance"}
 {"blob":"052102e6004c91ca83f28b31a7bd351451e80370","byte_count":15791,"git_mode":"100644","object_type":"blob","path":"governance/PROGRAM_LEVEL_RECURRENCE_RECOMPUTATION_PREREGISTRATION_0_1_0.md","schema_version":"0.1.0","top_level_class":"governance"}
 {"blob":"ea00fc36dfcfbef53fa1b3e92eac069460525b11","byte_count":8952,"git_mode":"100644","object_type":"blob","path":"handoffs/BROADER_HOLOGRAPHIC_SOURCE_INTAKE_STAGE1_HANDOFF_0_1_0.md","schema_version":"0.1.0","top_level_class":"handoffs"}
 {"blob":"63786520957cd81ec70531673e60ff94101378bb","byte_count":12187,"git_mode":"100644","object_type":"blob","path":"handoffs/BROADER_HOLOGRAPHIC_TAXONOMY_GATE_STAGE2_HANDOFF_0_1_0.md","schema_version":"0.1.0","top_level_class":"handoffs"}
