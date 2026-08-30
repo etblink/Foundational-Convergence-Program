@@ -6,10 +6,10 @@
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-26
-LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1
-LATEST_CANONICAL_SCIENTIFIC_COMMIT = 5675f75621125bdbac3755d88e57768afcc949c9
-LATEST_CANONICAL_SCIENTIFIC_TREE = 1cb2403c2ad84f050ed451a69ddbdfee0f3f7637
-LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE1_ROUTING_AND_NAVIGATION_RECONCILIATION
+LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = fdb1ff04fc5c4a494da9c44822cac277a819d8c0
+LATEST_CANONICAL_SCIENTIFIC_TREE = b348c91e73e95e552f16a067ed595e0d35ac7fc6
+LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION
 LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
 PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = e2fa96fe2fe2a686385a1f968f95a5eb9c2c68b5
 PREVIOUS_CANONICAL_MAINTENANCE_TREE = f29720957baa127a75ed086a88a46dda17c0252b
@@ -20,7 +20,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.1_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix admission-audit, sequencing, null-control, and targeted realizability source-strengthening operations are unnumbered and FCP-27 has not been selected. The latest substantive scientific operation is now the completed `FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_SOURCE_STRENGTHENING_STAGE1`: all frozen Q1–Q13 searches were executed across S1–S4, S5/S6 stayed within their preregistered identity/bibliographic roles, and a counterevidence-aware 27-source targeted corpus (16 reused canonical + 11 new external) is frozen as sufficient for later physical-selection adjudication at the declared scope. Physical-selection adjudication itself has not started. The next epistemic task is to prospectively freeze Stage-2 adjudication rules before applying the frozen corpus. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
+`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix admission-audit, sequencing, null-control, targeted realizability source-strengthening, and physical-selection Stage-2 operations are unnumbered and FCP-27 has not been selected. The latest substantive scientific operation is the completed `FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2`. Under the exact frozen 27-source corpus, a general `W`-scope probabilistic/postselected representation is established, while a general deterministic standard-QM realization, a complete general physical-selection criterion, unrestricted composition/globalization closure, and general classical-spacetime embedding are not established. Positive restricted realization classes and broad assumption-scoped exclusion boundaries are both nonempty, and the framework-wide physical-realizability remainder remains nonempty. No framework-level empirical selection follows. The next epistemic task is a fresh read-only post-Stage-2 scientific sequencing adjudication; no downstream scientific route is preselected. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.1 now governs prospective work as a narrow delta over Method 0.2.0: framework-admission criterion C tests source-bound physical law, constraint, or dynamical architecture rather than requiring intrinsic dynamics. All unaffected Method 0.2.0 rules remain inherited.
 
@@ -166,7 +166,29 @@ TARGETED_REALIZABILITY_REALIZABILITY_LAYER_COVERAGE = PASS
 TARGETED_REALIZABILITY_P1_P12_READINESS_COVERAGE = PASS
 TARGETED_REALIZABILITY_SEARCH_SATURATION = PASS_AT_DECLARED_SCOPE
 TARGETED_REALIZABILITY_CORPUS_SUFFICIENT_FOR_LATER_PHYSICAL_SELECTION_ADJUDICATION = YES_AT_CURRENT_DECLARED_SEARCH_SCOPE
-TARGETED_REALIZABILITY_PHYSICAL_SELECTION_ADJUDICATION_STARTED = NO
+TARGETED_REALIZABILITY_PHYSICAL_SELECTION_ADJUDICATION_STARTED = YES__COMPLETE
+TARGETED_REALIZABILITY_STAGE2_INPUT_IDENTITY_REPAIR = CANONICALLY_COMPLETE
+TARGETED_REALIZABILITY_STAGE2_INPUT_IDENTITY_REPAIR_COMMIT = 11700fa17ae42c915a45b6534aa21e3b56567b99
+TARGETED_REALIZABILITY_STAGE2_RESULT_COMMIT = fdb1ff04fc5c4a494da9c44822cac277a819d8c0
+TARGETED_REALIZABILITY_STAGE2_RESULT_TREE = b348c91e73e95e552f16a067ed595e0d35ac7fc6
+TARGETED_REALIZABILITY_STAGE2_FROZEN_SOURCE_COUNT = 27
+TARGETED_REALIZABILITY_STAGE2_AX1_GENERAL_COMPLETE_SELECTION_CRITERION = NOT_ESTABLISHED
+TARGETED_REALIZABILITY_STAGE2_AX2_GENERAL_DETERMINISTIC_STANDARD_QM_REALIZATION = NOT_ESTABLISHED
+TARGETED_REALIZABILITY_STAGE2_AX3_GENERAL_PROBABILISTIC_OR_POSTSELECTED_REPRESENTATION = ESTABLISHED
+TARGETED_REALIZABILITY_STAGE2_AX4_POSITIVE_RESTRICTED_REALIZATION_CLASSES = NONEMPTY
+TARGETED_REALIZABILITY_STAGE2_AX5_BROAD_SOURCE_BOUND_NO_GO_OR_EXCLUSION_BOUNDARIES = NONEMPTY
+TARGETED_REALIZABILITY_STAGE2_AX6_GENERAL_COMPOSITION_OR_GLOBALIZATION_CLOSURE = NOT_ESTABLISHED
+TARGETED_REALIZABILITY_STAGE2_AX7_CLASSICAL_SPACETIME_EMBEDDING_OF_GENERAL_W_DOMAIN = NOT_ESTABLISHED
+TARGETED_REALIZABILITY_STAGE2_AX8_UNRESOLVED_PHYSICAL_REALIZABILITY_REMAINDER = NONEMPTY
+TARGETED_REALIZABILITY_STAGE2_AX9_CONCRETE_IMPLEMENTATION_EVIDENCE = NONEMPTY_SUBCLASS_ONLY
+TARGETED_REALIZABILITY_STAGE2_AX10_NEW_STAGE1_SOURCES_ADD_MATERIAL_PROPOSITIONAL_INFORMATION = YES
+TARGETED_REALIZABILITY_STAGE2_SYNTHESIS_A = NOT_SUPPORTED
+TARGETED_REALIZABILITY_STAGE2_SYNTHESIS_B = SUPPORTED
+TARGETED_REALIZABILITY_STAGE2_SYNTHESIS_C = SUPPORTED__DETERMINISTIC_R1_AND_STRONGER_R2_R6_ONLY
+TARGETED_REALIZABILITY_STAGE2_SYNTHESIS_D = SUPPORTED
+TARGETED_REALIZABILITY_STAGE2_SYNTHESIS_E = SUPPORTED
+TARGETED_REALIZABILITY_STAGE2_SYNTHESIS_F = NOT_SUPPORTED
+TARGETED_REALIZABILITY_STAGE2_FRAMEWORK_LEVEL_EMPIRICAL_SELECTION = NONE
 ```
 
 Targeted source strengthening established, at bounded scope:
@@ -589,19 +611,22 @@ TARGETED_REALIZABILITY_NEW_EXTERNAL_SOURCE_SEARCH_STARTED = YES__COMPLETE
 TARGETED_REALIZABILITY_SOURCE_ADMISSION_STARTED = YES__COMPLETE
 TARGETED_REALIZABILITY_SOURCE_REGISTER_MUTATED = YES__11_NEW_SOURCE_BOUND_ROWS
 TARGETED_REALIZABILITY_TARGETED_CORPUS_FROZEN = YES__27_SOURCES
-TARGETED_REALIZABILITY_PHYSICAL_SELECTION_ADJUDICATION_STARTED = NO
+TARGETED_REALIZABILITY_PHYSICAL_SELECTION_ADJUDICATION_STARTED = YES__COMPLETE
 POST_FW_PROCESS_MATRIX_REALIZABILITY_PHYSICAL_SELECTION_STAGE1_PREREGISTRATION_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = PROSPECTIVELY_FREEZE_STAGE2_PHYSICAL_SELECTION_ADJUDICATION_RULES_BEFORE_CORPUS_APPLICATION
-NEXT_RECOMMENDED_OPERATION = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION
-NEXT_OPERATION_CLASS = PHYSICAL_SELECTION_ADJUDICATION_PREREGISTRATION
+FW_PROCESS_MATRIX_STAGE2_INPUT_IDENTITY_REPAIR = CANONICALLY_COMPLETE
+FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2 = CANONICALLY_COMPLETE
+POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
+NEXT_EXECUTION_STEP = READ_ONLY_POST_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_RECOMMENDED_OPERATION = POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_OPERATION_CLASS = READ_ONLY_SEQUENCING_ADJUDICATION
 NEXT_OPERATION_AUTHORIZED = YES__CURRENT_EXECUTIVE_DELEGATION
-NEXT_OPERATION_AUTHORIZATION_BOUNDARY = FREEZE_STAGE2_RULES_BEFORE_APPLYING_FROZEN_27_SOURCE_CORPUS
+NEXT_OPERATION_AUTHORIZATION_BOUNDARY = READ_ONLY_SEQUENCING_ONLY__NO_DOWNSTREAM_SCIENCE_PRESELECTED
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
-NEXT_SCIENTIFIC_PHASE = FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_AND_PHYSICAL_SELECTION_STAGE2_PREREGISTRATION
+NEXT_SCIENTIFIC_PHASE = NONE__PENDING_READ_ONLY_POST_STAGE2_SEQUENCING
 ```
 
-The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, causal-process Stage-2 taxonomy, the Method-0.2.1 result-independence audit, the dedicated `FW-PROCESS-MATRIX` admission adversarial audit, the closed-corpus `FW_PROCESS_MATRIX_NULL_CONTROL`, the post-null read-only sequencing adjudication, and the targeted realizability / physical-selection Stage-1 source strengthening are complete at their declared scopes. The 27-source targeted corpus is frozen and sufficient for later physical-selection adjudication at the declared search scope. No physical-selection adjudication, non-null pairwise comparison, recurrence consequence, empirical target, method change, or FCP-27 phase has begun. Under the current executive delegation, the next valid operation is prospective Stage-2 adjudication preregistration; corpus application remains forbidden until that rule set is frozen.
+The Grok audit and independent adjudication, Finding-007 targeted source re-audit, String/M controls and comparisons, prospective AS/LOOP reanalyses, program-level recurrence, FCP-25, broader holography, FCP-26 Stage 1, publication-provenance housekeeping, FW-CAT Stages 1–2, the post-FW-CAT current-state external audit, the bounded `OBJ-CAT-11` re-adjudication, the causal-process / indefinite-causal-order Stage-1 intake, the prospective Method 0.2.1 admission repair, causal-process Stage-2 taxonomy, the Method-0.2.1 result-independence audit, the dedicated `FW-PROCESS-MATRIX` admission adversarial audit, the closed-corpus `FW_PROCESS_MATRIX_NULL_CONTROL`, the post-null read-only sequencing adjudication, targeted realizability / physical-selection Stage 1, the result-independent Stage-2 input-identity repair, and the closed-corpus Stage-2 physical-selection adjudication are complete at their declared scopes. Stage 2 establishes a general probabilistic/postselected representation but not a general deterministic realization or complete physical-selection criterion; selected positive classes, broad assumption-scoped exclusions, and a nonempty unresolved framework-wide remainder coexist. No non-null pairwise comparison, convergence-credit change, recurrence consequence, empirical-target campaign, framework-status change, method change, or FCP-27 phase follows automatically. The next valid operation is `POST_FW_PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION`, a fresh read-only sequencing decision with no downstream scientific route preselected.
 
 ## Post-FW-CAT program-ledger and metadata reconciliation — canonical result
 

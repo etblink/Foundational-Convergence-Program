@@ -21,11 +21,11 @@ FCP separates questions that are often conflated:
 
 ## Current scientific frontier
 
-The latest canonical scientific operation is the targeted realizability / physical-selection **Stage 1 source strengthening** for the source-bound process-matrix framework (`FW-PROCESS-MATRIX`). It executed the preregistered search architecture and froze a **27-source targeted corpus** (16 reused canonical sources + 11 new external sources) with source-selection, counterevidence, R0–R6 layer coverage, P1–P12 readiness, identity/version, redundancy, and declared-scope saturation checks all passing.
+The latest canonical scientific operation is the targeted realizability / physical-selection **Stage 2 adjudication** for the source-bound process-matrix framework (`FW-PROCESS-MATRIX`). Applied to the prospectively frozen 27-source corpus, it finds a layered rather than binary physicality picture: a general `W`-scope probabilistic/postselected representation is established, while a general deterministic standard-quantum realization and a complete general physical-selection criterion are not established.
 
-That result does **not** decide which formally valid process matrices are physically realizable. The frozen literature instead gives the later adjudication enough two-sided evidence to distinguish probabilistic pre/postselection representations, standard-quantum and time-delocalized realization classes, purity/reversibility constraints, composition limits, closed-laboratory and classical-spacetime restrictions, QC-QC subclasses, simulations, and concrete implementation caveats without collapsing them into one predicate.
+Positive realization results remain nonempty for selected classes and implementations, while broad assumption-scoped exclusion boundaries are also nonempty. General composition/globalization closure and general classical-spacetime embedding are not established, and a framework-wide physical-realizability remainder remains unresolved. Concrete implementation evidence remains subclass-only and does not amount to framework-level empirical selection.
 
-Physical-selection adjudication has not started. The next epistemic step is to **prospectively freeze the Stage 2 adjudication rules before applying the 27-source corpus**. No pairwise comparison, convergence credit, recurrence recomputation, framework-level empirical selection, or FCP-27 phase follows automatically from Stage 1.
+The 11-source strengthening added material information beyond the legacy corpus. The next step is a **fresh read-only scientific sequencing decision**; Stage 2 does not automatically authorize a pairwise comparison, convergence credit, recurrence recomputation, empirical campaign, framework-status change, or FCP-27.
 
 For the exact live state and authorization boundary, see [`CURRENT_STATE.md`](CURRENT_STATE.md).
 
