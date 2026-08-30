@@ -1,0 +1,2 @@
+trigger=2026-08-30T00:00-07:00
+base=fdb1ff04fc5c4a494da9c44822cac277a819d8c0
