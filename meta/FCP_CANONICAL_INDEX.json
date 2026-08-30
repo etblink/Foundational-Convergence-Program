@@ -65,10 +65,10 @@
     "version": "0.2.1"
   },
   "indexed_scientific_baseline": {
-    "commit": "4b29990e16ce575182941cbc636f10424742d438",
-    "message": "Reconcile FW-PROCESS-MATRIX realizability preregistration state",
+    "commit": "0ead3d22d6dac498343cb3af0bc827af47195949",
+    "message": "Make README public-facing",
     "repository": "etblink/Foundational-Convergence-Program",
-    "tree": "6a9223aff973ad1589fd5236e01757e137c63997"
+    "tree": "589925379028573b695e5dcf66220782c1bc5f05"
   },
   "navigation_coverage": {
     "absence_from_operation_registry_means_scientific_absence": false,
