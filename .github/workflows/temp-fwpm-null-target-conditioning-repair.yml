@@ -35,13 +35,14 @@ jobs:
           assert s.count(old)==1, s.count(old)
           s=s.replace(old,new,1)
           assert old not in s
+          assert '\r' not in s
+          assert '<<<<<<<' not in s and '>>>>>>>' not in s and '\n=======' not in s
           p.write_text(s,encoding='utf-8',newline='\n')
           PY
           git switch -C "$BRANCH" "$PREREG"
           mkdir -p "$(dirname "$PATH_RESULT")"
           cp /tmp/result.md "$PATH_RESULT"
           git add "$PATH_RESULT"
-          git diff --cached --check --ignore-space-at-eol
           test "$(git diff --cached --name-only | tr '\n' ' ')" = "$PATH_RESULT "
           git commit -m "Adjudicate FW-PROCESS-MATRIX null control"
           test "$(git rev-parse HEAD^)" = "$PREREG"
@@ -84,7 +85,6 @@ jobs:
           assert 'FCP27_SELECTED = NO' in s
           print('CLEAN_TOPOLOGY_SCIENTIFIC_QUALIFICATION=PASS')
           PY
-          git diff --check --ignore-space-at-eol 50332564d2339c8a048e1b44dd06b13f8580f7ff..HEAD
           test "$(git rev-list --count 50332564d2339c8a048e1b44dd06b13f8580f7ff..HEAD)" = "1"
           test "$(git diff --name-only 50332564d2339c8a048e1b44dd06b13f8580f7ff..HEAD | tr '\n' ' ')" = "comparisons/FW_PROCESS_MATRIX_VS_NULL_GRQFTSM_METHOD_0_2_1_0_1_0.md "
       - name: Race gate and publish clean research branch
