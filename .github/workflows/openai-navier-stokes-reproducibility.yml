@@ -1,0 +1,138 @@
+name: OpenAI Navier-Stokes reproducibility audit
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/openai-navier-stokes-reproducibility.yml'
+      - 'governance/OPENAI_NAVIER_STOKES_2026_REPRODUCIBILITY_AUDIT_PREREGISTRATION_0_1_0.md'
+      - 'audits/OPENAI_NAVIER_STOKES_2026_REPRODUCIBILITY_AUDIT_0_1_0.md'
+      - 'handoffs/OPENAI_NAVIER_STOKES_2026_REPRODUCIBILITY_AUDIT_HANDOFF_0_1_0.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      UPSTREAM_COMMIT: f9e8bc5b38b6e212696e8a30e3e91517af887bbd
+      UPSTREAM_TREE: a503f07635f200c0f2f9c5361df1fa07f95c4741
+      LANDRUN_COMMIT: 811cfff51ceaf3d9843708aa6d22e9b84ccac8b4
+    steps:
+      - name: Checkout pinned OpenAI proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone https://github.com/openai/NavierStokesAndEuler.git upstream
+          cd upstream
+          git checkout --detach "$UPSTREAM_COMMIT"
+          test "$(git rev-parse HEAD)" = "$UPSTREAM_COMMIT"
+          test "$(git rev-parse HEAD^{tree})" = "$UPSTREAM_TREE"
+          printf 'UPSTREAM_HEAD=%s\n' "$(git rev-parse HEAD)"
+          printf 'UPSTREAM_TREE=%s\n' "$(git rev-parse HEAD^{tree})"
+
+      - name: Install Lean toolchain manager
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Verify pinned toolchain and dependency manifest
+        shell: bash
+        working-directory: upstream
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.34.0-rc2'
+          grep -F '"rev": "19e111e2141cf333c7daff0f64c5f24acc91dd2e"' lake-manifest.json
+          grep -F '"rev": "85e3a25e006c35636f0e53b0e9296caca2685bc0"' lake-manifest.json
+          lake --version
+
+      - name: Static proof-hole gate
+        shell: bash
+        working-directory: upstream
+        run: |
+          set -euo pipefail
+          if grep -RIn --include='*.lean' -E '^[[:space:]]*(sorry|admit)([[:space:]]|$)' NavierStokes; then
+            echo 'Executable proof hole found in NavierStokes/' >&2
+            exit 1
+          fi
+          if grep -RIn --include='*.lean' -E '^[[:space:]]*axiom[[:space:]]' NavierStokes; then
+            echo 'Project-defined axiom found in NavierStokes/' >&2
+            exit 1
+          fi
+          echo 'No executable sorry/admit or project-defined axiom found in NavierStokes/.'
+
+      - name: Fetch Mathlib cache
+        shell: bash
+        working-directory: upstream
+        run: |
+          set -euo pipefail
+          lake exe cache get
+
+      - name: Build Navier-Stokes library
+        shell: bash
+        working-directory: upstream
+        run: |
+          set -euo pipefail
+          lake build NavierStokes
+
+      - name: Recompile exported comparator solution
+        shell: bash
+        working-directory: upstream
+        run: |
+          set -euo pipefail
+          lake env lean NavierStokes/ComparatorSolution.lean | tee /tmp/comparator-solution.log
+          if grep -F 'sorryAx' /tmp/comparator-solution.log; then
+            echo 'Unexpected sorryAx dependency in exported theorem.' >&2
+            exit 1
+          fi
+
+      - name: Build pinned Landrun
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone https://github.com/Zouuup/landrun.git landrun-src
+          cd landrun-src
+          git checkout --detach "$LANDRUN_COMMIT"
+          test "$(git rev-parse HEAD)" = "$LANDRUN_COMMIT"
+          go version
+          go build -o "$GITHUB_WORKSPACE/landrun" cmd/landrun/main.go
+          "$GITHUB_WORKSPACE/landrun" --help >/dev/null
+
+      - name: Build Comparator and lean4export
+        shell: bash
+        working-directory: upstream
+        run: |
+          set -euo pipefail
+          lake build comparator lean4export
+          test -x .lake/packages/lean4export/.lake/build/bin/lean4export
+
+      - name: Comparator replay with builtin Lean kernel
+        shell: bash
+        working-directory: upstream
+        run: |
+          set -euo pipefail
+          cat > /tmp/navier-stokes-fcp-comparator.json <<'EOF'
+          {
+            "challenge_module": "ComparatorChallenges.NavierStokes",
+            "solution_module": "NavierStokes.ComparatorSolution",
+            "enable_nanoda": false,
+            "theorem_names": [
+              "NavierStokes.Comparator.navier_stokes_breakdown_R3",
+              "NavierStokes.Comparator.navier_stokes_breakdown_periodic"
+            ],
+            "permitted_axioms": [
+              "propext",
+              "Quot.sound",
+              "Classical.choice"
+            ]
+          }
+          EOF
+          COMPARATOR_LANDRUN="$GITHUB_WORKSPACE/landrun" \
+          COMPARATOR_LEAN4EXPORT="$GITHUB_WORKSPACE/upstream/.lake/packages/lean4export/.lake/build/bin/lean4export" \
+            lake exe comparator /tmp/navier-stokes-fcp-comparator.json
