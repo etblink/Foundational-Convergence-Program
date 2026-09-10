@@ -1,11 +1,9 @@
-name: One-shot OpenAI Navier-Stokes source-register reconciliation
+name: openai-navier-stokes-register-once
 
 on:
   push:
-    branches:
-      - maintenance/openai-navier-stokes-source-register
-    paths:
-      - .github/workflows/openai-navier-stokes-register-once.yml
+    branches: [maintenance/openai-navier-stokes-source-register]
+    paths: [.github/workflows/openai-navier-stokes-register-once.yml]
 
 permissions:
   contents: write
@@ -14,45 +12,23 @@ jobs:
   reconcile:
     runs-on: ubuntu-24.04
     steps:
-      - name: Checkout maintenance branch
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: maintenance/openai-navier-stokes-source-register
           fetch-depth: 0
-
-      - name: Append independently reproduced OpenAI Navier-Stokes sources
+      - name: Append register entry
+        run: python3 tools/append_openai_ns_source_register.py
+      - name: Validate and commit
         shell: bash
         run: |
           set -euo pipefail
-          if grep -Fq 'SRC-OPENAI-NS-2026-PAPER' SOURCE_REGISTER.md; then
-            echo 'OpenAI Navier-Stokes registration already present; refusing duplicate append.'
-            exit 0
-          fi
-          cat >> SOURCE_REGISTER.md <<'EOF'
-
-### OpenAI Navier–Stokes 2026 — separately authorized source and formal-reproducibility record
-
-These records postdate the active K9 closed-corpus freeze. They are canonical FCP source/provenance entries but are **not admissible evidence inside that frozen K9 run**. Registration records an independently reproduced formal certificate at the pinned state; it does not imply independent human proof review, global mathematical consensus, Clay recognition, framework admission, K1–K10 credit, E1–E5 credit, recurrence credit, empirical credit, or physical canonicity.
-
-| Source ID | Framework / role | Authority | Location | Status | Notes |
-|---|---|---|---|---|---|
-| `SRC-OPENAI-NS-2026-PAPER` | Generic mathematics / nonlinear PDE theorem source; no FCP framework assignment | OpenAI, *Finite Time Blowup for Navier–Stokes* (2026) | OpenAI paper released 2026-09-08; canonical FCP assessment `audits/OPENAI_NAVIER_STOKES_2026_SOURCE_ASSESSMENT_0_1_0.md` | `SOURCE_BOUND` | Forced 3D incompressible Navier–Stokes result only. Smooth compactly supported forcing is essential; this entry does not assert blowup for the unforced 3D Cauchy problem. `K9_CLOSED_CORPUS_EFFECT=NONE`; `CONVERGENCE_CREDIT=NONE`; `EMPIRICAL_CREDIT=NONE`. |
-| `SRC-OPENAI-NS-2026-LEAN` | Formal certificate / independent reproducibility provenance for the preceding theorem source | OpenAI `NavierStokesAndEuler` Lean 4 repository; independently replayed by FCP | repo `openai/NavierStokesAndEuler`; commit `f9e8bc5b38b6e212696e8a30e3e91517af887bbd`; tree `a503f07635f200c0f2f9c5361df1fa07f95c4741`; FCP CI run `34532064891`; result `audits/OPENAI_NAVIER_STOKES_2026_REPRODUCIBILITY_AUDIT_RESULT_0_1_0.md` | `SOURCE_BOUND` | `INDEPENDENT_FORMAL_REPRODUCIBILITY=PASS`: exact checkout, proof-hole gate, 9,580-job Navier–Stokes build, comparator-solution recompilation, pinned Landrun/Comparator builds, and Comparator replay of Clay alternatives C/D all passed. Exported theorems depend only on `propext`, `Classical.choice`, and `Quot.sound`; Lean default kernel accepted the solution. This is not independent human proof review or Clay recognition. |
-EOF
-
           git diff --check
-          git diff -- SOURCE_REGISTER.md
-
-      - name: Commit maintenance result
-        shell: bash
-        run: |
-          set -euo pipefail
           if git diff --quiet -- SOURCE_REGISTER.md; then
-            echo 'No source-register change to commit.'
+            echo "No change required."
             exit 0
           fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add SOURCE_REGISTER.md
-          git commit -m 'Register reproduced OpenAI Navier-Stokes sources'
+          git commit -m "Register reproduced OpenAI Navier-Stokes sources"
           git push origin HEAD:maintenance/openai-navier-stokes-source-register
