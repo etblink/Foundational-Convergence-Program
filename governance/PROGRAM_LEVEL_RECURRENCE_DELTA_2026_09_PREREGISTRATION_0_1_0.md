@@ -13,17 +13,19 @@ Recompute only the program-level recurrence consequences of the newly canonical 
 
 The operation asks whether the new current pairwise slot changes any recurrence-family disposition, creates any independent non-generic foundational recurrence, creates any repeated independent support for Reduced NFC, or changes any program-level empirical-selection conclusion.
 
-## 2. Frozen new delta inputs
+## 2. Frozen exact input identities
 
-The new scientific delta is limited to already-canonical repository artifacts at the base commit, principally:
+All scientific inputs are bound to blobs already present at the canonical base. The controlling identities are:
 
-- `audits/NFC_PROCESS_MATRIX_PROSPECTIVE_COMPARISON_ADJUDICATION_0_1_0.md`
-- its preregistration, hostile false-positive audit, and handoff;
-- `audits/FW_PROCESS_MATRIX_NULL_CONTROL_K9_TARGETED_PAIRWISE_REANALYSIS_ADJUDICATION_0_1_0.md` only where needed to resolve current process-matrix/null-control state;
-- the already-canonical process-matrix admission and realizability/physical-selection records only where needed to prevent overclaim or double counting;
-- the previous program-level recurrence recomputation and its frozen methodology artifacts.
+```text
+PRIOR_RECURRENCE_ADJUDICATION = a86e06773fa47268571744f4e118c8e49fb9ebda
+NFC_PROCESS_MATRIX_ADJUDICATION = fc3bb6c71b419595739378d3d44ff477dc489ee8
+PROCESS_MATRIX_K9_DELTA = 88073c891efa194ed7328a1a11853b91b83e55ed
+PROCESS_MATRIX_STAGE2_REALIZABILITY = 256e73ffc68bacc1860d4b3368868161e9845da1
+PROCESS_MATRIX_ADMISSION_ADVERSARIAL_AUDIT = e825e4b2befdb961877d3ec9b38351c2924ec4ab
+```
 
-No post-base source, commentary, framework paper, external audit, or new scientific source may alter the adjudication.
+The new scientific delta is limited to those already-canonical repository artifacts plus the new NFC/process-matrix comparison's preregistration, hostile false-positive audit, and handoff where necessary to interpret the adjudication. No post-base source, commentary, framework paper, external audit, or new scientific source may alter the adjudication.
 
 ## 3. Frozen denominator rule
 
