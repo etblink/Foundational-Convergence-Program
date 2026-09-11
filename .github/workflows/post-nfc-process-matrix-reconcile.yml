@@ -17,11 +17,34 @@ jobs:
           ref: maintenance/post-nfc-process-matrix-provenance-reconciliation
           fetch-depth: 0
 
-      - name: Bind verified comparison blob and apply reconciliation
+      - name: Bind verified identities and narrow current-state anchors
         shell: bash
         run: |
           set -euo pipefail
           sed -i 's/9d279102f2b7d5024fded2fd58b5a58c304957cf/0e4226a3dfc616554c8829dc677aab5c23128626/g' tools/post_nfc_process_matrix_reconcile.py
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tools/post_nfc_process_matrix_reconcile.py')
+          s = p.read_text(encoding='utf-8')
+          replacements = {
+              "state = replace_prefixed_line(state, 'CLAIM_LEDGER_CURRENT_SUPERSESSION = ', 'CLAIM_LEDGER_CURRENT_SUPERSESSION = RECONCILED_THROUGH_NFC_PROCESS_MATRIX_COMPARISON_CANONICALLY', 'claim ledger supersession')":
+              "state = replace_once(state, 'CLAIM_LEDGER_CURRENT_SUPERSESSION = RECONCILED_THROUGH_OBJ_CAT_11_READJUDICATION_CANONICALLY', 'CLAIM_LEDGER_CURRENT_SUPERSESSION = RECONCILED_THROUGH_NFC_PROCESS_MATRIX_COMPARISON_CANONICALLY', 'claim ledger supersession')",
+              "state = replace_prefixed_line(state, 'CLAIM_LEDGER_DURABLE_ROW_COUNT = ', 'CLAIM_LEDGER_DURABLE_ROW_COUNT = 99', 'claim ledger row count')":
+              "state = replace_once(state, 'CLAIM_LEDGER_DURABLE_ROW_COUNT = 94', 'CLAIM_LEDGER_DURABLE_ROW_COUNT = 99', 'claim ledger row count')",
+              "state = replace_prefixed_line(state, 'CLAIM_LEDGER_TEMPORAL_CEILING = ', 'CLAIM_LEDGER_TEMPORAL_CEILING = NFC_REDUCED_VS_FW_PROCESS_MATRIX_PROSPECTIVE_COMPARISON', 'claim ledger temporal ceiling')":
+              "state = replace_once(state, 'CLAIM_LEDGER_TEMPORAL_CEILING = FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION', 'CLAIM_LEDGER_TEMPORAL_CEILING = NFC_REDUCED_VS_FW_PROCESS_MATRIX_PROSPECTIVE_COMPARISON', 'claim ledger temporal ceiling')",
+          }
+          for old, new in replacements.items():
+              if s.count(old) != 1:
+                  raise SystemExit(f'helper patch anchor count for {old[:55]!r}: {s.count(old)}')
+              s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8', newline='\n')
+          PY
+
+      - name: Apply reconciliation
+        shell: bash
+        run: |
+          set -euo pipefail
           python tools/post_nfc_process_matrix_reconcile.py
 
       - name: Verify bounded working-tree diff
