@@ -22,7 +22,10 @@ jobs:
           fetch-depth: 0
 
       - name: Apply bounded reconciliation
-        run: python .github/scripts/post_pgh_stage2_routing.py
+        shell: bash
+        run: |
+          python .github/scripts/post_pgh_stage2_routing.py
+          sed -i 's/[[:space:]]\+$//' audits/POST_PGH_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION_0_1_0.md
 
       - name: Commit bounded result
         shell: bash
