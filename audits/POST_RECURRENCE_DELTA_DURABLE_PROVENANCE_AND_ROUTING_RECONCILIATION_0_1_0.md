@@ -38,9 +38,11 @@ FCP27_SELECTED = NO
 ## Exact candidate blobs
 
 ```text
-CLAIM_LEDGER_BLOB = d340940d04e4b525e011d9460a152684c8e8ad43
+CLAIM_LEDGER_BLOB = 48c123b7ce9051568992f9d39f7847c793f01769
 CURRENT_STATE_BLOB = 1d3754a0f697b88ea4e48eb51af125e7eb40a2ce
 ```
+
+The Claim Ledger identity above is the post-normalization candidate blob; the pre-normalization transient helper value is not canonical candidate provenance.
 
 ## Qualification
 
