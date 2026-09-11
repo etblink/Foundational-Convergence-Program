@@ -1,0 +1,142 @@
+# Post-NFC/Process-Matrix Durable Provenance and Routing Reconciliation — Handoff
+
+**Version:** 0.1.0  
+**Operation:** `POST_NFC_PROCESS_MATRIX_DURABLE_PROVENANCE_AND_ROUTING_RECONCILIATION`  
+**Status:** QUALIFIED_MAINTENANCE_CANDIDATE
+
+## Exact opening and scientific boundary
+
+```text
+CANONICAL_OPENING_COMMIT = ff7724464a293ce52a918b68348c6aa6082b1d22
+CANONICAL_OPENING_TREE = 49ac7e64ccdd3aba52d53017e108d0297aa5fe8b
+LATEST_SCIENTIFIC_OPERATION = NFC_REDUCED_VS_FW_PROCESS_MATRIX_PROSPECTIVE_COMPARISON
+LATEST_SCIENTIFIC_RESULT_COMMIT = ff7724464a293ce52a918b68348c6aa6082b1d22
+LATEST_SCIENTIFIC_RESULT_TREE = 49ac7e64ccdd3aba52d53017e108d0297aa5fe8b
+MAINTENANCE_BRANCH = maintenance/post-nfc-process-matrix-provenance-reconciliation
+MAINTENANCE_RESULT_COMMIT = 41d4b90156cb20d0ec40c39904713437a8c0d8e3
+MAINTENANCE_RESULT_TREE = 07a16cb519acc087eca782b2233ce7d5a20fec41
+```
+
+## Reconciliation result
+
+The candidate performs result-preserving provenance/navigation maintenance only.
+
+```text
+OLD_CLAIM_LEDGER_DURABLE_ROW_COUNT = 94
+APPENDED_DURABLE_ROW_COUNT = 5
+NEW_CLAIM_LEDGER_DURABLE_ROW_COUNT = 99
+HISTORICAL_94_ROWS_REWRITTEN = NO
+CLAIM_LEDGER_TEMPORAL_CEILING = NFC_REDUCED_VS_FW_PROCESS_MATRIX_PROSPECTIVE_COMPARISON
+```
+
+Appended durable rows:
+
+```text
+FWPM-001
+FWPM-NULL-001
+FWPM-REAL-001
+FWPM-K9-001
+FCP-NFCPM-001
+```
+
+The current scientific ceiling remains:
+
+```text
+NFC_PROCESS_MATRIX_E1 = 0
+NFC_PROCESS_MATRIX_E2 = 0
+NFC_PROCESS_MATRIX_E3 = 0
+NFC_PROCESS_MATRIX_E4 = 0
+NFC_PROCESS_MATRIX_E5 = 5
+NFC_PROCESS_MATRIX_NONE_ESTABLISHED = 5
+NFC_PROCESS_MATRIX_UNRESOLVED = 0
+NFC_PROCESS_MATRIX_NON_GENERIC_RELATIONS = 0
+NFC_PROCESS_MATRIX_PAIRWISE_EMPIRICAL_SELECTION = NO
+NFC_PROCESS_MATRIX_NFC_EMPIRICAL_SUPPORT = NO
+NFC_PROCESS_MATRIX_MATERIAL_ASYMMETRY = NONEMPTY
+```
+
+The process-matrix/null ceiling remains:
+
+```text
+FW_PROCESS_MATRIX_NULL_E1 = 0
+FW_PROCESS_MATRIX_NULL_E2 = 4
+FW_PROCESS_MATRIX_NULL_E3 = 0
+FW_PROCESS_MATRIX_NULL_E4 = 0
+FW_PROCESS_MATRIX_NULL_E5 = 0
+FW_PROCESS_MATRIX_NULL_NONE_ESTABLISHED = 13
+FW_PROCESS_MATRIX_NULL_UNRESOLVED = 1
+FW_PROCESS_MATRIX_NULL_SUBTRACTED_RESIDUE = NONEMPTY__S3_FRAMEWORK_WIDE
+```
+
+## Exact canonical blob bindings preserved in the durable ledger
+
+```text
+PROCESS_MATRIX_K1_K10_BLOB = 42a991dcdb250f305e47ac4360fc780bb4e78a7b
+PROCESS_MATRIX_NULL_CONTROL_BLOB = a9eea06aa3073e0c50707801fec327c6183be946
+PROCESS_MATRIX_K9_DELTA_BLOB = 5e1365093398fc68f7b9aaa825b2f43da66250dd
+PROCESS_MATRIX_K9_ADJUDICATION_BLOB = 88073c891efa194ed7328a1a11853b91b83e55ed
+PROCESS_MATRIX_TARGETED_REALIZABILITY_STAGE2_BLOB = 256e73ffc68bacc1860d4b3368868161e9845da1
+NFC_PROCESS_MATRIX_COMPARISON_BLOB = 0e4226a3dfc616554c8829dc677aab5c23128626
+NFC_PROCESS_MATRIX_HOSTILE_ADJUDICATION_BLOB = fc3bb6c71b419595739378d3d44ff477dc489ee8
+```
+
+## Workflow qualification provenance
+
+A temporary self-deleting helper workflow was used to patch large mutable navigation files without whole-file manual replacement.
+
+```text
+WORKFLOW_RUN_1 = 34555878623
+WORKFLOW_RUN_1_RESULT = FAILED_SAFE_BEFORE_COMMIT
+WORKFLOW_RUN_1_FAILURE_CLASS = OVERBROAD_HISTORICAL_CURRENT_STATE_ANCHOR_ASSERTION
+WORKFLOW_RUN_1_REPOSITORY_MUTATION = NONE
+
+WORKFLOW_RUN_2 = 34555939386
+WORKFLOW_RUN_2_RESULT = SUCCESS
+WORKFLOW_RUN_2_HELPER_COMMIT = 41d4b90156cb20d0ec40c39904713437a8c0d8e3
+HELPER_WORKFLOW_SURVIVES_FINAL_DIFF = NO
+HELPER_SCRIPT_SURVIVES_FINAL_DIFF = NO
+```
+
+The second run narrowed the current-state anchors to their exact current values rather than weakening uniqueness checks globally. It also bound the verified canonical comparison blob before executing the durable update.
+
+## Qualified final path set before this handoff
+
+Relative to canonical opening commit `ff7724464a293ce52a918b68348c6aa6082b1d22`, the qualified maintenance result before adding this handoff changes exactly:
+
+```text
+CLAIM_LEDGER.md
+CURRENT_STATE.md
+FRAMEWORK_REGISTER.md
+governance/POST_NFC_PROCESS_MATRIX_DURABLE_PROVENANCE_AND_ROUTING_RECONCILIATION_0_1_0.md
+```
+
+This handoff is the only additional path.
+
+## Scientific no-change firewall
+
+```text
+NEW_EXTERNAL_SOURCE_SEARCH = NO
+NEW_SOURCE_ADMISSION = NO
+SOURCE_REGISTER_CHANGE = NO
+COMPARISON_RESULT_CHANGE = NO
+E1_E5_READJUDICATION = NO
+RECURRENCE_RECOMPUTATION = NO
+EMPIRICAL_ESCALATION = NO
+METHOD_REVISION = NO
+FRAMEWORK_ID_CHANGE = NO
+NFC_CANON_EXPANSION = NO
+FCP27_SELECTION = NO
+```
+
+## Routing after integration
+
+The reconciliation preselects no substantive science. It only identifies the next decision point:
+
+```text
+NEXT_RECOMMENDED_OPERATION = POST_NFC_PROCESS_MATRIX_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_OPERATION_CLASS = READ_ONLY_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_NUMBERED_PHASE_SELECTED = NO
+FCP27_SELECTED = NO
+```
+
+A fresh sequencing adjudication must decide whether the newly added NFC/process-matrix pairwise slot now justifies a program-level recurrence recomputation, whether one or more old recurrence-consistency dockets should be folded into that epoch, or whether another open dependency has greater marginal scientific value.
