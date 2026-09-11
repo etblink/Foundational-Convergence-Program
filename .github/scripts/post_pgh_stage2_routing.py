@@ -1,0 +1,235 @@
+from pathlib import Path
+import subprocess
+
+p = Path("CURRENT_STATE.md")
+s = p.read_text(encoding="utf-8")
+
+
+def replace_once(old: str, new: str, label: str) -> None:
+    global s
+    count = s.count(old)
+    if count != 1:
+        raise SystemExit(f"{label}: expected exactly one match, found {count}")
+    s = s.replace(old, new, 1)
+
+
+replace_once(
+    """LATEST_CANONICAL_SCIENTIFIC_OPERATION = PROGRAM_LEVEL_RECURRENCE_DELTA_2026_09
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = 0bebb5167fa3feed630991c9cbfe007dfb519205
+LATEST_CANONICAL_SCIENTIFIC_TREE = 96c79a5b209af757d759102a1bd2cddb28d549f9
+LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION
+LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
+PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = e2fa96fe2fe2a686385a1f968f95a5eb9c2c68b5
+PREVIOUS_CANONICAL_MAINTENANCE_TREE = f29720957baa127a75ed086a88a46dda17c0252b
+""",
+    """LATEST_CANONICAL_SCIENTIFIC_OPERATION = FCP_PGH_STAGE2_A_H_TAXONOMY_GATE
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = e174dace37fe7c37ee0a75c0ffe0ddb8280af1bb
+LATEST_CANONICAL_SCIENTIFIC_TREE = 4c53f6695b8ce31c4ec5ccd12313ef3234701ec9
+LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_PGH_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION
+LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
+PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = ea02dd8f5010aff2aad6bf9526b388f3fb09fdbe
+PREVIOUS_CANONICAL_MAINTENANCE_TREE = fefc0963b25f27368c35af17c967cd2b8b30dabb
+""",
+    "top identity",
+)
+
+old_para = "`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix, pairwise, and recurrence-delta operations are unnumbered and FCP-27 has not been selected. The latest mutating scientific result remains the canonically integrated `PROGRAM_LEVEL_RECURRENCE_DELTA_2026_09`. Exact reconstruction gives 19 historical pairwise operations, 15 current effective pairwise slots, and seven current Reduced-NFC comparator slots; the recurrence-family vector remains R1=0, R2=0, R3=1, R4=1, R5=7, R6=0, R7=1, R8=3, R9=0, R10=0. No independent non-generic foundational recurrence, repeated independent support for Reduced NFC, framework-level EMP4, scalar score, or framework winner is established. The subsequent canonical read-only `POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_ADJUDICATION` selects `EVIDENCE_TRIGGERED_HOLD`: no immediate new scientific operation, FCP-27 phase, source search, recurrence reopening, tensor escalation, process-matrix Stage-2 reopening, or empirical escalation is selected. New science requires a named evidence trigger and fresh preregistration. The durable Claim Ledger remains at 100 rows because the sequencing decision creates no new framework-indexed scientific proposition. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially."
+new_para = "`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix, pairwise, recurrence-delta, and PGH intake/taxonomy operations are unnumbered and FCP-27 has not been selected. The latest mutating scientific result is now the canonically integrated `FCP_PGH_STAGE2_A_H_TAXONOMY_GATE`. The prior evidence-triggered hold was legitimately reopened by the named `T1_STABLE_NEW_FOUNDATIONAL_COMPETITOR_CANDIDATE` trigger supplied by the frozen PGH successor. FCP Stage 1 independently reconstructed a 31-record corpus; Stage 2 then classified the exact `PGH-GRAM-0010 / PGH-OBJ-0052` object as `B__CLASSIFY_AS_NONFRAMEWORK_PHYSICAL_MODEL_OR_POSTULATE`, with `G = FAIL` as the controlling framework-distinctness failure, no `FW-PGH`, and no established existing-framework host. PGH remains a nontrivial falsifiable physical hypothesis; its truth is not adjudicated by taxonomy. Program-level recurrence, pairwise counts, EMP4 status, framework-winner status, and the 100-row durable framework Claim Ledger are unchanged because no new framework identity or framework-indexed durable claim was created. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially."
+replace_once(old_para, new_para, "top narrative")
+
+milestone_anchor = """POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
+"""
+milestone_new = milestone_anchor + """FCP_PGH_STAGE1_SOURCE_INTAKE = CANONICALLY_COMPLETE
+FCP_PGH_STAGE1_SOURCE_CORPUS = FROZEN__31_RECORDS
+FCP_PGH_STAGE2_A_H_TAXONOMY_GATE = CANONICALLY_COMPLETE
+FCP_PGH_STAGE2_TOP_LEVEL_OUTCOME = B__CLASSIFY_AS_NONFRAMEWORK_PHYSICAL_MODEL_OR_POSTULATE
+FCP_PGH_FRAMEWORK_ADMISSION = FAIL__CONTROLLING_CRITERION_G
+FW_PGH_CREATED = NO
+PGH_EXISTING_FRAMEWORK_HOST = NONE_ESTABLISHED
+PGH_EMPIRICAL_TRUTH_STATUS = UNADJUDICATED
+POST_PGH_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
+"""
+replace_once(milestone_anchor, milestone_new, "milestone insertion")
+
+routing_old = """POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_COMMIT = 98e02f288b12948dc382be7c0c23f105dddb801b
+SEQUENCING_SELECTION = EVIDENCE_TRIGGERED_HOLD
+ACTIVE_SCIENTIFIC_OPERATION = NONE
+NEXT_EXECUTION_STEP = READ_ONLY_EVIDENCE_TRIGGER_ASSESSMENT
+NEXT_RECOMMENDED_OPERATION = NONE__RESEQUENCE_ON_NAMED_EVIDENCE_TRIGGER
+NEXT_OPERATION_CLASS = EVIDENCE_TRIGGERED_READ_ONLY_RESEQUENCING
+NEXT_OPERATION_AUTHORIZED = NO__NO_ACTIVE_SCIENTIFIC_OPERATION_SELECTED
+NEXT_OPERATION_AUTHORIZATION_BOUNDARY = NEW_SCIENCE_REQUIRES_NAMED_TRIGGER_AND_FRESH_PREREGISTRATION
+NEXT_NUMBERED_PHASE_SELECTED = NO
+FCP27_SELECTED = NO
+NEXT_SCIENTIFIC_PHASE = NONE__EVIDENCE_TRIGGERED_HOLD
+"""
+routing_new = """POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_COMMIT = 98e02f288b12948dc382be7c0c23f105dddb801b
+PRIOR_SEQUENCING_SELECTION = EVIDENCE_TRIGGERED_HOLD
+EVIDENCE_TRIGGER_PGH = T1_STABLE_NEW_FOUNDATIONAL_COMPETITOR_CANDIDATE__FULFILLED
+FCP_PGH_STAGE1_SOURCE_INTAKE = CANONICALLY_COMPLETE
+FCP_PGH_STAGE2_A_H_TAXONOMY_GATE = CANONICALLY_COMPLETE
+PGH_TOP_LEVEL_TAXONOMY_OUTCOME = B__CLASSIFY_AS_NONFRAMEWORK_PHYSICAL_MODEL_OR_POSTULATE
+PGH_FRAMEWORK_ADMISSION = FAIL__CONTROLLING_CRITERION_G
+FW_PGH_CREATED = NO
+PGH_EXISTING_FRAMEWORK_HOST = NONE_ESTABLISHED
+PGH_EMPIRICAL_TRUTH_STATUS = UNADJUDICATED
+PGH_STAGE2_CLAIM_LEDGER_ROW = NONE__NONFRAMEWORK_RESULT_OUTSIDE_FRAMEWORK_INDEXED_LEDGER_SCHEMA
+ACTIVE_SCIENTIFIC_OPERATION = NONE
+NEXT_EXECUTION_STEP = POST_PGH_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_RECOMMENDED_OPERATION = POST_PGH_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_OPERATION_CLASS = READ_ONLY_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_OPERATION_AUTHORIZED = YES__STANDING_PROJECT_LEAD_DELEGATION
+NEXT_OPERATION_AUTHORIZATION_BOUNDARY = SEQUENCING_ONLY__NO_SUBSEQUENT_FCP_SCIENCE_BEFORE_SELECTION
+NEXT_NUMBERED_PHASE_SELECTED = NO
+FCP27_SELECTED = NO
+NEXT_SCIENTIFIC_PHASE = NONE__POST_PGH_STAGE2_SEQUENCING_PENDING
+"""
+replace_once(routing_old, routing_new, "current routing block")
+
+routing_para_old = "The process-matrix Stage-2 external-audit chain, K9 reanalysis, Reduced-NFC/process-matrix closed-corpus comparison, and subsequent program-level recurrence delta remain canonical. The read-only post-recurrence-delta sequencing adjudication is now also canonical and selects an evidence-triggered hold. There is no active scientific operation and no FCP-27, source-search, recurrence, tensor, process-matrix Stage-2, empirical, or NFC-confirmation escalation selected. Scientific work reopens only after a named trigger—such as a stable new framework candidate, material new source, concrete framework-level empirical target, high-discrimination new pair, load-bearing defect, or independent falsification/verification result—and any resulting mutation requires fresh preregistration. The four Category-B recurrence-epoch consistency dockets remain deferred unless one is shown to threaten a current load-bearing result."
+routing_para_new = "The process-matrix chain, Reduced-NFC/process-matrix comparison, recurrence delta, and prior evidence-triggered hold remain canonical history. That hold was subsequently and prospectively satisfied by the named PGH T1 trigger. PGH Stage 1 and Stage 2 are now canonical: the candidate is a scientifically nontrivial but nonframework physical model/postulate, with no `FW-PGH` and no established host. FCP has not tested the truth of that postulate. The next FCP operation is therefore a fresh read-only post-PGH sequencing adjudication; this maintenance pass neither selects FCP-27 nor starts source search, pairwise comparison, recurrence recomputation, or a PGH empirical test. The four Category-B recurrence-epoch consistency dockets remain deferred unless one is shown to threaten a current load-bearing result."
+replace_once(routing_para_old, routing_para_new, "routing narrative")
+
+section_anchor = "## Post-FW-CAT program-ledger and metadata reconciliation — canonical result\n"
+if s.count(section_anchor) != 1:
+    raise SystemExit(f"PGH section anchor expected once, found {s.count(section_anchor)}")
+pgh_section = """## PGH Stage 1 and Stage 2 — canonical taxonomy result
+
+The named T1 evidence trigger that reopened the prior hold has been fully adjudicated at FCP taxonomy scope. Stage 1 independently reconstructed the current PGH successor from 17 proposal/provenance artifacts, 10 external primary sources, and four existing-FCP identity controls. Stage 2 applied the preregistered Method-0.2.1 A–H gate without reopening that 31-record source window.
+
+```text
+FCP_PGH_STAGE1_SOURCE_INTAKE = CANONICALLY_COMPLETE
+FCP_PGH_STAGE1_SOURCE_CORPUS = FROZEN__31_RECORDS
+FCP_PGH_STAGE2_A_H_TAXONOMY_GATE = CANONICALLY_COMPLETE
+FCP_PGH_STAGE2_CANONICAL_COMMIT = e174dace37fe7c37ee0a75c0ffe0ddb8280af1bb
+FCP_PGH_STAGE2_CANONICAL_TREE = 4c53f6695b8ce31c4ec5ccd12313ef3234701ec9
+
+PGH_A = PARTIAL
+PGH_B = PASS
+PGH_C = PASS
+PGH_D = PASS
+PGH_E = PARTIAL
+PGH_F = PASS
+PGH_G = FAIL
+PGH_H = PASS
+PGH_DYNAMICS_MATURITY = NO_INTRINSIC_DYNAMICS_ESTABLISHED
+PGH_FRAMEWORK_ADMISSION = FAIL
+PGH_CONTROLLING_SUBSTANTIVE_FAILURE = G
+PGH_TOP_LEVEL_OUTCOME = B__CLASSIFY_AS_NONFRAMEWORK_PHYSICAL_MODEL_OR_POSTULATE
+FW_PGH_CREATED = NO
+PGH_EXISTING_FRAMEWORK_HOST = NONE_ESTABLISHED
+PGH_EMPIRICAL_TRUTH_STATUS = UNADJUDICATED
+```
+
+The controlling distinction is that the candidate's universal `p_emp(A,B,C) in T_ind` proposition is source-bound, physically meaningful, and falsifiable, so criterion C passes; however the triangle independent-source mathematics, generic causal/Bayesian architecture, and membership machinery are established prior art, while the residual PGH-specific content does not establish a distinct foundational framework architecture. `FW-GPTOPT` remains an adjacent representational possibility space rather than an established host because PGH is not source-bound through GPT/OPT's native systems/states/effects/transformations identity. `FW-CQM` and `FW-PROCESS-MATRIX` are not hosts. The predecessor Kp refutation remains preserved and gives the successor zero positive credit; outcome-directed rescue is not established.
+
+The durable Claim Ledger remains at 100 rows. This omission is deliberate rather than a propagation gap: the ledger schema is framework-indexed, while the canonical result explicitly creates no `FW-PGH` and establishes no existing framework host. The Stage-2 scientific artifacts and this mutable current-state surface carry the nonframework taxonomy result without manufacturing a framework ledger identity.
+
+A later empirical test of the PGH postulate, if undertaken, is a separate prospective operation and does not become FCP framework evidence unless a later named trigger justifies fresh FCP intake or reanalysis.
+
+"""
+s = s.replace(section_anchor, pgh_section + section_anchor, 1)
+
+nav_old = "- `CLAIM_LEDGER.md` — detailed durable claim records; the canonical post-FCP-25 reconciliation extends the durable temporal ceiling through FCP-25 at 89 rows and makes historical-versus-current interpretation semantics explicit."
+nav_new = "- `CLAIM_LEDGER.md` — detailed durable framework-indexed claim records; the current durable ledger contains 100 rows through `PROGRAM_LEVEL_RECURRENCE_DELTA_2026_09`. The canonical PGH Stage-2 nonframework taxonomy result intentionally creates no ledger row because no registered PGH or host framework identity exists."
+replace_once(nav_old, nav_new, "claim ledger nav")
+
+nav_anchor = "- versioned handoffs — phase-specific conclusions and provenance.\n"
+nav_insert = """- `governance/FCP_PGH_STAGE1_SOURCE_INTAKE_PREREGISTRATION_0_1_0.md` — frozen PGH Stage-1 independent-intake rules.
+- `frameworks/pgh/FCP_PGH_STAGE1_SOURCE_INTAKE_0_1_0.md` — frozen 31-record PGH Stage-1 corpus.
+- `audits/FCP_PGH_STAGE1_IDENTITY_RECONSTRUCTION_AND_TAXONOMY_READINESS_0_1_0.md` — independent candidate reconstruction and Stage-2 readiness.
+- `governance/FCP_PGH_STAGE2_A_H_TAXONOMY_GATE_PREREGISTRATION_0_1_0.md` — prospective PGH Stage-2 A–H gate.
+- `audits/FCP_PGH_STAGE2_A_H_TAXONOMY_ADJUDICATION_0_1_0.md` — canonical Outcome-B taxonomy adjudication.
+- `handoffs/FCP_PGH_STAGE2_A_H_TAXONOMY_GATE_HANDOFF_0_1_0.md` — canonical Stage-2 handoff and firewalls.
+"""
+replace_once(nav_anchor, nav_insert + nav_anchor, "PGH navigation")
+
+p.write_text(s, encoding="utf-8", newline="\n")
+
+current_blob = subprocess.check_output(["git", "hash-object", "CURRENT_STATE.md"], text=True).strip()
+audit = f"""# Post-PGH Stage-2 Routing and Navigation Reconciliation — 0.1.0
+
+**Operation:** `POST_PGH_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION`  
+**Status:** `QUALIFIED_MAINTENANCE_CANDIDATE`  
+**Canonical scientific base:** `e174dace37fe7c37ee0a75c0ffe0ddb8280af1bb`  
+**Canonical scientific base tree:** `4c53f6695b8ce31c4ec5ccd12313ef3234701ec9`
+
+## Purpose
+
+Propagate the already-canonical PGH Stage-1 and Stage-2 result into the mutable FCP state/navigation surface without changing the scientific adjudication or manufacturing a framework identity.
+
+## Preserved scientific result
+
+```text
+FCP_PGH_STAGE1_SOURCE_INTAKE = CANONICALLY_COMPLETE
+FCP_PGH_STAGE2_A_H_TAXONOMY_GATE = CANONICALLY_COMPLETE
+PGH_TOP_LEVEL_OUTCOME = B__CLASSIFY_AS_NONFRAMEWORK_PHYSICAL_MODEL_OR_POSTULATE
+PGH_FRAMEWORK_ADMISSION = FAIL__CONTROLLING_CRITERION_G
+FW_PGH_CREATED = NO
+PGH_EXISTING_FRAMEWORK_HOST = NONE_ESTABLISHED
+PGH_EMPIRICAL_TRUTH_STATUS = UNADJUDICATED
+```
+
+## Durable-ledger disposition
+
+```text
+CLAIM_LEDGER_WRITE_COUNT = 0
+CLAIM_LEDGER_DURABLE_ROW_COUNT = 100
+PGH_STAGE2_LEDGER_ROW = NONE__NONFRAMEWORK_RESULT_OUTSIDE_FRAMEWORK_INDEXED_LEDGER_SCHEMA
+```
+
+The absence of a new row is required by the existing ledger schema and the scientific result itself. Adding a PGH row would require inventing a framework ID or host relation that Stage 2 explicitly did not establish.
+
+## Mutation boundary
+
+```text
+CURRENT_STATE_WRITE_COUNT = 1
+MAINTENANCE_AUDIT_WRITE_COUNT = 1
+CLAIM_LEDGER_WRITE_COUNT = 0
+FRAMEWORK_REGISTER_WRITE_COUNT = 0
+SOURCE_REGISTER_WRITE_COUNT = 0
+SCIENTIFIC_ARTIFACT_WRITE_COUNT = 0
+PAIRWISE_ARTIFACT_WRITE_COUNT = 0
+RECURRENCE_ARTIFACT_WRITE_COUNT = 0
+EMPIRICAL_RESULT_WRITE_COUNT = 0
+FCP27_SELECTION = 0
+```
+
+## Exact candidate identity
+
+```text
+CURRENT_STATE_BLOB = {current_blob}
+PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = ea02dd8f5010aff2aad6bf9526b388f3fb09fdbe
+PREVIOUS_CANONICAL_MAINTENANCE_TREE = fefc0963b25f27368c35af17c967cd2b8b30dabb
+```
+
+## Routing consequence
+
+```text
+ACTIVE_SCIENTIFIC_OPERATION = NONE
+NEXT_OPERATION = POST_PGH_STAGE2_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_OPERATION_CLASS = READ_ONLY_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_OPERATION_AUTHORIZED = YES__STANDING_PROJECT_LEAD_DELEGATION
+FCP27_SELECTED = NO
+PGH_EMPIRICAL_TEST_STARTED_BY_THIS_OPERATION = NO
+```
+
+## Qualification
+
+```text
+SCIENTIFIC_RESULT_CHANGED = NO
+PGH_TAXONOMY_CHANGED = NO
+FRAMEWORK_ID_CREATED = NO
+HOST_MAPPING_CREATED = NO
+K1_K10_CHANGE = NONE
+E1_E5_CHANGE = NONE
+PAIRWISE_CHANGE = NONE
+RECURRENCE_CHANGE = NONE
+EMPIRICAL_CREDIT_CHANGE = NONE
+MAINTENANCE_QUALIFICATION = PASS
+```
+"""
+Path("audits/POST_PGH_STAGE2_ROUTING_AND_NAVIGATION_RECONCILIATION_0_1_0.md").write_text(audit, encoding="utf-8", newline="\n")
