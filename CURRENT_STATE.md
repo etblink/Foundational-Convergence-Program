@@ -9,7 +9,7 @@ LATEST_NUMBERED_PHASE = FCP-26
 LATEST_CANONICAL_SCIENTIFIC_OPERATION = PROGRAM_LEVEL_RECURRENCE_DELTA_2026_09
 LATEST_CANONICAL_SCIENTIFIC_COMMIT = 0bebb5167fa3feed630991c9cbfe007dfb519205
 LATEST_CANONICAL_SCIENTIFIC_TREE = 96c79a5b209af757d759102a1bd2cddb28d549f9
-LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_RECURRENCE_DELTA_DURABLE_PROVENANCE_AND_ROUTING_RECONCILIATION
+LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION
 LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
 PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = e2fa96fe2fe2a686385a1f968f95a5eb9c2c68b5
 PREVIOUS_CANONICAL_MAINTENANCE_TREE = f29720957baa127a75ed086a88a46dda17c0252b
@@ -20,7 +20,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.1_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix, pairwise, and recurrence-delta operations are unnumbered and FCP-27 has not been selected. The latest mutating scientific result is the canonically integrated `PROGRAM_LEVEL_RECURRENCE_DELTA_2026_09`. Exact reconstruction corrects the current effective pairwise census from the preregistered provisional expectation of 14 to 15 because both the process-matrix/null slot and the later Reduced-NFC/process-matrix slot postdate the prior 13-slot recurrence epoch; the K9 targeted reanalysis updates the process-matrix/null slot rather than creating a separate current slot. The current Reduced-NFC comparator count is seven. The recurrence-family vector remains R1=0, R2=0, R3=1, R4=1, R5=7, R6=0, R7=1, R8=3, R9=0, R10=0: family support incidence changes, but family count does not. No independent non-generic foundational recurrence, repeated independent support for Reduced NFC, framework-level EMP4, scalar score, or framework winner is established. This maintenance reconciliation appends one durable recurrence-delta row, raising the Claim Ledger from 99 to 100 without rewriting historical rows. FCP-27 remains unselected. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
+`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix, pairwise, and recurrence-delta operations are unnumbered and FCP-27 has not been selected. The latest mutating scientific result remains the canonically integrated `PROGRAM_LEVEL_RECURRENCE_DELTA_2026_09`. Exact reconstruction gives 19 historical pairwise operations, 15 current effective pairwise slots, and seven current Reduced-NFC comparator slots; the recurrence-family vector remains R1=0, R2=0, R3=1, R4=1, R5=7, R6=0, R7=1, R8=3, R9=0, R10=0. No independent non-generic foundational recurrence, repeated independent support for Reduced NFC, framework-level EMP4, scalar score, or framework winner is established. The subsequent canonical read-only `POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_ADJUDICATION` selects `EVIDENCE_TRIGGERED_HOLD`: no immediate new scientific operation, FCP-27 phase, source search, recurrence reopening, tensor escalation, process-matrix Stage-2 reopening, or empirical escalation is selected. New science requires a named evidence trigger and fresh preregistration. The durable Claim Ledger remains at 100 rows because the sequencing decision creates no new framework-indexed scientific proposition. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.1 now governs prospective work as a narrow delta over Method 0.2.0: framework-admission criterion C tests source-bound physical law, constraint, or dynamical architecture rather than requiring intrinsic dynamics. All unaffected Method 0.2.0 rules remain inherited.
 
@@ -151,6 +151,8 @@ POST_FW_PROCESS_MATRIX_K9_SCIENTIFIC_SEQUENCING_SELECTED_ROUTE = R1__NFC_REDUCED
 NFC_PROCESS_MATRIX_PROSPECTIVE_COMPARISON = CANONICALLY_COMPLETE
 PROGRAM_LEVEL_RECURRENCE_DELTA_2026_09 = CANONICALLY_COMPLETE
 POST_RECURRENCE_DELTA_DURABLE_PROVENANCE_AND_ROUTING_RECONCILIATION = CANONICALLY_COMPLETE
+POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
 NFC_PROCESS_MATRIX_COMPARISON_RESULT_COMMIT = ff7724464a293ce52a918b68348c6aa6082b1d22
 NFC_PROCESS_MATRIX_COMPARISON_RESULT_TREE = 49ac7e64ccdd3aba52d53017e108d0297aa5fe8b
 NFC_PROCESS_MATRIX_PAIRWISE_E1 = 0
@@ -714,17 +716,21 @@ HAS_REDUCED_NFC_ACCUMULATED_REPEATED_INDEPENDENT_SUPPORT = NO
 CURRENT_INDEPENDENT_FRAMEWORK_LEVEL_EMP4_SLOT_COUNT = 0
 CURRENT_MULTI_FAMILY_EMP4_RECURRENCE_COUNT = 0
 FRAMEWORK_WINNER = NONE
-NEXT_EXECUTION_STEP = POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_ADJUDICATION
-NEXT_RECOMMENDED_OPERATION = POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_ADJUDICATION
-NEXT_OPERATION_CLASS = READ_ONLY_SCIENTIFIC_SEQUENCING_ADJUDICATION
-NEXT_OPERATION_AUTHORIZED = YES__STANDING_PROJECT_LEAD_DELEGATION
-NEXT_OPERATION_AUTHORIZATION_BOUNDARY = SEQUENCING_ONLY__NO_SUBSEQUENT_SCIENCE_BEFORE_SELECTION
+POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+POST_RECURRENCE_DELTA_SCIENTIFIC_SEQUENCING_COMMIT = 98e02f288b12948dc382be7c0c23f105dddb801b
+SEQUENCING_SELECTION = EVIDENCE_TRIGGERED_HOLD
+ACTIVE_SCIENTIFIC_OPERATION = NONE
+NEXT_EXECUTION_STEP = READ_ONLY_EVIDENCE_TRIGGER_ASSESSMENT
+NEXT_RECOMMENDED_OPERATION = NONE__RESEQUENCE_ON_NAMED_EVIDENCE_TRIGGER
+NEXT_OPERATION_CLASS = EVIDENCE_TRIGGERED_READ_ONLY_RESEQUENCING
+NEXT_OPERATION_AUTHORIZED = NO__NO_ACTIVE_SCIENTIFIC_OPERATION_SELECTED
+NEXT_OPERATION_AUTHORIZATION_BOUNDARY = NEW_SCIENCE_REQUIRES_NAMED_TRIGGER_AND_FRESH_PREREGISTRATION
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
-NEXT_SCIENTIFIC_PHASE = NONE__POST_RECURRENCE_DELTA_SEQUENCING_PENDING
+NEXT_SCIENTIFIC_PHASE = NONE__EVIDENCE_TRIGGERED_HOLD
 ```
 
-The process-matrix Stage-2 external-audit chain, K9 reanalysis, and Reduced-NFC/process-matrix closed-corpus comparison remain canonical. The subsequent program-level recurrence delta is now also canonical. It reconstructs 19 historical pairwise operations, 15 current effective pairwise slots, and seven current Reduced-NFC comparator slots; the recurrence-family vector remains unchanged while support incidence increases. The present maintenance operation propagates that already-canonical recurrence result into durable provenance and live navigation without changing any scientific classification. The next operation is a fresh read-only post-recurrence-delta sequencing adjudication; no FCP-27 operation, source search, empirical escalation, or new science is preselected here.
+The process-matrix Stage-2 external-audit chain, K9 reanalysis, Reduced-NFC/process-matrix closed-corpus comparison, and subsequent program-level recurrence delta remain canonical. The read-only post-recurrence-delta sequencing adjudication is now also canonical and selects an evidence-triggered hold. There is no active scientific operation and no FCP-27, source-search, recurrence, tensor, process-matrix Stage-2, empirical, or NFC-confirmation escalation selected. Scientific work reopens only after a named trigger—such as a stable new framework candidate, material new source, concrete framework-level empirical target, high-discrimination new pair, load-bearing defect, or independent falsification/verification result—and any resulting mutation requires fresh preregistration. The four Category-B recurrence-epoch consistency dockets remain deferred unless one is shown to threaten a current load-bearing result.
 
 ## Post-FW-CAT program-ledger and metadata reconciliation — canonical result
 
