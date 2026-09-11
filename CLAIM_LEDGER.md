@@ -2,7 +2,7 @@
 
 ## Current state
 
-Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 through FCP-18 appended the later controls/meta-audit, FCP-19 appended the Asymptotic Safety source-intake findings, FCP-20 appended the AS/null-GR subtraction/control result, and FCP-21 appended the Reduced-NFC/null-subtracted-AS controlled comparison. The 62 historical durable rows through FCP-21 remain preserved in their original order and wording. The earlier current-state supersession propagation appended 24 durable rows for already-canonical post-FCP-21 science, yielding 86 rows. The Post-FCP-25 reconciliation appended three FCP-25 durable rows, yielding 89 rows. The post-FW-CAT program-ledger reconciliation appended exactly four further durable rows—one FCP-26 Stage-1 empirical-screen row and three FW-CAT Stage-2 rows—yielding 93 durable rows through FW-CAT Taxonomy Gate Stage 2. The later external-audit / OBJ-CAT-11 bounded re-adjudication reconciliation appends exactly one current taxonomy-correction row, yielding **94 durable rows through the OBJ-CAT-11 bounded re-adjudication**. No historical claim row is deleted, reordered, or rewritten. `status: ACCEPTED` means that a row remains an accepted record at its declared source window and scope; it does **not** mean that the row is always the latest applicable present-tense interpretation. Current interpretation is resolved from the latest applicable durable rows together with `CURRENT_STATE.md` and `FRAMEWORK_REGISTER.md`. Canonical post-FCP-25 operations that create no distinct framework-indexed durable proposition remain authoritative in their own artifacts without being converted into artificial ledger rows. **No overall numerical framework score or winner is inferred from these rows.**
+Scientific claim entries began with FCP-1. FCP-15L reconciled the durable central provenance spine through FCP-15, FCP-16 through FCP-18 appended the later controls/meta-audit, FCP-19 appended the Asymptotic Safety source-intake findings, FCP-20 appended the AS/null-GR subtraction/control result, and FCP-21 appended the Reduced-NFC/null-subtracted-AS controlled comparison. The 62 historical durable rows through FCP-21 remain preserved in their original order and wording. The earlier current-state supersession propagation appended 24 durable rows for already-canonical post-FCP-21 science, yielding 86 rows. The Post-FCP-25 reconciliation appended three FCP-25 durable rows, yielding 89 rows. The post-FW-CAT program-ledger reconciliation appended exactly four further durable rows—one FCP-26 Stage-1 empirical-screen row and three FW-CAT Stage-2 rows—yielding 93 durable rows through FW-CAT Taxonomy Gate Stage 2. The later external-audit / OBJ-CAT-11 bounded re-adjudication reconciliation appends exactly one current taxonomy-correction row, yielding 94 durable rows through the OBJ-CAT-11 bounded re-adjudication. The post-NFC/process-matrix durable-provenance reconciliation appends five already-canonical process-matrix and pairwise rows, yielding **99 durable rows through the Reduced-NFC ↔ FW-PROCESS-MATRIX prospective comparison**. No historical claim row is deleted, reordered, or rewritten. `status: ACCEPTED` means that a row remains an accepted record at its declared source window and scope; it does **not** mean that the row is always the latest applicable present-tense interpretation. Current interpretation is resolved from the latest applicable durable rows together with `CURRENT_STATE.md` and `FRAMEWORK_REGISTER.md`. Canonical post-FCP-25 operations that create no distinct framework-indexed durable proposition remain authoritative in their own artifacts without being converted into artificial ledger rows. **No overall numerical framework score or winner is inferred from these rows.**
 
 ## Claim record schema
 
@@ -1786,3 +1786,98 @@ Future claims should use the following fields:
 - `status`: `ACCEPTED`
 - `supersedes`: `FWCAT-001` only for its present-tense OBJ-CAT-11 mapping and dependent 4/6/2 counts; `FWCAT-001` remains accepted at its original historical Stage-2 scope.
 - `notes`: canonical scientific provenance: `FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION`; preregistration commit `5ef5d6b5555ef0d94498340e9bfad617325e16a6`; re-adjudication commit `4f73ea29cf4b89e42bf52876b4ad7c782030edbc`; re-adjudication handoff commit `6c71fb1b66d5e01bd03919cb21b9e271fb013243`. The FW-CAT-local `REAL4/EMP3` labels in `FWCAT-003` are historical local-scale tokens and must be read through the prospective empirical/realization namespace alias table; their scientific content is unchanged.
+
+
+---
+
+# FW-PROCESS-MATRIX current durable claims
+
+## FWPM-001 — Process-matrix operational framework survives admission and hostile adjacent-framework subtraction
+
+- `framework_ids`: `FW-PROCESS-MATRIX`, `FW-CQM`, `FW-GPTOPT`
+- `source_ids`: `SRC-FW-CAT-STAGE1-ORESHKOV-COSTA-BRUKNER-2012`, `SRC-CPICO-ORESHKOV-GIARMATZI-2016`, `SRC-CPICO-COSTA-REVIEW-2026`
+- `claim_text`: Under the dedicated causal-process frozen corpus and Method 0.2.1, the generalized process-matrix object is a source-bound foundational comparison object with local quantum laboratories/instruments, a global process object `W`, process-specific validity conditions, and operational causal/signalling structure. The later hostile admission audit preserves this admission after explicit CQM/GPTOPT, weakest-classification, one-object-unity, realizability-scope, and method-sensitivity attacks; it does not establish framework truth, unique physical realization, or empirical selection.
+- `assumptions`: exact causal-process Stage-2 framework object and frozen source corpus; framework separation and framework admission remain distinct; ordinary quantum, categorical, process, probabilistic, and representational content is subtracted rather than treated as distinctive evidence.
+- `classification`: `SOURCE_DERIVED`
+- `canonicity_level`: framework identity/admission at the frozen source scope only.
+- `weaker_framework_test`: generic process/category/probability structure and CQM/GPTOPT coverage are insufficient to reproduce the global-`W` validity/causal architecture as a whole.
+- `physical_bridge`: native laboratory/instrument semantics and selected process realizations; universal physical realization remains unestablished.
+- `empirical_binding`: model/property/subclass evidence only; no framework-level discriminator or selection.
+- `falsification_condition`: a source-qualified showing that the admitted object is fully subsumed by an existing framework at the same physical scope, or that its asserted core architecture is not source-bound, would reopen the admission.
+- `countermodels`: CQM/GPTOPT and generic process formalisms supply weaker descriptions without reproducing the complete admitted object; selected process subclasses do not exhaust the full `W` domain.
+- `scope_ceiling`: `FW_PROCESS_MATRIX_STATUS = PAIRWISE_COMPARISON_COMPLETE`; admission survives hostile audit; no framework winner, truth claim, or empirical selection.
+- `status`: `ACCEPTED`
+- `supersedes`: `FWCAT-004` only for the present-tense disposition of the causal-process remainder; `FWCAT-004` remains accepted at its historical pre-intake scope.
+- `notes`: canonical framework identity is carried by the dedicated causal-process Stage-2 taxonomy, K1–K10 baseline blob `42a991dcdb250f305e47ac4360fc780bb4e78a7b`, and hostile admission audit. The general Method-0.2.1 reformulation/meta-framework ambiguity remains a separate governance issue and does not change this frozen admission result.
+
+## FWPM-NULL-001 — Process-matrix null control leaves a nonempty S3 residue while strict E2 rises to four after K9 repair
+
+- `framework_ids`: `FW-PROCESS-MATRIX`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FW-CAT-STAGE1-ORESHKOV-COSTA-BRUKNER-2012`, `SRC-CPICO-ORESHKOV-GIARMATZI-2016`, `SRC-CPICO-JIA-SAKHARWADE-2018`, `SRC-CPICO-ORESHKOV-TIME-DELOCALIZED-2019`, `SRC-CPICO-WECHS-QCQC-2021`, `SRC-FWPM-REAL-SILVA-MULTITIME-2017`
+- `claim_text`: The current Method-0.2.1 process-matrix/null control contains E1=0, E2=4, E3=0, E4=0, E5=0, thirteen `NONE_ESTABLISHED` records, and one unresolved framework-wide physical-selection record. Standard-QM lineage and representation/realization relations are retained without erasing a nonempty bounded `S3_FRAMEWORK_WIDE` process-matrix-specific residue involving global-`W` validity/causal architecture and nontrivial composition restrictions.
+- `assumptions`: exact GR+QFT+SM null comparator; exact admitted process-matrix object; K9 targeted reanalysis applied without reopening any other key; genericity, lineage, target-conditioning, empirical-inheritance, and residue/relation separation remain binding.
+- `classification`: `NONFORCED`
+- `canonicity_level`: bounded pairwise null-control result.
+- `weaker_framework_test`: standard quantum operational machinery explains the four E2 relations but does not reproduce the complete process-matrix-specific residue.
+- `physical_bridge`: selected standard-QM/time-delocalized and subclass realizations; no universal physical realization.
+- `empirical_binding`: inherited/subclass evidence only; direct framework-level empirical discriminator after null remains `NO`.
+- `falsification_condition`: a source-qualified null representation/recovery exhausting the remaining process-matrix-specific commitments, or a demonstrated error in the relation/residue partition, would alter the residue result.
+- `countermodels`: valid process-matrix structures and composition/causal architectures not exhausted by the null comparator's ordinary operational layer.
+- `scope_ceiling`: E2=4 at declared relation scopes; residue nonempty at `S3_FRAMEWORK_WIDE`; no E3/E4, framework identity, empirical selection, or scalar score follows.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: current null-control state combines the original null-control artifact blob `a9eea06aa3073e0c50707801fec327c6183be946` with the K9 delta blob `5e1365093398fc68f7b9aaa825b2f43da66250dd` and K9 adjudication blob `88073c891efa194ed7328a1a11853b91b83e55ed`.
+
+## FWPM-REAL-001 — General conditional representation is established while universal deterministic realization and physical selection remain open
+
+- `framework_ids`: `FW-PROCESS-MATRIX`
+- `source_ids`: `SRC-FWPM-REAL-SILVA-MULTITIME-2017`, `SRC-CPICO-ORESHKOV-TIME-DELOCALIZED-2019`, `SRC-CPICO-WECHS-QCQC-2021`, `SRC-FWPM-REAL-SALZGER-VILASINI-2025`, `SRC-CPICO-GUO-VBC-2026`, `SRC-CPICO-QU-BELLLIKE-2026`, `SRC-FWPM-REAL-ARAUJO-PURIFICATION-2017`, `SRC-FWPM-REAL-VILASINI-RENNER-PRA-2024`
+- `claim_text`: The repaired targeted realizability/physical-selection Stage-2 corpus establishes that every formally valid process matrix has an equivalent conditional pre/postselected multi-time standard-QM representation and probabilistic implementation recipe, and that selected deterministic, subsystem, spacetime-compatible, and concrete experimental realization classes are nonempty. It does not establish deterministic standard-QM realization for every `W`, a necessary-and-sufficient universal physical-selection criterion, unrestricted composition/globalization closure, or framework-level empirical selection.
+- `assumptions`: exact frozen 27-source targeted-realizability corpus; representation, postselection, deterministic realization, subsystem realization, closed laboratories, spacetime embedding, and implementation remain distinct layers; no subclass is generalized to all valid `W`.
+- `classification`: `NONFORCED`
+- `canonicity_level`: source-qualified mixed realization result with framework-wide representation but incomplete framework-wide physical selection.
+- `weaker_framework_test`: mathematical representation and selected implementations do not force deterministic or natural universal physical realization.
+- `physical_bridge`: nonempty selected bridges up to concrete implementations; framework-wide deterministic/selection bridge unestablished.
+- `empirical_binding`: concrete subclass implementation/certification exists; framework-level empirical selection remains `NONE`.
+- `falsification_condition`: a general necessary-and-sufficient physical selection law, general deterministic realization theorem, or counterexample to the claimed general conditional representation would materially change this row.
+- `countermodels`: assumption-scoped no-go/exclusion results and composition restrictions prevent generalization from selected positive realization classes.
+- `scope_ceiling`: `AX3 = ESTABLISHED`; selected realization classes nonempty; `GENERAL_W_DETERMINISTIC_R1_REALIZATION = NOT_ESTABLISHED`; `GENERAL_COMPLETE_PHYSICAL_SELECTION_CRITERION = NOT_ESTABLISHED`; unresolved physical-realizability remainder nonempty.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: controlling repaired Stage-2 adjudication blob `256e73ffc68bacc1860d4b3368868161e9845da1`; external-audit accepted-findings repair changes provenance/role precision but not the AX/A–F scientific values.
+
+## FWPM-K9-001 — K9 repair adds one framework-wide conditional E2 representation without resolving physical selection
+
+- `framework_ids`: `FW-PROCESS-MATRIX`, `FW-NULL-GRQFTSM`
+- `source_ids`: `SRC-FWPM-REAL-SILVA-MULTITIME-2017`, `SRC-CPICO-ORESHKOV-TIME-DELOCALIZED-2019`
+- `claim_text`: The closed-corpus K9 targeted pairwise reanalysis adds `PMNC-K9-04`, a source-qualified `E2_REPRESENTATION` from every formally valid process matrix to the null comparator's standard quantum/probabilistic operational layer through a pre/postselected multi-time representation and probabilistic implementation recipe. The relation is `S3_FRAMEWORK_WIDE` at representation scope, `PR2_MODEL_BRIDGE`, and `IND-N_TARGET_CONDITIONED`; postselection is load-bearing. It does not supersede the narrower but physically stronger selected-class `PMNC-K9-01`, and `PMNC-K9-03` remains unresolved because general deterministic/physically admissible realization and a complete selection criterion remain unestablished.
+- `assumptions`: `A_STDQM` and `A_POSTSEL`; exact K9 closed corpus; no comparator change or K1–K8/K10 reopening.
+- `classification`: `VALID_CONDITIONAL`
+- `canonicity_level`: pairwise representation relation only.
+- `weaker_framework_test`: standard-QM pre/postselection machinery explains the representation; target conditioning blocks independent convergence credit.
+- `physical_bridge`: conditional/probabilistic model bridge, not a general deterministic physical realization.
+- `empirical_binding`: `EMP0_NONE` for the new pairwise relation; no framework-level empirical selection.
+- `falsification_condition`: failure of the source-qualified all-`W` representation claim would remove/downgrade `PMNC-K9-04`; a general physical selection law could separately resolve `PMNC-K9-03`.
+- `countermodels`: deterministic/localized/closed-laboratory realization burdens remain assumption-sensitive and are not solved by postselected representability.
+- `scope_ceiling`: current strict process-matrix/null E2 count 4; NONE 13; unresolved 1; null-subtracted core residue unchanged; no E3/E4/empirical/recurrence consequence from the K9 delta alone.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical K9 scientific merge `48a047b2ee3757bc076c74fcdf61ca592d17c39a`; comparison delta blob `5e1365093398fc68f7b9aaa825b2f43da66250dd`; adjudication blob `88073c891efa194ed7328a1a11853b91b83e55ed`.
+
+## FCP-NFCPM-001 — Reduced NFC and process matrices share five independent-origin but generic E5 roles only
+
+- `framework_ids`: `FW-NFC-RED`, `FW-PROCESS-MATRIX`
+- `source_ids`: `SRC-NFC-RED-001`, `SRC-FCP3-NFC-BIND-001`, `SRC-FW-CAT-STAGE1-ORESHKOV-COSTA-BRUKNER-2012`, `SRC-CPICO-ORESHKOV-GIARMATZI-2016`, `SRC-CPICO-COSTA-REVIEW-2026`
+- `claim_text`: The prospective closed-corpus Reduced-NFC/process-matrix comparison evaluates exactly ten K-aligned candidates and finds E1=E2=E3=E4=0, five mathematically generic S0 E5 organizational relations, five `NONE_ESTABLISHED`, zero unresolved records, zero non-generic relations, no pairwise empirical selection, and no empirical support for Reduced NFC. The five generic relations concern allowed-domain organization, test-relative equivalence, admissible-transformation organization, operational-interface mediation, and global-coherence/globalization roles.
+- `assumptions`: exact frozen FCP-3 Reduced-NFC object; exact current process-matrix object after null subtraction, targeted realizability Stage 2 and K9 repair; closed canonical corpus; shared incompleteness and vocabulary are forbidden as positive relations.
+- `classification`: `GENERIC_MATHEMATICS`
+- `canonicity_level`: five generic E5 roles only.
+- `weaker_framework_test`: all five roles are available in substantially weaker formal systems and do not require NFC-specific or process-matrix-specific physical commitments.
+- `physical_bridge`: no cross-framework physical representation, recovery, realization, or calibrated measurement bridge.
+- `empirical_binding`: pairwise E4=0; `PAIRWISE_EMPIRICAL_SELECTION = NO`; `NFC_EMPIRICAL_SUPPORT = NO`.
+- `falsification_condition`: a source-qualified non-generic E1–E4 relation, cross-framework physical bridge, or comparator-qualified shared prediction could strengthen the current ceiling; a defect in an E5 functional-role assignment could reduce the generic E5 count without creating positive support.
+- `countermodels`: process-matrix global `W`, causal/signalling and composition structure lacks an NFC counterpart; NFC finite-interface sufficiency/capacity, fixed-carrier stabilization, weak-coupling order separation, saturation, and colimit content lacks a process-matrix counterpart.
+- `scope_ceiling`: E1–E4 zero; E5 5; NONE 5; non-generic 0; pairwise empirical selection `NO`; no framework winner or scalar score.
+- `status`: `ACCEPTED`
+- `supersedes`: `NONE`
+- `notes`: canonical comparison merge `ff7724464a293ce52a918b68348c6aa6082b1d22`; scientific comparison blob `0e4226a3dfc616554c8829dc677aab5c23128626`; hostile adjudication blob `fc3bb6c71b419595739378d3d44ff477dc489ee8`.

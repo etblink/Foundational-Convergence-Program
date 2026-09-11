@@ -6,10 +6,10 @@
 
 ```text
 LATEST_NUMBERED_PHASE = FCP-26
-LATEST_CANONICAL_SCIENTIFIC_OPERATION = FW_PROCESS_MATRIX_NULL_CONTROL_K9_TARGETED_PAIRWISE_REANALYSIS
-LATEST_CANONICAL_SCIENTIFIC_COMMIT = 48a047b2ee3757bc076c74fcdf61ca592d17c39a
-LATEST_CANONICAL_SCIENTIFIC_TREE = 8697ea5b2dd1a8e42cf5b51d060fa96fbf5d6f63
-LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_FW_PROCESS_MATRIX_K9_ROUTING_AND_NAVIGATION_RECONCILIATION
+LATEST_CANONICAL_SCIENTIFIC_OPERATION = NFC_REDUCED_VS_FW_PROCESS_MATRIX_PROSPECTIVE_COMPARISON
+LATEST_CANONICAL_SCIENTIFIC_COMMIT = ff7724464a293ce52a918b68348c6aa6082b1d22
+LATEST_CANONICAL_SCIENTIFIC_TREE = 49ac7e64ccdd3aba52d53017e108d0297aa5fe8b
+LATEST_CANONICAL_MAINTENANCE_OPERATION = POST_NFC_PROCESS_MATRIX_DURABLE_PROVENANCE_AND_ROUTING_RECONCILIATION
 LATEST_CANONICAL_MAINTENANCE_IDENTITY_MODE = RESOLVE_CURRENT_MAIN__NO_SELF_REFERENTIAL_LITERAL
 PREVIOUS_CANONICAL_MAINTENANCE_BOUNDARY = e2fa96fe2fe2a686385a1f968f95a5eb9c2c68b5
 PREVIOUS_CANONICAL_MAINTENANCE_TREE = f29720957baa127a75ed086a88a46dda17c0252b
@@ -20,7 +20,7 @@ CANONICAL_TREE_AT_STATE_SPLIT = fa605d0023e4c2e9d565cab469dd8fe145693d23
 METHOD = 0.2.1_ACTIVE_PROSPECTIVELY
 ```
 
-`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix admission-audit, null-control, targeted realizability, K9 reanalysis, and related operations are unnumbered and FCP-27 has not been selected. The latest mutating scientific result is now the canonically integrated closed-corpus `FW-PROCESS-MATRIX` K9 null-control pairwise reanalysis. It adds `PMNC-K9-04` as a distinct framework-wide `E2_REPRESENTATION` for arbitrary valid process matrices via the source-qualified pre/postselected multi-time standard-QM representation, while retaining `PMNC-K9-01`, `PMNC-K9-02`, and `PMNC-K9-03`. The strict E2 relation count is now 4; `NONE_ESTABLISHED` remains 13 and unresolved remains 1. `PMNC-K9-03` remains unresolved, but its rationale is narrowed because general conditional representability is now established while general deterministic physical realization and a complete physical-selection criterion remain unestablished. The null-subtracted positive core residue remains nonempty with unchanged highest scope and core content; the representation-viability map is strengthened. No E1/E3/E4/E5, empirical, recurrence, non-null, framework-identity, NFC, or FCP-27 consequence is authorized by this result. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
+`LATEST_NUMBERED_PHASE` remains FCP-26 because the later FW-CAT, causal-process, method-audit, process-matrix, and current pairwise operations are unnumbered and FCP-27 has not been selected. The latest mutating scientific result is the canonically integrated closed-corpus Reduced-NFC ↔ `FW-PROCESS-MATRIX` prospective comparison. Across ten preregistered K-aligned candidates it finds E1=0, E2=0, E3=0, E4=0, E5=5, five `NONE_ESTABLISHED`, zero unresolved, and zero non-generic relations. The five positive roles are generic S0 organizational correspondences only—allowed-domain organization, test-relative equivalence, admissible transformations, operational-interface mediation, and global coherence. No pairwise empirical selection or NFC empirical support follows, and material asymmetry remains nonempty. The earlier process-matrix null control remains E2=4 after the K9 repair with one unresolved physical-selection record and nonempty `S3_FRAMEWORK_WIDE` residue. This maintenance reconciliation appends five already-canonical durable Claim Ledger rows, raising the durable count from 94 to 99 without rewriting any historical row. No recurrence is recomputed here and FCP-27 remains unselected. Exact enclosing maintenance identities remain recoverable from Git rather than embedded self-referentially.
 
 Historical FCP-1 through FCP-21 remain immutable records under their original Method 0.1.0 / FCP-2 semantics. Method 0.2.1 now governs prospective work as a narrow delta over Method 0.2.0: framework-admission criterion C tests source-bound physical law, constraint, or dynamical architecture rather than requiring intrinsic dynamics. All unaffected Method 0.2.0 rules remain inherited.
 
@@ -146,6 +146,23 @@ FW_PROCESS_MATRIX_REPRESENTATION_VIABILITY_MAP = STRENGTHENED
 FW_PROCESS_MATRIX_K9_E3_CHANGE = NONE
 FW_PROCESS_MATRIX_K9_EMPIRICAL_CHANGE = NONE
 FW_PROCESS_MATRIX_K9_RECURRENCE_EFFECT = NONE
+POST_FW_PROCESS_MATRIX_K9_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+POST_FW_PROCESS_MATRIX_K9_SCIENTIFIC_SEQUENCING_SELECTED_ROUTE = R1__NFC_REDUCED_VS_FW_PROCESS_MATRIX_PROSPECTIVE_COMPARISON
+NFC_PROCESS_MATRIX_PROSPECTIVE_COMPARISON = CANONICALLY_COMPLETE
+NFC_PROCESS_MATRIX_COMPARISON_RESULT_COMMIT = ff7724464a293ce52a918b68348c6aa6082b1d22
+NFC_PROCESS_MATRIX_COMPARISON_RESULT_TREE = 49ac7e64ccdd3aba52d53017e108d0297aa5fe8b
+NFC_PROCESS_MATRIX_PAIRWISE_E1 = 0
+NFC_PROCESS_MATRIX_PAIRWISE_E2 = 0
+NFC_PROCESS_MATRIX_PAIRWISE_E3 = 0
+NFC_PROCESS_MATRIX_PAIRWISE_E4 = 0
+NFC_PROCESS_MATRIX_PAIRWISE_E5 = 5
+NFC_PROCESS_MATRIX_NONE_ESTABLISHED = 5
+NFC_PROCESS_MATRIX_UNRESOLVED = 0
+NFC_PROCESS_MATRIX_NON_GENERIC_RELATION_COUNT = 0
+NFC_PROCESS_MATRIX_PAIRWISE_EMPIRICAL_SELECTION = NO
+NFC_PROCESS_MATRIX_NFC_EMPIRICAL_SUPPORT = NO
+NFC_PROCESS_MATRIX_MATERIAL_ASYMMETRY = NONEMPTY
+NFC_PROCESS_MATRIX_RECURRENCE_IMPACT = INFORMATION_ADDED_NOT_RECOMPUTED
 FW_PROCESS_MATRIX_SPECIFIC_ADDITIONAL_COMMITMENT_INCIDENCE = 4
 FW_PROCESS_MATRIX_CORE_ADDITIONAL_COMMITMENT_INCIDENCE = 3
 FW_PROCESS_MATRIX_STRUCTURAL_LIMITATION_INCIDENCE = 1
@@ -480,10 +497,10 @@ NFC_LOOP_REANALYSIS = CANONICALLY_COMPLETE
 NFC_LOOP_PROSPECTIVE_REANALYSIS = CANONICALLY_COMPLETE
 RECURRENCE_RECOMPUTATION = CANONICALLY_COMPLETE
 PROGRAM_LEVEL_RECURRENCE_RECOMPUTATION = CANONICALLY_COMPLETE
-CLAIM_LEDGER_CURRENT_SUPERSESSION = RECONCILED_THROUGH_OBJ_CAT_11_READJUDICATION_CANONICALLY
+CLAIM_LEDGER_CURRENT_SUPERSESSION = RECONCILED_THROUGH_NFC_PROCESS_MATRIX_COMPARISON_CANONICALLY
 CLAIM_LEDGER_CURRENT_SUPERSESSION_PROPAGATION = CANONICALLY_COMPLETE
-CLAIM_LEDGER_DURABLE_ROW_COUNT = 94
-CLAIM_LEDGER_TEMPORAL_CEILING = FW_CAT_OBJ_CAT_11_EXISTING_FRAMEWORK_MAPPING_BOUNDED_READJUDICATION
+CLAIM_LEDGER_DURABLE_ROW_COUNT = 99
+CLAIM_LEDGER_TEMPORAL_CEILING = NFC_REDUCED_VS_FW_PROCESS_MATRIX_PROSPECTIVE_COMPARISON
 POST_FCP25_GROK_AUDIT = CANONICALLY_COMPLETE
 POST_FCP25_GROK_INDEPENDENT_ADJUDICATION = CANONICALLY_COMPLETE
 POST_FCP25_GROK_RECONCILIATION = CANONICALLY_COMPLETE
@@ -660,17 +677,20 @@ TARGETED_K9_CURRENT_RESIDUE_HIGHEST_SCOPE = S3_FRAMEWORK_WIDE
 TARGETED_K9_AX3_NEW_LOAD_BEARING_PROPOSITION = SRC-FWPM-REAL-SILVA-MULTITIME-2017__GENERAL_W_CONDITIONAL_POSTSELECTED_REPRESENTATION
 TARGETED_K9_PAIRWISE_RESULT = PLUS_ONE_E2_GENERAL_W_CONDITIONAL_POSTSELECTED_REPRESENTATION__K9_03_REMAINS_UNRESOLVED
 POST_FW_PROCESS_MATRIX_K9_ROUTING_AND_NAVIGATION_RECONCILIATION = CANONICALLY_COMPLETE
-NEXT_EXECUTION_STEP = SEPARATE_POST_K9_SCIENTIFIC_SEQUENCING_ADJUDICATION_IF_AUTHORIZED
-NEXT_RECOMMENDED_OPERATION = POST_FW_PROCESS_MATRIX_K9_SCIENTIFIC_SEQUENCING_ADJUDICATION
+POST_NFC_PROCESS_MATRIX_DURABLE_PROVENANCE_AND_ROUTING_RECONCILIATION = CANONICALLY_COMPLETE
+CLAIM_LEDGER_APPENDED_ROW_COUNT_THIS_OPERATION = 5
+CLAIM_LEDGER_NEW_ROW_IDS = FWPM-001;FWPM-NULL-001;FWPM-REAL-001;FWPM-K9-001;FCP-NFCPM-001
+NEXT_EXECUTION_STEP = POST_NFC_PROCESS_MATRIX_SCIENTIFIC_SEQUENCING_ADJUDICATION
+NEXT_RECOMMENDED_OPERATION = POST_NFC_PROCESS_MATRIX_SCIENTIFIC_SEQUENCING_ADJUDICATION
 NEXT_OPERATION_CLASS = READ_ONLY_SCIENTIFIC_SEQUENCING_ADJUDICATION
-NEXT_OPERATION_AUTHORIZED = NO
-NEXT_OPERATION_AUTHORIZATION_BOUNDARY = SEPARATE_SEQUENCING_DECISION_REQUIRED
+NEXT_OPERATION_AUTHORIZED = YES__STANDING_PROJECT_LEAD_DELEGATION
+NEXT_OPERATION_AUTHORIZATION_BOUNDARY = SEQUENCING_ONLY__NO_SUBSEQUENT_SCIENCE_BEFORE_SELECTION
 NEXT_NUMBERED_PHASE_SELECTED = NO
 FCP27_SELECTED = NO
-NEXT_SCIENTIFIC_PHASE = NONE__POST_K9_SEQUENCING_NOT_YET_SELECTED
+NEXT_SCIENTIFIC_PHASE = NONE__POST_NFC_PROCESS_MATRIX_SEQUENCING_PENDING
 ```
 
-The process-matrix Stage-2 external-audit chain remains complete through custody, independent adjudication, and accepted-findings repair. The subsequently selected closed-corpus K9 reanalysis is also now canonically complete. AX3 supports one new nonredundant `E2_REPRESENTATION`, `PMNC-K9-04`, at framework-wide representation scope under load-bearing standard-QM/postselection conditioning. The earlier selected-class `PMNC-K9-01` remains distinct and physically stronger at its narrower scope; `PMNC-K9-02` remains `NONE_ESTABLISHED`; and `PMNC-K9-03` remains unresolved because general deterministic or otherwise physically admissible realization and a complete physical-selection criterion are still not established. No recurrence, empirical, non-null, method, or FCP-27 work is selected by this reconciliation. The next scientific operation, if any, requires a separate post-K9 sequencing adjudication.
+The process-matrix Stage-2 external-audit chain and K9 reanalysis remain canonical. The post-K9 sequencing decision is also canonical and selected the now-completed Reduced-NFC/process-matrix closed-corpus comparison. That comparison adds five independent-origin but mathematically generic S0 E5 organizational relations and five `NONE_ESTABLISHED` records, while E1–E4, non-generic relations, pairwise empirical selection, and NFC empirical support remain zero/absent. The present maintenance operation propagates the already-canonical process-matrix program and this new pairwise result into durable provenance and live navigation without recomputing recurrence. The next operation is a read-only sequencing adjudication; no recurrence or other science is preselected here.
 
 ## Post-FW-CAT program-ledger and metadata reconciliation — canonical result
 
