@@ -26,11 +26,11 @@ jobs:
           git diff --check
           rm .github/workflows/post-fwpm-k9-reconcile.yml tools/post_fwpm_k9_reconcile.py
           changed="$(git status --short | awk '{print $2}' | sort)"
-          expected=$'CURRENT_STATE.md\nFRAMEWORK_REGISTER.md\nhandoffs/POST_FW_PROCESS_MATRIX_K9_ROUTING_AND_NAVIGATION_RECONCILIATION_HANDOFF_0_1_0.md'
+          expected=$'.github/workflows/post-fwpm-k9-reconcile.yml\nCURRENT_STATE.md\nFRAMEWORK_REGISTER.md\nhandoffs/POST_FW_PROCESS_MATRIX_K9_ROUTING_AND_NAVIGATION_RECONCILIATION_HANDOFF_0_1_0.md\ntools/post_fwpm_k9_reconcile.py'
           test "$changed" = "$expected" || { echo "Unexpected changed paths:"; printf '%s\n' "$changed"; exit 1; }
           grep -q 'TARGETED_K9_CURRENT_PAIRWISE_E2_COUNT = 4' CURRENT_STATE.md
           grep -q 'TARGETED_K9_PAIRWISE_READJUDICATION = CANONICALLY_COMPLETE' CURRENT_STATE.md
-          grep -q 'NEXT_OPERATION_AUTHORIZED = NO' CURRENT_STATE.md
+          grep -q 'NEXT_RECOMMENDED_OPERATION = POST_FW_PROCESS_MATRIX_K9_SCIENTIFIC_SEQUENCING_ADJUDICATION' CURRENT_STATE.md
           grep -q '^| `FW-PROCESS-MATRIX` .* `PAIRWISE_COMPARISON_COMPLETE` ' FRAMEWORK_REGISTER.md
           ! grep -q 'TARGETED_K9_PAIRWISE_REANALYSIS_PREREGISTRATION = SELECTED_NOT_STARTED' CURRENT_STATE.md
           ! grep -q 'TARGETED_K9_PAIRWISE_READJUDICATION = NOT_STARTED' CURRENT_STATE.md
