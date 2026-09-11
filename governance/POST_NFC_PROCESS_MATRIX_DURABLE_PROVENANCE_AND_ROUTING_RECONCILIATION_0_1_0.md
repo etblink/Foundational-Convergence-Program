@@ -23,7 +23,7 @@ This maintenance operation therefore performs exactly three classes of mutation:
 
 1. append five current durable Claim Ledger rows without rewriting any of the existing 94 rows;
 2. update `CURRENT_STATE.md` to the already-canonical process-matrix and NFC/process-matrix results and the 99-row ledger ceiling;
-3. update the `FW-NFC-RED` and `FW-PROCESS-MATRIX` current-status descriptions in `FRAMEWORK_REGISTER.md`.
+3. update the present-tense `FW-NULL-GRQFTSM`, `FW-NFC-RED`, and `FW-PROCESS-MATRIX` status descriptions in `FRAMEWORK_REGISTER.md` so the null row no longer incorrectly identifies String/M as the latest null comparison and both compared framework rows name the new canonical pairwise result.
 
 No source, scientific claim, pairwise classification, recurrence result, empirical result, or Method rule is newly adjudicated here.
 
@@ -83,6 +83,7 @@ CLAIM_LEDGER_DURABLE_ROW_COUNT = 99
 CLAIM_LEDGER_TEMPORAL_CEILING = NFC_REDUCED_VS_FW_PROCESS_MATRIX_PROSPECTIVE_COMPARISON
 NFC_PROCESS_MATRIX_PROSPECTIVE_COMPARISON = CANONICALLY_COMPLETE
 POST_FW_PROCESS_MATRIX_K9_SCIENTIFIC_SEQUENCING_ADJUDICATION = CANONICALLY_ACCEPTED_READ_ONLY_DECISION
+FW_NULL_LATEST_NULL_COMPARISON = FW_PROCESS_MATRIX_NULL_CONTROL_K9_TARGETED_PAIRWISE_REANALYSIS
 FW_PROCESS_MATRIX_STATUS = PAIRWISE_COMPARISON_COMPLETE
 FW_NFC_RED_STATUS = PAIRWISE_COMPARISON_COMPLETE
 RECURRENCE_RECOMPUTATION = NOT_PERFORMED_BY_THIS_OPERATION
