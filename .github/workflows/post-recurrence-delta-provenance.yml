@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   reconcile:
-    if: github.event.head_commit.message == 'Run corrected post-recurrence provenance reconciliation'
+    if: github.event.head_commit.message == 'Run formatted post-recurrence provenance reconciliation'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,6 +19,11 @@ jobs:
           fetch-depth: 0
       - name: Apply bounded reconciliation
         run: python .github/scripts/post_recurrence_delta_reconcile.py
+      - name: Normalize newly written formatting
+        shell: bash
+        run: |
+          sed -i 's/[[:space:]]\+$//' audits/POST_RECURRENCE_DELTA_DURABLE_PROVENANCE_AND_ROUTING_RECONCILIATION_0_1_0.md
+          python -c "from pathlib import Path; p=Path('CLAIM_LEDGER.md'); t=p.read_text(encoding='utf-8'); p.write_text(t.rstrip(chr(10))+chr(10), encoding='utf-8', newline=chr(10))"
       - name: Validate and publish clean candidate
         shell: bash
         run: |
