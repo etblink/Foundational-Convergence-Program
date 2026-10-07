@@ -148,33 +148,28 @@ lemma family270B_sum_reorder {E : Type*} [AddCommMonoid E]
     _ = ∑ β, ∑ A, ∑ i, ∑ j, ∑ B, ∑ C, T i j A B C β :=
         Finset.sum_congr rfl fun β _ => Finset.sum_comm
 
-/-- The undeformed potential multiplier coincides with the original bracket multiplier. -/
-set_option maxHeartbeats 2000000 in
-lemma family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier
-    (x : Boson N) (α : SpinIndex) :
-    M.deformedPotentialMultiplier 1 0 x α = M.bracketMultiplier α x := by
-  have hcoef (β : SpinIndex) (A : ColorIndex N) :
-      ((M.deformedPotentialMatrix 1 0 x A β α : ℝ) : ℂ) =
-        ∑ i : SpaceIndex, ∑ j : SpaceIndex, ∑ B : ColorIndex N, ∑ C : ColorIndex N,
-          (((1 / 2 : ℝ) * M.structureConstant A B C * M.gammaTwo i j α β : ℝ) : ℂ) *
-            (x (i, B) : ℂ) * (x (j, C) : ℂ) := by
-    rw [M.family270B_deformedPotentialMatrix_one_zero_coeff]
-    simp only [coordinateBracketAll, Finset.mul_sum, Finset.sum_mul, Complex.ofReal_sum,
-      Complex.ofReal_mul]
-    refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ =>
-      Finset.sum_congr rfl fun B _ => Finset.sum_congr rfl fun C _ => ?_
-    ring
-  simp only [deformedPotentialMultiplier, cliffordLinear, deformedPotentialCoefficients,
-    bracketMultiplier, Fintype.sum_prod_type, hcoef]
-  exact (family270B_sum_reorder (E := Fermion N →L[ℂ] Fermion N) _).symm
+/--
+Expand the (h=1,m=0) potential coefficient into exactly the scalar
+coefficient convention of the original BFSS charge. This is isolated
+from continuous-linear-map equality for a bounded compiler checkpoint.
+-/
+lemma family270B_undeformed_coefficient
+    (x : Boson N) (α β : SpinIndex) (A : ColorIndex N) :
+    ((M.deformedPotentialCoefficients 1 0 x α (β, A) : ℝ) : ℂ) =
+      ∑ i : SpaceIndex, ∑ j : SpaceIndex, ∑ B : ColorIndex N, ∑ C : ColorIndex N,
+        (((1 / 2 : ℝ) * M.structureConstant A B C * M.gammaTwo i j α β : ℝ) : ℂ) *
+          (x (i, B) : ℂ) * (x (j, C) : ℂ) := by
+  change ((M.deformedPotentialMatrix 1 0 x A β α : ℝ) : ℂ) = _
+  rw [M.family270B_deformedPotentialMatrix_one_zero_coeff]
+  simp only [coordinateBracketAll, Finset.mul_sum, Finset.sum_mul, Complex.ofReal_sum,
+    Complex.ofReal_mul]
+  refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ =>
+    Finset.sum_congr rfl fun B _ => Finset.sum_congr rfl fun C _ => ?_
+  ring
 
-/-- The undeformed deformed charge is the original BFSS charge. -/
-lemma family270B_deformedCoreCharge_one_zero_eq_charge
-    (α : SpinIndex) (f : SmoothCore N) :
-    M.deformedCoreCharge 1 0 α f = M.charge α f := by
-  ext x
-  rw [M.deformedCoreCharge_apply, M.charge_kinetic_plus_bracket,
-    M.family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier]
+#print axioms family270B_deformedPotentialMatrix_one_zero_coeff
+#print axioms family270B_sum_reorder
+#print axioms family270B_undeformed_coefficient
 
 end
 end BFSSQuantum.AlgebraData
