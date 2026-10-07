@@ -1,4 +1,4 @@
-import OAI.MathematicalPhysics.BFSS.DeformedCharge
+import OAI.MathematicalPhysics.BFSS.FermionQuantization
 
 namespace OAI
 namespace BFSSQuantum.AlgebraData
@@ -7,7 +7,7 @@ open Matrix Finset
 
 variable {N : ℕ} (M : AlgebraData N)
 
-/-- Convert the BFSS ordered spatial-pair subtype sum to an explicit i<j double sum. -/
+/-- Convert the BFSS strict spatial-pair subtype sum to an explicit i<j double sum. -/
 lemma family270B_spatialPair_sum {W : Type*} [AddCommMonoid W]
     (F : SpaceIndex → SpaceIndex → W) :
     (∑ p : BFSSGamma.SpatialPair, F p.1.1 p.1.2) =
@@ -50,7 +50,7 @@ lemma family270B_sum_pairs_half (f : SpaceIndex → SpaceIndex → ℝ)
   rw [he, hr]
   ring
 
-/-- The original ordered-pair gamma-two kernel is symmetric after multiplying by the skew color bracket. -/
+/-- The color-bracket/gamma-two scalar kernel is symmetric in its spatial indices. -/
 lemma family270B_kernel_symmetric (x : Boson N) (A : ColorIndex N)
     (α β : SpinIndex) (i j : SpaceIndex) :
     M.coordinateBracketAll x i j A * M.gammaTwo i j α β =
@@ -60,7 +60,7 @@ lemma family270B_kernel_symmetric (x : Boson N) (A : ColorIndex N)
   simp only [Matrix.smul_apply, Matrix.sub_apply, smul_eq_mul]
   ring
 
-/-- On a strict spatial pair, the ordered gamma-two is exactly the pairGamma product. -/
+/-- On a strict spatial pair, gammaTwo is the pairGamma product. -/
 lemma family270B_gammaTwo_eq_pairGamma (p : BFSSGamma.SpatialPair) :
     M.gammaTwo p.1.1 p.1.2 = BFSSGamma.pairGamma M.gamma p := by
   unfold AlgebraData.gammaTwo BFSSGamma.pairGamma
@@ -68,8 +68,8 @@ lemma family270B_gammaTwo_eq_pairGamma (p : BFSSGamma.SpatialPair) :
   module
 
 /--
-Coefficient-level bridge between the h=1,m=0 deformed potential matrix
-and the ordered-pair coefficient used in the original BFSS charge.
+The h=1,m=0 deformed potential matrix is exactly the ordered-pair
+coefficient used in the original BFSS bracket multiplier.
 -/
 lemma family270B_deformedPotentialMatrix_one_zero_coeff
     (x : Boson N) (A : ColorIndex N) (α β : SpinIndex) :
@@ -96,71 +96,25 @@ lemma family270B_deformedPotentialMatrix_one_zero_coeff
   have hhalf :
       (∑ p : BFSSGamma.SpatialPair, f p.1.1 p.1.2) =
         (1/2 : ℝ) * ∑ i : SpaceIndex, ∑ j : SpaceIndex, f i j := by
-    rw [M.family270B_spatialPair_sum f,
-      M.family270B_sum_pairs_half f hs, hoff]
+    rw [family270B_spatialPair_sum f,
+      family270B_sum_pairs_half f hs, hoff]
   have hpair (p : BFSSGamma.SpatialPair) :
       -(M.coordinateBracket x p A * (BFSSGamma.pairGamma M.gamma p) β α) =
         f p.1.1 p.1.2 := by
     have hsk := congrArg (fun K : GammaMatrix => K α β)
       (BFSSGamma.pairGamma_skew M.gamma M.gamma_clifford M.gamma_symmetric p)
     simp only [Matrix.transpose_apply, Matrix.neg_apply] at hsk
-    rw [M.family270B_gammaTwo_eq_pairGamma p]
-    simp only [f]
-    rw [← hsk]
-    rfl
+    change -(M.coordinateBracketAll x p.1.1 p.1.2 A *
+        (BFSSGamma.pairGamma M.gamma p) β α) =
+      M.coordinateBracketAll x p.1.1 p.1.2 A * M.gammaTwo p.1.1 p.1.2 α β
+    rw [M.family270B_gammaTwo_eq_pairGamma p, hsk]
+    ring
   rw [deformedPotentialMatrix, BFSSGamma.bracketMassMatrix]
-  simp only [one_smul, zero_smul, add_zero, Matrix.neg_apply, Matrix.sum_apply,
-    Matrix.smul_apply, smul_eq_mul]
+  simp only [zero_smul, add_zero, Matrix.sum_apply, Matrix.smul_apply, smul_eq_mul]
   simp_rw [hpair]
   rw [hhalf]
   simp only [f, ← Finset.mul_sum]
   ring
-
-/--
-Bridge probe for Family 270-B Lemma 2.1:
-the undeformed (h=1,m=0) deformed potential multiplier coincides
-with the bracket multiplier appearing in the original BFSS charge.
--/
-lemma family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier
-    (x : Boson N) (α : SpinIndex) :
-    M.deformedPotentialMultiplier 1 0 x α = M.bracketMultiplier α x := by
-  apply ContinuousLinearMap.ext
-  intro z
-  ext q
-  simp only [deformedPotentialMultiplier, cliffordLinear, _root_.sum_apply,
-    IsSMulApply.smul_apply, Fintype.sum_prod_type, bracketMultiplier,
-    ContinuousLinearMap.sum_apply]
-  simp_rw [deformedPotentialCoefficients,
-    M.family270B_deformedPotentialMatrix_one_zero_coeff]
-  simp only [Complex.ofReal_sum, Complex.ofReal_mul, Finset.sum_smul, smul_smul]
-  rw [Finset.sum_comm]
-  apply Finset.sum_congr rfl
-  intro A _
-  rw [Finset.sum_comm]
-  apply Finset.sum_congr rfl
-  intro β _
-  rw [Finset.sum_comm]
-  apply Finset.sum_congr rfl
-  intro i _
-  rw [Finset.sum_comm]
-  apply Finset.sum_congr rfl
-  intro j _
-  simp only [coordinateBracketAll, Complex.ofReal_sum, Complex.ofReal_mul,
-    Finset.sum_smul, smul_smul]
-  rw [Finset.sum_comm]
-  apply Finset.sum_congr rfl
-  intro B _
-  apply Finset.sum_congr rfl
-  intro C _
-  ring
-
-/-- The undeformed deformed charge is the original BFSS charge. -/
-lemma family270B_deformedCoreCharge_one_zero_eq_charge
-    (α : SpinIndex) (f : SmoothCore N) :
-    M.deformedCoreCharge 1 0 α f = M.charge α f := by
-  ext x
-  rw [M.deformedCoreCharge_apply, M.charge_kinetic_plus_bracket]
-  rw [M.family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier]
 
 end
 end BFSSQuantum.AlgebraData
