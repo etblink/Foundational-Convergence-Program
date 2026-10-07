@@ -1,0 +1,40 @@
+name: Family 270-B Lemma 2.1 Bridge Audit
+
+on:
+  push:
+    branches:
+      - research/openai-math-family270b-lemma21-bridge-audit
+    paths:
+      - experiments/openai-math-family270b-lemma21-bridge-audit/**
+      - .github/workflows/openai-math-family270b-lemma21-bridge-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bridge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out FCP audit branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Check out pinned OpenAI Math
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: openai/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+
+      - name: Install pinned Lean and compile bridge probe
+        shell: bash
+        run: |
+          set -euxo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          test "$(cat upstream-math/lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
+          cp experiments/openai-math-family270b-lemma21-bridge-audit/Family270BBridgeProbe.lean upstream-math/lean/Family270BBridgeProbe.lean
+          cd upstream-math/lean
+          lake exe cache get
+          lake env lean Family270BBridgeProbe.lean
