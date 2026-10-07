@@ -26,6 +26,9 @@ jobs:
           ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
           path: upstream-math
           persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
 
       - name: Install pinned Lean and compile bridge probe
         shell: bash
