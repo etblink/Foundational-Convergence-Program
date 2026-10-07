@@ -30,6 +30,14 @@ jobs:
             lean
           sparse-checkout-cone-mode: true
 
+      - name: Restore pinned Lean build cache
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake
+            ~/.elan
+          key: family270b-bridge-ubuntu-lean4341-openai-adc7f124-deformedcharge-v1
+
       - name: Install pinned Lean and compile bridge probe
         shell: bash
         run: |
