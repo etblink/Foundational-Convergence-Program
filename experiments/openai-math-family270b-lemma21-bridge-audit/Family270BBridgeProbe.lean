@@ -167,6 +167,59 @@ lemma family270B_undeformed_coefficient
     Finset.sum_congr rfl fun B _ => Finset.sum_congr rfl fun C _ => ?_
   ring
 
+/--
+The pinned undeformed deformed-potential multiplier agrees with the
+original BFSS bracket multiplier. Reuse the compiled scalar coefficient
+identity so Lean never unfolds gamma and structure-constant algebra here.
+-/
+lemma family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier
+    (x : Boson N) (α : SpinIndex) :
+    M.deformedPotentialMultiplier 1 0 x α = M.bracketMultiplier α x := by
+  let T : SpaceIndex → SpaceIndex → ColorIndex N → ColorIndex N →
+      ColorIndex N → SpinIndex → (Fermion N →L[ℂ] Fermion N) :=
+    fun i j A B C β =>
+      (((((1 / 2 : ℝ) * M.structureConstant A B C *
+          M.gammaTwo i j α β : ℝ) : ℂ) *
+        (x (i, B) : ℂ) * (x (j, C) : ℂ))) • M.theta β A
+  calc
+    M.deformedPotentialMultiplier 1 0 x α =
+        ∑ β : SpinIndex, ∑ A : ColorIndex N,
+          ((M.deformedPotentialCoefficients 1 0 x α (β, A) : ℝ) : ℂ) •
+            M.theta β A := by
+      change (∑ p : FermionIndex N,
+        ((M.deformedPotentialCoefficients 1 0 x α p : ℝ) : ℂ) •
+          M.theta p.1 p.2) = _
+      rw [Fintype.sum_prod_type]
+    _ = ∑ β : SpinIndex, ∑ A : ColorIndex N,
+          (∑ i : SpaceIndex, ∑ j : SpaceIndex,
+            ∑ B : ColorIndex N, ∑ C : ColorIndex N,
+              (((1 / 2 : ℝ) * M.structureConstant A B C *
+                M.gammaTwo i j α β : ℝ) : ℂ) *
+                (x (i, B) : ℂ) * (x (j, C) : ℂ)) •
+            M.theta β A := by
+      apply Finset.sum_congr rfl
+      intro β _
+      apply Finset.sum_congr rfl
+      intro A _
+      rw [M.family270B_undeformed_coefficient x α β A]
+    _ = ∑ β : SpinIndex, ∑ A : ColorIndex N,
+          ∑ i : SpaceIndex, ∑ j : SpaceIndex,
+            ∑ B : ColorIndex N, ∑ C : ColorIndex N,
+              T i j A B C β := by
+      simp only [T, Finset.sum_smul]
+    _ = M.bracketMultiplier α x := by
+      change (∑ β : SpinIndex, ∑ A : ColorIndex N,
+        ∑ i : SpaceIndex, ∑ j : SpaceIndex,
+          ∑ B : ColorIndex N, ∑ C : ColorIndex N,
+            T i j A B C β) =
+        (∑ i : SpaceIndex, ∑ j : SpaceIndex,
+          ∑ A : ColorIndex N, ∑ B : ColorIndex N,
+            ∑ C : ColorIndex N, ∑ β : SpinIndex,
+              T i j A B C β)
+      exact (family270B_sum_reorder T).symm
+
+#print axioms family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier
+
 #print axioms family270B_deformedPotentialMatrix_one_zero_coeff
 #print axioms family270B_sum_reorder
 #print axioms family270B_undeformed_coefficient
