@@ -1341,7 +1341,7 @@ Future claims should use the following fields:
 - `scope_ceiling`: nonperturbative content nonempty/source-qualified in declared domains; universal complete definition and vacuum selection not established.
 - `status`: `ACCEPTED`
 - `supersedes`: `NONE`
-- `notes`: canonical provenance: FCP-24 K1–K10 baseline blob `a4a166cbe9546d72ecf7622e6c4dd6948cb361e1`; handoff blob `83cebd500cab24b8e19e15b81b0acac8bd872040`.
+- `notes`: canonical provenance: FCP-24 K1–K10 baseline blob `a4a166cbe9546d72ecf7622e6c4dd6948cb361e1`; handoff blob `83cebd500cab24b8e19e15b81b0acac8bd872040`. Post-acceptance evidence (2026-10-07): `SRC-OPENAI-MATH-F270B-BFSS-2026` strengthens source-bound model-level BFSS spectral knowledge and scope-limitedly corrects the 1997 blanket exclusion of other normalizable bound states for the defined N=2 relative operator under the normalizable-eigenstate reading. This post-FCP-24 evidence does **not** alter the historical `source_ids` field, `NONFORCED` classification, K1–K10 coordinates, framework-wide incompleteness/selection ceiling, pairwise results, recurrence, empirical status, or Reduced-NFC comparisons. Controlling adjudication: `audits/OPENAI_MATH_FAMILY270B_BFSS_T6_SOURCE_DELTA_ADJUDICATION_0_1_0.md`.
 
 ## FCP24-STRING-003 — String/M phenomenology reaches model/parameter constraint scope but not framework selection
 
