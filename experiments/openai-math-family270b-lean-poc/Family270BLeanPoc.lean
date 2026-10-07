@@ -94,7 +94,8 @@ lemma sum_gamma_mul_gammaTwo (l : Space) :
     rw [he, Finset.card_erase_of_mem (by simp)]
     simp [Space]
   rw [hcard]
-  norm_num
+  ext a b
+  simp [Matrix.mul_apply]
 
 end
 end BFSSGamma
