@@ -235,6 +235,24 @@ lemma family270B_deformedCoreCharge_one_zero_eq_charge
   rw [M.deformedCoreCharge_apply, M.charge_kinetic_plus_bracket,
     M.family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier]
 
+
+/--
+The original BFSS core form inherits the general undeformed averaged
+energy identity: kinetic energy + bosonic potential + fermionic field.
+This is conditional on the upstream abstract AlgebraData N assumptions
+and does not instantiate the concrete relative SU(2) model.
+-/
+lemma family270B_coreForm_energy_identity (f : SmoothCore N) :
+    M.coreForm f =
+      (1/2 : ℝ) * ∑ p : SpaceIndex × ColorIndex N,
+        ‖coreToL2 (coordinateDerivative p.1 p.2 f)‖^2 +
+      ∫ x : Boson N, (M.deformedBosonicPotential 1 0 x * ‖f x‖^2 +
+        inner ℝ (f x) (M.deformedFermionField 1 0 x (f x))) := by
+  have h := M.averaged_core_energy 1 0 f
+  simpa only [coreForm, M.family270B_deformedCoreCharge_one_zero_eq_charge] using h
+
+#print axioms family270B_coreForm_energy_identity
+
 #print axioms family270B_deformedCoreCharge_one_zero_eq_charge
 
 #print axioms family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier
