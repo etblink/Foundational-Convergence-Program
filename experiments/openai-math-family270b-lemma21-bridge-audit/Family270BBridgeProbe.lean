@@ -115,7 +115,8 @@ lemma family270B_deformedPotentialMatrix_one_zero_coeff
   rw [← Finset.sum_neg_distrib]
   simp_rw [hpair]
   rw [hhalf]
-  simp only [f, ← Finset.mul_sum]
+  simp only [f]
+  rw [← Finset.sum_mul, ← Finset.sum_mul]
   ring
 
 end
