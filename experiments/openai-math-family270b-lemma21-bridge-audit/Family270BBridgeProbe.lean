@@ -149,6 +149,7 @@ lemma family270B_sum_reorder {E : Type*} [AddCommMonoid E]
         Finset.sum_congr rfl fun β _ => Finset.sum_comm
 
 /-- The undeformed potential multiplier coincides with the original bracket multiplier. -/
+set_option maxHeartbeats 2000000 in
 lemma family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier
     (x : Boson N) (α : SpinIndex) :
     M.deformedPotentialMultiplier 1 0 x α = M.bracketMultiplier α x := by
@@ -164,7 +165,7 @@ lemma family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier
       Finset.sum_congr rfl fun B _ => Finset.sum_congr rfl fun C _ => ?_
     ring
   simp only [deformedPotentialMultiplier, cliffordLinear, deformedPotentialCoefficients,
-    bracketMultiplier, Fintype.sum_prod_type, hcoef, Finset.sum_smul]
+    bracketMultiplier, Fintype.sum_prod_type, hcoef]
   exact (family270B_sum_reorder (E := Fermion N →L[ℂ] Fermion N) _).symm
 
 /-- The undeformed deformed charge is the original BFSS charge. -/
