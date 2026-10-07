@@ -206,7 +206,11 @@ lemma family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier
           ∑ i : SpaceIndex, ∑ j : SpaceIndex,
             ∑ B : ColorIndex N, ∑ C : ColorIndex N,
               T i j A B C β := by
-      simp only [T, Finset.sum_smul]
+      apply Finset.sum_congr rfl
+      intro β _
+      apply Finset.sum_congr rfl
+      intro A _
+      simp only [T, ← Finset.sum_smul]
     _ = M.bracketMultiplier α x := by
       change (∑ β : SpinIndex, ∑ A : ColorIndex N,
         ∑ i : SpaceIndex, ∑ j : SpaceIndex,
