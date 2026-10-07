@@ -120,6 +120,9 @@ lemma family270B_deformedPotentialMatrix_one_zero_coeff
   apply Finset.sum_congr rfl
   intro i _
   rw [Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro j _
+  ring
 
 end
 end BFSSQuantum.AlgebraData
