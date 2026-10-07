@@ -18,12 +18,31 @@ jobs:
     steps:
       - name: Check out FCP experiment
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-      - name: Compile pinned Lean proof-of-concept
+
+      # lean-action installs the pinned toolchain before its manifest preflight.
+      # The first bounded run starts without a checked-in lake-manifest.json, so
+      # allow that preflight to stop after installation and generate the manifest
+      # explicitly in the next step.
+      - name: Install pinned Lean toolchain
+        continue-on-error: true
         uses: leanprover/lean-action@f061402b660e0c34644504b324e830f2991d4865
         with:
           lake-package-directory: experiments/openai-math-family270b-lean-poc
           auto-config: "false"
-          build: "true"
+          build: "false"
           test: "false"
           lint: "false"
-          use-mathlib-cache: "true"
+          use-mathlib-cache: "false"
+          use-github-cache: "false"
+
+      - name: Resolve pinned mathlib and compile proof-of-concept
+        shell: bash
+        working-directory: experiments/openai-math-family270b-lean-poc
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          lean --version
+          lake --version
+          lake update
+          lake exe cache get
+          lake build
