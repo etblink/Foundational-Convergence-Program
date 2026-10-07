@@ -222,6 +222,21 @@ lemma family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier
               T i j A B C β)
       exact (family270B_sum_reorder T).symm
 
+
+/--
+The undeformed deformed-core supercharge agrees with the original BFSS
+supercharge on the common smooth core. The kinetic terms agree directly;
+the potential terms agree by the compiled multiplier bridge.
+-/
+lemma family270B_deformedCoreCharge_one_zero_eq_charge
+    (α : SpinIndex) (f : SmoothCore N) :
+    M.deformedCoreCharge 1 0 α f = M.charge α f := by
+  ext x
+  rw [M.deformedCoreCharge_apply, M.charge_kinetic_plus_bracket,
+    M.family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier]
+
+#print axioms family270B_deformedCoreCharge_one_zero_eq_charge
+
 #print axioms family270B_deformedPotentialMultiplier_one_zero_eq_bracketMultiplier
 
 #print axioms family270B_deformedPotentialMatrix_one_zero_coeff
