@@ -116,8 +116,7 @@ lemma family270B_deformedPotentialMatrix_one_zero_coeff
   simp_rw [hpair]
   rw [hhalf]
   simp only [f]
-  rw [← Finset.sum_mul, ← Finset.sum_mul]
-  ring
+  rw [← Finset.mul_sum, ← Finset.mul_sum]
 
 end
 end BFSSQuantum.AlgebraData
