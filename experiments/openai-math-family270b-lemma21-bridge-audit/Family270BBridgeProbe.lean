@@ -1,4 +1,4 @@
-import OAI.MathematicalPhysics.BFSS.FermionQuantization
+import OAI.MathematicalPhysics.BFSS.DeformedCharge
 
 namespace OAI
 namespace BFSSQuantum.AlgebraData
