@@ -40,5 +40,5 @@ jobs:
           cp experiments/openai-math-family270b-lemma21-bridge-audit/Family270BBridgeProbe.lean upstream-math/lean/Family270BBridgeProbe.lean
           cd upstream-math/lean
           lake exe cache get
-          lake build OAI.MathematicalPhysics.BFSS.FermionQuantization
+          lake build OAI.MathematicalPhysics.BFSS.DeformedCharge
           lake env lean Family270BBridgeProbe.lean
