@@ -36,7 +36,7 @@ jobs:
           path: |
             upstream-math/lean/.lake
             ~/.elan
-          key: family270b-bridge-ubuntu-lean4341-openai-adc7f124-deformedcharge-v1
+          key: family270b-bridge-ubuntu-lean4341-openai-adc7f124-deformedcharge-v2
 
       - name: Install pinned Lean and compile bridge probe
         shell: bash
@@ -48,5 +48,5 @@ jobs:
           cp experiments/openai-math-family270b-lemma21-bridge-audit/Family270BBridgeProbe.lean upstream-math/lean/Family270BBridgeProbe.lean
           cd upstream-math/lean
           lake exe cache get
-          lake build OAI.MathematicalPhysics.BFSS.FermionQuantization
+          lake build OAI.MathematicalPhysics.BFSS.DeformedCharge
           lake env lean Family270BBridgeProbe.lean
