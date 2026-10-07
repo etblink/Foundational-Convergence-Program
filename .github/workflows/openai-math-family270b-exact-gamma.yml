@@ -1,0 +1,54 @@
+name: OpenAI Math Family 270-B Exact Gamma Integration
+
+on:
+  push:
+    branches:
+      - research/openai-math-family270b-lean-poc
+    paths:
+      - experiments/openai-math-family270b-lean-poc/Family270BUpstreamProbe.lean
+      - .github/workflows/openai-math-family270b-exact-gamma.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-gamma:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out FCP experiment
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Install pinned Lean toolchain
+        uses: leanprover/lean-action@f061402b660e0c34644504b324e830f2991d4865
+        with:
+          lake-package-directory: experiments/openai-math-family270b-lean-poc
+          auto-config: "false"
+          build: "false"
+          test: "false"
+          lint: "false"
+          use-mathlib-cache: "false"
+          use-github-cache: "false"
+
+      - name: Compile against exact upstream GammaWords source
+        shell: bash
+        working-directory: experiments/openai-math-family270b-lean-poc
+        env:
+          OPENAI_MATH_COMMIT: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          GAMMAWORDS_BLOB: d12051e70de679f5458dbd456667a32c7b407ce4
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          lake update
+          lake exe cache get
+
+          mkdir -p OAI/MathematicalPhysics/BFSS
+          mkdir -p .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS
+
+          curl --fail --location --silent --show-error             "https://raw.githubusercontent.com/openai/math/$OPENAI_MATH_COMMIT/lean/OAI/MathematicalPhysics/BFSS/GammaWords.lean"             --output OAI/MathematicalPhysics/BFSS/GammaWords.lean
+
+          test "$(git hash-object OAI/MathematicalPhysics/BFSS/GammaWords.lean)" = "$GAMMAWORDS_BLOB"
+
+          lake env lean             OAI/MathematicalPhysics/BFSS/GammaWords.lean             -o .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/GammaWords.olean             -i .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/GammaWords.ilean
+
+          lake env lean Family270BUpstreamProbe.lean
