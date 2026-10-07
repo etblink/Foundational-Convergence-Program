@@ -1,0 +1,29 @@
+name: OpenAI Math Family 270-B Lean POC
+
+on:
+  push:
+    branches:
+      - research/openai-math-family270b-lean-poc
+    paths:
+      - experiments/openai-math-family270b-lean-poc/**
+      - .github/workflows/openai-math-family270b-lean-poc.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out FCP experiment
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Compile pinned Lean proof-of-concept
+        uses: leanprover/lean-action@f061402b660e0c34644504b324e830f2991d4865
+        with:
+          lake-package-directory: experiments/openai-math-family270b-lean-poc
+          auto-config: "false"
+          build: "true"
+          test: "false"
+          lint: "false"
+          use-mathlib-cache: "true"
