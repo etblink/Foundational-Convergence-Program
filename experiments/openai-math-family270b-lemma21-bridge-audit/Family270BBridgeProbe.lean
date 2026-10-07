@@ -110,10 +110,8 @@ lemma family270B_deformedPotentialMatrix_one_zero_coeff
     rw [M.family270B_gammaTwo_eq_pairGamma p, hsk]
     ring
   rw [deformedPotentialMatrix, BFSSGamma.bracketMassMatrix]
-  change -(∑ p : BFSSGamma.SpatialPair,
-      M.coordinateBracket x p A * (BFSSGamma.pairGamma M.gamma p) β α) =
-    ∑ i : SpaceIndex, ∑ j : SpaceIndex,
-      ((1/2 : ℝ) * M.coordinateBracketAll x i j A) * M.gammaTwo i j α β
+  simp only [neg_smul, one_smul, zero_smul, add_zero, Matrix.neg_apply,
+    Matrix.sum_apply, Matrix.smul_apply, smul_eq_mul]
   rw [← Finset.sum_neg_distrib]
   simp_rw [hpair]
   rw [hhalf]
