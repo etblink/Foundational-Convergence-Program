@@ -76,7 +76,7 @@ private theorem generic_basis_map_sum_repr
     {ι V W : Type*} [Fintype ι] [DecidableEq ι]
     [AddCommGroup V] [Module ℂ V]
     [AddCommGroup W] [Module ℂ W]
-    (b : Basis ι ℂ V) (f : V →ₗ[ℂ] W) (v : V) :
+    (b : Module.Basis ι ℂ V) (f : V →ₗ[ℂ] W) (v : V) :
     f v = ∑ i : ι, b.repr v i • f (b i) := by
   calc
     f v = f (∑ i : ι, b.repr v i • b i) :=
@@ -174,7 +174,7 @@ theorem occupationSelector_apply (A : Finset (Fin 24)) (x : BFSSFermion) :
         apply Finset.sum_eq_single_of_mem A (Finset.mem_univ A)
         intro B _ hBA
         exact if_neg (Ne.symm hBA)
-      simpa only [if_pos rfl] using hsingle
+      simpa only [ite_true] using hsingle
 
 #print axioms occupationExpansion
 #print axioms occupationSelector_apply
