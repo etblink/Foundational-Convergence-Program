@@ -161,6 +161,55 @@ lemma normalizedPauli_commutator (a b : Fin 3) :
           (∑ c : Fin 3, (epsilon3 a b c : ℂ) • normalizedPauli c) := by
             rw [hsum, smul_smul, hscale]
 
+
+/-- The explicit 2×2 Pauli matrices are Hermitian. -/
+lemma pauli_hermitian (a : Fin 3) : (pauli a).IsHermitian := by
+  ext i j
+  fin_cases a <;> fin_cases i <;> fin_cases j <;>
+    simp [pauli, Matrix.conjTranspose_apply, Complex.star_def,
+      Complex.conj_I]
+
+/-- The orthonormal Pauli color generators are Hermitian. -/
+lemma normalizedPauli_hermitian (a : Fin 3) :
+    (normalizedPauli a).IsHermitian := by
+  ext i j
+  fin_cases a <;> fin_cases i <;> fin_cases j <;>
+    simp [normalizedPauli, pauli, Matrix.conjTranspose_apply,
+      Matrix.smul_apply, smul_eq_mul, Complex.star_def,
+      Complex.conj_I, Complex.conj_ofReal, map_mul] <;> ring
+
+/-- Normalization preserves the traceless color-generator condition. -/
+lemma normalizedPauli_trace_zero (a : Fin 3) :
+    Matrix.trace (normalizedPauli a) = 0 := by
+  simp [normalizedPauli, Matrix.trace_smul, pauli_trace_zero]
+
+/-- The 3-color orientation is invariant under a cyclic index permutation. -/
+lemma epsilon3_cyclic (a b c : Fin 3) :
+    epsilon3 a b c = epsilon3 b c a := by
+  fin_cases a <;> fin_cases b <;> fin_cases c <;> rfl
+
+/-- The normalized Pauli bracket in the exact Hermitian BFSS sign convention. -/
+lemma normalizedPauli_realBracket (a b : Fin 3) :
+    (-Complex.I) •
+      (normalizedPauli a * normalizedPauli b -
+        normalizedPauli b * normalizedPauli a) =
+      (Real.sqrt 2 : ℂ) •
+        (∑ c : Fin 3, (epsilon3 a b c : ℂ) • normalizedPauli c) := by
+  rw [normalizedPauli_commutator, smul_smul]
+  have h : (-Complex.I) * (Complex.I * (Real.sqrt 2 : ℂ)) =
+      (Real.sqrt 2 : ℂ) := by
+    calc
+      (-Complex.I) * (Complex.I * (Real.sqrt 2 : ℂ)) =
+          -(Complex.I ^ 2) * (Real.sqrt 2 : ℂ) := by ring
+      _ = (Real.sqrt 2 : ℂ) := by rw [Complex.I_sq]; ring
+  rw [h]
+
+#print axioms pauli_hermitian
+#print axioms normalizedPauli_hermitian
+#print axioms normalizedPauli_trace_zero
+#print axioms epsilon3_cyclic
+#print axioms normalizedPauli_realBracket
+
 #print axioms pauliScale_sq
 #print axioms pauli_trace_pair
 #print axioms normalizedPauli_trace_pair
