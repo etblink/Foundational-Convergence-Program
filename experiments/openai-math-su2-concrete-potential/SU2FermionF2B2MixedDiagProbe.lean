@@ -26,7 +26,9 @@ private theorem majorana1_phase (i : Fin 24) :
         ((Complex.I : ℂ) • (creator i - annihilator i)) := by
   unfold majorana1
   simp only [star_smul, Complex.star_def, Complex.conj_I, creator_adjoint]
-  rw [smul_sub, sub_eq_add_neg, neg_smul]
+  rw [smul_sub, sub_eq_add_neg]
+  ext x
+  simp
 
 /-- Same-mode real/imaginary CAR follows from creation and
 annihilation square zero, with no new assumptions. -/
