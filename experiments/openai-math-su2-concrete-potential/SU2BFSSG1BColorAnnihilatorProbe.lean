@@ -69,7 +69,19 @@ theorem color_annihilator (j : Fin 8) (A : ColorIndex 2) :
           annihilator (colorModeEquiv (j,A))) -
         (1 / 2 : ℂ) • (creator (colorModeEquiv (j,A)) -
           annihilator (colorModeEquiv (j,A))) := by
-            rw [s_sq, s_I_sq, neg_smul]
+            rw [s_sq, s_I_sq]
+            have hneg :
+                (-(1 / 2 : ℂ)) •
+                    (creator (colorModeEquiv (j,A)) -
+                      annihilator (colorModeEquiv (j,A))) =
+                  -((1 / 2 : ℂ) •
+                    (creator (colorModeEquiv (j,A)) -
+                      annihilator (colorModeEquiv (j,A)))) :=
+              neg_smul (1 / 2 : ℂ)
+                (creator (colorModeEquiv (j,A)) -
+                  annihilator (colorModeEquiv (j,A)))
+            rw [hneg]
+            exact (sub_eq_add_neg _ _).symm
     _ = annihilator (colorModeEquiv (j,A)) := by
       calc
         _ = (1 / 2 : ℂ) • annihilator (colorModeEquiv (j,A)) +
@@ -77,8 +89,12 @@ theorem color_annihilator (j : Fin 8) (A : ColorIndex 2) :
                 rw [smul_add, smul_sub]
                 abel
         _ = annihilator (colorModeEquiv (j,A)) := by
-          rw [← add_smul]
-          norm_num
+          calc
+            _ = ((1 / 2 : ℂ) + (1 / 2 : ℂ)) •
+                  annihilator (colorModeEquiv (j,A)) :=
+              (add_smul (1 / 2 : ℂ) (1 / 2 : ℂ)
+                (annihilator (colorModeEquiv (j,A)))).symm
+            _ = annihilator (colorModeEquiv (j,A)) := by norm_num
 
 /-- The same identity for the actual theta field of the SECOND
 fully constructed upstream AlgebraData 2 witness, not merely an
