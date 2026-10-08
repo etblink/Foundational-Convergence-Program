@@ -35,7 +35,8 @@ noncomputable def concreteAlgebraData : AlgebraData 2 where
     have h := FCP.BFSSFermionF3C2.thetaCandidate_upstream_CAR α β A B
     by_cases he : α = β ∧ A = B
     · simpa only [if_pos he, one_smul] using h
-    · simpa [he] using h
+    · simpa only [if_neg he, ← Nat.cast_smul_eq_nsmul ℂ,
+        Nat.cast_zero] using h
   theta_irreducible :=
     FCP.BFSSFermionF3C2.thetaCandidate_upstream_irreducible
 
