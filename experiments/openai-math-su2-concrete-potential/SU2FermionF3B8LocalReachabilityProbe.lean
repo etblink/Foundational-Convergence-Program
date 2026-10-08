@@ -17,6 +17,7 @@ noncomputable section
 open FCP.BFSSFermionF1 FCP.BFSSFermionF2
 open FCP.BFSSFermionF3A2 FCP.BFSSFermionF3B2
 open FCP.BFSSFermionF3B7
+open OAI.ContinuumCoulomb.HubbardGlobal
 
 private abbrev BFSSFermion := OAI.BFSSQuantum.Fermion 2
 
