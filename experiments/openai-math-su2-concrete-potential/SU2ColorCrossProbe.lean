@@ -1,4 +1,5 @@
 import Mathlib
+import OAI.MathematicalPhysics.BFSS.Core
 
 /-!
 # Concrete SU(2) color algebra, first independently compiled gate
@@ -203,6 +204,57 @@ lemma normalizedPauli_realBracket (a b : Fin 3) :
           -(Complex.I ^ 2) * (Real.sqrt 2 : ℂ) := by ring
       _ = (Real.sqrt 2 : ℂ) := by rw [Complex.I_sq]; ring
   rw [h]
+
+
+/--
+A direct trace extraction identity: the normalized Pauli trace pairing
+reads off the A-th coefficient of an epsilon-weighted color combination.
+-/
+lemma normalizedPauli_trace_epsilon_sum (a b c : Fin 3) :
+    Matrix.trace (normalizedPauli a *
+        (∑ d : Fin 3, (epsilon3 b c d : ℂ) • normalizedPauli d)) =
+      (epsilon3 b c a : ℂ) := by
+  rw [Matrix.mul_sum, Matrix.trace_sum]
+  simp only [Matrix.mul_smul, Matrix.trace_smul, smul_eq_mul,
+    normalizedPauli_trace_pair]
+  simp [mul_ite, Finset.sum_ite_eq', eq_comm]
+
+/--
+Fully concrete version of the color structure-constant trace formula,
+in the sign and cyclic ordering of OpenAI's BFSS AlgebraData.
+-/
+lemma normalizedPauli_structureConstant_trace (a b c : Fin 3) :
+    (Matrix.trace (normalizedPauli a *
+      ((-Complex.I) •
+        (normalizedPauli b * normalizedPauli c -
+          normalizedPauli c * normalizedPauli b)))).re =
+        Real.sqrt 2 * epsilon3 a b c := by
+  rw [normalizedPauli_realBracket, Matrix.mul_smul, Matrix.trace_smul,
+    normalizedPauli_trace_epsilon_sum]
+  simp only [smul_eq_mul, ← Complex.ofReal_mul, Complex.ofReal_re]
+  rw [epsilon3_cyclic]
+
+/--
+An explicitly conditional, actual-upstream-API statement.
+The hypothesis identifies the color basis; this theorem does not
+construct an inhabitant of AlgebraData 2 or prove realizability.
+-/
+lemma algebraData_structureConstant_of_pauli_color
+    (M : OAI.BFSSQuantum.AlgebraData 2)
+    (hcolor : ∀ a : OAI.BFSSQuantum.ColorIndex 2,
+      M.color a = normalizedPauli a)
+    (a b c : OAI.BFSSQuantum.ColorIndex 2) :
+    M.structureConstant a b c = Real.sqrt 2 * epsilon3 a b c := by
+  change
+    (Matrix.trace (M.color a *
+      ((-Complex.I) • (M.color b * M.color c -
+        M.color c * M.color b)))).re = _
+  rw [hcolor a, hcolor b, hcolor c]
+  exact normalizedPauli_structureConstant_trace a b c
+
+#print axioms normalizedPauli_trace_epsilon_sum
+#print axioms normalizedPauli_structureConstant_trace
+#print axioms algebraData_structureConstant_of_pauli_color
 
 #print axioms pauli_hermitian
 #print axioms normalizedPauli_hermitian
