@@ -72,6 +72,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3C2ThetaFieldsProbe.lean upstream-math/lean/SU2FermionF3C2ThetaFieldsProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSFullAlgebraDataProbe.lean upstream-math/lean/SU2BFSSFullAlgebraDataProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSConcretePotentialProbe.lean upstream-math/lean/SU2BFSSConcretePotentialProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSPotentialAverageFlatProbe.lean upstream-math/lean/SU2BFSSPotentialAverageFlatProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -135,4 +136,6 @@ jobs:
           # F4-G1: assemble all twelve fields of pinned BFSS AlgebraData 2.
           lake env lean -o .lake/build/lib/lean/SU2BFSSFullAlgebraDataProbe.olean SU2BFSSFullAlgebraDataProbe.lean
           # F5-G1: unconditional pinned SU2 color brackets and bosonic wedge potential.
-          lake env lean SU2BFSSConcretePotentialProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSConcretePotentialProbe.olean SU2BFSSConcretePotentialProbe.lean
+          # F5-G2: exact 1/16 Clifford average and single-color flat potential sector.
+          lake env lean SU2BFSSPotentialAverageFlatProbe.lean
