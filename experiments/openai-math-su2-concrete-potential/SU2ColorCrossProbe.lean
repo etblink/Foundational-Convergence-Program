@@ -432,6 +432,30 @@ lemma normalizedPauli_color_spanning
           simp only [normalizedPauli, smul_smul, Complex.ofReal_mul]
           rw [heq]
 
+
+/--
+The complete four-field SU(2) color slice of the pinned BFSS AlgebraData
+requirements has an explicit inhabitant, independently of gamma/theta.
+This is NOT a construction of AlgebraData 2.
+-/
+theorem exists_normalizedPauli_color_basis :
+    ∃ C : OAI.BFSSQuantum.ColorIndex 2 →
+        OAI.BFSSQuantum.ColorMatrix 2,
+      (∀ A, (C A).IsHermitian) ∧
+      (∀ A, Matrix.trace (C A) = 0) ∧
+      (∀ A B, Matrix.trace (C A * C B) =
+        if A = B then 1 else 0) ∧
+      (∀ X : OAI.BFSSQuantum.ColorMatrix 2,
+        X.IsHermitian → Matrix.trace X = 0 →
+          ∃ a : OAI.BFSSQuantum.ColorIndex 2 → ℝ,
+            X = ∑ A, (a A : ℂ) • C A) := by
+  refine ⟨normalizedPauli, normalizedPauli_hermitian,
+    normalizedPauli_trace_zero, normalizedPauli_trace_pair, ?_⟩
+  intro X hX htrace
+  exact normalizedPauli_color_spanning X hX htrace
+
+#print axioms exists_normalizedPauli_color_basis
+
 #print axioms nativePauli_coeff_im_zero
 #print axioms normalizedPauli_color_spanning
 
