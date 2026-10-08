@@ -48,4 +48,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2ColorCrossProbe.lean upstream-math/lean/SU2ColorCrossProbe.lean
           cd upstream-math/lean
           lake exe cache get
+          # Starting at Gate 10, this file imports the upstream local BFSS Core.
+          # `lake exe cache get` restores dependencies but does NOT compile OAI.Core.
+          lake build OAI.MathematicalPhysics.BFSS.Core
           lake env lean SU2ColorCrossProbe.lean
