@@ -70,6 +70,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B9FiniteReachabilityProbe.lean upstream-math/lean/SU2FermionF3B9FiniteReachabilityProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3C1SubmoduleDichotomyProbe.lean upstream-math/lean/SU2FermionF3C1SubmoduleDichotomyProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3C2ThetaFieldsProbe.lean upstream-math/lean/SU2FermionF3C2ThetaFieldsProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSFullAlgebraDataProbe.lean upstream-math/lean/SU2BFSSFullAlgebraDataProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -77,9 +78,9 @@ jobs:
           # Build both pinned OAI modules explicitly. The native Pauli expansion
           # module supplies the complex spanning lemma; BFSS supplies the potential.
           lake build OAI.MathematicalPhysics.BFSS.PotentialBasis OAI.Analysis.CharacterCriterion.Pauli
-          lake env lean SU2ColorCrossProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2ColorCrossProbe.olean SU2ColorCrossProbe.lean
           # Additional independently checkable gamma9 witness, same pinned BFSS Core API.
-          lake env lean SU2RealGammaProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2RealGammaProbe.olean SU2RealGammaProbe.lean
           # Stage F1: 24-mode Fock transport and one Majorana CAR on the exact BFSS Hilbert type.
           # Build the pinned operator/adjoint dependencies before compiling the candidate.
           lake build OAI.MathematicalPhysics.ContinuumCoulomb.ManyBody.FockNorm
@@ -129,4 +130,6 @@ jobs:
           # F3-C1: concrete theta-invariant submodule top/bottom dichotomy.
           lake env lean -o .lake/build/lib/lean/SU2FermionF3C1SubmoduleDichotomyProbe.olean SU2FermionF3C1SubmoduleDichotomyProbe.lean
           # F3-C2: match all pinned upstream AlgebraData 2 theta field types.
-          lake env lean SU2FermionF3C2ThetaFieldsProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2FermionF3C2ThetaFieldsProbe.olean SU2FermionF3C2ThetaFieldsProbe.lean
+          # F4-G1: assemble all twelve fields of pinned BFSS AlgebraData 2.
+          lake env lean SU2BFSSFullAlgebraDataProbe.lean
