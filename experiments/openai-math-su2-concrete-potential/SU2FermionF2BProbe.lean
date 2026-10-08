@@ -30,12 +30,15 @@ private theorem rotatedAnnihilator_formula (i : Fin 24) :
 
 private theorem rotatedCreator_sq (i : Fin 24) :
     rotatedCreator i * rotatedCreator i = 0 := by
-  simp only [rotatedCreator, smul_mul_smul, creator_sq, smul_zero]
+  simp only [rotatedCreator, smul_mul_smul, creator_sq]
+  ext x
+  simp
 
 private theorem rotatedAnnihilator_sq (i : Fin 24) :
     rotatedAnnihilator i * rotatedAnnihilator i = 0 := by
-  simp only [rotatedAnnihilator_formula, smul_mul_smul,
-    annihilator_sq, smul_zero]
+  simp only [rotatedAnnihilator_formula, smul_mul_smul, annihilator_sq]
+  ext x
+  simp
 
 private theorem rotated_mixed_car (i : Fin 24) :
     rotatedAnnihilator i * rotatedCreator i +
