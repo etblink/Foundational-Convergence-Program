@@ -46,7 +46,9 @@ jobs:
           source "$HOME/.elan/env"
           test "$(cat upstream-math/lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
           cat experiments/openai-math-bfss-native-bridge/DeformedChargeNativeAppend.lean >> upstream-math/lean/OAI/MathematicalPhysics/BFSS/DeformedCharge.lean
+          cat experiments/openai-math-bfss-native-bridge/MassiveMomentsNativeConsumer.lean >> upstream-math/lean/OAI/MathematicalPhysics/BFSS/MassiveMoments.lean
           cd upstream-math/lean
           lake exe cache get
-          lake build OAI.MathematicalPhysics.BFSS.DeformedCharge
+          lake build OAI.MathematicalPhysics.BFSS.MassiveMoments
           lake env lean OAI/MathematicalPhysics/BFSS/DeformedCharge.lean
+          lake env lean OAI/MathematicalPhysics/BFSS/MassiveMoments.lean
