@@ -68,6 +68,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B7SignedModeProbe.lean upstream-math/lean/SU2FermionF3B7SignedModeProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B8LocalReachabilityProbe.lean upstream-math/lean/SU2FermionF3B8LocalReachabilityProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B9FiniteReachabilityProbe.lean upstream-math/lean/SU2FermionF3B9FiniteReachabilityProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2FermionF3C1SubmoduleDichotomyProbe.lean upstream-math/lean/SU2FermionF3C1SubmoduleDichotomyProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -123,4 +124,6 @@ jobs:
           # F3-B8: theta-invariant submodule local ket insert/erase reachability.
           lake env lean -o .lake/build/lib/lean/SU2FermionF3B8LocalReachabilityProbe.olean SU2FermionF3B8LocalReachabilityProbe.lean
           # F3-B9: finite induction from any ket through vacuum to all kets.
-          lake env lean SU2FermionF3B9FiniteReachabilityProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2FermionF3B9FiniteReachabilityProbe.olean SU2FermionF3B9FiniteReachabilityProbe.lean
+          # F3-C1: concrete theta-invariant submodule top/bottom dichotomy.
+          lake env lean SU2FermionF3C1SubmoduleDichotomyProbe.lean
