@@ -48,6 +48,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2ColorCrossProbe.lean upstream-math/lean/SU2ColorCrossProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean upstream-math/lean/SU2RealGammaProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionFockProbe.lean upstream-math/lean/SU2FermionFockProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2FermionF2Probe.lean upstream-math/lean/SU2FermionF2Probe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -61,4 +62,7 @@ jobs:
           # Stage F1: 24-mode Fock transport and one Majorana CAR on the exact BFSS Hilbert type.
           # Build the pinned operator/adjoint dependencies before compiling the candidate.
           lake build OAI.MathematicalPhysics.ContinuumCoulomb.ManyBody.FockNorm
-          lake env lean SU2FermionFockProbe.lean
+          # Emit the accepted F1 module as an importable olean for F2; keep its axiom checks.
+          lake env lean -o .lake/build/lib/lean/SU2FermionFockProbe.olean SU2FermionFockProbe.lean
+          # F2-A is bounded to full mode CAR, second self-adjoint Majorana and theta indexing.
+          lake env lean SU2FermionF2Probe.lean
