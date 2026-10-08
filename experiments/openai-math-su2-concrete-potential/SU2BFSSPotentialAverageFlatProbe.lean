@@ -39,15 +39,15 @@ criterion, not an operator spectral or coercivity theorem. -/
 theorem concrete_potential_zero_of_single_color
     (x : Boson 2)
     (hx : ∀ i : SpaceIndex, ∀ a : ColorIndex 2,
-      a ≠ 0 → x (i, a) = 0) :
+      a ≠ (0 : Fin 3) → x (i, a) = 0) :
     concreteAlgebraData.deformedBosonicPotential 1 0 x = 0 := by
   rw [concrete_potential_one_zero_eq_wedge]
   apply Finset.sum_eq_zero
   intro p hp
   have h1 (i : SpaceIndex) : x (i, (1 : Fin 3)) = 0 :=
-    hx i (1 : ColorIndex 2) (by decide)
+    hx i (1 : Fin 3) (by decide)
   have h2 (i : SpaceIndex) : x (i, (2 : Fin 3)) = 0 :=
-    hx i (2 : ColorIndex 2) (by decide)
+    hx i (2 : Fin 3) (by decide)
   simp [FCP.BFSSSU2.colorWedgeSquared, h1, h2]
 
 /-- Consequently, the pinned mean squared Clifford-potential action
@@ -55,7 +55,7 @@ vanishes pointwise on the same single-color sector. -/
 theorem concrete_potential_average_zero_of_single_color
     (x : Boson 2) (z : Fermion 2)
     (hx : ∀ i : SpaceIndex, ∀ a : ColorIndex 2,
-      a ≠ 0 → x (i, a) = 0) :
+      a ≠ (0 : Fin 3) → x (i, a) = 0) :
     (1 / 16 : ℝ) * ∑ α : SpinIndex,
         ‖concreteAlgebraData.deformedPotentialMultiplier 1 0 x α z‖ ^ 2 = 0 := by
   rw [concreteAlgebraData.deformed_potential_average 1 0 x z]
