@@ -63,7 +63,7 @@ theorem fermionGaugeLinearEquiv_norm_sq
 theorem fermionGaugeLinearEquiv_norm
     (g : GaugeGroup 2) (v : Fermion 2) :
     ‖fermionGaugeLinearEquiv g v‖ = ‖v‖ := by
-  exact (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mpr
+  exact (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
     (fermionGaugeLinearEquiv_norm_sq g v)
 
 /-- Actual Fermion 2 complex-linear ISOMETRIC equivalence from the
