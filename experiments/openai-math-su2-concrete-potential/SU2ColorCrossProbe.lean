@@ -365,6 +365,74 @@ lemma nativePauli_complex_span_traceless
       intro a _
       rw [← pauli_eq_native_pauli a]
 
+
+/--
+The native Pauli coefficient of a Hermitian matrix is real. This is a
+non-circular proof: the trace of a product of two Hermitian matrices is
+real by adjoint reversal and cyclicity, rather than by color_spanning.
+-/
+lemma nativePauli_coeff_im_zero
+    (X : Matrix (Fin 2) (Fin 2) ℂ) (hX : X.IsHermitian)
+    (a : Fin 3) :
+    (OAI.KirchbergRordam.Pauli.coeff a.succ X).im = 0 := by
+  have hstar : star (Matrix.trace (pauli a * X)) =
+      Matrix.trace (pauli a * X) := by
+    rw [← Matrix.trace_conjTranspose, Matrix.conjTranspose_mul,
+      (pauli_hermitian a).eq, hX.eq, Matrix.trace_mul_comm]
+  have ht : (Matrix.trace (pauli a * X)).im = 0 :=
+    Complex.conj_eq_iff_im.mp (by simpa only [Complex.star_def] using hstar)
+  rw [OAI.KirchbergRordam.Pauli.coeff_apply, ← pauli_eq_native_pauli a]
+  simp [Complex.mul_im, ht]
+
+/--
+Discharge the precise real-coefficient Pauli color-spanning field of
+OAI.BFSSQuantum.AlgebraData 2. This is a property of an explicit color
+basis, not a constructed instance of the full BFSS algebra.
+-/
+lemma normalizedPauli_color_spanning
+    (X : OAI.BFSSQuantum.ColorMatrix 2)
+    (hX : X.IsHermitian) (htrace : Matrix.trace X = 0) :
+    ∃ a : OAI.BFSSQuantum.ColorIndex 2 → ℝ,
+      X = ∑ A, (a A : ℂ) • normalizedPauli A := by
+  let c : Fin 3 → ℂ :=
+    fun a => OAI.KirchbergRordam.Pauli.coeff a.succ X
+  refine ⟨fun a => Real.sqrt 2 * (c a).re, ?_⟩
+  change X = ∑ a : Fin 3,
+    ((Real.sqrt 2 * (c a).re : ℝ) : ℂ) • normalizedPauli a
+  have hroot : (pauliScale : ℂ) * (Real.sqrt 2 : ℂ) = 1 := by
+    simpa using congrArg (fun t : ℝ => (t : ℂ)) pauliScale_mul_sqrt
+  have hs : (Real.sqrt 2 : ℂ) * (pauliScale : ℂ) = 1 := by
+    calc
+      _ = (pauliScale : ℂ) * (Real.sqrt 2 : ℂ) := by ring
+      _ = 1 := hroot
+  calc
+    X = ∑ a : Fin 3, c a • pauli a :=
+      nativePauli_complex_span_traceless X htrace
+    _ = ∑ a : Fin 3,
+        ((Real.sqrt 2 * (c a).re : ℝ) : ℂ) • normalizedPauli a := by
+      apply Finset.sum_congr rfl
+      intro a _
+      have hc : c a = ((c a).re : ℂ) := by
+        apply Complex.ext
+        · simp
+        · simpa only [Complex.ofReal_im] using
+            (nativePauli_coeff_im_zero X hX a)
+      have heq :
+          (Real.sqrt 2 : ℂ) * ((c a).re : ℂ) * (pauliScale : ℂ) =
+            ((c a).re : ℂ) := by
+        calc
+          _ = ((c a).re : ℂ) *
+                ((Real.sqrt 2 : ℂ) * (pauliScale : ℂ)) := by ring
+          _ = _ := by rw [hs, mul_one]
+      calc
+        c a • pauli a = ((c a).re : ℂ) • pauli a := by rw [hc]
+        _ = ((Real.sqrt 2 * (c a).re : ℝ) : ℂ) • normalizedPauli a := by
+          simp only [normalizedPauli, smul_smul, Complex.ofReal_mul]
+          rw [heq]
+
+#print axioms nativePauli_coeff_im_zero
+#print axioms normalizedPauli_color_spanning
+
 #print axioms pauli_eq_native_pauli
 #print axioms nativePauli_complex_span_traceless
 
