@@ -92,12 +92,10 @@ noncomputable def fermionGaugeLinearHom :
     apply LinearEquiv.ext
     intro v
     obtain ⟨x, rfl⟩ := fockAlgebraToBFSS.surjective v
-    change fermionGaugeLinearEquiv (g*h) (fockAlgebraToBFSS x) =
-      fermionGaugeLinearEquiv g
-        (fermionGaugeLinearEquiv h (fockAlgebraToBFSS x))
-    rw [fermionGaugeLinearEquiv_intertwine,
-      fermionGaugeLinearEquiv_intertwine,
-      fermionGaugeLinearEquiv_intertwine]
+    rw [LinearEquiv.mul_apply,
+      fermionGaugeLinearEquiv_intertwine h x,
+      fermionGaugeLinearEquiv_intertwine g (exteriorGauge h x),
+      fermionGaugeLinearEquiv_intertwine (g*h) x]
     exact (congrArg fockAlgebraToBFSS (exteriorGauge_mul g h x)).symm
 
 #print axioms exteriorGaugeLinearEquiv
