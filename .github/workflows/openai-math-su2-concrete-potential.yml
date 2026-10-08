@@ -66,6 +66,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B5CoordinateProbe.lean upstream-math/lean/SU2FermionF3B5CoordinateProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B6NonzeroKetProbe.lean upstream-math/lean/SU2FermionF3B6NonzeroKetProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B7SignedModeProbe.lean upstream-math/lean/SU2FermionF3B7SignedModeProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B8LocalReachabilityProbe.lean upstream-math/lean/SU2FermionF3B8LocalReachabilityProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -117,4 +118,6 @@ jobs:
           # F3-B6: selector stability and ket extraction from a nonzero invariant vector.
           lake env lean -o .lake/build/lib/lean/SU2FermionF3B6NonzeroKetProbe.olean SU2FermionF3B6NonzeroKetProbe.lean
           # F3-B7: exact transported signed creation/annihilation mode action.
-          lake env lean SU2FermionF3B7SignedModeProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2FermionF3B7SignedModeProbe.olean SU2FermionF3B7SignedModeProbe.lean
+          # F3-B8: theta-invariant submodule local ket insert/erase reachability.
+          lake env lean SU2FermionF3B8LocalReachabilityProbe.lean
