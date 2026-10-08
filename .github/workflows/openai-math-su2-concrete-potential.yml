@@ -73,6 +73,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSFullAlgebraDataProbe.lean upstream-math/lean/SU2BFSSFullAlgebraDataProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSConcretePotentialProbe.lean upstream-math/lean/SU2BFSSConcretePotentialProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSPotentialAverageFlatProbe.lean upstream-math/lean/SU2BFSSPotentialAverageFlatProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSSingleColorMultiplierZeroProbe.lean upstream-math/lean/SU2BFSSSingleColorMultiplierZeroProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -138,4 +139,6 @@ jobs:
           # F5-G1: unconditional pinned SU2 color brackets and bosonic wedge potential.
           lake env lean -o .lake/build/lib/lean/SU2BFSSConcretePotentialProbe.olean SU2BFSSConcretePotentialProbe.lean
           # F5-G2: exact 1/16 Clifford average and single-color flat potential sector.
-          lake env lean SU2BFSSPotentialAverageFlatProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPotentialAverageFlatProbe.olean SU2BFSSPotentialAverageFlatProbe.lean
+          # F5-G3: each exact Clifford potential multiplier vanishes on the single-color sector.
+          lake env lean SU2BFSSSingleColorMultiplierZeroProbe.lean
