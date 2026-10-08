@@ -27,7 +27,7 @@ theorem thetaCandidate_upstream_CAR :
       (A B : OAI.BFSSQuantum.ColorIndex 2),
       thetaCandidate α A * thetaCandidate β B +
         thetaCandidate β B * thetaCandidate α A =
-        (if α = β ∧ A = B then 1 else 0) •
+        (if α = β ∧ A = B then (1 : ℂ) else 0) •
           (1 : OAI.BFSSQuantum.Fermion 2 →L[ℂ]
             OAI.BFSSQuantum.Fermion 2) := by
   intro α β A B
