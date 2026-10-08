@@ -1,5 +1,6 @@
 import Mathlib
 import OAI.MathematicalPhysics.BFSS.PotentialBasis
+import OAI.Analysis.CharacterCriterion.Pauli
 
 /-!
 # Concrete SU(2) color algebra, first independently compiled gate
@@ -324,6 +325,48 @@ lemma deformedBosonicPotential_one_zero_eq_wedge
   simp only [colorCross, colorWedgeSquared, mul_pow,
     Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2)]
   ring
+
+
+/--
+The already-proven Pauli basis in openai/math uses color labels 1,2,3,
+after its scalar identity element 0. Our color ordering agrees exactly.
+-/
+lemma pauli_eq_native_pauli (a : Fin 3) :
+    pauli a = OAI.KirchbergRordam.Pauli.e a.succ := by
+  fin_cases a <;>
+    norm_num [pauli, OAI.KirchbergRordam.Pauli.e]
+
+/--
+An initial spanning milestone **over ℂ**: every traceless complex 2×2
+matrix is a complex linear combination of our three Pauli colors.
+This deliberately does NOT discharge the real-coefficient spanning field
+required for *Hermitian* color matrices in BFSS AlgebraData 2.
+-/
+lemma nativePauli_complex_span_traceless
+    (X : Matrix (Fin 2) (Fin 2) ℂ)
+    (htrace : Matrix.trace X = 0) :
+    X = ∑ a : Fin 3,
+      OAI.KirchbergRordam.Pauli.coeff a.succ X • pauli a := by
+  have hzero : OAI.KirchbergRordam.Pauli.coeff 0 X = 0 := by
+    simp [OAI.KirchbergRordam.Pauli.coeff_apply,
+      OAI.KirchbergRordam.Pauli.e_zero, htrace]
+  calc
+    X = ∑ a : Fin 4,
+        OAI.KirchbergRordam.Pauli.coeff a X •
+          OAI.KirchbergRordam.Pauli.e a :=
+      (OAI.KirchbergRordam.Pauli.coeff_sum X).symm
+    _ = ∑ a : Fin 3,
+        OAI.KirchbergRordam.Pauli.coeff a.succ X •
+          OAI.KirchbergRordam.Pauli.e a.succ := by
+      rw [Fin.sum_univ_succ]
+      simp [hzero]
+    _ = _ := by
+      apply Finset.sum_congr rfl
+      intro a _
+      rw [← pauli_eq_native_pauli a]
+
+#print axioms pauli_eq_native_pauli
+#print axioms nativePauli_complex_span_traceless
 
 #print axioms coordinateBracket_of_pauli_color
 #print axioms deformedBosonicPotential_one_zero_eq_wedge
