@@ -24,8 +24,7 @@ No `native_decide`, `sorry`, or extra axioms are used.
 namespace FCP.BFSSGamma9
 
 set_option maxRecDepth 20000
-set_option maxRecDepth 20000 in
-set_option maxHeartbeats 0 in
+set_option maxHeartbeats 0
 
 /-- Each row's column of the unique nonzero entry. -/
 private def perm : Fin 9 → Fin 16 → Fin 16
