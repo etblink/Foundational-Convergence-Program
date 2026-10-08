@@ -170,8 +170,11 @@ theorem majorana0_car (i : Fin 24) :
   change (_ • (c + a)) * (_ • (c + a)) +
     (_ • (c + a)) * (_ • (c + a)) = _
   simp only [smul_mul_smul, hsum, majoranaScale_sq]
-  rw [← two_smul, smul_smul]
-  norm_num
+  -- Give the scalar field explicitly to avoid an ambiguous Module instance.
+  refine (add_smul (1 / 2 : ℂ) (1 / 2 : ℂ)
+      (1 : OAI.BFSSQuantum.Fermion 2 →L[ℂ] OAI.BFSSQuantum.Fermion 2)).symm.trans ?_
+  have hcoef : (1 / 2 : ℂ) + (1 / 2 : ℂ) = 1 := by norm_num
+  rw [hcoef, one_smul]
 
 #print axioms fockBFSSUnitary
 #print axioms creator_annihilator_car
