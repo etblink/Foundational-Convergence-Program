@@ -310,6 +310,16 @@ lemma deformedBosonicPotential_one_zero_eq_wedge
   apply Finset.sum_congr rfl
   intro p _
   simp_rw [coordinateBracket_of_pauli_color M hcolor x p]
+  -- The upstream ColorIndex 2 is definitionally Fin 3, but the generic
+  -- finite-sum rewrite does not recognize its unreduced index expression.
+  -- Expose the actual three-component sum before using Fin.sum_univ_three.
+  change (1/2 : ℝ) * (∑ a : Fin 3,
+      (Real.sqrt 2 * colorCross
+        (fun b : Fin 3 => x (p.1.1,b))
+        (fun c : Fin 3 => x (p.1.2,c)) a)^2) =
+      colorWedgeSquared
+        (fun b : Fin 3 => x (p.1.1,b))
+        (fun c : Fin 3 => x (p.1.2,c))
   rw [Fin.sum_univ_three]
   simp only [colorCross, colorWedgeSquared, mul_pow,
     Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2)]
