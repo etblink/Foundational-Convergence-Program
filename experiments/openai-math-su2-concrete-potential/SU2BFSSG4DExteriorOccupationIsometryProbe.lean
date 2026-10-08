@@ -35,8 +35,8 @@ theorem orbitalDual_gauge (g : GaugeGroup 2) (v : Orbital 23) :
   change star (complexOneParticleMatrix g *ᵥ v) ⬝ᵥ
     (complexOneParticleMatrix g *ᵥ w) = star v ⬝ᵥ w
   rw [Matrix.star_mulVec, Matrix.dotProduct_mulVec,
-    Matrix.vecMul_vecMul, Matrix.star_eq_conjTranspose,
-    complexOneParticleMatrix_left_unitary, Matrix.vecMul_one]
+    Matrix.vecMul_vecMul, complexOneParticleMatrix_left_unitary,
+    Matrix.vecMul_one]
 
 /-- The *genuine* vector contraction intertwines the accepted BFSS
 exterior gauge action, not the unrelated upstream SourceSU2 action. -/
