@@ -62,6 +62,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B1OccupationProbe.lean upstream-math/lean/SU2FermionF3B1OccupationProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B2BasisActionProbe.lean upstream-math/lean/SU2FermionF3B2BasisActionProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B3ProjectorProbe.lean upstream-math/lean/SU2FermionF3B3ProjectorProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B4SelectorProbe.lean upstream-math/lean/SU2FermionF3B4SelectorProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -105,4 +106,6 @@ jobs:
           # F3-B2: true number/complement action on exact transported occupation vectors.
           lake env lean -o .lake/build/lib/lean/SU2FermionF3B2BasisActionProbe.olean SU2FermionF3B2BasisActionProbe.lean
           # F3-B3: idempotence and pairwise commutation of actual occupied-mode operators.
-          lake env lean SU2FermionF3B3ProjectorProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2FermionF3B3ProjectorProbe.olean SU2FermionF3B3ProjectorProbe.lean
+          # F3-B4: exact action of a 24-mode ordered selector on each canonical occupation ket.
+          lake env lean SU2FermionF3B4SelectorProbe.lean
