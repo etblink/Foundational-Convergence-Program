@@ -8,7 +8,7 @@
 
 The owner reminded Project Lead that FCP already contains a large source-bound scientific literature, review and artifact-provenance infrastructure. The prior `OPENAI_MATH_BFSS_FERMION24_FOCK_FEASIBILITY_0_1_0.md` searched OpenAI's pinned Lean code extensively, but failed to name relevant **FCP-held source and review records**. Future BFSS planning should start with both sets, maintaining clear separation among primary scientific sources, independent reviews, finite computational certificates, Lean kernel certificates, and historical framework taxonomies.
 
-## Relevant FCP-held assets inspected on main
+## Relevant FCP-held assets (main and current research branch)
 
 | Asset | Precise location | Appropriate contribution | Does NOT supply |
 |---|---|---|---|
@@ -20,8 +20,8 @@ The owner reminded Project Lead that FCP already contains a large source-bound s
 | Preserved external mathematical review | `audits/external/GROK_OPENAI_MATH_FAMILY270B_INDEPENDENT_VERIFICATION_REPORT_2026_10_07.md` | Independent argument stress review, analysis of form/operator correspondence | Built gamma/theta/gauge instance; report itself states Lean was unavailable |
 | FCP finite gamma cross-check | `audits/external/OPENAI_MATH_FAMILY270B_REAL_SYMMETRIC_GAMMA_CHECK_2026_10_07.py` | Exact integer real-symmetric 16x16 Clifford, traces, bivector contractions; a complementary check of manuscript normalization | The 48 Majorana CAR operators, Fock-space irreducibility, spectral theorem |
 | FCP external Grok identity script | `audits/external/GROK_OPENAI_MATH_FAMILY270B_IDENTITY_CHECKS_2026_10_07.py` | Independent computational cross-check with known gamma-convention qualification | Authority to skip exact-real-gamma cross-check or claims of full formalization |
-| Current BFSS accepted gamma theorem | `audits/OPENAI_MATH_BFSS_GAMMA9_GATE_31_FORMAL_ACCEPTANCE_0_1_0.md` and `experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean` | Actual kernel-checked 9 real gamma matrices; CI #31 PASS, standard Lean axioms only | The distinct 48 Majorana/Fock/gauge obligations |
-| Current Fock feasibility memo | `audits/OPENAI_MATH_BFSS_FERMION24_FOCK_FEASIBILITY_0_1_0.md` | Pin-aligned plan to reuse existing upstream Fock and adjoint code | A completed F1 proof |
+| Current BFSS accepted gamma theorem (research branch) | `audits/OPENAI_MATH_BFSS_GAMMA9_GATE_31_FORMAL_ACCEPTANCE_0_1_0.md` and `experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean` | Actual kernel-checked 9 real gamma matrices; CI #31 PASS, standard Lean axioms only | The distinct 48 Majorana/Fock/gauge obligations |
+| Current Fock feasibility memo (research branch) | `audits/OPENAI_MATH_BFSS_FERMION24_FOCK_FEASIBILITY_0_1_0.md` | Pin-aligned plan to reuse existing upstream Fock and adjoint code | A completed F1 proof |
 
 The FCP source register's other framework corpora can aid context or supply mathematical analogies, but are **not** automatically applicable to the pinned BFSS (\theta\) representation. Do not mistake registered sources or secondary formal-sounding reports for a reusable proof of the exact target.
 
