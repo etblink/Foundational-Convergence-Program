@@ -52,17 +52,10 @@ theorem creator_fermionGauge_covariant
       ∑ j : Fin 24, complexOneParticleMatrix g j i •
         creator j (fermionGaugeLinearEquiv g v) := by
   obtain ⟨x, rfl⟩ := fockAlgebraToBFSS.surjective v
-  calc
-    _ = fockAlgebraToBFSS (exteriorGauge g (create i x)) := by
-      rw [creator_transport, fermionGaugeLinearEquiv_intertwine]
-    _ = fockAlgebraToBFSS
-          (∑ j : Fin 24, complexOneParticleMatrix g j i •
-            create j (exteriorGauge g x)) := by
-      rw [create_exteriorGauge]
-    _ = ∑ j : Fin 24, complexOneParticleMatrix g j i •
-          creator j (fermionGaugeLinearEquiv g (fockAlgebraToBFSS x)) := by
-      simp only [map_sum, map_smul, fermionGaugeLinearEquiv_intertwine,
-        creator_transport]
+  have h := congrArg fockAlgebraToBFSS (create_exteriorGauge g i x)
+  simp only [map_sum, map_smul] at h
+  simpa only [← creator_transport,
+    ← fermionGaugeLinearEquiv_intertwine] using h
 
 /-- Covariance of the actual BFSS annihilators, with the
 INPUT/OUTPUT index convention dual to creator covariance. -/
@@ -72,18 +65,10 @@ theorem annihilator_fermionGauge_covariant
       ∑ j : Fin 24, complexOneParticleMatrix g i j •
         fermionGaugeLinearEquiv g (annihilator j v) := by
   obtain ⟨x, rfl⟩ := fockAlgebraToBFSS.surjective v
-  calc
-    _ = fockAlgebraToBFSS (annihilate i (exteriorGauge g x)) := by
-      rw [fermionGaugeLinearEquiv_intertwine, annihilator_transport]
-    _ = fockAlgebraToBFSS
-          (∑ j : Fin 24, complexOneParticleMatrix g i j •
-            exteriorGauge g (annihilate j x)) := by
-      rw [annihilate_exteriorGauge]
-    _ = ∑ j : Fin 24, complexOneParticleMatrix g i j •
-          fermionGaugeLinearEquiv g
-            (annihilator j (fockAlgebraToBFSS x)) := by
-      simp only [map_sum, map_smul, annihilator_transport,
-        fermionGaugeLinearEquiv_intertwine]
+  have h := congrArg fockAlgebraToBFSS (annihilate_exteriorGauge g i x)
+  simp only [map_sum, map_smul] at h
+  simpa only [← annihilator_transport,
+    ← fermionGaugeLinearEquiv_intertwine] using h
 
 #print axioms creator_transport
 #print axioms annihilator_transport
