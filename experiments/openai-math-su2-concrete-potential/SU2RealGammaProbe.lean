@@ -209,7 +209,7 @@ theorem gamma_clifford (a b : OAI.BFSSQuantum.SpaceIndex) :
     -- After substituting b, Lean leaves an `if True` under the map.
     -- Reduce the actual `ite_true` form before rewriting mapped addition.
     simp only [ite_true] at h
-    rw [hmap_add, hmap_one, hmap_one] at h
+    rw [hmap_add, hmap_one] at h
     simpa [gamma, two_smul] using h
   · simpa [gamma, hab] using h
 
