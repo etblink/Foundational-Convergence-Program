@@ -56,6 +56,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF2B2MixedDiagProbe.lean upstream-math/lean/SU2FermionF2B2MixedDiagProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF2B2MixedAllProbe.lean upstream-math/lean/SU2FermionF2B2MixedAllProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF2B2IndexedProbe.lean upstream-math/lean/SU2FermionF2B2IndexedProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2FermionF2B2ThetaProbe.lean upstream-math/lean/SU2FermionF2B2ThetaProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -86,5 +87,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2FermionF2B2MixedDiagProbe.olean SU2FermionF2B2MixedDiagProbe.lean
           # Preserve accepted mixed-all F2-B2c3 as an importable module for the 48-generator theorem.
           lake env lean -o .lake/build/lib/lean/SU2FermionF2B2MixedAllProbe.olean SU2FermionF2B2MixedAllProbe.lean
-          # F2-B2d1: exact Fin24 × Fin2 Majorana CAR; upstream theta transport remains pending.
-          lake env lean SU2FermionF2B2IndexedProbe.lean
+          # Preserve accepted F2-B2d1 as an importable olean for the exact BFSS theta_CAR transport.
+          lake env lean -o .lake/build/lib/lean/SU2FermionF2B2IndexedProbe.olean SU2FermionF2B2IndexedProbe.lean
+          # F2-B2d2: exact pinned AlgebraData.theta_CAR field theorem; irreducibility remains pending.
+          lake env lean SU2FermionF2B2ThetaProbe.lean
