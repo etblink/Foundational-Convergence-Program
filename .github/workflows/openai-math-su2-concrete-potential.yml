@@ -47,6 +47,7 @@ jobs:
           test "$(cat upstream-math/lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
           cp experiments/openai-math-su2-concrete-potential/SU2ColorCrossProbe.lean upstream-math/lean/SU2ColorCrossProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean upstream-math/lean/SU2RealGammaProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2FermionFockProbe.lean upstream-math/lean/SU2FermionFockProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -57,3 +58,7 @@ jobs:
           lake env lean SU2ColorCrossProbe.lean
           # Additional independently checkable gamma9 witness, same pinned BFSS Core API.
           lake env lean SU2RealGammaProbe.lean
+          # Stage F1: 24-mode Fock transport and one Majorana CAR on the exact BFSS Hilbert type.
+          # Build the pinned operator/adjoint dependencies before compiling the candidate.
+          lake build OAI.MathematicalPhysics.ContinuumCoulomb.ManyBody.FockNorm
+          lake env lean SU2FermionFockProbe.lean
