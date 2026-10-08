@@ -28,12 +28,13 @@ noncomputable def occupationCoeff (x : BFSSFermion)
   (fockBasis 23).repr
     ((fockCoordinates 23).symm (fockBFSSUnitary.symm x)) A
 
+-- A dedicated section applies Lean's resource limit before the docstring
+-- and declaration. This repairs Gate #67's rejected command placement.
+section OccupationExpansionCheck
+set_option maxRecDepth 4096
+
 /-- Every vector of the exact BFSS Fermion 2 space is an honest finite
 linear combination of the transported 24-mode occupation basis vectors. -/
--- The exact finite exterior occupation basis has 2^24 labels. Gate #66
--- elaborated the theorem but exceeded the kernel's default recursion budget.
--- This scoped resource adjustment introduces no axiom and changes no target.
-set_option maxRecDepth 4096 in
 theorem occupationExpansion (x : BFSSFermion) :
     x = ∑ B : Finset (Fin 24), occupationCoeff x B • occupationKet B := by
   let y : Space 23 :=
@@ -53,6 +54,8 @@ theorem occupationExpansion (x : BFSSFermion) :
     _ = ∑ B : Finset (Fin 24), occupationCoeff x B • occupationKet B := by
         simp only [map_sum, map_smul]
         rfl
+
+end OccupationExpansionCheck
 
 /-- The 24-mode ordered selector truly extracts exactly one canonical
 occupation coordinate from an ARBITRARY BFSS fermion vector. -/
