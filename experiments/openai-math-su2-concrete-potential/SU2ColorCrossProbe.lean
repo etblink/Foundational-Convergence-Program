@@ -304,7 +304,8 @@ lemma deformedBosonicPotential_one_zero_eq_wedge
         -M.coordinateBracket x p a := by
     simp [OAI.BFSSGamma.shiftedPair]
   unfold OAI.BFSSQuantum.AlgebraData.deformedBosonicPotential
-  simp only [hshift, zero_mul, neg_sq, Finset.sum_const_zero, add_zero]
+  simp only [hshift, zero_mul, neg_sq,
+    zero_pow (by decide : (2 : ℕ) ≠ 0), Finset.sum_const_zero, add_zero]
   rw [Finset.sum_comm, Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro p _
