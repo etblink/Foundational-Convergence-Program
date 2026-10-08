@@ -87,6 +87,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4DExteriorOccupationIsometryProbe.lean upstream-math/lean/SU2BFSSG4DExteriorOccupationIsometryProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4EFermionHilbertUnitaryProbe.lean upstream-math/lean/SU2BFSSG4EFermionHilbertUnitaryProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4FRealColorAnnihilatorForwardProbe.lean upstream-math/lean/SU2BFSSG4FRealColorAnnihilatorForwardProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4GMajoranaModeCovarianceProbe.lean upstream-math/lean/SU2BFSSG4GMajoranaModeCovarianceProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -193,4 +194,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4EFermionHilbertUnitaryProbe.olean SU2BFSSG4EFermionHilbertUnitaryProbe.lean
           # G4-F: exact real SU2 color coefficients and forward annihilator covariance.
           # The 48 paired theta operator covariance is a separate later gate.
-          lake env lean SU2BFSSG4FRealColorAnnihilatorForwardProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4FRealColorAnnihilatorForwardProbe.olean SU2BFSSG4FRealColorAnnihilatorForwardProbe.lean
+          # G4-G: exact paired Majorana real and imaginary covariance across all 24 modes.
+          # Full 48-label GaugeData.fermion_adjoint and continuity remain open.
+          lake env lean SU2BFSSG4GMajoranaModeCovarianceProbe.lean
