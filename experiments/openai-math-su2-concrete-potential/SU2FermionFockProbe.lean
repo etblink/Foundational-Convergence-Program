@@ -50,14 +50,14 @@ private theorem fockOperator_one :
       (1 : FockCoordinateSpace 23 →L[ℂ] FockCoordinateSpace 23) := by
   ext v
   obtain ⟨x, rfl⟩ := (fockCoordinates 23).surjective v
-  simp only [fockOperator_coordinates, LinearMap.one_apply, ContinuousLinearMap.one_apply]
+  simp [fockOperator_coordinates]
 
 private theorem fockOperator_zero :
     fockOperator (0 : Module.End ℂ (Space 23)) =
       (0 : FockCoordinateSpace 23 →L[ℂ] FockCoordinateSpace 23) := by
   ext v
   obtain ⟨x, rfl⟩ := (fockCoordinates 23).surjective v
-  simp only [fockOperator_coordinates, LinearMap.zero_apply, ContinuousLinearMap.zero_apply, map_zero]
+  simp [fockOperator_coordinates]
 
 private theorem fock_mixed_car (i : Fin 24) :
     fockOperator (annihilate i) * fockOperator (create i) +
@@ -66,8 +66,9 @@ private theorem fock_mixed_car (i : Fin 24) :
   have h := congrArg
     (fun T : Module.End ℂ (Space 23) => fockOperator T)
     (OAI.Laughlin.Fock.mixed_car i i)
-  simpa only [if_pos rfl, one_smul, fockOperator_add, fockOperator_mul,
-    fockOperator_one] using h
+  simp only [ite_true, one_smul, fockOperator_add, fockOperator_mul,
+    fockOperator_one] at h
+  simpa only [ContinuousLinearMap.mul_def] using h
 
 /-- A true continuous-operator CAR identity on the exact upstream BFSS Hilbert type. -/
 theorem creator_annihilator_car (i : Fin 24) :
@@ -102,11 +103,11 @@ noncomputable def majorana0 (i : Fin 24) :
 
 theorem majorana0_selfAdjoint (i : Fin 24) :
     IsSelfAdjoint (majorana0 i) := by
-  change star (majorana0 i) = majorana0 i
   unfold majorana0
-  rw [star_smul, star_add, creator_adjoint, annihilator_adjoint]
-  simp only [star_def, Complex.star_def, Complex.conj_ofReal]
-  rw [add_comm]
+  apply IsSelfAdjoint.smul
+  · simp [IsSelfAdjoint, Complex.star_def, Complex.conj_ofReal]
+  · simpa only [creator_adjoint] using
+      (IsSelfAdjoint.add_star_self (creator i))
 
 private theorem fock_creator_sq (i : Fin 24) :
     fockOperator (create i) * fockOperator (create i) =
@@ -114,7 +115,8 @@ private theorem fock_creator_sq (i : Fin 24) :
   have h := congrArg
     (fun T : Module.End ℂ (Space 23) => fockOperator T)
     (OAI.Laughlin.Fock.create_sq i)
-  simpa only [fockOperator_mul, fockOperator_zero] using h
+  simpa only [fockOperator_mul, fockOperator_zero,
+    ContinuousLinearMap.mul_def] using h
 
 private theorem fock_annihilator_sq (i : Fin 24) :
     fockOperator (annihilate i) * fockOperator (annihilate i) =
@@ -122,7 +124,8 @@ private theorem fock_annihilator_sq (i : Fin 24) :
   have h := congrArg
     (fun T : Module.End ℂ (Space 23) => fockOperator T)
     (OAI.Laughlin.Fock.annihilate_sq i)
-  simpa only [fockOperator_mul, fockOperator_zero] using h
+  simpa only [fockOperator_mul, fockOperator_zero,
+    ContinuousLinearMap.mul_def] using h
 
 theorem creator_sq (i : Fin 24) :
     creator i * creator i = 0 := by
@@ -144,9 +147,11 @@ private theorem majoranaScale_sq :
   have hs : (Real.sqrt 2 / 2 : ℝ) ^ 2 = 1 / 2 := by
     rw [div_pow, Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2)]
     norm_num
-  exact_mod_cast (show
-      (Real.sqrt 2 / 2 : ℝ) * (Real.sqrt 2 / 2 : ℝ) = 1 / 2 from
-    (pow_two _).symm.trans hs)
+  have heq : (Real.sqrt 2 / 2 : ℝ) * (Real.sqrt 2 / 2 : ℝ) = 1 / 2 :=
+    (pow_two _).symm.trans hs
+  have hc := congrArg (fun x : ℝ => (x : ℂ)) heq
+  simpa only [Complex.ofReal_mul, Complex.ofReal_div,
+    Complex.ofReal_ofNat] using hc
 
 /-- The first transported Majorana squares to 1/2, hence obeys {θ,θ}=1. -/
 theorem majorana0_car (i : Fin 24) :
@@ -164,9 +169,9 @@ theorem majorana0_car (i : Fin 24) :
   unfold majorana0
   change (_ • (c + a)) * (_ • (c + a)) +
     (_ • (c + a)) * (_ • (c + a)) = _
-  rw [smul_mul_smul, smul_mul_smul, hsum]
-  rw [← two_smul, smul_smul, majoranaScale_sq]
-  simp [smul_smul]
+  simp only [smul_mul_smul, hsum, majoranaScale_sq]
+  rw [← add_smul]
+  norm_num
 
 #print axioms fockBFSSUnitary
 #print axioms creator_annihilator_car
@@ -174,4 +179,5 @@ theorem majorana0_car (i : Fin 24) :
 #print axioms majorana0_selfAdjoint
 #print axioms majorana0_car
 
+end
 end FCP.BFSSFermionF1
