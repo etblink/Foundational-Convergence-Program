@@ -32,10 +32,20 @@ theorem majorana0_car_all (i j : Fin 24) :
         (0 : BFSSOp) := annihilator_annihilator_car i j
     have hac : annihilator i * creator j + creator j * annihilator i =
         (0 : BFSSOp) := by
-      simpa [hij] using (annihilator_creator_car i j)
+      calc
+        _ = (0 : ℂ) • (1 : BFSSOp) := by
+          simpa only [hij, ite_false] using (annihilator_creator_car i j)
+        _ = 0 := by
+          ext x
+          simp
     have hca : annihilator j * creator i + creator i * annihilator j =
         (0 : BFSSOp) := by
-      simpa [hji] using (annihilator_creator_car j i)
+      calc
+        _ = (0 : ℂ) • (1 : BFSSOp) := by
+          simpa only [hji, ite_false] using (annihilator_creator_car j i)
+        _ = 0 := by
+          ext x
+          simp
     have hsum :
         (creator i + annihilator i) * (creator j + annihilator j) +
           (creator j + annihilator j) * (creator i + annihilator i) =
@@ -47,10 +57,11 @@ theorem majorana0_car_all (i j : Fin 24) :
               (annihilator j * creator i + creator i * annihilator j) := by
                 noncomm_ring
         _ = 0 := by rw [hcc, haa, hac, hca]; simp
+    simp only [hij, ite_false]
     unfold majorana0
-    simp only [smul_mul_smul, ← smul_add, hsum]
+    rw [smul_mul_smul, smul_mul_smul, ← smul_add, hsum]
     ext x
-    simp [hij]
+    simp
 
 #print axioms majorana0_car_all
 
