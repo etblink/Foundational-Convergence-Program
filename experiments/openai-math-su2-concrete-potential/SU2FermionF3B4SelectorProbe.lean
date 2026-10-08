@@ -65,7 +65,9 @@ theorem selectorSeq_occupationKet (A B : Finset (Fin 24))
   | cons i is ih =>
       change step A i (selectorSeq A is (occupationKet B)) =
         (weight A B i * weightSeq A B is) • occupationKet B
-      rw [ih, map_smul, step_occupationKet, smul_smul, mul_comm]
+      rw [ih, map_smul, step_occupationKet, smul_smul]
+      exact congrArg (fun c : ℂ => c • occupationKet B)
+        (mul_comm (weightSeq A B is) (weight A B i))
 
 private theorem weightSeq_one (A B : Finset (Fin 24)) :
     ∀ is : List (Fin 24),
@@ -121,7 +123,7 @@ theorem occupationSelector_occupationKet
     have hw :
         weightSeq A A (Finset.univ : Finset (Fin 24)).toList = 1 :=
       weightSeq_one A A _ hall
-    simp only [hw, one_smul, if_pos rfl]
+    simp [hw]
   · have hdiff : ∃ i : Fin 24, ¬ (i ∈ A ↔ i ∈ B) := by
       by_contra hn
       apply hAB
