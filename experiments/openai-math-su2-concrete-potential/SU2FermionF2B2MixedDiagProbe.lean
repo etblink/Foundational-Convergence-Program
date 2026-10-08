@@ -25,8 +25,8 @@ private theorem majorana1_phase (i : Fin 24) :
       (((Real.sqrt 2 / 2 : ℝ) : ℂ)) •
         ((Complex.I : ℂ) • (creator i - annihilator i)) := by
   unfold majorana1
-  simp only [star_smul, Complex.star_def, Complex.conj_I,
-    creator_adjoint, smul_sub, neg_smul, sub_eq_add_neg]
+  simp only [star_smul, Complex.star_def, Complex.conj_I, creator_adjoint]
+  rw [smul_sub, sub_eq_add_neg, neg_smul]
 
 /-- Same-mode real/imaginary CAR follows from creation and
 annihilation square zero, with no new assumptions. -/
@@ -41,7 +41,9 @@ theorem majorana01_car_self (i : Fin 24) :
       (c + a) * (c - a) + (c - a) * (c + a) =
         (0 : BFSSOp) := by
     calc
-      _ = (c * c + c * c) - (a * a + a * a) := by noncomm_ring
+      _ = (c * c + c * c) - (a * a + a * a) := by
+        simp only [mul_sub, sub_mul, mul_add, add_mul]
+        abel
       _ = 0 := by rw [hcc, haa]; simp
   have hphase :
       (c + a) * ((Complex.I : ℂ) • (c - a)) +
