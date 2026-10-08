@@ -425,7 +425,9 @@ lemma normalizedPauli_color_spanning
                 ((Real.sqrt 2 : ℂ) * (pauliScale : ℂ)) := by ring
           _ = _ := by rw [hs, mul_one]
       calc
-        c a • pauli a = ((c a).re : ℂ) • pauli a := by rw [hc]
+        c a • pauli a = ((c a).re : ℂ) • pauli a := by
+          rw [hc]
+          simp only [Complex.ofReal_re]
         _ = ((Real.sqrt 2 * (c a).re : ℝ) : ℂ) • normalizedPauli a := by
           simp only [normalizedPauli, smul_smul, Complex.ofReal_mul]
           rw [heq]
