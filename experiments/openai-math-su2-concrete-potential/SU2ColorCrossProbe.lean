@@ -232,7 +232,7 @@ lemma normalizedPauli_structureConstant_trace (a b c : Fin 3) :
   rw [normalizedPauli_realBracket, Matrix.mul_smul, Matrix.trace_smul,
     normalizedPauli_trace_epsilon_sum]
   simp only [smul_eq_mul, ← Complex.ofReal_mul, Complex.ofReal_re]
-  rw [epsilon3_cyclic]
+  rw [epsilon3_cyclic a b c]
 
 /--
 An explicitly conditional, actual-upstream-API statement.
