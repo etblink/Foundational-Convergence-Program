@@ -54,8 +54,9 @@ theorem creator_fermionGauge_covariant
   obtain ⟨x, rfl⟩ := fockAlgebraToBFSS.surjective v
   have h := congrArg fockAlgebraToBFSS (create_exteriorGauge g i x)
   simp only [map_sum, map_smul] at h
-  simpa only [← creator_transport,
-    ← fermionGaugeLinearEquiv_intertwine] using h
+  rw [creator_transport, fermionGaugeLinearEquiv_intertwine]
+  simp only [fermionGaugeLinearEquiv_intertwine, creator_transport]
+  exact h
 
 /-- Covariance of the actual BFSS annihilators, with the
 INPUT/OUTPUT index convention dual to creator covariance. -/
@@ -67,8 +68,9 @@ theorem annihilator_fermionGauge_covariant
   obtain ⟨x, rfl⟩ := fockAlgebraToBFSS.surjective v
   have h := congrArg fockAlgebraToBFSS (annihilate_exteriorGauge g i x)
   simp only [map_sum, map_smul] at h
-  simpa only [← annihilator_transport,
-    ← fermionGaugeLinearEquiv_intertwine] using h
+  rw [fermionGaugeLinearEquiv_intertwine, annihilator_transport]
+  simp only [annihilator_transport, fermionGaugeLinearEquiv_intertwine]
+  exact h
 
 #print axioms creator_transport
 #print axioms annihilator_transport
