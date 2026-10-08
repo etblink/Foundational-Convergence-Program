@@ -46,6 +46,7 @@ jobs:
           source "$HOME/.elan/env"
           test "$(cat upstream-math/lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
           cp experiments/openai-math-su2-concrete-potential/SU2ColorCrossProbe.lean upstream-math/lean/SU2ColorCrossProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean upstream-math/lean/SU2RealGammaProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -54,3 +55,5 @@ jobs:
           # module supplies the complex spanning lemma; BFSS supplies the potential.
           lake build OAI.MathematicalPhysics.BFSS.PotentialBasis OAI.Analysis.CharacterCriterion.Pauli
           lake env lean SU2ColorCrossProbe.lean
+          # Additional independently checkable gamma9 witness, same pinned BFSS Core API.
+          lake env lean SU2RealGammaProbe.lean
