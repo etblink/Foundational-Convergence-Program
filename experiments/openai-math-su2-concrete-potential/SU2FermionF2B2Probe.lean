@@ -58,10 +58,18 @@ theorem majorana0_car_all (i j : Fin 24) :
                 noncomm_ring
         _ = 0 := by rw [hcc, haa, hac, hca]; simp
     simp only [hij, ite_false]
+    let s : ℂ := (((Real.sqrt 2 / 2 : ℝ) : ℂ)) * (((Real.sqrt 2 / 2 : ℝ) : ℂ))
+    let p : BFSSOp := (creator i + annihilator i) * (creator j + annihilator j)
+    let q : BFSSOp := (creator j + annihilator j) * (creator i + annihilator i)
     unfold majorana0
-    rw [smul_mul_smul, smul_mul_smul, ← smul_add, hsum]
-    ext x
-    simp
+    rw [smul_mul_smul, smul_mul_smul]
+    change s • p + s • q = (0 : ℂ) • (1 : BFSSOp)
+    calc
+      s • p + s • q = s • (p + q) := (smul_add s p q).symm
+      _ = s • (0 : BFSSOp) := congrArg (fun T : BFSSOp => s • T) hsum
+      _ = (0 : ℂ) • (1 : BFSSOp) := by
+        ext x
+        simp
 
 #print axioms majorana0_car_all
 
