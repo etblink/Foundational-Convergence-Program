@@ -81,6 +81,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG3AAdjointColorRepresentationProbe.lean upstream-math/lean/SU2BFSSG3AAdjointColorRepresentationProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG3B24ModeOrthogonalLiftProbe.lean upstream-math/lean/SU2BFSSG3B24ModeOrthogonalLiftProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG3CComplexOneParticleUnitaryProbe.lean upstream-math/lean/SU2BFSSG3CComplexOneParticleUnitaryProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4AExteriorGaugeActionProbe.lean upstream-math/lean/SU2BFSSG4AExteriorGaugeActionProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -167,4 +168,8 @@ jobs:
           # G3-B: actual 24 Fock modes, eight independent real SU2 color blocks.
           lake env lean -o .lake/build/lib/lean/SU2BFSSG3B24ModeOrthogonalLiftProbe.olean SU2BFSSG3B24ModeOrthogonalLiftProbe.lean
           # G3-C: exact ℝ→ℂ one-particle SU2 unitary hom, before Fock second quantization.
-          lake env lean SU2BFSSG3CComplexOneParticleUnitaryProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG3CComplexOneParticleUnitaryProbe.olean SU2BFSSG3CComplexOneParticleUnitaryProbe.lean
+          # G4-A imports the pinned generic exterior-algebra covariance machinery.
+          lake build OAI.Analysis.Laughlin.Exterior.SpinAction
+          # G4-A: actual SU2 exterior algebra action on the 24 Fock orbitals.
+          lake env lean SU2BFSSG4AExteriorGaugeActionProbe.lean
