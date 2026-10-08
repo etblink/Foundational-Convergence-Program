@@ -112,13 +112,13 @@ lemma normalizedPauli_trace_pair (a b : Fin 3) :
     Matrix.trace (normalizedPauli a * normalizedPauli b) =
       (if a = b then 1 else 0 : ℂ) := by
   have hs : (pauliScale : ℂ) ^ 2 = (1/2 : ℂ) := by
-    exact_mod_cast pauliScale_sq
-  simp only [normalizedPauli, Matrix.smul_mul, Matrix.mul_smul,
-    Matrix.trace_smul, smul_smul, smul_eq_mul]
-  rw [pauli_trace_pair]
-  by_cases h : a = b
-  · simp [h, ← pow_two, hs]
-  · simp [h]
+    simpa using congrArg (fun t : ℝ => (t : ℂ)) pauliScale_sq
+  have hprod : normalizedPauli a * normalizedPauli b =
+      ((pauliScale : ℂ)^2) • (pauli a * pauli b) := by
+    simp only [normalizedPauli, Matrix.smul_mul, Matrix.mul_smul,
+      smul_smul, pow_two, Complex.ofReal_mul]
+  rw [hprod, Matrix.trace_smul, smul_eq_mul, pauli_trace_pair, hs]
+  split_ifs <;> norm_num
 
 /-- The normalized Pauli basis has the manuscript's √2 structure constants. -/
 lemma normalizedPauli_commutator (a b : Fin 3) :
@@ -127,9 +127,9 @@ lemma normalizedPauli_commutator (a b : Fin 3) :
       (Complex.I * (Real.sqrt 2 : ℂ)) •
         (∑ c : Fin 3, (epsilon3 a b c : ℂ) • normalizedPauli c) := by
   have hsq : (pauliScale : ℂ) ^ 2 = (1/2 : ℂ) := by
-    exact_mod_cast pauliScale_sq
+    simpa using congrArg (fun t : ℝ => (t : ℂ)) pauliScale_sq
   have hroot : (pauliScale : ℂ) * (Real.sqrt 2 : ℂ) = 1 := by
-    exact_mod_cast pauliScale_mul_sqrt
+    simpa using congrArg (fun t : ℝ => (t : ℂ)) pauliScale_mul_sqrt
   have hscale : (pauliScale : ℂ) ^ 2 * (2 * Complex.I) =
       (Complex.I * (Real.sqrt 2 : ℂ)) * (pauliScale : ℂ) := by
     rw [hsq]
@@ -138,20 +138,28 @@ lemma normalizedPauli_commutator (a b : Fin 3) :
       _ = Complex.I * ((pauliScale : ℂ) * (Real.sqrt 2 : ℂ)) := by
         rw [hroot, mul_one]
       _ = (Complex.I * (Real.sqrt 2 : ℂ)) * (pauliScale : ℂ) := by ring
+  have hprod (a b : Fin 3) : normalizedPauli a * normalizedPauli b =
+      ((pauliScale : ℂ)^2) • (pauli a * pauli b) := by
+    simp only [normalizedPauli, Matrix.smul_mul, Matrix.mul_smul,
+      smul_smul, pow_two, Complex.ofReal_mul]
+  have hsum :
+      (∑ c : Fin 3, (epsilon3 a b c : ℂ) • normalizedPauli c) =
+        (pauliScale : ℂ) • (∑ c : Fin 3, (epsilon3 a b c : ℂ) • pauli c) := by
+    rw [Finset.smul_sum]
+    apply Finset.sum_congr rfl
+    intro c _
+    simp only [normalizedPauli]
+    exact smul_comm (epsilon3 a b c : ℂ) (pauliScale : ℂ) (pauli c)
   calc
     _ = ((pauliScale : ℂ)^2) •
           (pauli a * pauli b - pauli b * pauli a) := by
-          simp [normalizedPauli, Matrix.smul_mul, Matrix.mul_smul,
-            smul_sub, smul_smul, pow_two]
+            rw [hprod a b, hprod b a, smul_sub]
     _ = ((pauliScale : ℂ)^2 * (2 * Complex.I)) •
           (∑ c : Fin 3, (epsilon3 a b c : ℂ) • pauli c) := by
-          rw [pauli_commutator, smul_smul]
+            rw [pauli_commutator, smul_smul]
     _ = (Complex.I * (Real.sqrt 2 : ℂ)) •
           (∑ c : Fin 3, (epsilon3 a b c : ℂ) • normalizedPauli c) := by
-          rw [hscale]
-          simp only [normalizedPauli, Finset.sum_smul, smul_smul]
-          congr 1
-          simp [mul_assoc, mul_comm, mul_left_comm]
+            rw [hsum, smul_smul, hscale]
 
 #print axioms pauliScale_sq
 #print axioms pauli_trace_pair
