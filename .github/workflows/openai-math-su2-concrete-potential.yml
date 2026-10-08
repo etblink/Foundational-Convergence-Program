@@ -60,6 +60,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3InvariantProbe.lean upstream-math/lean/SU2FermionF3InvariantProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3RecoveryProbe.lean upstream-math/lean/SU2FermionF3RecoveryProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B1OccupationProbe.lean upstream-math/lean/SU2FermionF3B1OccupationProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B2BasisActionProbe.lean upstream-math/lean/SU2FermionF3B2BasisActionProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -99,4 +100,6 @@ jobs:
           # F3-A2: derive creator/annihilator invariance without assuming irreducibility.
           lake env lean -o .lake/build/lib/lean/SU2FermionF3RecoveryProbe.olean SU2FermionF3RecoveryProbe.lean
           # F3-B1: mode-number/complement submodule stability; no projector-eigenvalue claim.
-          lake env lean SU2FermionF3B1OccupationProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2FermionF3B1OccupationProbe.olean SU2FermionF3B1OccupationProbe.lean
+          # F3-B2: true number/complement action on exact transported occupation vectors.
+          lake env lean SU2FermionF3B2BasisActionProbe.lean
