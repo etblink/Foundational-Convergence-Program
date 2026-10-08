@@ -72,7 +72,7 @@ lemma pauli_commutator (a b : Fin 3) :
     ext i j <;> fin_cases i <;> fin_cases j <;>
       norm_num [pauli, epsilon3, Matrix.mul_apply, Fin.sum_univ_two,
         Fin.sum_univ_three, Matrix.smul_apply, Matrix.sub_apply,
-        Complex.I_mul_I, Complex.I_sq] <;> ring
+        Complex.I_mul_I, Complex.I_sq] <;> ring_nf <;> norm_num [Complex.I_sq]
 
 #print axioms pauli_commutator
 
