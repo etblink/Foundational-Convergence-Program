@@ -310,10 +310,10 @@ lemma deformedBosonicPotential_one_zero_eq_wedge
   apply Finset.sum_congr rfl
   intro p _
   simp_rw [coordinateBracket_of_pauli_color M hcolor x p]
-  simpa only [epsilon3_contraction, colorWedgeSquared] using
-    (normalized_cross_energy
-      (fun a : Fin 3 => x (p.1.1,a))
-      (fun a : Fin 3 => x (p.1.2,a)))
+  rw [Fin.sum_univ_three]
+  simp only [colorCross, colorWedgeSquared, mul_pow,
+    Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2)]
+  ring
 
 #print axioms coordinateBracket_of_pauli_color
 #print axioms deformedBosonicPotential_one_zero_eq_wedge
