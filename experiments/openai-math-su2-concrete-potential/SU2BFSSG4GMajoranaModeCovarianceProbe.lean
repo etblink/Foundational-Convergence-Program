@@ -74,7 +74,7 @@ theorem majorana1_linear_apply (i : Fin 24) (v : Fermion 2) :
   change s • ((Complex.I : ℂ) • (creator i v - annihilator i v)) =
     (s * Complex.I) • creator i v +
       (-(s * Complex.I)) • annihilator i v
-  simp only [smul_sub, smul_smul, sub_eq_add_neg, neg_smul]
+  rw [smul_smul, smul_sub, sub_eq_add_neg, neg_smul]
 
 /-- Forward gauge covariance of the *actual* first (real)
 self-adjoint Majorana operator, for all 24 modes and all states. -/
