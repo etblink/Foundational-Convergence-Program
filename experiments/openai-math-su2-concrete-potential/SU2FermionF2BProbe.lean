@@ -30,15 +30,15 @@ private theorem rotatedAnnihilator_formula (i : Fin 24) :
 
 private theorem rotatedCreator_sq (i : Fin 24) :
     rotatedCreator i * rotatedCreator i = 0 := by
-  have hz : (Complex.I * Complex.I : ℂ) • (0 : BFSSOp) = 0 :=
-    smul_zero _
+  have hz : (Complex.I * Complex.I : ℂ) • (0 : BFSSOp) = 0 := by
+    exact smul_zero (Complex.I * Complex.I : ℂ)
   change (Complex.I • creator i) * (Complex.I • creator i) = 0
   simpa only [smul_mul_smul, creator_sq] using hz
 
 private theorem rotatedAnnihilator_sq (i : Fin 24) :
     rotatedAnnihilator i * rotatedAnnihilator i = 0 := by
-  have hz : ((-Complex.I : ℂ) * (-Complex.I : ℂ)) • (0 : BFSSOp) = 0 :=
-    smul_zero _
+  have hz : ((-Complex.I : ℂ) * (-Complex.I : ℂ)) • (0 : BFSSOp) = 0 := by
+    exact smul_zero ((-Complex.I : ℂ) * (-Complex.I : ℂ))
   simpa only [rotatedAnnihilator_formula, smul_mul_smul,
     annihilator_sq] using hz
 
