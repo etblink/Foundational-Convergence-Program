@@ -86,6 +86,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4CFermionOperatorCovarianceProbe.lean upstream-math/lean/SU2BFSSG4CFermionOperatorCovarianceProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4DExteriorOccupationIsometryProbe.lean upstream-math/lean/SU2BFSSG4DExteriorOccupationIsometryProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4EFermionHilbertUnitaryProbe.lean upstream-math/lean/SU2BFSSG4EFermionHilbertUnitaryProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4FRealColorAnnihilatorForwardProbe.lean upstream-math/lean/SU2BFSSG4FRealColorAnnihilatorForwardProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -189,4 +190,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4DExteriorOccupationIsometryProbe.olean SU2BFSSG4DExteriorOccupationIsometryProbe.lean
           # G4-E: exact BFSS Fermion 2 norm isometry and unitary SU2 homomorphism.
           # 48-theta covariance and joint continuity are still separate.
-          lake env lean SU2BFSSG4EFermionHilbertUnitaryProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4EFermionHilbertUnitaryProbe.olean SU2BFSSG4EFermionHilbertUnitaryProbe.lean
+          # G4-F: exact real SU2 color coefficients and forward annihilator covariance.
+          # The 48 paired theta operator covariance is a separate later gate.
+          lake env lean SU2BFSSG4FRealColorAnnihilatorForwardProbe.lean
