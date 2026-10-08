@@ -1,5 +1,5 @@
 import Mathlib
-import OAI.MathematicalPhysics.BFSS.Core
+import OAI.MathematicalPhysics.BFSS.PotentialBasis
 
 /-!
 # Concrete SU(2) color algebra, first independently compiled gate
@@ -251,6 +251,70 @@ lemma algebraData_structureConstant_of_pauli_color
         M.color c * M.color b)))).re = _
   rw [hcolor a, hcolor b, hcolor c]
   exact normalizedPauli_structureConstant_trace a b c
+
+
+/-- Squared norm of the three color minors for a pair of 3-vectors. -/
+def colorWedgeSquared (u v : Fin 3 → ℝ) : ℝ :=
+  (u 0 * v 1 - u 1 * v 0)^2 +
+  (u 0 * v 2 - u 2 * v 0)^2 +
+  (u 1 * v 2 - u 2 * v 1)^2
+
+/--
+Under an explicitly identified Pauli color basis, the *actual upstream*
+coordinateBracket is the normalized cross product at any spatial pair.
+This is conditional on AlgebraData 2; no concrete instance is asserted.
+-/
+lemma coordinateBracket_of_pauli_color
+    (M : OAI.BFSSQuantum.AlgebraData 2)
+    (hcolor : ∀ a : OAI.BFSSQuantum.ColorIndex 2,
+      M.color a = normalizedPauli a)
+    (x : OAI.BFSSQuantum.Boson 2)
+    (p : OAI.BFSSGamma.SpatialPair)
+    (a : OAI.BFSSQuantum.ColorIndex 2) :
+    M.coordinateBracket x p a =
+      Real.sqrt 2 * colorCross
+        (fun b : Fin 3 => x (p.1.1,b))
+        (fun c : Fin 3 => x (p.1.2,c)) a := by
+  change (∑ b : OAI.BFSSQuantum.ColorIndex 2,
+    ∑ c : OAI.BFSSQuantum.ColorIndex 2,
+      M.structureConstant a b c * x (p.1.1,b) * x (p.1.2,c)) = _
+  simp_rw [algebraData_structureConstant_of_pauli_color M hcolor]
+  exact epsilon3_contraction _ _ a
+
+/--
+The pinned deformed BFSS potential at (h,m)=(1,0) is the sum of the
+three squared color minors over strict spatial pairs, conditional on the
+explicit normalized Pauli color basis.
+-/
+lemma deformedBosonicPotential_one_zero_eq_wedge
+    (M : OAI.BFSSQuantum.AlgebraData 2)
+    (hcolor : ∀ a : OAI.BFSSQuantum.ColorIndex 2,
+      M.color a = normalizedPauli a)
+    (x : OAI.BFSSQuantum.Boson 2) :
+    M.deformedBosonicPotential 1 0 x =
+      ∑ p : OAI.BFSSGamma.SpatialPair,
+        colorWedgeSquared
+          (fun a : Fin 3 => x (p.1.1,a))
+          (fun a : Fin 3 => x (p.1.2,a)) := by
+  have hshift (p : OAI.BFSSGamma.SpatialPair)
+      (a : OAI.BFSSQuantum.ColorIndex 2) :
+      OAI.BFSSGamma.shiftedPair 1 0
+        (fun q => M.coordinateBracket x q a)
+        (fun i => x (i,a)) p =
+        -M.coordinateBracket x p a := by
+    simp [OAI.BFSSGamma.shiftedPair]
+  unfold OAI.BFSSQuantum.AlgebraData.deformedBosonicPotential
+  simp only [hshift, zero_mul, neg_sq, Finset.sum_const_zero, add_zero]
+  rw [Finset.sum_comm, Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro p _
+  simp_rw [coordinateBracket_of_pauli_color M hcolor x p]
+  exact normalized_cross_energy
+    (fun a : Fin 3 => x (p.1.1,a))
+    (fun a : Fin 3 => x (p.1.2,a))
+
+#print axioms coordinateBracket_of_pauli_color
+#print axioms deformedBosonicPotential_one_zero_eq_wedge
 
 #print axioms normalizedPauli_trace_epsilon_sum
 #print axioms normalizedPauli_structureConstant_trace
