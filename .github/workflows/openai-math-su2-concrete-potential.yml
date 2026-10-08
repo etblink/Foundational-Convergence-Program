@@ -64,6 +64,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B3ProjectorProbe.lean upstream-math/lean/SU2FermionF3B3ProjectorProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B4SelectorProbe.lean upstream-math/lean/SU2FermionF3B4SelectorProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B5CoordinateProbe.lean upstream-math/lean/SU2FermionF3B5CoordinateProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2FermionF3B6NonzeroKetProbe.lean upstream-math/lean/SU2FermionF3B6NonzeroKetProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -111,4 +112,6 @@ jobs:
           # F3-B4: exact action of a 24-mode ordered selector on each canonical occupation ket.
           lake env lean -o .lake/build/lib/lean/SU2FermionF3B4SelectorProbe.olean SU2FermionF3B4SelectorProbe.lean
           # F3-B5: full finite basis expansion and arbitrary-vector selector action.
-          lake env lean SU2FermionF3B5CoordinateProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2FermionF3B5CoordinateProbe.olean SU2FermionF3B5CoordinateProbe.lean
+          # F3-B6: selector stability and ket extraction from a nonzero invariant vector.
+          lake env lean SU2FermionF3B6NonzeroKetProbe.lean
