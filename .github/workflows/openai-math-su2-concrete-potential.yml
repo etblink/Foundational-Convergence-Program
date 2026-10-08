@@ -51,6 +51,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF2Probe.lean upstream-math/lean/SU2FermionF2Probe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF2BProbe.lean upstream-math/lean/SU2FermionF2BProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF2B2Probe.lean upstream-math/lean/SU2FermionF2B2Probe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2FermionF2B2ImagProbe.lean upstream-math/lean/SU2FermionF2B2ImagProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -71,5 +72,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2FermionF2Probe.olean SU2FermionF2Probe.lean
           # Preserve kernel-accepted F2-B1 and make it importable into the F2-B2a probe.
           lake env lean -o .lake/build/lib/lean/SU2FermionF2BProbe.olean SU2FermionF2BProbe.lean
-          # F2-B2a: all-mode real Majorana delta-CAR; imaginary/mixed/full theta remain pending.
-          lake env lean SU2FermionF2B2Probe.lean
+          # Preserve accepted F2-B2a and import its olean into F2-B2b.
+          lake env lean -o .lake/build/lib/lean/SU2FermionF2B2Probe.olean SU2FermionF2B2Probe.lean
+          # F2-B2b: imaginary Majorana all-mode delta-CAR only; mixed/full theta remain pending.
+          lake env lean SU2FermionF2B2ImagProbe.lean
