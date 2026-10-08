@@ -206,8 +206,9 @@ theorem gamma_clifford (a b : OAI.BFSSQuantum.SpaceIndex) :
   rw [hmap_add, Matrix.map_mul, Matrix.map_mul] at h
   by_cases hab : a = b
   · subst b
-    -- Reduce the ite underneath Matrix.map before mapping the integer sum.
-    simp only [if_pos rfl] at h
+    -- After substituting b, Lean leaves an `if True` under the map.
+    -- Reduce the actual `ite_true` form before rewriting mapped addition.
+    simp only [ite_true] at h
     rw [hmap_add, hmap_one, hmap_one] at h
     simpa [gamma, two_smul] using h
   · simpa [gamma, hab] using h
