@@ -197,10 +197,19 @@ theorem gamma_clifford (a b : OAI.BFSSQuantum.SpaceIndex) :
         X.map (Int.castRingHom ℝ) + Y.map (Int.castRingHom ℝ) := by
     ext i j
     simp [Matrix.add_apply]
+  -- Explicitly transport the integer identity matrix to the real one.
+  have hmap_one :
+      (1 : Matrix (Fin 16) (Fin 16) ℤ).map (Int.castRingHom ℝ) =
+        (1 : Matrix (Fin 16) (Fin 16) ℝ) := by
+    ext i j
+    simp [Matrix.one_apply]
   rw [hmap_add, Matrix.map_mul, Matrix.map_mul] at h
   by_cases hab : a = b
   · subst b
-    simpa [gamma, two_smul, hmap_add] using h
+    -- Reduce the ite underneath Matrix.map before mapping the integer sum.
+    simp only [if_pos rfl] at h
+    rw [hmap_add, hmap_one, hmap_one] at h
+    simpa [gamma, two_smul] using h
   · simpa [gamma, hab] using h
 
 /-- A constructed witness to both gamma fields, without theta or a full AlgebraData instance. -/
