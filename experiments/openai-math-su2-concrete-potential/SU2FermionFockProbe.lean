@@ -151,7 +151,7 @@ private theorem majoranaScale_sq :
     (pow_two _).symm.trans hs
   have hc := congrArg (fun x : ℝ => (x : ℂ)) heq
   simpa only [Complex.ofReal_mul, Complex.ofReal_div,
-    Complex.ofReal_ofNat] using hc
+    Complex.ofReal_ofNat, Complex.ofReal_one] using hc
 
 /-- The first transported Majorana squares to 1/2, hence obeys {θ,θ}=1. -/
 theorem majorana0_car (i : Fin 24) :
@@ -170,7 +170,7 @@ theorem majorana0_car (i : Fin 24) :
   change (_ • (c + a)) * (_ • (c + a)) +
     (_ • (c + a)) * (_ • (c + a)) = _
   simp only [smul_mul_smul, hsum, majoranaScale_sq]
-  rw [← add_smul]
+  rw [← two_smul, smul_smul]
   norm_num
 
 #print axioms fockBFSSUnitary
