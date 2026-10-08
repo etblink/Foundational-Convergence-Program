@@ -60,7 +60,7 @@ noncomputable def bosonGaugeEquiv (g : GaugeGroup 2) :
     map_smul' := by
       intro c x
       obtain ⟨L, hL⟩ := M.gaugeConjugate_linear (g : ColorMatrix 2)
-      simpa only [hL] using L.map_smul c x
+      simpa only [RingHom.id_apply, hL] using L.map_smul c x
   }
   norm_map' := by
     intro x
