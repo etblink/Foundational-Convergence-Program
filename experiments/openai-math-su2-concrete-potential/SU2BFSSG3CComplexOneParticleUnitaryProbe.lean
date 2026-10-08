@@ -34,7 +34,9 @@ theorem complexOneParticleMatrix_block (g : GaugeGroup 2)
     (j k : Fin 8) (B A : ColorIndex 2) :
     complexOneParticleMatrix g (colorModeEquiv (j,B)) (colorModeEquiv (k,A)) =
       if j = k then (adjointColorMatrix g B A : ℂ) else 0 := by
-  simp [complexOneParticleMatrix, Matrix.map_apply, oneParticleMatrix_block]
+  by_cases h : j = k
+  · simp [complexOneParticleMatrix, Matrix.map_apply, oneParticleMatrix_block, h]
+  · simp [complexOneParticleMatrix, Matrix.map_apply, oneParticleMatrix_block, h]
 
 /-- The scalar extension respects the identity SU(2) element. -/
 theorem complexOneParticleMatrix_one :
