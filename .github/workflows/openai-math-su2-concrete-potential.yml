@@ -84,6 +84,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4AExteriorGaugeActionProbe.lean upstream-math/lean/SU2BFSSG4AExteriorGaugeActionProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4BFermionLinearTransportProbe.lean upstream-math/lean/SU2BFSSG4BFermionLinearTransportProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4CFermionOperatorCovarianceProbe.lean upstream-math/lean/SU2BFSSG4CFermionOperatorCovarianceProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4DExteriorOccupationIsometryProbe.lean upstream-math/lean/SU2BFSSG4DExteriorOccupationIsometryProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -180,4 +181,8 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4BFermionLinearTransportProbe.olean SU2BFSSG4BFermionLinearTransportProbe.lean
           # G4-C: transport actual creators/annihilators and prove full Fermion 2 covariance.
           # This does not yet assert Fock Hilbert norm preservation.
-          lake env lean SU2BFSSG4CFermionOperatorCovarianceProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4CFermionOperatorCovarianceProbe.olean SU2BFSSG4CFermionOperatorCovarianceProbe.lean
+          # G4-D: compile pinned occupation inner-product and vector-annihilation source.
+          lake build OAI.Analysis.Laughlin.Exterior.SpinUnitary
+          # G4-D: true BFSS SU2 exterior Fock occupation inner-product isometry.
+          lake env lean SU2BFSSG4DExteriorOccupationIsometryProbe.lean
