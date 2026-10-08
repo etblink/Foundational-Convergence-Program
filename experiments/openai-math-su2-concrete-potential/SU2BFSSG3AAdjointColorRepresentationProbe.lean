@@ -36,6 +36,10 @@ theorem colorUnit_inner (A D : ColorIndex 2) :
     inner ℝ (colorUnit A) (colorUnit D) =
       if A = D then 1 else 0 := by
   simp [colorUnit, PiLp.inner_apply, RCLike.inner_apply, mul_comm]
+  by_cases h : A = D
+  · subst D
+    simp
+  · simp [h, Ne.symm h]
 
 /-- The actual pinned adjointCoefficient g A B is the B-th coordinate
 of the conjugated A-th unit basis vector, fixing index direction. -/
@@ -102,6 +106,9 @@ theorem adjointCoefficient_orthogonal (g : GaugeGroup 2)
     _ = inner ℝ (M.colorConjugate (g : ColorMatrix 2) (colorUnit A))
           (M.colorConjugate (g : ColorMatrix 2) (colorUnit D)) := by
       simp only [PiLp.inner_apply, RCLike.inner_apply, conj_trivial]
+      apply Finset.sum_congr rfl
+      intro B _
+      ring
     _ = inner ℝ (colorUnit A) (colorUnit D) :=
       M.colorConjugate_inner (g : ColorMatrix 2) g.prop.1 _ _
     _ = if A = D then 1 else 0 := colorUnit_inner A D
@@ -115,8 +122,12 @@ noncomputable def adjointColorMatrix (g : GaugeGroup 2) :
 theorem adjointColorMatrix_one :
     adjointColorMatrix (1 : GaugeGroup 2) = 1 := by
   ext B A
-  simpa only [adjointColorMatrix, Matrix.one_apply] using
-    adjointCoefficient_one A B
+  change M.adjointCoefficient 1 A B = if B = A then (1 : ℝ) else 0
+  rw [adjointCoefficient_one]
+  by_cases h : A = B
+  · subst B
+    simp
+  · simp [h, Ne.symm h]
 
 theorem adjointColorMatrix_mul (g h : GaugeGroup 2) :
     adjointColorMatrix (g * h) =
