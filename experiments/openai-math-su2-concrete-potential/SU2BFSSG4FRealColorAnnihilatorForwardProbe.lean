@@ -64,6 +64,10 @@ theorem annihilator_fermionGauge_forward
         annihilator j (fermionGaugeLinearEquiv g v) := by
   have h := annihilator_fermionGauge_covariant
     g⁻¹ i (fermionGaugeLinearEquiv g v)
+  have hleft : fermionGaugeLinearEquiv g⁻¹
+      (fermionGaugeLinearEquiv g v) = v := by
+    simpa only [inv_inv] using (fermionGauge_cancel_inv g⁻¹ v)
+  rw [hleft] at h
   have ht := congrArg (fermionGaugeLinearEquiv g) h
   simp only [map_sum, map_smul,
     fermionGauge_cancel_inv, complexOneParticleMatrix_inv_entry] at ht
