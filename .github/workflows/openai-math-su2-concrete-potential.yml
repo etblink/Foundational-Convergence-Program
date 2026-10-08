@@ -83,6 +83,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG3CComplexOneParticleUnitaryProbe.lean upstream-math/lean/SU2BFSSG3CComplexOneParticleUnitaryProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4AExteriorGaugeActionProbe.lean upstream-math/lean/SU2BFSSG4AExteriorGaugeActionProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4BFermionLinearTransportProbe.lean upstream-math/lean/SU2BFSSG4BFermionLinearTransportProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4CFermionOperatorCovarianceProbe.lean upstream-math/lean/SU2BFSSG4CFermionOperatorCovarianceProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -176,4 +177,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4AExteriorGaugeActionProbe.olean SU2BFSSG4AExteriorGaugeActionProbe.lean
           # G4-B: actual 2^24-dimensional BFSS Fermion 2 complex-linear SU2 representation.
           # Unitarity, 48-theta covariance and joint continuity are NOT asserted.
-          lake env lean SU2BFSSG4BFermionLinearTransportProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4BFermionLinearTransportProbe.olean SU2BFSSG4BFermionLinearTransportProbe.lean
+          # G4-C: transport actual creators/annihilators and prove full Fermion 2 covariance.
+          # This does not yet assert Fock Hilbert norm preservation.
+          lake env lean SU2BFSSG4CFermionOperatorCovarianceProbe.lean
