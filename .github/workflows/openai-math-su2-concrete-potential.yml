@@ -149,5 +149,8 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG1APairedThetaProbe.olean SU2BFSSG1APairedThetaProbe.lean
           # G1-B: exact paired spin/color annihilator normalization in the actual AlgebraData 2.
           lake env lean -o .lake/build/lib/lean/SU2BFSSG1BColorAnnihilatorProbe.olean SU2BFSSG1BColorAnnihilatorProbe.lean
+          # G2-A imports the pinned GaugeCore API, not yet present in the saved OAI .olean build.
+          # Build its exact pinned dependency closure (including GaugeOrbits) before Lean checks.
+          lake build OAI.MathematicalPhysics.BFSS.GaugeCore
           # G2-A: genuine paired bosonic GaugeGroup action and matrix adjoint identity.
           lake env lean SU2BFSSG2ABosonGaugeProbe.lean
