@@ -31,12 +31,12 @@ private theorem rotatedAnnihilator_formula (i : Fin 24) :
 private theorem rotatedCreator_sq (i : Fin 24) :
     rotatedCreator i * rotatedCreator i = 0 := by
   change (Complex.I • creator i) * (Complex.I • creator i) = 0
-  rw [smul_mul_smul, creator_sq, smul_zero]
+  simp only [smul_mul_smul, creator_sq, smul_zero]
 
 private theorem rotatedAnnihilator_sq (i : Fin 24) :
     rotatedAnnihilator i * rotatedAnnihilator i = 0 := by
-  have h := congrArg star (rotatedCreator_sq i)
-  simpa only [rotatedAnnihilator, star_mul, star_zero] using h
+  simp only [rotatedAnnihilator_formula, smul_mul_smul,
+    annihilator_sq, smul_zero]
 
 private theorem rotated_mixed_car (i : Fin 24) :
     rotatedAnnihilator i * rotatedCreator i +
