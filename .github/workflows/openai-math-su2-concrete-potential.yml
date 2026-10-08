@@ -80,6 +80,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG2BBosonGaugeContinuityProbe.lean upstream-math/lean/SU2BFSSG2BBosonGaugeContinuityProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG3AAdjointColorRepresentationProbe.lean upstream-math/lean/SU2BFSSG3AAdjointColorRepresentationProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG3B24ModeOrthogonalLiftProbe.lean upstream-math/lean/SU2BFSSG3B24ModeOrthogonalLiftProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG3CComplexOneParticleUnitaryProbe.lean upstream-math/lean/SU2BFSSG3CComplexOneParticleUnitaryProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -164,4 +165,6 @@ jobs:
           # G3-A: exact SU2 adjoint 3x3 matrix group and orthogonality laws.
           lake env lean -o .lake/build/lib/lean/SU2BFSSG3AAdjointColorRepresentationProbe.olean SU2BFSSG3AAdjointColorRepresentationProbe.lean
           # G3-B: actual 24 Fock modes, eight independent real SU2 color blocks.
-          lake env lean SU2BFSSG3B24ModeOrthogonalLiftProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG3B24ModeOrthogonalLiftProbe.olean SU2BFSSG3B24ModeOrthogonalLiftProbe.lean
+          # G3-C: exact ℝ→ℂ one-particle SU2 unitary hom, before Fock second quantization.
+          lake env lean SU2BFSSG3CComplexOneParticleUnitaryProbe.lean
