@@ -50,6 +50,7 @@ jobs:
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
           # `lake exe cache get` restores dependencies but does NOT compile OAI modules.
-          # The potential bridge imports PotentialBasis, not Core alone.
-          lake build OAI.MathematicalPhysics.BFSS.PotentialBasis
+          # Build both pinned OAI modules explicitly. The native Pauli expansion
+          # module supplies the complex spanning lemma; BFSS supplies the potential.
+          lake build OAI.MathematicalPhysics.BFSS.PotentialBasis OAI.Analysis.CharacterCriterion.Pauli
           lake env lean SU2ColorCrossProbe.lean
