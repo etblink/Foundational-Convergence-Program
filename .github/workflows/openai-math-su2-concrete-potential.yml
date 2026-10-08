@@ -77,6 +77,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean upstream-math/lean/SU2BFSSG1APairedThetaProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG1BColorAnnihilatorProbe.lean upstream-math/lean/SU2BFSSG1BColorAnnihilatorProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG2ABosonGaugeProbe.lean upstream-math/lean/SU2BFSSG2ABosonGaugeProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG2BBosonGaugeContinuityProbe.lean upstream-math/lean/SU2BFSSG2BBosonGaugeContinuityProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -153,4 +154,6 @@ jobs:
           # Build its exact pinned dependency closure (including GaugeOrbits) before Lean checks.
           lake build OAI.MathematicalPhysics.BFSS.GaugeCore
           # G2-A: genuine paired bosonic GaugeGroup action and matrix adjoint identity.
-          lake env lean SU2BFSSG2ABosonGaugeProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG2ABosonGaugeProbe.olean SU2BFSSG2ABosonGaugeProbe.lean
+          # G2-B: joint continuity of the actual special-unitary bosonic gauge representation.
+          lake env lean SU2BFSSG2BBosonGaugeContinuityProbe.lean
