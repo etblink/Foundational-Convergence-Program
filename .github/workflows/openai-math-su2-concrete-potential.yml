@@ -76,6 +76,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSSingleColorMultiplierZeroProbe.lean upstream-math/lean/SU2BFSSSingleColorMultiplierZeroProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean upstream-math/lean/SU2BFSSG1APairedThetaProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG1BColorAnnihilatorProbe.lean upstream-math/lean/SU2BFSSG1BColorAnnihilatorProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG2ABosonGaugeProbe.lean upstream-math/lean/SU2BFSSG2ABosonGaugeProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -147,4 +148,6 @@ jobs:
           # G1-A: explicitly paired spin/color theta labeling and second AlgebraData 2.
           lake env lean -o .lake/build/lib/lean/SU2BFSSG1APairedThetaProbe.olean SU2BFSSG1APairedThetaProbe.lean
           # G1-B: exact paired spin/color annihilator normalization in the actual AlgebraData 2.
-          lake env lean SU2BFSSG1BColorAnnihilatorProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG1BColorAnnihilatorProbe.olean SU2BFSSG1BColorAnnihilatorProbe.lean
+          # G2-A: genuine paired bosonic GaugeGroup action and matrix adjoint identity.
+          lake env lean SU2BFSSG2ABosonGaugeProbe.lean
