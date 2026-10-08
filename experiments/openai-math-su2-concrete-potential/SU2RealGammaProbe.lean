@@ -190,12 +190,17 @@ theorem gamma_clifford (a b : OAI.BFSSQuantum.SpaceIndex) :
   have h := congrArg
     (fun M : Matrix (Fin 16) (Fin 16) ℤ => M.map (Int.castRingHom ℝ))
     (gammaInt_clifford a b)
-  -- Transport integer multiplication across the ring-hom matrix map
-  -- explicitly; simp alone did not rewrite the mapped products.
-  rw [Matrix.map_add, Matrix.map_mul, Matrix.map_mul] at h
+  -- Supply the additivity argument explicitly: the generic
+  -- Matrix.map_add rewrite left the ring hom's map_add obligation open.
+  have hmap_add (X Y : Matrix (Fin 16) (Fin 16) ℤ) :
+      (X + Y).map (Int.castRingHom ℝ) =
+        X.map (Int.castRingHom ℝ) + Y.map (Int.castRingHom ℝ) := by
+    ext i j
+    simp [Matrix.add_apply]
+  rw [hmap_add, Matrix.map_mul, Matrix.map_mul] at h
   by_cases hab : a = b
   · subst b
-    simpa [gamma, two_smul] using h
+    simpa [gamma, two_smul, hmap_add] using h
   · simpa [gamma, hab] using h
 
 /-- A constructed witness to both gamma fields, without theta or a full AlgebraData instance. -/
