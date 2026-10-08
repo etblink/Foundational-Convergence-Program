@@ -54,6 +54,28 @@ lemma normalized_cross_energy (u v : Fin 3 → ℝ) :
   simp only [colorCross, mul_pow, Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2)]
   ring
 
+
+/-- The standard ordered Pauli matrices (σₓ, σᵧ, σ_z) over ℂ. -/
+def pauli : Fin 3 → Matrix (Fin 2) (Fin 2) ℂ
+  | 0 => !![0, 1; 1, 0]
+  | 1 => !![0, -Complex.I; Complex.I, 0]
+  | 2 => !![1, 0; 0, -1]
+
+/--
+Unnormalized Pauli commutators. This is a finite, fully explicit matrix
+check. The normalized Tₐ=σₐ/√2 identity is a *subsequent* milestone.
+-/
+lemma pauli_commutator (a b : Fin 3) :
+    pauli a * pauli b - pauli b * pauli a =
+      (2 * Complex.I) • (∑ c : Fin 3, (epsilon3 a b c : ℂ) • pauli c) := by
+  fin_cases a <;> fin_cases b <;>
+    ext i j <;> fin_cases i <;> fin_cases j <;>
+      norm_num [pauli, epsilon3, Matrix.mul_apply, Fin.sum_univ_two,
+        Fin.sum_univ_three, Matrix.smul_apply, Matrix.sub_apply,
+        Complex.I_mul_I]
+
+#print axioms pauli_commutator
+
 #print axioms epsilon3_contraction
 #print axioms normalized_cross_energy
 
