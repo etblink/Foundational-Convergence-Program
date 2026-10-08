@@ -78,6 +78,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG1BColorAnnihilatorProbe.lean upstream-math/lean/SU2BFSSG1BColorAnnihilatorProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG2ABosonGaugeProbe.lean upstream-math/lean/SU2BFSSG2ABosonGaugeProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG2BBosonGaugeContinuityProbe.lean upstream-math/lean/SU2BFSSG2BBosonGaugeContinuityProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG3AAdjointColorRepresentationProbe.lean upstream-math/lean/SU2BFSSG3AAdjointColorRepresentationProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -156,4 +157,8 @@ jobs:
           # G2-A: genuine paired bosonic GaugeGroup action and matrix adjoint identity.
           lake env lean -o .lake/build/lib/lean/SU2BFSSG2ABosonGaugeProbe.olean SU2BFSSG2ABosonGaugeProbe.lean
           # G2-B: joint continuity of the actual special-unitary bosonic gauge representation.
-          lake env lean SU2BFSSG2BBosonGaugeContinuityProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG2BBosonGaugeContinuityProbe.olean SU2BFSSG2BBosonGaugeContinuityProbe.lean
+          # G3-A source reuses exact pinned CovariantFields.colorConjugate_coefficient.
+          lake build OAI.MathematicalPhysics.BFSS.CovariantFields
+          # G3-A: exact SU2 adjoint 3x3 matrix group and orthogonality laws.
+          lake env lean SU2BFSSG3AAdjointColorRepresentationProbe.lean
