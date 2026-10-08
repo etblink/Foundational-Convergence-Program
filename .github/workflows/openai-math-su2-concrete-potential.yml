@@ -54,6 +54,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF2B2ImagProbe.lean upstream-math/lean/SU2FermionF2B2ImagProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF2B2MixedProbe.lean upstream-math/lean/SU2FermionF2B2MixedProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2FermionF2B2MixedDiagProbe.lean upstream-math/lean/SU2FermionF2B2MixedDiagProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2FermionF2B2MixedAllProbe.lean upstream-math/lean/SU2FermionF2B2MixedAllProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -80,5 +81,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2FermionF2B2ImagProbe.olean SU2FermionF2B2ImagProbe.lean
           # Preserve kernel-accepted F2-B2c1 and emit its olean for F2-B2c2.
           lake env lean -o .lake/build/lib/lean/SU2FermionF2B2MixedProbe.olean SU2FermionF2B2MixedProbe.lean
-          # F2-B2c2: same-mode real/imaginary Majorana CAR; all-pair/full theta remain pending.
-          lake env lean SU2FermionF2B2MixedDiagProbe.lean
+          # Preserve accepted F2-B2c2 and emit its olean for the all-pair mixed CAR proof.
+          lake env lean -o .lake/build/lib/lean/SU2FermionF2B2MixedDiagProbe.olean SU2FermionF2B2MixedDiagProbe.lean
+          # F2-B2c3: compose accepted same/distinct-mode mixed relations; full theta remains pending.
+          lake env lean SU2FermionF2B2MixedAllProbe.lean
