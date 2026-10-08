@@ -129,6 +129,10 @@ private def gammaInt (a : Fin 9) : Matrix (Fin 16) (Fin 16) ℤ :=
 /-- Integer symmetry certificate, checked at all 9*16*16 entries. -/
 private theorem gammaInt_symm_entries :
     ∀ a : Fin 9, ∀ i j : Fin 16, gammaInt a i j = gammaInt a j i := by
+  -- Expose the sparse integer entries before requesting a decidable certificate.
+  change ∀ a : Fin 9, ∀ i j : Fin 16,
+    (if perm a i = j then sign a i else 0) =
+    (if perm a j = i then sign a j else 0)
   decide
 
 /-- Sparse matrix multiplication: exactly one nonzero term per row. -/
@@ -137,7 +141,15 @@ private theorem gammaInt_mul_apply (a b : Fin 9) (i j : Fin 16) :
       if perm b (perm a i) = j then
         sign a i * sign b (perm a i)
       else 0 := by
-  simp [Matrix.mul_apply, gammaInt, ite_mul]
+  classical
+  change (∑ k : Fin 16,
+      (if perm a i = k then sign a i else 0) *
+      (if perm b k = j then sign b k else 0)) = _
+  rw [Finset.sum_eq_single (perm a i)]
+  · simp
+  · intro k _ hk
+    simp [Ne.symm hk]
+  · simp
 
 /-- All 9*9*16*16 signed-permutation Clifford identities, over integers. -/
 private theorem signedPerm_clifford :
@@ -178,10 +190,13 @@ theorem gamma_clifford (a b : OAI.BFSSQuantum.SpaceIndex) :
   have h := congrArg
     (fun M : Matrix (Fin 16) (Fin 16) ℤ => M.map (Int.castRingHom ℝ))
     (gammaInt_clifford a b)
+  -- Transport integer multiplication across the ring-hom matrix map
+  -- explicitly; simp alone did not rewrite the mapped products.
+  rw [Matrix.map_add, Matrix.map_mul, Matrix.map_mul] at h
   by_cases hab : a = b
   · subst b
-    simpa [gamma, two_smul, Matrix.map_add, Matrix.map_mul] using h
-  · simpa [gamma, hab, Matrix.map_add, Matrix.map_mul] using h
+    simpa [gamma, two_smul] using h
+  · simpa [gamma, hab] using h
 
 /-- A constructed witness to both gamma fields, without theta or a full AlgebraData instance. -/
 theorem exists_gamma9 :
