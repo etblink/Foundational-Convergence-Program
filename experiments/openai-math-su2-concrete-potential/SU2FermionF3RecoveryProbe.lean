@@ -69,7 +69,9 @@ theorem thetaInvariant_creator_annihilator
     have hphase : (Complex.I : ℂ) • ((creator i - annihilator i) w) ∈ W := by
       have h := W.smul_mem s⁻¹ hdiffScaled
       have hInv : s⁻¹ * s = 1 := inv_mul_cancel₀ hs
-      simpa only [smul_smul, hInv, one_smul] using h
+      have hcancel : s⁻¹ * (s * Complex.I) = Complex.I := by
+        rw [← mul_assoc, hInv, one_mul]
+      simpa only [smul_smul, hcancel] using h
     have hdiff : (creator i - annihilator i) w ∈ W := by
       have h := W.smul_mem ((Complex.I : ℂ)⁻¹) hphase
       have hInv : (Complex.I : ℂ)⁻¹ * Complex.I = 1 :=
