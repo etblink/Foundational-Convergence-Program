@@ -49,6 +49,7 @@ jobs:
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
-          # `lake exe cache get` restores dependencies but does NOT compile OAI.Core.
-          lake build OAI.MathematicalPhysics.BFSS.Core
+          # `lake exe cache get` restores dependencies but does NOT compile OAI modules.
+          # The potential bridge imports PotentialBasis, not Core alone.
+          lake build OAI.MathematicalPhysics.BFSS.PotentialBasis
           lake env lean SU2ColorCrossProbe.lean
