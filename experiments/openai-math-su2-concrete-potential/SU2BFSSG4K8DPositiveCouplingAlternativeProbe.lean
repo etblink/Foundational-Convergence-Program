@@ -132,9 +132,10 @@ theorem physicalInteractingCharge_one_or_two_ne_zero (α : SpinIndex) :
         (pairedAlgebraData.deformedCoreCharge 2 0 α radialBumpSmoothCore) = 0 := by
     by_contra h
     exact hn (Or.inr h)
+  have htwo (f : SmoothCore 2) : (2 : ℝ) • f = f + f := by module
   have hid := congrArg (fun f : SmoothCore 2 => coreToL2 f)
     (physicalCharge_two_plus_kinetic_eq_twice_one α)
-  rw [map_add, map_smul, h1, h2, zero_add, smul_zero] at hid
+  rw [map_add, htwo, map_add, h1, h2, zero_add, add_zero] at hid
   exact (physicalKineticFirstOrder_L2_ne_zero α) hid
 
 /-- Strictly positive ACTUAL source-defined interacting
