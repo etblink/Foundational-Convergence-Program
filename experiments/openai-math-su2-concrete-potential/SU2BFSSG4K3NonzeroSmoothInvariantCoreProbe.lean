@@ -34,20 +34,27 @@ open FCP.BFSSSU2GaugeG4K2B
 /-- Smoothness on the ACTUAL Euclidean bosonic configuration space.
 The input is ‖x‖² (smooth), not ‖x‖ (not smooth at zero). -/
 theorem radialBumpProfile_contDiff :
-    ContDiff ℝ (⊤ : WithTop ℕ∞)
+    ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞)
       (radialVacuumProfile radialBumpCoefficient) := by
-  have hreal : ContDiff ℝ (⊤ : WithTop ℕ∞)
-      (fun x : Boson 2 => Real.smoothTransition (2 - 2 * ‖x‖ ^ 2)) :=
-    Real.smoothTransition.contDiff.comp
-      (contDiff_const.sub (contDiff_const.mul (contDiff_norm_sq ℝ)))
-  have hcomplex : ContDiff ℝ (⊤ : WithTop ℕ∞)
-      (fun x : Boson 2 =>
-        (Real.smoothTransition (2 - 2 * ‖x‖ ^ 2) : ℂ)) :=
+  have hpoly :
+      ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞)
+        (fun x : Boson 2 => (2 : ℝ) - 2 * ‖x‖ ^ 2) := by
+    exact contDiff_const.sub (contDiff_const.mul (contDiff_norm_sq ℝ))
+  have hreal :
+      ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞)
+        (fun x : Boson 2 => Real.smoothTransition (2 - 2 * ‖x‖ ^ 2)) :=
+    Real.smoothTransition.contDiff.comp hpoly
+  have hcomplex :
+      ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞)
+        (fun x : Boson 2 =>
+          (Real.smoothTransition (2 - 2 * ‖x‖ ^ 2) : ℂ)) :=
     Complex.ofRealCLM.contDiff.comp hreal
-  simpa only [radialVacuumProfile, radialBumpCoefficient] using
-    hcomplex.smul
-      (contDiff_const : ContDiff ℝ (⊤ : WithTop ℕ∞)
-        (fun _ : Boson 2 => fermionVacuum))
+  change ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞)
+    (fun x : Boson 2 =>
+      (Real.smoothTransition (2 - 2 * ‖x‖ ^ 2) : ℂ) • fermionVacuum)
+  exact hcomplex.smul
+    (contDiff_const : ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞)
+      (fun _ : Boson 2 => fermionVacuum))
 
 /-- The exact same nonzero physical radial wavepacket, now packaged
 as a literal source-defined BFSS SmoothCore test function. -/
