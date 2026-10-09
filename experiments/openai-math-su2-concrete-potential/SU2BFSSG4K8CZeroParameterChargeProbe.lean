@@ -36,6 +36,7 @@ namespace FCP.BFSSSU2GaugeG4K8C
 noncomputable section
 
 open scoped BigOperators
+open OAI
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open MeasureTheory
@@ -76,8 +77,8 @@ potential operator FIELD at zero interaction and mass. -/
 theorem pairedDeformedRealField_zero_zero
     (α : SpinIndex) (x : Boson 2) :
     pairedAlgebraData.deformedRealField 0 0 α x = 0 := by
-  rw [pairedAlgebraData.deformedRealField_polarized]
-  simp
+  simp only [pairedAlgebraData.deformedRealField_polarized,
+    zero_smul, zero_add]
 
 /-- At h=m=0, the actual deformedCoreCharge equals the
 source first-order kinetic charge AS A SMOOTH CORE SECTION.
