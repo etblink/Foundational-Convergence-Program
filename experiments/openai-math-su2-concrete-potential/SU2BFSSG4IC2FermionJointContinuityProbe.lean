@@ -50,7 +50,7 @@ theorem fermionGauge_jointContinuous :
       ‖z.2 - v‖ +
         ‖fermionGaugeUnitaryHom z.1 v - fermionGaugeUnitaryHom g v‖)
         (𝓝 (g, v)) (𝓝 (0 : ℝ)) := by
-    have h := (hstate.add hparameter).continuousAt
+    have h := (hstate.add hparameter).continuousAt (g, v)
     simpa only [sub_self, norm_zero, zero_add] using h
   have hbound (z : GaugeGroup 2 × Fermion 2) :
       ‖fermionGaugeUnitaryHom z.1 z.2 -
