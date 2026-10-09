@@ -90,6 +90,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4GMajoranaModeCovarianceProbe.lean upstream-math/lean/SU2BFSSG4GMajoranaModeCovarianceProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4HExactThetaCovarianceProbe.lean upstream-math/lean/SU2BFSSG4HExactThetaCovarianceProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4IAOneParticleContinuityProbe.lean upstream-math/lean/SU2BFSSG4IAOneParticleContinuityProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4IB1ExteriorFockSeedContinuityProbe.lean upstream-math/lean/SU2BFSSG4IB1ExteriorFockSeedContinuityProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -205,4 +206,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4HExactThetaCovarianceProbe.olean SU2BFSSG4HExactThetaCovarianceProbe.lean
           # G4-I-A: derive continuity of the exact pinned SU2 color coefficients and 24-mode matrix.
           # This does not yet prove joint fermionic continuity or full GaugeData.
-          lake env lean SU2BFSSG4IAOneParticleContinuityProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4IAOneParticleContinuityProbe.olean SU2BFSSG4IAOneParticleContinuityProbe.lean
+          # G4-I-B1: genuine exterior action on vacuum and degree-one occupation states.
+          # Multiparticle Fock and full fermion_continuous are separate later obligations.
+          lake env lean SU2BFSSG4IB1ExteriorFockSeedContinuityProbe.lean
