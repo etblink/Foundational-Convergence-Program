@@ -69,7 +69,7 @@ theorem pairedDeformedCoreEnergy_zero_iff (h m : ℝ)
   have hc : (1 / 16 : ℝ) ≠ 0 := by norm_num
   simp only [hc, false_or]
   rw [Finset.sum_eq_zero_iff_of_nonneg (fun α _ => sq_nonneg _)]
-  simp only [Finset.mem_univ, true_implies, pow_eq_zero, norm_eq_zero]
+  simp only [Finset.mem_univ, true_implies, sq_eq_zero_iff, norm_eq_zero]
 
 /-- The exact zero-energy condition on OUR nonzero physical
 trial state; nonzero Hilbert norm of the state itself cannot
