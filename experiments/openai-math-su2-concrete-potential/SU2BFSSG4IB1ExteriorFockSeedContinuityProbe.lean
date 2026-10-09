@@ -63,9 +63,14 @@ theorem exteriorGauge_seedCoordinate_continuous (v : Orbital 23) :
         fockSeedCoordinateLinear (orbitalGauge g v) := by
     rw [exteriorGauge, ExteriorAlgebra.map_apply_ι]
     rfl
-  simpa only [he] using
-    fockSeedCoordinateLinear_continuous.comp
+  have hcont :
+      Continuous (fun g : GaugeGroup 2 =>
+        fockSeedCoordinateLinear (orbitalGauge g v)) := by
+    change Continuous ((fun w : Orbital 23 => fockSeedCoordinateLinear w) ∘
+      (fun g : GaugeGroup 2 => orbitalGauge g v))
+    exact fockSeedCoordinateLinear_continuous.comp
       (orbitalGauge_parameter_continuous v)
+  simpa only [he] using hcont
 
 /-- The true degree-zero exterior Fock vacuum is invariant, hence
 its image under the *same pinned* coordinate transport is continuous. -/
