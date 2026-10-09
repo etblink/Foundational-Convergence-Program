@@ -54,8 +54,9 @@ theorem exists_coordinateDerivative_pointwise_ne_zero :
         (0 : Boson 2 →ₗ[ℝ] Fermion 2) := by
     apply (EuclideanSpace.basisFun (SpaceIndex × ColorIndex 2) ℝ).toBasis.ext
     intro p
-    simpa only [OrthonormalBasis.coe_toBasis,
-      EuclideanSpace.basisFun_apply, LinearMap.zero_apply] using hzero p
+    change (fderiv ℝ (radialBumpSmoothCore : Boson 2 → Fermion 2) x)
+      (EuclideanSpace.single p 1) = 0
+    exact hzero p
   apply hx
   apply ContinuousLinearMap.ext
   intro v
