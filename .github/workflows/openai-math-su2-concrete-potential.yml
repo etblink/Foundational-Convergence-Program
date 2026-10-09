@@ -91,6 +91,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4HExactThetaCovarianceProbe.lean upstream-math/lean/SU2BFSSG4HExactThetaCovarianceProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4IAOneParticleContinuityProbe.lean upstream-math/lean/SU2BFSSG4IAOneParticleContinuityProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4IB1ExteriorFockSeedContinuityProbe.lean upstream-math/lean/SU2BFSSG4IB1ExteriorFockSeedContinuityProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4IB2ExteriorFockTwoWedgeContinuityProbe.lean upstream-math/lean/SU2BFSSG4IB2ExteriorFockTwoWedgeContinuityProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -209,4 +210,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4IAOneParticleContinuityProbe.olean SU2BFSSG4IAOneParticleContinuityProbe.lean
           # G4-I-B1: genuine exterior action on vacuum and degree-one occupation states.
           # Multiparticle Fock and full fermion_continuous are separate later obligations.
-          lake env lean SU2BFSSG4IB1ExteriorFockSeedContinuityProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4IB1ExteriorFockSeedContinuityProbe.olean SU2BFSSG4IB1ExteriorFockSeedContinuityProbe.lean
+          # G4-I-B2: actual two-fermion exterior wedge continuity from finite-coordinate polynomials.
+          # Full multiparticle, exact Fermion 2, and joint GaugeData continuity remain unproved.
+          lake env lean SU2BFSSG4IB2ExteriorFockTwoWedgeContinuityProbe.lean
