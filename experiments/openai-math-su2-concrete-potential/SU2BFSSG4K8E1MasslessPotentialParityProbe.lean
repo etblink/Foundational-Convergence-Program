@@ -1,0 +1,97 @@
+import SU2BFSSG4K8DPositiveCouplingAlternativeProbe
+
+/-!
+# BFSS SU(2) G4-K8E1 — physical state and massless potential parity
+
+Gate #149 formally proved that the true pinned SU(2) physical
+radial trial state has strictly positive actual interacting
+deformed energy at h=1 OR h=2, m=0. The alternative does NOT
+select h=1 individually.
+
+The next scientific obstacle is exact kinetic/potential
+cancellation in the original deformedCoreCharge at h=1,m=0.
+Here we test two independently source-grounded evenness facts:
+
+1. The SAME smooth radial Gauss-invariant state is even under
+   the true Boson 2 involution x ↦ -x.
+2. For EVERY real coupling h and zero mass, the source real
+   potential field is even under the same involution, because
+   the ORIGINAL source polarized field is quadratic in x.
+
+Combining them yields evenness of the actual pinned potential
+multiplication field acting on the chosen state. A later
+stage must separately prove that the ORIGINAL source kinetic
+first-order core component is odd and nonzero under parity;
+only then can it disallow cancellation and infer strict
+trial-energy positivity specifically at h=1,m=0.
+
+No assertion about h=1 energy positivity is proved in this
+stage; no eigenstate, ground state, spectral infimum or
+BFSS mass gap is claimed.
+-/
+
+namespace FCP.BFSSSU2GaugeG4K8E1
+noncomputable section
+
+open OAI
+open OAI.BFSSQuantum
+open OAI.BFSSQuantum.AlgebraData
+open FCP.BFSSSU2GaugeG4K2A
+open FCP.BFSSSU2GaugeG4K2B
+open FCP.BFSSSU2GaugeG4K3
+open FCP.BFSSSU2GaugeG4K8D
+
+/-- True original nonzero physical smooth radial state is even,
+without assuming parity as a new gauge symmetry. -/
+theorem physicalSmoothRadialState_even (x : Boson 2) :
+    radialBumpSmoothCore (-x) = radialBumpSmoothCore x := by
+  change radialVacuumProfile radialBumpCoefficient (-x) =
+    radialVacuumProfile radialBumpCoefficient x
+  simp only [radialVacuumProfile, norm_neg]
+
+/-- Pinned massless deformation (m=0) is an exactly EVEN
+quadratic source potential field for ANY REAL h.
+This is NOT true as written for arbitrary nonzero mass,
+whose source field contains a linear term. -/
+theorem physicalMasslessRealField_even (h : ℝ) (α : SpinIndex)
+    (x : Boson 2) :
+    pairedAlgebraData.deformedRealField h 0 α (-x) =
+      pairedAlgebraData.deformedRealField h 0 α x := by
+  rw [pairedAlgebraData.deformedRealField_polarized,
+    pairedAlgebraData.deformedRealField_polarized]
+  simp only [zero_smul, add_zero, map_neg, neg_apply, neg_neg]
+
+/-- The true source field multiplied by the same physical
+radial test section is an even Fermion 2-valued function
+at every real coupling h and zero mass. -/
+theorem physicalMasslessPotentialAction_even (h : ℝ)
+    (α : SpinIndex) (x : Boson 2) :
+    (pairedAlgebraData.deformedRealField h 0 α (-x))
+        (radialBumpSmoothCore (-x)) =
+      (pairedAlgebraData.deformedRealField h 0 α x)
+        (radialBumpSmoothCore x) := by
+  rw [physicalMasslessRealField_even, physicalSmoothRadialState_even]
+
+/-- The actual source MixedEnergy.field SmoothCore operator
+obeys pointwise parity on our original Gauss test state.
+This uses the pinned `field_apply`, not an auxiliary operator. -/
+theorem physicalMasslessCorePotential_even (h : ℝ)
+    (α : SpinIndex) (x : Boson 2) :
+    MixedEnergy.field
+        (pairedAlgebraData.deformedRealField h 0 α)
+        (pairedAlgebraData.deformedRealField_contDiff h 0 α)
+        radialBumpSmoothCore (-x) =
+      MixedEnergy.field
+        (pairedAlgebraData.deformedRealField h 0 α)
+        (pairedAlgebraData.deformedRealField_contDiff h 0 α)
+        radialBumpSmoothCore x := by
+  rw [MixedEnergy.field_apply, MixedEnergy.field_apply]
+  exact physicalMasslessPotentialAction_even h α x
+
+#print axioms physicalSmoothRadialState_even
+#print axioms physicalMasslessRealField_even
+#print axioms physicalMasslessPotentialAction_even
+#print axioms physicalMasslessCorePotential_even
+
+end
+end FCP.BFSSSU2GaugeG4K8E1

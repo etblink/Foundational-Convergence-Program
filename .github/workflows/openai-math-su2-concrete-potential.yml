@@ -108,6 +108,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8BNonzeroCoordinateL2Probe.lean upstream-math/lean/SU2BFSSG4K8BNonzeroCoordinateL2Probe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8CZeroParameterChargeProbe.lean upstream-math/lean/SU2BFSSG4K8CZeroParameterChargeProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8DPositiveCouplingAlternativeProbe.lean upstream-math/lean/SU2BFSSG4K8DPositiveCouplingAlternativeProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8E1MasslessPotentialParityProbe.lean upstream-math/lean/SU2BFSSG4K8E1MasslessPotentialParityProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -283,4 +284,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K8CZeroParameterChargeProbe.olean SU2BFSSG4K8CZeroParameterChargeProbe.lean
           # G4-K8D: source-bound exact comparison of h=1 and h=2 interacting m=0 supercharges.
           # Strictly positive interacting trial energy at one of h=1 or h=2, not a specific h=1 claim.
-          lake env lean SU2BFSSG4K8DPositiveCouplingAlternativeProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4K8DPositiveCouplingAlternativeProbe.olean SU2BFSSG4K8DPositiveCouplingAlternativeProbe.lean
+          # G4-K8E1: true evenness of physical radial wavepacket and source massless potential.
+          # Necessary parity input, not yet strict h=1 energy or spectral gap.
+          lake env lean SU2BFSSG4K8E1MasslessPotentialParityProbe.lean
