@@ -106,6 +106,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe.lean upstream-math/lean/SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8ANonzeroDerivativeProbe.lean upstream-math/lean/SU2BFSSG4K8ANonzeroDerivativeProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8BNonzeroCoordinateL2Probe.lean upstream-math/lean/SU2BFSSG4K8BNonzeroCoordinateL2Probe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8CZeroParameterChargeProbe.lean upstream-math/lean/SU2BFSSG4K8CZeroParameterChargeProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -274,4 +275,8 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K8ANonzeroDerivativeProbe.olean SU2BFSSG4K8ANonzeroDerivativeProbe.lean
           # G4-K8B: nonzero exact coordinate derivative FullL2 image and strictly positive kinetic integral.
           # Does NOT claim a nonzero deformed supercharge, strict total energy or BFSS spectral result.
-          lake env lean SU2BFSSG4K8BNonzeroCoordinateL2Probe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4K8BNonzeroCoordinateL2Probe.olean SU2BFSSG4K8BNonzeroCoordinateL2Probe.lean
+          # G4-K8C: all 16 first-order charge components nonzero; zero-parameter h=m=0
+          # deformed charge nonzero and strictly positive concrete trial energy.
+          # Does NOT claim interacting BFSS h=1 or positive mass spectral gap.
+          lake env lean SU2BFSSG4K8CZeroParameterChargeProbe.lean
