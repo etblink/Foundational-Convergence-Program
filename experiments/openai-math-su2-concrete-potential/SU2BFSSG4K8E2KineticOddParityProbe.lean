@@ -54,7 +54,18 @@ private theorem abstractFderivEven_odd_apply
     change fderiv ℝ (fun y : Boson 2 => f (-y)) x =
       (fderiv ℝ f (-x)).comp
         (fderiv ℝ (fun y : Boson 2 => -y) x) at hc
-    simpa only [fderiv_fun_neg, fderiv_fun_id] using hc
+    have hneg :
+        fderiv ℝ (fun y : Boson 2 => -y) x =
+          -(ContinuousLinearMap.id ℝ (Boson 2)) := by
+      calc
+        fderiv ℝ (fun y : Boson 2 => -y) x =
+            -fderiv ℝ (fun y : Boson 2 => y) x :=
+          (fderiv_fun_neg (𝕜 := ℝ)
+            (f := fun y : Boson 2 => y) (x := x))
+        _ = -(ContinuousLinearMap.id ℝ (Boson 2)) := by
+          rw [fderiv_fun_id]
+    rw [hneg] at hc
+    exact hc
   rw [hfun] at hcomp
   have happ := congrArg
     (fun L : Boson 2 →L[ℝ] Fermion 2 => L (-v)) hcomp.symm
