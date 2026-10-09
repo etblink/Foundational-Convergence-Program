@@ -95,6 +95,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4IB3ExteriorFockAllContinuityProbe.lean upstream-math/lean/SU2BFSSG4IB3ExteriorFockAllContinuityProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4IC1FermionParameterContinuityProbe.lean upstream-math/lean/SU2BFSSG4IC1FermionParameterContinuityProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4IC2FermionJointContinuityProbe.lean upstream-math/lean/SU2BFSSG4IC2FermionJointContinuityProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4JExactGaugeDataAssemblyProbe.lean upstream-math/lean/SU2BFSSG4JExactGaugeDataAssemblyProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -225,4 +226,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4IC1FermionParameterContinuityProbe.olean SU2BFSSG4IC1FermionParameterContinuityProbe.lean
           # G4-I-C2: literal joint Fermion 2 gauge continuity by isometry/triangle estimate.
           # Full six-field GaugeData is not assembled in this candidate.
-          lake env lean SU2BFSSG4IC2FermionJointContinuityProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4IC2FermionJointContinuityProbe.olean SU2BFSSG4IC2FermionJointContinuityProbe.lean
+          # G4-J: literal pairedAlgebraData.GaugeData six-field structure assembly.
+          # This does not establish any BFSS Hamiltonian spectrum or physical prediction.
+          lake env lean SU2BFSSG4JExactGaugeDataAssemblyProbe.lean
