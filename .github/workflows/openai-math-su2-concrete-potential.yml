@@ -103,6 +103,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K4ClosedChargeGraphProbe.lean upstream-math/lean/SU2BFSSG4K4ClosedChargeGraphProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K5ConcreteEnergyDensityProbe.lean upstream-math/lean/SU2BFSSG4K5ConcreteEnergyDensityProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K6PhysicalTrialEnergyLowerProbe.lean upstream-math/lean/SU2BFSSG4K6PhysicalTrialEnergyLowerProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe.lean upstream-math/lean/SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -262,4 +263,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K5ConcreteEnergyDensityProbe.olean SU2BFSSG4K5ConcreteEnergyDensityProbe.lean
           # G4-K6: exact integrated physical energy and normalized uniform source lower bound.
           # No spectral gap, energy eigenvector or supersymmetric vacuum claim.
-          lake env lean SU2BFSSG4K6PhysicalTrialEnergyLowerProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4K6PhysicalTrialEnergyLowerProbe.olean SU2BFSSG4K6PhysicalTrialEnergyLowerProbe.lean
+          # G4-K7: correct lower-bound interpretation with global source sum-of-squares.
+          # Strict positivity stays CONDITIONAL on a nonzero deformed charge; no spectral claims.
+          lake env lean SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe.lean
