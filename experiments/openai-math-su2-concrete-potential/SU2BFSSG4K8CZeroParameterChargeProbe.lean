@@ -90,16 +90,24 @@ theorem physicalZeroParametersCharge_eq_firstOrder (α : SpinIndex) :
     pairedAlgebraData.deformedCoreCharge 0 0 α radialBumpSmoothCore =
       MixedEnergy.firstOrder
         (pairedAlgebraData.kineticSkewSymbol α) radialBumpSmoothCore := by
-  apply DFunLike.ext
-  intro x
-  change (MixedEnergy.firstOrder
-      (pairedAlgebraData.kineticSkewSymbol α) radialBumpSmoothCore) x +
-    (pairedAlgebraData.deformedRealField 0 0 α x)
-      (radialBumpSmoothCore x) =
-    (MixedEnergy.firstOrder
-      (pairedAlgebraData.kineticSkewSymbol α) radialBumpSmoothCore) x
-  rw [pairedDeformedRealField_zero_zero]
-  simp
+  have hzeroField :
+      MixedEnergy.field
+        (pairedAlgebraData.deformedRealField 0 0 α)
+        (pairedAlgebraData.deformedRealField_contDiff 0 0 α)
+        radialBumpSmoothCore = 0 := by
+    apply DFunLike.ext
+    intro x
+    rw [MixedEnergy.field_apply, pairedDeformedRealField_zero_zero]
+    simp
+  calc
+    pairedAlgebraData.deformedCoreCharge 0 0 α radialBumpSmoothCore =
+        MixedEnergy.firstOrder
+          (pairedAlgebraData.kineticSkewSymbol α) radialBumpSmoothCore +
+        MixedEnergy.field
+          (pairedAlgebraData.deformedRealField 0 0 α)
+          (pairedAlgebraData.deformedRealField_contDiff 0 0 α)
+          radialBumpSmoothCore := rfl
+    _ = _ := by rw [hzeroField, add_zero]
 
 /-- Nonzero L² DEFORMED charge component in the literal
 zero-coupling, zero-mass source specialization; ALL 16
