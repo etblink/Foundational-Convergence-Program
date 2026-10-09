@@ -8,6 +8,12 @@ on:
       - experiments/openai-math-su2-concrete-potential/**
       - .github/workflows/openai-math-su2-concrete-potential.yml
   workflow_dispatch:
+    inputs:
+      clean_build:
+        description: 'Recompile entire pinned SU2 chain from source, bypassing compiled proof cache'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
@@ -38,7 +44,22 @@ jobs:
             ~/.elan
           key: family270b-bridge-ubuntu-lean4341-openai-adc7f124-deformedcharge-v2
 
-      - name: Compile concrete SU2 color identity
+      - name: Verify immutable accepted G4-K8E3 prerequisite inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          # The compiled cache is sound only for the EXACT accepted source chain.
+          # Fetch the owner-verified Gate #159 commit even with shallow checkout.
+          git fetch --quiet --no-tags --depth=1 origin 31849ff72d569d38a18988e62e371c6b6f3e256c
+          # G4-K8E4 is the only newly authorized, uncompiled leaf. Changes to
+          # any accepted precursor are a hard error, even for a cold rebuild.
+          changed="$(git diff --name-only 31849ff72d569d38a18988e62e371c6b6f3e256c HEAD -- experiments/openai-math-su2-concrete-potential/ | grep -v -x 'experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8E4L2BridgeProbe.lean' || true)"
+          if [ -n "$changed" ]; then
+            printf 'Accepted baseline source has drifted; explicitly requalify before changing the compiled cache:\n%s\n' "$changed" >&2
+            exit 1
+          fi
+
+      - name: Prepare pinned Lean and restore Mathlib dependency cache
         shell: bash
         run: |
           set -euxo pipefail
@@ -113,6 +134,22 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8E3CoreNoncancellationProbe.lean upstream-math/lean/SU2BFSSG4K8E3CoreNoncancellationProbe.lean
           cd upstream-math/lean
           lake exe cache get
+
+      - name: Restore immutable compiled G4-K8E3 source proof chain
+        id: proof_cache
+        if: ${{ inputs.clean_build != true }}
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-accepted-g4k8e3-v1-31849ff72d569d38a18988e62e371c6b6f3e256c-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Compile exact accepted source proof chain
+        if: ${{ steps.proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
           # `lake exe cache get` restores dependencies but does NOT compile OAI modules.
           # Build both pinned OAI modules explicitly. The native Pauli expansion
@@ -295,4 +332,95 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K8E2KineticOddParityProbe.olean SU2BFSSG4K8E2KineticOddParityProbe.lean
           # G4-K8E3: genuine interacting source charge nonzero as a SMOOTH CORE section
           # at m=0 for all h; L² nonvanishing and strict h=1 energy remain unproved.
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4K8E3CoreNoncancellationProbe.olean SU2BFSSG4K8E3CoreNoncancellationProbe.lean
+
+      - name: Verify compiled proof cache required module objects
+        if: ${{ steps.proof_cache.outputs.cache-hit == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd upstream-math/lean
+          # A broken or incomplete cached build must never count as green.
+          test -s .lake/build/lib/lean/SU2ColorCrossProbe.olean
+          test -s .lake/build/lib/lean/SU2RealGammaProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionFockProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF2Probe.olean
+          test -s .lake/build/lib/lean/SU2FermionF2BProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF2B2Probe.olean
+          test -s .lake/build/lib/lean/SU2FermionF2B2ImagProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF2B2MixedProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF2B2MixedDiagProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF2B2MixedAllProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF2B2IndexedProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF2B2ThetaProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF3InvariantProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF3RecoveryProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF3B1OccupationProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF3B2BasisActionProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF3B3ProjectorProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF3B4SelectorProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF3B5CoordinateProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF3B6NonzeroKetProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF3B7SignedModeProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF3B8LocalReachabilityProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF3B9FiniteReachabilityProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF3C1SubmoduleDichotomyProbe.olean
+          test -s .lake/build/lib/lean/SU2FermionF3C2ThetaFieldsProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSFullAlgebraDataProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSConcretePotentialProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPotentialAverageFlatProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG1APairedThetaProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG1BColorAnnihilatorProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG2ABosonGaugeProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG2BBosonGaugeContinuityProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG3AAdjointColorRepresentationProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG3B24ModeOrthogonalLiftProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG3CComplexOneParticleUnitaryProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4AExteriorGaugeActionProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4BFermionLinearTransportProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4CFermionOperatorCovarianceProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4DExteriorOccupationIsometryProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4EFermionHilbertUnitaryProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4FRealColorAnnihilatorForwardProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4GMajoranaModeCovarianceProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4HExactThetaCovarianceProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4IAOneParticleContinuityProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4IB1ExteriorFockSeedContinuityProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4IB2ExteriorFockTwoWedgeContinuityProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4IB3ExteriorFockAllContinuityProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4IC1FermionParameterContinuityProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4IC2FermionJointContinuityProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4JExactGaugeDataAssemblyProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K1PhysicalSpaceCoreProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K2ANonzeroVacuumRadialProfileProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K2BNonzeroPhysicalL2Probe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K4ClosedChargeGraphProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K5ConcreteEnergyDensityProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K6PhysicalTrialEnergyLowerProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K8ANonzeroDerivativeProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K8BNonzeroCoordinateL2Probe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K8CZeroParameterChargeProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K8DPositiveCouplingAlternativeProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K8E1MasslessPotentialParityProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K8E2KineticOddParityProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K8E3CoreNoncancellationProbe.olean
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/PotentialBasis.olean
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/ProfileEnergy.olean
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/KineticMeasures.olean
+
+      - name: Save qualified prerequisite objects after successful cold compilation
+        if: ${{ steps.proof_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-accepted-g4k8e3-v1-31849ff72d569d38a18988e62e371c6b6f3e256c-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Independently compile and print axioms for accepted G4-K8E3
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
           lake env lean SU2BFSSG4K8E3CoreNoncancellationProbe.lean
