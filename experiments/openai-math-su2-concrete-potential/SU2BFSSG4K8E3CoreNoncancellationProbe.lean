@@ -53,7 +53,14 @@ private theorem abstractOddEvenSum_ne_zero
       simpa only [add_apply, zero_apply] using heval
     rw [hkodd x, hveven x] at hval
     exact hval
-  module
+  have htwice : k x + k x = 0 := by
+    calc
+      k x + k x = (k x + v x) - (-(k x) + v x) := by abel
+      _ = 0 := by rw [hpos, hneg]; simp
+  have hsmul : (2 : ℝ) • k x = 0 := by
+    rw [two_smul]
+    exact htwice
+  exact (smul_eq_zero.mp hsmul).resolve_left (by norm_num)
 
 /-- The genuine source first-order core cannot be the zero section:
 otherwise its image under the actual coreToL2 map would vanish,
