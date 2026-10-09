@@ -93,6 +93,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4IB1ExteriorFockSeedContinuityProbe.lean upstream-math/lean/SU2BFSSG4IB1ExteriorFockSeedContinuityProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4IB2ExteriorFockTwoWedgeContinuityProbe.lean upstream-math/lean/SU2BFSSG4IB2ExteriorFockTwoWedgeContinuityProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4IB3ExteriorFockAllContinuityProbe.lean upstream-math/lean/SU2BFSSG4IB3ExteriorFockAllContinuityProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4IC1FermionParameterContinuityProbe.lean upstream-math/lean/SU2BFSSG4IC1FermionParameterContinuityProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -217,4 +218,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4IB2ExteriorFockTwoWedgeContinuityProbe.olean SU2BFSSG4IB2ExteriorFockTwoWedgeContinuityProbe.lean
           # G4-I-B3: exact full exterior-Fock parameter continuity by finite product and wedge induction.
           # The joint Fermion 2 continuity and complete GaugeData remain separate obligations.
-          lake env lean SU2BFSSG4IB3ExteriorFockAllContinuityProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4IB3ExteriorFockAllContinuityProbe.olean SU2BFSSG4IB3ExteriorFockAllContinuityProbe.lean
+          # G4-I-C1: exact Fermion 2 fixed-state parameter continuity via the pinned G4-B/F1 transport.
+          # Joint continuity (G4-I-C2) and six-field GaugeData (G4-J) are separate obligations.
+          lake env lean SU2BFSSG4IC1FermionParameterContinuityProbe.lean
