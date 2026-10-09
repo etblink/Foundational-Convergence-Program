@@ -102,6 +102,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe.lean upstream-math/lean/SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K4ClosedChargeGraphProbe.lean upstream-math/lean/SU2BFSSG4K4ClosedChargeGraphProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K5ConcreteEnergyDensityProbe.lean upstream-math/lean/SU2BFSSG4K5ConcreteEnergyDensityProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K6PhysicalTrialEnergyLowerProbe.lean upstream-math/lean/SU2BFSSG4K6PhysicalTrialEnergyLowerProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -186,6 +187,8 @@ jobs:
           # G4-K5 imports source-local BFSS.KineticMeasures, not provided by mathlib cache.
           # Build the pinned upstream module and its Lean import closure before G4-K5.
           lake build OAI.MathematicalPhysics.BFSS.KineticMeasures
+          # G4-K6 imports pinned source-local ProfileEnergy; cache does not supply OAI modules.
+          lake build OAI.MathematicalPhysics.BFSS.ProfileEnergy
           # G3-A: exact SU2 adjoint 3x3 matrix group and orthogonality laws.
           lake env lean -o .lake/build/lib/lean/SU2BFSSG3AAdjointColorRepresentationProbe.olean SU2BFSSG3AAdjointColorRepresentationProbe.lean
           # G3-B: actual 24 Fock modes, eight independent real SU2 color blocks.
@@ -256,4 +259,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K4ClosedChargeGraphProbe.olean SU2BFSSG4K4ClosedChargeGraphProbe.lean
           # G4-K5: exact gauge-invariant integrable energy densities of nonzero physical smooth state.
           # No positive spectral bound, SUSY ground-state or physical model verification claim.
-          lake env lean SU2BFSSG4K5ConcreteEnergyDensityProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4K5ConcreteEnergyDensityProbe.olean SU2BFSSG4K5ConcreteEnergyDensityProbe.lean
+          # G4-K6: exact integrated physical energy and normalized uniform source lower bound.
+          # No spectral gap, energy eigenvector or supersymmetric vacuum claim.
+          lake env lean SU2BFSSG4K6PhysicalTrialEnergyLowerProbe.lean
