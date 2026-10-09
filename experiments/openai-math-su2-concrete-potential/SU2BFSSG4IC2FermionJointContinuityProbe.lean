@@ -18,6 +18,7 @@ namespace FCP.BFSSSU2GaugeG4IC2
 noncomputable section
 
 open OAI.BFSSQuantum
+open Filter
 open FCP.BFSSSU2GaugeG4E FCP.BFSSSU2GaugeG4IC1
 
 /-- The genuine SU(2) gauge action is simultaneously continuous
