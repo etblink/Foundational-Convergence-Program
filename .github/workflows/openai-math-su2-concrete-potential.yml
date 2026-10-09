@@ -183,6 +183,9 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG2BBosonGaugeContinuityProbe.olean SU2BFSSG2BBosonGaugeContinuityProbe.lean
           # G3-A source reuses exact pinned CovariantFields.colorConjugate_coefficient.
           lake build OAI.MathematicalPhysics.BFSS.CovariantFields
+          # G4-K5 imports source-local BFSS.KineticMeasures, not provided by mathlib cache.
+          # Build the pinned upstream module and its Lean import closure before G4-K5.
+          lake build OAI.MathematicalPhysics.BFSS.KineticMeasures
           # G3-A: exact SU2 adjoint 3x3 matrix group and orthogonality laws.
           lake env lean -o .lake/build/lib/lean/SU2BFSSG3AAdjointColorRepresentationProbe.olean SU2BFSSG3AAdjointColorRepresentationProbe.lean
           # G3-B: actual 24 Fock modes, eight independent real SU2 color blocks.
