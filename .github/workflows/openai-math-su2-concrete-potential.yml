@@ -1,0 +1,25 @@
+# Default-branch registration for a branch-scoped, pinned Lean research gate.
+# GitHub requires workflow_dispatch to exist on the default branch before
+# "Run workflow" becomes available. The full Lean workflow and experimental
+# sources are intentionally kept only on the research branch.
+#
+# To run the actual Lean gate, choose the branch
+# research/openai-math-su2-concrete-potential under Actions > Run workflow.
+# GitHub executes that branch's version of this SAME workflow path.
+# Do not interpret a run of this default-branch placeholder as a Lean test.
+name: BFSS SU2 Concrete Color Gate
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  default-branch-registration-only:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Select the pinned research branch
+        run: |
+          echo "::error::This is only the default-branch dispatch registration. To compile the pinned BFSS SU2 Lean proofs, select branch research/openai-math-su2-concrete-potential in Run workflow."
+          exit 1
