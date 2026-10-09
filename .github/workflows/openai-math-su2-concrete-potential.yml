@@ -107,6 +107,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8ANonzeroDerivativeProbe.lean upstream-math/lean/SU2BFSSG4K8ANonzeroDerivativeProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8BNonzeroCoordinateL2Probe.lean upstream-math/lean/SU2BFSSG4K8BNonzeroCoordinateL2Probe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8CZeroParameterChargeProbe.lean upstream-math/lean/SU2BFSSG4K8CZeroParameterChargeProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8DPositiveCouplingAlternativeProbe.lean upstream-math/lean/SU2BFSSG4K8DPositiveCouplingAlternativeProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -279,4 +280,7 @@ jobs:
           # G4-K8C: all 16 first-order charge components nonzero; zero-parameter h=m=0
           # deformed charge nonzero and strictly positive concrete trial energy.
           # Does NOT claim interacting BFSS h=1 or positive mass spectral gap.
-          lake env lean SU2BFSSG4K8CZeroParameterChargeProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4K8CZeroParameterChargeProbe.olean SU2BFSSG4K8CZeroParameterChargeProbe.lean
+          # G4-K8D: source-bound exact comparison of h=1 and h=2 interacting m=0 supercharges.
+          # Strictly positive interacting trial energy at one of h=1 or h=2, not a specific h=1 claim.
+          lake env lean SU2BFSSG4K8DPositiveCouplingAlternativeProbe.lean
