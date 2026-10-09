@@ -109,6 +109,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8CZeroParameterChargeProbe.lean upstream-math/lean/SU2BFSSG4K8CZeroParameterChargeProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8DPositiveCouplingAlternativeProbe.lean upstream-math/lean/SU2BFSSG4K8DPositiveCouplingAlternativeProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8E1MasslessPotentialParityProbe.lean upstream-math/lean/SU2BFSSG4K8E1MasslessPotentialParityProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8E2KineticOddParityProbe.lean upstream-math/lean/SU2BFSSG4K8E2KineticOddParityProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -287,4 +288,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K8DPositiveCouplingAlternativeProbe.olean SU2BFSSG4K8DPositiveCouplingAlternativeProbe.lean
           # G4-K8E1: true evenness of physical radial wavepacket and source massless potential.
           # Necessary parity input, not yet strict h=1 energy or spectral gap.
-          lake env lean SU2BFSSG4K8E1MasslessPotentialParityProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4K8E1MasslessPotentialParityProbe.olean SU2BFSSG4K8E1MasslessPotentialParityProbe.lean
+          # G4-K8E2: pointwise oddness of the genuine first-order kinetic term
+          # on the same physical radial trial; NOT yet h=1 strict energy.
+          lake env lean SU2BFSSG4K8E2KineticOddParityProbe.lean
