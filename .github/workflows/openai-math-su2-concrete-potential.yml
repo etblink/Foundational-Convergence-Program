@@ -98,6 +98,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4JExactGaugeDataAssemblyProbe.lean upstream-math/lean/SU2BFSSG4JExactGaugeDataAssemblyProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K1PhysicalSpaceCoreProbe.lean upstream-math/lean/SU2BFSSG4K1PhysicalSpaceCoreProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K2ANonzeroVacuumRadialProfileProbe.lean upstream-math/lean/SU2BFSSG4K2ANonzeroVacuumRadialProfileProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K2BNonzeroPhysicalL2Probe.lean upstream-math/lean/SU2BFSSG4K2BNonzeroPhysicalL2Probe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -237,4 +238,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K1PhysicalSpaceCoreProbe.olean SU2BFSSG4K1PhysicalSpaceCoreProbe.lean
           # G4-K2A: exact nonzero singlet and pointwise Gauss-equivariant radial profile.
           # Genuine square-integrable nonzero physical state remains an open obligation.
-          lake env lean SU2BFSSG4K2ANonzeroVacuumRadialProfileProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4K2ANonzeroVacuumRadialProfileProbe.olean SU2BFSSG4K2ANonzeroVacuumRadialProfileProbe.lean
+          # G4-K2B: a nonzero normalizable SU2-invariant state in the literal Gauss FullL2 space.
+          # No Hamiltonian eigenstate, SUSY vacuum, spectral bound or physics prediction is asserted.
+          lake env lean SU2BFSSG4K2BNonzeroPhysicalL2Probe.lean
