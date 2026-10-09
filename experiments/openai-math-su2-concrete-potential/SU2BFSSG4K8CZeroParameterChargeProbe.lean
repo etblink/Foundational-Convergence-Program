@@ -77,8 +77,10 @@ potential operator FIELD at zero interaction and mass. -/
 theorem pairedDeformedRealField_zero_zero
     (α : SpinIndex) (x : Boson 2) :
     pairedAlgebraData.deformedRealField 0 0 α x = 0 := by
-  simp only [pairedAlgebraData.deformedRealField_polarized,
-    zero_smul, zero_add]
+  rw [pairedAlgebraData.deformedRealField_polarized]
+  apply ContinuousLinearMap.ext
+  intro z
+  simp [IsSMulApply.smul_apply, ContinuousLinearMap.smul_apply]
 
 /-- At h=m=0, the actual deformedCoreCharge equals the
 source first-order kinetic charge AS A SMOOTH CORE SECTION.
@@ -88,7 +90,8 @@ theorem physicalZeroParametersCharge_eq_firstOrder (α : SpinIndex) :
     pairedAlgebraData.deformedCoreCharge 0 0 α radialBumpSmoothCore =
       MixedEnergy.firstOrder
         (pairedAlgebraData.kineticSkewSymbol α) radialBumpSmoothCore := by
-  ext x
+  apply DFunLike.ext
+  intro x
   change (MixedEnergy.firstOrder
       (pairedAlgebraData.kineticSkewSymbol α) radialBumpSmoothCore) x +
     (pairedAlgebraData.deformedRealField 0 0 α x)
