@@ -33,7 +33,7 @@ open FCP.BFSSSU2GaugeG4K3
 /-- Genuine BFSS N=2 bosonic configuration with one spatial/color
 coordinate set to 2. This lies outside the bump's support. -/
 noncomputable def radialFarPoint : Boson 2 :=
-  EuclideanSpace.single ((0 : SpaceIndex), (0 : ColorIndex 2)) (2 : ℝ)
+  EuclideanSpace.single ((0 : SpaceIndex), (⟨0, by decide⟩ : ColorIndex 2)) (2 : ℝ)
 
 /-- Its norm is at least one in the literal EuclideanSpace metric. -/
 theorem radialFarPoint_norm_ge_one : 1 ≤ ‖radialFarPoint‖ := by
