@@ -101,6 +101,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K2BNonzeroPhysicalL2Probe.lean upstream-math/lean/SU2BFSSG4K2BNonzeroPhysicalL2Probe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe.lean upstream-math/lean/SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K4ClosedChargeGraphProbe.lean upstream-math/lean/SU2BFSSG4K4ClosedChargeGraphProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K5ConcreteEnergyDensityProbe.lean upstream-math/lean/SU2BFSSG4K5ConcreteEnergyDensityProbe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -249,4 +250,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe.olean SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe.lean
           # G4-K4: explicit nonzero physical L2 state in the genuine closed BFSS supercharge graph.
           # No supercharge gauge covariance, zero-energy state, spectral gap or bound state claim.
-          lake env lean SU2BFSSG4K4ClosedChargeGraphProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4K4ClosedChargeGraphProbe.olean SU2BFSSG4K4ClosedChargeGraphProbe.lean
+          # G4-K5: exact gauge-invariant integrable energy densities of nonzero physical smooth state.
+          # No positive spectral bound, SUSY ground-state or physical model verification claim.
+          lake env lean SU2BFSSG4K5ConcreteEnergyDensityProbe.lean
