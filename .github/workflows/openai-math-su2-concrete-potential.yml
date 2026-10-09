@@ -105,6 +105,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K6PhysicalTrialEnergyLowerProbe.lean upstream-math/lean/SU2BFSSG4K6PhysicalTrialEnergyLowerProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe.lean upstream-math/lean/SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8ANonzeroDerivativeProbe.lean upstream-math/lean/SU2BFSSG4K8ANonzeroDerivativeProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8BNonzeroCoordinateL2Probe.lean upstream-math/lean/SU2BFSSG4K8BNonzeroCoordinateL2Probe.lean
           cd upstream-math/lean
           lake exe cache get
           # Starting at Gate 10, this file imports the upstream local BFSS Core.
@@ -270,4 +271,7 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe.olean SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe.lean
           # G4-K8A: real Frechet derivative of the true nonzero physical radial state is nonzero somewhere.
           # Does NOT claim a supercharge, coordinate L2 derivative or trial energy is strictly positive.
-          lake env lean SU2BFSSG4K8ANonzeroDerivativeProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4K8ANonzeroDerivativeProbe.olean SU2BFSSG4K8ANonzeroDerivativeProbe.lean
+          # G4-K8B: nonzero exact coordinate derivative FullL2 image and strictly positive kinetic integral.
+          # Does NOT claim a nonzero deformed supercharge, strict total energy or BFSS spectral result.
+          lake env lean SU2BFSSG4K8BNonzeroCoordinateL2Probe.lean
