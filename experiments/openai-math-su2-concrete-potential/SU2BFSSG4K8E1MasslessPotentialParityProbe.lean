@@ -58,9 +58,25 @@ theorem physicalMasslessRealField_even (h : ℝ) (α : SpinIndex)
     (x : Boson 2) :
     pairedAlgebraData.deformedRealField h 0 α (-x) =
       pairedAlgebraData.deformedRealField h 0 α x := by
-  rw [pairedAlgebraData.deformedRealField_polarized,
-    pairedAlgebraData.deformedRealField_polarized]
-  simp only [zero_smul, add_zero, map_neg, neg_apply, neg_neg]
+  have hbracket :
+      (pairedAlgebraData.bracketBilinear α) (-x) (-x) =
+        (pairedAlgebraData.bracketBilinear α) x x := by
+    simp only [map_neg, neg_apply, neg_neg]
+  have hmassZero (y : Boson 2) :
+      (0 : ℝ) • (pairedAlgebraData.massLinear α y) = 0 := by
+    apply ContinuousLinearMap.ext
+    intro z
+    simp [IsSMulApply.smul_apply]
+  calc
+    pairedAlgebraData.deformedRealField h 0 α (-x) =
+        h • (pairedAlgebraData.bracketBilinear α) (-x) (-x) +
+        (0 : ℝ) • (pairedAlgebraData.massLinear α) (-x) :=
+      pairedAlgebraData.deformedRealField_polarized h 0 α (-x)
+    _ = h • (pairedAlgebraData.bracketBilinear α) x x +
+          (0 : ℝ) • (pairedAlgebraData.massLinear α) x := by
+      simp only [hbracket, hmassZero, add_zero]
+    _ = pairedAlgebraData.deformedRealField h 0 α x :=
+      (pairedAlgebraData.deformedRealField_polarized h 0 α x).symm
 
 /-- The true source field multiplied by the same physical
 radial test section is an even Fermion 2-valued function
@@ -86,8 +102,22 @@ theorem physicalMasslessCorePotential_even (h : ℝ)
         (pairedAlgebraData.deformedRealField h 0 α)
         (pairedAlgebraData.deformedRealField_contDiff h 0 α)
         radialBumpSmoothCore x := by
-  rw [MixedEnergy.field_apply, MixedEnergy.field_apply]
-  exact physicalMasslessPotentialAction_even h α x
+  calc
+    MixedEnergy.field
+        (pairedAlgebraData.deformedRealField h 0 α)
+        (pairedAlgebraData.deformedRealField_contDiff h 0 α)
+        radialBumpSmoothCore (-x) =
+      (pairedAlgebraData.deformedRealField h 0 α (-x))
+        (radialBumpSmoothCore (-x)) :=
+      MixedEnergy.field_apply _ _ _ _
+    _ = (pairedAlgebraData.deformedRealField h 0 α x)
+          (radialBumpSmoothCore x) :=
+      physicalMasslessPotentialAction_even h α x
+    _ = MixedEnergy.field
+        (pairedAlgebraData.deformedRealField h 0 α)
+        (pairedAlgebraData.deformedRealField_contDiff h 0 α)
+        radialBumpSmoothCore x :=
+      (MixedEnergy.field_apply _ _ _ _).symm
 
 #print axioms physicalSmoothRadialState_even
 #print axioms physicalMasslessRealField_even
