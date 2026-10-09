@@ -132,6 +132,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8E1MasslessPotentialParityProbe.lean upstream-math/lean/SU2BFSSG4K8E1MasslessPotentialParityProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8E2KineticOddParityProbe.lean upstream-math/lean/SU2BFSSG4K8E2KineticOddParityProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8E3CoreNoncancellationProbe.lean upstream-math/lean/SU2BFSSG4K8E3CoreNoncancellationProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8E4L2BridgeProbe.lean upstream-math/lean/SU2BFSSG4K8E4L2BridgeProbe.lean
           cd upstream-math/lean
           lake exe cache get
 
@@ -424,3 +425,10 @@ jobs:
           source "$HOME/.elan/env"
           cd upstream-math/lean
           lake env lean SU2BFSSG4K8E3CoreNoncancellationProbe.lean
+      - name: Compile prospective source G4-K8E4 L2 bridge and print axioms
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          lake env lean SU2BFSSG4K8E4L2BridgeProbe.lean
