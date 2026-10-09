@@ -54,20 +54,28 @@ theorem physicalSmoothRadialState_even (x : Boson 2) :
 quadratic source potential field for ANY REAL h.
 This is NOT true as written for arbitrary nonzero mass,
 whose source field contains a linear term. -/
-/-- Bilinearity at the ContinuousLinearMap interface, without reducing
-the full pinned structure-constant expansion of bracketBilinear. -/
+/-- A generic continuous bilinear map is even under simultaneous
+sign reversal. IMPORTANT: Keep B ABSTRACT so kernel elaboration does
+not unfold the source's full five-fold bracket structure-constant sum. -/
+private lemma abstractBilinear_neg_neg
+    (B : Boson 2 →L[ℝ] Boson 2 →L[ℝ]
+      (Fermion 2 →L[ℝ] Fermion 2))
+    (x : Boson 2) :
+    B (-x) (-x) = B x x := by
+  have houter : B (-x) = -(B x) := map_neg B x
+  have hinner : B (-x) (-x) = -(B (-x) x) := map_neg (B (-x)) x
+  calc
+    B (-x) (-x) = -(B (-x) x) := hinner
+    _ = -((-(B x)) x) := by rw [houter]
+    _ = -(-(B x x)) := by rfl
+    _ = B x x := neg_neg _
+
+/-- Instantiate only the opaque bilinear interface of the actual
+source BFSS bracket, without reducing its implementation. -/
 private lemma bracketBilinear_neg_neg (α : SpinIndex) (x : Boson 2) :
     (pairedAlgebraData.bracketBilinear α) (-x) (-x) =
-      (pairedAlgebraData.bracketBilinear α) x x := by
-  let B := pairedAlgebraData.bracketBilinear α
-  have houter : B (-x) = -(B x) := map_neg B x
-  have hinner : (B (-x)) (-x) = -((B (-x)) x) := map_neg (B (-x)) x
-  calc
-    (pairedAlgebraData.bracketBilinear α) (-x) (-x) =
-        -((B (-x)) x) := hinner
-    _ = -((-(B x)) x) := by rw [houter]
-    _ = -(-((B x) x)) := by rfl
-    _ = (pairedAlgebraData.bracketBilinear α) x x := neg_neg _
+      (pairedAlgebraData.bracketBilinear α) x x :=
+  abstractBilinear_neg_neg (pairedAlgebraData.bracketBilinear α) x
 
 theorem physicalMasslessRealField_even (h : ℝ) (α : SpinIndex)
     (x : Boson 2) :
@@ -105,9 +113,23 @@ theorem physicalMasslessPotentialAction_even (h : ℝ)
         (radialBumpSmoothCore x) := by
   rw [physicalMasslessRealField_even, physicalSmoothRadialState_even]
 
+/-- The pinned MixedEnergy.field is definitionally pointwise
+multiplication. Prove once for ABSTRACT V and hV; specializing directly
+inside field_apply elaboration can recurse through the entire BFSS
+potential and its source ContDiff certificate. -/
+private lemma abstractCoreField_even_of_action_even
+    (V : Boson 2 → Fermion 2 →L[ℝ] Fermion 2)
+    (hV : ContDiff ℝ ((⊤ : ℕ∞) : WithTop ℕ∞) V)
+    (f : SmoothCore 2) (x : Boson 2)
+    (hv : V (-x) (f (-x)) = V x (f x)) :
+    MixedEnergy.field V hV f (-x) = MixedEnergy.field V hV f x := by
+  change V (-x) (f (-x)) = V x (f x)
+  exact hv
+
 /-- The actual source MixedEnergy.field SmoothCore operator
 obeys pointwise parity on our original Gauss test state.
-This uses the pinned `field_apply`, not an auxiliary operator. -/
+This specializes the abstract source `field_apply` identity
+without unfolding or replacing the original operator. -/
 theorem physicalMasslessCorePotential_even (h : ℝ)
     (α : SpinIndex) (x : Boson 2) :
     MixedEnergy.field
@@ -118,28 +140,11 @@ theorem physicalMasslessCorePotential_even (h : ℝ)
         (pairedAlgebraData.deformedRealField h 0 α)
         (pairedAlgebraData.deformedRealField_contDiff h 0 α)
         radialBumpSmoothCore x := by
-  calc
-    MixedEnergy.field
-        (pairedAlgebraData.deformedRealField h 0 α)
-        (pairedAlgebraData.deformedRealField_contDiff h 0 α)
-        radialBumpSmoothCore (-x) =
-      (pairedAlgebraData.deformedRealField h 0 α (-x))
-        (radialBumpSmoothCore (-x)) :=
-      MixedEnergy.field_apply
-        (pairedAlgebraData.deformedRealField h 0 α)
-        (pairedAlgebraData.deformedRealField_contDiff h 0 α)
-        radialBumpSmoothCore (-x)
-    _ = (pairedAlgebraData.deformedRealField h 0 α x)
-          (radialBumpSmoothCore x) :=
-      physicalMasslessPotentialAction_even h α x
-    _ = MixedEnergy.field
-        (pairedAlgebraData.deformedRealField h 0 α)
-        (pairedAlgebraData.deformedRealField_contDiff h 0 α)
-        radialBumpSmoothCore x :=
-      (MixedEnergy.field_apply
-        (pairedAlgebraData.deformedRealField h 0 α)
-        (pairedAlgebraData.deformedRealField_contDiff h 0 α)
-        radialBumpSmoothCore x).symm
+  exact abstractCoreField_even_of_action_even
+    (pairedAlgebraData.deformedRealField h 0 α)
+    (pairedAlgebraData.deformedRealField_contDiff h 0 α)
+    radialBumpSmoothCore x
+    (physicalMasslessPotentialAction_even h α x)
 
 #print axioms physicalSmoothRadialState_even
 #print axioms physicalMasslessRealField_even
