@@ -46,16 +46,17 @@ theorem fockProductCoordinates_expansion (x y : Fock23) :
           fockProductBasisCoordinate A B := by
   have hx : x =
       ∑ A : Occupation, ((fockCoordinates 23 x) A) • fockBasis 23 A := by
-    simpa only [fockCoordinates_apply] using (fockBasis 23).sum_repr x
+    simpa only [fockCoordinates_apply] using ((fockBasis 23).sum_repr x).symm
   have hy : y =
       ∑ B : Occupation, ((fockCoordinates 23 y) B) • fockBasis 23 B := by
-    simpa only [fockCoordinates_apply] using (fockBasis 23).sum_repr y
+    simpa only [fockCoordinates_apply] using ((fockBasis 23).sum_repr y).symm
   calc
     fockCoordinates 23 (x * y) =
         fockCoordinates 23
           ((∑ A : Occupation, ((fockCoordinates 23 x) A) • fockBasis 23 A) *
            (∑ B : Occupation, ((fockCoordinates 23 y) B) • fockBasis 23 B)) := by
-            rw [hx, hy]
+            exact congrArg (fockCoordinates 23)
+              (congrArg₂ (fun a b : Fock23 => a * b) hx hy)
     _ = ∑ A : Occupation, ∑ B : Occupation,
           ((fockCoordinates 23 x) A * (fockCoordinates 23 y) B) •
             fockProductBasisCoordinate A B := by
@@ -122,8 +123,7 @@ theorem exteriorGauge_allCoordinates_continuous (x : Fock23) :
         (fun _ : GaugeGroup 2 =>
           fockCoordinates 23 (algebraMap ℂ Fock23 r)) := by
             funext g
-            exact congrArg (fockCoordinates 23)
-              (map_algebraMap (exteriorGauge g) r)
+            simp only [AlgHom.commutes]
     rw [he]
     exact continuous_const
   | add x y hx hy =>
