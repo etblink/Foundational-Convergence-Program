@@ -56,9 +56,21 @@ theorem wedgePairCoordinate_expansion (u v : Orbital 23) :
           rw [hu, hv]
     _ = ∑ i : Fin 24, ∑ j : Fin 24,
           (u i * v j) • wedgePairCoordinate i j := by
-          simp only [Finset.sum_mul, Finset.mul_sum, smul_mul_assoc,
-            mul_smul_comm, smul_smul, map_sum, map_smul,
-            wedgePairCoordinate]
+          calc
+            _ = ∑ j : Fin 24, ∑ i : Fin 24,
+                  (v j * u i) • wedgePairCoordinate i j := by
+                    simp only [Finset.sum_mul, Finset.mul_sum,
+                      smul_mul_assoc, mul_smul_comm, map_sum,
+                      map_smul, Finset.smul_sum, smul_smul,
+                      wedgePairCoordinate]
+            _ = ∑ i : Fin 24, ∑ j : Fin 24,
+                  (u i * v j) • wedgePairCoordinate i j := by
+                    rw [Finset.sum_comm]
+                    apply Finset.sum_congr rfl
+                    intro i _
+                    apply Finset.sum_congr rfl
+                    intro j _
+                    rw [mul_comm (v j) (u i)]
 
 /-- Each actual orbital coordinate is continuously dependent on SU(2)
 by the already compiled G4-I-B1 one-particle theorem. -/
