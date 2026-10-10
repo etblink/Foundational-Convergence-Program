@@ -85,7 +85,8 @@ theorem pairedFermionPlaneSpinFlow_add
           pairedFermionPlaneSpinGenerator i j =
         (((s : ℝ) : ℂ) • pairedFermionPlaneSpinGenerator i j) +
           (((t : ℝ) : ℂ) • pairedFermionPlaneSpinGenerator i j) := by
-    ext v
+    apply ContinuousLinearMap.ext
+    intro v
     simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply]
     exact add_smul (s : ℂ) (t : ℂ)
       (pairedFermionPlaneSpinGenerator i j v)
