@@ -85,7 +85,7 @@ theorem symmetricZeroDiagonal_halfDoubleSum_eq_upper
     -- The subtype's universe, filter sum, and product sum are converted
     -- only AFTER this source-independent typed equality has been formed.
     simpa only [Finset.subtype_univ, Finset.sum_filter,
-      Finset.sum_univ, Fintype.sum_prod_type] using
+      Fintype.sum_prod_type] using
       (Finset.sum_subtype_eq_sum_filter
         (s := (Finset.univ : Finset (SpaceIndex × SpaceIndex)))
         (p := fun ij : SpaceIndex × SpaceIndex => ij.1 < ij.2)
