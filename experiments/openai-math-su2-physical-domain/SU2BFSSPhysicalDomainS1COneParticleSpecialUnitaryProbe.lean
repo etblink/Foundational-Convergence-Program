@@ -37,7 +37,7 @@ theorem oneParticleMatrix_det_one (g : GaugeGroup 2) :
   calc
     (oneParticleMatrix g).det = (colorBlocks g).det := by
       change Matrix.det (Matrix.reindexAlgEquiv ℝ ℝ colorModeEquiv (colorBlocks g)) = _
-      exact Matrix.det_reindexAlgEquiv ℝ (colorBlocks g) colorModeEquiv
+      exact Matrix.det_reindexAlgEquiv ℝ colorModeEquiv (colorBlocks g)
     _ = (adjointColorMatrix g).det ^ 8 := by
       rw [colorBlocks, Matrix.det_kronecker]
       simp
