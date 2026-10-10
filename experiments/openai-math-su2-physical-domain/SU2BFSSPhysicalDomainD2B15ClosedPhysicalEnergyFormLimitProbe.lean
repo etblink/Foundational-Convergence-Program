@@ -30,6 +30,7 @@ open FCP.BFSSSU2PhysicalDomainD2B11
 open FCP.BFSSSU2PhysicalDomainD2B12
 open FCP.BFSSSU2PhysicalDomainD2B14
 open Finset MeasureTheory Set Filter
+open scoped Topology
 
 variable {N : ℕ} (M : AlgebraData N) (G : M.GaugeData)
 
@@ -44,8 +45,11 @@ theorem sourceClosedPhysicalCharge_component_sq_le_form
   have hs :
       ‖(sourceClosedPhysicalChargeColumn M G u) α‖^2 ≤
       ∑ β : SpinIndex,
-        ‖(sourceClosedPhysicalChargeColumn M G u) β‖^2 :=
-    Finset.single_le_sum (fun β hβ => sq_nonneg _) (Finset.mem_univ α)
+        ‖(sourceClosedPhysicalChargeColumn M G u) β‖^2 := by
+    apply Finset.single_le_sum
+    · intro β hβ
+      exact sq_nonneg _
+    · exact Finset.mem_univ α
   calc
     _ ≤ ∑ β : SpinIndex,
           ‖(sourceClosedPhysicalChargeColumn M G u) β‖^2 := hs
