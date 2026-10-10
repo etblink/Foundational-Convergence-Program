@@ -74,9 +74,6 @@ theorem sourceOriginalCoreChargePMap_domain_eq_embedded :
     LinearMap.range (coreToL2.comp G.invariantCore.subtype)
   rw [← LinearMap.range_comp]
   congr 1
-  apply LinearMap.ext
-  intro f
-  rfl
 
 /-- Source core operator is closable: its graph closure is precisely
 the previously established closed source charge column graph. -/
