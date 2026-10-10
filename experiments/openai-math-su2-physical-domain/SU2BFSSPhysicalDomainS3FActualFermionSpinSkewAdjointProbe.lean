@@ -38,14 +38,18 @@ theorem pairedFermionSpinQuadraticColor_star_eq_neg
     have h := congrArg
       (fun M : Matrix SpinIndex SpinIndex ℝ => M α β) hJ
     simpa only [Matrix.transpose_apply, Matrix.neg_apply] using h
+  have hcoeff (α β : SpinIndex) :
+      star (((J α β : ℝ) : ℂ)) = ((J α β : ℝ) : ℂ) := by
+    simp only [RCLike.star_def, RCLike.conj_ofReal]
+  have hneg (z : ℂ) (T : Fermion 2 →L[ℂ] Fermion 2) :
+      (-z) • T = -(z • T) := neg_smul z T
   unfold pairedFermionSpinQuadraticColor
   calc
     star (∑ α : SpinIndex, ∑ β : SpinIndex,
       ((J α β : ℝ) : ℂ) • (pairedTheta α A * pairedTheta β A)) =
         ∑ α : SpinIndex, ∑ β : SpinIndex,
           ((J α β : ℝ) : ℂ) • (pairedTheta β A * pairedTheta α A) := by
-      simp only [star_sum, star_smul, pairedTheta_pair_star,
-        RCLike.star_def, RCLike.conj_ofReal]
+      simp only [star_sum, star_smul, pairedTheta_pair_star, hcoeff]
     _ = ∑ α : SpinIndex, ∑ β : SpinIndex,
       ((J β α : ℝ) : ℂ) • (pairedTheta α A * pairedTheta β A) := by
       rw [Finset.sum_comm]
@@ -59,7 +63,7 @@ theorem pairedFermionSpinQuadraticColor_star_eq_neg
           apply Finset.sum_congr rfl
           intro β _
           rw [hsk α β]
-          simp only [Complex.ofReal_neg, neg_smul]
+          simp only [Complex.ofReal_neg, hneg]
         _ = _ := by simp only [Finset.sum_neg_distrib]
 
 /-- The exact S3D three-color spin-plane generator is skew-adjoint.
@@ -77,8 +81,7 @@ theorem pairedFermionPlaneSpinGenerator_star_eq_neg
         pairedFermionSpinQuadraticColor (pairedPlaneSpinGenerator i j) A) =
       -(∑ A : ColorIndex 2,
         pairedFermionSpinQuadraticColor (pairedPlaneSpinGenerator i j) A) := by
-    rw [star_sum]
-    simp only [pairedFermionSpinQuadraticColor_star_eq_neg
+    simp only [star_sum, pairedFermionSpinQuadraticColor_star_eq_neg
       (pairedPlaneSpinGenerator i j) hs, Finset.sum_neg_distrib]
   unfold pairedFermionPlaneSpinGenerator
   rw [star_smul, hhalf, hsum]
