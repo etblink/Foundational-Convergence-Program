@@ -33,12 +33,37 @@ These are actual, nontrivial `Cl(9)` infinitesimal spin-rotation identities. No 
 
 Operationally, the accepted Gate-93 D2B11–D2B28 cache was hit and verified; the pre-existing Hamiltonian proof and S2A–S2D source identities remain intact.
 
-## S3B candidate and scope
+## S3B accepted — Gate #127
 
-The next concrete candidate file is
-`experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3BFullPlaneSpinVectorCovarianceProbe.lean`.
+**Status:** `S3B_ALL_NINE_ACTUAL_GAMMA_SPIN_COVARIANCE__KERNEL_ACCEPTED`.
 
-It proposes, for `k ≠ i,j`, `[J_ij,gamma_k]=0`; together with S3A this yields the **complete** nine-vector covariance formula for gamma fields. The proposed CI workflow for this candidate is [Gate #127](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38082477384). **Do not qualify S3B until its own exact passing gate and axiom audit.**
+[BFSS SU2 Physical Domain Bridge #127](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38082477384) completed **SUCCESS** at exact proof commit
+`df8a4166c582e3e96d43bb9f3a35ca9a077f0281`.
+Source: `experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3BFullPlaneSpinVectorCovarianceProbe.lean`;
+qualified blob `6e382a0ae639416f74196ffc15bbb95bd8dfe94d`.
+
+The pinned compiler and CI exact-name/axiom check accepted two additional theorems:
+- `pairedPlaneGenerator_comm_gamma_remaining`: for `k≠i,j`, `[J_ij,gamma_k]=0`.
+- `pairedPlaneGenerator_comm_gamma_all`: for every `k : Fin 9` and `i≠j`,
+  `[J_ij,gamma_k] = if k=j then gamma_i else if k=i then -gamma_j else 0`.
+
+Taken together with Gate #125, the actual 16×16 paired BFSS gamma family
+satisfies `[J_ij,gamma_k]=delta(j,k) gamma_i - delta(i,k) gamma_j`,
+with `J_ijᵀ=-J_ij`. This is the **complete infinitesimal
+spinor–vector gamma covariance** for all nine spatial components,
+not a finite two-axis illustration.
+
+Both S3B declarations depend only on the standard accepted
+`propext`, `Classical.choice` and `Quot.sound` axioms.
+The Gate-93 D2B11–D2B28 cache and separate six-module
+S1ABC/S2ABC cache **both hit and were verified**. Qualified
+S2D and S3A imported and compiled successfully. D2B29
+was not run.
+
+The source **still does not** define a bona fide `Spin(9)` unitary
+representation on the 48 Majoranas or its reducing physical
+Hilbert-space sectors. That exact missing step is the next
+discriminating test, not an implication of S3B.
 
 ## Frontier that actually matters for the manuscript
 
