@@ -163,7 +163,13 @@ theorem sourcePotentialMultipliers_equal
             ((((1 / 2 : ℝ) * M.structureConstant A B C *
               M.gammaTwo i j α β : ℝ) : ℂ) *
               (x (i, B) : ℂ) * (x (j, C) : ℂ)) • M.theta β A := by
-              simp only [Finset.sum_smul]
+              -- Fold the RHS finite sums of scalar multiples through
+              -- the fixed, original theta operator at each spin/color index.
+              apply Finset.sum_congr rfl
+              intro β _
+              apply Finset.sum_congr rfl
+              intro A _
+              simp only [← Finset.sum_smul]
     _ = M.bracketMultiplier α x := hrev.symm
 
 /-- The pinned G4-K9B conditional all-core result can now be specialized
