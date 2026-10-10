@@ -95,6 +95,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate47AcceptedCacheSmoke.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -133,6 +134,2231 @@ jobs:
             fi
           done
           echo GATE28_TWELVE_ACCEPTED_SOURCES_IMMUTABLE
+
+      - name: Freeze exact Gate 47 ten-module accepted extension
+        shell: bash
+        run: |
+          set -euo pipefail
+          qualified=d50fe847096df7cf981173cd69787392d8d3d268
+          git fetch --quiet --no-tags --depth=1 origin "$qualified"
+          mapfile -t accepted < <(git ls-tree -r --name-only "$qualified" -- experiments/openai-math-su2-physical-domain/ | grep -E 'SU2BFSSPhysicalDomainD2B(8[ABC]|9[ABC]|10(A|B1|B2|C))' | grep -E '\.lean
+        id: domain_proof_cache
+        if: ${{ inputs.clean_build != true }}
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-domain-gate28-v1-b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean', 'experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Reject incomplete or stale Gate 28 physical-domain cache
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          baseline=b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab
+          mapfile -t accepted < <(git ls-tree -r --name-only "$baseline" -- experiments/openai-math-su2-physical-domain/ | grep -E '\.lean$')
+          test "${#accepted[@]}" -eq 12
+          for p in "${accepted[@]}"; do
+            module="$(basename "$p" .lean)"
+            test -s "upstream-math/lean/.lake/build/lib/lean/${module}.olean" || {
+              echo "INCOMPLETE_GATE28_ACCEPTED_OLEAN $module" >&2
+              exit 1
+            }
+          done
+          test -s upstream-math/lean/.lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean
+          echo GATE28_TWELVE_OLEANS_AND_PINNED_PREREQUISITES_PRESENT
+
+      - name: Restore qualified immutable Gate 47 extension cache
+        id: gate47_cache
+        if: ${{ inputs.clean_build != true }}
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-domain-gate47-d2b10c-v1-d50fe847096df7cf981173cd69787392d8d3d268-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B8*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B9*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B10*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate47AcceptedCacheSmoke.lean', 'experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Verify complete exact Gate 47 cached objects
+        if: ${{ steps.gate47_cache.outputs.cache-hit == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          qualified=d50fe847096df7cf981173cd69787392d8d3d268
+          mapfile -t accepted < <(git ls-tree -r --name-only "$qualified" -- experiments/openai-math-su2-physical-domain/ | grep -E 'SU2BFSSPhysicalDomainD2B(8[ABC]|9[ABC]|10(A|B1|B2|C))' | grep -E '\.lean
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.olean SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.lean 2>&1 | tee /tmp/bfss-su2-domain-d1-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-domain-d1-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceGaugeRestrictedGraphMap_equal',
+              'sourceGaugeRestrictedClosedGraph_equal',
+              'sourceGaugeRestrictedClosedDomain_iff',
+              'sourceGaugeRestrictedCoreForm_equal',
+              'sourceGaugeRestrictedGraph_le_full',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {part.strip() for part in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D1_EXACT_FIVE_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D3A kinetic gauge contraction and emit importable module
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.olean SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.lean 2>&1 | tee /tmp/bfss-su2-d3a-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d3a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          required = [
+              'sourceKineticSkewContraction_basisInvariant',
+              'sourceContractedKinetic_gaugeCovariant',
+          ]
+          assert len(found) == len(required), found
+          for (name, axioms), suffix in zip(found, required):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D3A_EXACT_TWO_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D3B original supercharge physical-space preservation
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.olean SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.lean 2>&1 | tee /tmp/bfss-su2-d3b-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d3b-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          required = [
+              'sourceDeformedCoreCharge_contracted',
+              'sourceDeformedCoreCharge_pointwiseGaugeCovariant',
+              'sourceOriginalCoreCharge_pointwiseGaugeCovariant',
+              'sourceOriginalCoreCharge_mem_physicalSpace',
+              'sourceOriginalCoreCharge_mem_invariantCore',
+          ]
+          assert len(found) == len(required), found
+          for (name, axioms), suffix in zip(found, required):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D3B_EXACT_FIVE_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2A physical closed graph bridge
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.olean SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.lean 2>&1 | tee /tmp/bfss-su2-d2a-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          required = [
+              'sourceCoreNormClosure_le_physicalSpace',
+              'sourceClosedGaugeGraph_input_physical',
+              'sourceClosedGaugeGraph_output_physical',
+              'sourceOriginalRestrictedClosedGraph_all_physical',
+          ]
+          assert len(found) == len(required), found
+          for (name, axioms), suffix in zip(found, required):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2A_EXACT_FOUR_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2B1 source Haar fermion average equivariance
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.olean
+          # Reuse the existing upstream SU(2) compactness and normalized
+          # Haar probability measure. No surrogate group/measure allowed.
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.olean SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b1-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b1-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarIntegrand_continuous',
+              'sourceHaarIntegrand_integrable',
+              'sourceHaarAverageRaw_equivariant',
+              'sourceHaarAverageRaw_fixed',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B1_FOUR_HAAR_AVERAGE_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2B2 Haar-average joint continuity and compact support
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.olean SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b2-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b2-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarIntegrand_jointContinuous',
+              'sourceHaarAverageRaw_continuous',
+              'sourceHaarAverageRaw_hasCompactSupport',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B2_THREE_HAAR_CONTINUITY_SUPPORT_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2B3 true-source smooth gauge slices and explicit all-jet reduction
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.olean
+          # The accepted warm G4-K10A cache does NOT include this
+          # unrelated original-source RVM module. Compile its exact
+          # pinned source before importing it into D2B3.
+          test -s OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.lean
+          mkdir -p .lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity
+          lake env lean -o .lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.lean 2>&1 | tee /tmp/bfss-su2-pinned-rvm-analytic-dependency.log
+          test -s .lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean
+          echo PINNED_RVM_SMOOTH_INTEGRAL_COMPILED
+          # No new assumed property of BFSS GaugeData is admitted.
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe.olean SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b3-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b3-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarSpatialSlice_contDiff',
+              'sourceHaarAverageRaw_contDiff_of_jointJets',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B3_SMOOTH_SLICES_AND_CONDITIONAL_ANALYTIC_REDUCTION_PASS')
+          PY
+
+      - name: Recompile accepted D2B3J original gauge operator continuity and unconditional smooth Haar average
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.olean SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b3j-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b3j-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceBosonOperator_continuous',
+              'sourceFermionOperator_continuous',
+              'sourceHaarIntegrand_smoothFamily',
+              'sourceHaarAllJets_jointContinuous',
+              'sourceHaarAverageRaw_contDiff',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B3J_FIVE_TRUE_SOURCE_OPERATOR_JETS_AND_UNCONDITIONAL_HAAR_SMOOTHNESS_PASS')
+          PY
+
+      - name: Recompile accepted D2B4 original bundled SmoothCore average and physical invariant-core membership
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.olean SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b4-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b4-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarAverageCore_apply',
+              'sourceHaarAverageCore_equivariant',
+              'sourceHaarAverageCore_mem_physicalSpace',
+              'sourceHaarAverageCore_mem_invariantCore',
+              'sourceHaarAverageCore_fixed',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B4_FIVE_TRUE_SOURCE_SMOOTHCORE_PHYSICAL_INVARIANTCORE_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2B5 original SmoothCore Haar complex-linear idempotent operator and source L2 boson isometry
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.olean SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b5-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b5-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarAverageCore_add',
+              'sourceHaarAverageCore_smul',
+              'sourceHaarAverageCore_linear_apply',
+              'sourceHaarAverageCore_idempotent',
+              'sourceBosonPullback_norm',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B5_FIVE_SOURCE_LINEAR_HAAR_PROJECTION_AND_L2_BOSON_ISOMETRY_PASS')
+          PY
+
+      - name: Recompile accepted D2B6 source full-L2 gauge action as norm-one-bounded complex CLM
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.olean SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b6-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b6-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceFermionFiberAction_norm_le',
+              'sourceFermionFiberAction_continuous',
+              'sourceFullGaugePair_norm_le',
+              'sourceFullGaugePairCLM_apply',
+              'sourceFullGaugePairCLM_norm_le_one',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B6_FIVE_ACTUAL_FULL_L2_GAUGE_BOUND_AND_COMPLEX_CLM_REPORTS_PASS')
+          PY
+
+      - name: Compile D2B7 original full-L2 gauge isometry physical fixedness and smooth-core compatibility
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.olean SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b7-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b7-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceFermionFiberAction_left_inv',
+              'sourceFermionFiberAction_norm_eq',
+              'sourceFullGaugePair_norm_eq',
+              'sourceFullGaugePairCLM_norm_map',
+              'sourceFullGaugePairCLM_fixed_physical',
+              'sourceFullGaugePairCLM_core_ae',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B7_SIX_GENUINE_FULL_L2_ISOMETRY_PHYSICAL_FIXEDNESS_AND_CORE_AE_REPORTS_PASS')
+          PY
+
+      - name: Kernel-import and exact 51-theorem axiom recheck (cache hit or clean compilation)
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          # Defend against both missing proof objects and a silently changed
+          # smoke test. The 51 expected theorem names are reconstructed
+          # from the actual 12 qualified source files at Gate #28.
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          baseline = "b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab"
+          files = subprocess.check_output(
+              ["git", "-C", "../..", "ls-tree", "-r", "--name-only", baseline,
+               "experiments/openai-math-su2-physical-domain/"],
+              text=True).splitlines()
+          accepted = [f for f in files if f.endswith(".lean")]
+          assert len(accepted) == 12, accepted
+          expected = []
+          for p in accepted:
+              module = Path(p).stem
+              obj = Path(".lake/build/lib/lean") / (module + ".olean")
+              assert obj.is_file() and obj.stat().st_size > 0, str(obj)
+              source = (Path("../..") / p).read_text()
+              ns = re.findall(r"^namespace (FCP\.[A-Za-z0-9_.]+)$", source, re.M)
+              reports = re.findall(r"^#print axioms ([A-Za-z0-9_']+)$", source, re.M)
+              assert len(ns) == 1 and reports, module
+              expected.extend(ns[0] + "." + n for n in reports)
+          assert len(expected) == len(set(expected)) == 51
+          smoke = Path("SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean").read_text()
+          actual = re.findall(r"^#print axioms ([A-Za-z0-9_.']+)$", smoke, re.M)
+          assert actual == expected, (actual, expected)
+          print("GATE28_TWELVE_OBJECTS_51_SMOKE_NAMES_GROUNDED_IN_FROZEN_SOURCE")
+          PY
+          lake env lean SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean 2>&1 | tee /tmp/bfss-su2-gate28-cache-axioms.log
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          src = Path("SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean").read_text()
+          expected = re.findall(r"^#print axioms ([A-Za-z0-9_.']+)$", src, re.M)
+          log = Path("/tmp/bfss-su2-gate28-cache-axioms.log").read_text()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          assert len(expected) == len(reports) == 51, (len(expected), len(reports))
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          for (name, axioms), want in zip(reports, expected):
+              assert name == want, (name, want)
+              assert {a.strip() for a in axioms.split(",")} <= allowed, (name, axioms)
+          assert "sorryAx" not in log and "error:" not in log and "unknownIdentifier" not in log
+          print("GATE28_ALL_51_TRUE_SOURCE_ACCEPTED_AXIOM_REPORTS_PASS")
+          PY
+
+      - name: Compile D2B8A true-source full-L2 physical fixed-point characterization
+        if: ${{ steps.gate47_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.olean SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b8a-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b8a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          assert len(found) == 1, found
+          name, axioms = found[0]
+          assert name == 'FCP.BFSSSU2PhysicalDomainD2B8A.sourceFullGaugePairCLM_fixed_iff_physical', name
+          assert {a.strip() for a in axioms.split(',')} <= {
+              'propext', 'Classical.choice', 'Quot.sound'
+          }, axioms
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B8A_EXACT_SOURCE_FULL_L2_FIXED_POINT_CHARACTERIZATION_PASS')
+          PY
+
+      - name: Compile D2B8B exact fermion full-L2 strong continuity reduction
+        if: ${{ steps.gate47_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe.olean SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b8b-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b8b-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFermionComplexOperator_continuous',
+              'sourceFermionFiberCLM_parameter_continuous',
+              'sourceFermionFiberAction_joint_continuous',
+              'sourceFullGaugePair_strongContinuous_of_boson'
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B8B.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B8B_TRUE_SOURCE_FERMION_CONTINUITY_AND_BOSON_REDUCTION_PASS')
+          PY
+
+      - name: Compile D2B8C genuine boson L2 and full gauge strong continuity
+        if: ${{ steps.gate47_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe.olean SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b8c-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b8c-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceBosonContinuousMap_parameter_continuous',
+              'sourceBosonPullback_strongContinuous',
+              'sourceFullGaugePair_strongContinuous',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B8C.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B8C_UNCONDITIONAL_GENUINE_FULL_L2_STRONG_CONTINUITY_PASS')
+          PY
+
+      - name: Compile D2B9A true-source full-L2 Haar existence contraction and physical fixedness
+        if: ${{ steps.gate47_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe.olean SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b9a-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b9a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFullHaarIntegrand_integrable',
+              'sourceFullHaarAverage_norm_le',
+              'sourceFullHaarAverage_fixed_physical',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B9A.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B9A_TRUE_SOURCE_FULL_L2_HAAR_INTEGRAL_CONTRACTION_PHYSICAL_FIXED_PASS')
+          PY
+
+      - name: Compile D2B9B genuine bounded complex-linear full-L2 Haar operator
+        if: ${{ steps.gate47_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe.olean SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b9b-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b9b-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFullHaarAverage_add',
+              'sourceFullHaarAverage_smul',
+              'sourceFullHaarAverageCLM_apply',
+              'sourceFullHaarAverageCLM_norm_le_one',
+              'sourceFullHaarAverageCLM_fixed_physical',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B9B.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B9B_TRUE_SOURCE_COMPLEX_LINEAR_CONTRACTIVE_HAAR_CLM_PASS')
+          PY
+
+      - name: Compile D2B9C genuine source full-L2 gauge action and physical Haar projection
+        if: ${{ steps.gate47_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe.olean SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b9c-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b9c-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFullGaugePairCLM_ae',
+              'sourceFullGaugePairCLM_mul',
+              'sourceFullHaarAverageCLM_mem_physical',
+              'sourceFullHaarAverageCLM_idempotent',
+              'sourceFullHaarAverageCLM_range_eq_physical',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B9C.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B9C_TRUE_SOURCE_PHYSICAL_HAAR_PROJECTION_RANGE_IDEMPOTENCE_PASS')
+          PY
+
+      - name: Compile D2B10A original projected smooth-core density and exact conditional bridge
+        if: ${{ steps.gate47_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe.olean SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b10a-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b10a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceProjectedSmoothCore_closure_eq_physical',
+              'sourceCoreNormClosure_eq_physical_of_Haar_core_compat',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B10A.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B10A_SOURCE_PROJECTED_CORE_DENSITY_AND_EXACT_CONDITIONAL_BRIDGE_PASS')
+          PY
+
+      - name: Compile D2B10B1 exact Haar-spatial joint integrability for Fubini bridge
+        if: ${{ steps.gate47_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe.olean SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b10b1-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b10b1-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceHaarJoint_hasCompactSupport',
+              'sourceHaarJoint_integrable',
+              'sourceHaarJoint_integrable_swapped',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B10B1.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B10B1_TRUE_SOURCE_HAAR_SPATIAL_PRODUCT_INTEGRABILITY_PASS')
+          PY
+
+      - name: Compile D2B10B2 genuine original smooth test pairing Haar-spatial Fubini
+        if: ${{ steps.gate47_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe.olean SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b10b2-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b10b2-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceHaarFubini_vector',
+              'sourceHaarInnerJoint_integrable',
+              'sourceHaarFubini_inner',
+              'sourceHaarFubini_inner_eq_raw',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B10B2.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B10B2_SOURCE_SMOOTH_PAIRING_HAAR_SPATIAL_FUBINI_PASS')
+          PY
+
+      - name: Compile D2B10C original Bochner smooth Haar compatibility and full physical-core density
+        if: ${{ steps.gate47_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe.olean SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b10c-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b10c-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFullHaarAverageCLM_testInner_eq',
+              'sourceFullHaarAverageCLM_coreToL2_compat',
+              'sourceCoreNormClosure_eq_physical_unconditional',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B10C.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B10C_UNCONDITIONAL_TRUE_SOURCE_PHYSICAL_CORE_DENSITY_PASS')
+          PY
+
+      - name: Gate 47 kernel-import thirty-three exact accepted theorem axiom recheck
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          qualified = "d50fe847096df7cf981173cd69787392d8d3d268"
+          names = subprocess.check_output(["git", "-C", "../..", "ls-tree", "-r",
+              "--name-only", qualified, "experiments/openai-math-su2-physical-domain/"],
+              text=True).splitlines()
+          accepted = [p for p in names if p.endswith(".lean") and re.search(
+              r"SU2BFSSPhysicalDomainD2B(?:8[ABC]|9[ABC]|10(?:A|B1|B2|C))", p)]
+          assert len(accepted) == 10, accepted
+          expected = []
+          for path in accepted:
+              module = Path(path).stem
+              obj = Path(".lake/build/lib/lean") / (module + ".olean")
+              assert obj.is_file() and obj.stat().st_size > 0, str(obj)
+              src = subprocess.check_output(["git", "-C", "../..", "show",
+                  qualified + ":" + path], text=True)
+              ns = re.findall(r"^namespace (FCP\.[A-Za-z0-9_.]+)$", src, re.M)
+              theorems = re.findall(r"^#print axioms ([A-Za-z0-9_']+)$", src, re.M)
+              assert len(ns) == 1 and theorems, module
+              expected.extend(ns[0] + "." + t for t in theorems)
+          assert len(expected) == len(set(expected)) == 33
+          smoke = Path("SU2BFSSPhysicalDomainGate47AcceptedCacheSmoke.lean").read_text()
+          actual = re.findall(r"^#print axioms ([A-Za-z0-9_.']+)$", smoke, re.M)
+          assert len(actual) == len(set(actual)) == 33 and set(actual) == set(expected)
+          imports = re.findall(r"^import ([A-Za-z0-9_.]+)$", smoke, re.M)
+          assert imports == ["SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe"], imports
+          print("GATE47_TEN_FROZEN_MODULES_THIRTY_THREE_SMOKE_NAMES_VERIFIED")
+          PY
+          lake env lean SU2BFSSPhysicalDomainGate47AcceptedCacheSmoke.lean 2>&1 | tee /tmp/bfss-su2-gate47-smoke-axioms.log
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          expected = re.findall(r"^#print axioms ([A-Za-z0-9_.']+)$",
+              Path("SU2BFSSPhysicalDomainGate47AcceptedCacheSmoke.lean").read_text(), re.M)
+          log = Path("/tmp/bfss-su2-gate47-smoke-axioms.log").read_text()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          assert len(found) == len(expected) == 33, (len(found), len(expected))
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          for (name, axioms), want in zip(found, expected):
+              assert name == want, (name, want)
+              assert {a.strip() for a in axioms.split(",")} <= allowed, (name, axioms)
+          assert "sorryAx" not in log and "error:" not in log and "unknownIdentifier" not in log
+          print("GATE47_ALL_33_TRUE_SOURCE_ACCEPTED_AXIOM_REPORTS_PASS")
+          PY
+
+      - name: Save qualified immutable Gate 47 extension cache
+        if: ${{ steps.gate47_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-domain-gate47-d2b10c-v1-d50fe847096df7cf981173cd69787392d8d3d268-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B8*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B9*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B10*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate47AcceptedCacheSmoke.lean', 'experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Save qualified immutable Gate 28 physical-domain compiled chain
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-domain-gate28-v1-b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean', 'experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+)
+          test "${#accepted[@]}" -eq 10
+          for p in "${accepted[@]}"; do
+            test -f "$p"
+            expected="$(git rev-parse "$qualified:$p")"
+            actual="$(git hash-object "$p")"
+            if [ "$expected" != "$actual" ]; then
+              echo "GATE47_QUALIFIED_SOURCE_DRIFT $p expected=$expected actual=$actual" >&2
+              exit 1
+            fi
+          done
+          echo GATE47_TEN_ACCEPTED_SOURCES_IMMUTABLE
+
+      - name: Restore exact accepted Gate 28 physical-domain compiled modules
+        id: domain_proof_cache
+        if: ${{ inputs.clean_build != true }}
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-domain-gate28-v1-b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean', 'experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Reject incomplete or stale Gate 28 physical-domain cache
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          baseline=b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab
+          mapfile -t accepted < <(git ls-tree -r --name-only "$baseline" -- experiments/openai-math-su2-physical-domain/ | grep -E '\.lean$')
+          test "${#accepted[@]}" -eq 12
+          for p in "${accepted[@]}"; do
+            module="$(basename "$p" .lean)"
+            test -s "upstream-math/lean/.lake/build/lib/lean/${module}.olean" || {
+              echo "INCOMPLETE_GATE28_ACCEPTED_OLEAN $module" >&2
+              exit 1
+            }
+          done
+          test -s upstream-math/lean/.lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean
+          echo GATE28_TWELVE_OLEANS_AND_PINNED_PREREQUISITES_PRESENT
+
+      - name: Compile D1 original gauge-restricted source-graph bridge
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.olean SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.lean 2>&1 | tee /tmp/bfss-su2-domain-d1-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-domain-d1-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceGaugeRestrictedGraphMap_equal',
+              'sourceGaugeRestrictedClosedGraph_equal',
+              'sourceGaugeRestrictedClosedDomain_iff',
+              'sourceGaugeRestrictedCoreForm_equal',
+              'sourceGaugeRestrictedGraph_le_full',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {part.strip() for part in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D1_EXACT_FIVE_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D3A kinetic gauge contraction and emit importable module
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.olean SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.lean 2>&1 | tee /tmp/bfss-su2-d3a-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d3a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          required = [
+              'sourceKineticSkewContraction_basisInvariant',
+              'sourceContractedKinetic_gaugeCovariant',
+          ]
+          assert len(found) == len(required), found
+          for (name, axioms), suffix in zip(found, required):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D3A_EXACT_TWO_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D3B original supercharge physical-space preservation
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.olean SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.lean 2>&1 | tee /tmp/bfss-su2-d3b-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d3b-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          required = [
+              'sourceDeformedCoreCharge_contracted',
+              'sourceDeformedCoreCharge_pointwiseGaugeCovariant',
+              'sourceOriginalCoreCharge_pointwiseGaugeCovariant',
+              'sourceOriginalCoreCharge_mem_physicalSpace',
+              'sourceOriginalCoreCharge_mem_invariantCore',
+          ]
+          assert len(found) == len(required), found
+          for (name, axioms), suffix in zip(found, required):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D3B_EXACT_FIVE_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2A physical closed graph bridge
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.olean SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.lean 2>&1 | tee /tmp/bfss-su2-d2a-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          required = [
+              'sourceCoreNormClosure_le_physicalSpace',
+              'sourceClosedGaugeGraph_input_physical',
+              'sourceClosedGaugeGraph_output_physical',
+              'sourceOriginalRestrictedClosedGraph_all_physical',
+          ]
+          assert len(found) == len(required), found
+          for (name, axioms), suffix in zip(found, required):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2A_EXACT_FOUR_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2B1 source Haar fermion average equivariance
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.olean
+          # Reuse the existing upstream SU(2) compactness and normalized
+          # Haar probability measure. No surrogate group/measure allowed.
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.olean SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b1-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b1-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarIntegrand_continuous',
+              'sourceHaarIntegrand_integrable',
+              'sourceHaarAverageRaw_equivariant',
+              'sourceHaarAverageRaw_fixed',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B1_FOUR_HAAR_AVERAGE_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2B2 Haar-average joint continuity and compact support
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.olean SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b2-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b2-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarIntegrand_jointContinuous',
+              'sourceHaarAverageRaw_continuous',
+              'sourceHaarAverageRaw_hasCompactSupport',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B2_THREE_HAAR_CONTINUITY_SUPPORT_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2B3 true-source smooth gauge slices and explicit all-jet reduction
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.olean
+          # The accepted warm G4-K10A cache does NOT include this
+          # unrelated original-source RVM module. Compile its exact
+          # pinned source before importing it into D2B3.
+          test -s OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.lean
+          mkdir -p .lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity
+          lake env lean -o .lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.lean 2>&1 | tee /tmp/bfss-su2-pinned-rvm-analytic-dependency.log
+          test -s .lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean
+          echo PINNED_RVM_SMOOTH_INTEGRAL_COMPILED
+          # No new assumed property of BFSS GaugeData is admitted.
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe.olean SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b3-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b3-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarSpatialSlice_contDiff',
+              'sourceHaarAverageRaw_contDiff_of_jointJets',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B3_SMOOTH_SLICES_AND_CONDITIONAL_ANALYTIC_REDUCTION_PASS')
+          PY
+
+      - name: Recompile accepted D2B3J original gauge operator continuity and unconditional smooth Haar average
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.olean SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b3j-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b3j-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceBosonOperator_continuous',
+              'sourceFermionOperator_continuous',
+              'sourceHaarIntegrand_smoothFamily',
+              'sourceHaarAllJets_jointContinuous',
+              'sourceHaarAverageRaw_contDiff',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B3J_FIVE_TRUE_SOURCE_OPERATOR_JETS_AND_UNCONDITIONAL_HAAR_SMOOTHNESS_PASS')
+          PY
+
+      - name: Recompile accepted D2B4 original bundled SmoothCore average and physical invariant-core membership
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.olean SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b4-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b4-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarAverageCore_apply',
+              'sourceHaarAverageCore_equivariant',
+              'sourceHaarAverageCore_mem_physicalSpace',
+              'sourceHaarAverageCore_mem_invariantCore',
+              'sourceHaarAverageCore_fixed',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B4_FIVE_TRUE_SOURCE_SMOOTHCORE_PHYSICAL_INVARIANTCORE_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2B5 original SmoothCore Haar complex-linear idempotent operator and source L2 boson isometry
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.olean SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b5-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b5-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarAverageCore_add',
+              'sourceHaarAverageCore_smul',
+              'sourceHaarAverageCore_linear_apply',
+              'sourceHaarAverageCore_idempotent',
+              'sourceBosonPullback_norm',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B5_FIVE_SOURCE_LINEAR_HAAR_PROJECTION_AND_L2_BOSON_ISOMETRY_PASS')
+          PY
+
+      - name: Recompile accepted D2B6 source full-L2 gauge action as norm-one-bounded complex CLM
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.olean SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b6-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b6-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceFermionFiberAction_norm_le',
+              'sourceFermionFiberAction_continuous',
+              'sourceFullGaugePair_norm_le',
+              'sourceFullGaugePairCLM_apply',
+              'sourceFullGaugePairCLM_norm_le_one',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B6_FIVE_ACTUAL_FULL_L2_GAUGE_BOUND_AND_COMPLEX_CLM_REPORTS_PASS')
+          PY
+
+      - name: Compile D2B7 original full-L2 gauge isometry physical fixedness and smooth-core compatibility
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.olean SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b7-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b7-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceFermionFiberAction_left_inv',
+              'sourceFermionFiberAction_norm_eq',
+              'sourceFullGaugePair_norm_eq',
+              'sourceFullGaugePairCLM_norm_map',
+              'sourceFullGaugePairCLM_fixed_physical',
+              'sourceFullGaugePairCLM_core_ae',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B7_SIX_GENUINE_FULL_L2_ISOMETRY_PHYSICAL_FIXEDNESS_AND_CORE_AE_REPORTS_PASS')
+          PY
+
+      - name: Kernel-import and exact 51-theorem axiom recheck (cache hit or clean compilation)
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          # Defend against both missing proof objects and a silently changed
+          # smoke test. The 51 expected theorem names are reconstructed
+          # from the actual 12 qualified source files at Gate #28.
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          baseline = "b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab"
+          files = subprocess.check_output(
+              ["git", "-C", "../..", "ls-tree", "-r", "--name-only", baseline,
+               "experiments/openai-math-su2-physical-domain/"],
+              text=True).splitlines()
+          accepted = [f for f in files if f.endswith(".lean")]
+          assert len(accepted) == 12, accepted
+          expected = []
+          for p in accepted:
+              module = Path(p).stem
+              obj = Path(".lake/build/lib/lean") / (module + ".olean")
+              assert obj.is_file() and obj.stat().st_size > 0, str(obj)
+              source = (Path("../..") / p).read_text()
+              ns = re.findall(r"^namespace (FCP\.[A-Za-z0-9_.]+)$", source, re.M)
+              reports = re.findall(r"^#print axioms ([A-Za-z0-9_']+)$", source, re.M)
+              assert len(ns) == 1 and reports, module
+              expected.extend(ns[0] + "." + n for n in reports)
+          assert len(expected) == len(set(expected)) == 51
+          smoke = Path("SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean").read_text()
+          actual = re.findall(r"^#print axioms ([A-Za-z0-9_.']+)$", smoke, re.M)
+          assert actual == expected, (actual, expected)
+          print("GATE28_TWELVE_OBJECTS_51_SMOKE_NAMES_GROUNDED_IN_FROZEN_SOURCE")
+          PY
+          lake env lean SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean 2>&1 | tee /tmp/bfss-su2-gate28-cache-axioms.log
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          src = Path("SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean").read_text()
+          expected = re.findall(r"^#print axioms ([A-Za-z0-9_.']+)$", src, re.M)
+          log = Path("/tmp/bfss-su2-gate28-cache-axioms.log").read_text()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          assert len(expected) == len(reports) == 51, (len(expected), len(reports))
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          for (name, axioms), want in zip(reports, expected):
+              assert name == want, (name, want)
+              assert {a.strip() for a in axioms.split(",")} <= allowed, (name, axioms)
+          assert "sorryAx" not in log and "error:" not in log and "unknownIdentifier" not in log
+          print("GATE28_ALL_51_TRUE_SOURCE_ACCEPTED_AXIOM_REPORTS_PASS")
+          PY
+
+      - name: Compile D2B8A true-source full-L2 physical fixed-point characterization
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.olean SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b8a-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b8a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          assert len(found) == 1, found
+          name, axioms = found[0]
+          assert name == 'FCP.BFSSSU2PhysicalDomainD2B8A.sourceFullGaugePairCLM_fixed_iff_physical', name
+          assert {a.strip() for a in axioms.split(',')} <= {
+              'propext', 'Classical.choice', 'Quot.sound'
+          }, axioms
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B8A_EXACT_SOURCE_FULL_L2_FIXED_POINT_CHARACTERIZATION_PASS')
+          PY
+
+      - name: Compile D2B8B exact fermion full-L2 strong continuity reduction
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe.olean SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b8b-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b8b-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFermionComplexOperator_continuous',
+              'sourceFermionFiberCLM_parameter_continuous',
+              'sourceFermionFiberAction_joint_continuous',
+              'sourceFullGaugePair_strongContinuous_of_boson'
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B8B.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B8B_TRUE_SOURCE_FERMION_CONTINUITY_AND_BOSON_REDUCTION_PASS')
+          PY
+
+      - name: Compile D2B8C genuine boson L2 and full gauge strong continuity
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe.olean SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b8c-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b8c-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceBosonContinuousMap_parameter_continuous',
+              'sourceBosonPullback_strongContinuous',
+              'sourceFullGaugePair_strongContinuous',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B8C.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B8C_UNCONDITIONAL_GENUINE_FULL_L2_STRONG_CONTINUITY_PASS')
+          PY
+
+      - name: Compile D2B9A true-source full-L2 Haar existence contraction and physical fixedness
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe.olean SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b9a-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b9a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFullHaarIntegrand_integrable',
+              'sourceFullHaarAverage_norm_le',
+              'sourceFullHaarAverage_fixed_physical',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B9A.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B9A_TRUE_SOURCE_FULL_L2_HAAR_INTEGRAL_CONTRACTION_PHYSICAL_FIXED_PASS')
+          PY
+
+      - name: Compile D2B9B genuine bounded complex-linear full-L2 Haar operator
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe.olean SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b9b-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b9b-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFullHaarAverage_add',
+              'sourceFullHaarAverage_smul',
+              'sourceFullHaarAverageCLM_apply',
+              'sourceFullHaarAverageCLM_norm_le_one',
+              'sourceFullHaarAverageCLM_fixed_physical',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B9B.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B9B_TRUE_SOURCE_COMPLEX_LINEAR_CONTRACTIVE_HAAR_CLM_PASS')
+          PY
+
+      - name: Compile D2B9C genuine source full-L2 gauge action and physical Haar projection
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe.olean SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b9c-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b9c-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFullGaugePairCLM_ae',
+              'sourceFullGaugePairCLM_mul',
+              'sourceFullHaarAverageCLM_mem_physical',
+              'sourceFullHaarAverageCLM_idempotent',
+              'sourceFullHaarAverageCLM_range_eq_physical',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B9C.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B9C_TRUE_SOURCE_PHYSICAL_HAAR_PROJECTION_RANGE_IDEMPOTENCE_PASS')
+          PY
+
+      - name: Compile D2B10A original projected smooth-core density and exact conditional bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe.olean SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b10a-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b10a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceProjectedSmoothCore_closure_eq_physical',
+              'sourceCoreNormClosure_eq_physical_of_Haar_core_compat',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B10A.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B10A_SOURCE_PROJECTED_CORE_DENSITY_AND_EXACT_CONDITIONAL_BRIDGE_PASS')
+          PY
+
+      - name: Compile D2B10B1 exact Haar-spatial joint integrability for Fubini bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe.olean SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b10b1-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b10b1-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceHaarJoint_hasCompactSupport',
+              'sourceHaarJoint_integrable',
+              'sourceHaarJoint_integrable_swapped',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B10B1.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B10B1_TRUE_SOURCE_HAAR_SPATIAL_PRODUCT_INTEGRABILITY_PASS')
+          PY
+
+      - name: Compile D2B10B2 genuine original smooth test pairing Haar-spatial Fubini
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe.olean SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b10b2-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b10b2-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceHaarFubini_vector',
+              'sourceHaarInnerJoint_integrable',
+              'sourceHaarFubini_inner',
+              'sourceHaarFubini_inner_eq_raw',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B10B2.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B10B2_SOURCE_SMOOTH_PAIRING_HAAR_SPATIAL_FUBINI_PASS')
+          PY
+
+      - name: Compile D2B10C original Bochner smooth Haar compatibility and full physical-core density
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe.olean SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b10c-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b10c-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFullHaarAverageCLM_testInner_eq',
+              'sourceFullHaarAverageCLM_coreToL2_compat',
+              'sourceCoreNormClosure_eq_physical_unconditional',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B10C.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B10C_UNCONDITIONAL_TRUE_SOURCE_PHYSICAL_CORE_DENSITY_PASS')
+          PY
+
+      - name: Save qualified immutable Gate 28 physical-domain compiled chain
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-domain-gate28-v1-b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean', 'experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+)
+          test "${#accepted[@]}" -eq 10
+          for p in "${accepted[@]}"; do
+            module="$(basename "$p" .lean)"
+            test -s "upstream-math/lean/.lake/build/lib/lean/${module}.olean" || {
+              echo "INCOMPLETE_GATE47_QUALIFIED_OLEAN $module" >&2
+              exit 1
+            }
+          done
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean
+          echo GATE47_TEN_ACCEPTED_OLEANS_PRESENT
+
+      - name: Compile D1 original gauge-restricted source-graph bridge
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.olean SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.lean 2>&1 | tee /tmp/bfss-su2-domain-d1-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-domain-d1-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceGaugeRestrictedGraphMap_equal',
+              'sourceGaugeRestrictedClosedGraph_equal',
+              'sourceGaugeRestrictedClosedDomain_iff',
+              'sourceGaugeRestrictedCoreForm_equal',
+              'sourceGaugeRestrictedGraph_le_full',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {part.strip() for part in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D1_EXACT_FIVE_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D3A kinetic gauge contraction and emit importable module
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.olean SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.lean 2>&1 | tee /tmp/bfss-su2-d3a-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d3a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          required = [
+              'sourceKineticSkewContraction_basisInvariant',
+              'sourceContractedKinetic_gaugeCovariant',
+          ]
+          assert len(found) == len(required), found
+          for (name, axioms), suffix in zip(found, required):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D3A_EXACT_TWO_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D3B original supercharge physical-space preservation
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.olean SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.lean 2>&1 | tee /tmp/bfss-su2-d3b-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d3b-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          required = [
+              'sourceDeformedCoreCharge_contracted',
+              'sourceDeformedCoreCharge_pointwiseGaugeCovariant',
+              'sourceOriginalCoreCharge_pointwiseGaugeCovariant',
+              'sourceOriginalCoreCharge_mem_physicalSpace',
+              'sourceOriginalCoreCharge_mem_invariantCore',
+          ]
+          assert len(found) == len(required), found
+          for (name, axioms), suffix in zip(found, required):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D3B_EXACT_FIVE_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2A physical closed graph bridge
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.olean SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.lean 2>&1 | tee /tmp/bfss-su2-d2a-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          required = [
+              'sourceCoreNormClosure_le_physicalSpace',
+              'sourceClosedGaugeGraph_input_physical',
+              'sourceClosedGaugeGraph_output_physical',
+              'sourceOriginalRestrictedClosedGraph_all_physical',
+          ]
+          assert len(found) == len(required), found
+          for (name, axioms), suffix in zip(found, required):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2A_EXACT_FOUR_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2B1 source Haar fermion average equivariance
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.olean
+          # Reuse the existing upstream SU(2) compactness and normalized
+          # Haar probability measure. No surrogate group/measure allowed.
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.olean SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b1-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b1-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarIntegrand_continuous',
+              'sourceHaarIntegrand_integrable',
+              'sourceHaarAverageRaw_equivariant',
+              'sourceHaarAverageRaw_fixed',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B1_FOUR_HAAR_AVERAGE_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2B2 Haar-average joint continuity and compact support
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.olean SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b2-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b2-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarIntegrand_jointContinuous',
+              'sourceHaarAverageRaw_continuous',
+              'sourceHaarAverageRaw_hasCompactSupport',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B2_THREE_HAAR_CONTINUITY_SUPPORT_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2B3 true-source smooth gauge slices and explicit all-jet reduction
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.olean
+          # The accepted warm G4-K10A cache does NOT include this
+          # unrelated original-source RVM module. Compile its exact
+          # pinned source before importing it into D2B3.
+          test -s OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.lean
+          mkdir -p .lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity
+          lake env lean -o .lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.lean 2>&1 | tee /tmp/bfss-su2-pinned-rvm-analytic-dependency.log
+          test -s .lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean
+          echo PINNED_RVM_SMOOTH_INTEGRAL_COMPILED
+          # No new assumed property of BFSS GaugeData is admitted.
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe.olean SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b3-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b3-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarSpatialSlice_contDiff',
+              'sourceHaarAverageRaw_contDiff_of_jointJets',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B3_SMOOTH_SLICES_AND_CONDITIONAL_ANALYTIC_REDUCTION_PASS')
+          PY
+
+      - name: Recompile accepted D2B3J original gauge operator continuity and unconditional smooth Haar average
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.olean SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b3j-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b3j-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceBosonOperator_continuous',
+              'sourceFermionOperator_continuous',
+              'sourceHaarIntegrand_smoothFamily',
+              'sourceHaarAllJets_jointContinuous',
+              'sourceHaarAverageRaw_contDiff',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B3J_FIVE_TRUE_SOURCE_OPERATOR_JETS_AND_UNCONDITIONAL_HAAR_SMOOTHNESS_PASS')
+          PY
+
+      - name: Recompile accepted D2B4 original bundled SmoothCore average and physical invariant-core membership
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.olean SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b4-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b4-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarAverageCore_apply',
+              'sourceHaarAverageCore_equivariant',
+              'sourceHaarAverageCore_mem_physicalSpace',
+              'sourceHaarAverageCore_mem_invariantCore',
+              'sourceHaarAverageCore_fixed',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B4_FIVE_TRUE_SOURCE_SMOOTHCORE_PHYSICAL_INVARIANTCORE_REPORTS_PASS')
+          PY
+
+      - name: Recompile accepted D2B5 original SmoothCore Haar complex-linear idempotent operator and source L2 boson isometry
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.olean SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b5-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b5-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarAverageCore_add',
+              'sourceHaarAverageCore_smul',
+              'sourceHaarAverageCore_linear_apply',
+              'sourceHaarAverageCore_idempotent',
+              'sourceBosonPullback_norm',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B5_FIVE_SOURCE_LINEAR_HAAR_PROJECTION_AND_L2_BOSON_ISOMETRY_PASS')
+          PY
+
+      - name: Recompile accepted D2B6 source full-L2 gauge action as norm-one-bounded complex CLM
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.olean SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b6-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b6-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceFermionFiberAction_norm_le',
+              'sourceFermionFiberAction_continuous',
+              'sourceFullGaugePair_norm_le',
+              'sourceFullGaugePairCLM_apply',
+              'sourceFullGaugePairCLM_norm_le_one',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B6_FIVE_ACTUAL_FULL_L2_GAUGE_BOUND_AND_COMPLEX_CLM_REPORTS_PASS')
+          PY
+
+      - name: Compile D2B7 original full-L2 gauge isometry physical fixedness and smooth-core compatibility
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.olean SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b7-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b7-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceFermionFiberAction_left_inv',
+              'sourceFermionFiberAction_norm_eq',
+              'sourceFullGaugePair_norm_eq',
+              'sourceFullGaugePairCLM_norm_map',
+              'sourceFullGaugePairCLM_fixed_physical',
+              'sourceFullGaugePairCLM_core_ae',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B7_SIX_GENUINE_FULL_L2_ISOMETRY_PHYSICAL_FIXEDNESS_AND_CORE_AE_REPORTS_PASS')
+          PY
+
+      - name: Kernel-import and exact 51-theorem axiom recheck (cache hit or clean compilation)
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          # Defend against both missing proof objects and a silently changed
+          # smoke test. The 51 expected theorem names are reconstructed
+          # from the actual 12 qualified source files at Gate #28.
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          baseline = "b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab"
+          files = subprocess.check_output(
+              ["git", "-C", "../..", "ls-tree", "-r", "--name-only", baseline,
+               "experiments/openai-math-su2-physical-domain/"],
+              text=True).splitlines()
+          accepted = [f for f in files if f.endswith(".lean")]
+          assert len(accepted) == 12, accepted
+          expected = []
+          for p in accepted:
+              module = Path(p).stem
+              obj = Path(".lake/build/lib/lean") / (module + ".olean")
+              assert obj.is_file() and obj.stat().st_size > 0, str(obj)
+              source = (Path("../..") / p).read_text()
+              ns = re.findall(r"^namespace (FCP\.[A-Za-z0-9_.]+)$", source, re.M)
+              reports = re.findall(r"^#print axioms ([A-Za-z0-9_']+)$", source, re.M)
+              assert len(ns) == 1 and reports, module
+              expected.extend(ns[0] + "." + n for n in reports)
+          assert len(expected) == len(set(expected)) == 51
+          smoke = Path("SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean").read_text()
+          actual = re.findall(r"^#print axioms ([A-Za-z0-9_.']+)$", smoke, re.M)
+          assert actual == expected, (actual, expected)
+          print("GATE28_TWELVE_OBJECTS_51_SMOKE_NAMES_GROUNDED_IN_FROZEN_SOURCE")
+          PY
+          lake env lean SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean 2>&1 | tee /tmp/bfss-su2-gate28-cache-axioms.log
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          src = Path("SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean").read_text()
+          expected = re.findall(r"^#print axioms ([A-Za-z0-9_.']+)$", src, re.M)
+          log = Path("/tmp/bfss-su2-gate28-cache-axioms.log").read_text()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          assert len(expected) == len(reports) == 51, (len(expected), len(reports))
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          for (name, axioms), want in zip(reports, expected):
+              assert name == want, (name, want)
+              assert {a.strip() for a in axioms.split(",")} <= allowed, (name, axioms)
+          assert "sorryAx" not in log and "error:" not in log and "unknownIdentifier" not in log
+          print("GATE28_ALL_51_TRUE_SOURCE_ACCEPTED_AXIOM_REPORTS_PASS")
+          PY
+
+      - name: Compile D2B8A true-source full-L2 physical fixed-point characterization
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.olean SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b8a-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b8a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          assert len(found) == 1, found
+          name, axioms = found[0]
+          assert name == 'FCP.BFSSSU2PhysicalDomainD2B8A.sourceFullGaugePairCLM_fixed_iff_physical', name
+          assert {a.strip() for a in axioms.split(',')} <= {
+              'propext', 'Classical.choice', 'Quot.sound'
+          }, axioms
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B8A_EXACT_SOURCE_FULL_L2_FIXED_POINT_CHARACTERIZATION_PASS')
+          PY
+
+      - name: Compile D2B8B exact fermion full-L2 strong continuity reduction
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe.olean SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b8b-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b8b-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFermionComplexOperator_continuous',
+              'sourceFermionFiberCLM_parameter_continuous',
+              'sourceFermionFiberAction_joint_continuous',
+              'sourceFullGaugePair_strongContinuous_of_boson'
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B8B.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B8B_TRUE_SOURCE_FERMION_CONTINUITY_AND_BOSON_REDUCTION_PASS')
+          PY
+
+      - name: Compile D2B8C genuine boson L2 and full gauge strong continuity
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe.olean SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b8c-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b8c-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceBosonContinuousMap_parameter_continuous',
+              'sourceBosonPullback_strongContinuous',
+              'sourceFullGaugePair_strongContinuous',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B8C.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B8C_UNCONDITIONAL_GENUINE_FULL_L2_STRONG_CONTINUITY_PASS')
+          PY
+
+      - name: Compile D2B9A true-source full-L2 Haar existence contraction and physical fixedness
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe.olean SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b9a-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b9a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFullHaarIntegrand_integrable',
+              'sourceFullHaarAverage_norm_le',
+              'sourceFullHaarAverage_fixed_physical',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B9A.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B9A_TRUE_SOURCE_FULL_L2_HAAR_INTEGRAL_CONTRACTION_PHYSICAL_FIXED_PASS')
+          PY
+
+      - name: Compile D2B9B genuine bounded complex-linear full-L2 Haar operator
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe.olean SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b9b-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b9b-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFullHaarAverage_add',
+              'sourceFullHaarAverage_smul',
+              'sourceFullHaarAverageCLM_apply',
+              'sourceFullHaarAverageCLM_norm_le_one',
+              'sourceFullHaarAverageCLM_fixed_physical',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B9B.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B9B_TRUE_SOURCE_COMPLEX_LINEAR_CONTRACTIVE_HAAR_CLM_PASS')
+          PY
+
+      - name: Compile D2B9C genuine source full-L2 gauge action and physical Haar projection
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe.olean SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b9c-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b9c-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFullGaugePairCLM_ae',
+              'sourceFullGaugePairCLM_mul',
+              'sourceFullHaarAverageCLM_mem_physical',
+              'sourceFullHaarAverageCLM_idempotent',
+              'sourceFullHaarAverageCLM_range_eq_physical',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B9C.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B9C_TRUE_SOURCE_PHYSICAL_HAAR_PROJECTION_RANGE_IDEMPOTENCE_PASS')
+          PY
+
+      - name: Compile D2B10A original projected smooth-core density and exact conditional bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe.olean SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b10a-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b10a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceProjectedSmoothCore_closure_eq_physical',
+              'sourceCoreNormClosure_eq_physical_of_Haar_core_compat',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B10A.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B10A_SOURCE_PROJECTED_CORE_DENSITY_AND_EXACT_CONDITIONAL_BRIDGE_PASS')
+          PY
+
+      - name: Compile D2B10B1 exact Haar-spatial joint integrability for Fubini bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe.olean SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b10b1-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b10b1-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceHaarJoint_hasCompactSupport',
+              'sourceHaarJoint_integrable',
+              'sourceHaarJoint_integrable_swapped',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B10B1.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B10B1_TRUE_SOURCE_HAAR_SPATIAL_PRODUCT_INTEGRABILITY_PASS')
+          PY
+
+      - name: Compile D2B10B2 genuine original smooth test pairing Haar-spatial Fubini
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe.olean SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b10b2-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b10b2-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceHaarFubini_vector',
+              'sourceHaarInnerJoint_integrable',
+              'sourceHaarFubini_inner',
+              'sourceHaarFubini_inner_eq_raw',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B10B2.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B10B2_SOURCE_SMOOTH_PAIRING_HAAR_SPATIAL_FUBINI_PASS')
+          PY
+
+      - name: Compile D2B10C original Bochner smooth Haar compatibility and full physical-core density
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe.olean SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b10c-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b10c-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFullHaarAverageCLM_testInner_eq',
+              'sourceFullHaarAverageCLM_coreToL2_compat',
+              'sourceCoreNormClosure_eq_physical_unconditional',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B10C.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B10C_UNCONDITIONAL_TRUE_SOURCE_PHYSICAL_CORE_DENSITY_PASS')
+          PY
+
+      - name: Save qualified immutable Gate 28 physical-domain compiled chain
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-domain-gate28-v1-b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean', 'experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+)
+          test "${#accepted[@]}" -eq 10
+          for p in "${accepted[@]}"; do
+            test -f "$p"
+            expected="$(git rev-parse "$qualified:$p")"
+            actual="$(git hash-object "$p")"
+            if [ "$expected" != "$actual" ]; then
+              echo "GATE47_QUALIFIED_SOURCE_DRIFT $p expected=$expected actual=$actual" >&2
+              exit 1
+            fi
+          done
+          echo GATE47_TEN_ACCEPTED_SOURCES_IMMUTABLE
 
       - name: Restore exact accepted Gate 28 physical-domain compiled modules
         id: domain_proof_cache
