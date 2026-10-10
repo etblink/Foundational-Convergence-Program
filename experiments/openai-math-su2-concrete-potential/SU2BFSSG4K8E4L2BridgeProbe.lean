@@ -21,6 +21,7 @@ open MeasureTheory
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2GaugeG4K2B
 open FCP.BFSSSU2GaugeG4K3
+open FCP.BFSSSU2GaugeG4K6
 open FCP.BFSSSU2GaugeG4K7
 open FCP.BFSSSU2GaugeG4K8E3
 
