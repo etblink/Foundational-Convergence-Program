@@ -1,24 +1,18 @@
 import SU2BFSSPhysicalDomainS3G2GaugeInvariantMajoranaPairsProbe
 
 /-!
-# BFSS SU(2) S3G3 — literal three-color fermionic Spin(9) generator
-# commutes with exact source gauge action
+# BFSS SU(2) S3G3 — actual fermionic Spin(9) plane-generator gauge compatibility
 
-Theorem applies to the real Gamma-defined quadratic K_ij of S3D
-and the genuine 24-mode fermionGaugeUnitaryHom of G4E.
-Uses G4H's 48-Majorana theta covariance, G3A row orthogonality
-(proved in S3G), and the gauge-invariant color pair theorem S3G2.
+Separate an elementary finite-linear-combination lemma from the very
+large concrete source Fock operators. The genuine G4E SU(2) action
+commutes with each source color-summed theta theta bilinear by S3G2.
+Consequently it commutes with the exact S3D quadratic generator.
 
-No global Spin(9) group, bosonic extension, closed Hamiltonian
-symmetry, angular level exclusion or positive spectrum is inferred.
+No global Spin(9), physical Hamiltonian symmetry or spectral theorem.
 -/
 
 namespace FCP.BFSSSU2PhysicalDomainS3G3
 noncomputable section
-
--- The source-defined Fock operator is a large nested finite sum.
--- This elaborator budget changes no mathematical assumption or kernel axiom.
-set_option maxRecDepth 4096
 
 open scoped BigOperators
 open Finset
@@ -29,18 +23,62 @@ open FCP.BFSSSU2PhysicalDomainS3A
 open FCP.BFSSSU2PhysicalDomainS3D
 open FCP.BFSSSU2PhysicalDomainS3G2
 
-private theorem reindex_color_spin_sums
-    (F : ColorIndex 2 → SpinIndex → SpinIndex → Fermion 2) :
-    (∑ A : ColorIndex 2, ∑ α : SpinIndex, ∑ β : SpinIndex, F A α β) =
-      ∑ α : SpinIndex, ∑ β : SpinIndex, ∑ A : ColorIndex 2, F A α β := by
-  rw [Finset.sum_comm]
-  apply Finset.sum_congr rfl
-  intro α _
-  rw [Finset.sum_comm]
+private abbrev FermionOp := Fermion 2 →L[ℂ] Fermion 2
 
-/-- On the actual Fock Hilbert space, the color sum of the complete
-quadratic fermionic operator with any real spinor matrix J commutes
-with every source SU(2) fermion-gauge unitary. -/
+/-- Abstract finite weighted-sum commutation with the genuine source
+unitary, requiring only commutation of its indicated summands. -/
+private theorem finiteWeightedGaugeCommutes (g : GaugeGroup 2)
+    (F : SpinIndex → SpinIndex → FermionOp)
+    (w : SpinIndex → SpinIndex → ℂ)
+    (hF : ∀ α β v,
+      fermionGaugeUnitaryHom g (F α β v) =
+        F α β (fermionGaugeUnitaryHom g v))
+    (v : Fermion 2) :
+    fermionGaugeUnitaryHom g
+      ((∑ α : SpinIndex, ∑ β : SpinIndex, w α β • F α β) v) =
+      (∑ α : SpinIndex, ∑ β : SpinIndex, w α β • F α β)
+        (fermionGaugeUnitaryHom g v) := by
+  simp only [ContinuousLinearMap.sum_apply, ContinuousLinearMap.smul_apply]
+  calc
+    _ = ∑ α : SpinIndex, ∑ β : SpinIndex,
+          w α β • fermionGaugeUnitaryHom g (F α β v) := by
+        simp only [map_sum, map_smul]
+    _ = ∑ α : SpinIndex, ∑ β : SpinIndex,
+          w α β • F α β (fermionGaugeUnitaryHom g v) := by
+        apply Finset.sum_congr rfl
+        intro α _
+        apply Finset.sum_congr rfl
+        intro β _
+        rw [hF α β v]
+
+/-- Pure finite-sum rearrangement of the exact S3D source operators.
+There is NO surrogate fermionic generator and no analytic assumption. -/
+private theorem sourceQuadraticColorSum_reindex
+    (J : Matrix SpinIndex SpinIndex ℝ) :
+    (∑ A : ColorIndex 2, pairedFermionSpinQuadraticColor J A) =
+      ∑ α : SpinIndex, ∑ β : SpinIndex,
+        ((J α β : ℝ) : ℂ) •
+          (∑ A : ColorIndex 2,
+            pairedTheta α A * pairedTheta β A) := by
+  unfold pairedFermionSpinQuadraticColor
+  calc
+    _ = ∑ α : SpinIndex, ∑ β : SpinIndex,
+          ∑ A : ColorIndex 2,
+            ((J α β : ℝ) : ℂ) •
+              (pairedTheta α A * pairedTheta β A) := by
+        rw [Finset.sum_comm]
+        apply Finset.sum_congr rfl
+        intro α _
+        rw [Finset.sum_comm]
+    _ = _ := by
+        apply Finset.sum_congr rfl
+        intro α _
+        apply Finset.sum_congr rfl
+        intro β _
+        rw [Finset.smul_sum]
+
+/-- The full quadratic source-color sum is gauge invariant for ANY
+real spin matrix J; the only color geometry is exact G3A/G4H. -/
 theorem pairedFermionSpinQuadraticSum_gauge_commutes
     (g : GaugeGroup 2) (J : Matrix SpinIndex SpinIndex ℝ)
     (v : Fermion 2) :
@@ -48,57 +86,16 @@ theorem pairedFermionSpinQuadraticSum_gauge_commutes
       ((∑ A : ColorIndex 2, pairedFermionSpinQuadraticColor J A) v) =
       (∑ A : ColorIndex 2, pairedFermionSpinQuadraticColor J A)
         (fermionGaugeUnitaryHom g v) := by
-  let c : SpinIndex → SpinIndex → ℂ :=
-    fun α β => ((J α β : ℝ) : ℂ)
-  have hrearrange (w : ColorIndex 2 → Fermion 2) :
-      fermionGaugeUnitaryHom g (∑ A : ColorIndex 2, w A) =
-        ∑ A : ColorIndex 2, fermionGaugeUnitaryHom g (w A) := by
-    rw [map_sum]
-  unfold pairedFermionSpinQuadraticColor
-  simp only [ContinuousLinearMap.sum_apply, ContinuousLinearMap.smul_apply,
-    ContinuousLinearMap.mul_apply]
-  calc
-    fermionGaugeUnitaryHom g
-      (∑ A : ColorIndex 2, ∑ α : SpinIndex, ∑ β : SpinIndex,
-        (c α β) • (pairedTheta α A * pairedTheta β A) v) =
-      ∑ A : ColorIndex 2, ∑ α : SpinIndex, ∑ β : SpinIndex,
-        (c α β) •
-          fermionGaugeUnitaryHom g ((pairedTheta α A * pairedTheta β A) v) := by
-        simp only [map_sum, map_smul]
-    _ = ∑ α : SpinIndex, ∑ β : SpinIndex,
-          (c α β) •
-            fermionGaugeUnitaryHom g
-              (∑ A : ColorIndex 2,
-                (pairedTheta α A * pairedTheta β A) v) := by
-        rw [reindex_color_spin_sums]
-        apply Finset.sum_congr rfl
-        intro α _
-        apply Finset.sum_congr rfl
-        intro β _
-        rw [← Finset.smul_sum]
-        rw [← map_sum]
-    _ = ∑ α : SpinIndex, ∑ β : SpinIndex,
-          (c α β) •
-            (∑ A : ColorIndex 2,
-              (pairedTheta α A * pairedTheta β A)
-                (fermionGaugeUnitaryHom g v)) := by
-        apply Finset.sum_congr rfl
-        intro α _
-        apply Finset.sum_congr rfl
-        intro β _
-        rw [pairedTheta_colorPairSum_gauge_invariant]
-        simp only [ContinuousLinearMap.sum_apply]
-    _ = ∑ A : ColorIndex 2, ∑ α : SpinIndex, ∑ β : SpinIndex,
-          (c α β) •
-            (pairedTheta α A * pairedTheta β A)
-              (fermionGaugeUnitaryHom g v) := by
-        rw [reindex_color_spin_sums]
-        simp only [Finset.smul_sum]
-    _ = _ := by rfl
+  rw [sourceQuadraticColorSum_reindex]
+  exact finiteWeightedGaugeCommutes g
+    (fun α β => ∑ A : ColorIndex 2,
+      pairedTheta α A * pairedTheta β A)
+    (fun α β => ((J α β : ℝ) : ℂ))
+    (fun α β w =>
+      pairedTheta_colorPairSum_gauge_invariant g α β w) v
 
-/-- The exact accepted S3D gamma-plane quadratic spin generator,
-without a replacement implementation, commutes with G4E's genuine
-SU(2) gauge representation, pointwise on the full Fermion 2. -/
+/-- The literal S3D 48-Majorana spin-plane rotation generator
+commutes pointwise with the genuine G4E SU(2) gauge unitaries. -/
 theorem pairedFermionPlaneSpinGenerator_gauge_commutes
     (g : GaugeGroup 2) (i j : SpaceIndex) (v : Fermion 2) :
     fermionGaugeUnitaryHom g
