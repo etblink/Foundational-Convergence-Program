@@ -41,11 +41,16 @@ theorem pairedFermionGaugeOperator_comm_spinGenerator
       (pairedFermionPlaneSpinGenerator i j) := by
   change pairedFermionGaugeOperator g * pairedFermionPlaneSpinGenerator i j =
     pairedFermionPlaneSpinGenerator i j * pairedFermionGaugeOperator g
-  ext v
-  change fermionGaugeUnitaryHom g
+  apply ContinuousLinearMap.ext
+  intro v
+  change pairedFermionGaugeOperator g
       (pairedFermionPlaneSpinGenerator i j v) =
     pairedFermionPlaneSpinGenerator i j
-      (fermionGaugeUnitaryHom g v)
+      (pairedFermionGaugeOperator g v)
+  have hGaugeApply (w : Fermion 2) :
+      pairedFermionGaugeOperator g w = fermionGaugeUnitaryHom g w := by
+    rfl
+  rw [hGaugeApply, hGaugeApply]
   exact pairedFermionPlaneSpinGenerator_gauge_commutes g i j v
 
 /-- Each exact source fermionic one-parameter plane rotation
@@ -69,7 +74,15 @@ theorem pairedFermionPlaneSpinFlow_gauge_commutes
         pairedFermionPlaneSpinFlow i j t * pairedFermionGaugeOperator g :=
     pairedFermionGaugeOperator_comm_spinFlow g i j t
   have hv := congrArg (fun T : FermionOp => T v) h
-  simpa only [pairedFermionGaugeOperator, ContinuousLinearMap.mul_apply] using hv
+  simp only [ContinuousLinearMap.mul_apply] at hv
+  change pairedFermionGaugeOperator g
+      (pairedFermionPlaneSpinFlow i j t v) =
+    pairedFermionPlaneSpinFlow i j t
+      (pairedFermionGaugeOperator g v) at hv
+  have hGaugeApply (w : Fermion 2) :
+      pairedFermionGaugeOperator g w = fermionGaugeUnitaryHom g w := by
+    rfl
+  simpa only [hGaugeApply] using hv
 
 #print axioms pairedFermionGaugeOperator_comm_spinGenerator
 #print axioms pairedFermionGaugeOperator_comm_spinFlow
