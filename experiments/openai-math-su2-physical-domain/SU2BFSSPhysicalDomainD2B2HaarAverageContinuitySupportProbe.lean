@@ -45,7 +45,11 @@ theorem sourceHaarAverageRaw_continuous (f : SmoothCore 2) :
       G.fermion g (f (G.boson g⁻¹ x)))
     (s := Set.univ) (sourceHaarIntegrand_jointContinuous M G f)
     isCompact_univ
-  simpa only [sourceHaarAverageRaw, MeasureTheory.setIntegral_univ] using h
+  -- Mathlib's parametric-integral theorem uses the norm-induced
+  -- pseudometric topology on the PiLp fermionic space. Normalize the
+  -- equivalent PiLp product/uniform topology used by the BFSS alias.
+  simpa [sourceHaarAverageRaw, MeasureTheory.setIntegral_univ,
+    PiLp.topologicalSpace, PiLp.uniformSpace] using h
 
 /-- Compact gauge saturation of the ACTUAL source smooth test
 function's support. No averaging-space compactness assumption. -/
@@ -82,8 +86,17 @@ theorem sourceHaarAverageRaw_hasCompactSupport (f : SmoothCore 2) :
       simp
     exact hnotK (hcancel ▸ himage)
   have heq : sourceHaarAverageRaw M G f x = 0 := by
-    simp [sourceHaarAverageRaw, hvanish]
-  exact (by simpa only [Function.mem_support] using hx) heq
+    change (∫ g : GaugeGroup 2,
+      G.fermion g (f (G.boson g⁻¹ x)) ∂sourceHaar) = 0
+    have hz :
+        (fun g : GaugeGroup 2 => G.fermion g (f (G.boson g⁻¹ x))) =
+          (fun _ : GaugeGroup 2 => (0 : Fermion 2)) := by
+      funext g
+      rw [hvanish g]
+      simp
+    rw [hz]
+    simp
+  exact (Function.mem_support.mp hx) heq
 
 #print axioms sourceHaarIntegrand_jointContinuous
 #print axioms sourceHaarAverageRaw_continuous
