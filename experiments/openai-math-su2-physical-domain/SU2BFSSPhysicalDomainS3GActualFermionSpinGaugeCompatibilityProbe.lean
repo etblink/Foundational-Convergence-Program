@@ -53,7 +53,21 @@ theorem source_color_rows_contraction_complex (g : GaugeGroup 2)
       (adjointColorMatrix g B A : ℂ) *
         (adjointColorMatrix g D A : ℂ)) =
       if B = D then 1 else 0 := by
-  exact_mod_cast source_color_rows_contraction g B D
+  calc
+    _ = ∑ A : ColorIndex 2,
+          ((adjointColorMatrix g B A *
+            adjointColorMatrix g D A : ℝ) : ℂ) := by
+        apply Finset.sum_congr rfl
+        intro A _
+        exact (Complex.ofReal_mul _ _).symm
+    _ = ((∑ A : ColorIndex 2,
+          adjointColorMatrix g B A *
+            adjointColorMatrix g D A : ℝ) : ℂ) := by
+        rw [map_sum]
+    _ = ((if B = D then (1 : ℝ) else 0) : ℂ) := by
+        rw [source_color_rows_contraction]
+    _ = if B = D then 1 else 0 := by
+        split_ifs <;> norm_num
 
 /-- G4H's actual on-vectors covariance of the 48 true Majoranas
 in the accepted G3A row/output vs column/input convention. -/
