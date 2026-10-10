@@ -27,6 +27,17 @@ theorem pairedTheta_pair_star
   rw [star_mul, (pairedTheta_selfAdjoint β A).star_eq,
     (pairedTheta_selfAdjoint α A).star_eq]
 
+private abbrev BFSSOp := Fermion 2 →L[ℂ] Fermion 2
+
+/-- The exact Fock-operator adjoint is an additive equivalence, so
+it commutes with every finite sum of genuine BFSS operators. -/
+private theorem pairedStar_sum {ι : Type*} [Fintype ι]
+    (f : ι → BFSSOp) :
+    star (∑ i : ι, f i) = ∑ i : ι, star (f i) := by
+  change (starAddEquiv : BFSSOp ≃+ BFSSOp) (∑ i : ι, f i) =
+    ∑ i : ι, (starAddEquiv : BFSSOp ≃+ BFSSOp) (f i)
+  exact map_sum (starAddEquiv : BFSSOp ≃+ BFSSOp) _ _
+
 /-- The source quadratic operator is skew-adjoint for every
 real skew 16x16 spinor matrix, on the actual Fock Hilbert space. -/
 theorem pairedFermionSpinQuadraticColor_star_eq_neg
@@ -40,7 +51,8 @@ theorem pairedFermionSpinQuadraticColor_star_eq_neg
     simpa only [Matrix.transpose_apply, Matrix.neg_apply] using h
   have hcoeff (α β : SpinIndex) :
       star (((J α β : ℝ) : ℂ)) = ((J α β : ℝ) : ℂ) := by
-    simp only [RCLike.star_def, RCLike.conj_ofReal]
+    change Complex.conj ((J α β : ℝ) : ℂ) = _
+    exact Complex.conj_ofReal (J α β)
   have hneg (z : ℂ) (T : Fermion 2 →L[ℂ] Fermion 2) :
       (-z) • T = -(z • T) := neg_smul z T
   unfold pairedFermionSpinQuadraticColor
@@ -49,7 +61,24 @@ theorem pairedFermionSpinQuadraticColor_star_eq_neg
       ((J α β : ℝ) : ℂ) • (pairedTheta α A * pairedTheta β A)) =
         ∑ α : SpinIndex, ∑ β : SpinIndex,
           ((J α β : ℝ) : ℂ) • (pairedTheta β A * pairedTheta α A) := by
-      simp only [star_sum, star_smul, pairedTheta_pair_star, hcoeff]
+      calc
+        _ = ∑ α : SpinIndex, star
+              (∑ β : SpinIndex,
+                ((J α β : ℝ) : ℂ) •
+                  (pairedTheta α A * pairedTheta β A)) :=
+          pairedStar_sum _
+        _ = ∑ α : SpinIndex, ∑ β : SpinIndex, star
+              (((J α β : ℝ) : ℂ) •
+                (pairedTheta α A * pairedTheta β A)) := by
+          apply Finset.sum_congr rfl
+          intro α _
+          exact pairedStar_sum _
+        _ = _ := by
+          apply Finset.sum_congr rfl
+          intro α _
+          apply Finset.sum_congr rfl
+          intro β _
+          rw [star_smul, hcoeff α β, pairedTheta_pair_star]
     _ = ∑ α : SpinIndex, ∑ β : SpinIndex,
       ((J β α : ℝ) : ℂ) • (pairedTheta α A * pairedTheta β A) := by
       rw [Finset.sum_comm]
@@ -81,8 +110,17 @@ theorem pairedFermionPlaneSpinGenerator_star_eq_neg
         pairedFermionSpinQuadraticColor (pairedPlaneSpinGenerator i j) A) =
       -(∑ A : ColorIndex 2,
         pairedFermionSpinQuadraticColor (pairedPlaneSpinGenerator i j) A) := by
-    simp only [star_sum, pairedFermionSpinQuadraticColor_star_eq_neg
-      (pairedPlaneSpinGenerator i j) hs, Finset.sum_neg_distrib]
+    calc
+      _ = ∑ A : ColorIndex 2,
+            star (pairedFermionSpinQuadraticColor (pairedPlaneSpinGenerator i j) A) :=
+          pairedStar_sum _
+      _ = ∑ A : ColorIndex 2,
+            -(pairedFermionSpinQuadraticColor (pairedPlaneSpinGenerator i j) A) := by
+          apply Finset.sum_congr rfl
+          intro A _
+          exact pairedFermionSpinQuadraticColor_star_eq_neg
+            (pairedPlaneSpinGenerator i j) hs A
+      _ = _ := by rw [Finset.sum_neg_distrib]
   unfold pairedFermionPlaneSpinGenerator
   rw [star_smul, hhalf, hsum]
   module
