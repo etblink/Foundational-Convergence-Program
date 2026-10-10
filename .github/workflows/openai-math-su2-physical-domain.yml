@@ -112,6 +112,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B24WeightedClosedFormGraphProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B25WeightedFormDomainExactnessProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B26WeakFormAssociatedOperatorProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B27NormalizedHamiltonianSelfAdjointProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -1432,6 +1433,39 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
           print('D2B26_PHYSICAL_NORMALIZED_WEAK_FORM_ASSOCIATED_OPERATOR_PASS')
+          PY
+
+
+      - name: Compile D2B27 exact physical normalized associated Hamiltonian self-adjointness
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B26WeakFormAssociatedOperatorProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B27NormalizedHamiltonianSelfAdjointProbe.olean SU2BFSSPhysicalDomainD2B27NormalizedHamiltonianSelfAdjointProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b27-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b27-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'adjoint_smul_of_dense',
+              'selfAdjoint_smul_real',
+              'sourcePhysicalNormalizedHamiltonian_domain',
+              'sourcePhysicalNormalizedHamiltonian_apply',
+              'sourcePhysicalNormalizedHamiltonian_selfAdjoint',
+              'sourcePhysicalNormalizedHamiltonian_weakForm_iff',
+              'sourcePhysicalNormalizedHamiltonian_closed',
+              'sourcePhysicalNormalizedHamiltonian_domain_dense',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B27.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B27_NORMALIZED_PHYSICAL_ASSOCIATED_HAMILTONIAN_SELFADJOINT_PASS')
           PY
 
       - name: Save qualified immutable Gate 47 extension cache
