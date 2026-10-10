@@ -76,3 +76,57 @@ confinement.
 complete, not a positive-eigenvalue theorem, new physical spectrum,
 or empirical confirmation of any broader FCP/NFC framework.
 FCP main and the frozen source pins remain unchanged.
+
+## S3D follow-on — Gate #132 accepted
+
+**Status:** `S3D_ACTUAL_SOURCE_FOCK_SPIN_GENERATOR_COLOR_LOCALITY__KERNEL_ACCEPTED`.
+[BFSS SU2 Physical Domain Bridge #132](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38083753314),
+**SUCCESS** at exact CI commit
+`19386a9bdecc3c6ee5a9c21694a8bb8ded65458b`.
+Module:
+`experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3DActualFermionSpinQuadraticGeneratorProbe.lean`,
+qualified Git blob `14fa985ddd24f4fd37db229f7fc87f4303cce4be`.
+
+The pinned compiler **accepted actual definitions** of
+`pairedFermionSpinQuadraticColor J A` and
+`pairedFermionPlaneSpinGenerator i j` on the same
+`Fermion 2` Hilbert space, with **no new CAR or gamma assumptions**.
+The unique printed theorem,
+`pairedFermionSpinQuadraticColor_comm_other_color`,
+proves for arbitrary real spinor matrix `J` that
+```text
+A ≠ C  ⇒  [sum_{alpha,beta} J[alpha,beta]
+             theta[alpha,A] theta[beta,A], theta[gamma,C]] = 0.
+```
+CI verified the exact name, standard permitted axioms
+`propext`, `Classical.choice`, `Quot.sound` only,
+and no `sorryAx` or compiler errors. The Gate-93 and the
+S1ABC/S2ABC immutable accepted-module caches both hit
+and were verified; D2B29 remained disabled.
+
+**Strict nonclaim:** This source operator is *defined* but
+its skew-adjointness, *same*-color spinor commutator,
+SU(2) gauge invariance under rotations mixing the colors,
+global Spin(9) exponentiation/identification,
+gauge-physical-space invariance, closed-form symmetry, and
+reducing angular spectral sectors are **not proved** by S3D.
+
+**Next test (S3E):** Establish in the exact source's
+`Fermion 2 →L[ℂ] Fermion 2`, with the **same**
+`J_ij=1/2 gamma_i gamma_j` and its accepted real skewness,
+```text
+[K_ij, theta[gamma,C]]
+  = sum_{alpha=0}^{15} J_ij[alpha,gamma] theta[alpha,C].
+```
+The delta-one CAR from Gate #131 fixes the prefactor
+`1/2` precisely. Derive this with finite sums and
+S3C's exact quadratic commutator, not with an assumed
+`Spin(9)` representation. Then audit skew-adjointness
+and G4H/G3A SU(2) color covariance before claiming
+an actual integrated gauge-compatible rotation action.
+
+Even a fully accepted S3E would be symmetry algebra;
+the manuscript's positive point spectrum still requires
+high Spin(9) isotypic branching, transverse level
+exclusion, coercive closed form and compact resolvent.
+Do not promote source algebra to a spectral theorem.
