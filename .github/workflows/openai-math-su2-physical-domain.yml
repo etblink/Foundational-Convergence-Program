@@ -57,6 +57,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -75,15 +76,15 @@ jobs:
           test -s upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/ClosedProfiles.olean
           echo ACCEPTED_K10A_CACHE_RESTORED_AND_CHECKED
 
-      - name: Verify all qualified D1 D3A D3B D2A source is immutable
+      - name: Verify accepted D1 D3A D3B D2A and D2B1 source is frozen
         shell: bash
         run: |
           set -euo pipefail
-          # Gate #7: D2A was compiler-qualified with exactly four axiom reports.
-          git fetch --quiet --no-tags --depth=1 origin 2c54db2171084eb804c2b775bd19b50028f21d76
-          changed="$(git diff --name-only 2c54db2171084eb804c2b775bd19b50028f21d76 HEAD -- experiments/openai-math-su2-physical-domain/ | grep -v -x 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.lean' || true)"
+          # Gate #9: four genuine source SU2 Haar averaging declarations qualified.
+          git fetch --quiet --no-tags --depth=1 origin 4c03638ad2534f0e086a579f177e85ec3ff7962d
+          changed="$(git diff --name-only 4c03638ad2534f0e086a579f177e85ec3ff7962d HEAD -- experiments/openai-math-su2-physical-domain/ | grep -v -x 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.lean' || true)"
           if [ -n "$changed" ]; then
-            echo "Accepted D1/D3A/D3B/D2A source drift; stop the candidate" >&2
+            echo "Accepted D1/D3A/D3B/D2A/D2B1 source drift; stop the candidate" >&2
             printf '%s\n' "$changed" >&2
             exit 1
           fi
@@ -199,7 +200,7 @@ jobs:
           print('D2A_EXACT_FOUR_STANDARD_AXIOM_REPORTS_PASS')
           PY
 
-      - name: Compile prospective D2B1 source Haar fermion average equivariance
+      - name: Recompile accepted D2B1 source Haar fermion average equivariance
         shell: bash
         run: |
           set -euxo pipefail
@@ -208,7 +209,7 @@ jobs:
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.olean
           # Reuse the existing upstream SU(2) compactness and normalized
           # Haar probability measure. No surrogate group/measure allowed.
-          lake env lean SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b1-axioms.log
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.olean SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b1-axioms.log
           python3 - <<'PY'
           import re
           text = open('/tmp/bfss-su2-d2b1-axioms.log').read()
@@ -226,4 +227,30 @@ jobs:
               assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
           assert 'sorryAx' not in text and 'error:' not in text
           print('D2B1_FOUR_HAAR_AVERAGE_REPORTS_PASS')
+          PY
+
+      - name: Compile D2B2 original Haar-average joint continuity and compact support
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe.olean
+          lake env lean SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b2-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b2-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarIntegrand_jointContinuous',
+              'sourceHaarAverageRaw_continuous',
+              'sourceHaarAverageRaw_hasCompactSupport',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B2_THREE_HAAR_CONTINUITY_SUPPORT_REPORTS_PASS')
           PY
