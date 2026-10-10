@@ -2225,7 +2225,57 @@ jobs:
           path: upstream-math/lean/.lake/build
           key: bfss-su2-accepted-s3g-v1-4cf7700e0e507c5d-467a6c50fe620c74-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
 
+      - name: Freeze exact Gate 162 S3H and Gate 165 S3I qualified sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --quiet --no-tags --depth=1 origin 75a09e3ceded364c93b8b25b8b27864852c4a13e
+          git fetch --quiet --no-tags --depth=1 origin 7a176b75ed17260271143a6d4ebc4470d6d3fd27
+          for module in \
+            SU2BFSSPhysicalDomainS3HActualFockPlaneUnitaryFlowProbe \
+            SU2BFSSPhysicalDomainS3IActualFockPlaneFlowGaugeCommutationProbe
+          do
+            p="experiments/openai-math-su2-physical-domain/${module}.lean"
+            case "$module" in
+              SU2BFSSPhysicalDomainS3H*) qualified=75a09e3ceded364c93b8b25b8b27864852c4a13e ;;
+              SU2BFSSPhysicalDomainS3I*) qualified=7a176b75ed17260271143a6d4ebc4470d6d3fd27 ;;
+              *) exit 1 ;;
+            esac
+            expected="$(git rev-parse "$qualified:$p")"
+            actual="$(git hash-object "$p")"
+            if [ "$expected" != "$actual" ]; then
+              echo "GATE165_ACCEPTED_SOURCE_DRIFT $p expected=$expected actual=$actual" >&2
+              exit 1
+            fi
+          done
+          echo TWO_ACCEPTED_S3H_S3I_SOURCES_IMMUTABLE
+
+      - name: Restore immutable Gate 165 S3H S3I compiled objects
+        id: accepted_s3hi_cache
+        if: ${{ inputs.clean_build != true }}
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-accepted-s3hi-v1-75a09e3ceded364c-7a176b75ed172602-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Verify two qualified S3H S3I objects on cache hit
+        if: ${{ steps.accepted_s3hi_cache.outputs.cache-hit == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for module in \
+            SU2BFSSPhysicalDomainS3HActualFockPlaneUnitaryFlowProbe \
+            SU2BFSSPhysicalDomainS3IActualFockPlaneFlowGaugeCommutationProbe
+          do
+            test -s "upstream-math/lean/.lake/build/lib/lean/${module}.olean" || {
+              echo "ACCEPTED_S3HI_MISSING_OLEAN $module" >&2
+              exit 1
+            }
+          done
+          echo TWO_ACCEPTED_S3H_S3I_OLEANS_VERIFIED
+
       - name: Compile S3H actual Fock one-parameter unitary spin rotations
+        if: ${{ steps.accepted_s3hi_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -2254,6 +2304,7 @@ jobs:
           PY
 
       - name: Compile S3I actual unitary Fock spin flow SU2 gauge commutation
+        if: ${{ steps.accepted_s3hi_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -2279,6 +2330,13 @@ jobs:
           assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
           print('S3I_ACTUAL_FOCK_UNITARY_SPIN_FLOW_GAUGE_COMPATIBILITY_PASS')
           PY
+
+      - name: Save immutable Gate 165 S3H S3I accepted proof objects
+        if: ${{ steps.accepted_s3hi_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-accepted-s3hi-v1-75a09e3ceded364c-7a176b75ed172602-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
         if: ${{ inputs.d2b29_trial == true }}
