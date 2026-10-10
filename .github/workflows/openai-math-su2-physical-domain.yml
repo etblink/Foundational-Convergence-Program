@@ -76,6 +76,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -94,16 +95,16 @@ jobs:
           test -s upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/ClosedProfiles.olean
           echo ACCEPTED_K10A_CACHE_RESTORED_AND_CHECKED
 
-      - name: Freeze qualified D1 D3A D3B D2A D2B1 D2B2 D2B3 D2B3J D2B4 sources
+      - name: Freeze qualified D1 D3A D3B D2A D2B1 D2B2 D2B3 D2B3J D2B4 D2B5 sources
         shell: bash
         run: |
           set -euo pipefail
-          # Gate #23 proved the five ORIGINAL bundled SmoothCore/Haar
-          # invariant-core membership and fixed-point statements.
-          git fetch --quiet --no-tags --depth=1 origin 41c45a2ad0e47e1c30699b494045c665c51ed298
-          changed="$(git diff --name-only 41c45a2ad0e47e1c30699b494045c665c51ed298 HEAD -- experiments/openai-math-su2-physical-domain/ | grep -v -x 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.lean' || true)"
+          # Gate #25 proved all five authentic source Haar complex-linear,
+          # idempotent and bosonic full-L2 isometry propositions without sorryAx.
+          git fetch --quiet --no-tags --depth=1 origin 29e5f8cf7c5b238f3f91a971e725ed1cb569f293
+          changed="$(git diff --name-only 29e5f8cf7c5b238f3f91a971e725ed1cb569f293 HEAD -- experiments/openai-math-su2-physical-domain/ | grep -v -x 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.lean' || true)"
           if [ -n "$changed" ]; then
-            echo "Previously qualified D1/D3A/D3B/D2A/D2B1/D2B2/D2B3/D2B3J/D2B4 source drift" >&2
+            echo "Previously qualified D1/D3A/D3B/D2A/D2B1/D2B2/D2B3/D2B3J/D2B4/D2B5 source drift" >&2
             printf '%s\n' "$changed" >&2
             exit 1
           fi
@@ -364,14 +365,14 @@ jobs:
           print('D2B4_FIVE_TRUE_SOURCE_SMOOTHCORE_PHYSICAL_INVARIANTCORE_REPORTS_PASS')
           PY
 
-      - name: Compile D2B5 original SmoothCore Haar complex-linear idempotent operator and source L2 boson isometry
+      - name: Recompile accepted D2B5 original SmoothCore Haar complex-linear idempotent operator and source L2 boson isometry
         shell: bash
         run: |
           set -euxo pipefail
           source "$HOME/.elan/env"
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.olean
-          lake env lean SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b5-axioms.log
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.olean SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b5-axioms.log
           python3 - <<'PY'
           import re
           text = open('/tmp/bfss-su2-d2b5-axioms.log').read()
@@ -390,4 +391,32 @@ jobs:
               assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
           assert 'sorryAx' not in text and 'error:' not in text
           print('D2B5_FIVE_SOURCE_LINEAR_HAAR_PROJECTION_AND_L2_BOSON_ISOMETRY_PASS')
+          PY
+
+      - name: Compile D2B6 source full-L2 gauge action as norm-one-bounded complex CLM
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.olean
+          lake env lean SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b6-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b6-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceFermionFiberAction_norm_le',
+              'sourceFermionFiberAction_continuous',
+              'sourceFullGaugePair_norm_le',
+              'sourceFullGaugePairCLM_apply',
+              'sourceFullGaugePairCLM_norm_le_one',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B6_FIVE_ACTUAL_FULL_L2_GAUGE_BOUND_AND_COMPLEX_CLM_REPORTS_PASS')
           PY
