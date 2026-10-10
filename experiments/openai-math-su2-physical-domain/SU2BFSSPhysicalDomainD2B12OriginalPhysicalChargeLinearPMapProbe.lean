@@ -98,8 +98,12 @@ theorem sourceClosedPhysicalChargeColumn_domain_closure_eq_physical :
       {ψ : FullL2 2 | ∃ y : SpinIndex → FullL2 2,
         (ψ,y) ∈ G.deformedModelGraph 1 0} := by
     ext ψ
-    rw [LinearPMap.mem_domain_iff]
-    rw [sourceClosedPhysicalChargeColumn_graph_eq M G]
+    change ψ ∈ (G.deformedModelGraph 1 0).map
+      (LinearMap.fst ℂ (FullL2 2) (SpinIndex → FullL2 2)) ↔
+      ∃ y : SpinIndex → FullL2 2,
+        (ψ,y) ∈ G.deformedModelGraph 1 0
+    simp only [Submodule.mem_map, LinearMap.fst_apply,
+      Prod.exists, exists_and_right, exists_eq_right]
   rw [hdom]
   exact sourceRestrictedPhysicalGraph_domain_closure_eq_physical M G
 
