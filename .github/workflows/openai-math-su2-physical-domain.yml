@@ -2048,7 +2048,63 @@ jobs:
           path: upstream-math/lean/.lake/build
           key: bfss-su2-accepted-s3e-v1-5ab0ee08dfca4565-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
 
+
+      - name: Freeze exact Gate 145 S3F and Gate 155 S3G123 qualified sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          s3f=4cf7700e0e507c5dc7284b3d385f6cd7d105c675
+          s3g=467a6c50fe620c74876b84b1d53be16f3fe0e47c
+          git fetch --quiet --no-tags --depth=1 origin "$s3f" "$s3g"
+          for module in \
+            SU2BFSSPhysicalDomainS3FActualFermionSpinSkewAdjointProbe \
+            SU2BFSSPhysicalDomainS3GActualFermionSpinGaugeCompatibilityProbe \
+            SU2BFSSPhysicalDomainS3G2GaugeInvariantMajoranaPairsProbe \
+            SU2BFSSPhysicalDomainS3G3FullQuadraticGaugeCommutationProbe
+          do
+            case "$module" in
+              SU2BFSSPhysicalDomainS3F*) qualified="$s3f" ;;
+              SU2BFSSPhysicalDomainS3G*) qualified="$s3g" ;;
+              *) exit 1 ;;
+            esac
+            p="experiments/openai-math-su2-physical-domain/${module}.lean"
+            expected="$(git rev-parse "$qualified:$p")"
+            actual="$(git hash-object "$p")"
+            if [ "$expected" != "$actual" ]; then
+              echo "GATE155_ACCEPTED_SOURCE_DRIFT $p expected=$expected actual=$actual" >&2
+              exit 1
+            fi
+          done
+          echo FOUR_ACCEPTED_S3F_S3G123_SOURCES_IMMUTABLE
+
+      - name: Restore immutable Gate 155 S3F S3G123 compiled objects
+        id: accepted_s3g_cache
+        if: ${{ inputs.clean_build != true }}
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-accepted-s3g-v1-4cf7700e0e507c5d-467a6c50fe620c74-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Verify four qualified S3F S3G123 objects on cache hit
+        if: ${{ steps.accepted_s3g_cache.outputs.cache-hit == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for module in \
+            SU2BFSSPhysicalDomainS3FActualFermionSpinSkewAdjointProbe \
+            SU2BFSSPhysicalDomainS3GActualFermionSpinGaugeCompatibilityProbe \
+            SU2BFSSPhysicalDomainS3G2GaugeInvariantMajoranaPairsProbe \
+            SU2BFSSPhysicalDomainS3G3FullQuadraticGaugeCommutationProbe
+          do
+            test -s "upstream-math/lean/.lake/build/lib/lean/${module}.olean" || {
+              echo "ACCEPTED_S3G_MISSING_OLEAN $module" >&2
+              exit 1
+            }
+          done
+          echo FOUR_ACCEPTED_S3F_S3G123_OLEANS_VERIFIED
+
       - name: Compile S3F true Fock spin generator skew adjointness
+        if: ${{ steps.accepted_s3g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -2076,6 +2132,7 @@ jobs:
           PY
 
       - name: Compile S3G actual gauge color rows and theta covariance source
+        if: ${{ steps.accepted_s3g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -2104,6 +2161,7 @@ jobs:
           PY
 
       - name: Compile S3G2 actual Majorana color-pair gauge invariance
+        if: ${{ steps.accepted_s3g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -2131,6 +2189,7 @@ jobs:
           PY
 
       - name: Compile S3G3 actual full quadratic fermionic spin SU2 gauge compatibility
+        if: ${{ steps.accepted_s3g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -2155,6 +2214,14 @@ jobs:
           assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
           print('S3G3_ACTUAL_FOCK_SPIN_SU2_GAUGE_COMPATIBILITY_PASS')
           PY
+
+
+      - name: Save immutable Gate 155 S3F S3G123 accepted proof objects
+        if: ${{ steps.accepted_s3g_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-accepted-s3g-v1-4cf7700e0e507c5d-467a6c50fe620c74-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
         if: ${{ inputs.d2b29_trial == true }}
