@@ -88,6 +88,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -634,6 +635,33 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
           print('D2B8C_UNCONDITIONAL_GENUINE_FULL_L2_STRONG_CONTINUITY_PASS')
+          PY
+
+      - name: Compile D2B9A true-source full-L2 Haar existence contraction and physical fixedness
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe.olean SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b9a-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b9a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFullHaarIntegrand_integrable',
+              'sourceFullHaarAverage_norm_le',
+              'sourceFullHaarAverage_fixed_physical',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B9A.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B9A_TRUE_SOURCE_FULL_L2_HAAR_INTEGRAL_CONTRACTION_PHYSICAL_FIXED_PASS')
           PY
 
       - name: Save qualified immutable Gate 28 physical-domain compiled chain
