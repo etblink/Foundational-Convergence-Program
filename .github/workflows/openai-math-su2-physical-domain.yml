@@ -123,6 +123,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS2ASpatialWedgePotentialProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -1646,6 +1647,34 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
           print('S1C_PAIRED_24_MODE_SU24_DETERMINANT_ONE_PASS')
+          PY
+
+      - name: Compile S2A exact paired BFSS spatial-wedge quartic potential and one-color bound
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS2ASpatialWedgePotentialProbe.olean SU2BFSSPhysicalDomainS2ASpatialWedgePotentialProbe.lean 2>&1 | tee /tmp/bfss-su2-s2a-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s2a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceSpatialWedgeSq_nonneg',
+              'pairedPotential_eq_spatialWedges',
+              'pairedPotential_ge_two_spatialWedges',
+              'pairedPotential_nonneg',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainS2A.' + suffix, (name, suffix)
+              assert {v.strip() for v in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
+          print('S2A_ACTUAL_PAIRED_POTENTIAL_SPATIAL_WEDGES_ONE_COLOR_BOUND_PASS')
           PY
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
