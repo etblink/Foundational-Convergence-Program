@@ -86,6 +86,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -577,6 +578,34 @@ jobs:
           }, axioms
           assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
           print('D2B8A_EXACT_SOURCE_FULL_L2_FIXED_POINT_CHARACTERIZATION_PASS')
+          PY
+
+      - name: Compile D2B8B exact fermion full-L2 strong continuity reduction
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe.olean SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b8b-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b8b-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceFermionComplexOperator_continuous',
+              'sourceFermionFiberCLM_parameter_continuous',
+              'sourceFermionFiberAction_joint_continuous',
+              'sourceFullGaugePair_strongContinuous_of_boson'
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B8B.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B8B_TRUE_SOURCE_FERMION_CONTINUITY_AND_BOSON_REDUCTION_PASS')
           PY
 
       - name: Save qualified immutable Gate 28 physical-domain compiled chain
