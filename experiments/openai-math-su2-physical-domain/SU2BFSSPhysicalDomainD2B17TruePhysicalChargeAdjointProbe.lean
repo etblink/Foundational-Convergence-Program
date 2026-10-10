@@ -139,7 +139,8 @@ theorem sourcePhysicalHilbertChargeColumn_domain_dense :
     have hout :
         sourceChargeOutputHilbertEquiv (WithLp.toLp 2 y) = y := by
       rfl
-    simpa only [hout] using hy
+    rw [hout]
+    exact hy
   exact (sourcePhysicalRebasedChargeColumn_domain_dense M G).mono hs
 
 /-- Original physical Hilbert subspace remains complete. -/
