@@ -115,7 +115,7 @@ theorem pairedCoreForm_ge_sourcePotential_minusLinearFermion
         ∫ x : Boson 2,
           (M.deformedBosonicPotential 1 0 x * ‖f x‖ ^ 2 +
             inner ℝ (f x) (M.deformedFermionField 1 0 x (f x))) :=
-      add_le_add_left hint _
+      add_le_add_right hint _
     _ = M.deformedCoreEnergy 1 0 f := hform.symm
     _ = M.coreForm f := sourceUnconditionalCoreForm_equal M f
 
