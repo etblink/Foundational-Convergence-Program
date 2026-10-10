@@ -104,6 +104,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B16PhysicalHilbertRebasedChargeOperatorProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B17TruePhysicalChargeAdjointProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B18NaturalChargeAdjointSquareProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B19NaturalChargeSquarePositiveProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -1186,6 +1187,37 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
           print('D2B18_SOURCE_PHYSICAL_NATURAL_ADJOINT_SQUARE_DOMAIN_PASS')
+          PY
+
+
+      - name: Compile D2B19 exact source physical adjoint-square pairing symmetry and nonnegativity
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B18NaturalChargeAdjointSquareProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B19NaturalChargeSquarePositiveProbe.olean SU2BFSSPhysicalDomainD2B19NaturalChargeSquarePositiveProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b19-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b19-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'naturalFormalProduct_inner',
+              'naturalFormalProduct_symmetric',
+              'sourcePhysicalChargeAdjointSquare_inner',
+              'sourcePhysicalChargeAdjointSquare_symmetric',
+              'sourcePhysicalChargeAdjointSquare_energy',
+              'sourcePhysicalChargeAdjointSquare_nonneg',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B19.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B19_SOURCE_PHYSICAL_ADJOINT_SQUARE_POSITIVE_SYMMETRIC_PASS')
           PY
 
       - name: Save qualified immutable Gate 47 extension cache
