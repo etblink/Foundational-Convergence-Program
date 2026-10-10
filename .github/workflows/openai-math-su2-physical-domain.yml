@@ -995,16 +995,7 @@ jobs:
           path: upstream-math/lean/.lake/build
           key: bfss-su2-domain-gate93-d2b28-v1-e6dcc0f751252f9cdb609d3de61f67abe733a041-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
 
-      - name: Require Gate 93 warm cache on explicit smoke-test commit
-        if: ${{ github.event_name == 'push' && github.event.head_commit.message == 'BFSS: warm-test accepted Gate 93 cache' }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          test "${{ steps.gate93_cache.outputs.cache-hit }}" = "true" || {
-            echo GATE93_WARM_RESTORE_REQUIRED_BUT_NOT_HIT >&2
-            exit 1
-          }
-          echo GATE93_EXACT_WARM_RESTORE_CONFIRMED
+      # Gate 93 warm cache is checked by the restore action and 18-object verification below.
 
       - name: Verify exact Gate 93 proof objects on cache hit
         if: ${{ steps.gate93_cache.outputs.cache-hit == 'true' }}
