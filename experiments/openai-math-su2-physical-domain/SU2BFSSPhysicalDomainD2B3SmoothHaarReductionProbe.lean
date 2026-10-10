@@ -28,6 +28,7 @@ open OAI.Laughlin.Rotation
 open FCP.BFSSSU2PhysicalDomainD2B1
 open FCP.BFSSSU2PhysicalDomainD2B2
 open MeasureTheory
+open scoped Topology ContDiff
 
 variable (M : AlgebraData 2) (G : M.GaugeData)
 
