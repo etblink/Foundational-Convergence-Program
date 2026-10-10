@@ -39,7 +39,7 @@ theorem pairedTheta_quadratic_commutator
       rw [hbc, hac]
       by_cases hbc' : β = γ ∧ B = C <;>
         by_cases hac' : α = γ ∧ A = C <;>
-        simp [hbc', hac']
+        simp [hbc', hac', zero_smul]
 
 /-- A color-diagonal quadratic spinor generator commutes with every
 Majorana of a different gauge color, on the actual 48-label CAR. -/
