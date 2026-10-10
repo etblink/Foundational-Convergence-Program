@@ -34,6 +34,7 @@ open OAI.BFSSQuantum.AlgebraData
 open OAI.Laughlin.Rotation
 open FCP.BFSSSU2PhysicalDomainD2B1
 open FCP.BFSSSU2PhysicalDomainD2B4
+open FCP.BFSSSU2PhysicalDomainD2B6
 open FCP.BFSSSU2PhysicalDomainD2B7
 open FCP.BFSSSU2PhysicalDomainD2B9A
 open FCP.BFSSSU2PhysicalDomainD2B9B
@@ -57,11 +58,7 @@ theorem sourceFullHaarAverageCLM_testInner_eq
     inner ℂ (coreToL2 h)
       (coreToL2 (sourceHaarAverageCore M G f)) := by
   rw [sourceFullHaarAverageCLM_apply]
-  change inner ℂ (coreToL2 h)
-      (∫ g : GaugeGroup 2,
-        sourceFullGaugePairCLM M G g (coreToL2 f) ∂sourceHaar) =
-    inner ℂ (coreToL2 h)
-      (coreToL2 (sourceHaarAverageCore M G f))
+  unfold sourceFullHaarAverage
   calc
     _ = ∫ g : GaugeGroup 2,
         inner ℂ (coreToL2 h)
