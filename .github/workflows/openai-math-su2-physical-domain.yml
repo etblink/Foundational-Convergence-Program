@@ -8,6 +8,12 @@ on:
       - experiments/openai-math-su2-physical-domain/**
       - .github/workflows/openai-math-su2-physical-domain.yml
   workflow_dispatch:
+    inputs:
+      clean_build:
+        description: 'Recompile all accepted physical-domain sources; bypass the domain object cache'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
@@ -78,6 +84,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -96,21 +103,56 @@ jobs:
           test -s upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/ClosedProfiles.olean
           echo ACCEPTED_K10A_CACHE_RESTORED_AND_CHECKED
 
-      - name: Freeze qualified D1 D3A D3B D2A D2B1 D2B2 D2B3 D2B3J D2B4 D2B5 D2B6 sources
+      - name: Freeze exact Gate 28 accepted twelve-source baseline
         shell: bash
         run: |
           set -euo pipefail
-          # Gate #26 proved five original FullL2 gauge norm bounds and
-          # source-defined complex-linear-map identity with standard axioms.
-          git fetch --quiet --no-tags --depth=1 origin 8c44aa10ae6b963fffa78718cc93437d4f2dd9cd
-          changed="$(git diff --name-only 8c44aa10ae6b963fffa78718cc93437d4f2dd9cd HEAD -- experiments/openai-math-su2-physical-domain/ | grep -v -x 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.lean' || true)"
-          if [ -n "$changed" ]; then
-            echo "Previously qualified D1/D3A/D3B/D2A/D2B1/D2B2/D2B3/D2B3J/D2B4/D2B5/D2B6 source drift" >&2
-            printf '%s\n' "$changed" >&2
-            exit 1
-          fi
+          # Cache acceptance is controlled by the exact kernel-qualified
+          # Gate #28 source commit, NOT by a changeable head or test claim.
+          baseline=b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab
+          git fetch --quiet --no-tags --depth=1 origin "$baseline"
+          mapfile -t accepted < <(git ls-tree -r --name-only "$baseline" -- experiments/openai-math-su2-physical-domain/ | grep -E '\.lean$')
+          test "${#accepted[@]}" -eq 12
+          for p in "${accepted[@]}"; do
+            test -f "$p"
+            expected="$(git rev-parse "$baseline:$p")"
+            actual="$(git hash-object "$p")"
+            if [ "$expected" != "$actual" ]; then
+              echo "ACCEPTED_GATE28_SOURCE_DRIFT $p expected=$expected actual=$actual" >&2
+              exit 1
+            fi
+          done
+          echo GATE28_TWELVE_ACCEPTED_SOURCES_IMMUTABLE
+
+      - name: Restore exact accepted Gate 28 physical-domain compiled modules
+        id: domain_proof_cache
+        if: ${{ inputs.clean_build != true }}
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-domain-gate28-v1-b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean', 'experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Reject incomplete or stale Gate 28 physical-domain cache
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          baseline=b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab
+          mapfile -t accepted < <(git ls-tree -r --name-only "$baseline" -- experiments/openai-math-su2-physical-domain/ | grep -E '\.lean$')
+          test "${#accepted[@]}" -eq 12
+          for p in "${accepted[@]}"; do
+            module="$(basename "$p" .lean)"
+            test -s "upstream-math/lean/.lake/build/lib/lean/${module}.olean" || {
+              echo "INCOMPLETE_GATE28_ACCEPTED_OLEAN $module" >&2
+              exit 1
+            }
+          done
+          test -s upstream-math/lean/.lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean
+          echo GATE28_TWELVE_OLEANS_AND_PINNED_PREREQUISITES_PRESENT
 
       - name: Compile D1 original gauge-restricted source-graph bridge
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
@@ -139,6 +181,7 @@ jobs:
           PY
 
       - name: Recompile accepted D3A kinetic gauge contraction and emit importable module
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
@@ -164,6 +207,7 @@ jobs:
           PY
 
       - name: Recompile accepted D3B original supercharge physical-space preservation
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
@@ -193,6 +237,7 @@ jobs:
           PY
 
       - name: Recompile accepted D2A physical closed graph bridge
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
@@ -222,6 +267,7 @@ jobs:
           PY
 
       - name: Recompile accepted D2B1 source Haar fermion average equivariance
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
@@ -251,6 +297,7 @@ jobs:
           PY
 
       - name: Recompile accepted D2B2 Haar-average joint continuity and compact support
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
@@ -277,6 +324,7 @@ jobs:
           PY
 
       - name: Recompile accepted D2B3 true-source smooth gauge slices and explicit all-jet reduction
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
@@ -311,6 +359,7 @@ jobs:
           PY
 
       - name: Recompile accepted D2B3J original gauge operator continuity and unconditional smooth Haar average
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
@@ -339,6 +388,7 @@ jobs:
           PY
 
       - name: Recompile accepted D2B4 original bundled SmoothCore average and physical invariant-core membership
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
@@ -367,6 +417,7 @@ jobs:
           PY
 
       - name: Recompile accepted D2B5 original SmoothCore Haar complex-linear idempotent operator and source L2 boson isometry
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
@@ -395,6 +446,7 @@ jobs:
           PY
 
       - name: Recompile accepted D2B6 source full-L2 gauge action as norm-one-bounded complex CLM
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
@@ -423,13 +475,14 @@ jobs:
           PY
 
       - name: Compile D2B7 original full-L2 gauge isometry physical fixedness and smooth-core compatibility
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
           source "$HOME/.elan/env"
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.olean
-          lake env lean SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b7-axioms.log
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.olean SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b7-axioms.log
           python3 - <<'PY'
           import re
           text = open('/tmp/bfss-su2-d2b7-axioms.log').read()
@@ -450,3 +503,62 @@ jobs:
           assert 'sorryAx' not in text and 'error:' not in text
           print('D2B7_SIX_GENUINE_FULL_L2_ISOMETRY_PHYSICAL_FIXEDNESS_AND_CORE_AE_REPORTS_PASS')
           PY
+
+      - name: Kernel-import and exact 51-theorem axiom recheck (cache hit or clean compilation)
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          # Defend against both missing proof objects and a silently changed
+          # smoke test. The 51 expected theorem names are reconstructed
+          # from the actual 12 qualified source files at Gate #28.
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          baseline = "b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab"
+          files = subprocess.check_output(
+              ["git", "-C", "../..", "ls-tree", "-r", "--name-only", baseline,
+               "experiments/openai-math-su2-physical-domain/"],
+              text=True).splitlines()
+          accepted = [f for f in files if f.endswith(".lean")]
+          assert len(accepted) == 12, accepted
+          expected = []
+          for p in accepted:
+              module = Path(p).stem
+              obj = Path(".lake/build/lib/lean") / (module + ".olean")
+              assert obj.is_file() and obj.stat().st_size > 0, str(obj)
+              source = (Path("../..") / p).read_text()
+              ns = re.findall(r"^namespace (FCP\.[A-Za-z0-9_.]+)$", source, re.M)
+              reports = re.findall(r"^#print axioms ([A-Za-z0-9_']+)$", source, re.M)
+              assert len(ns) == 1 and reports, module
+              expected.extend(ns[0] + "." + n for n in reports)
+          assert len(expected) == len(set(expected)) == 51
+          smoke = Path("SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean").read_text()
+          actual = re.findall(r"^#print axioms ([A-Za-z0-9_.']+)$", smoke, re.M)
+          assert actual == expected, (actual, expected)
+          print("GATE28_TWELVE_OBJECTS_51_SMOKE_NAMES_GROUNDED_IN_FROZEN_SOURCE")
+          PY
+          lake env lean SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean 2>&1 | tee /tmp/bfss-su2-gate28-cache-axioms.log
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          src = Path("SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean").read_text()
+          expected = re.findall(r"^#print axioms ([A-Za-z0-9_.']+)$", src, re.M)
+          log = Path("/tmp/bfss-su2-gate28-cache-axioms.log").read_text()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          assert len(expected) == len(reports) == 51, (len(expected), len(reports))
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          for (name, axioms), want in zip(reports, expected):
+              assert name == want, (name, want)
+              assert {a.strip() for a in axioms.split(",")} <= allowed, (name, axioms)
+          assert "sorryAx" not in log and "error:" not in log and "unknownIdentifier" not in log
+          print("GATE28_ALL_51_TRUE_SOURCE_ACCEPTED_AXIOM_REPORTS_PASS")
+          PY
+
+      - name: Save qualified immutable Gate 28 physical-domain compiled chain
+        if: ${{ steps.domain_proof_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-domain-gate28-v1-b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean', 'experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
