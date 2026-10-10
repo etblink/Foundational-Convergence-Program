@@ -1608,7 +1608,7 @@ jobs:
           python3 - <<'PY'
           import re
           log = open('/tmp/bfss-su2-s1b-axioms.log').read()
-          found = re.findall(r"'([^']+)' depends on axioms: \\[([^\\]]*)\\]", log)
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
           assert len(found) == 1, found
           assert found[0][0] == 'FCP.BFSSSU2PhysicalDomainS1B.theta_covariant_implementer_scalar', found
           assert {v.strip() for v in found[0][1].split(',')} <= {
