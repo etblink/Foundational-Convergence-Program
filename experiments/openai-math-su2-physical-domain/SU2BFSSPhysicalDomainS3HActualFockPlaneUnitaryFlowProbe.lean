@@ -61,7 +61,11 @@ theorem pairedFermionPlaneSpinFlow_zero (i j : SpaceIndex) :
     pairedFermionPlaneSpinFlow i j 0 = 1 := by
   change NormedSpace.exp ((0 : ℂ) •
     pairedFermionPlaneSpinGenerator i j) = 1
-  rw [zero_smul, NormedSpace.exp_zero]
+  have hzero :
+      (0 : ℂ) • pairedFermionPlaneSpinGenerator i j = (0 : FermionOp) := by
+    ext v
+    simp
+  rw [hzero, NormedSpace.exp_zero]
 
 /-- The exact source one-parameter group law, using pinned exponential
 commutation for two scalar multiples of the same accepted K_ij. -/
@@ -76,7 +80,7 @@ theorem pairedFermionPlaneSpinFlow_add
       pairedFermionPlaneSpinGenerator i j) *
     NormedSpace.exp (((t : ℝ) : ℂ) •
       pairedFermionPlaneSpinGenerator i j)
-  rw [map_add, add_smul]
+  rw [Complex.ofReal_add, add_smul]
   exact NormedSpace.exp_add_of_commute
     (((Commute.refl (pairedFermionPlaneSpinGenerator i j)).smul_left (s : ℂ)).smul_right (t : ℂ))
 
