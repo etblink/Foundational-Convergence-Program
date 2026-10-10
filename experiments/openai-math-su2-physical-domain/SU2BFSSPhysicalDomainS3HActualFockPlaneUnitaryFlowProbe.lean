@@ -80,7 +80,16 @@ theorem pairedFermionPlaneSpinFlow_add
       pairedFermionPlaneSpinGenerator i j) *
     NormedSpace.exp (((t : ℝ) : ℂ) •
       pairedFermionPlaneSpinGenerator i j)
-  rw [Complex.ofReal_add, add_smul]
+  have hadd :
+      (((s : ℝ) : ℂ) + ((t : ℝ) : ℂ)) •
+          pairedFermionPlaneSpinGenerator i j =
+        (((s : ℝ) : ℂ) • pairedFermionPlaneSpinGenerator i j) +
+          (((t : ℝ) : ℂ) • pairedFermionPlaneSpinGenerator i j) := by
+    ext v
+    simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply]
+    exact add_smul (s : ℂ) (t : ℂ)
+      (pairedFermionPlaneSpinGenerator i j v)
+  rw [Complex.ofReal_add, hadd]
   exact NormedSpace.exp_add_of_commute
     (((Commute.refl (pairedFermionPlaneSpinGenerator i j)).smul_left (s : ℂ)).smul_right (t : ℂ))
 
