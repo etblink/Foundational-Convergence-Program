@@ -66,6 +66,9 @@ theorem source_color_rows_contraction_complex (g : GaugeGroup 2)
         simp
     _ = ((if B = D then (1 : ℝ) else 0) : ℂ) := by
         rw [source_color_rows_contraction]
+        by_cases h : B = D
+        · simp [h]
+        · simp [h]
     _ = if B = D then 1 else 0 := by
         by_cases h : B = D
         · simp [h]
