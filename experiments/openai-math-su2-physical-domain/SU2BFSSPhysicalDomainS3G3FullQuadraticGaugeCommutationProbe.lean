@@ -23,6 +23,11 @@ open FCP.BFSSSU2PhysicalDomainS3A
 open FCP.BFSSSU2PhysicalDomainS3D
 open FCP.BFSSSU2PhysicalDomainS3G2
 
+-- The concrete source Fock terms can require larger elaborator recursion
+-- during the final abstract theorem instantiation; no new axioms.
+set_option maxRecDepth 4096
+set_option maxHeartbeats 1000000
+
 private abbrev FermionOp := Fermion 2 →L[ℂ] Fermion 2
 
 /-- Abstract finite weighted-sum commutation with the genuine source
@@ -87,12 +92,9 @@ theorem pairedFermionSpinQuadraticSum_gauge_commutes
       (∑ A : ColorIndex 2, pairedFermionSpinQuadraticColor J A)
         (fermionGaugeUnitaryHom g v) := by
   rw [sourceQuadraticColorSum_reindex]
-  exact finiteWeightedGaugeCommutes g
-    (fun α β => ∑ A : ColorIndex 2,
-      pairedTheta α A * pairedTheta β A)
-    (fun α β => ((J α β : ℝ) : ℂ))
-    (fun α β w =>
-      pairedTheta_colorPairSum_gauge_invariant g α β w) v
+  apply finiteWeightedGaugeCommutes g
+  intro α β w
+  exact pairedTheta_colorPairSum_gauge_invariant g α β w
 
 /-- The literal S3D 48-Majorana spin-plane rotation generator
 commutes pointwise with the genuine G4E SU(2) gauge unitaries. -/
