@@ -1,0 +1,100 @@
+name: BFSS SU2 Physical Domain Bridge
+
+on:
+  push:
+    branches:
+      - research/openai-math-su2-physical-domain
+    paths:
+      - experiments/openai-math-su2-physical-domain/**
+      - .github/workflows/openai-math-su2-physical-domain.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-domain:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out FCP physical-domain branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Check out exact OpenAI Math source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: openai/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Restore pinned dependency environment
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake
+            ~/.elan
+          key: family270b-bridge-ubuntu-lean4341-openai-adc7f124-deformedcharge-v2
+
+      - name: Freeze accepted source and pin compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --quiet --no-tags --depth=1 origin 6eeb4293abcc1cf3a111ff5c511f708cb5ed320a
+          changed="$(git diff --name-only 6eeb4293abcc1cf3a111ff5c511f708cb5ed320a HEAD -- experiments/openai-math-su2-concrete-potential/)"
+          if [ -n "$changed" ]; then
+            echo "Accepted proof source changed; do not use its cached Lean objects" >&2
+            printf '%s\n' "$changed" >&2
+            exit 1
+          fi
+          test "$(cat upstream-math/lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.lean upstream-math/lean/
+
+      - name: Restore exact Gate 174 warm-qualified proof chain
+        id: accepted_cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-accepted-g4k10a-v1-6eeb4293abcc1cf3a111ff5c511f708cb5ed320a-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Reject cache miss or stale accepted proof objects
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.accepted_cache.outputs.cache-hit }}" = "true"
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9DSourcePotentialMultiplierProbe.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/ClosedProfiles.olean
+          echo ACCEPTED_K10A_CACHE_RESTORED_AND_CHECKED
+
+      - name: Compile D1 original gauge-restricted source-graph bridge
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          lake env lean SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.lean 2>&1 | tee /tmp/bfss-su2-domain-d1-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-domain-d1-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceGaugeRestrictedGraphMap_equal',
+              'sourceGaugeRestrictedClosedGraph_equal',
+              'sourceGaugeRestrictedClosedDomain_iff',
+              'sourceGaugeRestrictedCoreForm_equal',
+              'sourceGaugeRestrictedGraph_le_full',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {part.strip() for part in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D1_EXACT_FIVE_STANDARD_AXIOM_REPORTS_PASS')
+          PY
