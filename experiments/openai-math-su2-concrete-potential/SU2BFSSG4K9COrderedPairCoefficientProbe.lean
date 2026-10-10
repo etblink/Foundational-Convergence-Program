@@ -79,12 +79,17 @@ theorem symmetricZeroDiagonal_halfDoubleSum_eq_upper
   have hupper :
       (∑ p : BFSSGamma.SpatialPair, F p.1.1 p.1.2) = upper := by
     dsimp [upper]
-    -- A subtype Fintype sum elaborates as sum over the subtype's univ.
-    -- Rewrite THAT univ first; the finite-filter lemma does not match it alone.
-    rw [← Finset.subtype_univ
-      (fun ij : SpaceIndex × SpaceIndex => ij.1 < ij.2)]
-    rw [Finset.sum_subtype_eq_sum_filter]
-    simp only [Finset.sum_filter, Fintype.sum_prod_type]
+    -- The generic rewrite cannot synthesize the pair-function from
+    -- `F p.1 p.2` under a dependent subtype binder. Give the exact
+    -- original pair-indexed function to the mathlib theorem explicitly.
+    -- The subtype's universe, filter sum, and product sum are converted
+    -- only AFTER this source-independent typed equality has been formed.
+    simpa only [Finset.subtype_univ, Finset.sum_filter,
+      Finset.sum_univ, Fintype.sum_prod_type] using
+      (Finset.sum_subtype_eq_sum_filter
+        (s := (Finset.univ : Finset (SpaceIndex × SpaceIndex)))
+        (p := fun ij : SpaceIndex × SpaceIndex => ij.1 < ij.2)
+        (fun ij : SpaceIndex × SpaceIndex => F ij.1 ij.2))
   calc
     (1 / 2 : ℝ) * (∑ i : SpaceIndex, ∑ j : SpaceIndex, F i j) =
         upper := by rw [htwo]; ring
