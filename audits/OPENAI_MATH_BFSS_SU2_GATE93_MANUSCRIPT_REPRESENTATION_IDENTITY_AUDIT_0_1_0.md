@@ -206,3 +206,63 @@ rather than re-proving eigenvector/centralizer lemmas.
 algebra module, the manuscript's Spin(48) lift, SU(2) character
 triviality, or the resulting representation equality. These are
 concrete separate goals; source existence is not proof discharge.
+
+## 8. S1A exact kernel acceptance — Gate #99
+
+**Outcome: `S1A_PAIRED_48_THETA_SCALAR_COMMUTANT__KERNEL_ACCEPTED`.**
+
+- Run: **BFSS SU2 Physical Domain Bridge #99**, GitHub Actions run
+  `38074916490`, **SUCCESS**.
+- Qualified proof-producing commit:
+  `d8d91a356f9fdcaca02f627642bd0eb59fea8006`.
+- New file:
+  `experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe.lean`
+  with immutable blob `fd5f9e0f3d36a52e3a0222116022a11a83c387d7`.
+- Explicit green compiler output:
+  `'FCP.BFSSSU2PhysicalDomainS1A.pairedTheta_commutant_scalar' depends on axioms: [propext, Classical.choice, Quot.sound]`.
+- The exact axiom/sorry gate emitted
+  `S1A_PAIRED_48_THETA_SCALAR_COMMUTANT_PASS`.
+- Gate #99 restored/verified the exact Gate-93 18-source cache; the
+  D2B11–D2B28 accepted proofs did not recompile; unqualified D2B29
+  remained intentionally skipped.
+
+**Proved statement:** on the *literal* pinned `Fermion 2` of
+dimension `2^24`, if a complex-linear endomorphism `L` commutes
+pointwise with all 48 `pairedTheta alpha A` generators, then there
+exists `z : Complex` such that `L v = z • v` for every `v`.
+The proof uses the **accepted exact irreducibility** certificate of
+the paired theta family and the pinned Mathlib theorem
+`Module.End.exists_eigenvalue`. This is a substantive
+representation-theoretic source bridge ingredient, not a spectral
+result and not an invented physical assumption.
+
+**New pin-aligned source finding:** the exact Mathlib snapshot includes
+`Mathlib/LinearAlgebra/CliffordAlgebra/SpinGroup.lean` and the
+`spinGroup` algebraic group structure. But this file itself
+**does not supply the required explicit global continuous lift**
+`SU(2) -> Spin(48)` of the actual color action, nor does it prove
+equivalence with FCP's `fermionGaugeUnitaryHom`. Existence of a
+`spinGroup` type is not existence of the *particular lift*.
+
+**Next real scientific bridge, named S1B:** establish equality of the
+paper's actual Spin(48)-lift implementation and FCP's accepted
+fermionic SU(2) action on the *same* paired module by exact covariance,
+irreducibility, and triviality of SU(2) scalar characters. S1A supplies
+the pointwise centralizer-scalar theorem; the actual lift and global
+character elimination remain separate, undischargeable by S1A alone.
+For a more efficient alternative, a direct derivation that the
+accepted Fock exterior action implements the *unique* spin lift may
+bypass general representation classification, but must identify the
+same color-index action and group-law normalization.
+
+**Scientific distinction preserved:** Gate #99 does **not** show that
+the FCP Hamiltonian is unitarily equivalent to the manuscript
+Hamiltonian, nor does it prove an eigenvalue. The accepted FCP
+Hamiltonian at Gate #93 remains a real self-adjoint operator
+construction; `U H_paper = H_FCP U` is still open.
+
+**Operational posture:** The accepted exact Gate-93 cache was saved
+in Gate #96 and independently warm-qualified in Gate #98. No further
+cache repair is justified; future Lean modules should reuse it and
+must not recompile the accepted D2B11-D2B28 chain. Keep FCP main,
+the source register, and its framework comparison ledgers unchanged.
