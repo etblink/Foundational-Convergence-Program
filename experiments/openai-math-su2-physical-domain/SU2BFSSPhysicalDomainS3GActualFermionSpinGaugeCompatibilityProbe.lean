@@ -63,11 +63,13 @@ theorem source_color_rows_contraction_complex (g : GaugeGroup 2)
     _ = ((∑ A : ColorIndex 2,
           adjointColorMatrix g B A *
             adjointColorMatrix g D A : ℝ) : ℂ) := by
-        rw [map_sum]
+        simp
     _ = ((if B = D then (1 : ℝ) else 0) : ℂ) := by
         rw [source_color_rows_contraction]
     _ = if B = D then 1 else 0 := by
-        split_ifs <;> norm_num
+        by_cases h : B = D
+        · simp [h]
+        · simp [h]
 
 /-- G4H's actual on-vectors covariance of the 48 true Majoranas
 in the accepted G3A row/output vs column/input convention. -/
