@@ -114,6 +114,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B26WeakFormAssociatedOperatorProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B27NormalizedHamiltonianSelfAdjointProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B28ConcretePairedSU2HamiltonianProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B29ConcretePositiveSourceFormTrialProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -1498,6 +1499,34 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
           print('D2B28_ACTUAL_PAIRED_SU2_NORMALIZED_HAMILTONIAN_SELFADJOINT_PASS')
+          PY
+
+
+      - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B28ConcretePairedSU2HamiltonianProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B29ConcretePositiveSourceFormTrialProbe.olean SU2BFSSPhysicalDomainD2B29ConcretePositiveSourceFormTrialProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b29-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b29-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceInvariantCoreHilbertFormEnergy_eq_massless',
+              'pairedSU2RadialClosedFormEnergy_pos',
+              'pairedSU2RadialCharge_ne_zero',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B29.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B29_EXACT_CONCRETE_SU2_POSITIVE_SOURCE_CLOSED_FORM_PASS')
           PY
 
       - name: Save qualified immutable Gate 47 extension cache
