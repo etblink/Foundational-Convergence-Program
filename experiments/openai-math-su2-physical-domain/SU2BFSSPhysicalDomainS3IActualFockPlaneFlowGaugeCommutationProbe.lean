@@ -56,7 +56,7 @@ theorem pairedFermionGaugeOperator_comm_spinFlow
       (pairedFermionPlaneSpinFlow i j t) := by
   unfold pairedFermionPlaneSpinFlow
   exact
-    ((pairedFermionGaugeOperator_comm_spinGenerator g i j).smul_right t).exp_right
+    ((pairedFermionGaugeOperator_comm_spinGenerator g i j).smul_right (t : ℂ)).exp_right
 
 /-- Pointwise form of the same exact source fact, for all Fock states. -/
 theorem pairedFermionPlaneSpinFlow_gauge_commutes
