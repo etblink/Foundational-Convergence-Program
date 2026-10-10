@@ -98,7 +98,11 @@ not an assumed projection law. -/
 theorem sourceHaarAverageCore_fixed
     (f : G.invariantCore) :
     sourceHaarAverageCore M G f.val = f.val := by
-  ext x
+  -- TestFunction.ext asks for whole Fermion-valued function equality.
+  -- Generic `ext x` descended into PiLp coordinates in Gate #22.
+  apply TestFunction.ext
+  intro x
+  change sourceHaarAverageRaw M G f.val x = f.val x
   exact sourceHaarAverageRaw_fixed M G f x
 
 #print axioms sourceHaarAverageCore_apply
