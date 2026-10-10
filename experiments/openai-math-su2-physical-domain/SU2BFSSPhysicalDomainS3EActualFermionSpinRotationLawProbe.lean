@@ -33,7 +33,9 @@ theorem pairedSpinQuadraticColor_comm_raw
         pairedTheta γ C * pairedFermionSpinQuadraticColor J C =
       (∑ α : SpinIndex, ((J α γ : ℝ) : ℂ) • pairedTheta α C) -
         (∑ β : SpinIndex, ((J γ β : ℝ) : ℂ) • pairedTheta β C) := by
-  let theta := pairedTheta
+  have hz (z : ℂ) :
+      z • (0 : Fermion 2 →L[ℂ] Fermion 2) = 0 :=
+    smul_zero z
   have hfirst :
       (∑ α : SpinIndex, ∑ β : SpinIndex,
          ((J α β : ℝ) : ℂ) •
@@ -41,7 +43,7 @@ theorem pairedSpinQuadraticColor_comm_raw
         ∑ α : SpinIndex, ((J α γ : ℝ) : ℂ) • pairedTheta α C := by
     apply Finset.sum_congr rfl
     intro α _
-    simp only [smul_ite, smul_zero, Finset.sum_ite_eq',
+    simp only [smul_ite, hz, Finset.sum_ite_eq',
       Finset.mem_univ, ite_true]
   have hsecond :
       (∑ α : SpinIndex, ∑ β : SpinIndex,
@@ -57,7 +59,7 @@ theorem pairedSpinQuadraticColor_comm_raw
             intro α _
             by_cases h : α = γ
             · simp only [if_pos h]
-            · simp only [if_neg h, smul_zero, Finset.sum_const_zero]
+            · simp only [if_neg h, hz, Finset.sum_const_zero]
       _ = _ := by
         simp only [Finset.sum_ite_eq', Finset.mem_univ, ite_true]
   unfold pairedFermionSpinQuadraticColor
@@ -102,6 +104,8 @@ theorem pairedSpinQuadraticColor_comm_skew
     have h := congrArg
       (fun M : Matrix SpinIndex SpinIndex ℝ => M α γ) hJ
     simpa only [Matrix.transpose_apply, Matrix.neg_apply] using h
+  have hneg (z : ℂ) (T : Fermion 2 →L[ℂ] Fermion 2) :
+      (-z) • T = -(z • T) := neg_smul z T
   have hsum :
       (∑ α : SpinIndex, ((J γ α : ℝ) : ℂ) • pairedTheta α C) =
         -(∑ α : SpinIndex, ((J α γ : ℝ) : ℂ) • pairedTheta α C) := by
@@ -109,7 +113,7 @@ theorem pairedSpinQuadraticColor_comm_skew
     apply Finset.sum_congr rfl
     intro α _
     rw [hsk α]
-    simp only [Complex.ofReal_neg, neg_smul]
+    simp only [Complex.ofReal_neg, hneg]
   rw [pairedSpinQuadraticColor_comm_raw, hsum]
   module
 
@@ -131,7 +135,7 @@ theorem pairedFermionPlaneSpinGenerator_comm_theta
         pairedFermionSpinQuadraticColor J C * pairedTheta γ C -
           pairedTheta γ C * pairedFermionSpinQuadraticColor J C := by
     apply Finset.sum_eq_single C
-    · intro A hAC
+    · intro A _ hAC
       exact sub_eq_zero.mpr
         (pairedFermionSpinQuadraticColor_comm_other_color J A C hAC γ)
     · intro hC
