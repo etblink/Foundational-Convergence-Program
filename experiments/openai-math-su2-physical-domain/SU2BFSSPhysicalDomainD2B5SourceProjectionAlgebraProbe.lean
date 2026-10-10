@@ -46,7 +46,7 @@ theorem sourceHaarAverageCore_add (f h : SmoothCore 2) :
           G.fermion g (h (G.boson g⁻¹ x))) ∂sourceHaar := by
             apply integral_congr_ae
             filter_upwards [] with g
-            simp only [FunLike.add_apply, map_add]
+            simp only [add_apply, map_add]
     _ = _ := integral_add
       (sourceHaarIntegrand_integrable M G f x)
       (sourceHaarIntegrand_integrable M G h x)
@@ -66,7 +66,7 @@ theorem sourceHaarAverageCore_smul (c : ℂ) (f : SmoothCore 2) :
         c • (G.fermion g (f (G.boson g⁻¹ x))) ∂sourceHaar := by
             apply integral_congr_ae
             filter_upwards [] with g
-            simp only [FunLike.smul_apply, map_smul]
+            simp only [smul_apply, map_smul]
     _ = _ := integral_smul c _
 
 /-- The exact original-source Haar operator as a complex-linear
