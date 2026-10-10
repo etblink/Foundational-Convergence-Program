@@ -26,6 +26,8 @@ open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainD2B17
 open FCP.BFSSSU2PhysicalDomainD2B18
+open RCLike
+open scoped ComplexConjugate
 
 variable {E F : Type*}
 variable [NormedAddCommGroup E] [InnerProductSpace ℂ E]
