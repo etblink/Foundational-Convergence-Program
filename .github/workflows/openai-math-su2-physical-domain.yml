@@ -120,6 +120,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B27NormalizedHamiltonianSelfAdjointProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B28ConcretePairedSU2HamiltonianProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B29ConcretePositiveSourceFormTrialProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -1571,6 +1572,28 @@ jobs:
           print('D2B28_ACTUAL_PAIRED_SU2_NORMALIZED_HAMILTONIAN_SELFADJOINT_PASS')
           PY
 
+
+
+      - name: Compile S1A exact paired 48-Majorana scalar commutant
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSG1APairedThetaProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe.olean SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe.lean 2>&1 | tee /tmp/bfss-su2-s1a-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s1a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          assert len(found) == 1, found
+          assert found[0][0] == 'FCP.BFSSSU2PhysicalDomainS1A.pairedTheta_commutant_scalar', found
+          assert {v.strip() for v in found[0][1].split(',')} <= {
+              'propext', 'Classical.choice', 'Quot.sound'
+          }, found
+          assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
+          print('S1A_PAIRED_48_THETA_SCALAR_COMMUTANT_PASS')
+          PY
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
         if: ${{ inputs.d2b29_trial == true }}
