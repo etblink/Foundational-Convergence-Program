@@ -53,6 +53,7 @@ jobs:
           curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
           source "$HOME/.elan/env"
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -70,6 +71,18 @@ jobs:
           test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean
           test -s upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/ClosedProfiles.olean
           echo ACCEPTED_K10A_CACHE_RESTORED_AND_CHECKED
+
+      - name: Verify qualified D1 is immutable and only D3A is prospective
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --quiet --no-tags --depth=1 origin 8db5b4909152b837b4e338b60f761083c6cf9c9f
+          changed="$(git diff --name-only 8db5b4909152b837b4e338b60f761083c6cf9c9f HEAD -- experiments/openai-math-su2-physical-domain/ | grep -v -x 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.lean' || true)"
+          if [ -n "$changed" ]; then
+            echo "Source-typed D1 changed; block the candidate" >&2
+            printf '%s\n' "$changed" >&2
+            exit 1
+          fi
 
       - name: Compile D1 original gauge-restricted source-graph bridge
         shell: bash
@@ -97,4 +110,29 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in text and 'error:' not in text
           print('D1_EXACT_FIVE_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Compile prospective D3A real orthogonal kinetic contraction
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          lake env lean SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.lean 2>&1 | tee /tmp/bfss-su2-d3a-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d3a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          required = [
+              'sourceKineticSkewContraction_basisInvariant',
+              'sourceContractedKinetic_gaugeCovariant',
+          ]
+          assert len(found) == len(required), found
+          for (name, axioms), suffix in zip(found, required):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D3A_EXACT_TWO_STANDARD_AXIOM_REPORTS_PASS')
           PY
