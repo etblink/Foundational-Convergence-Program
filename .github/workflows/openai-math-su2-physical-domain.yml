@@ -133,6 +133,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3DActualFermionSpinQuadraticGeneratorProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3FActualFermionSpinSkewAdjointProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3GActualFermionSpinGaugeCompatibilityProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -2070,6 +2071,34 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
           print('S3F_ACTUAL_FOCK_SPIN_SKEW_ADJOINT_PASS')
+          PY
+
+      - name: Compile S3G actual gauge color rows and theta covariance source
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3FActualFermionSpinSkewAdjointProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS3GActualFermionSpinGaugeCompatibilityProbe.olean SU2BFSSPhysicalDomainS3GActualFermionSpinGaugeCompatibilityProbe.lean 2>&1 | tee /tmp/bfss-su2-s3g-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s3g-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'adjointColorMatrix_row_orthogonal',
+              'source_color_rows_contraction',
+              'source_color_rows_contraction_complex',
+              'pairedTheta_gauge_covariance_source',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainS3G.' + suffix, (name, suffix)
+              assert {v.strip() for v in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
+          print('S3G_SOURCE_COLOR_ROW_ORTHOGONALITY_AND_G4H_COVARIANCE_PASS')
           PY
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
