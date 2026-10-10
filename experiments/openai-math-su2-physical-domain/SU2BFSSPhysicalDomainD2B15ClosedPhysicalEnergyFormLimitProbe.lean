@@ -46,7 +46,7 @@ theorem sourceClosedPhysicalCharge_component_sq_le_form
       ‖(sourceClosedPhysicalChargeColumn M G u) α‖^2 ≤
       ∑ β : SpinIndex,
         ‖(sourceClosedPhysicalChargeColumn M G u) β‖^2 := by
-    simpa only [Finset.sum_univ] using
+    simpa using
       (Finset.single_le_sum
         (f := fun β : SpinIndex =>
           ‖(sourceClosedPhysicalChargeColumn M G u) β‖ ^ 2)
