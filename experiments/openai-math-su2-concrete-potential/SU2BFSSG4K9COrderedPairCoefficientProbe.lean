@@ -67,7 +67,11 @@ theorem symmetricZeroDiagonal_halfDoubleSum_eq_upper
         ∑ i : SpaceIndex, ∑ j : SpaceIndex,
           ((if i < j then F i j else 0) +
             (if j < i then F i j else 0)) := by
-          simp only [hsplit]
+          apply Finset.sum_congr rfl
+          intro i _
+          apply Finset.sum_congr rfl
+          intro j _
+          exact hsplit i j
       _ = upper + (∑ i : SpaceIndex, ∑ j : SpaceIndex,
         if j < i then F i j else 0) := by
           simp only [Finset.sum_add_distrib, upper]
@@ -75,9 +79,12 @@ theorem symmetricZeroDiagonal_halfDoubleSum_eq_upper
   have hupper :
       (∑ p : BFSSGamma.SpatialPair, F p.1.1 p.1.2) = upper := by
     dsimp [upper]
+    -- A subtype Fintype sum elaborates as sum over the subtype's univ.
+    -- Rewrite THAT univ first; the finite-filter lemma does not match it alone.
+    rw [← Finset.subtype_univ
+      (fun ij : SpaceIndex × SpaceIndex => ij.1 < ij.2)]
     rw [Finset.sum_subtype_eq_sum_filter]
     simp only [Finset.sum_filter, Fintype.sum_prod_type]
-    simp
   calc
     (1 / 2 : ℝ) * (∑ i : SpaceIndex, ∑ j : SpaceIndex, F i j) =
         upper := by rw [htwo]; ring
