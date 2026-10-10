@@ -132,6 +132,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3CActualMajoranaQuadraticCommutatorProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3DActualFermionSpinQuadraticGeneratorProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3FActualFermionSpinSkewAdjointProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -2043,6 +2044,33 @@ jobs:
         with:
           path: upstream-math/lean/.lake/build
           key: bfss-su2-accepted-s3e-v1-5ab0ee08dfca4565-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Compile S3F true Fock spin generator skew adjointness
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS3FActualFermionSpinSkewAdjointProbe.olean SU2BFSSPhysicalDomainS3FActualFermionSpinSkewAdjointProbe.lean 2>&1 | tee /tmp/bfss-su2-s3f-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s3f-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'pairedTheta_pair_star',
+              'pairedFermionSpinQuadraticColor_star_eq_neg',
+              'pairedFermionPlaneSpinGenerator_star_eq_neg',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainS3F.' + suffix, (name, suffix)
+              assert {v.strip() for v in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
+          print('S3F_ACTUAL_FOCK_SPIN_SKEW_ADJOINT_PASS')
+          PY
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
         if: ${{ inputs.d2b29_trial == true }}
