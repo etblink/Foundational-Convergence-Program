@@ -50,9 +50,10 @@ jobs:
           set -euo pipefail
           # The compiled cache is sound only for the EXACT accepted source chain.
           # Fetch the owner-verified Gate #159 commit even with shallow checkout.
-          git fetch --quiet --no-tags --depth=1 origin 87e78a95ed7bbca790180fb120f11b08746f0ea4
-          # Gate #164 freezes K9B plus all accepted predecessors. Only K9C is prospective.
-          changed="$(git diff --name-only 87e78a95ed7bbca790180fb120f11b08746f0ea4 HEAD -- experiments/openai-math-su2-concrete-potential/ | grep -v -x 'experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9COrderedPairCoefficientProbe.lean' || true)"
+          git fetch --quiet --no-tags --depth=1 origin e0d7a9bfc43cb721f6acaa62db41dcd76a4ad6df
+          # Gate #168 freezes K9C and every accepted predecessor. K9D is the
+          # sole prospective leaf; reject any change to old proof sources.
+          changed="$(git diff --name-only e0d7a9bfc43cb721f6acaa62db41dcd76a4ad6df HEAD -- experiments/openai-math-su2-concrete-potential/ | grep -v -x 'experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9DSourcePotentialMultiplierProbe.lean' || true)"
           if [ -n "$changed" ]; then
             printf 'Accepted baseline source has drifted; explicitly requalify before changing the compiled cache:\n%s\n' "$changed" >&2
             exit 1
@@ -135,6 +136,7 @@ jobs:
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.lean upstream-math/lean/SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9BSourcePairAndChargeReductionProbe.lean upstream-math/lean/SU2BFSSG4K9BSourcePairAndChargeReductionProbe.lean
           cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9COrderedPairCoefficientProbe.lean upstream-math/lean/SU2BFSSG4K9COrderedPairCoefficientProbe.lean
+          cp experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9DSourcePotentialMultiplierProbe.lean upstream-math/lean/SU2BFSSG4K9DSourcePotentialMultiplierProbe.lean
           cd upstream-math/lean
           lake exe cache get
 
@@ -454,4 +456,11 @@ jobs:
           set -euxo pipefail
           source "$HOME/.elan/env"
           cd upstream-math/lean
-          lake env lean SU2BFSSG4K9COrderedPairCoefficientProbe.lean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4K9COrderedPairCoefficientProbe.olean SU2BFSSG4K9COrderedPairCoefficientProbe.lean
+      - name: Compile prospective G4-K9D original source potential multipliers and all-core identities
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          lake env lean SU2BFSSG4K9DSourcePotentialMultiplierProbe.lean
