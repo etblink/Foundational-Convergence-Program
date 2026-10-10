@@ -44,15 +44,23 @@ theorem pairedFermionSpinQuadraticColor_star_eq_neg
       ((J α β : ℝ) : ℂ) • (pairedTheta α A * pairedTheta β A)) =
         ∑ α : SpinIndex, ∑ β : SpinIndex,
           ((J α β : ℝ) : ℂ) • (pairedTheta β A * pairedTheta α A) := by
-      simp only [star_sum, star_smul, pairedTheta_pair_star]
-      simp
+      simp only [star_sum, star_smul, pairedTheta_pair_star,
+        RCLike.star_def, RCLike.conj_ofReal]
     _ = ∑ α : SpinIndex, ∑ β : SpinIndex,
       ((J β α : ℝ) : ℂ) • (pairedTheta α A * pairedTheta β A) := by
       rw [Finset.sum_comm]
     _ = -(∑ α : SpinIndex, ∑ β : SpinIndex,
       ((J α β : ℝ) : ℂ) • (pairedTheta α A * pairedTheta β A)) := by
-      simp only [hsk, Complex.ofReal_neg, neg_smul,
-        Finset.sum_neg_distrib]
+      calc
+        _ = ∑ α : SpinIndex, ∑ β : SpinIndex,
+          -(((J α β : ℝ) : ℂ) • (pairedTheta α A * pairedTheta β A)) := by
+          apply Finset.sum_congr rfl
+          intro α _
+          apply Finset.sum_congr rfl
+          intro β _
+          rw [hsk α β]
+          simp only [Complex.ofReal_neg, neg_smul]
+        _ = _ := by simp only [Finset.sum_neg_distrib]
 
 /-- The exact S3D three-color spin-plane generator is skew-adjoint.
 In finite dimension this is the bounded generator of unitary
@@ -62,10 +70,18 @@ theorem pairedFermionPlaneSpinGenerator_star_eq_neg
     star (pairedFermionPlaneSpinGenerator i j) =
       -(pairedFermionPlaneSpinGenerator i j) := by
   have hs := pairedPlaneSpinGenerator_skew i j
+  have hhalf : star (1 / 2 : ℂ) = (1 / 2 : ℂ) := by
+    simp only [star_div₀, star_one, star_ofNat]
+  have hsum :
+      star (∑ A : ColorIndex 2,
+        pairedFermionSpinQuadraticColor (pairedPlaneSpinGenerator i j) A) =
+      -(∑ A : ColorIndex 2,
+        pairedFermionSpinQuadraticColor (pairedPlaneSpinGenerator i j) A) := by
+    rw [star_sum]
+    simp only [pairedFermionSpinQuadraticColor_star_eq_neg
+      (pairedPlaneSpinGenerator i j) hs, Finset.sum_neg_distrib]
   unfold pairedFermionPlaneSpinGenerator
-  simp only [star_smul, star_sum, pairedFermionSpinQuadraticColor_star_eq_neg
-    (pairedPlaneSpinGenerator i j) hs, star_one, star_natCast, star_inv,
-    Finset.sum_neg_distrib]
+  rw [star_smul, hhalf, hsum]
   module
 
 #print axioms pairedTheta_pair_star
