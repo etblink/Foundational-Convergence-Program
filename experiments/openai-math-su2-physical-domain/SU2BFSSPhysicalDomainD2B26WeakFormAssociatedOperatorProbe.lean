@@ -87,7 +87,7 @@ conjugate-linear first slot of the complex Hilbert inner product. -/
 theorem sixteen_inner_smul (x y : E) :
     inner ℂ ((16 : ℂ) • x) y = (16 : ℂ) * inner ℂ x y := by
   rw [inner_smul_left]
-  norm_num
+  simp only [map_natCast]
 
 /-- Exactly 1/16 in the complex inner product's conjugate-linear
 slot; this normalization may not be replaced by a convention. -/
@@ -95,7 +95,7 @@ theorem one_sixteenth_inner_smul (x y : E) :
     inner ℂ ((1 / 16 : ℂ) • x) y =
       (1 / 16 : ℂ) * inner ℂ x y := by
   rw [inner_smul_left]
-  norm_num
+  simp only [map_div₀, map_one, map_natCast]
 
 /-- The source-independent associated-operator identity on the
 exact natural domain, with the paper's factor 1/16. -/
