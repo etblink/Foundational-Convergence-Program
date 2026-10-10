@@ -102,6 +102,8 @@ variable (M : AlgebraData 2) (G : M.GaugeData)
 natural-domain T†T. The only input is the already qualified physical
 symmetry and its closed-graph resolvent surjectivity. -/
 theorem sourcePhysicalChargeAdjointSquare_selfAdjoint :
+    letI : CompleteSpace G.physicalSpace :=
+      sourceOriginalPhysicalHilbert_complete M G
     IsSelfAdjoint (sourcePhysicalChargeAdjointSquare M G) := by
   letI : CompleteSpace G.physicalSpace :=
     sourceOriginalPhysicalHilbert_complete M G
@@ -112,12 +114,16 @@ theorem sourcePhysicalChargeAdjointSquare_selfAdjoint :
 
 theorem sourcePhysicalChargeAdjointSquare_domain_dense :
     Dense ((sourcePhysicalChargeAdjointSquare M G).domain :
-      Set G.physicalSpace) :=
-  (sourcePhysicalChargeAdjointSquare_selfAdjoint M G).dense_domain
+      Set G.physicalSpace) := by
+  letI : CompleteSpace G.physicalSpace :=
+    sourceOriginalPhysicalHilbert_complete M G
+  exact (sourcePhysicalChargeAdjointSquare_selfAdjoint M G).dense_domain
 
 theorem sourcePhysicalChargeAdjointSquare_closed :
-    (sourcePhysicalChargeAdjointSquare M G).IsClosed :=
-  (sourcePhysicalChargeAdjointSquare_selfAdjoint M G).isClosed
+    (sourcePhysicalChargeAdjointSquare M G).IsClosed := by
+  letI : CompleteSpace G.physicalSpace :=
+    sourceOriginalPhysicalHilbert_complete M G
+  exact (sourcePhysicalChargeAdjointSquare_selfAdjoint M G).isClosed
 
 #print axioms formalSymmetry_graph_pairing
 #print axioms selfAdjoint_of_formalSymmetry_and_shift_surjectivity
