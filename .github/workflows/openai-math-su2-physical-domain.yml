@@ -92,6 +92,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -749,6 +750,33 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
           print('D2B10A_SOURCE_PROJECTED_CORE_DENSITY_AND_EXACT_CONDITIONAL_BRIDGE_PASS')
+          PY
+
+      - name: Compile D2B10B1 exact Haar-spatial joint integrability for Fubini bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe.olean SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b10b1-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b10b1-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceHaarJoint_hasCompactSupport',
+              'sourceHaarJoint_integrable',
+              'sourceHaarJoint_integrable_swapped',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B10B1.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B10B1_TRUE_SOURCE_HAAR_SPATIAL_PRODUCT_INTEGRABILITY_PASS')
           PY
 
       - name: Save qualified immutable Gate 28 physical-domain compiled chain
