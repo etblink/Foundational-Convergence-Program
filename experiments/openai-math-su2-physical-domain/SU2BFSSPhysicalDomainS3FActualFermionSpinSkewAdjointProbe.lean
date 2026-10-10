@@ -51,7 +51,7 @@ theorem pairedFermionSpinQuadraticColor_star_eq_neg
     simpa only [Matrix.transpose_apply, Matrix.neg_apply] using h
   have hcoeff (α β : SpinIndex) :
       star (((J α β : ℝ) : ℂ)) = ((J α β : ℝ) : ℂ) := by
-    change RCLike.conj ((J α β : ℝ) : ℂ) = _
+    change conj ((J α β : ℝ) : ℂ) = _
     exact RCLike.conj_ofReal (J α β)
   have hneg (z : ℂ) (T : Fermion 2 →L[ℂ] Fermion 2) :
       (-z) • T = -(z • T) := neg_smul z T
