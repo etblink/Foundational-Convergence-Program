@@ -54,10 +54,17 @@ theorem sourcePhysicalWeightedFormGraph_isClosed :
     {p : WithLp 2 (G.physicalSpace × SourceChargeHilbertOutput) |
       ((WithLp.ofLp p).1, (4 : ℂ) • (WithLp.ofLp p).2) ∈
         (sourcePhysicalHilbertChargeColumn M G).graph}
+  have hconst : Continuous
+      (fun _ : (G.physicalSpace × SourceChargeHilbertOutput) => (4 : ℂ)) :=
+    continuous_const
+  have hscale : Continuous
+      (fun p : (G.physicalSpace × SourceChargeHilbertOutput) =>
+        (4 : ℂ) • p.2) :=
+    hconst.smul continuous_snd
   have hc : Continuous
       (fun p : (G.physicalSpace × SourceChargeHilbertOutput) =>
         (p.1, (4 : ℂ) • p.2)) :=
-    continuous_fst.prodMk (continuous_const.smul continuous_snd)
+    continuous_fst.prodMk hscale
   exact (sourcePhysicalHilbertChargeColumn_isClosed M G).preimage
     (hc.comp (WithLp.prod_continuous_ofLp 2
       G.physicalSpace SourceChargeHilbertOutput))
