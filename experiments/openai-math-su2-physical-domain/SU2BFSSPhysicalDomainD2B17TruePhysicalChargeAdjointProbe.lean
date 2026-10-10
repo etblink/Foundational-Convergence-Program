@@ -51,14 +51,14 @@ noncomputable def sourcePhysicalHilbertChargeGraph :
     Submodule ℂ (G.physicalSpace × SourceChargeHilbertOutput) :=
   (sourcePhysicalRebasedChargeGraph M G).comap
     ((LinearMap.id : G.physicalSpace →ₗ[ℂ] G.physicalSpace).prodMap
-      (sourceChargeOutputHilbertEquiv M G).toLinearMap)
+      (sourceChargeOutputHilbertEquiv).toLinearMap)
 
 /-- Every graph point maps EXACTLY to the original source physical
 charge graph under the canonical L² Hilbert-output identification. -/
 theorem sourcePhysicalHilbertChargeGraph_mem_iff
     (p : G.physicalSpace × SourceChargeHilbertOutput) :
     p ∈ sourcePhysicalHilbertChargeGraph M G ↔
-      (p.1, sourceChargeOutputHilbertEquiv M G p.2) ∈
+      (p.1, sourceChargeOutputHilbertEquiv p.2) ∈
         sourcePhysicalRebasedChargeGraph M G := by
   rfl
 
@@ -68,21 +68,21 @@ private theorem sourcePhysicalHilbertChargeGraph_vertical :
       p.1 = 0 → p.2 = 0 := by
   rintro ⟨ψ,y⟩ hp hz
   have hrebased :
-      (ψ,sourceChargeOutputHilbertEquiv M G y) ∈
+      (ψ,sourceChargeOutputHilbertEquiv y) ∈
         sourcePhysicalRebasedChargeGraph M G :=
     (sourcePhysicalHilbertChargeGraph_mem_iff M G _).mp hp
   have horiginal :
-      ((ψ : FullL2 2), sourceChargeOutputHilbertEquiv M G y) ∈
+      ((ψ : FullL2 2), sourceChargeOutputHilbertEquiv y) ∈
         G.deformedModelGraph 1 0 :=
     (sourcePhysicalRebasedChargeGraph_mem_iff M G _).mp hrebased
   have hz' : (ψ : FullL2 2) = 0 :=
     congrArg (fun x : G.physicalSpace => (x : FullL2 2)) hz
-  have hzero : ((0 : FullL2 2), sourceChargeOutputHilbertEquiv M G y) ∈
+  have hzero : ((0 : FullL2 2), sourceChargeOutputHilbertEquiv y) ∈
       G.deformedModelGraph 1 0 := by
     simpa only [hz'] using horiginal
-  have hy : sourceChargeOutputHilbertEquiv M G y = 0 :=
+  have hy : sourceChargeOutputHilbertEquiv y = 0 :=
     G.deformedModelGraph_vertical 1 0 hzero
-  apply (sourceChargeOutputHilbertEquiv M G).injective
+  apply (sourceChargeOutputHilbertEquiv).injective
   simpa using hy
 
 /-- Genuine Mathlib ℂ-linear partially-defined charge operator from
@@ -105,7 +105,7 @@ theorem sourcePhysicalHilbertChargeColumn_isClosed :
     Set (G.physicalSpace × SourceChargeHilbertOutput))
   rw [sourcePhysicalHilbertChargeColumn_graph_eq M G]
   change IsClosed {p : G.physicalSpace × SourceChargeHilbertOutput |
-    (p.1,sourceChargeOutputHilbertEquiv M G p.2) ∈
+    (p.1,sourceChargeOutputHilbertEquiv p.2) ∈
       (sourcePhysicalRebasedChargeGraph M G :
         Set (G.physicalSpace × (SpinIndex → FullL2 2)))}
   have hclosed : IsClosed (sourcePhysicalRebasedChargeGraph M G :
@@ -114,9 +114,9 @@ theorem sourcePhysicalHilbertChargeColumn_isClosed :
     exact sourcePhysicalRebasedChargeColumn_isClosed M G
   have hcont : Continuous
       (fun p : G.physicalSpace × SourceChargeHilbertOutput =>
-        (p.1,sourceChargeOutputHilbertEquiv M G p.2)) :=
+        (p.1,sourceChargeOutputHilbertEquiv p.2)) :=
     continuous_fst.prodMk
-      ((sourceChargeOutputHilbertEquiv M G).continuous.comp continuous_snd)
+      ((sourceChargeOutputHilbertEquiv).continuous.comp continuous_snd)
   exact hclosed.preimage hcont
 
 /-- Exact domain-density transfer from Gate 65.
