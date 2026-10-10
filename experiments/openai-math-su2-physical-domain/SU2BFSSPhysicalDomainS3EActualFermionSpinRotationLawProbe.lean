@@ -34,8 +34,9 @@ theorem pairedSpinQuadraticColor_comm_raw
       (∑ α : SpinIndex, ((J α γ : ℝ) : ℂ) • pairedTheta α C) -
         (∑ β : SpinIndex, ((J γ β : ℝ) : ℂ) • pairedTheta β C) := by
   have hz (z : ℂ) :
-      z • (0 : Fermion 2 →L[ℂ] Fermion 2) = 0 :=
-    smul_zero z
+      z • (0 : Fermion 2 →L[ℂ] Fermion 2) = 0 := by
+    ext v
+    simp
   have hfirst :
       (∑ α : SpinIndex, ∑ β : SpinIndex,
          ((J α β : ℝ) : ℂ) •
