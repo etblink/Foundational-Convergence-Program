@@ -45,7 +45,7 @@ noncomputable def sourceInvariantCoreInTrueHilbertChargeDomain
   let ψ : G.physicalSpace :=
     ⟨coreToL2 f.val, f.property⟩
   let y : SourceChargeHilbertOutput :=
-    sourceChargeOutputHilbertEquiv.symm (M.chargeVector f.val)
+    WithLp.toLp 2 (M.chargeVector f.val)
   have horiginal :
       ((ψ : FullL2 2), M.chargeVector f.val) ∈
         G.deformedModelGraph 1 0 :=
@@ -54,7 +54,10 @@ noncomputable def sourceInvariantCoreInTrueHilbertChargeDomain
       (ψ,sourceChargeOutputHilbertEquiv y) ∈
         sourcePhysicalRebasedChargeGraph M G := by
     apply (sourcePhysicalRebasedChargeGraph_mem_iff M G _).mpr
-    simpa only [sourceChargeOutputHilbertEquiv.apply_symm_apply] using horiginal
+    have hy : sourceChargeOutputHilbertEquiv y = M.chargeVector f.val := by
+      rfl
+    rw [hy]
+    exact horiginal
   have hgraph : (ψ,y) ∈ sourcePhysicalHilbertChargeGraph M G :=
     (sourcePhysicalHilbertChargeGraph_mem_iff M G _).mpr hrebased
   exact ⟨ψ, by
@@ -91,8 +94,18 @@ genuine physical SU2 smooth trial vector at h=1,m=0. -/
 theorem pairedSU2RadialClosedFormEnergy_pos :
     0 < sourcePhysicalHilbertChargeEnergy
       pairedAlgebraData pairedGaugeData pairedSU2RadialTrueHilbertChargeDomain := by
-  rw [pairedSU2RadialTrueHilbertChargeDomain,
-    sourceInvariantCoreHilbertFormEnergy_eq_massless]
+  have hcore : sourcePhysicalHilbertChargeEnergy
+      pairedAlgebraData pairedGaugeData
+        (sourceInvariantCoreInTrueHilbertChargeDomain
+          pairedAlgebraData pairedGaugeData radialBumpInvariantCore) =
+        physicalDeformedEnergy 1 0 :=
+    sourceInvariantCoreHilbertFormEnergy_eq_massless
+      pairedAlgebraData pairedGaugeData radialBumpInvariantCore
+  change 0 < sourcePhysicalHilbertChargeEnergy
+    pairedAlgebraData pairedGaugeData
+      (sourceInvariantCoreInTrueHilbertChargeDomain
+        pairedAlgebraData pairedGaugeData radialBumpInvariantCore)
+  rw [hcore]
   exact physicalInteractingTrialEnergy_one_pos
 
 /-- The EXACT source charge T is nonzero on this one concrete physical
