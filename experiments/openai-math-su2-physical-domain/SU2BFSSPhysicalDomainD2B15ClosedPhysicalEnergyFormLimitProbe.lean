@@ -46,10 +46,13 @@ theorem sourceClosedPhysicalCharge_component_sq_le_form
       ‖(sourceClosedPhysicalChargeColumn M G u) α‖^2 ≤
       ∑ β : SpinIndex,
         ‖(sourceClosedPhysicalChargeColumn M G u) β‖^2 := by
-    apply Finset.single_le_sum
-    · intro β hβ
-      exact sq_nonneg _
-    · exact Finset.mem_univ α
+    simpa only [Finset.sum_univ] using
+      (Finset.single_le_sum
+        (f := fun β : SpinIndex =>
+          ‖(sourceClosedPhysicalChargeColumn M G u) β‖ ^ 2)
+        (s := Finset.univ)
+        (fun β hβ => sq_nonneg _)
+        (Finset.mem_univ α))
   calc
     _ ≤ ∑ β : SpinIndex,
           ‖(sourceClosedPhysicalChargeColumn M G u) β‖^2 := hs
