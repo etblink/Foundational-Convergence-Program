@@ -110,7 +110,11 @@ identical physical bosonic coordinate indices and normalization. -/
 theorem sourceSpatialWedgeSq_eq_spatialWedgeSq
     (x : Boson 2) (a b : ColorIndex 2) :
     sourceSpatialWedgeSq x a b =
-      spatialWedgeSq (fun i => x (i, a)) (fun i => x (i, b)) := rfl
+      spatialWedgeSq (fun i => x (i, a)) (fun i => x (i, b)) := by
+  unfold sourceSpatialWedgeSq spatialWedgeSq
+  apply Finset.sum_congr rfl
+  intro p _
+  ring
 
 /-- Material paper slice estimate on the literal paired BFSS potential.
 The two transverse vectors are explicitly orthogonal to the chosen
