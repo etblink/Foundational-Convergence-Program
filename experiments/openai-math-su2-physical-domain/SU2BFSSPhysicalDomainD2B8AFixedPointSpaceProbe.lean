@@ -44,7 +44,7 @@ theorem sourceFullGaugePairCLM_fixed_iff_physical (v : FullL2 2) :
     rw [sourceFullGaugePairCLM_apply] at hg
     have hf := congrArg (G.fiberAction g) hg
     rw [sourceFermionFiberAction_left_inv M G g] at hf
-    exact hf
+    simpa only [inv_inv] using hf
   · intro hv g
     exact sourceFullGaugePairCLM_fixed_physical M G g v hv
 
