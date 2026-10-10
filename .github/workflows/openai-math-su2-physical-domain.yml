@@ -85,6 +85,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate28AcceptedCacheSmoke.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -554,6 +555,28 @@ jobs:
               assert {a.strip() for a in axioms.split(",")} <= allowed, (name, axioms)
           assert "sorryAx" not in log and "error:" not in log and "unknownIdentifier" not in log
           print("GATE28_ALL_51_TRUE_SOURCE_ACCEPTED_AXIOM_REPORTS_PASS")
+          PY
+
+      - name: Compile D2B8A true-source full-L2 physical fixed-point characterization
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.olean SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b8a-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b8a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          assert len(found) == 1, found
+          name, axioms = found[0]
+          assert name == 'FCP.BFSSSU2PhysicalDomainD2B8A.sourceFullGaugePairCLM_fixed_iff_physical', name
+          assert {a.strip() for a in axioms.split(',')} <= {
+              'propext', 'Classical.choice', 'Quot.sound'
+          }, axioms
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B8A_EXACT_SOURCE_FULL_L2_FIXED_POINT_CHARACTERIZATION_PASS')
           PY
 
       - name: Save qualified immutable Gate 28 physical-domain compiled chain
