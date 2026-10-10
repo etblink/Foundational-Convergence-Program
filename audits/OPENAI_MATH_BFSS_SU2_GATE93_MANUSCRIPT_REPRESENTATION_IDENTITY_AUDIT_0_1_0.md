@@ -312,3 +312,70 @@ the correct adjoint-matrix index convention. Apply S1B to obtain a
 pointwise scalar, and then prove the scalar is one using exact
 group/continuity infrastructure. Do **not** assume the existence of the
 specific lift merely from the pinned generic `spinGroup` type.
+
+## 10. Exact 24-mode special-unitary bridge — S1C prospective
+
+**Target:** show that the actual accepted complex 24-orbital Fock mode matrix
+`complexOneParticleMatrix g` has determinant 1, for every
+`g : GaugeGroup 2`. This is not a substitute model.
+
+The exact already accepted G3-B definition is
+`modeReindex (Matrix.kronecker 1 (adjointColorMatrix g))`,
+where the identity is on `Fin 8` and the real color block is
+a 3×3 orthogonal matrix, with input/output index orientation certified
+in G3-A. The accepted G3-C complex matrix is the real-to-complex
+scalar extension of that *same* one-particle matrix.
+These facts are sufficient, in ordinary matrix algebra, to prove
+```text
+det(oneParticleMatrix g)
+  = det(I_8 ⊗ adjointColorMatrix g)
+  = det(adjointColorMatrix g)^8
+  = (det(adjointColorMatrix g)^2)^4
+  = 1.
+det(complexOneParticleMatrix g) = 1.
+```
+Here the eighth power matters: orthogonality gives det²=1 **without
+needing** a separate proof that each 3×3 block individually has
+orientation +1. This is the mathematically minimal route.
+
+**Pinned source reuse** for kernel checking:
+`Mathlib/LinearAlgebra/Matrix/Kronecker.lean`:
+`Matrix.det_kronecker`;
+`Mathlib/LinearAlgebra/Matrix/Reindex.lean`:
+`Matrix.det_reindexAlgEquiv`;
+`Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean`:
+`Matrix.det_mul`, `Matrix.det_transpose`, `RingHom.map_det`.
+These are at exact pinned Mathlib
+`d13f23b723b8a846827a245b89c10fc7d3f11612`.
+A proof candidate lives in
+`experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe.lean`,
+and is tested by the physical-domain workflow. **Do not promote its
+Lean certificate without a passing exact gate and axiom check.**
+
+**Why this matters to S1:** standard spin representation theory
+identifies the restriction of the Spin(2m) spinors to SU(m) with
+the exterior powers of ℂ^m, for the usual compatible polarization.
+For U(m), a determinant square-root character modifies the exterior
+action. At m=24, source-derived det=1 removes that twist in the
+canonical SU(24) embedding. This strongly motivates a direct
+source-polarization route identifying the accepted exterior-Fock SU(2)
+action with the manuscript's Spin(48) lift. A useful independent source
+is the lecture notes
+[Lie Groups (Imperial College), spin representation restriction]
+(https://www.ma.imperial.ac.uk/~skdona/LIEGROUPSCONSOL.PDF).
+
+**Important gap:** a generic `Mathlib.spinGroup` type, the SU(24)
+determinant theorem, and an exterior-Fock action are **not in themselves**
+a Lean proof of the actual *specific* spin-cover embedding and
+spinor-representation equality. The remaining S1 obligation still
+requires that explicit lift/implementation and its generator
+covariance (or a fully justified equivalent standard-construction
+transport), with no hidden central sign/phase.
+
+**Potential shortening:** the accepted FCP source also proves
+`fermionVacuum_ne_zero` and `fermionVacuum_unitary_invariant` in
+G4K2A. Therefore if the manuscript spin lift is identified in the
+same exterior polarization and shown to fix this **same** nonzero
+vacuum, S1B's scalar necessarily equals 1 *pointwise*, avoiding a
+separate global SU(2)-character formalization. Vacuum preservation
+by the manuscript lift is still an obligation; do not assume it.
