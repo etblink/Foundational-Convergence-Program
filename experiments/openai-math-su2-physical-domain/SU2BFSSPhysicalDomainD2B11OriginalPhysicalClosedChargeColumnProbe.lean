@@ -36,13 +36,14 @@ open FCP.BFSSSU2PhysicalDomainD2A
 open FCP.BFSSSU2PhysicalDomainD2B10C
 open MeasureTheory Set
 
-variable (M : AlgebraData 2) (G : M.GaugeData)
+section GenericN
+variable {N : ℕ} (M : AlgebraData N) (G : M.GaugeData)
 
 /-- Source gauge-invariant closed charge graph is closed in the
 exact ambient full-L2 × sixteen-charge-output Hilbert product. -/
 theorem sourceRestrictedPhysicalGraph_isClosed :
     IsClosed (G.deformedModelGraph 1 0 :
-      Set (FullL2 2 × (SpinIndex → FullL2 2))) := by
+      Set (FullL2 N × (SpinIndex → FullL2 N))) := by
   exact (LinearMap.range (G.deformedModelGraphMap 1 0)).isClosed_topologicalClosure
 
 /-- Original source restricted smooth core belongs to the closed
@@ -51,17 +52,16 @@ theorem sourceRestrictedPhysicalGraph_containsCore
     (f : G.invariantCore) :
     (coreToL2 f.val, M.chargeVector f.val) ∈
       G.deformedModelGraph 1 0 := by
-  have hp : G.deformedModelGraphMap 1 0 f ∈
-      G.deformedModelGraph 1 0 :=
-    Submodule.le_topologicalClosure _
+  have hp : (coreToL2 f.val, M.deformedChargeVector 1 0 f.val) ∈
+      G.deformedModelGraph 1 0 := by
+    exact Submodule.le_topologicalClosure _
       (LinearMap.mem_range_self (G.deformedModelGraphMap 1 0) f)
-  rw [sourceGaugeRestrictedGraphMap_equal M G] at hp
-  exact hp
+  simpa only [sourceChargeVector_equal M] using hp
 
 /-- A graph point has an original physical input and
 all sixteen outputs inside the actual physical Hilbert subspace. -/
 theorem sourceRestrictedPhysicalGraph_input_output_physical
-    {ψ : FullL2 2} {y : SpinIndex → FullL2 2}
+    {ψ : FullL2 N} {y : SpinIndex → FullL2 N}
     (hp : (ψ,y) ∈ G.deformedModelGraph 1 0) :
     ψ ∈ G.physicalSpace ∧ ∀ α, y α ∈ G.physicalSpace := by
   exact ⟨sourceClosedGaugeGraph_input_physical M G hp,
@@ -70,15 +70,19 @@ theorem sourceRestrictedPhysicalGraph_input_output_physical
 /-- The pinned source vertical uniqueness theorem makes this
 closed graph genuinely single valued, not a multivalued relation. -/
 theorem sourceRestrictedPhysicalGraph_unique
-    {ψ : FullL2 2} {y z : SpinIndex → FullL2 2}
+    {ψ : FullL2 N} {y z : SpinIndex → FullL2 N}
     (hy : (ψ,y) ∈ G.deformedModelGraph 1 0)
     (hz : (ψ,z) ∈ G.deformedModelGraph 1 0) :
     y = z := by
-  have hvertical : ((0 : FullL2 2),y-z) ∈
+  have hvertical : ((0 : FullL2 N),y-z) ∈
       G.deformedModelGraph 1 0 := by
     have hsub := (G.deformedModelGraph 1 0).sub_mem hy hz
     simpa only [Prod.mk_sub_mk, sub_self] using hsub
-  exact G.deformedModelGraph_vertical 1 0 hvertical
+  exact sub_eq_zero.mp (G.deformedModelGraph_vertical 1 0 hvertical)
+
+end GenericN
+
+variable (M : AlgebraData 2) (G : M.GaugeData)
 
 /-- The new post-Gate-47 physical-domain theorem: the domain
 of the exact original closed gauge-restricted joint supercharge
