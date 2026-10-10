@@ -100,6 +100,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B12OriginalPhysicalChargeLinearPMapProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B13OriginalSmoothCoreChargeGraphClosureProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B14ExactClosedChargeQuadraticEnergyProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B15ClosedPhysicalEnergyFormLimitProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -1062,6 +1063,33 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
           print('D2B14_EXACT_CLOSED_PHYSICAL_FORM_AND_SOURCE_CORE_ENERGY_PASS')
+          PY
+
+      - name: Compile D2B15 exact source closed energy component bound and form graph limits
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B14ExactClosedChargeQuadraticEnergyProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B15ClosedPhysicalEnergyFormLimitProbe.olean SU2BFSSPhysicalDomainD2B15ClosedPhysicalEnergyFormLimitProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b15-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b15-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceClosedPhysicalCharge_component_sq_le_form',
+              'sourceClosedPhysicalCharge_graph_complete',
+              'sourceClosedPhysicalCharge_componentwise_limit',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B15.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B15_SOURCE_CLOSED_QUADRATIC_ENERGY_GRAPH_COMPLETENESS_PASS')
           PY
 
       - name: Save qualified immutable Gate 47 extension cache
