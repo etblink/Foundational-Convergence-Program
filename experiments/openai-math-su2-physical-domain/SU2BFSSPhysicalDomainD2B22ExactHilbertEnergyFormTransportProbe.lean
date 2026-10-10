@@ -85,17 +85,28 @@ theorem sourcePhysicalHilbertToClosedCharge_output
     exact sourcePhysicalHilbertCharge_on_originalGraph M G u
   exact Q.mem_graph_snd_inj h1 h2 rfl
 
-/-- Finite Hilbert sum norm, reusing the exact PiLp L² theorem. -/
+/-- Abstract mathematical Hilbert-sum identity. Keep the concrete
+BFSS source module OUT of norm elaboration, exactly as the successful
+abstract mathematical gate/physical instantiation pattern. -/
+theorem genericPiLpHilbert_norm_sq_sum
+    {ι : Type*} [Fintype ι] {H : ι → Type*}
+    [∀ i, NormedAddCommGroup (H i)]
+    [∀ i, InnerProductSpace ℂ (H i)]
+    (y : PiLp 2 H) :
+    ‖y‖ ^ 2 = ∑ i, ‖y i‖ ^ 2 :=
+  PiLp.norm_sq_eq_of_L2 ℂ y
+
+/-- Source equivalence only changes the representation of the same
+sixteen coordinates; the actual ℓ² norm is inherited from PiLp. -/
 theorem sourceChargeHilbertOutput_norm_sq_sum (y : SourceChargeHilbertOutput) :
     ‖y‖ ^ 2 =
       ∑ α : SpinIndex, ‖(sourceChargeOutputHilbertEquiv y) α‖ ^ 2 := by
-  calc
-    ‖y‖ ^ 2 = ∑ α : SpinIndex, ‖y α‖ ^ 2 :=
-      PiLp.norm_sq_eq_of_L2 ℂ y
-    _ = ∑ α : SpinIndex, ‖(sourceChargeOutputHilbertEquiv y) α‖ ^ 2 := by
-      apply Finset.sum_congr rfl
-      intro α hα
-      rfl
+  have hnorm : ‖y‖ ^ 2 = ∑ α : SpinIndex, ‖y α‖ ^ 2 :=
+    genericPiLpHilbert_norm_sq_sum y
+  rw [hnorm]
+  apply Finset.sum_congr rfl
+  intro α hα
+  rfl
 
 /-- The exact original source form energy and the physical Hilbert
 form energy AGREE on all of the source-closed charge domain, not
@@ -118,6 +129,7 @@ theorem sourcePhysicalHilbertChargeEnergy_nonneg
 
 #print axioms sourcePhysicalHilbertCharge_on_originalGraph
 #print axioms sourcePhysicalHilbertToClosedCharge_output
+#print axioms genericPiLpHilbert_norm_sq_sum
 #print axioms sourceChargeHilbertOutput_norm_sq_sum
 #print axioms sourcePhysicalHilbertChargeEnergy_eq_sourceClosed
 #print axioms sourcePhysicalHilbertChargeEnergy_nonneg
