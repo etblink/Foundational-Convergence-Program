@@ -445,3 +445,154 @@ bosonic coordinate, smooth invariant core, joint supercharge,
 quadratic-form and closed-operator comparison, reusing the accepted
 source-side D2B13–D2B28 without reopening them. If an actual mismatch
 occurs it overrides this paper-level identification argument.
+
+## 12. Gate #110 and source-to-paper closed-operator crosswalk
+
+### S1C final: literal SU(2)→SU(24) representation, kernel accepted
+
+[Physical Domain Bridge #110](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38077814928),
+run `38077814928`, **SUCCESS**; proof-gate commit
+`f525a4adb9a637320e176ba5b5f6730ee386d043`.
+
+Source file:
+`experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe.lean`,
+blob `c5de7c744744212711780aee2d4f9742c002cd84`.
+The existing three S1C determinant declarations and the new
+`complexOneParticleSpecialUnitary` and
+`complexOneParticleSpecialUnitaryHom` all passed the exact
+pinned compiler and explicit expected-name/axiom check,
+with axiom dependencies contained in
+`[propext, Classical.choice, Quot.sound]`. This is the **actual**
+G3-C matrix action lifted into
+`GaugeGroup 2 →* Matrix.specialUnitaryGroup (Fin 24) ℂ`.
+The immutable Gate-93 D2B11–D2B28 compiled-object cache was again
+restored and verified, without recompilation. D2B29 stayed skipped.
+
+This new source-side theorem does **not** by itself construct a
+`GaugeGroup 2 →* Spin(48)` lift in the pinned Lean library.
+See §11 for the standard paper-level Schur/character argument for
+gauge-action agreement. Both statements should be preserved at their
+actual evidence levels.
+
+### S2 — exact real bosonic space and adjoint gauge coefficients
+
+The manuscript coordinates
+`(x^a_i) ∈ (ℝ^9)^3` are canonically reordered to the actual
+upstream `Boson 2 = EuclideanSpace ℝ (Fin 9 × Fin 3)`,
+with source `SpaceIndex = Fin 9`, `ColorIndex 2 = Fin 3`.
+This coordinate permutation is an isometry of finite Euclidean
+spaces and preserves Lebesgue volume. The original source
+`GaugeGroup 2 = Matrix.specialUnitaryGroup (Fin 2) ℂ`
+is exactly SU(2), not a surrogate group.
+
+Accepted G2-A `bosonGauge` and `bosonGauge_adjoint` use
+genuine color-matrix conjugation on the source nine traceless
+matrices. Accepted G3-A `adjointCoefficient_on_basis` and
+`adjointColorMatrix` identify precisely the *output B/input A*
+coefficients with the manuscript's `O_g` action in the normalized
+Pauli basis. Under the coordinate reorder, the bosonic action is
+the paper's `O_g x`.
+
+No different bosonic gauge theory or external normalization is
+inserted. **The explicit cross-file isometric-coordinate transport
+to a separately encoded paper type is not a Lean theorem** (the
+paper does not define such a Lean type).
+
+### S3 — paper physical Hilbert space and invariant smooth core
+
+Pinned upstream `GaugeCore.lean` defines
+```text
+FullL2 N := Lp (Fermion N) 2 (volume : Measure (Boson N))
+G.bosonPullback g := pullback along G.boson g
+G.fiberAction g := pointwise action of G.fermion g
+G.physicalSpace := ⋂g ker (G.bosonPullback g - G.fiberAction g)
+G.invariantCore := G.physicalSpace.comap coreToL2
+```
+
+Its fixed-vector condition states `f(O_g x) = V_g f(x)` in
+the L² sense, equivalently
+`f(x) = V_g f(O_g^{-1} x)`, **exactly** the paper's gauge action
+`𝒢_g f(x) = V_g f(O_g^{-1} x)`. On compactly supported smooth
+functions, pointwise equivariance and the L² condition coincide
+by continuity (the source `invariantCore_equivariant` proves the
+source-core-to-pointwise direction).
+
+Accepted D2B8-A:
+`sourceFullGaugePairCLM_fixed_iff_physical`;
+accepted D2B10-C:
+`sourceCoreNormClosure_eq_physical_unconditional`.
+These establish full-Hilbert fixedness and norm density of the
+**actual original invariant smooth core**, respectively.
+
+Paper `C_c^∞(ℝ²⁷;F)` corresponds to the source's
+`TestFunction (⊤ : Opens (Boson 2)) (Fermion 2) ⊤`,
+with the above invariance. This correspondence uses the
+finite-dimensional unitary coordinate/fermion identifications;
+the paper's `F` may be chosen as the accepted `Fermion 2`.
+No alternative larger/maximal operator core is substituted.
+
+### S4 — literal 16 charges, minimal closure, and H
+
+Primary manuscript source
+`positive-eigenvalues-relative-su2-bfss.tex` lines 113–133
+specifies, on this **invariant** smooth core,
+```text
+Q_α = -i Σ_{i,a,β} γⁱ_{αβ} θᵃ_β ∂_{ia}
+      + 1/2 Σ_{i,j,a,b,c,β}
+        f_{abc} x⁽ᵇ⁾_i x⁽ᶜ⁾_j γⁱʲ_{αβ} θᵃ_β
+q(ψ) = 1/16 Σ_{α=1}^{16} ||Q_α ψ||²
+H = nonnegative self-adjoint operator of closure(q)
+```
+Pinned `Core.lean` `AlgebraData.charge` has precisely these
+kinetic/potential sums, with
+`gammaTwo i j = (1/2)(γ_iγ_j - γ_jγ_i)`,
+`structureConstant A B C` from the normalized Pauli commutator,
+and the literal `coordinateDerivative`, `position`,
+`fermionAction`. Its `coreForm` has the same exact `1/16`
+factor. Accepted G4K9-D `sourceUnconditionalCoreCharge_equal`
+and `sourceUnconditionalCoreForm_equal` ensure undeformed
+`h=1, m=0` is the **original pinned source charge**, not a
+further mass or deformation assumption.
+
+Accepted D2B13
+`sourceOriginalCoreChargePMap_closure_eq_closed`
+and `sourceInvariantSmoothCore_isGraphCoreOfMinimalClosedColumn`
+identify the closure of the **original restricted invariant
+core's joint 16-charge graph**, not a larger full-space closure.
+Accepted D2B22
+`sourcePhysicalHilbertChargeEnergy_eq_sourceClosed`
+proves form equality on the complete source-closed charge domain.
+Accepted D2B28
+`pairedSU2PhysicalHamiltonian_selfAdjoint`,
+`pairedSU2PhysicalHamiltonian_weakForm_iff`,
+`pairedSU2PhysicalHamiltonian_closed`, and
+`pairedSU2PhysicalHamiltonian_domain_dense`
+yield the literal source's nonnegative normalized associated
+Hamiltonian (with its natural domain). Under the data
+identification above, the **first representation theorem for
+closed nonnegative quadratic forms** gives the same H as
+the paper defines, not just the same formal differential
+expression.
+
+**Status / truth boundary.** This is an evidence-backed
+*ordinary-mathematics, source-to-paper instantiation and
+operator identification argument*, using accepted source
+proofs and standard unitary transport of form closures.
+It is NOT an additional Lean theorem stating
+`U H_paper = H_FCP U`, since the manuscript does not supply
+the paper-side `H_paper` as a Lean object; nor have we
+independently kernel-formalized its Theorem 1.1 positive
+eigenvalues. The standard Spin-lift and closed-form
+transport theorems are still external mathematical inputs
+at the cross-presentation boundary. Any discovery of an
+actual sign, normalization, coordinate, gauge, or domain
+mismatch would reopen this correspondence.
+
+**Program decision:** do not rebuild existing Spin or
+form representation libraries solely to hide that boundary.
+Use the already accepted exact Pauli, theta, gauge, source
+charge, restricted-core, closed-form and self-adjointness
+theorems to test new physically material questions.
+Formalize an additional cross-representation theorem only
+if an explicit independent paper-side representation or a
+real scientific discriminator makes it necessary.
