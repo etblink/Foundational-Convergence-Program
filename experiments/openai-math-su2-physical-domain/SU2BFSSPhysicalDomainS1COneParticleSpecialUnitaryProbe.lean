@@ -19,7 +19,7 @@ construct that lift or identify the manuscript Hamiltonian.
 namespace FCP.BFSSSU2PhysicalDomainS1C
 noncomputable section
 
-open scoped Matrix
+open scoped Kronecker
 open Matrix
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2GaugeG3A
