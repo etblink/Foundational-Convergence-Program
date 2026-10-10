@@ -89,8 +89,13 @@ theorem sourcePhysicalHilbertToClosedCharge_output
 theorem sourceChargeHilbertOutput_norm_sq_sum (y : SourceChargeHilbertOutput) :
     ‖y‖ ^ 2 =
       ∑ α : SpinIndex, ‖(sourceChargeOutputHilbertEquiv y) α‖ ^ 2 := by
-  simpa only [sourceChargeOutputHilbertEquiv] using
-    (PiLp.norm_sq_eq_of_L2 ℂ y)
+  calc
+    ‖y‖ ^ 2 = ∑ α : SpinIndex, ‖y α‖ ^ 2 :=
+      PiLp.norm_sq_eq_of_L2 ℂ y
+    _ = ∑ α : SpinIndex, ‖(sourceChargeOutputHilbertEquiv y) α‖ ^ 2 := by
+      apply Finset.sum_congr rfl
+      intro α hα
+      rfl
 
 /-- The exact original source form energy and the physical Hilbert
 form energy AGREE on all of the source-closed charge domain, not
