@@ -121,3 +121,62 @@ result, **not** a new independent proof of positive spectrum.
 `SU2_SPIN48_ACTION_EQUIVARIANCE_IN_LEAN = OPEN`;
 `MANUSCRIPT_CLOSED_OPERATOR_IDENTITY = OPEN`;
 `MANUSCRIPT_POSITIVE_SPECTRAL_THEOREM_IN_LEAN = NOT_CLAIMED`.
+
+## 6. Project Lead improvement after the first audit: direct manuscript instantiation
+
+**Correction/optimization of Section 5, not an elevation of proof status.**
+The primary manuscript says **"Let F be an irreducible complex Clifford module"**
+with the specified 48 theta generators, and **"Fix real symmetric matrices" gamma**
+subject to the Cl(9) CAR. The theorem is formulated for a chosen
+representation satisfying those assumptions. Accordingly a universal
+**between-two-arbitrary-modules** Lean classification theorem U1 is **not
+logically required** for source-to-manuscript instantiation.
+
+We can instead take the paper's `F` *to be* the kernel-qualified
+`OAI.BFSSQuantum.Fermion 2` with `pairedTheta`, and take its gamma
+matrices *to be* `FCP.BFSSGamma9.gamma`, which satisfy the manuscript's
+stated real symmetry and anticommutation relations. This is a genuine
+allowed choice of the paper's data, not a substitution of a new physics
+model. Source evidence: `SU2BFSSG1APairedThetaProbe.lean` proves the exact
+48-theta CAR and irreducibility, and `SU2BFSSFullAlgebraDataProbe.lean`
+assembles the Pauli color/gamma/theta data into the actual upstream API.
+
+The **first genuinely nontrivial matching obligation** can therefore be
+reduced to **S1 — gauge-action identity on the same module**:
+
+- Define/use the manuscript's unique Spin(48) lift of the representation
+  `h -> O_h tensor I_16`, acting on the *already-constructed FCP Fermion 2*.
+- Compare with the accepted `fermionGaugeUnitaryHom`. The FCP
+  `G4H.pairedAlgebraData_fermion_adjoint` establishes the required
+  48-generator covariance. Irreducibility implies that the pointwise
+  difference from the Spin lift is scalar; both actions are continuous
+  homomorphisms, so this scalar is a continuous character of SU(2), hence
+  trivial. Check the precise inverse/order of the source
+  `adjointCoefficient` matrix before treating the covariance as identical.
+- No unsupported physical representation-uniqueness claim is needed.
+  `Spin(48)` itself remains a **manuscript-defined** construction to
+  match, not an extra axiom that can be inserted into FCP.
+
+Then **S2** is the existing concrete boson representation/coordinate
+identity; **S3** is exact core charge and invariant smooth-core
+identification; **S4** is transport of the restricted graph closure,
+quadratic form and associated self-adjoint Hamiltonian. The source
+D2B13 restricted-core closure, D2B22 exact normalization, and D2B28
+self-adjoint operator can then be reused verbatim.
+
+This route potentially eliminates the costliest generic U1 task.
+However, the released manuscript's proof of positive spectrum is not a
+Lean theorem. Specializing an *external mathematical theorem* to the
+FCP instance still does **not** amount to kernel-formalizing that theorem.
+The FCP crosswalk can be proved; the spectrum remains manuscript-sourced
+unless the spectral proof is independently formalized.
+
+**Revised implementation priority:** S1 first; U1 retained as an optional
+stronger abstraction only if the direct instantiation encounters an
+actual representation-obstruction. This avoids building an unnecessary
+universal library theorem merely for symmetry of presentations.
+
+**Cache execution status:** Actions Gate #96, run 38073972157, **SUCCESS**
+for exact 18 accepted D2B11-D2B28 modules; Gate-93 cache save step
+succeeded, D2B29 was skipped by design. A separately checked warm-cache
+restore remains the next CI confirmation before subsequent Lean proofs.
