@@ -57,7 +57,7 @@ theorem sourceProjectedSmoothCore_closure_eq_physical :
     have himage : v ∈
         (sourceFullHaarAverageCLM M G) ''
           closure (Set.range (coreToL2 (N := 2))) :=
-      ⟨v, hcl, (sourceFullHaarAverageCLM_fixed_physical M G v hv).symm⟩
+      ⟨v, hcl, sourceFullHaarAverageCLM_fixed_physical M G v hv⟩
     have h := (image_closure_subset_closure_image
       (s := Set.range (coreToL2 (N := 2)))
       (sourceFullHaarAverageCLM M G).continuous) himage
@@ -96,6 +96,7 @@ theorem sourceCoreNormClosure_eq_physical_of_Haar_core_compat
         sourceFullHaarAverageCLM M G (coreToL2 f)) ⊆
           (G.coreNormClosure : Set (FullL2 2)) := by
       rintro w ⟨f, rfl⟩
+      change sourceFullHaarAverageCLM M G (coreToL2 f) ∈ G.coreNormClosure
       rw [hcompat f]
       have hm : coreToL2 (sourceHaarAverageCore M G f) ∈
           LinearMap.range (coreToL2.comp G.invariantCore.subtype) := by
