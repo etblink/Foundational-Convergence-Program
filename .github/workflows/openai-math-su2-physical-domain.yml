@@ -98,6 +98,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate47AcceptedCacheSmoke.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B11OriginalPhysicalClosedChargeColumnProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B12OriginalPhysicalChargeLinearPMapProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B13OriginalSmoothCoreChargeGraphClosureProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -1002,6 +1003,36 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
           print('D2B12_TRUE_SOURCE_CLOSED_DENSE_MATHLIB_LINEARPMAP_PASS')
+          PY
+
+      - name: Compile D2B13 exact original invariant core operator closability and native Mathlib graph core
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B12OriginalPhysicalChargeLinearPMapProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B13OriginalSmoothCoreChargeGraphClosureProbe.olean SU2BFSSPhysicalDomainD2B13OriginalSmoothCoreChargeGraphClosureProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b13-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b13-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceOriginalCoreChargePMap_graph_eq',
+              'sourceOriginalCoreChargePMap_domain_eq_embedded',
+              'sourceOriginalCoreChargePMap_isClosable',
+              'sourceOriginalCoreChargePMap_closure_eq_closed',
+              'sourceOriginalCoreChargePMap_hasCore',
+              'sourceInvariantSmoothCore_isGraphCoreOfMinimalClosedColumn',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B13.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B13_GENUINE_ORIGINAL_SOURCE_GRAPH_CLOSURE_GRAPH_CORE_PASS')
           PY
 
       - name: Save qualified immutable Gate 47 extension cache
