@@ -1297,6 +1297,7 @@ jobs:
           expected = [
               'sourcePhysicalHilbertCharge_on_originalGraph',
               'sourcePhysicalHilbertToClosedCharge_output',
+              'genericPiLpHilbert_norm_sq_sum',
               'sourceChargeHilbertOutput_norm_sq_sum',
               'sourcePhysicalHilbertChargeEnergy_eq_sourceClosed',
               'sourcePhysicalHilbertChargeEnergy_nonneg',
