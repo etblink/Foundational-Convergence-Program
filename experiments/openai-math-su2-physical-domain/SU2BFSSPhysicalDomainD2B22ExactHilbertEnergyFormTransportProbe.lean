@@ -94,7 +94,7 @@ theorem genericPiLpHilbert_norm_sq_sum
     [∀ i, InnerProductSpace ℂ (H i)]
     (y : PiLp 2 H) :
     ‖y‖ ^ 2 = ∑ i, ‖y i‖ ^ 2 :=
-  PiLp.norm_sq_eq_of_L2 ℂ y
+  PiLp.norm_sq_eq_of_L2 H y
 
 /-- Source equivalence only changes the representation of the same
 sixteen coordinates; the actual ℓ² norm is inherited from PiLp. -/
