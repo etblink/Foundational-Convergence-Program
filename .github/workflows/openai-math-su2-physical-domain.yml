@@ -124,6 +124,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS2ASpatialWedgePotentialProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS2BPotentialChargeEnergyBridgeProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -1675,6 +1676,35 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
           print('S2A_ACTUAL_PAIRED_POTENTIAL_SPATIAL_WEDGES_ONE_COLOR_BOUND_PASS')
+          PY
+
+      - name: Compile S2B exact 16-charge potential multiplier and three-color spatial-wedge bounds
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS2ASpatialWedgePotentialProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS2BPotentialChargeEnergyBridgeProbe.olean SU2BFSSPhysicalDomainS2BPotentialChargeEnergyBridgeProbe.lean 2>&1 | tee /tmp/bfss-su2-s2b-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s2b-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceSpatialWedgeSq_symm',
+              'pairedPotential_ge_color1_spatialWedges',
+              'pairedPotential_ge_color2_spatialWedges',
+              'pairedPotentialMultiplierEnergy_eq_spatialWedges',
+              'pairedPotentialMultiplierEnergy_ge_twoWedges',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainS2B.' + suffix, (name, suffix)
+              assert {v.strip() for v in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
+          print('S2B_ACTUAL_SU2_16_CHARGE_POTENTIAL_MULTIPLIER_SPATIAL_WEDGE_PASS')
           PY
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
