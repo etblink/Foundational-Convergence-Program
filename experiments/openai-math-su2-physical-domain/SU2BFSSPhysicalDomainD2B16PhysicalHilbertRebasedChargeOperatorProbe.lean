@@ -136,8 +136,14 @@ theorem sourcePhysicalRebasedChargeColumn_domain_dense :
     apply LinearPMap.mem_domain_of_mem_graph
     rw [sourcePhysicalRebasedChargeColumn_graph_eq M G]
     exact (sourcePhysicalRebasedChargeGraph_mem_iff M G _).mpr hy
-  rw [← sourceClosedPhysicalChargeColumn_domain_closure_eq_physical M G]
-  exact closure_mono hs
+  calc
+    (G.physicalSpace : Set (FullL2 2)) =
+        closure ((sourceClosedPhysicalChargeColumn M G).domain :
+          Set (FullL2 2)) :=
+      (sourceClosedPhysicalChargeColumn_domain_closure_eq_physical M G).symm
+    _ ≤ closure ((↑) '' ((sourcePhysicalRebasedChargeColumn M G).domain :
+          Set G.physicalSpace) : Set (FullL2 2)) :=
+      closure_mono hs
 
 #print axioms sourcePhysicalRebasedChargeGraph_mem_iff
 #print axioms sourcePhysicalRebasedChargeColumn_graph_eq
