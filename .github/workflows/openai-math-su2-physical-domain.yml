@@ -129,6 +129,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS2DTransverseSliceWedgeProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3AActualGammaPlaneRotationProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3BFullPlaneSpinVectorCovarianceProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3CActualMajoranaQuadraticCommutatorProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -1893,6 +1894,33 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
           print('S3B_ALL_NINE_ACTUAL_GAMMA_SPIN_COVARIANCE_PASS')
+          PY
+
+      - name: Compile S3C actual 48-Majorana quadratic Clifford commutator and color locality
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3BFullPlaneSpinVectorCovarianceProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS3CActualMajoranaQuadraticCommutatorProbe.olean SU2BFSSPhysicalDomainS3CActualMajoranaQuadraticCommutatorProbe.lean 2>&1 | tee /tmp/bfss-su2-s3c-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s3c-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'pairedTheta_quadratic_commutator',
+              'pairedTheta_quadratic_commutator_other_color',
+              'pairedTheta_quadratic_commutator_same_color',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainS3C.' + suffix, (name, suffix)
+              assert {v.strip() for v in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
+          print('S3C_ACTUAL_48_MAJORANA_QUADRATIC_COLOR_COMMUTATOR_PASS')
           PY
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
