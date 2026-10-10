@@ -121,6 +121,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B28ConcretePairedSU2HamiltonianProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B29ConcretePositiveSourceFormTrialProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -1593,6 +1594,28 @@ jobs:
           }, found
           assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
           print('S1A_PAIRED_48_THETA_SCALAR_COMMUTANT_PASS')
+          PY
+
+      - name: Compile S1B same-covariance paired gauge implementer scalar uniqueness
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4HExactThetaCovarianceProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe.olean SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe.lean 2>&1 | tee /tmp/bfss-su2-s1b-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s1b-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \\[([^\\]]*)\\]", log)
+          assert len(found) == 1, found
+          assert found[0][0] == 'FCP.BFSSSU2PhysicalDomainS1B.theta_covariant_implementer_scalar', found
+          assert {v.strip() for v in found[0][1].split(',')} <= {
+              'propext', 'Classical.choice', 'Quot.sound'
+          }, found
+          assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
+          print('S1B_THETA_GAUGE_IMPLEMENTER_SCALAR_UNIQUENESS_PASS')
           PY
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
