@@ -1,23 +1,26 @@
 import SU2BFSSPhysicalDomainD2B16PhysicalHilbertRebasedChargeOperatorProbe
+import Mathlib.Analysis.InnerProductSpace.PiL2
 import Mathlib.Analysis.InnerProductSpace.LinearPMap
 
 /-!
-# BFSS SU2 D2B17 — genuine physical Hilbert-space charge adjoint
+# BFSS SU2 D2B17 — genuine Hilbert-valued physical charge adjoint
 
-PROSPECTIVE until exact pinned Lean 4.34.1 compiler and axiom smoke PASS.
+PROSPECTIVE until the exact pinned compiler and axiom gate passes.
 
-This applies Mathlib's *real* unbounded-operator adjoint to the
-source-defined gauge-restricted charge column of D2B16, whose input
-ambient is the physical Hilbert space itself. Gate D2B16 establishes
-density of its domain in THAT space, thereby excluding the Mathlib
-adjoint's non-dense-domain fallback. Its ambient output space is the
-16-component full-L2 Hilbert space; the source separately establishes
-that every defined charge output is physically invariant.
+Source G.deformedModelGraph 1 0 is transported:
+* input: original source G.physicalSpace (Gate D2B16);
+* output: PiLp 2 sixteen original FullL2 components.
 
-The closed physical submodule is a complete Hilbert space.
-The source adjoint is closed and satisfies the exact Hilbert pairing.
-No product T†T, Hamiltonian self-adjointness, spectrum, maximal
-differential realization, or manuscript operator identity is claimed.
+This is the mathematically required finite L² Hilbert sum.
+The original source output type SpinIndex → FullL2 has the finite
+product/sup norm and therefore lacks a Hilbert inner-product instance.
+The pinned PiLp.continuousLinearEquiv is an exact homeomorphic
+ℂ-linear identification, NOT an added physical axiom or an invented
+operator. Graph membership, closedness and physical-domain density
+are proved prior to using Mathlib's unbounded Hilbert adjoint.
+
+This is a charge-column adjoint, NOT a self-adjoint Hamiltonian or
+manuscript operator identification. No spectral claims follow.
 -/
 
 namespace FCP.BFSSSU2PhysicalDomainD2B17
@@ -32,48 +35,151 @@ open scoped InnerProductSpace
 
 variable (M : AlgebraData 2) (G : M.GaugeData)
 
-/-- Source physical Hilbert space is complete as the original closed
-submodule of the original full-L2 Hilbert space. -/
+/-- True sixteen-component Hilbert direct sum with the ℓ² norm. -/
+abbrev SourceChargeHilbertOutput :=
+  PiLp 2 (fun _ : SpinIndex => FullL2 2)
+
+/-- The exact pinned continuous linear equivalence between Hilbert
+ℓ² outputs and the original sixteen component source output type. -/
+noncomputable def sourceChargeOutputHilbertEquiv :
+    SourceChargeHilbertOutput ≃L[ℂ] (SpinIndex → FullL2 2) :=
+  PiLp.continuousLinearEquiv 2 ℂ (fun _ : SpinIndex => FullL2 2)
+
+/-- Source physical charge graph with the output carried by the
+correct sixteen-component Hilbert direct sum. -/
+noncomputable def sourcePhysicalHilbertChargeGraph :
+    Submodule ℂ (G.physicalSpace × SourceChargeHilbertOutput) :=
+  (sourcePhysicalRebasedChargeGraph M G).comap
+    ((LinearMap.id : G.physicalSpace →ₗ[ℂ] G.physicalSpace).prodMap
+      (sourceChargeOutputHilbertEquiv M G).toLinearMap)
+
+/-- Every graph point maps EXACTLY to the original source physical
+charge graph under the canonical L² Hilbert-output identification. -/
+theorem sourcePhysicalHilbertChargeGraph_mem_iff
+    (p : G.physicalSpace × SourceChargeHilbertOutput) :
+    p ∈ sourcePhysicalHilbertChargeGraph M G ↔
+      (p.1, sourceChargeOutputHilbertEquiv M G p.2) ∈
+        sourcePhysicalRebasedChargeGraph M G := by
+  rfl
+
+private theorem sourcePhysicalHilbertChargeGraph_vertical :
+    ∀ (p : G.physicalSpace × SourceChargeHilbertOutput),
+      p ∈ sourcePhysicalHilbertChargeGraph M G →
+      p.1 = 0 → p.2 = 0 := by
+  rintro ⟨ψ,y⟩ hp hz
+  have hrebased :
+      (ψ,sourceChargeOutputHilbertEquiv M G y) ∈
+        sourcePhysicalRebasedChargeGraph M G :=
+    (sourcePhysicalHilbertChargeGraph_mem_iff M G _).mp hp
+  have horiginal :
+      ((ψ : FullL2 2), sourceChargeOutputHilbertEquiv M G y) ∈
+        G.deformedModelGraph 1 0 :=
+    (sourcePhysicalRebasedChargeGraph_mem_iff M G _).mp hrebased
+  have hz' : (ψ : FullL2 2) = 0 :=
+    congrArg (fun x : G.physicalSpace => (x : FullL2 2)) hz
+  have hzero : ((0 : FullL2 2), sourceChargeOutputHilbertEquiv M G y) ∈
+      G.deformedModelGraph 1 0 := by
+    simpa only [hz'] using horiginal
+  have hy : sourceChargeOutputHilbertEquiv M G y = 0 :=
+    G.deformedModelGraph_vertical 1 0 hzero
+  apply (sourceChargeOutputHilbertEquiv M G).injective
+  simpa using hy
+
+/-- Genuine Mathlib ℂ-linear partially-defined charge operator from
+the ORIGINAL source graph, now with both true Hilbert ambient spaces. -/
+noncomputable def sourcePhysicalHilbertChargeColumn :
+    G.physicalSpace →ₗ.[ℂ] SourceChargeHilbertOutput :=
+  (sourcePhysicalHilbertChargeGraph M G).toLinearPMap
+
+theorem sourcePhysicalHilbertChargeColumn_graph_eq :
+    (sourcePhysicalHilbertChargeColumn M G).graph =
+      sourcePhysicalHilbertChargeGraph M G := by
+  exact Submodule.toLinearPMap_graph_eq _
+    (sourcePhysicalHilbertChargeGraph_vertical M G)
+
+/-- Closedness transfers through Mathlib's continuous linear
+equivalence, so the transported graph is the literal source graph. -/
+theorem sourcePhysicalHilbertChargeColumn_isClosed :
+    (sourcePhysicalHilbertChargeColumn M G).IsClosed := by
+  change IsClosed ((sourcePhysicalHilbertChargeColumn M G).graph :
+    Set (G.physicalSpace × SourceChargeHilbertOutput))
+  rw [sourcePhysicalHilbertChargeColumn_graph_eq M G]
+  change IsClosed {p : G.physicalSpace × SourceChargeHilbertOutput |
+    (p.1,sourceChargeOutputHilbertEquiv M G p.2) ∈
+      (sourcePhysicalRebasedChargeGraph M G :
+        Set (G.physicalSpace × (SpinIndex → FullL2 2)))}
+  have hclosed : IsClosed (sourcePhysicalRebasedChargeGraph M G :
+      Set (G.physicalSpace × (SpinIndex → FullL2 2))) := by
+    rw [← sourcePhysicalRebasedChargeColumn_graph_eq M G]
+    exact sourcePhysicalRebasedChargeColumn_isClosed M G
+  have hcont : Continuous
+      (fun p : G.physicalSpace × SourceChargeHilbertOutput =>
+        (p.1,sourceChargeOutputHilbertEquiv M G p.2)) :=
+    continuous_fst.prodMk
+      ((sourceChargeOutputHilbertEquiv M G).continuous.comp continuous_snd)
+  exact hclosed.preimage hcont
+
+/-- Exact domain-density transfer from Gate 65.
+This verifies the actual Hilbert adjoint's density hypothesis. -/
+theorem sourcePhysicalHilbertChargeColumn_domain_dense :
+    Dense ((sourcePhysicalHilbertChargeColumn M G).domain :
+      Set G.physicalSpace) := by
+  have hs :
+      ((sourcePhysicalRebasedChargeColumn M G).domain : Set G.physicalSpace) ⊆
+      ((sourcePhysicalHilbertChargeColumn M G).domain : Set G.physicalSpace) := by
+    intro ψ hψ
+    have hy : ∃ y : SpinIndex → FullL2 2,
+        (ψ,y) ∈ sourcePhysicalRebasedChargeGraph M G := by
+      have h := (LinearPMap.mem_domain_iff).mp hψ
+      rwa [sourcePhysicalRebasedChargeColumn_graph_eq M G] at h
+    rcases hy with ⟨y,hy⟩
+    apply LinearPMap.mem_domain_of_mem_graph
+    rw [sourcePhysicalHilbertChargeColumn_graph_eq M G]
+    apply (sourcePhysicalHilbertChargeGraph_mem_iff M G _).mpr
+    simpa only [ContinuousLinearEquiv.apply_symm_apply] using hy
+  exact (sourcePhysicalRebasedChargeColumn_domain_dense M G).mono hs
+
+/-- Original physical Hilbert subspace remains complete. -/
 theorem sourceOriginalPhysicalHilbert_complete :
     CompleteSpace G.physicalSpace :=
   (G.physicalSpace_closed).isComplete.completeSpace_coe
 
-/-- Genuine Mathlib Hilbert adjoint of the exact source charge
-operator with the PHYSICAL Hilbert space as ambient input. -/
+/-- ACTUAL Hilbert adjoint, now over source physical input and
+genuine ℓ² sixteen-charge output, with no non-dense fallback. -/
 noncomputable def sourceOriginalPhysicalChargeAdjoint :
-    (SpinIndex → FullL2 2) →ₗ.[ℂ] G.physicalSpace :=
-  (sourcePhysicalRebasedChargeColumn M G).adjoint
+    SourceChargeHilbertOutput →ₗ.[ℂ] G.physicalSpace :=
+  (sourcePhysicalHilbertChargeColumn M G).adjoint
 
-/-- The source adjoint satisfies the defining Hilbert-space
-adjoint pairing, using the ACTUAL source physical density proof.
-No artificial map or extra assumed axiom is introduced. -/
 theorem sourceOriginalPhysicalChargeAdjoint_isFormalAdjoint :
     (sourceOriginalPhysicalChargeAdjoint M G).IsFormalAdjoint
-      (sourcePhysicalRebasedChargeColumn M G) := by
+      (sourcePhysicalHilbertChargeColumn M G) := by
   exact LinearPMap.adjoint_isFormalAdjoint
-    (sourcePhysicalRebasedChargeColumn_domain_dense M G)
+    (sourcePhysicalHilbertChargeColumn_domain_dense M G)
 
-/-- Closedness of the true physical charge adjoint follows from
-the exact Hilbert domain density and physical Hilbert completeness. -/
+/-- The true physical charge adjoint is a CLOSED unbounded
+Hilbert operator; no self-adjoint Hamiltonian is inferred. -/
 theorem sourceOriginalPhysicalChargeAdjoint_isClosed :
     (sourceOriginalPhysicalChargeAdjoint M G).IsClosed := by
   letI : CompleteSpace G.physicalSpace :=
     sourceOriginalPhysicalHilbert_complete M G
   exact LinearPMap.adjoint_isClosed
-    (sourcePhysicalRebasedChargeColumn_domain_dense M G)
+    (sourcePhysicalHilbertChargeColumn_domain_dense M G)
 
-/-- Concrete adjoint identity with original source full-L2 output
-and literal physical-L2 input; no formal-adjoint proxy.
-The complex Hilbert inner product orientation matches Mathlib. -/
+/-- Correct physical Hilbert inner product adjoint identity,
+where charge outputs carry their ℓ² direct-sum inner product. -/
 theorem sourceOriginalPhysicalChargeAdjoint_inner
-    (u : (sourcePhysicalRebasedChargeColumn M G).domain)
+    (u : (sourcePhysicalHilbertChargeColumn M G).domain)
     (v : (sourceOriginalPhysicalChargeAdjoint M G).domain) :
     inner ℂ (sourceOriginalPhysicalChargeAdjoint M G v)
       (u : G.physicalSpace) =
-    inner ℂ (v : SpinIndex → FullL2 2)
-      (sourcePhysicalRebasedChargeColumn M G u) := by
+    inner ℂ (v : SourceChargeHilbertOutput)
+      (sourcePhysicalHilbertChargeColumn M G u) := by
   exact (sourceOriginalPhysicalChargeAdjoint_isFormalAdjoint M G) v u
 
+#print axioms sourcePhysicalHilbertChargeGraph_mem_iff
+#print axioms sourcePhysicalHilbertChargeColumn_graph_eq
+#print axioms sourcePhysicalHilbertChargeColumn_isClosed
+#print axioms sourcePhysicalHilbertChargeColumn_domain_dense
 #print axioms sourceOriginalPhysicalHilbert_complete
 #print axioms sourceOriginalPhysicalChargeAdjoint_isFormalAdjoint
 #print axioms sourceOriginalPhysicalChargeAdjoint_isClosed

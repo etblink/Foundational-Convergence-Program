@@ -1136,6 +1136,10 @@ jobs:
           log = open('/tmp/bfss-su2-d2b17-axioms.log').read()
           found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
           expected = [
+              'sourcePhysicalHilbertChargeGraph_mem_iff',
+              'sourcePhysicalHilbertChargeColumn_graph_eq',
+              'sourcePhysicalHilbertChargeColumn_isClosed',
+              'sourcePhysicalHilbertChargeColumn_domain_dense',
               'sourceOriginalPhysicalHilbert_complete',
               'sourceOriginalPhysicalChargeAdjoint_isFormalAdjoint',
               'sourceOriginalPhysicalChargeAdjoint_isClosed',
@@ -1148,7 +1152,7 @@ jobs:
                   'propext', 'Classical.choice', 'Quot.sound'
               }, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
-          print('D2B17_TRUE_PHYSICAL_CHARGE_ADJOINT_CLOSED_AND_PAIRING_PASS')
+          print('D2B17_CORRECT_SOURCE_PHYSICAL_ELL2_CHARGE_ADJOINT_PASS')
           PY
 
       - name: Save qualified immutable Gate 47 extension cache
