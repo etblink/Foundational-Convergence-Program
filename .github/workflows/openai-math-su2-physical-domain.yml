@@ -96,6 +96,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainGate47AcceptedCacheSmoke.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B11OriginalPhysicalClosedChargeColumnProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -942,6 +943,36 @@ jobs:
               assert {a.strip() for a in axioms.split(",")} <= allowed, (name, axioms)
           assert "sorryAx" not in log and "error:" not in log and "unknownIdentifier" not in log
           print("GATE47_ALL_33_TRUE_SOURCE_ACCEPTED_AXIOM_REPORTS_PASS")
+          PY
+
+      - name: Compile D2B11 exact source physical closed densely-defined charge-column graph
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B11OriginalPhysicalClosedChargeColumnProbe.olean SU2BFSSPhysicalDomainD2B11OriginalPhysicalClosedChargeColumnProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b11-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-d2b11-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'sourceRestrictedPhysicalGraph_isClosed',
+              'sourceRestrictedPhysicalGraph_containsCore',
+              'sourceRestrictedPhysicalGraph_input_output_physical',
+              'sourceRestrictedPhysicalGraph_unique',
+              'sourceRestrictedPhysicalGraph_domain_closure_eq_physical',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainD2B11.' + suffix, name
+              assert {a.strip() for a in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
+          print('D2B11_TRUE_SOURCE_PHYSICAL_CLOSED_DENSE_CHARGE_COLUMN_PASS')
           PY
 
       - name: Save qualified immutable Gate 47 extension cache
