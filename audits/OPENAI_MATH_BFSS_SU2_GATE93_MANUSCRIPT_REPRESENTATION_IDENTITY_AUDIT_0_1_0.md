@@ -379,3 +379,69 @@ same exterior polarization and shown to fix this **same** nonzero
 vacuum, S1B's scalar necessarily equals 1 *pointwise*, avoiding a
 separate global SU(2)-character formalization. Vacuum preservation
 by the manuscript lift is still an obligation; do not assume it.
+
+## 11. Gate #108: exact source one-particle determinant-one, kernel accepted
+
+**Outcome: `S1C_EXACT_SOURCE_24_MODE_DET_ONE__KERNEL_ACCEPTED`.**
+[Physical Domain Bridge #108](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38077555933),
+run `38077555933`, **SUCCESS** at exact proof commit
+`fc28cdf02064cebe2e01e6ddb829ca3a32767921`.
+Its three theorems:
+`adjointColorMatrix_det_sq_one`,
+`oneParticleMatrix_det_one`, and
+`complexOneParticleMatrix_det_one` compiled under the exact pinned
+Lean/Mathlib toolchain with only `propext`, `Classical.choice`,
+and `Quot.sound`. The workflow accepted
+`S1C_PAIRED_24_MODE_SU24_DETERMINANT_ONE_PASS`.
+The accepted Gate-93 cache hit and all D2B11–D2B28 objects
+were reused; no unqualified D2B29 was compiled.
+
+This proves that the *actual* accepted G3-C one-particle SU(2) matrix,
+formed by complex extension of the 8×3 real Fock orbital color action,
+has determinant one on every group element. As indicated in §10,
+the eighth power of an orthogonal 3×3 determinant supplies the proof
+without an unproved orientation lemma.
+
+**Prospective extension (not accepted by #108):** an exact
+`GaugeGroup 2 →* Matrix.specialUnitaryGroup (Fin 24) ℂ` subtype-valued
+representation has been added to S1C and a 5-declaration kernel gate
+requested. Do not elevate that new group-homomorphism declaration
+before its **own** green gate.
+
+### Manuscript-level S1 argument from already accepted data
+
+The paper's `F` can be instantiated as the accepted FCP irreducible
+`Fermion 2` with the normalized paired theta operators. It chooses
+the unique **connected** SU(2)→Spin(48) lift of
+`g ↦ O_g ⊗ I₁₆` and lets its Clifford action be `V_paper(g)`.
+G3-A fixes `O_g` by literal conjugation in the same normalized
+Pauli color basis and with output-color B/input-color A index
+orientation. G4-H certifies exactly
+`V_FCP(g) theta_A V_FCP(g)^(-1)=Σ_B O_g[B,A] theta_B`;
+G4-E and G4-IC2 certify a genuine continuous SU(2) unitary action.
+Thus the paper and FCP unitary actions both implement the *same*
+48-generator orthogonal automorphism on the *same* irreducible module.
+
+The accepted S1A scalar-commutant and S1B covariance-implementer
+rigidity make their pointwise ratio scalar:
+`V_paper(g) = z(g) V_FCP(g)`. The two group-homomorphism laws
+imply `z(gh)=z(g)z(h)`; unitarity implies `z(g)∈U(1)`.
+The compact Lie group SU(2) is perfect, so every group homomorphism
+SU(2)→an abelian group is trivial: `z(g)=1`. Therefore, *at the
+ordinary-mathematical manuscript level*, the unique SU(2) spin lift
+must agree with this Fock gauge action **provided the paper's action
+is interpreted on the exact normalized theta module and with the
+verified O_g orientation**. No **additional** SU(24) determinant-one
+hypothesis is needed for this uniqueness argument; S1C additionally
+supports an explicit polarization/spinor-construction crosscheck.
+
+This is a standard external-mathematics **identification argument**,
+not a kernel certificate for the Spin(48) cover, the SU(2) perfectness
+instance, or the paper-defined `V_paper`. The manuscript explicitly
+supplies the Spin(48) lift as part of its setup; we do not fabricate an
+unproved Lean construction or count this argument as a new theorem
+about point eigenvalues. The next scientific check should be exact
+bosonic coordinate, smooth invariant core, joint supercharge,
+quadratic-form and closed-operator comparison, reusing the accepted
+source-side D2B13–D2B28 without reopening them. If an actual mismatch
+occurs it overrides this paper-level identification argument.
