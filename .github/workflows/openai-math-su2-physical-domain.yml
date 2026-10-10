@@ -1580,7 +1580,67 @@ jobs:
 
 
 
+
+      - name: Freeze exact S1ABC and Gate 118 S2ABC qualified sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          s1=f525a4adb9a637320e176ba5b5f6730ee386d043
+          s2=78cdc33a7e7abcecc3542fee769197eb450f050c
+          git fetch --quiet --no-tags --depth=1 origin "$s1" "$s2"
+          for module in \
+            SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe \
+            SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe \
+            SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe \
+            SU2BFSSPhysicalDomainS2ASpatialWedgePotentialProbe \
+            SU2BFSSPhysicalDomainS2BPotentialChargeEnergyBridgeProbe \
+            SU2BFSSPhysicalDomainS2CCoreFormLinearFermionBoundProbe
+          do
+            case "$module" in
+              SU2BFSSPhysicalDomainS1*) rev="$s1" ;;
+              SU2BFSSPhysicalDomainS2*) rev="$s2" ;;
+              *) exit 1 ;;
+            esac
+            p="experiments/openai-math-su2-physical-domain/${module}.lean"
+            expected="$(git rev-parse "$rev:$p")"
+            actual="$(git hash-object "$p")"
+            test "$expected" = "$actual" || {
+              echo "QUALIFIED_S1_S2_SOURCE_DRIFT $p expected=$expected actual=$actual" >&2
+              exit 1
+            }
+          done
+          echo SIX_ACCEPTED_S1_S2_SOURCES_IMMUTABLE
+
+      - name: Restore immutable accepted S1ABC and S2ABC Lean objects
+        id: accepted_s2c_cache
+        if: ${{ inputs.clean_build != true }}
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-accepted-s2c-v1-f525a4adb9a637-78cdc33a7e7abc-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Verify six qualified S1ABC S2ABC Lean objects on cache hit
+        if: ${{ steps.accepted_s2c_cache.outputs.cache-hit == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for module in \
+            SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe \
+            SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe \
+            SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe \
+            SU2BFSSPhysicalDomainS2ASpatialWedgePotentialProbe \
+            SU2BFSSPhysicalDomainS2BPotentialChargeEnergyBridgeProbe \
+            SU2BFSSPhysicalDomainS2CCoreFormLinearFermionBoundProbe
+          do
+            test -s "upstream-math/lean/.lake/build/lib/lean/${module}.olean" || {
+              echo "ACCEPTED_S2C_MISSING_OLEAN $module" >&2
+              exit 1
+            }
+          done
+          echo SIX_ACCEPTED_S1_S2_OLEANS_VERIFIED
+
       - name: Compile S1A exact paired 48-Majorana scalar commutant
+        if: ${{ steps.accepted_s2c_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1602,6 +1662,7 @@ jobs:
           PY
 
       - name: Compile S1B same-covariance paired gauge implementer scalar uniqueness
+        if: ${{ steps.accepted_s2c_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1624,6 +1685,7 @@ jobs:
           PY
 
       - name: Compile S1C determinant-one 24-mode source one-particle action
+        if: ${{ steps.accepted_s2c_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1653,6 +1715,7 @@ jobs:
           PY
 
       - name: Compile S2A exact paired BFSS spatial-wedge quartic potential and one-color bound
+        if: ${{ steps.accepted_s2c_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1681,6 +1744,7 @@ jobs:
           PY
 
       - name: Compile S2B exact 16-charge potential multiplier and three-color spatial-wedge bounds
+        if: ${{ steps.accepted_s2c_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1710,6 +1774,7 @@ jobs:
           PY
 
       - name: Compile S2C exact original BFSS core kinetic plus wedge minus linear fermion bound
+        if: ${{ steps.accepted_s2c_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1735,6 +1800,14 @@ jobs:
           assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
           print('S2C_ORIGINAL_SU2_BFSS_CORE_KINETIC_WEDGE_FERMION_LINEAR_BOUND_PASS')
           PY
+
+
+      - name: Save six immutable S1ABC S2ABC accepted proof objects
+        if: ${{ steps.accepted_s2c_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-accepted-s2c-v1-f525a4adb9a637-78cdc33a7e7abc-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
 
       - name: Compile S2D source BFSS transverse-slice Lagrange identity and confinement wedge bound
         shell: bash
