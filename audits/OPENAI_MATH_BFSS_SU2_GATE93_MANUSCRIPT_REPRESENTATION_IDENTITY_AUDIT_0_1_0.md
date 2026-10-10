@@ -266,3 +266,49 @@ in Gate #96 and independently warm-qualified in Gate #98. No further
 cache repair is justified; future Lean modules should reuse it and
 must not recompile the accepted D2B11-D2B28 chain. Keep FCP main,
 the source register, and its framework comparison ledgers unchanged.
+
+## 9. S1B relative gauge implementer rigidity — Gate #102
+
+**Outcome: `S1B_SAME_COVARIANCE_IMPLEMENTER_SCALAR__KERNEL_ACCEPTED`.**
+Accepted workflow run: **BFSS SU2 Physical Domain Bridge #102**,
+[run 38075901151](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38075901151),
+completed **SUCCESS** at proof-gate commit
+`bab2f905a6d4cab8abb60e6bbffa95ea2e1799b6`.
+The actual compiled Lean source:
+`experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe.lean`,
+Git blob `4bf6bb015c68b7a1702fefbc908c12a88ad656b1`.
+
+The exact pinned compiler reports:
+
+```text
+'FCP.BFSSSU2PhysicalDomainS1B.theta_covariant_implementer_scalar'
+  depends on axioms: [propext, Classical.choice, Quot.sound]
+S1B_THETA_GAUGE_IMPLEMENTER_SCALAR_UNIQUENESS_PASS
+```
+
+**Proved statement (conditional):** Given the actual `GaugeGroup 2` element
+`g` and an *assumed* invertible complex-linear candidate
+`V : Fermion 2 ≃ₗ[ℂ] Fermion 2` satisfying the same indexed 48-theta
+adjoint-color covariance as the **accepted** exterior-Fock action at `g`,
+there exists a complex scalar `z` such that for all `v`,
+`V v = z • fermionGaugeLinearEquiv g v`.
+
+This is a non-vacuous exact representation-rigidity theorem using Gate #99
+S1A scalar commutant and accepted G4H exact theta covariance. It is **not**
+the construction of the manuscript's Spin(48) lift, nor does it prove that
+the manuscript action satisfies the explicit S1B candidate hypothesis.
+Removing the possible scalar **globally over SU(2)** requires both the
+paper-action construction/identification and continuous-character
+triviality (or an exact source-normalized equivalent).
+
+The accepted Gate-93 D2B11–D2B28 cache was restored and verified;
+the 18 accepted modules were not recompiled. The unqualified D2B29 trial
+was skipped. **No spectral transfer or positive-eigenvalue theorem in Lean
+is claimed.** FCP main, source register and FCP comparisons remain unchanged.
+
+**Next discriminating bridge:** verify the exact `O_g ⊗ I₁₆` theta covariance
+of the manuscript's defined Spin(48) lift on the *same* Fock module and
+the correct adjoint-matrix index convention. Apply S1B to obtain a
+pointwise scalar, and then prove the scalar is one using exact
+group/continuity infrastructure. Do **not** assume the existence of the
+specific lift merely from the pinned generic `spinGroup` type.
