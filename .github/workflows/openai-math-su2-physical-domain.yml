@@ -134,6 +134,8 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3FActualFermionSpinSkewAdjointProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3GActualFermionSpinGaugeCompatibilityProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3G2GaugeInvariantMajoranaPairsProbe.lean upstream-math/lean
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3G3FullQuadraticGaugeCommutationProbe.lean upstream-math/lean
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -2099,6 +2101,59 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
           print('S3G_SOURCE_COLOR_ROW_ORTHOGONALITY_AND_G4H_COVARIANCE_PASS')
+          PY
+
+      - name: Compile S3G2 actual Majorana color-pair gauge invariance
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3GActualFermionSpinGaugeCompatibilityProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS3G2GaugeInvariantMajoranaPairsProbe.olean SU2BFSSPhysicalDomainS3G2GaugeInvariantMajoranaPairsProbe.lean 2>&1 | tee /tmp/bfss-su2-s3g2-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s3g2-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'source_color_pair_contraction',
+              'pairedTheta_pair_gauge_covariance',
+              'pairedTheta_colorPairSum_gauge_invariant',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainS3G2.' + suffix, (name, suffix)
+              assert {v.strip() for v in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
+          print('S3G2_SOURCE_MAJORANA_COLOR_PAIR_GAUGE_INVARIANCE_PASS')
+          PY
+
+      - name: Compile S3G3 actual full quadratic fermionic spin SU2 gauge compatibility
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3G2GaugeInvariantMajoranaPairsProbe.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS3G3FullQuadraticGaugeCommutationProbe.olean SU2BFSSPhysicalDomainS3G3FullQuadraticGaugeCommutationProbe.lean 2>&1 | tee /tmp/bfss-su2-s3g3-axioms.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s3g3-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+              'pairedFermionSpinQuadraticSum_gauge_commutes',
+              'pairedFermionPlaneSpinGenerator_gauge_commutes',
+          ]
+          assert len(found) == len(expected), found
+          for (name, axioms), suffix in zip(found, expected):
+              assert name == 'FCP.BFSSSU2PhysicalDomainS3G3.' + suffix, (name, suffix)
+              assert {v.strip() for v in axioms.split(',')} <= {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
+          print('S3G3_ACTUAL_FOCK_SPIN_SU2_GAUGE_COMPATIBILITY_PASS')
           PY
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
