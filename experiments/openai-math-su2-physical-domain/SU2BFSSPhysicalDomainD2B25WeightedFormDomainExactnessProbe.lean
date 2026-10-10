@@ -63,7 +63,7 @@ theorem sourcePhysicalWeightedFormGraph_exhausted
       ((u : G.physicalSpace),
         (1 / 4 : ℂ) • sourcePhysicalHilbertChargeColumn M G u)
   apply Prod.ext
-  · exact hfst
+  · exact hfst.symm
   · calc
       (WithLp.ofLp (p :
         WithLp 2 (G.physicalSpace × SourceChargeHilbertOutput))).2 =
@@ -73,7 +73,7 @@ theorem sourcePhysicalWeightedFormGraph_exhausted
                 rw [smul_smul]
                 norm_num
       _ = (1 / 4 : ℂ) • sourcePhysicalHilbertChargeColumn M G u :=
-        congrArg ((1 / 4 : ℂ) • ·) hsnd
+        congrArg ((1 / 4 : ℂ) • ·) hsnd.symm
 
 /-- The explicit source physical form-domain identification is
 injective (no two different charge states yield the same graph point). -/
