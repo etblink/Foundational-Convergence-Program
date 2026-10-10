@@ -55,9 +55,32 @@ theorem complexOneParticleMatrix_det_one (g : GaugeGroup 2) :
   rw [oneParticleMatrix_det_one]
   simp
 
+/-- The actual 24-mode BFSS matrix, now inhabiting the exact SU(24) subtype. -/
+noncomputable def complexOneParticleSpecialUnitary (g : GaugeGroup 2) :
+    Matrix.specialUnitaryGroup (Fin 24) ℂ := by
+  refine ⟨complexOneParticleMatrix g, ?_⟩
+  rw [Matrix.mem_specialUnitaryGroup_iff]
+  exact ⟨(complexOneParticleUnitary g).property, complexOneParticleMatrix_det_one g⟩
+
+/-- Exact source-defined SU(2) representation into SU(24), not only U(24). -/
+noncomputable def complexOneParticleSpecialUnitaryHom :
+    GaugeGroup 2 →* Matrix.specialUnitaryGroup (Fin 24) ℂ where
+  toFun := complexOneParticleSpecialUnitary
+  map_one' := by
+    apply Subtype.ext
+    change complexOneParticleMatrix 1 = 1
+    exact complexOneParticleMatrix_one
+  map_mul' g h := by
+    apply Subtype.ext
+    change complexOneParticleMatrix (g * h) =
+      complexOneParticleMatrix g * complexOneParticleMatrix h
+    exact complexOneParticleMatrix_mul g h
+
 #print axioms adjointColorMatrix_det_sq_one
 #print axioms oneParticleMatrix_det_one
 #print axioms complexOneParticleMatrix_det_one
+#print axioms complexOneParticleSpecialUnitary
+#print axioms complexOneParticleSpecialUnitaryHom
 
 end
 end FCP.BFSSSU2PhysicalDomainS1C
