@@ -31,6 +31,7 @@ noncomputable section
 open OAI
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
+open FCP.BFSSSU2GaugeG4K10A
 open FCP.BFSSSU2PhysicalDomainD1
 open FCP.BFSSSU2PhysicalDomainD2A
 open FCP.BFSSSU2PhysicalDomainD2B10C
