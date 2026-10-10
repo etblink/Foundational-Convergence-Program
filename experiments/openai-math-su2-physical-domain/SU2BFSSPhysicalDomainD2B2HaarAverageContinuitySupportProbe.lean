@@ -39,17 +39,51 @@ the actual bosonic coordinate, using compact parametric integration
 of the joint continuous source action. -/
 theorem sourceHaarAverageRaw_continuous (f : SmoothCore 2) :
     Continuous (sourceHaarAverageRaw M G f) := by
-  have h := continuous_parametric_integral_of_continuous
-    (μ := sourceHaar)
-    (f := fun x : Boson 2 => fun g : GaugeGroup 2 =>
-      G.fermion g (f (G.boson g⁻¹ x)))
-    (s := Set.univ) (sourceHaarIntegrand_jointContinuous M G f)
-    isCompact_univ
-  -- Mathlib's parametric-integral theorem uses the norm-induced
-  -- pseudometric topology on the PiLp fermionic space. Normalize the
-  -- equivalent PiLp product/uniform topology used by the BFSS alias.
-  simpa [sourceHaarAverageRaw, MeasureTheory.setIntegral_univ,
-    PiLp.topologicalSpace, PiLp.uniformSpace] using h
+  -- Work coordinatewise in the original Fermion 2 = EuclideanSpace ℂ
+  -- (Fin (2^(8*colorDim 2))). Parametric integration in ℂ has a
+  -- canonical topology and avoids an irrelevant PiLp instance choice.
+  have hcoord (i : Fin (2 ^ (8 * colorDim 2))) (x : Boson 2) :
+      (sourceHaarAverageRaw M G f x) i =
+        ∫ g : GaugeGroup 2,
+          (G.fermion g (f (G.boson g⁻¹ x))) i ∂sourceHaar := by
+    change (∫ g : GaugeGroup 2,
+        G.fermion g (f (G.boson g⁻¹ x)) ∂sourceHaar) i = _
+    exact eval_integral_piLp
+      (fun j => (sourceHaarIntegrand_integrable M G f x).eval_piLp j) i
+  have hcoords : Continuous (fun x : Boson 2 =>
+      (fun i : Fin (2 ^ (8 * colorDim 2)) =>
+        (sourceHaarAverageRaw M G f x) i)) := by
+    apply continuous_pi
+    intro i
+    have hjoint : Continuous (fun p : Boson 2 × GaugeGroup 2 =>
+        (G.fermion p.2 (f (G.boson p.2⁻¹ p.1))) i) :=
+      (PiLp.continuous_apply i).comp
+        (sourceHaarIntegrand_jointContinuous M G f)
+    have hscalar := continuous_parametric_integral_of_continuous
+      (μ := sourceHaar)
+      (f := fun x : Boson 2 => fun g : GaugeGroup 2 =>
+        (G.fermion g (f (G.boson g⁻¹ x))) i)
+      (s := Set.univ) hjoint isCompact_univ
+    have hc : Continuous (fun x : Boson 2 =>
+        ∫ g : GaugeGroup 2,
+          (G.fermion g (f (G.boson g⁻¹ x))) i ∂sourceHaar) := by
+      simpa only [MeasureTheory.setIntegral_univ] using hscalar
+    have heq :
+        (fun x : Boson 2 => (sourceHaarAverageRaw M G f x) i) =
+        (fun x : Boson 2 =>
+          ∫ g : GaugeGroup 2,
+            (G.fermion g (f (G.boson g⁻¹ x))) i ∂sourceHaar) := by
+      funext x
+      exact hcoord i x
+    rw [heq]
+    exact hc
+  -- Assemble the same finitely indexed coordinates with the genuine
+  -- source PiLp product topology, not a surrogate metric-space instance.
+  change Continuous (fun x : Boson 2 =>
+    WithLp.toLp 2 (fun i : Fin (2 ^ (8 * colorDim 2)) =>
+      (sourceHaarAverageRaw M G f x) i))
+  exact (PiLp.continuous_toLp 2
+    (fun _ : Fin (2 ^ (8 * colorDim 2)) => ℂ)).comp hcoords
 
 /-- Compact gauge saturation of the ACTUAL source smooth test
 function's support. No averaging-space compactness assumption. -/
