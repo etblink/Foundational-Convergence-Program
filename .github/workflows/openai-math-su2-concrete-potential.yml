@@ -44,16 +44,15 @@ jobs:
             ~/.elan
           key: family270b-bridge-ubuntu-lean4341-openai-adc7f124-deformedcharge-v2
 
-      - name: Verify immutable accepted G4-K8E3 prerequisite inputs
+      - name: Verify immutable accepted G4-K10A proof-source baseline
         shell: bash
         run: |
           set -euo pipefail
           # The compiled cache is sound only for the EXACT accepted source chain.
-          # Fetch the owner-verified Gate #159 commit even with shallow checkout.
-          git fetch --quiet --no-tags --depth=1 origin 1fbd0db2af96914d20b8750bfbbeb3af6770a491
-          # Gate #170 freezes original potential, all-core charges and forms.
-          # K10A alone is prospective. Protect every accepted Lean source.
-          changed="$(git diff --name-only 1fbd0db2af96914d20b8750bfbbeb3af6770a491 HEAD -- experiments/openai-math-su2-concrete-potential/ | grep -v -x 'experiments/openai-math-su2-concrete-potential/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.lean' || true)"
+          # Gate #171 kernel-qualified every accepted Lean source through G4-K10A.
+          # Never accept a cache under changed source, even if older modules import.
+          git fetch --quiet --no-tags --depth=1 origin 6eeb4293abcc1cf3a111ff5c511f708cb5ed320a
+          changed="$(git diff --name-only 6eeb4293abcc1cf3a111ff5c511f708cb5ed320a HEAD -- experiments/openai-math-su2-concrete-potential/)"
           if [ -n "$changed" ]; then
             printf 'Accepted baseline source has drifted; explicitly requalify before changing the compiled cache:\n%s\n' "$changed" >&2
             exit 1
@@ -141,16 +140,24 @@ jobs:
           cd upstream-math/lean
           lake exe cache get
 
+      - name: Restore immutable compiled Gate 171 G4-K10A proof chain
+        id: full_proof_cache
+        if: ${{ inputs.clean_build != true }}
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-accepted-g4k10a-v1-6eeb4293abcc1cf3a111ff5c511f708cb5ed320a-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
       - name: Restore immutable compiled G4-K8E3 source proof chain
         id: proof_cache
-        if: ${{ inputs.clean_build != true }}
+        if: ${{ steps.full_proof_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
         uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: upstream-math/lean/.lake/build
           key: bfss-su2-accepted-g4k8e3-v1-31849ff72d569d38a18988e62e371c6b6f3e256c-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
 
       - name: Compile exact accepted source proof chain
-        if: ${{ steps.proof_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.full_proof_cache.outputs.cache-hit != 'true' && steps.proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
@@ -340,8 +347,8 @@ jobs:
           # at m=0 for all h; L² nonvanishing and strict h=1 energy remain unproved.
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K8E3CoreNoncancellationProbe.olean SU2BFSSG4K8E3CoreNoncancellationProbe.lean
 
-      - name: Verify compiled proof cache required module objects
-        if: ${{ steps.proof_cache.outputs.cache-hit == 'true' }}
+      - name: Verify compiled prerequisite proof-cache module objects
+        if: ${{ steps.full_proof_cache.outputs.cache-hit == 'true' || steps.proof_cache.outputs.cache-hit == 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -417,7 +424,7 @@ jobs:
           test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/KineticMeasures.olean
 
       - name: Save qualified prerequisite objects after successful cold compilation
-        if: ${{ steps.proof_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
+        if: ${{ steps.full_proof_cache.outputs.cache-hit != 'true' && steps.proof_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: upstream-math/lean/.lake/build
@@ -430,45 +437,60 @@ jobs:
           source "$HOME/.elan/env"
           cd upstream-math/lean
           lake env lean SU2BFSSG4K8E3CoreNoncancellationProbe.lean
-      - name: Compile prospective source G4-K8E4 L2 bridge and print axioms
+
+      - name: Compile and cache all Gate 171 qualified extensions (G4-K8E4 through G4-K10A)
+        if: ${{ steps.full_proof_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euxo pipefail
           source "$HOME/.elan/env"
           cd upstream-math/lean
-          lake env lean SU2BFSSG4K8E4L2BridgeProbe.lean
-      - name: Compile prospective G4-K9A source coefficient crosswalk and print axioms
-        shell: bash
-        run: |
-          set -euxo pipefail
-          source "$HOME/.elan/env"
-          cd upstream-math/lean
+          # Emit complete original source modules, with their qualified axiom prints.
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4K8E4L2BridgeProbe.olean SU2BFSSG4K8E4L2BridgeProbe.lean
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.olean SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.lean
-      - name: Compile prospective G4-K9B source pair and charge reduction
-        shell: bash
-        run: |
-          set -euxo pipefail
-          source "$HOME/.elan/env"
-          cd upstream-math/lean
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K9BSourcePairAndChargeReductionProbe.olean SU2BFSSG4K9BSourcePairAndChargeReductionProbe.lean
-      - name: Compile prospective G4-K9C original ordered-pair coefficient
-        shell: bash
-        run: |
-          set -euxo pipefail
-          source "$HOME/.elan/env"
-          cd upstream-math/lean
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K9COrderedPairCoefficientProbe.olean SU2BFSSG4K9COrderedPairCoefficientProbe.lean
-      - name: Compile prospective G4-K9D original source potential multipliers and all-core identities
-        shell: bash
-        run: |
-          set -euxo pipefail
-          source "$HOME/.elan/env"
-          cd upstream-math/lean
           lake env lean -o .lake/build/lib/lean/SU2BFSSG4K9DSourcePotentialMultiplierProbe.olean SU2BFSSG4K9DSourcePotentialMultiplierProbe.lean
-      - name: Compile prospective G4-K10A exact source closed joint charge graph and domain crosswalk
+          lake env lean -o .lake/build/lib/lean/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.lean
+
+      - name: Verify accepted extension module objects and axiom lineage
         shell: bash
         run: |
-          set -euxo pipefail
+          set -euo pipefail
           source "$HOME/.elan/env"
           cd upstream-math/lean
-          lake env lean SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.lean
+          # Independently reject a truncated cache or incomplete cold compilation.
+          test -s .lake/build/lib/lean/SU2BFSSG4K8E4L2BridgeProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K9BSourcePairAndChargeReductionProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K9COrderedPairCoefficientProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K9DSourcePotentialMultiplierProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean
+          # On full-cache hits, import the cached theorem modules and interrogate
+          # their kernel axiom dependencies, rather than blindly trusting .olean.
+          cat > BFSSAcceptedGate171CacheSmoke.lean <<'LEAN'
+import SU2BFSSG4K8E4L2BridgeProbe
+import SU2BFSSG4K10ASourceClosedJointChargeGraphProbe
+#print axioms FCP.BFSSSU2GaugeG4K8E4.physicalInteractingNormalizedTrialEnergy_one_pos
+#print axioms FCP.BFSSSU2GaugeG4K9A.sourceMasslessPotentialCoefficient_eq_pairSum
+#print axioms FCP.BFSSSU2GaugeG4K9B.sourceCharge_eq_of_potentialAgreement
+#print axioms FCP.BFSSSU2GaugeG4K9C.sourceMasslessCoefficient_eq_halfOriginalOrdered
+#print axioms FCP.BFSSSU2GaugeG4K9D.sourcePotentialMultipliers_equal
+#print axioms FCP.BFSSSU2GaugeG4K9D.sourceUnconditionalCoreCharge_equal
+#print axioms FCP.BFSSSU2GaugeG4K9D.sourceUnconditionalCoreForm_equal
+#print axioms FCP.BFSSSU2GaugeG4K10A.sourceClosedJointChargeGraph_equal
+#print axioms FCP.BFSSSU2GaugeG4K10A.sourceClosedJointChargeDomain_iff
+LEAN
+          lake env lean BFSSAcceptedGate171CacheSmoke.lean 2>&1 | tee /tmp/bfss-gate171-axioms.log
+          test "$(grep -c 'depends on axioms:' /tmp/bfss-gate171-axioms.log)" -eq 9
+          if grep -E '(sorryAx|error:|unknownIdentifier)' /tmp/bfss-gate171-axioms.log; then
+            echo 'Unqualified accepted module in cache or cold compilation' >&2
+            exit 1
+          fi
+
+      - name: Save immutable Gate 171 G4-K10A qualified proof cache
+        if: ${{ steps.full_proof_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-accepted-g4k10a-v1-6eeb4293abcc1cf3a111ff5c511f708cb5ed320a-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
