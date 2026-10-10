@@ -74,6 +74,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -92,16 +93,16 @@ jobs:
           test -s upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/ClosedProfiles.olean
           echo ACCEPTED_K10A_CACHE_RESTORED_AND_CHECKED
 
-      - name: Freeze qualified D1 D3A D3B D2A D2B1 D2B2 D2B3 sources
+      - name: Freeze qualified D1 D3A D3B D2A D2B1 D2B2 D2B3 D2B3J sources
         shell: bash
         run: |
           set -euo pipefail
-          # Gate #20 qualified BOTH D2B3 declarations (fixed-g smoothness
-          # and honest conditional all-jets integration), no sorryAx.
-          git fetch --quiet --no-tags --depth=1 origin 3d3f2ccc3f33b8ad2ce3789ba566442ed61bc16e
-          changed="$(git diff --name-only 3d3f2ccc3f33b8ad2ce3789ba566442ed61bc16e HEAD -- experiments/openai-math-su2-physical-domain/ | grep -v -x 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.lean' || true)"
+          # Gate #21 formally qualified FIVE unconditional genuine-source
+          # operator/joint-jet/true Haar C-infinity theorems, no sorryAx.
+          git fetch --quiet --no-tags --depth=1 origin 5fc0144cb2983967a71733b7ca4fcacf432a3a9d
+          changed="$(git diff --name-only 5fc0144cb2983967a71733b7ca4fcacf432a3a9d HEAD -- experiments/openai-math-su2-physical-domain/ | grep -v -x 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.lean' || true)"
           if [ -n "$changed" ]; then
-            echo "Previously qualified D1/D3A/D3B/D2A/D2B1/D2B2/D2B3 source drift" >&2
+            echo "Previously qualified D1/D3A/D3B/D2A/D2B1/D2B2/D2B3/D2B3J source drift" >&2
             printf '%s\n' "$changed" >&2
             exit 1
           fi
@@ -306,14 +307,14 @@ jobs:
           print('D2B3_SMOOTH_SLICES_AND_CONDITIONAL_ANALYTIC_REDUCTION_PASS')
           PY
 
-      - name: Compile D2B3J original gauge operator continuity and unconditional smooth Haar average
+      - name: Recompile accepted D2B3J original gauge operator continuity and unconditional smooth Haar average
         shell: bash
         run: |
           set -euxo pipefail
           source "$HOME/.elan/env"
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe.olean
-          lake env lean SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b3j-axioms.log
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.olean SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b3j-axioms.log
           python3 - <<'PY'
           import re
           text = open('/tmp/bfss-su2-d2b3j-axioms.log').read()
@@ -332,4 +333,32 @@ jobs:
               assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
           assert 'sorryAx' not in text and 'error:' not in text
           print('D2B3J_FIVE_TRUE_SOURCE_OPERATOR_JETS_AND_UNCONDITIONAL_HAAR_SMOOTHNESS_PASS')
+          PY
+
+      - name: Compile D2B4 original bundled SmoothCore average and physical invariant-core membership
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe.olean
+          lake env lean SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b4-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2b4-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          expected = [
+              'sourceHaarAverageCore_apply',
+              'sourceHaarAverageCore_equivariant',
+              'sourceHaarAverageCore_mem_physicalSpace',
+              'sourceHaarAverageCore_mem_invariantCore',
+              'sourceHaarAverageCore_fixed',
+          ]
+          assert len(found) == len(expected), found
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for (name, axioms), suffix in zip(found, expected):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} <= allowed, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2B4_FIVE_TRUE_SOURCE_SMOOTHCORE_PHYSICAL_INVARIANTCORE_REPORTS_PASS')
           PY
