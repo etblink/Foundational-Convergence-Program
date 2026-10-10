@@ -180,3 +180,29 @@ universal library theorem merely for symmetry of presentations.
 for exact 18 accepted D2B11-D2B28 modules; Gate-93 cache save step
 succeeded, D2B29 was skipped by design. A separately checked warm-cache
 restore remains the next CI confirmation before subsequent Lean proofs.
+
+## 7. Exact pinned upstream Mathlib reuse for S1 scalar-commutant step
+
+The pinned `openai/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`
+`lean/lake-manifest.json` fixes Mathlib at
+`leanprover-community/mathlib4@d13f23b723b8a846827a245b89c10fc7d3f11612`.
+At that **exact pinned commit**, the source file
+`Mathlib/RepresentationTheory/AlgebraRepresentation/Basic.lean`
+already proves
+`IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed`:
+under finite-dimensional irreducible module assumptions over an
+algebraically closed field, every algebra-linear endomorphism is scalar.
+This is the correct *existing* Schur-lemma infrastructure for S1.
+
+The genuine missing glue is narrower: exhibit the accepted paired
+48-theta generators as an action of their generated complex
+associative operator subalgebra on `Fermion 2`, prove that its
+submodules are exactly theta-invariant complex submodules, and
+transfer the already accepted `pairedTheta_irreducible` to an
+`IsSimpleModule` instance. Then apply the pinned Mathlib Schur theorem
+rather than re-proving eigenvector/centralizer lemmas.
+
+**Not yet proved in Lean:** construction/compatibility of that generated
+algebra module, the manuscript's Spin(48) lift, SU(2) character
+triviality, or the resulting representation equality. These are
+concrete separate goals; source existence is not proof discharge.
