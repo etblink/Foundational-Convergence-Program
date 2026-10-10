@@ -17,6 +17,7 @@ global SU(2) character, or prove manuscript Hamiltonian/spectral identity.
 namespace FCP.BFSSSU2PhysicalDomainS1B
 noncomputable section
 
+open scoped BigOperators
 open OAI.BFSSQuantum
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2GaugeG4B
