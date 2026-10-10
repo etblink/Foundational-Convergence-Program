@@ -33,6 +33,7 @@ open FCP.BFSSSU2PhysicalDomainD2B11
 open FCP.BFSSSU2PhysicalDomainD2B12
 open MeasureTheory Set
 
+section GenericN
 variable {N : ℕ} (M : AlgebraData N) (G : M.GaugeData)
 
 /-- The literal source closed restricted graph, pulled back along
@@ -97,15 +98,18 @@ original source physical state. -/
 theorem sourcePhysicalRebasedChargeColumn_output_physical
     (u : (sourcePhysicalRebasedChargeColumn M G).domain) (α : SpinIndex) :
     (sourcePhysicalRebasedChargeColumn M G u) α ∈ G.physicalSpace := by
-  have hp : (((u : G.physicalSpace) : FullL2 N),
+  have hgraph : ((u : G.physicalSpace),
       sourcePhysicalRebasedChargeColumn M G u) ∈
-      G.deformedModelGraph 1 0 := by
-    apply (sourcePhysicalRebasedChargeGraph_mem_iff M G _).mp
+      sourcePhysicalRebasedChargeGraph M G := by
     rw [← sourcePhysicalRebasedChargeColumn_graph_eq M G]
     exact (sourcePhysicalRebasedChargeColumn M G).mem_graph u
+  have hp : (((u : G.physicalSpace) : FullL2 N),
+      sourcePhysicalRebasedChargeColumn M G u) ∈
+      G.deformedModelGraph 1 0 :=
+    (sourcePhysicalRebasedChargeGraph_mem_iff M G _).mp hgraph
   exact sourceClosedGaugeGraph_output_physical M G hp α
 
-end -- generic N
+end GenericN
 
 variable (M : AlgebraData 2) (G : M.GaugeData)
 
