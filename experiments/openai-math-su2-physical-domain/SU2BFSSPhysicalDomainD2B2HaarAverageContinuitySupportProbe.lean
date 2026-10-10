@@ -55,10 +55,13 @@ theorem sourceHaarAverageRaw_continuous (f : SmoothCore 2) :
         (sourceHaarAverageRaw M G f x) i)) := by
     apply continuous_pi
     intro i
+    -- Fix the source Fermion 2 coordinate projection's type before
+    -- composing; otherwise PiLp/WithLp elaboration leaves metavariables.
+    have hproj : Continuous (fun v : Fermion 2 => v i) :=
+      PiLp.continuous_apply i
     have hjoint : Continuous (fun p : Boson 2 × GaugeGroup 2 =>
         (G.fermion p.2 (f (G.boson p.2⁻¹ p.1))) i) :=
-      (PiLp.continuous_apply i).comp
-        (sourceHaarIntegrand_jointContinuous M G f)
+      hproj.comp (sourceHaarIntegrand_jointContinuous M G f)
     have hscalar := continuous_parametric_integral_of_continuous
       (μ := sourceHaar)
       (f := fun x : Boson 2 => fun g : GaugeGroup 2 =>
