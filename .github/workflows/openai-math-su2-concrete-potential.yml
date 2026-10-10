@@ -469,18 +469,18 @@ jobs:
           # On full-cache hits, import the cached theorem modules and interrogate
           # their kernel axiom dependencies, rather than blindly trusting .olean.
           cat > BFSSAcceptedGate171CacheSmoke.lean <<'LEAN'
-import SU2BFSSG4K8E4L2BridgeProbe
-import SU2BFSSG4K10ASourceClosedJointChargeGraphProbe
-#print axioms FCP.BFSSSU2GaugeG4K8E4.physicalInteractingNormalizedTrialEnergy_one_pos
-#print axioms FCP.BFSSSU2GaugeG4K9A.sourceMasslessPotentialCoefficient_eq_pairSum
-#print axioms FCP.BFSSSU2GaugeG4K9B.sourceCharge_eq_of_potentialAgreement
-#print axioms FCP.BFSSSU2GaugeG4K9C.sourceMasslessCoefficient_eq_halfOriginalOrdered
-#print axioms FCP.BFSSSU2GaugeG4K9D.sourcePotentialMultipliers_equal
-#print axioms FCP.BFSSSU2GaugeG4K9D.sourceUnconditionalCoreCharge_equal
-#print axioms FCP.BFSSSU2GaugeG4K9D.sourceUnconditionalCoreForm_equal
-#print axioms FCP.BFSSSU2GaugeG4K10A.sourceClosedJointChargeGraph_equal
-#print axioms FCP.BFSSSU2GaugeG4K10A.sourceClosedJointChargeDomain_iff
-LEAN
+          import SU2BFSSG4K8E4L2BridgeProbe
+          import SU2BFSSG4K10ASourceClosedJointChargeGraphProbe
+          #print axioms FCP.BFSSSU2GaugeG4K8E4.physicalInteractingNormalizedTrialEnergy_one_pos
+          #print axioms FCP.BFSSSU2GaugeG4K9A.sourceMasslessPotentialCoefficient_eq_pairSum
+          #print axioms FCP.BFSSSU2GaugeG4K9B.sourceCharge_eq_of_potentialAgreement
+          #print axioms FCP.BFSSSU2GaugeG4K9C.sourceMasslessCoefficient_eq_halfOriginalOrdered
+          #print axioms FCP.BFSSSU2GaugeG4K9D.sourcePotentialMultipliers_equal
+          #print axioms FCP.BFSSSU2GaugeG4K9D.sourceUnconditionalCoreCharge_equal
+          #print axioms FCP.BFSSSU2GaugeG4K9D.sourceUnconditionalCoreForm_equal
+          #print axioms FCP.BFSSSU2GaugeG4K10A.sourceClosedJointChargeGraph_equal
+          #print axioms FCP.BFSSSU2GaugeG4K10A.sourceClosedJointChargeDomain_iff
+          LEAN
           lake env lean BFSSAcceptedGate171CacheSmoke.lean 2>&1 | tee /tmp/bfss-gate171-axioms.log
           test "$(grep -c 'depends on axioms:' /tmp/bfss-gate171-axioms.log)" -eq 9
           if grep -E '(sorryAx|error:|unknownIdentifier)' /tmp/bfss-gate171-axioms.log; then
