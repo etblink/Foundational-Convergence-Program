@@ -140,6 +140,10 @@ jobs:
           cd upstream-math/lean
           lake exe cache get
 
+      # Dedicated warm-hit qualification after Gate #173 created this exact
+      # content-keyed cache. No source or dependency pin changed; inspect the
+      # resulting CI log for the new cache-hit, skipped extension compilation,
+      # nonempty .olean checks and nine successful cached axiom reports.
       - name: Restore immutable compiled Gate 171 G4-K10A proof chain
         id: full_proof_cache
         if: ${{ inputs.clean_build != true }}
