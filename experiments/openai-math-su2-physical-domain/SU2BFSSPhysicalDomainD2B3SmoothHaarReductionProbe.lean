@@ -67,6 +67,13 @@ theorem sourceHaarAverageRaw_contDiff_of_jointJets
       (fun g : GaugeGroup 2 => fun x : Boson 2 =>
         G.fermion g (f (G.boson g⁻¹ x))) :=
     ⟨sourceHaarSpatialSlice_contDiff M G f, hJets⟩
+  -- This is the exact original SU2 group: the subtype of a 2×2
+  -- complex matrix product. Establish its STANDARD second-countability
+  -- locally; do not extend GaugeData or postulate smoothness.
+  letI : SecondCountableTopology (Matrix (Fin 2) (Fin 2) ℂ) :=
+    inferInstanceAs (SecondCountableTopology (Fin 2 → Fin 2 → ℂ))
+  letI : SecondCountableTopology (GaugeGroup 2) :=
+    Subtype.secondCountableTopology _
   have h := OAI.RVM.contDiff_integral_smoothFamily
     (μ := sourceHaar) hFamily
   exact h
