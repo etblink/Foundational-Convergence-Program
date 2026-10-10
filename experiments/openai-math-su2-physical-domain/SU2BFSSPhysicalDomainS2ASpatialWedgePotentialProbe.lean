@@ -63,15 +63,15 @@ theorem pairedPotential_ge_two_spatialWedges (x : Boson 2) :
     sourceSpatialWedgeSq x (0 : Fin 3) (1 : Fin 3) + sourceSpatialWedgeSq x (0 : Fin 3) (2 : Fin 3) ≤
       pairedAlgebraData.deformedBosonicPotential 1 0 x := by
   rw [pairedPotential_eq_spatialWedges]
-  have h := sourceSpatialWedgeSq_nonneg x 1 2
+  have h := sourceSpatialWedgeSq_nonneg x (1 : Fin 3) (2 : Fin 3)
   linarith
 
 theorem pairedPotential_nonneg (x : Boson 2) :
     0 ≤ pairedAlgebraData.deformedBosonicPotential 1 0 x := by
   rw [pairedPotential_eq_spatialWedges]
-  have h01 := sourceSpatialWedgeSq_nonneg x 0 1
-  have h02 := sourceSpatialWedgeSq_nonneg x 0 2
-  have h12 := sourceSpatialWedgeSq_nonneg x 1 2
+  have h01 := sourceSpatialWedgeSq_nonneg x (0 : Fin 3) (1 : Fin 3)
+  have h02 := sourceSpatialWedgeSq_nonneg x (0 : Fin 3) (2 : Fin 3)
+  have h12 := sourceSpatialWedgeSq_nonneg x (1 : Fin 3) (2 : Fin 3)
   linarith
 
 #print axioms sourceSpatialWedgeSq_nonneg
