@@ -18,6 +18,12 @@ remain separate obligations.
 namespace FCP.BFSSSU2PhysicalDomainS3H
 noncomputable section
 
+-- Instance search for the finite-dimensional but large 24-mode
+-- Fock continuous-linear endomorphism algebra can exceed the
+-- default heartbeat budget. The underlying instance is standard.
+set_option synthInstance.maxHeartbeats 400000
+set_option maxHeartbeats 1600000
+
 open OAI.BFSSQuantum
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2PhysicalDomainS3D
@@ -32,7 +38,7 @@ local instance fockRationalNormedAlgebra : NormedAlgebra ℚ FermionOp :=
 norm-convergent exponential of the accepted source K_ij. -/
 noncomputable def pairedFermionPlaneSpinFlow
     (i j : SpaceIndex) (t : ℝ) : FermionOp :=
-  NormedSpace.exp (t • pairedFermionPlaneSpinGenerator i j)
+  NormedSpace.exp (((t : ℝ) : ℂ) • pairedFermionPlaneSpinGenerator i j)
 
 /-- Genuine unitarity for all real times, without assuming a global
 Spin(9) group lift or Hamiltonian invariance. -/
@@ -42,15 +48,20 @@ theorem pairedFermionPlaneSpinFlow_unitary
   unfold pairedFermionPlaneSpinFlow
   apply NormedSpace.exp_mem_unitary_of_mem_skewAdjoint
   rw [skewAdjoint.mem_iff]
-  change star (t • pairedFermionPlaneSpinGenerator i j) =
-    -(t • pairedFermionPlaneSpinGenerator i j)
-  rw [star_smul, star_trivial,
+  change star (((t : ℝ) : ℂ) • pairedFermionPlaneSpinGenerator i j) =
+    -(((t : ℝ) : ℂ) • pairedFermionPlaneSpinGenerator i j)
+  have hstar : star ((t : ℝ) : ℂ) = ((t : ℝ) : ℂ) := by
+    rw [RCLike.star_def]
+    exact RCLike.conj_ofReal t
+  rw [star_smul, hstar,
     pairedFermionPlaneSpinGenerator_star_eq_neg, smul_neg]
 
 /-- The source-defined fermionic plane flow begins at identity. -/
 theorem pairedFermionPlaneSpinFlow_zero (i j : SpaceIndex) :
     pairedFermionPlaneSpinFlow i j 0 = 1 := by
-  simp [pairedFermionPlaneSpinFlow]
+  change NormedSpace.exp ((0 : ℂ) •
+    pairedFermionPlaneSpinGenerator i j) = 1
+  rw [zero_smul, NormedSpace.exp_zero]
 
 /-- The exact source one-parameter group law, using pinned exponential
 commutation for two scalar multiples of the same accepted K_ij. -/
@@ -59,9 +70,15 @@ theorem pairedFermionPlaneSpinFlow_add
     pairedFermionPlaneSpinFlow i j (s + t) =
       pairedFermionPlaneSpinFlow i j s *
         pairedFermionPlaneSpinFlow i j t := by
-  simp only [pairedFermionPlaneSpinFlow, add_smul]
+  change NormedSpace.exp ((((s + t : ℝ) : ℂ) •
+      pairedFermionPlaneSpinGenerator i j)) =
+    NormedSpace.exp (((s : ℝ) : ℂ) •
+      pairedFermionPlaneSpinGenerator i j) *
+    NormedSpace.exp (((t : ℝ) : ℂ) •
+      pairedFermionPlaneSpinGenerator i j)
+  rw [map_add, add_smul]
   exact NormedSpace.exp_add_of_commute
-    (((Commute.refl (pairedFermionPlaneSpinGenerator i j)).smul_left s).smul_right t)
+    (((Commute.refl (pairedFermionPlaneSpinGenerator i j)).smul_left (s : ℂ)).smul_right (t : ℂ))
 
 /-- Each source fermionic plane rotation preserves the literal Fock
 Hilbert norm, not only a formal operator-star equation. -/
