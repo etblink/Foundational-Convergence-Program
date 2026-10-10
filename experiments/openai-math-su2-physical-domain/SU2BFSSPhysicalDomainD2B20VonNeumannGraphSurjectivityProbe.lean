@@ -46,13 +46,17 @@ theorem mem_graph_naturalComp {T : E →ₗ.[ℂ] F} {A : F →ₗ.[ℂ] E}
   constructor
   · intro h
     obtain ⟨u, rfl, rfl⟩ := (LinearPMap.mem_graph_iff _).mp h
-    refine ⟨T ⟨u, naturalComp_domain_le u.property⟩, T.mem_graph _, ?_⟩
-    rw [naturalComp_apply]
-    exact A.mem_graph _
+    refine ⟨T ⟨u, naturalComp_domain_le u.property⟩, ?_, ?_⟩
+    · exact T.mem_graph ⟨u, naturalComp_domain_le u.property⟩
+    · rw [naturalComp_apply]
+      exact A.mem_graph _
   · rintro ⟨y, hy, hz⟩
     obtain ⟨u, rfl, rfl⟩ := (LinearPMap.mem_graph_iff _).mp hy
     obtain ⟨v, hv, hzv⟩ := (LinearPMap.mem_graph_iff _).mp hz
-    have hTv : T u ∈ A.domain := hv ▸ v.property
+    change (v : F) = T u at hv
+    have hTv : T u ∈ A.domain := by
+      rw [← hv]
+      exact v.property
     have hd : (u : E) ∈ (naturalComp A T).domain :=
       naturalComp_mem_domain.mpr ⟨u.property, hTv⟩
     refine (LinearPMap.mem_graph_iff _).mpr ⟨⟨u, hd⟩, rfl, ?_⟩
