@@ -30,6 +30,9 @@ theorem pairedTheta_quadratic_commutator
         (if α = γ ∧ A = C then pairedTheta β B else 0) := by
   have hbc := pairedTheta_CAR β γ B C
   have hac := pairedTheta_CAR α γ A C
+  have hz (δ : SpinIndex) (D : ColorIndex 2) :
+      (0 : ℂ) • pairedTheta δ D = 0 :=
+    zero_smul ℂ (pairedTheta δ D)
   calc
     _ = pairedTheta α A *
           (pairedTheta β B * pairedTheta γ C + pairedTheta γ C * pairedTheta β B) -
@@ -39,7 +42,7 @@ theorem pairedTheta_quadratic_commutator
       rw [hbc, hac]
       by_cases hbc' : β = γ ∧ B = C <;>
         by_cases hac' : α = γ ∧ A = C <;>
-        simp [hbc', hac', zero_smul]
+        simp [hbc', hac', hz]
 
 /-- A color-diagonal quadratic spinor generator commutes with every
 Majorana of a different gauge color, on the actual 48-label CAR. -/
