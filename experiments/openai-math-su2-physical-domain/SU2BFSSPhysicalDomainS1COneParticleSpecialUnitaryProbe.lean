@@ -19,6 +19,7 @@ construct that lift or identify the manuscript Hamiltonian.
 namespace FCP.BFSSSU2PhysicalDomainS1C
 noncomputable section
 
+open scoped Matrix
 open Matrix
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2GaugeG3A
@@ -37,9 +38,11 @@ theorem oneParticleMatrix_det_one (g : GaugeGroup 2) :
   calc
     (oneParticleMatrix g).det = (colorBlocks g).det := by
       change Matrix.det (Matrix.reindexAlgEquiv ℝ ℝ colorModeEquiv (colorBlocks g)) = _
-      exact Matrix.det_reindexAlgEquiv ℝ colorModeEquiv (colorBlocks g)
+      exact Matrix.det_reindexAlgEquiv ℝ ℝ colorModeEquiv (colorBlocks g)
     _ = (adjointColorMatrix g).det ^ 8 := by
-      rw [colorBlocks, Matrix.det_kronecker]
+      change ((1 : Matrix (Fin 8) (Fin 8) ℝ) ⊗ₖ adjointColorMatrix g).det =
+        (adjointColorMatrix g).det ^ 8
+      rw [Matrix.det_kronecker]
       simp
     _ = ((adjointColorMatrix g).det ^ 2) ^ 4 := by ring
     _ = 1 := by rw [hsq]; norm_num
@@ -47,7 +50,7 @@ theorem oneParticleMatrix_det_one (g : GaugeGroup 2) :
 /-- The literal 24 x 24 complex source one-particle action has determinant one. -/
 theorem complexOneParticleMatrix_det_one (g : GaugeGroup 2) :
     (complexOneParticleMatrix g).det = 1 := by
-  change Matrix.det ((oneParticleMatrix g).map (algebraMap ℝ ℂ)) = 1
+  change Matrix.det ((algebraMap ℝ ℂ).mapMatrix (oneParticleMatrix g)) = 1
   rw [← (algebraMap ℝ ℂ).map_det]
   rw [oneParticleMatrix_det_one]
   simp
