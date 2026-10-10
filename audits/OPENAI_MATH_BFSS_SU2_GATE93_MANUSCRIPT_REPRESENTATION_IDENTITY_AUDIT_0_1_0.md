@@ -596,3 +596,92 @@ theorems to test new physically material questions.
 Formalize an additional cross-representation theorem only
 if an explicit independent paper-side representation or a
 real scientific discriminator makes it necessary.
+
+## 13. Bounded spectral mechanism check — prioritize physics over machinery
+
+**Date:** 2026-10-10. **Evidence:** direct read of pinned primary
+`positive-eigenvalues-relative-su2-bfss.tex` at
+`openai/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`,
+with focused inspection of lines 228–413 and 413–819.
+This is a **targeted mathematical source audit, not an
+independent full re-proof and not a kernel certificate**.
+
+The paper's Theorem 1.1 (lines 135–143) is an unbounded sequence
+of *positive point* eigenvalues, not merely positivity of
+`⟨ψ,Hψ⟩` for a selected trial or the existence of positive
+continuous spectrum. Its substantive route is:
+
+1. The standard core-form computation gives
+   `q=1/2||∇ψ||² + ∫V|ψ|² + ∫⟨ψ,Bψ⟩`,
+   `V=Σ_{a<b}|x^a∧x^b|²`, and `||B(x)||≤C|x|`
+   (lines 236–337). Check normalization against actual
+   source `AlgebraData.charge`/G4K9-D, not against a
+   convenient rescaling.
+2. The `Spin(9)` representation preserves the *closed*
+   physical form and its isotypic `λ` sectors reduce H
+   (lines 338–412). This is additional genuine mathematical
+   machinery not present in the FCP Gate-93 spectrum API.
+3. Orthogonal branching from `Spin(9)` to the slice
+   stabilizer `Spin(8)` gives `ν₁≥λ₂` (lines 453–517).
+   The equivariant finite translate-span restriction to each
+   transverse slice is the bridge, not pointwise sampling
+   of arbitrary L² classes (lines 524–558).
+4. In 16 transverse real dimensions,
+   `-1/4 Δ_z + |u|²|z|²` has levels
+   `|u|(n+8)`. If `λ₂>m+M`, low
+   levels `n≤m` are excluded, yielding `(m+9)|u|`
+   as the first permitted oscillator energy
+   (lines 569–613). The 8 is **16/2**; the 9 is the
+   first remaining level, not an arbitrary offset.
+5. After averaging the three color slices, form coercivity is
+   `q≥1/4||∇ψ||²+c_m∫|x||ψ|²`, where
+   `c_m=(m+9)/3-C>0` (lines 615–668).
+   Rellich compactness plus the tail
+   `∫_{|x|>R}|ψ|²≤q/(c_m R)` gives compact
+   resolvent in each high sector; the weight positivity
+   excludes a kernel (lines 669–685).
+6. The paper builds nonzero gauge-invariant fermion vectors
+   and gauge-invariant polynomial highest vectors
+   `P(x)^k v` of `Spin(9)` type
+   `λ=(2k+μ₁,2k+μ₂,μ₃,μ₄)`.
+   Independent radial cutoffs yield an
+   infinite-dimensional fixed high sector
+   (lines 696–803). The compact-resolvent theorem
+   supplies an unbounded **positive** discrete spectrum
+   in that reducing sector (lines 805–819).
+
+**Focused audit result:** the indicated coefficient arithmetic
+and logical dependency chain are internally consistent with the
+identified operator and core. No immediate normalization, missing
+zero-sector, or free-parameter contradiction was found.
+This check does **not** establish every orthogonal branching,
+slice, or functional-analytic argument independently.
+A real gap in one of those steps could change the
+scientific verdict and must be investigated rather than
+papered over with another compiler lemma.
+
+**Next physically material formalization frontier:** derive the
+`Spin(9)` action on the actual paired 24-orbital Fock/gauge
+physical space, its interaction with the 16 charges and
+closed form, and at least one nontrivial rotation sector.
+Then test the angular-type exclusion/transverse oscillator
+bound (the source of compact-resolvent positive point spectrum)
+against the exact accepted Hamiltonian.
+
+A mere additional positive radial form trial, abstract
+self-adjointness lemma, or generic spin-group type construction
+does **not** test this spectral mechanism and should not be
+the default next gate. Conversely, do not attempt a wholesale
+formalization of the spectral proof before determining the
+minimal existing Mathlib representation/oscillator ingredients.
+This is a bounded *source-first* decision, not a license
+for open-ended methodology expansion.
+
+**Final scientific status:** source Hamiltonian genuinely
+self-adjoint (Gate #93); exact paired Majorana commutant and
+gauge-implementer rigidity (Gates #99/#102/#103);
+exact one-particle SU(24) action (Gate #110);
+ordinary-mathematics source-to-paper operator crosswalk
+assembled here; **positive eigenvalues remain a
+manuscript theorem, not a Lean-proved FCP theorem**.
+No NFC/TOE promotion or independent new empirical claim.
