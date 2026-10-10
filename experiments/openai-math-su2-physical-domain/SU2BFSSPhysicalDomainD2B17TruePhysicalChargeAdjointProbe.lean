@@ -136,7 +136,10 @@ theorem sourcePhysicalHilbertChargeColumn_domain_dense :
     apply LinearPMap.mem_domain_of_mem_graph
     rw [sourcePhysicalHilbertChargeColumn_graph_eq M G]
     apply (sourcePhysicalHilbertChargeGraph_mem_iff M G _).mpr
-    simpa only [ContinuousLinearEquiv.apply_symm_apply] using hy
+    have hout :
+        sourceChargeOutputHilbertEquiv (WithLp.toLp 2 y) = y := by
+      rfl
+    simpa only [hout] using hy
   exact (sourcePhysicalRebasedChargeColumn_domain_dense M G).mono hs
 
 /-- Original physical Hilbert subspace remains complete. -/
@@ -147,12 +150,16 @@ theorem sourceOriginalPhysicalHilbert_complete :
 /-- ACTUAL Hilbert adjoint, now over source physical input and
 genuine ℓ² sixteen-charge output, with no non-dense fallback. -/
 noncomputable def sourceOriginalPhysicalChargeAdjoint :
-    SourceChargeHilbertOutput →ₗ.[ℂ] G.physicalSpace :=
-  (sourcePhysicalHilbertChargeColumn M G).adjoint
+    SourceChargeHilbertOutput →ₗ.[ℂ] G.physicalSpace := by
+  letI : CompleteSpace G.physicalSpace :=
+    sourceOriginalPhysicalHilbert_complete M G
+  exact (sourcePhysicalHilbertChargeColumn M G).adjoint
 
 theorem sourceOriginalPhysicalChargeAdjoint_isFormalAdjoint :
     (sourceOriginalPhysicalChargeAdjoint M G).IsFormalAdjoint
       (sourcePhysicalHilbertChargeColumn M G) := by
+  letI : CompleteSpace G.physicalSpace :=
+    sourceOriginalPhysicalHilbert_complete M G
   exact LinearPMap.adjoint_isFormalAdjoint
     (sourcePhysicalHilbertChargeColumn_domain_dense M G)
 
@@ -174,7 +181,11 @@ theorem sourceOriginalPhysicalChargeAdjoint_inner
       (u : G.physicalSpace) =
     inner ℂ (v : SourceChargeHilbertOutput)
       (sourcePhysicalHilbertChargeColumn M G u) := by
-  exact (sourceOriginalPhysicalChargeAdjoint_isFormalAdjoint M G) v u
+  have hformal :
+      (sourceOriginalPhysicalChargeAdjoint M G).IsFormalAdjoint
+        (sourcePhysicalHilbertChargeColumn M G) :=
+    sourceOriginalPhysicalChargeAdjoint_isFormalAdjoint M G
+  exact hformal v u
 
 #print axioms sourcePhysicalHilbertChargeGraph_mem_iff
 #print axioms sourcePhysicalHilbertChargeColumn_graph_eq
