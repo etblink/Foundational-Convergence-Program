@@ -58,7 +58,9 @@ theorem sourceHaarJoint_hasCompactSupport (f : SmoothCore 2) :
   have hx : f (G.boson p.2⁻¹ p.1) ≠ 0 := by
     intro hz
     apply (Function.mem_support.mp hp)
-    simpa only [map_inv] using hz
+    have hz' : f ((G.boson p.2).symm p.1) = 0 := by
+      simpa only [map_inv] using hz
+    simp [hz']
   have hs : G.boson p.2⁻¹ p.1 ∈ tsupport (f : Boson 2 → Fermion 2) := by
     apply subset_closure
     simpa only [Function.mem_support] using hx
