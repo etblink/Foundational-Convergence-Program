@@ -60,7 +60,8 @@ private theorem orthogonalKineticContraction
           (c i j * c i k) • K (b j) (D (b k)) := by
             apply Finset.sum_congr rfl
             intro i _
-            conv_lhs => rw [hexpand i]
+            -- The first rewrite replaces both occurrences of U (b i)
+            -- within the entire LHS; a second rewrite has no target.
             conv_lhs => rw [hexpand i]
             simp only [map_sum, map_smul, _root_.sum_apply,
               ContinuousLinearMap.smul_apply, smul_sum,
