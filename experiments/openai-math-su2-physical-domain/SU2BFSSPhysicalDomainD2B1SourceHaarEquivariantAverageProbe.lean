@@ -72,7 +72,10 @@ theorem sourceHaarAverageRaw_equivariant (f : SmoothCore 2)
       G.fermion (h * g)
           (f (G.boson (h * g)⁻¹ (G.boson h x))) =
         G.fermion h (G.fermion g (f (G.boson g⁻¹ x))) := by
-    simp [mul_inv_rev, map_mul, map_inv, LinearIsometryEquiv.mul_apply]
+    -- The genuine group homomorphisms are multiplicative, and
+    -- linear-isometry equivalence multiplication acts by composition.
+    -- No bespoke mul_apply lemma is needed.
+    simp [mul_inv_rev, map_mul, map_inv, mul_assoc]
   calc
     sourceHaarAverageRaw M G f (G.boson h x) =
       ∫ g : GaugeGroup 2,
@@ -93,8 +96,8 @@ theorem sourceHaarAverageRaw_equivariant (f : SmoothCore 2)
             (G.fermion h).toContinuousLinearEquiv.toContinuousLinearMap
               (∫ g : GaugeGroup 2,
                 G.fermion g (f (G.boson g⁻¹ x)) ∂sourceHaar)
-          exact ((G.fermion h).toContinuousLinearEquiv.toContinuousLinearMap.integral_comp_comm
-            (sourceHaarIntegrand_integrable M G f x)).symm
+          exact (G.fermion h).toContinuousLinearEquiv.toContinuousLinearMap.integral_comp_comm
+            (sourceHaarIntegrand_integrable M G f x)
 
 /-- The normalized group average fixes EVERY actual BFSS
 gauge-invariant source smooth-core section. -/
