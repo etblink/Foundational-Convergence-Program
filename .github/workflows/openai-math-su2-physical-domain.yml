@@ -38,6 +38,20 @@ jobs:
             ~/.elan
           key: family270b-bridge-ubuntu-lean4341-openai-adc7f124-deformedcharge-v2
 
+      - name: Verify dependency-cache payload before any proof compilation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s upstream-math/lean/.lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean || {
+            echo 'INFRASTRUCTURE_CACHE_RESTORE_INCOMPLETE: pinned Mathlib.olean missing' >&2
+            exit 1
+          }
+          test -x "$HOME/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean" || {
+            echo 'INFRASTRUCTURE_CACHE_RESTORE_INCOMPLETE: pinned Lean v4.34.1 binary missing' >&2
+            exit 1
+          }
+          echo PINNED_DEPENDENCY_CACHE_PAYLOAD_VERIFIED
+
       - name: Freeze accepted source and pin compiler
         shell: bash
         run: |
@@ -263,9 +277,15 @@ jobs:
           source "$HOME/.elan/env"
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe.olean
-          # Existing pinned RVM analytic theorem is the genuine
-          # higher-derivative integral tool. No new assumed property
-          # of BFSS GaugeData is admitted in this source-typed probe.
+          # The accepted warm G4-K10A cache does NOT include this
+          # unrelated original-source RVM module. Compile its exact
+          # pinned source before importing it into D2B3.
+          test -s OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.lean
+          mkdir -p .lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity
+          lake env lean -o .lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.lean 2>&1 | tee /tmp/bfss-su2-pinned-rvm-analytic-dependency.log
+          test -s .lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean
+          echo PINNED_RVM_SMOOTH_INTEGRAL_COMPILED
+          # No new assumed property of BFSS GaugeData is admitted.
           lake env lean SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe.lean 2>&1 | tee /tmp/bfss-su2-d2b3-axioms.log
           python3 - <<'PY'
           import re
