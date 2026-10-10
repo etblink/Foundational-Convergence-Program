@@ -16,6 +16,10 @@ symmetry, angular level exclusion or positive spectrum is inferred.
 namespace FCP.BFSSSU2PhysicalDomainS3G3
 noncomputable section
 
+-- The source-defined Fock operator is a large nested finite sum.
+-- This elaborator budget changes no mathematical assumption or kernel axiom.
+set_option maxRecDepth 4096
+
 open scoped BigOperators
 open Finset
 open OAI.BFSSQuantum
