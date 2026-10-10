@@ -1,0 +1,60 @@
+import SU2BFSSG3CComplexOneParticleUnitaryProbe
+import Mathlib.LinearAlgebra.Matrix.Kronecker
+
+/-!
+# BFSS SU(2) S1C — determinant-one exact 24-mode one-particle action
+
+The accepted oneParticleMatrix g is eight identical real orthogonal
+three-color blocks, reindexed by the exact 8 x 3 -> 24 Fock mode map.
+Consequently its determinant is one, even using only orthogonality
+of the color block (whose determinant is ±1). Complex scalar extension
+remains determinant one, so the actual accepted one-particle SU(2)
+representation lands in SU(24), not merely U(24).
+
+This removes a determinant/phase obstruction on the route to identifying
+the second-quantized action with a Spin(48) lift. It does NOT itself
+construct that lift or identify the manuscript Hamiltonian.
+-/
+
+namespace FCP.BFSSSU2PhysicalDomainS1C
+noncomputable section
+
+open Matrix
+open FCP.BFSSSU2GaugeG1A
+open FCP.BFSSSU2GaugeG3A
+open FCP.BFSSSU2GaugeG3B
+open FCP.BFSSSU2GaugeG3C
+open OAI.BFSSQuantum
+
+theorem adjointColorMatrix_det_sq_one (g : GaugeGroup 2) :
+    (adjointColorMatrix g).det ^ 2 = 1 := by
+  have h := congrArg Matrix.det (adjointColorMatrix_orthogonal g)
+  simpa only [Matrix.det_mul, Matrix.det_transpose, Matrix.det_one, pow_two] using h
+
+theorem oneParticleMatrix_det_one (g : GaugeGroup 2) :
+    (oneParticleMatrix g).det = 1 := by
+  have hsq := adjointColorMatrix_det_sq_one g
+  calc
+    (oneParticleMatrix g).det = (colorBlocks g).det := by
+      change Matrix.det (Matrix.reindexAlgEquiv ℝ ℝ colorModeEquiv (colorBlocks g)) = _
+      exact Matrix.det_reindexAlgEquiv ℝ (colorBlocks g) colorModeEquiv
+    _ = (adjointColorMatrix g).det ^ 8 := by
+      rw [colorBlocks, Matrix.det_kronecker]
+      simp
+    _ = ((adjointColorMatrix g).det ^ 2) ^ 4 := by ring
+    _ = 1 := by rw [hsq]; norm_num
+
+/-- The literal 24 x 24 complex source one-particle action has determinant one. -/
+theorem complexOneParticleMatrix_det_one (g : GaugeGroup 2) :
+    (complexOneParticleMatrix g).det = 1 := by
+  change Matrix.det ((oneParticleMatrix g).map (algebraMap ℝ ℂ)) = 1
+  rw [← (algebraMap ℝ ℂ).map_det]
+  rw [oneParticleMatrix_det_one]
+  simp
+
+#print axioms adjointColorMatrix_det_sq_one
+#print axioms oneParticleMatrix_det_one
+#print axioms complexOneParticleMatrix_det_one
+
+end
+end FCP.BFSSSU2PhysicalDomainS1C
