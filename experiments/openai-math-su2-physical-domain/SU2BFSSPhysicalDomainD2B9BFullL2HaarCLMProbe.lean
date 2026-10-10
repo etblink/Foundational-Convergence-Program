@@ -77,6 +77,7 @@ noncomputable def sourceFullHaarAverageCLM :
     FullL2 2 →L[ℂ] FullL2 2 :=
   (sourceFullHaarAverageLinear M G).mkContinuous 1 (by
     intro v
+    change ‖sourceFullHaarAverage M G v‖ ≤ 1 * ‖v‖
     simpa only [one_mul] using sourceFullHaarAverage_norm_le M G v)
 
 /-- This new CLM acts by the EXACT D2B9A Bochner integral. -/
