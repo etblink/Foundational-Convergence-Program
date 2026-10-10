@@ -1635,6 +1635,8 @@ jobs:
               'adjointColorMatrix_det_sq_one',
               'oneParticleMatrix_det_one',
               'complexOneParticleMatrix_det_one',
+              'complexOneParticleSpecialUnitary',
+              'complexOneParticleSpecialUnitaryHom',
           ]
           assert len(found) == len(expected), found
           for (name, axioms), suffix in zip(found, expected):
