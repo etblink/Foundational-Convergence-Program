@@ -17,6 +17,12 @@ reduction.
 namespace FCP.BFSSSU2PhysicalDomainS3I
 noncomputable section
 
+-- The literal source 24-mode Fock operator can exhaust default
+-- Lean elaboration depth when concrete expressions are unfolded.
+-- We use a small exact coercion lemma instead of expanding K_ij.
+set_option maxRecDepth 4096
+set_option maxHeartbeats 1000000
+
 open OAI.BFSSQuantum
 open FCP.BFSSSU2GaugeG4E
 open FCP.BFSSSU2PhysicalDomainS3D
@@ -33,6 +39,12 @@ as a bounded source Fock operator, not a replacement representation. -/
 noncomputable def pairedFermionGaugeOperator (g : GaugeGroup 2) : FermionOp :=
   (fermionGaugeUnitaryHom g).toLinearIsometry.toContinuousLinearMap
 
+/-- The bounded-operator view is definitionally the identical
+accepted G4E source fermionic gauge action on every Fock vector. -/
+private theorem pairedFermionGaugeOperator_apply
+    (g : GaugeGroup 2) (w : Fermion 2) :
+    pairedFermionGaugeOperator g w = fermionGaugeUnitaryHom g w := rfl
+
 /-- The accepted full source bilinear K commutes with G4E gauge
 unitaries in the literal Fock bounded-operator algebra. -/
 theorem pairedFermionGaugeOperator_comm_spinGenerator
@@ -43,15 +55,9 @@ theorem pairedFermionGaugeOperator_comm_spinGenerator
     pairedFermionPlaneSpinGenerator i j * pairedFermionGaugeOperator g
   apply ContinuousLinearMap.ext
   intro v
-  change pairedFermionGaugeOperator g
-      (pairedFermionPlaneSpinGenerator i j v) =
-    pairedFermionPlaneSpinGenerator i j
-      (pairedFermionGaugeOperator g v)
-  have hGaugeApply (w : Fermion 2) :
-      pairedFermionGaugeOperator g w = fermionGaugeUnitaryHom g w := by
-    rfl
-  rw [hGaugeApply, hGaugeApply]
-  exact pairedFermionPlaneSpinGenerator_gauge_commutes g i j v
+  simpa only [ContinuousLinearMap.mul_apply,
+    pairedFermionGaugeOperator_apply] using
+      (pairedFermionPlaneSpinGenerator_gauge_commutes g i j v)
 
 /-- Each exact source fermionic one-parameter plane rotation
 also commutes with the actual SU(2) fermionic gauge action. -/
@@ -74,15 +80,8 @@ theorem pairedFermionPlaneSpinFlow_gauge_commutes
         pairedFermionPlaneSpinFlow i j t * pairedFermionGaugeOperator g :=
     pairedFermionGaugeOperator_comm_spinFlow g i j t
   have hv := congrArg (fun T : FermionOp => T v) h
-  simp only [ContinuousLinearMap.mul_apply] at hv
-  change pairedFermionGaugeOperator g
-      (pairedFermionPlaneSpinFlow i j t v) =
-    pairedFermionPlaneSpinFlow i j t
-      (pairedFermionGaugeOperator g v) at hv
-  have hGaugeApply (w : Fermion 2) :
-      pairedFermionGaugeOperator g w = fermionGaugeUnitaryHom g w := by
-    rfl
-  simpa only [hGaugeApply] using hv
+  simpa only [ContinuousLinearMap.mul_apply,
+    pairedFermionGaugeOperator_apply] using hv
 
 #print axioms pairedFermionGaugeOperator_comm_spinGenerator
 #print axioms pairedFermionGaugeOperator_comm_spinFlow
