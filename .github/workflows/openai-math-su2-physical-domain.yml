@@ -1814,7 +1814,61 @@ jobs:
           path: upstream-math/lean/.lake/build
           key: bfss-su2-accepted-s2c-v1-f525a4adb9a637-78cdc33a7e7abc-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
 
+
+      - name: Freeze exact Gate 136 S2D S3ABCDE accepted sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          qualified=5ab0ee08dfca456574dcf3d877a9a9035d4be39f
+          git fetch --quiet --no-tags --depth=1 origin "$qualified"
+          for module in \
+            SU2BFSSPhysicalDomainS2DTransverseSliceWedgeProbe \
+            SU2BFSSPhysicalDomainS3AActualGammaPlaneRotationProbe \
+            SU2BFSSPhysicalDomainS3BFullPlaneSpinVectorCovarianceProbe \
+            SU2BFSSPhysicalDomainS3CActualMajoranaQuadraticCommutatorProbe \
+            SU2BFSSPhysicalDomainS3DActualFermionSpinQuadraticGeneratorProbe \
+            SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbe
+          do
+            p="experiments/openai-math-su2-physical-domain/${module}.lean"
+            expected="$(git rev-parse "$qualified:$p")"
+            actual="$(git hash-object "$p")"
+            if [ "$expected" != "$actual" ]; then
+              echo "GATE136_ACCEPTED_SOURCE_DRIFT $p expected=$expected actual=$actual" >&2
+              exit 1
+            fi
+          done
+          echo SIX_ACCEPTED_S2D_S3ABCDE_SOURCES_IMMUTABLE
+
+      - name: Restore immutable Gate 136 S2D S3ABCDE compiled objects
+        id: accepted_s3e_cache
+        if: ${{ inputs.clean_build != true }}
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-accepted-s3e-v1-5ab0ee08dfca4565-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Verify six qualified S2D S3ABCDE objects on cache hit
+        if: ${{ steps.accepted_s3e_cache.outputs.cache-hit == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for module in \
+            SU2BFSSPhysicalDomainS2DTransverseSliceWedgeProbe \
+            SU2BFSSPhysicalDomainS3AActualGammaPlaneRotationProbe \
+            SU2BFSSPhysicalDomainS3BFullPlaneSpinVectorCovarianceProbe \
+            SU2BFSSPhysicalDomainS3CActualMajoranaQuadraticCommutatorProbe \
+            SU2BFSSPhysicalDomainS3DActualFermionSpinQuadraticGeneratorProbe \
+            SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbe
+          do
+            test -s "upstream-math/lean/.lake/build/lib/lean/${module}.olean" || {
+              echo "ACCEPTED_S3E_MISSING_OLEAN $module" >&2
+              exit 1
+            }
+          done
+          echo SIX_ACCEPTED_S2D_S3ABCDE_OLEANS_VERIFIED
+
       - name: Compile S2D source BFSS transverse-slice Lagrange identity and confinement wedge bound
+        if: ${{ steps.accepted_s3e_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1844,6 +1898,7 @@ jobs:
           PY
 
       - name: Compile S3A actual Cl9 gamma spatial plane spin infinitesimal covariance
+        if: ${{ steps.accepted_s3e_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1873,6 +1928,7 @@ jobs:
           PY
 
       - name: Compile S3B all nine literal gamma spatial-plane spin covariance
+        if: ${{ steps.accepted_s3e_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1899,6 +1955,7 @@ jobs:
           PY
 
       - name: Compile S3C actual 48-Majorana quadratic Clifford commutator and color locality
+        if: ${{ steps.accepted_s3e_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1926,6 +1983,7 @@ jobs:
           PY
 
       - name: Compile S3D actual 48-Majorana spin quadratic generator and color-locality law
+        if: ${{ steps.accepted_s3e_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1951,6 +2009,7 @@ jobs:
           PY
 
       - name: Compile S3E actual 48-Majorana full fermion plane spin covariance
+        if: ${{ steps.accepted_s3e_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1976,6 +2035,14 @@ jobs:
           assert 'sorryAx' not in log and 'error:' not in log, log[-4000:]
           print('S3E_SOURCE_48_MAJORANA_FULL_PLANE_SPIN_ROTATION_PASS')
           PY
+
+
+      - name: Save immutable Gate 136 S2D S3ABCDE accepted proof objects
+        if: ${{ steps.accepted_s3e_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-accepted-s3e-v1-5ab0ee08dfca4565-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
         if: ${{ inputs.d2b29_trial == true }}
