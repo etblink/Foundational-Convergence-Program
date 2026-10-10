@@ -14,6 +14,11 @@ on:
         type: boolean
         required: false
         default: false
+      d2b29_trial:
+        description: 'Run the unqualified D2B29 trial (not part of accepted cache)'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
@@ -963,7 +968,53 @@ jobs:
           print("GATE47_ALL_33_TRUE_SOURCE_ACCEPTED_AXIOM_REPORTS_PASS")
           PY
 
+
+      - name: Freeze exact Gate 93 accepted D2B11-D2B28 sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          qualified=e6dcc0f751252f9cdb609d3de61f67abe733a041
+          git fetch --quiet --no-tags --depth=1 origin "$qualified"
+          mapfile -t accepted < <(git ls-tree -r --name-only "$qualified" -- experiments/openai-math-su2-physical-domain/ | grep -E 'SU2BFSSPhysicalDomainD2B(1[1-9]|2[0-8]).*\.lean$')
+          test "${#accepted[@]}" -eq 18
+          for p in "${accepted[@]}"; do
+            expected="$(git rev-parse "$qualified:$p")"
+            actual="$(git hash-object "$p")"
+            if [ "$expected" != "$actual" ]; then
+              echo "GATE93_QUALIFIED_SOURCE_DRIFT $p expected=$expected actual=$actual" >&2
+              exit 1
+            fi
+          done
+          echo GATE93_EIGHTEEN_ACCEPTED_SOURCES_IMMUTABLE
+
+      - name: Restore qualified Gate 93 D2B11-D2B28 proof objects
+        id: gate93_cache
+        if: ${{ inputs.clean_build != true }}
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-domain-gate93-d2b28-v1-e6dcc0f751252f9cdb609d3de61f67abe733a041-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Verify exact Gate 93 proof objects on cache hit
+        if: ${{ steps.gate93_cache.outputs.cache-hit == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          qualified=e6dcc0f751252f9cdb609d3de61f67abe733a041
+          mapfile -t accepted < <(git ls-tree -r --name-only "$qualified" -- experiments/openai-math-su2-physical-domain/ | grep -E 'SU2BFSSPhysicalDomainD2B(1[1-9]|2[0-8]).*\.lean$')
+          test "${#accepted[@]}" -eq 18
+          for p in "${accepted[@]}"; do
+            module="$(basename "$p" .lean)"
+            test -s "upstream-math/lean/.lake/build/lib/lean/${module}.olean" || {
+              echo "INCOMPLETE_GATE93_ACCEPTED_OLEAN $module" >&2
+              exit 1
+            }
+          done
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean
+          echo GATE93_EIGHTEEN_OLEANS_AND_PINNED_PREREQUISITES_PRESENT
+
       - name: Compile D2B11 exact source physical closed densely-defined charge-column graph
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -994,6 +1045,7 @@ jobs:
           PY
 
       - name: Compile D2B12 exact physical source closed dense Mathlib unbounded LinearPMap
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1022,6 +1074,7 @@ jobs:
           PY
 
       - name: Compile D2B13 exact original invariant core operator closability and native Mathlib graph core
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1052,6 +1105,7 @@ jobs:
           PY
 
       - name: Compile D2B14 exact original closed physical charge quadratic energy
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1080,6 +1134,7 @@ jobs:
           PY
 
       - name: Compile D2B15 exact source closed energy component bound and form graph limits
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1107,6 +1162,7 @@ jobs:
           PY
 
       - name: Compile D2B16 true physical-Hilbert closed dense source charge operator
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1136,6 +1192,7 @@ jobs:
           PY
 
       - name: Compile D2B17 true source physical Hilbert adjoint and pairing
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1169,6 +1226,7 @@ jobs:
 
 
       - name: Compile D2B18 source physical adjoint-square natural domain (no self-adjointness claim)
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1201,6 +1259,7 @@ jobs:
 
 
       - name: Compile D2B19 exact source physical adjoint-square pairing symmetry and nonnegativity
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1232,6 +1291,7 @@ jobs:
 
 
       - name: Compile D2B20 source physical von Neumann graph decomposition and resolvent surjectivity
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1260,6 +1320,7 @@ jobs:
 
 
       - name: Compile D2B21 genuine self-adjoint physical Hilbert source charge square
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1290,6 +1351,7 @@ jobs:
 
 
       - name: Compile D2B22 exact 1/16 Hilbert charge energy and original source closed form
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1321,6 +1383,7 @@ jobs:
 
 
       - name: Compile D2B23 exact physical charge graph completeness and form norm equivalence
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1350,6 +1413,7 @@ jobs:
 
 
       - name: Compile D2B24 true physical closed weighted Hilbert form graph and norm identity
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1379,6 +1443,7 @@ jobs:
 
 
       - name: Compile D2B25 exact full source physical form domain as weighted Hilbert graph
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1408,6 +1473,7 @@ jobs:
 
 
       - name: Compile D2B26 exact physical weak-form associated Hamiltonian representation
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1439,6 +1505,7 @@ jobs:
 
 
       - name: Compile D2B27 exact physical normalized associated Hamiltonian self-adjointness
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1472,6 +1539,7 @@ jobs:
 
 
       - name: Compile D2B28 actual paired SU2 gauge physical normalized Hamiltonian
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1503,6 +1571,7 @@ jobs:
 
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
+        if: ${{ inputs.d2b29_trial == true }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1528,6 +1597,14 @@ jobs:
           assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log
           print('D2B29_EXACT_CONCRETE_SU2_POSITIVE_SOURCE_CLOSED_FORM_PASS')
           PY
+
+
+      - name: Save qualified immutable Gate 93 D2B11-D2B28 proof objects
+        if: ${{ steps.gate93_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build
+          key: bfss-su2-domain-gate93-d2b28-v1-e6dcc0f751252f9cdb609d3de61f67abe733a041-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
 
       - name: Save qualified immutable Gate 47 extension cache
         if: ${{ steps.gate47_cache.outputs.cache-hit != 'true' && inputs.clean_build != true }}
