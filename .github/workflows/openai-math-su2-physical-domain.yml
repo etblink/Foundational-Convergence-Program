@@ -55,6 +55,7 @@ jobs:
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.lean upstream-math/lean/
 
       - name: Restore exact Gate 174 warm-qualified proof chain
         id: accepted_cache
@@ -73,15 +74,15 @@ jobs:
           test -s upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/ClosedProfiles.olean
           echo ACCEPTED_K10A_CACHE_RESTORED_AND_CHECKED
 
-      - name: Verify qualified D1 and D3A are immutable; only D3B is prospective
+      - name: Verify qualified D1 D3A D3B are immutable; D2A is prospective
         shell: bash
         run: |
           set -euo pipefail
-          # Gate #5: both D3A source-typed theorems compiled without sorryAx.
-          git fetch --quiet --no-tags --depth=1 origin fbb6306a2a3c49b26e94c5e91d01920fd1145708
-          changed="$(git diff --name-only fbb6306a2a3c49b26e94c5e91d01920fd1145708 HEAD -- experiments/openai-math-su2-physical-domain/ | grep -v -x 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.lean' || true)"
+          # Gate #6: all five D3B source-typed theorems compiled without sorryAx.
+          git fetch --quiet --no-tags --depth=1 origin 9a10ca764e1ac69c4b4d681cd467ff9d898b71dc
+          changed="$(git diff --name-only 9a10ca764e1ac69c4b4d681cd467ff9d898b71dc HEAD -- experiments/openai-math-su2-physical-domain/ | grep -v -x 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.lean' || true)"
           if [ -n "$changed" ]; then
-            echo "Accepted D1/D3A source drift; stop the candidate" >&2
+            echo "Accepted D1/D3A/D3B source drift; stop the candidate" >&2
             printf '%s\n' "$changed" >&2
             exit 1
           fi
@@ -92,7 +93,7 @@ jobs:
           set -euxo pipefail
           source "$HOME/.elan/env"
           cd upstream-math/lean
-          lake env lean SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.lean 2>&1 | tee /tmp/bfss-su2-domain-d1-axioms.log
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.olean SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.lean 2>&1 | tee /tmp/bfss-su2-domain-d1-axioms.log
           python3 - <<'PY'
           import re
           text = open('/tmp/bfss-su2-domain-d1-axioms.log').read()
@@ -139,14 +140,14 @@ jobs:
           print('D3A_EXACT_TWO_STANDARD_AXIOM_REPORTS_PASS')
           PY
 
-      - name: Compile prospective D3B original supercharge physical-space preservation
+      - name: Recompile accepted D3B original supercharge physical-space preservation
         shell: bash
         run: |
           set -euxo pipefail
           source "$HOME/.elan/env"
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.olean
-          lake env lean SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.lean 2>&1 | tee /tmp/bfss-su2-d3b-axioms.log
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.olean SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.lean 2>&1 | tee /tmp/bfss-su2-d3b-axioms.log
           python3 - <<'PY'
           import re
           text = open('/tmp/bfss-su2-d3b-axioms.log').read()
@@ -166,4 +167,33 @@ jobs:
               }, (name, axioms)
           assert 'sorryAx' not in text and 'error:' not in text
           print('D3B_EXACT_FIVE_STANDARD_AXIOM_REPORTS_PASS')
+          PY
+
+      - name: Compile prospective D2A physical closed graph bridge
+        shell: bash
+        run: |
+          set -euxo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.olean
+          lake env lean SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.lean 2>&1 | tee /tmp/bfss-su2-d2a-axioms.log
+          python3 - <<'PY'
+          import re
+          text = open('/tmp/bfss-su2-d2a-axioms.log').read()
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          required = [
+              'sourceCoreNormClosure_le_physicalSpace',
+              'sourceClosedGaugeGraph_input_physical',
+              'sourceClosedGaugeGraph_output_physical',
+              'sourceOriginalRestrictedClosedGraph_all_physical',
+          ]
+          assert len(found) == len(required), found
+          for (name, axioms), suffix in zip(found, required):
+              assert name.endswith('.' + suffix), (name, suffix)
+              assert {a.strip() for a in axioms.split(',')} == {
+                  'propext', 'Classical.choice', 'Quot.sound'
+              }, (name, axioms)
+          assert 'sorryAx' not in text and 'error:' not in text
+          print('D2A_EXACT_FOUR_STANDARD_AXIOM_REPORTS_PASS')
           PY
