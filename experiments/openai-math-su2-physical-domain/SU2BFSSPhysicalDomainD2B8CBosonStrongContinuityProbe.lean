@@ -62,7 +62,7 @@ theorem sourceBosonPullback_strongContinuous (v : FullL2 2) :
         (volume : Measure (Boson 2)) :=
     (G.boson g⁻¹).measurePreserving
   have h := (continuous_const : Continuous (fun _ : GaugeGroup 2 => v))
-    |>.compMeasurePreservingLp hmaps hmp (by norm_num : (2 : ℝ≥0∞) ≠ ∞)
+    |>.compMeasurePreservingLp hmaps hmp (by norm_num)
   exact h
 
 /-- The FULL original combined source SU2 gauge orbit map is strongly
