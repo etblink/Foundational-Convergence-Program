@@ -46,7 +46,13 @@ theorem spatialWedgeSq_lagrange (u v : SpaceIndex → ℝ) :
       (∑ i : SpaceIndex, ∑ j : SpaceIndex, (u i)^2 * (v j)^2) =
         (∑ i : SpaceIndex, (u i)^2) *
           (∑ j : SpaceIndex, (v j)^2) := by
-    rw [Finset.sum_mul, Finset.mul_sum]
+    calc
+      _ = ∑ i : SpaceIndex, (u i)^2 *
+          (∑ j : SpaceIndex, (v j)^2) := by
+        apply Finset.sum_congr rfl
+        intro i _
+        rw [Finset.mul_sum]
+      _ = _ := by rw [Finset.sum_mul]
   have hsecond :
       (∑ i : SpaceIndex, ∑ j : SpaceIndex, (u j)^2 * (v i)^2) =
         (∑ i : SpaceIndex, (u i)^2) *
@@ -56,7 +62,15 @@ theorem spatialWedgeSq_lagrange (u v : SpaceIndex → ℝ) :
   have hcross :
       (∑ i : SpaceIndex, ∑ j : SpaceIndex, (u i * v i) * (u j * v j)) =
         (∑ i : SpaceIndex, u i * v i)^2 := by
-    rw [pow_two, Finset.sum_mul, Finset.mul_sum]
+    calc
+      _ = ∑ i : SpaceIndex, (u i * v i) *
+          (∑ j : SpaceIndex, u j * v j) := by
+        apply Finset.sum_congr rfl
+        intro i _
+        rw [Finset.mul_sum]
+      _ = (∑ i : SpaceIndex, u i * v i) *
+          (∑ j : SpaceIndex, u j * v j) := by rw [Finset.sum_mul]
+      _ = _ := by rw [pow_two]
   have hdouble :
       (∑ i : SpaceIndex, ∑ j : SpaceIndex,
           (u i * v j - u j * v i)^2) =
