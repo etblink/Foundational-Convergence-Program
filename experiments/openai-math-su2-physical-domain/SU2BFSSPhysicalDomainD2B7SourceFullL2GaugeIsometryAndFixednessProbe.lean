@@ -20,6 +20,7 @@ open OAI
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainD2B6
+open FCP.BFSSSU2PhysicalDomainD2B5
 open MeasureTheory
 
 variable (M : AlgebraData 2) (G : M.GaugeData)
@@ -39,7 +40,8 @@ theorem sourceFermionFiberAction_left_inv
   calc
     (G.fiberAction g (G.fiberAction g⁻¹ v)) x =
         G.fermion g ((G.fiberAction g⁻¹ v) x) := hx
-    _ = G.fermion g (G.fermion g⁻¹ (v x)) := by rw [hy]
+    _ = G.fermion g (G.fermion g⁻¹ (v x)) :=
+      congrArg (G.fermion g) hy
     _ = G.fermion (g * g⁻¹) (v x) := by rw [map_mul]; rfl
     _ = v x := by simp
 
@@ -107,8 +109,10 @@ theorem sourceFullGaugePairCLM_core_ae
         (G.fiberAction g (G.bosonPullback g⁻¹ (coreToL2 f))) x := by
           rw [sourceFullGaugePairCLM_apply]
     _ = G.fermion g ((G.bosonPullback g⁻¹ (coreToL2 f)) x) := hfx
-    _ = G.fermion g ((coreToL2 f) (G.boson g⁻¹ x)) := by rw [hbx]
-    _ = G.fermion g (f (G.boson g⁻¹ x)) := by rw [hax]
+    _ = G.fermion g ((coreToL2 f) (G.boson g⁻¹ x)) :=
+      congrArg (G.fermion g) hbx
+    _ = G.fermion g (f (G.boson g⁻¹ x)) :=
+      congrArg (G.fermion g) hax
 
 #print axioms sourceFermionFiberAction_left_inv
 #print axioms sourceFermionFiberAction_norm_eq
