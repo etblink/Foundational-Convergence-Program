@@ -49,7 +49,8 @@ theorem mem_graph_naturalComp {T : E →ₗ.[ℂ] F} {A : F →ₗ.[ℂ] E}
     refine ⟨T ⟨u, naturalComp_domain_le u.property⟩, ?_, ?_⟩
     · exact T.mem_graph ⟨u, naturalComp_domain_le u.property⟩
     · rw [naturalComp_apply]
-      exact A.mem_graph _
+      exact A.mem_graph
+        ⟨T ⟨u, naturalComp_domain_le u.property⟩, naturalComp_apply_mem u⟩
   · rintro ⟨y, hy, hz⟩
     obtain ⟨u, rfl, rfl⟩ := (LinearPMap.mem_graph_iff _).mp hy
     obtain ⟨v, hv, hzv⟩ := (LinearPMap.mem_graph_iff _).mp hz
