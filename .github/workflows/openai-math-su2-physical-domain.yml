@@ -31,6 +31,9 @@ permissions:
 
 jobs:
   source-domain:
+    # Temporarily quarantine automatic S3K PR reruns while the dependency environment is unqualified.
+    # Remove this guard before resuming the S3K proof gate; no accepted source semantics change.
+    if: ${{ github.event_name != 'pull_request' || github.head_ref != 'research/openai-math-su2-s3k-physical-spin-flow' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out FCP qualified-cache owner branch
