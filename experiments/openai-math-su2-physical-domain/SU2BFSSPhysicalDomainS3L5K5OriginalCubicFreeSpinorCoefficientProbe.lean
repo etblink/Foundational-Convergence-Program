@@ -9,6 +9,9 @@ definitional bridge to the sourceCubicCharge. This step exposes the
 literal finite spinor matrix multiplication on the RHS of K4 as the
 negative free-spinor generator acting on original gammaTwo coefficients.
 
+Qualification K5 #1 checks abstract negative free-spinor matrix-entry
+contraction before concrete source monomial specialization.
+
 The abstract real/complex algebra is proved BEFORE specializing the
 actual paired SU(2) Clifford matrices; original source operators and
 physical Fock data remain opaque. K2 full cubic monomial commutator
