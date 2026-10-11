@@ -34,7 +34,9 @@ theorem pairedComplexKineticCoefficient_reindexed
     -(∑ β : SpinIndex,
       (pairedPlaneSpinGenerator i j α β : ℂ) *
         (pairedAlgebraData.gamma k β γ : ℂ)) := by
-  exact_mod_cast pairedRealKineticCoefficient_reindexed i j k α γ hij
+  have h := congrArg (fun x : ℝ => (x : ℂ))
+    (pairedRealKineticCoefficient_reindexed i j k α γ hij)
+  simpa using h
 
 /-- Multiply the exact complexified gamma/J identity by the
 LITERAL original -Complex.I source kinetic coefficient, with no
