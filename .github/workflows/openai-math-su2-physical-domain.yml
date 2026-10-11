@@ -2405,57 +2405,41 @@ jobs:
           print('S3J3D0_GENERIC_WEIGHTED_IDENTITIES_KERNEL_PASS')
           PY
 
-      - name: Diagnose S3J3 P0 operator-source specialization, K vs Z vs let
+      - name: Diagnose S3J3 P0 exact source-definitional handles
         shell: bash
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
-          for tag in P0OnlyK P0OnlyZ P0LetBoundary; do
-            stem="SU2BFSSPhysicalDomainS3J3Diag${tag}Probe"
-            cp "experiments/openai-math-su2-physical-domain/${stem}.lean" upstream-math/lean/
-          done
+          stem="SU2BFSSPhysicalDomainS3J3DiagP0ExactHandlesProbe"
+          cp "experiments/openai-math-su2-physical-domain/${stem}.lean" upstream-math/lean/
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbe.olean
           test -s .lake/build/lib/lean/OAI/Analysis/KadisonKastler/ExponentialCommutator.olean
-          failed=0
-          for tag in P0OnlyK P0OnlyZ P0LetBoundary; do
-            stem="SU2BFSSPhysicalDomainS3J3Diag${tag}Probe"
-            echo "S3J3_P0_DISCRIM_BEGIN:${tag}"
-            set +e
-            timeout 40s lake env lean -o ".lake/build/lib/lean/${stem}.olean" "${stem}.lean" > "/tmp/${stem}.log" 2>&1
-            status=$?
-            set -e
-            if [ "$status" -ne 0 ]; then
-              echo "S3J3_P0_DISCRIM_FAIL:${tag}:LEAN_EXIT_${status}"
-              tail -n 40 "/tmp/${stem}.log"
-              failed=1
-              continue
-            fi
-            if python3 - "/tmp/${stem}.log" "$tag" <<'PY'
-          import re, sys
-          log = open(sys.argv[1]).read()
-          tag = sys.argv[2]
-          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
-          prefix = 'FCP.BFSSSU2PhysicalDomainS3J3Diag' + tag + '.'
-          assert [n for n, _ in reports] == [prefix + 'abstract_fock_op', prefix + 'diagnostic_step'], reports
-          for name, axioms in reports:
-            assert {x.strip() for x in axioms.split(',')} <= {'propext', 'Classical.choice', 'Quot.sound'}, (name, axioms)
-          assert 'sorryAx' not in log and 'error:' not in log, log
-          print('S3J3_P0_DISCRIM_KERNEL_PASS:' + tag)
-          PY
-            then
-              echo "S3J3_P0_DISCRIM_PASS:${tag}"
-            else
-              echo "S3J3_P0_DISCRIM_FAIL:${tag}:AXIOM_OR_REPORT"
-              tail -n 40 "/tmp/${stem}.log"
-              failed=1
-            fi
-          done
-          if [ "$failed" -ne 0 ]; then
-            echo S3J3_P0_DISCRIM_PARTIAL_OR_FAIL
+          echo S3J3_P0_HANDLES_BEGIN
+          set +e
+          timeout 55s lake env lean -o ".lake/build/lib/lean/${stem}.olean" "${stem}.lean" > /tmp/s3j3-p0-handles.log 2>&1
+          status=$?
+          set -e
+          if [ "$status" -ne 0 ]; then
+            echo "S3J3_P0_HANDLES_LEAN_FAIL:${status}"
+            tail -n 55 /tmp/s3j3-p0-handles.log
             exit 1
           fi
-          echo S3J3_P0_DISCRIM_ALL_PASS
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/s3j3-p0-handles.log').read()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          prefix = 'FCP.BFSSSU2PhysicalDomainS3J3DiagP0ExactHandles.'
+          assert [n for n, _ in reports] == [
+            prefix + 'exactSourceK_eq',
+            prefix + 'exactSourceThetaSum_eq',
+            prefix + 'diagnostic_step',
+          ], reports
+          for n, ax in reports:
+            assert {s.strip() for s in ax.split(',')} <= {'propext', 'Classical.choice', 'Quot.sound'}, (n, ax)
+          assert 'sorryAx' not in log and 'error:' not in log, log
+          print('S3J3_P0_EXACT_SOURCE_HANDLES_KERNEL_PASS')
+          PY
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
         if: ${{ inputs.d2b29_trial == true }}
