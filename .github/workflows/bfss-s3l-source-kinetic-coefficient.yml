@@ -36,6 +36,7 @@ name: BFSS S3L Source Rotation Coefficients
 # S3L5J2 #64: discharge exact missing j-ne-i condition in k=j branch from CI #63.
 # S3L5J3: double spinor finite-sum transport on original source operators; J1/J2 Gate #64 immutable cache.
 # S3L5J3 #65: one-gate pinned spinor source reindex, provenance-checked accepted J1/J2 cache.
+# S3L5J3 #66: general double sum compiled in #65; repair only missing S3A open for paired specialization.
 # S3L5I2 #54: Gate #53 whnf heartbeat at final change; source-syntax simpa only, no increased compiler budgets.
 # Pinned S3L5I2 source qualification launch after cache/source preflight.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
