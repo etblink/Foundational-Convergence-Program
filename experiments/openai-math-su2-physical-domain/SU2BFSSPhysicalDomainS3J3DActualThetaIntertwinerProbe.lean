@@ -16,6 +16,7 @@ noncomputable section
 
 set_option maxHeartbeats 1600000
 set_option synthInstance.maxHeartbeats 400000
+set_option maxRecDepth 20000
 
 open scoped BigOperators
 open OAI.BFSSQuantum
@@ -34,9 +35,25 @@ noncomputable def pairedThetaComboLin (C : ColorIndex 2) :
     SpinCoeffs →ₗ[ℂ] FermionOp where
   toFun v := ∑ α : SpinIndex, v α • pairedTheta α C
   map_add' v w := by
-    simp only [Pi.add_apply, add_smul, Finset.sum_add_distrib]
+    change (∑ α : SpinIndex, (v α + w α) • pairedTheta α C) =
+      (∑ α : SpinIndex, v α • pairedTheta α C) +
+        (∑ α : SpinIndex, w α • pairedTheta α C)
+    calc
+      _ = ∑ α : SpinIndex,
+            (v α • pairedTheta α C + w α • pairedTheta α C) := by
+            apply Finset.sum_congr rfl
+            intro α _
+            exact add_smul (v α) (w α) (pairedTheta α C)
+      _ = _ := Finset.sum_add_distrib
   map_smul' c v := by
-    simp only [Pi.smul_apply, smul_smul, Finset.smul_sum]
+    change (∑ α : SpinIndex, (c * v α) • pairedTheta α C) =
+      c • (∑ α : SpinIndex, v α • pairedTheta α C)
+    calc
+      _ = ∑ α : SpinIndex, c • (v α • pairedTheta α C) := by
+            apply Finset.sum_congr rfl
+            intro α _
+            exact smul_smul c (v α) (pairedTheta α C)
+      _ = _ := (Finset.smul_sum _ _ _).symm
 
 noncomputable def pairedThetaCombo (C : ColorIndex 2) :
     SpinCoeffs →L[ℂ] FermionOp :=
