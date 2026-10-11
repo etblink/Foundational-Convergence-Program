@@ -17,6 +17,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3CSourceOrbitalPositionCommutatorProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe.lean
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
@@ -318,4 +319,26 @@ jobs:
             assert {v.strip() for v in ax.split(',')} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('S3L3D_SOURCE_MIXED_DERIVATIVES_COMMUTE_PASS')
+          PY
+
+      - name: Compile S3L3E exact orbital-derivative covariance
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l3e-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l3e-axioms.log').read()
+          names=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)
+          assert [n for n,_ in names]==['FCP.BFSSSU2PhysicalDomainS3L3E.pairedSourceOrbital_comm_derivative'],names
+          for n,ax in names:
+            assert {v.strip() for v in ax.split(',')} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L3E_SOURCE_ORBITAL_DERIVATIVE_COVARIANCE_PASS')
           PY
