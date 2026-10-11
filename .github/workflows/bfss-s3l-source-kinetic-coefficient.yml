@@ -39,6 +39,7 @@ name: BFSS S3L Source Rotation Coefficients
 # S3L5J3 #66: general double sum compiled in #65; repair only missing S3A open for paired specialization.
 # S3L5J4: qualify original source fermion-sum composition and paired fixed-index response; J3 Gate66 accepted.
 # S3L5J4 #67: single cache-aware source composition qualification, no Fock expansion.
+# S3L5J4 #68: repair exact AlgebraData.coordinateDerivative namespace missing in #67; no theorem change.
 # S3L5I2 #54: Gate #53 whnf heartbeat at final change; source-syntax simpa only, no increased compiler budgets.
 # Pinned S3L5I2 source qualification launch after cache/source preflight.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
