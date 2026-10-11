@@ -31,9 +31,6 @@ permissions:
 
 jobs:
   source-domain:
-    # Temporarily quarantine automatic S3K PR reruns while the dependency environment is unqualified.
-    # Remove this guard before resuming the S3K proof gate; no accepted source semantics change.
-    if: ${{ github.event_name != 'pull_request' || github.head_ref != 'research/openai-math-su2-s3k-physical-spin-flow' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out FCP qualified-cache owner branch
@@ -49,6 +46,17 @@ jobs:
           sparse-checkout: |
             lean
           sparse-checkout-cone-mode: true
+
+      - name: Reclaim verified disposable runner disk before restoring pinned dependencies
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          echo PINNED_ENVIRONMENT_DISK_BEFORE_CLEANUP
+          df -h /
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+          echo PINNED_ENVIRONMENT_DISK_AFTER_CLEANUP
+          df -h /
 
       - name: Restore pinned dependency environment
         id: pinned_dependency_cache
