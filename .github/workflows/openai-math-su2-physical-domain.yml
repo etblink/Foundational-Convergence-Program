@@ -2393,7 +2393,7 @@ jobs:
           python3 - <<'PY'
           import re
           log = open('/tmp/bfss-su2-s3j3d0.log').read()
-          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
           expected = [
             'FCP.BFSSSU2PhysicalDomainS3J3D0.weighted_commutator',
             'FCP.BFSSSU2PhysicalDomainS3J3D0.weighted_matrix_sum',
@@ -2418,7 +2418,7 @@ jobs:
           python3 - <<'PY'
           import re
           log = open('/tmp/bfss-su2-s3j3d1.log').read()
-          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
           assert [n for n, _ in reports] == [
             'FCP.BFSSSU2PhysicalDomainS3J3D1.pairedSourceTheta_weighted_commutator',
           ], reports
