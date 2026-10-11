@@ -5,6 +5,7 @@ import SU2BFSSPhysicalDomainS3L5K2AOriginalFermionActionCovarianceProbe
 K2B #2: open the K2A-qualified S3L5K2 namespace omitted in Gate #1; no theorem/proof edits.
 K2B Gate #3: Gate #2 fixed namespace but hit recursion in three simplifications; replace tactics with exact use of qualified lemmas.
 K2B Gate #4: Gate #3 failed at typed hF with maxRecDepth; preserve inferred hF/hP types and expose only monomial definition.
+K2B qualification #4 tests inferred proof types plus single monomial-definition rewrite.
 
 First bounded successor to known-red S3L5K2. Reuse the SOURCE-QUALIFIED
 K1 paired position-pair commutator, K2A exact 48-Majorana fermion-action
