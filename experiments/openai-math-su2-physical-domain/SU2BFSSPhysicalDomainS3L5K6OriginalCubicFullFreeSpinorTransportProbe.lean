@@ -103,9 +103,42 @@ theorem sourceCubicSevenSum_spinorFirst
         rw [Finset.sum_comm]
     _ = _ := by rw [Finset.sum_comm]
 
-/-- Generic original SmoothCore operator identity. Move the negative
-free-spinor sum across all six cubic labels without touching the
-real Clifford matrices or the actual fermionic Fock representation. -/
+/-- Transport the POSITIVE finite free-spinor sum first, following
+the accepted J9 source transport pattern. This keeps the kernel proof
+small and makes negative transport a separate one-line consequence. -/
+private theorem sourceCubicPositiveFreeSpinorSum_transport
+    (d : SpinIndex → ℂ)
+    (c : SpinIndex → SpaceIndex → SpaceIndex →
+      ColorIndex 2 → ColorIndex 2 → ColorIndex 2 →
+      SpinIndex → ℂ)
+    (T : SpaceIndex → SpaceIndex → ColorIndex 2 →
+      ColorIndex 2 → ColorIndex 2 → SpinIndex → SourceEnd) :
+    (∑ k : SpaceIndex, ∑ l : SpaceIndex,
+      ∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
+      ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
+      (∑ β : SpinIndex, d β * c β k l A B C γ) •
+        T k l A B C γ) =
+    ∑ β : SpinIndex, d β •
+      (∑ k : SpaceIndex, ∑ l : SpaceIndex,
+        ∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
+        ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
+        c β k l A B C γ • T k l A B C γ) := by
+  calc
+    _ = ∑ k : SpaceIndex, ∑ l : SpaceIndex,
+      ∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
+      ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
+      ∑ β : SpinIndex,
+        d β • (c β k l A B C γ • T k l A B C γ) := by
+          simp_rw [Finset.sum_smul, mul_smul]
+    _ = ∑ β : SpinIndex, ∑ k : SpaceIndex, ∑ l : SpaceIndex,
+      ∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
+      ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
+        d β • (c β k l A B C γ • T k l A B C γ) :=
+          sourceCubicSevenSum_spinorFirst _
+    _ = _ := by simp_rw [Finset.smul_sum]
+
+/-- Negative version follows from the independently isolated
+positive transport, using only finite-sum linearity. -/
 theorem sourceCubicNegativeFreeSpinorSum_transport
     (d : SpinIndex → ℂ)
     (c : SpinIndex → SpaceIndex → SpaceIndex →
@@ -130,19 +163,7 @@ theorem sourceCubicNegativeFreeSpinorSum_transport
       (∑ β : SpinIndex, d β * c β k l A B C γ) •
         T k l A B C γ) := by
           simp_rw [neg_smul, Finset.sum_neg_distrib]
-    _ = -(∑ k : SpaceIndex, ∑ l : SpaceIndex,
-      ∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
-      ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
-      ∑ β : SpinIndex,
-        d β • (c β k l A B C γ • T k l A B C γ)) := by
-          simp_rw [Finset.sum_smul, mul_smul]
-    _ = -(∑ β : SpinIndex,
-      ∑ k : SpaceIndex, ∑ l : SpaceIndex,
-      ∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
-      ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
-        d β • (c β k l A B C γ • T k l A B C γ)) := by
-          exact congrArg Neg.neg (sourceCubicSevenSum_spinorFirst _)
-    _ = _ := by simp_rw [Finset.smul_sum]
+    _ = _ := congrArg Neg.neg (sourceCubicPositiveFreeSpinorSum_transport d c T)
 
 /-- Original cubic coefficient response, including the full literal
 source 1/2 structure constant, gammaTwo, six source sums, and exact
@@ -204,7 +225,7 @@ theorem pairedOriginalCubicCoefficientResponse_freeSpinor
           (fun β k l A B C γ =>
             (((originalCubicStructureWeight A B C *
               pairedAlgebraData.gammaTwo k l β γ : ℝ) : ℂ)))
-          (originalCubicSourceMonomial)
+          (fun k l A B C γ => originalCubicSourceMonomial k l γ A B C)
     _ = _ := by
         apply congrArg (fun T : SourceEnd => -T)
         apply Finset.sum_congr rfl
