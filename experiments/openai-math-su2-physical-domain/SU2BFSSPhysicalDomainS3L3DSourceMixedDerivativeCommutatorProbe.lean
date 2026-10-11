@@ -45,8 +45,8 @@ private theorem sourceSecondDirectional_apply
       (fun y : Boson 2 => ((coordinateDerivative (N := 2) j B) f) y) x vi = _
   rw [heval]
   rw [fderiv_clm_apply hfderiv (differentiableAt_const vj)]
-  simp only [fderiv_const, ContinuousLinearMap.comp_zero, zero_add,
-    ContinuousLinearMap.flip_apply]
+  trace_state
+  rfl
 
 /-- Source-defined mixed coordinate derivatives commute on the original
 BFSS compactly supported smooth core, with NO extra commutation axiom. -/
