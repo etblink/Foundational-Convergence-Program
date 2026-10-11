@@ -4,7 +4,7 @@ name: BFSS S3L Source Rotation Coefficients
 # Gate #31 repeated S3L4A's known concrete elaboration failure; this run MUST NOT compile S3L4A.
 # Gate #33 checks only the generic, exact AlgebraData.fermionAction interface; no concrete Fock elaboration.
 # Gate #34 checks the separately accepted S3E 48-Majorana specialization using S3L4C; no S3L4A replay.
-# S3L5A qualification: exact pinned charge split plus the concrete spin commutator of each kinetic monomial.
+# Gate #39 found definitional and concrete elaboration bottlenecks; S3L5A now checks ONLY the source-parametric kinetic monomial transport.
 
 # Qualification is run in a PR against the original cache-owning BFSS research base.
 # After qualification the review PR may return to its stacked S3K base.
@@ -438,7 +438,7 @@ jobs:
           print('S3L4D_ACTUAL_48_MAJORANA_SOURCE_SPIN_COVARIANCE_PASS')
           PY
 
-      - name: Compile S3L5A literal source charge and actual kinetic monomial covariance
+      - name: Compile S3L5A source-parametric kinetic monomial commutator
         shell: bash
         run: |
           set -euo pipefail
@@ -453,14 +453,12 @@ jobs:
           import re
           s=open('/tmp/s3l5a-axioms.log').read()
           expected=[
-            'FCP.BFSSSU2PhysicalDomainS3L5A.sourceCharge_eq_kinetic_add_cubic',
-            'FCP.BFSSSU2PhysicalDomainS3L5A.pairedSourceCharge_eq_kinetic_add_cubic',
-            'FCP.BFSSSU2PhysicalDomainS3L5A.pairedActualSourceSpin_comm_kineticMonomial']
+            'FCP.BFSSSU2PhysicalDomainS3L5A.sourceFermionSpin_comm_kineticMonomial_of_fiber']
           pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
           matches=pat.findall(s)
           assert [n for n,_ in matches]==expected,matches
           for n,ax in matches:
             assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
-          print('S3L5A_LITERAL_SOURCE_KINETIC_MONOMIAL_PASS')
+          print('S3L5A_PARAMETRIC_SOURCE_KINETIC_MONOMIAL_PASS')
           PY
