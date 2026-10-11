@@ -35,9 +35,14 @@ theorem sourceCoordinateDerivative_position_commutator_operator
     (if (i, A) = (k, B) then (LinearMap.id : SmoothCore 2 →ₗ[ℂ] SmoothCore 2)
        else 0) f x
   rw [sourceCoordinateDerivative_position_commutator_apply]
+  simp only [EuclideanSpace.single, PiLp.single_apply]
   by_cases h : (i, A) = (k, B)
-  · simp [h, h.symm, EuclideanSpace.single, PiLp.single_apply]
-  · simp [h, Ne.symm h, EuclideanSpace.single, PiLp.single_apply]
+  · have hr : (k, B) = (i, A) := h.symm
+    simp only [if_pos h, if_pos hr, Complex.ofReal_one, one_smul,
+      LinearMap.id_apply]
+  · have hn : (k, B) ≠ (i, A) := Ne.symm h
+    simp only [if_neg h, if_neg hn, Complex.ofReal_zero, zero_smul,
+      LinearMap.zero_apply]
 
 #print axioms sourceCoordinateDerivative_position_commutator_operator
 
