@@ -37,6 +37,7 @@ theorem pairedOriginalCubicResponse_asNegativeCoefficients
           ((originalCubicStructureWeight A B C *
             pairedAlgebraData.gammaTwo k l β γ : ℝ) : ℂ))) •
           originalCubicSourceMonomial k l γ A B C := by
+  calc
     _ = ∑ k : SpaceIndex, ∑ l : SpaceIndex,
       ∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
       ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
