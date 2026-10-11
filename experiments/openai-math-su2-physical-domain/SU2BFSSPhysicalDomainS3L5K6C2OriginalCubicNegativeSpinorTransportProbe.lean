@@ -2,7 +2,7 @@ import SU2BFSSPhysicalDomainS3L5K6C1OriginalCubicCoefficientContractionProbe
 
 /-!
 # S3L5K6C2 — isolated original cubic source coefficient step
-Gate #3 qualification: explicit typed source aliases and non-unfolding finite-sum change. Gate #3 experiment: explicitly typed named scalar and monomial interfaces before finite-sum transport; preserve the exact original theorem statement.
+Gate #4 qualification: avoid Gate #3 whnf timeout at change by simp-only three typed aliases. Gate #3 experiment: explicitly typed named scalar and monomial interfaces before finite-sum transport; preserve the exact original theorem statement.
 Specialize already-qualified K6B negative sixfold transport to original BFSS gammaTwo and original SmoothCore cubic monomials.
 No new axioms, source physics, concrete K2 commutator, or spectral claims.
 -/
@@ -53,7 +53,10 @@ theorem pairedOriginalCubicNegativeCoefficients_asSpinorSum
   let T : SpaceIndex → SpaceIndex → ColorIndex 2 →
       ColorIndex 2 → ColorIndex 2 → SpinIndex → SourceEnd :=
     fun k l A B C γ => originalCubicSourceMonomial k l γ A B C
-  change (∑ k : SpaceIndex, ∑ l : SpaceIndex,
+  -- Gate #3 failed at 'change' itself (whnf heartbeat exhaustion).
+  -- Reuse the compiled K6B theorem as a named proof first; rewrite ONLY
+  -- the three explicit aliases, never unfold the BFSS operators.
+  have h : (∑ k : SpaceIndex, ∑ l : SpaceIndex,
       ∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
       ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
       (-(∑ β : SpinIndex, d β * c β k l A B C γ)) •
@@ -62,8 +65,9 @@ theorem pairedOriginalCubicNegativeCoefficients_asSpinorSum
       (∑ k : SpaceIndex, ∑ l : SpaceIndex,
         ∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
         ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
-        c β k l A B C γ • T k l A B C γ))
-  exact sourceCubicNegativeFreeSpinorSum_transport d c T
+        c β k l A B C γ • T k l A B C γ)) :=
+      sourceCubicNegativeFreeSpinorSum_transport d c T
+  simpa only [d, c, T] using h
 
 #print axioms pairedOriginalCubicNegativeCoefficients_asSpinorSum
 
