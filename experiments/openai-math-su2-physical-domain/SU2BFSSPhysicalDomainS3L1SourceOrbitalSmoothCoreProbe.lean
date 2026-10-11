@@ -31,6 +31,14 @@ noncomputable def pairedSourceOrbitalPlaneGenerator
      (position (N := 2) j A).comp
       (coordinateDerivative (N := 2) i A))
 
+/-- Evaluation of the literal upstream smooth test-function space at
+a bosonic configuration is additive. No auxiliary function space. -/
+private def sourceSmoothCoreEval (x : Boson 2) :
+    SmoothCore 2 →+ Fermion 2 where
+  toFun := fun f => f x
+  map_zero' := by rfl
+  map_add' := by intro f g; rfl
+
 /-- This is exactly the true BFSS 27-variable orbital differential
 expression, with the original fderiv and source coordinate directions. -/
 theorem pairedSourceOrbitalPlaneGenerator_apply
@@ -44,8 +52,12 @@ theorem pairedSourceOrbitalPlaneGenerator_apply
           fderiv ℝ (f : Boson 2 → Fermion 2) x
             (EuclideanSpace.single (i, A) 1))) := by
   unfold pairedSourceOrbitalPlaneGenerator
-  simp only [LinearMap.sum_apply, LinearMap.sub_apply, LinearMap.comp_apply,
-    map_sum, map_sub]
+  simp only [LinearMap.sum_apply, LinearMap.sub_apply, LinearMap.comp_apply]
+  change sourceSmoothCoreEval x
+    (∑ A : ColorIndex 2,
+      ((position (N := 2) i A) ((coordinateDerivative (N := 2) j A) f) -
+       (position (N := 2) j A) ((coordinateDerivative (N := 2) i A) f))) = _
+  rw [map_sum]
   apply Finset.sum_congr rfl
   intro A _
   change
