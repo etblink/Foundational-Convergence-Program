@@ -1,6 +1,12 @@
 name: BFSS SU2 Physical Domain Bridge
 
 on:
+  pull_request:
+    branches:
+      - research/openai-math-su2-concrete-potential
+    paths:
+      - experiments/openai-math-su2-physical-domain/**
+      - .github/workflows/openai-math-su2-physical-domain.yml
   push:
     branches:
       - research/openai-math-su2-concrete-potential
@@ -2337,6 +2343,181 @@ jobs:
         with:
           path: upstream-math/lean/.lake/build
           key: bfss-su2-accepted-s3hi-v1-75a09e3ceded364c-7a176b75ed172602-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Compile S3J3C generic exponential intertwiner against pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3J3CAbstractExponentialIntertwinerProbe.lean upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3CAbstractExponentialIntertwinerProbe.olean SU2BFSSPhysicalDomainS3J3CAbstractExponentialIntertwinerProbe.lean 2>&1 | tee /tmp/bfss-su2-s3j3c.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s3j3c.log').read()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          assert len(reports) == 1, reports
+          assert reports[0][0] == 'FCP.BFSSSU2PhysicalDomainS3J3C.exp_intertwines_on_vector', reports
+          assert {x.strip() for x in reports[0][1].split(',')} <= {'propext','Classical.choice','Quot.sound'}, reports
+          assert 'sorryAx' not in log and 'error:' not in log
+          print('S3J3C_GENERIC_EXP_INTERTWINER_KERNEL_PASS')
+          PY
+
+      - name: Compile pinned upstream bounded commutator exponential dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          for module in ExponentialRemainder ClosedExponentialGenerator ExponentialCommutator; do
+            path="OAI/Analysis/KadisonKastler/${module}"
+            test -s "${path}.lean"
+            if [ ! -s ".lake/build/lib/lean/${path}.olean" ]; then
+              mkdir -p .lake/build/lib/lean/OAI/Analysis/KadisonKastler
+              lake env lean -o ".lake/build/lib/lean/${path}.olean" "${path}.lean" 2>&1 | tee "/tmp/bfss-su2-s3j3-${module}.log"
+              ! grep -Eq 'error:|sorryAx' "/tmp/bfss-su2-s3j3-${module}.log"
+            fi
+          done
+          test -s .lake/build/lib/lean/OAI/Analysis/KadisonKastler/ExponentialCommutator.olean
+          echo PINNED_OAI_BOUNDED_COMMUTATOR_DEPENDENCY_READY
+
+      - name: Compile S3J3D0 generic weighted commutator and matrix sum
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3J3D0WeightedCommutatorProbe.lean upstream-math/lean/
+          cd upstream-math/lean
+          timeout 120s lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3D0WeightedCommutatorProbe.olean SU2BFSSPhysicalDomainS3J3D0WeightedCommutatorProbe.lean 2>&1 | tee /tmp/bfss-su2-s3j3d0.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s3j3d0.log').read()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+            'FCP.BFSSSU2PhysicalDomainS3J3D0.weighted_commutator',
+            'FCP.BFSSSU2PhysicalDomainS3J3D0.weighted_matrix_sum',
+          ]
+          assert [n for n, _ in reports] == expected, reports
+          for name, axioms in reports:
+            assert {s.strip() for s in axioms.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (name, axioms)
+          assert 'sorryAx' not in log and 'error:' not in log
+          print('S3J3D0_GENERIC_WEIGHTED_IDENTITIES_KERNEL_PASS')
+          PY
+
+      - name: Diagnose S3J3 P0 exact source-definitional handles
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem="SU2BFSSPhysicalDomainS3J3DiagP0ExactHandlesProbe"
+          cp "experiments/openai-math-su2-physical-domain/${stem}.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbe.olean
+          test -s .lake/build/lib/lean/OAI/Analysis/KadisonKastler/ExponentialCommutator.olean
+          echo S3J3_P0_HANDLES_BEGIN
+          set +e
+          timeout 55s lake env lean -o ".lake/build/lib/lean/${stem}.olean" "${stem}.lean" > /tmp/s3j3-p0-handles.log 2>&1
+          status=$?
+          set -e
+          if [ "$status" -ne 0 ]; then
+            echo "S3J3_P0_HANDLES_LEAN_FAIL:${status}"
+            tail -n 55 /tmp/s3j3-p0-handles.log
+            exit 1
+          fi
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/s3j3-p0-handles.log').read()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          prefix = 'FCP.BFSSSU2PhysicalDomainS3J3DiagP0ExactHandles.'
+          assert [n for n, _ in reports] == [
+            prefix + 'exactSourceK_eq',
+            prefix + 'exactSourceThetaSum_eq',
+            prefix + 'diagnostic_step',
+          ], reports
+          for n, ax in reports:
+            assert {s.strip() for s in ax.split(',')} <= {'propext', 'Classical.choice', 'Quot.sound'}, (n, ax)
+          assert 'sorryAx' not in log and 'error:' not in log, log
+          print('S3J3_P0_EXACT_SOURCE_HANDLES_KERNEL_PASS')
+          PY
+
+      - name: Compile S3J3D2 single actual Majorana handle covariance
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem="SU2BFSSPhysicalDomainS3J3D2ExactHandleSingleThetaProbe"
+          cp "experiments/openai-math-su2-physical-domain/${stem}.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3DiagP0ExactHandlesProbe.olean
+          timeout 60s lake env lean -o ".lake/build/lib/lean/${stem}.olean" "${stem}.lean" 2>&1 | tee /tmp/s3j3d2single.log
+          python3 - <<'PY'
+          import re
+          log=open('/tmp/s3j3d2single.log').read()
+          reports=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",log)
+          assert [n for n,_ in reports] == [
+            'FCP.BFSSSU2PhysicalDomainS3J3D2Single.exactThetaOne_eq',
+            'FCP.BFSSSU2PhysicalDomainS3J3D2Single.source_single_theta_reuse',
+            'FCP.BFSSSU2PhysicalDomainS3J3D2Single.handle_single_theta_comm',
+          ],reports
+          for theorem_name, ax in reports:
+            assert {x.strip() for x in ax.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (theorem_name, ax)
+          assert 'sorryAx' not in log and 'error:' not in log
+          print('S3J3D2_SINGLE_THETA_EXACT_SOURCE_KERNEL_PASS')
+          PY
+
+      - name: Diagnose S3J3D3 A-B-C independent source-weighted obligations
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          for tag in A B C; do
+            stem="SU2BFSSPhysicalDomainS3J3D3${tag}Probe"
+            cp "experiments/openai-math-su2-physical-domain/${stem}.lean" upstream-math/lean/
+          done
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3D2ExactHandleSingleThetaProbe.olean
+          failed=0
+          for tag in A B C; do
+            stem="SU2BFSSPhysicalDomainS3J3D3${tag}Probe"
+            echo "S3J3D3_DIAG_BEGIN:${tag}"
+            set +e
+            timeout 65s lake env lean -o ".lake/build/lib/lean/${stem}.olean" "${stem}.lean" > "/tmp/s3j3d3${tag}.log" 2>&1
+            status=$?
+            set -e
+            if [ "$status" -ne 0 ]; then
+              echo "S3J3D3_DIAG_FAIL:${tag}:LEAN_EXIT_${status}"
+              tail -n 65 "/tmp/s3j3d3${tag}.log"
+              failed=1
+              continue
+            fi
+            if python3 - "/tmp/s3j3d3${tag}.log" "$tag" <<'PY'
+          import re,sys
+          tag = sys.argv[2]
+          expected = {'A':'handle_ad_sum','B':'handle_ad_pointwise','C':'handle_matrix_swap'}[tag]
+          log = open(sys.argv[1]).read()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          name = 'FCP.BFSSSU2PhysicalDomainS3J3D3' + tag + '.'
+          expected_names = ([name + 'exactSourceAd_eq', name + 'exactSourceAd_apply', name + 'handle_ad_linear_named'] if tag == 'A' else []) + [name + expected]
+          assert [n for n,_ in reports] == expected_names, reports
+          for theorem,ax in reports:
+            assert {s.strip() for s in ax.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (theorem,ax)
+          assert 'sorryAx' not in log and 'error:' not in log
+          print('S3J3D3_KERNEL_AXIOM_PASS:'+tag)
+          PY
+            then
+              echo "S3J3D3_DIAG_PASS:${tag}"
+            else
+              echo "S3J3D3_DIAG_FAIL:${tag}:AXIOM_OR_REPORT"
+              tail -n 65 "/tmp/s3j3d3${tag}.log"
+              failed=1
+            fi
+          done
+          if [ "$failed" -ne 0 ]; then
+            echo S3J3D3_DIAG_PARTIAL_OR_FAIL
+            exit 1
+          fi
+          echo S3J3D3_DIAG_ALL_THREE_EXACT_SOURCE_PASS
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
         if: ${{ inputs.d2b29_trial == true }}
