@@ -8,16 +8,9 @@ name: BFSS S3L Cubic Full Spinor Transport
 # K2 source cubic monomial remains UNQUALIFIED; this workflow does not
 # bypass its failure or assert full cubic supercharge covariance.
 # Reuse exact qualified 26-module source-verified cache and pinned Lean.
+# QUARANTINE 2026-10-11: Monolithic K6 kernel timeout remains unresolved; K6C staged source response supersedes its automatic gate.
+# Preserve this original diagnostic workflow and all proof/axiom checks for manual dispatch.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-concrete-potential
-    paths:
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K3OriginalCubicGammaTwoCoefficientProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K4OriginalCubicOperatorCoefficientTransportProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K5OriginalCubicFreeSpinorCoefficientProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K6OriginalCubicFullFreeSpinorTransportProbe.lean
-      - .github/workflows/bfss-s3l-cubic-full-free-spinor.yml
   workflow_dispatch:
 
 permissions:
