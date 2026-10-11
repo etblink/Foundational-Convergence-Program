@@ -7,7 +7,7 @@ name: BFSS S3L Source Rotation Coefficients
 # Gate #39 found definitional and concrete elaboration bottlenecks; S3L5A now checks ONLY the source-parametric kinetic monomial transport.
 # S3L5C independent source orbital-fermionAction commutation: trigger one isolated qualification run.
 # S3L5D original orbital kinetic monomial: trigger one isolated proof qualification.
-# S3L5E concrete additive specialization is UNQUALIFIED (gate #45); excluded pending bounded generic repair.
+# S3L5E concrete specialization remains UNQUALIFIED (#45); S3L5F tests only the parametric additive transport.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
 
 # Qualification is run in a PR against the original cache-owning BFSS research base.
@@ -33,6 +33,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5BActualKineticMonomialCovarianceProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5CSourceOrbitalFermionActionCommutationProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5DSourceOrbitalKineticMonomialProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5FParametricCombinedKineticMonomialProbe.lean
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
@@ -544,4 +545,31 @@ jobs:
             assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('S3L5D_ORIGINAL_ORBITAL_KINETIC_MONOMIAL_PASS')
+          PY
+
+      - name: Compile S3L5F parameterized combined source kinetic monomial
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L5FParametricCombinedKineticMonomialProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5DSourceOrbitalKineticMonomialProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5BActualKineticMonomialCovarianceProbe.olean
+          timeout 160s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5f-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5f-axioms.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=[
+            'FCP.BFSSSU2PhysicalDomainS3L5F.sourceComm_sum_of_components',
+            'FCP.BFSSSU2PhysicalDomainS3L5F.sourceCombined_comm_kineticMonomial_of_fiber']
+          assert [n for n,_ in matches]==expected,matches
+          for n,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5F_PARAMETRIC_COMBINED_KINETIC_MONOMIAL_PASS')
           PY
