@@ -44,6 +44,8 @@ private theorem sourceSecondDirectional_apply
   rw [fderiv_clm_apply hfderiv (differentiableAt_const vj)]
   simp only [fderiv_fun_const, Pi.zero_apply,
     ContinuousLinearMap.comp_zero, zero_add, ContinuousLinearMap.flip_apply]
+  -- Gate #22's only remaining goal differs by these local abbreviations.
+  simpa only [vi, vj]
 
 /-- Source-defined mixed coordinate derivatives commute on the original
 BFSS compactly supported smooth core, with NO extra commutation axiom. -/
