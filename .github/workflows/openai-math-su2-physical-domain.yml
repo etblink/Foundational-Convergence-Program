@@ -2420,9 +2420,11 @@ jobs:
           log = open('/tmp/bfss-su2-s3j3d1.log').read()
           reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
           assert [n for n, _ in reports] == [
+            'FCP.BFSSSU2PhysicalDomainS3J3D1.pairedSourceTheta_commutator_map_sum',
             'FCP.BFSSSU2PhysicalDomainS3J3D1.pairedSourceTheta_weighted_commutator',
           ], reports
-          assert {s.strip() for s in reports[0][1].split(',')} <= {'propext','Classical.choice','Quot.sound'}, reports
+          for name, axioms in reports:
+            assert {s.strip() for s in axioms.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log
           print('S3J3D1_ACTUAL_MAJORANA_INFINITESIMAL_WEIGHTED_COVARIANCE_PASS')
           PY
