@@ -1,5 +1,7 @@
 name: BFSS S3L Source Rotation Coefficients
 
+# Qualification gate for original-source S3L0–S3L3A through the cache-owning PR base.
+
 # Qualification is run in a PR against the original cache-owning BFSS research base.
 # After qualification the review PR may return to its stacked S3K base.
 
