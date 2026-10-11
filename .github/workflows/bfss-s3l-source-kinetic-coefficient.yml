@@ -4,6 +4,7 @@ name: BFSS S3L Source Rotation Coefficients
 # Gate #31 repeated S3L4A's known concrete elaboration failure; this run MUST NOT compile S3L4A.
 # Gate #33 checks only the generic, exact AlgebraData.fermionAction interface; no concrete Fock elaboration.
 # Gate #34 checks the separately accepted S3E 48-Majorana specialization using S3L4C; no S3L4A replay.
+# S3L5A qualification: exact pinned charge split plus the concrete spin commutator of each kinetic monomial.
 
 # Qualification is run in a PR against the original cache-owning BFSS research base.
 # After qualification the review PR may return to its stacked S3K base.
