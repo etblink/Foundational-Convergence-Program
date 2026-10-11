@@ -40,6 +40,7 @@ name: BFSS S3L Source Rotation Coefficients
 # S3L5J4: qualify original source fermion-sum composition and paired fixed-index response; J3 Gate66 accepted.
 # S3L5J4 #67: single cache-aware source composition qualification, no Fock expansion.
 # S3L5J4 #68: repair exact AlgebraData.coordinateDerivative namespace missing in #67; no theorem change.
+# S3L5J5: exact source kinetic response orbital/fiber split; new accepted J3/J4 source-checked cache.
 # S3L5I2 #54: Gate #53 whnf heartbeat at final change; source-syntax simpa only, no increased compiler budgets.
 # Pinned S3L5I2 source qualification launch after cache/source preflight.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
@@ -78,6 +79,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J2ComplexGammaCoefficientProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J5SourceKineticResponseSplitProbe.lean
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
@@ -1104,7 +1106,54 @@ jobs:
           key: bfss-s3l-accepted-j1-j2-v1-20ccdfb2-${{ runner.os }}-${{ runner.arch }}
 
 
+      - name: Restore accepted J3/J4 original-source response cache
+        id: accepted_s3l5j4_cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe.olean
+          key: bfss-s3l-accepted-j3-j4-v1-2685ac89-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Verify exact Gate 68 J3/J4 source and root axiom footprint
+        shell: bash
+        run: |
+          set -euo pipefail
+          frozen=2685ac890f62b8b71e01eeca83682362ce8587a2
+          git fetch --quiet --no-tags --depth=1 origin "$frozen"
+          modules=(
+            SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe
+            SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe
+          )
+          for m in "${modules[@]}"; do
+            p="experiments/openai-math-su2-physical-domain/$m.lean"
+            test "$(git rev-parse "$frozen:$p")" = "$(git hash-object "$p")"
+            if [ "${{ steps.accepted_s3l5j4_cache.outputs.cache-hit }}" = "true" ]; then
+              test -s "upstream-math/lean/.lake/build/lib/lean/$m.olean"
+            fi
+          done
+          if [ "${{ steps.accepted_s3l5j4_cache.outputs.cache-hit }}" = "true" ]; then
+            source "$HOME/.elan/env"
+            cd upstream-math/lean
+            printf '%s\n' 'import SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe' \
+              '#print axioms FCP.BFSSSU2PhysicalDomainS3L5J4.pairedFixedKineticFermionResponse_reindex' > S3L5J4CacheImportCheck.lean
+            timeout 90s lake env lean S3L5J4CacheImportCheck.lean 2>&1 | tee /tmp/s3l5j4-cache-check.log
+            python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5j4-cache-check.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=['FCP.BFSSSU2PhysicalDomainS3L5J4.pairedFixedKineticFermionResponse_reindex']
+          assert [n for n,_ in matches]==expected,matches
+          for n,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5J4_EXACT_GATE68_SOURCE_CACHE_PASS')
+          PY
+          fi
+
       - name: Compile S3L5J3 original source double spinor sum transport
+        if: ${{ steps.accepted_s3l5j4_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1131,6 +1180,7 @@ jobs:
           PY
 
       - name: Compile S3L5J4 source fermion sum and derivative composition
+        if: ${{ steps.accepted_s3l5j4_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1155,4 +1205,41 @@ jobs:
             assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('S3L5J4_SOURCE_FERMION_SUM_COMPOSITION_PASS')
+          PY
+
+      - name: Save exact accepted Gate 68 J3/J4 source cache
+        if: ${{ steps.accepted_s3l5j4_cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe.olean
+          key: bfss-s3l-accepted-j3-j4-v1-2685ac89-${{ runner.os }}-${{ runner.arch }}
+
+
+      - name: Compile S3L5J5 original-source kinetic response additive split
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L5J5SourceKineticResponseSplitProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe.olean
+          timeout 140s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5j5-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5j5-axioms.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=[
+            'FCP.BFSSSU2PhysicalDomainS3L5J5.kineticResponseTerm_eq_parts',
+            'FCP.BFSSSU2PhysicalDomainS3L5J5.sourceWeightedThreeSum_add',
+            'FCP.BFSSSU2PhysicalDomainS3L5J5.sourceKineticWeightedResponse_split']
+          assert [n for n,_ in matches]==expected,matches
+          for n,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5J5_ORIGINAL_KINETIC_RESPONSE_SPLIT_PASS')
           PY
