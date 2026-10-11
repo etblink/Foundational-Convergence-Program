@@ -39,7 +39,7 @@ theorem pairedComplexKineticCoefficient_reindexed
   by_cases hki : k = i
   · simpa [hki] using h
   · by_cases hkj : k = j
-    · simpa [hki, hkj] using h
+    · simpa [hki, hkj, Ne.symm hij] using h
     · simpa [hki, hkj] using h
 
 /-- Multiply the exact complexified gamma/J identity by the
