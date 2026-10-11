@@ -48,6 +48,7 @@ name: BFSS S3L Source Rotation Coefficients
 # J6 Gate72: close only the implicit i-ne-j branch from Gate71; merged cache remains frozen and qualified.
 # J7: original source three-index coefficient transport and finite-sum coefficient regroup; no full Fock expansion.
 # Gate73 qualification: source J7 all-index transport, with qualified consolidated cache and axiom gate.
+# J8: contract actual scalar -i gamma/J coefficient; keep final source operator spinor sum separate.
 # S3L5I2 #54: Gate #53 whnf heartbeat at final change; source-syntax simpa only, no increased compiler budgets.
 # Pinned S3L5I2 source qualification launch after cache/source preflight.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
@@ -89,6 +90,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J5SourceKineticResponseSplitProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J6SourceOrbitalFixedIndexReindexProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J7OriginalFullResponseCoefficientTransportProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J8PairedComplexResponseCoefficientContractionProbe.lean
       - experiments/openai-math-su2-physical-domain/S3L_ACCEPTED_CACHE_QUALIFIED_SOURCES_0_1_0.txt
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
@@ -1473,4 +1475,32 @@ jobs:
             assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('S3L5J7_SOURCE_TRIPLE_RESPONSE_COEFFICIENT_PASS')
+          PY
+
+      - name: Compile S3L5J8 exact paired complex gamma-J coefficient contraction
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L5J8PairedComplexResponseCoefficientContractionProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J7OriginalFullResponseCoefficientTransportProbe.olean
+          timeout 150s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5j8-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5j8-axioms.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=[
+            'FCP.BFSSSU2PhysicalDomainS3L5J8.pairedOrbitalCoefficient_isMinusI',
+            'FCP.BFSSSU2PhysicalDomainS3L5J8.pairedFiberCoefficient_isMinusI',
+            'FCP.BFSSSU2PhysicalDomainS3L5J8.pairedFreeSpinorCoefficient_isMinusI',
+            'FCP.BFSSSU2PhysicalDomainS3L5J8.pairedOriginalKineticResponseCoefficient_contract']
+          assert [n for n,_ in matches] == expected,matches
+          for n, ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5J8_EXACT_GAMMA_J_RESPONSE_COEFFICIENT_PASS')
           PY
