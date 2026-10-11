@@ -2466,24 +2466,67 @@ jobs:
           print('S3J3D2_SINGLE_THETA_EXACT_SOURCE_KERNEL_PASS')
           PY
 
-      - name: Compile S3J3D2 weighted actual Majorana handle covariance
+      - name: Compile S3J3D3A isolated exact-source weighted subobligation
         shell: bash
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
-          stem="SU2BFSSPhysicalDomainS3J3D2ExactHandleWeightedThetaProbe"
+          stem="SU2BFSSPhysicalDomainS3J3D3AProbe"
           cp "experiments/openai-math-su2-physical-domain/${stem}.lean" upstream-math/lean/
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3D2ExactHandleSingleThetaProbe.olean
-          timeout 60s lake env lean -o ".lake/build/lib/lean/${stem}.olean" "${stem}.lean" 2>&1 | tee /tmp/s3j3d2weighted.log
+          timeout 65s lake env lean -o ".lake/build/lib/lean/${stem}.olean" "${stem}.lean" 2>&1 | tee /tmp/s3j3d3A.log
           python3 - <<'PY'
           import re
-          log=open('/tmp/s3j3d2weighted.log').read()
-          reports=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",log)
-          assert [n for n,_ in reports] == ['FCP.BFSSSU2PhysicalDomainS3J3D2Weighted.handle_weighted_theta_comm'],reports
-          assert {x.strip() for x in reports[0][1].split(',')} <= {'propext','Classical.choice','Quot.sound'},reports
+          log = open('/tmp/s3j3d3A.log').read()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = 'FCP.BFSSSU2PhysicalDomainS3J3D3A.handle_ad_sum'
+          assert [n for n,_ in reports] == [expected], reports
+          assert {x.strip() for x in reports[0][1].split(',')} <= {'propext','Classical.choice','Quot.sound'}, reports
           assert 'sorryAx' not in log and 'error:' not in log
-          print('S3J3D2_WEIGHTED_THETA_EXACT_SOURCE_KERNEL_PASS')
+          print('S3J3D3A_EXACT_SOURCE_KERNEL_PASS')
+          PY
+
+      - name: Compile S3J3D3B isolated exact-source weighted subobligation
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem="SU2BFSSPhysicalDomainS3J3D3BProbe"
+          cp "experiments/openai-math-su2-physical-domain/${stem}.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3D2ExactHandleSingleThetaProbe.olean
+          timeout 65s lake env lean -o ".lake/build/lib/lean/${stem}.olean" "${stem}.lean" 2>&1 | tee /tmp/s3j3d3B.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/s3j3d3B.log').read()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = 'FCP.BFSSSU2PhysicalDomainS3J3D3B.handle_ad_pointwise'
+          assert [n for n,_ in reports] == [expected], reports
+          assert {x.strip() for x in reports[0][1].split(',')} <= {'propext','Classical.choice','Quot.sound'}, reports
+          assert 'sorryAx' not in log and 'error:' not in log
+          print('S3J3D3B_EXACT_SOURCE_KERNEL_PASS')
+          PY
+
+      - name: Compile S3J3D3C isolated exact-source weighted subobligation
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem="SU2BFSSPhysicalDomainS3J3D3CProbe"
+          cp "experiments/openai-math-su2-physical-domain/${stem}.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3D2ExactHandleSingleThetaProbe.olean
+          timeout 65s lake env lean -o ".lake/build/lib/lean/${stem}.olean" "${stem}.lean" 2>&1 | tee /tmp/s3j3d3C.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/s3j3d3C.log').read()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = 'FCP.BFSSSU2PhysicalDomainS3J3D3C.handle_matrix_swap'
+          assert [n for n,_ in reports] == [expected], reports
+          assert {x.strip() for x in reports[0][1].split(',')} <= {'propext','Classical.choice','Quot.sound'}, reports
+          assert 'sorryAx' not in log and 'error:' not in log
+          print('S3J3D3C_EXACT_SOURCE_KERNEL_PASS')
           PY
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
