@@ -4,7 +4,7 @@ import SU2BFSSPhysicalDomainS3L5K2AOriginalFermionActionCovarianceProbe
 # S3L5K2B — exact concrete cubic source monomial via opaque operator interfaces
 K2B #2: open the K2A-qualified S3L5K2 namespace omitted in Gate #1; no theorem/proof edits.
 K2B Gate #3: Gate #2 fixed namespace but hit recursion in three simplifications; replace tactics with exact use of qualified lemmas.
-K2B #3 qualification trigger: direct proof term reuse without simpa or larger recursion budget.
+K2B Gate #4: Gate #3 failed at typed hF with maxRecDepth; preserve inferred hF/hP types and expose only monomial definition.
 
 First bounded successor to known-red S3L5K2. Reuse the SOURCE-QUALIFIED
 K1 paired position-pair commutator, K2A exact 48-Majorana fermion-action
@@ -64,30 +64,24 @@ theorem pairedActualCombined_comm_cubicMonomial
         ((sourcePositionVariation i j k B).comp (position (N := 2) l C) +
           (position (N := 2) k B).comp
             (sourcePositionVariation i j l C)) := by
-  -- Gate K2B: abstract the genuine SmoothCore sources at precise
-  -- SourceEnd boundaries so the already-checked K1 Leibniz theorem
-  -- does not attempt to elaborate concrete Fock compositions.
-  let G : SourceEnd :=
-    sourceParametricCombinedPlane (pairedFermionPlaneSpinGenerator i j) i j
-  let F : SourceEnd := pairedAlgebraData.fermionAction γ A
-  let P : SourceEnd :=
-    (position (N := 2) k B).comp (position (N := 2) l C)
-  let VF : SourceEnd := sourceCubicFermionVariation i j γ A
-  let VP : SourceEnd :=
-    (sourcePositionVariation i j k B).comp (position (N := 2) l C) +
-      (position (N := 2) k B).comp (sourcePositionVariation i j l C)
-  -- Gate #2 recursion was caused by the simplifier traversing the
-  -- enormous concrete Fock/SmoothCore expressions. Use the accepted
-  -- K2A and K1 proof objects directly through exact SourceEnd aliases.
-  have hF : G.comp F - F.comp G = VF :=
-    pairedActualCombined_comm_fermionAction i j γ A
-  have hP : G.comp P - P.comp G = VP :=
-    pairedActualCombined_comm_positionPair i j k l B C hij
-  have hLeibniz :
-      G.comp (F.comp P) - (F.comp P).comp G =
-        VF.comp P + F.comp VP :=
-    sourceComm_comp G F P VF VP hF hP
-  exact hLeibniz
+  -- K2B #4: first retain each independently kernel-checked source
+  -- commutator WITH ITS OWN INFERRED TYPE. Gate #3's typed alias
+  -- hF forced Lean to unfold the concrete Fock operator (maxRecDepth).
+  have hF := pairedActualCombined_comm_fermionAction i j γ A
+  have hP := pairedActualCombined_comm_positionPair i j k l B C hij
+  -- Combine the exact original source expressions, not their aliases.
+  have hLeibniz :=
+    sourceComm_comp
+      (sourceParametricCombinedPlane (pairedFermionPlaneSpinGenerator i j) i j)
+      (pairedAlgebraData.fermionAction γ A)
+      ((position (N := 2) k B).comp (position (N := 2) l C))
+      (sourceCubicFermionVariation i j γ A)
+      ((sourcePositionVariation i j k B).comp (position (N := 2) l C) +
+        (position (N := 2) k B).comp (sourcePositionVariation i j l C))
+      hF hP
+  -- Expose ONLY the original monomial name, not the combined generator,
+  -- gamma matrices, or the genuine fermionAction source definition.
+  simpa only [pairedOriginalCubicMonomial] using hLeibniz
 
 #print axioms pairedActualCombined_comm_cubicMonomial
 
