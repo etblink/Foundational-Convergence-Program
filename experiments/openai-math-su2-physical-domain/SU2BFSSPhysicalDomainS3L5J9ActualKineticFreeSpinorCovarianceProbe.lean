@@ -24,6 +24,7 @@ open FCP.BFSSSU2PhysicalDomainS3A
 open FCP.BFSSSU2PhysicalDomainS3D
 open FCP.BFSSSU2PhysicalDomainS3L4B
 open FCP.BFSSSU2PhysicalDomainS3L5A
+open FCP.BFSSSU2PhysicalDomainS3L5F
 open FCP.BFSSSU2PhysicalDomainS3L5I2A
 open FCP.BFSSSU2PhysicalDomainS3L5I2B
 open FCP.BFSSSU2PhysicalDomainS3L5I3
@@ -91,6 +92,16 @@ theorem sourceFullNegativeFreeSpinorSum_transport
     _ = _ :=
       congrArg Neg.neg (sourceFullFreeSpinorSum_transport d c T)
 
+/-- Original literal 9×3×16 source kinetic sum under its qualified
+S3L5I2A name, kept as a separate reducible expression to prevent
+full-charge elaboration inside the outer free-spinor sum. -/
+theorem pairedSourceKineticTripleSum_eqNamed (β : SpinIndex) :
+    (∑ k : SpaceIndex, ∑ A : ColorIndex 2, ∑ γ : SpinIndex,
+      kineticWeight pairedAlgebraData β k A γ •
+        kineticTerm pairedAlgebraData k A γ) =
+      kineticWeightedSum pairedAlgebraData β := by
+  rfl
+
 /-- The ENTIRE paired source kinetic weighted response now transforms
 by minus the true plane spin generator on its free spinor index,
 using the original 9×3×16 source sums and original kinetic weights. -/
@@ -119,12 +130,23 @@ theorem pairedKineticWeightedResponse_freeSpinorCovariance
           apply Finset.sum_congr rfl
           intro γ _
           rw [pairedOriginalKineticResponseCoefficient_contract i j k hij α γ A]
-    _ = _ := by
-      simpa only [kineticWeightedSum] using
-        (sourceFullNegativeFreeSpinorSum_transport
+    _ = -(∑ β : SpinIndex,
+          (pairedPlaneSpinGenerator i j α β : ℂ) •
+            (∑ k : SpaceIndex, ∑ A : ColorIndex 2,
+              ∑ γ : SpinIndex,
+                kineticWeight pairedAlgebraData β k A γ •
+                  kineticTerm pairedAlgebraData k A γ)) :=
+        sourceFullNegativeFreeSpinorSum_transport
           (fun β => (pairedPlaneSpinGenerator i j α β : ℂ))
           (fun β k A γ => kineticWeight pairedAlgebraData β k A γ)
-          (kineticTerm pairedAlgebraData))
+          (kineticTerm pairedAlgebraData)
+    _ = _ := by
+      apply congrArg (fun T : SourceEnd => -T)
+      apply Finset.sum_congr rfl
+      intro β _
+      exact congrArg
+        (fun T : SourceEnd => (pairedPlaneSpinGenerator i j α β : ℂ) • T)
+        (pairedSourceKineticTripleSum_eqNamed β)
 
 /-- FINAL original kinetic-sector theorem: exact paired 48-Majorana
 combined rotation generator commutes with the full literal source
@@ -154,6 +176,7 @@ theorem pairedActualCombined_comm_sourceKineticCharge_freeSpinor
 #print axioms sourceFourSum_spinorFirst
 #print axioms sourceFullFreeSpinorSum_transport
 #print axioms sourceFullNegativeFreeSpinorSum_transport
+#print axioms pairedSourceKineticTripleSum_eqNamed
 #print axioms pairedKineticWeightedResponse_freeSpinorCovariance
 #print axioms pairedActualCombined_comm_sourceKineticCharge_freeSpinor
 
