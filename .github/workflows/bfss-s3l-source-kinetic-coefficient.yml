@@ -2,6 +2,7 @@ name: BFSS S3L Source Rotation Coefficients
 
 # Qualification gate for accepted S3L0–S3L4B plus source-parametric S3L4C; failed concrete S3L4A excluded.
 # Gate #31 repeated S3L4A's known concrete elaboration failure; this run MUST NOT compile S3L4A.
+# Gate #33 checks only the generic, exact AlgebraData.fermionAction interface; no concrete Fock elaboration.
 
 # Qualification is run in a PR against the original cache-owning BFSS research base.
 # After qualification the review PR may return to its stacked S3K base.
