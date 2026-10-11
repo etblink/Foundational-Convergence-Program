@@ -3,6 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K6AGenericOriginalSixfoldTransportProbe
 /-!
 # S3L5K6B — negative cubic coefficient transport
 
+K6B qualification checkpoint #1: import the green K6A module, isolate the negative sign.
 K6A independently qualified positive seven-index transport over the
 original source SmoothCore 2 endomorphism module. This isolated layer
 takes one minus sign outside the original six source sums, then applies
