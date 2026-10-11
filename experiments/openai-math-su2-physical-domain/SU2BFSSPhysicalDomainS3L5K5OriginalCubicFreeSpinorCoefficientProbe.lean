@@ -34,7 +34,10 @@ theorem realMatrix_weightedNegativeProduct_entry
     (w : ℝ) (G H : GammaMatrix) (α γ : SpinIndex) :
     (w • (-(G * H))) α γ =
       -(∑ β : SpinIndex, G α β * (w * H β γ)) := by
-  simp only [Pi.smul_apply, smul_eq_mul, Pi.neg_apply, Matrix.mul_apply]
+  -- GammaMatrix is a matrix, not a generic function. Expose
+  -- its two indexed entries using the exact matrix-specific laws.
+  simp only [Matrix.smul_apply, Matrix.neg_apply, Matrix.mul_apply,
+    smul_eq_mul]
   rw [mul_neg, Finset.mul_sum]
   congr 1
   apply Finset.sum_congr rfl
