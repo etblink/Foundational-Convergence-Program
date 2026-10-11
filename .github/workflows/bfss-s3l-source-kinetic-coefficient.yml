@@ -52,6 +52,7 @@ name: BFSS S3L Source Rotation Coefficients
 # Gate74: pinned J8 scalar coefficient proof with strict exact-name and axiom checks.
 # J9: original paired 48-Majorana source kinetic charge negative free-spinor covariance, not Hamiltonian or cubic.
 # Gate75: one pinned source kinetic-sector covariance theorem and four small finite-sum lemmas.
+# J9 Gate76: isolate literal named weighted sum; avoid expensive global simpa and open exact S3L5F source.
 # S3L5I2 #54: Gate #53 whnf heartbeat at final change; source-syntax simpa only, no increased compiler budgets.
 # Pinned S3L5I2 source qualification launch after cache/source preflight.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
@@ -1529,6 +1530,7 @@ jobs:
             'FCP.BFSSSU2PhysicalDomainS3L5J9.sourceFourSum_spinorFirst',
             'FCP.BFSSSU2PhysicalDomainS3L5J9.sourceFullFreeSpinorSum_transport',
             'FCP.BFSSSU2PhysicalDomainS3L5J9.sourceFullNegativeFreeSpinorSum_transport',
+            'FCP.BFSSSU2PhysicalDomainS3L5J9.pairedSourceKineticTripleSum_eqNamed',
             'FCP.BFSSSU2PhysicalDomainS3L5J9.pairedKineticWeightedResponse_freeSpinorCovariance',
             'FCP.BFSSSU2PhysicalDomainS3L5J9.pairedActualCombined_comm_sourceKineticCharge_freeSpinor']
           assert [n for n,_ in matches] == expected,matches
