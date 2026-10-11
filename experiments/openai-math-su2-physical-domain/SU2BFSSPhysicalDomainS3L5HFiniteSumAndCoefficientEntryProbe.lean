@@ -25,6 +25,7 @@ open OAI.BFSSQuantum
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2PhysicalDomainS3A
 open FCP.BFSSSU2PhysicalDomainS3L0
+open FCP.BFSSSU2PhysicalDomainS3L4B
 
 /-- Scalar weighting commutes with taking a source-endomorphism
 commutator. This is linear algebra on the ORIGINAL SmoothCore 2. -/
@@ -78,9 +79,9 @@ theorem pairedKineticSpinorCoefficient_entry
     (i j k : SpaceIndex) (α γ : SpinIndex) (hij : i ≠ j) :
     (∑ β : SpinIndex, pairedAlgebraData.gamma k α β *
       pairedPlaneSpinGenerator i j γ β) -
-      (if k = j then pairedAlgebraData.gamma i α γ
-        else if k = i then -(pairedAlgebraData.gamma j α γ)
-        else 0) =
+      ((if k = j then pairedAlgebraData.gamma i
+        else if k = i then -(pairedAlgebraData.gamma j)
+        else (0 : GammaMatrix)) α γ) =
       -(∑ β : SpinIndex, pairedPlaneSpinGenerator i j α β *
         pairedAlgebraData.gamma k β γ) := by
   have h := congrArg (fun M : GammaMatrix => M α γ)
