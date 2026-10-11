@@ -83,16 +83,30 @@ theorem pairedActualCombined_comm_cubicMonomial
         ((sourcePositionVariation i j k B).comp (position (N := 2) l C) +
           (position (N := 2) k B).comp
             (sourcePositionVariation i j l C)) := by
-  -- Consume the independently compiled 48-Majorana result rather
-  -- than asking Lean to re-specialize its concrete fiber proof.
-  have hF := pairedActualCombined_comm_fermionAction i j γ A
-  unfold sourceCubicFermionVariation at hF
-  unfold pairedOriginalCubicMonomial sourceCubicFermionVariation
-  exact sourceCombined_comm_cubicMonomial_of_fermionCovariance
-    pairedAlgebraData (pairedFermionPlaneSpinGenerator i j)
-    (fun β => ((pairedPlaneSpinGenerator i j β γ : ℝ) : ℂ))
-    i j k l γ A B C hij
-    hF
+  -- The cubic monomial is source-definitionally F ∘ P; no
+  -- concrete Fock definitions need to be unfolded by elaboration.
+  let G : SourceEnd :=
+    sourceParametricCombinedPlane
+      (pairedFermionPlaneSpinGenerator i j) i j
+  let F : SourceEnd := pairedAlgebraData.fermionAction γ A
+  let P : SourceEnd :=
+    (position (N := 2) k B).comp (position (N := 2) l C)
+  let V : SourceEnd := sourceCubicFermionVariation i j γ A
+  let W : SourceEnd :=
+    (sourcePositionVariation i j k B).comp (position (N := 2) l C) +
+      (position (N := 2) k B).comp (sourcePositionVariation i j l C)
+  have hF : G.comp F - F.comp G = V :=
+    pairedActualCombined_comm_fermionAction i j γ A
+  have hP : G.comp P - P.comp G = W :=
+    pairedActualCombined_comm_positionPair i j k l B C hij
+  have h : G.comp (F.comp P) - (F.comp P).comp G =
+      V.comp P + F.comp W :=
+    sourceComm_comp G F P V W hF hP
+  -- Match only the small declared source wrappers; keep the original
+  -- paired spin generator, fermionAction, and positions opaque.
+  change G.comp (F.comp P) - (F.comp P).comp G =
+    V.comp P + F.comp W
+  exact h
 
 
 #print axioms pairedActualCombined_comm_fermionAction
