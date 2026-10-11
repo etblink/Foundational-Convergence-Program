@@ -70,13 +70,11 @@ theorem sourceCombined_comm_sourceKineticCharge_expanded_of_fiber
     intro k A γ
     exact sourceCombined_comm_kineticMonomial_of_fiber
       M K (d γ) i j k γ A A hij (hFiber γ A)
-  change G.comp (∑ k : SpaceIndex, ∑ A : ColorIndex 2, ∑ γ : SpinIndex,
-      c k A γ • T k A γ) -
-    (∑ k : SpaceIndex, ∑ A : ColorIndex 2, ∑ γ : SpinIndex,
-      c k A γ • T k A γ).comp G =
-    ∑ k : SpaceIndex, ∑ A : ColorIndex 2, ∑ γ : SpinIndex,
-      c k A γ • R k A γ
-  exact sourceComm_three_weighted_sums_of G c T R hterm
+  /- Use syntactic rewriting of the one-line source definition rather
+     than asking `change` to weak-head normalize all three large sums.
+     The identity being transported is unchanged. -/
+  have hsum := sourceComm_three_weighted_sums_of G c T R hterm
+  simpa only [G, c, T, R, sourceKineticCharge] using hsum
 
 #print axioms sourceCombined_comm_sourceKineticCharge_expanded_of_fiber
 
