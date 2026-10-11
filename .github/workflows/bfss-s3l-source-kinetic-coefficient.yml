@@ -45,6 +45,7 @@ name: BFSS S3L Source Rotation Coefficients
 # Cache consolidation qualification: first-fill fallback uses six known-green snapshots; test new merged restore separately.
 # S3L5J6: first consolidated cache HIT audit plus exact original orbital source reindex; no full charge expansion.
 # J6 Gate71: verify consolidated 26-module snapshot, skip all legacy restores, then compile source orbital reindex.
+# J6 Gate72: close only the implicit i-ne-j branch from Gate71; merged cache remains frozen and qualified.
 # S3L5I2 #54: Gate #53 whnf heartbeat at final change; source-syntax simpa only, no increased compiler budgets.
 # Pinned S3L5I2 source qualification launch after cache/source preflight.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
