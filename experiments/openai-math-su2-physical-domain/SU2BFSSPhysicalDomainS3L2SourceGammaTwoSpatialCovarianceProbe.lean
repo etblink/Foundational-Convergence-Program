@@ -59,6 +59,8 @@ theorem pairedGammaTwo_source_spatial_commutator
       ((1 / 2 : ℝ) • (pairedAlgebraData.gamma k * pairedAlgebraData.gamma l -
         pairedAlgebraData.gamma l * pairedAlgebraData.gamma k)) *
         pairedPlaneSpinGenerator i j = _
+  simp only [mul_smul_comm, smul_mul_assoc, mul_sub, sub_mul,
+    mul_add, add_mul, smul_sub, smul_add, Matrix.mul_assoc]
   module
 
 /-- The source cubic gammaTwo coefficient has the same correct
