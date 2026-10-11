@@ -26,10 +26,10 @@ open FCP.BFSSSU2GaugeG1A
 noncomputable def pairedSourceOrbitalPlaneGenerator
     (i j : SpaceIndex) : SmoothCore 2 →ₗ[ℂ] SmoothCore 2 :=
   ∑ A : ColorIndex 2,
-    ((pairedAlgebraData.position i A).comp
-      (pairedAlgebraData.coordinateDerivative j A) -
-     (pairedAlgebraData.position j A).comp
-      (pairedAlgebraData.coordinateDerivative i A))
+    ((position (N := 2) i A).comp
+      (coordinateDerivative (N := 2) j A) -
+     (position (N := 2) j A).comp
+      (coordinateDerivative (N := 2) i A))
 
 /-- This is exactly the true BFSS 27-variable orbital differential
 expression, with the original fderiv and source coordinate directions. -/
@@ -50,11 +50,11 @@ theorem pairedSourceOrbitalPlaneGenerator_apply
   intro A _
   change
     (((x (i, A) : ℝ) : ℂ) •
-      (pairedAlgebraData.coordinateDerivative j A f) x) -
+      (coordinateDerivative (N := 2) j A f) x) -
     (((x (j, A) : ℝ) : ℂ) •
-      (pairedAlgebraData.coordinateDerivative i A f) x) = _
-  rw [pairedAlgebraData.coordinateDerivative_apply,
-      pairedAlgebraData.coordinateDerivative_apply]
+      (coordinateDerivative (N := 2) i A f) x) = _
+  rw [coordinateDerivative_apply,
+      coordinateDerivative_apply]
 
 #print axioms pairedSourceOrbitalPlaneGenerator_apply
 
