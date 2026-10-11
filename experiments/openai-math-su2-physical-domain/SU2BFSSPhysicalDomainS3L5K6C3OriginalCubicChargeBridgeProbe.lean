@@ -33,12 +33,12 @@ theorem pairedOriginalCubicRawSpinorSum_eqSourceCharge
     -(∑ β : SpinIndex,
       (pairedPlaneSpinGenerator i j α β : ℂ) •
         sourceCubicCharge pairedAlgebraData β) := by
-       apply congrArg (fun T : SourceEnd => -T)
-        apply Finset.sum_congr rfl
-        intro β _
-        exact congrArg
-          (fun T : SourceEnd => (pairedPlaneSpinGenerator i j α β : ℂ) • T)
-          (pairedSourceCubicCharge_asOriginalSixfoldMonomials β).symm
+  apply congrArg (fun T : SourceEnd => -T)
+  apply Finset.sum_congr rfl
+  intro β _
+  exact congrArg
+    (fun T : SourceEnd => (pairedPlaneSpinGenerator i j α β : ℂ) • T)
+    (pairedSourceCubicCharge_asOriginalSixfoldMonomials β).symm
 
 #print axioms pairedOriginalCubicRawSpinorSum_eqSourceCharge
 
