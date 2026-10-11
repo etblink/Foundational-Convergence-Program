@@ -43,6 +43,8 @@ theorem sourceCoordinateDerivative_position_commutator_operator
   · have hn : (k, B) ≠ (i, A) := Ne.symm h
     simp only [if_neg h, if_neg hn, Complex.ofReal_zero, zero_smul,
       LinearMap.zero_apply]
+    -- Pointwise zero on the original test-function space is definitional.
+    rfl
 
 #print axioms sourceCoordinateDerivative_position_commutator_operator
 
