@@ -2455,8 +2455,13 @@ jobs:
           import re
           log=open('/tmp/s3j3d2single.log').read()
           reports=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",log)
-          assert [n for n,_ in reports] == ['FCP.BFSSSU2PhysicalDomainS3J3D2Single.handle_single_theta_comm'],reports
-          assert {x.strip() for x in reports[0][1].split(',')} <= {'propext','Classical.choice','Quot.sound'},reports
+          assert [n for n,_ in reports] == [
+            'FCP.BFSSSU2PhysicalDomainS3J3D2Single.exactThetaOne_eq',
+            'FCP.BFSSSU2PhysicalDomainS3J3D2Single.source_single_theta_reuse',
+            'FCP.BFSSSU2PhysicalDomainS3J3D2Single.handle_single_theta_comm',
+          ],reports
+          for theorem_name, ax in reports:
+            assert {x.strip() for x in ax.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (theorem_name, ax)
           assert 'sorryAx' not in log and 'error:' not in log
           print('S3J3D2_SINGLE_THETA_EXACT_SOURCE_KERNEL_PASS')
           PY
