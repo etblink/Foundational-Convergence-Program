@@ -74,7 +74,7 @@ theorem sourceSpinFullL2CLM_comm_boson
     (pairedGaugeData.boson g).measurePreserving
   have hFin := ContinuousLinearMap.coeFn_compLp
     (sourceSpinFockIsometry i j t).toContinuousLinearMap v
-  have hFinComp := hFin.comp_tendsto
+  have hFinComp := Filter.EventuallyEq.comp_tendsto hFin
     (pairedGaugeData.boson g).measurePreserving.quasiMeasurePreserving.tendsto_ae
   filter_upwards [hFout, hBin, hBout, hFinComp]
     with x hxFout hxBin hxBout hxFin
