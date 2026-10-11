@@ -40,9 +40,6 @@ noncomputable def sourceCubicFermionVariation
     (((pairedPlaneSpinGenerator i j β γ : ℝ) : ℂ) •
       pairedAlgebraData.fermionAction β A)
 
-/-- The original paired combined plane generator acts on literal
-source fermionAction by the accepted 48-Majorana spin response; the
-orbital source plane commutes with original fermionAction. -/
 /-- Source-parametric combined orbital/fiber commutator.
 The actual 48-Majorana fiber hypothesis remains explicit here, so Lean
 can check the commutator algebra before specializing to pairedAlgebraData. -/
@@ -100,13 +97,9 @@ noncomputable def pairedOriginalCubicMonomial
   (pairedAlgebraData.fermionAction γ A).comp
     ((position (N := 2) k B).comp (position (N := 2) l C))
 
-/-- Concrete source-level full cubic MONOMIAL commutator: actual
-48-Majorana spin response plus both original spatial multipliers.
-The original gammaTwo and structure-constant coefficient contraction
-and complete six-index cubic sum are separate obligations. -/
-/-- Separate the universal source composition Leibniz rule from
-the concrete paired 48-Majorana substitution. No cubic coefficient,
-finite charge sum, or unproved new source representation is used. -/
+/-- Source-parametric cubic composition Leibniz rule, keeping
+the actual 48-Majorana fiber hypothesis visible for separate discharge.
+No potential coefficient, sum, or replacement source representation. -/
 private theorem sourceCombined_comm_cubicMonomial_of_fiber
     (M : AlgebraData 2) (K : FockEnd) (c : SpinIndex → ℂ)
     (i j k l : SpaceIndex) (γ : SpinIndex)
@@ -150,6 +143,8 @@ theorem pairedActualCombined_comm_cubicMonomial
         ((sourcePositionVariation i j k B).comp (position (N := 2) l C) +
           (position (N := 2) k B).comp
             (sourcePositionVariation i j l C)) := by
+  -- Unfold only the two named source wrappers before the exact source lemma.
+  unfold pairedOriginalCubicMonomial sourceCubicFermionVariation
   exact sourceCombined_comm_cubicMonomial_of_fiber
     pairedAlgebraData (pairedFermionPlaneSpinGenerator i j)
     (fun β => ((pairedPlaneSpinGenerator i j β γ : ℝ) : ℂ))
