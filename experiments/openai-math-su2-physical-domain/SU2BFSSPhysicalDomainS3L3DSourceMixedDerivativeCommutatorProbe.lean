@@ -29,9 +29,6 @@ private theorem sourceSecondDirectional_apply
         (EuclideanSpace.single (j, B) (1 : ℝ)) := by
   let vi : Boson 2 := EuclideanSpace.single (i, A) (1 : ℝ)
   let vj : Boson 2 := EuclideanSpace.single (j, B) (1 : ℝ)
-  have hfun :
-      ((coordinateDerivative (N := 2) j B) f : SmoothCore 2) =
-        (coordinateDerivative (N := 2) j B) f := rfl
   have heval :
       (fun y : Boson 2 => ((coordinateDerivative (N := 2) j B) f) y) =
         fun y : Boson 2 => fderiv ℝ (f : Boson 2 → Fermion 2) y vj := by
@@ -45,8 +42,8 @@ private theorem sourceSecondDirectional_apply
       (fun y : Boson 2 => ((coordinateDerivative (N := 2) j B) f) y) x vi = _
   rw [heval]
   rw [fderiv_clm_apply hfderiv (differentiableAt_const vj)]
-  trace_state
-  rfl
+  simp only [fderiv_fun_const, Pi.zero_apply,
+    ContinuousLinearMap.comp_zero, zero_add, ContinuousLinearMap.flip_apply]
 
 /-- Source-defined mixed coordinate derivatives commute on the original
 BFSS compactly supported smooth core, with NO extra commutation axiom. -/
