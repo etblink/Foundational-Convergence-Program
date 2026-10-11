@@ -37,6 +37,7 @@ name: BFSS S3L Source Rotation Coefficients
 # S3L5J3: double spinor finite-sum transport on original source operators; J1/J2 Gate #64 immutable cache.
 # S3L5J3 #65: one-gate pinned spinor source reindex, provenance-checked accepted J1/J2 cache.
 # S3L5J3 #66: general double sum compiled in #65; repair only missing S3A open for paired specialization.
+# S3L5J4: qualify original source fermion-sum composition and paired fixed-index response; J3 Gate66 accepted.
 # S3L5I2 #54: Gate #53 whnf heartbeat at final change; source-syntax simpa only, no increased compiler budgets.
 # Pinned S3L5I2 source qualification launch after cache/source preflight.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
@@ -74,6 +75,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J1SourceSpatialReindexAndGammaCoefficientProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J2ComplexGammaCoefficientProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe.lean
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
@@ -1124,4 +1126,31 @@ jobs:
             assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('S3L5J3_SOURCE_SPINOR_DOUBLE_SUM_PASS')
+          PY
+
+      - name: Compile S3L5J4 source fermion sum and derivative composition
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe.olean
+          timeout 120s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5j4-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5j4-axioms.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=[
+            'FCP.BFSSSU2PhysicalDomainS3L5J4.sourceSpinorSum_comp',
+            'FCP.BFSSSU2PhysicalDomainS3L5J4.sourceFermionSpinorSum_comp_derivative',
+            'FCP.BFSSSU2PhysicalDomainS3L5J4.pairedFixedKineticFermionResponse_reindex']
+          assert [n for n,_ in matches]==expected,matches
+          for n,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5J4_SOURCE_FERMION_SUM_COMPOSITION_PASS')
           PY
