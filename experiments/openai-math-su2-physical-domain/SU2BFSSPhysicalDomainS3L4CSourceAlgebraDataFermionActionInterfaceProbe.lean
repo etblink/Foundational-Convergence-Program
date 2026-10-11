@@ -52,7 +52,7 @@ theorem sourceFermionAction_comm_position
     (k : SpaceIndex) (B : ColorIndex 2) :
     (M.fermionAction γ C).comp (position (N := 2) k B) =
       (position (N := 2) k B).comp (M.fermionAction γ C) := by
-  rw [sourceFermionAction_eq_postcomp]
+  simp only [sourceFermionAction_eq_postcomp]
   exact sourcePostcomp_comm_position (M.theta γ C) k B
 
 /-- The exact `fermionAction` stays compatible with the source
@@ -62,7 +62,7 @@ theorem sourceFermionAction_comm_derivative
     (k : SpaceIndex) (B : ColorIndex 2) :
     (M.fermionAction γ C).comp (coordinateDerivative (N := 2) k B) =
       (coordinateDerivative (N := 2) k B).comp (M.fermionAction γ C) := by
-  rw [sourceFermionAction_eq_postcomp]
+  simp only [sourceFermionAction_eq_postcomp]
   exact sourcePostcomp_comm_derivative (M.theta γ C) k B
 
 #print axioms sourceFermionAction_eq_postcomp
