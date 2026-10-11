@@ -36,7 +36,11 @@ theorem pairedComplexKineticCoefficient_reindexed
         (pairedAlgebraData.gamma k β γ : ℂ)) := by
   have h := congrArg (fun x : ℝ => (x : ℂ))
     (pairedRealKineticCoefficient_reindexed i j k α γ hij)
-  simpa using h
+  by_cases hki : k = i
+  · simpa [hki] using h
+  · by_cases hkj : k = j
+    · simpa [hki, hkj] using h
+    · simpa [hki, hkj] using h
 
 /-- Multiply the exact complexified gamma/J identity by the
 LITERAL original -Complex.I source kinetic coefficient, with no
