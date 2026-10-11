@@ -9,6 +9,7 @@ definitional bridge to the sourceCubicCharge. This step exposes the
 literal finite spinor matrix multiplication on the RHS of K4 as the
 negative free-spinor generator acting on original gammaTwo coefficients.
 
+K5 #2: matrix-specific smul/neg entry simplification after #1 failure.
 Qualification K5 #1 checks abstract negative free-spinor matrix-entry
 contraction before concrete source monomial specialization.
 
