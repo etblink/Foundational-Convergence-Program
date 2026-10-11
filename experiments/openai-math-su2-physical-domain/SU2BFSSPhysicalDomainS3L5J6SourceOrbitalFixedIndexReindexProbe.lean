@@ -34,9 +34,12 @@ theorem sourceComp_orbitalDerivative_cases
   by_cases hkj : k = j
   · simp [hkj]
   · by_cases hki : k = i
-    · apply LinearMap.ext
+    · have hij : i ≠ j := by
+        intro e
+        exact hkj (hki.trans e)
+      apply LinearMap.ext
       intro f
-      simp [hkj, hki, LinearMap.comp_apply]
+      simp [hkj, hki, hij, LinearMap.comp_apply]
     · apply LinearMap.ext
       intro f
       simp [hkj, hki, LinearMap.comp_apply]
