@@ -44,7 +44,19 @@ theorem sourceSpinFullL2CLM_norm_le
     (i j : SpaceIndex) (t : ℝ) (v : FullL2 2) :
     ‖sourceSpinFullL2CLM i j t v‖ ≤ ‖v‖ := by
   change ‖((sourceSpinFockIsometry i j t).toContinuousLinearMap).compLp v‖ ≤ ‖v‖
-  exact ((sourceSpinFockIsometry i j t).toContinuousLinearMap).norm_compLp_le v
+  have hnorm :
+      ‖(sourceSpinFockIsometry i j t).toContinuousLinearMap‖ ≤ (1 : ℝ) := by
+    apply ContinuousLinearMap.opNorm_le_bound _ (by norm_num)
+    intro w
+    change ‖sourceSpinFockIsometry i j t w‖ ≤ (1 : ℝ) * ‖w‖
+    simp only [LinearIsometry.norm_map, one_mul, le_refl]
+  calc
+    ‖((sourceSpinFockIsometry i j t).toContinuousLinearMap).compLp v‖ ≤
+        ‖(sourceSpinFockIsometry i j t).toContinuousLinearMap‖ * ‖v‖ :=
+      ((sourceSpinFockIsometry i j t).toContinuousLinearMap).norm_compLp_le v
+    _ ≤ 1 * ‖v‖ :=
+      mul_le_mul_of_nonneg_right hnorm (norm_nonneg v)
+    _ = ‖v‖ := one_mul _
 
 #print axioms sourceSpinFockIsometry_apply
 #print axioms sourceSpinFullL2CLM_apply
