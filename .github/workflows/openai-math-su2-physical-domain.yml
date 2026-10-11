@@ -2498,7 +2498,7 @@ jobs:
           log = open(sys.argv[1]).read()
           reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
           name = 'FCP.BFSSSU2PhysicalDomainS3J3D3' + tag + '.'
-          expected_names = ([name + 'exactSourceAd_eq', name + 'exactSourceAd_apply'] if tag == 'A' else []) + [name + expected]
+          expected_names = ([name + 'exactSourceAd_eq', name + 'exactSourceAd_apply', name + 'handle_ad_linear_named'] if tag == 'A' else []) + [name + expected]
           assert [n for n,_ in reports] == expected_names, reports
           for theorem,ax in reports:
             assert {s.strip() for s in ax.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (theorem,ax)

@@ -45,6 +45,28 @@ private theorem exactThetaSum_as_family (C : ColorIndex 2)
 /-- True actual-Fock source bounded commutator acts linearly on the
 weighted genuine Majorana sum; all concrete data are represented only
 through definitionally identical named continuous linear maps. -/
+private theorem abstract_clm_sum
+    (L : FermionOp →L[ℂ] FermionOp)
+    (theta : SpinIndex → FermionOp) (v : SpinCoeffs) :
+    L (∑ γ : SpinIndex, v γ • theta γ) =
+      ∑ γ : SpinIndex, v γ • L (theta γ) := by
+  rw [map_sum]
+  apply Finset.sum_congr rfl
+  intro γ _
+  rw [map_smul]
+
+/-- First fully specialize only the named source CLM and named Majorana
+family, never the expensive original source operator expression. -/
+theorem handle_ad_linear_named
+    (i j : SpaceIndex) (C : ColorIndex 2) (v : SpinCoeffs) :
+    exactSourceAd i j
+      (∑ γ : SpinIndex, v γ • exactThetaFamily C γ) =
+    ∑ γ : SpinIndex, v γ • exactSourceAd i j
+      (exactThetaFamily C γ) := by
+  exact abstract_clm_sum (exactSourceAd i j) (exactThetaFamily C) v
+
+/-- The actual source Majorana weighted sum, related by its separately
+qualified definitional equality, inherits the same linear-map identity. -/
 theorem handle_ad_sum (i j : SpaceIndex) (C : ColorIndex 2)
     (v : SpinCoeffs) :
     exactSourceAd i j (exactSourceThetaSum C v) =
@@ -54,14 +76,11 @@ theorem handle_ad_sum (i j : SpaceIndex) (C : ColorIndex 2)
     _ = exactSourceAd i j
         (∑ γ : SpinIndex, v γ • exactThetaFamily C γ) :=
           congrArg (exactSourceAd i j) (exactThetaSum_as_family C v)
-    _ = _ := by
-          rw [map_sum]
-          apply Finset.sum_congr rfl
-          intro γ _
-          rw [map_smul]
+    _ = _ := handle_ad_linear_named i j C v
 
 #print axioms exactSourceAd_eq
 #print axioms exactSourceAd_apply
+#print axioms handle_ad_linear_named
 #print axioms handle_ad_sum
 end FCP.BFSSSU2PhysicalDomainS3J3D3A
 end
