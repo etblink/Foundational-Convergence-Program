@@ -145,10 +145,10 @@ theorem pairedSourceOrbital_comm_derivative
     sourceDerivativeColorDeltaSum j k i B]
   by_cases hkj : k = j
   · subst k
-    simp [hij]
+    simp [hij, hij.symm]
   · by_cases hki : k = i
     · subst k
-      simp [hij]
+      simp [hij, hij.symm]
     · simp [hkj, hki, Ne.symm hkj, Ne.symm hki]
 
 #print axioms pairedSourceOrbital_comm_derivative
