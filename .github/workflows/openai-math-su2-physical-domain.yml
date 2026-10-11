@@ -31,6 +31,8 @@ permissions:
 
 jobs:
   source-domain:
+    # Temporary S3L5A source-only qualification; restore immediately after result.
+    if: ${{ github.event_name != 'pull_request' || github.head_ref != 'research/openai-math-su2-s3l-combined-rotation' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out FCP qualified-cache owner branch
