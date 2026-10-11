@@ -114,7 +114,8 @@ private theorem sourceOrbital_comm_sum
   intro f
   simp only [pairedSourceOrbitalPlaneGenerator,
     LinearMap.sub_apply, LinearMap.comp_apply, LinearMap.sum_apply,
-    map_sum, Finset.sum_sub_distrib]
+    map_sum]
+  rw [← Finset.sum_sub_distrib]
   apply Finset.sum_congr rfl
   intro A _
   simpa only [LinearMap.sub_apply, LinearMap.comp_apply] using
