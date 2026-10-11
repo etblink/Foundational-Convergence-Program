@@ -57,7 +57,8 @@ theorem sourceCoordinateDerivative_position_commutator_apply
         ((y (k, B) : ℝ) : ℂ) • (f : Boson 2 → Fermion 2) y) x v -
       ((x (k, B) : ℝ) : ℂ) • fderiv ℝ (f : Boson 2 → Fermion 2) x v = _
   rw [fderiv_fun_smul hc hf]
-  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply]
+  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
+    ContinuousLinearMap.smulRight_apply]
   rw [sourceCoordinate_fderiv k B x v]
   change
     (((x (k, B) : ℝ) : ℂ) • fderiv ℝ (f : Boson 2 → Fermion 2) x v +
