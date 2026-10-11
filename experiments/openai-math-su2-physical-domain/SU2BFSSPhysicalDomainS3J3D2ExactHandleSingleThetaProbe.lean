@@ -23,8 +23,8 @@ theorem handle_single_theta_comm
       ∑ α : SpinIndex,
         ((pairedPlaneSpinGenerator i j α γ : ℝ) : ℂ) •
           pairedTheta α C := by
-  rw [OAI.KadisonKastler.boundedCommutator_apply, exactSourceK_eq]
-  rw [pairedFermionPlaneSpinGenerator_comm_theta]
+  simpa only [OAI.KadisonKastler.boundedCommutator_apply, exactSourceK_eq] using
+    (pairedFermionPlaneSpinGenerator_comm_theta i j γ C)
 
 #print axioms handle_single_theta_comm
 
