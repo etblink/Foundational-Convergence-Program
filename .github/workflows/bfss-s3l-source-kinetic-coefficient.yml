@@ -7,6 +7,7 @@ name: BFSS S3L Source Rotation Coefficients
 # Gate #39 found definitional and concrete elaboration bottlenecks; S3L5A now checks ONLY the source-parametric kinetic monomial transport.
 # S3L5C independent source orbital-fermionAction commutation: trigger one isolated qualification run.
 # S3L5D original orbital kinetic monomial: trigger one isolated proof qualification.
+# S3L5E actual combined kinetic monomial: trigger one isolated source Lean gate.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
 
 # Qualification is run in a PR against the original cache-owning BFSS research base.
