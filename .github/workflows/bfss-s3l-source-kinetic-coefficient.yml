@@ -10,6 +10,7 @@ on:
     paths:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L0SourceKineticSpinorCoefficientProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L1SourceOrbitalSmoothCoreProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L2SourceGammaTwoSpatialCovarianceProbe.lean
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
@@ -129,4 +130,29 @@ jobs:
             assert {v.strip() for v in axioms.split(',')} <= allowed,(n,axioms)
           assert 'sorryAx' not in s and 'error:' not in s, s[-4000:]
           print('S3L1_ORIGINAL_SMOOTH_CORE_ORBITAL_GENERATOR_PASS')
+          PY
+
+      - name: Compile S3L2 literal cubic gammaTwo spatial covariance
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L2SourceGammaTwoSpatialCovarianceProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L0SourceKineticSpinorCoefficientProbe.olean
+          timeout 140s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l2-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l2-axioms.log').read()
+          names=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)
+          assert [n for n,_ in names]==[
+            'FCP.BFSSSU2PhysicalDomainS3L2.pairedGammaTwo_source_spatial_commutator',
+            'FCP.BFSSSU2PhysicalDomainS3L2.pairedGammaTwo_potential_spinor_coefficient_exact'], names
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for n,axioms in names:
+            assert {v.strip() for v in axioms.split(',')} <= allowed,(n,axioms)
+          assert 'sorryAx' not in s and 'error:' not in s, s[-4000:]
+          print('S3L2_ACTUAL_GAMMATWO_SPATIAL_COVARIANCE_PASS')
           PY
