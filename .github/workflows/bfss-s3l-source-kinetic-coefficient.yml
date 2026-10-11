@@ -94,7 +94,7 @@ jobs:
           python3 - <<'PY'
           import re
           s=open('/tmp/s3l0-axioms.log').read()
-          names=re.findall(r"'([^']+)' depends on axioms: \\[([^\\]]*)\\]",s)
+          names=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)
           assert [n for n,_ in names]==[
             'FCP.BFSSSU2PhysicalDomainS3L0.pairedKineticSpinorCoefficient_exact'], names
           allowed={'propext','Classical.choice','Quot.sound'}
