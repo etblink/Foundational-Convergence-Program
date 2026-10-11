@@ -151,13 +151,13 @@ theorem pairedSourceSpinSmoothCore_comm_fermionAction
   have hFock : K * pairedTheta γ C - pairedTheta γ C * K =
       ∑ α : SpinIndex, c α • pairedTheta α C :=
     pairedFermionPlaneSpinGenerator_comm_theta i j γ C
-  change (sourcePostcomp K).comp (pairedAlgebraData.fermionAction γ C) -
-      (pairedAlgebraData.fermionAction γ C).comp (sourcePostcomp K) =
-      ∑ α : SpinIndex, c α • pairedAlgebraData.fermionAction α C
-  -- Instantiate a previously proved tiny operator identity; do not
-  -- elaborate a concrete 48-Majorana matrix-sum calc in the source goal.
-  simpa only [pairedFermionAction_eq_postcomp] using
-    (sourcePostcomp_covariance K (fun α => pairedTheta α C) c γ hFock)
+  -- The source fermionAction is *definitionally* TestFunction
+  -- postcomposition by pairedTheta. Specify the small generic target
+  -- directly: do not simplify the concrete quadratic-Fock expression.
+  change (sourcePostcomp K).comp (sourcePostcomp (pairedTheta γ C)) -
+      (sourcePostcomp (pairedTheta γ C)).comp (sourcePostcomp K) =
+      ∑ α : SpinIndex, c α • sourcePostcomp (pairedTheta α C)
+  exact sourcePostcomp_covariance K (fun α => pairedTheta α C) c γ hFock
 
 theorem pairedSourceSpinSmoothCore_comm_position
     (i j k : SpaceIndex) (B : ColorIndex 2) :
