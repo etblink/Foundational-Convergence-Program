@@ -41,14 +41,14 @@ theorem sourceOrbitalSpatialSum_reindex
       (∑ k : SpaceIndex,
         c k • (if k = j then D i else if k = i then -(D j) else 0)) =
       c j • D i - c i • D j := by
-    simp [Finset.sum_ite, smul_ite, smul_neg, sub_eq_add_neg, hij,
-      Ne.symm hij]
+    simp [Finset.sum_ite, Finset.filter_eq', smul_ite, smul_neg,
+      sub_eq_add_neg, hij]
   have hright :
       (∑ k : SpaceIndex,
         (if k = i then c j else if k = j then -(c i) else 0) • D k) =
       c j • D i - c i • D j := by
-    simp [Finset.sum_ite, ite_smul, neg_smul, sub_eq_add_neg, hij,
-      Ne.symm hij]
+    simp [Finset.sum_ite, Finset.filter_eq', ite_smul, neg_smul,
+      sub_eq_add_neg, Ne.symm hij]
   exact hleft.trans hright.symm
 
 /-- The REAL gamma spatial-orbital coefficient (from the reindexed
