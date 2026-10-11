@@ -87,15 +87,15 @@ theorem pairedSourceThetaCombo_intertwines
         (pairedFermionPlaneSpinGenerator i j)
         (pairedThetaCombo C v) =
       pairedThetaCombo C (pairedSourceSpinOp i j v) := by
-  let K := pairedFermionPlaneSpinGenerator i j
-  -- Rewrite only the small wrappers. Do not delta-reduce the literal
-  -- 2^24-dimensional Fock theta construction during target matching.
+  -- Only unfold the small source wrappers; keep the accepted, enormous
+  -- concrete Majorana implementation opaque in this calculation.
   rw [OAI.KadisonKastler.boundedCommutator_apply,
     pairedThetaCombo_apply, pairedThetaCombo_apply]
   simp only [pairedSourceSpinOp_apply]
   calc
     _ = ∑ γ : SpinIndex, v γ •
-          (K * pairedTheta γ C - pairedTheta γ C * K) := by
+          (pairedFermionPlaneSpinGenerator i j * pairedTheta γ C -
+            pairedTheta γ C * pairedFermionPlaneSpinGenerator i j) := by
           simp only [Finset.mul_sum, Finset.sum_mul, Finset.sum_sub_distrib,
             smul_mul_assoc, mul_smul_comm, smul_sub]
     _ = ∑ γ : SpinIndex, v γ •
@@ -111,11 +111,44 @@ theorem pairedSourceThetaCombo_intertwines
           apply Finset.sum_congr rfl
           intro α _
           rw [← Finset.sum_smul]
+          apply congrArg (fun c : ℂ => c • pairedTheta α C)
           apply Finset.sum_congr rfl
           intro γ _
-          rw [mul_comm (v γ)]
+          exact mul_comm (v γ)
+            (((pairedPlaneSpinGenerator i j α γ : ℝ) : ℂ))
 
-/-- Finite-time covariance of the actual Majorana span. -/
+/-- A scalar multiple of the actual spin-plane commutator transports
+through the genuine source Majorana span, avoiding any concrete
+Fock-space unfolding or definally huge local identifications. -/
+private theorem pairedSourceThetaCombo_intertwines_scaled
+    (i j : SpaceIndex) (C : ColorIndex 2)
+    (t : ℝ) (v : SpinCoeffs) :
+    OAI.KadisonKastler.boundedCommutator
+        (((t : ℝ) : ℂ) • pairedFermionPlaneSpinGenerator i j)
+        (pairedThetaCombo C v) =
+      pairedThetaCombo C
+        (((t : ℂ) • pairedSourceSpinOp i j) v) := by
+  rw [OAI.KadisonKastler.boundedCommutator_apply]
+  calc
+    _ = ((t : ℂ) •
+          OAI.KadisonKastler.boundedCommutator
+            (pairedFermionPlaneSpinGenerator i j)
+            (pairedThetaCombo C v)) := by
+            rw [OAI.KadisonKastler.boundedCommutator_apply]
+            simp only [smul_mul_assoc, mul_smul_comm, smul_sub]
+    _ = (t : ℂ) •
+          pairedThetaCombo C (pairedSourceSpinOp i j v) := by
+            exact congrArg (fun T : FermionOp => (t : ℂ) • T)
+              (pairedSourceThetaCombo_intertwines i j C v)
+    _ = pairedThetaCombo C
+          (((t : ℂ) • pairedSourceSpinOp i j) v) := by
+            rw [ContinuousLinearMap.smul_apply]
+            exact (map_smul (pairedThetaCombo C) (t : ℂ)
+              (pairedSourceSpinOp i j v)).symm
+
+/-- Finite-time covariance of the 48 actual source Majoranas:
+the 16 spinor coefficients at each of the three gauge colors are
+transported by the exponential of the literal gamma-plane generator. -/
 theorem pairedSourceSpinFlow_covariance
     (i j : SpaceIndex) (C : ColorIndex 2)
     (t : ℝ) (v : SpinCoeffs) :
@@ -127,42 +160,24 @@ theorem pairedSourceSpinFlow_covariance
            (((t : ℝ) : ℂ) • pairedSourceSpinOp i j)) v) := by
   letI : NormedAlgebra ℚ FermionOp :=
     NormedAlgebra.restrictScalars ℚ ℂ FermionOp
-  let K := pairedFermionPlaneSpinGenerator i j
-  let T := pairedThetaCombo C
-  let J := pairedSourceSpinOp i j
-  let A := ((t : ℝ) : ℂ) • J
-  let B := OAI.KadisonKastler.boundedCommutator (((t : ℝ) : ℂ) • K)
-  have hintertwine (w : SpinCoeffs) : B (T w) = T (A w) := by
-    have h0 : OAI.KadisonKastler.boundedCommutator K (T w) =
-        T (J w) := pairedSourceThetaCombo_intertwines i j C w
-    have hscaled :
-        OAI.KadisonKastler.boundedCommutator
-            (((t : ℝ) : ℂ) • K) (T w) =
-          ((t : ℝ) : ℂ) •
-            OAI.KadisonKastler.boundedCommutator K (T w) := by
-      simp only [OAI.KadisonKastler.boundedCommutator_apply,
-        smul_mul_assoc, mul_smul_comm, smul_sub]
-    calc
-      B (T w) = ((t : ℝ) : ℂ) •
-          OAI.KadisonKastler.boundedCommutator K (T w) := hscaled
-      _ = ((t : ℝ) : ℂ) • T (J w) := congrArg (fun x : FermionOp => ((t : ℝ) : ℂ) • x) h0
-      _ = T (A w) := by
-        rw [ContinuousLinearMap.smul_apply]
-        exact (map_smul T ((t : ℝ) : ℂ) (J w)).symm
-  have hexp := exp_intertwines_on_vector A B T hintertwine v
-  have hconj :
-      NormedSpace.exp B (T v) =
-        NormedSpace.exp (((t : ℝ) : ℂ) • K) * T v *
-          NormedSpace.exp (-(((t : ℝ) : ℂ) • K)) :=
+  have hexp :=
+    exp_intertwines_on_vector
+      (((t : ℝ) : ℂ) • pairedSourceSpinOp i j)
+      (OAI.KadisonKastler.boundedCommutator
+        (((t : ℝ) : ℂ) • pairedFermionPlaneSpinGenerator i j))
+      (pairedThetaCombo C)
+      (pairedSourceThetaCombo_intertwines_scaled i j C t) v
+  have hconj :=
     OAI.KadisonKastler.exp_boundedCommutator_apply
-      (((t : ℝ) : ℂ) • K) (T v)
+      (((t : ℝ) : ℂ) • pairedFermionPlaneSpinGenerator i j)
+      (pairedThetaCombo C v)
   calc
-    pairedFermionPlaneSpinFlow i j t * T v *
-        NormedSpace.exp (-(((t : ℝ) : ℂ) • K)) =
-      NormedSpace.exp B (T v) := by
-        simpa only [pairedFermionPlaneSpinFlow, K] using hconj.symm
-    _ = T ((NormedSpace.exp A) v) := hexp
-
+    _ = NormedSpace.exp
+          (OAI.KadisonKastler.boundedCommutator
+            (((t : ℝ) : ℂ) • pairedFermionPlaneSpinGenerator i j))
+          (pairedThetaCombo C v) := by
+            simpa only [pairedFermionPlaneSpinFlow] using hconj.symm
+    _ = _ := hexp
 
 #print axioms pairedSourceThetaCombo_intertwines
 #print axioms pairedSourceSpinFlow_covariance
