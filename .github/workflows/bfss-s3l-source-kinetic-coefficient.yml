@@ -21,6 +21,7 @@ name: BFSS S3L Source Rotation Coefficients
 # S3L5I2 #53: qualify actual original source-syntax kinetic sum over M:AlgebraData2; fiber premise explicit.
 # #53/#54 unqualified at whole-expression elaboration; S3L5I2A tests only exact named full weighted sums and visible fiber premise.
 # S3L5I2A #55: one cached qualification; no changes to axioms, physical operators, or budgets.
+# S3L5I2B: frozen 5H/I1/I2A source cache and exact original sourceKineticCharge bridge; no new axioms.
 # S3L5I2 #54: Gate #53 whnf heartbeat at final change; source-syntax simpa only, no increased compiler budgets.
 # Pinned S3L5I2 source qualification launch after cache/source preflight.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
@@ -53,6 +54,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5HFiniteSumAndCoefficientEntryProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5I1ExactTripleWeightedSumTransportProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5I2ANamedKineticSourceSumProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5I2BOriginalSourceKineticChargeBridgeProbe.lean
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
@@ -719,7 +721,57 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe.olean
           key: bfss-s3l-accepted-3b-5g-v1-252e17a8-lean4341-${{ runner.os }}-${{ runner.arch }}
 
+      - name: Restore qualified Gate 55 accepted H I1 I2A modules
+        id: accepted_s3l5i2a_cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5HFiniteSumAndCoefficientEntryProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I1ExactTripleWeightedSumTransportProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I2ANamedKineticSourceSumProbe.olean
+          key: bfss-s3l-accepted-5h-i1-i2a-v1-bd678530-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Verify exact accepted Gate 55 sources and cached theorem
+        shell: bash
+        run: |
+          set -euo pipefail
+          frozen=bd6785307c37931a0871b6bba100cd561d2566d7
+          git fetch --quiet --no-tags --depth=1 origin "$frozen"
+          modules=(
+            SU2BFSSPhysicalDomainS3L5HFiniteSumAndCoefficientEntryProbe
+            SU2BFSSPhysicalDomainS3L5I1ExactTripleWeightedSumTransportProbe
+            SU2BFSSPhysicalDomainS3L5I2ANamedKineticSourceSumProbe
+          )
+          for m in "${modules[@]}"; do
+            p="experiments/openai-math-su2-physical-domain/$m.lean"
+            test "$(git rev-parse "$frozen:$p")" = "$(git hash-object "$p")"
+            if [ "${{ steps.accepted_s3l5i2a_cache.outputs.cache-hit }}" = "true" ]; then
+              test -s "upstream-math/lean/.lake/build/lib/lean/$m.olean"
+            fi
+          done
+          if [ "${{ steps.accepted_s3l5i2a_cache.outputs.cache-hit }}" = "true" ]; then
+            source "$HOME/.elan/env"
+            cd upstream-math/lean
+            printf '%s\n' 'import SU2BFSSPhysicalDomainS3L5I2ANamedKineticSourceSumProbe' \
+              '#print axioms FCP.BFSSSU2PhysicalDomainS3L5I2A.kineticWeightedSum_comm_of_fiber' \
+              > S3L5I2ACacheImportCheck.lean
+            timeout 90s lake env lean S3L5I2ACacheImportCheck.lean 2>&1 | tee /tmp/s3l5i2a-cache-check.log
+            python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5i2a-cache-check.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=['FCP.BFSSSU2PhysicalDomainS3L5I2A.kineticWeightedSum_comm_of_fiber']
+          assert [n for n,_ in matches]==expected,matches
+          for n,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5I2A_EXACT_CACHE_SOURCE_AND_AXIO​M_PASS')
+          PY
+          fi
+
       - name: Compile S3L5H exact source sum and coefficient identities
+        if: ${{ steps.accepted_s3l5i2a_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -749,6 +801,7 @@ jobs:
           PY
 
       - name: Compile S3L5I1 independent original-core triple finite-sum identities
+        if: ${{ steps.accepted_s3l5i2a_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -776,6 +829,7 @@ jobs:
           PY
 
       - name: Compile S3L5I2A exact named original-source weighted sum
+        if: ${{ steps.accepted_s3l5i2a_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -798,4 +852,39 @@ jobs:
             assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('S3L5I2A_NAMED_ORIGINAL_SOURCE_KINETIC_SUM_PASS')
+          PY
+      - name: Save immutable qualified Gate 55 source modules
+        if: ${{ steps.accepted_s3l5i2a_cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5HFiniteSumAndCoefficientEntryProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I1ExactTripleWeightedSumTransportProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I2ANamedKineticSourceSumProbe.olean
+          key: bfss-s3l-accepted-5h-i1-i2a-v1-bd678530-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Compile S3L5I2B original literal kinetic-charge bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L5I2BOriginalSourceKineticChargeBridgeProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I2ANamedKineticSourceSumProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5i2b-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5i2b-axioms.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=[
+            'FCP.BFSSSU2PhysicalDomainS3L5I2B.kineticWeightedSum_eq_sourceKineticCharge',
+            'FCP.BFSSSU2PhysicalDomainS3L5I2B.sourceCombined_comm_sourceKineticCharge_of_fiber']
+          assert [n for n,_ in matches]==expected,matches
+          for n,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5I2B_LITERAL_SOURCE_KINETIC_CHARGE_BRIDGE_PASS')
           PY
