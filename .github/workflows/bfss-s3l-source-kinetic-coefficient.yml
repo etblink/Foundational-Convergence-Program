@@ -81,6 +81,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J5SourceKineticResponseSplitProbe.lean
+      - experiments/openai-math-su2-physical-domain/S3L_ACCEPTED_CACHE_QUALIFIED_SOURCES_0_1_0.txt
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
@@ -156,7 +157,127 @@ jobs:
           done
           echo ACCEPTED_S3A_S3B_SOURCE_AND_OBJECTS_EXACT
 
+      # On a merged cache miss the exact six legacy layers remain the safe fallback.
+      - name: Restore consolidated accepted S3L proof objects
+        id: accepted_s3l_merged
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L0SourceKineticSpinorCoefficientProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L1SourceOrbitalSmoothCoreProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L2SourceGammaTwoSpatialCovarianceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3ASourcePositionDerivativeCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3CSourceOrbitalPositionCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L4BOriginalSmoothCorePostcompCalculusProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L4CSourceAlgebraDataFermionActionInterfaceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L4DConcreteSourceFockSpinCovarianceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5ASourceChargeKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5BActualKineticMonomialCovarianceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5CSourceOrbitalFermionActionCommutationProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5DSourceOrbitalKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5FParametricCombinedKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5HFiniteSumAndCoefficientEntryProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I1ExactTripleWeightedSumTransportProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I2ANamedKineticSourceSumProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I2BOriginalSourceKineticChargeBridgeProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I3ActualPairedKineticChargeProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J1SourceSpatialReindexAndGammaCoefficientProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J2ComplexGammaCoefficientProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe.olean
+          key: bfss-s3l-accepted-26-v1-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/S3L_ACCEPTED_CACHE_QUALIFIED_SOURCES_0_1_0.txt') }}
+
+      - name: Verify 26 source blobs and ten consolidated kernel axioms
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          git fetch --quiet --no-tags --depth=1 origin 3012fa8a6f5c1d599af47d1fc7204d1703a062c0 252e17a8b3a2c8beb5b1df3856a7f6de1c5df6de bd6785307c37931a0871b6bba100cd561d2566d7 f8adbc49aeb90a78cb06d6a076457434afd109c3 20ccdfb2faa6735cc0b832512083689270583dd3 2685ac890f62b8b71e01eeca83682362ce8587a2
+          n=0
+          while read -r module frozen; do
+            case "$module" in ''|'#'*) continue ;; esac
+            [[ "$module" =~ ^SU2BFSSPhysicalDomain[A-Za-z0-9_]+$ ]]
+            [[ "$frozen" =~ ^[a-f0-9]{40}$ ]]
+            file="experiments/openai-math-su2-physical-domain/$module.lean"
+            test -s "$file"
+            test -s "upstream-math/lean/.lake/build/lib/lean/$module.olean"
+            test "$(git rev-parse "$frozen:$file")" = "$(git hash-object "$file")"
+            n=$((n + 1))
+          done < "experiments/openai-math-su2-physical-domain/S3L_ACCEPTED_CACHE_QUALIFIED_SOURCES_0_1_0.txt"
+          test "$n" -eq 26
+          cd upstream-math/lean
+          cat > S3LConsolidatedKernelAudit.lean <<'LEAN'
+          import SU2BFSSPhysicalDomainS3L0SourceKineticSpinorCoefficientProbe
+          import SU2BFSSPhysicalDomainS3L1SourceOrbitalSmoothCoreProbe
+          import SU2BFSSPhysicalDomainS3L2SourceGammaTwoSpatialCovarianceProbe
+          import SU2BFSSPhysicalDomainS3L3ASourcePositionDerivativeCommutatorProbe
+          import SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe
+          import SU2BFSSPhysicalDomainS3L3CSourceOrbitalPositionCommutatorProbe
+          import SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe
+          import SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe
+          import SU2BFSSPhysicalDomainS3L4BOriginalSmoothCorePostcompCalculusProbe
+          import SU2BFSSPhysicalDomainS3L4CSourceAlgebraDataFermionActionInterfaceProbe
+          import SU2BFSSPhysicalDomainS3L4DConcreteSourceFockSpinCovarianceProbe
+          import SU2BFSSPhysicalDomainS3L5ASourceChargeKineticMonomialProbe
+          import SU2BFSSPhysicalDomainS3L5BActualKineticMonomialCovarianceProbe
+          import SU2BFSSPhysicalDomainS3L5CSourceOrbitalFermionActionCommutationProbe
+          import SU2BFSSPhysicalDomainS3L5DSourceOrbitalKineticMonomialProbe
+          import SU2BFSSPhysicalDomainS3L5FParametricCombinedKineticMonomialProbe
+          import SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe
+          import SU2BFSSPhysicalDomainS3L5HFiniteSumAndCoefficientEntryProbe
+          import SU2BFSSPhysicalDomainS3L5I1ExactTripleWeightedSumTransportProbe
+          import SU2BFSSPhysicalDomainS3L5I2ANamedKineticSourceSumProbe
+          import SU2BFSSPhysicalDomainS3L5I2BOriginalSourceKineticChargeBridgeProbe
+          import SU2BFSSPhysicalDomainS3L5I3ActualPairedKineticChargeProbe
+          import SU2BFSSPhysicalDomainS3L5J1SourceSpatialReindexAndGammaCoefficientProbe
+          import SU2BFSSPhysicalDomainS3L5J2ComplexGammaCoefficientProbe
+          import SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe
+          import SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe
+          #print axioms FCP.BFSSSU2PhysicalDomainS3L0.pairedKineticSpinorCoefficient_exact
+          #print axioms FCP.BFSSSU2PhysicalDomainS3L1.pairedSourceOrbitalPlaneGenerator_apply
+          #print axioms FCP.BFSSSU2PhysicalDomainS3L2.pairedGammaTwo_source_spatial_commutator
+          #print axioms FCP.BFSSSU2PhysicalDomainS3L2.pairedGammaTwo_potential_spinor_coefficient_exact
+          #print axioms FCP.BFSSSU2PhysicalDomainS3L3A.sourceCoordinateDerivative_position_commutator_apply
+          #print axioms FCP.BFSSSU2PhysicalDomainS3L5G.pairedActualCombined_comm_kineticMonomial
+          #print axioms FCP.BFSSSU2PhysicalDomainS3L5I2A.kineticWeightedSum_comm_of_fiber
+          #print axioms FCP.BFSSSU2PhysicalDomainS3L5I3.pairedActualCombined_comm_sourceKineticCharge_response
+          #print axioms FCP.BFSSSU2PhysicalDomainS3L5J2.pairedMinusI_KineticCoefficient_reindexed
+          #print axioms FCP.BFSSSU2PhysicalDomainS3L5J4.pairedFixedKineticFermionResponse_reindex
+          LEAN
+          timeout 120s lake env lean S3LConsolidatedKernelAudit.lean 2>&1 | tee /tmp/s3l-merged-axioms.log
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l-merged-axioms.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=[
+            'FCP.BFSSSU2PhysicalDomainS3L0.pairedKineticSpinorCoefficient_exact',
+            'FCP.BFSSSU2PhysicalDomainS3L1.pairedSourceOrbitalPlaneGenerator_apply',
+            'FCP.BFSSSU2PhysicalDomainS3L2.pairedGammaTwo_source_spatial_commutator',
+            'FCP.BFSSSU2PhysicalDomainS3L2.pairedGammaTwo_potential_spinor_coefficient_exact',
+            'FCP.BFSSSU2PhysicalDomainS3L3A.sourceCoordinateDerivative_position_commutator_apply',
+            'FCP.BFSSSU2PhysicalDomainS3L5G.pairedActualCombined_comm_kineticMonomial',
+            'FCP.BFSSSU2PhysicalDomainS3L5I2A.kineticWeightedSum_comm_of_fiber',
+            'FCP.BFSSSU2PhysicalDomainS3L5I3.pairedActualCombined_comm_sourceKineticCharge_response',
+            'FCP.BFSSSU2PhysicalDomainS3L5J2.pairedMinusI_KineticCoefficient_reindexed',
+            'FCP.BFSSSU2PhysicalDomainS3L5J4.pairedFixedKineticFermionResponse_reindex'
+          ]
+          assert [x for x,_ in matches] == expected,matches
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for name,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= allowed,(name,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L_CONSOLIDATED_26_SOURCES_TEN_ROOTS_AXIOMS_PASS')
+          PY
+
+
       - name: Restore exact S3L0–S3L3A qualified Lean proof objects
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' }}
         id: accepted_s3l3a_cache
         uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
         with:
@@ -168,7 +289,7 @@ jobs:
           key: bfss-s3l3a-source-objects-v1-3012fa8a6f5c1d59-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L0*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L1*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L2*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3A*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
 
       - name: Kernel-check cached S3L0–S3L3A modules and immutable source
-        if: ${{ steps.accepted_s3l3a_cache.outputs.cache-hit == 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l3a_cache.outputs.cache-hit == 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -209,7 +330,7 @@ jobs:
           print('S3L3A_IMMUTABLE_SOURCE_OBJECTS_KERNEL_REQUALIFIED')
           PY
       - name: Compile exact S3L0 coefficient and reject nonstandard axioms
-        if: ${{ steps.accepted_s3l3a_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l3a_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -233,7 +354,7 @@ jobs:
           PY
 
       - name: Compile source S3L1 genuine orbital SmoothCore generator
-        if: ${{ steps.accepted_s3l3a_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l3a_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -257,7 +378,7 @@ jobs:
           PY
 
       - name: Compile S3L2 literal cubic gammaTwo spatial covariance
-        if: ${{ steps.accepted_s3l3a_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l3a_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -283,7 +404,7 @@ jobs:
           PY
 
       - name: Compile S3L3A original SmoothCore derivative-position commutator
-        if: ${{ steps.accepted_s3l3a_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l3a_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -306,7 +427,7 @@ jobs:
           PY
 
       - name: Save immutable qualified S3L0–S3L3A Lean proof objects
-        if: ${{ steps.accepted_s3l3a_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l3a_cache.outputs.cache-hit != 'true') }}
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: |
@@ -317,6 +438,7 @@ jobs:
           key: bfss-s3l3a-source-objects-v1-3012fa8a6f5c1d59-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L0*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L1*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L2*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3A*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
 
       - name: Restore exact qualified S3L3B–S3L5G Lean objects
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' }}
         id: accepted_s3l5g_cache
         uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
         with:
@@ -337,6 +459,7 @@ jobs:
           key: bfss-s3l-accepted-3b-5g-v1-252e17a8-lean4341-${{ runner.os }}-${{ runner.arch }}
 
       - name: Verify accepted Gate 47 source identity and cached objects
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -386,7 +509,7 @@ jobs:
           fi
 
       - name: Compile S3L3B exact source operator-level Heisenberg commutator
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -409,7 +532,7 @@ jobs:
           PY
 
       - name: Compile S3L3C exact orbital-position rotation commutator
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -434,7 +557,7 @@ jobs:
           PY
 
       - name: Compile S3L3D mixed coordinate derivatives on original SmoothCore
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -457,7 +580,7 @@ jobs:
           PY
 
       - name: Compile S3L3E exact orbital-derivative covariance
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -480,7 +603,7 @@ jobs:
           PY
 
       - name: Compile S3L4B generic original-source postcomp calculus only
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -511,7 +634,7 @@ jobs:
           PY
 
       - name: Compile S3L4C exact source AlgebraData fermionAction interface
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -540,7 +663,7 @@ jobs:
           PY
 
       - name: Compile S3L4D exact 48-Majorana source spin covariance from S3E
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -570,7 +693,7 @@ jobs:
           PY
 
       - name: Compile S3L5A source-parametric kinetic monomial commutator
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -596,7 +719,7 @@ jobs:
           PY
 
       - name: Compile S3L5B actual 48-Majorana kinetic monomial covariance
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -622,7 +745,7 @@ jobs:
           PY
 
       - name: Compile S3L5C exact orbital-source fermionAction commutation
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -650,7 +773,7 @@ jobs:
           PY
 
       - name: Compile S3L5D original orbital kinetic monomial law
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -675,7 +798,7 @@ jobs:
           PY
 
       - name: Compile S3L5F parameterized combined source kinetic monomial
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -703,7 +826,7 @@ jobs:
           PY
 
       - name: Compile S3L5G actual combined paired kinetic monomial
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -728,7 +851,7 @@ jobs:
           print('S3L5G_ACTUAL_COMBINED_KINETIC_MONOMIAL_PASS')
           PY
       - name: Save immutable accepted S3L3B–S3L5G proof object cache
-        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5g_cache.outputs.cache-hit != 'true') }}
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: |
@@ -748,6 +871,7 @@ jobs:
           key: bfss-s3l-accepted-3b-5g-v1-252e17a8-lean4341-${{ runner.os }}-${{ runner.arch }}
 
       - name: Restore qualified Gate 55 accepted H I1 I2A modules
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' }}
         id: accepted_s3l5i2a_cache
         uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
         with:
@@ -758,6 +882,7 @@ jobs:
           key: bfss-s3l-accepted-5h-i1-i2a-v1-bd678530-${{ runner.os }}-${{ runner.arch }}
 
       - name: Verify exact accepted Gate 55 sources and cached theorem
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -797,7 +922,7 @@ jobs:
           fi
 
       - name: Compile S3L5H exact source sum and coefficient identities
-        if: ${{ steps.accepted_s3l5i2a_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5i2a_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -827,7 +952,7 @@ jobs:
           PY
 
       - name: Compile S3L5I1 independent original-core triple finite-sum identities
-        if: ${{ steps.accepted_s3l5i2a_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5i2a_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -855,7 +980,7 @@ jobs:
           PY
 
       - name: Compile S3L5I2A exact named original-source weighted sum
-        if: ${{ steps.accepted_s3l5i2a_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5i2a_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -880,7 +1005,7 @@ jobs:
           print('S3L5I2A_NAMED_ORIGINAL_SOURCE_KINETIC_SUM_PASS')
           PY
       - name: Save immutable qualified Gate 55 source modules
-        if: ${{ steps.accepted_s3l5i2a_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5i2a_cache.outputs.cache-hit != 'true') }}
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: |
@@ -890,6 +1015,7 @@ jobs:
           key: bfss-s3l-accepted-5h-i1-i2a-v1-bd678530-${{ runner.os }}-${{ runner.arch }}
 
       - name: Restore immutable accepted Gate 57 source kinetic objects
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' }}
         id: accepted_s3l5i3_cache
         uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
         with:
@@ -899,6 +1025,7 @@ jobs:
           key: bfss-s3l-accepted-i2b-i3-v1-f8adbc49-${{ runner.os }}-${{ runner.arch }}
 
       - name: Verify exact Gate 57 sources and cached physical theorem
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -937,7 +1064,7 @@ jobs:
           fi
 
       - name: Compile S3L5I2B original literal kinetic-charge bridge
-        if: ${{ steps.accepted_s3l5i3_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5i3_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -964,7 +1091,7 @@ jobs:
           PY
 
       - name: Compile S3L5I3 actual paired full kinetic charge response
-        if: ${{ steps.accepted_s3l5i3_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5i3_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -989,7 +1116,7 @@ jobs:
           print('S3L5I3_ACTUAL_PAIRED_KINETIC_CHARGE_RESPONSE_PASS')
           PY
       - name: Save immutable accepted Gate 57 source kinetic objects
-        if: ${{ steps.accepted_s3l5i3_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5i3_cache.outputs.cache-hit != 'true') }}
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: |
@@ -998,6 +1125,7 @@ jobs:
           key: bfss-s3l-accepted-i2b-i3-v1-f8adbc49-${{ runner.os }}-${{ runner.arch }}
 
       - name: Restore Gate 64 accepted J1/J2 complex coefficient cache
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' }}
         id: accepted_s3l5j2_cache
         uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
         with:
@@ -1007,6 +1135,7 @@ jobs:
           key: bfss-s3l-accepted-j1-j2-v1-20ccdfb2-${{ runner.os }}-${{ runner.arch }}
 
       - name: Verify exact Gate 64 J1/J2 source and root axiom footprint
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1044,7 +1173,7 @@ jobs:
           fi
 
       - name: Compile S3L5J1 spatial sum reindex and exact real gamma sign
-        if: ${{ steps.accepted_s3l5j2_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5j2_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1071,7 +1200,7 @@ jobs:
           PY
 
       - name: Compile S3L5J2 source complex gamma coefficient and -i weight
-        if: ${{ steps.accepted_s3l5j2_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5j2_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1098,7 +1227,7 @@ jobs:
           PY
 
       - name: Save exact accepted Gate 64 J1/J2 source cache
-        if: ${{ steps.accepted_s3l5j2_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5j2_cache.outputs.cache-hit != 'true') }}
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: |
@@ -1108,6 +1237,7 @@ jobs:
 
 
       - name: Restore accepted J3/J4 original-source response cache
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' }}
         id: accepted_s3l5j4_cache
         uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
         with:
@@ -1117,6 +1247,7 @@ jobs:
           key: bfss-s3l-accepted-j3-j4-v1-2685ac89-${{ runner.os }}-${{ runner.arch }}
 
       - name: Verify exact Gate 68 J3/J4 source and root axiom footprint
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1154,7 +1285,7 @@ jobs:
           fi
 
       - name: Compile S3L5J3 original source double spinor sum transport
-        if: ${{ steps.accepted_s3l5j4_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5j4_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1181,7 +1312,7 @@ jobs:
           PY
 
       - name: Compile S3L5J4 source fermion sum and derivative composition
-        if: ${{ steps.accepted_s3l5j4_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5j4_cache.outputs.cache-hit != 'true') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1209,13 +1340,47 @@ jobs:
           PY
 
       - name: Save exact accepted Gate 68 J3/J4 source cache
-        if: ${{ steps.accepted_s3l5j4_cache.outputs.cache-hit != 'true' }}
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' && (steps.accepted_s3l5j4_cache.outputs.cache-hit != 'true') }}
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: |
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe.olean
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe.olean
           key: bfss-s3l-accepted-j3-j4-v1-2685ac89-${{ runner.os }}-${{ runner.arch }}
+
+
+      - name: Save consolidated 26 accepted S3L objects after legacy qualification
+        if: ${{ steps.accepted_s3l_merged.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L0SourceKineticSpinorCoefficientProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L1SourceOrbitalSmoothCoreProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L2SourceGammaTwoSpatialCovarianceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3ASourcePositionDerivativeCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3CSourceOrbitalPositionCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L4BOriginalSmoothCorePostcompCalculusProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L4CSourceAlgebraDataFermionActionInterfaceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L4DConcreteSourceFockSpinCovarianceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5ASourceChargeKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5BActualKineticMonomialCovarianceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5CSourceOrbitalFermionActionCommutationProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5DSourceOrbitalKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5FParametricCombinedKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5HFiniteSumAndCoefficientEntryProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I1ExactTripleWeightedSumTransportProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I2ANamedKineticSourceSumProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I2BOriginalSourceKineticChargeBridgeProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I3ActualPairedKineticChargeProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J1SourceSpatialReindexAndGammaCoefficientProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J2ComplexGammaCoefficientProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe.olean
+          key: bfss-s3l-accepted-26-v1-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/S3L_ACCEPTED_CACHE_QUALIFIED_SOURCES_0_1_0.txt') }}
 
 
       - name: Compile S3L5J5 original-source kinetic response additive split
