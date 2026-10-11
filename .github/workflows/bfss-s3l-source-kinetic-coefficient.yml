@@ -60,6 +60,7 @@ name: BFSS S3L Source Rotation Coefficients
 # S3L5K2 Gate82: remove duplicate Lean doc comments and unfold only original cubic monomial and fiber-variation wrappers; no theorem changes.
 # S3L5K2 Gate83: diagnostic ONLY: seven theorem-boundary checkpoints; 65s fast-fail K2 budget to localize #82 silent 140s stall. Revert diagnostic budget after localization.
 # Gate83 launch: trigger isolated diagnostic on cache-owning base; do not use this as new mathematics.
+# Gate84: independently compile K2A actual fermionAction proof; K2 imports and consumes accepted lemma; strict kernel axioms and unchanged source model.
 # J9: original paired 48-Majorana source kinetic charge negative free-spinor covariance, not Hamiltonian or cubic.
 # Gate75: one pinned source kinetic-sector covariance theorem and four small finite-sum lemmas.
 # J9 Gate76: isolate literal named weighted sum; avoid expensive global simpa and open exact S3L5F source.
@@ -108,6 +109,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J8PairedComplexResponseCoefficientContractionProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J9ActualKineticFreeSpinorCovarianceProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K1SourceCubicPositionPairProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2AOriginalFermionActionCovarianceProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2ActualCubicSourceMonomialProbe.lean
       - experiments/openai-math-su2-physical-domain/S3L_ACCEPTED_CACHE_QUALIFIED_SOURCES_0_1_0.txt
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
@@ -1581,6 +1583,30 @@ jobs:
           print('S3L5K1_ORIGINAL_CUBIC_POSITION_PAIR_ROTATION_PASS')
           PY
 
+      - name: Compile S3L5K2A actual fermionAction prerequisite separately
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L5K2AOriginalFermionActionCovarianceProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5K1SourceCubicPositionPairProbe.olean
+          timeout 55s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5k2a-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5k2a-axioms.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=['FCP.BFSSSU2PhysicalDomainS3L5K2.pairedActualCombined_comm_fermionAction']
+          assert [n for n,_ in matches] == expected,matches
+          for n,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5K2A_ACTUAL_FERMION_ACTION_COVARIANCE_PASS')
+          PY
+
       - name: Compile S3L5K2 actual cubic source monomial commutator
         shell: bash
         run: |
@@ -1589,7 +1615,7 @@ jobs:
           stem=SU2BFSSPhysicalDomainS3L5K2ActualCubicSourceMonomialProbe
           cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
           cd upstream-math/lean
-          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5K1SourceCubicPositionPairProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5K2AOriginalFermionActionCovarianceProbe.olean
           timeout 65s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5k2-axioms.log
           test -s ".lake/build/lib/lean/$stem.olean"
           python3 - <<'PY'
