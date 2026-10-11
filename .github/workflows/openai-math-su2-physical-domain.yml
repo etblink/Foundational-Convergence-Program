@@ -2382,30 +2382,49 @@ jobs:
           test -s .lake/build/lib/lean/OAI/Analysis/KadisonKastler/ExponentialCommutator.olean
           echo PINNED_OAI_BOUNDED_COMMUTATOR_DEPENDENCY_READY
 
-      - name: Compile S3J3D actual three-color Fock Majorana finite-time covariance
+      - name: Compile S3J3D0 generic weighted commutator and matrix sum
         shell: bash
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
-          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3J3DActualThetaIntertwinerProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3J3D0WeightedCommutatorProbe.lean upstream-math/lean/
           cd upstream-math/lean
-          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3IActualFockPlaneFlowGaugeCommutationProbe.olean
-          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3CAbstractExponentialIntertwinerProbe.olean
-          test -s .lake/build/lib/lean/OAI/Analysis/KadisonKastler/ExponentialCommutator.olean
-          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3DActualThetaIntertwinerProbe.olean SU2BFSSPhysicalDomainS3J3DActualThetaIntertwinerProbe.lean 2>&1 | tee /tmp/bfss-su2-s3j3d.log
+          timeout 120s lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3D0WeightedCommutatorProbe.olean SU2BFSSPhysicalDomainS3J3D0WeightedCommutatorProbe.lean 2>&1 | tee /tmp/bfss-su2-s3j3d0.log
           python3 - <<'PY'
           import re
-          log = open('/tmp/bfss-su2-s3j3d.log').read()
-          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          log = open('/tmp/bfss-su2-s3j3d0.log').read()
+          reports = re.findall(r"'([^']+)' depends on axioms: \\[([^\\]]*)\\]", log)
           expected = [
-            'FCP.BFSSSU2PhysicalDomainS3J3D.pairedSourceThetaCombo_intertwines',
-            'FCP.BFSSSU2PhysicalDomainS3J3D.pairedSourceSpinFlow_covariance',
+            'FCP.BFSSSU2PhysicalDomainS3J3D0.weighted_commutator',
+            'FCP.BFSSSU2PhysicalDomainS3J3D0.weighted_matrix_sum',
           ]
-          assert [n for n,_ in reports] == expected, reports
-          for n, ax in reports:
-            assert {x.strip() for x in ax.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (n,ax)
+          assert [n for n, _ in reports] == expected, reports
+          for name, axioms in reports:
+            assert {s.strip() for s in axioms.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log
-          print('S3J3D_ACTUAL_FOCK_FINITE_TIME_COVARIANCE_KERNEL_PASS')
+          print('S3J3D0_GENERIC_WEIGHTED_IDENTITIES_KERNEL_PASS')
+          PY
+
+      - name: Compile S3J3D1 original Majorana weighted infinitesimal covariance
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3J3D1ActualMajoranaWeightedCommutatorProbe.lean upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3D0WeightedCommutatorProbe.olean
+          timeout 120s lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3D1ActualMajoranaWeightedCommutatorProbe.olean SU2BFSSPhysicalDomainS3J3D1ActualMajoranaWeightedCommutatorProbe.lean 2>&1 | tee /tmp/bfss-su2-s3j3d1.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s3j3d1.log').read()
+          reports = re.findall(r"'([^']+)' depends on axioms: \\[([^\\]]*)\\]", log)
+          assert [n for n, _ in reports] == [
+            'FCP.BFSSSU2PhysicalDomainS3J3D1.pairedSourceTheta_weighted_commutator',
+          ], reports
+          assert {s.strip() for s in reports[0][1].split(',')} <= {'propext','Classical.choice','Quot.sound'}, reports
+          assert 'sorryAx' not in log and 'error:' not in log
+          print('S3J3D1_ACTUAL_MAJORANA_INFINITESIMAL_WEIGHTED_COVARIANCE_PASS')
           PY
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
