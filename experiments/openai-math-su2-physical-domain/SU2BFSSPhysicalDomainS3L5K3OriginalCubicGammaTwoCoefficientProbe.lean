@@ -9,6 +9,8 @@ matrix rotation and exact negative free-spinor sign. This module carries
 that coefficient through the original spatial (k,l) and color (A,B,C)
 finite sums, with 16-component matrix multiplication retained exactly.
 
+Qualification checkpoint K3-1: test original gammaTwo coefficient independently.
+
 This is a coefficient identity only: K2 whole cubic source monomial,
 the six-index operator sum, the complete supercharge commutator and
 the Hamiltonian spectrum are NOT established by this module.
