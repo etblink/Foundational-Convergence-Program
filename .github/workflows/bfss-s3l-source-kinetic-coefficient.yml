@@ -308,20 +308,20 @@ jobs:
               test -s "upstream-math/lean/.lake/build/lib/lean/$m.olean"
             fi
           done <<'MODULES'
-SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe
-SU2BFSSPhysicalDomainS3L3CSourceOrbitalPositionCommutatorProbe
-SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe
-SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe
-SU2BFSSPhysicalDomainS3L4BOriginalSmoothCorePostcompCalculusProbe
-SU2BFSSPhysicalDomainS3L4CSourceAlgebraDataFermionActionInterfaceProbe
-SU2BFSSPhysicalDomainS3L4DConcreteSourceFockSpinCovarianceProbe
-SU2BFSSPhysicalDomainS3L5ASourceChargeKineticMonomialProbe
-SU2BFSSPhysicalDomainS3L5BActualKineticMonomialCovarianceProbe
-SU2BFSSPhysicalDomainS3L5CSourceOrbitalFermionActionCommutationProbe
-SU2BFSSPhysicalDomainS3L5DSourceOrbitalKineticMonomialProbe
-SU2BFSSPhysicalDomainS3L5FParametricCombinedKineticMonomialProbe
-SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe
-MODULES
+          SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe
+          SU2BFSSPhysicalDomainS3L3CSourceOrbitalPositionCommutatorProbe
+          SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe
+          SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe
+          SU2BFSSPhysicalDomainS3L4BOriginalSmoothCorePostcompCalculusProbe
+          SU2BFSSPhysicalDomainS3L4CSourceAlgebraDataFermionActionInterfaceProbe
+          SU2BFSSPhysicalDomainS3L4DConcreteSourceFockSpinCovarianceProbe
+          SU2BFSSPhysicalDomainS3L5ASourceChargeKineticMonomialProbe
+          SU2BFSSPhysicalDomainS3L5BActualKineticMonomialCovarianceProbe
+          SU2BFSSPhysicalDomainS3L5CSourceOrbitalFermionActionCommutationProbe
+          SU2BFSSPhysicalDomainS3L5DSourceOrbitalKineticMonomialProbe
+          SU2BFSSPhysicalDomainS3L5FParametricCombinedKineticMonomialProbe
+          SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe
+          MODULES
           if [ "${{ steps.accepted_s3l5g_cache.outputs.cache-hit }}" = "true" ]; then
             source "$HOME/.elan/env"
             cd upstream-math/lean
