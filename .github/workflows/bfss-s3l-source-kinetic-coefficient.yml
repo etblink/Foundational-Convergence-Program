@@ -12,6 +12,7 @@ name: BFSS S3L Source Rotation Coefficients
 # S3L5G launch: qualify ONLY the named concrete specialization of accepted S3L5F; do not compile S3L5E.
 # S3L5H: first isolate source finite-sum transport and exact S3L0 gamma entry; freeze qualified 3B–5G oleans into exact source-checked cache.
 # S3L5H #48: invoke one pinned gate; no S3L5E replay or full charge elaboration.
+# S3L5H repair #50: use accepted 3B-5G cache; fix namespace and preserve matrix entry as direct S3L0 extraction.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
 
 # Qualification is run in a PR against the original cache-owning BFSS research base.
