@@ -49,6 +49,7 @@ name: BFSS S3L Source Rotation Coefficients
 # J7: original source three-index coefficient transport and finite-sum coefficient regroup; no full Fock expansion.
 # Gate73 qualification: source J7 all-index transport, with qualified consolidated cache and axiom gate.
 # J8: contract actual scalar -i gamma/J coefficient; keep final source operator spinor sum separate.
+# Gate74: pinned J8 scalar coefficient proof with strict exact-name and axiom checks.
 # S3L5I2 #54: Gate #53 whnf heartbeat at final change; source-syntax simpa only, no increased compiler budgets.
 # Pinned S3L5I2 source qualification launch after cache/source preflight.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
