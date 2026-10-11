@@ -57,6 +57,7 @@ name: BFSS S3L Source Rotation Coefficients
 # S3L5K2 Gate79: fix Gate78 concrete recursion by naming four original source operators; no new axioms.
 # S3L5K2 Gate80: source-only named unfolding and exact accepted lemma reuse; unchanged statements and axioms.
 # S3L5K2 Gate81: after Gate80 K2 timeout, qualify parametric cubic commutator and actual Fock specialization; original theorem statements unchanged.
+# S3L5K2 Gate82: remove duplicate Lean doc comments and unfold only original cubic monomial and fiber-variation wrappers; no theorem changes.
 # J9: original paired 48-Majorana source kinetic charge negative free-spinor covariance, not Hamiltonian or cubic.
 # Gate75: one pinned source kinetic-sector covariance theorem and four small finite-sum lemmas.
 # J9 Gate76: isolate literal named weighted sum; avoid expensive global simpa and open exact S3L5F source.
