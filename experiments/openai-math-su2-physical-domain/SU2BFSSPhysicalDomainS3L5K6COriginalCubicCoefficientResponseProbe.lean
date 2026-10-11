@@ -3,6 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K6BNegativeCubicCoefficientTransportProbe
 /-!
 # S3L5K6C — exact paired cubic coefficient response
 
+K6C #1 qualification: source response from accepted K3-K6B compiled dependencies.
 The entire original source cubic coefficient-response contraction,
 reusing the separately kernel-qualified K3 coefficient law, K4 sixfold
 operator transport and sourceCubicCharge bridge, K5 free-spinor
