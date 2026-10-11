@@ -4,6 +4,7 @@ import SU2BFSSPhysicalDomainS3L5K5OriginalCubicFreeSpinorCoefficientProbe
 # S3L5K6 — entire original cubic coefficient free-spinor transport
 
 K6 Gate1 qualification: original sixfold operator coefficient response and real free-spinor cancellation.
+K6 Gate2: open the accepted S3L4B SourceEnd abbreviation; theorem statements and proof bodies unchanged.
 
 K3–K5 qualified the genuine BFSS 1/2 structure-constant gammaTwo
 coefficient and the negative 16-component spinor action on each
