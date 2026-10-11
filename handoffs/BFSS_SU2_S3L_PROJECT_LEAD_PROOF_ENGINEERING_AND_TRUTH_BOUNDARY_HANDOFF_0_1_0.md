@@ -95,3 +95,11 @@ S3L5K6C_ORIGINAL_CUBIC_COEFFICIENT_SOURCE_RESPONSE_PASS
 **Scientific limit unchanged:** Full source cubic **coefficient** response now **[U] qualified**. The actual source cubic **operator commutator** and full cubic-charge covariance remain **unqualified**. Positive spectral claims remain entirely distinct.
 
 The successful proof and these negative lessons should inform all future Project Lead successors; never revert to an outdated red/pending status from the earlier handoff sections without checking this Gate #4 evidence.
+
+## K2B #1 diagnostic — first source namespace failure (2026-10-11)
+
+[Cubic Monomial Factored Proof #1](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38183300575) finished **red** at K2B; cached source prerequisites through K1 and K2A were green. First causal errors at K2B lines 57/71/77: unknown `sourceCubicFermionVariation` and `pairedActualCombined_comm_fermionAction`. **Although the file is named K2A, both symbols are declared in namespace `FCP.BFSSSU2PhysicalDomainS3L5K2`.** Import alone is insufficient for unqualified identifier resolution; K2B originally opened only K1. Later maximum recursion-depth errors may have cascaded from these missing names; no independent new obstruction has yet been established.
+
+Minimal repair `6d04d89daa45c73d103077bff011b4d801a2f8d7`: added `open FCP.BFSSSU2PhysicalDomainS3L5K2` without changing the theorem statement or tactic proof. [Cubic Monomial Factored Proof #2](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38183910618) started at qualification commit `f854beddcba37c02c172741a017380358ee9bedb`. **Pending at time of note**; inspect actual Gate #2 rather than treating K2B as qualified. This K2B line of work is mathematically the original cubic monomial commutator, unlike now-qualified coefficient-only K6C.
+
+Lesson: file stem (K2A) and Lean namespace (S3L5K2) are not interchangeable. Confirm exact namespace declarations and the *first* compiler error before allocating another CI run.
