@@ -51,35 +51,22 @@ theorem pairedActualCombined_comm_fermionAction
       (sourceParametricCombinedPlane
         (pairedFermionPlaneSpinGenerator i j) i j) =
       sourceCubicFermionVariation i j γ A := by
-  have hL :
-      (pairedSourceOrbitalPlaneGenerator i j).comp
-        (pairedAlgebraData.fermionAction γ A) -
-      (pairedAlgebraData.fermionAction γ A).comp
-        (pairedSourceOrbitalPlaneGenerator i j) =
-        (0 : SourceEnd) :=
-    sub_eq_zero.mpr
-      (sourceOrbital_comm_fermionAction pairedAlgebraData i j γ A)
-  have hK :
-      (sourcePostcomp (pairedFermionPlaneSpinGenerator i j)).comp
-        (pairedAlgebraData.fermionAction γ A) -
-      (pairedAlgebraData.fermionAction γ A).comp
-        (sourcePostcomp (pairedFermionPlaneSpinGenerator i j)) =
-      sourceCubicFermionVariation i j γ A := by
-    simpa only [pairedActualSourceSpin, sourceCubicFermionVariation] using
+  let L : SourceEnd := pairedSourceOrbitalPlaneGenerator i j
+  let K : SourceEnd := sourcePostcomp (pairedFermionPlaneSpinGenerator i j)
+  let F : SourceEnd := pairedAlgebraData.fermionAction γ A
+  let V : SourceEnd := sourceCubicFermionVariation i j γ A
+  have hL : L.comp F - F.comp L = (0 : SourceEnd) := by
+    apply sub_eq_zero.mpr
+    exact sourceOrbital_comm_fermionAction pairedAlgebraData i j γ A
+  have hK : K.comp F - F.comp K = V := by
+    simpa only [K, F, V, pairedActualSourceSpin,
+      sourceCubicFermionVariation] using
       (pairedActualSourceSpin_comm_fermionAction i j γ A)
-  change (pairedSourceOrbitalPlaneGenerator i j +
-      sourcePostcomp (pairedFermionPlaneSpinGenerator i j)).comp
-        (pairedAlgebraData.fermionAction γ A) -
-      (pairedAlgebraData.fermionAction γ A).comp
-        (pairedSourceOrbitalPlaneGenerator i j +
-          sourcePostcomp (pairedFermionPlaneSpinGenerator i j)) =
-      sourceCubicFermionVariation i j γ A
-  rw [sourceComm_sum_of_components
-    (pairedSourceOrbitalPlaneGenerator i j)
-    (sourcePostcomp (pairedFermionPlaneSpinGenerator i j))
-    (pairedAlgebraData.fermionAction γ A)
-    0 (sourceCubicFermionVariation i j γ A) hL hK]
-  simp
+  have h := sourceComm_sum_of_components
+    L K F (0 : SourceEnd) V hL hK
+  have hs : (L + K).comp F - F.comp (L + K) = V :=
+    h.trans (zero_add V)
+  simpa only [L, K, F, V, sourceParametricCombinedPlane] using hs
 
 /-- The EXACT source operator factor of Core.lean's original cubic
 supercharge, including composition order and all three colors. -/
@@ -108,16 +95,23 @@ theorem pairedActualCombined_comm_cubicMonomial
         ((sourcePositionVariation i j k B).comp (position (N := 2) l C) +
           (position (N := 2) k B).comp
             (sourcePositionVariation i j l C)) := by
-  exact sourceComm_comp
-    (sourceParametricCombinedPlane
-      (pairedFermionPlaneSpinGenerator i j) i j)
-    (pairedAlgebraData.fermionAction γ A)
-    ((position (N := 2) k B).comp (position (N := 2) l C))
-    (sourceCubicFermionVariation i j γ A)
-    ((sourcePositionVariation i j k B).comp (position (N := 2) l C) +
-      (position (N := 2) k B).comp (sourcePositionVariation i j l C))
-    (pairedActualCombined_comm_fermionAction i j γ A)
-    (pairedActualCombined_comm_positionPair i j k l B C hij)
+  let G : SourceEnd := sourceParametricCombinedPlane
+    (pairedFermionPlaneSpinGenerator i j) i j
+  let F : SourceEnd := pairedAlgebraData.fermionAction γ A
+  let P : SourceEnd :=
+    (position (N := 2) k B).comp (position (N := 2) l C)
+  let V : SourceEnd := sourceCubicFermionVariation i j γ A
+  let W : SourceEnd :=
+    (sourcePositionVariation i j k B).comp (position (N := 2) l C) +
+      (position (N := 2) k B).comp (sourcePositionVariation i j l C)
+  have hF : G.comp F - F.comp G = V := by
+    simpa only [G, F, V] using
+      (pairedActualCombined_comm_fermionAction i j γ A)
+  have hP : G.comp P - P.comp G = W := by
+    simpa only [G, P, W] using
+      (pairedActualCombined_comm_positionPair i j k l B C hij)
+  have h := sourceComm_comp G F P V W hF hP
+  simpa only [G, F, P, V, W, pairedOriginalCubicMonomial] using h
 
 #print axioms pairedActualCombined_comm_fermionAction
 #print axioms pairedActualCombined_comm_cubicMonomial
