@@ -34,6 +34,7 @@ name: BFSS S3L Source Rotation Coefficients
 # S3L5J2 #62: present orbital conditional as the direct cast seen in Lean #61 diagnostics.
 # S3L5J2 #63: explicit k=i/k=j spatial branch simplification; keep exact expanded complex statement.
 # S3L5J2 #64: discharge exact missing j-ne-i condition in k=j branch from CI #63.
+# S3L5J3: double spinor finite-sum transport on original source operators; J1/J2 Gate #64 immutable cache.
 # S3L5I2 #54: Gate #53 whnf heartbeat at final change; source-syntax simpa only, no increased compiler budgets.
 # Pinned S3L5I2 source qualification launch after cache/source preflight.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
@@ -70,6 +71,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5I3ActualPairedKineticChargeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J1SourceSpatialReindexAndGammaCoefficientProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J2ComplexGammaCoefficientProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe.lean
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
@@ -986,7 +988,54 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5I3ActualPairedKineticChargeProbe.olean
           key: bfss-s3l-accepted-i2b-i3-v1-f8adbc49-${{ runner.os }}-${{ runner.arch }}
 
+      - name: Restore Gate 64 accepted J1/J2 complex coefficient cache
+        id: accepted_s3l5j2_cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J1SourceSpatialReindexAndGammaCoefficientProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J2ComplexGammaCoefficientProbe.olean
+          key: bfss-s3l-accepted-j1-j2-v1-20ccdfb2-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Verify exact Gate 64 J1/J2 source and root axiom footprint
+        shell: bash
+        run: |
+          set -euo pipefail
+          frozen=20ccdfb2faa6735cc0b832512083689270583dd3
+          git fetch --quiet --no-tags --depth=1 origin "$frozen"
+          modules=(
+            SU2BFSSPhysicalDomainS3L5J1SourceSpatialReindexAndGammaCoefficientProbe
+            SU2BFSSPhysicalDomainS3L5J2ComplexGammaCoefficientProbe
+          )
+          for m in "${modules[@]}"; do
+            p="experiments/openai-math-su2-physical-domain/$m.lean"
+            test "$(git rev-parse "$frozen:$p")" = "$(git hash-object "$p")"
+            if [ "${{ steps.accepted_s3l5j2_cache.outputs.cache-hit }}" = "true" ]; then
+              test -s "upstream-math/lean/.lake/build/lib/lean/$m.olean"
+            fi
+          done
+          if [ "${{ steps.accepted_s3l5j2_cache.outputs.cache-hit }}" = "true" ]; then
+            source "$HOME/.elan/env"
+            cd upstream-math/lean
+            printf '%s\n' 'import SU2BFSSPhysicalDomainS3L5J2ComplexGammaCoefficientProbe' \
+              '#print axioms FCP.BFSSSU2PhysicalDomainS3L5J2.pairedMinusI_KineticCoefficient_reindexed' > S3L5J2CacheImportCheck.lean
+            timeout 90s lake env lean S3L5J2CacheImportCheck.lean 2>&1 | tee /tmp/s3l5j2-cache-check.log
+            python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5j2-cache-check.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=['FCP.BFSSSU2PhysicalDomainS3L5J2.pairedMinusI_KineticCoefficient_reindexed']
+          assert [n for n,_ in matches]==expected,matches
+          for n,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5J2_EXACT_GATE64_CACHE_PASS')
+          PY
+          fi
+
       - name: Compile S3L5J1 spatial sum reindex and exact real gamma sign
+        if: ${{ steps.accepted_s3l5j2_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1013,6 +1062,7 @@ jobs:
           PY
 
       - name: Compile S3L5J2 source complex gamma coefficient and -i weight
+        if: ${{ steps.accepted_s3l5j2_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1036,4 +1086,40 @@ jobs:
             assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('S3L5J2_COMPLEX_SOURCE_GAMMA_MINUS_I_PASS')
+          PY
+
+      - name: Save exact accepted Gate 64 J1/J2 source cache
+        if: ${{ steps.accepted_s3l5j2_cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J1SourceSpatialReindexAndGammaCoefficientProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J2ComplexGammaCoefficientProbe.olean
+          key: bfss-s3l-accepted-j1-j2-v1-20ccdfb2-${{ runner.os }}-${{ runner.arch }}
+
+
+      - name: Compile S3L5J3 original source double spinor sum transport
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J2ComplexGammaCoefficientProbe.olean
+          timeout 120s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5j3-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5j3-axioms.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=[
+            'FCP.BFSSSU2PhysicalDomainS3L5J3.sourceSpinorDoubleSum_reindex',
+            'FCP.BFSSSU2PhysicalDomainS3L5J3.pairedKineticSpinorTerm_reindex']
+          assert [n for n,_ in matches]==expected,matches
+          for n,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5J3_SOURCE_SPINOR_DOUBLE_SUM_PASS')
           PY
