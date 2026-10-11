@@ -72,3 +72,26 @@ The user's explicit preference: think before changing proof code; learn from red
 **Gate #4 experimental repair:** Commit `20696917417f8f98b382a889555c95c630d75e4a` constructs a named `have h` at the fully typed `d/c/T` source interface, then uses `simpa only [d, c, T] using h` instead of `change`. Qualification head `a05fbfbc4414cac8573d83256c19ba904ec081e7`; [Cubic Source Response #4](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38182729417) **started, not yet qualified at this update**. Original public statement, K3–K6C1 dependencies, accepted cache, physical source, and strict axiom policy unchanged. If #4 fails, use its *first* diagnostic to decide whether the aliases require a separately checked bridge; do not blindly increase budgets or repeat the same proof.
 
 **Decision discipline:** Note the distinction between `timeout 90s` (Gate #2: wall-clock/exit 124, no Lean theorem diagnostic) and `whnf` heartbeat exhaustion (Gate #3: targeted definitional-conversion failure). These are different evidence and must never be summarized interchangeably.
+
+## 2026-10-11 milestone: Gate #4 GREEN — full original cubic coefficient response accepted
+
+**This section supersedes the earlier pending/red K6C snapshot above.** [Cubic Source Response #4](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38182729417), exact qualification head `a05fbfbc4414cac8573d83256c19ba904ec081e7`, **COMPLETED SUCCESS**. The CI log contains strict permitted-axiom and compiled-`.olean` checks, including:
+
+```text
+S3L5K6A_GENERIC_CUBIC_POSITIVE_SOURCE_TRANSPORT_PASS
+S3L5K6B_NEGATIVE_CUBIC_FINITE_SOURCE_TRANSPORT_PASS
+S3L5K6C1_CUBIC_SIXFOLD_COEFFICIENT_CONTRACTION_PASS
+S3L5K6C2_CUBIC_NEGATIVE_SOURCE_TRANSPORT_PASS
+S3L5K6C3_SOURCE_CHARGE_BRIDGE_PASS
+S3L5K6C_ORIGINAL_CUBIC_COEFFICIENT_SOURCE_RESPONSE_PASS
+```
+
+**Qualified exact source theorem:** `FCP.BFSSSU2PhysicalDomainS3L5K6C.pairedOriginalCubicCoefficientResponse_freeSpinor`. It carries the original BFSS cubic `1/2` structure-constant weights, source `gammaTwo`, genuine paired plane spin generator, all six spatial/color/spinor monomial indices, and the negative free-spinor generator action on original `sourceCubicCharge pairedAlgebraData β`. Verified permitted axioms only (`propext`, `Classical.choice`, `Quot.sound`).
+
+**What changed, exactly:** Gate #3 exhausted deterministic Lean heartbeats in `change`/weak-head normalization of concrete `d/c/T` aliases. Gate #4's corrective commit `20696917417f8f98b382a889555c95c630d75e4a` instead gave K6B's already-checked theorem an explicit typed `have h` followed by `simpa only [d, c, T] using h`. No statement, source-defined operator, assumption or compiler-resource increase was required. This is reusable proof-engineering evidence **not** a replacement for any physical assumption.
+
+**NEXT substantive goal:** original, actual 48-Majorana combined-spin **source cubic-monomial operator commutator (K2)**. Legacy `S3L5K2ActualCubicSourceMonomialProbe.lean` repeatedly hit its 65-second wall-clock limit (exit 124) after K1 position-pair and K2A fermion-action covariance were qualified. Do not confuse this with K6's former coefficient transport. Inspect qualified `S3L5K1.sourceComm_comp`, `S3L5K1.pairedActualCombined_comm_positionPair`, and `S3L5K2.pairedActualCombined_comm_fermionAction`; use non-unfolding, explicitly typed interfaces to instantiate Leibniz once, then discharge the original monomial definition. Preserve original monomial factor order and no hidden K2 assumption. Do not rerun the old K2 or monolithic K6 workflow unchanged.
+
+**Scientific limit unchanged:** Full source cubic **coefficient** response now **[U] qualified**. The actual source cubic **operator commutator** and full cubic-charge covariance remain **unqualified**. Positive spectral claims remain entirely distinct.
+
+The successful proof and these negative lessons should inform all future Project Lead successors; never revert to an outdated red/pending status from the earlier handoff sections without checking this Gate #4 evidence.
