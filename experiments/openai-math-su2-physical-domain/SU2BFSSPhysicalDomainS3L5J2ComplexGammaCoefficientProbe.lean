@@ -28,9 +28,9 @@ theorem pairedComplexKineticCoefficient_reindexed
     (∑ β : SpinIndex,
       (pairedAlgebraData.gamma k α β : ℂ) *
         (pairedPlaneSpinGenerator i j γ β : ℂ)) +
-      (if k = i then (pairedAlgebraData.gamma j α γ : ℂ)
-       else if k = j then -(pairedAlgebraData.gamma i α γ : ℂ)
-       else 0) =
+      ((if k = i then pairedAlgebraData.gamma j α γ
+        else if k = j then -(pairedAlgebraData.gamma i α γ)
+        else (0 : ℝ)) : ℂ) =
     -(∑ β : SpinIndex,
       (pairedPlaneSpinGenerator i j α β : ℂ) *
         (pairedAlgebraData.gamma k β γ : ℂ)) := by
@@ -47,9 +47,9 @@ theorem pairedMinusI_KineticCoefficient_reindexed
       ((∑ β : SpinIndex,
         (pairedAlgebraData.gamma k α β : ℂ) *
           (pairedPlaneSpinGenerator i j γ β : ℂ)) +
-        (if k = i then (pairedAlgebraData.gamma j α γ : ℂ)
-         else if k = j then -(pairedAlgebraData.gamma i α γ : ℂ)
-         else 0)) =
+        ((if k = i then pairedAlgebraData.gamma j α γ
+          else if k = j then -(pairedAlgebraData.gamma i α γ)
+          else (0 : ℝ)) : ℂ)) =
     -Complex.I *
       (-(∑ β : SpinIndex,
         (pairedPlaneSpinGenerator i j α β : ℂ) *
