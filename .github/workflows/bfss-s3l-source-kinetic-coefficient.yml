@@ -32,6 +32,7 @@ name: BFSS S3L Source Rotation Coefficients
 # S3L5J2 #60: exact scalar gate with source-qualified J1 import and axiom review.
 # S3L5J2 #61: direct congrArg real-to-complex cast, no change to original source gamma signs.
 # S3L5J2 #62: present orbital conditional as the direct cast seen in Lean #61 diagnostics.
+# S3L5J2 #63: explicit k=i/k=j spatial branch simplification; keep exact expanded complex statement.
 # S3L5I2 #54: Gate #53 whnf heartbeat at final change; source-syntax simpa only, no increased compiler budgets.
 # Pinned S3L5I2 source qualification launch after cache/source preflight.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
