@@ -2,7 +2,7 @@ import SU2BFSSPhysicalDomainS3L5K2AOriginalFermionActionCovarianceProbe
 
 /-!
 # S3L5K2B — exact concrete cubic source monomial via opaque operator interfaces
-K2B #1: independently qualify original source commutator using qualified K1 and K2A aliases.
+K2B #2: open the K2A-qualified S3L5K2 namespace omitted in Gate #1; no theorem/proof edits.
 
 First bounded successor to known-red S3L5K2. Reuse the SOURCE-QUALIFIED
 K1 paired position-pair commutator, K2A exact 48-Majorana fermion-action
@@ -29,6 +29,8 @@ open FCP.BFSSSU2PhysicalDomainS3L4D
 open FCP.BFSSSU2PhysicalDomainS3L5C
 open FCP.BFSSSU2PhysicalDomainS3L5F
 open FCP.BFSSSU2PhysicalDomainS3L5K1
+-- K2A is deliberately in namespace S3L5K2, despite its K2A filename.
+open FCP.BFSSSU2PhysicalDomainS3L5K2
 
 
 /-- The EXACT source operator factor of Core.lean's original cubic
