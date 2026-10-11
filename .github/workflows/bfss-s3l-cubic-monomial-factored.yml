@@ -3,13 +3,9 @@ name: BFSS S3L Cubic Monomial Factored Proof
 # K2B original source cubic monomial via typed operator interfaces.
 # Reuse source-verified accepted 26-module cache and qualified K1/K2A.
 # This does not claim complete cubic charge covariance or spectra.
+# Known-red K2B #1–#4 interface strategy superseded by isolated K2C.
+# Preserve strict historical diagnostics; re-run manually only.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-concrete-potential
-    paths:
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2BFactoredCubicSourceMonomialProbe.lean
-      - .github/workflows/bfss-s3l-cubic-monomial-factored.yml
   workflow_dispatch:
 
 permissions:
