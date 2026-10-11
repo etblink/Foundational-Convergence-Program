@@ -3,7 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K2AOriginalFermionActionCovarianceProbe
 /-!
 # S3L5K2B — exact concrete cubic source monomial via opaque operator interfaces
 K2B #2: open the K2A-qualified S3L5K2 namespace omitted in Gate #1; no theorem/proof edits.
-K2B Gate #2 qualification: first causal error at K2B #1 was missing namespace; validate independently.
+K2B Gate #3: Gate #2 fixed namespace but hit recursion in three simplifications; replace tactics with exact use of qualified lemmas.
 
 First bounded successor to known-red S3L5K2. Reuse the SOURCE-QUALIFIED
 K1 paired position-pair commutator, K2A exact 48-Majorana fermion-action
@@ -75,17 +75,18 @@ theorem pairedActualCombined_comm_cubicMonomial
   let VP : SourceEnd :=
     (sourcePositionVariation i j k B).comp (position (N := 2) l C) +
       (position (N := 2) k B).comp (sourcePositionVariation i j l C)
-  have hF : G.comp F - F.comp G = VF := by
-    simpa only [G, F, VF] using
-      (pairedActualCombined_comm_fermionAction i j γ A)
-  have hP : G.comp P - P.comp G = VP := by
-    simpa only [G, P, VP] using
-      (pairedActualCombined_comm_positionPair i j k l B C hij)
+  -- Gate #2 recursion was caused by the simplifier traversing the
+  -- enormous concrete Fock/SmoothCore expressions. Use the accepted
+  -- K2A and K1 proof objects directly through exact SourceEnd aliases.
+  have hF : G.comp F - F.comp G = VF :=
+    pairedActualCombined_comm_fermionAction i j γ A
+  have hP : G.comp P - P.comp G = VP :=
+    pairedActualCombined_comm_positionPair i j k l B C hij
   have hLeibniz :
       G.comp (F.comp P) - (F.comp P).comp G =
         VF.comp P + F.comp VP :=
     sourceComm_comp G F P VF VP hF hP
-  simpa only [G, F, P, VF, VP, pairedOriginalCubicMonomial] using hLeibniz
+  exact hLeibniz
 
 #print axioms pairedActualCombined_comm_cubicMonomial
 
