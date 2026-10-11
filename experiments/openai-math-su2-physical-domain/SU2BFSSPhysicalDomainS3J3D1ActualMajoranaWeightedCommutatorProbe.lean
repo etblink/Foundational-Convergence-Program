@@ -39,9 +39,9 @@ theorem pairedSourceTheta_weighted_commutator
     _ = ∑ γ : SpinIndex, v γ •
           (pairedFermionPlaneSpinGenerator i j * pairedTheta γ C -
             pairedTheta γ C * pairedFermionPlaneSpinGenerator i j) := by
-            exact weighted_commutator
-              (pairedFermionPlaneSpinGenerator i j)
-              (fun γ : SpinIndex => pairedTheta γ C) v
+            simp only [Finset.mul_sum, Finset.sum_mul,
+              mul_smul_comm, smul_mul_assoc, smul_sub,
+              Finset.sum_sub_distrib]
     _ = ∑ γ : SpinIndex, v γ •
           (∑ α : SpinIndex,
             ((pairedPlaneSpinGenerator i j α γ : ℝ) : ℂ) •
