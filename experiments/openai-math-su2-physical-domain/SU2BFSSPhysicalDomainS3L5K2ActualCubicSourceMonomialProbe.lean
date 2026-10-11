@@ -68,6 +68,16 @@ private theorem sourceCombined_comm_cubicMonomial_of_fermionCovariance
     (sourceCombined_comm_positionPair K i j k l B C hij)
 
 
+/-- Raw source-endomorphism commutator Leibniz identity.
+Unlike a typed concrete specialization, its rewrite needs only to match
+the syntactic composition tree on the original SmoothCore. -/
+private theorem sourceComm_comp_raw (G F P : SourceEnd) :
+    G.comp (F.comp P) - (F.comp P).comp G =
+      (G.comp F - F.comp G).comp P +
+        F.comp (G.comp P - P.comp G) := by
+  exact sourceComm_comp G F P
+    (G.comp F - F.comp G) (G.comp P - P.comp G) rfl rfl
+
 theorem pairedActualCombined_comm_cubicMonomial
     (i j k l : SpaceIndex) (γ : SpinIndex)
     (A B C : ColorIndex 2) (hij : i ≠ j) :
@@ -83,30 +93,12 @@ theorem pairedActualCombined_comm_cubicMonomial
         ((sourcePositionVariation i j k B).comp (position (N := 2) l C) +
           (position (N := 2) k B).comp
             (sourcePositionVariation i j l C)) := by
-  -- The cubic monomial is source-definitionally F ∘ P; no
-  -- concrete Fock definitions need to be unfolded by elaboration.
-  let G : SourceEnd :=
-    sourceParametricCombinedPlane
-      (pairedFermionPlaneSpinGenerator i j) i j
-  let F : SourceEnd := pairedAlgebraData.fermionAction γ A
-  let P : SourceEnd :=
-    (position (N := 2) k B).comp (position (N := 2) l C)
-  let V : SourceEnd := sourceCubicFermionVariation i j γ A
-  let W : SourceEnd :=
-    (sourcePositionVariation i j k B).comp (position (N := 2) l C) +
-      (position (N := 2) k B).comp (sourcePositionVariation i j l C)
-  have hF : G.comp F - F.comp G = V :=
-    pairedActualCombined_comm_fermionAction i j γ A
-  have hP : G.comp P - P.comp G = W :=
-    pairedActualCombined_comm_positionPair i j k l B C hij
-  have h : G.comp (F.comp P) - (F.comp P).comp G =
-      V.comp P + F.comp W :=
-    sourceComm_comp G F P V W hF hP
-  -- Match only the small declared source wrappers; keep the original
-  -- paired spin generator, fermionAction, and positions opaque.
-  change G.comp (F.comp P) - (F.comp P).comp G =
-    V.comp P + F.comp W
-  exact h
+  -- Rewrite syntactically instead of elaborating the enormous
+  -- paired operators as arguments of a generic theorem.
+  unfold pairedOriginalCubicMonomial
+  rw [sourceComm_comp_raw,
+      pairedActualCombined_comm_fermionAction i j γ A,
+      pairedActualCombined_comm_positionPair i j k l B C hij]
 
 
 #print axioms pairedActualCombined_comm_fermionAction
