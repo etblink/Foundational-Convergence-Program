@@ -50,6 +50,7 @@ name: BFSS S3L Source Rotation Coefficients
 # Gate73 qualification: source J7 all-index transport, with qualified consolidated cache and axiom gate.
 # J8: contract actual scalar -i gamma/J coefficient; keep final source operator spinor sum separate.
 # Gate74: pinned J8 scalar coefficient proof with strict exact-name and axiom checks.
+# J9: original paired 48-Majorana source kinetic charge negative free-spinor covariance, not Hamiltonian or cubic.
 # S3L5I2 #54: Gate #53 whnf heartbeat at final change; source-syntax simpa only, no increased compiler budgets.
 # Pinned S3L5I2 source qualification launch after cache/source preflight.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
@@ -92,6 +93,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J6SourceOrbitalFixedIndexReindexProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J7OriginalFullResponseCoefficientTransportProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J8PairedComplexResponseCoefficientContractionProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J9ActualKineticFreeSpinorCovarianceProbe.lean
       - experiments/openai-math-su2-physical-domain/S3L_ACCEPTED_CACHE_QUALIFIED_SOURCES_0_1_0.txt
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
@@ -1504,4 +1506,33 @@ jobs:
             assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('S3L5J8_EXACT_GAMMA_J_RESPONSE_COEFFICIENT_PASS')
+          PY
+
+      - name: Compile S3L5J9 actual SU2 source kinetic free-spinor covariance
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L5J9ActualKineticFreeSpinorCovarianceProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5J8PairedComplexResponseCoefficientContractionProbe.olean
+          timeout 160s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5j9-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5j9-axioms.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=[
+            'FCP.BFSSSU2PhysicalDomainS3L5J9.sourceFourSum_spinorFirst',
+            'FCP.BFSSSU2PhysicalDomainS3L5J9.sourceFullFreeSpinorSum_transport',
+            'FCP.BFSSSU2PhysicalDomainS3L5J9.sourceFullNegativeFreeSpinorSum_transport',
+            'FCP.BFSSSU2PhysicalDomainS3L5J9.pairedKineticWeightedResponse_freeSpinorCovariance',
+            'FCP.BFSSSU2PhysicalDomainS3L5J9.pairedActualCombined_comm_sourceKineticCharge_freeSpinor']
+          assert [n for n,_ in matches] == expected,matches
+          for n, ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5J9_ACTUAL_PAIRED_SOURCE_KINETIC_FREE_SPINOR_COVARIANCE_PASS')
           PY
