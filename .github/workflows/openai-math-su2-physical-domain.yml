@@ -2435,9 +2435,11 @@ jobs:
           log = open(sys.argv[1]).read()
           tag = sys.argv[2]
           reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
-          expected = 'FCP.BFSSSU2PhysicalDomainS3J3Diag' + tag + '.diagnostic_step'
-          assert len(reports) == 1 and reports[0][0] == expected, reports
-          assert {x.strip() for x in reports[0][1].split(',')} <= {'propext','Classical.choice','Quot.sound'}, reports
+          prefix = 'FCP.BFSSSU2PhysicalDomainS3J3Diag' + tag + '.'
+          expected = ([prefix + 'abstract_fock_op'] if tag == 'P0CommApply' else []) + [prefix + 'diagnostic_step']
+          assert [n for n, _ in reports] == expected, reports
+          for name, axioms in reports:
+            assert {x.strip() for x in axioms.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (name, axioms)
           assert 'sorryAx' not in log and 'error:' not in log, log
           print('S3J3_DIAG_KERNEL_AXIOM_PASS:' + tag)
           PY
