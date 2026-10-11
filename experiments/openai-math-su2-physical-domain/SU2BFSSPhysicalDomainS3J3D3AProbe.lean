@@ -45,7 +45,11 @@ theorem handle_ad_sum (i j : SpaceIndex) (C : ColorIndex 2)
         congrArg (fun Z : FermionOp =>
           OAI.KadisonKastler.boundedCommutator (exactSourceK i j) Z)
           (exactSourceThetaSum_eq C v)
-    _ = _ := ad_sum_linear (exactSourceK i j) C v
+    _ = _ := by
+          rw [map_sum]
+          apply Finset.sum_congr rfl
+          intro γ _
+          rw [map_smul]
 
 #print axioms handle_ad_sum
 end FCP.BFSSSU2PhysicalDomainS3J3D3A
