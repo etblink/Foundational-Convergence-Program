@@ -19,12 +19,21 @@ private abbrev SpinCoeffs := SpinIndex → ℂ
 
 namespace FCP.BFSSSU2PhysicalDomainS3J3D3A
 
-private theorem ad_sum_linear (K : FermionOp) (C : ColorIndex 2)
+/-- A definitional name for the original source Majorana family. -/
+noncomputable def exactThetaFamily (C : ColorIndex 2) :
+    SpinIndex → FermionOp := fun γ => pairedTheta γ C
+
+private theorem exactThetaSum_as_family (C : ColorIndex 2)
     (v : SpinCoeffs) :
+    exactSourceThetaSum C v =
+      ∑ γ : SpinIndex, v γ • exactThetaFamily C γ := rfl
+
+private theorem ad_sum_linear (K : FermionOp)
+    (theta : SpinIndex → FermionOp) (v : SpinCoeffs) :
     OAI.KadisonKastler.boundedCommutator K
-      (∑ γ : SpinIndex, v γ • pairedTheta γ C) =
+      (∑ γ : SpinIndex, v γ • theta γ) =
     ∑ γ : SpinIndex, v γ •
-      OAI.KadisonKastler.boundedCommutator K (pairedTheta γ C) := by
+      OAI.KadisonKastler.boundedCommutator K (theta γ) := by
   rw [map_sum]
   apply Finset.sum_congr rfl
   intro γ _
@@ -38,18 +47,15 @@ theorem handle_ad_sum (i j : SpaceIndex) (C : ColorIndex 2)
       (exactSourceK i j) (exactSourceThetaSum C v) =
     ∑ γ : SpinIndex, v γ •
       OAI.KadisonKastler.boundedCommutator
-        (exactSourceK i j) (pairedTheta γ C) := by
+        (exactSourceK i j) (exactThetaFamily C γ) := by
   calc
     _ = OAI.KadisonKastler.boundedCommutator
-      (exactSourceK i j) (∑ γ : SpinIndex, v γ • pairedTheta γ C) :=
+      (exactSourceK i j)
+      (∑ γ : SpinIndex, v γ • exactThetaFamily C γ) :=
         congrArg (fun Z : FermionOp =>
           OAI.KadisonKastler.boundedCommutator (exactSourceK i j) Z)
-          (exactSourceThetaSum_eq C v)
-    _ = _ := by
-          rw [map_sum]
-          apply Finset.sum_congr rfl
-          intro γ _
-          rw [map_smul]
+          (exactThetaSum_as_family C v)
+    _ = _ := ad_sum_linear (exactSourceK i j) (exactThetaFamily C) v
 
 #print axioms handle_ad_sum
 end FCP.BFSSSU2PhysicalDomainS3J3D3A

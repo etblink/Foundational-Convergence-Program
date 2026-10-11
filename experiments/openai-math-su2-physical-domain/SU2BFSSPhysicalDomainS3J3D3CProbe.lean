@@ -1,4 +1,5 @@
 import SU2BFSSPhysicalDomainS3J3D2ExactHandleSingleThetaProbe
+import SU2BFSSPhysicalDomainS3J3D0WeightedCommutatorProbe
 
 /-!
 S3J3D3 — independent bounded weighted-Majorana subobligation.
@@ -28,22 +29,7 @@ private theorem fock_matrix_swap
       (∑ α : SpinIndex, J α γ • theta α)) =
     ∑ α : SpinIndex,
       (∑ γ : SpinIndex, J α γ * v γ) • theta α := by
-  calc
-    _ = ∑ γ : SpinIndex, ∑ α : SpinIndex,
-      (v γ * J α γ) • theta α := by
-        simp only [Finset.smul_sum, smul_smul]
-    _ = ∑ α : SpinIndex, ∑ γ : SpinIndex,
-      (v γ * J α γ) • theta α := Finset.sum_comm
-    _ = ∑ α : SpinIndex,
-      (∑ γ : SpinIndex, v γ * J α γ) • theta α := by
-        simp only [Finset.sum_smul]
-    _ = _ := by
-        apply Finset.sum_congr rfl
-        intro α _
-        apply congrArg (fun z : ℂ => z • theta α)
-        apply Finset.sum_congr rfl
-        intro γ _
-        exact mul_comm (v γ) (J α γ)
+  exact FCP.BFSSSU2PhysicalDomainS3J3D0.weighted_matrix_sum J theta v
 
 /-- Original gamma-plane coefficients and genuine Majorana family,
 with no polymorphic algebra synthesis at specialization. -/
