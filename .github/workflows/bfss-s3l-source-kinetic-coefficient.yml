@@ -1,6 +1,6 @@
 name: BFSS S3L Source Rotation Coefficients
 
-# Qualification gate for source S3L0–S3L4A through the cache-owning PR base.
+# Qualification gate for accepted S3L0–S3L3E plus isolated S3L4B; unqualified S3L4A intentionally excluded.
 
 # Qualification is run in a PR against the original cache-owning BFSS research base.
 # After qualification the review PR may return to its stacked S3K base.
@@ -18,7 +18,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3CSourceOrbitalPositionCommutatorProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L4ASourceSmoothCoreFermionSpinBridgeProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L4BOriginalSmoothCorePostcompCalculusProbe.lean
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
@@ -344,30 +344,32 @@ jobs:
           print('S3L3E_SOURCE_ORBITAL_DERIVATIVE_COVARIANCE_PASS')
           PY
 
-      - name: Compile S3L4A literal SmoothCore Fock spin lift and source commutators
+      - name: Compile S3L4B generic original-source postcomp calculus only
         shell: bash
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
-          stem=SU2BFSSPhysicalDomainS3L4ASourceSmoothCoreFermionSpinBridgeProbe
+          stem=SU2BFSSPhysicalDomainS3L4BOriginalSmoothCorePostcompCalculusProbe
           cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe.olean
-          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbe.olean
-          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l4a-axioms.log
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l4b-axioms.log
           test -s ".lake/build/lib/lean/$stem.olean"
           python3 - <<'PY'
           import re
-          s=open('/tmp/s3l4a-axioms.log').read()
-          names=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)
+          s=open('/tmp/s3l4b-axioms.log').read()
           expected=[
-            'FCP.BFSSSU2PhysicalDomainS3L4A.pairedSourceSpinSmoothCore_apply',
-            'FCP.BFSSSU2PhysicalDomainS3L4A.pairedSourceSpinSmoothCore_comm_fermionAction',
-            'FCP.BFSSSU2PhysicalDomainS3L4A.pairedSourceSpinSmoothCore_comm_position',
-            'FCP.BFSSSU2PhysicalDomainS3L4A.pairedSourceSpinSmoothCore_comm_derivative']
-          assert [n for n,_ in names]==expected,names
-          for n,ax in names:
-            assert {v.strip() for v in ax.split(',')} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+            'FCP.BFSSSU2PhysicalDomainS3L4B.sourcePostcomp_apply',
+            'FCP.BFSSSU2PhysicalDomainS3L4B.sourcePostcomp_comm',
+            'FCP.BFSSSU2PhysicalDomainS3L4B.sourcePostcomp_sum',
+            'FCP.BFSSSU2PhysicalDomainS3L4B.sourcePostcomp_comm_position',
+            'FCP.BFSSSU2PhysicalDomainS3L4B.sourcePostcomp_comm_derivative',
+            'FCP.BFSSSU2PhysicalDomainS3L4B.sourcePostcomp_covariance']
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          assert [n for n,_ in matches]==expected,matches
+          for n,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
-          print('S3L4A_SOURCE_FOCK_SPIN_SMOOTHCORE_LIFT_PASS')
+          print('S3L4B_ORIGINAL_SMOOTHCORE_POSTCOMP_CALCULUS_PASS')
           PY
