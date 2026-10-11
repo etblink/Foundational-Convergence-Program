@@ -2,7 +2,7 @@ import SU2BFSSPhysicalDomainS3L5K6C1OriginalCubicCoefficientContractionProbe
 
 /-!
 # S3L5K6C2 — isolated original cubic source coefficient step
-Gate #3 experiment: explicitly typed named scalar and monomial interfaces before finite-sum transport; preserve the exact original theorem statement.
+Gate #3 qualification: explicit typed source aliases and non-unfolding finite-sum change. Gate #3 experiment: explicitly typed named scalar and monomial interfaces before finite-sum transport; preserve the exact original theorem statement.
 Specialize already-qualified K6B negative sixfold transport to original BFSS gammaTwo and original SmoothCore cubic monomials.
 No new axioms, source physics, concrete K2 commutator, or spectral claims.
 -/
