@@ -10,6 +10,7 @@ name: BFSS S3L Source Rotation Coefficients
 # S3L5E concrete specialization remains UNQUALIFIED (#45); S3L5F tests only the parametric additive transport.
 # S3L5F launch: source-parametric M/K, explicit fiber premise, no concrete S3L5E expansion.
 # S3L5G launch: qualify ONLY the named concrete specialization of accepted S3L5F; do not compile S3L5E.
+# S3L5H: first isolate source finite-sum transport and exact S3L0 gamma entry; freeze qualified 3B–5G oleans into exact source-checked cache.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
 
 # Qualification is run in a PR against the original cache-owning BFSS research base.
@@ -37,6 +38,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5DSourceOrbitalKineticMonomialProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5FParametricCombinedKineticMonomialProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5HFiniteSumAndCoefficientEntryProbe.lean
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
@@ -272,7 +274,77 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3ASourcePositionDerivativeCommutatorProbe.olean
           key: bfss-s3l3a-source-objects-v1-3012fa8a6f5c1d59-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L0*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L1*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L2*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3A*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
 
+      - name: Restore exact qualified S3L3B–S3L5G Lean objects
+        id: accepted_s3l5g_cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3CSourceOrbitalPositionCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L4BOriginalSmoothCorePostcompCalculusProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L4CSourceAlgebraDataFermionActionInterfaceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L4DConcreteSourceFockSpinCovarianceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5ASourceChargeKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5BActualKineticMonomialCovarianceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5CSourceOrbitalFermionActionCommutationProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5DSourceOrbitalKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5FParametricCombinedKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe.olean
+          key: bfss-s3l-accepted-3b-5g-v1-252e17a8-lean4341-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Verify accepted Gate 47 source identity and cached objects
+        shell: bash
+        run: |
+          set -euo pipefail
+          frozen=252e17a8b3a2c8beb5b1df3856a7f6de1c5df6de
+          git fetch --quiet --no-tags --depth=1 origin "$frozen"
+          while IFS= read -r m; do
+            test -n "$m" || continue
+            p="experiments/openai-math-su2-physical-domain/$m.lean"
+            test "$(git rev-parse "$frozen:$p")" = "$(git hash-object "$p")"
+            if [ "${{ steps.accepted_s3l5g_cache.outputs.cache-hit }}" = "true" ]; then
+              test -s "upstream-math/lean/.lake/build/lib/lean/$m.olean"
+            fi
+          done <<'MODULES'
+SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe
+SU2BFSSPhysicalDomainS3L3CSourceOrbitalPositionCommutatorProbe
+SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe
+SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe
+SU2BFSSPhysicalDomainS3L4BOriginalSmoothCorePostcompCalculusProbe
+SU2BFSSPhysicalDomainS3L4CSourceAlgebraDataFermionActionInterfaceProbe
+SU2BFSSPhysicalDomainS3L4DConcreteSourceFockSpinCovarianceProbe
+SU2BFSSPhysicalDomainS3L5ASourceChargeKineticMonomialProbe
+SU2BFSSPhysicalDomainS3L5BActualKineticMonomialCovarianceProbe
+SU2BFSSPhysicalDomainS3L5CSourceOrbitalFermionActionCommutationProbe
+SU2BFSSPhysicalDomainS3L5DSourceOrbitalKineticMonomialProbe
+SU2BFSSPhysicalDomainS3L5FParametricCombinedKineticMonomialProbe
+SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe
+MODULES
+          if [ "${{ steps.accepted_s3l5g_cache.outputs.cache-hit }}" = "true" ]; then
+            source "$HOME/.elan/env"
+            cd upstream-math/lean
+            printf '%s\n' 'import SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe' \
+              '#print axioms FCP.BFSSSU2PhysicalDomainS3L5G.pairedActualCombined_comm_kineticMonomial' \
+              > S3L5GCacheImportCheck.lean
+            timeout 80s lake env lean S3L5GCacheImportCheck.lean 2>&1 | tee /tmp/s3l5g-cache-check.log
+            python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5g-cache-check.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=['FCP.BFSSSU2PhysicalDomainS3L5G.pairedActualCombined_comm_kineticMonomial']
+          assert [n for n,_ in matches]==expected,matches
+          for n,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5G_IMMUTABLE_CACHE_SOURCE_AND_AXIOM_CHECK_PASS')
+          PY
+          fi
+
       - name: Compile S3L3B exact source operator-level Heisenberg commutator
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -295,6 +367,7 @@ jobs:
           PY
 
       - name: Compile S3L3C exact orbital-position rotation commutator
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -319,6 +392,7 @@ jobs:
           PY
 
       - name: Compile S3L3D mixed coordinate derivatives on original SmoothCore
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -341,6 +415,7 @@ jobs:
           PY
 
       - name: Compile S3L3E exact orbital-derivative covariance
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -363,6 +438,7 @@ jobs:
           PY
 
       - name: Compile S3L4B generic original-source postcomp calculus only
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -393,6 +469,7 @@ jobs:
           PY
 
       - name: Compile S3L4C exact source AlgebraData fermionAction interface
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -421,6 +498,7 @@ jobs:
           PY
 
       - name: Compile S3L4D exact 48-Majorana source spin covariance from S3E
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -450,6 +528,7 @@ jobs:
           PY
 
       - name: Compile S3L5A source-parametric kinetic monomial commutator
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -475,6 +554,7 @@ jobs:
           PY
 
       - name: Compile S3L5B actual 48-Majorana kinetic monomial covariance
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -500,6 +580,7 @@ jobs:
           PY
 
       - name: Compile S3L5C exact orbital-source fermionAction commutation
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -527,6 +608,7 @@ jobs:
           PY
 
       - name: Compile S3L5D original orbital kinetic monomial law
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -551,6 +633,7 @@ jobs:
           PY
 
       - name: Compile S3L5F parameterized combined source kinetic monomial
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -578,6 +661,7 @@ jobs:
           PY
 
       - name: Compile S3L5G actual combined paired kinetic monomial
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -600,4 +684,52 @@ jobs:
             assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('S3L5G_ACTUAL_COMBINED_KINETIC_MONOMIAL_PASS')
+          PY
+      - name: Save immutable accepted S3L3B–S3L5G proof object cache
+        if: ${{ steps.accepted_s3l5g_cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3CSourceOrbitalPositionCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L4BOriginalSmoothCorePostcompCalculusProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L4CSourceAlgebraDataFermionActionInterfaceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L4DConcreteSourceFockSpinCovarianceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5ASourceChargeKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5BActualKineticMonomialCovarianceProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5CSourceOrbitalFermionActionCommutationProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5DSourceOrbitalKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5FParametricCombinedKineticMonomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe.olean
+          key: bfss-s3l-accepted-3b-5g-v1-252e17a8-lean4341-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Compile S3L5H exact source sum and coefficient identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L5HFiniteSumAndCoefficientEntryProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L0SourceKineticSpinorCoefficientProbe.olean
+          timeout 160s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5h-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5h-axioms.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          expected=[
+            'FCP.BFSSSU2PhysicalDomainS3L5H.sourceComm_smul',
+            'FCP.BFSSSU2PhysicalDomainS3L5H.sourceComm_sum',
+            'FCP.BFSSSU2PhysicalDomainS3L5H.sourceComm_weighted_sum',
+            'FCP.BFSSSU2PhysicalDomainS3L5H.pairedKineticSpinorCoefficient_entry']
+          assert [n for n,_ in matches]==expected,matches
+          for n,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5H_SUM_AND_COEFFICIENT_SOURCE_PASS')
           PY
