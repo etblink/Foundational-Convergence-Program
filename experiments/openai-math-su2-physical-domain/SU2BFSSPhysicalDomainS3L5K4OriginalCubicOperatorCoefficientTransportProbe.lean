@@ -11,6 +11,8 @@ with scalar multiplication of source SmoothCore endomorphisms.
 Independently identify the same original monomial sum with Core.lean's
 sourceCubicCharge. No new representation or assumptions are introduced.
 
+Qualification K4-1: independent operator-valued transport over the original sixfold cubic monomials.
+
 This module does NOT prove the K2 commutator of the whole source
 monomial, the complete cubic charge covariance or any spectral claim.
 -/
