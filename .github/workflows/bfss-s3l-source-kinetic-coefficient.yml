@@ -5,6 +5,7 @@ name: BFSS S3L Source Rotation Coefficients
 # Gate #33 checks only the generic, exact AlgebraData.fermionAction interface; no concrete Fock elaboration.
 # Gate #34 checks the separately accepted S3E 48-Majorana specialization using S3L4C; no S3L4A replay.
 # Gate #39 found definitional and concrete elaboration bottlenecks; S3L5A now checks ONLY the source-parametric kinetic monomial transport.
+# S3L5C independent source orbital-fermionAction commutation: trigger one isolated qualification run.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
 
 # Qualification is run in a PR against the original cache-owning BFSS research base.
