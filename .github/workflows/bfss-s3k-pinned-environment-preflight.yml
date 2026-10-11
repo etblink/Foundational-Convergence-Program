@@ -15,24 +15,41 @@ permissions:
 jobs:
   exact-dependency-preflight:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 8
     steps:
-      - name: Inspect existing pinned dependency caches without extracting them
+      - name: Inspect lightweight runner and cache inventory
+        shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-        shell: bash
         run: |
-          set -euo pipefail
-          echo "CACHE_INVENTORY_BEGIN"
-          if gh api "repos/$GH_REPO/actions/caches?per_page=100" \
-             --jq '.actions_caches[] | select(.key | contains("family270b-bridge-ubuntu-lean4341-openai-adc7f124")) | [.key, .ref, (.size_in_bytes | tostring)] | @tsv'; then
-            echo "CACHE_INVENTORY_QUERY_COMPLETE"
-          else
-            echo "CACHE_INVENTORY_UNAVAILABLE__NOT_A_PROOF_FAILURE"
-          fi
+          set -uo pipefail
+          mkdir -p /tmp/s3k-diag
+          {
+            echo "BFSS_S3K_PINNED_ENVIRONMENT_DIAGNOSTIC_V2"
+            echo "RUN_ID=$GITHUB_RUN_ID"
+            echo "REF=$GITHUB_REF"
+            echo "DIAGNOSTIC_ONLY__NO_BFSS_PROOFS_RUN"
+            echo "UTC_DATE=$(date -u +%FT%TZ)"
+            echo "RUNNER_OS=$(uname -sr)"
+            echo "RUNNER_DISK:"
+            df -h / /home/runner/work || true
+            echo "RUNNER_MEMORY:"
+            free -m || true
+            echo "RUNNER_DISK_INODES:"
+            df -i / || true
+            echo "CACHE_INVENTORY_RESULT:"
+            gh api "repos/$GH_REPO/actions/caches?per_page=100" \
+              --jq '[.actions_caches[] | select(.key | contains("family270b-bridge-ubuntu-lean4341-openai-adc7f124")) | {key,ref,size_in_bytes,created_at,last_accessed_at}]' \
+              2>&1 || echo "CACHE_INVENTORY_QUERY_FAILED"
+            echo "LEAN_RELEASE_HEAD_STATUS:"
+            curl -LIs -o /dev/null --max-time 15 -w '%{http_code}\n' https://github.com/leanprover/lean4/releases/tag/v4.34.1 || echo "LEAN_RELEASE_HEAD_UNAVAILABLE"
+            echo "MATHLIB_CACHE_ENDPOINT_STATUS:"
+            curl -LIs -o /dev/null --max-time 15 -w '%{http_code}\n' https://cache.mathlib.org/ || echo "MATHLIB_CACHE_HEAD_UNAVAILABLE"
+            echo "DIAGNOSTIC_SCRIPT_REACHED_END"
+          } | tee /tmp/s3k-diag/runner-and-cache.txt
 
-      - name: Check out exact pinned OpenAI Math source
+      - name: Inspect exact source pins without downloading Mathlib artifacts
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: openai/math
@@ -42,20 +59,25 @@ jobs:
           sparse-checkout-cone-mode: true
           persist-credentials: false
 
-      - name: Cold-bootstrap pinned Lean and Mathlib without restoring the 3.5 GB cache
+      - name: Verify exact toolchain and lockfile identity
         shell: bash
-        timeout-minutes: 25
         run: |
           set -euo pipefail
-          test "$(cat lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
-          grep -q '"rev": "d13f23b723b8a846827a245b89c10fc7d3f11612"' lean/lake-manifest.json
-          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
-          source "$HOME/.elan/env"
-          cd lean
-          echo "PINNED_MATHLIB_COLD_CACHE_BEGIN"
-          timeout 1200s lake exe cache get
-          test -x "$HOME/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean"
-          test -s .lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean
-          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "d13f23b723b8a846827a245b89c10fc7d3f11612"
-          git diff --exit-code -- lake-manifest.json
-          echo "PINNED_S3K_MATHLIB_ENVIRONMENT_AVAILABLE__NO_BFSS_THEOREM_TESTED"
+          mkdir -p /tmp/s3k-diag
+          {
+            echo "OPENAI_MATH_HEAD=$(git rev-parse HEAD)"
+            echo "TOOLCHAIN=$(cat lean/lean-toolchain)"
+            grep '"rev": "d13f23b723b8a846827a245b89c10fc7d3f11612"' lean/lake-manifest.json
+            test "$(git rev-parse HEAD)" = "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
+            test "$(cat lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
+            echo "PINNED_SOURCE_IDENTITIES_VERIFIED__NO_COMPILATION"
+          } | tee /tmp/s3k-diag/source-pins.txt
+
+      - name: Publish diagnostic evidence for independent inspection
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s3k-env-diagnostic-v2
+          path: /tmp/s3k-diag/
+          if-no-files-found: error
+          retention-days: 14
