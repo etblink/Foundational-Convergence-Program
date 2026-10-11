@@ -2405,29 +2405,49 @@ jobs:
           print('S3J3D0_GENERIC_WEIGHTED_IDENTITIES_KERNEL_PASS')
           PY
 
-      - name: Compile S3J3D1 original Majorana weighted infinitesimal covariance
+      - name: Diagnose S3J3D1 first failing exact source equality (five isolated modules)
         shell: bash
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
-          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3J3D1ActualMajoranaWeightedCommutatorProbe.lean upstream-math/lean/
+          for tag in P0CommApply P1MapSum P2Pointwise P3SourceS3E P4IndexSwap; do
+            stem="SU2BFSSPhysicalDomainS3J3Diag${tag}Probe"
+            cp "experiments/openai-math-su2-physical-domain/${stem}.lean" upstream-math/lean/
+          done
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbe.olean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3D0WeightedCommutatorProbe.olean
-          timeout 120s lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3D1ActualMajoranaWeightedCommutatorProbe.olean SU2BFSSPhysicalDomainS3J3D1ActualMajoranaWeightedCommutatorProbe.lean 2>&1 | tee /tmp/bfss-su2-s3j3d1.log
-          python3 - <<'PY'
-          import re
-          log = open('/tmp/bfss-su2-s3j3d1.log').read()
+          test -s .lake/build/lib/lean/OAI/Analysis/KadisonKastler/ExponentialCommutator.olean
+          for tag in P0CommApply P1MapSum P2Pointwise P3SourceS3E P4IndexSwap; do
+            stem="SU2BFSSPhysicalDomainS3J3Diag${tag}Probe"
+            echo "S3J3_DIAG_BEGIN:${tag}"
+            set +e
+            timeout 35s lake env lean -o ".lake/build/lib/lean/${stem}.olean" "${stem}.lean" > "/tmp/${stem}.log" 2>&1
+            status=$?
+            set -e
+            if [ "$status" -ne 0 ]; then
+              echo "S3J3_DIAG_FIRST_FAIL:${tag}:LEAN_EXIT_${status}"
+              tail -n 100 "/tmp/${stem}.log"
+              exit 1
+            fi
+            if ! python3 - "/tmp/${stem}.log" "$tag" <<'PY'
+          import re, sys
+          log = open(sys.argv[1]).read()
+          tag = sys.argv[2]
           reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
-          assert [n for n, _ in reports] == [
-            'FCP.BFSSSU2PhysicalDomainS3J3D1.pairedSourceTheta_commutator_map_sum',
-            'FCP.BFSSSU2PhysicalDomainS3J3D1.pairedSourceTheta_weighted_commutator',
-          ], reports
-          for name, axioms in reports:
-            assert {s.strip() for s in axioms.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (name, axioms)
-          assert 'sorryAx' not in log and 'error:' not in log
-          print('S3J3D1_ACTUAL_MAJORANA_INFINITESIMAL_WEIGHTED_COVARIANCE_PASS')
+          expected = 'FCP.BFSSSU2PhysicalDomainS3J3Diag' + tag + '.diagnostic_step'
+          assert len(reports) == 1 and reports[0][0] == expected, reports
+          assert {x.strip() for x in reports[0][1].split(',')} <= {'propext','Classical.choice','Quot.sound'}, reports
+          assert 'sorryAx' not in log and 'error:' not in log, log
+          print('S3J3_DIAG_KERNEL_AXIOM_PASS:' + tag)
           PY
+            then
+              echo "S3J3_DIAG_FIRST_FAIL:${tag}:AXIOM_CHECK"
+              tail -n 100 "/tmp/${stem}.log"
+              exit 1
+            fi
+          done
+          echo S3J3_DIAG_ALL_FIVE_EXACT_SOURCE_EQUALITIES_KERNEL_PASS
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
         if: ${{ inputs.d2b29_trial == true }}
