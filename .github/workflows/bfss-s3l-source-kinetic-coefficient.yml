@@ -63,6 +63,7 @@ name: BFSS S3L Source Rotation Coefficients
 # Gate84: independently compile K2A actual fermionAction proof; K2 imports and consumes accepted lemma; strict kernel axioms and unchanged source model.
 # Gate84 launch: separate compiled prerequisite and bounded K2 consumer; preserve all accepted source modules and cache.
 # Gate85: K2A accepted at Gate84; replace concrete parametric theorem application with typed SourceEnd hF/hP and K1 generic composition law; no physics, cache, or axiom changes.
+# Gate86: original K2 monomial rewrite via sourceComm_comp_raw then accepted K2A and K1 commutator equalities; avoid paired Fock unification; no higher compiler budget.
 # J9: original paired 48-Majorana source kinetic charge negative free-spinor covariance, not Hamiltonian or cubic.
 # Gate75: one pinned source kinetic-sector covariance theorem and four small finite-sum lemmas.
 # J9 Gate76: isolate literal named weighted sum; avoid expensive global simpa and open exact S3L5F source.
