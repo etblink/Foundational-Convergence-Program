@@ -52,8 +52,9 @@ noncomputable def pairedThetaComboLin (C : ColorIndex 2) :
       _ = ∑ α : SpinIndex, c • (v α • pairedTheta α C) := by
             apply Finset.sum_congr rfl
             intro α _
-            exact smul_smul c (v α) (pairedTheta α C)
-      _ = _ := (Finset.smul_sum _ _ _).symm
+            exact (smul_smul c (v α) (pairedTheta α C)).symm
+      _ = _ := by
+            simp only [Finset.smul_sum]
 
 noncomputable def pairedThetaCombo (C : ColorIndex 2) :
     SpinCoeffs →L[ℂ] FermionOp :=
@@ -144,7 +145,7 @@ theorem pairedSourceSpinFlow_covariance
     calc
       B (T w) = ((t : ℝ) : ℂ) •
           OAI.KadisonKastler.boundedCommutator K (T w) := hscaled
-      _ = ((t : ℝ) : ℂ) • T (J w) := congrArg _ h0
+      _ = ((t : ℝ) : ℂ) • T (J w) := congrArg (fun x : FermionOp => ((t : ℝ) : ℂ) • x) h0
       _ = T (A w) := by
         rw [ContinuousLinearMap.smul_apply]
         exact (map_smul T ((t : ℝ) : ℂ) (J w)).symm
