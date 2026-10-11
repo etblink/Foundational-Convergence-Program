@@ -153,7 +153,7 @@ theorem pairedSourceOrbital_comm_position
   · by_cases hki : k = i
     · subst k
       simp [hij, hij.symm]
-    · simp [hkj, hki, hkj.symm, hki.symm]
+    · simp [hkj, hki, Ne.symm hkj, Ne.symm hki]
 
 #print axioms sourcePosition_comp_comm
 #print axioms pairedSourceOrbital_comm_position
