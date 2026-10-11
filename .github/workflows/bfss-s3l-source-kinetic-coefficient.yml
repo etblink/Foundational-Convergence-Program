@@ -16,6 +16,7 @@ name: BFSS S3L Source Rotation Coefficients
 # S3L5I: contract commutators over the literal original 9x3x16 kinetic charge; defer final gamma/J coefficient contraction.
 # S3L5I #51 one-gate pinned qualification; reuse accepted Gate #47 cache and S3L5H #50.
 # S3L5I #51 diagnostic RED: only direct concrete specialization exhausted Lean recursion. S3L5I1 isolates two CLEAN compiled triple-sum source identities.
+# S3L5I1 #52: pinned isolated green-boundary qualification; preserve source I #51 diagnostic.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
 
 # Qualification is run in a PR against the original cache-owning BFSS research base.
