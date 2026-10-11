@@ -1,6 +1,6 @@
 name: BFSS S3L Source Rotation Coefficients
 
-# Qualification gate for accepted S3L0–S3L4B plus source-parametric S3L4C; failed concrete S3L4A excluded.
+# Qualified S3L0–S3L4C plus exact specialized S3L4D; failed monolithic S3L4A remains excluded.
 # Gate #31 repeated S3L4A's known concrete elaboration failure; this run MUST NOT compile S3L4A.
 # Gate #33 checks only the generic, exact AlgebraData.fermionAction interface; no concrete Fock elaboration.
 
@@ -22,6 +22,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L4BOriginalSmoothCorePostcompCalculusProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L4CSourceAlgebraDataFermionActionInterfaceProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L4DConcreteSourceFockSpinCovarianceProbe.lean
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
@@ -403,4 +404,33 @@ jobs:
             assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('S3L4C_EXACT_SOURCE_FERMIONACTION_INTERFACE_PASS')
+          PY
+
+      - name: Compile S3L4D exact 48-Majorana source spin covariance from S3E
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L4DConcreteSourceFockSpinCovarianceProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L4CSourceAlgebraDataFermionActionInterfaceProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l4d-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l4d-axioms.log').read()
+          expected=[
+            'FCP.BFSSSU2PhysicalDomainS3L4D.pairedActualFockSpin_comm_source_theta',
+            'FCP.BFSSSU2PhysicalDomainS3L4D.pairedActualSourceSpin_comm_fermionAction',
+            'FCP.BFSSSU2PhysicalDomainS3L4D.pairedActualSourceSpin_comm_position',
+            'FCP.BFSSSU2PhysicalDomainS3L4D.pairedActualSourceSpin_comm_derivative']
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          assert [n for n,_ in matches]==expected,matches
+          for n,ax in matches:
+            assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L4D_ACTUAL_48_MAJORANA_SOURCE_SPIN_COVARIANCE_PASS')
           PY
