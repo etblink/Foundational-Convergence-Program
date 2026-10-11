@@ -9,6 +9,7 @@ on:
       - research/openai-math-su2-concrete-potential
     paths:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L0SourceKineticSpinorCoefficientProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L1SourceOrbitalSmoothCoreProbe.lean
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
@@ -105,4 +106,27 @@ jobs:
             assert {v.strip() for v in axioms.split(',')} <= allowed,(n,axioms)
           assert 'sorryAx' not in s and 'error:' not in s, s[-4000:]
           print('S3L0_PINNED_SOURCE_KINETIC_COEFFICIENT_PASS')
+          PY
+
+      - name: Compile source S3L1 genuine orbital SmoothCore generator
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L1SourceOrbitalSmoothCoreProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          timeout 140s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l1-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l1-axioms.log').read()
+          names=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)
+          assert [n for n,_ in names]==[
+            'FCP.BFSSSU2PhysicalDomainS3L1.pairedSourceOrbitalPlaneGenerator_apply'], names
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for n,axioms in names:
+            assert {v.strip() for v in axioms.split(',')} <= allowed,(n,axioms)
+          assert 'sorryAx' not in s and 'error:' not in s, s[-4000:]
+          print('S3L1_ORIGINAL_SMOOTH_CORE_ORBITAL_GENERATOR_PASS')
           PY
