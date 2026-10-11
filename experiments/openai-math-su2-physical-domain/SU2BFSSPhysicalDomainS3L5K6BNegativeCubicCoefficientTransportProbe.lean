@@ -3,6 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K6AGenericOriginalSixfoldTransportProbe
 /-!
 # S3L5K6B — negative cubic coefficient transport
 
+K6B #2 qualification: scalar-first negative coefficient plus accepted positive source transport.
 K6B #1 hit the 95s compile limit during the large
 neg_smul / sixfold Finset.sum_neg_distrib simplification. This attempt
 negates the sixteen-component SCALAR sum first, applies the already
