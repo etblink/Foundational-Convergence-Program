@@ -31,8 +31,6 @@ permissions:
 
 jobs:
   source-domain:
-    # Temporary source-only S3L5F parameterized Lean preflight; restore after gate.
-    if: ${{ github.event_name != 'pull_request' || github.head_ref != 'research/openai-math-su2-s3l-combined-rotation' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out FCP qualified-cache owner branch
