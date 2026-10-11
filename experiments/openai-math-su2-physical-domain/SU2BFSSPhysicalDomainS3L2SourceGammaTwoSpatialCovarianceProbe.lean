@@ -25,13 +25,13 @@ open FCP.BFSSSU2PhysicalDomainS3B
 
 /-- Explicit source rotation of a spatial gamma vector under J_ij,
 using the convention already kernel-checked in S3B. -/
-private def sourceGammaVariation
+def sourceGammaVariation
     (i j k : SpaceIndex) : GammaMatrix :=
   if k = j then pairedAlgebraData.gamma i
   else if k = i then -(pairedAlgebraData.gamma j)
   else 0
 
-private theorem sourceGammaVariation_eq_comm
+theorem sourceGammaVariation_eq_comm
     (i j k : SpaceIndex) (hij : i ≠ j) :
     sourceGammaVariation i j k =
       pairedPlaneSpinGenerator i j * pairedAlgebraData.gamma k -
