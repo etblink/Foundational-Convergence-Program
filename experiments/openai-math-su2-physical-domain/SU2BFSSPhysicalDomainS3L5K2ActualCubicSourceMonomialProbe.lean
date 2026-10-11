@@ -30,6 +30,7 @@ open FCP.BFSSSU2PhysicalDomainS3L5C
 open FCP.BFSSSU2PhysicalDomainS3L5F
 open FCP.BFSSSU2PhysicalDomainS3L5K1
 
+#eval IO.println "K2_DIAG_00_entered_module"
 /-- The actual original paired source fermion-action spin variation.
 The matrix coefficient and transpose orientation are inherited
 exactly from accepted S3L4D and the true 48-Majorana generator. -/
@@ -39,6 +40,8 @@ noncomputable def sourceCubicFermionVariation
   ∑ β : SpinIndex,
     (((pairedPlaneSpinGenerator i j β γ : ℝ) : ℂ) •
       pairedAlgebraData.fermionAction β A)
+
+#eval IO.println "K2_DIAG_01_variation_def_elaborated"
 
 /-- Source-parametric combined orbital/fiber commutator.
 The actual 48-Majorana fiber hypothesis remains explicit here, so Lean
@@ -75,6 +78,8 @@ private theorem sourceCombined_comm_fermionAction_of_fiber
         (∑ β : SpinIndex, c β • M.fermionAction β A) hL hK
     _ = _ := zero_add _
 
+#eval IO.println "K2_DIAG_02_parametric_fermion_proved"
+
 theorem pairedActualCombined_comm_fermionAction
     (i j : SpaceIndex) (γ : SpinIndex) (A : ColorIndex 2) :
     (sourceParametricCombinedPlane
@@ -89,6 +94,8 @@ theorem pairedActualCombined_comm_fermionAction
     (fun β => ((pairedPlaneSpinGenerator i j β γ : ℝ) : ℂ))
     i j γ A (pairedActualFockSpin_comm_source_theta i j γ A)
 
+#eval IO.println "K2_DIAG_03_paired_fermion_proved"
+
 /-- The EXACT source operator factor of Core.lean's original cubic
 supercharge, including composition order and all three colors. -/
 noncomputable def pairedOriginalCubicMonomial
@@ -96,6 +103,8 @@ noncomputable def pairedOriginalCubicMonomial
     (A B C : ColorIndex 2) : SourceEnd :=
   (pairedAlgebraData.fermionAction γ A).comp
     ((position (N := 2) k B).comp (position (N := 2) l C))
+
+#eval IO.println "K2_DIAG_04_cubic_monomial_def_elaborated"
 
 /-- Source-parametric cubic composition Leibniz rule, keeping
 the actual 48-Majorana fiber hypothesis visible for separate discharge.
@@ -128,6 +137,8 @@ private theorem sourceCombined_comm_cubicMonomial_of_fiber
     (sourceCombined_comm_fermionAction_of_fiber M K c i j γ A hFiber)
     (sourceCombined_comm_positionPair K i j k l B C hij)
 
+#eval IO.println "K2_DIAG_05_parametric_monomial_proved"
+
 theorem pairedActualCombined_comm_cubicMonomial
     (i j k l : SpaceIndex) (γ : SpinIndex)
     (A B C : ColorIndex 2) (hij : i ≠ j) :
@@ -150,6 +161,8 @@ theorem pairedActualCombined_comm_cubicMonomial
     (fun β => ((pairedPlaneSpinGenerator i j β γ : ℝ) : ℂ))
     i j k l γ A B C hij
     (pairedActualFockSpin_comm_source_theta i j γ A)
+
+#eval IO.println "K2_DIAG_06_paired_monomial_proved"
 
 #print axioms pairedActualCombined_comm_fermionAction
 #print axioms pairedActualCombined_comm_cubicMonomial
