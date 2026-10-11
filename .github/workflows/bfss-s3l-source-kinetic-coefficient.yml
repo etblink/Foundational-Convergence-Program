@@ -766,7 +766,7 @@ jobs:
           for n,ax in matches:
             assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
-          print('S3L5I2A_EXACT_CACHE_SOURCE_AND_AXIO​M_PASS')
+          print('S3L5I2A_EXACT_CACHE_SOURCE_AND_AXIOM_PASS')
           PY
           fi
 
