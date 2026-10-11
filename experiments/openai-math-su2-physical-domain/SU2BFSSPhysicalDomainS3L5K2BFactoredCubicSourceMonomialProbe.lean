@@ -4,6 +4,7 @@ import SU2BFSSPhysicalDomainS3L5K2AOriginalFermionActionCovarianceProbe
 # S3L5K2B — exact concrete cubic source monomial via opaque operator interfaces
 K2B #2: open the K2A-qualified S3L5K2 namespace omitted in Gate #1; no theorem/proof edits.
 K2B Gate #3: Gate #2 fixed namespace but hit recursion in three simplifications; replace tactics with exact use of qualified lemmas.
+K2B #3 qualification trigger: direct proof term reuse without simpa or larger recursion budget.
 
 First bounded successor to known-red S3L5K2. Reuse the SOURCE-QUALIFIED
 K1 paired position-pair commutator, K2A exact 48-Majorana fermion-action
