@@ -61,3 +61,14 @@ Root for following files: `experiments/openai-math-su2-physical-domain/`; filena
 The user's explicit preference: think before changing proof code; learn from red CI; minimize needless runner wait; reuse existing sources and already-compiled modules; preserve the big picture and negative knowledge for successors. More important, the user is after **truth rather than avoiding falsification**. Always describe the concrete uncertainty each mathematical milestone resolves, and the one it leaves behind. Never equate elaborate green CI with physical discovery.
 
 **Succession motto:** *Expose only the structure needed for the next identity, never abstract away a source-required assumption; make each red narrow uncertainty, and measure progress by mathematical truth rather than workflow color.*
+
+
+## 2026-10-11 update: K6C Gate #3 exact diagnostic, and Gate #4 experiment
+
+**Provenance:** [Cubic Source Response #3](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38182261252), HEAD `ec5074d5460db9dad956ed9b0bdaf2a29dcd7c05`, **red**. Accepted K3–K6B and K6C1 still compiled and passed source/axiom checks. K6C2 failed at **line 56**: `(deterministic) timeout at whnf, maximum number of heartbeats (200000) has been reached`. The first causal error was the `change` tactic attempting to convert the original sixfold source expression into a sixfold expression with named concrete `let d/c/T` functions. `#print axioms` then mentioned `sorryAx` only because Lean had not built a valid proof: it is **not** an authorized axiom or a green theorem. K6C3 and final K6C remained unchecked.
+
+**Negative knowledge:** Introducing typed local aliases is **not enough** if a follow-on `change` must run costly definitional normalization over the fully instantiated BFSS operators. A compiled generic theorem may be cheap while exact concrete elaboration or conversion is expensive.
+
+**Gate #4 experimental repair:** Commit `20696917417f8f98b382a889555c95c630d75e4a` constructs a named `have h` at the fully typed `d/c/T` source interface, then uses `simpa only [d, c, T] using h` instead of `change`. Qualification head `a05fbfbc4414cac8573d83256c19ba904ec081e7`; [Cubic Source Response #4](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38182729417) **started, not yet qualified at this update**. Original public statement, K3–K6C1 dependencies, accepted cache, physical source, and strict axiom policy unchanged. If #4 fails, use its *first* diagnostic to decide whether the aliases require a separately checked bridge; do not blindly increase budgets or repeat the same proof.
+
+**Decision discipline:** Note the distinction between `timeout 90s` (Gate #2: wall-clock/exit 124, no Lean theorem diagnostic) and `whnf` heartbeat exhaustion (Gate #3: targeted definitional-conversion failure). These are different evidence and must never be summarized interchangeably.
