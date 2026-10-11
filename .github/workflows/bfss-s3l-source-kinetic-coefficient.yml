@@ -1,5 +1,8 @@
 name: BFSS S3L Source Kinetic Coefficient
 
+# Qualification is run in a PR against the original cache-owning BFSS research base.
+# After qualification the review PR may return to its stacked S3K base.
+
 on:
   pull_request:
     branches:
