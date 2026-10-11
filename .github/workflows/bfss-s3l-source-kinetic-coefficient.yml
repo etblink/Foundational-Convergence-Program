@@ -15,6 +15,7 @@ name: BFSS S3L Source Rotation Coefficients
 # S3L5H repair #50: use accepted 3B-5G cache; fix namespace and preserve matrix entry as direct S3L0 extraction.
 # S3L5I: contract commutators over the literal original 9x3x16 kinetic charge; defer final gamma/J coefficient contraction.
 # S3L5I #51 one-gate pinned qualification; reuse accepted Gate #47 cache and S3L5H #50.
+# S3L5I #51 diagnostic RED: only direct concrete specialization exhausted Lean recursion. S3L5I1 isolates two CLEAN compiled triple-sum source identities.
 # S3L5B: exact actual paired SU2 specialization from green S3L4D and S3L5A; source and workflow were prepared while PR base was stacked.
 
 # Qualification is run in a PR against the original cache-owning BFSS research base.
@@ -43,7 +44,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5FParametricCombinedKineticMonomialProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5HFiniteSumAndCoefficientEntryProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5IActualKineticChargeExpansionProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5I1ExactTripleWeightedSumTransportProbe.lean
       - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
@@ -739,12 +740,12 @@ jobs:
           print('S3L5H_SUM_AND_COEFFICIENT_SOURCE_PASS')
           PY
 
-      - name: Compile S3L5I actual paired kinetic finite-sum expansion
+      - name: Compile S3L5I1 independent original-core triple finite-sum identities
         shell: bash
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
-          stem=SU2BFSSPhysicalDomainS3L5IActualKineticChargeExpansionProbe
+          stem=SU2BFSSPhysicalDomainS3L5I1ExactTripleWeightedSumTransportProbe
           cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5HFiniteSumAndCoefficientEntryProbe.olean
@@ -757,12 +758,11 @@ jobs:
           pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
           matches=pat.findall(s)
           expected=[
-            'FCP.BFSSSU2PhysicalDomainS3L5I.sourceComm_three_weighted_sums',
-            'FCP.BFSSSU2PhysicalDomainS3L5I.sourceComm_three_weighted_sums_of',
-            'FCP.BFSSSU2PhysicalDomainS3L5I.pairedActualCombined_comm_sourceKineticCharge_expanded']
+            'FCP.BFSSSU2PhysicalDomainS3L5I1.sourceComm_three_weighted_sums',
+            'FCP.BFSSSU2PhysicalDomainS3L5I1.sourceComm_three_weighted_sums_of']
           assert [n for n,_ in matches]==expected,matches
           for n,ax in matches:
             assert {v.strip() for v in ax.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
-          print('S3L5I_EXACT_SOURCE_KINETIC_CHARGE_SUM_EXPANSION_PASS')
+          print('S3L5I1_CLEAN_SOURCE_TRIPLE_SUM_TRANSPORT_PASS')
           PY
