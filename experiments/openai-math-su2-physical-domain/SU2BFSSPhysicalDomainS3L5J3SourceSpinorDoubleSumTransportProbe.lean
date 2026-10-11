@@ -3,6 +3,9 @@ import SU2BFSSPhysicalDomainS3L5J2ComplexGammaCoefficientProbe
 /-!
 # S3L5J3 — finite spinor reindex with the genuine source operator family
 
+The gate checks source-level sum exchange only; no claim of completed
+free-spinor kinetic covariance follows from this intermediate lemma.
+
 Gates #59/#64 established the original spatial orbital and complex
 -i gamma/J coefficient. Before contracting the real 9 × 3 × 16
 source kinetic response, this gate independently transports the
