@@ -2497,8 +2497,9 @@ jobs:
           expected = {'A':'handle_ad_sum','B':'handle_ad_pointwise','C':'handle_matrix_swap'}[tag]
           log = open(sys.argv[1]).read()
           reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
-          name = 'FCP.BFSSSU2PhysicalDomainS3J3D3' + tag + '.' + expected
-          assert [n for n,_ in reports] == [name], reports
+          name = 'FCP.BFSSSU2PhysicalDomainS3J3D3' + tag + '.'
+          expected_names = ([name + 'exactSourceAd_eq', name + 'exactSourceAd_apply'] if tag == 'A' else []) + [name + expected]
+          assert [n for n,_ in reports] == expected_names, reports
           for theorem,ax in reports:
             assert {s.strip() for s in ax.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (theorem,ax)
           assert 'sorryAx' not in log and 'error:' not in log

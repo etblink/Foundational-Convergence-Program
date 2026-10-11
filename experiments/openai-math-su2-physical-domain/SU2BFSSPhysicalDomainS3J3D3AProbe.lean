@@ -19,44 +19,49 @@ private abbrev SpinCoeffs := SpinIndex → ℂ
 
 namespace FCP.BFSSSU2PhysicalDomainS3J3D3A
 
-/-- A definitional name for the original source Majorana family. -/
+/-- Definitional handle of the actual source Majorana operator family. -/
 noncomputable def exactThetaFamily (C : ColorIndex 2) :
     SpinIndex → FermionOp := fun γ => pairedTheta γ C
+
+/-- Definitional handle for the pinned OAI bounded commutator applied to
+the original BFSS fermionic plane-spin generator. -/
+noncomputable def exactSourceAd (i j : SpaceIndex) :
+    FermionOp →L[ℂ] FermionOp :=
+  OAI.KadisonKastler.boundedCommutator (exactSourceK i j)
+
+theorem exactSourceAd_eq (i j : SpaceIndex) :
+    exactSourceAd i j =
+      OAI.KadisonKastler.boundedCommutator (exactSourceK i j) := rfl
+
+theorem exactSourceAd_apply (i j : SpaceIndex) (Z : FermionOp) :
+    exactSourceAd i j Z =
+      OAI.KadisonKastler.boundedCommutator (exactSourceK i j) Z := rfl
 
 private theorem exactThetaSum_as_family (C : ColorIndex 2)
     (v : SpinCoeffs) :
     exactSourceThetaSum C v =
       ∑ γ : SpinIndex, v γ • exactThetaFamily C γ := rfl
 
-private theorem ad_sum_linear (K : FermionOp)
-    (theta : SpinIndex → FermionOp) (v : SpinCoeffs) :
-    OAI.KadisonKastler.boundedCommutator K
-      (∑ γ : SpinIndex, v γ • theta γ) =
-    ∑ γ : SpinIndex, v γ •
-      OAI.KadisonKastler.boundedCommutator K (theta γ) := by
-  rw [map_sum]
-  apply Finset.sum_congr rfl
-  intro γ _
-  rw [map_smul]
-
-/-- The exact physical weighted Majorana sum is carried through the
-upstream bounded commutator by continuous complex linearity. -/
+/-- True actual-Fock source bounded commutator acts linearly on the
+weighted genuine Majorana sum; all concrete data are represented only
+through definitionally identical named continuous linear maps. -/
 theorem handle_ad_sum (i j : SpaceIndex) (C : ColorIndex 2)
     (v : SpinCoeffs) :
-    OAI.KadisonKastler.boundedCommutator
-      (exactSourceK i j) (exactSourceThetaSum C v) =
-    ∑ γ : SpinIndex, v γ •
-      OAI.KadisonKastler.boundedCommutator
-        (exactSourceK i j) (exactThetaFamily C γ) := by
+    exactSourceAd i j (exactSourceThetaSum C v) =
+      ∑ γ : SpinIndex, v γ • exactSourceAd i j
+        (exactThetaFamily C γ) := by
   calc
-    _ = OAI.KadisonKastler.boundedCommutator
-      (exactSourceK i j)
-      (∑ γ : SpinIndex, v γ • exactThetaFamily C γ) :=
-        congrArg (fun Z : FermionOp =>
-          OAI.KadisonKastler.boundedCommutator (exactSourceK i j) Z)
-          (exactThetaSum_as_family C v)
-    _ = _ := ad_sum_linear (exactSourceK i j) (exactThetaFamily C) v
+    _ = exactSourceAd i j
+        (∑ γ : SpinIndex, v γ • exactThetaFamily C γ) :=
+          congrArg (exactSourceAd i j) (exactThetaSum_as_family C v)
+    _ = _ := by
+          rw [map_sum]
+          apply Finset.sum_congr rfl
+          intro γ _
+          rw [map_smul]
 
+#print axioms exactSourceAd_eq
+#print axioms exactSourceAd_apply
 #print axioms handle_ad_sum
 end FCP.BFSSSU2PhysicalDomainS3J3D3A
 end
