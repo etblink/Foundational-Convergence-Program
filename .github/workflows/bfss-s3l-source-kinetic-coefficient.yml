@@ -75,47 +75,9 @@ name: BFSS S3L Source Rotation Coefficients
 # Qualification is run in a PR against the original cache-owning BFSS research base.
 # After qualification the review PR may return to its stacked S3K base.
 
+# QUARANTINE 2026-10-11: K2 genuine cubic monomial commutator remains unqualified; use manual gate only upon K2 source changes.
+# Preserve this original diagnostic workflow and all proof/axiom checks for manual dispatch.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-concrete-potential
-    paths:
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L0SourceKineticSpinorCoefficientProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L1SourceOrbitalSmoothCoreProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L2SourceGammaTwoSpatialCovarianceProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3ASourcePositionDerivativeCommutatorProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3CSourceOrbitalPositionCommutatorProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3ESourceOrbitalDerivativeCommutatorProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L4BOriginalSmoothCorePostcompCalculusProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L4CSourceAlgebraDataFermionActionInterfaceProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L4DConcreteSourceFockSpinCovarianceProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5ASourceChargeKineticMonomialProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5BActualKineticMonomialCovarianceProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5CSourceOrbitalFermionActionCommutationProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5DSourceOrbitalKineticMonomialProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5FParametricCombinedKineticMonomialProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5GConcreteCombinedKineticMonomialProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5HFiniteSumAndCoefficientEntryProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5I1ExactTripleWeightedSumTransportProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5I2ANamedKineticSourceSumProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5I2BOriginalSourceKineticChargeBridgeProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5I3ActualPairedKineticChargeProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J1SourceSpatialReindexAndGammaCoefficientProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J2ComplexGammaCoefficientProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J3SourceSpinorDoubleSumTransportProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J4SourceFermionSumCompositionProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J5SourceKineticResponseSplitProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J6SourceOrbitalFixedIndexReindexProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J7OriginalFullResponseCoefficientTransportProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J8PairedComplexResponseCoefficientContractionProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5J9ActualKineticFreeSpinorCovarianceProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K1SourceCubicPositionPairProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2AOriginalFermionActionCovarianceProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2ActualCubicSourceMonomialProbe.lean
-      - experiments/openai-math-su2-physical-domain/S3L_ACCEPTED_CACHE_QUALIFIED_SOURCES_0_1_0.txt
-      - .github/workflows/bfss-s3l-source-kinetic-coefficient.yml
   workflow_dispatch:
 
 permissions:
