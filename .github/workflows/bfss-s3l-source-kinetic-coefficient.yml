@@ -1,6 +1,7 @@
 name: BFSS S3L Source Rotation Coefficients
 
 # Qualification gate for accepted S3L0–S3L3E plus isolated S3L4B; unqualified S3L4A intentionally excluded.
+# Gate #31 repeated S3L4A's known concrete elaboration failure; this run MUST NOT compile S3L4A.
 
 # Qualification is run in a PR against the original cache-owning BFSS research base.
 # After qualification the review PR may return to its stacked S3K base.
