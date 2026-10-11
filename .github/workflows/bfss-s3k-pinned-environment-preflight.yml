@@ -1,11 +1,8 @@
 name: BFSS S3K Pinned Environment Preflight
 
+# The bounded PR evidence gates #3 and #4 are archived; this diagnostic
+# workflow is no longer part of automatic PR execution.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-concrete-potential
-    paths:
-      - .github/workflows/bfss-s3k-pinned-environment-preflight.yml
   workflow_dispatch:
 
 permissions:
