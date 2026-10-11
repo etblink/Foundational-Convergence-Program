@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - research/openai-math-su2-concrete-potential
+      - research/openai-math-su2-s3k-physical-spin-flow
     paths:
       - experiments/openai-math-su2-physical-domain/**
       - .github/workflows/openai-math-su2-physical-domain.yml
@@ -2337,6 +2338,50 @@ jobs:
         with:
           path: upstream-math/lean/.lake/build
           key: bfss-su2-accepted-s3hi-v1-75a09e3ceded364c-7a176b75ed172602-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Compile S3K0 actual physical spin-flow source bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem="SU2BFSSPhysicalDomainS3K0SourceSpinFullL2LiftProbe"
+          cp "experiments/openai-math-su2-physical-domain/${stem}.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3IActualFockPlaneFlowGaugeCommutationProbe.olean
+          timeout 120s lake env lean -o ".lake/build/lib/lean/${stem}.olean" "${stem}.lean" 2>&1 | tee "/tmp/s3k0.log"
+          python3 - <<'PY'
+          import re
+          log=open('/tmp/s3k0.log').read()
+          matches=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",log)
+          names=["sourceSpinFockIsometry_apply","sourceSpinFullL2CLM_apply","sourceSpinFullL2CLM_norm_le"]
+          assert [n for n,_ in matches] == ['FCP.BFSSSU2PhysicalDomainS3K0.' + x for x in names], matches
+          for n,ax in matches:
+            assert {x.strip() for x in ax.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (n,ax)
+          assert 'sorryAx' not in log and 'error:' not in log
+          print('S3K0_EXACT_SOURCE_KERNEL_PASS')
+          PY
+
+      - name: Compile S3K1 actual physical spin-flow source bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem="SU2BFSSPhysicalDomainS3K1ExactPhysicalGaugePreservationProbe"
+          cp "experiments/openai-math-su2-physical-domain/${stem}.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3K0SourceSpinFullL2LiftProbe.olean
+          timeout 120s lake env lean -o ".lake/build/lib/lean/${stem}.olean" "${stem}.lean" 2>&1 | tee "/tmp/s3k1.log"
+          python3 - <<'PY'
+          import re
+          log=open('/tmp/s3k1.log').read()
+          matches=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",log)
+          names=["sourceSpinFullL2CLM_comm_fiber","sourceSpinFullL2CLM_comm_boson","sourceSpinFullL2CLM_mem_physical"]
+          assert [n for n,_ in matches] == ['FCP.BFSSSU2PhysicalDomainS3K1.' + x for x in names], matches
+          for n,ax in matches:
+            assert {x.strip() for x in ax.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (n,ax)
+          assert 'sorryAx' not in log and 'error:' not in log
+          print('S3K1_EXACT_SOURCE_KERNEL_PASS')
+          PY
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
         if: ${{ inputs.d2b29_trial == true }}
