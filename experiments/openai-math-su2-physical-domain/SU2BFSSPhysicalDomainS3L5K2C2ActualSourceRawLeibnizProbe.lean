@@ -2,7 +2,7 @@ import SU2BFSSPhysicalDomainS3L5K2C1AbstractSourceLeibnizProbe
 
 /-!
 # S3L5K2C2 — exact concrete source operator Leibniz shape
-K2C Gate #1 tests raw original BFSS monomial composition without concrete covariance response substitution.
+K2C Gate #2: add the original GaugeG1A source namespace omitted in K2C2 #1. Preserve exact theorem and raw Leibniz tactic.
 
 Qualify only the Leibniz decomposition of the ACTUAL source 48-Majorana
 combined generator acting on the original ordered cubic monomial.
@@ -16,6 +16,8 @@ noncomputable section
 open scoped BigOperators
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
+-- pairedAlgebraData is defined in the original SU(2) gauge source namespace.
+open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2PhysicalDomainS3A
 open FCP.BFSSSU2PhysicalDomainS3D
 open FCP.BFSSSU2PhysicalDomainS3L4B
