@@ -23,6 +23,7 @@ open scoped BigOperators
 open OAI.BFSSQuantum
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2PhysicalDomainS3A
+open FCP.BFSSSU2PhysicalDomainS3L4B
 open FCP.BFSSSU2PhysicalDomainS3L5A
 open FCP.BFSSSU2PhysicalDomainS3L5K3
 open FCP.BFSSSU2PhysicalDomainS3L5K4
