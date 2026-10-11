@@ -99,10 +99,23 @@ private theorem sourcePostcomp_comm_derivative (K : FockEnd)
     fderiv ℝ ((K.restrictScalars ℝ) ∘
       (f : Boson 2 → Fermion 2)) x
       (EuclideanSpace.single (k, B) 1)
-  rw [fderiv_comp _ K.restrictScalars.differentiableAt
+  rw [fderiv_comp _ (K.restrictScalars ℝ).differentiableAt
       (f.contDiff.differentiable (by simp)).differentiableAt,
       ContinuousLinearMap.fderiv]
   rfl
+
+/-- Abstract transport of an explicitly supplied source Fock commutator.
+The only premise is discharged below by the pinned, accepted S3E theorem
+for the actual paired quadratic fermionic spin K_ij. -/
+private theorem sourcePostcomp_covariance
+    (K : FockEnd) (T : SpinIndex → FockEnd)
+    (c : SpinIndex → ℂ) (γ : SpinIndex)
+    (h : K * T γ - T γ * K =
+      ∑ α : SpinIndex, c α • T α) :
+    (sourcePostcomp K).comp (sourcePostcomp (T γ)) -
+      (sourcePostcomp (T γ)).comp (sourcePostcomp K) =
+      ∑ α : SpinIndex, c α • sourcePostcomp (T α) := by
+  rw [sourcePostcomp_comm K (T γ), h, sourcePostcomp_sum T c]
 
 /-- The actual accepted 48-Majorana quadratic generator, lifted into
 the exact original compactly supported BFSS test-function algebra. -/
@@ -141,20 +154,10 @@ theorem pairedSourceSpinSmoothCore_comm_fermionAction
   change (sourcePostcomp K).comp (pairedAlgebraData.fermionAction γ C) -
       (pairedAlgebraData.fermionAction γ C).comp (sourcePostcomp K) =
       ∑ α : SpinIndex, c α • pairedAlgebraData.fermionAction α C
-  rw [pairedFermionAction_eq_postcomp γ C]
-  calc
-    (sourcePostcomp K).comp (sourcePostcomp (pairedTheta γ C)) -
-        (sourcePostcomp (pairedTheta γ C)).comp (sourcePostcomp K) =
-      sourcePostcomp (K * pairedTheta γ C - pairedTheta γ C * K) :=
-        sourcePostcomp_comm K (pairedTheta γ C)
-    _ = sourcePostcomp (∑ α : SpinIndex, c α • pairedTheta α C) := by
-      rw [hFock]
-    _ = ∑ α : SpinIndex, c α • sourcePostcomp (pairedTheta α C) :=
-      sourcePostcomp_sum (fun α => pairedTheta α C) c
-    _ = ∑ α : SpinIndex, c α • pairedAlgebraData.fermionAction α C := by
-      apply Finset.sum_congr rfl
-      intro α _
-      rw [pairedFermionAction_eq_postcomp α C]
+  -- Instantiate a previously proved tiny operator identity; do not
+  -- elaborate a concrete 48-Majorana matrix-sum calc in the source goal.
+  simpa only [pairedFermionAction_eq_postcomp] using
+    (sourcePostcomp_covariance K (fun α => pairedTheta α C) c γ hFock)
 
 theorem pairedSourceSpinSmoothCore_comm_position
     (i j k : SpaceIndex) (B : ColorIndex 2) :
