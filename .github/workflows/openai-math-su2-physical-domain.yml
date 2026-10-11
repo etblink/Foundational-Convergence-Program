@@ -1,6 +1,12 @@
 name: BFSS SU2 Physical Domain Bridge
 
 on:
+  pull_request:
+    branches:
+      - research/openai-math-su2-concrete-potential
+    paths:
+      - experiments/openai-math-su2-physical-domain/**
+      - .github/workflows/openai-math-su2-physical-domain.yml
   push:
     branches:
       - research/openai-math-su2-concrete-potential
@@ -2337,6 +2343,70 @@ jobs:
         with:
           path: upstream-math/lean/.lake/build
           key: bfss-su2-accepted-s3hi-v1-75a09e3ceded364c-7a176b75ed172602-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/*.lean', 'upstream-math/lean/lean-toolchain', 'upstream-math/lean/lake-manifest.json') }}
+
+      - name: Compile S3J3C generic exponential intertwiner against pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3J3CAbstractExponentialIntertwinerProbe.lean upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3CAbstractExponentialIntertwinerProbe.olean SU2BFSSPhysicalDomainS3J3CAbstractExponentialIntertwinerProbe.lean 2>&1 | tee /tmp/bfss-su2-s3j3c.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s3j3c.log').read()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          assert len(reports) == 1, reports
+          assert reports[0][0] == 'FCP.BFSSSU2PhysicalDomainS3J3C.exp_intertwines_on_vector', reports
+          assert {x.strip() for x in reports[0][1].split(',')} <= {'propext','Classical.choice','Quot.sound'}, reports
+          assert 'sorryAx' not in log and 'error:' not in log
+          print('S3J3C_GENERIC_EXP_INTERTWINER_KERNEL_PASS')
+          PY
+
+      - name: Compile pinned upstream bounded commutator exponential dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          for module in ExponentialRemainder ClosedExponentialGenerator ExponentialCommutator; do
+            path="OAI/Analysis/KadisonKastler/${module}"
+            test -s "${path}.lean"
+            if [ ! -s ".lake/build/lib/lean/${path}.olean" ]; then
+              mkdir -p .lake/build/lib/lean/OAI/Analysis/KadisonKastler
+              lake env lean -o ".lake/build/lib/lean/${path}.olean" "${path}.lean" 2>&1 | tee "/tmp/bfss-su2-s3j3-${module}.log"
+              ! grep -Eq 'error:|sorryAx' "/tmp/bfss-su2-s3j3-${module}.log"
+            fi
+          done
+          test -s .lake/build/lib/lean/OAI/Analysis/KadisonKastler/ExponentialCommutator.olean
+          echo PINNED_OAI_BOUNDED_COMMUTATOR_DEPENDENCY_READY
+
+      - name: Compile S3J3D actual three-color Fock Majorana finite-time covariance
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3J3DActualThetaIntertwinerProbe.lean upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3IActualFockPlaneFlowGaugeCommutationProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3CAbstractExponentialIntertwinerProbe.olean
+          test -s .lake/build/lib/lean/OAI/Analysis/KadisonKastler/ExponentialCommutator.olean
+          lake env lean -o .lake/build/lib/lean/SU2BFSSPhysicalDomainS3J3DActualThetaIntertwinerProbe.olean SU2BFSSPhysicalDomainS3J3DActualThetaIntertwinerProbe.lean 2>&1 | tee /tmp/bfss-su2-s3j3d.log
+          python3 - <<'PY'
+          import re
+          log = open('/tmp/bfss-su2-s3j3d.log').read()
+          reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", log)
+          expected = [
+            'FCP.BFSSSU2PhysicalDomainS3J3D.pairedSourceThetaCombo_intertwines',
+            'FCP.BFSSSU2PhysicalDomainS3J3D.pairedSourceSpinFlow_covariance',
+          ]
+          assert [n for n,_ in reports] == expected, reports
+          for n, ax in reports:
+            assert {x.strip() for x in ax.split(',')} <= {'propext','Classical.choice','Quot.sound'}, (n,ax)
+          assert 'sorryAx' not in log and 'error:' not in log
+          print('S3J3D_ACTUAL_FOCK_FINITE_TIME_COVARIANCE_KERNEL_PASS')
+          PY
 
       - name: Compile D2B29 true concrete SU2 radial core positive normalized closed form
         if: ${{ inputs.d2b29_trial == true }}
