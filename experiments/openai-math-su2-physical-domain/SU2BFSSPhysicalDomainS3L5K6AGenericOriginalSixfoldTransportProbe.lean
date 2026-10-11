@@ -7,6 +7,7 @@ Isolated source-level finite-sum permutation and POSITIVE spinor
 coefficient transport, on the actual SmoothCore 2 endomorphism module.
 The full paired BFSS cubic expression and negative-coefficient
 specialization are intentionally not elaborated in this module.
+K6A first independent qualification: only the generic source-index proofs.
 This split addresses the kernel timeout at K6 Gate #2 and 120-second
 compile timeout at K6 Gate #3 without raising Lean resource budgets.
 -/
