@@ -2,6 +2,7 @@ import SU2BFSSPhysicalDomainS3L5K2AOriginalFermionActionCovarianceProbe
 
 /-!
 # S3L5K2B — exact concrete cubic source monomial via opaque operator interfaces
+K2B #1: independently qualify original source commutator using qualified K1 and K2A aliases.
 
 First bounded successor to known-red S3L5K2. Reuse the SOURCE-QUALIFIED
 K1 paired position-pair commutator, K2A exact 48-Majorana fermion-action
