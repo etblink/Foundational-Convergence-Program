@@ -6,12 +6,15 @@ import SU2BFSSPhysicalDomainS3L4DConcreteSourceFockSpinCovarianceProbe
 This is an independent, bounded first gate toward the *original*
 16-component BFSS supercharge covariance. Preserve EXACTLY the
 AlgebraData.charge coefficients and ordering from pinned Core.lean,
-separating the kinetic part from the gammaTwo cubic part. Then prove
-how the *actual* qualified 48-Majorana source spin acts on each true
-fermionAction ∘ coordinateDerivative monomial.
+separating the kinetic part from the gammaTwo cubic part. Then derive the source-parametric kinetic-monomial commutator from an
+explicit fiber-spin covariance premise, without expanding any concrete
+48-Majorana generator. The premise must be discharged separately.
 
-The full kinetic sum, orbital contribution, cubic covariance, combined
-charge and Hamiltonian conclusions remain separate, unproved gates.
+The charge decomposition below reproduces the source syntax, but its
+potentially expensive definitional equality theorem is deliberately
+NOT claimed at this gate. Concrete specialization, the full kinetic sum,
+orbital contribution, cubic covariance, combined charge and Hamiltonian
+conclusions remain separate, unproved gates.
 No surrogate Fock representation, invented source operators, axioms,
 or alteration of the pinned Hamiltonian are introduced.
 -/
@@ -24,6 +27,7 @@ open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2PhysicalDomainS3A
 open FCP.BFSSSU2PhysicalDomainS3L4B
+open FCP.BFSSSU2PhysicalDomainS3L4C
 open FCP.BFSSSU2PhysicalDomainS3L4D
 
 /-- The literal -i gamma theta derivative portion of Core.lean's
@@ -45,22 +49,8 @@ noncomputable def sourceCubicCharge
       ((M.fermionAction β A).comp
         ((position (N := 2) k B).comp (position (N := 2) l C)))
 
-/-- Exact pinned *source* charge definition. Not a formal reconstruction
-with altered normalization or a substitute domain. -/
-theorem sourceCharge_eq_kinetic_add_cubic
-    (M : AlgebraData 2) (α : SpinIndex) :
-    M.charge α = sourceKineticCharge M α + sourceCubicCharge M α := rfl
-
-/-- The accepted physical paired SU(2) source charge inherits
-the exact original source decomposition without expanding its Fock data. -/
-theorem pairedSourceCharge_eq_kinetic_add_cubic (α : SpinIndex) :
-    pairedAlgebraData.charge α =
-      sourceKineticCharge pairedAlgebraData α +
-      sourceCubicCharge pairedAlgebraData α :=
-  sourceCharge_eq_kinetic_add_cubic pairedAlgebraData α
-
-/-- Elementary composition-commutator rule, stated for actual source
-SmoothCore endomorphisms. The second factor genuinely commutes with K. -/
+/-- A source-generic composition-commutator rule on the *original*
+SmoothCore 2, with an explicitly discharged second-factor commutation. -/
 private theorem sourceSpin_comm_comp_of_second_comm
     (K T D Δ : SourceEnd)
     (hKD : K.comp D = D.comp K)
@@ -78,36 +68,31 @@ private theorem sourceSpin_comm_comp_of_second_comm
   rw [hD]
   exact hT
 
-/-- The ACTUAL paired 48-Majorana source spin transforms each
-literal original fermionAction ∘ coordinateDerivative kinetic monomial.
-The right side uses the original source fermionAction, not a surrogate
-or an assumed spin law. The full -i gamma sum is not yet asserted. -/
-theorem pairedActualSourceSpin_comm_kineticMonomial
-    (i j k : SpaceIndex) (γ : SpinIndex)
-    (A B : ColorIndex 2) :
-    (pairedActualSourceSpin i j).comp
-       ((pairedAlgebraData.fermionAction γ A).comp
-         (coordinateDerivative (N := 2) k B)) -
-    ((pairedAlgebraData.fermionAction γ A).comp
-         (coordinateDerivative (N := 2) k B)).comp
-       (pairedActualSourceSpin i j) =
-    (∑ β : SpinIndex,
-      (((pairedPlaneSpinGenerator i j β γ : ℝ) : ℂ) •
-        pairedAlgebraData.fermionAction β A)).comp
+/-- Literal source fermionAction ∘ coordinateDerivative covariance,
+from an EXPLICIT fiber identity for M.theta. The premise will only
+be discharged by the qualified concrete S3L4D theorem in a separate
+gate; it is not assumed for the BFSS physical representation here. -/
+theorem sourceFermionSpin_comm_kineticMonomial_of_fiber
+    (M : AlgebraData 2) (K : FockEnd)
+    (c : SpinIndex → ℂ) (γ : SpinIndex)
+    (A B : ColorIndex 2) (k : SpaceIndex)
+    (h : K * M.theta γ A - M.theta γ A * K =
+      ∑ β : SpinIndex, c β • M.theta β A) :
+    (sourcePostcomp K).comp
+       ((M.fermionAction γ A).comp (coordinateDerivative (N := 2) k B)) -
+    ((M.fermionAction γ A).comp
+         (coordinateDerivative (N := 2) k B)).comp (sourcePostcomp K) =
+    (∑ β : SpinIndex, c β • M.fermionAction β A).comp
          (coordinateDerivative (N := 2) k B) := by
   exact sourceSpin_comm_comp_of_second_comm
-    (pairedActualSourceSpin i j)
-    (pairedAlgebraData.fermionAction γ A)
+    (sourcePostcomp K)
+    (M.fermionAction γ A)
     (coordinateDerivative (N := 2) k B)
-    (∑ β : SpinIndex,
-      (((pairedPlaneSpinGenerator i j β γ : ℝ) : ℂ) •
-        pairedAlgebraData.fermionAction β A))
-    (pairedActualSourceSpin_comm_derivative i j k B)
-    (pairedActualSourceSpin_comm_fermionAction i j γ A)
+    (∑ β : SpinIndex, c β • M.fermionAction β A)
+    (sourcePostcomp_comm_derivative K k B)
+    (sourceFermionAction_covariance_of_fiber M K c γ A h)
 
-#print axioms sourceCharge_eq_kinetic_add_cubic
-#print axioms pairedSourceCharge_eq_kinetic_add_cubic
-#print axioms pairedActualSourceSpin_comm_kineticMonomial
+#print axioms sourceFermionSpin_comm_kineticMonomial_of_fiber
 
 end
 end FCP.BFSSSU2PhysicalDomainS3L5A
