@@ -16,7 +16,7 @@ noncomputable section
 
 set_option maxHeartbeats 1600000
 set_option synthInstance.maxHeartbeats 400000
-set_option maxRecDepth 20000
+set_option maxRecDepth 4000
 
 open scoped BigOperators
 open OAI.BFSSQuantum
@@ -59,6 +59,11 @@ noncomputable def pairedThetaCombo (C : ColorIndex 2) :
     SpinCoeffs →L[ℂ] FermionOp :=
   (pairedThetaComboLin C).toContinuousLinearMap
 
+private theorem pairedThetaCombo_apply (C : ColorIndex 2)
+    (v : SpinCoeffs) :
+    pairedThetaCombo C v =
+      ∑ α : SpinIndex, v α • pairedTheta α C := rfl
+
 /-- Complexification of the accepted real 16-by-16 gamma-plane matrix. -/
 noncomputable def pairedSourceSpinMatrix (i j : SpaceIndex) :
     Matrix SpinIndex SpinIndex ℂ :=
@@ -68,6 +73,12 @@ noncomputable def pairedSourceSpinOp (i j : SpaceIndex) :
     SpinCoeffs →L[ℂ] SpinCoeffs :=
   (pairedSourceSpinMatrix i j).mulVecLin.toContinuousLinearMap
 
+private theorem pairedSourceSpinOp_apply (i j : SpaceIndex)
+    (v : SpinCoeffs) (α : SpinIndex) :
+    (pairedSourceSpinOp i j v) α =
+      ∑ γ : SpinIndex,
+        ((pairedPlaneSpinGenerator i j α γ : ℝ) : ℂ) * v γ := rfl
+
 /-- Infinitesimal source intertwining, directly from accepted S3E. -/
 theorem pairedSourceThetaCombo_intertwines
     (i j : SpaceIndex) (C : ColorIndex 2) (v : SpinCoeffs) :
@@ -76,12 +87,11 @@ theorem pairedSourceThetaCombo_intertwines
         (pairedThetaCombo C v) =
       pairedThetaCombo C (pairedSourceSpinOp i j v) := by
   let K := pairedFermionPlaneSpinGenerator i j
-  change K * (∑ γ : SpinIndex, v γ • pairedTheta γ C) -
-      (∑ γ : SpinIndex, v γ • pairedTheta γ C) * K =
-    ∑ α : SpinIndex,
-      (∑ γ : SpinIndex,
-          ((pairedPlaneSpinGenerator i j α γ : ℝ) : ℂ) * v γ) •
-        pairedTheta α C
+  -- Rewrite only the small wrappers. Do not delta-reduce the literal
+  -- 2^24-dimensional Fock theta construction during target matching.
+  rw [OAI.KadisonKastler.boundedCommutator_apply,
+    pairedThetaCombo_apply, pairedThetaCombo_apply]
+  simp only [pairedSourceSpinOp_apply]
   calc
     _ = ∑ γ : SpinIndex, v γ •
           (K * pairedTheta γ C - pairedTheta γ C * K) := by
@@ -122,21 +132,36 @@ theorem pairedSourceSpinFlow_covariance
   let A := ((t : ℝ) : ℂ) • J
   let B := OAI.KadisonKastler.boundedCommutator (((t : ℝ) : ℂ) • K)
   have hintertwine (w : SpinCoeffs) : B (T w) = T (A w) := by
-    have h0 := pairedSourceThetaCombo_intertwines i j C w
-    change K * T w - T w * K = T (J w) at h0
-    change (((t : ℝ) : ℂ) • K) * T w -
-      T w * (((t : ℝ) : ℂ) • K) =
-      T ((((t : ℝ) : ℂ) • J) w)
-    rw [ContinuousLinearMap.smul_apply, ← map_smul T]
-    rw [← h0]
-    simp only [smul_mul_assoc, mul_smul_comm, smul_sub]
+    have h0 : OAI.KadisonKastler.boundedCommutator K (T w) =
+        T (J w) := pairedSourceThetaCombo_intertwines i j C w
+    have hscaled :
+        OAI.KadisonKastler.boundedCommutator
+            (((t : ℝ) : ℂ) • K) (T w) =
+          ((t : ℝ) : ℂ) •
+            OAI.KadisonKastler.boundedCommutator K (T w) := by
+      simp only [OAI.KadisonKastler.boundedCommutator_apply,
+        smul_mul_assoc, mul_smul_comm, smul_sub]
+    calc
+      B (T w) = ((t : ℝ) : ℂ) •
+          OAI.KadisonKastler.boundedCommutator K (T w) := hscaled
+      _ = ((t : ℝ) : ℂ) • T (J w) := congrArg _ h0
+      _ = T (A w) := by
+        rw [ContinuousLinearMap.smul_apply]
+        exact (map_smul T ((t : ℝ) : ℂ) (J w)).symm
   have hexp := exp_intertwines_on_vector A B T hintertwine v
-  have hconj := OAI.KadisonKastler.exp_boundedCommutator_apply
-    (((t : ℝ) : ℂ) • K) (T v)
-  change NormedSpace.exp B (T v) =
+  have hconj :
+      NormedSpace.exp B (T v) =
+        NormedSpace.exp (((t : ℝ) : ℂ) • K) * T v *
+          NormedSpace.exp (-(((t : ℝ) : ℂ) • K)) :=
+    OAI.KadisonKastler.exp_boundedCommutator_apply
+      (((t : ℝ) : ℂ) • K) (T v)
+  calc
     pairedFermionPlaneSpinFlow i j t * T v *
-      NormedSpace.exp (-(((t : ℝ) : ℂ) • K)) at hconj
-  exact hconj.symm.trans hexp
+        NormedSpace.exp (-(((t : ℝ) : ℂ) • K)) =
+      NormedSpace.exp B (T v) := by
+        simpa only [pairedFermionPlaneSpinFlow, K] using hconj.symm
+    _ = T ((NormedSpace.exp A) v) := hexp
+
 
 #print axioms pairedSourceThetaCombo_intertwines
 #print axioms pairedSourceSpinFlow_covariance
