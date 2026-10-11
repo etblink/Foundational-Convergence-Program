@@ -2,6 +2,7 @@ import SU2BFSSPhysicalDomainS3L5K6BNegativeCubicCoefficientTransportProbe
 
 /-!
 # S3L5K6C1 — isolated original cubic source coefficient step
+Staged K6C qualification #2: check C1, C2, C3 in distinct Lean kernel modules.
 Transport genuine gammaTwo/J spatial response through original sixfold operator coefficients with qualified K4 and K5.
 No new axioms, source physics, concrete K2 commutator, or spectral claims.
 -/
