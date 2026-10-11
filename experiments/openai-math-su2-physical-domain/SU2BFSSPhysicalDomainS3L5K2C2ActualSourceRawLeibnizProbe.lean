@@ -2,6 +2,7 @@ import SU2BFSSPhysicalDomainS3L5K2C1AbstractSourceLeibnizProbe
 
 /-!
 # S3L5K2C2 — exact concrete source operator Leibniz shape
+K2C Gate #1 tests raw original BFSS monomial composition without concrete covariance response substitution.
 
 Qualify only the Leibniz decomposition of the ACTUAL source 48-Majorana
 combined generator acting on the original ordered cubic monomial.
