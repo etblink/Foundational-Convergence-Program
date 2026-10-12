@@ -3,7 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K2E2E1OriginalCubicDefiningEquationProbe
 /-!
 # E2E3: final bounded Grok irreducibility differential test
 
-Pinned qualification #1; proof body unchanged.
+Pinned qualification #2: local modifier required for imported definitions; theorem/proof unchanged.
 
 E2E1's three source defining equations compiled, but E2E2's final
 exact after simp only exceeded Lean recursion. Grok's original
@@ -29,7 +29,7 @@ open FCP.BFSSSU2PhysicalDomainS3L5K2E2D0
 open FCP.BFSSSU2PhysicalDomainS3L5K2E2E1
 
 -- Contained in this probe's imported environment; upstream D0 is unchanged.
-attribute [irreducible]
+attribute [local irreducible]
   pairedCubicSourceGenerator
   pairedCubicSourceFactor
   pairedCubicSourceResponse
