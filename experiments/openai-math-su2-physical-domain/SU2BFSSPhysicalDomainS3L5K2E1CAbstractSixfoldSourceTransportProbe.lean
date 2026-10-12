@@ -3,7 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K2E1BFourSumOperatorTransportProbe
 /-!
 # K2E1C — source-generic sixfold commutator transport, all index types abstract
 
-E1 #1 timed out during six sequential Finset rewrite steps.
+E1C qualification attempt #1 under pinned CI.\nE1 #1 timed out during six sequential Finset rewrite steps.
 E1 #3 had qualified E1A and E1B but hit a whnf heartbeat limit
 after constructing a four-sum source response and attempting final
 sixfold composition with concrete SpaceIndex/ColorIndex/SpinIndex types.
