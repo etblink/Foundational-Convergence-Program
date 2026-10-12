@@ -4,6 +4,7 @@ import SU2BFSSPhysicalDomainS3L5K3OriginalCubicGammaTwoCoefficientProbe
 # K2R3A — original gammaTwo spatial response vs two-index reindex
 
 Pinned qualification #2: explicit original gammaTwo case signs; no `ring`/`module` guessing.
+CI qualification #2: noncomputable source proof unchanged.
 
 The newly qualified R2A–D genuine source position reindex gives a
 specific transformed spatial coefficient. The ORIGINAL pinned
