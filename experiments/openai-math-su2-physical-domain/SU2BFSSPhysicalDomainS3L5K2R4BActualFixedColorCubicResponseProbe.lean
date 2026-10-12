@@ -70,6 +70,7 @@ theorem pairedOriginalCubicFixedColorResponse_decompose
   -- Gate #2 localized the concrete hsplit elaboration bottleneck.
   -- Prove the outer distribution at each finite index first; do not
   -- instantiate a generic full-expression equality against the giant source.
+  trace "R4B_STAGE_0_PROOF_START"
   calc
     _ = (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
           ((((originalCubicStructureWeight A B C *
@@ -80,6 +81,7 @@ theorem pairedOriginalCubicFixedColorResponse_decompose
         (pairedAlgebraData.fermionAction γ A).comp
           ((position (N := 2) k B).comp
             (sourcePositionVariation i j l C))))) := by
+      trace "R4B_STAGE_1_POINTWISE_START"
       apply Finset.sum_congr rfl
       intro k _
       apply Finset.sum_congr rfl
@@ -98,6 +100,7 @@ theorem pairedOriginalCubicFixedColorResponse_decompose
         (pairedAlgebraData.fermionAction γ A).comp
           ((position (N := 2) k B).comp
             (sourcePositionVariation i j l C)))) := by
+      trace "R4B_STAGE_2_SUM_DISTRIBUTION_START"
       simp only [Finset.sum_add_distrib]
     _ = (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
           (((originalCubicStructureWeight A B C *
@@ -110,6 +113,7 @@ theorem pairedOriginalCubicFixedColorResponse_decompose
         (pairedAlgebraData.fermionAction γ A).comp
           ((position (N := 2) k B).comp
             (sourcePositionVariation i j l C)))) := by
+      trace "R4B_STAGE_3_REINDEX_START"
       apply congrArg (fun X : SourceEnd => (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
           (((originalCubicStructureWeight A B C *
       pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) • (sourceCubicFermionVariation i j γ A).comp
@@ -147,6 +151,7 @@ theorem pairedOriginalCubicFixedColorResponse_decompose
           (((originalCubicStructureWeight A B C •
           (-(sourceCubicTwoFormSpatialResponse i j k l))) α γ : ℝ) : ℂ) • (pairedAlgebraData.fermionAction γ A).comp
           ((position (N := 2) k B).comp (position (N := 2) l C))) := by
+      trace "R4B_STAGE_4_ACCEPTED_IDENTITIES_START"
       apply congrArg₂ (fun X Y : SourceEnd => X + Y)
       · apply Finset.sum_congr rfl
         intro k _
