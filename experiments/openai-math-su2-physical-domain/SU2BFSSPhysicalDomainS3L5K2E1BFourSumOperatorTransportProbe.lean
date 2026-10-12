@@ -11,27 +11,27 @@ open FCP.BFSSSU2PhysicalDomainS3L5H
 open FCP.BFSSSU2PhysicalDomainS3L5K2E1A
 
 theorem sourceComm_four_weighted_sums_of
-    {ι κ λ μ : Type*}
-    [Fintype ι] [Fintype κ] [Fintype λ] [Fintype μ]
+    {ι κ ξ μ : Type*}
+    [Fintype ι] [Fintype κ] [Fintype ξ] [Fintype μ]
     (G : SourceEnd)
-    (c : ι → κ → λ → μ → ℂ)
-    (T R : ι → κ → λ → μ → SourceEnd)
+    (c : ι → κ → ξ → μ → ℂ)
+    (T R : ι → κ → ξ → μ → SourceEnd)
     (h : ∀ x y z w,
       G.comp (T x y z w) - (T x y z w).comp G = R x y z w) :
-    G.comp (∑ x : ι, ∑ y : κ, ∑ z : λ, ∑ w : μ,
+    G.comp (∑ x : ι, ∑ y : κ, ∑ z : ξ, ∑ w : μ,
       c x y z w • T x y z w) -
-    (∑ x : ι, ∑ y : κ, ∑ z : λ, ∑ w : μ,
+    (∑ x : ι, ∑ y : κ, ∑ z : ξ, ∑ w : μ,
       c x y z w • T x y z w).comp G =
-    ∑ x : ι, ∑ y : κ, ∑ z : λ, ∑ w : μ,
+    ∑ x : ι, ∑ y : κ, ∑ z : ξ, ∑ w : μ,
       c x y z w • R x y z w := by
   classical
   exact sourceComm_two_unweighted_sums_of G
-    (fun x y => ∑ z : λ, ∑ w : μ, c x y z w • T x y z w)
-    (fun x y => ∑ z : λ, ∑ w : μ, c x y z w • R x y z w)
+    (fun x y => ∑ z : ξ, ∑ w : μ, c x y z w • T x y z w)
+    (fun x y => ∑ z : ξ, ∑ w : μ, c x y z w • R x y z w)
     (by
       intro x y
       calc
-        _ = ∑ z : λ, (G.comp (∑ w : μ, c x y z w • T x y z w) -
+        _ = ∑ z : ξ, (G.comp (∑ w : μ, c x y z w • T x y z w) -
                 (∑ w : μ, c x y z w • T x y z w).comp G) :=
           sourceComm_sum Finset.univ G
             (fun z => ∑ w : μ, c x y z w • T x y z w)
