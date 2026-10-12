@@ -3,6 +3,8 @@ import SU2BFSSPhysicalDomainS3L5K2E2D0OriginalCubicNamedSourceDefinitionsProbe
 /-!
 # E2D1 — bounded one-factor literal-to-named source bridge
 
+Pinned qualification attempt #1: source-unchanged one-factor proof.
+
 K2D3 already proved the unconditional original 48-Majorana cubic-factor
 commutator at the literal source level. E2C1 then failed due to whnf
 heartbeat while comparing a named sixfold source sum with the accepted
