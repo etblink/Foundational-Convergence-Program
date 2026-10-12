@@ -3,7 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K3OriginalCubicGammaTwoCoefficientProbe
 /-!
 # K2R3A — original gammaTwo spatial response vs two-index reindex
 
-Pinned qualification #1: original gammaTwo spatial response sign.
+Pinned qualification #2: explicit original gammaTwo case signs; no `ring`/`module` guessing.
 
 The newly qualified R2A–D genuine source position reindex gives a
 specific transformed spatial coefficient. The ORIGINAL pinned
@@ -27,6 +27,23 @@ open FCP.BFSSSU2PhysicalDomainS3A
 open FCP.BFSSSU2PhysicalDomainS3L2
 open FCP.BFSSSU2PhysicalDomainS3L5K3
 
+/-- Additive identity for the first ordered slot, with NO commutativity
+assumption on the original GammaMatrix multiplication. -/
+private theorem halfCommutator_negFirst
+    (X Y : GammaMatrix) :
+    (1 / 2 : ℝ) • (X * Y - Y * X) =
+      -((1 / 2 : ℝ) • ((-X) * Y - Y * (-X))) := by
+  simp only [neg_mul, mul_neg, smul_sub, smul_neg]
+  abel
+
+/-- Analogous source-order-preserving identity for the second slot. -/
+private theorem halfCommutator_negSecond
+    (X Y : GammaMatrix) :
+    (1 / 2 : ℝ) • (X * Y - Y * X) =
+      -((1 / 2 : ℝ) • (X * (-Y) - (-Y) * X)) := by
+  simp only [neg_mul, mul_neg, smul_sub, smul_neg]
+  abel
+
 /-- First source spatial slot: exact opposite-sign reindex of the
 original gammaTwo matrix, for the source plane (i,j). -/
 theorem originalGammaTwo_firstIndex_reindex
@@ -37,15 +54,20 @@ theorem originalGammaTwo_firstIndex_reindex
       (sourceGammaVariation i j k * pairedAlgebraData.gamma l -
        pairedAlgebraData.gamma l * sourceGammaVariation i j k)) := by
   classical
-  by_cases hkj : k = j
-  · have hki : k ≠ i := by
-      intro hki
-      exact hij (hki.symm.trans hkj)
-    simp [hkj, hki, sourceGammaVariation, AlgebraData.gammaTwo]
-  · by_cases hki : k = i
-    · simp [hkj, hki, sourceGammaVariation, AlgebraData.gammaTwo,
-        neg_mul, mul_neg, smul_neg] <;> module
-    · simp [hkj, hki, sourceGammaVariation, AlgebraData.gammaTwo]
+  by_cases hki : k = i
+  · subst k
+    -- gamma variation at the FIRST coordinate i is -gamma j.
+    -- Check the sign as a standalone noncommutative matrix identity.
+    simpa only [sourceGammaVariation, if_neg hij, if_pos rfl,
+      AlgebraData.gammaTwo] using
+      (halfCommutator_negFirst
+        (pairedAlgebraData.gamma j) (pairedAlgebraData.gamma l))
+  · by_cases hkj : k = j
+    · subst k
+      -- The first coordinate j varies as +gamma i.
+      simp [sourceGammaVariation, AlgebraData.gammaTwo, hij, Ne.symm hij]
+    · -- Outside the source plane there is no spatial variation.
+      simp [sourceGammaVariation, hki, hkj]
 
 /-- Second source spatial slot: independent reindex of the second
 ordered coordinate factor, without exchanging k and l. -/
@@ -57,15 +79,17 @@ theorem originalGammaTwo_secondIndex_reindex
       (pairedAlgebraData.gamma k * sourceGammaVariation i j l -
        sourceGammaVariation i j l * pairedAlgebraData.gamma k)) := by
   classical
-  by_cases hlj : l = j
-  · have hli : l ≠ i := by
-      intro hli
-      exact hij (hli.symm.trans hlj)
-    simp [hlj, hli, sourceGammaVariation, AlgebraData.gammaTwo]
-  · by_cases hli : l = i
-    · simp [hlj, hli, sourceGammaVariation, AlgebraData.gammaTwo,
-        neg_mul, mul_neg, smul_neg] <;> module
-    · simp [hlj, hli, sourceGammaVariation, AlgebraData.gammaTwo]
+  by_cases hli : l = i
+  · subst l
+    -- The SECOND coordinate i varies as -gamma j.
+    simpa only [sourceGammaVariation, if_neg hij, if_pos rfl,
+      AlgebraData.gammaTwo] using
+      (halfCommutator_negSecond
+        (pairedAlgebraData.gamma k) (pairedAlgebraData.gamma j))
+  · by_cases hlj : l = j
+    · subst l
+      simp [sourceGammaVariation, AlgebraData.gammaTwo, hij, Ne.symm hij]
+    · simp [sourceGammaVariation, hli, hlj]
 
 /-- The ORIGINAL two-index gammaTwo spatial reindex has the exact
 minus sign needed by K6C, not a presumed spinor matrix identity.
