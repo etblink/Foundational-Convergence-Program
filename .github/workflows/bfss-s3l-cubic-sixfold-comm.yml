@@ -1,6 +1,6 @@
 name: BFSS S3L Cubic Sixfold Commutator
 
-# K2E1 generic sixfold commutator transport with the real SourceEnd.\n# Reuses qualified S3L5H commutator-sum laws and K2D3; deliberately\n# DOES NOT compile the unqualified K2B named alias or K2C2.
+# E1C: abstract-six-index source transport. E1A/E1B qualified; E1 #3\n# RED at whnf heartbeat after staging. Preserve original E1 uncompiled.\n# K2B and K2C2 known-red declarations remain excluded.
 # Uses K1 position-pair law; concrete original paired specialization stays open.
 # Pinned 26-module verification and strict kernel-axiom audit unchanged.
 on:
@@ -14,6 +14,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2BFactoredCubicSourceMonomialProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E1ATwoSumOperatorTransportProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E1BFourSumOperatorTransportProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E1CAbstractSixfoldSourceTransportProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E1GenericCubicSixfoldCommTransportProbe.lean
       - .github/workflows/bfss-s3l-cubic-sixfold-comm.yml
 
@@ -520,26 +521,26 @@ jobs:
           print('K2E1B_QUALIFIED')
           PY
 
-      - name: Qualify K2E1 sixfold source commutator from explicit pointwise response
+      - name: Qualify K2E1C generic sixfold transport with all index types abstract
         shell: bash
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
-          stem=SU2BFSSPhysicalDomainS3L5K2E1GenericCubicSixfoldCommTransportProbe
+          stem=SU2BFSSPhysicalDomainS3L5K2E1CAbstractSixfoldSourceTransportProbe
           cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5K2E1BFourSumOperatorTransportProbe.olean
-          timeout 65s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5k2e1-axioms.log
+          timeout 65s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5k2e1c-axioms.log
           test -s ".lake/build/lib/lean/$stem.olean"
           python3 - <<'PY'
           import re
-          s=open('/tmp/s3l5k2e1-axioms.log').read()
+          s=open('/tmp/s3l5k2e1c-axioms.log').read()
           pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
           matches=pat.findall(s)
           assert [n for n,_ in matches] == [
-            'FCP.BFSSSU2PhysicalDomainS3L5K2E1.sourceComm_sixfold_weighted_sums_of'],matches
+            'FCP.BFSSSU2PhysicalDomainS3L5K2E1C.sourceComm_sixfold_generic_of'],matches
           for n,axioms in matches:
             assert {v.strip() for v in axioms.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,axioms)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
-          print('S3L5K2E1_SIXFOLD_SOURCE_COMMUTATOR_TRANSPORT_PASS')
+          print('S3L5K2E1C_ABSTRACT_SIXFOLD_TRANSPORT_PASS')
           PY
