@@ -1,4 +1,4 @@
-name: BFSS L6G4 Original Coefficient Commutator
+name: BFSS L6G5A Original Kinetic Gram
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -13,6 +13,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5AOriginalKineticGramProbe.lean
 
 permissions:
   contents: read
@@ -375,6 +376,31 @@ jobs:
         with:
           path: upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe.olean
           key: bfss-l6g4b-coefficient-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe.lean') }}
+
+      - name: Qualify exact original-source kinetic gamma Gram contraction
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5AOriginalKineticGramProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.olean
+          echo L6G5A_SOURCE_KINETIC_GRAM_BEGIN
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/kinetic-gram.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/kinetic-gram.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          actual={name:{a.strip() for a in ax.split(',') if a.strip()} for name,ax in re.findall(r"'([^']+)' (?:depends on axioms: \\[([^\\]]*)\\]|does not depend on any axioms)",s)}
+          name='FCP.BFSSSU2PhysicalDomainL6G5A.originalGamma_rowKineticGram'
+          assert name in actual and actual[name]<=allowed,actual
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('L6G5A_ORIGINAL_REAL_SPINOR_KINETIC_GRAM_QUALIFIED')
+          PY
 
       - name: Preserve independently inspectable qualification evidence
         if: always()
