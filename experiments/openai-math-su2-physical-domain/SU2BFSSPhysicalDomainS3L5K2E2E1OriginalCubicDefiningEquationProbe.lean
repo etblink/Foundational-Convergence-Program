@@ -3,6 +3,8 @@ import SU2BFSSPhysicalDomainS3L5K2E2D0OriginalCubicNamedSourceDefinitionsProbe
 /-!
 # E2E1: explicit defining-equation probe from independent Grok review
 
+Pinned qualification attempt #1; mathematics unchanged.
+
 E2D0 original generator/factor/response definitions compile. E2D1's
 bare 'exact K2D3' failed at maximum recursion depth even with no sums.
 Grok suggests separately kernel-qualifying definitional equations
