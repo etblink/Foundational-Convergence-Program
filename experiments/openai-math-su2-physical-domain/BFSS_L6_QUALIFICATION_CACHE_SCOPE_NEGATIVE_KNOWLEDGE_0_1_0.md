@@ -1,6 +1,6 @@
 # BFSS L6 qualification: GitHub Actions cache-scope blocker and proof reuse
 
-> **Current recovery status:** the stable PR25-scope pinned bootstrap has succeeded, and [L6G1 #2](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38294155678) qualified both original-source unit-spinor theorem declarations. The historical cache-scope failure and first G1 errors below remain negative knowledge. See `L6G1_ORIGINAL_SOURCE_SPIN_IDENTITY_ACCEPTED_CHECKPOINT_0_1_0.md`; G2 is a separate unqualified candidate.
+> **Current recovery status:** stable PR25-scope bootstrap succeeded. [L6G1 #2](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38294155678) qualified the unit-spinor source identity; [L6G2 #4](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38296484114) qualified arbitrary-real-spinor homogeneity, row orientation and source Fierz entries. Both source caches are saved. See the G1 and G2 accepted checkpoints. The failures below remain historical negative knowledge; the next obligation is the actual CAR/Gauss normal-order operator bridge.
 
 **2026-10-12 Project Lead: CI negative-knowledge checkpoint.**
 

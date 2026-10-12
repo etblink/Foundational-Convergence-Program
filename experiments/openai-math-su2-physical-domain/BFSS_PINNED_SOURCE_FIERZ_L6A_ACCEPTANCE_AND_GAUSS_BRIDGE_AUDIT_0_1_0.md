@@ -2,6 +2,8 @@
 
 # BFSS Project Lead — original signed-permutation source gamma certificate and bounded Lean discharge plan
 
+> **Superseding kernel evidence:** [L6G2 #4](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38296484114) qualifies the all-real-spinor ROW Fierz identity for `FCP.BFSSGamma9.gamma`, the unchanged gamma definition installed in the paired data. G1 reuses the upstream spin identity; G2 proves homogeneity and orientation. See `L6G2_ORIGINAL_ALL_SPINOR_ROW_FIERZ_ACCEPTED_CHECKPOINT_0_1_0.md`. The finite gamma coefficient obligation is resolved; CAR/Gauss normal ordering and domains remain separate. The earlier reduction and candidate plans are historical, not instructions to rebuild a basis or numerical kernel certificate.
+
 **2026-10-12 | Research-branch source-algebra checkpoint 0.1.0**. Verdict: EXACT_PINNED_SOURCE_GAMMA_CHECK_PASS; 20,736 source gamma Clifford entries and 313,344 generalized Fierz entries; no new Lean theorem or CI qualification; frozen caches respected.
 
 ## The mathematical finding

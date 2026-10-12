@@ -1,5 +1,7 @@
 # L6G2 — first source-row Fierz gate and exact statement repair
 
+> **Superseding outcome:** [G2 #4](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38296484114) is green at `a334f34d74a7cf1ec67faac28a164a82c7ffce84`; the repaired module, five axiom checks and explicit final type passed. See `L6G2_ORIGINAL_ALL_SPINOR_ROW_FIERZ_ACCEPTED_CHECKPOINT_0_1_0.md`. The first-attempt failures below remain historical evidence.
+
 **2026-10-12. Status: G2 unqualified pending the repaired gate. G1 remains accepted.**
 
 [Homogeneous Original Source Fierz #3](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38295308241), commit `814d8b9d91c48da00b516d15a970bd0e5b109413`, restored the new pinned dependency environment and exact five accepted G1 source objects successfully. No G0, R4B, R4D, upstream or concrete gamma source was rebuilt. Lean reached G2 and emitted actual diagnostics after about ten seconds; there was no resource timeout.
