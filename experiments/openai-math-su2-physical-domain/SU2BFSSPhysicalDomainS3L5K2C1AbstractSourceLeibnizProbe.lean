@@ -3,6 +3,7 @@ import Mathlib.Tactic.NoncommRing
 
 /-!
 # S3L5K2C1 — abstract source endomorphism Leibniz law
+K2C qualification #3: pinned Mathlib noncomm_ring algebra and exact source specialization.
 
 Accept and cache a pure source-operator composition identity before asking
 Lean to elaborate any of the concrete paired BFSS Fock operators. This is
