@@ -10,6 +10,7 @@ on:
     paths:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2D1ParametricCubicFactorTransportProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2D2OriginalSourceCubicFactorOfResponseProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2D3OriginalSourceUnconditionalCubicFactorProbe.lean
       - .github/workflows/bfss-s3l-cubic-parametric-factor.yml
 
 permissions:
@@ -444,4 +445,28 @@ jobs:
             assert {v.strip() for v in axioms.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,axioms)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('S3L5K2D2_ORIGINAL_FACTOR_CONDITIONAL_PASS')
+          PY
+
+      - name: Qualify K2D3 unconditional original BFSS cubic source factor using K2A
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L5K2D3OriginalSourceUnconditionalCubicFactorProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5K2D2OriginalSourceCubicFactorOfResponseProbe.olean
+          timeout 65s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5k2d3-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5k2d3-axioms.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          assert [n for n,_ in matches]==[
+            'FCP.BFSSSU2PhysicalDomainS3L5K2D3.pairedActualCombined_comm_cubicFactor'],matches
+          for n,axioms in matches:
+            assert {v.strip() for v in axioms.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,axioms)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5K2D3_ORIGINAL_UNCONDITIONAL_CUBIC_FACTOR_PASS')
           PY
