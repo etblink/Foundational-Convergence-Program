@@ -21,6 +21,7 @@ open scoped BigOperators
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainL6G1
+open FCP.BFSSSU2PhysicalDomainL6G2
 open FCP.BFSSSU2PhysicalDomainL6G3
 open FCP.BFSSSU2PhysicalDomainL6G5C
 open FCP.BFSSSU2PhysicalDomainL6G5D
@@ -46,11 +47,11 @@ private theorem orderedCoefficientSquare_split
     {R I : Type*} [Ring R] [Fintype I] (K W : I → R) :
     (∑ p : I, (K p + W p) * (K p + W p)) =
       (∑ p : I, K p * K p) +
-      (∑ p : I, K p * W p + W p * K p) +
+      (∑ p : I, (K p * W p + W p * K p)) +
       (∑ p : I, W p * W p) := by
   calc
     _ = ∑ p : I,
-      (K p * K p + (K p * W p + W p * K p)) + W p * W p := by
+      ((K p * K p + (K p * W p + W p * K p)) + W p * W p) := by
         apply Finset.sum_congr rfl
         intro p _
         noncomm_ring
