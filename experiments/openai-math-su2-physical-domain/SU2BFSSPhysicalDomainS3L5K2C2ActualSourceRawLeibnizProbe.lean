@@ -3,7 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K2C1AbstractSourceLeibnizProbe
 /-!
 # S3L5K2C2 — exact concrete source operator Leibniz shape
 K2C Gate #2: add the original GaugeG1A source namespace omitted in K2C2 #1. Preserve exact theorem and raw Leibniz tactic.
-K2C Gate #3: Mathlib abstract ring passed; concrete exact source application exhausted recursion depth.\nK2C Gate #4: direct source-endomorphism extensional proof, preserving the exact statement. CI-qualification trigger: extensional original SourceEnd proof.
+K2C Gate #3: Mathlib abstract ring passed; concrete exact source application exhausted recursion depth.\nK2C Gate #4: direct extensional application exhausted wall-clock (exit 124) without Lean diagnostics.\nK2C Gate #5: syntactically generalize the exact three original SourceEnd atoms within the target; prove the stronger abstract identity without source unfolding.
 
 Qualify only the Leibniz decomposition of the ACTUAL source 48-Majorana
 combined generator acting on the original ordered cubic monomial.
@@ -51,17 +51,19 @@ theorem pairedActualCombined_comm_cubicMonomial_rawLeibniz
          ((position (N := 2) k B).comp (position (N := 2) l C)).comp
            (sourceParametricCombinedPlane
              (pairedFermionPlaneSpinGenerator i j) i j)) := by
-  -- K2C #3 exhausted maximum recursion depth when specializing an already
-  -- checked abstract Leibniz theorem to these literal BFSS source operators.
-  -- Instead prove the UNCHANGED concrete statement extensionally. Expand
-  -- only the linear-map application boundary; do not unfold the Fock source,
-  -- Clifford coefficients, orbital generator, or any physical definitions.
-  -- This is the same finite algebra pattern qualified earlier in K1.
-  apply LinearMap.ext
-  intro f
-  simp only [LinearMap.add_apply, LinearMap.sub_apply,
-    LinearMap.comp_apply, map_sub]
-  abel
+  -- Gate #3: concrete specialisation of the abstract theorem recursed.
+  -- Gate #4: direct pointwise simplification took the 65s wall-clock limit.
+  -- Instead abstract only THREE rigid SourceEnd atoms syntactically in the
+  -- CURRENT GOAL, BEFORE applying any algebraic theorem. We never reduce
+  -- their genuine Fock, gamma, orbital, position or gauge definitions.
+  -- The resulting goal is the exact noncommutative SourceEnd identity.
+  generalize hG :
+    sourceParametricCombinedPlane
+      (pairedFermionPlaneSpinGenerator i j) i j = G
+  generalize hF : pairedAlgebraData.fermionAction γ A = F
+  generalize hP :
+    (position (N := 2) k B).comp (position (N := 2) l C) = P
+  exact sourceComm_comp_raw G F P
 
 #print axioms pairedActualCombined_comm_cubicMonomial_rawLeibniz
 
