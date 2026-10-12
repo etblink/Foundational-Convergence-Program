@@ -4,6 +4,7 @@ import SU2BFSSPhysicalDomainS3L5K2E1DOriginalSixfoldIndexSpecializationProbe
 # K2E2A — original BFSS cubic operator family, sixfold source transport
 
 CI qualification attempt #1 (statement and proof unchanged).
+CI qualification attempt #2: restore original source G1A namespace only.
 
 E1D's exact original six BFSS index types are kernel-qualified. This
 module introduces the TRUE paired 48-Majorana source plane generator and
