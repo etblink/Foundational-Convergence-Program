@@ -1,9 +1,9 @@
-import SU2BFSSPhysicalDomainS3L5K2D3OriginalSourceUnconditionalCubicFactorProbe
+import SU2BFSSPhysicalDomainS3L5K2E1BFourSumOperatorTransportProbe
 
 /-!
 # S3L5K2E1 — sixfold original cubic source-index commutator transport
 
-K2E1 pinned qualification #1 (generic sixfold transport only).\nThis is the next substantive transport obligation after kernel-qualified
+K2E1 #1 timed out; E1 #2 uses separately compiled two/four sum lemmas.\nThis is the next substantive transport obligation after kernel-qualified
 K2D3's LITERAL 48-Majorana cubic-factor commutator. The previous K2B
 theorem's conversion of that literal factor to the separate named
 pairedOriginalCubicMonomial failed; it is NOT imported or assumed.
@@ -28,6 +28,8 @@ open OAI.BFSSQuantum
 open FCP.BFSSSU2PhysicalDomainS3A
 open FCP.BFSSSU2PhysicalDomainS3L4B
 open FCP.BFSSSU2PhysicalDomainS3L5H
+open FCP.BFSSSU2PhysicalDomainS3L5K2E1A
+open FCP.BFSSSU2PhysicalDomainS3L5K2E1B
 
 /-- Transport an exact pointwise source commutator through the original
 six cubic-charge index types without unfolding physical source operators.
@@ -54,27 +56,32 @@ theorem sourceComm_sixfold_weighted_sums_of
       ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
       c k l A B C γ • R k l A B C γ := by
   classical
-  -- Staged finite-sum source algebra already used successfully for I1.
-  -- Each 'rw' only sees a parametric operator family; no 48-Majorana body.
-  rw [sourceComm_sum]
-  apply Finset.sum_congr rfl
-  intro k _
-  rw [sourceComm_sum]
-  apply Finset.sum_congr rfl
-  intro l _
-  rw [sourceComm_sum]
-  apply Finset.sum_congr rfl
-  intro A _
-  rw [sourceComm_sum]
-  apply Finset.sum_congr rfl
-  intro B _
-  rw [sourceComm_sum]
-  apply Finset.sum_congr rfl
-  intro C _
-  rw [sourceComm_weighted_sum]
-  apply Finset.sum_congr rfl
-  intro γ _
-  rw [h k l A B C γ]
+  -- Factor two outer original spatial sums from the inner four-index
+  -- source identity, checked independently in E1B and E1A.
+  have hFour (k l : SpaceIndex) :
+      G.comp (∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
+        ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
+        c k l A B C γ • T k l A B C γ) -
+      (∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
+        ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
+        c k l A B C γ • T k l A B C γ).comp G =
+      ∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
+        ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
+        c k l A B C γ • R k l A B C γ :=
+    sourceComm_four_weighted_sums_of G
+      (fun A B C γ => c k l A B C γ)
+      (fun A B C γ => T k l A B C γ)
+      (fun A B C γ => R k l A B C γ)
+      (fun A B C γ => h k l A B C γ)
+  trace "K2E1_STAGE_A_FOUR_SUM_PARAMETRIC_RESPONSE"
+  exact sourceComm_two_unweighted_sums_of G
+    (fun k l => ∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
+      ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
+      c k l A B C γ • T k l A B C γ)
+    (fun k l => ∑ A : ColorIndex 2, ∑ B : ColorIndex 2,
+      ∑ C : ColorIndex 2, ∑ γ : SpinIndex,
+      c k l A B C γ • R k l A B C γ)
+    hFour
 
 #print axioms sourceComm_sixfold_weighted_sums_of
 

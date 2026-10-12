@@ -12,6 +12,8 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2D2OriginalSourceCubicFactorOfResponseProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2D3OriginalSourceUnconditionalCubicFactorProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2BFactoredCubicSourceMonomialProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E1ATwoSumOperatorTransportProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E1BFourSumOperatorTransportProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E1GenericCubicSixfoldCommTransportProbe.lean
       - .github/workflows/bfss-s3l-cubic-sixfold-comm.yml
 
@@ -473,6 +475,51 @@ jobs:
           print('S3L5K2D3_ORIGINAL_UNCONDITIONAL_CUBIC_FACTOR_PASS')
           PY
 
+      - name: Qualify K2E1A single weighted and double unweighted source sums
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L5K2E1ATwoSumOperatorTransportProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5K2D3OriginalSourceUnconditionalCubicFactorProbe.olean
+          timeout 65s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/e1a.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/e1a.log').read()
+          m=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          assert [x for x,_ in m]==[
+           'FCP.BFSSSU2PhysicalDomainS3L5K2E1A.sourceComm_one_weighted_sum_of',
+           'FCP.BFSSSU2PhysicalDomainS3L5K2E1A.sourceComm_two_unweighted_sums_of'],m
+          for n,ax in m: assert {z.strip() for z in ax.split(',') if z.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('K2E1A_QUALIFIED')
+          PY
+
+      - name: Qualify K2E1B generic four-index source commutator transport
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L5K2E1BFourSumOperatorTransportProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5K2E1ATwoSumOperatorTransportProbe.olean
+          timeout 65s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/e1b.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/e1b.log').read()
+          m=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          assert [x for x,_ in m]==[
+            'FCP.BFSSSU2PhysicalDomainS3L5K2E1B.sourceComm_four_weighted_sums_of'],m
+          for n,ax in m: assert {z.strip() for z in ax.split(',') if z.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,ax)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('K2E1B_QUALIFIED')
+          PY
+
       - name: Qualify K2E1 sixfold source commutator from explicit pointwise response
         shell: bash
         run: |
@@ -481,7 +528,7 @@ jobs:
           stem=SU2BFSSPhysicalDomainS3L5K2E1GenericCubicSixfoldCommTransportProbe
           cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
           cd upstream-math/lean
-          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5K2D3OriginalSourceUnconditionalCubicFactorProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5K2E1BFourSumOperatorTransportProbe.olean
           timeout 65s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5k2e1-axioms.log
           test -s ".lake/build/lib/lean/$stem.olean"
           python3 - <<'PY'
