@@ -4,6 +4,10 @@ import SU2BFSSPhysicalDomainS3L5K2R3COriginalWeightedPositionResponseProbe
 /-!
 # R4B — actual original cubic response at fixed colors A,B,C
 
+Qualification #2 preflight: repair only the S3L5K1 namespace and the
+first coefficient-lambda delimiter diagnosed by fixed-color gate #1.
+The public theorem statement and all source mathematics are unchanged.
+
 R4A isolates precise triple finite-index distribution; qualified R1D
 proves the actual original source fermionic variation, and R3C the
 actual two-position source spatial response. This module COMBINES
