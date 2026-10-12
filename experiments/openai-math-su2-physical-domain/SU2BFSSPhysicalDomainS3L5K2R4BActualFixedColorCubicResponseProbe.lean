@@ -7,6 +7,8 @@ import SU2BFSSPhysicalDomainS3L5K2R3COriginalWeightedPositionResponseProbe
 Qualification #2 preflight: repair only the S3L5K1 namespace and the
 first coefficient-lambda delimiter diagnosed by fixed-color gate #1.
 The public theorem statement and all source mathematics are unchanged.
+Qualification #3: termwise finite-index distribution replaces the
+large hsplit definitional conversion isolated by gate #2.
 
 R4A isolates precise triple finite-index distribution; qualified R1D
 proves the actual original source fermionic variation, and R3C the
