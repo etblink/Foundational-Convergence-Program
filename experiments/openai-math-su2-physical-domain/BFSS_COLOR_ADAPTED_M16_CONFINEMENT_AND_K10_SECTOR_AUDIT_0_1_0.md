@@ -1,3 +1,5 @@
+> **Improved gauge-orbit averaging (2026-10-12):** This audit's >22 cutoff and k=10 minimum were valid for its color-coordinate sum comparison, but a stronger source-faithful physical SU2 gauge-orbit estimate now gives **lambda2>16** and **k=7** (actual lambda=(17,17,1,0)), or a smaller target lambda=(18,18,0,0) at k=8. The spherical inequality is proved by concavity of singular-value squared weights; see BFSS_GAUGE_ORBIT_SPHERICAL_RADIAL_M10_CONFINEMENT_AND_K7_AUDIT_0_1_0.md. Do not cite m=16 or k=10 as the current optimum.
+
 # BFSS SU(2) — color-resolved fermionic bound, optimized kinetic split, and new high-spin construction threshold
 
 **2026-10-12 | Project Lead mathematical discovery 0.1.0.** Disposition: `SOURCE_CAR_COLOR_SUM_BOUND_SHARP__TRANSVERSE_KINETIC_ALLOCATION_REPAIRED__M16_CUTOFF_LAMBDA2_GT22__OPTIMAL_K10_WITHIN_P_METHOD__SOURCE_SPECTRAL_CONCLUSIONS_CONDITIONAL`.
