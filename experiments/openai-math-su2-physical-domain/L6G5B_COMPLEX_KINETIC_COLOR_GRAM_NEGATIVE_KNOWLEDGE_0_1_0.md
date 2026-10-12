@@ -15,6 +15,12 @@ The audit printed `sorryAx` for the two unfinished declarations because Lean ela
 
 Commit [`415b4782d9d74264235b95a08db1fa5881bb2ee6`](https://github.com/etblink/Foundational-Convergence-Program/commit/415b4782d9d74264235b95a08db1fa5881bb2ee6) changes only those two proof steps in the L6G5B source. [Run #14](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38310062657) is the next qualification attempt. **Its result was not known at the time of this note.** Never promote the attempted repair to a qualified theorem without a successful pinned compile and explicit `#print axioms` audit.
 
+## Run #14 follow-up: one remaining if/cast mismatch
+
+[Run #14](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38310062657) at `415b4782d9d74264235b95a08db1fa5881bb2ee6` also finished red, but **both original proof-interface errors did not persist**. The explicit `colorSelectors_contract` instance rewrote successfully; no new local error appeared in the final `sourceSpinorKineticWeight_colorGram` proof. The only Lean error, line 86, remained in `originalGamma_complexRowKineticGram`: after `congrArg (fun a : ℝ => (a : ℂ))` and `simpa`, the result still had `↑(if i = j then spinorSquareNorm w else 0)` while the target was `if i = j then ↑(spinorSquareNorm w) else 0`. **Do not change the theorem or gamma normalization to work around this syntactic cast mismatch.**
+
+Committed fix [`f838be4e1c0f84be496171147a5e0cd37ad843c6`](https://github.com/etblink/Foundational-Convergence-Program/commit/f838be4e1c0f84be496171147a5e0cd37ad843c6) explicitly splits `i = j` and `i ≠ j` before transporting the equality. This discharges the conditional form by reduction to its two ordinary scalar cases; it remains a candidate until the follow-up Lean CI compiler and axiom gate passes.
+
 ## Research boundaries retained
 
 L6G5A's exact real gamma Gram theorem is already accepted. L6G5B targets only the complex `-i` kinetic coefficient, finite spinor/color contraction, and its negative diagonal sign. It does **not** prove the full kinetic differential-operator square, original scalar potential, either Gauss generator, gauge restriction, closure or spectral positivity. Preserve source normalizations and seek the smallest compiler-verifiable bridge rather than increasing heartbeats or rerunning legacy monolithic cubic proofs.
