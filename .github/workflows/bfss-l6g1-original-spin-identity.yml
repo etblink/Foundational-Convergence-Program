@@ -1,4 +1,4 @@
-name: BFSS L6G5B Complex Kinetic Color Gram
+name: BFSS L6G5C Original Kinetic Differential Square
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -15,6 +15,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5AOriginalKineticGramProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5BOriginalComplexKineticColorGramProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5COriginalKineticDifferentialSquareProbe.lean
 
 permissions:
   contents: read
@@ -427,6 +428,34 @@ jobs:
           assert all(prefix+n in actual and actual[prefix+n]<=allowed for n in names),actual
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('L6G5B_ORIGINAL_COMPLEX_KINETIC_COLOR_GRAM_QUALIFIED')
+          PY
+
+      - name: Qualify L6G5C genuine source differential kinetic square
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5COriginalKineticDifferentialSquareProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5BOriginalComplexKineticColorGramProbe.olean
+          echo L6G5C_ORIGINAL_KINETIC_DIFFERENTIAL_SQUARE_BEGIN
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/kinetic-differential-square.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/kinetic-differential-square.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          actual={name:{a.strip() for a in ax.split(',') if a.strip()} for name,ax in re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          prefix='FCP.BFSSSU2PhysicalDomainL6G5C.'
+          names=['sourceSpinorKineticDifferential_square',
+              'sourceSpinorKineticDifferential_halfSquare']
+          assert all(prefix+n in actual and actual[prefix+n]<=allowed for n in names),actual
+          generic=[a for n,a in actual.items() if n.endswith('.weightedOperatorGramSquare')]
+          assert len(generic)==1 and generic[0]<=allowed,actual
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('L6G5C_ORIGINAL_SOURCE_KINETIC_DIFFERENTIAL_SQUARE_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
