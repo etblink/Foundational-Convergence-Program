@@ -3,6 +3,8 @@ import SU2BFSSPhysicalDomainS3L5K2R1DOriginalWeightedFermionCoefficientBridgePro
 /-!
 # R4A — exact triple-index source response decomposition
 
+Pinned qualification attempt #1: source theorem statements unchanged.
+
 The accepted original cubic fermion and spatial responses use
 different finite-sum orders: R1D contracts the spinor index at fixed
 spatial positions; R3C moves the spatial pair at fixed spinor index.
