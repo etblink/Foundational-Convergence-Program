@@ -23,6 +23,8 @@ open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2PhysicalDomainS3A
+-- S3D owns the source-defined actual 48-Majorana paired Fock generator.
+open FCP.BFSSSU2PhysicalDomainS3D
 open FCP.BFSSSU2PhysicalDomainS3L4B
 open FCP.BFSSSU2PhysicalDomainS3L5F
 open FCP.BFSSSU2PhysicalDomainS3L5K1
