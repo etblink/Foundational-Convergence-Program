@@ -49,18 +49,9 @@ private theorem centeredProduct_gram
       (A * B - d • (1 : R)) * (B * A - d • (1 : R)) =
         (A * B) * (B * A) -
           d • (A * B + B * A) + (d * d) • (1 : R) := by
-    calc
-      _ = (A * B) * (B * A) -
-            (A * B) * (d • (1 : R)) -
-            (d • (1 : R)) * (B * A) +
-            (d • (1 : R)) * (d • (1 : R)) := by noncomm_ring
-      _ = (A * B) * (B * A) -
-            d • (A * B) - d • (B * A) +
-            (d * d) • (1 : R) := by
-              rw [hright (A * B), hleft (B * A), hd2]
-      _ = _ := by
-        rw [smul_add]
-        abel
+    simp only [mul_sub, sub_mul, hright, hleft, hd2, smul_smul,
+      smul_add]
+    abel
   calc
     _ = (A * B) * (B * A) -
           d • (A * B + B * A) + (d * d) • (1 : R) := hexpand
