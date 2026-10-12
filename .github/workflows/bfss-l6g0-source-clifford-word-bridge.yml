@@ -2,9 +2,9 @@ name: BFSS L6G0 Source Clifford Word Bridge
 
 # Isolated, source-pinned gate. No R4B/R4D or monolithic cubic modules.
 on:
-  push:
+  pull_request:
     branches:
-      - research/openai-math-su2-s3l-combined-rotation
+      - research/openai-math-su2-s3k-physical-spin-flow
     paths:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G0SourceCliffordWordBridgeProbe.lean
       - .github/workflows/bfss-l6g0-source-clifford-word-bridge.yml
