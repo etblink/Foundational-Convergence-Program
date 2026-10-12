@@ -3,7 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K2E1CAbstractSixfoldSourceTransportProbe
 /-!
 # K2E1D — exact original BFSS six-index types, generic SourceEnd transport
 
-SOURCE AND QUALIFICATION BOUNDARY:
+K2E1D pinned qualification #1, unchanged theorem.\nSOURCE AND QUALIFICATION BOUNDARY:
 * K2E1C has already compiled and axiom-audited at exact pinned sources.
 * K2E1D instantiates ONLY six original types: 9-space, 9-space, three
   SU(2) colors, three colors, three colors, 16-component spinor.
