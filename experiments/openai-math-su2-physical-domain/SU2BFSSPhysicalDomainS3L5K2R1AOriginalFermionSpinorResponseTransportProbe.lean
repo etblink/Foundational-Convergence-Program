@@ -4,6 +4,8 @@ import SU2BFSSPhysicalDomainS3L5K2AOriginalFermionActionCovarianceProbe
 /-!
 # K2R1A — original SU(2) fermion response finite spinor transport
 
+Pinned qualification attempt #1, original source/axioms unchanged.
+
 Mathematical purpose: discharge the ORIGINAL finite fermion spinor
 response index transfer that K6C's transformed cubic coefficient
 requires. Reuse the accepted J3 two-index transport and J4
