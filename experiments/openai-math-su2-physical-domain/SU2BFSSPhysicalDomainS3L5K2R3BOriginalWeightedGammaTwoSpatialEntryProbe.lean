@@ -3,6 +3,8 @@ import SU2BFSSPhysicalDomainS3L5K2R3AOriginalGammaTwoSpatialReindexProbe
 /-!
 # K2R3B — original weighted gammaTwo two-index spatial coefficient
 
+Pinned qualification attempt #2: explicitly distribute entry evaluation over index conditionals.
+
 Pinned qualification attempt #1. No physics or proof-body changes.
 
 R3A qualified three original gammaTwo matrix reindex identities, and
@@ -68,8 +70,19 @@ theorem originalCubicSpatialComplexCoefficient_reindexed
   have h := congrArg
     (fun M : GammaMatrix => ((M α γ : ℝ) : ℂ))
     (originalCubicStructureWeightedGammaTwo_spatial i j k l A B C hij)
-  simpa [Matrix.add_apply, Matrix.neg_apply, Matrix.smul_apply,
-    smul_eq_mul] using h
+  -- The matrix equality is already qualified; only the distribution
+  -- of entry evaluation over its two conditional spatial slots remains.
+  -- Resolve the four source-index conditions without changing signs or
+  -- unfolding any original Fock/Clifford representation.
+  classical
+  by_cases hki : k = i <;> by_cases hkj : k = j <;>
+    by_cases hli : l = i <;> by_cases hlj : l = j
+  all_goals
+    first
+    | exact False.elim (hij (hki.symm.trans hkj))
+    | exact False.elim (hij (hli.symm.trans hlj))
+    | simpa [hki, hkj, hli, hlj, Matrix.add_apply,
+        Matrix.neg_apply, Matrix.smul_apply, smul_eq_mul] using h
 
 #print axioms originalCubicStructureWeightedGammaTwo_spatial
 #print axioms originalCubicSpatialComplexCoefficient_reindexed
