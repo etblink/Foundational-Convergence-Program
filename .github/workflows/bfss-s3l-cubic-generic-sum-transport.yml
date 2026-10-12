@@ -34,7 +34,7 @@ jobs:
       - name: Check out exact pinned OpenAI Math dependency source
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          repository: openai/math
+          repository: etblink/math
           ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
           path: upstream-math
           persist-credentials: false
