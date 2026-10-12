@@ -65,73 +65,97 @@ theorem pairedOriginalCubicFixedColorResponse_decompose
           (-(sourceCubicTwoFormSpatialResponse i j k l))) α γ : ℝ) : ℂ) •
         (pairedAlgebraData.fermionAction γ A).comp
           ((position (N := 2) k B).comp (position (N := 2) l C))) := by
-  have hsplit := sourceThreeSum_weightedResponse_split
-    (fun k l γ =>
-      (((originalCubicStructureWeight A B C *
-        pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)))
-    (fun k l γ =>
-      (sourceCubicFermionVariation i j γ A).comp
-        ((position (N := 2) k B).comp (position (N := 2) l C)))
-    (fun k l γ =>
-      (pairedAlgebraData.fermionAction γ A).comp
-        ((sourcePositionVariation i j k B).comp (position (N := 2) l C)) +
-      (pairedAlgebraData.fermionAction γ A).comp
-        ((position (N := 2) k B).comp
-          (sourcePositionVariation i j l C)))
+  -- Gate #2 localized the concrete hsplit elaboration bottleneck.
+  -- Prove the outer distribution at each finite index first; do not
+  -- instantiate a generic full-expression equality against the giant source.
   calc
     _ = (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
-      (((originalCubicStructureWeight A B C *
-        pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) •
-        (sourceCubicFermionVariation i j γ A).comp
-          ((position (N := 2) k B).comp (position (N := 2) l C))) +
-        (∑ γ : SpinIndex, ∑ k : SpaceIndex, ∑ l : SpaceIndex,
-      (((originalCubicStructureWeight A B C *
-        pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) •
-        ((pairedAlgebraData.fermionAction γ A).comp
+          ((((originalCubicStructureWeight A B C *
+      pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) • (sourceCubicFermionVariation i j γ A).comp
+        ((position (N := 2) k B).comp (position (N := 2) l C))) + ((((originalCubicStructureWeight A B C *
+      pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) • ((pairedAlgebraData.fermionAction γ A).comp
           ((sourcePositionVariation i j k B).comp (position (N := 2) l C)) +
-         (pairedAlgebraData.fermionAction γ A).comp
+        (pairedAlgebraData.fermionAction γ A).comp
           ((position (N := 2) k B).comp
-            (sourcePositionVariation i j l C)))) := hsplit
-    _ = _ := by
-      have hF :
+            (sourcePositionVariation i j l C))))) := by
+      apply Finset.sum_congr rfl
+      intro k _
+      apply Finset.sum_congr rfl
+      intro l _
+      apply Finset.sum_congr rfl
+      intro γ _
+      rw [smul_add]
+    _ = (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
+          (((originalCubicStructureWeight A B C *
+      pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) • (sourceCubicFermionVariation i j γ A).comp
+        ((position (N := 2) k B).comp (position (N := 2) l C))) +
         (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
           (((originalCubicStructureWeight A B C *
-            pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) •
-          (sourceCubicFermionVariation i j γ A).comp
-            ((position (N := 2) k B).comp (position (N := 2) l C))) =
-        ∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ β : SpinIndex,
+      pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) • ((pairedAlgebraData.fermionAction γ A).comp
+          ((sourcePositionVariation i j k B).comp (position (N := 2) l C)) +
+        (pairedAlgebraData.fermionAction γ A).comp
+          ((position (N := 2) k B).comp
+            (sourcePositionVariation i j l C)))) := by
+      simp only [Finset.sum_add_distrib]
+    _ = (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
+          (((originalCubicStructureWeight A B C *
+      pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) • (sourceCubicFermionVariation i j γ A).comp
+        ((position (N := 2) k B).comp (position (N := 2) l C))) +
+        (∑ γ : SpinIndex, ∑ k : SpaceIndex, ∑ l : SpaceIndex,
+          (((originalCubicStructureWeight A B C *
+      pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) • ((pairedAlgebraData.fermionAction γ A).comp
+          ((sourcePositionVariation i j k B).comp (position (N := 2) l C)) +
+        (pairedAlgebraData.fermionAction γ A).comp
+          ((position (N := 2) k B).comp
+            (sourcePositionVariation i j l C)))) := by
+      apply congrArg (fun X : SourceEnd => (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
+          (((originalCubicStructureWeight A B C *
+      pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) • (sourceCubicFermionVariation i j γ A).comp
+        ((position (N := 2) k B).comp (position (N := 2) l C))) + X)
+      calc
+        (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
+          (((originalCubicStructureWeight A B C *
+      pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) • ((pairedAlgebraData.fermionAction γ A).comp
+          ((sourcePositionVariation i j k B).comp (position (N := 2) l C)) +
+        (pairedAlgebraData.fermionAction γ A).comp
+          ((position (N := 2) k B).comp
+            (sourcePositionVariation i j l C)))) = (∑ k : SpaceIndex, ∑ γ : SpinIndex, ∑ l : SpaceIndex,
+          (((originalCubicStructureWeight A B C *
+      pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) • ((pairedAlgebraData.fermionAction γ A).comp
+          ((sourcePositionVariation i j k B).comp (position (N := 2) l C)) +
+        (pairedAlgebraData.fermionAction γ A).comp
+          ((position (N := 2) k B).comp
+            (sourcePositionVariation i j l C)))) := by
+          apply Finset.sum_congr rfl
+          intro k _
+          exact Finset.sum_comm
+        _ = (∑ γ : SpinIndex, ∑ k : SpaceIndex, ∑ l : SpaceIndex,
+          (((originalCubicStructureWeight A B C *
+      pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) • ((pairedAlgebraData.fermionAction γ A).comp
+          ((sourcePositionVariation i j k B).comp (position (N := 2) l C)) +
+        (pairedAlgebraData.fermionAction γ A).comp
+          ((position (N := 2) k B).comp
+            (sourcePositionVariation i j l C)))) := Finset.sum_comm
+    _ = (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ β : SpinIndex,
           (((originalCubicStructureWeight A B C •
-            (pairedAlgebraData.gammaTwo k l *
-              (pairedPlaneSpinGenerator i j).transpose)) α β : ℝ) : ℂ) •
-            (pairedAlgebraData.fermionAction β A).comp
-              ((position (N := 2) k B).comp
-                (position (N := 2) l C)) := by
-        apply Finset.sum_congr rfl
+          (pairedAlgebraData.gammaTwo k l *
+            (pairedPlaneSpinGenerator i j).transpose)) α β : ℝ) : ℂ) • (pairedAlgebraData.fermionAction β A).comp
+          ((position (N := 2) k B).comp (position (N := 2) l C))) +
+        (∑ γ : SpinIndex, ∑ k : SpaceIndex, ∑ l : SpaceIndex,
+          (((originalCubicStructureWeight A B C •
+          (-(sourceCubicTwoFormSpatialResponse i j k l))) α γ : ℝ) : ℂ) • (pairedAlgebraData.fermionAction γ A).comp
+          ((position (N := 2) k B).comp (position (N := 2) l C))) := by
+      apply congrArg₂ (fun X Y : SourceEnd => X + Y)
+      · apply Finset.sum_congr rfl
         intro k _
         apply Finset.sum_congr rfl
         intro l _
         exact pairedOriginalCubicWeightedFermionResponse_coefficient
           i j k l α A B C
-      have hP :
-        (∑ γ : SpinIndex, ∑ k : SpaceIndex, ∑ l : SpaceIndex,
-          (((originalCubicStructureWeight A B C *
-            pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) •
-          ((pairedAlgebraData.fermionAction γ A).comp
-            ((sourcePositionVariation i j k B).comp (position (N := 2) l C)) +
-           (pairedAlgebraData.fermionAction γ A).comp
-            ((position (N := 2) k B).comp
-              (sourcePositionVariation i j l C)))) =
-        ∑ γ : SpinIndex, ∑ k : SpaceIndex, ∑ l : SpaceIndex,
-          (((originalCubicStructureWeight A B C •
-            (-(sourceCubicTwoFormSpatialResponse i j k l))) α γ : ℝ) : ℂ) •
-            (pairedAlgebraData.fermionAction γ A).comp
-              ((position (N := 2) k B).comp
-                (position (N := 2) l C)) := by
-        apply Finset.sum_congr rfl
+      · apply Finset.sum_congr rfl
         intro γ _
         exact pairedOriginalCubicWeightedPositionResponse_spatial
           i j hij α γ A B C
-      exact congrArg₂ (fun X Y : SourceEnd => X + Y) hF hP
 
 #print axioms pairedOriginalCubicFixedColorResponse_decompose
 end
