@@ -6,7 +6,7 @@ K2C Gate #2: add the original GaugeG1A source namespace omitted in K2C2 #1. Pres
 K2C Gate #3: Mathlib abstract ring passed; concrete exact source application exhausted recursion depth.
 K2C Gate #4: direct extensional application exhausted wall-clock (exit 124) without Lean diagnostics.\nK2C Gate #5: concrete three-atom generalization timed out (exit 124).\nK2C Gate #6: opaque identity instantiation passed, simultaneous final simpa only hit maxRecDepth at line 75.\nK2C Gate #7: sequential unfold reached all markers, but left irreducible_def internal wrapped values; exact h failed type matching.\nK2C Gate #8: generated sourceP_def/sourceF_def/sourceG_def equation lemmas, preserving the EXACT original theorem.
 K2C Gate #9: all generated forward equation rewrites succeeded, final exact h recursed.
-K2C Gate #10: reverse generated equations on literal goal; preserve qualified abstract proof opaque.
+K2C Gate #10: reverse generated equations on literal goal; preserve qualified abstract proof opaque. Pinned CI qualification event #10.
 
 Qualify only the Leibniz decomposition of the ACTUAL source 48-Majorana
 combined generator acting on the original ordered cubic monomial.
