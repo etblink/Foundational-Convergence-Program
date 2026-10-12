@@ -3,17 +3,10 @@ name: BFSS S3L Cubic Raw Leibniz Boundary
 # K2C1 exact source algebra then K2C2 concrete source-specialized raw Leibniz.
 # Reuse source-verified accepted 26-module cache and qualified K1/K2A.
 # This does not claim complete cubic charge covariance or spectra.
+# Direct raw K2C2 specialization is STOPPED after #10. Preserve this
+# workflow for manual reproducibility only; do not automatically rerun
+# its unchanged known-red Lean source on unrelated PR qualification.
 on:
-  pull_request:
-    branches:
-      # Existing verified Lean/Mathlib cache is accessible from this base.
-      # S3K base was tested at #8 and fail-closed on its independent scope.
-      # Do not broaden until a pinned, verified cache is seeded there.
-      - research/openai-math-su2-concrete-potential
-    paths:
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2C1AbstractSourceLeibnizProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2C2ActualSourceRawLeibnizProbe.lean
-      - .github/workflows/bfss-s3l-cubic-raw-leibniz.yml
   workflow_dispatch:
 
 permissions:
