@@ -1,4 +1,4 @@
-name: BFSS L6G3 Original Charge CAR Normal Order
+name: BFSS L6G4 Original Coefficient Commutator
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -11,6 +11,8 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe.lean
 
 permissions:
   contents: read
@@ -48,6 +50,7 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean)" = "5ec0fcb039fb5c1367f72b2bd0f8c05fcd936587"
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean)" = "b3c4cb1b12c64d3e718d2c547ee29ebac2b18a36"
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.lean)" = "481df011d2e87b31e58efea2b97f81094fc14918"
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean)" = "1c155a708930af50534dc9cb540c48319aeae8b2"
           python3 - <<'PY'
           import json
           d=json.load(open('upstream-math/lean/lake-manifest.json'))
@@ -60,6 +63,8 @@ jobs:
             echo "G1_SOURCE_BLOB=$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean)"
             echo "G2_SOURCE_BLOB=$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.lean)"
             echo "G3_SOURCE_BLOB=$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean)"
+            echo "G4A_SOURCE_BLOB=$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.lean)"
+            echo "G4B_SOURCE_BLOB=$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe.lean)"
             echo "EXACT_SOURCE_PREFLIGHT_PASS"
           } | tee /tmp/bfss-l6g1/source-pins.txt
 
@@ -246,7 +251,15 @@ jobs:
           path: upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.olean
           key: bfss-l6g2-source-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.lean') }}
 
+      - name: Restore qualified G3 original normal ordering by frozen source hash
+        id: accepted_g3
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.olean
+          key: bfss-l6g3-source-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean') }}
+
       - name: Qualify literal original smooth-core CAR normal ordering
+        if: steps.accepted_g3.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -276,10 +289,92 @@ jobs:
           PY
 
       - name: Cache only the qualified original-charge normal-order object
+        if: steps.accepted_g3.outputs.cache-hit != 'true'
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.olean
           key: bfss-l6g3-source-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean') }}
+
+      - name: Restore independently qualified minimal G4A source calculus
+        id: accepted_g4a
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/CliffordSymbols.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.olean
+          key: bfss-l6g4a-calculus-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.lean') }}
+
+      - name: Qualify only upstream multiplier rule and minimal original calculus
+        if: steps.accepted_g4a.outputs.cache-hit != 'true'
+        shell: bash
+        timeout-minutes: 9
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.olean
+          timeout 300s lake env lean -o .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/CliffordSymbols.olean OAI/MathematicalPhysics/BFSS/CliffordSymbols.lean 2>&1 | tee /tmp/bfss-l6g1/upstream-clifford-symbols.log
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/CliffordSymbols.olean
+          echo L6G4A_LITERAL_SOURCE_CALCULUS_BEGIN
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/original-core-calculus.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/original-core-calculus.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          actual={name:{a.strip() for a in ax.split(',') if a.strip()} for name,ax in re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          names=['sourceD_P_comm','sourceD_D_comm','sourceP_P_comm','sourceD_positionPair_comm']
+          expected=['FCP.BFSSSU2PhysicalDomainL6G4A.'+n for n in names]
+          expected+=['OAI.BFSSQuantum.AlgebraData.coordinateDerivative_multiplier']
+          assert all(n in actual and actual[n]<=allowed for n in expected),actual
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('L6G4A_ORIGINAL_CORE_CALCULUS_QUALIFIED')
+          PY
+
+      - name: Cache qualified calculus before coefficient experiments
+        if: steps.accepted_g4a.outputs.cache-hit != 'true'
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/CliffordSymbols.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.olean
+          key: bfss-l6g4a-calculus-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.lean') }}
+
+      - name: Qualify literal original all-spinor coefficient commutator
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.olean
+          echo L6G4B_LITERAL_ORIGINAL_COEFFICIENT_COMMUTATOR_BEGIN
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/original-coefficient-commutator.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/original-coefficient-commutator.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          actual={name:{a.strip() for a in ax.split(',') if a.strip()} for name,ax in re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          names=['sourceCoefficient_eq_polynomial','sourceCoefficient_commutator',
+              'sourceAllSpinorCoefficient_commutator','sourceAllSpinorCharge_normalOrder_response']
+          prefix='FCP.BFSSSU2PhysicalDomainL6G4B.'
+          assert all(prefix+n in actual and actual[prefix+n]<=allowed for n in names),actual
+          generic=[a for n,a in actual.items() if n.endswith('.differentialPolynomial_comm')]
+          assert len(generic)==1 and generic[0]<=allowed,actual
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('L6G4B_ORIGINAL_ALL_SPINOR_LINEAR_POSITION_RESPONSE_QUALIFIED')
+          PY
+
+      - name: Cache only the qualified original coefficient response object
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe.olean
+          key: bfss-l6g4b-coefficient-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe.lean') }}
 
       - name: Preserve independently inspectable qualification evidence
         if: always()
