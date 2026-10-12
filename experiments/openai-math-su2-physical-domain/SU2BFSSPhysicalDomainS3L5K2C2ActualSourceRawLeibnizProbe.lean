@@ -5,6 +5,8 @@ import SU2BFSSPhysicalDomainS3L5K2C1AbstractSourceLeibnizProbe
 K2C Gate #2: add the original GaugeG1A source namespace omitted in K2C2 #1. Preserve exact theorem and raw Leibniz tactic.
 K2C Gate #3: Mathlib abstract ring passed; concrete exact source application exhausted recursion depth.
 K2C Gate #4: direct extensional application exhausted wall-clock (exit 124) without Lean diagnostics.\nK2C Gate #5: concrete three-atom generalization timed out (exit 124).\nK2C Gate #6: opaque identity instantiation passed, simultaneous final simpa only hit maxRecDepth at line 75.\nK2C Gate #7: sequential unfold reached all markers, but left irreducible_def internal wrapped values; exact h failed type matching.\nK2C Gate #8: generated sourceP_def/sourceF_def/sourceG_def equation lemmas, preserving the EXACT original theorem.
+K2C Gate #9: all generated forward equation rewrites succeeded, final exact h recursed.
+K2C Gate #10: reverse generated equations on literal goal; preserve qualified abstract proof opaque.
 
 Qualify only the Leibniz decomposition of the ACTUAL source 48-Majorana
 combined generator acting on the original ordered cubic monomial.
@@ -64,25 +66,21 @@ theorem pairedActualCombined_comm_cubicMonomial_rawLeibniz
          ((position (N := 2) k B).comp (position (N := 2) l C)).comp
            (sourceParametricCombinedPlane
              (pairedFermionPlaneSpinGenerator i j) i j)) := by
-  -- Gate #6 established the opaque K2C1 application, then failed in
-  -- simultaneous 'simpa only' with maxRecDepth (source line 75).
-  -- Gate #7 is diagnostic as well as constructive: expose ONE rigid
-  -- source definition at a time in a proved hypothesis, not via a
-  -- simplifier traversing the whole concrete source statement.
-  -- The order is smallest-to-largest; no BFSS body is reduced further.
+  -- Gate #9: forward equations at 'h' all succeeded, but final
+  -- 'exact h' recursed comparing two huge concrete BFSS expressions.
+  -- Gate #10: retain an opaque proof and transform the ORIGINAL GOAL
+  -- in the REVERSE direction, one generated equation lemma at a time.
+  -- No physical source definition is unfolded beyond these exact
+  -- theorem-backed equalities. Each marker identifies a new boundary.
   have h := sourceComm_comp_raw
     (sourceG i j) (sourceF γ A) (sourceP k l B C)
   trace "K2C2_STAGE_A_OPAQUE_LEIBNIZ_ELABORATED"
-  -- irreducible_def is deliberately kernel-opaque. Plain 'unfold' exposes
-  -- internal 'wrapped' projections, not the original source expression.
-  -- Lean's GENERATED equation theorems are the supported interface:
-  -- https://github.com/leanprover-community/mathlib4/wiki/Porting-wiki
-  rw [sourceP_def] at h
-  trace "K2C2_STAGE_B1_SOURCE_POSITION_PAIR_EQN_APPLIED"
-  rw [sourceF_def] at h
-  trace "K2C2_STAGE_B2_SOURCE_FERMION_ACTION_EQN_APPLIED"
-  rw [sourceG_def] at h
-  trace "K2C2_STAGE_B3_SOURCE_COMBINED_GENERATOR_EQN_APPLIED"
+  rw [← sourceP_def]
+  trace "K2C2_STAGE_B1_GOAL_POSITION_PAIR_OPAQUE"
+  rw [← sourceF_def]
+  trace "K2C2_STAGE_B2_GOAL_FERMION_ACTION_OPAQUE"
+  rw [← sourceG_def]
+  trace "K2C2_STAGE_B3_GOAL_COMBINED_GENERATOR_OPAQUE"
   exact h
 
 #print axioms pairedActualCombined_comm_cubicMonomial_rawLeibniz
