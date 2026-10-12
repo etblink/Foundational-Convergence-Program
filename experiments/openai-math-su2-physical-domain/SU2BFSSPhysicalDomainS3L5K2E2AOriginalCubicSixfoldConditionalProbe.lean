@@ -5,6 +5,7 @@ import SU2BFSSPhysicalDomainS3L5K2E1DOriginalSixfoldIndexSpecializationProbe
 
 CI qualification attempt #1 (statement and proof unchanged).
 CI qualification attempt #2: restore original source G1A namespace only.
+CI qualification attempt #3: restore original K1 position-variation namespace; theorem unchanged.
 
 E1D's exact original six BFSS index types are kernel-qualified. This
 module introduces the TRUE paired 48-Majorana source plane generator and
