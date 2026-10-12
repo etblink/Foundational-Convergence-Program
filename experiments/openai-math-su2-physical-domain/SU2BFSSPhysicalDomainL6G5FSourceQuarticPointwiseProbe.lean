@@ -72,6 +72,16 @@ private theorem originalPositionPair_apply {N : ℕ}
     ((((x v : ℝ) : ℂ) * ((x t : ℝ) : ℂ)) • f x)
   rw [smul_smul]
 
+/-- Actual evaluation of an original core endomorphism at one core test
+function and one original bosonic configuration. This is linear because
+both the source operator action and SmoothCore evaluation are linear. -/
+private def sourceEndPointEvaluation {N : ℕ}
+    (f : SmoothCore N) (x : Boson N) :
+    SourceEnd N →ₗ[ℂ] Fermion N where
+  toFun A := (A f) x
+  map_add' A B := by rfl
+  map_smul' c A := by rfl
+
 /-- Identifies the L6G5E quadratic operator's pointwise action with
 the exact original polynomial coefficient, not a surrogate multiplier. -/
 theorem sourceSpinorQuadraticMultiplication_apply {N : ℕ}
@@ -80,33 +90,29 @@ theorem sourceSpinorQuadraticMultiplication_apply {N : ℕ}
     (sourceSpinorQuadraticMultiplication M w p f) x =
       (sourceQuadraticPointCoefficient M w p x) • f x := by
   classical
-  have hterm (α : SpinIndex) (v t : BosonLabel N) :
-      (((sourceQuadraticWeight M α p v t) •
-        (sourceP v * sourceP t)) f) x =
-        (sourceQuadraticWeight M α p v t *
-          (((x v : ℝ) : ℂ) * ((x t : ℝ) : ℂ))) • f x := by
-    rw [LinearMap.smul_apply, originalPositionPair_apply, smul_smul]
   calc
     (sourceSpinorQuadraticMultiplication M w p f) x =
       ∑ α : SpinIndex, (w α : ℂ) •
         (∑ v : BosonLabel N, ∑ t : BosonLabel N,
-          (((sourceQuadraticWeight M α p v t) •
-            (sourceP v * sourceP t)) f) x) := by
+          sourceQuadraticWeight M α p v t •
+            (((sourceP v * sourceP t) f) x)) := by
+              change (sourceEndPointEvaluation f x)
+                (sourceSpinorQuadraticMultiplication M w p) = _
               unfold sourceSpinorQuadraticMultiplication
-              simp only [Finset.sum_apply, LinearMap.smul_apply]
+              simp only [map_sum, map_smul, sourceEndPointEvaluation]
     _ = ∑ α : SpinIndex, (w α : ℂ) •
         (∑ v : BosonLabel N, ∑ t : BosonLabel N,
           (sourceQuadraticWeight M α p v t *
             (((x v : ℝ) : ℂ) * ((x t : ℝ) : ℂ))) • f x) := by
-              simp_rw [hterm]
+              simp_rw [originalPositionPair_apply, smul_smul]
     _ = _ := by
       unfold sourceQuadraticPointCoefficient
       simp only [Finset.sum_smul, Finset.smul_sum, Finset.mul_sum,
         smul_smul, mul_assoc]
 
-/-- The source quadratic-operator square is *precisely* multiplication
-by the sum of squared source point coefficients on the original core.
-There is no spin/color contraction assumption in this reduction. -/
+/-- The source quadratic-operator square is precisely multiplication
+by the sum of squared original point coefficients on the source core;
+the gamma/color quartic contraction remains a separate obligation. -/
 theorem sourceSpinorQuadraticSquare_apply {N : ℕ}
     (M : AlgebraData N) (w : SpinIndex → ℝ)
     (f : SmoothCore N) (x : Boson N) :
@@ -125,21 +131,24 @@ theorem sourceSpinorQuadraticSquare_apply {N : ℕ}
     rw [sourceSpinorQuadraticMultiplication_apply]
     rw [sourceSpinorQuadraticMultiplication_apply]
     rw [smul_smul]
-  unfold sourceSpinorQuadraticSquare
   calc
-    ((∑ p : FermionLabel N,
-        sourceSpinorQuadraticMultiplication M w p *
-          sourceSpinorQuadraticMultiplication M w p) f) x =
+    (sourceSpinorQuadraticSquare M w f) x =
       ∑ p : FermionLabel N,
         (((sourceSpinorQuadraticMultiplication M w p *
           sourceSpinorQuadraticMultiplication M w p) f) x) := by
-            simp only [Finset.sum_apply]
+            change (sourceEndPointEvaluation f x)
+              (sourceSpinorQuadraticSquare M w) = _
+            unfold sourceSpinorQuadraticSquare
+            simp only [map_sum, sourceEndPointEvaluation]
     _ = ∑ p : FermionLabel N,
         (sourceQuadraticPointCoefficient M w p x *
           sourceQuadraticPointCoefficient M w p x) • f x := by
-            simp_rw [hterm]
+            apply Finset.sum_congr rfl
+            intro p _
+            exact hterm p
     _ = _ := by rw [Finset.sum_smul]
 
+#print axioms sourceEndPointEvaluation
 #print axioms sourceNineSpatialQuarticPotential_matrix
 #print axioms originalPositionPair_apply
 #print axioms sourceSpinorQuadraticMultiplication_apply
