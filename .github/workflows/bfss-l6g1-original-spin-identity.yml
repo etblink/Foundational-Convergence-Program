@@ -1,4 +1,4 @@
-name: BFSS L6G5G SU2 Quartic Color Jacobi
+name: BFSS L6G5H Centered Clifford Gram
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -20,6 +20,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5EOriginalScalarCoefficientSquareProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5FSourceQuarticPointwiseProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5GOriginalSU2QuarticJacobiProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5HSourceCenteredGammaGramProbe.lean
 
 permissions:
   contents: read
@@ -565,6 +566,32 @@ jobs:
           assert any(n.endswith('.simpleBivector_plucker') and a<=allowed for n,a in entries.items()),entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6G5G_PINNED_SOURCE_SU2_QUARTIC_COLOR_JACOBI_QUALIFIED')
+          PY
+
+      - name: Qualify centered gammaLinear Clifford Gram without new assumptions
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5HSourceCenteredGammaGramProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5FSourceQuarticPointwiseProbe.olean
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/CliffordSymbols.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g5h.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g5h.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G5H.'
+          for n in ('sourceCenteredGammaPair_transpose','sourceCenteredGammaPair_gram'):
+              assert p+n in entries and entries[p+n] <= allowed,entries
+          assert any(n.endswith('.centeredProduct_gram') and a<=allowed for n,a in entries.items()),entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
+          print('L6G5H_CENTERED_ORIGINAL_SOURCE_CLIFFORD_GRAM_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
