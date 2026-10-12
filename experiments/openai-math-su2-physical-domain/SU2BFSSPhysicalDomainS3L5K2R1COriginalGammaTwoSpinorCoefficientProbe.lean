@@ -3,6 +3,8 @@ import SU2BFSSPhysicalDomainS3L5K2R1BOriginalWeightedFermionResponseProbe
 /-!
 # R1C — original weighted cubic gammaTwo × transpose spinor contraction
 
+CI qualification #1: mathematical source unchanged.
+
 Kinetic J3/J4 and cubic R1A/R1B qualified the genuine source
 fermion-action response through a 16-index sum. This new coefficient
 theorem relates EXACTLY that sum to the original gammaTwo * J.transpose
