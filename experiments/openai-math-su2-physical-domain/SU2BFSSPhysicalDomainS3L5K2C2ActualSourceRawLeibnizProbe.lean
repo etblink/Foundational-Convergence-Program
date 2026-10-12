@@ -3,7 +3,8 @@ import SU2BFSSPhysicalDomainS3L5K2C1AbstractSourceLeibnizProbe
 /-!
 # S3L5K2C2 — exact concrete source operator Leibniz shape
 K2C Gate #2: add the original GaugeG1A source namespace omitted in K2C2 #1. Preserve exact theorem and raw Leibniz tactic.
-K2C Gate #3: Mathlib abstract ring passed; concrete exact source application exhausted recursion depth.\nK2C Gate #4: direct extensional application exhausted wall-clock (exit 124) without Lean diagnostics.\nK2C Gate #5: syntactically generalize the exact three original SourceEnd atoms within the target; prove the stronger abstract identity without source unfolding. CI-qualification trigger: three-atom generalization.
+K2C Gate #3: Mathlib abstract ring passed; concrete exact source application exhausted recursion depth.
+K2C Gate #4: direct extensional application exhausted wall-clock (exit 124) without Lean diagnostics.\nK2C Gate #5: concrete three-atom generalization timed out (exit 124).\nK2C Gate #6: independent opaque-SourceEnd name experiment; stage marker distinguishes algebraic instantiation from final definitional discharge.
 
 Qualify only the Leibniz decomposition of the ACTUAL source 48-Majorana
 combined generator acting on the original ordered cubic monomial.
@@ -25,6 +26,18 @@ open FCP.BFSSSU2PhysicalDomainS3L4B
 open FCP.BFSSSU2PhysicalDomainS3L5F
 open FCP.BFSSSU2PhysicalDomainS3L5K1
 open FCP.BFSSSU2PhysicalDomainS3L5K2C1
+
+/-! Source-faithful opaque interfaces: each RHS is exactly the original
+    48-Majorana BFSS source operator, not an assumed source identification. -/
+irreducible_def sourceG (i j : SpaceIndex) : SourceEnd :=
+  sourceParametricCombinedPlane (pairedFermionPlaneSpinGenerator i j) i j
+
+irreducible_def sourceF (γ : SpinIndex) (A : ColorIndex 2) : SourceEnd :=
+  pairedAlgebraData.fermionAction γ A
+
+irreducible_def sourceP (k l : SpaceIndex)
+    (B C : ColorIndex 2) : SourceEnd :=
+  (position (N := 2) k B).comp (position (N := 2) l C)
 
 theorem pairedActualCombined_comm_cubicMonomial_rawLeibniz
     (i j k l : SpaceIndex) (γ : SpinIndex)
@@ -51,19 +64,15 @@ theorem pairedActualCombined_comm_cubicMonomial_rawLeibniz
          ((position (N := 2) k B).comp (position (N := 2) l C)).comp
            (sourceParametricCombinedPlane
              (pairedFermionPlaneSpinGenerator i j) i j)) := by
-  -- Gate #3: concrete specialisation of the abstract theorem recursed.
-  -- Gate #4: direct pointwise simplification took the 65s wall-clock limit.
-  -- Instead abstract only THREE rigid SourceEnd atoms syntactically in the
-  -- CURRENT GOAL, BEFORE applying any algebraic theorem. We never reduce
-  -- their genuine Fock, gamma, orbital, position or gauge definitions.
-  -- The resulting goal is the exact noncommutative SourceEnd identity.
-  generalize hG :
-    sourceParametricCombinedPlane
-      (pairedFermionPlaneSpinGenerator i j) i j = G
-  generalize hF : pairedAlgebraData.fermionAction γ A = F
-  generalize hP :
-    (position (N := 2) k B).comp (position (N := 2) l C) = P
-  exact sourceComm_comp_raw G F P
+  -- Independent Grok-inspired test after K2C #5 exit 124.
+  -- Stage A: instantiate K2C1 ONLY at three irreducible SourceEnd names.
+  -- Stage B: discharge their exact original-source defining equalities
+  -- with only these three rewrite rules. No source or physics unfolding
+  -- other than the explicitly named definitions.
+  have h := sourceComm_comp_raw
+    (sourceG i j) (sourceF γ A) (sourceP k l B C)
+  trace "K2C2_STAGE_A_OPAQUE_LEIBNIZ_ELABORATED"
+  simpa only [sourceG, sourceF, sourceP] using h
 
 #print axioms pairedActualCombined_comm_cubicMonomial_rawLeibniz
 
