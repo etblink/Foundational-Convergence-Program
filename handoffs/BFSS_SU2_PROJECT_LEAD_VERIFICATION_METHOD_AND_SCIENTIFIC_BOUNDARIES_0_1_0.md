@@ -44,6 +44,14 @@ Each arrow is an **explicit Lean proof obligation**, not a license to assume a r
 
 **New discriminating target:** E1D contains the literal original six index types with still-abstract coefficient and source-operator families. The proof attempts only `exact sourceComm_sixfold_generic_of G c T R h` with no intermediate `hFour`, distinguishing the cost of specializing an accepted sixfold theorem from reconstructing sixfold algebra. One bounded Lean compilation; if `whnf` still fails, do not repeat variants of direct literal sixfold specialization. Next consider a separately justified product-index representation with an explicit theorem reducing to the original K4 six nested sums; never substitute a different physical source or hide any missing bridge.
 
+## Sixfold #5: original index types qualified; source operator specialization next
+
+[**Sixfold Commutator #5**](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38199016121), SHA `2b6c107c79eb09dcf395ee8cf4f54ad67ae826d0`, **GREEN**. Accepted K2D1–D3, E1A, E1B, and E1C all passed again. New `FCP.BFSSSU2PhysicalDomainS3L5K2E1D.sourceComm_originalSixfoldIndices_of` compiled into a .olean with axiom set only `propext`, `Classical.choice`, `Quot.sound`. It states commutator transport through the **literal six BFSS index types** with coefficients `c`, operator family `T`, response `R`, and their pointwise commutator `h` still explicit. Not yet actual cubic operator specialization or full cubic charge.
+
+**Planned bounded staged operator specialization:** E2A substitutes the original 48-Majorana plane source generator and **literal** original ordered `fermionAction.comp (position.comp position)` factor and literal K2D3 response throughout the sixfold operator statement, **with visible pointwise h** and arbitrary coefficient c; E2B separately discharges h from already-qualified unconditional K2D3 for all original indices. Do **not** present E2A as unconditional source covariance. Even E2B green would establish weighted *operator-response* sum covariance for **arbitrary** scalar weights, **not** full charge covariance until the original `1/2 * structureConstant * gammaTwo` weight, K4 charge identity, and K6C coefficient contraction are separately discharged. No extra axioms, operator substitutions, different index families, or resource escalation.
+
+K2D1–D3 and E1A–D remain preserved. Older sixfold CI is now manual-only; a dedicated new E2 workflow retains exact pin/cache checks and individual .olean + axiom qualification. Successor: if E2A/E2B fails, inspect the first exact diagnostic and avoid old K2B name bridge/K2C2 direct tactics.
+
 ## Failure taxonomy: a red gate is not a unit of mathematical information
 
 Before editing source or launching a follow-up:
