@@ -10,6 +10,7 @@ This is a finite matrix identity, not a CAR/Gauss operator or domain theorem.
 -/
 namespace FCP.BFSSSU2PhysicalDomainL6G2
 noncomputable section
+set_option autoImplicit false
 open scoped Matrix BigOperators
 open OAI.BFSSGamma
 open FCP.BFSSSU2PhysicalDomainL6G1
@@ -68,7 +69,7 @@ theorem originalGamma_spinIdentity_homogeneous
       change w α = 0
       nlinarith
     rw [hw]
-    simp [spinLHS, symm, spinorSquareNorm]
+    simp [spinLHS, OAI.BFSSGamma.symm, spinorSquareNorm]
   · let t : ℝ := Real.sqrt q
     have hsq : t ^ 2 = q := Real.sq_sqrt hq
     have ht : t ≠ 0 := by
@@ -140,8 +141,8 @@ construction. No unit-length hypothesis and no operator-domain conclusion. -/
 theorem originalGamma_generalizedRowFierz
     (w : Spin → ℝ) (p : Space) (r s : Spin) :
     (∑ i : Space,
-      (w ᵥ* originalGamma i) r * (w ᵥ* gammaTwo originalGamma i p) s +
-      (w ᵥ* originalGamma i) s * (w ᵥ* gammaTwo originalGamma i p) r) =
+      ((w ᵥ* originalGamma i) r * (w ᵥ* gammaTwo originalGamma i p) s +
+       (w ᵥ* originalGamma i) s * (w ᵥ* gammaTwo originalGamma i p) r)) =
       spinorSquareNorm w * originalGamma p r s -
         (if r = s then dotProduct w (originalGamma p *ᵥ w) else 0) := by
   have h := congrArg (fun A : Mat => A r s)
@@ -153,13 +154,13 @@ theorem originalGamma_generalizedRowFierz
       ((1 / 2 : ℝ) * dotProduct w (originalGamma p *ᵥ w)) *
         (if r = s then 1 else 0) -
       ((1 / 2 : ℝ) * spinorSquareNorm w) * originalGamma p r s := by
-    simpa only [spinLHS, symm, Finset.sum_apply, Matrix.smul_apply,
+    simpa only [spinLHS, OAI.BFSSGamma.symm, Matrix.sum_apply, Matrix.smul_apply,
       Matrix.add_apply, Matrix.sub_apply, Matrix.transpose_apply,
-      Matrix.vecMulVec, Matrix.one_apply, smul_eq_mul] using h
+      Matrix.vecMulVec_apply, Matrix.one_apply, smul_eq_mul] using h
   have hleft :
       (∑ i : Space,
-        (w ᵥ* originalGamma i) r * (w ᵥ* gammaTwo originalGamma i p) s +
-        (w ᵥ* originalGamma i) s * (w ᵥ* gammaTwo originalGamma i p) r) =
+        ((w ᵥ* originalGamma i) r * (w ᵥ* gammaTwo originalGamma i p) s +
+         (w ᵥ* originalGamma i) s * (w ᵥ* gammaTwo originalGamma i p) r)) =
       -2 * (∑ i : Space, (1 / 2 : ℝ) *
         ((originalGamma i *ᵥ w) r * (gammaTwo originalGamma i p *ᵥ w) s +
          (originalGamma i *ᵥ w) s * (gammaTwo originalGamma i p *ᵥ w) r)) := by
@@ -181,6 +182,7 @@ theorem originalGamma_generalizedRowFierz
 #print axioms originalGamma_row_eq_column
 #print axioms originalGammaTwo_row_eq_neg_column
 #print axioms originalGamma_generalizedRowFierz
+#check @originalGamma_generalizedRowFierz
 
 end
 end FCP.BFSSSU2PhysicalDomainL6G2
