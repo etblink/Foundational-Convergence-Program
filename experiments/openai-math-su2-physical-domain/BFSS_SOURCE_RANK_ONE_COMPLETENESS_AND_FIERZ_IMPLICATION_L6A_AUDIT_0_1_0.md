@@ -1,3 +1,5 @@
+> **New mathematical simplification (2026-10-12):** Concrete 34,816-entry finite Lean evaluation is NOT required in principle. From the already-qualified source gamma symmetry and Cl(9) relations, the 136 gamma products of grades 0, 1, and 4 form a trace-orthogonal basis of symmetric 16-by-16 matrices. The map R -> sum_i gamma_i R gamma_i has eigenvalues 9,-7,+1 by grade. This proves the universal completeness formula for ALL symmetric R, hence the earlier rank-one Fierz identity. Exact checks against the original accepted gamma source passed. See BFSS_UNIVERSAL_CL9_SYMMETRIC_GRADE_BASIS_AND_SANDWICH_AUDIT_0_1_0.md. This is NOT yet Lean kernel-certified.
+
 # BFSS Project Lead: rank-one Spin(9) gamma completeness is the minimal next kernel gate
 
 **2026-10-12 | research branch | source-faithful mathematical refactor 0.1.0**
