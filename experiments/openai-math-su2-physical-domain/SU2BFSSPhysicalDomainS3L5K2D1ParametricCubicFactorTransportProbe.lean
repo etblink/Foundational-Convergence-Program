@@ -11,7 +11,7 @@ This is a NEW theorem architecture, not K2B with aliases:
   * DO NOT elaborate pairedFermionPlaneSpinGenerator or pairedAlgebraData
     anywhere in this statement or proof.
 
-The original concrete physical hF is independently established by K2A,
+K2D1 CI qualification #1: source-parametric conditional theorem only.\nThe original concrete physical hF is independently established by K2A,
 but this theorem deliberately does NOT specialize it. Its future concrete
 discharge remains a separate, unqualified scientific/formalization obligation.
 
