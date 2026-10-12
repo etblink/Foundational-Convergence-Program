@@ -1,4 +1,4 @@
-name: BFSS L6G2 Homogeneous Original Source Fierz
+name: BFSS L6G3 Original Charge CAR Normal Order
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -10,6 +10,7 @@ on:
       - .github/workflows/bfss-l6g1-original-spin-identity.yml
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean
 
 permissions:
   contents: read
@@ -46,6 +47,7 @@ jobs:
           test "$(cat upstream-math/lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean)" = "5ec0fcb039fb5c1367f72b2bd0f8c05fcd936587"
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean)" = "b3c4cb1b12c64d3e718d2c547ee29ebac2b18a36"
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.lean)" = "481df011d2e87b31e58efea2b97f81094fc14918"
           python3 - <<'PY'
           import json
           d=json.load(open('upstream-math/lean/lake-manifest.json'))
@@ -57,6 +59,7 @@ jobs:
             echo "GAMMA_SOURCE_BLOB=$(git hash-object experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean)"
             echo "G1_SOURCE_BLOB=$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean)"
             echo "G2_SOURCE_BLOB=$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.lean)"
+            echo "G3_SOURCE_BLOB=$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean)"
             echo "EXACT_SOURCE_PREFLIGHT_PASS"
           } | tee /tmp/bfss-l6g1/source-pins.txt
 
@@ -201,7 +204,15 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.olean
           key: bfss-l6g1-source-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean') }}
 
+      - name: Restore qualified G2 Fierz by exact frozen source hashes
+        id: accepted_g2
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.olean
+          key: bfss-l6g2-source-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.lean') }}
+
       - name: Qualify arbitrary-spinor homogeneity and literal source row Fierz
+        if: steps.accepted_g2.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -229,10 +240,46 @@ jobs:
           PY
 
       - name: Cache the qualified G2 source theorem object
+        if: steps.accepted_g2.outputs.cache-hit != 'true'
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.olean
           key: bfss-l6g2-source-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.lean') }}
+
+      - name: Qualify literal original smooth-core CAR normal ordering
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          test -s upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/Core.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.olean
+          stem=SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          echo L6G3_ORIGINAL_SMOOTH_CORE_CAR_NORMAL_ORDER_BEGIN
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/original-charge-normal-order.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/original-charge-normal-order.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          actual={name:{a.strip() for a in ax.split(',') if a.strip()} for name,ax in re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          names=['sourceFermionAction_CAR','sourceCoefficient_comm_fermion',
+              'sourceCharge_factorization','sourceAllSpinorCharge_factorization',
+              'sourceAllSpinorCoefficient_comm_fermion',
+              'sourceCharge_normalOrder','sourceAllSpinorCharge_normalOrder']
+          prefix='FCP.BFSSSU2PhysicalDomainL6G3.'
+          assert all(prefix+n in actual and actual[prefix+n]<=allowed for n in names),actual
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('L6G3_ORIGINAL_SOURCE_ALL_SPINOR_CAR_NORMAL_ORDER_QUALIFIED')
+          PY
+
+      - name: Cache only the qualified original-charge normal-order object
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.olean
+          key: bfss-l6g3-source-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean') }}
 
       - name: Preserve independently inspectable qualification evidence
         if: always()
