@@ -1,4 +1,4 @@
-name: BFSS L6G5A Original Kinetic Gram
+name: BFSS L6G5B Complex Kinetic Color Gram
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -14,6 +14,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5AOriginalKineticGramProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5BOriginalComplexKineticColorGramProbe.lean
 
 permissions:
   contents: read
@@ -400,6 +401,32 @@ jobs:
           assert name in actual and actual[name]<=allowed,actual
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('L6G5A_ORIGINAL_REAL_SPINOR_KINETIC_GRAM_QUALIFIED')
+          PY
+
+      - name: Qualify exact original complex kinetic weights and color contraction
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5BOriginalComplexKineticColorGramProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5AOriginalKineticGramProbe.olean
+          echo L6G5B_LITERAL_COMPLEX_KINETIC_COLOR_GRAM_BEGIN
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/complex-kinetic-color-gram.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/complex-kinetic-color-gram.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          actual={name:{a.strip() for a in ax.split(',') if a.strip()} for name,ax in re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          names=['sourceSpinorKineticWeight_eq','originalGamma_complexRowKineticGram',
+              'sourceSpinorKineticWeight_colorGram']
+          prefix='FCP.BFSSSU2PhysicalDomainL6G5B.'
+          assert all(prefix+n in actual and actual[prefix+n]<=allowed for n in names),actual
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('L6G5B_ORIGINAL_COMPLEX_KINETIC_COLOR_GRAM_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
