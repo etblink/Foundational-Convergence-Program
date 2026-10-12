@@ -159,3 +159,38 @@ This bridge is **substantively accounted for by standard Hilbert-space operator 
 - **No further R4B/R4D assembly CI without a new source-faithful compression interface.** The kernel timeout/recursion problem is preserved separately.
 - **Next possible scientific falsifier:** the exact \(K_u\) slice-equivariance and allowed-weight exclusion at all longitudinal parameters; seek a truly pathological representation/domain example, not more random points. Then test the confinement and infinite-sector construction at their actual domains.
 - Never modify the pinned `etblink/math` fork, upstream `openai/math`, FCP main, or create an upstream pull request without owner authorization.
+
+
+## Third-step fixed-slice adversarial closure check — precise scope (2026-10-12)
+
+**Question:** Does the manuscript improperly evaluate arbitrary \(L^2\) equivalence classes along the codimension-11 slice \(x(u,s,z)\), or implicitly require a globally continuous evaluation operator? **Finding: the proof avoids that trap on its stated smooth core. No counterexample identified at this boundary.**
+
+Fix a nonzero \(u\), longitudinal coordinates \(s_b\), and a *smooth core vector* \(\Psi\in\mathcal C\cap\mathcal H_\lambda\). Isotypic decomposition for a compact group provides
+\(\mathcal H_\lambda\simeq V_\lambda\widehat\otimes\mathcal M_\lambda\).
+Write \(\Psi=\sum_{j=1}^{d} e_j\otimes m_j\), \(d=\dim V_\lambda\). The full \(G\)-orbit of \(\Psi\) lies in the finite-dimensional vector space
+\(V_\lambda\otimes\mathrm{span}\{m_1,\ldots,m_d\}\),
+regardless of the dimension of \(\mathcal M_\lambda\). Thus \(W_\Psi=\mathrm{span}\{D_g\Psi:g\in G\}\) is finite-dimensional. Since \(\mathcal C\) is \(G\)-stable, \(W_\Psi\subset\mathcal C\).
+
+Every element of \(W_\Psi\) has a uniquely defined continuous compactly supported representative: two such representatives agreeing \(L^2\)-a.e. agree everywhere. The restriction
+\[
+E_{u,s}:W_\Psi\to C_c^\infty((u^\perp)^2;\mathcal F),
+\quad E_{u,s}\Phi(z)=\Phi(x(u,s,z))
+\]
+is therefore a legitimate finite-dimensional linear map. For \(k\in K_u=\mathrm{Stab}_G(u)\),
+\[
+R_k^{-1}x(u,s,z)=x(u,s,R_k^{-1}z),
+\qquad
+E_{u,s}(D_k\Phi)(z)
+=U_k\Phi(x(u,s,R_k^{-1}z)).
+\]
+Hence \(E_{u,s}\) intertwines \(K_u\). Since \(W_\Psi\) is a finite sum of \(K_u\)-constituents of \(V_\lambda\vert_{K_u}\), its image contains **only those constituent types**. The manuscript's branching inequality therefore transfers to the fiber: \(\nu_1\ge\lambda_2\). No boundedness of \(E_{u,s}\) on the *whole* \(L^2\) Hilbert space is used or needed.
+
+For a fixed \(u\ne0\), the substitution
+\(x^b=s_b\widehat u+z_b\) (\(b\ne a\))
+is an orthogonal linear coordinate change in the other two color vectors, with determinant of absolute value 1. The \(z\)-gradient is just the projection of the ordinary gradient on the two fixed \(u^\perp\) directions, so
+\(\lvert\nabla_z E_{u,s}\Psi\rvert^2\le\lvert\nabla\Psi(x(u,s,z))\rvert^2\).
+The dependence of the decomposition on \(u\) does not create derivative terms, because \(u\) remains fixed during the transverse derivative. A globally smooth frame on the sphere is **not required**; choose local orthonormal frames (or measurable frames) and patch Fubini integrals. The null slice \(u=0\) is irrelevant to the integral.
+
+**Conclusion and outstanding boundary:** this supplies a detailed ordinary-analysis explanation of the *core-level* slice and fiber integration. Passage of the resulting coercive estimate from \(\mathcal C\cap\mathcal H_\lambda\) to the complete closed restricted form domain still uses the previously identified form-core theorem and closedness of weak gradient and multiplication operators. It remains **unformalized** in the pinned Lean program; it is not evidence that the abstract main spectral claim has been fully certified there.
+
+**Priority adjustment:** with the above ordinary-mathematical slice mechanism accounted for, the highest remaining *formalization* gaps are (1) the complete all-spinor original cubic source covariance and true spatial-plus-Fock \(\mathrm{Spin}(9)\) group action on the **exact** gauge core, and (2) the closed quadratic form/operator identification. For *scientific falsification* (rather than merely Lean completeness), scrutinize the claimed gauge-invariant highest-weight polynomial sectors and the full form expansion's normalization against the exact original supercharges. Both have prior favorable source reviews; independently disprove a specific equality or disclose no counterexample. Do not relaunch R4D solely to satisfy proof-engineering completeness.
