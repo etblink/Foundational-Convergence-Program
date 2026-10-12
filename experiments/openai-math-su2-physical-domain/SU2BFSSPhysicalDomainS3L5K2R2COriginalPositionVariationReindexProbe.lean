@@ -4,6 +4,8 @@ import SU2BFSSPhysicalDomainS3L5K1SourceCubicPositionPairProbe
 /-!
 # K2R2C — original sourcePositionVariation specialization
 
+Pinned qualification attempt #1; theorem/proof unchanged.
+
 R2A and R2B are already Lean-qualified under pinned source and exact
 axiom audit. R2C moves beyond a general ordered SourceEnd family:
 the position factors are the source-defined position (N:=2), and
