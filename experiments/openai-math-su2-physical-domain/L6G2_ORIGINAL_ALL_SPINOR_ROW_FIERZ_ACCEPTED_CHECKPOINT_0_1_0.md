@@ -2,6 +2,8 @@
 
 **2026-10-12. Status: KERNEL_QUALIFIED_ORIGINAL_GAMMA_COEFFICIENT_IDENTITY.**
 
+> **Subsequent operator checkpoint:** L6G3 [gate #6](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38300167214) now qualifies CAR normal ordering of the literal original smooth-core charges for every real spinor, with source CAR and coefficient/fermion commutation discharged. See `L6G3_ORIGINAL_CHARGE_NORMAL_ORDER_ACCEPTED_CHECKPOINT_0_1_0.md`. Evaluating its retained terms into the complete Hamiltonian/Gauss identity and closing operators remain open. This does not alter the scope or frozen source of G2.
+
 [Homogeneous Original Source Fierz #4](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38296484114) completed successfully at qualification commit `a334f34d74a7cf1ec67faac28a164a82c7ffce84`. The module compiled as a real importable `.olean`; all five requested theorem declarations passed the explicit permitted-axiom audit. No `sorryAx`, unapproved axiom, Lean error or missing name was accepted.
 
 ## Exact source and statement

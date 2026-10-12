@@ -2,6 +2,8 @@
 
 **Date 2026-10-12 | Project Lead audit 0.1.0**
 
+> **Subsequent kernel evidence (2026-10-12):** L6G2 [gate #4](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38296484114) qualifies the original all-real-spinor row Fierz coefficient identity. L6G3 [gate #6](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38300167214) qualifies original smooth-core CAR normal ordering with actual source premises discharged. See the corresponding accepted checkpoint files. The complete identification with `H0` and BOTH Gauss components, physical restriction, and analytic/spectral statements below remain ordinary mathematical audits rather than complete Lean theorems.
+
 **Verdict:** DIRECT_SOURCE_SUPERALGEBRA_REDUCED_TO_313344_EXACT_GAMMA_ENTRIES; ORIGINAL_ORBITAL_AND_FOCK_GAUSS_TERMS_VERIFIED; SUPERALGEBRA_INDEPENDENT_OF_GLOBAL_SPIN9_COVARIANCE; COMPACT_RESOLVENT_NEEDS_ONLY_CORE_COERCIVITY; NOT_LEAN_CERTIFIED.
 
 ## 1. Precise source, what is new, and epistemic scope
