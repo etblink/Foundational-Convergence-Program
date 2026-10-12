@@ -1,3 +1,5 @@
+> **Superseded numerical threshold (2026-10-12):** This audit's source-coherent lambda2>16 and k7 results remain correct, but the exact joint fermion-versus-color-spherical inequality now proves **lambda2>14** and a **k6, degree24** physical witness in (15,15,1,0), or the smaller k7 sector (16,16,0,0). See `BFSS_JOINT_FERMION_SPHERE_M8_LAMBDA14_K6_AUDIT_0_1_0.md` and its exact 64-cell rational certificate. The independent-rank-geometry combination below is not optimal; do not treat m10/k7 as current best.
+
 # BFSS relative SU(2): gauge-orbit averaged radial confinement and a k=7 physical high-spin witness
 
 **2026-10-12 | Project Lead mathematical advance 0.1.0.** Disposition: SOURCE_GAUGE_AVERAGED_SPHERICAL_RADIAL_BOUND_PROVED__M10_LAMBDA2_GT16__PHYSICAL_K7_SECTOR__CLOSED_SOURCE_SPECTRAL_CONSEQUENCE_CONDITIONAL__NOT_LEAN_CERTIFIED.
