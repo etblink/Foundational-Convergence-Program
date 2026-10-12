@@ -728,7 +728,7 @@ jobs:
           python3 - <<'PY'
           import re
           s=open("/tmp/SU2BFSSPhysicalDomainS3L5K2R4C1FixedColorFermionSumProbe.log").read()
-          m=re.findall(r"'([^']+)' (?:depends on axioms: \\[([^\\]]*)\\]|does not depend on any axioms)",s)
+          m=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
           expected=["FCP.BFSSSU2PhysicalDomainS3L5K2R4C1.pairedOriginalCubicFixedColor_fermionSum"]
           assert [name for name,_ in m] == expected,m
           for name,ax in m:
@@ -751,7 +751,7 @@ jobs:
           python3 - <<'PY'
           import re
           s=open("/tmp/SU2BFSSPhysicalDomainS3L5K2R4C2FixedColorSpatialSumProbe.log").read()
-          m=re.findall(r"'([^']+)' (?:depends on axioms: \\[([^\\]]*)\\]|does not depend on any axioms)",s)
+          m=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
           expected=["FCP.BFSSSU2PhysicalDomainS3L5K2R4C2.pairedOriginalCubicFixedColor_spatialSum"]
           assert [name for name,_ in m] == expected,m
           for name,ax in m:
