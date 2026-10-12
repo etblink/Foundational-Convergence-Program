@@ -1,0 +1,68 @@
+# BFSS S3L — exact weighted cubic source-response gap and next proof boundary
+
+**Research architecture review, 2026-10-11 PDT.** This note is scoped to BFSS S3L and is **NOT** evergreen leadership guidance, a qualified theorem, or a claim of complete source charge covariance. No new Lean theorem is asserted or compiler result invented.
+
+## Input and independent source adjudication
+
+The owner supplied a Claude architectural review that could not access the original Lean source. We directly checked, on research branch `research/openai-math-su2-s3l-combined-rotation`, these exact accepted source declarations:
+
+| Source | Exact verified role | Does not provide |
+|---|---|---|
+| `SU2BFSSPhysicalDomainS3L5K2D3OriginalSourceUnconditionalCubicFactorProbe.lean`, `pairedActualCombined_comm_cubicFactor` | Literal original fermionAction–position–position commutator for genuine paired generator, under the single external plane hypothesis `i ≠ j` | A summed weighted charge theorem |
+| `SU2BFSSPhysicalDomainS3L5K2E1DOriginalSixfoldIndexSpecializationProbe.lean`, `sourceComm_originalSixfoldIndices_of` | Parametric `SourceEnd` commutator transport over EXACT six original BFSS index types, with explicit pointwise premise | Concrete specialization to physical operators/weights |
+| `SU2BFSSPhysicalDomainS3L5K4OriginalCubicOperatorCoefficientTransportProbe.lean`, `pairedSourceCubicCharge_asOriginalSixfoldMonomials` | Exact `sourceCubicCharge` definition as sixfold weight times `originalCubicSourceMonomial`, with real weight `(1/2)*structureConstant*gammaTwo` cast to complex | Any generator commutator with that charge |
+| `SU2BFSSPhysicalDomainS3L5K6COriginalCubicCoefficientResponseProbe.lean`, `pairedOriginalCubicCoefficientResponse_freeSpinor` | Sum over ORIGINAL cubic monomials with transformed coefficient `structureWeight • (gammaTwo * Jᵀ - sourceCubicTwoFormSpatialResponse)` equals `-∑β J_{αβ} • sourceCubicCharge β` | Identity of that transformed-coefficient sum with the weighted K2D3 operator response |
+
+Additional relevant qualified sources: `S3L5K2A` defines `sourceCubicFermionVariation i j γ A = ∑β ((J β γ : ℝ):ℂ) • pairedAlgebraData.fermionAction β A`; `S3L5K1` defines `sourcePositionVariation i j k B = if k=j then position i B else if k=i then -(position j B) else 0`; `S3L2` defines the exact source `gammaTwo` spatial response. The successful kinetic-source chain `S3L5J4/J6/J7/J8/J9` separately reindexes fermionic and orbital variations, combines their coefficients, and only then applies Clifford contraction. This is the closest source-verified prior strategy to reuse.
+
+## The genuinely missing equality
+
+Fix original spatial-plane indices `i j : SpaceIndex` with `hij : i ≠ j`, and original free spinor index `α`. Write **only as explanatory notation**, not substitute definitions:
+
+- `G := sourceParametricCombinedPlane (pairedFermionPlaneSpinGenerator i j) i j`.
+- `FγA := pairedAlgebraData.fermionAction γ A`.
+- `XkB := position (N := 2) k B`.
+- `M(k,l,γ,A,B,C) := FγA.comp ((XkB).comp (XlC))`.
+- `w(α;k,l,A,B,C,γ) := (((originalCubicStructureWeight A B C * pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ))`.
+- `ΔFγA := sourceCubicFermionVariation i j γ A` and `ΔXkB := sourcePositionVariation i j k B`.
+
+Original K2D3 gives pointwise, with exactly this original source order:
+`[G,M] = ΔFγA.comp (XkB.comp XlC) + FγA.comp (ΔXkB.comp XlC + XkB.comp ΔXlC)`.
+
+The next substantive equality is:
+
+`∑ k,l,A,B,C,γ, w(α;k,l,A,B,C,γ) • (ΔFγA.comp (XkB.comp XlC) + FγA.comp (ΔXkB.comp XlC + XkB.comp ΔXlC))`
+
+`= ∑ k,l,A,B,C,β, (((originalCubicStructureWeight A B C • (pairedAlgebraData.gammaTwo k l * (pairedPlaneSpinGenerator i j).transpose - sourceCubicTwoFormSpatialResponse i j k l)) α β : ℝ) : ℂ) • originalCubicSourceMonomial k l β A B C.`
+
+**This equation is NOT a qualified theorem.** It is the missing *operator-response reindex and regroup* from K2D3 to K6C. Merely applying K6C to an arbitrary `hresp` from a generic assembly lemma would silently assume precisely this unproved equation. The target is *not generally zero*: K6C's conclusion is the negative free-spinor action `-(∑ β, J_{αβ} • sourceCubicCharge β)`.
+
+## A mathematically distinct staged strategy
+
+**R1 — Fermion-index transport, no concrete giant generator.** At fixed spatial/color indices, use `sourceCubicFermionVariation` to reindex the ORIGINAL spinor `γ` variation into `β`. The resulting coefficient is `wStruct * (gammaTwo k l * Jᵀ) α β`. Model the proof on accepted `S3L5J4` finite-sum fermion response transport. Keep the operator family parametric in the reindex lemma and specialize only after the scalar identity is qualified. The original `48`-Majorana generator is absent here because its pointwise commutator is already K2D3.
+
+**R2 — Two spatial-index transports, preserve noncommutative order.** At fixed color and spinor, reindex original `ΔXkB.comp XlC` and `XkB.comp ΔXlC` terms separately, reusing accepted `S3L5J6` one-dimensional branch method, then `Finset.sum_comm`/congruence to lift through the second spatial sum. For arbitrary spatial coefficient `c(k,l)`, the reindexed coefficient at `(k,l)` is
+
+`(if k=i then c(j,l) else if k=j then -c(i,l) else 0) + (if l=i then c(k,j) else if l=j then -c(k,i) else 0)`.
+
+This expression follows algebraically from the exact `sourcePositionVariation` branch convention, provided `i ≠ j`. Verify the exact expression and sign under the source convention in the Lean proof. Crucially, no position operators may be commuted or reordered to make the proof easier: the original `FγA.comp (XkB.comp XlC)` ordering is retained. First prove a coefficient/reindex lemma parametrically in the `SourceEnd` monomial family; then separately match the genuine source positions.
+
+**R3 — Identify the spatial coefficient, THEN assemble.** At `c(k,l) = w(α;k,l,A,B,C,γ)`, prove that the R2 transformed coefficient equals the **negative** spatial contribution `-originalCubicStructureWeight A B C • sourceCubicTwoFormSpatialResponse i j k l` at entry `α γ`. This relies on the ORIGINAL gammaTwo definition and source gamma variation (`S3L2`) and is a genuine equation to prove: it is not supplied simply by K6C's matrix commutator identity. Combine R1 and R2/R3 via `add_smul`, `Finset.sum_add_distrib`, with reusable operator-parametric identities (as accepted J7/J8), and only *then* use K6C to conclude the original free-spinor response.
+
+**Final original-source assembly** may use accepted E1D generic commutator transport and K4 exact charge equation. Passing R1–R3 alone would not settle Lean's historical concrete theorem conversion costs. That latter bridge must have its own separately qualified kernel proof, without prohibited new axioms or surrogate physics.
+
+## Claude's proposed generic lemma — adjudication
+
+- **Useful conceptual principle:** apply qualified theorem terms without unnecessarily restating giant source expressions; keep operator linearity independent from Clifford physics.
+- **Redundant immediate theorem:** E1D already supplies exactly the sixfold original-index `SourceEnd.comp` commutator linearity with an explicit pointwise premise. Proving a generic `[Ring E] [Algebra ℂ E]` multiplication theorem does not discharge the missing physical response equality and risks introducing another irrelevant green gate.
+- **Incorrect inference:** K6C cannot fill `hresp : ∑ w • R = T` automatically; it relates a DIFFERENT coefficient-weighted monomial expression to `T`. R1–R3 are necessary to establish that LHS. Similarly `i ≠ j` is one fixed external plane restriction, NOT something to discharge afresh at each spatial/color/spinor summation index.
+- **Indexing warning:** a sixfold index tuple is a Cartesian PRODUCT, not a disjoint union. Conversion between nested Finset sums and a product Finset requires exact index bijection/reindex proof if adopted.
+- **Diagnostic caution:** uncompiled `trace.Meta.isDefEq` speculation is not a proof and does not itself advance this physics obligation; the failed named-alias approach is closed in the scoped E2 negative-knowledge record.
+
+## Next bounded trial, acceptance and stop criteria
+
+**Do not launch a large physical-source CI gate now.** First implement or independently review a small **operator-parametric two-spatial-index reindex** proof (R2) and a *separate* original gammaTwo spatial coefficient identity (R3). These test a mathematically new, indispensable part of the cubic charge covariance, unlike another alias spelling test. A useful trial must retain the original branch conditions, ordered source factor and signs and have its own .olean and exact permitted-axiom audit before counting as accepted. If a scalar coefficient identity fails after source definitions and signs are checked, treat it as potential mathematical/convention information, not a purely technical red. Check R1 spinor indexing with J4 before composing.
+
+Even a green R1–R3 is still only the source-response side; the final commutator transport/charge equivalence remains to be qualified. No Hamiltonian/spectral/positive-eigenvalue assertion follows.
+
+**Governance:** Work remains on `research/openai-math-su2-s3l-combined-rotation` under draft PR #25. Canonical main/upstream source and the evergreen Project Lead guide are not modified by this analysis.
