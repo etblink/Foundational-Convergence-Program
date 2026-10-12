@@ -1,4 +1,4 @@
-name: BFSS L6G5F Quartic Pointwise Bridge
+name: BFSS L6G5G SU2 Quartic Color Jacobi
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -19,6 +19,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5DOriginalCoefficientKineticSplitProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5EOriginalScalarCoefficientSquareProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5FSourceQuarticPointwiseProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5GOriginalSU2QuarticJacobiProbe.lean
 
 permissions:
   contents: read
@@ -534,6 +535,36 @@ jobs:
               assert p+n in entries and entries[p+n] <= allowed,entries
           assert 'sorryAx' not in s and 'error:' not in s,s
           print('L6G5F_SOURCE_QUARTIC_POINTWISE_BRIDGE_QUALIFIED')
+          PY
+
+      - name: Qualify source SU2 quartic color Jacobi via accepted Pauli basis
+        shell: bash
+        timeout-minutes: 10
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5GOriginalSU2QuarticJacobiProbe
+          cp experiments/openai-math-su2-concrete-potential/SU2ColorCrossProbe.lean upstream-math/lean/
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5FSourceQuarticPointwiseProbe.olean
+          if [ ! -s .lake/build/lib/lean/SU2ColorCrossProbe.olean ]; then
+            timeout 420s lake build SU2ColorCrossProbe 2>&1 | tee /tmp/bfss-l6g1/l6g5g-accepted-pauli-build.log
+          fi
+          test -s .lake/build/lib/lean/SU2ColorCrossProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g5g.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g5g.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G5G.'
+          for n in ('sourceSU2Bracket_eq_cross','sourceSU2Bracket_plucker'):
+              assert p+n in entries and entries[p+n] <= allowed,entries
+          assert any(n.endswith('.simpleBivector_plucker') and a<=allowed for n,a in entries.items()),entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6G5G_PINNED_SOURCE_SU2_QUARTIC_COLOR_JACOBI_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
