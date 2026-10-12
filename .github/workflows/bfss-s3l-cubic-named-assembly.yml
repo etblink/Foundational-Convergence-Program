@@ -1,6 +1,7 @@
 name: BFSS S3L Cubic Named Assembly
 
 # Qualification attempt #1, source-only split, max 65s per module.
+# Qualification rerun #2: source statement unmodified, restore scoped cache.
 # Existing pinned warm cache is scoped to concrete-potential PR base; keep this
 # trigger aligned to that scope until a separately qualified cache migration.
 # Distinct gate: isolate independently kernel-qualified R1D and R3C
