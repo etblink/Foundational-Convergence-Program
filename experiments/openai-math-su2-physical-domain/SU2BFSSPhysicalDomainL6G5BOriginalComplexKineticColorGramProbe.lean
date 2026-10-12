@@ -83,7 +83,11 @@ theorem originalGamma_complexRowKineticGram (w : Spin → ℝ)
     (w ᵥ* originalGamma i) β * (w ᵥ* originalGamma j) β) =
       if i = j then spinorSquareNorm w else 0 at h
   have hc := congrArg (fun a : ℝ => (a : ℂ)) h
-  simpa using hc
+  by_cases hij : i = j
+  · simp only [if_pos hij] at hc ⊢
+    exact hc
+  · simp only [if_neg hij] at hc ⊢
+    simpa using hc
 
 /-- Color contraction of two selectors does not assume or change
 the number of colors. -/
