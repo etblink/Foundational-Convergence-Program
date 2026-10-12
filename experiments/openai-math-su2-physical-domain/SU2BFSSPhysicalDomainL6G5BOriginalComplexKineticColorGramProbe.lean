@@ -85,7 +85,8 @@ theorem originalGamma_complexRowKineticGram (w : Spin → ℝ)
   have hc := congrArg (fun a : ℝ => (a : ℂ)) h
   by_cases hij : i = j
   · simp only [if_pos hij] at hc ⊢
-    exact hc
+    -- Normalize the cast of the finite real sum and its products.
+    simpa using hc
   · simp only [if_neg hij] at hc ⊢
     simpa using hc
 
