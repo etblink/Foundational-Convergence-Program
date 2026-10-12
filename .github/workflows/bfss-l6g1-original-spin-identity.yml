@@ -540,7 +540,7 @@ jobs:
 
       - name: Qualify source SU2 quartic color Jacobi via accepted Pauli basis
         shell: bash
-        timeout-minutes: 10
+        timeout-minutes: 14
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
@@ -549,8 +549,14 @@ jobs:
           cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5FSourceQuarticPointwiseProbe.olean
+          if [ ! -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/PotentialBasis.olean ] ||
+             [ ! -s .lake/build/lib/lean/OAI/Analysis/CharacterCriterion/Pauli.olean ]; then
+            timeout 420s lake build OAI.MathematicalPhysics.BFSS.PotentialBasis OAI.Analysis.CharacterCriterion.Pauli 2>&1 | tee /tmp/bfss-l6g1/l6g5g-upstream-build.log
+          fi
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/PotentialBasis.olean
+          test -s .lake/build/lib/lean/OAI/Analysis/CharacterCriterion/Pauli.olean
           if [ ! -s .lake/build/lib/lean/SU2ColorCrossProbe.olean ]; then
-            timeout 420s lake build SU2ColorCrossProbe 2>&1 | tee /tmp/bfss-l6g1/l6g5g-accepted-pauli-build.log
+            timeout 180s lake env lean -o .lake/build/lib/lean/SU2ColorCrossProbe.olean SU2ColorCrossProbe.lean 2>&1 | tee /tmp/bfss-l6g1/l6g5g-accepted-pauli-build.log
           fi
           test -s .lake/build/lib/lean/SU2ColorCrossProbe.olean
           timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g5g.log
