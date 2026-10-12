@@ -507,7 +507,7 @@ jobs:
 
       - name: Qualify L6G5F source quartic matrix target and quadratic pointwise square
         shell: bash
-        timeout-minutes: 4
+        timeout-minutes: 9
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
@@ -515,6 +515,12 @@ jobs:
           cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5EOriginalScalarCoefficientSquareProbe.olean
+          # L6G5F invokes the actual pinned ColorMatrices coordinate_bracket_norm.
+          # That upstream .olean is not part of the existing L6 G1-E cache.
+          if [ ! -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/ColorMatrices.olean ]; then
+            timeout 360s lake build OAI.MathematicalPhysics.BFSS.ColorMatrices 2>&1 | tee /tmp/bfss-l6g1/l6g5f-colormatrices-build.log
+          fi
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/ColorMatrices.olean
           timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g5f.log
           test -s ".lake/build/lib/lean/$stem.olean"
           python3 - <<'PY'
