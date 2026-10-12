@@ -395,7 +395,7 @@ jobs:
           import re
           s=open('/tmp/bfss-l6g1/kinetic-gram.log').read()
           allowed={'propext','Classical.choice','Quot.sound'}
-          actual={name:{a.strip() for a in ax.split(',') if a.strip()} for name,ax in re.findall(r"'([^']+)' (?:depends on axioms: \\[([^\\]]*)\\]|does not depend on any axioms)",s)}
+          actual={name:{a.strip() for a in ax.split(',') if a.strip()} for name,ax in re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
           name='FCP.BFSSSU2PhysicalDomainL6G5A.originalGamma_rowKineticGram'
           assert name in actual and actual[name]<=allowed,actual
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
