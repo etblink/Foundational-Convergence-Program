@@ -1,3 +1,5 @@
+> **Numerical-threshold supersession (2026-10-12):** The exact SU2 x Spin9 Fock decomposition and method-relative k18 calculation below remain mathematically valid **for the previous >37 confinement bound**, but the bound itself has been substantially improved by keeping the original color-sum fermion norm and allocating more kinetic energy to the transverse oscillator. The new source inequality gives **lambda2>22**, and a minimal method-relative **k=10** witness `mu=(3,3,1,0), lambda=(23,23,1,0)`; a smaller representation choice is k11, lambda=(24,24,0,0). See `BFSS_COLOR_ADAPTED_M16_CONFINEMENT_AND_K10_SECTOR_AUDIT_0_1_0.md`. Do not repeat k18 as the current optimal degree.
+
 # BFSS SU(2) relative model — complete gauge-invariant original Fock character and improved minimal-degree high-spin witness
 
 **2026-10-12 — Project Lead mathematical research, 0.1.0.**  
