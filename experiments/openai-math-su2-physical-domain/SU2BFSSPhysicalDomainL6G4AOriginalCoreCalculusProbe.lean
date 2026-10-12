@@ -48,6 +48,10 @@ theorem sourceD_P_comm {N : ℕ} (u v : BosonLabel N) :
   have h := coordinateDerivative_multiplier u.1 u.2
     (fun y : Boson N => (coordinate v.1 v.2 y : ℂ))
     (Complex.ofRealCLM.contDiff.comp (coordinate_contDiff v.1 v.2)) f x
+  change coordinateDerivative u.1 u.2 (position v.1 v.2 f) x =
+    (x v : ℂ) • coordinateDerivative u.1 u.2 f x +
+      (fderiv ℝ (fun y : Boson N => (y v : ℂ)) x
+        (EuclideanSpace.single u 1)) • f x at h
   change coordinateDerivative u.1 u.2 (position v.1 v.2 f) x -
     (x v : ℂ) • coordinateDerivative u.1 u.2 f x =
       ((if u = v then (1 : SourceEnd N) else 0) f) x
