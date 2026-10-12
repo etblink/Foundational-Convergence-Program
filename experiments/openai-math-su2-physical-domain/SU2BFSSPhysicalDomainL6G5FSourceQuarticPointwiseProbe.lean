@@ -68,8 +68,9 @@ private theorem originalPositionPair_apply {N : ℕ}
     (v t : BosonLabel N) (f : SmoothCore N) (x : Boson N) :
     ((sourceP v * sourceP t) f) x =
       (((x v : ℝ) : ℂ) * ((x t : ℝ) : ℂ)) • f x := by
-  change (position v.1 v.2 (position t.1 t.2 f)) x = _
-  simp only [position, smoothMultiplier_apply, smul_smul]
+  change (((x v : ℝ) : ℂ) • (((x t : ℝ) : ℂ) • f x)) =
+    ((((x v : ℝ) : ℂ) * ((x t : ℝ) : ℂ)) • f x)
+  rw [smul_smul]
 
 /-- Identifies the L6G5E quadratic operator's pointwise action with
 the exact original polynomial coefficient, not a surrogate multiplier. -/
@@ -79,12 +80,29 @@ theorem sourceSpinorQuadraticMultiplication_apply {N : ℕ}
     (sourceSpinorQuadraticMultiplication M w p f) x =
       (sourceQuadraticPointCoefficient M w p x) • f x := by
   classical
-  unfold sourceSpinorQuadraticMultiplication sourceQuadraticPointCoefficient
-  simp only [Finset.sum_apply, LinearMap.smul_apply, Finset.smul_sum,
-    smul_smul]
-  simp_rw [originalPositionPair_apply]
-  simp only [smul_smul, Finset.sum_smul]
-  rfl
+  have hterm (α : SpinIndex) (v t : BosonLabel N) :
+      (((sourceQuadraticWeight M α p v t) •
+        (sourceP v * sourceP t)) f) x =
+        (sourceQuadraticWeight M α p v t *
+          (((x v : ℝ) : ℂ) * ((x t : ℝ) : ℂ))) • f x := by
+    rw [LinearMap.smul_apply, originalPositionPair_apply, smul_smul]
+  calc
+    (sourceSpinorQuadraticMultiplication M w p f) x =
+      ∑ α : SpinIndex, (w α : ℂ) •
+        (∑ v : BosonLabel N, ∑ t : BosonLabel N,
+          (((sourceQuadraticWeight M α p v t) •
+            (sourceP v * sourceP t)) f) x) := by
+              unfold sourceSpinorQuadraticMultiplication
+              simp only [Finset.sum_apply, LinearMap.smul_apply]
+    _ = ∑ α : SpinIndex, (w α : ℂ) •
+        (∑ v : BosonLabel N, ∑ t : BosonLabel N,
+          (sourceQuadraticWeight M α p v t *
+            (((x v : ℝ) : ℂ) * ((x t : ℝ) : ℂ))) • f x) := by
+              simp_rw [hterm]
+    _ = _ := by
+      unfold sourceQuadraticPointCoefficient
+      simp only [Finset.sum_smul, Finset.smul_sum, Finset.mul_sum,
+        smul_smul, mul_assoc]
 
 /-- The source quadratic-operator square is *precisely* multiplication
 by the sum of squared source point coefficients on the original core.
@@ -97,10 +115,30 @@ theorem sourceSpinorQuadraticSquare_apply {N : ℕ}
         sourceQuadraticPointCoefficient M w p x *
           sourceQuadraticPointCoefficient M w p x) • f x := by
   classical
+  have hterm (p : FermionLabel N) :
+      (((sourceSpinorQuadraticMultiplication M w p *
+        sourceSpinorQuadraticMultiplication M w p) f) x) =
+          (sourceQuadraticPointCoefficient M w p x *
+            sourceQuadraticPointCoefficient M w p x) • f x := by
+    change (sourceSpinorQuadraticMultiplication M w p
+      (sourceSpinorQuadraticMultiplication M w p f)) x = _
+    rw [sourceSpinorQuadraticMultiplication_apply]
+    rw [sourceSpinorQuadraticMultiplication_apply]
+    rw [smul_smul]
   unfold sourceSpinorQuadraticSquare
-  simp only [Finset.sum_apply, LinearMap.mul_apply,
-    sourceSpinorQuadraticMultiplication_apply, map_smul, smul_smul,
-    Finset.sum_smul]
+  calc
+    ((∑ p : FermionLabel N,
+        sourceSpinorQuadraticMultiplication M w p *
+          sourceSpinorQuadraticMultiplication M w p) f) x =
+      ∑ p : FermionLabel N,
+        (((sourceSpinorQuadraticMultiplication M w p *
+          sourceSpinorQuadraticMultiplication M w p) f) x) := by
+            simp only [Finset.sum_apply]
+    _ = ∑ p : FermionLabel N,
+        (sourceQuadraticPointCoefficient M w p x *
+          sourceQuadraticPointCoefficient M w p x) • f x := by
+            simp_rw [hterm]
+    _ = _ := by rw [Finset.sum_smul]
 
 #print axioms sourceNineSpatialQuarticPotential_matrix
 #print axioms originalPositionPair_apply
