@@ -3,16 +3,11 @@ name: BFSS S3L Cubic Factor Bridge
 # K2D1 qualified GREEN on run #1. K2D2 tests literal paired source\n# specialization with exact K2A hF premise still explicit.
 # Uses K1 position-pair law; concrete original paired specialization stays open.
 # Pinned 26-module verification and strict kernel-axiom audit unchanged.
+# K2D1-D3 accepted, but final original named K2B bridge is known red
+# (Gate #5 exact def simp reaches maxRecDepth). Keep historical workflow
+# manually reproducible, do not retrigger on unrelated sixfold progress.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-concrete-potential
-    paths:
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2D1ParametricCubicFactorTransportProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2D2OriginalSourceCubicFactorOfResponseProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2D3OriginalSourceUnconditionalCubicFactorProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2BFactoredCubicSourceMonomialProbe.lean
-      - .github/workflows/bfss-s3l-cubic-parametric-factor.yml
+  workflow_dispatch:
 
 permissions:
   contents: read
