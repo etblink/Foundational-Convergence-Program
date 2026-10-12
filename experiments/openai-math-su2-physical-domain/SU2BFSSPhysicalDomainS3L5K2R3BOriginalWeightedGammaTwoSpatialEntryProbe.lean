@@ -82,7 +82,7 @@ theorem originalCubicSpatialComplexCoefficient_reindexed
     first
     | exact False.elim (hij (hki.symm.trans hkj))
     | exact False.elim (hij (hli.symm.trans hlj))
-    | simpa [hki, hkj, hli, hlj, Matrix.add_apply,
+    | simpa [hki, hkj, hli, hlj, hij, Ne.symm hij, Matrix.add_apply,
         Matrix.neg_apply, Matrix.smul_apply, smul_eq_mul] using h
 
 #print axioms originalCubicStructureWeightedGammaTwo_spatial
