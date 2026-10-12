@@ -1,5 +1,6 @@
 name: BFSS S3L Cubic Named Response Interfaces
 
+# Qualification attempt #1, source-only split, max 65s per module.
 # Distinct gate: isolate independently kernel-qualified R1D and R3C
 # source responses in two small named original fixed-color theorems.
 # Deliberately DO NOT compile unqualified R4B combined equality.
