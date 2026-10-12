@@ -3,7 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K2D3OriginalSourceUnconditionalCubicFactorProbe
 /-!
 # S3L5K2E1 — sixfold original cubic source-index commutator transport
 
-This is the next substantive transport obligation after kernel-qualified
+K2E1 pinned qualification #1 (generic sixfold transport only).\nThis is the next substantive transport obligation after kernel-qualified
 K2D3's LITERAL 48-Majorana cubic-factor commutator. The previous K2B
 theorem's conversion of that literal factor to the separate named
 pairedOriginalCubicMonomial failed; it is NOT imported or assumed.
