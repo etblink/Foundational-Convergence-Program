@@ -3,6 +3,8 @@ import SU2BFSSPhysicalDomainS3L5K2R3AOriginalGammaTwoSpatialReindexProbe
 /-!
 # K2R3B — original weighted gammaTwo two-index spatial coefficient
 
+Pinned qualification attempt #1. No physics or proof-body changes.
+
 R3A qualified three original gammaTwo matrix reindex identities, and
 K3 qualified the exact real structureConstant / 2 source weight.
 This step applies that SAME weight to R3A's original two-index response,
