@@ -28,6 +28,7 @@ open FCP.BFSSSU2PhysicalDomainS3L2
 open FCP.BFSSSU2PhysicalDomainS3L4B
 open FCP.BFSSSU2PhysicalDomainS3L5K2
 open FCP.BFSSSU2PhysicalDomainS3L5K3
+open FCP.BFSSSU2PhysicalDomainS3L5K1
 open FCP.BFSSSU2PhysicalDomainS3L5K2R1D
 open FCP.BFSSSU2PhysicalDomainS3L5K2R3C
 open FCP.BFSSSU2PhysicalDomainS3L5K2R4A
@@ -63,7 +64,7 @@ theorem pairedOriginalCubicFixedColorResponse_decompose
   have hsplit := sourceThreeSum_weightedResponse_split
     (fun k l γ =>
       (((originalCubicStructureWeight A B C *
-        pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ))
+        pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)))
     (fun k l γ =>
       (sourceCubicFermionVariation i j γ A).comp
         ((position (N := 2) k B).comp (position (N := 2) l C)))
