@@ -99,7 +99,8 @@ theorem sourceSpinorQuadraticMultiplication_apply {N : ℕ}
               change (sourceEndPointEvaluation f x)
                 (sourceSpinorQuadraticMultiplication M w p) = _
               unfold sourceSpinorQuadraticMultiplication
-              simp only [map_sum, map_smul, sourceEndPointEvaluation]
+              simp only [map_sum, map_smul]
+              rfl
     _ = ∑ α : SpinIndex, (w α : ℂ) •
         (∑ v : BosonLabel N, ∑ t : BosonLabel N,
           (sourceQuadraticWeight M α p v t *
@@ -139,7 +140,8 @@ theorem sourceSpinorQuadraticSquare_apply {N : ℕ}
             change (sourceEndPointEvaluation f x)
               (sourceSpinorQuadraticSquare M w) = _
             unfold sourceSpinorQuadraticSquare
-            simp only [map_sum, sourceEndPointEvaluation]
+            simp only [map_sum]
+            rfl
     _ = ∑ p : FermionLabel N,
         (sourceQuadraticPointCoefficient M w p x *
           sourceQuadraticPointCoefficient M w p x) • f x := by
