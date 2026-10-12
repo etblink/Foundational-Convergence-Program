@@ -4,6 +4,7 @@ import SU2BFSSPhysicalDomainS3L5K2E2E1OriginalCubicDefiningEquationProbe
 # E2E3: final bounded Grok irreducibility differential test
 
 Pinned qualification #2: local modifier required for imported definitions; theorem/proof unchanged.
+CI rerun #2, local attribute preflight; theorem unchanged.
 
 E2E1's three source defining equations compiled, but E2E2's final
 exact after simp only exceeded Lean recursion. Grok's original
