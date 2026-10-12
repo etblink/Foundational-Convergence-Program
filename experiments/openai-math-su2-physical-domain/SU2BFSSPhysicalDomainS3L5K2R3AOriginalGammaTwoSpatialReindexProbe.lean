@@ -4,6 +4,7 @@ import SU2BFSSPhysicalDomainS3L5K3OriginalCubicGammaTwoCoefficientProbe
 # K2R3A — original gammaTwo spatial response vs two-index reindex
 
 Pinned qualification #3: simplify residual `if True` in each positive source-plane branch.
+CI qualification attempt #3; exact source statement unchanged.
 CI qualification #2: noncomputable source proof unchanged.
 
 The newly qualified R2A–D genuine source position reindex gives a
