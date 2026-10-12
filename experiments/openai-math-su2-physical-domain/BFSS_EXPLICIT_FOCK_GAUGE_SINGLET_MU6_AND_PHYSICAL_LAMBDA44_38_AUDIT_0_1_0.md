@@ -1,3 +1,5 @@
+> **Superseded optimality context — 2026-10-12:** The `mu=(6,0,0,0), k=19, lambda=(44,38,0,0)` witness constructed below is valid but NOT the minimal-degree or smallest-representation high-spin witness. The complete original SU2-singlet Fock character gives 32 Spin9 types, including `mu=(2,2,0,0)`; its `k=18` polynomial produces `lambda=(38,38,0,0)` satisfying the same sharp confinement threshold. `k=18` is minimal **within this P^k/Fock-highest method**, and the new rotation irrep is ~14.76 times smaller. See `BFSS_COMPLETE_SU2_SINGLET_FOCK_SPIN9_DECOMPOSITION_AND_K18_WITNESS_0_1_0.md` for exact evidence and qualifications.
+
 # BFSS S3L — explicit gauge-invariant Fock highest weight and concrete positive-energy rotation sector
 
 **2026-10-12 | Project Lead source-faithful representation theorem 0.1.0.** Status: `ORIGINAL_48_MAJORANA_WEIGHT_CHARACTER_EXACT__UNIQUE_TOP_GAUGE_SINGLET_PROVED__EXPLICIT_MU_6_0_0_0__PHYSICAL_K19_LAMBDA_44_38_0_0__FOUR_ONE_STEP_PARTNERS__NOT_FULL_LEAN_CERTIFIED`.
