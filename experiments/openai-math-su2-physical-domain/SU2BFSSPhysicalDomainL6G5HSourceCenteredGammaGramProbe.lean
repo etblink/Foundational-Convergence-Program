@@ -38,6 +38,13 @@ private theorem centeredProduct_gram
         simp only [mul_smul_comm, smul_mul_assoc, mul_one]
       _ = b • (a • (1 : R)) := by rw [hAA]
       _ = _ := by rw [smul_smul, mul_comm b a]
+  have hright (T : R) : T * (d • (1 : R)) = d • T := by
+    rw [mul_smul_comm, mul_one]
+  have hleft (T : R) : (d • (1 : R)) * T = d • T := by
+    rw [smul_mul_assoc, one_mul]
+  have hd2 :
+      (d • (1 : R)) * (d • (1 : R)) = (d * d) • (1 : R) := by
+    rw [hleft (d • (1 : R)), smul_smul]
   have hexpand :
       (A * B - d • (1 : R)) * (B * A - d • (1 : R)) =
         (A * B) * (B * A) -
@@ -47,9 +54,12 @@ private theorem centeredProduct_gram
             (A * B) * (d • (1 : R)) -
             (d • (1 : R)) * (B * A) +
             (d • (1 : R)) * (d • (1 : R)) := by noncomm_ring
+      _ = (A * B) * (B * A) -
+            d • (A * B) - d • (B * A) +
+            (d * d) • (1 : R) := by
+              rw [hright (A * B), hleft (B * A), hd2]
       _ = _ := by
-        simp only [mul_smul_comm, smul_mul_assoc, mul_one, one_mul,
-          smul_smul, smul_add]
+        rw [smul_add]
         abel
   calc
     _ = (A * B) * (B * A) -
