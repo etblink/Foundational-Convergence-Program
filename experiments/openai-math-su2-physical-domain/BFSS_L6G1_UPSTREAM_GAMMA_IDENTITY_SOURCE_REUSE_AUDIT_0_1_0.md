@@ -1,5 +1,7 @@
 # BFSS L6-G1: upstream GammaIdentity already proves original finite Fierz structure
 
+> **Superseding qualification:** [L6G1 #2](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38294155678) is green at `8731052a43b8abfe29dad4d9cd2951982a2bd364`. The two exact FCP source theorems and imported upstream theorem passed the pinned compiler/axiom gate. See `L6G1_ORIGINAL_SOURCE_SPIN_IDENTITY_ACCEPTED_CHECKPOINT_0_1_0.md`. The original candidate description below records the pre-qualification state; arbitrary-spinor/row-orientation G2 remains a separate gate.
+
 **2026-10-12 — UNCOMPILED source-specialization candidate.**
 
 Discovery: pinned etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a contains lean/OAI/MathematicalPhysics/BFSS/GammaIdentity.lean, which imports GammaWords.lean and ALREADY proves the theorem OAI.BFSSGamma.spinIdentity : SpinIdentity G under the same symmetric nine-gamma Clifford hypotheses accepted for FCP.BFSSGamma9.gamma.

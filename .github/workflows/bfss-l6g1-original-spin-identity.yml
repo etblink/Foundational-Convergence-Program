@@ -1,4 +1,4 @@
-name: BFSS L6G1 Original Source Spin Identity
+name: BFSS L6G2 Homogeneous Original Source Fierz
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -9,6 +9,7 @@ on:
     paths:
       - .github/workflows/bfss-l6g1-original-spin-identity.yml
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.lean
 
 permissions:
   contents: read
@@ -44,6 +45,7 @@ jobs:
           test "$(git -C upstream-math rev-parse HEAD)" = "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
           test "$(cat upstream-math/lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean)" = "5ec0fcb039fb5c1367f72b2bd0f8c05fcd936587"
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean)" = "b3c4cb1b12c64d3e718d2c547ee29ebac2b18a36"
           python3 - <<'PY'
           import json
           d=json.load(open('upstream-math/lean/lake-manifest.json'))
@@ -54,6 +56,7 @@ jobs:
             echo "UPSTREAM_HEAD=$(git -C upstream-math rev-parse HEAD)"
             echo "GAMMA_SOURCE_BLOB=$(git hash-object experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean)"
             echo "G1_SOURCE_BLOB=$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean)"
+            echo "G2_SOURCE_BLOB=$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.lean)"
             echo "EXACT_SOURCE_PREFLIGHT_PASS"
           } | tee /tmp/bfss-l6g1/source-pins.txt
 
@@ -107,7 +110,20 @@ jobs:
             ~/.elan
           key: bfss-l6-pinned-env-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
 
+      - name: Restore qualified G1 gamma objects by exact frozen source hashes
+        id: accepted_g1
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/GammaWords.olean
+            upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/GammaIdentity.olean
+            upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/Core.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2RealGammaProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.olean
+          key: bfss-l6g1-source-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean') }}
+
       - name: Compile only three original upstream gamma prerequisites
+        if: steps.accepted_g1.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 16
         run: |
@@ -122,6 +138,7 @@ jobs:
           done
 
       - name: Compile unchanged original real gamma source and audit its axioms
+        if: steps.accepted_g1.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 11
         run: |
@@ -144,6 +161,7 @@ jobs:
           PY
 
       - name: Qualify only L6G1 original source spinor identity
+        if: steps.accepted_g1.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -172,6 +190,7 @@ jobs:
           PY
 
       - name: Cache only the qualified source gamma objects
+        if: steps.accepted_g1.outputs.cache-hit != 'true'
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: |
@@ -181,6 +200,39 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/SU2RealGammaProbe.olean
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.olean
           key: bfss-l6g1-source-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean') }}
+
+      - name: Qualify arbitrary-spinor homogeneity and literal source row Fierz
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.olean
+          stem=SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          echo L6G2_HOMOGENEOUS_SOURCE_ROW_FIERZ_BEGIN
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/homogeneous-row-fierz.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/homogeneous-row-fierz.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          actual={name:{a.strip() for a in ax.split(',') if a.strip()} for name,ax in re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          names=['originalGamma_spinIdentity_homogeneous','originalGammaTwo_transpose',
+              'originalGamma_row_eq_column','originalGammaTwo_row_eq_neg_column',
+              'originalGamma_generalizedRowFierz']
+          prefix='FCP.BFSSSU2PhysicalDomainL6G2.'
+          assert all(prefix+n in actual and actual[prefix+n]<=allowed for n in names),actual
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('L6G2_ALL_REAL_SPINORS_ORIGINAL_ROW_FIERZ_QUALIFIED')
+          PY
+
+      - name: Cache the qualified G2 source theorem object
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.olean
+          key: bfss-l6g2-source-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.lean') }}
 
       - name: Preserve independently inspectable qualification evidence
         if: always()

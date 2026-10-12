@@ -1,5 +1,7 @@
 # BFSS L6 qualification: GitHub Actions cache-scope blocker and proof reuse
 
+> **Current recovery status:** the stable PR25-scope pinned bootstrap has succeeded, and [L6G1 #2](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38294155678) qualified both original-source unit-spinor theorem declarations. The historical cache-scope failure and first G1 errors below remain negative knowledge. See `L6G1_ORIGINAL_SOURCE_SPIN_IDENTITY_ACCEPTED_CHECKPOINT_0_1_0.md`; G2 is a separate unqualified candidate.
+
 **2026-10-12 Project Lead: CI negative-knowledge checkpoint.**
 
 Workflow run #38290017644 for L6-G0 failed at the environment preflight, BEFORE any Lean compilation. The log explicitly reports: "Cache not found for input keys: family270b-bridge-ubuntu-lean4341-openai-adc7f124-deformedcharge-v2". The preceding original source checkout completed and the pinned remote source commit was adc7f1241b42e322a6451854ab7e4b4c146bf78a. The next preflight shell step tested empty cache-hit and immediately exited 1.
