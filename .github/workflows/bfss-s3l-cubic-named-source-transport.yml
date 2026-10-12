@@ -3,26 +3,10 @@ name: BFSS S3L Cubic Named Operator Transport
 # E1C: abstract-six-index source transport. E1A/E1B qualified; E1 #3\n# RED at whnf heartbeat after staging. Preserve original E1 uncompiled.\n# K2B and K2C2 known-red declarations remain excluded.
 # Uses K1 position-pair law; concrete original paired specialization stays open.
 # Pinned 26-module verification and strict kernel-axiom audit unchanged.
+# C1 #1 RED at whnf while connecting named sixfold source sum to E1D.
+# Retire automatic retries; preserve C1/C2/C3 files for manual history.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-concrete-potential
-    paths:
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2D1ParametricCubicFactorTransportProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2D2OriginalSourceCubicFactorOfResponseProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2D3OriginalSourceUnconditionalCubicFactorProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2BFactoredCubicSourceMonomialProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E1ATwoSumOperatorTransportProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E1BFourSumOperatorTransportProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E1CAbstractSixfoldSourceTransportProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E1GenericCubicSixfoldCommTransportProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E1DOriginalSixfoldIndexSpecializationProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E2AOriginalCubicSixfoldConditionalProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E2BOriginalCubicSixfoldPointwiseDischargeProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E2C1NamedCubicSourceFamilyTransportProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E2C2NamedCubicPointwiseDischargeProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2E2C3NamedCubicWeightedResponseProbe.lean
-      - .github/workflows/bfss-s3l-cubic-named-source-transport.yml
+  workflow_dispatch:
 
 permissions:
   contents: read
