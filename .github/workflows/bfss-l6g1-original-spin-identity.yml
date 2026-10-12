@@ -1,4 +1,4 @@
-name: BFSS L6G5C Original Kinetic Differential Square
+name: BFSS L6G5D Original Coefficient Split
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -16,6 +16,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5AOriginalKineticGramProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5BOriginalComplexKineticColorGramProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5COriginalKineticDifferentialSquareProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5DOriginalCoefficientKineticSplitProbe.lean
 
 permissions:
   contents: read
@@ -456,6 +457,25 @@ jobs:
           assert len(generic)==1 and generic[0]<=allowed,actual
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('L6G5C_ORIGINAL_SOURCE_KINETIC_DIFFERENTIAL_SQUARE_QUALIFIED')
+          PY
+
+      - name: Compile and audit L6G5D source coefficient bridge
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5DOriginalCoefficientKineticSplitProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5COriginalKineticDifferentialSquareProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g5d.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          s=open('/tmp/bfss-l6g1/l6g5d.log').read()
+          assert 'sorryAx' not in s and 'error:' not in s
+          assert 'sourceAllSpinorCoefficient_kinetic_quadratic' in s
+          print('L6G5D_SOURCE_COEFFICIENT_SPLIT_COMPILED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
