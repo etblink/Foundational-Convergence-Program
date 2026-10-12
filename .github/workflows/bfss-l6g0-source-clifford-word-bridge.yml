@@ -20,6 +20,9 @@ concurrency:
 
 jobs:
   source-clifford-word-bridge:
+    # Quarantined: PR25 cannot see the exact pinned dependency cache.
+    # Re-enable only after verified cache-scope access or reproducible build.
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 18
     steps:
