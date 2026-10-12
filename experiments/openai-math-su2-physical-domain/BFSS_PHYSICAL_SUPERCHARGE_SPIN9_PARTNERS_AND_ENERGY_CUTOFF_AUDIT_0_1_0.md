@@ -1,3 +1,5 @@
+> **Successor mathematical update (2026-10-12):** The earlier statement that the actual gauge-invariant Fock highest weight `mu` is unknown has now been superseded for one explicitly exhibited choice. The exact source 48-Majorana Spin(9) torus character has a unique top-weight line of weight `mu=(6,0,0,0)`. Since SU(2) commutes with the torus and has no nontrivial characters, this line is gauge invariant; it is also highest. See `BFSS_EXPLICIT_FOCK_GAUGE_SINGLET_MU6_AND_PHYSICAL_LAMBDA44_38_AUDIT_0_1_0.md`. Thus an **actual** k=19 physical isotype is `lambda=(44,38,0,0)`, with exactly four *candidate* one-step supercharge destinations. The original general minuscule and energy-cutoff results below remain valid; do not infer that all four candidates are populated or that this exhausts the invariant Fock space.
+
 # BFSS S3L — Spin(9) minuscule supercharge-sector transitions and sharp high-spin protection
 
 **Date:** 2026-10-12. **Project Lead research audit 0.1.0.** Verdict: `B4_SPINOR_TENSOR_RULE_DERIVED__EXACT_DIMENSION_TESTS_PASS__CONDITIONAL_SUPERPARTNER_HIGH_SPIN_PERSISTENCE__ENERGY_ANGULAR_CUTOFF__NO_LEAN_SPECTRAL_CERTIFICATION`.
