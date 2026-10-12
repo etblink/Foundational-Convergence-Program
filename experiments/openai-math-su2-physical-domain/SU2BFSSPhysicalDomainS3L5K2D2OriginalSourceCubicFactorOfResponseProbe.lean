@@ -3,7 +3,8 @@ import SU2BFSSPhysicalDomainS3L5K2D1ParametricCubicFactorTransportProbe
 /-!
 # S3L5K2D2 — literal original BFSS cubic factor, conditional bridge
 
-K2D2 pinned CI qualification run #1 (conditional, original source).\nK2D1 is axiom-qualified and compiled: it proves genuine SourceEnd factor
+K2D2 pinned CI qualification run #1 (conditional, original source).
+K2D2 CI qualification #2: missing original S3D source namespace repaired; theorem unchanged.\nK2D1 is axiom-qualified and compiled: it proves genuine SourceEnd factor
 transport before specializing to pairedFermionPlaneSpinGenerator or
 pairedAlgebraData. Here we perform ONE concrete specialization with the
 original 48-Majorana Fock generator and original fermionAction, keeping
