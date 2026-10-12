@@ -4,6 +4,8 @@ import SU2BFSSPhysicalDomainS3L5K3OriginalCubicGammaTwoCoefficientProbe
 /-!
 # K2R1B — genuine cubic-weighted source fermion response
 
+Qualification #2: missing lambda parenthesis corrected; all theorem statements unchanged.
+
 Specialize the already separated R1A spinor-index identity to the
 EXACT cubic scalar coefficient: original 1/2 × structureConstant ×
 pairedAlgebraData.gammaTwo(k,l,alpha,gamma). Specialize the right factor
