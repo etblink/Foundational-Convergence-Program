@@ -70,6 +70,7 @@ theorem pairedOriginalCubicFixedColorResponse_decompose
   -- Gate #2 localized the concrete hsplit elaboration bottleneck.
   -- Prove the outer distribution at each finite index first; do not
   -- instantiate a generic full-expression equality against the giant source.
+  -- Gate #4 instrumented localization; no theorem/tactic change.
   trace "R4B_STAGE_0_PROOF_START"
   calc
     _ = (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
