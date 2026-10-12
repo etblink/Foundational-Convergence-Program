@@ -3,7 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K2C1AbstractSourceLeibnizProbe
 /-!
 # S3L5K2C2 — exact concrete source operator Leibniz shape
 K2C Gate #2: add the original GaugeG1A source namespace omitted in K2C2 #1. Preserve exact theorem and raw Leibniz tactic.
-K2C Gate #2 qualification: check original source namespace repair with the same raw Leibniz theorem.
+K2C Gate #3: second run hit 65-second wall-clock timeout at concrete rewrite; Mathlib abstract ring and exact source application.
 
 Qualify only the Leibniz decomposition of the ACTUAL source 48-Majorana
 combined generator acting on the original ordered cubic monomial.
@@ -51,7 +51,13 @@ theorem pairedActualCombined_comm_cubicMonomial_rawLeibniz
          ((position (N := 2) k B).comp (position (N := 2) l C)).comp
            (sourceParametricCombinedPlane
              (pairedFermionPlaneSpinGenerator i j) i j)) := by
-  rw [sourceComm_comp_raw]
+  -- Explicit instantiation avoids broad 'rw' matching through concrete
+  -- BFSS Fock definitions; the abstract lemma now uses Mathlib's
+  -- noncommutative endomorphism-ring algebra.
+  exact sourceComm_comp_raw
+    (sourceParametricCombinedPlane (pairedFermionPlaneSpinGenerator i j) i j)
+    (pairedAlgebraData.fermionAction γ A)
+    ((position (N := 2) k B).comp (position (N := 2) l C))
 
 #print axioms pairedActualCombined_comm_cubicMonomial_rawLeibniz
 
