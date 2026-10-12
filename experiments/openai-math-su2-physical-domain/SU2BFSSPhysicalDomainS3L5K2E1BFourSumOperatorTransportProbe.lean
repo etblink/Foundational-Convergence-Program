@@ -1,7 +1,8 @@
 import SU2BFSSPhysicalDomainS3L5K2E1ATwoSumOperatorTransportProbe
 
 /-! K2E1B: a kernel-separate generic four-sum bridge using E1A.
-No original BFSS source generator is elaborated in this theorem. -/
+No original BFSS source generator is elaborated in this theorem.
+E1B qualification #2: lexical repair of reserved Lean binder, no theorem change. -/
 namespace FCP.BFSSSU2PhysicalDomainS3L5K2E1B
 noncomputable section
 open scoped BigOperators
