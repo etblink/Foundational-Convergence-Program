@@ -7,7 +7,7 @@ K2D1 and K2D2 qualified: the SourceEnd position-pair Leibniz law
 was first proved with M and K parametric, then instantiated to the
 ACTUAL paired 48-Majorana source generator with hF left visible.
 
-This is the previously missing physical discharge: use EXACT qualified
+K2D3 qualification attempt #1: unconditional actual cubic factor, K2A discharge.\nThis is the previously missing physical discharge: use EXACT qualified
 K2A hF, not a fresh premise or a new postulated operator identity.
 Original smooth test-function SourceEnd, original fermionAction and
 ordered two-position factor are literal in the statement.
