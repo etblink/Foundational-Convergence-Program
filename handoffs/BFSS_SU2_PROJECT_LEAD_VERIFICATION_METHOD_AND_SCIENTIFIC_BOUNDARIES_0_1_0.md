@@ -36,6 +36,14 @@ Each arrow is an **explicit Lean proof obligation**, not a license to assume a r
 
 **Decision:** Keep E1A/E1B as accepted, leave original-index E1 theorem **UNQUALIFIED and unchanged**, and perform only one discriminating generic-sixfold trial `K2E1C` with **six abstract finite index types**, using already accepted E1A/E1B and with no intermediate concrete `hFour` declaration. If this also fails at `whnf`, stop the nested sixfold-expansion architecture rather than repeat variations or raise resource limits; investigate an alternative single-index/product-type interface only if a concrete physical discharge strategy is clear. A green generic E1C qualifies **only abstract sum algebra**, not the original K4/K6C cubic-charge covariance.
 
+## Sixfold #4: generic six-index theorem accepted; next exact index specialization
+
+[Sixfold #4](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38198284569), head `a0c2033b4267141ee074568e5492238f3ea37883`, **GREEN**. Accepted K2D1–D3, E1A and E1B requalified. Newly accepted `FCP.BFSSSU2PhysicalDomainS3L5K2E1C.sourceComm_sixfold_generic_of` compiled to `.olean` with **only** `propext, Classical.choice, Quot.sound` axioms. It transports an arbitrary scalar-weighted sixfold commutator on the REAL BFSS `SourceEnd`, while **all six finite index types remain abstract and the pointwise commutator remains a visible hypothesis**. This does NOT prove original cubic-source charge covariance.
+
+**Causal learning:** E1A/E1B/E1C succeeded after structural parameterization and independently sealed composition, while original-index E1 #3 hit deterministic `whnf` heartbeat. The exact culprit could involve the old proof structure, the original concrete index-type elaboration, or both. Do NOT overclaim that index types alone caused the error.
+
+**New discriminating target:** E1D contains the literal original six index types with still-abstract coefficient and source-operator families. The proof attempts only `exact sourceComm_sixfold_generic_of G c T R h` with no intermediate `hFour`, distinguishing the cost of specializing an accepted sixfold theorem from reconstructing sixfold algebra. One bounded Lean compilation; if `whnf` still fails, do not repeat variants of direct literal sixfold specialization. Next consider a separately justified product-index representation with an explicit theorem reducing to the original K4 six nested sums; never substitute a different physical source or hide any missing bridge.
+
 ## Failure taxonomy: a red gate is not a unit of mathematical information
 
 Before editing source or launching a follow-up:
