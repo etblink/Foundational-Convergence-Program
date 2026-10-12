@@ -1,4 +1,4 @@
-name: BFSS S3L Parametric Cubic Factor Transport
+name: BFSS S3L Cubic Factor Bridge
 
 # K2D1: one CONDITIONAL source-parametric theorem with independent K and M.
 # Uses K1 position-pair law; concrete original paired specialization stays open.
@@ -9,6 +9,7 @@ on:
       - research/openai-math-su2-concrete-potential
     paths:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2D1ParametricCubicFactorTransportProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2D2OriginalSourceCubicFactorOfResponseProbe.lean
       - .github/workflows/bfss-s3l-cubic-parametric-factor.yml
 
 permissions:
@@ -419,4 +420,28 @@ jobs:
             assert {v.strip() for v in axioms.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,axioms)
           assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
           print('S3L5K2D1_PARAMETRIC_CUBIC_FACTOR_PASS')
+          PY
+
+      - name: Qualify K2D2 original paired source factor with explicit K2A response premise
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS3L5K2D2OriginalSourceCubicFactorOfResponseProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS3L5K2D1ParametricCubicFactorTransportProbe.olean
+          timeout 65s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/s3l5k2d2-axioms.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/s3l5k2d2-axioms.log').read()
+          pat=re.compile(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)")
+          matches=pat.findall(s)
+          assert [n for n,_ in matches]==[
+            'FCP.BFSSSU2PhysicalDomainS3L5K2D2.pairedActualCombined_comm_cubicFactor_of_fermionResponse'],matches
+          for n,axioms in matches:
+            assert {v.strip() for v in axioms.split(',') if v.strip()} <= {'propext','Classical.choice','Quot.sound'},(n,axioms)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-4000:]
+          print('S3L5K2D2_ORIGINAL_FACTOR_CONDITIONAL_PASS')
           PY
