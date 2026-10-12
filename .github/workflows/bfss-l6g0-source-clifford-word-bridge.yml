@@ -6,7 +6,9 @@ on:
     branches:
       - research/openai-math-su2-s3k-physical-spin-flow
     paths:
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G0SourceCliffordWordBridgeProbe.lean
+      # CACHE-SCOPE BLOCKER: PR25 run 38290017644 missed the exact dependency
+      # cache before Lean; do not retrigger on ordinary L6 module edits.
+      # Re-enable module paths only after a cache-access recovery is verified.
       - .github/workflows/bfss-l6g0-source-clifford-word-bridge.yml
 
 permissions:
