@@ -5,6 +5,7 @@ import SU2BFSSPhysicalDomainS3L5K1SourceCubicPositionPairProbe
 # K2R2C — original sourcePositionVariation specialization
 
 Pinned qualification attempt #2: restore source AlgebraData namespace; theorem/proof unchanged.
+CI rerun #2, comment-only trigger; proof unchanged.
 
 R2A and R2B are already Lean-qualified under pinned source and exact
 axiom audit. R2C moves beyond a general ordered SourceEnd family:
