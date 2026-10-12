@@ -3,7 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K2C1AbstractSourceLeibnizProbe
 /-!
 # S3L5K2C2 — exact concrete source operator Leibniz shape
 K2C Gate #2: add the original GaugeG1A source namespace omitted in K2C2 #1. Preserve exact theorem and raw Leibniz tactic.
-K2C Gate #3: second run hit 65-second wall-clock timeout at concrete rewrite; Mathlib abstract ring and exact source application.
+K2C Gate #3: Mathlib abstract ring passed; concrete exact source application exhausted recursion depth.\nK2C Gate #4: direct source-endomorphism extensional proof, preserving the exact statement.
 
 Qualify only the Leibniz decomposition of the ACTUAL source 48-Majorana
 combined generator acting on the original ordered cubic monomial.
@@ -51,13 +51,17 @@ theorem pairedActualCombined_comm_cubicMonomial_rawLeibniz
          ((position (N := 2) k B).comp (position (N := 2) l C)).comp
            (sourceParametricCombinedPlane
              (pairedFermionPlaneSpinGenerator i j) i j)) := by
-  -- Explicit instantiation avoids broad 'rw' matching through concrete
-  -- BFSS Fock definitions; the abstract lemma now uses Mathlib's
-  -- noncommutative endomorphism-ring algebra.
-  exact sourceComm_comp_raw
-    (sourceParametricCombinedPlane (pairedFermionPlaneSpinGenerator i j) i j)
-    (pairedAlgebraData.fermionAction γ A)
-    ((position (N := 2) k B).comp (position (N := 2) l C))
+  -- K2C #3 exhausted maximum recursion depth when specializing an already
+  -- checked abstract Leibniz theorem to these literal BFSS source operators.
+  -- Instead prove the UNCHANGED concrete statement extensionally. Expand
+  -- only the linear-map application boundary; do not unfold the Fock source,
+  -- Clifford coefficients, orbital generator, or any physical definitions.
+  -- This is the same finite algebra pattern qualified earlier in K1.
+  apply LinearMap.ext
+  intro f
+  simp only [LinearMap.add_apply, LinearMap.sub_apply,
+    LinearMap.comp_apply, map_sub]
+  abel
 
 #print axioms pairedActualCombined_comm_cubicMonomial_rawLeibniz
 
