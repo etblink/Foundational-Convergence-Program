@@ -82,7 +82,8 @@ theorem originalGamma_complexRowKineticGram (w : Spin → ℝ)
   change (∑ β : Spin,
     (w ᵥ* originalGamma i) β * (w ᵥ* originalGamma j) β) =
       if i = j then spinorSquareNorm w else 0 at h
-  exact_mod_cast h
+  have hc := congrArg (fun a : ℝ => (a : ℂ)) h
+  simpa using hc
 
 /-- Color contraction of two selectors does not assume or change
 the number of colors. -/
@@ -132,7 +133,12 @@ theorem sourceSpinorKineticWeight_colorGram {N : ℕ}
         if u = v then -(spinorSquareNorm w : ℂ) else 0 := by
   classical
   simp_rw [sourceSpinorKineticWeight_eq M w hgamma]
-  rw [colorSelectors_contract]
+  have hcolor := colorSelectors_contract
+    (S := SpinIndex) (C := ColorIndex N)
+    u.2 v.2
+    (fun r => -Complex.I * (((w ᵥ* originalGamma u.1) r : ℝ) : ℂ))
+    (fun r => -Complex.I * (((w ᵥ* originalGamma v.1) r : ℝ) : ℂ))
+  rw [hcolor]
   by_cases hc : u.2 = v.2
   · simp only [if_pos hc]
     simp_rw [minusI_mul_minusI]
