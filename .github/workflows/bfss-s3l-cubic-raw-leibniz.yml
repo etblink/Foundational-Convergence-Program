@@ -6,8 +6,10 @@ name: BFSS S3L Cubic Raw Leibniz Boundary
 on:
   pull_request:
     branches:
+      # Existing verified Lean/Mathlib cache is accessible from this base.
+      # S3K base was tested at #8 and fail-closed on its independent scope.
+      # Do not broaden until a pinned, verified cache is seeded there.
       - research/openai-math-su2-concrete-potential
-      - research/openai-math-su2-s3k-physical-spin-flow
     paths:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2C1AbstractSourceLeibnizProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2C2ActualSourceRawLeibnizProbe.lean
