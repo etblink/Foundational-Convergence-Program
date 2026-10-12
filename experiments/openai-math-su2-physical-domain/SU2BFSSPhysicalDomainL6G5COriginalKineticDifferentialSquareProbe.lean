@@ -33,7 +33,7 @@ operator-valued finite linear combination. The lemma has no assumed
 commutativity of operators and no physical or gamma premises. -/
 private theorem weightedOperatorGramSquare
     {R I J : Type*} [Ring R] [Algebra ℂ R]
-    [Fintype I] [Fintype J]
+    [Fintype I] [Fintype J] [DecidableEq I]
     (K : J → I → ℂ) (D : I → R) (g : ℂ)
     (hGram : ∀ u v : I,
       (∑ p : J, K p u * K p v) = if u = v then g else 0) :
@@ -57,6 +57,7 @@ private theorem weightedOperatorGramSquare
         apply Finset.sum_congr rfl
         intro v _
         simp only [smul_mul_assoc, mul_smul_comm, smul_smul]
+        rw [mul_comm (K p v) (K p u)]
   calc
     _ = ∑ p : J, ∑ u : I, ∑ v : I,
           (K p u * K p v) • (D u * D v) := by
@@ -77,8 +78,9 @@ private theorem weightedOperatorGramSquare
           (if u = v then g else 0) • (D u * D v) := by
       simp_rw [hGram]
     _ = ∑ u : I, g • (D u * D u) := by
-      simp only [ite_smul, zero_smul, Finset.sum_ite_eq', Finset.mem_univ,
-        ite_true]
+      apply Finset.sum_congr rfl
+      intro u _
+      simp
     _ = _ := by rw [Finset.smul_sum]
 
 /-- Original -i weighted differential operator for a single actual
