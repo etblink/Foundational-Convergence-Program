@@ -4,7 +4,7 @@ import SU2BFSSPhysicalDomainS3L5K1SourceCubicPositionPairProbe
 /-!
 # K2R2C — original sourcePositionVariation specialization
 
-Pinned qualification attempt #1; theorem/proof unchanged.
+Pinned qualification attempt #2: restore source AlgebraData namespace; theorem/proof unchanged.
 
 R2A and R2B are already Lean-qualified under pinned source and exact
 axiom audit. R2C moves beyond a general ordered SourceEnd family:
@@ -20,6 +20,7 @@ namespace FCP.BFSSSU2PhysicalDomainS3L5K2R2C
 noncomputable section
 open scoped BigOperators
 open OAI.BFSSQuantum
+open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainS3A
 open FCP.BFSSSU2PhysicalDomainS3L4B
 open FCP.BFSSSU2PhysicalDomainS3L5K1
