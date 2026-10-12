@@ -3,7 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K3OriginalCubicGammaTwoCoefficientProbe
 /-!
 # K2R3A — original gammaTwo spatial response vs two-index reindex
 
-Pinned qualification #2: explicit original gammaTwo case signs; no `ring`/`module` guessing.
+Pinned qualification #3: simplify residual `if True` in each positive source-plane branch.
 CI qualification #2: noncomputable source proof unchanged.
 
 The newly qualified R2A–D genuine source position reindex gives a
@@ -60,7 +60,7 @@ theorem originalGammaTwo_firstIndex_reindex
     -- gamma variation at the FIRST coordinate i is -gamma j.
     -- Check the sign as a standalone noncommutative matrix identity.
     simpa only [sourceGammaVariation, if_neg hij, if_pos rfl,
-      AlgebraData.gammaTwo] using
+      ite_true, AlgebraData.gammaTwo] using
       (halfCommutator_negFirst
         (pairedAlgebraData.gamma j) (pairedAlgebraData.gamma l))
   · by_cases hkj : k = j
@@ -84,7 +84,7 @@ theorem originalGammaTwo_secondIndex_reindex
   · subst l
     -- The SECOND coordinate i varies as -gamma j.
     simpa only [sourceGammaVariation, if_neg hij, if_pos rfl,
-      AlgebraData.gammaTwo] using
+      ite_true, AlgebraData.gammaTwo] using
       (halfCommutator_negSecond
         (pairedAlgebraData.gamma k) (pairedAlgebraData.gamma j))
   · by_cases hlj : l = j
