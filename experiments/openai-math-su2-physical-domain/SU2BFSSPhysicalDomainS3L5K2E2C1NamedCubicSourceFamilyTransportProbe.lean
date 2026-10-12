@@ -3,6 +3,8 @@ import SU2BFSSPhysicalDomainS3L5K2E1DOriginalSixfoldIndexSpecializationProbe
 /-!
 # K2E2C1 — source-faithful named original BFSS cubic operator families
 
+Pinned qualification attempt #1: C1 conditional, C2 K2D3, C3 composed.
+
 Old E2A #3 has no unresolved source symbols but fails MAX REC DEPTH
 at exact E1D applied to sixfold expansions containing the full original
 48-Majorana generator and position-fermion terms.
