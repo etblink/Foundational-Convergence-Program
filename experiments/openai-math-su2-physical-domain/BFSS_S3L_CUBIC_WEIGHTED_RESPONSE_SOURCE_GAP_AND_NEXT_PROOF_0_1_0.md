@@ -131,4 +131,6 @@ The owner authorized evaluating a technical dependency checkout change after sou
 
 **Accepted scientific checkpoint before migration:** [Cubic Weighted Spatial Response #3](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38215095421) GREEN, with independently qualified original weighted matrix coefficient theorem R3B and genuine original ordered spatial position response R3C. Full cubic charge fermionic-spinor R1 and six-index source commutator/charge composition remain OPEN. Postmigration CI must verify the new remote checkout path; no old green is reused as proof of fork availability without a new checkout run.
 
-**Governance:** FCP canonical `main`, `etblink/math`, `openai/math`, and evergreen leadership guidance remain untouched by the migration. Proof claims and accepted axioms remain exactly as under original upstream source pin.
+**Governance:** FCP canonical `main`, `etblink/math`, `openai/math`, and evergreen leadership guidance remain untouched by the migration.
+
+Pinned fork-checkout CI validation attempt #1 (source-only; no theorem edits). Proof claims and accepted axioms remain exactly as under original upstream source pin.
