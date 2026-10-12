@@ -4,6 +4,7 @@ import SU2BFSSPhysicalDomainS3L5K2R3AOriginalGammaTwoSpatialReindexProbe
 # K2R3B — original weighted gammaTwo two-index spatial coefficient
 
 Pinned qualification attempt #2: explicitly distribute entry evaluation over index conditionals.
+Qualification rerun #2: only comment trigger; theorem and proof unchanged.
 
 Pinned qualification attempt #1. No physics or proof-body changes.
 
