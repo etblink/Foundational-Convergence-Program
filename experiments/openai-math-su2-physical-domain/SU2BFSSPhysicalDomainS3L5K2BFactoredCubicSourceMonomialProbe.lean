@@ -5,7 +5,7 @@ import SU2BFSSPhysicalDomainS3L5K2D3OriginalSourceUnconditionalCubicFactorProbe
 K2B #2: open the K2A-qualified S3L5K2 namespace omitted in Gate #1; no theorem/proof edits.
 K2B Gate #3: Gate #2 fixed namespace but hit recursion in three simplifications; replace tactics with exact use of qualified lemmas.
 K2B Gate #4: Gate #3 failed at typed hF with maxRecDepth; preserve inferred hF/hP types and expose only monomial definition.
-K2B qualification #4 tested inferred proof types plus single monomial-definition rewrite.\nK2B resumed only after K2D1/D2/D3 kernel qualification; the original theorem\nstatement and monomial definition are unchanged. No new direct K2C2 attempt.
+K2B qualification #4 tested inferred proof types plus single monomial-definition rewrite.\nK2B named-monomial CI qualification #6, using qualified K2D3.\nK2B resumed only after K2D1/D2/D3 kernel qualification; the original theorem\nstatement and monomial definition are unchanged. No new direct K2C2 attempt.
 
 First bounded successor to known-red S3L5K2. Reuse the SOURCE-QUALIFIED
 K1 paired position-pair commutator, K2A exact 48-Majorana fermion-action
