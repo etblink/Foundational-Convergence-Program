@@ -18,6 +18,8 @@ This source module is UNCOMPILED until pinned CI qualifies it.
 -/
 namespace FCP.BFSSSU2PhysicalDomainL6G1
 noncomputable section
+open scoped Matrix BigOperators
+open Matrix
 open OAI.BFSSGamma
 
 abbrev originalGamma : OAI.BFSSGamma.Space → OAI.BFSSGamma.Mat :=
@@ -42,7 +44,7 @@ theorem originalGamma_spinIdentity_apply
         (Matrix.vecMulVec
           (originalGamma i *ᵥ v)
           (OAI.BFSSGamma.gammaTwo originalGamma i j *ᵥ v))) =
-      ((1 / 2 : ℝ) * Matrix.dotProduct v (originalGamma j *ᵥ v)) •
+      ((1 / 2 : ℝ) * dotProduct v (originalGamma j *ᵥ v)) •
           (1 : OAI.BFSSGamma.Mat) -
         (1 / 2 : ℝ) • originalGamma j := by
   exact originalGamma_spinIdentity v hv j
