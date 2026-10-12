@@ -52,6 +52,12 @@ Each arrow is an **explicit Lean proof obligation**, not a license to assume a r
 
 K2D1–D3 and E1A–D remain preserved. Older sixfold CI is now manual-only; a dedicated new E2 workflow retains exact pin/cache checks and individual .olean + axiom qualification. Successor: if E2A/E2B fails, inspect the first exact diagnostic and avoid old K2B name bridge/K2C2 direct tactics.
 
+## Original cubic sixfold operator #1 — negative knowledge and exact repair
+
+[Original Cubic Sixfold Operator #1](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38199787332) at SHA `d33dd3d5f685c953701c8e51177ba1129576bec0` was RED only at E2A. All pinned cache, accepted K2D1–D3 and E1A–D source modules compiled and passed axiom audits, including `S3L5K2E1D_ORIGINAL_BFSS_SIX_INDEX_TYPES_PASS`. The E2A file had six first errors `Unknown identifier pairedAlgebraData.fermionAction` at lines 42, 44, 48, 57, 62 and 70. Unlike already-qualified K2D3 and K2D2, E2A and E2B omitted `open FCP.BFSSSU2GaugeG1A`, needed to resolve the physical pairedAlgebraData source expression with its fermionAction. E2A also reported `whnf` heartbeat (200000) at the final `exact sourceComm_originalSixfoldIndices_of`, but this happened *after source name resolution failed*, so the record does not isolate a valid original BFSS theorem conversion bottleneck. A final unknown declaration arose after E2A was rejected. E2B was never compiled. **Do not classify this red as disproof of sixfold physics or E1D.**
+
+**Repair decision:** Add only the missing `open FCP.BFSSSU2GaugeG1A` to E2A and E2B, leaving exact original source operators, six indices, coefficient parameter `c`, pointwise h, theorem statement/proof bodies, original generator, pinned dependencies and strict axiom rules untouched. First independent requalification is needed to determine whether a real whnf issue remains. Stop and inspect first diagnostic before additional refactoring. E2A conditional and E2B unconditional are both UNQUALIFIED until exact successful Lean compilation and axiom audit.
+
 ## Failure taxonomy: a red gate is not a unit of mathematical information
 
 Before editing source or launching a follow-up:
