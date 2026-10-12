@@ -3,7 +3,7 @@ import SU2BFSSPhysicalDomainS3L5K2C1AbstractSourceLeibnizProbe
 /-!
 # S3L5K2C2 — exact concrete source operator Leibniz shape
 K2C Gate #2: add the original GaugeG1A source namespace omitted in K2C2 #1. Preserve exact theorem and raw Leibniz tactic.
-K2C Gate #3: Mathlib abstract ring passed; concrete exact source application exhausted recursion depth.\nK2C Gate #4: direct extensional application exhausted wall-clock (exit 124) without Lean diagnostics.\nK2C Gate #5: syntactically generalize the exact three original SourceEnd atoms within the target; prove the stronger abstract identity without source unfolding.
+K2C Gate #3: Mathlib abstract ring passed; concrete exact source application exhausted recursion depth.\nK2C Gate #4: direct extensional application exhausted wall-clock (exit 124) without Lean diagnostics.\nK2C Gate #5: syntactically generalize the exact three original SourceEnd atoms within the target; prove the stronger abstract identity without source unfolding. CI-qualification trigger: three-atom generalization.
 
 Qualify only the Leibniz decomposition of the ACTUAL source 48-Majorana
 combined generator acting on the original ordered cubic monomial.
