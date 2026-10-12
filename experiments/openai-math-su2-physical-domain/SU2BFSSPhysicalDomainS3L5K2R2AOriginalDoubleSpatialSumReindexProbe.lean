@@ -3,6 +3,8 @@ import SU2BFSSPhysicalDomainS3L5J1SourceSpatialReindexAndGammaCoefficientProbe
 /-!
 # K2R2A — exact double-spatial cubic response reindex
 
+Pinned qualification #1: new double spatial response identities.
+
 Source-faithful operator-valued index algebra, before ANY concrete
 48-Majorana generator or huge cubic charge is elaborated. Reuse the
 previously QUALIFIED J1 one-index source orbital reindex twice.
