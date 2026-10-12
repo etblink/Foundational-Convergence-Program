@@ -251,6 +251,7 @@ private theorem carNormalOrder {R I : Type*} [Ring R] [Algebra ℂ R]
   let Q := ∑ p, θ p * L p
   have hdouble : Q * Q = ∑ p, ∑ q, (θ p * L p) * (θ q * L q) := by
     simp only [Q, Finset.sum_mul, Finset.mul_sum]
+    exact Finset.sum_comm
   have htwice : Q * Q + Q * Q = (∑ p, L p * L p) +
       ∑ p, ∑ q, (θ p * θ q) * (L p * L q - L q * L p) := by
     simp only [hdouble]
@@ -276,7 +277,8 @@ theorem sourceCharge_normalOrder {N : ℕ} (M : AlgebraData N) (α : SpinIndex) 
             sourceCoefficient M α q * sourceCoefficient M α p)) := by
   classical
   simp only [sourceCharge_factorization]
-  exact carNormalOrder (fun p => M.fermionAction p.1 p.2)
+  exact carNormalOrder (R := SourceEnd N) (I := FermionLabel N)
+    (fun p : FermionLabel N => M.fermionAction p.1 p.2)
     (sourceCoefficient M α) (sourceFermionAction_CAR M)
     (sourceCoefficient_comm_fermion M α)
 
@@ -292,7 +294,8 @@ theorem sourceAllSpinorCharge_normalOrder {N : ℕ} (M : AlgebraData N)
             sourceAllSpinorCoefficient M w q * sourceAllSpinorCoefficient M w p)) := by
   classical
   simp only [sourceAllSpinorCharge_factorization]
-  exact carNormalOrder (fun p => M.fermionAction p.1 p.2)
+  exact carNormalOrder (R := SourceEnd N) (I := FermionLabel N)
+    (fun p : FermionLabel N => M.fermionAction p.1 p.2)
     (sourceAllSpinorCoefficient M w) (sourceFermionAction_CAR M)
     (sourceAllSpinorCoefficient_comm_fermion M w)
 
@@ -301,6 +304,7 @@ theorem sourceAllSpinorCharge_normalOrder {N : ℕ} (M : AlgebraData N)
 #print axioms sourceCharge_factorization
 #print axioms sourceAllSpinorCharge_factorization
 #print axioms sourceAllSpinorCoefficient_comm_fermion
+#print axioms carNormalOrder
 #print axioms sourceCharge_normalOrder
 #print axioms sourceAllSpinorCharge_normalOrder
 #check @sourceAllSpinorCharge_normalOrder
