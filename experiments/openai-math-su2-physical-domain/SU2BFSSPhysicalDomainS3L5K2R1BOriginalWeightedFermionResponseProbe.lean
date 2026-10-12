@@ -47,7 +47,7 @@ theorem pairedOriginalCubicWeightedFermionResponse_reindex
   exact pairedOriginalFermionSpinorResponse_reindex
     i j A
     (fun γ => (((originalCubicStructureWeight A B C *
-      pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ))
+      pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)))
     ((position (N := 2) k B).comp (position (N := 2) l C))
 
 #print axioms pairedOriginalCubicWeightedFermionResponse_reindex
