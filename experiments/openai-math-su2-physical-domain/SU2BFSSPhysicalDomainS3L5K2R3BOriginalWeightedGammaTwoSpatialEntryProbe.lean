@@ -3,6 +3,8 @@ import SU2BFSSPhysicalDomainS3L5K2R3AOriginalGammaTwoSpatialReindexProbe
 /-!
 # K2R3B — original weighted gammaTwo two-index spatial coefficient
 
+Qualification #3: reverse plane inequality included; source mathematics unchanged.
+
 Pinned qualification attempt #2: explicitly distribute entry evaluation over index conditionals.
 Qualification rerun #2: only comment trigger; theorem and proof unchanged.
 
