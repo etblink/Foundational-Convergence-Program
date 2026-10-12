@@ -28,6 +28,8 @@ open FCP.BFSSSU2PhysicalDomainS3A
 open FCP.BFSSSU2PhysicalDomainS3D
 open FCP.BFSSSU2PhysicalDomainS3L4B
 open FCP.BFSSSU2PhysicalDomainS3L5F
+-- Original sourcePositionVariation is defined in the accepted K1 source module.
+open FCP.BFSSSU2PhysicalDomainS3L5K1
 open FCP.BFSSSU2PhysicalDomainS3L5K2
 open FCP.BFSSSU2PhysicalDomainS3L5K2D3
 open FCP.BFSSSU2PhysicalDomainS3L5K2E1D
