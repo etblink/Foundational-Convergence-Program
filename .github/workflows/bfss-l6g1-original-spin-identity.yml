@@ -1,4 +1,4 @@
-name: BFSS L6G5D Original Coefficient Split
+name: BFSS L6G5E Original Scalar Coefficient Square
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -17,6 +17,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5BOriginalComplexKineticColorGramProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5COriginalKineticDifferentialSquareProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5DOriginalCoefficientKineticSplitProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5EOriginalScalarCoefficientSquareProbe.lean
 
 permissions:
   contents: read
@@ -476,6 +477,31 @@ jobs:
           assert 'sorryAx' not in s and 'error:' not in s
           assert 'sourceAllSpinorCoefficient_kinetic_quadratic' in s
           print('L6G5D_SOURCE_COEFFICIENT_SPLIT_COMPILED')
+          PY
+
+      - name: Compile and audit L6G5E original scalar coefficient square
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5EOriginalScalarCoefficientSquareProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5DOriginalCoefficientKineticSplitProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g5e.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g5e.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G5E.'
+          for n in ('sourceAllSpinorCoefficient_rawSquare_split','sourceAllSpinorCoefficient_halfSquare_split'):
+              assert p+n in entries and entries[p+n] <= allowed,entries
+          assert any(n.endswith('.orderedCoefficientSquare_split') and a<=allowed for n,a in entries.items()),entries
+          assert 'sorryAx' not in s and 'error:' not in s,s
+          print('L6G5E_SOURCE_SCALAR_COEFFICIENT_SQUARE_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
