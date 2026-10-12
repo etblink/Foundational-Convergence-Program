@@ -4,7 +4,7 @@ import SU2BFSSPhysicalDomainS3L5K2C1AbstractSourceLeibnizProbe
 # S3L5K2C2 — exact concrete source operator Leibniz shape
 K2C Gate #2: add the original GaugeG1A source namespace omitted in K2C2 #1. Preserve exact theorem and raw Leibniz tactic.
 K2C Gate #3: Mathlib abstract ring passed; concrete exact source application exhausted recursion depth.
-K2C Gate #4: direct extensional application exhausted wall-clock (exit 124) without Lean diagnostics.\nK2C Gate #5: concrete three-atom generalization timed out (exit 124).\nK2C Gate #6: independent opaque-SourceEnd name experiment; stage marker distinguishes algebraic instantiation from final definitional discharge. CI qualification #6.
+K2C Gate #4: direct extensional application exhausted wall-clock (exit 124) without Lean diagnostics.\nK2C Gate #5: concrete three-atom generalization timed out (exit 124).\nK2C Gate #6: opaque identity instantiation passed, simultaneous final simpa only hit maxRecDepth at line 75.\nK2C Gate #7: sequential unfold at qualified hypothesis, with stage markers for P then F then G then exact target matching.
 
 Qualify only the Leibniz decomposition of the ACTUAL source 48-Majorana
 combined generator acting on the original ordered cubic monomial.
@@ -64,15 +64,22 @@ theorem pairedActualCombined_comm_cubicMonomial_rawLeibniz
          ((position (N := 2) k B).comp (position (N := 2) l C)).comp
            (sourceParametricCombinedPlane
              (pairedFermionPlaneSpinGenerator i j) i j)) := by
-  -- Independent Grok-inspired test after K2C #5 exit 124.
-  -- Stage A: instantiate K2C1 ONLY at three irreducible SourceEnd names.
-  -- Stage B: discharge their exact original-source defining equalities
-  -- with only these three rewrite rules. No source or physics unfolding
-  -- other than the explicitly named definitions.
+  -- Gate #6 established the opaque K2C1 application, then failed in
+  -- simultaneous 'simpa only' with maxRecDepth (source line 75).
+  -- Gate #7 is diagnostic as well as constructive: expose ONE rigid
+  -- source definition at a time in a proved hypothesis, not via a
+  -- simplifier traversing the whole concrete source statement.
+  -- The order is smallest-to-largest; no BFSS body is reduced further.
   have h := sourceComm_comp_raw
     (sourceG i j) (sourceF γ A) (sourceP k l B C)
   trace "K2C2_STAGE_A_OPAQUE_LEIBNIZ_ELABORATED"
-  simpa only [sourceG, sourceF, sourceP] using h
+  unfold sourceP at h
+  trace "K2C2_STAGE_B1_SOURCE_POSITION_PAIR_EXPOSED"
+  unfold sourceF at h
+  trace "K2C2_STAGE_B2_SOURCE_FERMION_ACTION_EXPOSED"
+  unfold sourceG at h
+  trace "K2C2_STAGE_B3_SOURCE_COMBINED_GENERATOR_EXPOSED"
+  exact h
 
 #print axioms pairedActualCombined_comm_cubicMonomial_rawLeibniz
 
