@@ -1,3 +1,5 @@
+> **Project Lead proof reduction (2026-10-12):** The proposed L6-A generalized Fierz kernel gate has been refined to a strictly smaller rank-one completeness lemma: 2(sum_i gamma_i*(w w^T)*gamma_i - w w^T)=||w||² I - sum_p(w^T gamma_p w) gamma_p. Exact source-specific 34,816-entry checking passed. An elementary gamma anticommutator calculation then implies the previous 313,344-entry generalized Fierz identity without new concrete gammaTwo computation. See BFSS_SOURCE_RANK_ONE_COMPLETENESS_AND_FIERZ_IMPLICATION_L6A_AUDIT_0_1_0.md. Preserve the proof dependencies; this new finite check is NOT Lean-certified.
+
 # BFSS Project Lead — original signed-permutation source gamma certificate and bounded Lean discharge plan
 
 **2026-10-12 | Research-branch source-algebra checkpoint 0.1.0**. Verdict: EXACT_PINNED_SOURCE_GAMMA_CHECK_PASS; 20,736 source gamma Clifford entries and 313,344 generalized Fierz entries; no new Lean theorem or CI qualification; frozen caches respected.
