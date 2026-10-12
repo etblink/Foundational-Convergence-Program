@@ -1,11 +1,11 @@
-import SU2BFSSPhysicalDomainS3L5K2AOriginalFermionActionCovarianceProbe
+import SU2BFSSPhysicalDomainS3L5K2D3OriginalSourceUnconditionalCubicFactorProbe
 
 /-!
 # S3L5K2B — exact concrete cubic source monomial via opaque operator interfaces
 K2B #2: open the K2A-qualified S3L5K2 namespace omitted in Gate #1; no theorem/proof edits.
 K2B Gate #3: Gate #2 fixed namespace but hit recursion in three simplifications; replace tactics with exact use of qualified lemmas.
 K2B Gate #4: Gate #3 failed at typed hF with maxRecDepth; preserve inferred hF/hP types and expose only monomial definition.
-K2B qualification #4 tests inferred proof types plus single monomial-definition rewrite.
+K2B qualification #4 tested inferred proof types plus single monomial-definition rewrite.\nK2B resumed only after K2D1/D2/D3 kernel qualification; the original theorem\nstatement and monomial definition are unchanged. No new direct K2C2 attempt.
 
 First bounded successor to known-red S3L5K2. Reuse the SOURCE-QUALIFIED
 K1 paired position-pair commutator, K2A exact 48-Majorana fermion-action
@@ -65,24 +65,14 @@ theorem pairedActualCombined_comm_cubicMonomial
         ((sourcePositionVariation i j k B).comp (position (N := 2) l C) +
           (position (N := 2) k B).comp
             (sourcePositionVariation i j l C)) := by
-  -- K2B #4: first retain each independently kernel-checked source
-  -- commutator WITH ITS OWN INFERRED TYPE. Gate #3's typed alias
-  -- hF forced Lean to unfold the concrete Fock operator (maxRecDepth).
-  have hF := pairedActualCombined_comm_fermionAction i j γ A
-  have hP := pairedActualCombined_comm_positionPair i j k l B C hij
-  -- Combine the exact original source expressions, not their aliases.
-  have hLeibniz :=
-    sourceComm_comp
-      (sourceParametricCombinedPlane (pairedFermionPlaneSpinGenerator i j) i j)
-      (pairedAlgebraData.fermionAction γ A)
-      ((position (N := 2) k B).comp (position (N := 2) l C))
-      (sourceCubicFermionVariation i j γ A)
-      ((sourcePositionVariation i j k B).comp (position (N := 2) l C) +
-        (position (N := 2) k B).comp (sourcePositionVariation i j l C))
-      hF hP
-  -- Expose ONLY the original monomial name, not the combined generator,
-  -- gamma matrices, or the genuine fermionAction source definition.
-  simpa only [pairedOriginalCubicMonomial] using hLeibniz
+  -- K2D3 is already KERNEL-QUALIFIED for the literal genuine paired
+  -- 48-Majorana cubic source factor. Its K1 and K2A discharge is sealed.
+  -- This final bridge changes only the exact original K2B *definition*;
+  -- unlike K2B #1–#5, no large Leibniz specialization happens here.
+  have h := FCP.BFSSSU2PhysicalDomainS3L5K2D3.pairedActualCombined_comm_cubicFactor
+    i j k l γ A B C hij
+  trace "K2B_STAGE_A_UNCONDITIONAL_LITERAL_FACTOR_RETRIEVED"
+  simpa only [pairedOriginalCubicMonomial] using h
 
 #print axioms pairedActualCombined_comm_cubicMonomial
 
