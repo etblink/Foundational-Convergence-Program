@@ -967,6 +967,26 @@ jobs:
           print('L6G5V_ORIGINAL_RIGHT_ORDERED_MIXED_SMOOTHCORE_QUALIFIED')
           PY
 
+      - name: Build exact pinned original gauge-tangent upstream dependency
+        shell: bash
+        timeout-minutes: 22
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          # L6G5W imports the ACTUAL upstream gaugeTangent, defined in
+          # NormalLinearization. The G1-G5V warm caches do not contain its .olean.
+          # Lake resolves/builds its transitive pinned source imports rather than
+          # substituting a local gauge-tangent surrogate.
+          echo L6G5W_PINNED_NORMAL_LINEARIZATION_BUILD_BEGIN
+          timeout 1200s lake build OAI.MathematicalPhysics.BFSS.NormalLinearization 2>&1 | tee /tmp/bfss-l6g1/upstream-normal-linearization.log
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/NormalLinearization.olean
+          if grep -F 'error:' /tmp/bfss-l6g1/upstream-normal-linearization.log; then
+            echo L6G5W_UPSTREAM_COMPILE_ERROR
+            exit 1
+          fi
+          echo L6G5W_PINNED_NORMAL_LINEARIZATION_BUILD_PASS
+
       - name: Qualify original source orbital gauge-tangent identification
         shell: bash
         timeout-minutes: 5
