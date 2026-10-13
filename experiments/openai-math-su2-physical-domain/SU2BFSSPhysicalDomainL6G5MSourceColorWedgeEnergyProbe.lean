@@ -28,7 +28,14 @@ theorem finiteWedge_lagrange
   have hprod :
       (∑ i : I, ∑ j : I, (u i * v j) ^ 2) =
         (∑ i : I, u i ^ 2) * (∑ j : I, v j ^ 2) := by
-    simp only [mul_pow, Finset.sum_mul, Finset.mul_sum]
+    calc
+      _ = ∑ i : I, ∑ j : I, u i ^ 2 * v j ^ 2 := by
+            simp only [mul_pow]
+      _ = _ := by
+            rw [Finset.sum_mul]
+            apply Finset.sum_congr rfl
+            intro i _
+            rw [Finset.mul_sum]
   have hswap :
       (∑ i : I, ∑ j : I, (u j * v i) ^ 2) =
         (∑ i : I, ∑ j : I, (u i * v j) ^ 2) := by
@@ -36,13 +43,19 @@ theorem finiteWedge_lagrange
   have hcross :
       (∑ i : I, ∑ j : I, (u i * v j) * (u j * v i)) =
         (∑ i : I, u i * v i) ^ 2 := by
-    rw [pow_two]
-    simp only [Finset.sum_mul, Finset.mul_sum]
-    apply Finset.sum_congr rfl
-    intro i _
-    apply Finset.sum_congr rfl
-    intro j _
-    ring
+    calc
+      _ = ∑ i : I, ∑ j : I, (u i * v i) * (u j * v j) := by
+            apply Finset.sum_congr rfl
+            intro i _
+            apply Finset.sum_congr rfl
+            intro j _
+            ring
+      _ = (∑ i : I, u i * v i) * (∑ j : I, u j * v j) := by
+            rw [Finset.sum_mul]
+            apply Finset.sum_congr rfl
+            intro i _
+            rw [Finset.mul_sum]
+      _ = _ := by rw [pow_two]
   calc
     (1 / 2 : ℝ) * ∑ i : I, ∑ j : I,
         (u i * v j - u j * v i) ^ 2 =
