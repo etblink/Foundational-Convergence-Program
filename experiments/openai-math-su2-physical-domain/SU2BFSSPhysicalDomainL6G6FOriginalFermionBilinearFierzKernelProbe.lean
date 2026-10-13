@@ -36,7 +36,7 @@ theorem sourceSpinorQuadraticPairWeight_eq_row
     (p : FermionLabel 2) (u t : BosonLabel 2) :
     sourceSpinorQuadraticPairWeight M w p u t =
       (((1 / 2 : ℝ) * M.structureConstant p.2 u.2 t.2 *
-        ((w ᵥ* M.gammaTwo u.1 t.1) p.1)) : ℝ) := by
+        ((w ᵥ* M.gammaTwo u.1 t.1) p.1)) : ℝ) : ℂ) := by
   unfold sourceSpinorQuadraticPairWeight sourceQuadraticWeight
   simp only [← Complex.ofReal_mul, ← Complex.ofReal_sum]
   congr 1
@@ -184,11 +184,10 @@ def sourceOriginalFermionRowKernel
     (p q : FermionLabel 2) (x : Boson 2) : ℂ :=
   Complex.I * (∑ i : SpaceIndex, ∑ k : SpaceIndex, ∑ c : ColorIndex 2,
     ((M.structureConstant p.2 q.2 c : ℂ) * ((x (k,c) : ℝ) : ℂ)) *
-      (((w ᵥ* M.gamma i) p.1 : ℝ) : ℂ) *
-        (((w ᵥ* M.gammaTwo i k) q.1 : ℝ) : ℂ) +
-    ((M.structureConstant p.2 q.2 c : ℂ) * ((x (k,c) : ℝ) : ℂ)) *
-      (((w ᵥ* M.gamma i) q.1 : ℝ) : ℂ) *
-        (((w ᵥ* M.gammaTwo i k) p.1 : ℝ) : ℂ))
+      (((((w ᵥ* M.gamma i) p.1 : ℝ) : ℂ) *
+          (((w ᵥ* M.gammaTwo i k) q.1 : ℝ) : ℂ)) +
+       ((((w ᵥ* M.gamma i) q.1 : ℝ) : ℂ) *
+          (((w ᵥ* M.gammaTwo i k) p.1 : ℝ) : ℂ))))
 
 /-- L6G6E's unchanged original pointwise response is EXACTLY
 the original signed gamma/gammaTwo Fierz kernel. In particular,
@@ -216,16 +215,14 @@ theorem sourceAllSpinorResponsePoint_eq_originalRowKernel
       (sourceSU2StructureConstant_swapFirst M hcolor a b c)
   -- The last step is a reusable scalar finite sum theorem, not
   -- normalization of the concrete source differential operators.
-  convert finiteColorSkewSpinorContraction
+  exact finiteColorSkewSpinorContraction
     (fun a b c : ColorIndex 2 => (M.structureConstant a b c : ℂ))
     hf
     (fun i : SpaceIndex => (((w ᵥ* M.gamma i) p.1 : ℝ) : ℂ))
     (fun i : SpaceIndex => (((w ᵥ* M.gamma i) q.1 : ℝ) : ℂ))
     (fun i k : SpaceIndex => (((w ᵥ* M.gammaTwo i k) q.1 : ℝ) : ℂ))
     (fun i k : SpaceIndex => (((w ᵥ* M.gammaTwo i k) p.1 : ℝ) : ℂ))
-    (fun k c => ((x (k,c) : ℝ) : ℂ)) p.2 q.2 using 1 <;>
-    simp only [Finset.mul_sum, mul_add] <;>
-    (try ring)
+    (fun k c => ((x (k,c) : ℝ) : ℂ)) p.2 q.2
 
 #print axioms sourceSpinorQuadraticPairWeight_eq_row
 #print axioms sourceSpinorKineticWeight_eq_sourceRow
