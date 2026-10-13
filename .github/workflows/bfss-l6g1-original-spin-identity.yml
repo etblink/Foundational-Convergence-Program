@@ -1,4 +1,4 @@
-name: BFSS L6G5J Original GammaTwo Bivector
+name: BFSS L6G5K Source Bracket Regroup
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -23,6 +23,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5HSourceCenteredGammaGramProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5IOriginalQuadraticRealAndGammaRowProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5JSourceGammaTwoBivectorTransportProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5KSourceQuadraticBracketRegroupProbe.lean
 
 permissions:
   contents: read
@@ -649,6 +650,31 @@ jobs:
               assert p+n in entries and entries[p+n] <= allowed,entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
           print('L6G5J_ORIGINAL_GAMMATWO_CENTERED_WEDGE_QUALIFIED')
+          PY
+
+      - name: Qualify source real quadratic coefficient finite color-bracket regroup
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5KSourceQuadraticBracketRegroupProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5JSourceGammaTwoBivectorTransportProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g5k.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g5k.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G5K.'
+          assert p+'sourceQuadraticReal_eq_bracket_sum' in entries
+          assert entries[p+'sourceQuadraticReal_eq_bracket_sum'] <= allowed
+          assert any(n.endswith('.finitePairSum_fourfold') and ax<=allowed for n,ax in entries.items())
+          assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
+          print('L6G5K_PINNED_SOURCE_REAL_QUADRATIC_BRACKET_REGROUP_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
