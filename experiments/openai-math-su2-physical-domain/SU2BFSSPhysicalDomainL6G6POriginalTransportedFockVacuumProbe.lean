@@ -54,7 +54,12 @@ specialized to distinct literal Fock mode labels. -/
 private theorem source24Mode_offDiagonalMixedCAR
     (i j : Fin 24) (hij : i ≠ j) :
     annihilator i * creator j + creator j * annihilator i = 0 := by
-  simpa only [if_neg hij, zero_smul] using
+  -- Specify the complex scalar action: a generic zero_smul rewrite
+  -- leaves 0 • 1 unresolved at this continuous-linear-map type.
+  have hzero :
+      (0 : ℂ) • (1 : Fermion 2 →L[ℂ] Fermion 2) = 0 :=
+    zero_smul ℂ _
+  simpa only [if_neg hij, hzero] using
     (FCP.BFSSFermionF2.annihilator_creator_car i j)
 
 /-- Exact source-Fock specialization of the qualified L6G6N
