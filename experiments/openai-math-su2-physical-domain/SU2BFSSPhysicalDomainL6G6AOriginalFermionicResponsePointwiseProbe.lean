@@ -43,7 +43,7 @@ theorem sourcePositionPairResponse_apply {N : ℕ}
     by_cases hp : P
     · simp only [if_pos hp]
       rfl
-    · simp only [if_neg hp, LinearMap.zero_apply, zero_smul]
+    · simp only [if_neg hp, LinearMap.zero_apply, zero_smul, zero_apply]
   calc
     ((sourcePositionPairResponse u v t) f) x =
         (((if u = v then sourceP t else 0) f) x) +
