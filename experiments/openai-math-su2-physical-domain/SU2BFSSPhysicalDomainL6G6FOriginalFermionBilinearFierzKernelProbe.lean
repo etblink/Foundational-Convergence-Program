@@ -36,7 +36,7 @@ theorem sourceSpinorQuadraticPairWeight_eq_row
     (p : FermionLabel 2) (u t : BosonLabel 2) :
     sourceSpinorQuadraticPairWeight M w p u t =
       (((1 / 2 : ℝ) * M.structureConstant p.2 u.2 t.2 *
-        ((w ᵥ* M.gammaTwo u.1 t.1) p.1)) : ℝ) : ℂ) := by
+        ((w ᵥ* M.gammaTwo u.1 t.1) p.1) : ℝ) : ℂ) := by
   unfold sourceSpinorQuadraticPairWeight sourceQuadraticWeight
   simp only [← Complex.ofReal_mul, ← Complex.ofReal_sum]
   congr 1
@@ -206,7 +206,9 @@ theorem sourceAllSpinorResponsePoint_eq_originalRowKernel
   unfold sourceOriginalFermionRowKernel
   simp_rw [sourceSpinorKineticWeight_eq_sourceRow M w hgamma,
     sourceSpinorQuadraticPairWeight_eq_row M w]
-  simp only [Complex.ofReal_mul]
+  have hhalf : (((1 / 2 : ℝ) : ℂ)) = (1 / 2 : ℂ) := by
+    norm_num
+  simp only [Complex.ofReal_mul, hhalf]
   have hf (a b c : ColorIndex 2) :
       (M.structureConstant b a c : ℂ) =
         -(M.structureConstant a b c : ℂ) := by
