@@ -1,4 +1,4 @@
-name: BFSS L6G6F Original Fermion Fierz Kernel
+name: BFSS L6G6G Original Fermion Fierz Channels
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -42,6 +42,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6DOriginalFermionResponseSymmetricLegsProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6EOriginalSpinorBilinearResponseProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6FOriginalFermionBilinearFierzKernelProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6GOriginalFermionFullFierzCoefficientProbe.lean
 
 permissions:
   contents: read
@@ -1198,6 +1199,34 @@ jobs:
                         for n,ax in entries.items()) for suf in suffixes), entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6G6F_ORIGINAL_FERMION_SOURCE_FIERZ_KERNEL_QUALIFIED')
+          PY
+
+      - name: Qualify exact original fermion source Fierz coefficient channels
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6GOriginalFermionFullFierzCoefficientProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6FOriginalFermionBilinearFierzKernelProbe.olean
+          echo L6G6G_ORIGINAL_FERMION_SOURCE_FIERZ_COEFFICIENT_BEGIN
+          timeout 270s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6g.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6g.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6G.'
+          names=('sourceAllSpinorResponsePoint_eq_fierzChannels',)
+          assert all(p+n in entries and entries[p+n] <= allowed for n in names), entries
+          assert any(n.startswith('_private.') and n.endswith(p+'finiteRealFierzSumTransport')
+                     and ax <= allowed for n,ax in entries.items()), entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6G6G_ORIGINAL_FERMION_SOURCE_FIERZ_COEFFICIENT_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
