@@ -29,7 +29,7 @@ private theorem finiteFockMajoranaPhasePair
       (Complex.I • (Ci - Ai)) * (Complex.I • (Cj - Aj)) =
     (Ci * Aj + Ai * Cj) + (Ci * Aj + Ai * Cj) := by
   rw [smul_mul_smul, Complex.I_mul_I]
-  simp only [neg_smul, one_smul]
+  -- After I * I = -1, Lean has already normalized the negative scalar.
   noncomm_ring
 
 /-- General algebraic lemma ON THE ORIGINAL FERMION 2 HILBERT TYPE:
@@ -51,9 +51,19 @@ theorem finiteFockMajoranaPair_vacuumCancellation
          (q • (Complex.I • (C j - A j)))) =
       (q * q) • ((C i * A j + A i * C j) +
                   (C i * A j + A i * C j)) := by
-    rw [smul_mul_smul, smul_mul_smul, ← smul_add]
-    exact congrArg (fun T : SourceFiberEnd => (q * q) • T)
-      (finiteFockMajoranaPhasePair (C i) (A i) (C j) (A j))
+    calc
+      _ = (q * q) •
+          ((C i + A i) * (C j + A j) +
+            (Complex.I • (C i - A i)) *
+              (Complex.I • (C j - A j))) := by
+            rw [smul_mul_smul, smul_mul_smul]
+            exact (smul_add (q * q)
+              ((C i + A i) * (C j + A j))
+              ((Complex.I • (C i - A i)) *
+                (Complex.I • (C j - A j)))).symm
+      _ = _ :=
+        congrArg (fun T : SourceFiberEnd => (q * q) • T)
+          (finiteFockMajoranaPhasePair (C i) (A i) (C j) (A j))
   have hcross : A i (C j Ω) = 0 := by
     have h := congrArg (fun T : SourceFiberEnd => T Ω) (hCAR i j hij)
     change A i (C j Ω) + C j (A i Ω) = 0 at h
