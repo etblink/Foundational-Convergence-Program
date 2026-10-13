@@ -53,6 +53,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6OOriginalExteriorFockVacuumProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6POriginalTransportedFockVacuumProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6QPairedSourceThetaVacuumProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6RSourceSpinSumColorGeneratorVacuumProbe.lean
 
 permissions:
   contents: read
@@ -1654,6 +1655,34 @@ jobs:
                      for n,ax in entries.items()),entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G6Q_ACTUAL_PAIRED_THETA_TWO_SPIN_VACUUM_QUALIFIED')
+          PYCODE
+
+      - name: Qualify literal 16-spin source fermionic color-generator vacuum
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6RSourceSpinSumColorGeneratorVacuumProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6QPairedSourceThetaVacuumProbe.olean
+          echo L6G6R_LITERAL_SOURCE_16SPIN_SUM_AND_COLOR_GENERATOR_BEGIN
+          timeout 250s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6r.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6r.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6R.'
+          for root in ('sourcePairedTheta_spinSum_vacuumCancellation',
+                       'sourcePairedFermionColorGenerator_vacuum'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G6R_ACTUAL_16SPIN_SOURCE_COLOR_GENERATOR_VACUUM_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence

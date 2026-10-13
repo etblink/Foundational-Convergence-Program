@@ -59,3 +59,9 @@ The next Project Lead should read the earliest causal error from the linked run,
 2. Update the scoped record **when an actually new failure class or successful technique emerges**. Do not create one entry per cosmetic rewrite. Keep exact first error, expected/observed theorem type, and acceptance boundary.
 3. Make a targeted edit only when it will distinguish a new possibility, preserve the prior qualified `.olean` closure, and stop retrying a design when no new information is gained.
 4. A step that establishes only well-understood source algebra should be followed by mathematics that materially reduces the open gauge/spectral uncertainties. Do not remain indefinitely in proof-engineering work or overstate its scientific significance.
+
+## 2026-10-13 — exact paired source Majoranas qualified
+
+**Gate [#133 GREEN](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38478802320):** `L6G6Q_ACTUAL_PAIRED_THETA_TWO_SPIN_VACUUM_QUALIFIED`. Source revision `4d9c013c2d426bc43c2b62f0762ad777d9035eb1`. G1B's imaginary phase `i(C−A)`, G1A's original even/odd `spinPairEquiv` and `colorModeEquiv`, and L6G6P's literal `source24ModeVacuum` are combined without new assumptions. Distinct color modes `colorModeEquiv (j,a) ≠ colorModeEquiv (j,b)` are proved through equivalence injectivity. The 26 accepted supporting modules compiled first; Q then passed the kernel/axiom audit without `sorryAx`.
+
+**Reusable lesson:** when the finite algebraic identity is qualified at source mode level, specialize to exact `pairedAlgebraData.theta` with two named even/odd phase lemmas before reindexing a global spin sum. This preserves complex `I`, `sqrt(2)/2` and real/imaginary sign rather than hiding them in a generic 16-spin simplification. The first source 16-spin sum and full bounded generator vacuum are L6G6R obligations, not conclusions of Q.
