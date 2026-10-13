@@ -1,4 +1,4 @@
-name: BFSS L6G5L Pauli Cyclic Coefficient
+name: BFSS L6G5M SU2 Bracket Wedge Energy
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -25,6 +25,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5JSourceGammaTwoBivectorTransportProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5KSourceQuadraticBracketRegroupProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5LSourcePauliCyclicCoefficientProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5MSourceColorWedgeEnergyProbe.lean
 
 permissions:
   contents: read
@@ -701,6 +702,30 @@ jobs:
               assert p+n in entries and entries[p+n] <= allowed,entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
           print('L6G5L_PINNED_SOURCE_PAULI_CYCLIC_COEFFICIENT_QUALIFIED')
+          PY
+
+      - name: Qualify real finite Lagrange and original SU2 source bracket energy
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5MSourceColorWedgeEnergyProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5LSourcePauliCyclicCoefficientProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g5m.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g5m.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G5M.'
+          for n in ('finiteWedge_lagrange','sourceSU2ColorBracketEnergy_area'):
+              assert p+n in entries and entries[p+n] <= allowed,entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
+          print('L6G5M_SOURCE_SU2_BRACKET_WEDGE_ENERGY_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
