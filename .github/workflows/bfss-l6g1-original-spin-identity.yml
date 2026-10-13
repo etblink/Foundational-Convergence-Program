@@ -1,4 +1,4 @@
-name: BFSS L6G6I Original Fermion Color Current
+name: BFSS L6G6J Original Fermion Color CAR
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -45,6 +45,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6GOriginalFermionFullFierzCoefficientProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6HOriginalOrderedMajoranaFierzAssemblyProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6IOriginalFermionColorCurrentProjectionProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6JOriginalFermionColorCurrentCARProbe.lean
 
 permissions:
   contents: read
@@ -1287,6 +1288,35 @@ jobs:
                      and ax <= allowed for n,ax in entries.items()), entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6G6I_ORIGINAL_SOURCE_FERMION_COLOR_CURRENT_QUALIFIED')
+          PY
+
+      - name: Qualify source original ordered CAR and fermionic color current commutator
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6JOriginalFermionColorCurrentCARProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6IOriginalFermionColorCurrentProjectionProbe.olean
+          echo L6G6J_ORIGINAL_FERMION_SOURCE_COLOR_CAR_BEGIN
+          timeout 270s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6j.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6j.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6J.'
+          name=p+'sourceOriginalOrderedFermionPair_comm'
+          assert name in entries and entries[name] <= allowed,entries
+          for suffix in ('finiteCAROrderedPair_comm','finiteCARColorCurrent_comm'):
+              assert any(n.startswith('_private.') and n.endswith(p+suffix)
+                         and ax <= allowed for n,ax in entries.items()), entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6G6J_ORIGINAL_FERMION_SOURCE_COLOR_CAR_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
