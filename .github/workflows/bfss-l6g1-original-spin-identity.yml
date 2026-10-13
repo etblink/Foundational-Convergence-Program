@@ -1005,7 +1005,12 @@ jobs:
           allowed={'propext','Classical.choice','Quot.sound'}
           entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
           p='FCP.BFSSSU2PhysicalDomainL6G5W.'
-          for n in ('sourceColorLieFirstLinear', 'sourceSpinorWeightedColor',
+          # Lean private declarations have a generated _private.<module>.<id>
+          # prefix. Match that prefix without weakening axiom validation.
+          private=[(n,ax) for n,ax in entries.items()
+                   if n.startswith('_private.') and n.endswith(p+'sourceColorLieFirstLinear')]
+          assert len(private)==1 and private[0][1] <= allowed, entries
+          for n in ('sourceSpinorWeightedColor',
                     'sourceSpinorWeightedColor_gaugeTangent_component',
                     'sourceSpinorRightOrderedMixed_eq_originalGaugeTangent_apply'):
               assert p+n in entries and entries[p+n] <= allowed, entries
