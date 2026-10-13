@@ -47,6 +47,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6IOriginalFermionColorCurrentProjectionProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6JOriginalFermionColorCurrentCARProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6KOriginalBoundedFermionColorCurrentProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6LOriginalInfinitesimalColorActionProbe.lean
 
 permissions:
   contents: read
@@ -1433,6 +1434,36 @@ jobs:
                          for n,ax in entries.items()),entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G6K_ORIGINAL_BOUNDED_CURRENT_CORE_TRANSPORT_AND_HERMITICITY_QUALIFIED')
+          PYCODE
+
+      - name: Qualify original bounded and SmoothCore color-generator action sign
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6LOriginalInfinitesimalColorActionProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6KOriginalBoundedFermionColorCurrentProbe.olean
+          echo L6G6L_ORIGINAL_COLOR_GENERATOR_SIGN_BEGIN
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6l.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6l.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6L.'
+          for root in ('sourceFiberFermionColorGenerator_comm',
+                       'sourceOriginalFermionColorGenerator_comm'):
+              assert p+root in entries and entries[p+root] <= allowed,entries
+          assert any(n.startswith('_private.') and
+                     n.endswith(p+'complexI_comm_of_current_comm') and ax <= allowed
+                     for n,ax in entries.items()),entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G6L_ORIGINAL_INFINITESIMAL_COLOR_GENERATOR_SIGN_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
