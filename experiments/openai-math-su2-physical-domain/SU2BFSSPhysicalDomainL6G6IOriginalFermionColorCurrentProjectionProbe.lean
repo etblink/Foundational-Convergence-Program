@@ -87,14 +87,18 @@ theorem sourceOriginalFermionColorCurrent_eq_spinDiagonal
         ∑ s : SpinIndex, ∑ a : ColorIndex 2,
           ∑ b : ColorIndex 2, F s a b :=
     finiteDiagonalSpinProjection F
-  change (-Complex.I / 2 : ℂ) •
+  -- Transport the proved equality FIRST, then use syntax-directed
+  -- unfolding of the two short abbreviations. A concrete `change`
+  -- causes definitional reduction of the entire original Fock
+  -- SmoothCore and exhausted recursion depth in gate #102.
+  have hscaled : (-Complex.I / 2 : ℂ) •
       (∑ s : SpinIndex, ∑ a : ColorIndex 2,
         ∑ b : ColorIndex 2, F s a b) =
     (-Complex.I / 2 : ℂ) •
       (∑ p : FermionLabel 2, ∑ q : FermionLabel 2,
-        if p.1 = q.1 then F p.1 p.2 q.2 else 0)
-  exact congrArg (fun T : SourceEnd 2 =>
-    (-Complex.I / 2 : ℂ) • T) hdiag.symm
+        if p.1 = q.1 then F p.1 p.2 q.2 else 0) :=
+    congrArg (fun T : SourceEnd 2 => (-Complex.I / 2 : ℂ) • T) hdiag.symm
+  simpa only [sourceOriginalFermionColorCurrent, F] using hscaled
 
 #print axioms finiteDiagonalSpinProjection
 #print axioms sourceOriginalFermionColorCurrent_eq_spinDiagonal
