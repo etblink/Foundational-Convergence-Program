@@ -28,8 +28,9 @@ private theorem finiteFockMajoranaPhasePair
     (Ci + Ai) * (Cj + Aj) +
       (Complex.I • (Ci - Ai)) * (Complex.I • (Cj - Aj)) =
     (Ci * Aj + Ai * Cj) + (Ci * Aj + Ai * Cj) := by
-  rw [smul_mul_smul, Complex.I_mul_I, neg_one_smul]
-  -- Explicitly remove (-1) • X before noncommutative normalization.
+  -- The remaining scalar is (-1 : ℂ), not an integer smul.
+  -- Reuse the exact complex-module normalization qualified in L6G6L.
+  rw [smul_mul_smul, Complex.I_mul_I, neg_smul, one_smul]
   noncomm_ring
 
 /-- General algebraic lemma ON THE ORIGINAL FERMION 2 HILBERT TYPE:
