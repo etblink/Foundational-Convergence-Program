@@ -216,6 +216,27 @@ private theorem finiteCARColorCurrent_namedTerms_comm
   rw [hsum]
   exact finiteCARColorCurrent_comm theta hCAR F hskew c t d
 
+/-- Public interface to the accepted generic CAR transport, for separately
+qualified bounded-fiber source specializations. -/
+theorem finiteCARColorCurrent_namedTerms_interface
+    {R S C : Type*} [Ring R] [Algebra ℂ R]
+    [Fintype S] [DecidableEq S] [Fintype C] [DecidableEq C]
+    (theta : S → C → R)
+    (hCAR : ∀ s t a b,
+      theta s a * theta t b + theta t b * theta s a =
+        if s = t ∧ a = b then 1 else 0)
+    (F : C → C → C → ℂ)
+    (hskew : ∀ a b c, F b a c = -F a b c)
+    (c : C) (T : S → C → C → R)
+    (hT : ∀ s a b, T s a b = F a b c • (theta s a * theta s b))
+    (t : S) (d : C) :
+    ((-Complex.I / 2 : ℂ) •
+        (∑ s : S, ∑ a : C, ∑ b : C, T s a b)) * theta t d -
+      theta t d * ((-Complex.I / 2 : ℂ) •
+        (∑ s : S, ∑ a : C, ∑ b : C, T s a b)) =
+      Complex.I • (∑ b : C, F d b c • theta t b) := by
+  exact finiteCARColorCurrent_namedTerms_comm theta hCAR F hskew c T hT t d
+
 /-- Exact commutator of the ORIGINAL source fermionic color current
 with each ORIGINAL Majorana action on SmoothCore 2. Source CAR and
 Pauli color antisymmetry are discharged from accepted source results.
@@ -258,6 +279,7 @@ theorem sourceOriginalFermionColorCurrent_comm
 #print axioms sourceOriginalOrderedFermionPair_comm
 #print axioms finiteCARColorCurrent_namedTerms_comm
 #print axioms sourceOriginalFermionColorCurrent_comm
+#print axioms finiteCARColorCurrent_namedTerms_interface
 #check @sourceOriginalOrderedFermionPair_comm
 #check @sourceOriginalFermionColorCurrent_comm
 

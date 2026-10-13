@@ -1,4 +1,4 @@
-name: BFSS L6G6J Original Source Fermion Color Current
+name: BFSS L6G6K Original Bounded Fermion Color Current
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -46,6 +46,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6HOriginalOrderedMajoranaFierzAssemblyProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6IOriginalFermionColorCurrentProjectionProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6JOriginalFermionColorCurrentCARProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6KOriginalBoundedFermionColorCurrentProbe.lean
 
 permissions:
   contents: read
@@ -375,7 +376,22 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.olean
           key: bfss-l6g4a-calculus-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.lean') }}
 
+      # This prefix is saved only after its final G6J axiom audit passes.
+      # The key hashes its complete FCP source closure; K and later targets
+      # are deliberately excluded and must be compiled independently.
+      - name: Restore qualified L6 prefix by exact source closure
+        id: accepted_l6_prefix
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS
+            upstream-math/lean/.lake/build/lib/lean/OAI/Analysis/CharacterCriterion/Pauli.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2ColorCrossProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G*.olean
+          key: bfss-l6-prefix-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean', 'experiments/openai-math-su2-concrete-potential/SU2ColorCrossProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G[1-5]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6[A-J]*Probe.lean') }}
+
       - name: Qualify literal original all-spinor coefficient commutator
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -404,12 +420,14 @@ jobs:
           PY
 
       - name: Cache only the qualified original coefficient response object
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe.olean
           key: bfss-l6g4b-coefficient-v1-adc7f124-lean4341-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe.lean') }}
 
       - name: Qualify exact original-source kinetic gamma Gram contraction
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -435,6 +453,7 @@ jobs:
           PY
 
       - name: Qualify exact original complex kinetic weights and color contraction
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -461,6 +480,7 @@ jobs:
           PY
 
       - name: Qualify L6G5C genuine source differential kinetic square
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -489,6 +509,7 @@ jobs:
           PY
 
       - name: Compile and audit L6G5D source coefficient bridge
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -508,6 +529,7 @@ jobs:
           PY
 
       - name: Compile and audit L6G5E original scalar coefficient square
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -533,6 +555,7 @@ jobs:
           PY
 
       - name: Qualify L6G5F source quartic matrix target and quadratic pointwise square
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 9
         run: |
@@ -564,6 +587,7 @@ jobs:
           PY
 
       - name: Qualify source SU2 quartic color Jacobi via accepted Pauli basis
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 14
         run: |
@@ -600,6 +624,7 @@ jobs:
           PY
 
       - name: Qualify centered gammaLinear Clifford Gram without new assumptions
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -626,6 +651,7 @@ jobs:
           PY
 
       - name: Qualify real original quadratic coefficient and centered Clifford spinor row
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -651,6 +677,7 @@ jobs:
           PY
 
       - name: Qualify literal gammaTwo weighted and antisymmetric centered transport
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -675,6 +702,7 @@ jobs:
           PY
 
       - name: Qualify source real quadratic coefficient finite color-bracket regroup
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -700,6 +728,7 @@ jobs:
           PY
 
       - name: Qualify literal SU2 Pauli cyclic original quadratic gamma row
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -725,6 +754,7 @@ jobs:
           PY
 
       - name: Qualify real finite Lagrange and original SU2 source bracket energy
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -749,6 +779,7 @@ jobs:
           PY
 
       - name: Qualify exact original finite SU2 coefficient square equals quartic potential
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -773,6 +804,7 @@ jobs:
           PY
 
       - name: Qualify original complex coefficient and SmoothCore quadratic potential action
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -797,6 +829,7 @@ jobs:
           PY
 
       - name: Qualify original scalar-square residual with explicitly ordered mixed operator
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -823,6 +856,7 @@ jobs:
           PY
 
       - name: Qualify literal SU2 diagonal kinetic-quadratic commutator
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -852,6 +886,7 @@ jobs:
           PY
 
       - name: Qualify original source Clifford bivector commutator
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -879,6 +914,7 @@ jobs:
           PY
 
       - name: Qualify source signed row gamma contraction
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -902,6 +938,7 @@ jobs:
           PY
 
       - name: Qualify original gamma/color mixed bracket reindex
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -926,6 +963,7 @@ jobs:
           PY
 
       - name: Qualify original real mixed point coefficient
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -952,6 +990,7 @@ jobs:
           PY
 
       - name: Qualify original right-ordered mixed SmoothCore operator
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -978,6 +1017,7 @@ jobs:
           PY
 
       - name: Build exact pinned original gauge-tangent upstream dependency
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 22
         run: |
@@ -998,6 +1038,7 @@ jobs:
           echo L6G5W_PINNED_NORMAL_LINEARIZATION_BUILD_PASS
 
       - name: Qualify original source orbital gauge-tangent identification
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 5
         run: |
@@ -1029,6 +1070,7 @@ jobs:
           PY
 
       - name: Qualify exact original fermionic response as source-core point multiplier
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1057,6 +1099,7 @@ jobs:
           PY
 
       - name: Qualify signed original fermionic Fierz color contraction
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1083,6 +1126,7 @@ jobs:
           PY
 
       - name: Qualify both original fermionic response Kronecker legs
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1113,6 +1157,7 @@ jobs:
           PY
 
       - name: Qualify source SU2 fermionic response symmetric legs
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1144,6 +1189,7 @@ jobs:
           PY
 
       - name: Qualify genuine original all-spinor fermionic bilinear response
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1174,6 +1220,7 @@ jobs:
           PY
 
       - name: Qualify original fermionic response to signed source Fierz kernel
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1205,6 +1252,7 @@ jobs:
           PY
 
       - name: Qualify exact original fermion source Fierz coefficient channels
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1233,6 +1281,7 @@ jobs:
           PY
 
       - name: Qualify genuine original ordered theta Fierz operator assembly
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1260,6 +1309,7 @@ jobs:
           PY
 
       - name: Qualify genuine source fermion color-current spin projection
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1291,6 +1341,7 @@ jobs:
           PY
 
       - name: Qualify original ordered CAR and actual source color current commutator
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1311,7 +1362,8 @@ jobs:
                    re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
           p='FCP.BFSSSU2PhysicalDomainL6G6J.'
           for suffix in ('sourceOriginalOrderedFermionPair_comm',
-                         'sourceOriginalFermionColorCurrent_comm'):
+                         'sourceOriginalFermionColorCurrent_comm',
+                         'finiteCARColorCurrent_namedTerms_interface'):
               name=p+suffix
               assert name in entries and entries[name] <= allowed,entries
           for suffix in ('finiteCAROrderedPair_comm','finiteCARColorCurrent_comm',
@@ -1321,6 +1373,50 @@ jobs:
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6G6J_ORIGINAL_FERMION_SOURCE_COLOR_CURRENT_COMMUTATOR_QUALIFIED')
           PY
+
+      - name: Save qualified L6 prefix before the new bounded-current target
+        if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/BFSS
+            upstream-math/lean/.lake/build/lib/lean/OAI/Analysis/CharacterCriterion/Pauli.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2ColorCrossProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G*.olean
+          key: bfss-l6-prefix-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean', 'experiments/openai-math-su2-concrete-potential/SU2ColorCrossProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G[1-5]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6[A-J]*Probe.lean') }}
+
+      - name: Qualify bounded source current, exact core transport and Hermiticity
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6KOriginalBoundedFermionColorCurrentProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6JOriginalFermionColorCurrentCARProbe.olean
+          echo L6G6K_BOUNDED_SOURCE_CURRENT_BEGIN
+          timeout 270s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6k.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6k.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6K.'
+          roots=('sourceFermionColorTerm_apply_fiber','sourceFermionColorCurrent_apply_fiber',
+                 'sourceFermionColorCurrent_eq_postcomp','sourceFiberFermionColorCurrent_comm',
+                 'sourceFiberFermionColorCurrent_selfAdjoint','sourceFiberFermionColorGenerator_star_eq_neg')
+          for root in roots:
+              assert p+root in entries and entries[p+root] <= allowed,entries
+          for root in ('sourceFiberTheta_CAR','finiteRealSkewThetaQuadratic_star',
+                       'finiteRealSkewThetaNamedQuadratic_star'):
+              assert any(n.startswith('_private.') and n.endswith(p+root) and ax <= allowed
+                         for n,ax in entries.items()),entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G6K_ORIGINAL_BOUNDED_CURRENT_CORE_TRANSPORT_AND_HERMITICITY_QUALIFIED')
+          PYCODE
 
       - name: Preserve independently inspectable qualification evidence
         if: always()
