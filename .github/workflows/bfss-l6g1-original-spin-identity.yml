@@ -1,4 +1,4 @@
-name: BFSS L6G5U Original Mixed Point Coefficient
+name: BFSS L6G5V Original Right-Ordered Mixed Operator
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -34,6 +34,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5SOriginalSignedRowGammaContractionProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5TOriginalMixedBracketReindexProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5UOriginalMixedPointCoefficientProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5VOriginalRightOrderedMixedOperatorProbe.lean
 
 permissions:
   contents: read
@@ -937,6 +938,32 @@ jobs:
           assert any(n.endswith('.finiteMixedRow_halfFubini') and ax<=allowed for n,ax in entries.items()), entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
           print('L6G5U_ORIGINAL_REAL_MIXED_POINT_COEFFICIENT_QUALIFIED')
+          PY
+
+      - name: Qualify original right-ordered mixed SmoothCore operator
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5VOriginalRightOrderedMixedOperatorProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5UOriginalMixedPointCoefficientProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g5v.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g5v.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G5V.'
+          for n in ('sourceOriginalMixedComplexCoefficient_contract',
+                    'sourceSpinorRightOrderedMixed_originalApply'):
+              assert p+n in entries and entries[p+n] <= allowed, entries
+          assert all(ax<=allowed for name,ax in entries.items() if 'L6G5V' in name),entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
+          print('L6G5V_ORIGINAL_RIGHT_ORDERED_MIXED_SMOOTHCORE_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
