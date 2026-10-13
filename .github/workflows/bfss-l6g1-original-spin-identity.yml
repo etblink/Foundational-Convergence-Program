@@ -1,4 +1,4 @@
-name: BFSS L6G5O Original Complex Quartic Operator
+name: BFSS L6G5P Original Mixed Remainder
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -28,6 +28,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5MSourceColorWedgeEnergyProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5NOriginalFiniteQuarticContractionProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5OOriginalComplexQuarticOperatorProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5POriginalScalarMixedRemainderProbe.lean
 
 permissions:
   contents: read
@@ -776,6 +777,32 @@ jobs:
               assert p+n in entries and entries[p+n] <= allowed,entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
           print('L6G5O_ORIGINAL_COMPLEX_QUARTIC_OPERATOR_QUALIFIED')
+          PY
+
+      - name: Qualify original scalar-square residual with explicitly ordered mixed operator
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5POriginalScalarMixedRemainderProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5OOriginalComplexQuarticOperatorProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g5p.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g5p.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G5P.'
+          for n in ('sourceSpinorOrderedMixedTerm_split',
+                    'sourceSU2HalfScalarSquare_kinetic_mixed_potential_apply'):
+              assert p+n in entries and entries[p+n] <= allowed,entries
+          assert any(n.endswith('.orderedMixed_firstOrder_commutator') and ax<=allowed for n,ax in entries.items()),entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
+          print('L6G5P_SOURCE_SCALAR_MIXED_REMAINDER_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
