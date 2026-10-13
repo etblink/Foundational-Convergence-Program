@@ -183,10 +183,83 @@ theorem sourceOriginalOrderedFermionPair_comm
     (fun u : FermionLabel 2 => M.fermionAction u.1 u.2)
     (sourceFermionAction_CAR M) p q t
 
+/-- Transport the accepted CAR current identity through individually
+checked ordered summands, before any concrete BFSS specialization.
+The target ring remains abstract throughout this finite sum proof. -/
+private theorem finiteCARColorCurrent_namedTerms_comm
+    {R S C : Type*} [Ring R] [Algebra ℂ R]
+    [Fintype S] [DecidableEq S] [Fintype C] [DecidableEq C]
+    (theta : S → C → R)
+    (hCAR : ∀ s t a b,
+      theta s a * theta t b + theta t b * theta s a =
+        if s = t ∧ a = b then 1 else 0)
+    (F : C → C → C → ℂ)
+    (hskew : ∀ a b c, F b a c = -F a b c)
+    (c : C) (T : S → C → C → R)
+    (hT : ∀ s a b, T s a b = F a b c • (theta s a * theta s b))
+    (t : S) (d : C) :
+    ((-Complex.I / 2 : ℂ) •
+        (∑ s : S, ∑ a : C, ∑ b : C, T s a b)) * theta t d -
+      theta t d * ((-Complex.I / 2 : ℂ) •
+        (∑ s : S, ∑ a : C, ∑ b : C, T s a b)) =
+      Complex.I • (∑ b : C, F d b c • theta t b) := by
+  have hsum : (∑ s : S, ∑ a : C, ∑ b : C, T s a b) =
+      ∑ s : S, ∑ a : C, ∑ b : C,
+        F a b c • (theta s a * theta s b) := by
+    apply Finset.sum_congr rfl
+    intro s _
+    apply Finset.sum_congr rfl
+    intro a _
+    apply Finset.sum_congr rfl
+    intro b _
+    exact hT s a b
+  rw [hsum]
+  exact finiteCARColorCurrent_comm theta hCAR F hskew c t d
+
+/-- Exact commutator of the ORIGINAL source fermionic color current
+with each ORIGINAL Majorana action on SmoothCore 2. Source CAR and
+Pauli color antisymmetry are discharged from accepted source results.
+No gamma, gauge-invariance, or infinitesimal-representation premise
+is assumed. Identification with GaugeData.fermion remains separate. -/
+theorem sourceOriginalFermionColorCurrent_comm
+    (M : AlgebraData 2)
+    (hcolor : ∀ a : ColorIndex 2,
+      M.color a = FCP.BFSSSU2.normalizedPauli a)
+    (c : ColorIndex 2) (t : SpinIndex) (d : ColorIndex 2) :
+    sourceOriginalFermionColorCurrent M c * M.fermionAction t d -
+      M.fermionAction t d * sourceOriginalFermionColorCurrent M c =
+      Complex.I • (∑ b : ColorIndex 2,
+        (M.structureConstant d b c : ℂ) • M.fermionAction t b) := by
+  classical
+  have hCAR (s u : SpinIndex) (a b : ColorIndex 2) :
+      M.fermionAction s a * M.fermionAction u b +
+        M.fermionAction u b * M.fermionAction s a =
+      if s = u ∧ a = b then (1 : SourceEnd 2) else 0 := by
+    simpa only [Prod.mk.injEq] using
+      sourceFermionAction_CAR M (s,a) (u,b)
+  have hskew (a b e : ColorIndex 2) :
+      (M.structureConstant b a e : ℂ) =
+        -(M.structureConstant a b e : ℂ) := by
+    simpa only [Complex.ofReal_neg] using
+      congrArg (fun r : ℝ => (r : ℂ))
+        (FCP.BFSSSU2PhysicalDomainL6G6D.sourceSU2StructureConstant_swapFirst
+          M hcolor a b e)
+  unfold sourceOriginalFermionColorCurrent
+  exact finiteCARColorCurrent_namedTerms_comm
+    (R := SourceEnd 2) (S := SpinIndex) (C := ColorIndex 2)
+    (fun s a => M.fermionAction s a) hCAR
+    (fun a b e => (M.structureConstant a b e : ℂ)) hskew
+    c (fun s a b => sourceOriginalFermionColorTerm M c s a b)
+    (fun s a b => sourceOriginalFermionColorTerm_eq_source M c s a b)
+    t d
+
 #print axioms finiteCAROrderedPair_comm
 #print axioms finiteCARColorCurrent_comm
 #print axioms sourceOriginalOrderedFermionPair_comm
+#print axioms finiteCARColorCurrent_namedTerms_comm
+#print axioms sourceOriginalFermionColorCurrent_comm
 #check @sourceOriginalOrderedFermionPair_comm
+#check @sourceOriginalFermionColorCurrent_comm
 
 end
 end FCP.BFSSSU2PhysicalDomainL6G6J

@@ -1,4 +1,4 @@
-name: BFSS L6G6J Original Fermion Color CAR
+name: BFSS L6G6J Original Source Fermion Color Current
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -1290,7 +1290,7 @@ jobs:
           print('L6G6I_ORIGINAL_SOURCE_FERMION_COLOR_CURRENT_QUALIFIED')
           PY
 
-      - name: Qualify source original ordered CAR and fermionic color current commutator
+      - name: Qualify original ordered CAR and actual source color current commutator
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1310,13 +1310,16 @@ jobs:
           entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
                    re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
           p='FCP.BFSSSU2PhysicalDomainL6G6J.'
-          name=p+'sourceOriginalOrderedFermionPair_comm'
-          assert name in entries and entries[name] <= allowed,entries
-          for suffix in ('finiteCAROrderedPair_comm','finiteCARColorCurrent_comm'):
+          for suffix in ('sourceOriginalOrderedFermionPair_comm',
+                         'sourceOriginalFermionColorCurrent_comm'):
+              name=p+suffix
+              assert name in entries and entries[name] <= allowed,entries
+          for suffix in ('finiteCAROrderedPair_comm','finiteCARColorCurrent_comm',
+                         'finiteCARColorCurrent_namedTerms_comm'):
               assert any(n.startswith('_private.') and n.endswith(p+suffix)
                          and ax <= allowed for n,ax in entries.items()), entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
-          print('L6G6J_ORIGINAL_FERMION_SOURCE_COLOR_CAR_QUALIFIED')
+          print('L6G6J_ORIGINAL_FERMION_SOURCE_COLOR_CURRENT_COMMUTATOR_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
