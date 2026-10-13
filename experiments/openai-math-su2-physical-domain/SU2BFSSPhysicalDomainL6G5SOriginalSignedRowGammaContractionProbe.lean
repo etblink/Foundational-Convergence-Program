@@ -68,9 +68,12 @@ theorem sourceOriginalGamma_row_bivector_contraction
         (if i = j then dotProduct w (M.gamma k *ᵥ w) else 0) -
         (if i = k then dotProduct w (M.gamma j *ᵥ w) else 0) := by
     rw [hswap] at hcomm
-    by_cases hij : i = j <;> by_cases hik : i = k <;>
-      simp [hij, hik] at hcomm ⊢ <;>
-      linarith
+    have hfactor (P : Prop) [Decidable P] (a : ℝ) :
+        (if P then (2 : ℝ) else 0) * a =
+          2 * (if P then a else 0) := by
+      by_cases hP : P <;> simp [hP]
+    simp only [hfactor] at hcomm
+    linarith
   calc
     (∑ β : SpinIndex,
       (w ᵥ* M.gamma i) β * (w ᵥ* M.gammaTwo j k) β) =
