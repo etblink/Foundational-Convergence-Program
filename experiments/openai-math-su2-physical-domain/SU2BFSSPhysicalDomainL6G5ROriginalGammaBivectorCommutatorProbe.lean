@@ -38,7 +38,7 @@ private theorem bivector_commutator_of_anticommutators
     _ = (1 / 2 : ℝ) •
           (A * (B * C - C * B) -
             (B * C - C * B) * A) := by
-      simp only [mul_smul_comm, smul_mul_assoc, smul_sub]
+      rw [mul_smul_comm, smul_mul_assoc, smul_sub]
     _ = (1 / 2 : ℝ) •
           (((A * B + B * A) * C + C * (A * B + B * A)) -
             ((A * C + C * A) * B + B * (A * C + C * A))) :=
@@ -73,10 +73,16 @@ theorem sourceGamma_bivector_commutator {N : ℕ}
       ((1 / 2 : ℝ) • (M.gamma j * M.gamma k - M.gamma k * M.gamma j)) -
         ((1 / 2 : ℝ) • (M.gamma j * M.gamma k - M.gamma k * M.gamma j)) *
           M.gamma i = _
+  have hcliffordReal (u v : SpaceIndex) :
+      M.gamma u * M.gamma v + M.gamma v * M.gamma u =
+        (if u = v then (2 : ℝ) else 0) • (1 : GammaMatrix) := by
+    by_cases huv : u = v
+    · simpa only [if_pos huv, two_smul] using (M.gamma_clifford u v)
+    · simpa only [if_neg huv, zero_smul] using (M.gamma_clifford u v)
   exact bivector_commutator_of_anticommutators
     (M.gamma i) (M.gamma j) (M.gamma k)
     (if i = j then 2 else 0) (if i = k then 2 else 0)
-    (M.gamma_clifford i j) (M.gamma_clifford i k)
+    (hcliffordReal i j) (hcliffordReal i k)
 
 #print axioms bivector_commutator_of_anticommutators
 #print axioms sourceGammaTwo_skew_transpose
