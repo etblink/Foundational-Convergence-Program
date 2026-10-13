@@ -1,4 +1,4 @@
-name: BFSS L6G5N Original Finite Quartic Contraction
+name: BFSS L6G5O Original Complex Quartic Operator
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -27,6 +27,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5LSourcePauliCyclicCoefficientProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5MSourceColorWedgeEnergyProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5NOriginalFiniteQuarticContractionProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5OOriginalComplexQuarticOperatorProbe.lean
 
 permissions:
   contents: read
@@ -751,6 +752,30 @@ jobs:
               assert p+n in entries and entries[p+n] <= allowed,entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
           print('L6G5N_PINNED_ORIGINAL_FINITE_QUARTIC_CONTRACTION_QUALIFIED')
+          PY
+
+      - name: Qualify original complex coefficient and SmoothCore quadratic potential action
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5OOriginalComplexQuarticOperatorProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5NOriginalFiniteQuarticContractionProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g5o.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g5o.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G5O.'
+          for n in ('sourceSU2FiniteQuarticComplex','sourceSU2QuadraticSquare_potential_apply'):
+              assert p+n in entries and entries[p+n] <= allowed,entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
+          print('L6G5O_ORIGINAL_COMPLEX_QUARTIC_OPERATOR_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
