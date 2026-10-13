@@ -20,12 +20,14 @@ open FCP.BFSSSU2PhysicalDomainL6G5J
 open FCP.BFSSSU2PhysicalDomainL6G5K
 
 /-- Positively oriented first complementary color coordinate vector. -/
-def sourceCyclicU (x : Boson 2) (a : ColorIndex 2) : SpaceIndex → ℝ :=
-  fun i => if a = 0 then x (i,1) else if a = 1 then x (i,2) else x (i,0)
+def sourceCyclicU (x : Boson 2) (a : Fin 3) : SpaceIndex → ℝ :=
+  fun i => if a = 0 then x (i,(1 : Fin 3))
+    else if a = 1 then x (i,(2 : Fin 3)) else x (i,(0 : Fin 3))
 
 /-- Positively oriented second complementary color coordinate vector. -/
-def sourceCyclicV (x : Boson 2) (a : ColorIndex 2) : SpaceIndex → ℝ :=
-  fun i => if a = 0 then x (i,2) else if a = 1 then x (i,0) else x (i,1)
+def sourceCyclicV (x : Boson 2) (a : Fin 3) : SpaceIndex → ℝ :=
+  fun i => if a = 0 then x (i,(2 : Fin 3))
+    else if a = 1 then x (i,(0 : Fin 3)) else x (i,(1 : Fin 3))
 
 /-- Actual source bracket at fixed color is a simple oriented
 bivector, derived from the accepted Pauli color structure constants. -/
@@ -81,8 +83,11 @@ theorem sourceQuadraticReal_eq_cyclicCenteredRow
           M.gammaTwo i j α β) =
         Real.sqrt 2 * (sourceCenteredGammaPair M u v) α β := by
     have h := congrArg (fun T : GammaMatrix => T α β) hmat
-    simpa only [Finset.sum_apply, Matrix.smul_apply,
-      Pi.smul_apply, smul_eq_mul] using h
+    change (∑ i : SpaceIndex, ∑ j : SpaceIndex,
+      ((1 / 2 : ℝ) * M.coordinateBracketAll x i j a) *
+        M.gammaTwo i j α β) =
+          Real.sqrt 2 * (sourceCenteredGammaPair M u v) α β at h
+    exact h
   rw [sourceQuadraticReal_eq_bracket_sum M w β a x]
   simp_rw [hentry]
   change (∑ α : SpinIndex,
