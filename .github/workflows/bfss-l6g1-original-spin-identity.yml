@@ -1,4 +1,4 @@
-name: BFSS L6G6C Original Fermion Kronecker Response
+name: BFSS L6G6D Original Fermion Symmetric Legs
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -39,6 +39,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6AOriginalFermionicResponsePointwiseProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6BOriginalFermionicFierzColorContractionProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6COriginalFermionResponseKroneckerSelectorProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6DOriginalFermionResponseSymmetricLegsProbe.lean
 
 permissions:
   contents: read
@@ -1103,6 +1104,37 @@ jobs:
           assert len(private)==1 and private[0][1] <= allowed, entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6G6C_ORIGINAL_SOURCE_FERMION_KRONECKER_QUALIFIED')
+          PY
+
+      - name: Qualify source SU2 fermionic response symmetric legs
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6DOriginalFermionResponseSymmetricLegsProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6COriginalFermionResponseKroneckerSelectorProbe.olean
+          echo L6G6D_SOURCE_FERMION_SYMMETRIC_LEGS_BEGIN
+          timeout 270s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6d.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6d.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6D.'
+          names=('sourceGammaTwo_swapOriginal',
+                 'sourceSU2StructureConstant_swapLast',
+                 'sourceSU2StructureConstant_swapFirst',
+                 'sourceQuadraticWeight_pairSymmetric',
+                 'sourceCoefficientResponseSelected_eq_twice_first',
+                 'sourceCoefficientResponsePoint_eq_twice_first')
+          assert all(p+n in entries and entries[p+n] <= allowed for n in names), entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6G6D_ORIGINAL_FERMION_RESPONSE_SYMMETRIC_LEGS_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
