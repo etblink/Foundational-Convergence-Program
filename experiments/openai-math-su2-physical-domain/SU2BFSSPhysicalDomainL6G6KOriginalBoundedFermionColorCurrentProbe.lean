@@ -227,7 +227,9 @@ theorem sourceFiberFermionColorGenerator_star_eq_neg (M : AlgebraData 2)
       -sourceFiberFermionColorGenerator M c := by
   unfold sourceFiberFermionColorGenerator
   rw [star_smul, (sourceFiberFermionColorCurrent_selfAdjoint M hcolor c).star_eq]
-  simp only [Complex.star_def, Complex.conj_I, neg_smul]
+  simp only [Complex.star_def, Complex.conj_I]
+  -- The remaining goal is scalar-negation transport, not a new CAR identity.
+  exact neg_smul Complex.I (sourceFiberFermionColorCurrent M c)
 
 #print axioms sourceFermionColorTerm_apply_fiber
 #print axioms sourceFermionColorCurrent_apply_fiber
