@@ -1278,9 +1278,11 @@ jobs:
           entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
                    re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
           p='FCP.BFSSSU2PhysicalDomainL6G6I.'
-          for name in ('sourceOriginalFermionColorTerm_eq_source',
-                       'sourceOriginalFermionColorCurrent_eq_spinDiagonal'):
-              assert p+name in entries and entries[p+name] <= allowed, entries
+          assert (p+'sourceOriginalFermionColorCurrent_eq_spinDiagonal' in entries and
+                  entries[p+'sourceOriginalFermionColorCurrent_eq_spinDiagonal'] <= allowed), entries
+          source_term=p+'sourceOriginalFermionColorTerm_eq_source'
+          assert ((source_term in entries and entries[source_term] <= allowed) or
+                  ("'"+source_term+"' does not depend on any axioms" in s)), s[-6000:]
           assert any(n.startswith('_private.') and n.endswith(p+'finiteDiagonalSpinProjection')
                      and ax <= allowed for n,ax in entries.items()), entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
