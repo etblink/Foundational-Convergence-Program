@@ -1548,7 +1548,7 @@ jobs:
           s=open('/tmp/bfss-l6g1/l6g6o.log').read()
           allowed={'propext','Classical.choice','Quot.sound'}
           entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
-                   re.findall(r"'([^']+)' (?:depends on axioms: \\[([^\\]]*)\\]|does not depend on any axioms)",s)}
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
           p='FCP.BFSSSU2PhysicalDomainL6G6O.'
           for root in ('originalExteriorVacuum_annihilate',
                        'original24ModeVacuum_annihilate'):
