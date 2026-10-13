@@ -74,13 +74,27 @@ theorem sourceOriginalFermionColorCurrent_eq_spinDiagonal
             (M.structureConstant p.2 q.2 c : ℂ) •
               (M.fermionAction p.1 p.2 * M.fermionAction q.1 q.2)
           else 0) := by
-  unfold sourceOriginalFermionColorCurrent
-  congr 1
-  exact (finiteDiagonalSpinProjection
-    (S := SpinIndex) (C := ColorIndex 2)
-    (fun s a b =>
+  -- First freeze the actual source theta product behind a named
+  -- coefficient family. Do not elaborate 48×48 source maps inside
+  -- the abstract finite-index proof.
+  let F : SpinIndex → ColorIndex 2 → ColorIndex 2 → SourceEnd 2 :=
+    fun s a b =>
       (M.structureConstant a b c : ℂ) •
-        (M.fermionAction s a * M.fermionAction s b))).symm
+        (M.fermionAction s a * M.fermionAction s b)
+  have hdiag :
+      (∑ p : FermionLabel 2, ∑ q : FermionLabel 2,
+        if p.1 = q.1 then F p.1 p.2 q.2 else 0) =
+        ∑ s : SpinIndex, ∑ a : ColorIndex 2,
+          ∑ b : ColorIndex 2, F s a b :=
+    finiteDiagonalSpinProjection F
+  change (-Complex.I / 2 : ℂ) •
+      (∑ s : SpinIndex, ∑ a : ColorIndex 2,
+        ∑ b : ColorIndex 2, F s a b) =
+    (-Complex.I / 2 : ℂ) •
+      (∑ p : FermionLabel 2, ∑ q : FermionLabel 2,
+        if p.1 = q.1 then F p.1 p.2 q.2 else 0)
+  exact congrArg (fun T : SourceEnd 2 =>
+    (-Complex.I / 2 : ℂ) • T) hdiag.symm
 
 #print axioms finiteDiagonalSpinProjection
 #print axioms sourceOriginalFermionColorCurrent_eq_spinDiagonal
