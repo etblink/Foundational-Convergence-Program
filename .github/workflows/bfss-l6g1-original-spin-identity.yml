@@ -52,6 +52,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6NAbstractFockPairVacuumCancellationProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6OOriginalExteriorFockVacuumProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6POriginalTransportedFockVacuumProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6QPairedSourceThetaVacuumProbe.lean
 
 permissions:
   contents: read
@@ -1599,6 +1600,60 @@ jobs:
                      for n,ax in entries.items()),entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G6P_SOURCE_FERMION2_TRANSPORTED_VACUUM_QUALIFIED')
+          PYCODE
+
+      - name: Compile accepted concrete Fock and paired theta source chain
+        shell: bash
+        timeout-minutes: 38
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cp experiments/openai-math-su2-concrete-potential/*.lean upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6POriginalTransportedFockVacuumProbe.olean
+          echo L6G6Q_ACCEPTED_SOURCE_PAIRED_THETA_DEPENDENCIES_BEGIN
+          timeout 420s lake build OAI.MathematicalPhysics.BFSS.PotentialBasis OAI.Analysis.CharacterCriterion.Pauli
+          for stem in SU2ColorCrossProbe SU2RealGammaProbe SU2FermionF2BProbe SU2FermionF2B2Probe SU2FermionF2B2ImagProbe SU2FermionF2B2MixedProbe SU2FermionF2B2MixedDiagProbe SU2FermionF2B2MixedAllProbe SU2FermionF2B2IndexedProbe SU2FermionF2B2ThetaProbe SU2FermionF3InvariantProbe SU2FermionF3RecoveryProbe SU2FermionF3B1OccupationProbe SU2FermionF3B2BasisActionProbe SU2FermionF3B3ProjectorProbe SU2FermionF3B4SelectorProbe SU2FermionF3B5CoordinateProbe SU2FermionF3B6NonzeroKetProbe SU2FermionF3B7SignedModeProbe SU2FermionF3B8LocalReachabilityProbe SU2FermionF3B9FiniteReachabilityProbe SU2FermionF3C1SubmoduleDichotomyProbe SU2FermionF3C2ThetaFieldsProbe SU2BFSSFullAlgebraDataProbe SU2BFSSG1APairedThetaProbe SU2BFSSG1BColorAnnihilatorProbe; do
+            echo "L6G6Q_BUILD_ACCEPTED=$stem"
+            timeout 230s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-l6g1/accepted-$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean"
+            if grep -Eq 'error:|sorryAx' "/tmp/bfss-l6g1/accepted-$stem.log"; then
+              echo "Accepted source chain failed: $stem" >&2
+              exit 1
+            fi
+          done
+          echo L6G6Q_ACCEPTED_G1B_SOURCE_CHAIN_COMPILED
+
+      - name: Qualify literal source paired theta two-spin color vacuum cancellation
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6QPairedSourceThetaVacuumProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSG1BColorAnnihilatorProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6POriginalTransportedFockVacuumProbe.olean
+          echo L6G6Q_SOURCE_PAIRED_THETA_COLOR_PAIR_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6q.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6q.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6Q.'
+          for root in ('sourcePairedTheta_even', 'sourcePairedTheta_odd',
+                       'sourceColorMode_ne','sourcePairedTheta_twoSpin_vacuumCancellation'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,entries
+          assert any(n.startswith('_private.') and
+                     n.endswith(p+'sourceMajorana1_phase') and ax <= allowed
+                     for n,ax in entries.items()),entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G6Q_ACTUAL_PAIRED_THETA_TWO_SPIN_VACUUM_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
