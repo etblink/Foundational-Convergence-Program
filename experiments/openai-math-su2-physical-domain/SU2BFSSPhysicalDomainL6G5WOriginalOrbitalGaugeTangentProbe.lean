@@ -69,12 +69,20 @@ theorem sourceSpinorWeightedColor_gaugeTangent_component
           (v k) • M.colorLie (spatialColor x k) (spatialColor x u.1)) u.2 := by
             rw [map_sum]
             simp only [map_smul]
+            rfl
     _ = ∑ k : SpaceIndex,
           v k * M.coordinateBracketAll x k u.1 u.2 := by
-            simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul]
+            -- EuclideanSpace is PiLp, not an unbundled Pi function.
+            -- Evaluate the sum through the canonical continuous linear
+            -- coordinate projection, so linearity is justified directly.
+            change (EuclideanSpace.proj (𝕜 := ℝ) u.2)
+              (∑ k : SpaceIndex,
+                v k • M.colorLie (spatialColor x k) (spatialColor x u.1)) = _
+            rw [map_sum]
+            simp only [map_smul, smul_eq_mul]
             apply Finset.sum_congr rfl
             intro k _
-            rw [hbracket]
+            exact congrArg (fun a : ℝ => v k * a) (hbracket k)
     _ = -(∑ k : SpaceIndex,
           M.coordinateBracketAll x u.1 k u.2 * v k) := by
             rw [← Finset.sum_neg_distrib]
