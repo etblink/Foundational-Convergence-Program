@@ -54,6 +54,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6POriginalTransportedFockVacuumProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6QPairedSourceThetaVacuumProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6RSourceSpinSumColorGeneratorVacuumProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6SOriginalGaugeVacuumIdentificationProbe.lean
 
 permissions:
   contents: read
@@ -1683,6 +1684,70 @@ jobs:
               assert name in entries and entries[name] <= allowed,entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G6R_ACTUAL_16SPIN_SOURCE_COLOR_GENERATOR_VACUUM_QUALIFIED')
+          PYCODE
+
+      - name: Compile accepted literal SU2 exterior gauge vacuum source dependencies
+        shell: bash
+        timeout-minutes: 22
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          # The preceding L6G6Q step already copied all exact accepted
+          # concrete source files and compiled their source F1/F2/G1 chain.
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6RSourceSpinSumColorGeneratorVacuumProbe.olean
+          echo L6G6S_SOURCE_GAUGE_ACTION_DEPENDENCIES_BEGIN
+          timeout 850s lake build OAI.MathematicalPhysics.BFSS.GaugeCore \
+            OAI.MathematicalPhysics.BFSS.CovariantFields \
+            OAI.Analysis.Laughlin.Exterior.SpinAction \
+            2>&1 | tee /tmp/bfss-l6g1/l6g6s-upstream-deps.log
+          for stem in \
+            SU2BFSSG2ABosonGaugeProbe \
+            SU2BFSSG2BBosonGaugeContinuityProbe \
+            SU2BFSSG3AAdjointColorRepresentationProbe \
+            SU2BFSSG3B24ModeOrthogonalLiftProbe \
+            SU2BFSSG3CComplexOneParticleUnitaryProbe \
+            SU2BFSSG4AExteriorGaugeActionProbe \
+            SU2BFSSG4BFermionLinearTransportProbe; do
+            echo "L6G6S_ACCEPTED_ORIGINAL_SOURCE=$stem"
+            timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+              2>&1 | tee "/tmp/bfss-l6g1/l6g6s-$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean"
+            if grep -Eq 'error:|sorryAx' "/tmp/bfss-l6g1/l6g6s-$stem.log"; then
+              echo "Original G4B source compile invalid: $stem" >&2
+              exit 1
+            fi
+          done
+          echo L6G6S_G4B_GAUGE_REPRESENTATION_SOURCE_READY
+
+      - name: Qualify exact common Fock vacuum for bounded source current and gauge action
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6SOriginalGaugeVacuumIdentificationProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSG4BFermionLinearTransportProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6RSourceSpinSumColorGeneratorVacuumProbe.olean
+          echo L6G6S_EXACT_COMMON_SOURCE_GAUGE_VACUUM_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6s.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6s.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6S.'
+          for root in ('source24ModeVacuum_eq_actualGaugeVacuum',
+                       'actualGaugeAction_fixes_source24ModeVacuum',
+                       'sourcePairedFermionColorGenerator_actualGaugeVacuum'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G6S_SOURCE_CURRENT_AND_GAUGE_ACTION_COMMON_VACUUM_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
