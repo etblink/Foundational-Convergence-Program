@@ -1,4 +1,4 @@
-name: BFSS L6G6G Original Fermion Fierz Channels
+name: BFSS L6G6H Original Ordered Theta Fierz Assembly
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -43,6 +43,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6EOriginalSpinorBilinearResponseProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6FOriginalFermionBilinearFierzKernelProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6GOriginalFermionFullFierzCoefficientProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6HOriginalOrderedMajoranaFierzAssemblyProbe.lean
 
 permissions:
   contents: read
@@ -1227,6 +1228,33 @@ jobs:
                      and ax <= allowed for n,ax in entries.items()), entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6G6G_ORIGINAL_FERMION_SOURCE_FIERZ_COEFFICIENT_QUALIFIED')
+          PY
+
+      - name: Qualify genuine original ordered theta Fierz operator assembly
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6HOriginalOrderedMajoranaFierzAssemblyProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6GOriginalFermionFullFierzCoefficientProbe.olean
+          echo L6G6H_ORIGINAL_ORDERED_THETA_SOURCE_FIERZ_BEGIN
+          timeout 270s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6h.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6h.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6H.'
+          names=('sourceOriginalOrderedThetaPair_response_apply',
+                 'sourceOriginalOrderedFermionicResponse_apply')
+          assert all(p+n in entries and entries[p+n] <= allowed for n in names), entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6G6H_ORIGINAL_ORDERED_THETA_SOURCE_FIERZ_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
