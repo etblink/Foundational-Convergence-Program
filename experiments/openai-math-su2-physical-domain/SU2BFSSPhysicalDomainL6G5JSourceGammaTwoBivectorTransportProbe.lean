@@ -37,7 +37,13 @@ theorem sourceGammaTwo_weighted_centered {N : ℕ}
       ∑ i : SpaceIndex, ∑ j : SpaceIndex,
         (a i * b j) • (M.gamma i * M.gamma j) := by
     simp only [Finset.sum_mul, Finset.mul_sum, smul_mul_assoc,
-      mul_smul_comm, smul_smul]
+      mul_smul_comm, Finset.smul_sum, smul_smul]
+    rw [Finset.sum_comm]
+    apply Finset.sum_congr rfl
+    intro i _
+    apply Finset.sum_congr rfl
+    intro j _
+    rw [mul_comm (b j) (a i)]
   have hdiag :
       (∑ i : SpaceIndex, ∑ j : SpaceIndex,
         (u i * v j) •
