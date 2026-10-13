@@ -28,8 +28,8 @@ private theorem finiteFockMajoranaPhasePair
     (Ci + Ai) * (Cj + Aj) +
       (Complex.I • (Ci - Ai)) * (Complex.I • (Cj - Aj)) =
     (Ci * Aj + Ai * Cj) + (Ci * Aj + Ai * Cj) := by
-  rw [smul_mul_smul, Complex.I_mul_I]
-  -- After I * I = -1, Lean has already normalized the negative scalar.
+  rw [smul_mul_smul, Complex.I_mul_I, neg_one_smul]
+  -- Explicitly remove (-1) • X before noncommutative normalization.
   noncomm_ring
 
 /-- General algebraic lemma ON THE ORIGINAL FERMION 2 HILBERT TYPE:
