@@ -48,6 +48,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6JOriginalFermionColorCurrentCARProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6KOriginalBoundedFermionColorCurrentProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6LOriginalInfinitesimalColorActionProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6MSourceVacuumContractionInterfaceProbe.lean
 
 permissions:
   contents: read
@@ -1464,6 +1465,35 @@ jobs:
                      for n,ax in entries.items()),entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G6L_ORIGINAL_INFINITESIMAL_COLOR_GENERATOR_SIGN_QUALIFIED')
+          PYCODE
+
+      - name: Qualify source bounded vacuum contraction interface
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6MSourceVacuumContractionInterfaceProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6LOriginalInfinitesimalColorActionProbe.olean
+          echo L6G6M_SOURCE_VACUUM_CONTRACTION_BEGIN
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6m.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6m.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6M.'
+          assert p+'sourceFiberFermionColorGenerator_vacuum_of_pairCancellation' in entries
+          assert entries[p+'sourceFiberFermionColorGenerator_vacuum_of_pairCancellation'] <= allowed
+          assert any(n.startswith('_private.') and
+                     n.endswith(p+'finiteDiagonalZeroVacuumContraction') and ax <= allowed
+                     for n,ax in entries.items()),entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G6M_SOURCE_BOUNDED_VACUUM_INTERFACE_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
