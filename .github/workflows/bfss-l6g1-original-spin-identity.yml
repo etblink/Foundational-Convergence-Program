@@ -1,4 +1,4 @@
-name: BFSS L6G5W Original Orbital Gauge Tangent
+name: BFSS L6G6A Original Fermionic Response Pointwise
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -36,6 +36,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5UOriginalMixedPointCoefficientProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5VOriginalRightOrderedMixedOperatorProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5WOriginalOrbitalGaugeTangentProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6AOriginalFermionicResponsePointwiseProbe.lean
 
 permissions:
   contents: read
@@ -1016,6 +1017,34 @@ jobs:
               assert p+n in entries and entries[p+n] <= allowed, entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
           print('L6G5W_ORIGINAL_ORBITAL_GAUGE_TANGENT_QUALIFIED')
+          PY
+
+      - name: Qualify exact original fermionic response as source-core point multiplier
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6AOriginalFermionicResponsePointwiseProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5WOriginalOrbitalGaugeTangentProbe.olean
+          echo L6G6A_ORIGINAL_SOURCE_FERMION_RESPONSE_POINTWISE_BEGIN
+          timeout 270s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6a.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6a.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6A.'
+          names=('sourcePositionPairResponse_apply',
+                 'sourceCoefficientResponse_apply',
+                 'sourceAllSpinorCoefficientResponse_apply')
+          assert all(p+n in entries and entries[p+n] <= allowed for n in names), entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6G6A_SOURCE_FERMION_RESPONSE_POINTWISE_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
