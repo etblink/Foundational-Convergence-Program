@@ -45,6 +45,7 @@ private theorem finiteFockMajoranaPhasePair
     _ = (Ci + Ai) * (Cj + Aj) -
           ((Ci - Ai) * (Cj - Aj)) := by
       rw [smul_mul_smul, Complex.I_mul_I, hneg]
+      exact (sub_eq_add_neg _ _).symm
     _ = (Ci * Aj + Ai * Cj) + (Ci * Aj + Ai * Cj) := by
       simp only [add_mul, mul_add, sub_mul, mul_sub]
       abel
