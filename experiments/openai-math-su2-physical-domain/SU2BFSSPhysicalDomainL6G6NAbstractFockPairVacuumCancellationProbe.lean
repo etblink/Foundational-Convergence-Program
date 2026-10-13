@@ -37,8 +37,17 @@ private theorem finiteFockMajoranaPhasePair
       _ = -((1 : ℂ) • ((Ci - Ai) * (Cj - Aj))) :=
         neg_smul (1 : ℂ) _
       _ = _ := by rw [one_smul]
-  rw [smul_mul_smul, Complex.I_mul_I, hneg]
-  noncomm_ring
+  -- Separate the complex phase from the additive ring calculation.
+  -- noncomm_ring normalizes nested module smuls as opaque coefficients
+  -- in this concrete continuous-linear-map ring; directed distribution
+  -- leaves only a commutative additive-group identity.
+  calc
+    _ = (Ci + Ai) * (Cj + Aj) -
+          ((Ci - Ai) * (Cj - Aj)) := by
+      rw [smul_mul_smul, Complex.I_mul_I, hneg]
+    _ = (Ci * Aj + Ai * Cj) + (Ci * Aj + Ai * Cj) := by
+      simp only [add_mul, mul_add, sub_mul, mul_sub]
+      abel
 
 /-- General algebraic lemma ON THE ORIGINAL FERMION 2 HILBERT TYPE:
 if every annihilator kills Ω and cross-mode CAR holds, then each
