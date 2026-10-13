@@ -59,7 +59,10 @@ private theorem source24Mode_offDiagonalMixedCAR
   -- zero operator pointwise using the source Hilbert-module action.
   have hzero :
       (0 : ℂ) • (1 : Fermion 2 →L[ℂ] Fermion 2) = 0 := by
-    ext x
+    -- Generic 'ext x' also destructs the PiLp codomain into coordinates.
+    -- Instead use exactly operator extensionality, retaining the vector goal.
+    apply ContinuousLinearMap.ext
+    intro x
     change (0 : ℂ) • ((1 : Fermion 2 →L[ℂ] Fermion 2) x) = 0
     simp
   simpa only [if_neg hij, hzero] using
