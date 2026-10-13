@@ -22,6 +22,7 @@ open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainL6G3
 open FCP.BFSSSU2PhysicalDomainL6G4A
 open FCP.BFSSSU2PhysicalDomainL6G4B
+open FCP.BFSSSU2PhysicalDomainL6G6A
 open FCP.BFSSSU2PhysicalDomainL6G6C
 
 /-- Skew exchange of the ORIGINAL source gamma bivector's
