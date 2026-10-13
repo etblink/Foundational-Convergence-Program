@@ -390,6 +390,23 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G*.olean
           key: bfss-l6-prefix-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean', 'experiments/openai-math-su2-concrete-potential/SU2ColorCrossProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G[1-5]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6[A-J]*Probe.lean') }}
 
+      - name: Recover pinned import required by a qualified prefix hit
+        if: steps.accepted_l6_prefix.outputs.cache-hit == 'true'
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          # Pauli imports Definitions. The first immutable prefix cache
+          # stores Pauli itself; rebuild its small pinned import if absent.
+          if [ ! -s .lake/build/lib/lean/OAI/Analysis/CharacterCriterion/Definitions.olean ]; then
+            timeout 180s lake build OAI.Analysis.CharacterCriterion.Definitions 2>&1 | tee /tmp/bfss-l6g1/prefix-character-definitions.log
+          fi
+          test -s .lake/build/lib/lean/OAI/Analysis/CharacterCriterion/Definitions.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6JOriginalFermionColorCurrentCARProbe.olean
+          echo L6_QUALIFIED_PREFIX_IMPORT_CLOSURE_READY
+
       - name: Qualify literal original all-spinor coefficient commutator
         if: steps.accepted_l6_prefix.outputs.cache-hit != 'true'
         shell: bash
@@ -1410,7 +1427,7 @@ jobs:
                  'sourceFiberFermionColorCurrent_selfAdjoint','sourceFiberFermionColorGenerator_star_eq_neg')
           for root in roots:
               assert p+root in entries and entries[p+root] <= allowed,entries
-          for root in ('sourceFiberTheta_CAR','finiteRealSkewThetaQuadratic_star',
+          for root in ('sourceFiberTheta_CAR','finiteStar_sum','finiteRealSkewThetaQuadratic_star',
                        'finiteRealSkewThetaNamedQuadratic_star'):
               assert any(n.startswith('_private.') and n.endswith(p+root) and ax <= allowed
                          for n,ax in entries.items()),entries

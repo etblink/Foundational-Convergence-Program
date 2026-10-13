@@ -1,6 +1,6 @@
 # L6G6K — bounded source color current, exact core transport and Hermiticity
 
-**2026-10-13. Status: candidate, UNQUALIFIED until the pinned new gate passes.**
+**2026-10-13. Status: first G6K gate #111 failed; targeted repair UNQUALIFIED until its follow-up gate passes.**
 
 ## Scientific target
 
@@ -28,9 +28,24 @@ G6K is excluded from the prefix key and is always compiled and independently aud
 
 **New negative knowledge:** GitHub pull-request path filters inspect the PR's changed-file set, so a standalone checkpoint commit on this long-lived PR still triggered the full proof workflow (#110), despite changing no Lean source. Combine routine checkpoint updates with necessary proof edits; do not count that replay as new mathematical progress. The prefix cache reduces the cost of unavoidable future executions without changing the evidence standard.
 
+## Gate #111 — first causal failures and bounded repair
+
+[Run #111](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38455307799), research commit `2561a9c1d229cab6a17ec8f7b7638e32b8166878`, actual CI checkout `e2a2d6444379818a78a3d2547628641c16ed7c01`, reached the new K stage after all prefix stages passed. The prefix was saved before K. K emitted diagnostics promptly, not a wall timeout. No complete K `.olean` qualification is claimed despite permitted-axiom reports for its earlier transport declarations.
+
+1. The pinned `AlgebraData.theta_CAR` zero scalar is a natural-number scalar multiple, `0 • 1`. `zero_smul` did not simplify that natural-number action. The repair uses the precise `zero_nsmul` interface; the actual CAR normalization is unchanged.
+2. Giving the unrestricted antisymmetry rule `F b a = -F a b` to `simp` repeatedly swapped its arguments, producing recursion failure. Use exactly `rw [hskew a b]` at one fixed summand, then simplify only cast/negative scalar multiplication. Do not raise recursion limits or change the mathematical skewness premise.
+3. The local polymorphic finite-star sum helper also introduced an extra universe in the failed generic declaration. The compiler reported a level-parameter mismatch and subsequent unknown-constant errors. Move this standard finite-star interface to an independently declared module-scope theorem; do not interpret the failed declaration's axiom-free printout as a kernel certificate.
+4. The final scalar coefficient normalization left `-(i/2) = (-i)/2`. Add the ordinary `neg_div` identity to the existing complex-star simplification. This is a scalar presentation mismatch, not a sign change.
+
+The real-coefficient star lemma now follows the already accepted S3F `RCLike.star_def`/`conj_ofReal` interface explicitly. All public theorem statements, original bounded/core current definitions, color premise, and Lean limits remain unchanged. The new private finite-star root is audited independently.
+
+**Prefix-import follow-up discovered by source inspection:** pinned `CharacterCriterion.Pauli` imports `CharacterCriterion.Definitions`, which was outside the initial immutable prefix artifact's paths. The follow-up workflow checks for that exact pinned import on a prefix hit and rebuilds it through the existing Lake procedure if absent, before any cached-prefix theorem is consumed. This is source-closure recovery; it neither repins the source nor treats a missing import as mathematical evidence.
+
+The prepared L flow remains unpublished and unqualified until its K parent passes. The repair gate isolates K instead of adding a downstream proof to the same failure diagnosis.
+
 ## Acceptance and remaining obligations
 
-Acceptance requires real `.olean` compilation, all six public source roots and three private CAR/star roots audited, explicit public theorem types, no `sorryAx` or compiler errors, and only `propext`, `Classical.choice`, and `Quot.sound`. The audit parser accepts honest axiom-free reports as well as permitted standard-axiom reports.
+Acceptance requires real `.olean` compilation, all six public source roots and four private CAR/star roots audited, explicit public theorem types, no `sorryAx` or compiler errors, and only `propext`, `Classical.choice`, and `Quot.sound`. The audit parser accepts honest axiom-free reports as well as permitted standard-axiom reports.
 
 Even a successful G6K gate does not identify the current with `pairedGaugeData.fermion`, prove vacuum annihilation, construct its flow, discharge the physical Gauss constraint, or prove the complete charge square or a spectrum statement. Next: establish the actual paired-Fock vacuum normalization and the current's exponential covariance, then use the accepted scalar-commutant interface to match the actual SU(2) action. The detailed source derivation and its curve sign are preserved in the G6J boundary record.
 

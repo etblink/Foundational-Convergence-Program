@@ -93,7 +93,7 @@ private theorem sourceFiberTheta_CAR (M : AlgebraData 2)
   classical
   by_cases h : s = u ∧ a = b
   · simpa only [if_pos h, one_smul] using M.theta_CAR s u a b
-  · simpa only [if_neg h, zero_smul] using M.theta_CAR s u a b
+  · simpa only [if_neg h, zero_nsmul] using M.theta_CAR s u a b
 
 /-- The bounded current has the same exact source-normalized CAR
 action. Its connection to GaugeData.fermion is still not assumed. -/
@@ -121,6 +121,13 @@ theorem sourceFiberFermionColorCurrent_comm (M : AlgebraData 2)
     c (fun s a b => sourceFiberFermionColorTerm M c s a b)
     (fun _ _ _ => rfl) t d
 
+/-- The additive star equivalence commutes with finite sums. Keep
+this universe-polymorphic interface at module scope. -/
+private theorem finiteStar_sum {R I : Type*}
+    [AddCommMonoid R] [StarAddMonoid R] [Fintype I] (T : I → R) :
+    star (∑ i : I, T i) = ∑ i : I, star (T i) := by
+  exact map_sum (starAddEquiv : R ≃+ R) _ _
+
 /-- A real skew quadratic form in self-adjoint generators is skew.
 Prove this in an abstract star algebra before passing to BFSS. -/
 private theorem finiteRealSkewThetaQuadratic_star
@@ -132,23 +139,29 @@ private theorem finiteRealSkewThetaQuadratic_star
       (F a b : ℂ) • (theta s a * theta s b)) =
       -(∑ s : S, ∑ a : C, ∑ b : C,
         (F a b : ℂ) • (theta s a * theta s b)) := by
-  have hsum {I : Type*} [Fintype I] (T : I → R) :
-      star (∑ i : I, T i) = ∑ i : I, star (T i) := by
-    exact map_sum (starAddEquiv : R ≃+ R) _ _
   have hcoeff (a b : C) : star (F a b : ℂ) = (F a b : ℂ) := by
-    simp only [Complex.star_def, Complex.conj_ofReal]
+    rw [RCLike.star_def]
+    exact RCLike.conj_ofReal (F a b)
   calc
     _ = ∑ s : S, ∑ a : C, ∑ b : C,
       (F a b : ℂ) • (theta s b * theta s a) := by
-        simp only [hsum, star_smul, star_mul, htheta, hcoeff]
+        simp only [finiteStar_sum, star_smul, star_mul, htheta, hcoeff]
     _ = ∑ s : S, ∑ a : C, ∑ b : C,
       (F b a : ℂ) • (theta s a * theta s b) := by
         apply Finset.sum_congr rfl
         intro s _
         exact Finset.sum_comm
-    _ = _ := by
-      simp only [hskew, Complex.ofReal_neg, neg_smul,
-        Finset.sum_neg_distrib]
+    _ = ∑ s : S, ∑ a : C, ∑ b : C,
+      -((F a b : ℂ) • (theta s a * theta s b)) := by
+        apply Finset.sum_congr rfl
+        intro s _
+        apply Finset.sum_congr rfl
+        intro a _
+        apply Finset.sum_congr rfl
+        intro b _
+        rw [hskew a b]
+        simp only [Complex.ofReal_neg, neg_smul]
+    _ = _ := by simp only [Finset.sum_neg_distrib]
 
 /-- Keep literal source summands named during the bounded-fiber
 specialization, with every recovery equality explicitly proved. -/
@@ -199,7 +212,7 @@ theorem sourceFiberFermionColorCurrent_selfAdjoint (M : AlgebraData 2)
       sourceFiberFermionColorTerm M c s a b)
   rw [star_smul, hs, smul_neg, ← neg_smul]
   congr 1
-  simp [Complex.star_def]
+  simp [Complex.star_def, neg_div]
 
 /-- The precise source generator for the +i Pauli gauge curve. -/
 def sourceFiberFermionColorGenerator (M : AlgebraData 2)
@@ -221,6 +234,7 @@ theorem sourceFiberFermionColorGenerator_star_eq_neg (M : AlgebraData 2)
 #print axioms sourceFermionColorCurrent_eq_postcomp
 #print axioms sourceFiberTheta_CAR
 #print axioms sourceFiberFermionColorCurrent_comm
+#print axioms finiteStar_sum
 #print axioms finiteRealSkewThetaQuadratic_star
 #print axioms finiteRealSkewThetaNamedQuadratic_star
 #print axioms sourceFiberFermionColorCurrent_selfAdjoint
