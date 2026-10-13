@@ -23,6 +23,7 @@ open scoped BigOperators
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainL6G3
+open FCP.BFSSSU2PhysicalDomainL6G4A
 open FCP.BFSSSU2PhysicalDomainL6G4B
 open FCP.BFSSSU2PhysicalDomainL6G5B
 open FCP.BFSSSU2PhysicalDomainL6G6A
@@ -44,6 +45,13 @@ private theorem finiteWeightedSpinorFactor
       (w α * w β) * (K α * Q β - L β * R α)) =
       (∑ α : A, w α * K α) * (∑ β : A, w β * Q β) -
       (∑ β : A, w β * L β) * (∑ α : A, w α * R α) := by
+  have hprod (f g : A → ℂ) :
+      (∑ α : A, ∑ β : A, f α * g β) =
+        (∑ α : A, f α) * (∑ β : A, g β) := by
+    rw [Finset.sum_mul]
+    apply Finset.sum_congr rfl
+    intro α _
+    rw [Finset.mul_sum]
   calc
     _ = (∑ α : A, ∑ β : A,
           ((w α * K α) * (w β * Q β) -
@@ -58,7 +66,8 @@ private theorem finiteWeightedSpinorFactor
           simp only [Finset.sum_sub_distrib]
     _ = (∑ α : A, w α * K α) * (∑ β : A, w β * Q β) -
         (∑ α : A, w α * R α) * (∑ β : A, w β * L β) := by
-          simp only [Finset.sum_mul, Finset.mul_sum]
+          rw [hprod (fun α => w α * K α) (fun β => w β * Q β),
+              hprod (fun α => w α * R α) (fun β => w β * L β)]
     _ = _ := by ring
 
 /-- Four-fold finite Fubini transport. It does not permute ANY
