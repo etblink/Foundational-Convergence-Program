@@ -55,6 +55,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6QPairedSourceThetaVacuumProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6RSourceSpinSumColorGeneratorVacuumProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6SOriginalGaugeVacuumIdentificationProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6TOriginalColorInfinitesimalUniquenessProbe.lean
 
 permissions:
   contents: read
@@ -1748,6 +1749,54 @@ jobs:
               assert name in entries and entries[name] <= allowed,entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G6S_SOURCE_CURRENT_AND_GAUGE_ACTION_COMMON_VACUUM_QUALIFIED')
+          PYCODE
+
+      - name: Compile source scalar-commutant theorem for exact original 48 Majoranas
+        shell: bash
+        timeout-minutes: 8
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6SOriginalGaugeVacuumIdentificationProbe.olean
+          echo L6G6T_SOURCE_SCHUR_COMMUTANT_BUILD_BEGIN
+          timeout 300s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6t-s1a.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          s=open('/tmp/bfss-l6g1/l6g6t-s1a.log').read()
+          assert 'error:' not in s and 'sorryAx' not in s,s[-5000:]
+          assert 'pairedTheta_commutant_scalar' in s
+          print('L6G6T_SOURCE_S1A_SCHUR_REUSED')
+          PYCODE
+
+      - name: Qualify source color-generator uniqueness from commutator and common nonzero vacuum
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6TOriginalColorInfinitesimalUniquenessProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe.olean
+          echo L6G6T_EXACT_SOURCE_COLOR_GENERATOR_UNIQUENESS_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6t.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6t.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6T.'
+          for root in ('actualGaugeVacuum_ne_zero',
+                       'sourceColorGenerator_unique_of_commutator_and_vacuum'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G6T_SOURCE_COLOR_GENERATOR_SCHUR_VACUUM_UNIQUENESS_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
