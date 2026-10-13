@@ -1,4 +1,4 @@
-name: BFSS L6G5R Original Gamma Bivector Commutator
+name: BFSS L6G5S Original Signed Row Contraction
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -31,6 +31,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5POriginalScalarMixedRemainderProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5QOriginalDiagonalMixedCommutatorProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5ROriginalGammaBivectorCommutatorProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5SOriginalSignedRowGammaContractionProbe.lean
 
 permissions:
   contents: read
@@ -861,6 +862,29 @@ jobs:
                      and ax <= allowed for n,ax in entries.items()),entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
           print('L6G5R_SOURCE_CLIFFORD_BIVECTOR_COMMUTATOR_QUALIFIED')
+          PY
+
+      - name: Qualify source signed row gamma contraction
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5SOriginalSignedRowGammaContractionProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5ROriginalGammaBivectorCommutatorProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g5s.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g5s.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          name='FCP.BFSSSU2PhysicalDomainL6G5S.sourceOriginalGamma_row_bivector_contraction'
+          assert name in entries and entries[name] <= allowed, entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
+          print('L6G5S_ORIGINAL_SIGNED_ROW_GAMMA_CONTRACTION_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
