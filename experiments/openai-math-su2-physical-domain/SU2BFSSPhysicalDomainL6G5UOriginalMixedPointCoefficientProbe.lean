@@ -108,15 +108,6 @@ private theorem finiteMixedRow_halfFubini
             exact Finset.sum_comm
     _ = _ := by
       simp only [← Finset.mul_sum]
-      congr 1
-      apply Finset.sum_congr rfl
-      intro j _
-      apply Finset.sum_congr rfl
-      intro k _
-      rw [Finset.mul_sum]
-      apply Finset.sum_congr rfl
-      intro β _
-      ring
 
 /-- The actual source W(x) coefficient against the unmodified real
 kinetic gamma row is precisely minus the source color bracket
