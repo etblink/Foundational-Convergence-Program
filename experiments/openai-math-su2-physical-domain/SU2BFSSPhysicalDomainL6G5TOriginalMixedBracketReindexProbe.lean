@@ -25,7 +25,7 @@ against a skew spatial bracket produces MINUS TWO times its ordered
 right-hand leg. The sign comes from swapping the bracket indices,
 not an assumption about the zero of either individual summand. -/
 private theorem skewKronecker_contraction
-    {I : Type*} [Fintype I]
+    {I : Type*} [Fintype I] [DecidableEq I]
     (B : I → I → ℝ)
     (hskew : ∀ j k : I, B j k = -B k j)
     (v : I → ℝ) (i : I) :
