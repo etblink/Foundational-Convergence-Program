@@ -51,6 +51,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6MSourceVacuumContractionInterfaceProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6NAbstractFockPairVacuumCancellationProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6OOriginalExteriorFockVacuumProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6POriginalTransportedFockVacuumProbe.lean
 
 permissions:
   contents: read
@@ -1556,6 +1557,48 @@ jobs:
               assert name in entries and entries[name] <= allowed,entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G6O_ACTUAL_SOURCE_EXTERIOR_VACUUM_QUALIFIED')
+          PYCODE
+
+      - name: Qualify source-transported 24-mode vacuum and mixed-CAR cancellation
+        shell: bash
+        timeout-minutes: 32
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6POriginalTransportedFockVacuumProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          for accepted in SU2FermionFockProbe SU2FermionF2Probe; do
+            cp "experiments/openai-math-su2-concrete-potential/$accepted.lean" upstream-math/lean/
+          done
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6OOriginalExteriorFockVacuumProbe.olean
+          echo L6G6P_EXACT_SOURCE_FOCK_NORM_DEPENDENCIES_BEGIN
+          timeout 1200s lake build OAI.MathematicalPhysics.ContinuumCoulomb.ManyBody.FockNorm 2>&1 | tee /tmp/bfss-l6g1/l6g6p-fock-deps.log
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/ContinuumCoulomb/ManyBody/FockNorm.olean
+          for accepted in SU2FermionFockProbe SU2FermionF2Probe; do
+            echo "L6G6P_ACCEPTED_FOCK_SOURCE_BUILD=$accepted"
+            timeout 240s lake env lean -o ".lake/build/lib/lean/$accepted.olean" "$accepted.lean" 2>&1 | tee "/tmp/bfss-l6g1/$accepted.log"
+            test -s ".lake/build/lib/lean/$accepted.olean"
+          done
+          echo L6G6P_SOURCE_FERMION2_TRANSPORTED_VACUUM_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6p.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6p.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6P.'
+          for root in ('source24ModeVacuum_annihilator',
+                       'source24ModeFockPair_vacuumCancellation'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,entries
+          assert any(n.startswith('_private.') and n.endswith(
+                     p+'source24Mode_offDiagonalMixedCAR') and ax <= allowed
+                     for n,ax in entries.items()),entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G6P_SOURCE_FERMION2_TRANSPORTED_VACUUM_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
