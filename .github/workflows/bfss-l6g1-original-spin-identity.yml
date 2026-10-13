@@ -1,4 +1,4 @@
-name: BFSS L6G6A Original Fermionic Response Pointwise
+name: BFSS L6G6B Original Fermionic Fierz Color Channels
 
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
@@ -37,6 +37,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5VOriginalRightOrderedMixedOperatorProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5WOriginalOrbitalGaugeTangentProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6AOriginalFermionicResponsePointwiseProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6BOriginalFermionicFierzColorContractionProbe.lean
 
 permissions:
   contents: read
@@ -1045,6 +1046,32 @@ jobs:
           assert all(p+n in entries and entries[p+n] <= allowed for n in names), entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6G6A_SOURCE_FERMION_RESPONSE_POINTWISE_QUALIFIED')
+          PY
+
+      - name: Qualify signed original fermionic Fierz color contraction
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6BOriginalFermionicFierzColorContractionProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6AOriginalFermionicResponsePointwiseProbe.olean
+          echo L6G6B_SOURCE_FERMION_FIERZ_COLOR_CONTRACTION_BEGIN
+          timeout 270s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6b.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6b.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6B.'
+          names=('sourceOriginalFermionFierz_row','sourceOriginalFermionFierz_colorChannels')
+          assert all(p+n in entries and entries[p+n] <= allowed for n in names), entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6G6B_SIGNED_SOURCE_FIERZ_COLOR_CHANNELS_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
