@@ -121,7 +121,6 @@ theorem sourceSU2FiniteQuarticReal
       unfold sourceNineSpatialQuarticPotential
       rw [hcolors]
       simp only [Finset.mul_sum]
-      ring
 
 #print axioms sourceSU2FixedColorQuadraticEnergy
 #print axioms sourceSU2FiniteQuarticReal
