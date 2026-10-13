@@ -54,11 +54,14 @@ specialized to distinct literal Fock mode labels. -/
 private theorem source24Mode_offDiagonalMixedCAR
     (i j : Fin 24) (hij : i ≠ j) :
     annihilator i * creator j + creator j * annihilator i = 0 := by
-  -- Specify the complex scalar action: a generic zero_smul rewrite
-  -- leaves 0 • 1 unresolved at this continuous-linear-map type.
+  -- The continuous-linear-map smul is a concrete action, not the
+  -- generic SMulZeroClass instance selected by zero_smul. Prove the
+  -- zero operator pointwise using the source Hilbert-module action.
   have hzero :
-      (0 : ℂ) • (1 : Fermion 2 →L[ℂ] Fermion 2) = 0 :=
-    zero_smul ℂ _
+      (0 : ℂ) • (1 : Fermion 2 →L[ℂ] Fermion 2) = 0 := by
+    ext x
+    change (0 : ℂ) • ((1 : Fermion 2 →L[ℂ] Fermion 2) x) = 0
+    simp
   simpa only [if_neg hij, hzero] using
     (FCP.BFSSFermionF2.annihilator_creator_car i j)
 
