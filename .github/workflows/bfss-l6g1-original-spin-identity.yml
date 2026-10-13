@@ -29,6 +29,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5NOriginalFiniteQuarticContractionProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5OOriginalComplexQuarticOperatorProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5POriginalScalarMixedRemainderProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G5QOriginalDiagonalMixedCommutatorProbe.lean
 
 permissions:
   contents: read
@@ -803,6 +804,35 @@ jobs:
           assert any(n.endswith('.orderedMixed_firstOrder_commutator') and ax<=allowed for n,ax in entries.items()),entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
           print('L6G5P_SOURCE_SCALAR_MIXED_REMAINDER_QUALIFIED')
+          PY
+
+      - name: Qualify literal SU2 diagonal kinetic-quadratic commutator
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G5QOriginalDiagonalMixedCommutatorProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G5POriginalScalarMixedRemainderProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g5q.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g5q.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G5Q.'
+          for n in ('sourceSU2StructureConstant_repeatLeft_zero',
+                    'sourceSU2StructureConstant_repeatRight_zero',
+                    'sourceSU2WeightedPairResponse_zero',
+                    'sourceSpinorKineticQuadratic_comm_zero',
+                    'sourceSpinorMixedCommutator_zero',
+                    'sourceSpinorOrderedMixedTerm_eq_rightOrdered'):
+              assert p+n in entries and entries[p+n] <= allowed,entries
+          assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
+          print('L6G5Q_SOURCE_DIAGONAL_MIXED_COMMUTATOR_QUALIFIED')
           PY
 
       - name: Preserve independently inspectable qualification evidence
