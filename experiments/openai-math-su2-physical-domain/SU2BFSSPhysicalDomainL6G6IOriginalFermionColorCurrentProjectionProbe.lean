@@ -31,7 +31,7 @@ open FCP.BFSSSU2PhysicalDomainL6G6H
 the other two indices and operates on arbitrary additive targets.
 No CAR relation, spin dimension, or color assumption enters here. -/
 private theorem finiteDiagonalSpinProjection
-    {S C V : Type*} [Fintype S] [Fintype C] [AddCommMonoid V]
+    {S C V : Type*} [Fintype S] [DecidableEq S] [Fintype C] [AddCommMonoid V]
     (F : S → C → C → V) :
     (∑ p : S × C, ∑ q : S × C,
       if p.1 = q.1 then F p.1 p.2 q.2 else 0) =
