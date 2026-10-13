@@ -77,8 +77,16 @@ theorem sourceColorGenerator_unique_of_commutator_and_vacuum
     have hJ :=
       FCP.BFSSSU2PhysicalDomainL6G6L.sourceFiberFermionColorGenerator_comm
         pairedAlgebraData hcolor c α a
+    -- Keep the exact imported source expressions in this comparison.
+    -- Unifying the locally abbreviated T and J forced Lean to unfold the
+    -- entire concrete color operator during Eq.trans (#136 recursion).
     have hsame :
-        D * T - T * D = J * T - T * J :=
+        D * pairedAlgebraData.theta α a -
+          pairedAlgebraData.theta α a * D =
+        sourceFiberFermionColorGenerator pairedAlgebraData c *
+          pairedAlgebraData.theta α a -
+        pairedAlgebraData.theta α a *
+          sourceFiberFermionColorGenerator pairedAlgebraData c :=
       (hD α a).trans hJ.symm
     have hv := congrArg
       (fun X : Fermion 2 →L[ℂ] Fermion 2 => X v) hsame
@@ -112,7 +120,9 @@ theorem sourceColorGenerator_unique_of_commutator_and_vacuum
     intro v
     have hv := hz v
     change (D - J) v = z • v at hv
-    simpa only [hz0, zero_smul] using hv
+    -- The goal is (0 : FermionOp) v, whereas the scalar proof ends
+    -- at the zero *vector*. Normalize the zero operator application.
+    simpa only [hz0, zero_smul, ContinuousLinearMap.zero_apply] using hv
   exact sub_eq_zero.mp hzero
 
 #print axioms actualGaugeVacuum_ne_zero
