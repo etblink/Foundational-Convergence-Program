@@ -35,15 +35,25 @@ theorem sourcePositionPairResponse_apply {N : ℕ}
     ((sourcePositionPairResponse u v t) f) x =
       (sourcePositionPairPoint u v t x) • f x := by
   classical
-  -- Evaluate the original position map BEFORE distributing conditionals.
-  -- An unapplied conditional of endomorphisms does not definitionally
-  -- commute with application to f; the four Kronecker cases do.
-  have hP (a : BosonLabel N) :
-      ((sourceP a) f) x = (((x a : ℝ) : ℂ)) • f x := rfl
-  by_cases huv : u = v <;> by_cases hut : u = t
-  all_goals
-    simp [sourcePositionPairResponse, sourcePositionPairPoint,
-      huv, hut, hP, add_smul]
+  -- A conditional SourceEnd cannot be evaluated by definitional equality.
+  -- Discharge evaluation before summing the two Kronecker terms.
+  have hite (P : Prop) [Decidable P] (a : BosonLabel N) :
+      (((if P then sourceP a else 0) f) x) =
+        (if P then ((x a : ℝ) : ℂ) else 0) • f x := by
+    by_cases hp : P
+    · simp only [if_pos hp]
+      rfl
+    · simp only [if_neg hp, LinearMap.zero_apply, zero_smul]
+  calc
+    ((sourcePositionPairResponse u v t) f) x =
+        (((if u = v then sourceP t else 0) f) x) +
+        (((if u = t then sourceP v else 0) f) x) := rfl
+    _ = (if u = v then ((x t : ℝ) : ℂ) else 0) • f x +
+        (if u = t then ((x v : ℝ) : ℂ) else 0) • f x := by
+          rw [hite (u = v) t, hite (u = t) v]
+    _ = (sourcePositionPairPoint u v t x) • f x := by
+          unfold sourcePositionPairPoint
+          rw [add_smul]
 
 /-- Every coefficient here is pulled from G4B's actual source kinetic and
 quadratic terms, with the original -i and 1/2 normalization unchanged. -/
