@@ -28,9 +28,16 @@ private theorem finiteFockMajoranaPhasePair
     (Ci + Ai) * (Cj + Aj) +
       (Complex.I • (Ci - Ai)) * (Complex.I • (Cj - Aj)) =
     (Ci * Aj + Ai * Cj) + (Ci * Aj + Ai * Cj) := by
-  -- The remaining scalar is (-1 : ℂ), not an integer smul.
-  -- Reuse the exact complex-module normalization qualified in L6G6L.
-  rw [smul_mul_smul, Complex.I_mul_I, neg_smul, one_smul]
+  -- Supply the complex scalar type explicitly; an unqualified
+  -- neg_smul can elaborate at a different scalar action.
+  have hneg :
+      ((-1 : ℂ) • ((Ci - Ai) * (Cj - Aj))) =
+        -((Ci - Ai) * (Cj - Aj)) := by
+    calc
+      _ = -((1 : ℂ) • ((Ci - Ai) * (Cj - Aj))) :=
+        neg_smul (1 : ℂ) _
+      _ = _ := by rw [one_smul]
+  rw [smul_mul_smul, Complex.I_mul_I, hneg]
   noncomm_ring
 
 /-- General algebraic lemma ON THE ORIGINAL FERMION 2 HILBERT TYPE:
