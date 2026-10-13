@@ -18,6 +18,7 @@ open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainL6G1
 open FCP.BFSSSU2PhysicalDomainL6G2
+open FCP.BFSSSU2PhysicalDomainL6G3
 open FCP.BFSSSU2PhysicalDomainL6G4A
 open FCP.BFSSSU2PhysicalDomainL6G4B
 open FCP.BFSSSU2PhysicalDomainL6G5F
@@ -64,7 +65,11 @@ theorem sourceCenteredGammaPair_rowGram {N : ℕ}
     ring
   change (∑ β : SpinIndex, ((w ᵥ* C) β) ^ 2) = _
   rw [hrow]
-  change dotProduct (C.transpose *ᵥ w) (C.transpose *ᵥ w) = _
+  have hdot :
+      (∑ β : SpinIndex, ((C.transpose *ᵥ w) β) ^ 2) =
+        dotProduct (C.transpose *ᵥ w) (C.transpose *ᵥ w) := by
+    simp only [dotProduct, pow_two]
+  rw [hdot]
   rw [OAI.BFSSGamma.dot_mulVec_left, Matrix.transpose_transpose,
     Matrix.mulVec_mulVec]
   rw [show C * C.transpose =
