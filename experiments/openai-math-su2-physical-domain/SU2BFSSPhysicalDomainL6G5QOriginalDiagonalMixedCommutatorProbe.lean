@@ -20,11 +20,13 @@ noncomputable section
 open scoped BigOperators
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
+open FCP.BFSSSU2PhysicalDomainL6G3
 open FCP.BFSSSU2PhysicalDomainL6G4A
 open FCP.BFSSSU2PhysicalDomainL6G4B
 open FCP.BFSSSU2PhysicalDomainL6G5B
 open FCP.BFSSSU2PhysicalDomainL6G5C
 open FCP.BFSSSU2PhysicalDomainL6G5D
+open FCP.BFSSSU2PhysicalDomainL6G5E
 open FCP.BFSSSU2PhysicalDomainL6G5P
 
 /-- Actual normalized-Pauli SU(2) bracket is zero when the first
@@ -169,11 +171,9 @@ theorem sourceSpinorKineticQuadratic_comm_zero
       sourceSpinorQuadraticMultiplication M w p *
         sourceSpinorKineticDifferential M w p = 0 := by
   classical
-  change opComm
-    (∑ u : BosonLabel 2, sourceSpinorKineticWeight M w p u • sourceD u)
-    (∑ α : SpinIndex, (w α : ℂ) •
-      (∑ v : BosonLabel 2, ∑ t : BosonLabel 2,
-        sourceQuadraticWeight M α p v t • (sourceP v * sourceP t))) = 0
+  change opComm (sourceSpinorKineticDifferential M w p)
+    (sourceSpinorQuadraticMultiplication M w p) = 0
+  rw [sourceSpinorKineticDifferential, sourceSpinorQuadraticMultiplication]
   rw [opComm_sum_left]
   apply Finset.sum_eq_zero
   intro u _
