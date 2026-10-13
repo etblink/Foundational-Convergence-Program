@@ -78,9 +78,10 @@ theorem sourceCenteredGammaPair_rowGram {N : ℕ}
       (∑ i : SpaceIndex, u i * v i) ^ 2) • (1 : GammaMatrix) from
       sourceCenteredGammaPair_gram M u v]
   simp only [Matrix.smul_mulVec, Matrix.one_mulVec, dotProduct,
-    Pi.smul_apply, smul_eq_mul, Finset.mul_sum]
+    Pi.smul_apply, smul_eq_mul]
   unfold spinorSquareNorm
   simp only [pow_two]
+  conv_rhs => rw [Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro α _
   ring
