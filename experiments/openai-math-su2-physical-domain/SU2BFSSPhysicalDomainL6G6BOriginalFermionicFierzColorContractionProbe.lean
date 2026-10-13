@@ -34,15 +34,15 @@ theorem sourceOriginalFermionFierz_row
     (hgamma : M.gamma = originalGamma)
     (w : SpinIndex → ℝ) (k : SpaceIndex) (r s : SpinIndex) :
     (∑ i : SpaceIndex,
-      (w ᵥ* M.gamma i) r * (w ᵥ* M.gammaTwo i k) s +
-      (w ᵥ* M.gamma i) s * (w ᵥ* M.gammaTwo i k) r) =
+      ((w ᵥ* M.gamma i) r * (w ᵥ* M.gammaTwo i k) s +
+       (w ᵥ* M.gamma i) s * (w ᵥ* M.gammaTwo i k) r)) =
       spinorSquareNorm w * M.gamma k r s -
         (if r = s then dotProduct w (M.gamma k *ᵥ w) else 0) := by
   change (∑ i : SpaceIndex,
-      (w ᵥ* M.gamma i) r *
+      ((w ᵥ* M.gamma i) r *
         (w ᵥ* OAI.BFSSGamma.gammaTwo M.gamma i k) s +
-      (w ᵥ* M.gamma i) s *
-        (w ᵥ* OAI.BFSSGamma.gammaTwo M.gamma i k) r) =
+        (w ᵥ* M.gamma i) s *
+        (w ᵥ* OAI.BFSSGamma.gammaTwo M.gamma i k) r)) =
       spinorSquareNorm w * M.gamma k r s -
         (if r = s then dotProduct w (M.gamma k *ᵥ w) else 0)
   rw [hgamma]
@@ -82,8 +82,8 @@ theorem sourceOriginalFermionFierz_colorChannels
     (∑ c : ColorIndex N, ∑ k : SpaceIndex,
       (M.structureConstant a b c * x (k,c)) *
         (∑ i : SpaceIndex,
-          (w ᵥ* M.gamma i) r * (w ᵥ* M.gammaTwo i k) s +
-          (w ᵥ* M.gamma i) s * (w ᵥ* M.gammaTwo i k) r)) =
+          ((w ᵥ* M.gamma i) r * (w ᵥ* M.gammaTwo i k) s +
+           (w ᵥ* M.gamma i) s * (w ᵥ* M.gammaTwo i k) r))) =
       spinorSquareNorm w *
         (∑ c : ColorIndex N, ∑ k : SpaceIndex,
           (M.structureConstant a b c * x (k,c)) * M.gamma k r s) -
