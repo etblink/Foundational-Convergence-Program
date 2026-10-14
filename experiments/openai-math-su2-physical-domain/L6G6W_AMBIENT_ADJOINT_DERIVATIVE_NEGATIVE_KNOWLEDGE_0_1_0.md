@@ -25,3 +25,13 @@ W differentiates an **ambient unitary matrix trace coefficient**. It does not ye
 Use a named equality before unfolding the definition its left side requires. A simplifier list containing both a definition and its helper is not a guarantee that the helper will match. Preserve the progression of first causal failures: #149 instance coherence; #150 final conjugate-transpose conversion. Do not collapse them into one unchanged red streak or repeat chain-rule guesses after that step has successfully elaborated.
 
 Pinned environment: `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean `4.34.1`, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`. Canonical main and both mathematical-source repositories are unchanged.
+
+## Gate #151: repair kernel-qualified
+
+[#151](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38509669642), job `115675031522`, source commit `23a9a90937df7d291cbe6541a4733481eef2437a`, completed **SUCCESS**. The explicit named rewrite removed the sole #150 mismatch. Both `sourcePlusIColorMatrix_conjTranspose` and `sourcePlusIAmbientAdjointCoefficient_deriv` compiled into the W `.olean` and printed only `propext`, `Classical.choice`, and `Quot.sound`. The log reports `L6G6W_SOURCE_AMBIENT_ADJOINT_COEFFICIENT_DERIVATIVE_QUALIFIED` with no Lean errors or `sorryAx`.
+
+The printed full derivative quantifies exactly over `c B A : ColorIndex 2` and differentiates the original real matrix trace expression to `pairedAlgebraData.structureConstant B A c` at zero. Exact mathematical-source/compiler/Mathlib checks and the accepted K–V cache closure validated. W is now qualified at the **ambient coefficient** boundary stated above.
+
+Accepted W source blob: `5f73e148a9c4b2abf6afb7d6204271ec12b00f4f`. The actual PR-merge CI checkout is `fbe45b7634c2498957fba22fcffa449b8eb990c1`, distinct from the source branch commit. Preserved evidence artifact: `bfss-l6g1-source-qualification-38509669642`, ID `11869671481`, SHA256 `093a1896594736fd1c3c3c24ba4dbbbeb76eadcef4fc869a1b32fd8a9b2d7477`. The permanent source/statement record retains the qualification boundary beyond the artifact's 14-day retention window.
+
+Next candidate: `L6G6X` constructs the original determinant-one SU(2) curve and transports this accepted derivative to the native `AlgebraData.adjointCoefficient`. It is not accepted until its own pinned compile and axiom audit succeed.
