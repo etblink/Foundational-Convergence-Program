@@ -2445,6 +2445,32 @@ jobs:
           print('L6G7N_ORIGINAL_BOSON_GAUGE_VECTOR_DERIVATIVE_QUALIFIED')
           PYCODE
 
+      - name: Qualify exact original SmoothCore forward gauge pullback derivative
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7OOriginalSmoothCoreGaugePullbackDerivativeProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7NActualBosonGaugeVectorDerivativeProbe.olean
+          echo L6G7O_ORIGINAL_SMOOTHCORE_GAUGE_PULLBACK_DERIVATIVE_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6g7o.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7o.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6G7O.actualBosonGauge_smoothCore_pullback_derivative_zero'
+          assert root in entries and entries[root] <= allowed,(root,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7O_ORIGINAL_SMOOTHCORE_GAUGE_PULLBACK_DERIVATIVE_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
