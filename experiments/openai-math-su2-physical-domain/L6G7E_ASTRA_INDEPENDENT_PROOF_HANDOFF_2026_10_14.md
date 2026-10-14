@@ -5,11 +5,11 @@ Date: 2026-10-14. Prepared by active Project Lead for Astra's independent GitHub
 
 Provide an independent Lean 4 proof strategy (and, if practical, an axiom-clean PR) for the missing ORIGINAL bounded Fock operator commutator evolution
 
-$
+$$
 \frac{d}{dt} B_{s,A}(t)
 = J_F(c)B_{s,A}(t)-B_{s,A}(t)J_F(c),
 \quad B_{s,A}(t)=\sum_B R_c(t)[B,A]\,\theta_{s,B}.
-$
+$$
 
 The theorem's exact Lean name is `FCP.BFSSSU2PhysicalDomainL6G7E.sourceRotatedTheta_deriv_comm_all`. **The underlying full all-time commutator identity is not yet qualified.** No finite-time implementer equality, full gauge/Gauss or BFSS spectral result should be claimed from it.
 
