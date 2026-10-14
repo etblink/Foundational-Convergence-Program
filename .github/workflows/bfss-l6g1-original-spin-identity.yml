@@ -72,6 +72,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7IOriginalFlowThetaForwardCovarianceProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7JSourceFlowLinearEquivCovarianceProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7KOriginalSourceFlowExactGaugeImplementationProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7LActualGaugeFermionDerivativeProbe.lean
 
 permissions:
   contents: read
@@ -2352,6 +2353,35 @@ jobs:
               assert name in entries and entries[name] <= allowed,(name,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G7K_EXACT_ORIGINAL_SOURCE_GAUGE_IMPLEMENTATION_QUALIFIED')
+          PYCODE
+
+      - name: Qualify exact original SU2 gauge fermion infinitesimal and all-time derivatives
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7LActualGaugeFermionDerivativeProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7KOriginalSourceFlowExactGaugeImplementationProbe.olean
+          echo L6G7L_ORIGINAL_GAUGE_FERMION_DERIVATIVE_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6g7l.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7l.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7L.'
+          for root in ('actualGaugeFermion_derivative_zero',
+                       'actualGaugeFermion_derivative_all_time'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7L_ACTUAL_GAUGE_FERMION_DERIVATIVE_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
