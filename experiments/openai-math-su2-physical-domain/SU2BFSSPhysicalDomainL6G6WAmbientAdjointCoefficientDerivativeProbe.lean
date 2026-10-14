@@ -19,6 +19,7 @@ namespace FCP.BFSSSU2PhysicalDomainL6G6W
 noncomputable section
 
 open Matrix
+open scoped Matrix.Norms.L2Operator
 open OAI.BFSSQuantum
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2PhysicalDomainL6G6V
@@ -38,7 +39,7 @@ private noncomputable def sourceTraceCoefficientCLM (B : ColorIndex 2) :
          change (Matrix.trace (pairedAlgebraData.color B * (r • X))).re =
            r * (Matrix.trace (pairedAlgebraData.color B * X)).re
          rw [Matrix.mul_smul, Matrix.trace_smul]
-         simpa only [Complex.smul_re, smul_eq_mul]
+         simp only [Complex.smul_re, smul_eq_mul]
 
      } : ColorMatrix 2 →ₗ[ℝ] ℝ))
 
@@ -67,45 +68,40 @@ theorem sourcePlusIAmbientAdjointCoefficient_deriv
             (sourcePlusIColorMatrix c t * pairedAlgebraData.color A *
               (sourcePlusIColorMatrix c t)ᴴ))).re)
       (pairedAlgebraData.structureConstant B A c) 0 := by
-  -- Pin both maps and both derivatives. The pinned Mathlib chain
-  -- rule takes the scalar basepoint *before* the derivative proofs;
-  -- isolating the inputs avoids ambiguous dot-notation elaboration.
-  let f : ℝ → ColorMatrix 2 := fun t =>
-    sourcePlusIColorMatrix c t * pairedAlgebraData.color A *
-      NormedSpace.exp
-        (t • (-((Complex.I : ℂ) • pairedAlgebraData.color c)))
-  let L : ColorMatrix 2 →L[ℝ] ℝ := sourceTraceCoefficientCLM B
-  have hinner :
-      HasDerivAt f
-        ((Complex.I : ℂ) •
-          (pairedAlgebraData.color c * pairedAlgebraData.color A -
-           pairedAlgebraData.color A * pairedAlgebraData.color c)) (0 : ℝ) := by
-    exact sourcePlusIConjugation_deriv c A
-  -- Source-backed route: the pinned Mathlib uses
-  -- `e.hasFDerivAt.comp_hasDerivAt c hf` for fixed continuous linear
-  -- maps. Derive its composition proposition first and only then
-  -- transport it to a pointwise expression, avoiding higher-order
-  -- unification under the literal `∘` in the target.
-  have hcomp :=
-    L.hasFDerivAt.comp_hasDerivAt (0 : ℝ) hinner
-  have h :
-      HasDerivAt (fun t : ℝ => L (f t))
-        (L ((Complex.I : ℂ) •
-          (pairedAlgebraData.color c * pairedAlgebraData.color A -
-           pairedAlgebraData.color A * pairedAlgebraData.color c))) (0 : ℝ) := by
-    simpa only [Function.comp_def] using hcomp
+  -- Use the SAME scoped matrix norm and exact upstream derivative
+  -- composition architecture as the qualified GaugeGeometry proof.
+  -- Avoid composing with L6G6V's intermediate derivative or using
+  -- the overloaded local aliases that caused gates #144–#149 to fail.
+  have hd :=
+    (sourceTraceCoefficientCLM B).hasFDerivAt.comp_hasDerivAt (0 : ℝ)
+      (OAI.BFSSGaugeFlow.exp_conj_deriv_zero
+        ((Complex.I : ℂ) • pairedAlgebraData.color c)
+        (pairedAlgebraData.color A))
   change HasDerivAt
     (fun t : ℝ =>
       (Matrix.trace
         (pairedAlgebraData.color B *
-          (sourcePlusIColorMatrix c t * pairedAlgebraData.color A *
+          (NormedSpace.exp
+              (t • ((Complex.I : ℂ) • pairedAlgebraData.color c)) *
+            pairedAlgebraData.color A *
             NormedSpace.exp
               (t • (-((Complex.I : ℂ) • pairedAlgebraData.color c)))))).re)
     ((Matrix.trace
       (pairedAlgebraData.color B *
-        ((Complex.I : ℂ) •
-          (pairedAlgebraData.color c * pairedAlgebraData.color A -
-            pairedAlgebraData.color A * pairedAlgebraData.color c)))).re) 0 at h
+        (((Complex.I : ℂ) • pairedAlgebraData.color c) *
+          pairedAlgebraData.color A -
+          pairedAlgebraData.color A *
+            ((Complex.I : ℂ) • pairedAlgebraData.color c)))).re) 0 at hd
+  have heq :
+      ((Complex.I : ℂ) • pairedAlgebraData.color c) *
+          pairedAlgebraData.color A -
+        pairedAlgebraData.color A *
+          ((Complex.I : ℂ) • pairedAlgebraData.color c) =
+      (Complex.I : ℂ) •
+        (pairedAlgebraData.color c * pairedAlgebraData.color A -
+          pairedAlgebraData.color A * pairedAlgebraData.color c) := by
+    simp only [smul_mul_assoc, mul_smul_comm, smul_sub]
+  rw [heq] at hd
   have hcoeff :
       (Matrix.trace
         (pairedAlgebraData.color B *
@@ -114,8 +110,8 @@ theorem sourcePlusIAmbientAdjointCoefficient_deriv
               pairedAlgebraData.color A * pairedAlgebraData.color c)))).re =
       pairedAlgebraData.structureConstant B A c :=
     FCP.BFSSSU2PhysicalDomainL6G6U.pairedSourceAdjointColorCandidateTangent_coeff c B A
-  rw [hcoeff] at h
-  simpa only [sourcePlusIColorMatrix_conjTranspose] using h
+  rw [hcoeff] at hd
+  simpa only [sourcePlusIColorMatrix, sourcePlusIColorMatrix_conjTranspose] using hd
 
 #print axioms sourcePlusIColorMatrix_conjTranspose
 #print axioms sourcePlusIAmbientAdjointCoefficient_deriv
