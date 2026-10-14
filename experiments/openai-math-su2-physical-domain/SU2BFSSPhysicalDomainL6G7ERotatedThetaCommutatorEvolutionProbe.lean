@@ -9,8 +9,9 @@ Only accepted native source results are imported:
 * L6G6L — exact original generator commutator on theta;
 * L6G7C/D — native SU(2) all-time color derivative and the
   differentiated source bounded theta sum.
-A generic finite-color commutator identity performs all ring algebra
-BEFORE instantiation with the 2^24-dimensional original Fock fiber.
+A linear-map finite-color transport identity performs the sum algebra
+and real-to-complex scalar conversion in an abstract module BEFORE
+instantiation with the 2^24-dimensional original Fock fiber.
 The unqualified pointwise L6G7A wrapper is not used.
 
 This is an operator-valued evolution identity, not yet integrated
@@ -110,6 +111,62 @@ theorem sourceGenerator_theta_comm_output
       rw [hskew b]
       exact (neg_smul _ _).symm
 
+/-! Independent Issue #26 strategy: transport a finite coefficient vector
+through a linear map. All scalar casts and sum rearrangements are proved
+with an abstract module, before the original Fock operators are supplied.
+Continuity is unnecessary here: L6G7D already proves the derivative. -/
+private theorem linear_finite_color_transport
+    {V C : Type*} [AddCommGroup V] [Module ℂ V] [Fintype C]
+    (L : V →ₗ[ℂ] V) (theta : C → V)
+    (F : C → C → ℝ) (r : C → ℝ)
+    (h : ∀ d, L (theta d) = ∑ b : C, (F b d : ℂ) • theta b) :
+    L (∑ d : C, (r d : ℂ) • theta d) =
+      ∑ b : C, ((∑ d : C, F b d * r d : ℝ) : ℂ) • theta b := by
+  classical
+  calc
+    _ = ∑ d : C, (r d : ℂ) • L (theta d) := by
+      simp only [map_sum, map_smul]
+    _ = ∑ d : C, ∑ b : C, ((r d : ℂ) * (F b d : ℂ)) • theta b := by
+      simp_rw [h, Finset.smul_sum, smul_smul]
+    _ = ∑ b : C, ∑ d : C, ((F b d : ℂ) * (r d : ℂ)) • theta b := by
+      rw [Finset.sum_comm]
+      apply Finset.sum_congr rfl
+      intro b _
+      apply Finset.sum_congr rfl
+      intro d _
+      rw [mul_comm (r d : ℂ) (F b d : ℂ)]
+    _ = _ := by
+      simp only [Complex.ofReal_sum, Complex.ofReal_mul, Finset.sum_smul]
+
+/-- The commutator as a linear map on the EXACT source operator space.
+Its arguments are arbitrary operators; no concrete Majorana is expanded. -/
+private def sourceCommutator (J : SourceFiberEnd) :
+    SourceFiberEnd →ₗ[ℂ] SourceFiberEnd where
+  toFun T := J * T - T * J
+  map_add' S T := by
+    simp only [mul_add, add_mul]
+    abel
+  map_smul' z T := by
+    simp only [RingHom.id_apply, mul_smul_comm, smul_mul_assoc, smul_sub]
+
+-- Restrict elaborator transparency only inside this file. These constants
+-- retain their definitions in the kernel. Their accepted source files,
+-- values and theorem statements are unchanged. No recursion limit is raised.
+attribute [local irreducible] pairedAlgebraData sourceFiberFermionColorGenerator
+
+/-- Small, rigidly typed source bridge into the linear-map interface. -/
+private theorem sourceCommutator_theta
+    (c : ColorIndex 2) (spin : SpinIndex) (d : ColorIndex 2) :
+    sourceCommutator (sourceFiberFermionColorGenerator pairedAlgebraData c)
+        (pairedAlgebraData.theta spin d) =
+      ∑ b : ColorIndex 2,
+        (pairedAlgebraData.structureConstant b d c : ℂ) •
+          pairedAlgebraData.theta spin b := by
+  change sourceFiberFermionColorGenerator pairedAlgebraData c *
+      pairedAlgebraData.theta spin d - pairedAlgebraData.theta spin d *
+      sourceFiberFermionColorGenerator pairedAlgebraData c = _
+  exact sourceGenerator_theta_comm_output c spin d
+
 /-- ACTUAL original bounded source theta combination evolves by
 the ORIGINAL skew fermion generator, for every time and theta index. -/
 theorem sourceRotatedTheta_comm_evolution
@@ -120,70 +177,15 @@ theorem sourceRotatedTheta_comm_evolution
       sourceRotatedTheta c spin A t *
         sourceFiberFermionColorGenerator pairedAlgebraData c =
       sourceRotatedThetaDerivative c spin A t := by
-  -- #179: the generic ring lemma AND literal source commutator are
-  -- individually kernel-clean, but reducing abstract local aliases into
-  -- the literal source operator in hcomm exhausted recursion depth.
-  -- Preserve source J/theta syntactically. Rewrite one EXACT source
-  -- commutator at a time, only after ordinary finite-sum distribution.
+  change sourceCommutator (sourceFiberFermionColorGenerator pairedAlgebraData c)
+      (sourceRotatedTheta c spin A t) = sourceRotatedThetaDerivative c spin A t
   unfold sourceRotatedTheta sourceRotatedThetaDerivative
-  calc
-    sourceFiberFermionColorGenerator pairedAlgebraData c *
-        (∑ d : ColorIndex 2,
-          (pairedAlgebraData.adjointCoefficient
-            (sourcePlusIGaugeCurve c t) A d : ℂ) •
-              pairedAlgebraData.theta spin d) -
-      (∑ d : ColorIndex 2,
-          (pairedAlgebraData.adjointCoefficient
-            (sourcePlusIGaugeCurve c t) A d : ℂ) •
-              pairedAlgebraData.theta spin d) *
-        sourceFiberFermionColorGenerator pairedAlgebraData c =
-      ∑ d : ColorIndex 2,
-        (pairedAlgebraData.adjointCoefficient
-          (sourcePlusIGaugeCurve c t) A d : ℂ) •
-          (sourceFiberFermionColorGenerator pairedAlgebraData c *
-              pairedAlgebraData.theta spin d -
-            pairedAlgebraData.theta spin d *
-              sourceFiberFermionColorGenerator pairedAlgebraData c) := by
-        simp only [Finset.mul_sum, Finset.sum_mul,
-          mul_smul_comm, smul_mul_assoc,
-          ← Finset.sum_sub_distrib, ← smul_sub]
-    _ = ∑ d : ColorIndex 2,
-          (pairedAlgebraData.adjointCoefficient
-            (sourcePlusIGaugeCurve c t) A d : ℂ) •
-            (∑ b : ColorIndex 2,
-              (pairedAlgebraData.structureConstant b d c : ℂ) •
-                pairedAlgebraData.theta spin b) := by
-      apply Finset.sum_congr rfl
-      intro d _
-      rw [sourceGenerator_theta_comm_output c spin d]
-    _ = ∑ d : ColorIndex 2, ∑ b : ColorIndex 2,
-          ((pairedAlgebraData.adjointCoefficient
-            (sourcePlusIGaugeCurve c t) A d : ℂ) *
-              (pairedAlgebraData.structureConstant b d c : ℂ)) •
-              pairedAlgebraData.theta spin b := by
-      simp only [Finset.smul_sum, smul_smul]
-    _ = ∑ b : ColorIndex 2, ∑ d : ColorIndex 2,
-          ((pairedAlgebraData.structureConstant b d c : ℂ) *
-            (pairedAlgebraData.adjointCoefficient
-              (sourcePlusIGaugeCurve c t) A d : ℂ)) •
-              pairedAlgebraData.theta spin b := by
-      rw [Finset.sum_comm]
-      apply Finset.sum_congr rfl
-      intro b _
-      apply Finset.sum_congr rfl
-      intro d _
-      rw [mul_comm
-        (pairedAlgebraData.adjointCoefficient
-          (sourcePlusIGaugeCurve c t) A d : ℂ)
-        (pairedAlgebraData.structureConstant b d c : ℂ)]
-    _ = ∑ b : ColorIndex 2,
-          ((∑ d : ColorIndex 2,
-              pairedAlgebraData.structureConstant b d c *
-                pairedAlgebraData.adjointCoefficient
-                  (sourcePlusIGaugeCurve c t) A d : ℝ) : ℂ) •
-            pairedAlgebraData.theta spin b := by
-      simp only [Complex.ofReal_sum, Complex.ofReal_mul,
-        Finset.sum_smul]
+  exact linear_finite_color_transport
+    (sourceCommutator (sourceFiberFermionColorGenerator pairedAlgebraData c))
+    (pairedAlgebraData.theta spin)
+    (fun b d => pairedAlgebraData.structureConstant b d c)
+    (fun d => pairedAlgebraData.adjointCoefficient (sourcePlusIGaugeCurve c t) A d)
+    (sourceCommutator_theta c spin)
 
 /-- The all-time original 48-theta source operator evolution equation.
 No unverified Fock-vector transport or finite-time identification is used. -/
@@ -198,6 +200,9 @@ theorem sourceRotatedTheta_deriv_comm_all
   rw [sourceRotatedTheta_comm_evolution c spin A t]
   exact sourceRotatedTheta_deriv_all c spin A t
 
+#print axioms linear_finite_color_transport
+#print axioms sourceCommutator
+#print axioms sourceCommutator_theta
 #print axioms abstract_finite_color_commutator
 #print axioms sourceGenerator_theta_comm_output
 #print axioms sourceRotatedTheta_comm_evolution

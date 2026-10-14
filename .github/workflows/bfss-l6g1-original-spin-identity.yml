@@ -3,6 +3,12 @@ name: BFSS L6G6K Original Bounded Fermion Color Current
 # Stable PR25 scope. A missing historical cache is recovered from the
 # unchanged upstream lockfile; PR bases and accepted source files stay fixed.
 on:
+  push:
+    branches:
+      - research/openai-math-su2-l6g7e-independent-linear
+    paths:
+      - .github/workflows/bfss-l6g1-original-spin-identity.yml
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7ERotatedThetaCommutatorEvolutionProbe.lean
   pull_request:
     branches:
       - research/openai-math-su2-s3k-physical-spin-flow
@@ -2104,6 +2110,9 @@ jobs:
           cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7DRotatedThetaOperatorDerivativeProbe.olean
+          rm -f ".lake/build/lib/lean/$stem.olean"
+          cp "$stem.lean" /tmp/bfss-l6g1/l6g7e-tested-source.lean
+          git hash-object "$stem.lean" | tee /tmp/bfss-l6g1/l6g7e-source-blob.txt
           echo L6G7E_ORIGINAL_THETA_COMMUTATOR_EVOLUTION_BEGIN
           timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g7e.log
           test -s ".lake/build/lib/lean/$stem.olean"
