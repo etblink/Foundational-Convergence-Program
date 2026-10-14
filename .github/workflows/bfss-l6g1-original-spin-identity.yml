@@ -70,6 +70,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7GConjugatedThetaConstantDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7HSourceFiniteTimeThetaIntertwiningProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7IOriginalFlowThetaForwardCovarianceProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7JSourceFlowLinearEquivCovarianceProbe.lean
 
 permissions:
   contents: read
@@ -2242,6 +2243,35 @@ jobs:
               assert name in entries and entries[name] <= allowed,(name,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G7I_ACTUAL_SOURCE_THETA_FORWARD_COVARIANCE_QUALIFIED')
+          PYCODE
+
+      - name: Qualify source exponential as exact covariant fermion linear equivalence
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7JSourceFlowLinearEquivCovarianceProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7IOriginalFlowThetaForwardCovarianceProbe.olean
+          echo L6G7J_SOURCE_LINEAR_EQUIV_THETA_COVARIANCE_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g7j.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7j.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7J.'
+          for root in ('sourceFlowLinearEquiv',
+                       'sourceFlow_theta_forward_vector',
+                       'sourceFlowLinearEquiv_theta_covariant'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7J_SOURCE_COVARIANT_FERMION_LINEAR_EQUIV_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
