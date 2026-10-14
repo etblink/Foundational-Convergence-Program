@@ -2023,6 +2023,7 @@ jobs:
                    re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
           p='FCP.BFSSSU2PhysicalDomainL6G7A.'
           for root in ('sourceFermionGenerator_comm_matches_nativeAdjointTangent',
+                       'sourceFermionGenerator_comm_matches_nativeAdjointTangent_apply',
                        'sourceNativeAdjointCoefficient_matches_generator',
                        'sourceFermionColorFlow_thetaIntertwiner_deriv_zero'):
               name=p+root

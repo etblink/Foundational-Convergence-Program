@@ -130,6 +130,26 @@ private theorem sourceFiberEnd_comm_apply
       J (T v) - T (J v) := by
   rfl
 
+/-- Complete source operator-to-vector transport under the original
+algebraic instances. The later analytic proof receives only this vector
+equality; it never reconstructs the source operator product under its
+local PiLp normed-space dictionaries. -/
+theorem sourceFermionGenerator_comm_matches_nativeAdjointTangent_apply
+    (c : ColorIndex 2) (s : SpinIndex) (d : ColorIndex 2)
+    (v : Fermion 2) :
+    sourceFiberFermionColorGenerator pairedAlgebraData c
+        (pairedAlgebraData.theta s d v) -
+      pairedAlgebraData.theta s d
+        (sourceFiberFermionColorGenerator pairedAlgebraData c v) =
+      (∑ b : ColorIndex 2,
+        (pairedAlgebraData.structureConstant b d c : ℂ) •
+          pairedAlgebraData.theta s b) v := by
+  exact (sourceFiberEnd_comm_apply
+    (sourceFiberFermionColorGenerator pairedAlgebraData c)
+    (pairedAlgebraData.theta s d) v).symm.trans
+      (congrArg (fun K : SourceFiberEnd => K v)
+        (sourceFermionGenerator_comm_matches_nativeAdjointTangent c s d))
+
 /-- Resolve the source Fock analytic structure at the declaration boundary.
 The qualified L6G6Z derivative is elaborated with PiLp's actual
 normed-group and real-module instances, not WithLp's wrapper instances. -/
@@ -180,19 +200,8 @@ theorem sourceFermionColorFlow_thetaIntertwiner_deriv_zero
       (fun t : ℝ => sourceFermionColorFlow c t (T v))
       (fun t : ℝ => sourceFermionColorFlow c t v)
       (J (T v)) (J v) hleft hright
-  have hcoeff : J (T v) - T (J v) =
-      (∑ b : ColorIndex 2,
-        (pairedAlgebraData.structureConstant b d c : ℂ) •
-          pairedAlgebraData.theta s b) v := by
-    calc
-      J (T v) - T (J v) =
-          ((J * T - T * J) : SourceFiberEnd) v :=
-        (sourceFiberEnd_comm_apply J T v).symm
-      _ = (∑ b : ColorIndex 2,
-            (pairedAlgebraData.structureConstant b d c : ℂ) •
-              pairedAlgebraData.theta s b) v :=
-        congrArg (fun K : SourceFiberEnd => K v)
-          (sourceFermionGenerator_comm_matches_nativeAdjointTangent c s d)
+  have hcoeff :=
+    sourceFermionGenerator_comm_matches_nativeAdjointTangent_apply c s d v
   change HasDerivAt
     (fun t : ℝ => sourceFermionColorFlow c t (T v) -
       T (sourceFermionColorFlow c t v))
@@ -206,6 +215,7 @@ theorem sourceFermionColorFlow_thetaIntertwiner_deriv_zero
 #print axioms abstract_end_comm_apply
 #print axioms sourceFiberEnd_comm_apply
 #print axioms sourceFermionGenerator_comm_matches_nativeAdjointTangent
+#print axioms sourceFermionGenerator_comm_matches_nativeAdjointTangent_apply
 #print axioms sourceNativeAdjointCoefficient_matches_generator
 #print axioms sourceFermionColorFlow_thetaIntertwiner_deriv_zero
 #check @sourceFermionColorFlow_thetaIntertwiner_deriv_zero
