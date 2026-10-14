@@ -2683,6 +2683,8 @@ jobs:
           print('L6G7U_ACTUAL_SOURCE_FULLL2_GAUGE_CONTRACTION_QUALIFIED')
           PYCODE
 
+      # L6G7V #224 negative knowledge: the original packed fiberAction must
+      # be made definitionally explicit before coeFn_compLp's hinner rewrite.
       - name: Qualify original FullL2 physical Hilbert space as joint gauge fixed-point space
         shell: bash
         timeout-minutes: 6

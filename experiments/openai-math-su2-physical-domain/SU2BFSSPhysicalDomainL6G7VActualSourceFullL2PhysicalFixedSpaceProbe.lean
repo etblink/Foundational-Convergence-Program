@@ -48,7 +48,13 @@ theorem actualSourceFermionFiberAction_inv_cancel
         pairedGaugeData.fermion g
           ((pairedGaugeData.fiberAction g⁻¹ v) x) := houter
     _ = pairedGaugeData.fermion g
-          (pairedGaugeData.fermion g⁻¹ (v x)) := by rw [hinner]
+          (pairedGaugeData.fermion g⁻¹ (v x)) := by
+      -- #224: coeFn_compLp states its result in expanded compLp form.
+      -- The source fiberAction is definitionally this same compLpₗ map,
+      -- but `rw` does not reduce the packaged Lp term to find hinner.
+      change (pairedGaugeData.fiberAction g⁻¹ v) x =
+        pairedGaugeData.fermion g⁻¹ (v x) at hinner
+      rw [hinner]
     _ = v x := by
       calc
         _ = pairedGaugeData.fermion (g * g⁻¹) (v x) := by
