@@ -120,6 +120,16 @@ private theorem abstract_end_comm_apply
       J (T v) - T (J v) := by
   rfl
 
+/-- Evaluate in the original concrete operator type BEFORE introducing the
+analytic PiLp instances. J and T are arbitrary local parameters here, so
+this proof neither specializes a polymorphic NormedSpace dictionary nor
+unfolds the actual source current or theta construction. -/
+private theorem sourceFiberEnd_comm_apply
+    (J T : SourceFiberEnd) (v : Fermion 2) :
+    ((J * T - T * J) : SourceFiberEnd) v =
+      J (T v) - T (J v) := by
+  rfl
+
 /-- Resolve the source Fock analytic structure at the declaration boundary.
 The qualified L6G6Z derivative is elaborated with PiLp's actual
 normed-group and real-module instances, not WithLp's wrapper instances. -/
@@ -177,7 +187,7 @@ theorem sourceFermionColorFlow_thetaIntertwiner_deriv_zero
     calc
       J (T v) - T (J v) =
           ((J * T - T * J) : SourceFiberEnd) v :=
-        (abstract_end_comm_apply (E := Fermion 2) J T v).symm
+        (sourceFiberEnd_comm_apply J T v).symm
       _ = (∑ b : ColorIndex 2,
             (pairedAlgebraData.structureConstant b d c : ℂ) •
               pairedAlgebraData.theta s b) v :=
@@ -194,6 +204,7 @@ theorem sourceFermionColorFlow_thetaIntertwiner_deriv_zero
 
 #print axioms abstract_boundedLinear_sub_deriv
 #print axioms abstract_end_comm_apply
+#print axioms sourceFiberEnd_comm_apply
 #print axioms sourceFermionGenerator_comm_matches_nativeAdjointTangent
 #print axioms sourceNativeAdjointCoefficient_matches_generator
 #print axioms sourceFermionColorFlow_thetaIntertwiner_deriv_zero
