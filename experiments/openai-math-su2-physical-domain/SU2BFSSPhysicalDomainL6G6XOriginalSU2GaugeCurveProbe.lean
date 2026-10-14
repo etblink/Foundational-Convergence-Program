@@ -38,14 +38,15 @@ private theorem matrixTwoForm_adjugate
     Matrix.adjugate X = matrixTwoForm * Xᵀ * (-matrixTwoForm) := by
   rw [Matrix.adjugate_fin_two]
   ext i j <;> fin_cases i <;> fin_cases j <;>
-    simp [matrixTwoForm, Matrix.mul_apply, Fin.sum_univ_two]
+    simp [matrixTwoForm, Matrix.mul_apply, Matrix.vecMul, dotProduct,
+      Fin.sum_univ_two]
 
 /-- The exact 2-by-2 determinant identity, with its trace premise
 visible and no Hermiticity or gauge assumption. -/
 theorem twoByTwo_exp_det_one_of_trace_zero
     (W : Matrix (Fin 2) (Fin 2) ℂ) (hW : Matrix.trace W = 0) :
     Matrix.det (NormedSpace.exp W) = 1 := by
-  letI : NormedAlgebra ℚ (Matrix (Fin 2) (Fin 2) ℂ) :=
+  let : NormedAlgebra ℚ (Matrix (Fin 2) (Fin 2) ℂ) :=
     .restrictScalars ℚ ℂ (Matrix (Fin 2) (Fin 2) ℂ)
   have htrace : W 0 0 + W 1 1 = 0 := by
     simpa [Matrix.trace, Fin.sum_univ_two] using hW
@@ -70,8 +71,7 @@ theorem twoByTwo_exp_det_one_of_trace_zero
       add_neg_cancel, NormedSpace.exp_zero]
   have hprod := Matrix.mul_adjugate (NormedSpace.exp W)
   rw [hadj, hinv] at hprod
-  simpa only [Matrix.smul_apply, Matrix.one_apply, if_pos rfl,
-    smul_eq_mul, mul_one] using
+  simpa using
     congrArg (fun Z : Matrix (Fin 2) (Fin 2) ℂ => Z 0 0) hprod.symm
 
 /-- Determinant one for the exact source +i curve, obtained from the

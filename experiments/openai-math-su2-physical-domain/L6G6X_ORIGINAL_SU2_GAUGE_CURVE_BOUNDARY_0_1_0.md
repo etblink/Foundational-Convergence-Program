@@ -29,3 +29,16 @@ The one-particle 24-mode action derivative and exterior/Fock implementation are 
 Next bounded target after X qualification: transport the native adjoint derivative through the accepted G3C block formula to the literal eight 3-by-3 one-particle blocks, preserving output B/input A. Then connect the resulting flow to the actual exterior/Fock gauge action using accepted covariance/vacuum interfaces or a source-exact exterior derivation whose premises are separately discharged.
 
 Pinned `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean `4.34.1`, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`. Canonical main, both mathematical-source repos, and PR25's normal S3K base remain unchanged; PR25 is draft and unmerged.
+
+## Gate #152 first causal failures and bounded repair
+
+[#152](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38510630673), job `115678063132`, source commit `bc4b8678687590746115ef7a58155e0c145fc192`, completed **FAILURE** at X after independently recompiling and auditing accepted W successfully. K–V cache closure and all pinned environment checks succeeded.
+
+Two local errors were observed, with no timeout or exponential-instance failure:
+
+1. X line 38 `matrixTwoForm_adjugate` left four 2-by-2 entry goals, e.g. `X 1 1 = (![0,1] ᵥ* Xᵀ) 1`. Generic matrix simplification had exposed row-vector multiplication without reducing that interface. The repair explicitly includes the established `Matrix.vecMul` and `dotProduct` definitions in the finite entry proof.
+2. X line 73 scalar extraction left `det(exp W) * (if True then 1 else 0) = (if True then 1 else 0)`. The restricted simp list omitted the necessary identity-condition reduction. Use ordinary `simpa` on this small scalar-entry equality, without unfolding the exponential or changing its matrix statement. The nonfatal `letI` linter is also resolved by the upstream proof's `let` form.
+
+The native derivative's final type printed correctly, but its dependencies inherited `sorryAx` from these unfinished matrix proofs. **No X theorem or actual SU(2) membership is accepted from #152.** Repair only these observed finite reductions; retain the adjugate/semiconjugacy determinant proof, trace-zero source discharge, original curve, strict axiom audit and limits. Follow-up success remains unknown until its own compile and audit.
+
+Successor lesson: finite matrices can simplify through row-vector products; inspect the remaining interface rather than repeatedly adding unrelated matrix lemmas. A clean-looking downstream theorem printed after an upstream helper fails does not qualify that downstream theorem.
