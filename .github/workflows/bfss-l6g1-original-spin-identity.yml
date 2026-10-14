@@ -61,6 +61,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6XOriginalSU2GaugeCurveProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6YOriginalOneParticleDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6ZOriginalColorFlowVacuumProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7AOriginalColorThetaTangentMatchProbe.lean
 
 permissions:
   contents: read
@@ -1999,6 +2000,35 @@ jobs:
               assert name in entries and entries[name] <= allowed,(name,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G6Z_SOURCE_FOCK_COLOR_FLOW_AND_VACUUM_QUALIFIED')
+          PYCODE
+
+      - name: Qualify source theta tangent match against original SU2 coefficient
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7AOriginalColorThetaTangentMatchProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6ZOriginalColorFlowVacuumProbe.olean
+          echo L6G7A_ORIGINAL_SU2_THETA_TANGENT_MATCH_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g7a.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7a.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7A.'
+          for root in ('sourceFermionGenerator_comm_matches_nativeAdjointTangent',
+                       'sourceNativeAdjointCoefficient_matches_generator',
+                       'sourceFermionColorFlow_thetaIntertwiner_deriv_zero'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7A_ACTUAL_SOURCE_THETA_TANGENT_AND_SU2_DERIVATIVE_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
