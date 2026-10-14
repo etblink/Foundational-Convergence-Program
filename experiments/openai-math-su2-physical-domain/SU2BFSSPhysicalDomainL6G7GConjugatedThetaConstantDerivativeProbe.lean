@@ -60,7 +60,9 @@ private theorem abstract_conjugated_curve_deriv_zero
       _ = (U t * B t) * (V t * J) -
             (U t * B t) * (J * V t) := by noncomm_ring
       _ = 0 := by rw [hcomm.eq]; exact sub_self _
-  simpa only [hcancel] using hprod
+  -- The product rule uses pointwise multiplication on real-indexed functions.
+  -- Expand (U * B) t before using the already-proved noncommutative cancellation.
+  simpa only [Pi.mul_apply, hcancel] using hprod
 
 -- Keep opaque exactly those large source entities that previously
 -- triggered repeated recursion-depth errors in direct ring elaboration.
