@@ -38,8 +38,7 @@ private noncomputable def sourceTraceCoefficientCLM (B : ColorIndex 2) :
          change (Matrix.trace (pairedAlgebraData.color B * (r • X))).re =
            r * (Matrix.trace (pairedAlgebraData.color B * X)).re
          rw [Matrix.mul_smul, Matrix.trace_smul]
-         simp only [smul_eq_mul, Complex.mul_re,
-           Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero]
+
      } : ColorMatrix 2 →ₗ[ℝ] ℝ))
 
 /-- Positive-i exponent conjugate transpose is exactly the
@@ -68,7 +67,7 @@ theorem sourcePlusIAmbientAdjointCoefficient_deriv
               (sourcePlusIColorMatrix c t)ᴴ))).re)
       (pairedAlgebraData.structureConstant B A c) 0 := by
   have h :=
-    ((sourceTraceCoefficientCLM B).hasFDerivAt).comp_hasDerivAt 0
+    (sourceTraceCoefficientCLM B).hasFDerivAt.comp_hasDerivAt
       (sourcePlusIConjugation_deriv c A)
   change HasDerivAt
     (fun t : ℝ =>

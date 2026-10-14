@@ -1413,7 +1413,38 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6G*.olean
           key: bfss-l6-prefix-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean', 'experiments/openai-math-su2-concrete-potential/SU2ColorCrossProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G[1-5]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6[A-J]*Probe.lean') }}
 
+      # Saved only after V's exact-source Lean/axiom audit; W excluded.
+      - name: Restore content-pinned qualified L6G6K-V suffix
+        id: accepted_l6_kv
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-l6g6-kv-suffix-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G[1-5]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6[A-S]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6UOriginalAdjointColorTangentProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6VOriginalPlusIConjugationDerivativeProbe.lean', 'experiments/openai-math-su2-concrete-potential/SU2*.lean') }}
+
+      - name: Validate restored L6G6K-V qualification objects
+        if: steps.accepted_l6_kv.outputs.cache-hit == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          base=upstream-math/lean/.lake/build/lib/lean
+          for stem in \
+            SU2BFSSPhysicalDomainL6G6KOriginalBoundedFermionColorCurrentProbe \
+            SU2BFSSPhysicalDomainL6G6SOriginalGaugeVacuumIdentificationProbe \
+            SU2BFSSPhysicalDomainL6G6UOriginalAdjointColorTangentProbe \
+            SU2BFSSPhysicalDomainL6G6VOriginalPlusIConjugationDerivativeProbe \
+            SU2BFSSG3CComplexOneParticleUnitaryProbe \
+            SU2BFSSG4AExteriorGaugeActionProbe \
+            SU2BFSSG4BFermionLinearTransportProbe; do
+            test -s "$base/$stem.olean"
+          done
+          test -s "$base/OAI/MathematicalPhysics/BFSS/GaugeCore.olean"
+          test -s "$base/OAI/Analysis/Laughlin/Operators/CAR.olean"
+          echo L6G6KV_ACCEPTED_SOURCE_CLOSURE_RESTORED
+
       - name: Qualify bounded source current, exact core transport and Hermiticity
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1447,6 +1478,7 @@ jobs:
           PYCODE
 
       - name: Qualify original bounded and SmoothCore color-generator action sign
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -1477,6 +1509,7 @@ jobs:
           PYCODE
 
       - name: Qualify source bounded vacuum contraction interface
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -1506,6 +1539,7 @@ jobs:
           PYCODE
 
       - name: Qualify abstract normalized Fock-pair vacuum cancellation
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 4
         run: |
@@ -1535,6 +1569,7 @@ jobs:
           PYCODE
 
       - name: Qualify actual original exterior-Fock vacuum annihilation
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 12
         run: |
@@ -1566,6 +1601,7 @@ jobs:
           PYCODE
 
       - name: Qualify source-transported 24-mode vacuum and mixed-CAR cancellation
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 32
         run: |
@@ -1608,6 +1644,7 @@ jobs:
           PYCODE
 
       - name: Compile accepted concrete Fock and paired theta source chain
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 38
         run: |
@@ -1630,6 +1667,7 @@ jobs:
           echo L6G6Q_ACCEPTED_G1B_SOURCE_CHAIN_COMPILED
 
       - name: Qualify literal source paired theta two-spin color vacuum cancellation
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1662,6 +1700,7 @@ jobs:
           PYCODE
 
       - name: Qualify literal 16-spin source fermionic color-generator vacuum
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1690,6 +1729,7 @@ jobs:
           PYCODE
 
       - name: Compile accepted literal SU2 exterior gauge vacuum source dependencies
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 22
         run: |
@@ -1724,6 +1764,7 @@ jobs:
           echo L6G6S_G4B_GAUGE_REPRESENTATION_SOURCE_READY
 
       - name: Qualify exact common Fock vacuum for bounded source current and gauge action
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1754,6 +1795,7 @@ jobs:
           PYCODE
 
       - name: Qualify source adjoint +i tangent coefficient and 24-mode color blocks
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1788,6 +1830,7 @@ jobs:
           PYCODE
 
       - name: Qualify original plus-i source matrix conjugation derivative
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1816,6 +1859,15 @@ jobs:
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G6V_ORIGINAL_PLUS_I_MATRIX_CONJUGATION_DERIVATIVE_QUALIFIED')
           PYCODE
+
+      - name: Cache accepted L6G6K-V source objects after complete V audit
+        if: steps.accepted_l6_kv.outputs.cache-hit != 'true'
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-l6g6-kv-suffix-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G[1-5]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6[A-S]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6UOriginalAdjointColorTangentProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6VOriginalPlusIConjugationDerivativeProbe.lean', 'experiments/openai-math-su2-concrete-potential/SU2*.lean') }}
 
       - name: Qualify exact ambient adjoint coefficient derivative and source sign
         shell: bash
