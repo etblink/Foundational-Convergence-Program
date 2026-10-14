@@ -1841,8 +1841,6 @@ jobs:
                        'sourcePlusIAmbientAdjointCoefficient_deriv'):
               name=p+root
               assert name in entries and entries[name] <= allowed,entries
-          assert any(n.endswith(p+'sourceTraceCoefficientCLM') or
-                     n.endswith(p+'sourceTraceCoefficientCLM._proof_1') for n in entries) or True
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G6W_SOURCE_AMBIENT_ADJOINT_COEFFICIENT_DERIVATIVE_QUALIFIED')
           PYCODE
