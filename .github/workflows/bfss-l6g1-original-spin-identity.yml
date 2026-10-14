@@ -71,6 +71,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7HSourceFiniteTimeThetaIntertwiningProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7IOriginalFlowThetaForwardCovarianceProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7JSourceFlowLinearEquivCovarianceProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7KOriginalSourceFlowExactGaugeImplementationProbe.lean
 
 permissions:
   contents: read
@@ -2272,6 +2273,85 @@ jobs:
               assert name in entries and entries[name] <= allowed,(name,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G7J_SOURCE_COVARIANT_FERMION_LINEAR_EQUIV_QUALIFIED')
+          PYCODE
+
+      - name: Assemble original exterior gauge and scalar-commutant source closure
+        shell: bash
+        timeout-minutes: 22
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          # Previously accepted original source modules are staged in the
+          # same pinned Lean environment as the J theorem. G4B/G1A have
+          # already been restored or compiled earlier in this exact job.
+          cp experiments/openai-math-su2-concrete-potential/SU2*.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe.lean upstream-math/lean/
+          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6TOriginalColorInfinitesimalUniquenessProbe.lean upstream-math/lean/
+          cd upstream-math/lean
+          base=.lake/build/lib/lean
+          test -s "$base/SU2BFSSG4BFermionLinearTransportProbe.olean"
+          test -s "$base/SU2BFSSG1APairedThetaProbe.olean"
+          test -s "$base/SU2BFSSPhysicalDomainL6G7JSourceFlowLinearEquivCovarianceProbe.olean"
+          echo L6G7K_ORIGINAL_GAUGE_SCHUR_CLOSURE_BEGIN
+          timeout 650s lake build OAI.Analysis.Laughlin.Exterior.SpinUnitary \
+            2>&1 | tee /tmp/bfss-l6g1/l6g7k-spinunitary.log
+          for stem in \
+            SU2BFSSG4CFermionOperatorCovarianceProbe \
+            SU2BFSSG4DExteriorOccupationIsometryProbe \
+            SU2BFSSG4EFermionHilbertUnitaryProbe \
+            SU2BFSSG4FRealColorAnnihilatorForwardProbe \
+            SU2BFSSG4GMajoranaModeCovarianceProbe \
+            SU2BFSSG4HExactThetaCovarianceProbe \
+            SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe \
+            SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe \
+            SU2BFSSPhysicalDomainL6G6TOriginalColorInfinitesimalUniquenessProbe; do
+            if test -s "$base/$stem.olean"; then
+              echo "L6G7K_ACCEPTED_SOURCE_PRESENT=$stem"
+            else
+              echo "L6G7K_ACCEPTED_SOURCE_BUILD=$stem"
+              timeout 260s lake env lean -o "$base/$stem.olean" "$stem.lean" \
+                2>&1 | tee "/tmp/bfss-l6g1/l6g7k-accepted-$stem.log"
+              test -s "$base/$stem.olean"
+              if grep -Eq 'error:|sorryAx' "/tmp/bfss-l6g1/l6g7k-accepted-$stem.log"; then
+                echo "Original accepted module cannot be reused: $stem" >&2
+                exit 1
+              fi
+            fi
+          done
+          echo L6G7K_ORIGINAL_GAUGE_SCHUR_CLOSURE_READY
+
+      - name: Qualify exact original source exponential equals genuine SU2 gauge implementation
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7KOriginalSourceFlowExactGaugeImplementationProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          for dep in SU2BFSSPhysicalDomainL6G7JSourceFlowLinearEquivCovarianceProbe \
+                     SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe \
+                     SU2BFSSPhysicalDomainL6G6TOriginalColorInfinitesimalUniquenessProbe; do
+            test -s ".lake/build/lib/lean/$dep.olean"
+          done
+          echo L6G7K_ORIGINAL_GAUGE_IMPLEMENTATION_EQUALS_SOURCE_FLOW_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6g7k.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7k.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7K.'
+          for root in ('sourceFlowLinearEquiv_eq_actualGauge',
+                       'sourceFermionColorFlow_eq_actualGauge_apply'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7K_EXACT_ORIGINAL_SOURCE_GAUGE_IMPLEMENTATION_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
