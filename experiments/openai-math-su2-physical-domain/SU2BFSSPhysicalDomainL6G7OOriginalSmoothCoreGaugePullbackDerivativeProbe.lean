@@ -42,11 +42,11 @@ theorem actualBosonGauge_smoothCore_pullback_derivative_zero
     rw [sourcePlusIGaugeCurve_one]
     change x = pairedAlgebraData.gaugeConjugate (1 : ColorMatrix 2) x
     exact (pairedAlgebraData.gaugeConjugate_one x).symm
-  -- In pinned Mathlib, comp_hasDerivAt requires the time x as its
-  -- first explicit argument. The _of_eq variant instead accepts
-  -- the inner derivative and the source-exact basepoint equality.
+  -- Pinned Mathlib declares (x) as an explicit section variable:
+  -- BOTH comp_hasDerivAt and comp_hasDerivAt_of_eq need the time 0
+  -- before the inner derivative; #216 established the exact basepoint.
   simpa only [Function.comp_def] using
-    hf.comp_hasDerivAt_of_eq
+    hf.comp_hasDerivAt_of_eq 0
       (actualBosonGauge_vector_derivative_zero c x) hzero
 
 #print axioms actualBosonGauge_smoothCore_pullback_derivative_zero
