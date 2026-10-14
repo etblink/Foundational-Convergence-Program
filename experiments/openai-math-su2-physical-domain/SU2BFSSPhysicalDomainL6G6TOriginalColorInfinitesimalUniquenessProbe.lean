@@ -30,21 +30,26 @@ open FCP.BFSSSU2GaugeG4B
 open FCP.BFSSSU2PhysicalDomainL6G6K
 open FCP.BFSSSU2PhysicalDomainL6G6S
 
-/-- Generic ring-level commutator cancellation. Prove the
-subtraction algebra *before* specializing to the enormous concrete
-Fermion 2 operator representation; source gates #136–#137 showed that
-pointwise abel and change can trigger huge definitional reduction. -/
-private theorem sub_commutes_of_equal_commutators
-    {R : Type*} [Ring R]
-    (D J T : R)
-    (h : D * T - T * D = J * T - T * J) :
-    (D - J) * T = T * (D - J) := by
+/-- Cancellation of equal commutators, proved pointwise over an
+abstract complex normed vector space rather than the concrete Fock type. -/
+private theorem sub_commutes_pointwise_of_equal_commutators
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E]
+    (D J T : E →L[ℂ] E)
+    (h : D * T - T * D = J * T - T * J)
+    (v : E) :
+    (D - J) (T v) = T ((D - J) v) := by
+  have hv := congrArg (fun X : E →L[ℂ] E => X v) h
+  have hc :
+      D (T v) - T (D v) = J (T v) - T (J v) := by
+    simpa only [ContinuousLinearMap.sub_apply,
+      ContinuousLinearMap.mul_apply] using hv
+  simp only [ContinuousLinearMap.sub_apply, map_sub]
   calc
-    (D - J) * T = D * T - J * T := sub_mul D J T
-    _ = (D * T - T * D) - (J * T - T * J) +
-          (T * D - T * J) := by abel
-    _ = T * D - T * J := by rw [h]; simp
-    _ = T * (D - J) := (mul_sub T D J).symm
+    D (T v) - J (T v) =
+        (D (T v) - T (D v)) -
+        (J (T v) - T (J v)) +
+        (T (D v) - T (J v)) := by abel
+    _ = T (D v) - T (J v) := by rw [hc]; simp
 
 /-- The literal original gauge-invariant source Fock vacuum is
 nonzero: it is an injective linear transport of the exterior unit. -/
@@ -98,18 +103,8 @@ theorem sourceColorGenerator_unique_of_commutator_and_vacuum
           J * pairedTheta α a - pairedTheta α a * J := by
       simpa only [pairedAlgebraData_theta] using
         ((hD α a).trans hJ.symm)
-    have hop :
-        (D - J) * pairedTheta α a =
-          pairedTheta α a * (D - J) :=
-      sub_commutes_of_equal_commutators D J (pairedTheta α a) he
-    have hv := congrArg
-      (fun X : Fermion 2 →L[ℂ] Fermion 2 => X v) hop
-    -- L is just the underlying complex-linear endomorphism of D-J.
-    -- Both operators remain opaque here; apply their multiplication
-    -- at the final step, *after* the generic ring reduction.
-    change (D - J) (pairedTheta α a v) =
-      pairedTheta α a ((D - J) v)
-    simpa only [ContinuousLinearMap.mul_apply] using hv
+    exact sub_commutes_pointwise_of_equal_commutators
+      D J (pairedTheta α a) he v
   obtain ⟨z, hz⟩ :=
     FCP.BFSSSU2PhysicalDomainS1A.pairedTheta_commutant_scalar L hcomm
   have hLvac : L fermionVacuum = 0 := by
@@ -130,10 +125,10 @@ theorem sourceColorGenerator_unique_of_commutator_and_vacuum
     change (D - J) v = z • v at hv
     -- The goal is (0 : FermionOp) v, whereas the scalar proof ends
     -- at the zero *vector*. Normalize the zero operator application.
-    simpa only [hz0, zero_smul, ContinuousLinearMap.zero_apply] using hv
+    simpa only [hz0, zero_smul, zero_apply] using hv
   exact sub_eq_zero.mp hzero
 
-#print axioms sub_commutes_of_equal_commutators
+#print axioms sub_commutes_pointwise_of_equal_commutators
 #print axioms actualGaugeVacuum_ne_zero
 #print axioms sourceColorGenerator_unique_of_commutator_and_vacuum
 #check @sourceColorGenerator_unique_of_commutator_and_vacuum
