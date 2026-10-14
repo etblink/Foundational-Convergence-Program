@@ -52,6 +52,14 @@ Following an L6G7C green, next obligatory mathematics is the bounded-operator-va
 
 **General lesson for successors:** `HasDerivAt.comp` expects the outer theorem at the *syntactic image of the inner function's basepoint*; rewrite `t-t=0` into the exact required outer-derivative basepoint BEFORE composing. Avoid changing the mathematics or invoking excessive simplification when a real-variable calculus transport has this interface-only failure.
 
+## #173 red — implicit subtraction function incorrectly inferred in chain rule
+
+[Original Source Spin Identity #173](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38530473878), job `115740880934`, source commit `9c6e8bf7768e4e5b9f16196d143bd6e2cb2b1540`, completed RED only at the new L6G7C proof. The exact earlier original SU(2) source group law L6G7B passed again. `hshift_at` (outer scalar derivative at `t-t`) had compiled, thus correcting #172's earlier basepoint mismatch, but line 86 `hshift_at.comp t ((hasDerivAt_id' t).sub_const t)` failed: Lean expected `HasDerivAt (HSub.hSub t) ... t`, i.e. the inferred partially applied subtraction function `t - ·`, whereas the supplied derivative was of `· - t`. As a consequence the outer goal was unsolved. No other first causal Lean errors. Both L6G7C public roots carried `sorryAx` and remained UNQUALIFIED; L6G7B stays accepted.
+
+The correction [`5ad0ac12`](https://github.com/etblink/Foundational-Convergence-Program/commit/5ad0ac122d39a5a90d9b19395f7937d08bfea60b) replaces the ambiguous `.comp` invocation with an explicitly typed `hinner : HasDerivAt (fun u : ℝ => u - t) 1 t`, `hpoint : 0 = (fun u => u-t) t`, and `hshift.scomp_of_eq t hinner hpoint`. This uses Mathlib's real-to-real vector-space chain rule with explicit basepoint equality; `Function.comp_def`, `sub_add_cancel`, `one_smul` simplify the result. The two original all-time theorem statements, original source signs, existing qualified L6G7B and G3A, and CI audit are unchanged.
+
+[Original Source Spin Identity #174](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38531556989) was queued at the time of this note. Its exact compiler log and both public-root axiom printouts must be checked before qualification. If it fails, read the first error and avoid another guessed partial subtraction rewrite; the evidence shows an elaborator choice of wrong operand order, not a failed matrix derivative.
+
 ## 1. Scalar/matrix evolution, independently of Fock elaboration
 
 First prove g(t+h)=g(h)g(t) using the same-generator exponential addition law and lift the matrix equality with subtype extensionality. The two factors commute because they are exponentials of scalar multiples of the same matrix. This is an additional theorem obligation, not supplied automatically by subgroup membership.
