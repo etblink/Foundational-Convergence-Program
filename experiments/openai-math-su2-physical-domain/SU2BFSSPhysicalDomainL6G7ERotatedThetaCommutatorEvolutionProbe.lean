@@ -59,6 +59,8 @@ private theorem abstract_finite_color_commutator
       apply Finset.sum_congr rfl
       intro d _
       rw [mul_comm (r d) (F b d)]
+    _ = ∑ b : C, (∑ d : C, F b d * r d) • theta b := by
+      simp only [Finset.sum_smul]
 
 private theorem sourceNormalizedPauliColor :
     ∀ a : ColorIndex 2,
@@ -118,16 +120,51 @@ theorem sourceRotatedTheta_comm_evolution
       sourceRotatedTheta c spin A t *
         sourceFiberFermionColorGenerator pairedAlgebraData c =
       sourceRotatedThetaDerivative c spin A t := by
-  have h := abstract_finite_color_commutator
-    (R := SourceFiberEnd) (C := ColorIndex 2)
-    (sourceFiberFermionColorGenerator pairedAlgebraData c)
-    (pairedAlgebraData.theta spin)
-    (fun b d => (pairedAlgebraData.structureConstant b d c : ℂ))
-    (fun d => (pairedAlgebraData.adjointCoefficient
-      (sourcePlusIGaugeCurve c t) A d : ℂ))
-    (fun d => sourceGenerator_theta_comm_output c spin d)
-  simpa only [sourceRotatedTheta, sourceRotatedThetaDerivative,
-    Complex.ofReal_sum, Complex.ofReal_mul] using h
+  -- #178 showed that specializing a polymorphic Ring/Algebra lemma to
+  -- SourceFiberEnd provokes deep instance reconstruction. Prove the same
+  -- finite-sum calculation directly in the already-resolved operator
+  -- algebra, using local named quantities, never an operator on a vector.
+  let J : SourceFiberEnd :=
+    sourceFiberFermionColorGenerator pairedAlgebraData c
+  let theta : ColorIndex 2 → SourceFiberEnd :=
+    pairedAlgebraData.theta spin
+  let F : ColorIndex 2 → ColorIndex 2 → ℂ :=
+    fun b d => (pairedAlgebraData.structureConstant b d c : ℂ)
+  let r : ColorIndex 2 → ℂ :=
+    fun d => (pairedAlgebraData.adjointCoefficient
+      (sourcePlusIGaugeCurve c t) A d : ℂ)
+  have hcomm (d : ColorIndex 2) :
+      J * theta d - theta d * J =
+        ∑ b : ColorIndex 2, F b d • theta b :=
+    sourceGenerator_theta_comm_output c spin d
+  have htransport :
+      J * (∑ d : ColorIndex 2, r d • theta d) -
+        (∑ d : ColorIndex 2, r d • theta d) * J =
+      ∑ b : ColorIndex 2,
+        (∑ d : ColorIndex 2, F b d * r d) • theta b := by
+    calc
+      _ = ∑ d : ColorIndex 2,
+            r d • (J * theta d - theta d * J) := by
+        simp only [Finset.mul_sum, Finset.sum_mul,
+          mul_smul_comm, smul_mul_assoc,
+          ← Finset.sum_sub_distrib, ← smul_sub]
+      _ = ∑ d : ColorIndex 2, ∑ b : ColorIndex 2,
+            (r d * F b d) • theta b := by
+        simp_rw [hcomm, Finset.smul_sum, smul_smul]
+      _ = ∑ b : ColorIndex 2, ∑ d : ColorIndex 2,
+            (F b d * r d) • theta b := by
+        rw [Finset.sum_comm]
+        apply Finset.sum_congr rfl
+        intro b _
+        apply Finset.sum_congr rfl
+        intro d _
+        rw [mul_comm (r d) (F b d)]
+      _ = ∑ b : ColorIndex 2,
+            (∑ d : ColorIndex 2, F b d * r d) • theta b := by
+        simp only [Finset.sum_smul]
+  simpa only [J, theta, F, r, sourceRotatedTheta,
+    sourceRotatedThetaDerivative, Complex.ofReal_sum,
+    Complex.ofReal_mul] using htransport
 
 /-- The all-time original 48-theta source operator evolution equation.
 No unverified Fock-vector transport or finite-time identification is used. -/
