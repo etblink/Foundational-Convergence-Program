@@ -71,25 +71,15 @@ theorem actualBosonGauge_vector_derivative_zero
     apply hasDerivAt_pi.mpr
     intro p
     exact actualBosonGauge_coordinate_derivative_zero c x p.1 p.2
-  have htransport :=
-    e.symm.toContinuousLinearMap.hasFDerivAt.comp_hasDerivAt
-      (0 : ℝ) hcoords
-  -- Avoid relying on generic simp to discover the inverse of the
-  -- local equivalence through a composition and a HasDerivAt target.
-  -- Rewrite both original functions using its exact inverse law.
-  have hcurve :
-      (fun u : ℝ =>
-        e.symm (e (bosonGauge (sourcePlusIGaugeCurve c u) x))) =
-      (fun u : ℝ =>
-        bosonGauge (sourcePlusIGaugeCurve c u) x) := by
-    funext u
-    exact e.symm_apply_apply _
-  have htangent :
-      e.symm (e (sourceBosonGaugeTangent c x)) =
-        sourceBosonGaugeTangent c x :=
-    e.symm_apply_apply _
-  rw [Function.comp_def, hcurve, htangent] at htransport
-  exact htransport
+  -- Use the established equivalence theorem for Fréchet derivatives
+  -- instead of casting back through e.symm: the latter elaborated
+  -- with a different PiLp/WithLp normed additive instance in #211/#212.
+  -- The derivative of the scalar-parameter curve is the continuous
+  -- linear map toSpanSingleton; equivalences transport it by composition.
+  rw [hasDerivAt_iff_hasFDerivAt]
+  apply (e.comp_hasFDerivAt_iff).mp
+  simpa only [Function.comp_def, ContinuousLinearMap.comp_toSpanSingleton]
+    using hcoords.hasFDerivAt
 
 #print axioms sourceBosonGaugeTangent_apply
 #print axioms actualBosonGauge_vector_derivative_zero
