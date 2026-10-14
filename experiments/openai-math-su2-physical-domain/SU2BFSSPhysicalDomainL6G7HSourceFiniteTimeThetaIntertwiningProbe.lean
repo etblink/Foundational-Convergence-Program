@@ -41,7 +41,15 @@ not a proxy basis or arbitrary equality premise. -/
 theorem sourceRotatedTheta_zero (c : ColorIndex 2)
     (spin : SpinIndex) (A : ColorIndex 2) :
     sourceRotatedTheta c spin A 0 = pairedAlgebraData.theta spin A := by
-  simp [sourceRotatedTheta, sourceNativeAdjointCoefficient_zero]
+  classical
+  -- #190 reduced the source initial condition correctly to the finite
+  -- Kronecker sum. Give the single surviving color term explicitly;
+  -- do not unfold the original source Fock operators.
+  simp only [sourceRotatedTheta, sourceNativeAdjointCoefficient_zero]
+  rw [Fintype.sum_eq_single A]
+  · simp
+  · intro B hBA
+    simp [Ne.symm hBA]
 
 /-- Exact initial value of the source-conjugated Majorana combination. -/
 theorem sourceConjugatedRotatedTheta_zero (c : ColorIndex 2)
