@@ -74,9 +74,22 @@ theorem actualBosonGauge_vector_derivative_zero
   have htransport :=
     e.symm.toContinuousLinearMap.hasFDerivAt.comp_hasDerivAt
       (0 : ℝ) hcoords
-  -- The composition is a function; expose its argument before invoking
-  -- the accepted inverse law of the exact finite PiLp equivalence.
-  simpa only [Function.comp_def, ContinuousLinearEquiv.symm_apply_apply] using htransport
+  -- Avoid relying on generic simp to discover the inverse of the
+  -- local equivalence through a composition and a HasDerivAt target.
+  -- Rewrite both original functions using its exact inverse law.
+  have hcurve :
+      (fun u : ℝ =>
+        e.symm (e (bosonGauge (sourcePlusIGaugeCurve c u) x))) =
+      (fun u : ℝ =>
+        bosonGauge (sourcePlusIGaugeCurve c u) x) := by
+    funext u
+    exact e.symm_apply_apply _
+  have htangent :
+      e.symm (e (sourceBosonGaugeTangent c x)) =
+        sourceBosonGaugeTangent c x :=
+    e.symm_apply_apply _
+  rw [Function.comp_def, hcurve, htangent] at htransport
+  exact htransport
 
 #print axioms sourceBosonGaugeTangent_apply
 #print axioms actualBosonGauge_vector_derivative_zero
