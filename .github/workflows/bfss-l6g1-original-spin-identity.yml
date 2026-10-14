@@ -2714,6 +2714,36 @@ jobs:
           print('L6G7V_ACTUAL_SOURCE_FULLL2_PHYSICAL_FIXED_SPACE_QUALIFIED')
           PYCODE
 
+      - name: Qualify exact FullL2 original SU2 gauge isometry from source inverse action
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7WActualSourceFullL2GaugeIsometryProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7VActualSourceFullL2PhysicalFixedSpaceProbe.olean
+          echo L6G7W_ACTUAL_SOURCE_FULLL2_GAUGE_ISOMETRY_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6g7w.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7w.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7W.'
+          for root in ('originalSourceFermionFiberAction_norm',
+                       'actualOriginalFullL2GaugePair_norm',
+                       'actualOriginalFullL2GaugePair_isometry'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7W_ACTUAL_SOURCE_FULLL2_GAUGE_ISOMETRY_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
