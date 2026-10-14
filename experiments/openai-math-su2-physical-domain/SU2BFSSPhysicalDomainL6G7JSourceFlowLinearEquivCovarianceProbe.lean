@@ -1,5 +1,4 @@
 import SU2BFSSPhysicalDomainL6G7IOriginalFlowThetaForwardCovarianceProbe
-import SU2BFSSG4HExactThetaCovarianceProbe
 
 /-!
 L6G7J — put the actual source exponential V_c(t) on the same
