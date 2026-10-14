@@ -65,6 +65,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7BOriginalPlusIGaugeCurveGroupLawProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7CAllTimeNativeColorDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7DRotatedThetaOperatorDerivativeProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7ERotatedThetaCommutatorEvolutionProbe.lean
 
 permissions:
   contents: read
@@ -2091,6 +2092,36 @@ jobs:
               assert name in entries and entries[name] <= allowed,(name,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G7D_ACTUAL_ORIGINAL_THETA_OPERATOR_DERIVATIVE_QUALIFIED')
+          PYCODE
+
+      - name: Qualify original rotated theta all-time commutator evolution
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7ERotatedThetaCommutatorEvolutionProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7DRotatedThetaOperatorDerivativeProbe.olean
+          echo L6G7E_ORIGINAL_THETA_COMMUTATOR_EVOLUTION_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g7e.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7e.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7E.'
+          for root in ('sourceGenerator_theta_comm_output',
+                       'sourceRotatedTheta_comm_evolution',
+                       'sourceRotatedTheta_deriv_comm_all'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert all('sorryAx' not in x for x in entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7E_ORIGINAL_THETA_COMMUTATOR_EVOLUTION_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
