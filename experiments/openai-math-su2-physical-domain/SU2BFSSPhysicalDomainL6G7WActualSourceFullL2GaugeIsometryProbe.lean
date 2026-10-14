@@ -61,9 +61,11 @@ theorem actualOriginalFullL2GaugePair_isometry
     (g : GaugeGroup 2) :
     Isometry (actualOriginalFullL2GaugePairCLM g :
       FullL2 2 → FullL2 2) := by
-  intro v w
-  simpa only [dist_eq_norm, ← map_sub] using
-    actualOriginalFullL2GaugePair_norm g (v - w)
+  -- #226: Isometry is defined via edist, not ordinary real norm/dist.
+  -- Use Mathlib's native additive-map norm-preservation → isometry.
+  exact AddMonoidHomClass.isometry_of_norm
+    (actualOriginalFullL2GaugePairCLM g)
+    (actualOriginalFullL2GaugePair_norm g)
 
 #print axioms originalSourceFermionFiberAction_norm
 #print axioms actualOriginalFullL2GaugePair_norm

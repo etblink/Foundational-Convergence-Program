@@ -2714,6 +2714,8 @@ jobs:
           print('L6G7V_ACTUAL_SOURCE_FULLL2_PHYSICAL_FIXED_SPACE_QUALIFIED')
           PYCODE
 
+      # #226 negative knowledge: original norm identity compiled but Isometry
+      # expects edist, not dist; #227 uses AddMonoidHomClass.isometry_of_norm.
       - name: Qualify exact FullL2 original SU2 gauge isometry from source inverse action
         shell: bash
         timeout-minutes: 6
