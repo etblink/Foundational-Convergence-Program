@@ -72,7 +72,18 @@ theorem sourceNativeAdjointCoefficient_deriv_all
       exact sourceNativeAdjointCoefficient_add c A B h t
     rw [heq]
     exact hsum
-  have hback := hshift.comp t ((hasDerivAt_id' t).sub_const t)
+  -- The chain rule expects the outer derivative at the image of
+  -- u ↦ u-t evaluated at u=t. Make t-t=0 explicit, rather than
+  -- asking elaboration to identify these basepoints automatically.
+  have hshift_at : HasDerivAt
+      (fun h : ℝ => pairedAlgebraData.adjointCoefficient
+        (sourcePlusIGaugeCurve c (h + t)) A B)
+      (∑ D : ColorIndex 2,
+         pairedAlgebraData.structureConstant B D c *
+           pairedAlgebraData.adjointCoefficient
+             (sourcePlusIGaugeCurve c t) A D) (t-t) := by
+    simpa only [sub_self] using hshift
+  have hback := hshift_at.comp t ((hasDerivAt_id' t).sub_const t)
   simpa only [Function.comp_def, sub_add_cancel, mul_one] using hback
 
 /-- The complete three-by-three source color matrix satisfies
