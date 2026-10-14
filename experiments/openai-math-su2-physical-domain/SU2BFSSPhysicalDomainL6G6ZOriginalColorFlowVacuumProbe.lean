@@ -98,7 +98,17 @@ theorem sourceFermionColorFlow_add
       sourceFiberFermionColorGenerator pairedAlgebraData c) *
     NormedSpace.exp ((t : ℂ) •
       sourceFiberFermionColorGenerator pairedAlgebraData c)
-  rw [Complex.ofReal_add, add_smul]
+  have hadd :
+      (((s : ℝ) : ℂ) + ((t : ℝ) : ℂ)) •
+          sourceFiberFermionColorGenerator pairedAlgebraData c =
+        (((s : ℝ) : ℂ) • sourceFiberFermionColorGenerator pairedAlgebraData c) +
+          (((t : ℝ) : ℂ) • sourceFiberFermionColorGenerator pairedAlgebraData c) := by
+    apply ContinuousLinearMap.ext
+    intro v
+    simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply]
+    exact add_smul (s : ℂ) (t : ℂ)
+      (sourceFiberFermionColorGenerator pairedAlgebraData c v)
+  rw [Complex.ofReal_add, hadd]
   exact NormedSpace.exp_add_of_commute
     (((Commute.refl
       (sourceFiberFermionColorGenerator pairedAlgebraData c)).smul_left (s : ℂ)).smul_right (t : ℂ))
