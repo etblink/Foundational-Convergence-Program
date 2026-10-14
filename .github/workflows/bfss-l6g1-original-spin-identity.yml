@@ -69,6 +69,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7FOriginalColorFlowOperatorCalculusProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7GConjugatedThetaConstantDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7HSourceFiniteTimeThetaIntertwiningProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7IOriginalFlowThetaForwardCovarianceProbe.lean
 
 permissions:
   contents: read
@@ -2213,6 +2214,34 @@ jobs:
               assert name in entries and entries[name] <= allowed,(name,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G7H_ACTUAL_SOURCE_FINITE_TIME_THETA_INTERTWINING_QUALIFIED')
+          PYCODE
+
+      - name: Qualify exact original bounded theta forward-flow covariance
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7IOriginalFlowThetaForwardCovarianceProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7HSourceFiniteTimeThetaIntertwiningProbe.olean
+          echo L6G7I_SOURCE_THETA_FORWARD_COLOR_COVARIANCE_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g7i.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7i.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7I.'
+          for root in ('sourceFlow_theta_forward_operator',
+                       'sourceFlow_theta_forward_color_sum'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7I_ACTUAL_SOURCE_THETA_FORWARD_COVARIANCE_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
