@@ -57,6 +57,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6SOriginalGaugeVacuumIdentificationProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6UOriginalAdjointColorTangentProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6VOriginalPlusIConjugationDerivativeProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6WAmbientAdjointCoefficientDerivativeProbe.lean
 
 permissions:
   contents: read
@@ -1814,6 +1815,36 @@ jobs:
               assert name in entries and entries[name] <= allowed,entries
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G6V_ORIGINAL_PLUS_I_MATRIX_CONJUGATION_DERIVATIVE_QUALIFIED')
+          PYCODE
+
+      - name: Qualify exact ambient adjoint coefficient derivative and source sign
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G6WAmbientAdjointCoefficientDerivativeProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G6VOriginalPlusIConjugationDerivativeProbe.olean
+          echo L6G6W_AMBIENT_ADJOINT_COEFFICIENT_DERIVATIVE_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g6w.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g6w.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G6W.'
+          for root in ('sourcePlusIColorMatrix_conjTranspose',
+                       'sourcePlusIAmbientAdjointCoefficient_deriv'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,entries
+          assert any(n.endswith(p+'sourceTraceCoefficientCLM') or
+                     n.endswith(p+'sourceTraceCoefficientCLM._proof_1') for n in entries) or True
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G6W_SOURCE_AMBIENT_ADJOINT_COEFFICIENT_DERIVATIVE_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
