@@ -69,22 +69,39 @@ theorem sourceFermionColorFlow_unitary
     sourceFermionColorFlow c t ∈ unitary SourceFiberEnd := by
   unfold sourceFermionColorFlow
   apply NormedSpace.exp_mem_unitary_of_mem_skewAdjoint
-  change star (t • sourceFiberFermionColorGenerator pairedAlgebraData c) =
-    -(t • sourceFiberFermionColorGenerator pairedAlgebraData c)
-  rw [star_smul, star_trivial,
+  change star (((t : ℂ) • sourceFiberFermionColorGenerator pairedAlgebraData c)) =
+    -(((t : ℂ) • sourceFiberFermionColorGenerator pairedAlgebraData c))
+  have hstar : star (t : ℂ) = (t : ℂ) := by
+    rw [RCLike.star_def]
+    exact RCLike.conj_ofReal t
+  rw [star_smul, hstar,
     skewAdjoint.mem_iff.mp (sourceFermionColorGenerator_skew c), smul_neg]
 
 theorem sourceFermionColorFlow_zero (c : ColorIndex 2) :
     sourceFermionColorFlow c 0 = 1 := by
-  simp [sourceFermionColorFlow]
+  change NormedSpace.exp ((0 : ℂ) •
+    sourceFiberFermionColorGenerator pairedAlgebraData c) = 1
+  have hzero :
+      (0 : ℂ) • sourceFiberFermionColorGenerator pairedAlgebraData c =
+        (0 : SourceFiberEnd) := by
+    ext v
+    simp
+  rw [hzero, NormedSpace.exp_zero]
 
 theorem sourceFermionColorFlow_add
     (c : ColorIndex 2) (s t : ℝ) :
     sourceFermionColorFlow c (s+t) =
       sourceFermionColorFlow c s * sourceFermionColorFlow c t := by
-  simp only [sourceFermionColorFlow, add_smul]
+  change NormedSpace.exp (((s+t : ℝ) : ℂ) •
+      sourceFiberFermionColorGenerator pairedAlgebraData c) =
+    NormedSpace.exp ((s : ℂ) •
+      sourceFiberFermionColorGenerator pairedAlgebraData c) *
+    NormedSpace.exp ((t : ℂ) •
+      sourceFiberFermionColorGenerator pairedAlgebraData c)
+  rw [Complex.ofReal_add, add_smul]
   exact NormedSpace.exp_add_of_commute
-    (((Commute.refl (sourceFiberFermionColorGenerator pairedAlgebraData c)).smul_left s).smul_right t)
+    (((Commute.refl
+      (sourceFiberFermionColorGenerator pairedAlgebraData c)).smul_left (s : ℂ)).smul_right (t : ℂ))
 
 theorem sourceFermionColorFlow_norm
     (c : ColorIndex 2) (t : ℝ) (v : Fermion 2) :
