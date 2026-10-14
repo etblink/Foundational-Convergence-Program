@@ -29,6 +29,21 @@ This is a missing **source dependency** and local scalar-instance visibility pro
 
 [Gate #157](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38516208381) was launched to test this specific correction. Its outcome is **NOT KNOWN at this record's creation**. Acceptance still requires a genuine Z `.olean`, correct public theorem types, every one of ten source roots checked with allowed axioms only (`propext`, `Classical.choice`, `Quot.sound`), no compiler error or `sorryAx`. A red must be debugged from its *new* first causal error; do not launch repeated cosmetic edits or increase Lean limits without evidence.
 
+## Gate #157: imports repaired; derivative qualified in isolation, complex-scalar interface still red
+
+[Original Source Spin Identity #157](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38516208381), job `115695470743`, source commit `56978cc4655a2c5869e9e492fc8081642eb96865`, completed **FAILURE** in Z only after successful W/X/Y. Missing namespace and source-identifier errors from #156 were resolved. Crucial qualified diagnostic: `sourceFermionColorFlow_derivative` printed *only* `propext, Classical.choice, Quot.sound`, no `sorryAx`; it is not promoted as an independently full-stage accepted Z result while the workflow remains red.
+
+Three first local causes:
+1. Z line 74: failed to synthesize `StarModule ℝ (Fermion 2 →L[ℂ] Fermion 2)` after attempting `star_smul` with *real* scalar; this is not a proof of failed skew-adjointness. The source skew-adjointness theorem itself had an axiom-clean print.
+2. Z line 78: `NormedSpace.exp (0 • J_F) = 1` was not simplified by `simp [sourceFermionColorFlow]`; use the accepted S3H explicit zero-operator equality followed by `NormedSpace.exp_zero`.
+3. Z line 87: `Commute.smul_left s` asked for `SMulCommClass ℝ SourceFiberEnd SourceFiberEnd`; the pinned accepted S3H proof uses **complex** scalars.
+
+Pinned `Mathlib.LinearAlgebra.Complex.Module` proves `Complex.coe_smul` by `rfl`. Therefore the real-time flow's `t • J_F` is definitionally the same as `((t : ℝ) : ℂ) • J_F`, and the *proof interface* may be changed without modifying the mathematical definition, source sign, derivative type, or original generator.
+
+[Targeted repair `b7d820c6`](https://github.com/etblink/Foundational-Convergence-Program/commit/b7d820c622915c8d847dde9479838d6ec4156d1f) changes only these three tactic blocks: complex-scalar star transport, explicit zero operator, and complex-scalar exponential commutation. `sourceFermionColorFlow_derivative` and all original theorem statements are unchanged. [Gate #158](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38516751604) was launched to test this; **status pending when this note was created**. No L6G6Z theorem is promoted until full #158 source compilation and ten-root strict axiom audit succeed.
+
+**General lesson:** a real-parameter one-parameter group may be easiest to prove in the ambient complex endomorphism algebra. Before demanding abstract real-star or real-module commutation instances on huge Fock operator types, use the checked real-to-complex scalar equality and the accepted source's bounded exponential pattern. This is a proof-interface repair, not a change of generator.
+
 ## Scientific boundary after Z
 
 Even a fully green Z will *only* establish an original source norm-convergent fermionic color flow fixing the same vacuum. The missing theorem remains exact **finite-time covariance** of `V_c(t)` with the original 48 `pairedTheta` fields, with coefficients `pairedAlgebraData.adjointCoefficient (sourcePlusIGaugeCurve c t)`; S1B applies only once this premise is established. L6G6L supplies infinitesimal commutators; X/Y supply the actual SU(2) tangent. Keep T's previously red concrete Fock uniqueness specialization retired. No combined physical Gauss, operator square/closure, or BFSS spectral theorem is inferred.
