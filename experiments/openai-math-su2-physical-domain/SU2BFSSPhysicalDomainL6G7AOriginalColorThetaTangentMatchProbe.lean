@@ -91,6 +91,33 @@ theorem sourceNativeAdjointCoefficient_matches_generator
       (pairedAlgebraData.structureConstant b d c) 0 :=
   sourcePlusIGaugeCurve_adjointCoefficient_deriv c d b
 
+/-!
+First isolate the derivative of a bounded-linear intertwining defect
+independently of the original high-dimensional Fock-space elaboration.
+This is a purely analytic, polymorphic interface: no SU(2) premises.
+-/
+private theorem abstract_boundedLinear_sub_deriv
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    (T : E →L[ℝ] E) (f g : ℝ → E) (u w : E)
+    (hf : HasDerivAt f u 0) (hg : HasDerivAt g w 0) :
+    HasDerivAt (fun t : ℝ => f t - T (g t)) (u - T w) 0 := by
+  have hT : HasDerivAt (fun t : ℝ => T (g t)) (T w) 0 := by
+    have h := T.hasFDerivAt.comp_hasDerivAt 0 hg
+    change HasDerivAt (fun t : ℝ => T (g t)) (T w) 0 at h
+    exact h
+  simpa only [Pi.sub_apply] using hf.sub hT
+
+/-- Resolve the source Fock analytic structure at the declaration boundary.
+The qualified L6G6Z derivative is elaborated with PiLp's actual
+normed-group and real-module instances, not WithLp's wrapper instances. -/
+local instance sourceFockPiLpNormedAddCommGroup :
+    NormedAddCommGroup (Fermion 2) :=
+  PiLp.normedAddCommGroup 2 (fun _ => ℂ)
+
+local instance sourceFockPiLpRealNormedSpace :
+    NormedSpace ℝ (Fermion 2) :=
+  PiLp.normedSpace 2 ℝ (fun _ => ℂ)
+
 /-- FIRST-ORDER SOURCE COVARIANCE: on every literal original theta
 and every actual Fermion 2 state, the derivative of the bounded flow
 intertwining defect is the source native SU(2) adjoint-color tangent.
@@ -111,29 +138,29 @@ theorem sourceFermionColorFlow_thetaIntertwiner_deriv_zero
       (fun t : ℝ => sourceFermionColorFlow c t (T v))
       (J (T v)) 0 :=
     sourceFermionColorFlow_derivative_zero c (T v)
-  have hright' :=
-    ((T.restrictScalars ℝ).hasFDerivAt.comp_hasDerivAt 0
-      (sourceFermionColorFlow_derivative_zero c v))
-  have hright : HasDerivAt
-      (fun t : ℝ => T (sourceFermionColorFlow c t v))
-      (T (J v)) 0 := by
-    change HasDerivAt
-      (fun t : ℝ => T (sourceFermionColorFlow c t v))
-      (T (J v)) 0 at hright'
-    exact hright'
+  have hright :
+      HasDerivAt (fun t : ℝ => sourceFermionColorFlow c t v) (J v) 0 :=
+    sourceFermionColorFlow_derivative_zero c v
   have hsub : HasDerivAt
       (fun t : ℝ => sourceFermionColorFlow c t (T v) -
         T (sourceFermionColorFlow c t v))
-      (J (T v) - T (J v)) 0 := by
-    simpa only [Pi.sub_apply] using hleft.sub hright
+      (J (T v) - T (J v)) 0 :=
+    abstract_boundedLinear_sub_deriv (T.restrictScalars ℝ)
+      (fun t : ℝ => sourceFermionColorFlow c t (T v))
+      (fun t : ℝ => sourceFermionColorFlow c t v)
+      (J (T v)) (J v) hleft hright
   have hcoeff : J (T v) - T (J v) =
       (∑ b : ColorIndex 2,
         (pairedAlgebraData.structureConstant b d c : ℂ) •
           pairedAlgebraData.theta s b) v := by
-    have hc := congrArg (fun K : SourceFiberEnd => K v)
-      (sourceFermionGenerator_comm_matches_nativeAdjointTangent c s d)
-    simpa only [ContinuousLinearMap.sub_apply,
-      ContinuousLinearMap.comp_apply] using hc
+    calc
+      J (T v) - T (J v) =
+          ((J * T - T * J) : SourceFiberEnd) v := rfl
+      _ = (∑ b : ColorIndex 2,
+            (pairedAlgebraData.structureConstant b d c : ℂ) •
+              pairedAlgebraData.theta s b) v :=
+        congrArg (fun K : SourceFiberEnd => K v)
+          (sourceFermionGenerator_comm_matches_nativeAdjointTangent c s d)
   change HasDerivAt
     (fun t : ℝ => sourceFermionColorFlow c t (T v) -
       T (sourceFermionColorFlow c t v))
@@ -143,6 +170,7 @@ theorem sourceFermionColorFlow_thetaIntertwiner_deriv_zero
   rw [← hcoeff]
   exact hsub
 
+#print axioms abstract_boundedLinear_sub_deriv
 #print axioms sourceFermionGenerator_comm_matches_nativeAdjointTangent
 #print axioms sourceNativeAdjointCoefficient_matches_generator
 #print axioms sourceFermionColorFlow_thetaIntertwiner_deriv_zero
