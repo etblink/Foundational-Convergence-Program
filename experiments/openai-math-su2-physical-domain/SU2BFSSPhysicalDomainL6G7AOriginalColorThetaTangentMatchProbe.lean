@@ -131,6 +131,14 @@ local instance sourceFockPiLpRealNormedSpace :
     NormedSpace ℝ (Fermion 2) :=
   PiLp.normedSpace 2 ℝ (fun _ => ℂ)
 
+/-- Give the concrete Fock complex-module dictionary once. In the
+abstract operator commutator proof the scalar field is complex; allowing
+Lean to reconstruct this over 2^24 coordinates caused #164's
+recursion depth error before any mathematical proof search. -/
+local instance sourceFockPiLpComplexNormedSpace :
+    NormedSpace ℂ (Fermion 2) :=
+  PiLp.normedSpace 2 ℂ (fun _ => ℂ)
+
 /-- FIRST-ORDER SOURCE COVARIANCE: on every literal original theta
 and every actual Fermion 2 state, the derivative of the bounded flow
 intertwining defect is the source native SU(2) adjoint-color tangent.
@@ -169,7 +177,7 @@ theorem sourceFermionColorFlow_thetaIntertwiner_deriv_zero
     calc
       J (T v) - T (J v) =
           ((J * T - T * J) : SourceFiberEnd) v :=
-        (abstract_end_comm_apply J T v).symm
+        (abstract_end_comm_apply (E := Fermion 2) J T v).symm
       _ = (∑ b : ColorIndex 2,
             (pairedAlgebraData.structureConstant b d c : ℂ) •
               pairedAlgebraData.theta s b) v :=
