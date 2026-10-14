@@ -36,8 +36,18 @@ theorem actualBosonGauge_smoothCore_pullback_derivative_zero
       HasFDerivAt (f : Boson 2 → Fermion 2)
         (fderiv ℝ (f : Boson 2 → Fermion 2) x) x :=
     (f.contDiff.differentiable (by simp)).differentiableAt.hasFDerivAt
+  -- The exact source +i curve starts at the identity; this is the
+  -- basepoint equality required by Mathlib's composition theorem.
+  have hzero : x = bosonGauge (sourcePlusIGaugeCurve c 0) x := by
+    rw [sourcePlusIGaugeCurve_one]
+    change x = pairedAlgebraData.gaugeConjugate (1 : ColorMatrix 2) x
+    exact (pairedAlgebraData.gaugeConjugate_one x).symm
+  -- In pinned Mathlib, comp_hasDerivAt requires the time x as its
+  -- first explicit argument. The _of_eq variant instead accepts
+  -- the inner derivative and the source-exact basepoint equality.
   simpa only [Function.comp_def] using
-    hf.comp_hasDerivAt (actualBosonGauge_vector_derivative_zero c x)
+    hf.comp_hasDerivAt_of_eq
+      (actualBosonGauge_vector_derivative_zero c x) hzero
 
 #print axioms actualBosonGauge_smoothCore_pullback_derivative_zero
 #check @actualBosonGauge_smoothCore_pullback_derivative_zero
