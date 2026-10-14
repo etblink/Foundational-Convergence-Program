@@ -2651,6 +2651,38 @@ jobs:
           print('L6G7T_ACTUAL_SOURCE_FULL_COLOR_LIE_GAUSS_QUALIFIED')
           PYCODE
 
+      - name: Qualify exact original BFSS FullL2 bounded SU2 gauge transformations
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7UActualSourceFullL2GaugeContractionProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7TOriginalFullColorLieGaussIdentityProbe.olean
+          echo L6G7U_ACTUAL_SOURCE_FULLL2_GAUGE_CONTRACTION_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6g7u.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7u.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7U.'
+          for root in ('originalSourceFermionFiberAction_norm_le',
+                       'originalSourceBosonPullback_norm',
+                       'actualOriginalFullL2GaugePairCLM',
+                       'actualOriginalFullL2GaugePairCLM_apply',
+                       'actualOriginalFullL2GaugePairCLM_norm_le_one'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7U_ACTUAL_SOURCE_FULLL2_GAUGE_CONTRACTION_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
