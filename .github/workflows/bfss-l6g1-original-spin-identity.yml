@@ -2281,13 +2281,14 @@ jobs:
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
-          # Previously accepted original source modules are staged in the
-          # same pinned Lean environment as the J theorem. G4B/G1A have
-          # already been restored or compiled earlier in this exact job.
+          # Stage only the G4H/S1A/S1B closure actually needed for K.
+          # G4B/G1A were already restored or compiled earlier in this job.
+          # Do NOT recompile unrelated L6G6T generator uniqueness: its
+          # large proof hit maxRecDepth in #202, while K needs only the
+          # independent original exterior-vacuum nonzero sublemma.
           cp experiments/openai-math-su2-concrete-potential/SU2*.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe.lean upstream-math/lean/
           cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe.lean upstream-math/lean/
-          cp experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6TOriginalColorInfinitesimalUniquenessProbe.lean upstream-math/lean/
           cd upstream-math/lean
           base=.lake/build/lib/lean
           test -s "$base/SU2BFSSG4BFermionLinearTransportProbe.olean"
@@ -2304,8 +2305,7 @@ jobs:
             SU2BFSSG4GMajoranaModeCovarianceProbe \
             SU2BFSSG4HExactThetaCovarianceProbe \
             SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe \
-            SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe \
-            SU2BFSSPhysicalDomainL6G6TOriginalColorInfinitesimalUniquenessProbe; do
+            SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe; do
             if test -s "$base/$stem.olean"; then
               echo "L6G7K_ACCEPTED_SOURCE_PRESENT=$stem"
             else
@@ -2331,8 +2331,7 @@ jobs:
           cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
           cd upstream-math/lean
           for dep in SU2BFSSPhysicalDomainL6G7JSourceFlowLinearEquivCovarianceProbe \
-                     SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe \
-                     SU2BFSSPhysicalDomainL6G6TOriginalColorInfinitesimalUniquenessProbe; do
+                     SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe; do
             test -s ".lake/build/lib/lean/$dep.olean"
           done
           echo L6G7K_ORIGINAL_GAUGE_IMPLEMENTATION_EQUALS_SOURCE_FLOW_BEGIN
@@ -2346,7 +2345,8 @@ jobs:
           entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
                    re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
           p='FCP.BFSSSU2PhysicalDomainL6G7K.'
-          for root in ('sourceFlowLinearEquiv_eq_actualGauge',
+          for root in ('sourceGaugeVacuum_ne_zero',
+                       'sourceFlowLinearEquiv_eq_actualGauge',
                        'sourceFermionColorFlow_eq_actualGauge_apply'):
               name=p+root
               assert name in entries and entries[name] <= allowed,(name,entries)
