@@ -50,6 +50,12 @@ noncomputable def sourceFlowLinearEquiv
   map_add' := (sourceFermionColorFlow c t).map_add
   map_smul' := (sourceFermionColorFlow c t).map_smul
 
+/-- The invertible interface evaluates to the exact native bounded
+Fock exponential, with no unfolding of its matrix-element source. -/
+theorem sourceFlowLinearEquiv_apply
+    (c : ColorIndex 2) (t : ℝ) (v : Fermion 2) :
+    sourceFlowLinearEquiv c t v = sourceFermionColorFlow c t v := rfl
+
 /-- Evaluate the qualified CLM equality of source native forward
 theta covariance on one literal Fock state without unfolding its
 exterior-algebra construction. -/
@@ -65,7 +71,13 @@ theorem sourceFlow_theta_forward_vector
           (sourceFermionColorFlow c t v) := by
   have h := congrArg (fun T : SourceFiberEnd => T v)
     (sourceFlow_theta_forward_color_sum c spin A t)
-  simpa only [ContinuousLinearMap.mul_apply, Finset.sum_apply,
+  -- The summands are source bounded operators, not ordinary functions;
+  -- transport the finite sum through the bounded evaluation map.
+  have hsum (f : ColorIndex 2 → SourceFiberEnd) :
+      (∑ B : ColorIndex 2, f B) v =
+        ∑ B : ColorIndex 2, (f B) v := by
+    exact map_sum (ContinuousLinearMap.apply ℂ (Fermion 2) v) f Finset.univ
+  simpa only [hsum, ContinuousLinearMap.mul_apply,
     ContinuousLinearMap.smul_apply] using h
 
 /-- No covariance premise is assumed: exact same 48 source
@@ -79,10 +91,13 @@ theorem sourceFlowLinearEquiv_theta_covariant
         (pairedAlgebraData.adjointCoefficient
           (sourcePlusIGaugeCurve c t) A B : ℂ) •
           pairedTheta spin B (sourceFlowLinearEquiv c t v) := by
-  simpa only [sourceFlowLinearEquiv, pairedAlgebraData_theta] using
+  -- Normalize the *application* of the equivalence, rather than
+  -- unfolding the entire source Fock structure in the proposition.
+  simpa only [sourceFlowLinearEquiv_apply, pairedAlgebraData_theta] using
     (sourceFlow_theta_forward_vector c spin A t v)
 
 #print axioms sourceFlowLinearEquiv
+#print axioms sourceFlowLinearEquiv_apply
 #print axioms sourceFlow_theta_forward_vector
 #print axioms sourceFlowLinearEquiv_theta_covariant
 #check @sourceFlowLinearEquiv_theta_covariant
