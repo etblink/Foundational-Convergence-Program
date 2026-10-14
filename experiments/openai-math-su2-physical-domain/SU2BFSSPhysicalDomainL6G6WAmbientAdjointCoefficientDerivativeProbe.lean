@@ -111,7 +111,10 @@ theorem sourcePlusIAmbientAdjointCoefficient_deriv
       pairedAlgebraData.structureConstant B A c :=
     FCP.BFSSSU2PhysicalDomainL6G6U.pairedSourceAdjointColorCandidateTangent_coeff c B A
   rw [hcoeff] at hd
-  simpa only [sourcePlusIColorMatrix, sourcePlusIColorMatrix_conjTranspose] using hd
+  -- Rewrite the named conjugate transpose BEFORE unfolding the curve.
+  -- Gate #150 unfolded its argument first, hiding the helper's left side.
+  simp_rw [sourcePlusIColorMatrix_conjTranspose]
+  simpa only [sourcePlusIColorMatrix] using hd
 
 #print axioms sourcePlusIColorMatrix_conjTranspose
 #print axioms sourcePlusIAmbientAdjointCoefficient_deriv
