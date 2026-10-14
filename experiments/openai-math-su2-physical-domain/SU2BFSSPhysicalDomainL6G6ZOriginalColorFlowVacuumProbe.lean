@@ -1,5 +1,7 @@
 import SU2BFSSPhysicalDomainL6G6YOriginalOneParticleDerivativeProbe
+import SU2BFSSPhysicalDomainL6G6SOriginalGaugeVacuumIdentificationProbe
 import Mathlib.Analysis.Normed.Algebra.Exponential
+import Mathlib.LinearAlgebra.Complex.Module
 
 /-!
 L6G6Z — the actual bounded original Fock fermion COLOR generator
