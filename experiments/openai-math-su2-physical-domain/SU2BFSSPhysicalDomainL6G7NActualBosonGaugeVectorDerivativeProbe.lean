@@ -33,7 +33,7 @@ open FCP.BFSSSU2PhysicalDomainL6G7M
 for the actual G2A gauge action. -/
 noncomputable def sourceBosonGaugeTangent
     (c : ColorIndex 2) (x : Boson 2) : Boson 2 :=
-  PiLp.toLp 2 (fun p : SpaceIndex × ColorIndex 2 =>
+  WithLp.toLp 2 (fun p : SpaceIndex × ColorIndex 2 =>
     ∑ A : ColorIndex 2,
       pairedAlgebraData.structureConstant p.2 A c * x (p.1,A))
 
@@ -74,7 +74,9 @@ theorem actualBosonGauge_vector_derivative_zero
   have htransport :=
     e.symm.toContinuousLinearMap.hasFDerivAt.comp_hasDerivAt
       (0 : ℝ) hcoords
-  simpa only [ContinuousLinearEquiv.symm_apply_apply] using htransport
+  -- The composition is a function; expose its argument before invoking
+  -- the accepted inverse law of the exact finite PiLp equivalence.
+  simpa only [Function.comp_def, ContinuousLinearEquiv.symm_apply_apply] using htransport
 
 #print axioms sourceBosonGaugeTangent_apply
 #print axioms actualBosonGauge_vector_derivative_zero
