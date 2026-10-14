@@ -72,19 +72,16 @@ theorem sourceNativeAdjointCoefficient_deriv_all
       exact sourceNativeAdjointCoefficient_add c A B h t
     rw [heq]
     exact hsum
-  -- The chain rule expects the outer derivative at the image of
-  -- u ↦ u-t evaluated at u=t. Make t-t=0 explicit, rather than
-  -- asking elaboration to identify these basepoints automatically.
-  have hshift_at : HasDerivAt
-      (fun h : ℝ => pairedAlgebraData.adjointCoefficient
-        (sourcePlusIGaugeCurve c (h + t)) A B)
-      (∑ D : ColorIndex 2,
-         pairedAlgebraData.structureConstant B D c *
-           pairedAlgebraData.adjointCoefficient
-             (sourcePlusIGaugeCurve c t) A D) (t-t) := by
-    simpa only [sub_self] using hshift
-  have hback := hshift_at.comp t ((hasDerivAt_id' t).sub_const t)
-  simpa only [Function.comp_def, sub_add_cancel, mul_one] using hback
+  -- Specify the inner map and its basepoint equality independently.
+  -- In #173, direct .comp inferred (t - ·) from the syntactic t-t
+  -- instead of the required (· - t). The vector-space chain rule
+  -- with an explicit basepoint equality avoids that ambiguity.
+  have hinner : HasDerivAt (fun u : ℝ => u - t) (1 : ℝ) t :=
+    (hasDerivAt_id' t).sub_const t
+  have hpoint : (0 : ℝ) = (fun u : ℝ => u - t) t := by
+    simp only [sub_self]
+  have hback := hshift.scomp_of_eq t hinner hpoint
+  simpa only [Function.comp_def, sub_add_cancel, one_smul] using hback
 
 /-- The complete three-by-three source color matrix satisfies
 R'_c(t)=C_c R_c(t) at EVERY real t, without a new derivative premise. -/
