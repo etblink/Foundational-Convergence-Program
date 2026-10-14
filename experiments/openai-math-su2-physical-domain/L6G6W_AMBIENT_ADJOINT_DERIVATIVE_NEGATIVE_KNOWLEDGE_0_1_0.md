@@ -1,6 +1,6 @@
 # L6G6W — ambient adjoint derivative: exact rewrite boundary
 
-**Date:** 2026-10-13 PT. **Scope:** FCP research branch only. This is a diagnostic and qualification record, not a proof certificate.
+**Date:** 2026-10-13 PT. **Current status:** W KERNEL_QUALIFIED in gate #151; native SU(2) and one-particle successors X/Y qualified in #153/#154. **Scope:** FCP research branch only. This is a diagnostic and qualification record, not a proof certificate.
 
 ## Gate #150: what changed and what failed
 
@@ -35,3 +35,5 @@ The printed full derivative quantifies exactly over `c B A : ColorIndex 2` and d
 Accepted W source blob: `5f73e148a9c4b2abf6afb7d6204271ec12b00f4f`. The actual PR-merge CI checkout is `fbe45b7634c2498957fba22fcffa449b8eb990c1`, distinct from the source branch commit. Preserved evidence artifact: `bfss-l6g1-source-qualification-38509669642`, ID `11869671481`, SHA256 `093a1896594736fd1c3c3c24ba4dbbbeb76eadcef4fc869a1b32fd8a9b2d7477`. The permanent source/statement record retains the qualification boundary beyond the artifact's 14-day retention window.
 
 Next candidate: `L6G6X` constructs the original determinant-one SU(2) curve and transports this accepted derivative to the native `AlgebraData.adjointCoefficient`. It is not accepted until its own pinned compile and axiom audit succeed.
+
+**Subsequent qualification:** [X #153](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38511261397) and [Y #154](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38511980270) now qualify the original SU(2) curve/native adjoint derivative and complete actual 24-mode matrix derivative. Read their scoped records for those stronger statements. W's frozen source and ambient-only statement remain unchanged; the Fock generator and physical Gauss bridge remain open.

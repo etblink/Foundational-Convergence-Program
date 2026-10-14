@@ -52,3 +52,5 @@ The source curve is now proved to have determinant one for every real t, belongs
 Accepted X source blob: `b4aff5ae8e55e506d6850765ec661d777b63a58e`. Actual PR-merge CI checkout: `5d499fd4ce395b005a896e4eb80409ec7acb31bb`. Preserved artifact `bfss-l6g1-source-qualification-38511261397`, ID `11869854203`, SHA256 `97b4b13d5ea80cf9275fe7b66dfb276c12011958354bd1b54a6ac1016918c1d9`. This permanent statement and source record preserves the accepted boundary after artifact expiry.
 
 Next candidate `L6G6Y` transports the native derivative through G3C's actual block equation and the pinned real-to-complex and finite-Pi derivative laws. The complete 24-mode derivative is still unqualified until its own gate passes. All Fock, Gauss, square-assembly and spectral limitations above remain.
+
+**Subsequent qualification:** [#154](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38511980270) now qualifies that complete original 24-mode derivative in Y. See [Y's accepted statement and remaining Fock obligation](./L6G6Y_ORIGINAL_ONE_PARTICLE_DERIVATIVE_BOUNDARY_0_1_0.md). X's statement and frozen source remain unchanged.

@@ -1,10 +1,28 @@
-# FCP BFSS — Project Lead successor handoff: L6G6 Fock vacuum bridge (2026-10-13)
+# FCP BFSS — Project Lead successor handoff: L6G6 gauge curve and Fock generator bridge (2026-10-13)
 
 **Purpose:** Rapidly restore exact research state, avoid repeating diagnosed Lean failures, and return to the actual mathematics. **Snapshot, not canonical promotion.** Reverify live HEAD and Actions before acting.
 
-> **First read:** [Evergreen Project Lead guidance](./FCP_PROJECT_LEAD_EVERGREEN_RESEARCH_GUIDANCE_0_1_0.md) for decision rules, then [the L6G6N–P scoped negative-knowledge record](../experiments/openai-math-su2-physical-domain/L6G6N_TO_L6G6P_FOCK_VACUUM_BRIDGE_NEGATIVE_KNOWLEDGE_2026_10_13.md) for specific diagnostics, source modules, theorem types, remedies and research obligations. The older [S3L successor handoff](./FCP_BFSS_S3L_SPECTRAL_PROJECT_LEAD_CHAT_CONTEXT_SUCCESSION_2026_10_12.md) supplies the broader science and earlier methodological evidence.
+> **First read:** [Evergreen Project Lead guidance](./FCP_PROJECT_LEAD_EVERGREEN_RESEARCH_GUIDANCE_0_1_0.md), then the current checkpoint and W/X/Y scoped records below. [The N–P negative-knowledge record](../experiments/openai-math-su2-physical-domain/L6G6N_TO_L6G6P_FOCK_VACUUM_BRIDGE_NEGATIVE_KNOWLEDGE_2026_10_13.md) retains source-vacuum and T-specialization diagnostics. The older [S3L successor handoff](./FCP_BFSS_S3L_SPECTRAL_PROJECT_LEAD_CHAT_CONTEXT_SUCCESSION_2026_10_12.md) supplies broader scientific context. Earlier snapshots and dated pending statements below are historical; the current checkpoint controls verified status.
 
-## Last verified snapshot
+## Current verified checkpoint — after gate #154
+
+- Active research branch: `research/openai-math-su2-s3l-combined-rotation`. Latest **qualified source commit**: `17307220cdbfe0e5ea781b136932c70616853da0`, preceding this documentation update. Resolve live branch HEAD before any mutation; use an expected-head lease.
+- PR #25 remains open, draft, unmerged on `research/openai-math-su2-s3k-physical-spin-flow`. Canonical main remains `cf06212a57db0ceffad74bd78280a8a240856a17`. Neither mathematical-source repo changed.
+- Original source/compiler/dependencies: `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean `4.34.1`, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`. Strict compilation and allowed-axiom audit retained; only `propext`, `Classical.choice`, `Quot.sound` accepted.
+
+| Newly qualified source obligation | Evidence | Scoped record |
+|---|---|---|
+| W: exact ambient +i real trace-coefficient derivative | [#151 GREEN](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38509669642) | [W diagnosis and accepted source](../experiments/openai-math-su2-physical-domain/L6G6W_AMBIENT_ADJOINT_DERIVATIVE_NEGATIVE_KNOWLEDGE_0_1_0.md) |
+| X: determinant-one original SU(2) curve and native adjointCoefficient derivative | [#153 GREEN](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38511261397) | [X finite proof and #152 negative knowledge](../experiments/openai-math-su2-physical-domain/L6G6X_ORIGINAL_SU2_GAUGE_CURVE_BOUNDARY_0_1_0.md) |
+| Y: complete actual original 24-mode complex gauge matrix derivative | [#154 GREEN](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38511980270) | [Y accepted statement and next source obligation](../experiments/openai-math-su2-physical-domain/L6G6Y_ORIGINAL_ONE_PARTICLE_DERIVATIVE_BOUNDARY_0_1_0.md) |
+
+The derivative retains row B/output, column A/input and `f_(B A c)`. The entire 24-by-24 source matrix is covered, including eight actual color blocks and zero off-block derivatives. All W/X/Y roots are error-free and `sorryAx`-free. Existing source current/CAR, vacuum Q/R/S and candidate U/conjugation V results remain qualified.
+
+**Selected next scientific target:** match `exp((t : ℂ) • J_F(c))` to the actual G4B/G4J Fock gauge action along `sourcePlusIGaugeCurve`. Read accepted S1B's exact same-Majorana-covariance premise and S3H's bounded-flow implementation. Prove the candidate's actual finite-time covariance with the native color flow before applying S1B; use the common nonzero source vacuum to fix its complex scalar. Neither Y's finite derivative nor S1B's accepted conditional theorem discharges that covariance automatically. Then differentiate the established action equality and the source equivariance equation to obtain both Gauss components on the physical core. The source Fock-generator equality, combined Gauss, full charge-square assembly and spectral formalization remain **OPEN**. T and monolithic R4B/R4D remain paused.
+
+**New reusable lessons:** rewrite named equalities before unfolding their matching definitions (#150→#151); obtain det(exp W)=1 for traceless 2-by-2 W using adjugate/transpose semiconjugacy rather than inventing the unavailable general determinant-exp API; reduce row-vector products and scalar identity conditions explicitly (#152→#153); transport native scalar derivatives through original block identities and finite-Pi calculus (#154). Preserve these scoped lessons without adding run history to the evergreen guide. No redundant CI is required for this documentation update.
+
+## Historical gate #129 snapshot
 
 - Repo: https://github.com/etblink/Foundational-Convergence-Program ; **active branch** `research/openai-math-su2-s3l-combined-rotation`. HEAD **before this document commit**: `5d9a663a8795b33b34a425d94931542f644419d4`.
 - Draft **PR #25** https://github.com/etblink/Foundational-Convergence-Program/pull/25 ; head active branch, base `research/openai-math-su2-s3k-physical-spin-flow`; open, draft, unmerged.
@@ -13,7 +31,7 @@
 - **Kernel-qualified gates:** [#122 — L6G6N](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38472095926), [#125 — L6G6O](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38473401296), and [#129 — L6G6P](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38477409470) (complete source-Fock transport, mixed CAR specialization, and normalized pair cancellation; axiom-audited with no `sorryAx`).
 - **Gate #129 outcome (verified 2026-10-13 22:29 UTC):** **GREEN** at source commit `5d9a663a8795b33b34a425d94931542f644419d4`, log marker `L6G6P_SOURCE_FERMION2_TRANSPORTED_VACUUM_QUALIFIED`. Gates #126–#128 are red but the exact repairs and lessons were preserved. Reverify any newer results live.
 
-## Proven vs remaining
+## Historical gate #129 — proven vs remaining
 
 **Proven/qualified:** L6G6N establishes generic phase-pair algebra and conditional off-diagonal CAR/vacuum cancellation on `Fermion 2`. L6G6O proves the source **exterior-algebra unit** is annihilated by the true 24-mode source annihilators. The prior L6G6M theorem proves the literal bounded color generator kills a vacuum *conditional on* the source spin-pair sum vanishing.
 
@@ -21,7 +39,7 @@
 
 **Not proved:** equality with G4B's invariant vacuum, exact even/odd paired`Theta` source spin/color sum, application of L6G6M to `pairedAlgebraData`, color generator = actual SU(2) gauge-action derivative with the right sign and scalar normalization, full Gauss constraint, original charge-square/gauge assembly, and spectral positivity. Existing conditional analytical spectral-sector bounds remain conditional; the complete BFSS spectral claim is not Lean-qualified.
 
-## Next Project Lead action
+## Historical gate #129 — next action
 
 1. Fetch *live* branch HEAD, current PR base/draft state and recent CI logs. Gate #129 is now an accepted source checkpoint; do not re-litigate its vector-level zero-smul repair without contrary evidence. Advance to the exact `pairedAlgebraData` source identity, checking signs and indices.
 2. Accepted technique from #129: explicit `ContinuousLinearMap.ext` maintains vector-level operator equality, whereas unrestricted `ext` descended into `PiLp` coordinates; then the exact zero-scalar action simplifies. Preserve this as negative knowledge and reuse proven F1/F2 source objects, not guessed APIs.
@@ -143,3 +161,7 @@ An external Grok response, provided directly by the owner, agreed on sign, mathe
 [#153](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38511261397) **GREEN** at `02e5e74fc6db5a71ef563ace734831d23824ba24`. All six X public roots and both private finite helpers passed the pinned compile and allowed-axiom audit without `sorryAx`. The original `+i` curve is now genuinely determinant-one and lies in `GaugeGroup 2`, and the native `adjointCoefficient` derivative equals `f_(B A c)` at zero. This resolves the previously separate subgroup-membership and native scalar-derivative obligations. Read [X's scoped evidence record](../experiments/openai-math-su2-physical-domain/L6G6X_ORIGINAL_SU2_GAUGE_CURVE_BOUNDARY_0_1_0.md).
 
 Next **unqualified candidate**: `L6G6YOriginalOneParticleDerivativeProbe` transports this derivative through accepted G3C blocks and the pinned scalar-cast/finite-Pi calculus to the actual complete 24-mode matrix. See [Y's scoped boundary](../experiments/openai-math-su2-physical-domain/L6G6Y_ORIGINAL_ONE_PARTICLE_DERIVATIVE_BOUNDARY_0_1_0.md). No Fock derivative, bounded-generator equality, combined Gauss or spectral claim follows yet; T and R4B/R4D remain paused.
+
+## Gate #154 qualified complete original 24-mode derivative
+
+[#154](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38511980270) **GREEN** at `17307220cdbfe0e5ea781b136932c70616853da0`, actual PR-merge checkout `e91ced1aaa58f3c2a4c879b8377d71ce86415226`. All four Y roots passed strict axiom audit; source blob `837e5f9ef536aa4c0de0f54275a1a3b35fb4a83e`. The actual complete G3C complex one-particle gauge matrix differentiates to U's source tangent, with no new derivative premise. This closes the actual one-particle derivative obligation; it does not identify the Fock generator or establish full Gauss or spectral statements. The current checkpoint at the top supplies the next source target, exact scientific boundaries, and links to permanent acceptance/negative-knowledge records.

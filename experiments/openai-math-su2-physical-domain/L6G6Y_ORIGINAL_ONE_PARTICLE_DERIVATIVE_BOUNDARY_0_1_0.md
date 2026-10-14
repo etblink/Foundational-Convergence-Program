@@ -1,6 +1,6 @@
 # L6G6Y — original 24-mode gauge representation derivative
 
-**Date:** 2026-10-13 PT. **Status:** source-grounded candidate awaiting pinned qualification. Research branch only.
+**Date:** 2026-10-13 PT. **Current status:** KERNEL_QUALIFIED_ORIGINAL_COMPLETE_24MODE_GAUGE_MATRIX_DERIVATIVE in gate #154. Research branch only. The initial candidate specification below is retained as provenance.
 
 ## Exact mathematical target
 
@@ -27,3 +27,19 @@ The actual exterior/Fock gauge derivative and its equality with the original bou
 No full combined Gauss annihilation, complete charge-square assembly, closed-operator identity, or spectral formalization is inferred from the one-particle derivative. Preserve separate source and analytic obligations.
 
 Pinned `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean `4.34.1`, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`. FCP main and both source repositories are unchanged; PR25 stays draft/unmerged on its S3K base.
+
+## Gate #154: complete original one-particle derivative qualified
+
+[#154](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38511980270), job `115682310866`, source commit `17307220cdbfe0e5ea781b136932c70616853da0`, completed **SUCCESS**. W and X compiled and audited first. All four Y public roots passed their explicit allowed-axiom audit, with only `propext`, `Classical.choice`, and `Quot.sound`, no compiler error and no `sorryAx`. Marker: `L6G6Y_ORIGINAL_COMPLETE_24MODE_GAUGE_MATRIX_DERIVATIVE_QUALIFIED`.
+
+The actual printed type is exactly `∀ c : ColorIndex 2, HasDerivAt (fun t => complexOneParticleMatrix (sourcePlusIGaugeCurve c t)) (source24ModeCandidateTangent c) 0`. Its source block theorem preserves all original Fin8/ColorIndex2 input/output indices; entrywise recovery includes every Fin24 pair. No actual-action derivative or covariance premise is added.
+
+Accepted Y source blob: `837e5f9ef536aa4c0de0f54275a1a3b35fb4a83e`. Actual PR-merge CI checkout: `e91ced1aaa58f3c2a4c879b8377d71ce86415226`. Evidence artifact: `bfss-l6g1-source-qualification-38511980270`, ID `11870447670`, SHA256 `1ee4bee6708e5a1dab7386fc9f263da1558178e4963177c5ff3f495f337d6ad7`. Exact source/compiler/Mathlib checks and K–V cache validation succeeded. This permanent source/statement record retains the qualification boundary after artifact expiry.
+
+**Scientific change:** U's finite candidate tangent is now the proved derivative of the **actual** original 24-mode complex gauge representation along the genuine original SU(2) curve. This is the source one-particle result, not a proof of the Fock generator, physical Gauss or spectrum.
+
+## Selected next source obligation
+
+Identify the original bounded source `J_F` with the genuine G4B/G4J Fock gauge generator. The existing S1B `theta_covariant_implementer_scalar` compares an invertible complex-linear candidate with `fermionGaugeLinearEquiv g` **only after the candidate's actual same-48-Majorana covariance is proved**. Qualified S3H supplies a source-compatible bounded exponential-flow pattern; K supplies current skew-adjointness, L its commutators, and R/S the exact shared invariant vacuum. None of those alone discharges S1B's finite-time covariance premise.
+
+The intended complete target is `exp((t : ℂ) • J_F(c)) v = fermionGaugeLinearEquiv (sourcePlusIGaugeCurve c t) v` for all real t and original v, with source coefficients fixed by X/Y and the remaining central scalar fixed by the nonzero common vacuum. First establish the actual finite color flow/covariance relation through checked interfaces; then use S1B and the vacuum and differentiate the equality. Do not relaunch the abandoned T specialization or treat a new flow's unitarity alone as the generator-identification theorem. A direct source-exact exterior differentiation is an alternative only if its transport and domain premises are separately verified.
