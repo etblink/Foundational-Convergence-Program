@@ -46,40 +46,29 @@ noncomputable def sourceBosonGaugeTangent
 
 /-- Actual source G2A bosonGauge differentiates, AS A VECTOR in the
 original Boson 2 Euclidean space, to the source-exact color tangent.
-Only the qualified M coordinate results and the pinned finite PiLp
-linear equivalence are used. -/
+Use the pinned Mathlib PiLp coordinate-derivative equivalence directly;
+do not elaborate a second Pi-function normed/module instance. -/
 theorem actualBosonGauge_vector_derivative_zero
     (c : ColorIndex 2) (x : Boson 2) :
     HasDerivAt
       (fun t : ℝ => bosonGauge (sourcePlusIGaugeCurve c t) x)
       (sourceBosonGaugeTangent c x) 0 := by
-  let e : Boson 2 ≃L[ℝ]
-      ((SpaceIndex × ColorIndex 2) → ℝ) :=
-    PiLp.continuousLinearEquiv 2 ℝ
-      (fun _ : SpaceIndex × ColorIndex 2 => ℝ)
-  have hcoords :
+  have hcoord (p : SpaceIndex × ColorIndex 2) :
       HasDerivAt
-        (fun t : ℝ => e (bosonGauge (sourcePlusIGaugeCurve c t) x))
-        (e (sourceBosonGaugeTangent c x)) 0 := by
-    change HasDerivAt
-      (fun t : ℝ => fun p : SpaceIndex × ColorIndex 2 =>
-        (bosonGauge (sourcePlusIGaugeCurve c t) x) p)
-      (fun p : SpaceIndex × ColorIndex 2 =>
-        ∑ A : ColorIndex 2,
-          pairedAlgebraData.structureConstant p.2 A c * x (p.1,A))
-      0
-    apply hasDerivAt_pi.mpr
-    intro p
-    exact actualBosonGauge_coordinate_derivative_zero c x p.1 p.2
-  -- Use the established equivalence theorem for Fréchet derivatives
-  -- instead of casting back through e.symm: the latter elaborated
-  -- with a different PiLp/WithLp normed additive instance in #211/#212.
-  -- The derivative of the scalar-parameter curve is the continuous
-  -- linear map toSpanSingleton; equivalences transport it by composition.
-  rw [hasDerivAt_iff_hasFDerivAt]
-  apply (e.comp_hasFDerivAt_iff).mp
-  simpa only [Function.comp_def, ContinuousLinearMap.comp_toSpanSingleton]
-    using hcoords.hasFDerivAt
+        (fun t : ℝ => (bosonGauge (sourcePlusIGaugeCurve c t) x) p)
+        (sourceBosonGaugeTangent c x p) 0 := by
+    rcases p with ⟨i, B⟩
+    simpa only [sourceBosonGaugeTangent_apply] using
+      actualBosonGauge_coordinate_derivative_zero c x i B
+  -- Previous #210–#213 attempts rebuilt a Pi-space derivative and
+  -- encountered incompatible elaborated Pi module/additive instances
+  -- when transporting it back through a continuous linear equivalence.
+  -- Here the codomain remains the ORIGINAL PiLp 2 at every step.
+  rw [hasDerivAt_iff_hasFDerivAt, ← hasFDerivWithinAt_univ]
+  apply (hasFDerivWithinAt_piLp (p := 2)).mpr
+  intro p
+  simpa only [ContinuousLinearMap.comp_toSpanSingleton, PiLp.proj_apply]
+    using (hcoord p).hasFDerivAt.hasFDerivWithinAt
 
 #print axioms sourceBosonGaugeTangent_apply
 #print axioms actualBosonGauge_vector_derivative_zero
