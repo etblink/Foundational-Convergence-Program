@@ -44,6 +44,14 @@ Next candidate: [L6G7C source `72ebed39`](https://github.com/etblink/Foundationa
 
 Following an L6G7C green, next obligatory mathematics is the bounded-operator-valued evolution of `B_A(t)=Σ_B R(t)[B,A] theta_B`, then the conserved conjugate `V(-t) B_A(t) V(t)`, then S1B/vacuum uniqueness. Neither those identities nor full Gauss/spectral implications follow merely from the native 3×3 color derivative.
 
+## Gate #172 red — translation basepoint mismatch, not color evolution
+
+[Original Source Spin Identity #172](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38528770902), job `115737385463`, source `72ebed39675e6b78b63940091ef7c3891e06ddd4`, completed **RED** solely at L6G7C. Accepted L6G7B group law recompiled GREEN. First and only Lean error at L6G7C line 75: `hshift.comp t ((hasDerivAt_id' t).sub_const t)` expected `HasDerivAt ... (t-t)`, but `hshift` was explicitly typed at zero. The preceding original-source finite-sum derivative `hsum` and rewriting to `hshift` compiled without error. Both public L6G7C theorems nevertheless printed `sorryAx` and **are NOT qualified**; the mathematical all-time ODE is still open. This is not a failed source-color sign or matrix identity.
+
+**Bounded response:** [`9c6e8bf7`](https://github.com/etblink/Foundational-Convergence-Program/commit/9c6e8bf7768e4e5b9f16196d143bd6e2cb2b1540) inserts a new explicitly typed outer derivative `hshift_at` at `t-t`, proving it by `simpa only [sub_self] using hshift`, then applies the same chain rule to `u ↦ u-t`. It does not change the actual source color matrix, `+i` curve, derivative coefficients, index orientation, or any accepted module. [Original Source Spin Identity #173](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38530473878) was **queued**, unqualified when this note was authored. Audit both L6G7C roots, no `sorryAx`, and the exact printed all-time matrix theorem before promotion.
+
+**General lesson for successors:** `HasDerivAt.comp` expects the outer theorem at the *syntactic image of the inner function's basepoint*; rewrite `t-t=0` into the exact required outer-derivative basepoint BEFORE composing. Avoid changing the mathematics or invoking excessive simplification when a real-variable calculus transport has this interface-only failure.
+
 ## 1. Scalar/matrix evolution, independently of Fock elaboration
 
 First prove g(t+h)=g(h)g(t) using the same-generator exponential addition law and lift the matrix equality with subtype extensionality. The two factors commute because they are exponentials of scalar multiples of the same matrix. This is an additional theorem obligation, not supplied automatically by subgroup membership.
