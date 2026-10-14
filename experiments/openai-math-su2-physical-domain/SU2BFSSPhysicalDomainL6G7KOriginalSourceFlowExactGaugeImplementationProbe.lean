@@ -1,6 +1,5 @@
 import SU2BFSSPhysicalDomainL6G7JSourceFlowLinearEquivCovarianceProbe
 import SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe
-import SU2BFSSPhysicalDomainL6G6TOriginalColorInfinitesimalUniquenessProbe
 
 /-!
 L6G7K — equality of the literal original source Fermion 2 bounded
@@ -15,7 +14,8 @@ Inputs qualified independently:
   by a complex scalar.
 * L6G6Z/G4B: BOTH implementations fix the very same Fermion 2
   Fock vacuum.
-* L6G6T: this common vacuum is provably nonzero.
+* The same original exterior-Fock transport of the unit gives an
+  independent short proof that this common vacuum is nonzero.
 
 No gauge equality, generator identification, or scalar phase is
 assumed. Prove the complex scalar is one. Separate remaining
@@ -32,13 +32,26 @@ noncomputable section
 
 open scoped BigOperators
 open OAI.BFSSQuantum
+open OAI.Laughlin.Fock
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2GaugeG4B
 open FCP.BFSSSU2PhysicalDomainL6G6X
 open FCP.BFSSSU2PhysicalDomainL6G6Z
 open FCP.BFSSSU2PhysicalDomainL6G7J
 open FCP.BFSSSU2PhysicalDomainS1B
-open FCP.BFSSSU2PhysicalDomainL6G6T
+
+/-- Nonzero original gauge/Fock vacuum: the external algebra unit
+is nonzero and its source G4B transport is injective. This is the
+independently proven elementary sublemma from L6G6T, reused here
+without rebuilding L6G6T's unrelated, large infinitesimal-uniqueness
+proof (the actual first failure of Gate #202). -/
+theorem sourceGaugeVacuum_ne_zero :
+    fermionVacuum ≠ (0 : Fermion 2) := by
+  intro hzero
+  have hunit : (1 : Space 23) = 0 := by
+    apply fockAlgebraToBFSS.injective
+    simpa only [fermionVacuum, map_zero] using hzero
+  exact one_ne_zero hunit
 
 /-- Source-bounded exponential and independently constructed G4B
 exterior-Fock gauge action are exactly EQUAL, not merely equal up to
@@ -72,7 +85,7 @@ theorem sourceFlowLinearEquiv_eq_actualGauge
   have hzone : z = 1 := by
     by_contra hn
     exact (smul_ne_zero (sub_ne_zero.mpr hn)
-      actualGaugeVacuum_ne_zero) hzminus
+      sourceGaugeVacuum_ne_zero) hzminus
   apply LinearEquiv.ext
   intro v
   simpa only [hzone, one_smul] using hz v
@@ -91,6 +104,7 @@ theorem sourceFermionColorFlow_eq_actualGauge_apply
       congrArg (fun F : Fermion 2 ≃ₗ[ℂ] Fermion 2 => F v)
         (sourceFlowLinearEquiv_eq_actualGauge c t)
 
+#print axioms sourceGaugeVacuum_ne_zero
 #print axioms sourceFlowLinearEquiv_eq_actualGauge
 #print axioms sourceFermionColorFlow_eq_actualGauge_apply
 #check @sourceFlowLinearEquiv_eq_actualGauge
