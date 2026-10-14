@@ -120,51 +120,70 @@ theorem sourceRotatedTheta_comm_evolution
       sourceRotatedTheta c spin A t *
         sourceFiberFermionColorGenerator pairedAlgebraData c =
       sourceRotatedThetaDerivative c spin A t := by
-  -- #178 showed that specializing a polymorphic Ring/Algebra lemma to
-  -- SourceFiberEnd provokes deep instance reconstruction. Prove the same
-  -- finite-sum calculation directly in the already-resolved operator
-  -- algebra, using local named quantities, never an operator on a vector.
-  let J : SourceFiberEnd :=
-    sourceFiberFermionColorGenerator pairedAlgebraData c
-  let theta : ColorIndex 2 → SourceFiberEnd :=
-    pairedAlgebraData.theta spin
-  let F : ColorIndex 2 → ColorIndex 2 → ℂ :=
-    fun b d => (pairedAlgebraData.structureConstant b d c : ℂ)
-  let r : ColorIndex 2 → ℂ :=
-    fun d => (pairedAlgebraData.adjointCoefficient
-      (sourcePlusIGaugeCurve c t) A d : ℂ)
-  have hcomm (d : ColorIndex 2) :
-      J * theta d - theta d * J =
-        ∑ b : ColorIndex 2, F b d • theta b :=
-    sourceGenerator_theta_comm_output c spin d
-  have htransport :
-      J * (∑ d : ColorIndex 2, r d • theta d) -
-        (∑ d : ColorIndex 2, r d • theta d) * J =
-      ∑ b : ColorIndex 2,
-        (∑ d : ColorIndex 2, F b d * r d) • theta b := by
-    calc
-      _ = ∑ d : ColorIndex 2,
-            r d • (J * theta d - theta d * J) := by
+  -- #179: the generic ring lemma AND literal source commutator are
+  -- individually kernel-clean, but reducing abstract local aliases into
+  -- the literal source operator in hcomm exhausted recursion depth.
+  -- Preserve source J/theta syntactically. Rewrite one EXACT source
+  -- commutator at a time, only after ordinary finite-sum distribution.
+  unfold sourceRotatedTheta sourceRotatedThetaDerivative
+  calc
+    sourceFiberFermionColorGenerator pairedAlgebraData c *
+        (∑ d : ColorIndex 2,
+          (pairedAlgebraData.adjointCoefficient
+            (sourcePlusIGaugeCurve c t) A d : ℂ) •
+              pairedAlgebraData.theta spin d) -
+      (∑ d : ColorIndex 2,
+          (pairedAlgebraData.adjointCoefficient
+            (sourcePlusIGaugeCurve c t) A d : ℂ) •
+              pairedAlgebraData.theta spin d) *
+        sourceFiberFermionColorGenerator pairedAlgebraData c =
+      ∑ d : ColorIndex 2,
+        (pairedAlgebraData.adjointCoefficient
+          (sourcePlusIGaugeCurve c t) A d : ℂ) •
+          (sourceFiberFermionColorGenerator pairedAlgebraData c *
+              pairedAlgebraData.theta spin d -
+            pairedAlgebraData.theta spin d *
+              sourceFiberFermionColorGenerator pairedAlgebraData c) := by
         simp only [Finset.mul_sum, Finset.sum_mul,
           mul_smul_comm, smul_mul_assoc,
           ← Finset.sum_sub_distrib, ← smul_sub]
-      _ = ∑ d : ColorIndex 2, ∑ b : ColorIndex 2,
-            (r d * F b d) • theta b := by
-        simp_rw [hcomm, Finset.smul_sum, smul_smul]
-      _ = ∑ b : ColorIndex 2, ∑ d : ColorIndex 2,
-            (F b d * r d) • theta b := by
-        rw [Finset.sum_comm]
-        apply Finset.sum_congr rfl
-        intro b _
-        apply Finset.sum_congr rfl
-        intro d _
-        rw [mul_comm (r d) (F b d)]
-      _ = ∑ b : ColorIndex 2,
-            (∑ d : ColorIndex 2, F b d * r d) • theta b := by
-        simp only [Finset.sum_smul]
-  simpa only [J, theta, F, r, sourceRotatedTheta,
-    sourceRotatedThetaDerivative, Complex.ofReal_sum,
-    Complex.ofReal_mul] using htransport
+    _ = ∑ d : ColorIndex 2,
+          (pairedAlgebraData.adjointCoefficient
+            (sourcePlusIGaugeCurve c t) A d : ℂ) •
+            (∑ b : ColorIndex 2,
+              (pairedAlgebraData.structureConstant b d c : ℂ) •
+                pairedAlgebraData.theta spin b) := by
+      apply Finset.sum_congr rfl
+      intro d _
+      rw [sourceGenerator_theta_comm_output c spin d]
+    _ = ∑ d : ColorIndex 2, ∑ b : ColorIndex 2,
+          ((pairedAlgebraData.adjointCoefficient
+            (sourcePlusIGaugeCurve c t) A d : ℂ) *
+              (pairedAlgebraData.structureConstant b d c : ℂ)) •
+              pairedAlgebraData.theta spin b := by
+      simp only [Finset.smul_sum, smul_smul]
+    _ = ∑ b : ColorIndex 2, ∑ d : ColorIndex 2,
+          ((pairedAlgebraData.structureConstant b d c : ℂ) *
+            (pairedAlgebraData.adjointCoefficient
+              (sourcePlusIGaugeCurve c t) A d : ℂ)) •
+              pairedAlgebraData.theta spin b := by
+      rw [Finset.sum_comm]
+      apply Finset.sum_congr rfl
+      intro b _
+      apply Finset.sum_congr rfl
+      intro d _
+      rw [mul_comm
+        (pairedAlgebraData.adjointCoefficient
+          (sourcePlusIGaugeCurve c t) A d : ℂ)
+        (pairedAlgebraData.structureConstant b d c : ℂ)]
+    _ = ∑ b : ColorIndex 2,
+          ((∑ d : ColorIndex 2,
+              pairedAlgebraData.structureConstant b d c *
+                pairedAlgebraData.adjointCoefficient
+                  (sourcePlusIGaugeCurve c t) A d : ℝ) : ℂ) •
+            pairedAlgebraData.theta spin b := by
+      simp only [Complex.ofReal_sum, Complex.ofReal_mul,
+        Finset.sum_smul]
 
 /-- The all-time original 48-theta source operator evolution equation.
 No unverified Fock-vector transport or finite-time identification is used. -/
