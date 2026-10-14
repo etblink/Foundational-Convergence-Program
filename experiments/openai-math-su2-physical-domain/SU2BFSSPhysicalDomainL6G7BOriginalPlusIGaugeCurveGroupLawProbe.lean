@@ -21,7 +21,7 @@ set_option maxHeartbeats 1600000
 namespace FCP.BFSSSU2PhysicalDomainL6G7B
 noncomputable section
 
-open scoped BigOperators
+open scoped BigOperators Matrix.Norms.L2Operator
 open Matrix
 open OAI.BFSSQuantum
 open FCP.BFSSSU2GaugeG1A
