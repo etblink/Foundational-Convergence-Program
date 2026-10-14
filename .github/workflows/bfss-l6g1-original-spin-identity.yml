@@ -66,6 +66,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7CAllTimeNativeColorDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7DRotatedThetaOperatorDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7ERotatedThetaCommutatorEvolutionProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7FOriginalColorFlowOperatorCalculusProbe.lean
 
 permissions:
   contents: read
@@ -2122,6 +2123,36 @@ jobs:
           assert all('sorryAx' not in x for x in entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G7E_ORIGINAL_THETA_COMMUTATOR_EVOLUTION_QUALIFIED')
+          PYCODE
+
+      - name: Qualify exact source bounded flow operator calculus
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7FOriginalColorFlowOperatorCalculusProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7ERotatedThetaCommutatorEvolutionProbe.olean
+          echo L6G7F_SOURCE_BOUNDED_FLOW_OPERATOR_CALCULUS_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g7f.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7f.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7F.'
+          for root in ('sourceFermionColorFlow_mul_neg',
+                       'sourceFermionColorFlow_neg_mul',
+                       'sourceFermionColorGenerator_commute_flow',
+                       'sourceFermionColorFlow_derivative_operator'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7F_ACTUAL_SOURCE_FLOW_OPERATOR_CALCULUS_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
