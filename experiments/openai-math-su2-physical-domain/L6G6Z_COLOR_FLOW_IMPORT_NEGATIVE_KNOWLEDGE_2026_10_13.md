@@ -44,6 +44,16 @@ Pinned `Mathlib.LinearAlgebra.Complex.Module` proves `Complex.coe_smul` by `rfl`
 
 **General lesson:** a real-parameter one-parameter group may be easiest to prove in the ambient complex endomorphism algebra. Before demanding abstract real-star or real-module commutation instances on huge Fock operator types, use the checked real-to-complex scalar equality and the accepted source's bounded exponential pattern. This is a proof-interface repair, not a change of generator.
 
+## Gate #158: nine roots axiom-clean; one concrete group-law rewrite boundary
+
+[Original Source Spin Identity #158](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38516751604), job `115697170562`, source commit `b7d820c622915c8d847dde9479838d6ec4156d1f`, completed **RED** solely at `L6G6Z...lean:101:26`: `rw [Complex.ofReal_add, add_smul]` could not find the generic `(?r + ?s) • ?x` occurrence in the actual concrete Fock operator target. The goal printed `exp ((↑s + ↑t) • J_F)=exp(↑s • J_F)*exp(↑t • J_F)`, so this is a Lean rewrite/elaboration **interface failure**, not a sign or mathematical obstruction.
+
+The #158 axiom audit printed only `propext`, `Classical.choice`, `Quot.sound`, with **no `sorryAx`** for `sourceFermionColorGenerator_skew`, `sourceFermionColorFlow_unitary`, `sourceFermionColorFlow_zero`, `sourceFermionColorFlow_norm`, `sourceFermionColorFlow_derivative`, `sourceFermionColorFlow_derivative_zero`, `sourceFermionColorFlow_time_bound`, `sourceFermionColorFlow_initial_bound`, and `sourceFermionColorFlow_vacuum`. The group-law root alone inherited `sorryAx`; Z as a complete gate is still **NOT QUALIFIED**.
+
+The chosen response is the already successful S3H *pointwise* `ContinuousLinearMap.ext` proof of the complex-scalar `add_smul` equation on each actual Fock vector, followed by `rw [Complex.ofReal_add, hadd]`. This is the exact accepted S3H pattern and does not change the current, mathematical theorem statement, source pins, time bound, or verified other roots. [Repair commit `1daa35b9`](https://github.com/etblink/Foundational-Convergence-Program/commit/1daa35b9faab0baf7f4e6041fd7d066185cd89e9) launches [gate #159](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38517255631), pending at creation of this historical record. Its compilation/axiom audit must be read before any result is promoted.
+
+**New negative knowledge:** even a source-exact algebraic rewrite may fail to match a concrete endomorphism expression due to hidden scalar-module inference. Reduce to **pointwise CLM action** and prove ordinary vector `add_smul`, then rewrite the named operator equality instead of asking the generic lemma to infer the giant operator type.
+
 ## Scientific boundary after Z
 
 Even a fully green Z will *only* establish an original source norm-convergent fermionic color flow fixing the same vacuum. The missing theorem remains exact **finite-time covariance** of `V_c(t)` with the original 48 `pairedTheta` fields, with coefficients `pairedAlgebraData.adjointCoefficient (sourcePlusIGaugeCurve c t)`; S1B applies only once this premise is established. L6G6L supplies infinitesimal commutators; X/Y supply the actual SU(2) tangent. Keep T's previously red concrete Fock uniqueness specialization retired. No combined physical Gauss, operator square/closure, or BFSS spectral theorem is inferred.
