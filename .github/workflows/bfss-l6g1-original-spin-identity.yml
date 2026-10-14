@@ -2471,6 +2471,35 @@ jobs:
           print('L6G7O_ORIGINAL_SMOOTHCORE_GAUGE_PULLBACK_DERIVATIVE_QUALIFIED')
           PYCODE
 
+      - name: Qualify source-exact SmoothCore orbital coordinate gauge generator
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7POriginalSmoothCoreCoordinateGaugeGeneratorProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7OOriginalSmoothCoreGaugePullbackDerivativeProbe.olean
+          echo L6G7P_ORIGINAL_SMOOTHCORE_COORDINATE_GAUGE_GENERATOR_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6g7p.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7p.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7P.'
+          for root in ('originalSmoothCore_colorTangent_fderiv_coordinate_sum',
+                       'actualBosonGauge_smoothCore_pullback_coordinate_derivative_zero'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7P_ORIGINAL_SMOOTHCORE_COORDINATE_GAUGE_GENERATOR_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
