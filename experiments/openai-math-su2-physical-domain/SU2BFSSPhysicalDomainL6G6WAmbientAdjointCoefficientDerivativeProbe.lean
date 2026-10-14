@@ -81,13 +81,16 @@ theorem sourcePlusIAmbientAdjointCoefficient_deriv
           (pairedAlgebraData.color c * pairedAlgebraData.color A -
            pairedAlgebraData.color A * pairedAlgebraData.color c)) (0 : ℝ) := by
     exact sourcePlusIConjugation_deriv c A
-  have houter : HasFDerivAt (⇑L) L (f 0) := L.hasFDerivAt
   have h :
       HasDerivAt (L ∘ f)
         (L ((Complex.I : ℂ) •
           (pairedAlgebraData.color c * pairedAlgebraData.color A -
-           pairedAlgebraData.color A * pairedAlgebraData.color c))) (0 : ℝ) :=
-    HasFDerivAt.comp_hasDerivAt (0 : ℝ) houter hinner
+           pairedAlgebraData.color A * pairedAlgebraData.color c))) (0 : ℝ) := by
+    -- Force the chain rule's implicit maps and field from the goal
+    -- before supplying its two already-typed derivative premises.
+    apply HasFDerivAt.comp_hasDerivAt (0 : ℝ)
+    · exact L.hasFDerivAt
+    · exact hinner
   change HasDerivAt
     (fun t : ℝ =>
       (Matrix.trace
