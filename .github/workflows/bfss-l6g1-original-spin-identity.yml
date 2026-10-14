@@ -2500,6 +2500,35 @@ jobs:
           print('L6G7P_ORIGINAL_SMOOTHCORE_COORDINATE_GAUGE_GENERATOR_QUALIFIED')
           PYCODE
 
+      - name: Qualify original source gaugeTangent sign against +i SmoothCore pullback
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7QOriginalSourceGaugeTangentSignProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7POriginalSmoothCoreCoordinateGaugeGeneratorProbe.olean
+          echo L6G7Q_ORIGINAL_SOURCE_GAUGE_TANGENT_SIGN_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6g7q.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7q.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7Q.'
+          for root in ('sourceBosonGaugeTangent_eq_neg_originalGaugeTangent',
+                       'actualBosonGauge_smoothCore_pullback_neg_originalGaugeTangent'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7Q_ORIGINAL_SOURCE_GAUGE_TANGENT_SIGN_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
