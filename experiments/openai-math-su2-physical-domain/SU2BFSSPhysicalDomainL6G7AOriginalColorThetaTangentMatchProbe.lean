@@ -78,7 +78,8 @@ theorem sourceFermionGenerator_comm_matches_nativeAdjointTangent
             pairedAlgebraData.theta s b := by
       apply Finset.sum_congr rfl
       intro b _
-      rw [hskew b, neg_smul]
+      rw [hskew b]
+      exact (neg_smul _ _).symm
 
 /-- Each native SU(2) adjoint coefficient has exactly the tangent
 which appears in the actual bounded source generator commutator. -/
@@ -116,20 +117,31 @@ theorem sourceFermionColorFlow_thetaIntertwiner_deriv_zero
   have hright : HasDerivAt
       (fun t : ℝ => T (sourceFermionColorFlow c t v))
       (T (J v)) 0 := by
-    simpa only [Function.comp_def, ContinuousLinearMap.restrictScalars_apply] using hright'
-  have hsub := hleft.sub hright
+    change HasDerivAt
+      (fun t : ℝ => T (sourceFermionColorFlow c t v))
+      (T (J v)) 0 at hright'
+    exact hright'
+  have hsub : HasDerivAt
+      (fun t : ℝ => sourceFermionColorFlow c t (T v) -
+        T (sourceFermionColorFlow c t v))
+      (J (T v) - T (J v)) 0 := by
+    simpa only [Pi.sub_apply] using hleft.sub hright
   have hcoeff : J (T v) - T (J v) =
       (∑ b : ColorIndex 2,
         (pairedAlgebraData.structureConstant b d c : ℂ) •
           pairedAlgebraData.theta s b) v := by
     have hc := congrArg (fun K : SourceFiberEnd => K v)
       (sourceFermionGenerator_comm_matches_nativeAdjointTangent c s d)
-    change J (T v) - T (J v) =
-      (∑ b : ColorIndex 2,
+    simpa only [ContinuousLinearMap.sub_apply,
+      ContinuousLinearMap.comp_apply] using hc
+  change HasDerivAt
+    (fun t : ℝ => sourceFermionColorFlow c t (T v) -
+      T (sourceFermionColorFlow c t v))
+    ((∑ b : ColorIndex 2,
         (pairedAlgebraData.structureConstant b d c : ℂ) •
-          pairedAlgebraData.theta s b) v at hc
-    exact hc
-  simpa only [hcoeff] using hsub
+          pairedAlgebraData.theta s b) v) 0
+  rw [← hcoeff]
+  exact hsub
 
 #print axioms sourceFermionGenerator_comm_matches_nativeAdjointTangent
 #print axioms sourceNativeAdjointCoefficient_matches_generator
