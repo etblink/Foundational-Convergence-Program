@@ -67,6 +67,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7DRotatedThetaOperatorDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7ERotatedThetaCommutatorEvolutionProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7FOriginalColorFlowOperatorCalculusProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7GConjugatedThetaConstantDerivativeProbe.lean
 
 permissions:
   contents: read
@@ -2153,6 +2154,34 @@ jobs:
               assert name in entries and entries[name] <= allowed,(name,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G7F_ACTUAL_SOURCE_FLOW_OPERATOR_CALCULUS_QUALIFIED')
+          PYCODE
+
+      - name: Qualify exact source conjugated theta zero derivative
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7GConjugatedThetaConstantDerivativeProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7FOriginalColorFlowOperatorCalculusProbe.olean
+          echo L6G7G_SOURCE_CONJUGATED_THETA_ZERO_DERIV_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee /tmp/bfss-l6g1/l6g7g.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7g.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7G.'
+          for root in ('sourceFermionColorFlow_derivative_neg_time',
+                       'sourceConjugatedRotatedTheta_deriv_zero'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7G_ACTUAL_SOURCE_CONJUGATED_THETA_ZERO_DERIV_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
