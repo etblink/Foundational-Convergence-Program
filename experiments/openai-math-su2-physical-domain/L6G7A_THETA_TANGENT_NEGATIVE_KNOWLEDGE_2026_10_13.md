@@ -28,6 +28,16 @@ Project Lead response [`ce0bdd20`](https://github.com/etblink/Foundational-Conve
 
 **Key negative knowledge:** same mathematical Fock-space object can elaborate through distinct typeclass records in different source imports. Source-level derivative propositions can be dependent on those records; isolating a **generic bounded-linear derivative lemma** and fixing the specialized instance at theorem construction is more robust than repeated `simpa` in the concrete target.
 
+## Gate #163 — analytic type repair succeeded; two generic boundaries still unresolved
+
+[Original Source Spin Identity #163](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38520327023), job `115708315282`, source commit `ce0bdd204d4d7df506ae08e4c102d879e05117b9`, completed **red** in L6G7A only. Qualified L6G6Z prefix passed once more. The two source-native first-order color roots still printed allowed axioms only.
+
+Importantly, **the prior explicit PiLp/WithLp mismatch disappeared after fixing the PiLp group/real-module instance at the L6G7A theorem declaration boundary.** Newly isolated abstract bounded-linear derivative lemma had a first local error: `simpa only [Pi.sub_apply] using hf.sub hT` failed to convert the function-subtraction form `f - fun t => T(g t)` into the literal `fun t => f t - T (g t)`, despite identical analytic instances. Source-specific commutator-evaluation `rfl` on `(J*T-T*J)v` still caused maximal recursion, indicating that even definitional equality of these high-dimensional Fock endomorphism expressions is too costly.
+
+[Follow-up `bad42fd3`](https://github.com/etblink/Foundational-Convergence-Program/commit/bad42fd3aad4b9e34713bf67da3f3be606aedd54) changes only the two **interfaces**, not the theorem statements: `change` the function-subtraction statement **inside the abstract lemma**, and prove another generic `abstract_end_comm_apply` with type variable `E`, then apply it to source `J,T,v`. This prevents source-dependent normalization inside the already-qualified sign proof. [Gate #164](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38520890291) launched, **outcome unqualified as of this record**.
+
+If #164 still fails, inspect which abstract lemma is first causal. Do not blame a missing Gauss identity, change SU(2) index signs, move to a surrogate Fock type, assume finite-time covariance, or raise recursion depth indiscriminately. Accepted L6G7A roots remain two of three until final source derivative passes a strict compiler and axiom audit.
+
 ## Targeted repair candidate and next decision
 
 [Commit `12e3560a`](https://github.com/etblink/Foundational-Convergence-Program/commit/12e3560a11b8fef697e7ff2d09101eeb955c7cb8) keeps all three theorem statements, source generators, coefficients, 48-theta convention, and axiom audit unchanged. It orients the sign rewrite, passes the actual `HasDerivAt` through a local explicit type, and avoids fully expanding the operator composition. [Gate #162](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38519340240) is **not yet adjudicated** at this record's creation.
