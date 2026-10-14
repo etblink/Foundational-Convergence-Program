@@ -74,6 +74,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7KOriginalSourceFlowExactGaugeImplementationProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7LActualGaugeFermionDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7MActualBosonGaugeCoordinateDerivativeProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7NActualBosonGaugeVectorDerivativeProbe.lean
 
 permissions:
   contents: read
@@ -2413,6 +2414,35 @@ jobs:
               assert name in entries and entries[name] <= allowed,(name,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G7M_ACTUAL_BOSON_GAUGE_COORDINATE_DERIVATIVE_QUALIFIED')
+          PYCODE
+
+      - name: Qualify full original SU2 bosonic EuclideanSpace vector tangent
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7NActualBosonGaugeVectorDerivativeProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7MActualBosonGaugeCoordinateDerivativeProbe.olean
+          echo L6G7N_ORIGINAL_BOSON_GAUGE_VECTOR_DERIVATIVE_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6g7n.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7n.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7N.'
+          for root in ('sourceBosonGaugeTangent_apply',
+                       'actualBosonGauge_vector_derivative_zero'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7N_ORIGINAL_BOSON_GAUGE_VECTOR_DERIVATIVE_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
