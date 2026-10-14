@@ -105,7 +105,20 @@ private theorem abstract_boundedLinear_sub_deriv
     have h := T.hasFDerivAt.comp_hasDerivAt 0 hg
     change HasDerivAt (fun t : ℝ => T (g t)) (T w) 0 at h
     exact h
-  simpa only [Pi.sub_apply] using hf.sub hT
+  have hs := hf.sub hT
+  change HasDerivAt (fun t : ℝ => f t - T (g t))
+    (u - T w) 0 at hs
+  exact hs
+
+/-- Source-independent pointwise evaluation of an endomorphism
+commutator; this avoids unfolding the enormous concrete Fock operator
+multiplication in the source theorem. -/
+private theorem abstract_end_comm_apply
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E]
+    (J T : E →L[ℂ] E) (v : E) :
+    ((J * T - T * J) : E →L[ℂ] E) v =
+      J (T v) - T (J v) := by
+  rfl
 
 /-- Resolve the source Fock analytic structure at the declaration boundary.
 The qualified L6G6Z derivative is elaborated with PiLp's actual
@@ -155,7 +168,8 @@ theorem sourceFermionColorFlow_thetaIntertwiner_deriv_zero
           pairedAlgebraData.theta s b) v := by
     calc
       J (T v) - T (J v) =
-          ((J * T - T * J) : SourceFiberEnd) v := rfl
+          ((J * T - T * J) : SourceFiberEnd) v :=
+        (abstract_end_comm_apply J T v).symm
       _ = (∑ b : ColorIndex 2,
             (pairedAlgebraData.structureConstant b d c : ℂ) •
               pairedAlgebraData.theta s b) v :=
@@ -171,6 +185,7 @@ theorem sourceFermionColorFlow_thetaIntertwiner_deriv_zero
   exact hsub
 
 #print axioms abstract_boundedLinear_sub_deriv
+#print axioms abstract_end_comm_apply
 #print axioms sourceFermionGenerator_comm_matches_nativeAdjointTangent
 #print axioms sourceNativeAdjointCoefficient_matches_generator
 #print axioms sourceFermionColorFlow_thetaIntertwiner_deriv_zero
