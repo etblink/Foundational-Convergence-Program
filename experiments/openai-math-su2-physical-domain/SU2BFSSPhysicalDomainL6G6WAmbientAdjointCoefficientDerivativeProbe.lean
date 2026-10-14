@@ -81,16 +81,19 @@ theorem sourcePlusIAmbientAdjointCoefficient_deriv
           (pairedAlgebraData.color c * pairedAlgebraData.color A -
            pairedAlgebraData.color A * pairedAlgebraData.color c)) (0 : ℝ) := by
     exact sourcePlusIConjugation_deriv c A
+  -- Source-backed route: the pinned Mathlib uses
+  -- `e.hasFDerivAt.comp_hasDerivAt c hf` for fixed continuous linear
+  -- maps. Derive its composition proposition first and only then
+  -- transport it to a pointwise expression, avoiding higher-order
+  -- unification under the literal `∘` in the target.
+  have hcomp :=
+    L.hasFDerivAt.comp_hasDerivAt (0 : ℝ) hinner
   have h :
-      HasDerivAt (L ∘ f)
+      HasDerivAt (fun t : ℝ => L (f t))
         (L ((Complex.I : ℂ) •
           (pairedAlgebraData.color c * pairedAlgebraData.color A -
            pairedAlgebraData.color A * pairedAlgebraData.color c))) (0 : ℝ) := by
-    -- Force the chain rule's implicit maps and field from the goal
-    -- before supplying its two already-typed derivative premises.
-    apply HasFDerivAt.comp_hasDerivAt (0 : ℝ)
-    · exact L.hasFDerivAt
-    · exact hinner
+    simpa only [Function.comp_def] using hcomp
   change HasDerivAt
     (fun t : ℝ =>
       (Matrix.trace
