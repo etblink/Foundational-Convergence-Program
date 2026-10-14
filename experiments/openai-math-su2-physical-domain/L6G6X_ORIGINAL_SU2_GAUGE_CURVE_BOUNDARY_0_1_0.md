@@ -1,6 +1,6 @@
 # L6G6X — original determinant-one SU(2) curve and native adjoint derivative
 
-**Date:** 2026-10-13 PT. **Status:** source-grounded candidate, awaiting pinned Lean qualification. Research branch only.
+**Date:** 2026-10-13 PT. **Current status:** KERNEL_QUALIFIED_ORIGINAL_SU2_CURVE_AND_NATIVE_ADJOINT_DERIVATIVE in gate #153. Research branch only. Initial candidate and red-gate records below remain historical negative knowledge.
 
 ## Mathematical uncertainty addressed
 
@@ -42,3 +42,13 @@ Two local errors were observed, with no timeout or exponential-instance failure:
 The native derivative's final type printed correctly, but its dependencies inherited `sorryAx` from these unfinished matrix proofs. **No X theorem or actual SU(2) membership is accepted from #152.** Repair only these observed finite reductions; retain the adjugate/semiconjugacy determinant proof, trace-zero source discharge, original curve, strict axiom audit and limits. Follow-up success remains unknown until its own compile and audit.
 
 Successor lesson: finite matrices can simplify through row-vector products; inspect the remaining interface rather than repeatedly adding unrelated matrix lemmas. A clean-looking downstream theorem printed after an upstream helper fails does not qualify that downstream theorem.
+
+## Gate #153: original SU(2) curve and native derivative qualified
+
+[#153](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38511261397), job `115680067435`, source commit `02e5e74fc6db5a71ef563ace734831d23824ba24`, completed **SUCCESS**. Both finite repairs resolved #152's errors. All six public roots and both private matrix helpers compiled and passed the allowed-axiom audit, with no error or `sorryAx`; marker `L6G6X_ORIGINAL_SU2_CURVE_AND_NATIVE_ADJOINT_DERIVATIVE_QUALIFIED` was emitted.
+
+The source curve is now proved to have determinant one for every real t, belongs to the native `GaugeGroup 2`, equals identity at zero, and differentiates the actual source `adjointCoefficient` to `f_(B A c)` with original +i sign. The generic determinant theorem retains only its explicit trace-zero premise, discharged here by `pairedAlgebraData.color_traceless`; no determinant-one or derivative premise was added.
+
+Accepted X source blob: `b4aff5ae8e55e506d6850765ec661d777b63a58e`. Actual PR-merge CI checkout: `5d499fd4ce395b005a896e4eb80409ec7acb31bb`. Preserved artifact `bfss-l6g1-source-qualification-38511261397`, ID `11869854203`, SHA256 `97b4b13d5ea80cf9275fe7b66dfb276c12011958354bd1b54a6ac1016918c1d9`. This permanent statement and source record preserves the accepted boundary after artifact expiry.
+
+Next candidate `L6G6Y` transports the native derivative through G3C's actual block equation and the pinned real-to-complex and finite-Pi derivative laws. The complete 24-mode derivative is still unqualified until its own gate passes. All Fock, Gauss, square-assembly and spectral limitations above remain.
