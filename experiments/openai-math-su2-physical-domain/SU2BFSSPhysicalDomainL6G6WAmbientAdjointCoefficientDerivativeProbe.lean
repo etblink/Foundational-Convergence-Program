@@ -38,7 +38,7 @@ private noncomputable def sourceTraceCoefficientCLM (B : ColorIndex 2) :
          change (Matrix.trace (pairedAlgebraData.color B * (r • X))).re =
            r * (Matrix.trace (pairedAlgebraData.color B * X)).re
          rw [Matrix.mul_smul, Matrix.trace_smul]
-         simpa only [RCLike.smul_re]
+         simpa only [Complex.smul_re, smul_eq_mul]
 
      } : ColorMatrix 2 →ₗ[ℝ] ℝ))
 
@@ -67,22 +67,27 @@ theorem sourcePlusIAmbientAdjointCoefficient_deriv
             (sourcePlusIColorMatrix c t * pairedAlgebraData.color A *
               (sourcePlusIColorMatrix c t)ᴴ))).re)
       (pairedAlgebraData.structureConstant B A c) 0 := by
-  -- Pin the real basepoint and the derivative's codomain before
-  -- composing: an untyped numeral left the field as ℕ in gate #144;
-  -- omitting the basepoint misapplied comp_hasDerivAt in gate #145.
+  -- Pin both maps and both derivatives. The pinned Mathlib chain
+  -- rule takes the scalar basepoint *before* the derivative proofs;
+  -- isolating the inputs avoids ambiguous dot-notation elaboration.
+  let f : ℝ → ColorMatrix 2 := fun t =>
+    sourcePlusIColorMatrix c t * pairedAlgebraData.color A *
+      NormedSpace.exp
+        (t • (-((Complex.I : ℂ) • pairedAlgebraData.color c)))
+  let L : ColorMatrix 2 →L[ℝ] ℝ := sourceTraceCoefficientCLM B
+  have hinner :
+      HasDerivAt f
+        ((Complex.I : ℂ) •
+          (pairedAlgebraData.color c * pairedAlgebraData.color A -
+           pairedAlgebraData.color A * pairedAlgebraData.color c)) (0 : ℝ) := by
+    exact sourcePlusIConjugation_deriv c A
+  have houter : HasFDerivAt (⇑L) L (f 0) := L.hasFDerivAt
   have h :
-      HasDerivAt
-        ((sourceTraceCoefficientCLM B) ∘
-          (fun t : ℝ =>
-            sourcePlusIColorMatrix c t * pairedAlgebraData.color A *
-              NormedSpace.exp
-                (t • (-((Complex.I : ℂ) • pairedAlgebraData.color c)))))
-        ((sourceTraceCoefficientCLM B)
-          ((Complex.I : ℂ) •
-            (pairedAlgebraData.color c * pairedAlgebraData.color A -
-              pairedAlgebraData.color A * pairedAlgebraData.color c))) (0 : ℝ) :=
-    ((sourceTraceCoefficientCLM B).hasFDerivAt).comp_hasDerivAt
-      (0 : ℝ) (sourcePlusIConjugation_deriv c A)
+      HasDerivAt (L ∘ f)
+        (L ((Complex.I : ℂ) •
+          (pairedAlgebraData.color c * pairedAlgebraData.color A -
+           pairedAlgebraData.color A * pairedAlgebraData.color c))) (0 : ℝ) :=
+    HasFDerivAt.comp_hasDerivAt (0 : ℝ) houter hinner
   change HasDerivAt
     (fun t : ℝ =>
       (Matrix.trace
