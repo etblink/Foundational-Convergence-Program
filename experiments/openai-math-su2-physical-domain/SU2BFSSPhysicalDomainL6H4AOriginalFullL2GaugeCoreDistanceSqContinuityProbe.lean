@@ -43,6 +43,7 @@ theorem actualOriginalFullL2GaugeCore_distSq_eq_inner
       ‖coreToL2 f‖ ^ 2 := by
   rw [norm_sub_sq (𝕜 := ℂ), actualOriginalFullL2GaugePair_norm g,
     actualOriginalFullL2GaugePair_norm h]
+  simp only [RCLike.re_to_complex]
 
 /-- Genuine source BFSS orbit distance SQUARED varies
 continuously with the original SU(2) gauge parameter. This
