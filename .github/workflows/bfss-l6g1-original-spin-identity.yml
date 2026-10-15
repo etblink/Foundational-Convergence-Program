@@ -3033,6 +3033,32 @@ jobs:
           print('L6H2T_ORIGINAL_MATRIX_SUBTYPE_FIRST_COUNTABILITY_QUALIFIED')
           PYCODE
 
+      - name: Qualify abstract original SU2 dominated-convergence interface before full Fock expressions
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H2UActualOriginalSU2AbstractDominatedIntegralProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H2TOriginalSU2FirstCountableProbe.olean
+          echo L6H2U_ORIGINAL_SU2_ABSTRACT_DOMINATED_INTEGRAL_BEGIN
+          timeout 90s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h2u.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h2u.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          key='FCP.BFSSSU2PhysicalDomainL6H2U.actualOriginalSU2_continuous_integral_of_dominated'
+          assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-5000:]
+          print('L6H2U_ORIGINAL_SU2_ABSTRACT_DOMINATED_INTEGRAL_QUALIFIED')
+          PYCODE
+
       - name: Qualify genuine FullL2 SU2 smooth gauge-orbit correlation continuity by dominated convergence
         shell: bash
         timeout-minutes: 8
@@ -3044,6 +3070,7 @@ jobs:
           cd upstream-math/lean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H2ActualOriginalSmoothGaugeIntegrableEnvelopeProbe.olean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H2TOriginalSU2FirstCountableProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H2UActualOriginalSU2AbstractDominatedIntegralProbe.olean
           echo L6H3_ORIGINAL_SOURCE_FULLL2_CORRELATION_CONTINUITY_BEGIN
           timeout 330s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
             2>&1 | tee /tmp/bfss-l6g1/l6h3.log

@@ -1,4 +1,4 @@
-import SU2BFSSPhysicalDomainL6H2TOriginalSU2FirstCountableProbe
+import SU2BFSSPhysicalDomainL6H2UActualOriginalSU2AbstractDominatedIntegralProbe
 
 /-!
 L6H3 — ORIGINAL BFSS smooth SU2 gauge-orbit inner correlation.
@@ -92,13 +92,24 @@ theorem actualOriginalSmoothGaugeOrbit_correlationContinuous
           inner ℂ (actualOriginalSmoothGaugeOrbitRepresentative f g x)
             (actualOriginalSmoothGaugeOrbitRepresentative f h x)) :=
     Filter.Eventually.of_forall hcont_g
-  -- #239: runner shutdown mid-monolithic local topology instance proof.
-  -- Separately qualify ORIGINAL SU(2) matrix-subtype first-countability
-  -- in L6H2T; here only INSTALL the already named proof, without
-  -- elaborating an ambient Matrix instance inside the integral theorem.
-  letI : FirstCountableTopology (GaugeGroup 2) :=
-    FCP.BFSSSU2PhysicalDomainL6H2T.actualOriginalSU2_firstCountable
-  exact continuous_of_dominated hmeasure hbound_ae hint hcont_ae
+  -- #241 confirmed first-countability but runner again shut down
+  -- during the enormous concrete continuous_of_dominated elaboration.
+  -- Route through separately compiled ABSTRACT native SU2/Boson
+  -- dominated-integral lemma, with its tiny closed proof in L6H2U.
+  let F : GaugeGroup 2 → Boson 2 → ℂ := fun g x =>
+    inner ℂ (actualOriginalSmoothGaugeOrbitRepresentative f g x)
+      (actualOriginalSmoothGaugeOrbitRepresentative f h x)
+  let bound : Boson 2 → ℝ := fun x => envelope x ^ 2
+  have habstract :
+      Continuous (fun g : GaugeGroup 2 =>
+        ∫ x : Boson 2, F g x ∂(volume : Measure (Boson 2))) := by
+    apply FCP.BFSSSU2PhysicalDomainL6H2U.actualOriginalSU2_continuous_integral_of_dominated
+      F bound
+    · exact hmeasure
+    · exact hbound_ae
+    · exact hint
+    · exact hcont_ae
+  exact habstract
 
 /-- True ORIGINAL FullL2 inner product equals the same source
 pointwise correlation integral, by Mathlib L2.inner_def and H0
