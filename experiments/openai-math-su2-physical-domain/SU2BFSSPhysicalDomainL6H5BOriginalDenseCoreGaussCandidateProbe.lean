@@ -118,7 +118,7 @@ theorem actualOriginalCoreColorGaussCandidate_pointwise
   exact (smul_smul
     (pairedAlgebraData.structureConstant p.2 A c : ℂ)
     (x (p.1, A) : ℂ)
-    (((coordinateDerivative (N := 2) p.1 p.2 f) x) : Fermion 2)).symm
+    (((coordinateDerivative (N := 2) p.1 p.2 f) x) : Fermion 2))
 
 /-- A true FullL2 norm-derivative, already provable on the
 ORIGINAL physical fixed subspace (not asserted dense in FullL2).
