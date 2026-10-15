@@ -2976,6 +2976,37 @@ jobs:
           print('L6H1_ORIGINAL_SMOOTH_GAUGE_UNIFORM_ENVELOPE_QUALIFIED')
           PYCODE
 
+      - name: Qualify source bosonic ball finite volume and actual smooth gauge integrable L2 envelope
+        shell: bash
+        timeout-minutes: 7
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H2ActualOriginalSmoothGaugeIntegrableEnvelopeProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H1ActualOriginalSmoothGaugeUniformEnvelopeProbe.olean
+          echo L6H2_ORIGINAL_SOURCE_INTEGRABLE_L2_ENVELOPE_BEGIN
+          timeout 300s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h2.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h2.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6H2.'
+          for root in ('actualOriginalBosonBall_finiteMeasure',
+                       'actualOriginalRadialEnvelope_integrable',
+                       'actualOriginalRadialEnvelope_sq_integrable',
+                       'actualOriginalSmoothGaugeOrbit_integrableEnvelope'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6H2_ORIGINAL_SOURCE_INTEGRABLE_L2_ENVELOPE_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
