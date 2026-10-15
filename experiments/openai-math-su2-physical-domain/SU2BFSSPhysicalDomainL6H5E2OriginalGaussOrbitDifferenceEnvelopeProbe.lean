@@ -50,7 +50,7 @@ theorem norm_orbit_difference_le_of_derivative_bound
     have h := norm_image_sub_le_of_norm_deriv_right_le_segment
       (a := s) (b := t) (f := orbit) (f' := deriv) (C := C)
       hc hd (fun z _ => hbound z) t (right_mem_Icc.mpr hst)
-    simpa only [sub_nonneg.mpr hst, abs_of_nonneg, sub_zero] using h
+    simpa only [abs_of_nonneg (sub_nonneg.mpr hst)] using h
   · have hc : ContinuousOn orbit (Icc t s) :=
       fun z _ => (hderiv z).continuousAt.continuousWithinAt
     have hd : ∀ z ∈ Ico t s,
