@@ -68,7 +68,30 @@ theorem actualOriginalSmoothGaugeOrbit_combined_pointwise_derivative_zero
   have hvec :=
     originalSmoothCore_inverseBosonGauge_originalTangent_derivative_zero
       c f x
-  have hprod := hoper.clm_apply hvec
+  -- #266: the time parameter is real while the bounded Fock
+  -- endomorphisms are complex-linear. Move the exact same operator
+  -- through pinned continuous scalar restriction before using
+  -- the real-parameter CLM evaluation product rule.
+  let R : (Fermion 2 →L[ℂ] Fermion 2) →L[ℝ]
+      (Fermion 2 →L[ℝ] Fermion 2) :=
+    ContinuousLinearMap.restrictScalarsL ℂ (Fermion 2) (Fermion 2) ℝ ℝ
+  have hoperR :
+      HasDerivAt (fun t : ℝ => R (sourceFermionColorFlow c t))
+        (R (sourceFiberFermionColorGenerator pairedAlgebraData c)) 0 := by
+    simpa only [Function.comp_def] using
+      (R.hasFDerivAt.comp_hasDerivAt (0 : ℝ) hoper)
+  have hprod := hoperR.clm_apply hvec
+  change HasDerivAt
+    (fun t : ℝ =>
+      sourceFermionColorFlow c t
+        (f (bosonGauge ((sourcePlusIGaugeCurve c t)⁻¹) x)))
+    (sourceFiberFermionColorGenerator pairedAlgebraData c
+      (f (bosonGauge ((sourcePlusIGaugeCurve c (0 : ℝ))⁻¹) x)) +
+      sourceFermionColorFlow c 0
+        (fderiv ℝ (f : Boson 2 → Fermion 2) x
+          (pairedAlgebraData.gaugeTangent x
+            (EuclideanSpace.single c (1 : ℝ)))))
+    0 at hprod
   have hzero :
       f (bosonGauge ((sourcePlusIGaugeCurve c (0 : ℝ))⁻¹) x) =
         f x := by
