@@ -82,6 +82,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5BOriginalDenseCoreGaussCandidateProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5C1OriginalInverseBosonGaugeCurveDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5C2OriginalCombinedFockBosonPointwiseDerivativeProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5C3OriginalGaussCandidatePointwiseDerivativeBridgeProbe.lean
 
 permissions:
   contents: read
@@ -3409,6 +3410,37 @@ jobs:
               assert key in entries and entries[key] <= allowed,(key,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6H5C2_SOURCE_COMBINED_FOCK_BOSON_POINTWISE_DERIVATIVE_QUALIFIED')
+          PYCODE
+
+      # H5C3 original source real/complex coefficient bridge.
+      - name: Qualify original Gauss candidate as exact combined pointwise derivative
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5C3OriginalGaussCandidatePointwiseDerivativeBridgeProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5C2OriginalCombinedFockBosonPointwiseDerivativeProbe.olean
+          echo L6H5C3_ORIGINAL_GAUSS_CANDIDATE_POINTWISE_DERIVATIVE_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5c3.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5c3.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6H5C3.'
+          for root in ('actualOriginalColorCoefficient_real_complex_sum_eq',
+                       'actualOriginalCoreColorGaussCandidate_eq_combined_coordinates',
+                       'actualOriginalSmoothGaugeOrbit_gaussCandidate_pointwise_derivative_zero'):
+              key=p+root
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5C3_ORIGINAL_GAUSS_CANDIDATE_POINTWISE_DERIVATIVE_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
