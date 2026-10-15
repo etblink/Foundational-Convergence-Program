@@ -79,6 +79,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H4BOriginalFullL2GaugeCoreStrongContinuityProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H4COriginalFullL2GaugeStrongContinuityProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5AOriginalColorOneParameterStrongUnitaryGroupProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5BOriginalDenseCoreGaussCandidateProbe.lean
 
 permissions:
   contents: read
@@ -3310,6 +3311,39 @@ jobs:
               assert key in entries and entries[key] <= allowed,(key,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6H5A_SOURCE_COLOR_ONE_PARAMETER_STRONG_UNITARY_QUALIFIED')
+          PYCODE
+
+      # H5B: exact ORIGINAL dense SmoothCore Gauss candidate plus
+      # separately justified actual FullL2 derivative on fixed states.
+      - name: Qualify original dense Gauss candidate source signs and fixed-state L2 derivative
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5BOriginalDenseCoreGaussCandidateProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5AOriginalColorOneParameterStrongUnitaryGroupProbe.olean
+          echo L6H5B_SOURCE_DENSE_GAUSS_CANDIDATE_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5b.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5b.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6H5B.'
+          for root in ('actualOriginalCoreColorGaussCandidate',
+                       'actualOriginalCoreColorGaussCandidateL2',
+                       'actualOriginalCoreColorGaussCandidate_pointwise',
+                       'actualOriginalPhysicalColorCurve_hasDerivAt_zero'):
+              key=p+root
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5B_SOURCE_DENSE_GAUSS_CANDIDATE_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
