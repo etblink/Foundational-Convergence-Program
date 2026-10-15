@@ -452,6 +452,19 @@ Apply `hfAe.comp_tendsto (pairedGaugeData.boson g).measurePreserving.quasiMeasur
 
 **Negative-knowledge guide:** #224–225 packaged `fiberAction` vs raw `compLp` rewrite must be normalized using explicit `change`. #229–230 AE transport requires an explicitly typed `=ᵐ[volume]` before `Filter.EventuallyEq.comp_tendsto` if Lean elaborates raw source as null-set `Eq`. Last #230 and #231 green qualified with exact original group law and inverse. The source hash-pinned L6G7W cache materially cut observed runs to around 5–6 minutes; retain exact source hash validation and fresh proof axiom checks. No merge.
 
+## #232 RED — two deterministic Lean heartbeat failures plus one AE syntax mismatch; #233 repair
+
+[Original Source Spin Identity #232](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38665802578), source commit `85d97e2bfb57e86d84920527398eef97ee02a74b`, job `116197367584`, completed RED. Exact original pinned compiler output:
+
+- First causal error L6H0 line 31: deterministic `isDefEq` timeout, `maxHeartbeats = 200000`, during proof `pairedGaugeData.boson_continuous.comp hp` with a large fully unfolded original 6-field `pairedGaugeData`. `set_option synthInstance.maxHeartbeats 400000` does **NOT** raise general elaborator `maxHeartbeats`.
+- Second error line 44: `whnf` heartbeat exhaustion when using the joint continuity result at a fixed original Boson x. Again a tactic elaboration/normalization bottleneck, not missing physical assumptions.
+- Third error line 75: original `(coreToL2_ae f).comp_tendsto` yields an AE equality between `coreToL2 f ∘ pairedGaugeData.boson g⁻¹` and `f ∘ pairedGaugeData.boson g⁻¹`; direct `rw [hA]` did not match pointwise expanded expression. Need `change (coreToL2 f) (pairedGaugeData.boson g⁻¹ x) = f (pairedGaugeData.boson g⁻¹ x) at hA` before rewriting.
+- Two publicly checked L6H0 roots, exact original orbit representative definition and its fiberwise isometric norm, printed only `propext, Classical.choice, Quot.sound`. Continuity, parameter-continuity, and actual FullL2 AE identification printed `sorryAx` and are **NOT QUALIFIED**. Do not infer strong L² continuity.
+
+**Targeted #233 repair, unqualified until real pinned Lean gate:** Increase `maxHeartbeats` to 1000000 (not only `synthInstance.maxHeartbeats`); isolate continuity via named subproofs `hp`, `hb`, `hf`, `hpair`, `hfinal`; let source native action's joint-continuity fields infer composition proofs before `change` normalization, minimizing repeated huge isDefEq. For fixed-x specialization, type explicit `hp : Continuous (fun g : GaugeGroup 2 => (g,x))` and normalize composition statement by `change`. Explicitly normalize AE `hA` into the native pointwise form before `rw`. Preserve ORIGINAL inverse bosonic pullback `g⁻¹`, forward fermion action, exact G4J pairedGaugeData and FullL2 source; no new premises, no source substitutions. Require actual source .olean, five theorem axiom checks, no `sorryAx`. If higher heartbeats still fail, refactor into more opaque helper lemmas rather than indiscriminately raising timeouts; preserve failures as negative knowledge.
+
+**Running-time evidence:** exact source-hash pinned accepted-L6G7W cache HIT also for #232. The new H0 proof incurred genuine elaboration heartbeat failures, unlike preceding leaf 8–11-second algebraic proofs. Monitor elaboration time separately from CI runner setup. Strong L² continuity needs an independent common compact-support majorant, a valid dominated-convergence theorem and density extension and remains open.
+
 ## 1. Scalar/matrix evolution, independently of Fock elaboration
 
 First prove g(t+h)=g(h)g(t) using the same-generator exponential addition law and lift the matrix equality with subtype extensionality. The two factors commute because they are exponentials of scalar multiples of the same matrix. This is an additional theorem obligation, not supplied automatically by subgroup membership.

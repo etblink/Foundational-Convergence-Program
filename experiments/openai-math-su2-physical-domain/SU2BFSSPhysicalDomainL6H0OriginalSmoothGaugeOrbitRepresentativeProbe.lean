@@ -5,6 +5,9 @@ representatives and genuine FullL2 a.e. identification. Pointwise/AE
 results ONLY; strong L2 continuity still requires dominated convergence. -/
 
 set_option autoImplicit false
+-- #232 first causal failures were deterministic elaboration heartbeat exhaustion.
+-- Lift global isDefEq/whnf budget, not merely typeclass synthesis heartbeats.
+set_option maxHeartbeats 1000000
 set_option synthInstance.maxHeartbeats 400000
 
 namespace FCP.BFSSSU2PhysicalDomainL6H0
@@ -26,23 +29,32 @@ theorem actualOriginalSmoothGaugeOrbit_jointContinuous
   have hp : Continuous (fun z : GaugeGroup 2 × Boson 2 =>
       ((z.1)⁻¹, z.2)) :=
     (continuous_inv.comp continuous_fst).prodMk continuous_snd
-  have hb : Continuous (fun z : GaugeGroup 2 × Boson 2 =>
-      pairedGaugeData.boson z.1⁻¹ z.2) :=
-    pairedGaugeData.boson_continuous.comp hp
-  have hf : Continuous (fun z : GaugeGroup 2 × Boson 2 =>
-      f (pairedGaugeData.boson z.1⁻¹ z.2)) :=
-    f.continuous.comp hb
-  have hpair : Continuous (fun z : GaugeGroup 2 × Boson 2 =>
-      (z.1, f (pairedGaugeData.boson z.1⁻¹ z.2))) :=
-    continuous_fst.prodMk hf
-  exact pairedGaugeData.fermion_continuous.comp hpair
+  -- Retain source terms in compact intermediate statements so Lean
+  -- does not repeatedly elaborate the concrete six-field GaugeData.
+  have hb := pairedGaugeData.boson_continuous.comp hp
+  change Continuous (fun z : GaugeGroup 2 × Boson 2 =>
+    pairedGaugeData.boson z.1⁻¹ z.2) at hb
+  have hf := f.continuous.comp hb
+  change Continuous (fun z : GaugeGroup 2 × Boson 2 =>
+    f (pairedGaugeData.boson z.1⁻¹ z.2)) at hf
+  have hpair := continuous_fst.prodMk hf
+  change Continuous (fun z : GaugeGroup 2 × Boson 2 =>
+    (z.1, f (pairedGaugeData.boson z.1⁻¹ z.2))) at hpair
+  have hfinal := pairedGaugeData.fermion_continuous.comp hpair
+  change Continuous (fun z : GaugeGroup 2 × Boson 2 =>
+    actualOriginalSmoothGaugeOrbitRepresentative f z.1 z.2) at hfinal
+  exact hfinal
 
 theorem actualOriginalSmoothGaugeOrbit_parameterContinuous
     (f : SmoothCore 2) (x : Boson 2) :
     Continuous (fun g : GaugeGroup 2 =>
       actualOriginalSmoothGaugeOrbitRepresentative f g x) := by
-  exact (actualOriginalSmoothGaugeOrbit_jointContinuous f).comp
-    (continuous_id.prodMk continuous_const)
+  have hp : Continuous (fun g : GaugeGroup 2 => (g, x)) :=
+    continuous_id.prodMk continuous_const
+  have h := (actualOriginalSmoothGaugeOrbit_jointContinuous f).comp hp
+  change Continuous (fun g : GaugeGroup 2 =>
+    actualOriginalSmoothGaugeOrbitRepresentative f g x) at h
+  exact h
 
 theorem actualOriginalSmoothGaugeOrbit_ae_fullL2
     (f : SmoothCore 2) (g : GaugeGroup 2) :
@@ -72,6 +84,10 @@ theorem actualOriginalSmoothGaugeOrbit_ae_fullL2
     _ = pairedGaugeData.fermion g
       ((coreToL2 f) (pairedGaugeData.boson g⁻¹ x)) := by rw [hB]
     _ = actualOriginalSmoothGaugeOrbitRepresentative f g x := by
+      -- Original AE comp_tendsto produced a composition-form equality.
+      -- Normalize it to the precise source coordinate expression before rw.
+      change (coreToL2 f) (pairedGaugeData.boson g⁻¹ x) =
+        f (pairedGaugeData.boson g⁻¹ x) at hA
       rw [hA]
       rfl
 

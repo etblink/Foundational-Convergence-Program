@@ -2911,6 +2911,9 @@ jobs:
           print('L6G7Z_ORIGINAL_FULLL2_UNITARY_REPRESENTATION_QUALIFIED')
           PYCODE
 
+      # #232 RED: general maxHeartbeats (not synthInstance maxHeartbeats)
+      # exhausted at source boson composition and parameter continuity.
+      # #233: isolate named source continuity maps; AE hA normalization.
       - name: Qualify actual source SmoothCore gauge orbit and FullL2 AE representative
         shell: bash
         timeout-minutes: 7
