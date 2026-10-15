@@ -1,4 +1,4 @@
-import SU2BFSSPhysicalDomainL6H2ActualOriginalSmoothGaugeIntegrableEnvelopeProbe
+import SU2BFSSPhysicalDomainL6H2TOriginalSU2FirstCountableProbe
 
 /-!
 L6H3 — ORIGINAL BFSS smooth SU2 gauge-orbit inner correlation.
@@ -92,17 +92,12 @@ theorem actualOriginalSmoothGaugeOrbit_correlationContinuous
           inner ℂ (actualOriginalSmoothGaugeOrbitRepresentative f g x)
             (actualOriginalSmoothGaugeOrbitRepresentative f h x)) :=
     Filter.Eventually.of_forall hcont_g
-  -- #238: pinned continuous_of_dominated asks for FirstCountableTopology
-  -- of the parameter SU(2), not a new physical assumption. Derive it
-  -- from the genuine finite 2×2 complex matrix ambient and subtype
-  -- topology instead of inserting an unproved instance.
-  have hmatrix : FirstCountableTopology (Matrix (Fin 2) (Fin 2) ℂ) := by
-    change FirstCountableTopology (Fin 2 → Fin 2 → ℂ)
-    infer_instance
-  letI : FirstCountableTopology (Matrix (Fin 2) (Fin 2) ℂ) := hmatrix
-  letI : FirstCountableTopology (GaugeGroup 2) := by
-    change FirstCountableTopology (Matrix.specialUnitaryGroup (Fin 2) ℂ)
-    infer_instance
+  -- #239: runner shutdown mid-monolithic local topology instance proof.
+  -- Separately qualify ORIGINAL SU(2) matrix-subtype first-countability
+  -- in L6H2T; here only INSTALL the already named proof, without
+  -- elaborating an ambient Matrix instance inside the integral theorem.
+  letI : FirstCountableTopology (GaugeGroup 2) :=
+    FCP.BFSSSU2PhysicalDomainL6H2T.actualOriginalSU2_firstCountable
   exact continuous_of_dominated hmeasure hbound_ae hint hcont_ae
 
 /-- True ORIGINAL FullL2 inner product equals the same source
