@@ -88,6 +88,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5D3OriginalGaussCurveAllTimePointwiseDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E1OriginalAllTimeGaussDerivativeIntegrableEnvelopeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E2OriginalGaussOrbitDifferenceEnvelopeProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E3OriginalGaussOrbitDifferenceQuotientEnvelopeProbe.lean
 
 permissions:
   contents: read
@@ -3592,6 +3593,37 @@ jobs:
               assert key in entries and entries[key] <= allowed,(key,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6H5E2_ORIGINAL_GAUSS_ORBIT_DIFFERENCE_ENVELOPE_QUALIFIED')
+          PYCODE
+
+      # H5E3: exact original source quotient under the proven
+      # square-integrable envelope, with an independent scalar lemma.
+      - name: Qualify source SU2 Gauss difference quotient integrable envelope
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E3OriginalGaussOrbitDifferenceQuotientEnvelopeProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E2OriginalGaussOrbitDifferenceEnvelopeProbe.olean
+          echo L6H5E3_ORIGINAL_GAUSS_DIFFERENCE_QUOTIENT_ENVELOPE_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e3.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e3.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6H5E3.'
+          for root in ('norm_inv_smul_le_of_linear_time_bound',
+                       'actualOriginalGaussOrbit_differenceQuotient_integrableEnvelope'):
+              key=p+root
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E3_ORIGINAL_GAUSS_DIFFERENCE_QUOTIENT_ENVELOPE_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
