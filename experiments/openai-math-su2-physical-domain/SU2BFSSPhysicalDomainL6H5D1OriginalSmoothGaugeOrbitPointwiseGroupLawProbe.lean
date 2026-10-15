@@ -26,6 +26,26 @@ open FCP.BFSSSU2PhysicalDomainL6H0
 open FCP.BFSSSU2PhysicalDomainL6G6X
 open FCP.BFSSSU2PhysicalDomainL6G7B
 
+/-!
+Gate #273: all preceding source checks passed; this new leaf failed
+at a terminal `rfl` with maximum recursion depth (not a source-sign
+counterexample). Do NOT re-elaborate the large concrete pairedGaugeData
+in the final definitional equality. Prove the generic monoid-hom
+identity first, then specialize it to the exact qualified source.
+-/
+
+/-- Pure group-action composition with distinct boson and fermion
+monoid homomorphisms. No concrete Fock implementation elaboration. -/
+private theorem pointwisePairOrbit_mul_abstract
+    (B : GaugeGroup 2 →* (Boson 2 ≃ₗᵢ[ℝ] Boson 2))
+    (F : GaugeGroup 2 →* (Fermion 2 ≃ₗᵢ[ℂ] Fermion 2))
+    (u : Boson 2 → Fermion 2)
+    (g h : GaugeGroup 2) (x : Boson 2) :
+    F (g * h) (u (B (g * h)⁻¹ x)) =
+      F g (F h (u (B h⁻¹ (B g⁻¹ x)))) := by
+  rw [mul_inv_rev, map_mul F g h, map_mul B h⁻¹ g⁻¹]
+  rfl
+
 /-- Original gauge action on the literal source SmoothCore is
 covariant: fermion(g*h) and boson((g*h)^(-1)) retain their
 original ordering and are never replaced by surrogate actions. -/
@@ -41,10 +61,10 @@ theorem actualOriginalSmoothGaugeOrbit_pointwise_mul
       (pairedGaugeData.fermion h
         (f (pairedGaugeData.boson h⁻¹
           (pairedGaugeData.boson g⁻¹ x))))
-  rw [mul_inv_rev]
-  rw [map_mul]
-  rw [map_mul]
-  rfl
+  -- Source representation identity is proved for opaque homomorphisms,
+  -- then instantiated once; avoid concrete six-field GaugeData reduction.
+  exact pointwisePairOrbit_mul_abstract
+    pairedGaugeData.boson pairedGaugeData.fermion f g h x
 
 /-- Specialization to the exact +i native one-parameter SU2 group,
 not a newly defined gauge action. -/
