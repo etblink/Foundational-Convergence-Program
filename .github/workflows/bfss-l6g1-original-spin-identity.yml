@@ -2879,6 +2879,38 @@ jobs:
           print('L6G7Y_ORIGINAL_FULLL2_COMBINED_GAUGE_GROUP_LAW_QUALIFIED')
           PYCODE
 
+      - name: Qualify actual FullL2 source SU2 complex unitary representation
+        shell: bash
+        timeout-minutes: 7
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7ZActualSourceFullL2UnitaryGaugeRepresentationProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7YActualSourceFullL2CombinedGaugeGroupLawProbe.olean
+          echo L6G7Z_ORIGINAL_FULLL2_UNITARY_REPRESENTATION_BEGIN
+          timeout 300s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6g7z.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7z.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7Z.'
+          for root in ('actualOriginalFullL2GaugePair_inv_left',
+                       'actualOriginalFullL2GaugePair_inv_right',
+                       'actualOriginalFullL2GaugeUnitaryEquiv',
+                       'actualOriginalFullL2GaugeUnitaryEquiv_apply',
+                       'actualOriginalFullL2GaugeUnitaryHom'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7Z_ORIGINAL_FULLL2_UNITARY_REPRESENTATION_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
