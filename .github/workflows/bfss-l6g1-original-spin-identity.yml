@@ -75,6 +75,8 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7LActualGaugeFermionDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7MActualBosonGaugeCoordinateDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7NActualBosonGaugeVectorDerivativeProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H4AOriginalFullL2GaugeCoreDistanceSqContinuityProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H4BOriginalFullL2GaugeCoreStrongContinuityProbe.lean
 
 permissions:
   contents: read
@@ -3214,6 +3216,37 @@ jobs:
               assert key in entries and entries[key] <= allowed,(key,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6H4A_ORIGINAL_FULLL2_CORE_NORM_POLARIZATION_QUALIFIED')
+          PYCODE
+
+      # H4B: source-exact smooth-core FullL2 strong continuity, separated
+      # from the later density extension to all FullL2 vectors.
+      - name: Qualify actual original BFSS FullL2 strong SU2 continuity on smooth core
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H4BOriginalFullL2GaugeCoreStrongContinuityProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H4AOriginalFullL2GaugeCoreDistanceSqContinuityProbe.olean
+          echo L6H4B_ORIGINAL_FULLL2_CORE_STRONG_CONTINUITY_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h4b.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h4b.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6H4B.'
+          for root in ('actualOriginalFullL2GaugeCore_normDiff_continuous',
+                       'actualOriginalFullL2GaugeCore_orbit_continuous'):
+              key=p+root
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H4B_ORIGINAL_FULLL2_CORE_STRONG_CONTINUITY_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
