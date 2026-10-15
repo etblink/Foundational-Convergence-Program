@@ -89,6 +89,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E1OriginalAllTimeGaussDerivativeIntegrableEnvelopeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E2OriginalGaussOrbitDifferenceEnvelopeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E3OriginalGaussOrbitDifferenceQuotientEnvelopeProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E4OriginalGaussDifferenceQuotientPointwiseLimitProbe.lean
 
 permissions:
   contents: read
@@ -3624,6 +3625,37 @@ jobs:
               assert key in entries and entries[key] <= allowed,(key,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6H5E3_ORIGINAL_GAUSS_DIFFERENCE_QUOTIENT_ENVELOPE_QUALIFIED')
+          PYCODE
+
+      # H5E4: exact source pointwise derivative to punctured-zero
+      # quotient limit via pinned Mathlib slope characterization.
+      - name: Qualify original Gauss difference quotient pointwise limit
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E4OriginalGaussDifferenceQuotientPointwiseLimitProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E3OriginalGaussOrbitDifferenceQuotientEnvelopeProbe.olean
+          echo L6H5E4_ORIGINAL_GAUSS_QUOTIENT_POINTWISE_LIMIT_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e4.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e4.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6H5E4.'
+          for root in ('tendsto_punctured_differenceQuotient_of_hasDerivAt_zero',
+                       'actualOriginalGaussOrbit_differenceQuotient_pointwise_tendsto'):
+              key=p+root
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E4_ORIGINAL_GAUSS_QUOTIENT_POINTWISE_LIMIT_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
