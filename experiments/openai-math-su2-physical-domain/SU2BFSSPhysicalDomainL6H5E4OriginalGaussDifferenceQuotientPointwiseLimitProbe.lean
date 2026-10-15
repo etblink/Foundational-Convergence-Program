@@ -30,6 +30,11 @@ open FCP.BFSSSU2PhysicalDomainL6G6X
 open FCP.BFSSSU2PhysicalDomainL6H0
 open FCP.BFSSSU2PhysicalDomainL6H5B
 open FCP.BFSSSU2PhysicalDomainL6H5C3
+-- CI #292: the punctured-neighborhood notation 𝓝[≠] is in the
+-- Topology notation scope of pinned Mathlib Deriv/Slope, not activated
+-- by merely opening the Filter namespace. Both theorem parse failures
+-- and subsequent unknown identifiers were downstream of this omission.
+open scoped Topology
 open Filter
 
 /-- A purely vector-valued real derivative entails a punctured-zero
