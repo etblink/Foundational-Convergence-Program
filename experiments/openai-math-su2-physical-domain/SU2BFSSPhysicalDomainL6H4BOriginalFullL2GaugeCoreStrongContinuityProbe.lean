@@ -65,7 +65,7 @@ theorem actualOriginalFullL2GaugeCore_orbit_continuous
   intro h
   apply (tendsto_iff_norm_sub_tendsto_zero).2
   simpa only [sub_self, norm_zero] using
-    (actualOriginalFullL2GaugeCore_normDiff_continuous f h).continuousAt.tendsto
+    ((actualOriginalFullL2GaugeCore_normDiff_continuous f h).continuousAt (x := h)).tendsto
 
 #print axioms actualOriginalFullL2GaugeCore_normDiff_continuous
 #print axioms actualOriginalFullL2GaugeCore_orbit_continuous
