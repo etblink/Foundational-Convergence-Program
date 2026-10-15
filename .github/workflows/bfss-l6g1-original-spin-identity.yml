@@ -3059,36 +3059,40 @@ jobs:
           print('L6H2U_ORIGINAL_SU2_ABSTRACT_DOMINATED_INTEGRAL_QUALIFIED')
           PYCODE
 
-      - name: Qualify genuine FullL2 SU2 smooth gauge-orbit correlation continuity by dominated convergence
+      # #239/#241/#242 repeated host shutdowns in monolithic L6H3.
+      # DO NOT silently accept H3; it remains UNQUALIFIED in git
+      # and handoff. Temporarily replace its expensive CI step with
+      # a smaller source-exact mathematical qualification (L6H3A).
+      - name: Qualify original BFSS concrete SU2 inner kernel domination and continuity
         shell: bash
-        timeout-minutes: 8
+        timeout-minutes: 5
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
-          stem=SU2BFSSPhysicalDomainL6H3OriginalSmoothGaugeFullL2InnerContinuityProbe
+          stem=SU2BFSSPhysicalDomainL6H3AOriginalSourceCorrelationKernelPointwiseProbe
           cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
           cd upstream-math/lean
-          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H2ActualOriginalSmoothGaugeIntegrableEnvelopeProbe.olean
-          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H2TOriginalSU2FirstCountableProbe.olean
           test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H2UActualOriginalSU2AbstractDominatedIntegralProbe.olean
-          echo L6H3_ORIGINAL_SOURCE_FULLL2_CORRELATION_CONTINUITY_BEGIN
-          timeout 330s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
-            2>&1 | tee /tmp/bfss-l6g1/l6h3.log
+          echo L6H3A_ORIGINAL_SOURCE_CORRELATION_KERNEL_POINTWISE_BEGIN
+          timeout 100s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h3a.log
           test -s ".lake/build/lib/lean/$stem.olean"
           python3 - <<'PYCODE'
           import re
-          s=open('/tmp/bfss-l6g1/l6h3.log').read()
+          s=open('/tmp/bfss-l6g1/l6h3a.log').read()
           allowed={'propext','Classical.choice','Quot.sound'}
           entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
                    re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
-          p='FCP.BFSSSU2PhysicalDomainL6H3.'
-          for root in ('actualOriginalSmoothGaugeOrbit_correlationContinuous',
-                       'actualOriginalSmoothGaugeOrbit_fullL2Inner_eq_integral',
-                       'actualOriginalSmoothGaugeOrbit_fullL2InnerContinuous'):
+          p='FCP.BFSSSU2PhysicalDomainL6H3A.'
+          for root in ('actualOriginalSourceGaugeCorrelationKernel',
+                       'actualOriginalSourceGaugeCorrelationKernel_norm_le',
+                       'actualOriginalSourceGaugeCorrelationKernel_continuous_x',
+                       'actualOriginalSourceGaugeCorrelationKernel_continuous_g',
+                       'actualOriginalSourceGaugeCorrelationKernel_aeMeasurable'):
               name=p+root
               assert name in entries and entries[name] <= allowed,(name,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
-          print('L6H3_ORIGINAL_SOURCE_FULLL2_CORRELATION_CONTINUITY_QUALIFIED')
+          print('L6H3A_ORIGINAL_SOURCE_CORRELATION_KERNEL_POINTWISE_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
