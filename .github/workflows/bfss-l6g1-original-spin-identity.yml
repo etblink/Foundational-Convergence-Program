@@ -1906,7 +1906,7 @@ jobs:
           base=upstream-math/lean/.lake/build/lib/lean
           for stem in \
             SU2BFSSPhysicalDomainL6G6WAmbientAdjointCoefficientDerivativeProbe \
-            SU2BFSSPhysicalDomainL6G7KSourceGaugeImplementerProbe \
+            SU2BFSSPhysicalDomainL6G7KOriginalSourceFlowExactGaugeImplementationProbe \
             SU2BFSSPhysicalDomainL6G7SActualInvariantSmoothCoreInfinitesimalGaussProbe \
             SU2BFSSPhysicalDomainL6G7TOriginalFullColorLieGaussIdentityProbe \
             SU2BFSSPhysicalDomainL6G7UActualSourceFullL2GaugeContractionProbe \
