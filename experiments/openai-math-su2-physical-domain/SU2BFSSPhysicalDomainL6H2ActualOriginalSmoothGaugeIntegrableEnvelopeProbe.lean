@@ -20,12 +20,15 @@ noncomputable section
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainL6H1
+open FCP.BFSSSU2PhysicalDomainL6H0
 open MeasureTheory
 
 /-- Balls of the original 27-coordinate bosonic Euclidean space
 have finite original volume, even though the entire space does not. -/
 theorem actualOriginalBosonBall_finiteMeasure (R : ℝ) :
-    (volume : Measure (Boson 2)) (Metric.ball 0 R) < ∞ := by
+    (volume : Measure (Boson 2)) (Metric.ball 0 R) < ⊤ := by
+  -- Pinned Mathlib: bounded balls have finite volume in the original
+  -- finite-dimensional Euclidean bosonic configuration space.
   exact measure_ball_lt_top
 
 /-- Integrability of the actual fixed-support scalar envelope
@@ -35,8 +38,8 @@ theorem actualOriginalRadialEnvelope_integrable (R C : ℝ) :
       (volume : Measure (Boson 2)) := by
   classical
   let s : Set (Boson 2) := Metric.ball 0 R
-  have hs : MeasurableSet s := Metric.measurableSet_ball
-  have hfinite : (volume : Measure (Boson 2)) s ≠ ∞ :=
+  have hs : MeasurableSet s := Metric.isOpen_ball.measurableSet
+  have hfinite : (volume : Measure (Boson 2)) s ≠ ⊤ :=
     (actualOriginalBosonBall_finiteMeasure R).ne
   have hconst : IntegrableOn (fun _ : Boson 2 => C) s
       (volume : Measure (Boson 2)) :=

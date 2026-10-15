@@ -497,6 +497,16 @@ This avoids unrestricted `simp` while using the original source compact-support 
 
 **Analytical frontier after H2:** establish parameterized dominated convergence for original source representatives, using qualified L6H0 joint pointwise continuity, H1 pointwise envelope, H2 envelope-squared integrability and native `coreToL2` AE semantics, to show `Continuous (fun g => U(g) (coreToL2 f))` in actual FullL2. Then extend from original `coreToL2_dense` by exact uniform source unitarity (#227/#231). Strong derivative along source SU(2) curves, unbounded Gauss generator and BFSS spectrum remain OPEN. Handoff must retain distinction between algebraic representation and analytically strongly continuous representation. No merge.
 
+## #236 RED — source integrable envelope syntax/API mismatch; minimal #237 repair
+
+[Original Source Spin Identity #236](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38672162090), job 116217566833, commit 214f0f2d4f37af0ac9e0fbd96d447559cf878a63, completed RED. First causal compiler error H2 line 28: expected token at infinity notation (the same error at line 39); scope lacked the notation. The pinned Mathlib does not expose Metric.measurableSet_ball (line 38). Finally, the native accepted L6H0 orbit representative (line 76) was not in an opened namespace. Downstream unsolved goals, and sorryAx on all four theorem roots. Therefore the entire integrability H2 gate is UNQUALIFIED; no mathematical contradiction demonstrated.
+
+Pinned Mathlib d13f23b723b8a846827a245b89c10fc7d3f11612 confirms MeasureTheory.measure_ball_lt_top in Measure/Typeclasses/Finite.lean lines 361–371 with ProperSpace and IsFiniteMeasureOnCompacts instances; Metric.isOpen_ball in MetricSpace/Pseudo/Defs.lean line 839; and integrableOn_const plus IntegrableOn.integrable_indicator in Integral/IntegrableOn.lean lines 119–121 and 334–342. The existing proof uses these APIs, but the actual integration is not yet qualified.
+
+The #237 minimal corrective gate replaces infinity notation with top-order symbol (same mathematical quantity), Metric.measurableSet_ball with Metric.isOpen_ball.measurableSet, and opens FCP.BFSSSU2PhysicalDomainL6H0. Source volume and all four substantive claims unchanged; no additional assumptions or surrogate space. Require source Lean compilation, fresh .olean, four-root permitted-axiom audit, no sorryAx. If other issues arise, record first new compiler error.
+
+H0 genuine orbit joint continuity + AE transport, H1 uniform compact support and bound are qualified. H2 integrable square is OPEN until source-qualified. Strong FullL2 continuity still needs justified dominated convergence and dense-range extension. Unbounded Gauss generator and BFSS spectra remain OPEN. No merge.
+
 ## 1. Scalar/matrix evolution, independently of Fock elaboration
 
 First prove g(t+h)=g(h)g(t) using the same-generator exponential addition law and lift the matrix equality with subtype extensionality. The two factors commute because they are exponentials of scalar multiples of the same matrix. This is an additional theorem obligation, not supplied automatically by subgroup membership.
