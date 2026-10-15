@@ -92,6 +92,17 @@ theorem actualOriginalSmoothGaugeOrbit_correlationContinuous
           inner ℂ (actualOriginalSmoothGaugeOrbitRepresentative f g x)
             (actualOriginalSmoothGaugeOrbitRepresentative f h x)) :=
     Filter.Eventually.of_forall hcont_g
+  -- #238: pinned continuous_of_dominated asks for FirstCountableTopology
+  -- of the parameter SU(2), not a new physical assumption. Derive it
+  -- from the genuine finite 2×2 complex matrix ambient and subtype
+  -- topology instead of inserting an unproved instance.
+  have hmatrix : FirstCountableTopology (Matrix (Fin 2) (Fin 2) ℂ) := by
+    change FirstCountableTopology (Fin 2 → Fin 2 → ℂ)
+    infer_instance
+  letI : FirstCountableTopology (Matrix (Fin 2) (Fin 2) ℂ) := hmatrix
+  letI : FirstCountableTopology (GaugeGroup 2) := by
+    change FirstCountableTopology (Matrix.specialUnitaryGroup (Fin 2) ℂ)
+    infer_instance
   exact continuous_of_dominated hmeasure hbound_ae hint hcont_ae
 
 /-- True ORIGINAL FullL2 inner product equals the same source
