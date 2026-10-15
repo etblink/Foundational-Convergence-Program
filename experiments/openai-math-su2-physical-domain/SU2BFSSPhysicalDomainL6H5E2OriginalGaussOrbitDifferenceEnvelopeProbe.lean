@@ -98,8 +98,13 @@ theorem actualOriginalGaussOrbit_difference_integrableEnvelope
       (if ‖x‖ < R then C else 0) := by
     intro s
     exact hbound s x
-  exact norm_orbit_difference_le_of_derivative_bound orbit deriv
-    (if ‖x‖ < R then C else 0) hd hb 0 t
+  -- Gate #286: the abstract mean-value inequality is axiom-clean.
+  -- Only its final application failed: the expected bound has |t|
+  -- while the applied lemma retains |t - 0|. Normalize that exact
+  -- scalar expression, rather than unfolding source Fock operators.
+  simpa only [sub_zero] using
+    (norm_orbit_difference_le_of_derivative_bound orbit deriv
+      (if ‖x‖ < R then C else 0) hd hb 0 t)
 
 #print axioms norm_orbit_difference_le_of_derivative_bound
 #print axioms actualOriginalGaussOrbit_difference_integrableEnvelope
