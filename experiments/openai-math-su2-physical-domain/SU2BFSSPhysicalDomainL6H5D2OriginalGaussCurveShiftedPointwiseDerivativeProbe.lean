@@ -63,6 +63,11 @@ theorem actualOriginalSmoothGaugeOrbit_colorCurve_shifted_hasDerivAt_zero
     (pairedGaugeData.fermion (sourcePlusIGaugeCurve c t)
       ((actualOriginalCoreColorGaussCandidate c f) y))
     0 at htrans
+  -- Gate #278: applying the source group law against the local `y`
+  -- definition forced Lean into large concrete Fock definitional
+  -- equality checks at both final `exact` applications.
+  -- Formulate the curve identity *literally* as qualified by H5D1,
+  -- without an abbreviation in the dependent theorem statement.
   have hcurve :
       (fun s : ℝ =>
         actualOriginalSmoothGaugeOrbitRepresentative f
@@ -70,9 +75,13 @@ theorem actualOriginalSmoothGaugeOrbit_colorCurve_shifted_hasDerivAt_zero
       (fun s : ℝ =>
         pairedGaugeData.fermion (sourcePlusIGaugeCurve c t)
           (actualOriginalSmoothGaugeOrbitRepresentative f
-            (sourcePlusIGaugeCurve c s) y)) := by
+            (sourcePlusIGaugeCurve c s)
+              (pairedGaugeData.boson (sourcePlusIGaugeCurve c t)⁻¹ x))) := by
     funext s
     exact actualOriginalSmoothGaugeOrbit_colorCurve_add c f t s x
+  -- Unfold only the small local coordinate abbreviation, before
+  -- rewriting the entire function. Keep the qualified Fock maps opaque.
+  dsimp only [y] at htrans
   rw [hcurve]
   exact htrans
 
