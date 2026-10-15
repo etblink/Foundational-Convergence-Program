@@ -49,9 +49,11 @@ theorem actualOriginalSmoothGaugeOrbit_colorCurve_shifted_hasDerivAt_zero
   have hzero :=
     actualOriginalSmoothGaugeOrbit_gaussCandidate_pointwise_derivative_zero
       c f y
+  -- #277: keep the source isometry-to-CLM projection as a single
+  -- chained field expression. A line-leading .toContinuousLinearMap
+  -- was parsed as a projection on the fiber element instead.
   let F : Fermion 2 →L[ℝ] Fermion 2 :=
-    ((pairedGaugeData.fermion (sourcePlusIGaugeCurve c t)).toContinuousLinearEquiv
-      .toContinuousLinearMap).restrictScalars ℝ
+    ((pairedGaugeData.fermion (sourcePlusIGaugeCurve c t)).toContinuousLinearEquiv.toContinuousLinearMap).restrictScalars ℝ
   have htrans := F.hasFDerivAt.comp_hasDerivAt (0 : ℝ) hzero
   change HasDerivAt
     (fun s : ℝ =>
