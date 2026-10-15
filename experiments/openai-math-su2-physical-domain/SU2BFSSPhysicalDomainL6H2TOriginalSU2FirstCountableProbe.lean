@@ -30,7 +30,9 @@ theorem actualOriginalSU2_firstCountable :
     exact hPi
   letI : FirstCountableTopology (Matrix (Fin 2) (Fin 2) ℂ) := hMat
   change FirstCountableTopology (Matrix.specialUnitaryGroup (Fin 2) ℂ)
-  exact Subtype.firstCountableTopology _
+  -- Mathlib/Topology/Bases.lean: this *instance* lives under
+  -- TopologicalSpace.Subtype, not at root Subtype.
+  exact TopologicalSpace.Subtype.firstCountableTopology _
 
 #print axioms actualOriginalSU2_firstCountable
 #check @actualOriginalSU2_firstCountable
