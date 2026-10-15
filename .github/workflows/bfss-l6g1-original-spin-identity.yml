@@ -2911,6 +2911,38 @@ jobs:
           print('L6G7Z_ORIGINAL_FULLL2_UNITARY_REPRESENTATION_QUALIFIED')
           PYCODE
 
+      - name: Qualify actual source SmoothCore gauge orbit and FullL2 AE representative
+        shell: bash
+        timeout-minutes: 7
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H0OriginalSmoothGaugeOrbitRepresentativeProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7ZActualSourceFullL2UnitaryGaugeRepresentationProbe.olean
+          echo L6H0_ORIGINAL_SMOOTH_ORBIT_BEGIN
+          timeout 300s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h0.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h0.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6H0.'
+          for root in ('actualOriginalSmoothGaugeOrbitRepresentative',
+                       'actualOriginalSmoothGaugeOrbit_jointContinuous',
+                       'actualOriginalSmoothGaugeOrbit_parameterContinuous',
+                       'actualOriginalSmoothGaugeOrbit_ae_fullL2',
+                       'actualOriginalSmoothGaugeOrbit_norm'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6H0_ORIGINAL_SMOOTH_ORBIT_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
