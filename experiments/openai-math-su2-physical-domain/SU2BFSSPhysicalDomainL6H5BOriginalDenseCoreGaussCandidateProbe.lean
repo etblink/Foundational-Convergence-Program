@@ -72,12 +72,37 @@ theorem actualOriginalCoreColorGaussCandidate_pointwise
           ((pairedAlgebraData.structureConstant p.2 A c : ℂ) *
             (x (p.1, A) : ℂ)) •
               ((coordinateDerivative (N := 2) p.1 p.2 f) x) := by
+  -- Keep evaluation a named linear map. #260: unfolding the
+  -- SmoothCore subtraction before evaluation leaves the source
+  -- fermion-current rewrite syntactically hidden in the test function.
+  let ev : SmoothCore 2 →ₗ[ℂ] Fermion 2 :=
+    { toFun := fun u => u x
+      map_add' := fun _ _ => rfl
+      map_smul' := fun _ _ => rfl }
+  change ev (actualOriginalCoreColorGaussCandidate c f) = _
   simp only [actualOriginalCoreColorGaussCandidate,
     LinearMap.sub_apply, LinearMap.smul_apply,
     LinearMap.sum_apply, LinearMap.comp_apply,
     map_sub, map_sum, map_smul]
+  change
+    (Complex.I • ((sourceOriginalFermionColorCurrent pairedAlgebraData c) f) x) -
+      (∑ p : SpaceIndex × ColorIndex 2, ∑ A : ColorIndex 2,
+        (pairedAlgebraData.structureConstant p.2 A c : ℂ) •
+          ((position (N := 2) p.1 A)
+            ((coordinateDerivative (N := 2) p.1 p.2 f))) x) =
+      sourceFiberFermionColorGenerator pairedAlgebraData c (f x) -
+        ∑ p : SpaceIndex × ColorIndex 2, ∑ A : ColorIndex 2,
+          ((pairedAlgebraData.structureConstant p.2 A c : ℂ) *
+            (x (p.1, A) : ℂ)) •
+              ((coordinateDerivative (N := 2) p.1 p.2 f) x)
   rw [sourceFermionColorCurrent_apply_fiber]
-  simp only [sourceFiberFermionColorGenerator]
+  change
+    sourceFiberFermionColorGenerator pairedAlgebraData c (f x) -
+      (∑ p : SpaceIndex × ColorIndex 2, ∑ A : ColorIndex 2,
+        (pairedAlgebraData.structureConstant p.2 A c : ℂ) •
+          ((position (N := 2) p.1 A)
+            ((coordinateDerivative (N := 2) p.1 p.2 f))) x) =
+      _
   congr 1
   apply Finset.sum_congr rfl
   intro p _
