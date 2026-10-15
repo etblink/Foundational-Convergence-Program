@@ -77,6 +77,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7NActualBosonGaugeVectorDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H4AOriginalFullL2GaugeCoreDistanceSqContinuityProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H4BOriginalFullL2GaugeCoreStrongContinuityProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H4COriginalFullL2GaugeStrongContinuityProbe.lean
 
 permissions:
   contents: read
@@ -3247,6 +3248,34 @@ jobs:
               assert key in entries and entries[key] <= allowed,(key,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6H4B_ORIGINAL_FULLL2_CORE_STRONG_CONTINUITY_QUALIFIED')
+          PYCODE
+
+      # H4C: original source FullL2 all-vector strong continuity from
+      # source SmoothCore density, exact isometry, and qualified H4B.
+      - name: Qualify original BFSS FullL2 strong SU2 continuity for all vectors
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H4COriginalFullL2GaugeStrongContinuityProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H4BOriginalFullL2GaugeCoreStrongContinuityProbe.olean
+          echo L6H4C_ORIGINAL_FULLL2_ALL_VECTOR_STRONG_CONTINUITY_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h4c.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h4c.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          key='FCP.BFSSSU2PhysicalDomainL6H4C.actualOriginalFullL2GaugePair_orbit_continuous'
+          assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H4C_ORIGINAL_FULLL2_ALL_VECTOR_STRONG_CONTINUITY_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
