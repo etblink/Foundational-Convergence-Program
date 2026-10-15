@@ -20,6 +20,7 @@ open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2PhysicalDomainL6G6K
+open FCP.BFSSSU2PhysicalDomainL6G6X
 open FCP.BFSSSU2PhysicalDomainL6H0
 open FCP.BFSSSU2PhysicalDomainL6H5B
 open FCP.BFSSSU2PhysicalDomainL6H5C2
@@ -61,8 +62,11 @@ theorem actualOriginalSmoothGaugeOrbit_gaussCandidate_pointwise_derivative_zero
           (sourcePlusIGaugeCurve c t) x)
       ((actualOriginalCoreColorGaussCandidate c f) x)
       0 := by
-  simpa only [actualOriginalCoreColorGaussCandidate_eq_combined_coordinates]
-    using actualOriginalSmoothGaugeOrbit_combined_coordinate_derivative_zero c f x
+  -- Keep the already-qualified source derivative opaque during proof search.
+  -- #268: a missing gauge-curve namespace poisoned the goal before the
+  -- final `simpa` conversion; rewrite only the explicit coefficient identity.
+  rw [actualOriginalCoreColorGaussCandidate_eq_combined_coordinates c f x]
+  exact actualOriginalSmoothGaugeOrbit_combined_coordinate_derivative_zero c f x
 
 #print axioms actualOriginalColorCoefficient_real_complex_sum_eq
 #print axioms actualOriginalCoreColorGaussCandidate_eq_combined_coordinates
