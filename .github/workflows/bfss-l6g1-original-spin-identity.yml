@@ -1886,7 +1886,40 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
           key: bfss-l6g6-kv-suffix-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G[1-5]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6[A-S]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6UOriginalAdjointColorTangentProbe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G6VOriginalPlusIConjugationDerivativeProbe.lean', 'experiments/openai-math-su2-concrete-potential/SU2*.lean') }}
 
+      # Exact-source qualified L6G7W closure cache. The key covers EVERY
+      # original FCP source dependency through W and excludes the prospective
+      # X (and later) targets. Saved only following W's own strict axiom audit.
+      - name: Restore accepted L6G7W source closure by exact content hashes
+        id: accepted_l6g7w
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-l6g7w-accepted-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G[1-6]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7[A-W]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1[A-B]*Probe.lean', 'experiments/openai-math-su2-concrete-potential/SU2*.lean') }}
+
+      - name: Validate restored L6G7W frozen source objects
+        if: steps.accepted_l6g7w.outputs.cache-hit == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          base=upstream-math/lean/.lake/build/lib/lean
+          for stem in \
+            SU2BFSSPhysicalDomainL6G6WAmbientAdjointCoefficientDerivativeProbe \
+            SU2BFSSPhysicalDomainL6G7KSourceGaugeImplementerProbe \
+            SU2BFSSPhysicalDomainL6G7SActualInvariantSmoothCoreInfinitesimalGaussProbe \
+            SU2BFSSPhysicalDomainL6G7TOriginalFullColorLieGaussIdentityProbe \
+            SU2BFSSPhysicalDomainL6G7UActualSourceFullL2GaugeContractionProbe \
+            SU2BFSSPhysicalDomainL6G7VActualSourceFullL2PhysicalFixedSpaceProbe \
+            SU2BFSSPhysicalDomainL6G7WActualSourceFullL2GaugeIsometryProbe \
+            SU2BFSSG4JExactGaugeDataAssemblyProbe; do
+            test -s "$base/$stem.olean" || { echo "L6G7W_ACCEPTED_CACHE_MISSING=$stem" >&2; exit 1; }
+          done
+          test -s "$base/OAI/MathematicalPhysics/BFSS/GaugeCore.olean"
+          echo L6G7W_CONTENT_PINNED_ACCEPTED_SOURCE_RESTORED
+
       - name: Qualify exact ambient adjoint coefficient derivative and source sign
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1915,6 +1948,7 @@ jobs:
           PYCODE
 
       - name: Qualify original SU2 curve and native adjoint coefficient derivative
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1950,6 +1984,7 @@ jobs:
           PYCODE
 
       - name: Qualify actual source 24-mode gauge representation derivative
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -1980,6 +2015,7 @@ jobs:
           PYCODE
 
       - name: Qualify bounded source fermionic color flow and shared vacuum
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2019,6 +2055,7 @@ jobs:
       # red gates #161-#167, not hidden or accepted. The next independent
       # scientific requirement is the all-time source color coefficient law.
       - name: Qualify native source SU2 curve group and color composition
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2048,6 +2085,7 @@ jobs:
           PYCODE
 
       - name: Qualify all-time actual source SU2 adjoint-color evolution
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2076,6 +2114,7 @@ jobs:
           PYCODE
 
       - name: Qualify exact rotated original theta operator derivative
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2104,6 +2143,7 @@ jobs:
           PYCODE
 
       - name: Qualify original rotated theta all-time commutator evolution
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2134,6 +2174,7 @@ jobs:
           PYCODE
 
       - name: Qualify exact source bounded flow operator calculus
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2164,6 +2205,7 @@ jobs:
           PYCODE
 
       - name: Qualify exact source conjugated theta zero derivative
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2192,6 +2234,7 @@ jobs:
           PYCODE
 
       - name: Qualify original bounded source theta finite-time intertwining
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2222,6 +2265,7 @@ jobs:
           PYCODE
 
       - name: Qualify exact original bounded theta forward-flow covariance
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2250,6 +2294,7 @@ jobs:
           PYCODE
 
       - name: Qualify source exponential as exact covariant fermion linear equivalence
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2279,6 +2324,7 @@ jobs:
           PYCODE
 
       - name: Assemble original exterior gauge and scalar-commutant source closure
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 22
         run: |
@@ -2325,6 +2371,7 @@ jobs:
           echo L6G7K_ORIGINAL_GAUGE_SCHUR_CLOSURE_READY
 
       - name: Qualify exact original source exponential equals genuine SU2 gauge implementation
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2358,6 +2405,7 @@ jobs:
           PYCODE
 
       - name: Qualify exact original SU2 gauge fermion infinitesimal and all-time derivatives
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2387,6 +2435,7 @@ jobs:
           PYCODE
 
       - name: Qualify actual original SU2 bosonic coordinate tangent
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2417,6 +2466,7 @@ jobs:
           PYCODE
 
       - name: Qualify full original SU2 bosonic EuclideanSpace vector tangent
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2446,6 +2496,7 @@ jobs:
           PYCODE
 
       - name: Qualify exact original SmoothCore forward gauge pullback derivative
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2472,6 +2523,7 @@ jobs:
           PYCODE
 
       - name: Qualify source-exact SmoothCore orbital coordinate gauge generator
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2501,6 +2553,7 @@ jobs:
           PYCODE
 
       - name: Qualify original source gaugeTangent sign against +i SmoothCore pullback
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2530,6 +2583,7 @@ jobs:
           PYCODE
 
       - name: Qualify original pointwise boson-minus-fermion Gauss defect derivative
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2560,6 +2614,7 @@ jobs:
           PYCODE
 
       - name: Build exact original six-field SU2 GaugeData for invariant-core test
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 25
         run: |
@@ -2596,6 +2651,7 @@ jobs:
           echo L6G7S_ORIGINAL_GAUGEDATA_DEPENDENCY_CLOSURE_READY
 
       - name: Qualify genuine source invariant-core pointwise Gauss derivative vanishing
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2626,6 +2682,7 @@ jobs:
           PYCODE
 
       - name: Qualify full original source color Lie Gauss law on invariant SmoothCore
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2652,6 +2709,7 @@ jobs:
           PYCODE
 
       - name: Qualify exact original BFSS FullL2 bounded SU2 gauge transformations
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2686,6 +2744,7 @@ jobs:
       # L6G7V #224 negative knowledge: the original packed fiberAction must
       # be made definitionally explicit before coeFn_compLp's hinner rewrite.
       - name: Qualify original FullL2 physical Hilbert space as joint gauge fixed-point space
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2717,6 +2776,7 @@ jobs:
       # #226 negative knowledge: original norm identity compiled but Isometry
       # expects edist, not dist; #227 uses AddMonoidHomClass.isometry_of_norm.
       - name: Qualify exact FullL2 original SU2 gauge isometry from source inverse action
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
         shell: bash
         timeout-minutes: 6
         run: |
@@ -2744,6 +2804,44 @@ jobs:
               assert name in entries and entries[name] <= allowed,(name,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
           print('L6G7W_ACTUAL_SOURCE_FULLL2_GAUGE_ISOMETRY_QUALIFIED')
+          PYCODE
+
+      - name: Save only L6G7W accepted source closure after strict audit
+        if: steps.accepted_l6g7w.outputs.cache-hit != 'true'
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-l6g7w-accepted-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G[1-6]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7[A-W]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1[A-B]*Probe.lean', 'experiments/openai-math-su2-concrete-potential/SU2*.lean') }}
+
+      - name: Qualify original FullL2 fermionic SU2 representation multiplication and identity
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7XOriginalSourceFullL2FermionRepresentationProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7WActualSourceFullL2GaugeIsometryProbe.olean
+          echo L6G7X_SOURCE_FULLL2_FERMION_GROUP_LAW_BEGIN
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6g7x.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7x.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7X.'
+          for root in ('actualSourceFullL2_fiberAction_mul',
+                       'actualSourceFullL2_fiberAction_one'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7X_SOURCE_FULLL2_FERMION_GROUP_LAW_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
