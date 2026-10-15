@@ -83,6 +83,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5C1OriginalInverseBosonGaugeCurveDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5C2OriginalCombinedFockBosonPointwiseDerivativeProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5C3OriginalGaussCandidatePointwiseDerivativeBridgeProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5D1OriginalSmoothGaugeOrbitPointwiseGroupLawProbe.lean
 
 permissions:
   contents: read
@@ -3441,6 +3442,37 @@ jobs:
               assert key in entries and entries[key] <= allowed,(key,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6H5C3_ORIGINAL_GAUSS_CANDIDATE_POINTWISE_DERIVATIVE_QUALIFIED')
+          PYCODE
+
+      # H5D1: preserve the exact pointwise original combined-gauge
+      # group action, before attempting all-time Gauss differentiation.
+      - name: Qualify original SmoothCore SU2 orbit pointwise group law
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5D1OriginalSmoothGaugeOrbitPointwiseGroupLawProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5C3OriginalGaussCandidatePointwiseDerivativeBridgeProbe.olean
+          echo L6H5D1_ORIGINAL_SOURCE_POINTWISE_GROUP_LAW_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5d1.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5d1.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6H5D1.'
+          for root in ('actualOriginalSmoothGaugeOrbit_pointwise_mul',
+                       'actualOriginalSmoothGaugeOrbit_colorCurve_add'):
+              key=p+root
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5D1_ORIGINAL_SOURCE_POINTWISE_GROUP_LAW_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
