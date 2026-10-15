@@ -108,7 +108,14 @@ theorem actualSourceFullL2_bosonPullback_fiber_comm
     (pairedGaugeData.boson g).measurePreserving
   have hf := ContinuousLinearMap.coeFn_compLp
     (pairedGaugeData.fermion h).toContinuousLinearEquiv.toContinuousLinearMap v
-  have hfc := hf.comp_tendsto
+  -- Gate #229: coeFn_compLp elaborates through the underlying
+  -- measure-zero-set equality. Retype it as an EventuallyEq before
+  -- applying the source boson gauge quasi-measure-preserving pullback.
+  have hfAe :
+      (fun a : Boson 2 => (pairedGaugeData.fiberAction h v) a) =ᵐ[volume]
+        (fun a : Boson 2 => pairedGaugeData.fermion h (v a)) := by
+    exact hf
+  have hfc := hfAe.comp_tendsto
     (pairedGaugeData.boson g).measurePreserving.quasiMeasurePreserving.tendsto_ae
   have hi := Lp.coeFn_compMeasurePreserving v
     (pairedGaugeData.boson g).measurePreserving

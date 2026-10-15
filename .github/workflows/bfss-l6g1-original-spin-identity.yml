@@ -2844,6 +2844,9 @@ jobs:
           print('L6G7X_SOURCE_FULLL2_FERMION_GROUP_LAW_QUALIFIED')
           PYCODE
 
+      # #229 negative knowledge: coeFn_compLp's AE expression elaborated
+      # as a measure-null-set Eq; type it explicitly as EventuallyEq before
+      # .comp_tendsto along source boson gauge pullback.
       - name: Qualify source-exact original FullL2 combined SU2 gauge group law
         shell: bash
         timeout-minutes: 7
