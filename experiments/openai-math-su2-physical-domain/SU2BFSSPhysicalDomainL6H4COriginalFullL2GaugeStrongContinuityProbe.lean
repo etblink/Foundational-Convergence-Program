@@ -43,7 +43,7 @@ theorem actualOriginalFullL2GaugePair_orbit_continuous
   obtain ⟨f, hf⟩ :=
     (coreToL2_dense (N := 2)).exists_dist_lt v hthird
   have hcore :
-      ∀ᶠ g in 𝓝 h,
+      ∀ᶠ g in nhds h,
         dist (actualOriginalFullL2GaugePairCLM g (coreToL2 f))
           (actualOriginalFullL2GaugePairCLM h (coreToL2 f)) < ε / 3 :=
     (Metric.continuousAt_iff'.1
