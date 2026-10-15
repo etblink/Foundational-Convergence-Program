@@ -35,8 +35,10 @@ open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2GaugeG4J
+open FCP.BFSSSU2PhysicalDomainL6G6I
 open FCP.BFSSSU2PhysicalDomainL6G6K
 open FCP.BFSSSU2PhysicalDomainL6G6X
+open FCP.BFSSSU2PhysicalDomainL6G7U
 open FCP.BFSSSU2PhysicalDomainL6G7V
 open FCP.BFSSSU2PhysicalDomainL6H5A
 
