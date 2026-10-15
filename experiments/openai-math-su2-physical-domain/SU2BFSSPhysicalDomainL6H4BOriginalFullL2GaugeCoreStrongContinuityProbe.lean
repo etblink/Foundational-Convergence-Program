@@ -21,6 +21,7 @@ namespace FCP.BFSSSU2PhysicalDomainL6H4B
 noncomputable section
 
 open OAI.BFSSQuantum
+open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainL6G7U
 open FCP.BFSSSU2PhysicalDomainL6H4A
 open Filter
