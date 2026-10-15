@@ -2844,6 +2844,38 @@ jobs:
           print('L6G7X_SOURCE_FULLL2_FERMION_GROUP_LAW_QUALIFIED')
           PYCODE
 
+      - name: Qualify source-exact original FullL2 combined SU2 gauge group law
+        shell: bash
+        timeout-minutes: 7
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6G7YActualSourceFullL2CombinedGaugeGroupLawProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6G7XOriginalSourceFullL2FermionRepresentationProbe.olean
+          echo L6G7Y_ORIGINAL_FULLL2_COMBINED_GAUGE_GROUP_LAW_BEGIN
+          timeout 300s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6g7y.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6g7y.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          p='FCP.BFSSSU2PhysicalDomainL6G7Y.'
+          for root in ('actualSourceFullL2_bosonPullback_anti_mul',
+                       'actualSourceFullL2_bosonPullback_one',
+                       'actualSourceFullL2_bosonPullback_fiber_comm',
+                       'actualOriginalFullL2GaugePair_mul',
+                       'actualOriginalFullL2GaugePair_one'):
+              name=p+root
+              assert name in entries and entries[name] <= allowed,(name,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-7000:]
+          print('L6G7Y_ORIGINAL_FULLL2_COMBINED_GAUGE_GROUP_LAW_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
