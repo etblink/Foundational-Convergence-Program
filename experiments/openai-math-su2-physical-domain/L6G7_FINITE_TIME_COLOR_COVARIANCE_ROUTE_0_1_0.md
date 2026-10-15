@@ -473,6 +473,22 @@ Apply `hfAe.comp_tendsto (pairedGaugeData.boson g).measurePreserving.quasiMeasur
 
 **After H1:** prove the fixed-radius indicator majorant squared is integrable with respect to original `volume : Measure (Boson 2)` (local finiteness of Lebesgue volume in real finite-dimensional EuclideanSpace), then dominated convergence for original `Φ_f(g,x)` as g→g₀ in SU2. Use native `coreToL2` almost-everywhere identification to get norm continuity first for original smooth-core range and `coreToL2_dense` + uniform unitary norm to extend to all original `FullL2 2`. Parameter strong continuity cannot be inferred from pointwise continuity; no unproved limit lemmas. Unbounded Gauss generator and spectral BFSS remain OPEN. Continue preserving negative knowledge and source original +i/-i signs. Keep original source-hash pinned accepted caches and strict fresh leaf audits.
 
+## #234 RED — inverse normalization in original smooth-gauge compact-support proof; #235 targeted repair
+
+[Original Source Spin Identity #234](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38670176884), job `116211211206`, source commit `03b690bd6638919dc6e28120aea204d76d667a8a`, completed RED. **First causal error** in `SU2BFSSPhysicalDomainL6H1ActualOriginalSmoothGaugeUniformEnvelopeProbe.lean:36:66`: Lean left the goal `f ((pairedGaugeData.boson g).symm x) = 0` after unrestricted `simp [actualOriginalSmoothGaugeOrbitRepresentative, hzero]`. The actual independently proved local `hzero` was `f (pairedGaugeData.boson g⁻¹ x) = 0`. The unrestricted simplifier rewrote the source inverse under the group hom into the equivalent but syntactically different `(boson g).symm` before applying `hzero`, causing the equality rewrite to miss. The compiler additionally warned that `hzero` was an unused simp argument. This is a **Lean expression-normalization and simplifier-ordering failure**, not a mathematical counterexample and not evidence that the original boson isometry fails.
+
+**Separately compiled root:** `actualOriginalSmoothGaugeOrbit_uniformNorm` printed only `[propext, Classical.choice, Quot.sound]`. Both `actualOriginalSmoothGaugeOrbit_uniformSupport` and downstream `actualOriginalSmoothGaugeOrbit_uniformEnvelope` printed `sorryAx` and remain UNQUALIFIED at #234. Preserve this negative knowledge.
+
+**Minimal proposed #235 repair, UNQUALIFIED until new strict Lean CI:** Keep the original gauge and support expressions exactly:
+```lean
+  change pairedGaugeData.fermion g
+    (f (pairedGaugeData.boson g⁻¹ x)) = 0
+  simpa only [hzero, map_zero]
+```
+This avoids unrestricted `simp` while using the original source compact-support radius, literal `boson g⁻¹` norm isometry and original `fermion g` complex-linear isometry. It introduces no new hypotheses, changes no signs, and does not touch any accepted module or original physical space. Strict current workflow audits all three theorem roots and fresh .olean; reject #235 if any `sorryAx` remains.
+
+**After successful H1 (if verified):** separately prove that the shared radial indicator majorant is measurable and (L^2)-integrable for the original finite-dimensional EuclideanSpace volume. Only then use valid parameterized dominated convergence, accepted #233 AE identification, and original `coreToL2_dense` with #227 norm-preservation to establish actual FullL2 strong continuity. Do not infer strong continuity from the pointwise envelope alone. The true Gauss generator and BFSS spectral question remain OPEN. Exact pinned source, exact permitted Lean axioms, no merge.
+
 ## 1. Scalar/matrix evolution, independently of Fock elaboration
 
 First prove g(t+h)=g(h)g(t) using the same-generator exponential addition law and lift the matrix equality with subtype extensionality. The two factors commute because they are exponentials of scalar multiples of the same matrix. This is an additional theorem obligation, not supplied automatically by subgroup membership.

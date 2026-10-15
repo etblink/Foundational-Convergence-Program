@@ -42,7 +42,12 @@ theorem actualOriginalSmoothGaugeOrbit_uniformSupport
     (pairedGaugeData.boson g⁻¹).norm_map _
   have hzero : f (pairedGaugeData.boson g⁻¹ x) = 0 :=
     houtside _ (by simpa only [hnorm] using hx)
-  simp [actualOriginalSmoothGaugeOrbitRepresentative, hzero]
+  -- #234: unrestricted simp normalizes boson g⁻¹ into (boson g).symm
+  -- before using hzero, so the verified source equality fails to match.
+  -- Keep the original GaugeCore action in precisely its source syntax.
+  change pairedGaugeData.fermion g
+    (f (pairedGaugeData.boson g⁻¹ x)) = 0
+  simpa only [hzero, map_zero]
 
 /-- Uniform pointwise amplitude bound independent of g and x;
 the original fermion action preserves the source Fock norm. -/
