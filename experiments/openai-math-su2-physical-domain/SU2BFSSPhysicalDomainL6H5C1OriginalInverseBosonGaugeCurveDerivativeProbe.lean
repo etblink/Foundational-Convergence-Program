@@ -71,7 +71,7 @@ theorem originalSmoothCore_inverseBosonGauge_coordinate_derivative_zero
   have hforward :=
     actualBosonGauge_smoothCore_pullback_coordinate_derivative_zero c f x
   have hneg :=
-    hforward.scomp (0 : ℝ) (hasDerivAt_neg (0 : ℝ))
+    hforward.scomp_of_eq (0 : ℝ) (hasDerivAt_neg (0 : ℝ)) (by simp)
   have hfun :
       (fun t : ℝ =>
         f (bosonGauge ((sourcePlusIGaugeCurve c t)⁻¹) x)) =
@@ -97,7 +97,7 @@ theorem originalSmoothCore_inverseBosonGauge_originalTangent_derivative_zero
       0 := by
   have hforward :=
     actualBosonGauge_smoothCore_pullback_neg_originalGaugeTangent c f x
-  have hneg := hforward.scomp (0 : ℝ) (hasDerivAt_neg (0 : ℝ))
+  have hneg := hforward.scomp_of_eq (0 : ℝ) (hasDerivAt_neg (0 : ℝ)) (by simp)
   have hfun :
       (fun t : ℝ =>
         f (bosonGauge ((sourcePlusIGaugeCurve c t)⁻¹) x)) =
