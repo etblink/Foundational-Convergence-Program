@@ -41,3 +41,21 @@ axiom audits remain unchanged. Success requires a future strict green run
 and `L6H5E8G_ORIGINAL_COLOR_ALLTIME_STRONG_DERIVATIVE_QUALIFIED`.
 No closedness, essential skew-adjointness, or BFSS spectral conclusion
 is established by this repair.
+
+
+## Subsequent strict acceptance — #324
+
+[Original Source Spin Identity #324](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38914504434)
+(job `117018391116`) succeeded at
+`L6H5E8G_ORIGINAL_COLOR_ALLTIME_STRONG_DERIVATIVE_QUALIFIED`;
+accepted commit `ceae87a48d2e67c064866629fc3ebc3c360e3989`.
+All four H5E8G roots printed exactly the permitted
+`[propext, Classical.choice, Quot.sound]`, no `sorryAx`.
+The genuine original color one-parameter orbit is differentiable
+at every real time with derivative U_c(t) A_c v, and this derivative
+is norm-continuous.
+
+H5E8H now tests the Banach-valued fundamental theorem of calculus
+for this accepted source C1 orbit. The FTC is an intermediate
+evolution identity, not a statement that the maximal generator
+is closed or essentially skew-adjoint.
