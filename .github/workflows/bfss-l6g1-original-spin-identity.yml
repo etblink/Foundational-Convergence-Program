@@ -4465,6 +4465,41 @@ jobs:
           print('L6H5E8R_SOURCE_NORMALIZED_Z_COLOR_EXPONENTIAL_QUALIFIED')
           PYCODE
 
+      # H5E8S: original source +i Pauli-y exponential via fixed
+      # 2x2 semiconjugation and independently qualified z-diagonal.
+      - name: Qualify original source positive-i y-color diagonal conjugation
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8SSourcePositiveIYColorConjugatedDiagonalProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8RSourceNormalizedZColorFlowDiagonalProbe.olean
+          echo L6H5E8S_SOURCE_POSITIVE_I_Y_COLOR_DIAGONAL_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e8s.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e8s.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E8S.'
+          for name in ('sourceYChange',
+                       'sourceYChangeInv',
+                       'sourceYChange_mul_inverse',
+                       'sourceYChange_inverse_mul',
+                       'source_y_tangent_diagonal_conjugation',
+                       'source_y_gaugeCurve_diagonal_exp_conjugation'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E8S_SOURCE_POSITIVE_I_Y_COLOR_DIAGONAL_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
