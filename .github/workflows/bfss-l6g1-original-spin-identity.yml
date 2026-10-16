@@ -4044,6 +4044,39 @@ jobs:
           print('L6H5E8E_ORIGINAL_MAXIMAL_GAUSS_COMPLEX_LINEAR_QUALIFIED')
           PYCODE
 
+      # H5E8F: genuine source group generator-domain invariance
+      # and intertwining from the accepted maximal complex-linear map.
+      - name: Qualify original color generator domain invariance and intertwining
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8FOriginalColorGeneratorUnitaryIntertwiningProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8EOriginalColorMaximalGeneratorComplexLinearityProbe.olean
+          echo L6H5E8F_ORIGINAL_COLOR_DOMAIN_INVARIANCE_INTERTWINING_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e8f.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e8f.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E8F.'
+          for name in ('abstract_additive_CLM_group_orbit_derivative',
+                       'actualOriginalColorGenerator_shifted_hasDerivAt',
+                       'actualOriginalColorGenerator_domain_invariant',
+                       'actualOriginalColorGenerator_intertwines'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E8F_ORIGINAL_COLOR_DOMAIN_INVARIANCE_INTERTWINING_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
