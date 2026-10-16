@@ -3817,6 +3817,39 @@ jobs:
           print('L6H5E7A_ORIGINAL_FULLL2_NORM_SQUARE_INTEGRAL_QUALIFIED')
           PYCODE
 
+      # H5E7B: source-exact a.e. representative for the genuine
+      # FullL2 SU2 Gauss quotient residual; no generator-domain claim.
+      - name: Qualify exact original FullL2 Gauss residual integral bridge
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E7BOriginalGaussFullL2ResidualIntegralBridgeProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E7AOriginalFullL2NormSquareIntegralBridgeProbe.olean
+          echo L6H5E7B_SOURCE_FULLL2_GAUSS_RESIDUAL_INTEGRAL_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e7b.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e7b.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E7B.'
+          for name in ('abstractComplexL2_realAffineResidual_ae',
+                       'actualOriginalGaussFullL2Residual',
+                       'actualOriginalGaussFullL2Residual_ae',
+                       'actualOriginalGaussFullL2Residual_norm_sq_eq_integral'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E7B_SOURCE_FULLL2_GAUSS_RESIDUAL_INTEGRAL_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
