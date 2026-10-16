@@ -32,11 +32,11 @@ open FCP.BFSSSU2PhysicalDomainL6H5E8R
 
 /-- Fixed eigenvector columns of the source positive-i Pauli-y
 skew matrix [[0,1],[-1,0]]. Algebraic proof witness only. -/
-private def sourceYChange : ColorMatrix 2 :=
+def sourceYChange : ColorMatrix 2 :=
   !![(1 : ℂ), 1; Complex.I, -Complex.I]
 
 /-- Explicit two-sided inverse of sourceYChange. -/
-private def sourceYChangeInv : ColorMatrix 2 :=
+def sourceYChangeInv : ColorMatrix 2 :=
   !![(1/2 : ℂ), -(Complex.I)/2; (1/2 : ℂ), Complex.I/2]
 
 theorem sourceYChange_mul_inverse :
