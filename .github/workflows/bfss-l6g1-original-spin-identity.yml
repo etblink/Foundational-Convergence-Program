@@ -3912,6 +3912,41 @@ jobs:
           print('L6H5E8A_SOURCE_COLOR_CURVE_STRONG_FULLL2_GAUSS_DERIVATIVE_QUALIFIED')
           PYCODE
 
+      # H5E8B: original maximal infinitesimal-generator
+      # differentiability domain, source core membership, action
+      # and genuine Hilbert-space density.
+      - name: Qualify original color Gauss infinitesimal generator domain and density
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8BOriginalColorInfinitesimalGeneratorDomainProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8AOriginalColorCurveFullL2GaussDerivativeProbe.olean
+          echo L6H5E8B_ORIGINAL_INF_GENERATOR_DOMAIN_DENSE_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e8b.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e8b.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E8B.'
+          for name in ('actualOriginalFullL2ColorInfinitesimalDomain',
+                       'actualOriginalFullL2ColorInfinitesimalGenerator',
+                       'actualOriginalFullL2ColorInfinitesimalDomain_core_mem',
+                       'actualOriginalFullL2ColorInfinitesimalGenerator_core',
+                       'actualOriginalFullL2ColorInfinitesimalDomain_dense'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E8B_ORIGINAL_INF_GENERATOR_DOMAIN_DENSE_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

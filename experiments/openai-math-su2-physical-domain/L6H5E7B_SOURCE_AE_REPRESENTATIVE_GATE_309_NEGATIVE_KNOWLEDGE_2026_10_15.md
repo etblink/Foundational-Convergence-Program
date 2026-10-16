@@ -37,3 +37,24 @@ before pointwise rewriting, introduce AE equalities in the *same named
 variables* used in the eventual abstract L2 bridge, and open the exact
 namespace in which the qualified CLM was defined. This is a compiler
 repair, not new SU2 physics.
+
+
+## Acceptance — strict #311 and #312 (2026-10-15 PDT)
+
+[Original Source Spin Identity #311](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38848232838), job \`116803482484\`, **success**:
+\`L6H5E7C_SOURCE_GAUSS_STRONG_FULLL2_RESIDUAL_QUALIFIED\`.
+Two theorem roots allowlist-qualified, without sorryAx; true source
+strong FullL2 Gauss difference quotient residual converges to zero.
+Commit \`d7995a029a04696323bf9339d67b21a2297b2bb0\`.
+
+[Original Source Spin Identity #312](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38849235336), job \`116806531708\`, **success**:
+\`L6H5E8A_SOURCE_COLOR_CURVE_STRONG_FULLL2_GAUSS_DERIVATIVE_QUALIFIED\`.
+Two theorem roots allowlist-qualified, without sorryAx; source original
+gauge orbit in TRUE FullL2 has HasDerivAt at zero, with derivative
+\`coreToL2 (actualOriginalCoreColorGaussCandidate c f)\`.
+Commit \`2a128d0be792764d9ea74b7abe1a3f09897142f4\`.
+
+NEXT: H5E8B must test exact maximal differentiability-domain membership,
+source Gauss generator action and genuine source core density. Do not
+pretend these alone yield generator closedness, core essential
+self-adjointness, all-color physical kernel characterization, or spectra.
