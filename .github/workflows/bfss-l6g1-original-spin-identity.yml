@@ -4012,6 +4012,38 @@ jobs:
           print('L6H5E8D_MAXIMAL_GAUSS_SKEW_PHYSICAL_ZERO_QUALIFIED')
           PYCODE
 
+      # H5E8E: exact original maximal color generator complex linearity.
+      - name: Qualify original maximal color Gauss complex linearity
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8EOriginalColorMaximalGeneratorComplexLinearityProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8DOriginalMaximalGaussSkewAndPhysicalKernelProbe.olean
+          echo L6H5E8E_ORIGINAL_MAXIMAL_GAUSS_COMPLEX_LINEAR_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e8e.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e8e.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E8E.'
+          for name in ('actualOriginalColorGeneratorDomainSubmodule',
+                       'actualOriginalColorGeneratorDomainSubmodule_mem',
+                       'actualOriginalColorGeneratorLinear',
+                       'actualOriginalColorGeneratorLinear_core'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E8E_ORIGINAL_MAXIMAL_GAUSS_COMPLEX_LINEAR_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
