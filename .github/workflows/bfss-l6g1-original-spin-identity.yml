@@ -94,6 +94,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E6AOriginalGaussSquaredErrorDCTInterfaceProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E6BOriginalGaussSquaredErrorDominatedDataProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E6COriginalGaussSquaredErrorIntegralLimitProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E7AOriginalFullL2NormSquareIntegralBridgeProbe.lean
 
 permissions:
   contents: read
@@ -3783,6 +3784,34 @@ jobs:
           assert key in entries and entries[key] <= allowed,(key,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6H5E6C_ORIGINAL_GAUSS_SQUARED_ERROR_INTEGRAL_LIMIT_QUALIFIED')
+          PYCODE
+
+      # H5E7A: actual original FullL2 Hilbert norm squared as
+      # the Bochner integral of the source Fock-fiber squared norm.
+      - name: Qualify genuine original FullL2 norm-square integral identity
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E7AOriginalFullL2NormSquareIntegralBridgeProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E6COriginalGaussSquaredErrorIntegralLimitProbe.olean
+          echo L6H5E7A_ORIGINAL_FULLL2_NORM_SQUARE_INTEGRAL_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e7a.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e7a.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          key='FCP.BFSSSU2PhysicalDomainL6H5E7A.actualOriginalFullL2_norm_sq_eq_integral'
+          assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E7A_ORIGINAL_FULLL2_NORM_SQUARE_INTEGRAL_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
