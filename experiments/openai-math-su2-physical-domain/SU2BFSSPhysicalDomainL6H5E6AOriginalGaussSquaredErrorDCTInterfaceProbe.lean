@@ -67,7 +67,16 @@ theorem norm_sub_sq_tendsto_zero_of_tendsto
     {l : Filter ℝ} (q : ℝ → E) (v : E)
     (hlim : Tendsto q l (𝓝 v)) :
     Tendsto (fun t : ℝ => ‖q t - v‖ ^ 2) l (𝓝 (0 : ℝ)) := by
-  simpa using ((hlim.sub tendsto_const_nhds).norm.pow 2)
+  -- #297: an untyped tendsto_const_nhds leaves the subtracted
+  -- constant as an unresolved metavariable. Fix the constant v at
+  -- the abstract normed-fiber level before taking the squared norm.
+  have hconst : Tendsto (fun _ : ℝ => v) l (𝓝 v) :=
+    tendsto_const_nhds
+  have hsub : Tendsto (fun t : ℝ => q t - v) l (𝓝 (v - v)) :=
+    hlim.sub hconst
+  have hsq : Tendsto (fun t : ℝ => ‖q t - v‖ ^ 2) l
+      (𝓝 (‖v - v‖ ^ 2)) := hsub.norm.pow 2
+  simpa only [sub_self, norm_zero, zero_pow (by decide : (2 : ℕ) ≠ 0)] using hsq
 
 #print axioms originalBosonVolume_puncturedDCT_squaredError
 #print axioms norm_sub_sq_tendsto_zero_of_tendsto
