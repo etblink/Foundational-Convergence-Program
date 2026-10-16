@@ -12,7 +12,7 @@
 - H5E8N (strict #333): the kernel is also fixed under that subgroup's topological closure; equality with the `pairedGaugeData.physicalSpace` is still conditional on full density.
 - H5E8O (strict #336): the original three `+i * color c` directions really span traceless skew-Hermitian source color matrices over **real** scalars. Spanning alone is **not** group generation.
 - H5E8P (strict #339): for every genuine `g : GaugeGroup 2`, `g=[[u,v],[-star v,star u]]`, with the full source determinant-one/unitarity premises.
-- H5E8Q: the quaternionic matrix form and `u * star u + v * star v = 1` individually printed only allowed axioms on red #341, **but the complete new Q gate is not accepted**. The real `normSq u + normSq v = 1` proof on #341 failed at `Complex.conj`, an identifier absent from pinned Mathlib, and printed `sorryAx`. Targeted source-only correction commit `972120b3b0715b2b06426862de5fd351e9f34afd` replaces `Complex.conj` with the definitional `star`, preserving the theorem and axiom list; strict gate #342 must be checked independently before promotion.
+- H5E8Q **strict #342 QUALIFIED**: after red #341's nonexistent pinned `Complex.conj` identifier (which produced `sorryAx` only for the unqualified `normSq` root), the targeted source-only correction commit `972120b3b0715b2b06426862de5fd351e9f34afd` used the definitional `star` without changing theorem statements, source matrices or sign conventions. Strict [#342](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38955319998), job `117156615538` successfully compiled ALL THREE roots: `originalSU2_quaternion_matrix`, `originalSU2_firstRow_star_norm`, `originalSU2_firstRow_normSq_eq_one`. All three `#print axioms` outputs contain exactly `[propext, Classical.choice, Quot.sound]` (no `sorryAx`), and the mandatory marker `L6H5E8Q_ORIGINAL_SU2_QUATERNION_UNIT_SPHERE_QUALIFIED` is present. Hence the exact original source matrix quaternion form and real first-row normSq-one equality are accepted. This is still **not** SU(2) group generation.
 
 **Still unproved in Lean:** `actualOriginalColorGeneratedSubgroup = ⊤` (or merely its topological closure is all of `GaugeGroup 2`), and thus the unconditional exact-source joint-Gauss-kernel ↔ physicalSpace equivalence.
 
@@ -53,7 +53,7 @@ This is a **mathematical Euler factorization**, not yet a checked Lean theorem. 
 
 A. **Frozen y/z exponential entries.** Prove their matrix exponential closed forms from the qualified `sourcePlusIGaugeCurve` and the *actual* normalized Pauli matrix. Check the positive-i sign and the half-angle scale. Prefer small 2x2 matrix identities over any 48-Majorana/Fock elaboration.
 
-B. **Unit sphere and phase/magnitude witness.** Reuse H5E8Q once accepted. Supply an explicit real-angle unit-circle witness and two complex polar-phase witnesses with the zero cases visible. Read pinned Mathlib signatures before choosing `arg`, `atan2`, or unit-circle lemmas.
+B. **Unit sphere and phase/magnitude witness.** Reuse now-qualified H5E8Q. Supply an explicit real-angle unit-circle witness and two complex polar-phase witnesses with the zero cases visible. Read pinned Mathlib signatures before choosing `arg`, `atan2`, or unit-circle lemmas.
 
 C. **Small algebraic product.** Prove `Z a * Y b * Z c` at exactly four `Fin 2` indices. Never unfold the source `FullL2` gauge action in this proof.
 
