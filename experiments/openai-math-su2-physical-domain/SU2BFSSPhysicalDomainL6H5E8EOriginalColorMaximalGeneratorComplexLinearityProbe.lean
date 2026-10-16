@@ -95,6 +95,16 @@ noncomputable def actualOriginalColorGeneratorLinear
       funext t
       exact (exactColorU c t).map_add _ _
     have hs := hx.add hy
+    -- #318: HasDerivAt.add initially produces Pi-function addition.
+    -- Expose its pointwise application before rewriting by h.
+    change HasDerivAt
+      (fun t : ℝ =>
+        exactColorU c t (x : FullL2 2) +
+        exactColorU c t (y : FullL2 2))
+      (actualOriginalFullL2ColorInfinitesimalGenerator c
+        ⟨(x : FullL2 2), x.property⟩ +
+       actualOriginalFullL2ColorInfinitesimalGenerator c
+        ⟨(y : FullL2 2), y.property⟩) 0 at hs
     rw [← h] at hs
     exact hs.deriv
   map_smul' := by
