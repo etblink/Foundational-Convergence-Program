@@ -22,3 +22,18 @@ Preserve **all theorem statements** and exact original source signs, inverse bos
 **Falsifier / next test:** the existing strict H5E7B gate must compile, produce an \`.olean\`, and print only \`propext\`, \`Classical.choice\`, \`Quot.sound\` for each of the four roots. If another error occurs, inspect its *first* causal line, and do not claim qualification from trailing \`#print axioms\` after an error.
 
 Even a qualified H5E7B gives only **norm square = exact pointwise integral**; strong \(L^2\) convergence and the generator-domain theorem remain separate obligations.
+
+
+## Acceptance update — strict #310 (2026-10-15 PDT)
+
+[Original Source Spin Identity #310](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38846859129), job \`116799244008\`, completed **success**. The dedicated
+\`L6H5E7B_SOURCE_FULLL2_GAUSS_RESIDUAL_INTEGRAL_QUALIFIED\` marker was printed,
+all four new theorem roots were checked for only the pinned standard
+axiom allowlist, and no sorryAx/error survived. Qualified repair commit
+\`d17657e7d578cc8ce98b7826e5207f3cbe0b92e7\`.
+
+The precise reusable lesson: normalize coeFn function-level equalities
+before pointwise rewriting, introduce AE equalities in the *same named
+variables* used in the eventual abstract L2 bridge, and open the exact
+namespace in which the qualified CLM was defined. This is a compiler
+repair, not new SU2 physics.
