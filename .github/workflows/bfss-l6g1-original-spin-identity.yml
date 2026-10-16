@@ -3808,8 +3808,11 @@ jobs:
           allowed={'propext','Classical.choice','Quot.sound'}
           entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
                    re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
-          key='FCP.BFSSSU2PhysicalDomainL6H5E7A.actualOriginalFullL2_norm_sq_eq_integral'
-          assert key in entries and entries[key] <= allowed,(key,entries)
+          root='FCP.BFSSSU2PhysicalDomainL6H5E7A.'
+          for name in ('abstractComplexL2_norm_sq_eq_integral',
+                       'actualOriginalFullL2_norm_sq_eq_integral'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6H5E7A_ORIGINAL_FULLL2_NORM_SQUARE_INTEGRAL_QUALIFIED')
           PYCODE
