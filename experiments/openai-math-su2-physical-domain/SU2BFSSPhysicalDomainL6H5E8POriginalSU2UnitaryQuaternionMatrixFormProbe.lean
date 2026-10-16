@@ -58,8 +58,10 @@ theorem originalSU2_bottomRight_eq_conj_topLeft
   have he := congrArg
     (fun A : ColorMatrix 2 => A 0 0)
     (originalSU2_adjugate_eq_conjTranspose g)
-  simpa only [Matrix.adjugate_fin_two, Matrix.conjTranspose_apply,
-    Matrix.cons_val_zero, Matrix.cons_val_one] using he
+  -- #338: '!![...; ...]' expands to Matrix.of vecCons, so
+  -- simpa only [cons_val_*] leaves literal matrix applications.
+  -- The pinned matrix-notation simp rules reduce fixed Fin 2 entries.
+  simpa [Matrix.adjugate_fin_two] using he
 
 /-- Original SU2 matrix lower-left entry is negative
 the complex conjugate of its upper-right entry. -/
@@ -73,8 +75,8 @@ theorem originalSU2_bottomLeft_eq_neg_conj_topRight
   have hneg :
       -((g : ColorMatrix 2) 1 0) =
         star ((g : ColorMatrix 2) 0 1) := by
-    simpa only [Matrix.adjugate_fin_two, Matrix.conjTranspose_apply,
-      Matrix.cons_val_zero, Matrix.cons_val_one] using he
+    -- Same #338 missing Matrix.of/vecCons simp reductions.
+    simpa [Matrix.adjugate_fin_two] using he
   calc
     ((g : ColorMatrix 2) 1 0) =
         -(-((g : ColorMatrix 2) 1 0)) := by simp
