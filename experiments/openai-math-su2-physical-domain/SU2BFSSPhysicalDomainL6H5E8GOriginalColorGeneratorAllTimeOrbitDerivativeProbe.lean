@@ -75,8 +75,10 @@ theorem actualOriginalColorGenerator_orbit_hasDerivAt_allTime
         (actualOriginalFullL2ColorCurve_add c (t + (-s)) s
           (v : FullL2 2)).symm
       _ = U t (v : FullL2 2) := by
-        congr 1
-        ring
+        -- #323: never use `congr 1` on the concrete BFSS operator;
+        -- it unfolds enormous source definitions in whnf.
+        have ht : (t + (-s)) + s = t := by ring
+        exact congrArg (fun q : ℝ => U q (v : FullL2 2)) ht
   rw [horbit] at htranslated
   exact htranslated
 
