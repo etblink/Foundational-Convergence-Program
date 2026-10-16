@@ -3979,6 +3979,39 @@ jobs:
           print('L6H5E8C_ORIGINAL_SOURCE_CORE_GAUSS_SKEW_QUALIFIED')
           PYCODE
 
+      # H5E8D: maximal-domain skew-symmetry and actual
+      # physical-vector zero generator, source-qualified.
+      - name: Qualify maximal original Gauss skew symmetry and physical zero
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8DOriginalMaximalGaussSkewAndPhysicalKernelProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8COriginalCoreGaussSkewSymmetryProbe.olean
+          echo L6H5E8D_MAXIMAL_GAUSS_SKEW_PHYSICAL_ZERO_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e8d.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e8d.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E8D.'
+          for name in ('actualOriginalColorGenerator_hasDerivAt',
+                       'actualOriginalColorGenerator_maximalDomain_skew_inner',
+                       'actualOriginalPhysical_mem_colorGeneratorDomain',
+                       'actualOriginalPhysical_colorGenerator_eq_zero'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E8D_MAXIMAL_GAUSS_SKEW_PHYSICAL_ZERO_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
