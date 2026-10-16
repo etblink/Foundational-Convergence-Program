@@ -81,3 +81,33 @@ This gives a structural path for **both** exact-color curves without huge noncom
 - **Proof isolation:** first certify the tiny algebraic identities `U*V=V*U=1` and tangent conjugation, then exponential transport, then group-valued source coercion and Euler witnesses. Avoid opening the original Fock action, `FullL2`, or broad concrete `AlgebraData` expressions.
 
 This diagonalization uses **nonunitary but invertible** `U` only as an internal algebraic proof witness. It does **not** replace the source gauge group, nor assume any extra symmetry or unproved group generation. The exact implementation and Lean success remain unqualified until independent strict CI.
+
+
+## Pinned all-cases phase and angle interfaces (2026-10-16)
+
+Read `Mathlib/Analysis/SpecialFunctions/Complex/Arg.lean` at the exact pinned revision `d13f23b`. The key theorem is **already all-cases**, with no `u ≠ 0` precondition:
+
+```lean
+Complex.norm_mul_exp_arg_mul_I (x : ℂ) :
+  ‖x‖ * Complex.exp (Complex.arg x * Complex.I) = x
+```
+
+Consequently set `φ := Complex.arg u`, `ψ := Complex.arg v` without separate zero-entry cases. When `u=0` or `v=0`, the corresponding norm factor is zero and the theorem proves the required identity directly. This supersedes the earlier manual phase-case split, avoiding avoidable proof bifurcation.
+
+For the common real mixing angle, define `r=‖u‖`, `s=‖v‖`, and `θ=Real.arcsin s`. Pinned `Mathlib/Analysis/SpecialFunctions/Trigonometric/Inverse.lean` provides:
+
+```lean
+Real.sin_arcsin {x : ℝ} (hx₁ : -1 ≤ x) (hx₂ : x ≤ 1) :
+  Real.sin (Real.arcsin x) = x
+Real.cos_arcsin (x : ℝ) :
+  Real.cos (Real.arcsin x) = Real.sqrt (1 - x ^ 2)
+Real.arcsin_nonneg {x : ℝ} : 0 ≤ Real.arcsin x ↔ 0 ≤ x
+Real.arcsin_le_pi_div_two (x : ℝ) :
+  Real.arcsin x ≤ π / 2
+```
+
+Use now-qualified H5E8Q `normSq u + normSq v = 1` and pinned complex `normSq_eq_norm_sq` coercion lemmas to derive `r²+s²=1`. Since `r,s≥0`, then `s≤1`, `sin θ=s`, `cos θ=√(1-s²)=√(r²)=r`; both endpoints and zero-norm cases are automatic.
+
+Finally use `a=(φ+ψ)/√2`, `c=(φ-ψ)/√2`, `b=√2 θ`. Pinned `Mathlib/Analysis/Complex/Trigonometric.lean` has `Complex.exp_ofReal_mul_I (x:ℝ)` and `Complex.exp_mul_I` to bridge scalar exponentials to cos/sin, including exact signs.
+
+**Not qualified:** These are confirmed pinned lemma signatures and a mathematically sufficient constructive specialization plan; their composition into the literal `GaugeGroup 2` original color curves remains to be implemented and strictly checked. No replacement gauge action or unproved density premise is introduced.
