@@ -111,3 +111,15 @@ Use now-qualified H5E8Q `normSq u + normSq v = 1` and pinned complex `normSq_eq_
 Finally use `a=(φ+ψ)/√2`, `c=(φ-ψ)/√2`, `b=√2 θ`. Pinned `Mathlib/Analysis/Complex/Trigonometric.lean` has `Complex.exp_ofReal_mul_I (x:ℝ)` and `Complex.exp_mul_I` to bridge scalar exponentials to cos/sin, including exact signs.
 
 **Not qualified:** These are confirmed pinned lemma signatures and a mathematically sufficient constructive specialization plan; their composition into the literal `GaugeGroup 2` original color curves remains to be implemented and strictly checked. No replacement gauge action or unproved density premise is introduced.
+
+## Strict acceptance of original z and y source flows — 2026-10-16
+
+**H5E8R accepted:** Original Source Spin Identity [#345](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38974739593), source SHA `236d762b8f0dae4e3b181a0a2e8635ee62b0566f`. The original positive-i normalized Pauli-z tangent is diagonal, and the exact original gauge curve is the corresponding scalar-exponential diagonal. Strict allowed axioms only.
+
+**H5E8S accepted:** Original Source Spin Identity [#348](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38980539519), source SHA `18bb154ccf6a3ece51c858ea999e3c2531793186`. All six roots compiled under exactly `propext`, `Classical.choice`, `Quot.sound`: the fixed source y-change matrix U, its explicit inverse V, both inverse products, the actual positive-i y-tangent diagonal conjugation, and the exact genuine `sourcePlusIGaugeCurve (1:Fin 3)` diagonal-exponential conjugation. U=[[1,1],[i,-i]] and V=1/2[[1,-i],[1,i]]. This is a source-exact identity, not an alternative gauge representation.
+
+**Negative knowledge:** #346: normalize `Complex.I ^ 2 = -1` after `ring_nf`; expose `Matrix.vecMul_diagonal` for row-by-diagonal expressions; general `SemiconjBy.exp_right` selected a nonmatching matrix multiplication instance, so use pinned matrix-specific `Matrix.exp_units_conj`. #347: `(U⁻¹ : ColorMatrix 2)` can coerce BEFORE inversion; the required typed inverse is `((U⁻¹ : (ColorMatrix 2)ˣ) : ColorMatrix 2)`. The corrected form qualified #348.
+
+**H5E8T proposed, not yet accepted:** A dedicated small Lean module derives scalar `Complex.exp_ofReal_mul_I` values at the two sourceZDiagonal entries, then the exact original positive-i y-gauge curve matrix `[[cos(t * pauliScale),sin(t * pauliScale)],[-sin(t * pauliScale),cos(t * pauliScale)]]`. The strict audit is [#349](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38982041696) at workflow commit `eef13d686d4cbb179cf2e930191e7e1d7770c039`. Do not promote before all seven roots compile with allowlisted axioms.
+
+**Still open:** H5E8T, source Euler factorization for arbitrary actual `GaugeGroup 2`, `actualOriginalColorGeneratedSubgroup = ⊤`, unconditional physical fixed-space/joint maximal Gauss-kernel equivalence, and any BFSS spectral result.
