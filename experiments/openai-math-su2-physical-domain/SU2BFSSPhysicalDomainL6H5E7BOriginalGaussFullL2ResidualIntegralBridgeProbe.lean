@@ -26,6 +26,7 @@ open MeasureTheory
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainL6G6X
+open FCP.BFSSSU2PhysicalDomainL6G7U
 open FCP.BFSSSU2PhysicalDomainL6H0
 open FCP.BFSSSU2PhysicalDomainL6H5B
 open FCP.BFSSSU2PhysicalDomainL6H5E6B
@@ -43,11 +44,23 @@ theorem abstractComplexL2_realAffineResidual_ae
     [Lp.coeFn_sub (s • (u - v)) w,
       Lp.coeFn_smul s (u - v),
       Lp.coeFn_sub u v] with x hsub hsmul hdiff
+  -- #309: coeFn_sub and coeFn_smul first produce function-level
+  -- differences/smuls, not their evaluated pointwise versions.
+  have hsub' :
+      (s • (u - v) - w : Lp E 2 μ) x =
+        (s • (u - v) : Lp E 2 μ) x - w x := by
+    simpa only [Pi.sub_apply] using hsub
+  have hsmul' :
+      (s • (u - v) : Lp E 2 μ) x = s • (u - v : Lp E 2 μ) x := by
+    simpa only [Pi.smul_apply] using hsmul
+  have hdiff' :
+      (u - v : Lp E 2 μ) x = u x - v x := by
+    simpa only [Pi.sub_apply] using hdiff
   calc
     (s • (u - v) - w : Lp E 2 μ) x =
-        (s • (u - v) : Lp E 2 μ) x - w x := hsub
-    _ = s • ((u - v : Lp E 2 μ) x) - w x := by rw [hsmul]
-    _ = s • (u x - v x) - w x := by rw [hdiff]
+        (s • (u - v) : Lp E 2 μ) x - w x := hsub'
+    _ = s • ((u - v : Lp E 2 μ) x) - w x := by rw [hsmul']
+    _ = s • (u x - v x) - w x := by rw [hdiff']
 
 /-- The exact strong-Hilbert residual of the genuine source +i SU2
 gauge orbit, before its convergence has been proved. -/
@@ -86,15 +99,27 @@ theorem actualOriginalGaussFullL2Residual_ae
         (fun x : Boson 2 => (t⁻¹ : ℝ) • (u x - v x) - w x) :=
     abstractComplexL2_realAffineResidual_ae
       (μ := (volume : Measure (Boson 2))) u v w (t⁻¹)
-  have ht :=
-    actualOriginalSmoothGaugeOrbit_ae_fullL2 f
-      (sourcePlusIGaugeCurve c t)
-  have hzero :=
-    actualOriginalSmoothGaugeOrbit_ae_fullL2 f
-      (sourcePlusIGaugeCurve c 0)
-  have hgauss :=
+  -- #309: pin the H0 source a.e. identities to the *named*
+  -- FullL2 arguments u/v/w before performing the pointwise rewrite.
+  -- Rewriting against an opaque let binding otherwise fails to match.
+  have hu :
+      (u : Boson 2 → Fermion 2) =ᵐ[volume]
+        (fun x : Boson 2 =>
+          actualOriginalSmoothGaugeOrbitRepresentative f
+            (sourcePlusIGaugeCurve c t) x) :=
+    actualOriginalSmoothGaugeOrbit_ae_fullL2 f (sourcePlusIGaugeCurve c t)
+  have hv :
+      (v : Boson 2 → Fermion 2) =ᵐ[volume]
+        (fun x : Boson 2 =>
+          actualOriginalSmoothGaugeOrbitRepresentative f
+            (sourcePlusIGaugeCurve c 0) x) :=
+    actualOriginalSmoothGaugeOrbit_ae_fullL2 f (sourcePlusIGaugeCurve c 0)
+  have hw :
+      (w : Boson 2 → Fermion 2) =ᵐ[volume]
+        (fun x : Boson 2 =>
+          (actualOriginalCoreColorGaussCandidate c f) x) :=
     coreToL2_ae (actualOriginalCoreColorGaussCandidate c f)
-  filter_upwards [habstract, ht, hzero, hgauss]
+  filter_upwards [habstract, hu, hv, hw]
     with x hab hx hz hg
   calc
     (actualOriginalGaussFullL2Residual c f t :
