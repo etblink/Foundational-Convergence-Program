@@ -4338,6 +4338,38 @@ jobs:
           print('L6H5E8N_ORIGINAL_GAUSS_TOPOLOGICAL_CLOSURE_QUALIFIED')
           PYCODE
 
+      # H5E8O: exact source skew-Hermitian Lie tangent
+      # real spanning with original +i normalized-Pauli colors.
+      - name: Qualify original SU2 source color Lie tangent spanning
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8OOriginalSU2SourceInfinitesimalColorSpanProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8NOriginalColorTopologicalClosureProbe.olean
+          echo L6H5E8O_ORIGINAL_SU2_COLOR_TANGENT_REAL_SPAN_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e8o.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e8o.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E8O.'
+          for name in ('source_skewHermitian_to_hermitian',
+                       'source_skewHermitian_to_traceless',
+                       'source_original_color_tangent_real_spanning'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E8O_ORIGINAL_SU2_COLOR_TANGENT_REAL_SPAN_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
