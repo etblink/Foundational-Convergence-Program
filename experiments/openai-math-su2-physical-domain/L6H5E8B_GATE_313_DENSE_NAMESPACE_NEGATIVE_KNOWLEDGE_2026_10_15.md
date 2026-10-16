@@ -42,3 +42,25 @@ under the standard allowlist, contain no \`sorryAx\` and no \`error:\`.
 This is a hypothesis grounded in source, not a claim that the new run
 already passed. Even successful qualification will **not** prove
 generator closedness or essential self-adjointness.
+
+
+## Qualification after minimal repair: #314
+
+[Original Source Spin Identity #314](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38854499592), job \`116822825670\`,
+completed **success**. It printed
+\`L6H5E8B_ORIGINAL_INF_GENERATOR_DOMAIN_DENSE_QUALIFIED\`,
+with all five roots depending only on
+\`[propext, Classical.choice, Quot.sound]\`, no \`sorryAx\`.
+The corrected density proof applies the exact pinned
+\`Dense.mono hsubset (coreToL2_dense (N := 2))\`.
+Commit \`7b929dfc35e365a60496497db805a109c1d218b0\`.
+
+H5E8B is now accepted for: maximal real-time differentiability domain
+as a subset of genuine source FullL2, the derivative-valued partial
+operator, all original SmoothCore vectors in its domain, source-exact
+Gauss action on these, and density of the maximal domain. This does
+**not** establish (essential) skew-adjointness or spectrum.
+
+Next H5E8C attempts original SmoothCore Gauss skew-symmetry
+from the independently accepted unitary source flow and real
+Hilbert inner-product differentiation.
