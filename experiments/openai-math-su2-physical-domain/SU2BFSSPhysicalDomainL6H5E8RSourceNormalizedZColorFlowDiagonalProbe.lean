@@ -38,7 +38,7 @@ noncomputable def sourceZDiagonal (t : ℝ) : Fin 2 → ℂ :=
 This proves an exact matrix equality, not merely equality modulo
 an alternate Lie-algebra basis or conjugation. -/
 theorem source_z_tangent_diagonal (t : ℝ) :
-    t • ((Complex.I : ℂ) • pairedAlgebraData.color (2 : ColorIndex 2)) =
+    t • ((Complex.I : ℂ) • pairedAlgebraData.color (2 : Fin 3)) =
       Matrix.diagonal (sourceZDiagonal t) := by
   rw [pairedAlgebraData_color, concreteAlgebraData_color]
   ext i j
@@ -50,16 +50,18 @@ theorem source_z_tangent_diagonal (t : ℝ) :
 literal positive-i source gauge curve. All exponentials have the
 original real-time parameter and original Pauli normalization. -/
 theorem source_z_gaugeCurve_diagonal_exp (t : ℝ) :
-    (sourcePlusIGaugeCurve (2 : ColorIndex 2) t : ColorMatrix 2) =
+    (sourcePlusIGaugeCurve (2 : Fin 3) t : ColorMatrix 2) =
       Matrix.diagonal (fun i => Complex.exp (sourceZDiagonal t i)) := by
   calc
-    (sourcePlusIGaugeCurve (2 : ColorIndex 2) t : ColorMatrix 2) =
+    (sourcePlusIGaugeCurve (2 : Fin 3) t : ColorMatrix 2) =
         NormedSpace.exp (Matrix.diagonal (sourceZDiagonal t)) := by
           change NormedSpace.exp
-            (t • ((Complex.I : ℂ) • pairedAlgebraData.color (2 : ColorIndex 2))) = _
+            (t • ((Complex.I : ℂ) • pairedAlgebraData.color (2 : Fin 3))) = _
           rw [source_z_tangent_diagonal]
-    _ = Matrix.diagonal (fun i => NormedSpace.exp (sourceZDiagonal t i)) :=
-      Matrix.exp_diagonal (sourceZDiagonal t)
+    _ = Matrix.diagonal (fun i => NormedSpace.exp (sourceZDiagonal t i)) := by
+      -- Pinned Matrix.exp_diagonal returns exp on the function space;
+      -- Pi.exp_def discharges the required pointwise scalar transport.
+      rw [Matrix.exp_diagonal, Pi.exp_def]
     _ = Matrix.diagonal (fun i => Complex.exp (sourceZDiagonal t i)) := by
       simp only [Complex.exp_eq_exp_ℂ]
 
