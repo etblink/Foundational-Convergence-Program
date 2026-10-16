@@ -61,13 +61,17 @@ theorem actualOriginalGaussQuotientSquaredError_continuous_x
     change Continuous (fun x : Boson 2 =>
       actualOriginalSmoothGaugeOrbitRepresentative f g x) at hc
     exact hc
+  -- #300 first error: pin the REAL inverse-time scalar before
+  -- continuous smul; otherwise Lean leaves its scalar metavariable open.
+  have hscalar : Continuous (fun _ : Boson 2 => (t⁻¹ : ℝ)) :=
+    continuous_const
   have hquot : Continuous (fun x : Boson 2 =>
       (t⁻¹) •
         (actualOriginalSmoothGaugeOrbitRepresentative f
             (sourcePlusIGaugeCurve c t) x -
           actualOriginalSmoothGaugeOrbitRepresentative f
             (sourcePlusIGaugeCurve c 0) x)) :=
-    continuous_const.smul
+    hscalar.smul
       ((hsection (sourcePlusIGaugeCurve c t)).sub
         (hsection (sourcePlusIGaugeCurve c 0)))
   have herror := (hquot.sub
@@ -106,17 +110,26 @@ theorem actualOriginalGaussQuotientSquaredError_dominatedData
   · intro t
     exact actualOriginalGaussQuotientSquaredError_aeMeasurable c f t
   · intro t ht x
-    have herr := hbound t ht x
-    have hsq := pow_le_pow_left₀ (norm_nonneg _) herr 2
-    change
-      ‖(‖(t⁻¹) •
+    -- #300 second error: name the source error as an opaque Fock
+    -- vector, square its norm, then normalize the Real norm with an
+    -- explicitly typed nonnegativity witness.
+    let e : Fermion 2 :=
+      (t⁻¹) •
         (actualOriginalSmoothGaugeOrbitRepresentative f
             (sourcePlusIGaugeCurve c t) x -
           actualOriginalSmoothGaugeOrbitRepresentative f
             (sourcePlusIGaugeCurve c 0) x) -
-        (actualOriginalCoreColorGaussCandidate c f) x‖ ^ 2 : ℝ)‖ ≤
+        (actualOriginalCoreColorGaussCandidate c f) x
+    have herr : ‖e‖ ≤ 2 * (if ‖x‖ < R then C else 0) :=
+      hbound t ht x
+    have hsq : ‖e‖ ^ 2 ≤
+        (2 * (if ‖x‖ < R then C else 0)) ^ 2 :=
+      pow_le_pow_left₀ (norm_nonneg e) herr 2
+    have hnonneg : (0 : ℝ) ≤ ‖e‖ ^ 2 := sq_nonneg (‖e‖)
+    change ‖(‖e‖ ^ 2 : ℝ)‖ ≤
       (2 * (if ‖x‖ < R then C else 0)) ^ 2
-    simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)] using hsq
+    rw [Real.norm_eq_abs, abs_of_nonneg hnonneg]
+    exact hsq
   · intro x
     have hlim := actualOriginalGaussOrbit_differenceQuotient_pointwise_tendsto c f x
     have hsquared :=
