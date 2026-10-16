@@ -44,14 +44,14 @@ theorem sourceYChange_mul_inverse :
   ext i j
   fin_cases i <;> fin_cases j <;>
     norm_num [sourceYChange, sourceYChangeInv, Matrix.mul_apply,
-      Fin.sum_univ_two, Complex.I_mul_I, Complex.I_sq] <;> ring
+      Fin.sum_univ_two] <;> ring_nf <;> norm_num [Complex.I_sq]
 
 theorem sourceYChange_inverse_mul :
     sourceYChangeInv * sourceYChange = (1 : ColorMatrix 2) := by
   ext i j
   fin_cases i <;> fin_cases j <;>
     norm_num [sourceYChange, sourceYChangeInv, Matrix.mul_apply,
-      Fin.sum_univ_two, Complex.I_mul_I, Complex.I_sq] <;> ring
+      Fin.sum_univ_two] <;> ring_nf <;> norm_num [Complex.I_sq]
 
 /-- The exact source original +i y-tangent, not a substitute
 matrix generator, is the fixed-conjugate of the same diagonal used
@@ -65,12 +65,16 @@ theorem source_y_tangent_diagonal_conjugation (t : ℝ) :
   fin_cases i <;> fin_cases j <;>
     simp [sourceYChange, sourceYChangeInv, sourceZDiagonal,
       FCP.BFSSSU2.normalizedPauli, FCP.BFSSSU2.pauli,
-      Matrix.mul_apply, Fin.sum_univ_two, Matrix.smul_apply,
-      Complex.I_mul_I, Complex.I_sq] <;> ring
+      Matrix.mul_apply, Matrix.mul_diagonal, Matrix.vecMul_diagonal,
+      Fin.sum_univ_two, Matrix.smul_apply] <;>
+    ring_nf <;> norm_num [Complex.I_sq]
 
 /-- Exact source group curve as finite conjugation of pinned
-scalar exponentials. Uses SemiconjBy.exp_right and both elementary
-inverse identities, avoiding an IsUnit instance for the witness. -/
+scalar exponentials. The fixed 2x2 inverse witness defines a
+`Units` element, permitting the pinned matrix-specialized
+`Matrix.exp_units_conj` theorem. This avoids the known
+noncanonical matrix multiplication instance mismatch of
+`SemiconjBy.exp_right` from red #346. -/
 theorem source_y_gaugeCurve_diagonal_exp_conjugation (t : ℝ) :
     (sourcePlusIGaugeCurve (1 : Fin 3) t : ColorMatrix 2) =
       sourceYChange *
@@ -81,27 +85,22 @@ theorem source_y_gaugeCurve_diagonal_exp_conjugation (t : ℝ) :
   let D : ColorMatrix 2 := Matrix.diagonal (sourceZDiagonal t)
   have hAD : A = sourceYChange * D * sourceYChangeInv :=
     source_y_tangent_diagonal_conjugation t
-  have hsem : SemiconjBy sourceYChange D A := by
-    change sourceYChange * D = A * sourceYChange
-    rw [hAD]
-    simp only [mul_assoc, sourceYChange_inverse_mul, mul_one]
-  have hexp :
-      sourceYChange * NormedSpace.exp D =
-        NormedSpace.exp A * sourceYChange :=
-    hsem.exp_right
+  let U : (ColorMatrix 2)ˣ :=
+    ⟨sourceYChange, sourceYChangeInv,
+      sourceYChange_mul_inverse, sourceYChange_inverse_mul⟩
+  have hU : (U : ColorMatrix 2) = sourceYChange := rfl
+  have hUinv : (U⁻¹ : ColorMatrix 2) = sourceYChangeInv := rfl
   calc
     (sourcePlusIGaugeCurve (1 : Fin 3) t : ColorMatrix 2) =
         NormedSpace.exp A := rfl
-    _ = sourceYChange * NormedSpace.exp D * sourceYChangeInv := by
-      calc
-        NormedSpace.exp A =
-            (NormedSpace.exp A * sourceYChange) * sourceYChangeInv := by
-              rw [mul_assoc, sourceYChange_mul_inverse, mul_one]
-        _ = (sourceYChange * NormedSpace.exp D) * sourceYChangeInv := by
-              rw [hexp]
+    _ = NormedSpace.exp ((U : ColorMatrix 2) * D * (U⁻¹ : ColorMatrix 2)) := by
+      rw [hU, hUinv, ← hAD]
+    _ = (U : ColorMatrix 2) * NormedSpace.exp D * (U⁻¹ : ColorMatrix 2) :=
+      Matrix.exp_units_conj U D
     _ = sourceYChange *
           Matrix.diagonal (fun i => Complex.exp (sourceZDiagonal t i)) *
             sourceYChangeInv := by
+          rw [hU, hUinv]
           dsimp [D]
           rw [Matrix.exp_diagonal, Pi.exp_def]
           simp only [Complex.exp_eq_exp_ℂ]
