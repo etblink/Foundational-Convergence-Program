@@ -4500,6 +4500,42 @@ jobs:
           print('L6H5E8S_SOURCE_POSITIVE_I_Y_COLOR_DIAGONAL_QUALIFIED')
           PYCODE
 
+      # H5E8T: scalar Euler expansion of the qualified original
+      # +i Pauli-y diagonal conjugation to explicit real rotation.
+      - name: Qualify original source positive-i y-color real rotation
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8TSourcePositiveIYColorRealRotationProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8SSourcePositiveIYColorConjugatedDiagonalProbe.olean
+          echo L6H5E8T_SOURCE_Y_REAL_ROTATION_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e8t.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e8t.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E8T.'
+          for name in ('sourceYAngle',
+                       'sourceZDiagonal_zero_imag',
+                       'sourceZDiagonal_one_imag',
+                       'sourceZDiagonal_exp_zero',
+                       'sourceZDiagonal_exp_one',
+                       'sourceYRotation',
+                       'source_y_gaugeCurve_real_rotation'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E8T_SOURCE_Y_REAL_ROTATION_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
