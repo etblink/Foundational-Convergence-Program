@@ -71,13 +71,12 @@ theorem originalSU2_firstRow_normSq_eq_one
         ((Complex.normSq v : ℝ) : ℂ) = 1 := by
     rw [Complex.normSq_eq_conj_mul_self,
       Complex.normSq_eq_conj_mul_self]
-    change Complex.conj u * u + Complex.conj v * v = 1
-    have hs : star u = Complex.conj u := rfl
-    have ht : star v = Complex.conj v := rfl
-    rw [hs, ht] at hrow
+    -- Pinned Mathlib defines Complex conjugation via `star`; there is no
+    -- `Complex.conj` constant. Avoid that nonexistent identifier entirely.
+    change star u * u + star v * v = 1
     calc
-      Complex.conj u * u + Complex.conj v * v =
-        u * Complex.conj u + v * Complex.conj v := by ring
+      star u * u + star v * v =
+        u * star u + v * star v := by ring
       _ = 1 := hrow
   apply Complex.ofReal_injective
   simpa only [Complex.ofReal_add, Complex.ofReal_one] using hcast
