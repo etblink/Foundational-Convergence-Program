@@ -68,3 +68,16 @@ E. **Full Gauss statement.** With `actualOriginalColorGeneratedSubgroup = ⊤`, 
 Using the exact matrices above, NumPy tests of 1,000 seeded random normalized complex pairs `(u,v)`, plus 6 edge cases `u=0` or `v=0`, including imaginary and negative entries, gave maximum absolute entrywise discrepancy `8.4e-16` between `[[u,v],[-conj(v),conj(u)]]` and the constructed `Z(a)Y(b)Z(c)`. This only falsification-tests the signs, angle scaling, and zero-case recipe at floating-point precision. Analytic derivation and strict pinned Lean gate remain necessary.
 
 **Research governance:** no `main` or upstream source change, no broadened axioms, no `sorry`, no premature group-generation or BFSS spectral acceptance. Preserve the #341 identifier negative knowledge and subsequent strict-gate evidence separately.
+
+
+## Pinned Mathlib exponential route (verified against commit d13f23b)
+
+Source: `Mathlib/Analysis/Normed/Algebra/MatrixExponential.lean` in the exact pinned Mathlib checkout. Its **existing** lemmas are `Matrix.exp_diagonal (v : m → 𝔸)` (line ~87) and `Matrix.exp_conj (U A : Matrix m m 𝔸) (hy : IsUnit U)` (line ~188). The scalar reconciliation `Complex.exp_eq_exp_ℂ : Complex.exp = NormedSpace.exp` appears in the pinned `Mathlib/Analysis/SpecialFunctions/Exponential.lean` (line ~211). These signatures were checked in the **pinned source**, not assumed from current moving docs.
+
+This gives a structural path for **both** exact-color curves without huge noncommutative exponential power sums:
+
+- **z-direction:** show `t • (i • pairedAlgebraData.color (2:ColorIndex 2))` is the 2×2 diagonal with entries `i * t/√2`, `-i * t/√2` using `pairedAlgebraData_color`, `concreteAlgebraData_color`, and `normalizedPauli 2`. Rewrite with `Matrix.exp_diagonal` and `Complex.exp_eq_exp_ℂ`. Compare all four entries with actual `sourcePlusIGaugeCurve 2 t`.
+- **y-direction by fixed diagonalization:** write `J=[[0,1],[-1,0]]`, `U=[[1,1],[i,-i]]`, `V=(1/2)*[[1,-i],[1,i]]` over `ℂ`. Direct four-entry arithmetic proves `U*V=1`, `V*U=1`, and `J=U*diag(i,-i)*V`. Hence `V=U⁻¹` and `U` is a unit; apply `Matrix.exp_conj` and `Matrix.exp_diagonal`. The resulting first row is `[cos(t/√2),sin(t/√2)]`, and second row `[-sin(t/√2),cos(t/√2)]` after elementary `Complex.exp_mul_I`/Euler identities. This preserves positive-i and agrees with the exact source Pauli y-index `1`; check all boundary signs.
+- **Proof isolation:** first certify the tiny algebraic identities `U*V=V*U=1` and tangent conjugation, then exponential transport, then group-valued source coercion and Euler witnesses. Avoid opening the original Fock action, `FullL2`, or broad concrete `AlgebraData` expressions.
+
+This diagonalization uses **nonunitary but invertible** `U` only as an internal algebraic proof witness. It does **not** replace the source gauge group, nor assume any extra symmetry or unproved group generation. The exact implementation and Lean success remain unqualified until independent strict CI.
