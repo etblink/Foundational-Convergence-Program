@@ -26,6 +26,7 @@ open scoped Topology
 open Filter
 open MeasureTheory
 open OAI.BFSSQuantum
+open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainL6H5E6A
 open FCP.BFSSSU2PhysicalDomainL6H5E6B
 
