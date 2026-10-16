@@ -28,6 +28,8 @@ noncomputable section
 
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
+-- #316: pairedGaugeData is in the qualified original GaugeG4J namespace.
+open FCP.BFSSSU2GaugeG4J
 open FCP.BFSSSU2PhysicalDomainL6G6X
 open FCP.BFSSSU2PhysicalDomainL6G7U
 open FCP.BFSSSU2PhysicalDomainL6G7Z
