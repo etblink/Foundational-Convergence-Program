@@ -92,7 +92,9 @@ theorem actualOriginalFullL2ColorInfinitesimalDomain_dense
         actualOriginalFullL2ColorInfinitesimalDomain c := by
     rintro v ⟨f, rfl⟩
     exact actualOriginalFullL2ColorInfinitesimalDomain_core_mem c f
-  exact dense.mono hsubset (coreToL2_dense (N := 2))
+  -- #313: this pinned Mathlib lemma is capitalized `Dense.mono`.
+  -- Its arguments are precisely subset-then-dense; keep source core unchanged.
+  exact Dense.mono hsubset (coreToL2_dense (N := 2))
 
 #print axioms actualOriginalFullL2ColorInfinitesimalDomain
 #print axioms actualOriginalFullL2ColorInfinitesimalGenerator
