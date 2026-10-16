@@ -4402,6 +4402,37 @@ jobs:
           print('L6H5E8P_ORIGINAL_SU2_UNITARY_QUATERNION_MATRIX_FORM_QUALIFIED')
           PYCODE
 
+      # H5E8Q: literal quaternion SU2 matrix and normSq unit sphere.
+      - name: Qualify original SU2 quaternion unit-sphere coordinates
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8QOriginalSU2QuaternionUnitSphereProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8POriginalSU2UnitaryQuaternionMatrixFormProbe.olean
+          echo L6H5E8Q_ORIGINAL_SU2_QUATERNION_UNIT_SPHERE_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e8q.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e8q.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E8Q.'
+          for name in ('originalSU2_quaternion_matrix',
+                       'originalSU2_firstRow_star_norm',
+                       'originalSU2_firstRow_normSq_eq_one'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E8Q_ORIGINAL_SU2_QUATERNION_UNIT_SPHERE_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
