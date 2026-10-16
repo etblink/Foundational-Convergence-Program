@@ -4454,7 +4454,7 @@ jobs:
           s=open('/tmp/bfss-l6g1/l6h5e8r.log').read()
           allowed={'propext','Classical.choice','Quot.sound'}
           entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
-          actual={name:{a.strip() for a in ax.split(',') if a.strip()} for name,ax in re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)}
+                   re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
           root='FCP.BFSSSU2PhysicalDomainL6H5E8R.'
           for name in ('sourceZDiagonal',
                        'source_z_tangent_diagonal',
