@@ -19,6 +19,9 @@ noncomputable section
 
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
+-- Gate #332: the actual pairedGaugeData is defined in GaugeG4J.
+-- Prior source modules opened this namespace; H5E8N must too.
+open FCP.BFSSSU2GaugeG4J
 open FCP.BFSSSU2PhysicalDomainL6G6X
 open FCP.BFSSSU2PhysicalDomainL6G7U
 open FCP.BFSSSU2PhysicalDomainL6G7V
