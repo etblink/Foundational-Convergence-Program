@@ -57,7 +57,8 @@ theorem abstract_additive_CLM_group_orbit_derivative
   have hpost :
       HasDerivAt (fun t : ℝ => L (U t v)) (L dv) 0 := by
     have hcomp :=
-      (L.hasFDerivAt (U 0 v)).comp_hasDerivAt hv
+      -- #320 first causal error: hasFDerivAt's point is implicit in pinned Mathlib.
+      (L.hasFDerivAt).comp_hasDerivAt hv
     simpa only [Function.comp_def] using hcomp
   have heq :
       (fun t : ℝ => U t (U s v)) =
