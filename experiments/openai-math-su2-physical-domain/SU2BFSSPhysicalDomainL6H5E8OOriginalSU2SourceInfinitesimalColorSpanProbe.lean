@@ -31,6 +31,8 @@ namespace FCP.BFSSSU2PhysicalDomainL6H5E8O
 noncomputable section
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
+-- #335: pairedAlgebraData is the qualified G1A source witness.
+open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2GaugeG4J
 open Matrix
 
@@ -42,9 +44,12 @@ theorem source_skewHermitian_to_hermitian
     (hskew : Wᴴ = -W) :
     (((-Complex.I : ℂ) • W) : ColorMatrix 2).IsHermitian := by
   change ((-Complex.I : ℂ) • W)ᴴ = (-Complex.I : ℂ) • W
-  rw [Matrix.conjTranspose_smul, hskew]
-  simp only [Complex.star_def, Complex.conj_neg, Complex.conj_I,
-    neg_neg, smul_neg, neg_smul]
+  -- #335: `Complex.conj_neg` does not exist in pinned Mathlib.
+  -- Isolate the scalar star identity rather than rewriting the
+  -- concrete color matrix or relying on an unqualified simp lemma.
+  have hstar : star (-Complex.I : ℂ) = (Complex.I : ℂ) := by simp
+  rw [Matrix.conjTranspose_smul, hskew, hstar,
+    smul_neg, neg_smul]
 
 /-- The previous transport preserves source tracelessness;
 this is a separate named interface to the exact
