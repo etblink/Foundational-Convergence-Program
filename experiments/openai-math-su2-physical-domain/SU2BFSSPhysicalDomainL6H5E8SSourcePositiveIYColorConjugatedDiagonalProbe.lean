@@ -89,13 +89,13 @@ theorem source_y_gaugeCurve_diagonal_exp_conjugation (t : ℝ) :
     ⟨sourceYChange, sourceYChangeInv,
       sourceYChange_mul_inverse, sourceYChange_inverse_mul⟩
   have hU : (U : ColorMatrix 2) = sourceYChange := rfl
-  have hUinv : (U⁻¹ : ColorMatrix 2) = sourceYChangeInv := rfl
+  have hUinv : ((U⁻¹ : (ColorMatrix 2)ˣ) : ColorMatrix 2) = sourceYChangeInv := rfl
   calc
     (sourcePlusIGaugeCurve (1 : Fin 3) t : ColorMatrix 2) =
         NormedSpace.exp A := rfl
-    _ = NormedSpace.exp ((U : ColorMatrix 2) * D * (U⁻¹ : ColorMatrix 2)) := by
+    _ = NormedSpace.exp ((U : ColorMatrix 2) * D * ((U⁻¹ : (ColorMatrix 2)ˣ) : ColorMatrix 2)) := by
       rw [hU, hUinv, ← hAD]
-    _ = (U : ColorMatrix 2) * NormedSpace.exp D * (U⁻¹ : ColorMatrix 2) :=
+    _ = (U : ColorMatrix 2) * NormedSpace.exp D * ((U⁻¹ : (ColorMatrix 2)ˣ) : ColorMatrix 2) :=
       Matrix.exp_units_conj U D
     _ = sourceYChange *
           Matrix.diagonal (fun i => Complex.exp (sourceZDiagonal t i)) *
