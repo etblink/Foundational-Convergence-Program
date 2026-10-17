@@ -50,7 +50,7 @@ jobs:
           assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib')=='d13f23b723b8a846827a245b89c10fc7d3f11612'
           PY
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean)" = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ACPairedThetaScalarCommutantProbe.lean)" = 75e85e6adad644d6174320bc5e217c045eac5551
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ACPairedThetaScalarCommutantProbe.lean)" = 9a0ddbdf98e2e28303afb5211af2e3f6f1c39fd1
           echo FROZEN_BFSS_MAJORANA_SOURCE_PINS_VERIFIED
 
       - name: Reclaim disposable runner disk
