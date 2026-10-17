@@ -65,9 +65,13 @@ theorem originalSmoothParity_coordinateDerivative {N : ℕ}
     have hnegder :
         fderiv ℝ (fun y : Boson N => -y) x =
           -(1 : Boson N →L[ℝ] Boson N) := by
-      simpa only [fderiv_id] using
-        (fderiv_fun_neg (𝕜 := ℝ)
-          (f := fun y : Boson N => y) (x := x))
+      calc
+        fderiv ℝ (fun y : Boson N => -y) x =
+            -(fderiv ℝ (id : Boson N → Boson N) x) := by
+          exact (fderiv_fun_neg (𝕜 := ℝ)
+            (f := id) (x := x))
+        _ = -(1 : Boson N →L[ℝ] Boson N) := by
+          rw [fderiv_id]
     simpa only [ContinuousLinearMap.comp_apply, hnegder, neg_apply,
       one_apply_eq_self, map_neg] using hv
   rw [hsource]
