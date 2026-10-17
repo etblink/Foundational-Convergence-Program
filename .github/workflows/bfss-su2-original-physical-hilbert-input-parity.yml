@@ -1,19 +1,9 @@
 name: BFSS SU2 Original Physical Hilbert Input Parity
 
+# Qualified H5E8AX Gate #1 retains its exact pins and seven-root audit.
+# Requalification is explicit/manual to avoid redundant expensive PR
+# runs due to cumulative pull-request path matching.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-s3k-physical-spin-flow
-    paths:
-      - .github/workflows/bfss-su2-original-physical-hilbert-input-parity.yml
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AOOriginalPhysicalCoreGraphGeneratorParityProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8APOriginalPhysicalClosedGraphParityProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AQOriginalPhysicalClosedChargeDomainParityProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ASOriginalPhysicalClosedChargeGraphEnergyParityProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ATOriginalPiLp16OutputParityUnitaryProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AUOriginalMinimalClosedChargeLinearPMapProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AVOriginalMinimalChargeOperatorActionParityProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AXOriginalPhysicalHilbertParityUnitaryProbe.lean
   workflow_dispatch:
 
 permissions:
