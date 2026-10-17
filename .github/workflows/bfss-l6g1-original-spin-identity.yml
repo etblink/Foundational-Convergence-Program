@@ -4569,6 +4569,44 @@ jobs:
           print('L6H5E8U_SOURCE_ZYZ_MATRIX_QUALIFIED')
           PYCODE
 
+      # H5E8V: first-row norm/radius and zero-safe polar witnesses
+      # for genuine source SU2; no factorization existence assumed.
+      - name: Qualify original SU2 zero-safe Euler polar/radius witnesses
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8VOriginalSU2ZeroSafeEulerRadiusPolarProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8UOriginalSourceZYZProductMatrixProbe.olean
+          echo L6H5E8V_SU2_ZERO_SAFE_POLAR_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e8v.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e8v.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E8V.'
+          for name in ('originalSU2RowU',
+                       'originalSU2RowV',
+                       'originalSU2_row_norm_sq',
+                       'originalSU2_row_v_norm_le_one',
+                       'originalSU2MiddleAngle',
+                       'originalSU2_middle_sin',
+                       'originalSU2_middle_cos',
+                       'originalSU2_row_u_zero_safe_polar',
+                       'originalSU2_row_v_zero_safe_polar'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E8V_SU2_ZERO_SAFE_POLAR_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
