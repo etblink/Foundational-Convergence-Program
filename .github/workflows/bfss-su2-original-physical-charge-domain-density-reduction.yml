@@ -4,13 +4,11 @@ name: BFSS SU2 Original Physical Charge Domain Density Reduction
 # implication; it does not import the older Gate47 Haar theorem or
 # assert domain density without the explicit source core density premise.
 # After successful qualification, restrict this workflow to manual.
+# H5E8AZ strict Gate #2 qualified the CONDITIONAL source core-density
+# reduction. Requalification is manual-only to prevent cumulative PR
+# path matches from replaying 22 accepted Lean module builds. Original
+# source/hash checks and the two-root axiom audit remain unchanged.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-s3k-physical-spin-flow
-    paths:
-      - .github/workflows/bfss-su2-original-physical-charge-domain-density-reduction.yml
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AZOriginalPhysicalChargeDomainDensityReductionProbe.lean
   workflow_dispatch:
 
 permissions:
