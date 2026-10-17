@@ -78,10 +78,10 @@ private theorem originalMinimalClosedGraph_vertical {N : ℕ}
     ∀ p : FullL2 N × (SpinIndex → FullL2 N),
       p ∈ originalMinimalClosedGraph M G → p.1 = 0 → p.2 = 0 := by
   rintro ⟨x,y⟩ hp hx
-  have hzero : ((0 : FullL2 N),y) ∈ originalMinimalClosedGraph M G := by
-    simpa only [hx] using hp
+  dsimp at hx
+  subst x
   exact M.fullClosedGraph_vertical
-    (originalMinimalClosedGraph_le_full M G hzero)
+    (originalMinimalClosedGraph_le_full M G hp)
 
 /-- TRUE source original minimal closed charge `LinearPMap`,
 directly from the exact source `M.chargeVector` graph closure. -/
