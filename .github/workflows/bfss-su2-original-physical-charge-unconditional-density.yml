@@ -1,0 +1,313 @@
+name: BFSS SU2 Original Physical Charge Unconditional Domain Density
+
+# Isolated source-pinned joint D2B10C and AZ gate. Do not infer success
+# from a conditional theorem or from an inaccessible historical cache.
+on:
+  pull_request:
+    branches:
+      - research/openai-math-su2-s3k-physical-spin-flow
+    paths:
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8BAOriginalPhysicalChargeUnconditionalDensityProbe.lean
+      - .github/workflows/bfss-su2-original-physical-charge-unconditional-density.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-su2-source-unconditional-density-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  exact-unconditional-physical-charge-domain-density:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - name: Check out exact candidate sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Check out exact original OpenAI Lean source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+      - name: Fail closed on original upstream and candidate pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-physical-charge-domain-density-reduction
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = 'leanprover/lean4:v4.34.1'
+          python3 - <<'PY'
+          import json
+          d=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib')=='d13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean)" = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AFOriginalSmoothParityInvolutionProbe.lean)" = c9f71c6929121226788181ce3547979dcfe6afef
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AGOriginalSmoothParityDerivativeProbe.lean)" = 0e96b538f3a3eb63a3aaa24772a4d0e883bdb141
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ADOppositeGammaOrientationProbe.lean)" = f699d1a814c1646cfb819089356a64c3f5a169bc
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AEOriginalChargeGammaOrientationSplitProbe.lean)" = 82fd9226043d059f78a79e64ad8de016729c9246
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AHOriginalSourceChargeParityConjugationProbe.lean)" = c2e280e5ae1d541f21ef870b86dbea01f7253f99
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AIOriginalFullL2ParityLiftProbe.lean)" = 4832b4bdf140adaefa3271bea2325a05fde7d1be
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AMOriginalSourceChargeVectorParityProbe.lean)" = 0c42f5111fd9ff58ba9410f31047a2e922b28d76
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AKOriginalFullL2ParityBosonGaugeProbe.lean)" = fc298c8d2236d4294992577d08d30072c1777bf9
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ALOriginalFullL2PhysicalParityProbe.lean)" = 15cf6c8a2ea0f2da7f210e41efd5d0c249d3fbe1
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ANOriginalOppositeGammaGaugeDataProbe.lean)" = d5c3f7d6d2314bd28e9e15ec023a3a80ce303131
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AOOriginalPhysicalCoreGraphGeneratorParityProbe.lean)" = 8ed162109704a1bee07869dab8d60fc70446d484
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AJOriginalFullL2ParityUnitaryProbe.lean)" = 23bce6337e42dffb530339d54eef95378d9230b1
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8APOriginalPhysicalClosedGraphParityProbe.lean)" = 148cb78c918f9ab6836e3bc49acc7d60e356b817
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AQOriginalPhysicalClosedChargeDomainParityProbe.lean)" = 12c245924eb0e5ba4b1a1f9b7b10c34d29402995
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ASOriginalPhysicalClosedChargeGraphEnergyParityProbe.lean)" = 395f75d87a0ca2d4001b6ee2eccd4611ded90676
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ATOriginalPiLp16OutputParityUnitaryProbe.lean)" = dba70e368ad17344329782cb77da77cfb295328f
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AUOriginalMinimalClosedChargeLinearPMapProbe.lean)" = 5e6300e7db8d292b6766f5800e20c9a394cc0d69
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AVOriginalMinimalChargeOperatorActionParityProbe.lean)" = 9a975f56b2810a08683347ff6a2200bef922cbce
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AWOriginalMinimalChargeHilbertFormParityProbe.lean)" = 9ab1f89e31330ec4f1d1e4da26de355b126026cc
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AXOriginalPhysicalHilbertParityUnitaryProbe.lean)" = 54c236414f053d70b12036b40c8473160ca16a1a
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AYOriginalPhysicalHilbertChargeGraphProbe.lean)" = 050f744b3d00b0424fd59192340b98ed2b51406c
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AZOriginalPhysicalChargeDomainDensityReductionProbe.lean)" = cd900c47e2bcbccd0c8761df1beb69553430b68a
+          echo PHYSICAL_CHARGE_DOMAIN_DENSITY_REDUCTION_FROZEN_SOURCE_AND_CANDIDATE_PINS_PASS
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+      - name: Restore accepted Lean and Mathlib environment
+        id: dependencies
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake
+            ~/.elan
+          key: bfss-l6-pinned-env-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Verify accepted Lean Mathlib dependency provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.dependencies.outputs.cache-hit }}" = true || { echo PINNED_LEAN_CACHE_MISSING; exit 1; }
+          source "$HOME/.elan/env"
+          test -s upstream-math/lean/.lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean
+          test "$(git -C upstream-math/lean/.lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          cd upstream-math/lean
+          lake env lean --version | tee /tmp/bfss-physical-charge-domain-density-reduction/compiler.txt
+          grep -q 'version 4.34.1' /tmp/bfss-physical-charge-domain-density-reduction/compiler.txt
+      - name: Restore exact accepted source G1A closure
+        id: qualified
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-l6g7w-accepted-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G[1-6]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7[A-W]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1[A-B]*Probe.lean', 'experiments/openai-math-su2-concrete-potential/SU2*.lean') }}
+      - name: Check exact G1A and upstream BFSS compiled objects
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.qualified.outputs.cache-hit }}" = true || { echo ACCEPTED_SOURCE_CACHE_MISSING; exit 1; }
+          base=upstream-math/lean/.lake/build/lib/lean
+          for stem in SU2BFSSG1APairedThetaProbe SU2FermionFockProbe; do
+            test -s "$base/$stem.olean" || { echo "MISSING_SOURCE=$stem"; exit 1; }
+          done
+          test -s "$base/OAI/MathematicalPhysics/BFSS/Core.olean"
+          echo PHYSICAL_CHARGE_DOMAIN_DENSITY_REDUCTION_ACCEPTED_INPUTS_PASS
+      - name: Compile original physical Hilbert charge domain density reduction
+        shell: bash
+        timeout-minutes: 13
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stems="SU2BFSSPhysicalDomainL6H5E8ADOppositeGammaOrientationProbe SU2BFSSPhysicalDomainL6H5E8AEOriginalChargeGammaOrientationSplitProbe SU2BFSSPhysicalDomainL6H5E8AFOriginalSmoothParityInvolutionProbe SU2BFSSPhysicalDomainL6H5E8AGOriginalSmoothParityDerivativeProbe SU2BFSSPhysicalDomainL6H5E8AHOriginalSourceChargeParityConjugationProbe SU2BFSSPhysicalDomainL6H5E8AIOriginalFullL2ParityLiftProbe SU2BFSSPhysicalDomainL6H5E8AJOriginalFullL2ParityUnitaryProbe SU2BFSSPhysicalDomainL6H5E8AKOriginalFullL2ParityBosonGaugeProbe SU2BFSSPhysicalDomainL6H5E8ALOriginalFullL2PhysicalParityProbe SU2BFSSPhysicalDomainL6H5E8AMOriginalSourceChargeVectorParityProbe SU2BFSSPhysicalDomainL6H5E8ANOriginalOppositeGammaGaugeDataProbe SU2BFSSPhysicalDomainL6H5E8AOOriginalPhysicalCoreGraphGeneratorParityProbe SU2BFSSPhysicalDomainL6H5E8APOriginalPhysicalClosedGraphParityProbe SU2BFSSPhysicalDomainL6H5E8AQOriginalPhysicalClosedChargeDomainParityProbe SU2BFSSPhysicalDomainL6H5E8ASOriginalPhysicalClosedChargeGraphEnergyParityProbe SU2BFSSPhysicalDomainL6H5E8ATOriginalPiLp16OutputParityUnitaryProbe SU2BFSSPhysicalDomainL6H5E8AUOriginalMinimalClosedChargeLinearPMapProbe SU2BFSSPhysicalDomainL6H5E8AVOriginalMinimalChargeOperatorActionParityProbe SU2BFSSPhysicalDomainL6H5E8AWOriginalMinimalChargeHilbertFormParityProbe SU2BFSSPhysicalDomainL6H5E8AXOriginalPhysicalHilbertParityUnitaryProbe SU2BFSSPhysicalDomainL6H5E8AYOriginalPhysicalHilbertChargeGraphProbe SU2BFSSPhysicalDomainL6H5E8AZOriginalPhysicalChargeDomainDensityReductionProbe"
+          for stem in $stems; do
+            cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          done
+          cd upstream-math/lean
+          for stem in $stems; do
+            echo "COMPILING_EXACT_SOURCE=$stem"
+            timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+              2>&1 | tee "/tmp/bfss-physical-charge-domain-density-reduction/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean"
+          done
+          python3 - <<'PY'
+          import pathlib,re
+          d=pathlib.Path('/tmp/bfss-physical-charge-domain-density-reduction')
+          logs=list(d.glob('*.log'))
+          assert len(logs)==22,len(logs)
+          for path in logs:
+              txt=path.read_text()
+              assert 'sorryAx' not in txt and 'error:' not in txt,path.name
+          s=(d/'SU2BFSSPhysicalDomainL6H5E8AZOriginalPhysicalChargeDomainDensityReductionProbe.log').read_text()
+          prefix='FCP.BFSSSU2PhysicalDomainL6H5E8AZ.'
+          names=['originalMinimalPhysicalHilbertChargeColumn_core_mem_domain','originalMinimalPhysicalHilbertChargeColumn_domain_dense_of_coreNormClosure_eq']
+          m=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={name:{v.strip() for v in ax.split(',') if v.strip()} for name,ax in m}
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for n in names:
+              root=prefix+n
+              assert root in got,(root,got)
+              assert got[root] <= allowed,(root,got[root])
+          print('L6H5E8AZ_PHYSICAL_CHARGE_DENSITY_CONDITIONAL_REDUCTION_TWO_ROOTS_CLEAN_PASS')
+          PY
+
+      - name: Rebuild source-qualified Gate 28 and Gate 47 Haar prerequisites in same Lean environment
+        shell: bash
+        timeout-minutes: 33
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          qualified28=b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab
+          qualified47=d50fe847096df7cf981173cd69787392d8d3d268
+          git fetch --quiet --no-tags --depth=1 origin "$qualified28"
+          git fetch --quiet --no-tags --depth=1 origin "$qualified47"
+          before=(
+            SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe
+            SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe
+            SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe
+            SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe
+            SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe
+            SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe
+            SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe
+            SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe
+            SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe
+            SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe
+            SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe
+            SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe
+          )
+          after=(
+            SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe
+            SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe
+            SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe
+            SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe
+            SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe
+            SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe
+            SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe
+            SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe
+            SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe
+            SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe
+          )
+          test "${#before[@]}" -eq 12
+          test "${#after[@]}" -eq 10
+          for stem in "${before[@]}"; do
+            p="experiments/openai-math-su2-physical-domain/$stem.lean"
+            test "$(git hash-object "$p")" = "$(git rev-parse "$qualified28:$p")" || {
+              echo "GATE28_ACCEPTED_SOURCE_DRIFT=$p"
+              exit 1
+            }
+          done
+          for stem in "${after[@]}"; do
+            p="experiments/openai-math-su2-physical-domain/$stem.lean"
+            test "$(git hash-object "$p")" = "$(git rev-parse "$qualified47:$p")" || {
+              echo "GATE47_ACCEPTED_SOURCE_DRIFT=$p"
+              exit 1
+            }
+          done
+          original=upstream-math/lean/.lake/build/lib/lean
+          test -s "$original/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean" || {
+            echo PINNED_G4K10A_ACCEPTED_DEPENDENCY_NOT_IN_L6_CACHE
+            exit 1
+          }
+          test -s "$original/SU2BFSSG4K9DSourcePotentialMultiplierProbe.olean"
+          test -s "$original/OAI/MathematicalPhysics/BFSS/ClosedProfiles.olean"
+          echo GATE28_AND_GATE47_EXACT_SOURCE_HASHES_AND_G4K_DEPS_PASS
+          mkdir -p /tmp/bfss-unconditional-domain-density
+          for stem in "${before[@]}" "${after[@]}"; do
+            cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          done
+          if ! test -s "$original/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean"; then
+            echo COMPILING_PINNED_RVM_SMOOTH_INTEGRAL
+            mkdir -p "$original/OAI/Analysis/VlasovMaxwell/Regularity"
+            cd upstream-math/lean
+            timeout 180s lake env lean -o ".lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean" OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.lean 2>&1 | tee /tmp/bfss-unconditional-domain-density/pinned-rvm.log
+            cd ../..
+            test -s "$original/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean"
+          fi
+          cd upstream-math/lean
+          for stem in "${before[@]}" "${after[@]}"; do
+            echo "REBUILDING_EXACT_HAAR_SOURCE=$stem"
+            timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-unconditional-domain-density/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean"
+          done
+          python3 - <<'PY'
+          import pathlib,re
+          d=pathlib.Path('/tmp/bfss-unconditional-domain-density')
+          stems='''SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe
+          SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe
+          SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe
+          SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe
+          SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe
+          SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe
+          SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe
+          SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe
+          SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe
+          SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe
+          SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe
+          SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe
+          SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe
+          SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe
+          SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe
+          SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe
+          SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe
+          SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe
+          SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe
+          SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe
+          SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe
+          SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe'''.split()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for stem in stems:
+              txt=(d/(stem+'.log')).read_text()
+              assert 'sorryAx' not in txt and 'error:' not in txt,stem
+              reports=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",txt)
+              assert reports, ('NO_AXIOM_REPORTS',stem)
+              for name,axes in reports:
+                  assert {a.strip() for a in axes.split(',')}<=allowed,(stem,name,axes)
+          leaf=(d/(stems[-1]+'.log')).read_text()
+          for name in ['sourceFullHaarAverageCLM_testInner_eq','sourceFullHaarAverageCLM_coreToL2_compat','sourceCoreNormClosure_eq_physical_unconditional']:
+              assert "FCP.BFSSSU2PhysicalDomainD2B10C."+name in leaf,name
+          print("D2B10C_HAAR_CLOSURE_22_MODULES_REBUILT_AND_AXIOMS_CLEAN_PASS")
+          PY
+
+      - name: Kernel-qualify the original AY unconditional natural-domain density theorem
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8BAOriginalPhysicalChargeUnconditionalDensityProbe
+          p="experiments/openai-math-su2-physical-domain/$stem.lean"
+          qualified=0b877b4e67cba833e7796e1d1fc8804e07bdbd03
+          git fetch --quiet --no-tags --depth=1 origin "$qualified"
+          test "$(git hash-object "$p")" = "$(git rev-parse "$qualified:$p")" || {
+            echo ORIGINAL_UNCONDITIONAL_DENSITY_CANDIDATE_CHANGED_SINCE_PROPOSAL
+            exit 1
+          }
+          cp "$p" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8AZOriginalPhysicalChargeDomainDensityReductionProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-unconditional-domain-density/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          txt=pathlib.Path('/tmp/bfss-unconditional-domain-density/SU2BFSSPhysicalDomainL6H5E8BAOriginalPhysicalChargeUnconditionalDensityProbe.log').read_text()
+          expected="FCP.BFSSSU2PhysicalDomainL6H5E8BA.originalMinimalPhysicalHilbertChargeColumn_domain_dense_unconditional"
+          reports=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",txt)
+          assert len(reports)==1,reports
+          assert reports[0][0]==expected,reports
+          assert {a.strip() for a in reports[0][1].split(',')}<={'propext','Classical.choice','Quot.sound'},reports
+          assert 'sorryAx' not in txt and 'error:' not in txt,txt[-2000:]
+          print("L6H5E8BA_ORIGINAL_PHYSICAL_HILBERT_CHARGE_DOMAIN_DENSE_UNCONDITIONAL_KERNEL_PASS")
+          PY
+
+      - name: Preserve exact source-pinned evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-su2-source-unconditional-density-${{ github.run_id }}
+          path: |
+            /tmp/bfss-physical-charge-domain-density-reduction/
+            /tmp/bfss-unconditional-domain-density/
+          if-no-files-found: warn
+          retention-days: 14
