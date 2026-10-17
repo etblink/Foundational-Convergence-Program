@@ -103,6 +103,7 @@ private theorem originalMinimalPhysicalHilbertChargeGraph_vertical {N : ℕ}
       ((u : FullL2 N), originalMinimalHilbertOutputEquiv y) ∈
         originalMinimalClosedGraph M G :=
     (originalMinimalPhysicalHilbertChargeGraph_mem_iff M G _).mp hp
+  dsimp at hu
   subst u
   have hzero : originalMinimalHilbertOutputEquiv y = 0 :=
     M.fullClosedGraph_vertical
