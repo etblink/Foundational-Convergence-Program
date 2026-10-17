@@ -1,19 +1,10 @@
 name: BFSS SU2 Original Minimal Closed Hilbert Form Parity
 
+# Gate H5E8AW #1 is accepted: source and five roots fixed by hash.
+# Do not auto recompile this known-qualified 19-module chain on later
+# unrelated S3L PR commits (GitHub PR path filters see accumulated diffs).
+# Manual requalification retains EXACT source/cache pins and axiom audit.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-s3k-physical-spin-flow
-    paths:
-      - .github/workflows/bfss-su2-original-minimal-closed-hilbert-form-parity.yml
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AOOriginalPhysicalCoreGraphGeneratorParityProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8APOriginalPhysicalClosedGraphParityProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AQOriginalPhysicalClosedChargeDomainParityProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ASOriginalPhysicalClosedChargeGraphEnergyParityProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ATOriginalPiLp16OutputParityUnitaryProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AUOriginalMinimalClosedChargeLinearPMapProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AVOriginalMinimalChargeOperatorActionParityProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AWOriginalMinimalChargeHilbertFormParityProbe.lean
   workflow_dispatch:
 
 permissions:
