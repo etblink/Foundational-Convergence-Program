@@ -60,8 +60,16 @@ theorem originalSmoothParity_coordinateDerivative {N : ℕ}
           (EuclideanSpace.single (i, A) 1) =
         -(fderiv ℝ (f : Boson N → Fermion N) (-x)
           (EuclideanSpace.single (i, A) 1)) := by
-    simpa only [ContinuousLinearMap.comp_apply, fderiv_fun_neg,
-      fderiv_id, neg_apply, one_apply_eq_self, map_neg] using hv
+    -- Pin the Fréchet derivative of x ↦ -x explicitly rather than
+    -- asking simp to recognize an eta-expanded negative identity map.
+    have hnegder :
+        fderiv ℝ (fun y : Boson N => -y) x =
+          -(1 : Boson N →L[ℝ] Boson N) := by
+      simpa only [fderiv_id] using
+        (fderiv_fun_neg (𝕜 := ℝ)
+          (f := fun y : Boson N => y) (x := x))
+    simpa only [ContinuousLinearMap.comp_apply, hnegder, neg_apply,
+      one_apply_eq_self, map_neg] using hv
   rw [hsource]
   simp
 
