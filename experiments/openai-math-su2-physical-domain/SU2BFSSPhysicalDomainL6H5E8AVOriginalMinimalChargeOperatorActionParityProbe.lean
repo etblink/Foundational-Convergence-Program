@@ -45,23 +45,15 @@ theorem originalMinimalChargeOperator_graph_mem_iff {N : ℕ}
   rw [originalMinimalClosedChargeColumn_graph_eq M G,
       originalMinimalClosedChargeColumn_graph_eq
         (oppositeGamma M) (originalOppositeGammaGaugeData M G)]
-  rw [show ((x,y) ∈ originalMinimalClosedGraph M G) ↔
-      (x,y) ∈ closure (originalPhysicalCoreGraphSet M G) from
-      congrArg (fun S : Set (FullL2 N × (SpinIndex → FullL2 N)) => (x,y) ∈ S)
-        (originalMinimalClosedGraph_set_eq M G)]
-  rw [show ((originalFullL2Parity x,
-        fun α => originalFullL2Parity (y α)) ∈
-      originalMinimalClosedGraph (oppositeGamma M)
-        (originalOppositeGammaGaugeData M G)) ↔
-      ((originalFullL2Parity x,
-        fun α => originalFullL2Parity (y α)) ∈
-      closure (originalPhysicalCoreGraphSet (oppositeGamma M)
-        (originalOppositeGammaGaugeData M G))) from
-      congrArg (fun S : Set (FullL2 N × (SpinIndex → FullL2 N)) =>
-        (originalFullL2Parity x,
-          fun α => originalFullL2Parity (y α)) ∈ S)
-        (originalMinimalClosedGraph_set_eq (oppositeGamma M)
-          (originalOppositeGammaGaugeData M G))]
+  change ((x,y) ∈ (originalMinimalClosedGraph M G :
+      Set (FullL2 N × (SpinIndex → FullL2 N)))) ↔
+    ((originalFullL2Parity x, fun α => originalFullL2Parity (y α)) ∈
+      (originalMinimalClosedGraph (oppositeGamma M)
+        (originalOppositeGammaGaugeData M G) :
+        Set (FullL2 N × (SpinIndex → FullL2 N))))
+  rw [originalMinimalClosedGraph_set_eq M G,
+      originalMinimalClosedGraph_set_eq
+        (oppositeGamma M) (originalOppositeGammaGaugeData M G)]
   exact originalPhysicalClosedGraph_mem_iff M G x y
 
 /-- True Mathlib `LinearPMap.domain` parity; no auxiliary or maximal
@@ -73,11 +65,15 @@ theorem originalMinimalChargeOperator_domain_mem_iff {N : ℕ}
       originalFullL2Parity x ∈
       (originalMinimalClosedChargeColumn (oppositeGamma M)
         (originalOppositeGammaGaugeData M G)).domain := by
-  simpa only [
-      originalMinimalClosedChargeColumn_domain_eq M G,
+  change (x ∈ ((originalMinimalClosedChargeColumn M G).domain :
+        Set (FullL2 N))) ↔
+    (originalFullL2Parity x ∈
+      ((originalMinimalClosedChargeColumn (oppositeGamma M)
+        (originalOppositeGammaGaugeData M G)).domain : Set (FullL2 N)))
+  rw [originalMinimalClosedChargeColumn_domain_eq M G,
       originalMinimalClosedChargeColumn_domain_eq
-        (oppositeGamma M) (originalOppositeGammaGaugeData M G)
-      ] using originalPhysicalClosedChargeDomain_mem_iff M G x
+        (oppositeGamma M) (originalOppositeGammaGaugeData M G)]
+  exact originalPhysicalClosedChargeDomain_mem_iff M G x
 
 /-- Canonical actual-domain map induced by parity. It is built from
 the proved native operator-domain iff, not an assumed domain equality. -/
