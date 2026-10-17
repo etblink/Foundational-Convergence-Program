@@ -4679,6 +4679,38 @@ jobs:
           print('L6H5E8X_SU2_SOURCE_EULER_FIRST_ROW_QUALIFIED')
           PYCODE
 
+      # H5E8Y: exact original SU2 ZYZ Euler factorization via
+      # qualified first-row agreement and quaternion uniqueness.
+      - name: Qualify exact original SU2 source Euler factorization
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8YOriginalSU2ExactSourceEulerFactorizationProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8XOriginalSU2SourceEulerFirstRowProbe.olean
+          echo L6H5E8Y_ORIGINAL_SU2_EULER_FACTORIZATION_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e8y.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e8y.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E8Y.'
+          for name in ('originalSU2_eq_of_firstRow',
+                       'original_source_zyz_exact_euler',
+                       'original_source_zyz_exists'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E8Y_ORIGINAL_SU2_EULER_FACTORIZATION_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
