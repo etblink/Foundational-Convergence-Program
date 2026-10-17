@@ -96,6 +96,7 @@ on:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E6COriginalGaussSquaredErrorIntegralLimitProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E7AOriginalFullL2NormSquareIntegralBridgeProbe.lean
 
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ABOriginalMasslessPhysicalChargeGraphBridgeProbe.lean
 permissions:
   contents: read
 
@@ -4772,6 +4773,97 @@ jobs:
               assert key in entries and entries[key] <= allowed,(key,entries)
           assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
           print('L6H5E8AA_ORIGINAL_SU2_GAUSS_PHYSICAL_IFF_QUALIFIED')
+          PYCODE
+
+
+      # H5E8AB: jointly stage TWO independently accepted source families.
+      # Recompile Gate #170's byte-identical G4K1--G4K9D source closure
+      # in the already pinned and strictly audited H5E8AA job environment.
+      - name: Rebuild and audit exact G4K9D accepted source import closure
+        shell: bash
+        timeout-minutes: 42
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          qualified=1fbd0db2af96914d20b8750bfbbeb3af6770a491
+          git fetch --quiet --no-tags --depth=1 origin "$qualified"
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8AAOriginalSU2JointGaussKernelPhysicalIffProbe.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4JExactGaugeDataAssemblyProbe.olean
+          for stem in SU2BFSSG4K1PhysicalSpaceCoreProbe SU2BFSSG4K2ANonzeroVacuumRadialProfileProbe SU2BFSSG4K2BNonzeroPhysicalL2Probe SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe SU2BFSSG4K4ClosedChargeGraphProbe SU2BFSSG4K5ConcreteEnergyDensityProbe SU2BFSSG4K6PhysicalTrialEnergyLowerProbe SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe SU2BFSSG4K8ANonzeroDerivativeProbe SU2BFSSG4K8BNonzeroCoordinateL2Probe SU2BFSSG4K8CZeroParameterChargeProbe SU2BFSSG4K8DPositiveCouplingAlternativeProbe SU2BFSSG4K8E1MasslessPotentialParityProbe SU2BFSSG4K8E2KineticOddParityProbe SU2BFSSG4K8E3CoreNoncancellationProbe SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe SU2BFSSG4K9BSourcePairAndChargeReductionProbe SU2BFSSG4K9COrderedPairCoefficientProbe SU2BFSSG4K9DSourcePotentialMultiplierProbe; do
+            p="experiments/openai-math-su2-concrete-potential/$stem.lean"
+            test "$(git hash-object "$p")" = "$(git rev-parse "$qualified:$p")" || {
+              echo "G4K9D_QUALIFIED_SOURCE_DRIFT=$p" >&2
+              exit 1
+            }
+            cp "$p" upstream-math/lean/
+          done
+          cd upstream-math/lean
+          for module in OAI.MathematicalPhysics.BFSS.KineticMeasures OAI.MathematicalPhysics.BFSS.CovariantFields OAI.MathematicalPhysics.BFSS.ProfileEnergy; do
+            olean=".lake/build/lib/lean/$(printf '%s' "$module" | tr . /).olean"
+            if [ ! -s "$olean" ]; then
+              echo "H5E8AB_PINNED_UPSTREAM_IMPORT_BUILD=$module"
+              timeout 480s lake build "$module" 2>&1 | tee "/tmp/bfss-l6g1/h5e8ab-upstream-$(basename "$olean").log"
+            fi
+            test -s "$olean"
+          done
+          for stem in SU2BFSSG4K1PhysicalSpaceCoreProbe SU2BFSSG4K2ANonzeroVacuumRadialProfileProbe SU2BFSSG4K2BNonzeroPhysicalL2Probe SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe SU2BFSSG4K4ClosedChargeGraphProbe SU2BFSSG4K5ConcreteEnergyDensityProbe SU2BFSSG4K6PhysicalTrialEnergyLowerProbe SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe SU2BFSSG4K8ANonzeroDerivativeProbe SU2BFSSG4K8BNonzeroCoordinateL2Probe SU2BFSSG4K8CZeroParameterChargeProbe SU2BFSSG4K8DPositiveCouplingAlternativeProbe SU2BFSSG4K8E1MasslessPotentialParityProbe SU2BFSSG4K8E2KineticOddParityProbe SU2BFSSG4K8E3CoreNoncancellationProbe SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe SU2BFSSG4K9BSourcePairAndChargeReductionProbe SU2BFSSG4K9COrderedPairCoefficientProbe SU2BFSSG4K9DSourcePotentialMultiplierProbe; do
+            echo "H5E8AB_GATE170_FROZEN_SOURCE_BUILD=$stem"
+            timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+              2>&1 | tee "/tmp/bfss-l6g1/h5e8ab-g4k-$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean"
+          done
+          python3 - <<'PYCODE'
+          import pathlib,re
+          s=pathlib.Path('/tmp/bfss-l6g1/h5e8ab-g4k-SU2BFSSG4K9DSourcePotentialMultiplierProbe.log').read_text()
+          vals=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)
+          root='FCP.BFSSSU2GaugeG4K9D.'
+          required=('sourcePotentialCoefficientExpanded','sourcePotentialMultipliers_equal',
+            'sourceUnconditionalCoreCharge_equal','sourceUnconditionalCoreForm_equal')
+          byname={name:{x.strip() for x in axioms.split(',') if x.strip()} for name,axioms in vals}
+          for name in required:
+            key=root+name
+            assert key in byname, (key,list(byname))
+            assert byname[key] <= {'propext','Classical.choice','Quot.sound'},(key,byname[key])
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s
+          print('H5E8AB_G4K9D_ACCEPTED_SOURCE_CLOSURE_RECOMPILED_AND_AUDITED')
+          PYCODE
+
+      - name: Qualify original massless physical charge graph bridge on joint accepted imports
+        shell: bash
+        timeout-minutes: 8
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8ABOriginalMasslessPhysicalChargeGraphBridgeProbe
+          test "$(git hash-object "experiments/openai-math-su2-physical-domain/$stem.lean")" = \
+               "$(git rev-parse "HEAD:experiments/openai-math-su2-physical-domain/$stem.lean")"
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSG4K9DSourcePotentialMultiplierProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8AAOriginalSU2JointGaussKernelPhysicalIffProbe.olean
+          echo L6H5E8AB_ORIGINAL_SOURCE_PHYSICAL_CHARGE_GRAPHS_BEGIN
+          timeout 360s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e8ab.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import pathlib,re
+          s=pathlib.Path('/tmp/bfss-l6g1/l6h5e8ab.log').read_text()
+          records=dict((name,{x.strip() for x in axioms.split(',') if x.strip()})
+            for name,axioms in re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s))
+          none={name for name in re.findall(r"'([^']+)' does not depend on any axioms",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E8AB.'
+          stems=('original_source_chargeVector_eq_massless',
+            'original_source_coreGraph_eq_massless',
+            'original_source_closedGraph_eq_massless',
+            'original_source_smoothCore_invariant_iff_gauss',
+            'original_source_physicalCoreGraph',
+            'original_source_physicalGraph_eq_massless')
+          for name in stems:
+            full=root+name
+            assert full in records or full in none,(full,records,none)
+            assert records.get(full,set()) <= {'propext','Classical.choice','Quot.sound'},(full,records.get(full))
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s
+          print('L6H5E8AB_ORIGINAL_SOURCE_GRAPH_BRIDGE_ALL_SIX_ROOTS_QUALIFIED')
           PYCODE
 
       - name: Preserve independently inspectable qualification evidence
