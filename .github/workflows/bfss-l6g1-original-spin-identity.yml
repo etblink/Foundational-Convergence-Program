@@ -4646,6 +4646,39 @@ jobs:
           print('L6H5E8W_SU2_SOURCE_EULER_PHASE_QUALIFIED')
           PYCODE
 
+      # H5E8X: first-row agreement of source-exact ZYZ product with
+      # an arbitrary genuine SU2 matrix, no full factorization claim.
+      - name: Qualify genuine source SU2 Euler first-row agreement
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8XOriginalSU2SourceEulerFirstRowProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8WOriginalSU2SourceEulerTimePhaseProbe.olean
+          echo L6H5E8X_SU2_SOURCE_EULER_FIRST_ROW_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e8x.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e8x.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E8X.'
+          for name in ('original_source_zyz_firstRow_u',
+                       'original_source_zyz_firstRow_v',
+                       'original_source_zyz_firstRow',
+                       'original_source_zyz_gauge_firstRow'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E8X_SU2_SOURCE_EULER_FIRST_ROW_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
