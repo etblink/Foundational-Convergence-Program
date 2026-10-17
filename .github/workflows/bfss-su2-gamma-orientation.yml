@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
-      changed: $${{ steps.check.outputs.changed }}
+      changed: ${{ steps.check.outputs.changed }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - name: Check source and workflow delta against first gamma research commit
