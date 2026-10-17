@@ -73,7 +73,7 @@ jobs:
           PY
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean)" = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AFOriginalSmoothParityInvolutionProbe.lean)" = c9f71c6929121226788181ce3547979dcfe6afef
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AGOriginalSmoothParityDerivativeProbe.lean)" = ca5578117ba8672ed7d00e80f1abc494bf71ee86
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AGOriginalSmoothParityDerivativeProbe.lean)" = 9b193a6819c3dacbeae0a63def9d480cf8fd11d7
           echo ORIGINAL_PARITY_DERIVATIVE_FROZEN_SOURCE_AND_CANDIDATE_PINS_PASS
       - name: Reclaim disposable runner disk
         shell: bash
