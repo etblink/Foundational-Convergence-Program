@@ -56,12 +56,16 @@ theorem originalPhysicalGraphPairParity_continuous {N : ℕ} :
   change Continuous (fun p : FullL2 N × (SpinIndex → FullL2 N) =>
     (originalFullL2Parity p.1,
       fun α => originalFullL2Parity (p.2 α)))
-  apply Continuous.prod_mk
-  · exact (originalFullL2Parity (N := N)).continuous.comp continuous_fst
-  · apply continuous_pi
+  have hf : Continuous (fun p : FullL2 N × (SpinIndex → FullL2 N) =>
+      originalFullL2Parity p.1) :=
+    (originalFullL2Parity (N := N)).continuous.comp continuous_fst
+  have hg : Continuous (fun p : FullL2 N × (SpinIndex → FullL2 N) =>
+      fun α => originalFullL2Parity (p.2 α)) := by
+    apply continuous_pi
     intro α
     exact (originalFullL2Parity (N := N)).continuous.comp
       ((continuous_apply α).comp continuous_snd)
+  exact hf.prodMk hg
 
 /-- A genuine homeomorphism, using the actual source parity as its
 own inverse. We do not yet promote it to a Hilbert product unitary. -/
@@ -84,21 +88,45 @@ def originalPhysicalCoreGraphSet {N : ℕ}
   Set.range (fun f : G.invariantCore =>
     (coreToL2 f.val, M.chargeVector f.val))
 
+/-- Reusable, source-independent SET transport: a map carries the range
+of f exactly to the range of g when both inclusions have witnesses.
+Prove before specialization so no concrete Fock/source graph is reduced
+while solving Set.image/Set.range membership. -/
+private theorem image_range_of_two_way {A B X : Type*}
+    (p : X → X) (f : A → X) (g : B → X)
+    (forward : ∀ a : A, ∃ b : B, g b = p (f a))
+    (backward : ∀ b : B, ∃ a : A, p (f a) = g b) :
+    p '' Set.range f = Set.range g := by
+  ext x
+  constructor
+  · rintro ⟨y, ⟨a, rfl⟩, rfl⟩
+    obtain ⟨b, hb⟩ := forward a
+    exact ⟨b, hb⟩
+  · rintro ⟨b, rfl⟩
+    obtain ⟨a, ha⟩ := backward b
+    exact ⟨f a, ⟨a, rfl⟩, ha⟩
+
 /-- AO's two qualified source directions imply exact equality of the
-actual restricted core graph generator SETS after source parity. -/
+actual restricted core graph generator SETS after source parity.
+Specialize an already proven abstract set lemma; no huge source reduction. -/
 theorem originalPhysicalCoreGraphSet_image {N : ℕ}
     (M : AlgebraData N) (G : M.GaugeData) :
     originalPhysicalGraphPairParity '' originalPhysicalCoreGraphSet M G =
       originalPhysicalCoreGraphSet (oppositeGamma M)
         (originalOppositeGammaGaugeData M G) := by
-  ext p
-  constructor
-  · rintro ⟨q, ⟨f, rfl⟩, rfl⟩
-    rcases originalPhysicalCorePair_to_opposite M G f with ⟨f', hf'⟩
-    exact ⟨f', hf'⟩
-  · rintro ⟨f', rfl⟩
-    rcases originalPhysicalCorePair_from_opposite M G f' with ⟨f, hf⟩
-    exact ⟨_, ⟨f, rfl⟩, hf⟩
+  change originalPhysicalGraphPairParity ''
+      Set.range (fun f : G.invariantCore =>
+        (coreToL2 f.val, M.chargeVector f.val)) =
+    Set.range (fun f' : (originalOppositeGammaGaugeData M G).invariantCore =>
+      (coreToL2 f'.val, (oppositeGamma M).chargeVector f'.val))
+  exact image_range_of_two_way
+    (originalPhysicalGraphPairParity (N := N))
+    (fun f : G.invariantCore =>
+      (coreToL2 f.val, M.chargeVector f.val))
+    (fun f' : (originalOppositeGammaGaugeData M G).invariantCore =>
+      (coreToL2 f'.val, (oppositeGamma M).chargeVector f'.val))
+    (originalPhysicalCorePair_to_opposite M G)
+    (originalPhysicalCorePair_from_opposite M G)
 
 /-- Genuine CLOSED original physical sixteen-charge graph transport.
 Closure is taken in the exact paired FullL2 × sixteen-FullL2 product.
