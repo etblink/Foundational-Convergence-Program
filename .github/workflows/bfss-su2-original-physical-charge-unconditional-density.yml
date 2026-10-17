@@ -3,9 +3,9 @@ name: BFSS SU2 Original Physical Charge Unconditional Domain Density
 # Isolated source-pinned joint D2B10C and AZ gate. Do not infer success
 # from a conditional theorem or from an inaccessible historical cache.
 on:
-  push:
+  pull_request:
     branches:
-      - research/openai-math-su2-s3l-combined-rotation
+      - research/openai-math-su2-s3k-physical-spin-flow
     paths:
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8BAOriginalPhysicalChargeUnconditionalDensityProbe.lean
       - .github/workflows/bfss-su2-original-physical-charge-unconditional-density.yml
