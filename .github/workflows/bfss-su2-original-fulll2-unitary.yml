@@ -74,7 +74,7 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean)" = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AFOriginalSmoothParityInvolutionProbe.lean)" = c9f71c6929121226788181ce3547979dcfe6afef
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AIOriginalFullL2ParityLiftProbe.lean)" = 4832b4bdf140adaefa3271bea2325a05fde7d1be
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AJOriginalFullL2ParityUnitaryProbe.lean)" = e8b5b5da7d5ddbd013d760f622b207789a2659f4
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AJOriginalFullL2ParityUnitaryProbe.lean)" = 23bce6337e42dffb530339d54eef95378d9230b1
           echo ORIGINAL_FULLL2_UNITARY_FROZEN_SOURCE_AND_CANDIDATE_PINS_PASS
       - name: Reclaim disposable runner disk
         shell: bash
