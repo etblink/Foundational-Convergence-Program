@@ -105,7 +105,58 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # GitHub pull_request.paths is calculated from the entire still-open PR
+  # against its base, not from just the newest synchronize commit.
+  # Therefore the accepted H5E8AB source stays in the PR diff and an
+  # unrelated successor-proof edit otherwise reruns the 22-minute source
+  # qualification. This cheap preflight checks an immutable #361 source
+  # baseline and executes the strict job only if an EXISTING accepted
+  # proof/source file changed. New successor-probe files cannot downgrade
+  # or re-qualify #361. If accepted-source files change, fail OPEN into
+  # the complete strict qualification; after requalification, update the
+  # source baseline in an explicit auditable revision.
+  original-source-delta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      needs_strict: ${{ steps.delta.outputs.needs_strict }}
+    steps:
+      - name: Check out pull-request candidate for frozen-source delta
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Detect changed frozen source proofs since successful Gate 361
+        id: delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          baseline=f0683ba298a2c1109677f7bc7a8393265e0e8cda
+          git fetch --quiet --no-tags --depth=1 origin "$baseline"
+          python3 - "$baseline" <<'PY'
+          import os,subprocess,sys
+          baseline=sys.argv[1]
+          groups=['experiments/openai-math-su2-concrete-potential',
+                  'experiments/openai-math-su2-physical-domain']
+          changed=subprocess.check_output(
+              ['git','diff','--name-only',baseline,'HEAD','--',*groups],
+              text=True).splitlines()
+          frozen=[]
+          new=[]
+          for path in changed:
+              existed=subprocess.run(
+                  ['git','cat-file','-e',f'{baseline}:{path}'],
+                  stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0
+              (frozen if existed else new).append(path)
+          need='true' if frozen else 'false'
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              print(f'needs_strict={need}',file=out)
+          print(f'ACCEPTED_361_SOURCE_BASELINE={baseline}')
+          print(f'CHANGED_PREQUALIFIED_PROOFS={frozen}')
+          print(f'NEW_UNRELATED_RESEARCH_PROBES={new}')
+          print(f'RUN_EXPENSIVE_ORIGINAL_SOURCE_AUDIT={need}')
+          PY
+
   original-source-spin-identity:
+    needs: original-source-delta
+    if: needs.original-source-delta.outputs.needs_strict == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 70
     steps:
