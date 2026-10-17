@@ -152,6 +152,109 @@ jobs:
           print('L6H5E8AZ_PHYSICAL_CHARGE_DENSITY_CONDITIONAL_REDUCTION_TWO_ROOTS_CLEAN_PASS')
           PY
 
+      - name: Rebuild historical qualified G4K9D and G4K10A dependency closure from exact sources
+        shell: bash
+        timeout-minutes: 36
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          qualified9d=1fbd0db2af96914d20b8750bfbbeb3af6770a491
+          qualified10a=6eeb4293abcc1cf3a111ff5c511f708cb5ed320a
+          git fetch --quiet --no-tags --depth=1 origin "$qualified9d"
+          git fetch --quiet --no-tags --depth=1 origin "$qualified10a"
+          base=upstream-math/lean/.lake/build/lib/lean
+          test -s "$base/SU2BFSSG4JExactGaugeDataAssemblyProbe.olean" || {
+            echo SOURCE_G4J_ACCEPTED_PREREQUISITE_MISSING
+            exit 1
+          }
+          stems=(
+            SU2BFSSG4K1PhysicalSpaceCoreProbe
+            SU2BFSSG4K2ANonzeroVacuumRadialProfileProbe
+            SU2BFSSG4K2BNonzeroPhysicalL2Probe
+            SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe
+            SU2BFSSG4K4ClosedChargeGraphProbe
+            SU2BFSSG4K5ConcreteEnergyDensityProbe
+            SU2BFSSG4K6PhysicalTrialEnergyLowerProbe
+            SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe
+            SU2BFSSG4K8ANonzeroDerivativeProbe
+            SU2BFSSG4K8BNonzeroCoordinateL2Probe
+            SU2BFSSG4K8CZeroParameterChargeProbe
+            SU2BFSSG4K8DPositiveCouplingAlternativeProbe
+            SU2BFSSG4K8E1MasslessPotentialParityProbe
+            SU2BFSSG4K8E2KineticOddParityProbe
+            SU2BFSSG4K8E3CoreNoncancellationProbe
+            SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe
+            SU2BFSSG4K9BSourcePairAndChargeReductionProbe
+            SU2BFSSG4K9COrderedPairCoefficientProbe
+            SU2BFSSG4K9DSourcePotentialMultiplierProbe
+            SU2BFSSG4K10ASourceClosedJointChargeGraphProbe
+          )
+          test "${#stems[@]}" -eq 20
+          for stem in "${stems[@]}"; do
+            p="experiments/openai-math-su2-concrete-potential/$stem.lean"
+            expected="$qualified9d"
+            if [ "$stem" = SU2BFSSG4K10ASourceClosedJointChargeGraphProbe ]; then
+              expected="$qualified10a"
+            fi
+            test "$(git hash-object "$p")" = "$(git rev-parse "$expected:$p")" || {
+              echo "PINNED_G4K_ACCEPTED_SOURCE_DRIFT=$p"
+              exit 1
+            }
+            cp "$p" upstream-math/lean/
+          done
+          mkdir -p /tmp/bfss-unconditional-domain-density
+          cd upstream-math/lean
+          for module in OAI.MathematicalPhysics.BFSS.KineticMeasures OAI.MathematicalPhysics.BFSS.CovariantFields OAI.MathematicalPhysics.BFSS.ProfileEnergy; do
+            dest=".lake/build/lib/lean/$(printf '%s' "$module" | tr . /).olean"
+            if ! test -s "$dest"; then
+              echo "REBUILDING_PINNED_ORIGINAL_SOURCE=$module"
+              timeout 480s lake build "$module" 2>&1 | tee "/tmp/bfss-unconditional-domain-density/upstream-$(basename "$dest").log"
+              test -s "$dest"
+            fi
+          done
+          for stem in "${stems[@]}"; do
+            echo "REBUILDING_EXACT_ACCEPTED_G4K_SOURCE=$stem"
+            timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+              tee "/tmp/bfss-unconditional-domain-density/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean"
+          done
+          python3 - <<'PY'
+          import pathlib,re
+          d=pathlib.Path('/tmp/bfss-unconditional-domain-density')
+          stems='''SU2BFSSG4K1PhysicalSpaceCoreProbe
+          SU2BFSSG4K2ANonzeroVacuumRadialProfileProbe
+          SU2BFSSG4K2BNonzeroPhysicalL2Probe
+          SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe
+          SU2BFSSG4K4ClosedChargeGraphProbe
+          SU2BFSSG4K5ConcreteEnergyDensityProbe
+          SU2BFSSG4K6PhysicalTrialEnergyLowerProbe
+          SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe
+          SU2BFSSG4K8ANonzeroDerivativeProbe
+          SU2BFSSG4K8BNonzeroCoordinateL2Probe
+          SU2BFSSG4K8CZeroParameterChargeProbe
+          SU2BFSSG4K8DPositiveCouplingAlternativeProbe
+          SU2BFSSG4K8E1MasslessPotentialParityProbe
+          SU2BFSSG4K8E2KineticOddParityProbe
+          SU2BFSSG4K8E3CoreNoncancellationProbe
+          SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe
+          SU2BFSSG4K9BSourcePairAndChargeReductionProbe
+          SU2BFSSG4K9COrderedPairCoefficientProbe
+          SU2BFSSG4K9DSourcePotentialMultiplierProbe
+          SU2BFSSG4K10ASourceClosedJointChargeGraphProbe'''.split()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for stem in stems:
+              s=(d/(stem+'.log')).read_text()
+              assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,stem
+              reports=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)
+              assert reports,('G4K_MISSING_AXIOM_REPORTS',stem)
+              for name,ax in reports:
+                  assert {a.strip() for a in ax.split(',') if a.strip()}<=allowed,(stem,name,ax)
+          leaf=(d/(stems[-1]+'.log')).read_text()
+          for name in ['sourceChargeMap_equal','sourceChargeVector_equal','sourceCoreGraph_equal','sourceClosedJointChargeGraph_equal','sourceClosedJointChargeDomain_iff']:
+              assert 'FCP.BFSSSU2GaugeG4K10A.'+name in leaf,name
+          print('G4K9D_AND_G4K10A_BYTE_IDENTICAL_SOURCE_20_MODULE_REBUILD_AXIOM_PASS')
+          PY
+
       - name: Rebuild source-qualified Gate 28 and Gate 47 Haar prerequisites in same Lean environment
         shell: bash
         timeout-minutes: 33
