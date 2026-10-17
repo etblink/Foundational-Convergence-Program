@@ -55,7 +55,8 @@ noncomputable def parityConjugation {N : ℕ} :
   map_smul' c T := by
     apply LinearMap.ext
     intro f
-    simp only [LinearMap.comp_apply, LinearMap.smul_apply, map_smul]
+    simp only [LinearMap.comp_apply, LinearMap.smul_apply, map_smul,
+      RingHom.id_apply]
 
 /-- Literal composition preservation, using actual source P²=1. -/
 theorem parityConjugation_comp {N : ℕ} (T U : CoreEnd N) :
