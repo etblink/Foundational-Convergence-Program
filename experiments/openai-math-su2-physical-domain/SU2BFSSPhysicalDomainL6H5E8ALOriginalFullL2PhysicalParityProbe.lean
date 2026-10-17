@@ -37,7 +37,11 @@ theorem originalFullL2Parity_fiberAction {N : ℕ}
   let L : Fermion N →L[ℂ] Fermion N :=
     (G.fermion g).toContinuousLinearEquiv.toContinuousLinearMap
   have hleft := originalFullL2Parity_apply_ae (G.fiberAction g v)
-  have hfiber := ContinuousLinearMap.coeFn_compLp L v
+  -- The generic compLp lemma produces an Eventually equality; give it
+  -- explicit EventuallyEq syntax so comp_tendsto uses the correct lemma.
+  have hfiber : (fun x : Boson N => (G.fiberAction g v) x) =ᵐ[volume]
+      (fun x : Boson N => L (v x)) := by
+    exact ContinuousLinearMap.coeFn_compLp L v
   have hfiberNeg := hfiber.comp_tendsto
     (originalBosonNeg_measurePreserving (N := N)).quasiMeasurePreserving.tendsto_ae
   have hright := originalFullL2Parity_apply_ae v
