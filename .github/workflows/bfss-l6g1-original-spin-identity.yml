@@ -4817,11 +4817,14 @@ jobs:
           s=pathlib.Path('/tmp/bfss-l6g1/h5e8ab-g4k-SU2BFSSG4K9DSourcePotentialMultiplierProbe.log').read_text()
           vals=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)
           root='FCP.BFSSSU2GaugeG4K9D.'
-          required=('sourcePotentialCoefficientExpanded','sourcePotentialMultipliers_equal',
-            'sourceUnconditionalCoreCharge_equal','sourceUnconditionalCoreForm_equal')
           byname={name:{x.strip() for x in axioms.split(',') if x.strip()} for name,axioms in vals}
-          for name in required:
-            key=root+name
+          private=[name for name in byname if name.startswith('_private.SU2BFSSG4K9DSourcePotentialMultiplierProbe.')
+            and name.endswith(root+'sourcePotentialCoefficientExpanded')]
+          assert len(private)==1, (private,list(byname))
+          required=[private[0]]+[root+name for name in (
+            'sourcePotentialMultipliers_equal',
+            'sourceUnconditionalCoreCharge_equal','sourceUnconditionalCoreForm_equal')]
+          for key in required:
             assert key in byname, (key,list(byname))
             assert byname[key] <= {'propext','Classical.choice','Quot.sound'},(key,byname[key])
           assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s
