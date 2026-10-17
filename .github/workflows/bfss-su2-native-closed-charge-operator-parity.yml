@@ -1,15 +1,13 @@
 name: BFSS SU2 Original Native Closed Charge Operator Parity
 
+# RESEARCH QUARANTINE — Gate #93 immutable source D2B compiled-object cache
+# is not accessible from this S3L PR (confirmed native runs #1–#8).
+# Do NOT auto-trigger expensive, known-unrunnable native AR proof jobs on
+# unrelated PR commits. Remains explicitly MANUAL and FAIL-CLOSED until a
+# verified cross-branch dependency reconstruction/import is committed.
+# Quarantine is NOT proof acceptance: AR remains UNQUALIFIED; exact
+# failure and historical Gate #93 acceptance are retained in audits.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-s3k-physical-spin-flow
-    paths:
-      - .github/workflows/bfss-su2-native-closed-charge-operator-parity.yml
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AOOriginalPhysicalCoreGraphGeneratorParityProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8APOriginalPhysicalClosedGraphParityProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AQOriginalPhysicalClosedChargeDomainParityProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AROriginalNativeClosedChargeOperatorParityProbe.lean
   workflow_dispatch:
 
 permissions:
