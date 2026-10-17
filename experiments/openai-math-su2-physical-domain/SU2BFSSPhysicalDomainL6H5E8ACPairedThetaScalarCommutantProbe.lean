@@ -59,6 +59,9 @@ theorem pairedTheta_commutant_scalar
     exact Submodule.mem_top
   have heig : L v = c • v :=
     (Module.End.mem_eigenspace_iff).mp hv
+  -- The locally named algebraic endomorphism is definitionally the
+  -- underlying linear map of T; force that equality before simp.
+  change T v = c • v at heig
   simpa only [ContinuousLinearMap.smul_apply, ContinuousLinearMap.one_apply]
     using heig
 
