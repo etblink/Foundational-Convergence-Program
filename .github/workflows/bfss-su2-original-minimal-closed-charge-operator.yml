@@ -93,7 +93,7 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AQOriginalPhysicalClosedChargeDomainParityProbe.lean)" = 12c245924eb0e5ba4b1a1f9b7b10c34d29402995
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ASOriginalPhysicalClosedChargeGraphEnergyParityProbe.lean)" = 395f75d87a0ca2d4001b6ee2eccd4611ded90676
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ATOriginalPiLp16OutputParityUnitaryProbe.lean)" = dba70e368ad17344329782cb77da77cfb295328f
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AUOriginalMinimalClosedChargeLinearPMapProbe.lean)" = c7c26e577ff4e751876bd9d1ddf88fd3bc3dff1d
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AUOriginalMinimalClosedChargeLinearPMapProbe.lean)" = 5e6300e7db8d292b6766f5800e20c9a394cc0d69
           echo MINIMAL_CLOSED_CHARGE_OPERATOR_FROZEN_SOURCE_AND_CANDIDATE_PINS_PASS
       - name: Reclaim disposable runner disk
         shell: bash
