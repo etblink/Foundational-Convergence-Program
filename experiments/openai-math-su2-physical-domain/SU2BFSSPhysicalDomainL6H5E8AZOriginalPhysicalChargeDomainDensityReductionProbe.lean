@@ -1,4 +1,5 @@
 import SU2BFSSPhysicalDomainL6H5E8AYOriginalPhysicalHilbertChargeGraphProbe
+import OAI.MathematicalPhysics.BFSS.ClosedProfiles
 
 /-!
 # H5E8AZ — physical operator domain density REDUCTION to invariant core
