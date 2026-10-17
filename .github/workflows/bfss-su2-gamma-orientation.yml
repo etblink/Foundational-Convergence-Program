@@ -72,7 +72,7 @@ jobs:
           assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib')=='d13f23b723b8a846827a245b89c10fc7d3f11612'
           PY
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean)" = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ADOppositeGammaOrientationProbe.lean)" = ca0dfcbb6abde2daeb882f0d4391ba6fb7eccbe9
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ADOppositeGammaOrientationProbe.lean)" = f699d1a814c1646cfb819089356a64c3f5a169bc
           echo GAMMA_ORIENTATION_FROZEN_SOURCE_AND_CANDIDATE_PINS_PASS
       - name: Reclaim disposable runner disk
         shell: bash
