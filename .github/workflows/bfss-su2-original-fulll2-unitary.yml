@@ -1,0 +1,170 @@
+name: BFSS SU2 Original FullL2 Unitary
+
+on:
+  pull_request:
+    branches:
+      - research/openai-math-su2-s3k-physical-spin-flow
+    paths:
+      - .github/workflows/bfss-su2-original-fulll2-unitary.yml
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AJOriginalFullL2ParityUnitaryProbe.lean
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-su2-original-fulll2-unitary-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  original-fulll2-unitary-delta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Check source and workflow delta against first gamma research commit
+        id: check
+        shell: bash
+        run: |
+          set -euo pipefail
+          baseline=03bdb1bc6254d0a72d59bdd87eaea1e7581aaa8e
+          git fetch --quiet --no-tags --depth=1 origin "$baseline"
+          changed="$(git diff --name-only "$baseline" HEAD -- .github/workflows/bfss-su2-original-fulll2-unitary.yml experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AFOriginalSmoothParityInvolutionProbe.lean experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AIOriginalFullL2ParityLiftProbe.lean experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AJOriginalFullL2ParityUnitaryProbe.lean)"
+          if [ -n "$changed" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "ORIGINAL_FULLL2_UNITARY_PROOF_OR_WORKFLOW_CHANGED"
+            echo "$changed"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "NO_ORIGINAL_FULLL2_UNITARY_CHANGES_SKIP_EXPENSIVE_GATE"
+          fi
+
+  exact-original-fulll2-unitary:
+    needs: original-fulll2-unitary-delta
+    if: needs.original-fulll2-unitary-delta.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - name: Check out exact candidate sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Check out exact original OpenAI Lean source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+      - name: Fail closed on original upstream and candidate pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-fulll2-unitary
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = 'leanprover/lean4:v4.34.1'
+          python3 - <<'PY'
+          import json
+          d=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib')=='d13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean)" = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AFOriginalSmoothParityInvolutionProbe.lean)" = c9f71c6929121226788181ce3547979dcfe6afef
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AIOriginalFullL2ParityLiftProbe.lean)" = 4832b4bdf140adaefa3271bea2325a05fde7d1be
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AJOriginalFullL2ParityUnitaryProbe.lean)" = e8b5b5da7d5ddbd013d760f622b207789a2659f4
+          echo ORIGINAL_FULLL2_UNITARY_FROZEN_SOURCE_AND_CANDIDATE_PINS_PASS
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+      - name: Restore accepted Lean and Mathlib environment
+        id: dependencies
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake
+            ~/.elan
+          key: bfss-l6-pinned-env-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Verify accepted Lean Mathlib dependency provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.dependencies.outputs.cache-hit }}" = true || { echo PINNED_LEAN_CACHE_MISSING; exit 1; }
+          source "$HOME/.elan/env"
+          test -s upstream-math/lean/.lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean
+          test "$(git -C upstream-math/lean/.lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          cd upstream-math/lean
+          lake env lean --version | tee /tmp/bfss-fulll2-unitary/compiler.txt
+          grep -q 'version 4.34.1' /tmp/bfss-fulll2-unitary/compiler.txt
+      - name: Restore exact accepted source G1A closure
+        id: qualified
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-l6g7w-accepted-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G[1-6]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7[A-W]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1[A-B]*Probe.lean', 'experiments/openai-math-su2-concrete-potential/SU2*.lean') }}
+      - name: Check exact G1A and upstream BFSS compiled objects
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.qualified.outputs.cache-hit }}" = true || { echo ACCEPTED_SOURCE_CACHE_MISSING; exit 1; }
+          base=upstream-math/lean/.lake/build/lib/lean
+          for stem in SU2BFSSG1APairedThetaProbe SU2FermionFockProbe; do
+            test -s "$base/$stem.olean" || { echo "MISSING_SOURCE=$stem"; exit 1; }
+          done
+          test -s "$base/OAI/MathematicalPhysics/BFSS/Core.olean"
+          echo ORIGINAL_FULLL2_UNITARY_ACCEPTED_INPUTS_PASS
+      - name: Compile accepted source AF/AI and actual FullL2 parity unitary roots
+        shell: bash
+        timeout-minutes: 9
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          af=SU2BFSSPhysicalDomainL6H5E8AFOriginalSmoothParityInvolutionProbe
+          ai=SU2BFSSPhysicalDomainL6H5E8AIOriginalFullL2ParityLiftProbe
+          aj=SU2BFSSPhysicalDomainL6H5E8AJOriginalFullL2ParityUnitaryProbe
+          for stem in "$af" "$ai" "$aj"; do
+            cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          done
+          cd upstream-math/lean
+          for stem in "$af" "$ai" "$aj"; do
+            timeout 210s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+              2>&1 | tee "/tmp/bfss-fulll2-unitary/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean"
+          done
+          python3 - <<'PY'
+          import pathlib,re
+          d=pathlib.Path('/tmp/bfss-fulll2-unitary')
+          stems=['SU2BFSSPhysicalDomainL6H5E8AFOriginalSmoothParityInvolutionProbe',
+                 'SU2BFSSPhysicalDomainL6H5E8AIOriginalFullL2ParityLiftProbe',
+                 'SU2BFSSPhysicalDomainL6H5E8AJOriginalFullL2ParityUnitaryProbe']
+          for stem in stems:
+              log=(d/(stem+'.log')).read_text()
+              assert 'sorryAx' not in log and 'error:' not in log,stem
+          s=(d/(stems[-1]+'.log')).read_text()
+          prefix='FCP.BFSSSU2PhysicalDomainL6H5E8AJ.'
+          names=['originalFullL2Parity_involutive','originalFullL2ParityUnitary',
+                 'originalFullL2ParityUnitary_apply','originalFullL2ParityUnitary_sq',
+                 'originalFullL2ParityUnitary_coreToL2']
+          m=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          roots={name:{x.strip() for x in ax.split(',') if x.strip()} for name,ax in m}
+          for n in names:
+              root=prefix+n
+              assert root in roots,(root,roots)
+              assert roots[root] <= {'propext','Classical.choice','Quot.sound'},(root,roots[root])
+          print('L6H5E8AJ_ACTUAL_SOURCE_FULLL2_PARITY_UNITARY_AXIOM_CLEAN_PASS')
+          PY
+
+      - name: Preserve exact source-pinned evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-su2-opposite-gamma-${{ github.run_id }}
+          path: /tmp/bfss-fulll2-unitary/
+          if-no-files-found: warn
+          retention-days: 14
