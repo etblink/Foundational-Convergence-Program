@@ -29,8 +29,17 @@ open FCP.BFSSSU2PhysicalDomainL6H5E8AD
 representation for the valid opposite-gamma AlgebraData. -/
 noncomputable def originalOppositeGammaGaugeData {N : ℕ}
     (M : AlgebraData N) (G : M.GaugeData) :
-    (oppositeGamma M).GaugeData := by
-  exact G
+    (oppositeGamma M).GaugeData where
+  boson := G.boson
+  fermion := G.fermion
+  boson_adjoint := by
+    intro g x i
+    exact G.boson_adjoint g x i
+  fermion_adjoint := by
+    intro g α A f
+    exact G.fermion_adjoint g α A f
+  boson_continuous := G.boson_continuous
+  fermion_continuous := G.fermion_continuous
 
 /-- The exact original source gauge physical Hilbert spaces agree;
 no new physical state constraint is introduced by gamma reversal. -/
