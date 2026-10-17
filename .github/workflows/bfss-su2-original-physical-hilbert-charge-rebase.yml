@@ -2,13 +2,12 @@ name: BFSS SU2 Original Physical Hilbert Charge Operator Rebase
 
 # First source-pinned H5E8AY physical Hilbert charge graph rebase qualification.
 # Once green, turn this workflow manual-only to avoid cumulative PR replays.
+# H5E8AY strict Gate #2 accepted. Requalification is manual-only to
+# prevent cumulative pull-request path filters from replaying the entire
+# accepted original 21-module chain on unrelated later commits.
+# Original source/blob pin checks, Lean compiler and eight-root axiom
+# allowlist remain unchanged and fail closed.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-s3k-physical-spin-flow
-    paths:
-      - .github/workflows/bfss-su2-original-physical-hilbert-charge-rebase.yml
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AYOriginalPhysicalHilbertChargeGraphProbe.lean
   workflow_dispatch:
 
 permissions:
