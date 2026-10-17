@@ -73,7 +73,9 @@ theorem oppositeGamma_polarization {N : ℕ} (M : AlgebraData N) :
     (oppositeGamma M).polarization = -M.polarization := by
   change (-M.gamma 0) * (-M.gamma 1) * (-M.gamma 2) =
     -(M.gamma 0 * M.gamma 1 * M.gamma 2)
-  simp only [neg_mul_neg, mul_neg]
+  -- The threefold orientation change is a noncommutative ring identity;
+  -- avoid a brittle simp normalization of nested negations.
+  noncomm_ring
 
 /-- The 48 source fermion operators have not been relabeled or rescaled. -/
 theorem oppositeGamma_theta {N : ℕ} (M : AlgebraData N)
