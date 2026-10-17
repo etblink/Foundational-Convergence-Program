@@ -97,8 +97,18 @@ theorem originalEuler_sourceZ_complex_v (g : GaugeGroup 2) :
     sourceZDiagonal (originalEulerLeftTime g) 0 +
       sourceZDiagonal (originalEulerRightTime g) 1 =
         ((Complex.arg (originalSU2RowV g) : ℝ) : ℂ) * Complex.I := by
-  rw [sourceZDiagonal_zero_imag, sourceZDiagonal_one_imag,
-      ← sub_mul, ← Complex.ofReal_sub, originalEuler_sourceZ_diff]
+  calc
+    sourceZDiagonal (originalEulerLeftTime g) 0 +
+        sourceZDiagonal (originalEulerRightTime g) 1 =
+        (((sourceYAngle (originalEulerLeftTime g) -
+            sourceYAngle (originalEulerRightTime g) : ℝ) : ℂ) *
+          Complex.I := by
+            rw [sourceZDiagonal_zero_imag, sourceZDiagonal_one_imag]
+            push_cast
+            ring
+    _ = ((Complex.arg (originalSU2RowV g) : ℝ) : ℂ) *
+          Complex.I := by
+            rw [originalEuler_sourceZ_diff]
 
 /-- Product of original source z-exponentials recovers u's
 zero-safe complex polar phase, with no nonzero assumption. -/
