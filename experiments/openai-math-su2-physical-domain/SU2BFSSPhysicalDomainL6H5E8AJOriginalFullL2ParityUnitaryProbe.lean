@@ -36,8 +36,13 @@ theorem originalFullL2Parity_involutive {N : ℕ} (g : FullL2 N) :
   have hinv : inv ∘ inv = id := by
     funext x
     simp [inv]
-  rw [hinv]
-  exact Lp.compMeasurePreserving_id_apply g
+  -- Avoid dependent rewriting of the measure-preservation proof:
+  -- identify the two Lp representatives almost everywhere.
+  apply Lp.ext
+  have hcoe :=
+    Lp.coeFn_compMeasurePreserving g (h.comp h)
+  filter_upwards [hcoe] with x hx
+  simpa only [hinv, Function.comp_apply, id_eq] using hx
 
 /-- Genuine surjective complex-linear isometric equivalence of the
 original BFSS FullL2, not a newly assumed Hilbert-space symmetry. -/
