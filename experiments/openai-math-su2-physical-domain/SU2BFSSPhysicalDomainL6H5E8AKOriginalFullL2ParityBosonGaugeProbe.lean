@@ -66,7 +66,22 @@ theorem originalFullL2Parity_bosonPullback {N : ℕ}
     _ = Lp.compMeasurePreserving
         (inv ∘ (G.boson g : Boson N → Boson N))
         (hi.comp hg) v := by
-      rw [hcomm]
+      -- Avoid rewriting the domain map underneath its dependently typed
+      -- MeasurePreserving certificate; compare genuine Lp representatives.
+      apply Lp.ext
+      have hleft := Lp.coeFn_compMeasurePreserving v (hg.comp hi)
+      have hright := Lp.coeFn_compMeasurePreserving v (hi.comp hg)
+      filter_upwards [hleft, hright] with x hl hr
+      calc
+        (Lp.compMeasurePreserving
+            ((G.boson g : Boson N → Boson N) ∘ inv)
+            (hg.comp hi) v) x =
+          v (((G.boson g : Boson N → Boson N) ∘ inv) x) := hl
+        _ = v ((inv ∘ (G.boson g : Boson N → Boson N)) x) := by
+          rw [hcomm]
+        _ = (Lp.compMeasurePreserving
+            (inv ∘ (G.boson g : Boson N → Boson N))
+            (hi.comp hg) v) x := hr.symm
     _ = Lp.compMeasurePreserving (G.boson g) hg
         (Lp.compMeasurePreserving inv hi v) :=
       Lp.compMeasurePreserving_comp_apply v hi hg
