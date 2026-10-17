@@ -19,7 +19,49 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # pull_request.paths compares against the full unmerged PR: once a proof
+  # appears in the PR, unrelated audit/workflow commits retrigger it.
+  # Gate the expensive compiler stage on changes to existing qualified
+  # proofs since the successful #3 source baseline.
+  qualified-clifford-delta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      needs_strict: ${{ steps.delta.outputs.needs_strict }}
+    steps:
+      - name: Check out current PR source delta
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Detect modifications to qualified original theta source
+        id: delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          baseline=96f1a787c05970d5b43f506e256b9e63a055a43c
+          git fetch --quiet --no-tags --depth=1 origin "$baseline"
+          python3 - "$baseline" <<'PY'
+          import os,subprocess,sys
+          baseline=sys.argv[1]
+          changed=subprocess.check_output(
+              ['git','diff','--name-only',baseline,'HEAD','--',
+               'experiments/openai-math-su2-concrete-potential',
+               'experiments/openai-math-su2-physical-domain'],text=True).splitlines()
+          qualified=[]
+          for path in changed:
+              existed=subprocess.run(
+                  ['git','cat-file','-e',f'{baseline}:{path}'],
+                  stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0
+              if existed: qualified.append(path)
+          need='true' if qualified else 'false'
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              print(f'needs_strict={need}',file=out)
+          print(f'SCALAR_COMMUTANT_GATE_3_BASELINE={baseline}')
+          print(f'CHANGED_ACCEPTED_MATHEMATICS={qualified}')
+          print(f'RUN_SCALAR_COMMUTANT_AUDIT={need}')
+          PY
+
   paired-theta-scalar-commutant:
+    needs: qualified-clifford-delta
+    if: needs.qualified-clifford-delta.outputs.needs_strict == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 24
     steps:
