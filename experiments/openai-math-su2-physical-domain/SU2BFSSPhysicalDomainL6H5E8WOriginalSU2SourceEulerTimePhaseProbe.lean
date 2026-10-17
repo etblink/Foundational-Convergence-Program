@@ -100,7 +100,7 @@ theorem originalEuler_sourceZ_complex_v (g : GaugeGroup 2) :
   calc
     sourceZDiagonal (originalEulerLeftTime g) 0 +
         sourceZDiagonal (originalEulerRightTime g) 1 =
-        (((sourceYAngle (originalEulerLeftTime g) -
+        ((sourceYAngle (originalEulerLeftTime g) -
             sourceYAngle (originalEulerRightTime g) : ℝ) : ℂ) *
           Complex.I := by
             rw [sourceZDiagonal_zero_imag, sourceZDiagonal_one_imag]
