@@ -81,8 +81,10 @@ private theorem parityConjugation_of_anticommute {N : ℕ}
   have hv := congrArg (fun R : CoreEnd N => R (originalSmoothParity f)) h
   change originalSmoothParity (T (originalSmoothParity f)) =
     -(T (originalSmoothParity (originalSmoothParity f))) at hv
-  simpa only [parityConjugation, LinearMap.comp_apply, parity_twice_apply,
-    LinearMap.neg_apply] using hv
+  -- Unfold the bundled conjugation map at this specific test vector;
+  -- the original pointwise operator equality is exactly hv.
+  change originalSmoothParity (T (originalSmoothParity f)) = -(T f)
+  simpa only [parity_twice_apply] using hv
 
 private theorem parityConjugation_of_commute {N : ℕ}
     (T : CoreEnd N)
@@ -94,8 +96,8 @@ private theorem parityConjugation_of_commute {N : ℕ}
   have hv := congrArg (fun R : CoreEnd N => R (originalSmoothParity f)) h
   change originalSmoothParity (T (originalSmoothParity f)) =
     T (originalSmoothParity (originalSmoothParity f)) at hv
-  simpa only [parityConjugation, LinearMap.comp_apply, parity_twice_apply]
-    using hv
+  change originalSmoothParity (T (originalSmoothParity f)) = T f
+  simpa only [parity_twice_apply] using hv
 
 /-- Exact original fermion action is even under spatial inversion. -/
 theorem parityConjugation_fermionAction {N : ℕ}
