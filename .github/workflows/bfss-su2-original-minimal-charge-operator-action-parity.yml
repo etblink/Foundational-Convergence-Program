@@ -95,7 +95,7 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ASOriginalPhysicalClosedChargeGraphEnergyParityProbe.lean)" = 395f75d87a0ca2d4001b6ee2eccd4611ded90676
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8ATOriginalPiLp16OutputParityUnitaryProbe.lean)" = dba70e368ad17344329782cb77da77cfb295328f
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AUOriginalMinimalClosedChargeLinearPMapProbe.lean)" = 5e6300e7db8d292b6766f5800e20c9a394cc0d69
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AVOriginalMinimalChargeOperatorActionParityProbe.lean)" = 6b72cad36964b989a1d4808428d59082cb3421bc
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8AVOriginalMinimalChargeOperatorActionParityProbe.lean)" = 680839c3a65e72457268752e788e066acc383ab6
           echo MINIMAL_CHARGE_OPERATOR_ACTION_PARITY_FROZEN_SOURCE_AND_CANDIDATE_PINS_PASS
       - name: Reclaim disposable runner disk
         shell: bash
