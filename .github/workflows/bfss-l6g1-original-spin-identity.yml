@@ -4742,6 +4742,38 @@ jobs:
           print('L6H5E8Z_ORIGINAL_COLOR_GENERATED_TOP_QUALIFIED')
           PYCODE
 
+      # H5E8AA: unconditional source Gauss maximal-generator joint kernel
+      # iff original physical SU2 gauge-invariant Hilbert subspace.
+      - name: Qualify unconditional original SU2 Gauss kernel physical equivalence
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8AAOriginalSU2JointGaussKernelPhysicalIffProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8ZOriginalSU2ColorGeneratedSubgroupTopProbe.olean
+          echo L6H5E8AA_ORIGINAL_SU2_GAUSS_PHYSICAL_IFF_BEGIN
+          timeout 115s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" \
+            2>&1 | tee /tmp/bfss-l6g1/l6h5e8aa.log
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PYCODE'
+          import re
+          s=open('/tmp/bfss-l6g1/l6h5e8aa.log').read()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          entries={n:{a.strip() for a in v.split(',') if a.strip()} for n,v in
+                   re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)}
+          root='FCP.BFSSSU2PhysicalDomainL6H5E8AA.'
+          for name in ('actualOriginalJointKernel_fixed_fullGauge',
+                       'actualOriginalJointKernel_iff_fullGaugeFixed',
+                       'actualOriginalJointKernel_iff_physical'):
+              key=root+name
+              assert key in entries and entries[key] <= allowed,(key,entries)
+          assert 'sorryAx' not in s and 'error:' not in s,s[-6000:]
+          print('L6H5E8AA_ORIGINAL_SU2_GAUSS_PHYSICAL_IFF_QUALIFIED')
+          PYCODE
+
       - name: Preserve independently inspectable qualification evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
