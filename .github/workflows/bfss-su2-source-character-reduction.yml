@@ -7,7 +7,6 @@ on:
       - research/openai-math-su2-s3k-physical-spin-flow
     paths:
       - .github/workflows/bfss-su2-source-character-reduction.yml
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ERelativeGaugeCharacterReductionProbe.lean
       - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ESourceRelativeGaugeCharacterReductionProbe.lean
   workflow_dispatch:
 
@@ -172,7 +171,7 @@ jobs:
           roots=['scalar_character_conjugation_invariant','scalar_character_rooted_curve_trivial',
                  'scalar_character_trivial_of_zyz','sourceZ','sourceY',
                  'original_relativeGaugeScalar_one_of_curve_relations']
-          m=re.findall(r"'([^']+)' (?:depends on axioms: \\[([^\\]]*)\\]|does not depend on any axioms)",s)
+          m=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
           got={name:{a.strip() for a in ax.split(',') if a.strip()} for name,ax in m}
           assert len(m)==len(roots),(got,roots)
           for x in roots:
