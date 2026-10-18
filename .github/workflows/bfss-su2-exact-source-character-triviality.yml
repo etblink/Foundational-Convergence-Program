@@ -1,12 +1,11 @@
 name: BFSS SU2 Exact Source Character Triviality
 
 # New conditional relative-character theorem, NOT paper Spin48 equivalence.
+# Gate #9: frozen Euler import closure rebuilt and audited (59 modules);
+# S1G candidate had only duplicated post-simp and quarter-turn rw tactics.
+# Gate #10 was launched at the exact source pin below. Manual-only prevents
+# stale PR25 source diff from repeatedly replaying this expensive check.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-s3k-physical-spin-flow
-    paths:
-      - .github/workflows/bfss-su2-exact-source-character-triviality.yml
   workflow_dispatch:
 
 permissions:
