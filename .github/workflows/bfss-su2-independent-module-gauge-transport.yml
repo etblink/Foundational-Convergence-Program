@@ -6,6 +6,11 @@ name: BFSS SU2 Independent Module Gauge Transport
 # Gate #10 was launched at the exact source pin below. Manual-only prevents
 # stale PR25 source diff from repeatedly replaying this expensive check.
 on:
+  pull_request:
+    branches:
+      - research/openai-math-su2-s3k-physical-spin-flow
+    paths:
+      - .github/workflows/bfss-su2-independent-module-gauge-transport.yml
   workflow_dispatch:
 
 permissions:
@@ -54,7 +59,7 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1FSourceGaugeCurveHalvingProbe.lean)" = 79f34a8d5dc8c7d2ebcf605f709f4d9f2c6b2b14
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1GExactSourceRelativeCharacterTrivialityProbe.lean)" = e1fe07f84e4a1427b5b4d2b534bb32644e87b203
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1HSourceGaugeCovariantImplementerUniquenessProbe.lean)" = f4c02e412e06d93841696dc9b36e926ee93c33bb
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1IConditionalCliffordModuleGaugeTransportProbe.lean)" = 49f40a75d16f7fcaa32bdc2d07abbf047eb0c87c
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1IConditionalCliffordModuleGaugeTransportProbe.lean)" = 8fb5e258df5862c111a93241befe3da21f58dde6
           echo RELATIVE_CHARACTER_S1E_TO_S1I_SOURCE_BLOBS_PINNED
 
       - name: Reclaim disposable space
