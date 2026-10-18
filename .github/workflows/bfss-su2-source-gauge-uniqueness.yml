@@ -6,6 +6,11 @@ name: BFSS SU2 Source Gauge Representation Uniqueness
 # Gate #10 was launched at the exact source pin below. Manual-only prevents
 # stale PR25 source diff from repeatedly replaying this expensive check.
 on:
+  pull_request:
+    branches:
+      - research/openai-math-su2-s3k-physical-spin-flow
+    paths:
+      - .github/workflows/bfss-su2-source-gauge-uniqueness.yml
   workflow_dispatch:
 
 permissions:
@@ -53,7 +58,7 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ESourceRelativeGaugeCharacterReductionProbe.lean)" = cfee82b7531b00acfcdad4229cefe292c1ed9ca1
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1FSourceGaugeCurveHalvingProbe.lean)" = 79f34a8d5dc8c7d2ebcf605f709f4d9f2c6b2b14
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1GExactSourceRelativeCharacterTrivialityProbe.lean)" = e1fe07f84e4a1427b5b4d2b534bb32644e87b203
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1HSourceGaugeCovariantImplementerUniquenessProbe.lean)" = ed02abec2b21daf7638f8b8c4c60cbc3702f3187
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1HSourceGaugeCovariantImplementerUniquenessProbe.lean)" = f4c02e412e06d93841696dc9b36e926ee93c33bb
           echo RELATIVE_CHARACTER_S1E_S1F_S1G_S1H_SOURCE_BLOB_PINS_VERIFIED
 
       - name: Reclaim disposable space
