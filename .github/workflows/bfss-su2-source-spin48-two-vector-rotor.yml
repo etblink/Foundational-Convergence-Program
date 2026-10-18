@@ -57,7 +57,7 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1P1SourceCliffordUniversalHomProbe.lean)" = 7f6aa1f0029053cde4a18e7b969c318cf22ab83a
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1QOriginalClifford48GroupLawProbe.lean)" = 5966c753342e63e360849c00944ec959941772a9
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1RActualClifford48AlgebraAutomorphismProbe.lean)" = 65062204398e868cf6d00302fef5732d7fcf8de5
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1SSourceSpin48TwoVectorRotorProbe.lean)" = 9869a2a94a2c7f064beb100573b7769e47f0771e
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1SSourceSpin48TwoVectorRotorProbe.lean)" = ae5751e9cbab52a39e1475a445d75d92e7db762e
           echo ORIGINAL_SOURCE_48_REAL_MAJORANA_AND_TYPED_SO48_BLOBS_PINNED
           echo SOURCE_ONE_PARTICLE_AND_MANUSCRIPT_PHASE_PINS_VERIFIED
 

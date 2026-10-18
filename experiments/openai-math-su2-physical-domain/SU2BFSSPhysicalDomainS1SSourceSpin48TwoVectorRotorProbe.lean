@@ -136,15 +136,16 @@ theorem sourceSpinPair_conjugates_first
     dsimp [A, B]
     simp only [star_mul, CliffordAlgebra.star_ι, neg_mul_neg]
   rw [hstar]
+  have hleft : (A * B) * A = -B := by
+    calc
+      (A * B) * A = A * (B * A) := by rw [mul_assoc]
+      _ = A * (-(A * B)) := by rw [hcomm]
+      _ = -(A * A * B) := by rw [mul_neg, ← mul_assoc]
+      _ = -B := by rw [hA, one_mul]
   calc
-    (A * B) * A * (B * A) = (A * B) * (A * B * A) := by
-      simp only [mul_assoc]
-    _ = -A := by
-      rw [show (A * B) * (A * B * A) =
-        A * (B * A) * (B * A) by simp only [mul_assoc]]
-      rw [hcomm]
-      simp only [mul_neg, neg_mul, neg_neg, mul_assoc, hA, one_mul,
-        hB, mul_one]
+    (A * B) * A * (B * A) = (-B) * (B * A) := by rw [hleft]
+    _ = -((B * B) * A) := by rw [neg_mul, ← mul_assoc]
+    _ = -A := by rw [hB, one_mul]
 
 #print axioms sourceUnitVector
 #print axioms sourceUnitVector_coe
