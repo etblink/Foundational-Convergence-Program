@@ -1,0 +1,41 @@
+# FCP BFSS S3L Project Lead — AW/AX accepted physical-Hilbert operator succession
+
+**Date:** 2026-10-17 PDT. **Role:** Project Lead successor ledger for original BFSS SU(2) source minimal closed charge operator. **Research SHA at this record:** consult latest branch at `research/openai-math-su2-s3l-combined-rotation`, not a stale embedded HEAD. Draft PR #25 stays open/unmerged.
+
+## Frozen source and exact epistemic boundaries
+
+- Upstream source `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean `4.34.1`, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`.
+- Preserved source conventions: original literal `M.chargeVector`, color/fermion actions, SU2 physical invariant core, all 16 source SpinIndex outputs, `(1/16)` scalar form coefficient. Opposite gamma is the separate actual `AlgebraData` with valid opposite Clifford-nine orientation and explicitly reconstructed original GaugeData; **not** a change to source state or an arbitrary paper Clifford module.
+- All accepted research proves statements *within the source representation*. It does not validate the independently written 2026 positive-eigenvalues manuscript's abstract Cl(48)/Spin(48) gauge-equivariant unitary, global Spin(9) sector confinement, positive eigenvalues, or a mass gap.
+
+## Latest exact qualified chain
+
+- [H5E8AU strict Gate #2](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39056152305): real original minimal closed unbounded `LinearPMap` from the ACTUAL gauge-invariant `M.chargeVector` core-graph closure; graph inclusion into source `M.fullClosedGraph`, source vertical uniqueness, closed graph and natural domain. Axiom-clean eight roots.
+- [H5E8AV strict Gate #3](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39058099387): exact source original natural-domain operator action conjugation by spatial parity, all sixteen output values, source-normalized energy, axiom-clean five roots. The first two AV gates were RED for precise namespace and Eq/Iff/direct-rewrite elaboration errors; preserved in separate audits, never treated as mathematical counterexamples.
+- [H5E8AT strict Gate #1](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39054163210): true complex unitary on finite sixteen-component `PiLp 2 (fun _ : SpinIndex => FullL2 N)` outputs.
+- [H5E8AW strict Gate #1](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39062003275): **NEW** full complex polarized source original minimal closed charge form `(1 / 16 : ℂ) * inner ℂ (T u) (T v)` transports between gamma orientations on the true original minimal closed operator natural domain, after Hilbertization through `WithLp.toLp 2`. Five roots, no `sorryAx`, 19-module fresh proof stage. [Permanent acceptance audit](../audits/OPENAI_MATH_BFSS_SU2_H5E8AW_MINIMAL_CLOSED_HILBERT_POLARIZED_FORM_GATE_1_ACCEPTANCE_2026_10_17.md).
+- [H5E8AX strict Gate #1](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39062342663): **NEW** source-true complex Hilbert unitary on **`G.physicalSpace`** from AJ true FullL2 unitary, AL source physical-space invariance, pinned Mathlib `LinearIsometryEquiv.submoduleMap`, and AN exact opposite-gamma physicalSpace equality; all seven roots axiom-clean in original pinned CI. [Permanent acceptance audit](../audits/OPENAI_MATH_BFSS_SU2_H5E8AX_TRUE_PHYSICAL_HILBERT_INPUT_UNITARY_GATE_1_ACCEPTANCE_2026_10_17.md).
+- Exact accepted axioms across these qualified modules: only `propext`, `Classical.choice`, `Quot.sound`; do not count printouts from failed source files, workflow-level green skips, or cache-check success as theorem qualifications.
+
+## Next mathematical work — keep separate and order correctly
+
+**1. Physical Hilbert graph rebasing.** Prove the AU original minimal closed graph, defined by literal original source `M.chargeVector` on `G.invariantCore`, has **all first coordinates in `G.physicalSpace`**: source `G.physicalSpace_closed` and continuity of product first projection allow closure of the smooth-core inclusion. This is a genuine source submodule theorem, not an assumed property of a maximal operator.
+
+**2. True operator on physical input and Hilbert output.** Define the new source-original minimal closed charge graph as the **comap** of AU's qualified original closed graph by `G.physicalSpace.subtype.prodMap` with `PiLp.continuousLinearEquiv 2 ℂ (fun _ : SpinIndex => FullL2 N)` on outputs (as in accepted historical D2B17, but WITHOUT importing its inaccessible Gate #93 `.olean`). Prove exact membership iff, vertical uniqueness via AU/ original source, actual `Submodule.toLinearPMap`, `LinearPMap.graph_eq`, and closedness via preimage of a closed graph under continuous inclusion/output equivalence.
+
+**3. Exact natural-domain and form parity.** Transport input physical Hilbert states by accepted AX and output Hilbert charge values by accepted AT; establish actual source physical rebased operator graph/domain/action intertwining using the accepted AV and AW results. Use explicit map and subtype membership proofs before source specialization to avoid large concrete Fock elaboration. Preserve source `1/16` polarized form coefficient.
+
+**4. DENSITY IS A SEPARATE MATHEMATICAL OBLIGATION.** A closed graph and existence of a physical Hilbert unitary do NOT imply density of the minimal charge domain in `G.physicalSpace`. In the historical physical source, D2A's `sourceCoreNormClosure_le_physicalSpace` explicitly does NOT establish reverse density; D2B16 obtains density only by reusing earlier Gate-47 `sourceClosedPhysicalChargeColumn_domain_closure_eq_physical` about the separately identified deformed-model graph. Its historical acceptance remains valid but the required `.olean` cache cannot be assumed available on this PR. Either source-verify an independent density theorem for the literal original minimal source domain, or stage an exact jointly-qualified identity to the accepted historical source model and density. **Do not smuggle density into `LinearPMap.adjoint`.**
+
+**5. Only with domain density:** establish full physical Hilbert adjoint, exact natural-domain `T†T`, properly normalized complex `(1/16)T†T` associated self-adjoint source Hamiltonian, and true operator-domain conjugation under AX/AT. Abstract uniqueness of the weak-form representing vector may be useful, but requires explicit density/closedness/complete physical Hilbert space hypotheses. Reuse the accepted D2B26–D2B28 mathematical structure without asserting their historical source objects are definitionally equal to this new AU representation.
+
+**6. Distinct representation/science gap remains:** independently pinned 2026 manuscript physical Hilbert/gauge/Clifford module identification, Spin(48) lift, Spin(9) sector/high-weight confinement and positive point spectrum. No manuscript or mass gap transfer solely from source gamma-orientation parity.
+
+## CI and negative knowledge
+
+- Historical H5E8AR Gate #8 and predecessors failed before Lean because `PINNED_GATE93_CACHE_MISSING`; it is a GitHub Actions cross-branch cache accessibility problem, **not** a mathematical disproof, and the AR alias candidate is UNQUALIFIED. Manual-only fail-closed old workflow preserved.
+- Accepted AW/AX qualification workflows were moved to **manual-only** *after strict green*, because GitHub pull_request path filtering on accumulated PR diffs generated redundant expensive rebuilds on unrelated subsequent research commits. Their exact source/hash/axiom checks remain intact; immutable passing runs remain the accepted evidence. Do not relabel redundant pending/older runs.
+- Prefer clean focused proof modules, native source named lemmas, pinned Mathlib functional-analysis APIs, source short structural rewrites, explicit `subst` when matching zero coordinates, and abstract set lemmas before specializing dependent original Fock expressions. Preserve first causal Lean diagnostics, exact source git blob SHA and run ID in permanent audits.
+- No main/PR merge, upstream source modification, changed gamma/fermion signs, unproved assumption, or unqualified spectral conclusion authorized.
+
+**Next recommended title:** `L6H5E8AY — Original Source Minimal Closed Charge Physical Hilbert Rebased Graph and True PiLp-2 Operator`.

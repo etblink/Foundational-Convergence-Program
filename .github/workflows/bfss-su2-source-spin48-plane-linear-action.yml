@@ -1,0 +1,407 @@
+name: BFSS SU2 Source Spin48 Plane Linear Action
+
+# Strict source-exact SO(48) input, NOT a Spin(48) lift.
+on:
+  pull_request:
+    branches:
+      - research/openai-math-su2-s3k-physical-spin-flow
+    paths:
+      - .github/workflows/bfss-su2-source-spin48-plane-linear-action.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-su2-source-spin48-plane-linear-action-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  actual-48-real-majorana:
+    runs-on: ubuntu-latest
+    timeout-minutes: 26
+    steps:
+      - name: Checkout research proof source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Checkout exact independent original BFSS Lean source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Verify all source and compiler pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-spin48-phase
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = 'leanprover/lean4:v4.34.1'
+          python3 - <<'PY'
+          import json
+          data=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(x['rev'] for x in data['packages'] if x['name']=='mathlib')=='d13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe.lean)" = c5de7c744744212711780aee2d4f9742c002cd84
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG3AAdjointColorRepresentationProbe.lean)" = c8bbd59782c3116fb514d6aa20d91c607a11c3e7
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG3B24ModeOrthogonalLiftProbe.lean)" = c90b25156ec4d81ee16e5939cd888cc12cdc33a3
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG3CComplexOneParticleUnitaryProbe.lean)" = e555823155d5ce348843acb9eaa9ea6762f636ac
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe.lean)" = 3f845ae219586be47fa76aabc3259027b1bb4bae
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1KActualSO48SourceGaugeHomProbe.lean)" = e7f09cc289bc254aa4b23568dfec70552a0f613c
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1P0NormalizedSourceQuadraticActionProbe.lean)" = 3f5e42879537be4c3fd8a777ed927e6fda00f40e
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1P1SourceCliffordUniversalHomProbe.lean)" = 7f6aa1f0029053cde4a18e7b969c318cf22ab83a
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1QOriginalClifford48GroupLawProbe.lean)" = 5966c753342e63e360849c00944ec959941772a9
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1RActualClifford48AlgebraAutomorphismProbe.lean)" = 65062204398e868cf6d00302fef5732d7fcf8de5
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1SSourceSpin48TwoVectorRotorProbe.lean)" = ae5751e9cbab52a39e1475a445d75d92e7db762e
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1TSourceSpin48FullRotorActionProbe.lean)" = a63d8577ae2cb98bb59327b60df45defc3fae7cf
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1USourceSpin48PlaneLinearCombinationProbe.lean)" = 9c489177a20748aa8dcab1278c34e0f0b16deb08
+          echo ORIGINAL_SOURCE_48_REAL_MAJORANA_AND_TYPED_SO48_BLOBS_PINNED
+          echo SOURCE_ONE_PARTICLE_AND_MANUSCRIPT_PHASE_PINS_VERIFIED
+
+      - name: Reclaim disposable runner space
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean and Mathlib dependencies
+        id: pinned
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake
+            ~/.elan
+          key: bfss-l6-pinned-env-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Restore accepted source SU2 one-particle closure
+        id: l6
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-l6g7w-accepted-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G[1-6]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7[A-W]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1[A-B]*Probe.lean', 'experiments/openai-math-su2-concrete-potential/SU2*.lean') }}
+
+      - name: Fail closed on cache and compiled dependency provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.pinned.outputs.cache-hit }}" = true || { echo PINNED_LEAN_CACHE_MISSING; exit 1; }
+          test "${{ steps.l6.outputs.cache-hit }}" = true || { echo ACCEPTED_L6_SOURCE_CACHE_MISSING; exit 1; }
+          source "$HOME/.elan/env"
+          test "$(git -C upstream-math/lean/.lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          cd upstream-math/lean
+          lake env lean --version | tee /tmp/bfss-spin48-phase/compiler.txt
+          grep -q 'version 4.34.1' /tmp/bfss-spin48-phase/compiler.txt
+          for stem in SU2BFSSG1APairedThetaProbe SU2BFSSG3AAdjointColorRepresentationProbe SU2BFSSG3B24ModeOrthogonalLiftProbe SU2BFSSG3CComplexOneParticleUnitaryProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "ACCEPTED_SOURCE_OLEAN_MISSING=$stem"; exit 1; }
+          done
+
+      - name: Strictly prove actual SU2 24-mode determinant one and SU24 hom
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+            tee "/tmp/bfss-spin48-phase/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('/tmp/bfss-spin48-phase/SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe.log').read_text()
+          roots=['adjointColorMatrix_det_sq_one',
+                 'oneParticleMatrix_det_one',
+                 'complexOneParticleMatrix_det_one',
+                 'complexOneParticleSpecialUnitary',
+                 'complexOneParticleSpecialUnitaryHom']
+          reports=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in reports}
+          assert len(reports)==len(roots),(got,roots)
+          for name in roots:
+              key='FCP.BFSSSU2PhysicalDomainS1C.'+name
+              assert key in got,(key,got)
+              assert got[key]<={'propext','Classical.choice','Quot.sound'},(key,got[key])
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-4000:]
+          print('S1C_ACTUAL_SOURCE_SU24_DETERMINANT_ONE_FIVE_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Strictly prove actual 48-real source Majorana SO48 matrix input
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe.olean || { echo ACCEPTED_S1C_SOURCE_SU24_OLEAN_MISSING; exit 1; }
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+            tee "/tmp/bfss-spin48-phase/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('/tmp/bfss-spin48-phase/SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe.log').read_text()
+          roots=['sourceRealMajoranaMatrix','sourceRealMajoranaMatrix_entry',
+                 'sourceRealMajoranaMatrix_one','sourceRealMajoranaMatrix_mul',
+                 'sourceRealMajoranaMatrix_transpose',
+                 'sourceRealMajoranaMatrix_orthogonal',
+                 'sourceRealMajoranaMatrix_det_one','sourceRealMajoranaMatrixHom']
+          hits=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in hits}
+          assert len(hits)==len(roots),(got,roots)
+          for name in roots:
+              key='FCP.BFSSSU2PhysicalDomainS1J.'+name
+              assert key in got,(key,got)
+              assert got[key]<={'propext','Classical.choice','Quot.sound'},(key,got[key])
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-4000:]
+          print('S1J_ACTUAL_ORIGINAL_SOURCE_48_REAL_MAJORANA_SO48_MATRIX_8_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Strictly prove actual original SU2 to SO48 typed group homomorphism
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1KActualSO48SourceGaugeHomProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe.olean || { echo ACCEPTED_SOURCE_48_REAL_MAJORANA_OLEAN_MISSING; exit 1; }
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+            tee "/tmp/bfss-spin48-phase/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('/tmp/bfss-spin48-phase/SU2BFSSPhysicalDomainS1KActualSO48SourceGaugeHomProbe.log').read_text()
+          roots=['sourceRealMajoranaSO','sourceRealMajoranaSO_coe',
+                 'sourceRealMajoranaSOHom']
+          hits=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in hits}
+          assert len(hits)==len(roots),(got,roots)
+          for name in roots:
+              key='FCP.BFSSSU2PhysicalDomainS1K.'+name
+              assert key in got,(key,got)
+              assert got[key]<={'propext','Classical.choice','Quot.sound'},(key,got[key])
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-4000:]
+          print('S1K_ORIGINAL_SU2_TO_REAL_SO48_GROUP_HOM_3_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Strictly prove original normalized 48-real quadratic baseline
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1P0NormalizedSourceQuadraticActionProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1KActualSO48SourceGaugeHomProbe.olean || { echo SOURCE_SO48_OLEAN_MISSING; exit 1; }
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+            tee "/tmp/bfss-spin48-phase/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          stem='SU2BFSSPhysicalDomainS1P0NormalizedSourceQuadraticActionProbe'
+          s=pathlib.Path('/tmp/bfss-spin48-phase',stem+'.log').read_text()
+          roots=['source48Quadratic','source48Quadratic_eq_dot','source48LinearEquiv',
+                 'source48LinearEquiv_apply','source48LinearEquiv_preserves_quadratic']
+          reports=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in reports}
+          assert len(reports)==len(roots),(got,roots)
+          for n in roots:
+              key='FCP.BFSSSU2PhysicalDomainS1P0.'+n
+              assert key in got and got[key]<={'propext','Classical.choice','Quot.sound'},(key,got)
+          assert 'error:' not in s and 'sorryAx' not in s and 'unknownIdentifier' not in s,s[-4000:]
+          print('S1P0_ACTUAL_48_REAL_QUADRATIC_SOURCE_5_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Strictly prove universal original Clifford48 algebra hom and generator action
+        shell: bash
+        timeout-minutes: 7
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1P1SourceCliffordUniversalHomProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1P0NormalizedSourceQuadraticActionProbe.olean || { echo QUALIFIED_SOURCE_QUADRATIC_P0_OLEAN_MISSING; exit 1; }
+          timeout 200s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+            tee "/tmp/bfss-spin48-phase/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          stem='SU2BFSSPhysicalDomainS1P1SourceCliffordUniversalHomProbe'
+          s=pathlib.Path('/tmp/bfss-spin48-phase',stem+'.log').read_text()
+          roots=['source48CliffordHom','source48CliffordHom_generator']
+          reports=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in reports}
+          assert len(reports)==len(roots),(got,roots)
+          for n in roots:
+              key='FCP.BFSSSU2PhysicalDomainS1P1.'+n
+              assert key in got and got[key]<={'propext','Classical.choice','Quot.sound'},(key,got)
+          assert 'error:' not in s and 'sorryAx' not in s and 'unknownIdentifier' not in s,s[-4000:]
+          print('S1P1_ACTUAL_REAL_CLIFFORD48_UNIVERSAL_HOM_2_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Strictly prove original source Clifford48 SU2 composition and inverses
+        shell: bash
+        timeout-minutes: 7
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1QOriginalClifford48GroupLawProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1P1SourceCliffordUniversalHomProbe.olean || { echo QUALIFIED_SOURCE_CLIFFORD_P1_OLEAN_MISSING; exit 1; }
+          timeout 200s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+            tee "/tmp/bfss-spin48-phase/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          stem='SU2BFSSPhysicalDomainS1QOriginalClifford48GroupLawProbe'
+          s=pathlib.Path('/tmp/bfss-spin48-phase',stem+'.log').read_text()
+          roots=['source48CliffordHom_one','source48CliffordHom_mul',
+                 'source48CliffordHom_inv_left','source48CliffordHom_inv_right']
+          reports=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in reports}
+          assert len(reports)==len(roots),(got,roots)
+          for n in roots:
+              key='FCP.BFSSSU2PhysicalDomainS1Q.'+n
+              assert key in got and got[key]<={'propext','Classical.choice','Quot.sound'},(key,got)
+          assert 'error:' not in s and 'sorryAx' not in s and 'unknownIdentifier' not in s,s[-5000:]
+          print('S1Q_ACTUAL_CLIFFORD48_SU2_COMPOSITION_INVERSES_4_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Strictly prove actual original SU2 Clifford48 algebra automorphisms
+        shell: bash
+        timeout-minutes: 7
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1RActualClifford48AlgebraAutomorphismProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1QOriginalClifford48GroupLawProbe.olean || { echo QUALIFIED_SOURCE_CLIFFORD_Q_OLEAN_MISSING; exit 1; }
+          timeout 210s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+            tee "/tmp/bfss-spin48-phase/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          stem='SU2BFSSPhysicalDomainS1RActualClifford48AlgebraAutomorphismProbe'
+          s=pathlib.Path('/tmp/bfss-spin48-phase',stem+'.log').read_text()
+          roots=['source48CliffordAut','source48CliffordAut_apply',
+                 'source48CliffordAut_generator',
+                 'source48CliffordAut_one','source48CliffordAut_mul']
+          reports=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in reports}
+          assert len(reports)==len(roots),(got,roots)
+          for n in roots:
+              key='FCP.BFSSSU2PhysicalDomainS1R.'+n
+              assert key in got and got[key]<={'propext','Classical.choice','Quot.sound'},(key,got)
+          assert 'error:' not in s and 'sorryAx' not in s and 'unknownIdentifier' not in s,s[-5000:]
+          print('S1R_SOURCE_CLIFFORD48_ALGEQUIV_SU2_ACTION_5_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Strictly prove nontrivial source-normalized Spin48 two-vector rotor and conjugation
+        shell: bash
+        timeout-minutes: 7
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1SSourceSpin48TwoVectorRotorProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1RActualClifford48AlgebraAutomorphismProbe.olean || { echo ACCEPTED_SOURCE_S1R_AUT_OLEAN_MISSING; exit 1; }
+          timeout 210s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+            tee "/tmp/bfss-spin48-phase/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          stem='SU2BFSSPhysicalDomainS1SSourceSpin48TwoVectorRotorProbe'
+          s=pathlib.Path('/tmp/bfss-spin48-phase',stem+'.log').read_text()
+          roots=['sourceUnitVector','sourceUnitVector_coe',
+                 'sourceUnitVector_mem_lipschitz','sourceSpinPair',
+                 'sourceSpinPair_coe','sourceSpinPair_conjugates_first']
+          hits=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in hits}
+          assert len(hits)==len(roots),(got,roots)
+          for name in roots:
+              key='FCP.BFSSSU2PhysicalDomainS1S.'+name
+              assert key in got and got[key]<={'propext','Classical.choice','Quot.sound'},(key,got)
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-5000:]
+          print('S1S_ACTUAL_NORMALIZED_REAL_CLIFFORD48_SPIN_TWO_VECTOR_ROTOR_6_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Strictly prove second-axis and orthogonal complement Spin48 conjugation
+        shell: bash
+        timeout-minutes: 7
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1TSourceSpin48FullRotorActionProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1SSourceSpin48TwoVectorRotorProbe.olean || { echo ACCEPTED_S1S_SPIN_ROTOR_OLEAN_MISSING; exit 1; }
+          timeout 210s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+            tee "/tmp/bfss-spin48-phase/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          stem='SU2BFSSPhysicalDomainS1TSourceSpin48FullRotorActionProbe'
+          s=pathlib.Path('/tmp/bfss-spin48-phase',stem+'.log').read_text()
+          roots=['sourceSpinPair_conjugates_second',
+                 'sourceSpinPair_conjugates_perpendicular']
+          hits=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in hits}
+          assert len(hits)==len(roots),(got,roots)
+          for name in roots:
+              key='FCP.BFSSSU2PhysicalDomainS1T.'+name
+              assert key in got and got[key]<={'propext','Classical.choice','Quot.sound'},(key,got)
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-5000:]
+          print('S1T_SOURCE_SPIN48_FULL_PLANE_HALF_TURN_2_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Strictly prove source Spin48 rotor arbitrary plane linear combination
+        shell: bash
+        timeout-minutes: 7
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1USourceSpin48PlaneLinearCombinationProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1TSourceSpin48FullRotorActionProbe.olean || { echo ACCEPTED_S1T_FULL_PLANE_OLEAN_MISSING; exit 1; }
+          timeout 210s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+            tee "/tmp/bfss-spin48-phase/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          stem='SU2BFSSPhysicalDomainS1USourceSpin48PlaneLinearCombinationProbe'
+          s=pathlib.Path('/tmp/bfss-spin48-phase',stem+'.log').read_text()
+          roots=['sourceSpinPair_conjugates_plane_combination']
+          hits=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in hits}
+          assert len(hits)==len(roots),(got,roots)
+          for name in roots:
+              key='FCP.BFSSSU2PhysicalDomainS1U.'+name
+              assert key in got and got[key]<={'propext','Classical.choice','Quot.sound'},(key,got)
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-5000:]
+          print('S1U_SOURCE_SPIN48_ARBITRARY_PLANE_LINEAR_COMBINATION_1_ROOT_KERNEL_PASS')
+          PY
+
+      - name: Preserve exact pinned evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-su2-source-spin48-plane-linear-action-${{ github.run_id }}
+          path: /tmp/bfss-spin48-phase/
+          if-no-files-found: warn
+          retention-days: 14

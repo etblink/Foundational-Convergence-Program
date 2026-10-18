@@ -1,0 +1,224 @@
+import SU2BFSSPhysicalDomainL6G6ZOriginalColorFlowVacuumProbe
+import SU2BFSSPhysicalDomainL6G6LOriginalInfinitesimalColorActionProbe
+import SU2BFSSPhysicalDomainL6G6XOriginalSU2GaugeCurveProbe
+
+/-!
+L6G7A — direct match between the original bounded fermionic
+color-flow tangent and the genuine +i SU(2) adjoint-color tangent.
+
+On each of the literal 48 source theta operators, the commutator
+[J_F(c), theta_{s,d}] has output-color/input-color coefficient
+f_(b d c). L6G6X independently proves this is the derivative
+of the ORIGINAL pairedAlgebraData.adjointCoefficient of the
+genuine determinant-one SU(2) curve.
+
+This stage computes the derivative of the original bounded
+flow's theta intertwining defect at t=0 on every actual Fock state.
+It proves an infinitesimal source match, NOT finite-time covariance,
+equality with the G4B original gauge action, or a Gauss theorem.
+-/
+
+set_option autoImplicit false
+set_option synthInstance.maxHeartbeats 400000
+set_option maxHeartbeats 1600000
+
+namespace FCP.BFSSSU2PhysicalDomainL6G7A
+noncomputable section
+
+open scoped BigOperators
+open OAI.BFSSQuantum
+open FCP.BFSSSU2GaugeG1A
+open FCP.BFSSSU2PhysicalDomainL6G6K
+open FCP.BFSSSU2PhysicalDomainL6G6L
+open FCP.BFSSSU2PhysicalDomainL6G6X
+open FCP.BFSSSU2PhysicalDomainL6G6Z
+
+private theorem sourceNormalizedPauliColor :
+    ∀ a : ColorIndex 2,
+      pairedAlgebraData.color a = FCP.BFSSSU2.normalizedPauli a := by
+  intro a
+  calc
+    pairedAlgebraData.color a =
+        FCP.BFSSSU2Full.concreteAlgebraData.color a :=
+      pairedAlgebraData_color a
+    _ = FCP.BFSSSU2.normalizedPauli a :=
+      FCP.BFSSSU2Full.concreteAlgebraData_color a
+
+/-- EXACT sign and orientation of source color current at each
+original theta: index b is output, d is input. Coefficients coincide
+with the independently qualified true SU(2) tangent of L6G6X. -/
+theorem sourceFermionGenerator_comm_matches_nativeAdjointTangent
+    (c : ColorIndex 2) (s : SpinIndex) (d : ColorIndex 2) :
+    sourceFiberFermionColorGenerator pairedAlgebraData c *
+        pairedAlgebraData.theta s d -
+      pairedAlgebraData.theta s d *
+        sourceFiberFermionColorGenerator pairedAlgebraData c =
+      ∑ b : ColorIndex 2,
+        (pairedAlgebraData.structureConstant b d c : ℂ) •
+          pairedAlgebraData.theta s b := by
+  have hcomm :=
+    sourceFiberFermionColorGenerator_comm pairedAlgebraData
+      sourceNormalizedPauliColor c s d
+  have hskew (b : ColorIndex 2) :
+      (pairedAlgebraData.structureConstant b d c : ℂ) =
+        -(pairedAlgebraData.structureConstant d b c : ℂ) := by
+    simpa only [Complex.ofReal_neg] using
+      congrArg (fun z : ℝ => (z : ℂ))
+        (FCP.BFSSSU2PhysicalDomainL6G6D.sourceSU2StructureConstant_swapFirst
+          pairedAlgebraData sourceNormalizedPauliColor d b c)
+  calc
+    _ = -(∑ b : ColorIndex 2,
+          (pairedAlgebraData.structureConstant d b c : ℂ) •
+            pairedAlgebraData.theta s b) := hcomm
+    _ = ∑ b : ColorIndex 2,
+          -((pairedAlgebraData.structureConstant d b c : ℂ) •
+            pairedAlgebraData.theta s b) := by simp only [Finset.sum_neg_distrib]
+    _ = ∑ b : ColorIndex 2,
+          (pairedAlgebraData.structureConstant b d c : ℂ) •
+            pairedAlgebraData.theta s b := by
+      apply Finset.sum_congr rfl
+      intro b _
+      rw [hskew b]
+      exact (neg_smul _ _).symm
+
+/-- Each native SU(2) adjoint coefficient has exactly the tangent
+which appears in the actual bounded source generator commutator. -/
+theorem sourceNativeAdjointCoefficient_matches_generator
+    (c : ColorIndex 2) (d b : ColorIndex 2) :
+    HasDerivAt
+      (fun t : ℝ => pairedAlgebraData.adjointCoefficient
+        (sourcePlusIGaugeCurve c t) d b)
+      (pairedAlgebraData.structureConstant b d c) 0 :=
+  sourcePlusIGaugeCurve_adjointCoefficient_deriv c d b
+
+/-!
+First isolate the derivative of a bounded-linear intertwining defect
+independently of the original high-dimensional Fock-space elaboration.
+This is a purely analytic, polymorphic interface: no SU(2) premises.
+-/
+private theorem abstract_boundedLinear_sub_deriv
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    (T : E →L[ℝ] E) (f g : ℝ → E) (u w : E)
+    (hf : HasDerivAt f u 0) (hg : HasDerivAt g w 0) :
+    HasDerivAt (fun t : ℝ => f t - T (g t)) (u - T w) 0 := by
+  have hT : HasDerivAt (fun t : ℝ => T (g t)) (T w) 0 := by
+    have h := T.hasFDerivAt.comp_hasDerivAt 0 hg
+    change HasDerivAt (fun t : ℝ => T (g t)) (T w) 0 at h
+    exact h
+  have hs := hf.sub hT
+  change HasDerivAt (fun t : ℝ => f t - T (g t))
+    (u - T w) 0 at hs
+  exact hs
+
+/-- Source-independent pointwise evaluation of an endomorphism
+commutator; this avoids unfolding the enormous concrete Fock operator
+multiplication in the source theorem. -/
+private theorem abstract_end_comm_apply
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E]
+    (J T : E →L[ℂ] E) (v : E) :
+    ((J * T - T * J) : E →L[ℂ] E) v =
+      J (T v) - T (J v) := by
+  rfl
+
+/-- Evaluate in the original concrete operator type BEFORE introducing the
+analytic PiLp instances. J and T are arbitrary local parameters here, so
+this proof neither specializes a polymorphic NormedSpace dictionary nor
+unfolds the actual source current or theta construction. -/
+private theorem sourceFiberEnd_comm_apply
+    (J T : SourceFiberEnd) (v : Fermion 2) :
+    ((J * T - T * J) : SourceFiberEnd) v =
+      J (T v) - T (J v) := by
+  rfl
+
+/-- Complete source operator-to-vector transport under the original
+algebraic instances. The later analytic proof receives only this vector
+equality; it never reconstructs the source operator product under its
+local PiLp normed-space dictionaries. -/
+theorem sourceFermionGenerator_comm_matches_nativeAdjointTangent_apply
+    (c : ColorIndex 2) (s : SpinIndex) (d : ColorIndex 2)
+    (v : Fermion 2) :
+    sourceFiberFermionColorGenerator pairedAlgebraData c
+        (pairedAlgebraData.theta s d v) -
+      pairedAlgebraData.theta s d
+        (sourceFiberFermionColorGenerator pairedAlgebraData c v) =
+      (∑ b : ColorIndex 2,
+        (pairedAlgebraData.structureConstant b d c : ℂ) •
+          pairedAlgebraData.theta s b) v := by
+  exact (sourceFiberEnd_comm_apply
+    (sourceFiberFermionColorGenerator pairedAlgebraData c)
+    (pairedAlgebraData.theta s d) v).symm.trans
+      (congrArg (fun K : SourceFiberEnd => K v)
+        (sourceFermionGenerator_comm_matches_nativeAdjointTangent c s d))
+
+/-- Resolve the source Fock analytic structure at the declaration boundary.
+The qualified L6G6Z derivative is elaborated with PiLp's actual
+normed-group and real-module instances, not WithLp's wrapper instances. -/
+local instance sourceFockPiLpNormedAddCommGroup :
+    NormedAddCommGroup (Fermion 2) :=
+  PiLp.normedAddCommGroup 2 (fun _ => ℂ)
+
+local instance sourceFockPiLpRealNormedSpace :
+    NormedSpace ℝ (Fermion 2) :=
+  PiLp.normedSpace 2 ℝ (fun _ => ℂ)
+
+/-- Give the concrete Fock complex-module dictionary once. In the
+abstract operator commutator proof the scalar field is complex; allowing
+Lean to reconstruct this over 2^24 coordinates caused #164's
+recursion depth error before any mathematical proof search. -/
+local instance sourceFockPiLpComplexNormedSpace :
+    NormedSpace ℂ (Fermion 2) :=
+  PiLp.normedSpace 2 ℂ (fun _ => ℂ)
+
+/-- FIRST-ORDER SOURCE COVARIANCE: on every literal original theta
+and every actual Fermion 2 state, the derivative of the bounded flow
+intertwining defect is the source native SU(2) adjoint-color tangent.
+This is NOT a finite-time covariance equation. -/
+theorem sourceFermionColorFlow_thetaIntertwiner_deriv_zero
+    (c : ColorIndex 2) (s : SpinIndex)
+    (d : ColorIndex 2) (v : Fermion 2) :
+    HasDerivAt
+      (fun t : ℝ =>
+        sourceFermionColorFlow c t (pairedAlgebraData.theta s d v) -
+        pairedAlgebraData.theta s d (sourceFermionColorFlow c t v))
+      ((∑ b : ColorIndex 2,
+          (pairedAlgebraData.structureConstant b d c : ℂ) •
+            pairedAlgebraData.theta s b) v) 0 := by
+  let T := pairedAlgebraData.theta s d
+  let J := sourceFiberFermionColorGenerator pairedAlgebraData c
+  have hleft : HasDerivAt
+      (fun t : ℝ => sourceFermionColorFlow c t (T v))
+      (J (T v)) 0 :=
+    sourceFermionColorFlow_derivative_zero c (T v)
+  have hright :
+      HasDerivAt (fun t : ℝ => sourceFermionColorFlow c t v) (J v) 0 :=
+    sourceFermionColorFlow_derivative_zero c v
+  have hsub : HasDerivAt
+      (fun t : ℝ => sourceFermionColorFlow c t (T v) -
+        T (sourceFermionColorFlow c t v))
+      (J (T v) - T (J v)) 0 :=
+    abstract_boundedLinear_sub_deriv (T.restrictScalars ℝ)
+      (fun t : ℝ => sourceFermionColorFlow c t (T v))
+      (fun t : ℝ => sourceFermionColorFlow c t v)
+      (J (T v)) (J v) hleft hright
+  have hcoeff :=
+    sourceFermionGenerator_comm_matches_nativeAdjointTangent_apply c s d v
+  change HasDerivAt
+    (fun t : ℝ => sourceFermionColorFlow c t (T v) -
+      T (sourceFermionColorFlow c t v))
+    ((∑ b : ColorIndex 2,
+        (pairedAlgebraData.structureConstant b d c : ℂ) •
+          pairedAlgebraData.theta s b) v) 0
+  rw [← hcoeff]
+  exact hsub
+
+#print axioms abstract_boundedLinear_sub_deriv
+#print axioms abstract_end_comm_apply
+#print axioms sourceFiberEnd_comm_apply
+#print axioms sourceFermionGenerator_comm_matches_nativeAdjointTangent
+#print axioms sourceFermionGenerator_comm_matches_nativeAdjointTangent_apply
+#print axioms sourceNativeAdjointCoefficient_matches_generator
+#print axioms sourceFermionColorFlow_thetaIntertwiner_deriv_zero
+#check @sourceFermionColorFlow_thetaIntertwiner_deriv_zero
+
+end
+end FCP.BFSSSU2PhysicalDomainL6G7A
