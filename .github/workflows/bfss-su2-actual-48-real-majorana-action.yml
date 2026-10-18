@@ -2,11 +2,6 @@ name: BFSS SU2 Actual 48 Real Majorana Color Action
 
 # Strict source-exact SO(48) input, NOT a Spin(48) lift.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-s3k-physical-spin-flow
-    paths:
-      - .github/workflows/bfss-su2-actual-48-real-majorana-action.yml
   workflow_dispatch:
 
 permissions:
