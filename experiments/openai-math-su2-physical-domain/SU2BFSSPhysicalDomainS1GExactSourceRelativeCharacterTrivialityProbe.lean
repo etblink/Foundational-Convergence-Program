@@ -73,13 +73,11 @@ theorem source_z_diag_neg_zero (t : ℝ) :
     sourceZDiagonal (-t) (0 : Fin 2) =
       sourceZDiagonal t (1 : Fin 2) := by
   simp [sourceZDiagonal]
-  ring
 
 theorem source_z_diag_neg_one (t : ℝ) :
     sourceZDiagonal (-t) (1 : Fin 2) =
       sourceZDiagonal t (0 : Fin 2) := by
   simp [sourceZDiagonal]
-  ring
 
 theorem source_y_angle_neg (t : ℝ) :
     sourceYAngle (-t) = -sourceYAngle t := by
@@ -95,7 +93,6 @@ theorem original_source_yquarter_z_swap (t : ℝ) :
       (sourceZ t : ColorMatrix 2) =
     (sourceZ (-t) : ColorMatrix 2) *
       (sourceY sourceQuarterTurnTime : ColorMatrix 2)
-  rw [source_quarter_y_matrix]
   rw [source_quarter_y_matrix]
   change (!![(0 : ℂ), 1; -1, 0] : ColorMatrix 2) *
     (sourcePlusIGaugeCurve (2 : Fin 3) t : ColorMatrix 2) =
@@ -116,7 +113,6 @@ theorem original_source_zquarter_y_swap (t : ℝ) :
       (sourceY t : ColorMatrix 2) =
     (sourceY (-t) : ColorMatrix 2) *
       (sourceZ sourceQuarterTurnTime : ColorMatrix 2)
-  rw [source_quarter_z_matrix]
   rw [source_quarter_z_matrix]
   change (!![Complex.I, 0; 0, -Complex.I] : ColorMatrix 2) *
     (sourcePlusIGaugeCurve (1 : Fin 3) t : ColorMatrix 2) =
