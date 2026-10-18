@@ -2,6 +2,11 @@ name: BFSS SU2 Exact Source Character Triviality
 
 # New conditional relative-character theorem, NOT paper Spin48 equivalence.
 on:
+  pull_request:
+    branches:
+      - research/openai-math-su2-s3k-physical-spin-flow
+    paths:
+      - .github/workflows/bfss-su2-exact-source-character-triviality.yml
   workflow_dispatch:
 
 permissions:
@@ -14,7 +19,7 @@ concurrency:
 jobs:
   source-exact-relative-gauge-character:
     runs-on: ubuntu-latest
-    timeout-minutes: 22
+    timeout-minutes: 65
     steps:
       - name: Check out exact candidate source
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -206,6 +211,122 @@ jobs:
           assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-3500:]
           print('S1F_SOURCE_SU2_PLUS_I_CURVE_HALF_INVERSE_6_ROOTS_KERNEL_PASS')
           PY
+
+      - name: Restore frozen original Euler source import closure
+        id: euler_accepted
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1g-euler-source-v1-adc7f124-lean4341-f0683ba2-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7*.lean') }}
+
+      - name: Recover historical source Euler closure with exact frozen baseline
+        if: steps.euler_accepted.outputs.cache-hit != 'true'
+        shell: bash
+        timeout-minutes: 46
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          git fetch --quiet --no-tags --depth=1 origin f0683ba298a2c1109677f7bc7a8393265e0e8cda
+          python3 - <<'PY'
+          import pathlib, re, subprocess, sys, shutil
+          base='f0683ba298a2c1109677f7bc7a8393265e0e8cda'
+          target='SU2BFSSPhysicalDomainL6H5E8YOriginalSU2ExactSourceEulerFactorizationProbe'
+          root=pathlib.Path('upstream-math/lean')
+          obj=root/'.lake/build/lib/lean'
+          out=pathlib.Path('/tmp/bfss-su2-relative-character')
+          out.mkdir(exist_ok=True)
+          dirs=[pathlib.Path('experiments/openai-math-su2-physical-domain'),
+                pathlib.Path('experiments/openai-math-su2-concrete-potential')]
+          sources={}
+          for folder in dirs:
+              for path in sorted(folder.glob('SU2*.lean')):
+                  if path.stem in sources:
+                      raise RuntimeError(f'DUPLICATE_SOURCE_MODULE={path.stem}')
+                  sources[path.stem]=path
+          visited=set()
+          active=set()
+          plan=[]
+          immutable={}
+          def check_source(module, path):
+              rel=str(path)
+              expected=subprocess.run(['git','rev-parse','--verify',f'{base}:{rel}'],
+                  text=True,capture_output=True)
+              if expected.returncode:
+                  raise RuntimeError(f'NONFROZEN_EULER_IMPORT={module} {rel} missing in {base}')
+              current=subprocess.check_output(['git','hash-object',rel],text=True).strip()
+              if current!=expected.stdout.strip():
+                  raise RuntimeError(f'CHANGED_ACCEPTED_EULER_IMPORT={module} {rel}')
+              immutable[module]=current
+          def visit(module):
+              if not module.startswith('SU2'):
+                  return
+              if module in visited:
+                  return
+              if module in active:
+                  raise RuntimeError(f'CYCLIC_LEAN_IMPORT={module}')
+              path=sources.get(module)
+              ole=obj/(module+'.olean')
+              if path is None:
+                  if not ole.is_file():
+                      raise RuntimeError(f'MISSING_UNAVAILABLE_SOURCE_IMPORT={module}')
+                  visited.add(module)
+                  return
+              check_source(module,path)
+              # Existing pin- and source-qualified closure cache may be
+              # used, but never repair a missing import with an axiom.
+              if ole.is_file():
+                  visited.add(module)
+                  return
+              active.add(module)
+              for imp in re.findall(r'^import\s+([A-Za-z0-9_.]+)',path.read_text(),re.M):
+                  visit(imp)
+              active.remove(module)
+              visited.add(module)
+              plan.append(module)
+          visit(target)
+          (out/'euler-source-plan.txt').write_text(
+              'ACCEPTED_SOURCE_BASELINE='+base+'\n'+
+              '\n'.join(f'{module} {immutable[module]}' for module in immutable)+'\n'+
+              'COMPILE_ORDER\n'+'\n'.join(plan)+'\n')
+          print(f'EULER_SOURCE_FROZEN_BLOB_CHECKED={len(immutable)}')
+          print(f'EULER_RECOVER_MODULES_TO_COMPILE={len(plan)}',flush=True)
+          for i,module in enumerate(plan):
+              path=sources[module]
+              shutil.copy2(path,root/(module+'.lean'))
+              log=out/(module+'.log')
+              cmd=['timeout','220s','lake','env','lean','-o',
+                    str(pathlib.Path('.lake/build/lib/lean')/(module+'.olean')),
+                    module+'.lean']
+              result=subprocess.run(cmd,cwd=root,text=True,
+                                    stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+              log.write_text(result.stdout)
+              if result.returncode or 'error:' in result.stdout or 'sorryAx' in result.stdout or not (obj/(module+'.olean')).is_file():
+                  print(f'EULER_IMPORT_FIRST_FAILURE={module} STEP={i+1}/{len(plan)} EXIT={result.returncode}')
+                  print(result.stdout[-9000:],flush=True)
+                  sys.exit(1)
+              print(f'EULER_ACCEPTED_IMPORT_PASS={module} STEP={i+1}/{len(plan)}',flush=True)
+          if not (obj/(target+'.olean')).is_file():
+              raise RuntimeError('ORIGINAL_EULER_OLEAN_NOT_BUILT')
+          logfile=out/(target+'.log')
+          if logfile.exists():
+              data=logfile.read_text()
+              pat=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
+              got={k:{a.strip() for a in v.split(',') if a.strip()}
+                   for k,v in re.findall(pat,data)}
+              for name in ['originalSU2_eq_of_firstRow','original_source_zyz_exact_euler',
+                           'original_source_zyz_exists']:
+                  key='FCP.BFSSSU2PhysicalDomainL6H5E8Y.'+name
+                  if key not in got or not got[key]<={'propext','Classical.choice','Quot.sound'}:
+                      raise RuntimeError(f'EULER_AXIOM_AUDIT_FAILED={key} GOT={got.get(key)}')
+          print('EXACT_HISTORICAL_ORIGINAL_SU2_EULER_IMPORT_CLOSURE_KERNEL_PASS',flush=True)
+          PY
+
+      - name: Cache only rebuilt and qualified original Euler source closure
+        if: steps.euler_accepted.outputs.cache-hit != 'true'
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1g-euler-source-v1-adc7f124-lean4341-f0683ba2-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E*.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7*.lean') }}
 
       - name: Strictly test original SU2 YZ conjugation and source character triviality
         shell: bash
