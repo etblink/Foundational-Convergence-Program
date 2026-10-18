@@ -1,4 +1,4 @@
-name: BFSS SU2 Original Normalized Physical Hamiltonian
+name: BFSS SU2 Original Paired Hamiltonian Source Graph
 
 # Isolated source-pinned joint D2B10C and AZ gate. Do not infer success
 # from a conditional theorem or from an inaccessible historical cache.
@@ -7,7 +7,7 @@ on:
     branches:
       - research/openai-math-su2-s3k-physical-spin-flow
     paths:
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8BEOriginalNormalizedPhysicalHamiltonianProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8BFOriginalSourceGraphAndPairedHamiltonianProbe.lean
       - .github/workflows/bfss-su2-original-physical-charge-unconditional-density.yml
   workflow_dispatch:
 
@@ -547,11 +547,47 @@ jobs:
           print('L6H5E8BE_ORIGINAL_NORMALIZED_SOURCE_HAMILTONIAN_WEAK_FORM_14_ROOTS_KERNEL_PASS')
           PY
 
+      - name: Strictly qualify original/legacy charge graph identity and concrete paired H
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8BFOriginalSourceGraphAndPairedHamiltonianProbe
+          p="experiments/openai-math-su2-physical-domain/$stem.lean"
+          test "$(git hash-object "$p")" = "fc217320320afb59dd9d1b999f1e5ca7092cb34b" || {
+            echo ORIGINAL_BF_PAIRED_SOURCE_GRAPH_CANDIDATE_DRIFT
+            exit 1
+          }
+          cp "$p" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8BEOriginalNormalizedPhysicalHamiltonianProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSG4K2BNonzeroPhysicalL2Probe.olean
+          timeout 210s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+            tee "/tmp/bfss-unconditional-domain-density/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('/tmp/bfss-unconditional-domain-density/SU2BFSSPhysicalDomainL6H5E8BFOriginalSourceGraphAndPairedHamiltonianProbe.log').read_text()
+          roots=['originalMinimalClosedGraph_eq_exactSourceGaugeGraph','originalMinimalPhysicalHilbertChargeGraph_mem_source_iff','originalMinimalPhysicalHilbertChargeGraph_eq_sourceRebased','originalMinimalPhysicalHilbertChargeColumn_graph_eq_sourceRebased','pairedOriginalPhysicalNormalizedHamiltonian','pairedOriginalPhysicalSpace_ne_bot','pairedOriginalPhysicalNormalizedHamiltonian_selfAdjoint','pairedOriginalPhysicalNormalizedHamiltonian_domain','pairedOriginalPhysicalNormalizedHamiltonian_weakForm_iff']
+          prefix="FCP.BFSSSU2PhysicalDomainL6H5E8BF."
+          m=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={name:{a.strip() for a in axes.split(',') if a.strip()} for name,axes in m}
+          assert len(m)==len(roots),(got,roots)
+          for short in roots:
+              q=prefix+short
+              assert q in got,(q,got)
+              assert got[q]<={'propext','Classical.choice','Quot.sound'},(q,got[q])
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-4000:]
+          print('L6H5E8BF_ORIGINAL_EXACT_SOURCE_GAUGE_GRAPH_PAIRED_H_9_ROOTS_KERNEL_PASS')
+          PY
+
       - name: Preserve exact source-pinned evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: bfss-su2-source-original-normalized-hamiltonian-${{ github.run_id }}
+          name: bfss-su2-source-original-paired-graph-${{ github.run_id }}
           path: |
             /tmp/bfss-physical-charge-domain-density-reduction/
             /tmp/bfss-unconditional-domain-density/
