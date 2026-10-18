@@ -20,6 +20,7 @@ set_option maxHeartbeats 220000
 namespace FCP.BFSSSU2PhysicalDomainS1J
 noncomputable section
 
+open scoped Kronecker
 open Matrix
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2GaugeG3B
