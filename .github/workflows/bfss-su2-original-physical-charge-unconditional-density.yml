@@ -1,4 +1,4 @@
-name: BFSS SU2 Original Paired Hamiltonian Source Graph
+name: BFSS SU2 Original Physical Charge Operator Equality
 
 # Isolated source-pinned joint D2B10C and AZ gate. Do not infer success
 # from a conditional theorem or from an inaccessible historical cache.
@@ -7,7 +7,7 @@ on:
     branches:
       - research/openai-math-su2-s3k-physical-spin-flow
     paths:
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8BFOriginalSourceGraphAndPairedHamiltonianProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8BGOriginalHistoricalPhysicalHilbertChargeEqualityProbe.lean
       - .github/workflows/bfss-su2-original-physical-charge-unconditional-density.yml
   workflow_dispatch:
 
@@ -583,11 +583,88 @@ jobs:
           print('L6H5E8BF_ORIGINAL_EXACT_SOURCE_GAUGE_GRAPH_PAIRED_H_9_ROOTS_KERNEL_PASS')
           PY
 
+      - name: Rebuild frozen D2B11–D2B17 historical physical Hilbert charge chain
+        shell: bash
+        timeout-minutes: 11
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          mkdir -p /tmp/bfss-unconditional-domain-density
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe.olean
+          stems=(SU2BFSSPhysicalDomainD2B11OriginalPhysicalClosedChargeColumnProbe SU2BFSSPhysicalDomainD2B12OriginalPhysicalChargeLinearPMapProbe SU2BFSSPhysicalDomainD2B13OriginalSmoothCoreChargeGraphClosureProbe SU2BFSSPhysicalDomainD2B14ExactClosedChargeQuadraticEnergyProbe SU2BFSSPhysicalDomainD2B15ClosedPhysicalEnergyFormLimitProbe SU2BFSSPhysicalDomainD2B16PhysicalHilbertRebasedChargeOperatorProbe SU2BFSSPhysicalDomainD2B17TruePhysicalChargeAdjointProbe)
+          sha=(41bed09168a6d59df32ecad6e40842a92b9533b9 f908ecdf49d27174f0469d88d4800ba3eb36c80c 63c9b365ad3b867261469e221529a803252b3f8a e7f22ea071bfe87b3afa8cb65a5dcd598334ae8a 31a20a101e7d69ebe22ae36145fbcba4311fd00b 5ae8c1ea4b5285307e3e1e8eb8a3ea982a0cbfb4 34a5fcb61c496ddcd69b701821a94a980dd641b2)
+          test "${#stems[@]}" -eq 7
+          for i in "${!stems[@]}"; do
+            stem="${stems[$i]}"
+            p="experiments/openai-math-su2-physical-domain/$stem.lean"
+            test "$(git hash-object "$p")" = "${sha[$i]}" || {
+              echo "D2B11_TO_17_FROZEN_SOURCE_DRIFT=$p"
+              exit 1
+            }
+            cp "$p" upstream-math/lean/
+          done
+          cd upstream-math/lean
+          for stem in "${stems[@]}"; do
+            echo "COMPILING_FROZEN_HISTORICAL_PHYSICAL_CHARGE=$stem"
+            timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+              tee "/tmp/bfss-unconditional-domain-density/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean"
+          done
+          python3 - <<'PY'
+          import pathlib,re
+          stems=['SU2BFSSPhysicalDomainD2B11OriginalPhysicalClosedChargeColumnProbe','SU2BFSSPhysicalDomainD2B12OriginalPhysicalChargeLinearPMapProbe','SU2BFSSPhysicalDomainD2B13OriginalSmoothCoreChargeGraphClosureProbe','SU2BFSSPhysicalDomainD2B14ExactClosedChargeQuadraticEnergyProbe','SU2BFSSPhysicalDomainD2B15ClosedPhysicalEnergyFormLimitProbe','SU2BFSSPhysicalDomainD2B16PhysicalHilbertRebasedChargeOperatorProbe','SU2BFSSPhysicalDomainD2B17TruePhysicalChargeAdjointProbe']
+          base=pathlib.Path('/tmp/bfss-unconditional-domain-density')
+          for stem in stems:
+              s=(base/(stem+'.log')).read_text()
+              m=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+              assert m,('HISTORICAL_NO_PRINT_AXIOM_REPORTS',stem)
+              for name,ax in m:
+                  assert {a.strip() for a in ax.split(',') if a.strip()}<={'propext','Classical.choice','Quot.sound'},(stem,name,ax)
+              assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,stem
+          print('D2B11_TO_D2B17_FROZEN_SOURCE_7_MODULES_AXIOM_CLEAN_PASS')
+          PY
+
+      - name: Strictly prove the exact AY and D2B17 Hilbert charge operator equality
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8BGOriginalHistoricalPhysicalHilbertChargeEqualityProbe
+          p="experiments/openai-math-su2-physical-domain/$stem.lean"
+          test "$(git hash-object "$p")" = "e201161085514434c43895cd1c250c885882e3a9" || {
+            echo BG_EXACT_HILBERT_CHARGE_COLUMN_SOURCE_DRIFT
+            exit 1
+          }
+          cp "$p" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8BFOriginalSourceGraphAndPairedHamiltonianProbe.olean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD2B17TruePhysicalChargeAdjointProbe.olean
+          timeout 210s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+            tee "/tmp/bfss-unconditional-domain-density/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re,pathlib
+          s=pathlib.Path("/tmp/bfss-unconditional-domain-density/SU2BFSSPhysicalDomainL6H5E8BGOriginalHistoricalPhysicalHilbertChargeEqualityProbe.log").read_text()
+          roots=['originalMinimalHilbertOutputEquiv_eq_historical','originalMinimalPhysicalHilbertChargeGraph_eq_historical','originalMinimalPhysicalHilbertChargeColumn_eq_historical','originalMinimalPhysicalHilbertChargeColumn_domain_eq_historical','pairedOriginalMinimalChargeColumn_eq_historical']
+          prefix="FCP.BFSSSU2PhysicalDomainL6H5E8BG."
+          m=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={name:{x.strip() for x in ax.split(',') if x.strip()} for name,ax in m}
+          assert len(m)==len(roots),(got,roots)
+          for short in roots:
+              name=prefix+short
+              assert name in got,(name,got)
+              assert got[name]<={'propext','Classical.choice','Quot.sound'},(name,got[name])
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-5000:]
+          print('L6H5E8BG_ORIGINAL_HISTORICAL_CHARGE_HILBERT_GRAPH_OPERATOR_5_ROOTS_KERNEL_PASS')
+          PY
+
       - name: Preserve exact source-pinned evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: bfss-su2-source-original-paired-graph-${{ github.run_id }}
+          name: bfss-su2-source-original-operator-equality-${{ github.run_id }}
           path: |
             /tmp/bfss-physical-charge-domain-density-reduction/
             /tmp/bfss-unconditional-domain-density/
