@@ -19,6 +19,7 @@ namespace FCP.BFSSSU2PhysicalDomainS1F
 noncomputable section
 
 open Matrix
+open scoped Matrix.Norms.L2Operator
 open OAI.BFSSQuantum
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2PhysicalDomainL6G6X
@@ -53,8 +54,8 @@ theorem original_source_curve_neg_eq_inv (c : ColorIndex 2) (t : ℝ) :
       sourcePlusIGaugeCurve c (-t) = 1 := by
     apply Subtype.ext
     let : NormedAlgebra ℚ (ColorMatrix 2) :=
-    .restrictScalars ℚ ℂ (ColorMatrix 2)
-  let W : ColorMatrix 2 := (Complex.I : ℂ) • pairedAlgebraData.color c
+      .restrictScalars ℚ ℂ (ColorMatrix 2)
+    let W : ColorMatrix 2 := (Complex.I : ℂ) • pairedAlgebraData.color c
     change NormedSpace.exp (t • W) *
       NormedSpace.exp ((-t) • W) = 1
     rw [neg_smul]
