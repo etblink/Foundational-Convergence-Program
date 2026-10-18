@@ -2,6 +2,11 @@ name: BFSS SU2 Exact Source Character Triviality
 
 # New conditional relative-character theorem, NOT paper Spin48 equivalence.
 on:
+  pull_request:
+    branches:
+      - research/openai-math-su2-s3k-physical-spin-flow
+    paths:
+      - .github/workflows/bfss-su2-exact-source-character-triviality.yml
   workflow_dispatch:
 
 permissions:
@@ -48,7 +53,7 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG4HExactThetaCovarianceProbe.lean)" = 3ee402e49bbca8d90a232ddf5d34f578814549eb
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ESourceRelativeGaugeCharacterReductionProbe.lean)" = cfee82b7531b00acfcdad4229cefe292c1ed9ca1
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1FSourceGaugeCurveHalvingProbe.lean)" = 79f34a8d5dc8c7d2ebcf605f709f4d9f2c6b2b14
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1GExactSourceRelativeCharacterTrivialityProbe.lean)" = 152edc61e9b5a7a533928d6e53336eccdceaca57
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1GExactSourceRelativeCharacterTrivialityProbe.lean)" = e1fe07f84e4a1427b5b4d2b534bb32644e87b203
           echo RELATIVE_CHARACTER_S1E_S1F_S1G_SOURCE_BLOB_PINS_VERIFIED
 
       - name: Reclaim disposable space
