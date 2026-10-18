@@ -18,7 +18,39 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  accepted-source-delta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    outputs:
+      needs_strict: ${{ steps.delta.outputs.needs_strict }}
+    steps:
+      - name: Checkout candidate source and detect qualified math changes
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Distinguish historical frozen S1D proof from source edits
+        id: delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected_source=99ab414fc5d8d24157a6694c70c3f339b5947aa3
+          expected_s1a=fd5f9e0f3d36a52e3a0222116022a11a83c387d7
+          expected_s1b=2f508daa4e09989987d7d30000d4853671962621
+          expected_g4b=c6270243d0f61e8ee415e378c0865d2954958472
+          expected_g4h=3ee402e49bbca8d90a232ddf5d34f578814549eb
+          need=false
+          if [ "${{ github.event_name }}" = workflow_dispatch ] ||
+            [ "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1DRelativeGaugeCharacterProbe.lean)" != "$expected_source" ] ||
+            [ "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe.lean)" != "$expected_s1a" ] ||
+            [ "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe.lean)" != "$expected_s1b" ] ||
+            [ "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG4BFermionLinearTransportProbe.lean)" != "$expected_g4b" ] ||
+            [ "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG4HExactThetaCovarianceProbe.lean)" != "$expected_g4h" ]; then
+            need=true
+          fi
+          echo "S1D_STRICT_QUALIFICATION_SOURCE_CHANGE=$need"
+          echo "needs_strict=$need" >> "$GITHUB_OUTPUT"
+
   source-exact-relative-gauge-character:
+    needs: accepted-source-delta
+    if: needs.accepted-source-delta.outputs.needs_strict == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 22
     steps:
