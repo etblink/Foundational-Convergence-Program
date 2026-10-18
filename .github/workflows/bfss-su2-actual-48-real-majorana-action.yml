@@ -2,6 +2,11 @@ name: BFSS SU2 Actual 48 Real Majorana Color Action
 
 # Strict source-exact SO(48) input, NOT a Spin(48) lift.
 on:
+  pull_request:
+    branches:
+      - research/openai-math-su2-s3k-physical-spin-flow
+    paths:
+      - .github/workflows/bfss-su2-actual-48-real-majorana-action.yml
   workflow_dispatch:
 
 permissions:
@@ -46,7 +51,7 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG3AAdjointColorRepresentationProbe.lean)" = c8bbd59782c3116fb514d6aa20d91c607a11c3e7
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG3B24ModeOrthogonalLiftProbe.lean)" = c90b25156ec4d81ee16e5939cd888cc12cdc33a3
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG3CComplexOneParticleUnitaryProbe.lean)" = e555823155d5ce348843acb9eaa9ea6762f636ac
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe.lean)" = 6460a2caa730597171db75811f988c1b9ec7da96
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe.lean)" = 5c302134991e171eff69909d3bb518af340b1428
           echo ORIGINAL_SOURCE_48_REAL_MAJORANA_PROBE_BLOB_PINNED
           echo SOURCE_ONE_PARTICLE_AND_MANUSCRIPT_PHASE_PINS_VERIFIED
 
