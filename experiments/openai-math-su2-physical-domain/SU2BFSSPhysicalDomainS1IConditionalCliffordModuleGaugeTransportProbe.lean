@@ -87,8 +87,12 @@ theorem transportedGaugeHom_covariant
     _ = ∑ B : ColorIndex 2,
           (pairedAlgebraData.adjointCoefficient g A B : ℂ) •
             pairedTheta α B (transportedGaugeHom T W g (T x)) := by
-          simp only [map_sum, map_smul, hT, transportedGaugeHom,
-            LinearEquiv.trans_apply, T.symm_apply_apply]
+          have htransport :
+              transportedGaugeHom T W g (T x) = T (W g x) := by
+            change T (W g (T.symm (T x))) = T (W g x)
+            rw [T.symm_apply_apply]
+          rw [htransport]
+          simp only [map_sum, map_smul, hT]
 
 /-- Full equality, not merely equality up to a phase: conditional on
 an independent exact 48-Majorana identification and the paper action's
@@ -133,8 +137,11 @@ theorem independent_gauge_intertwines_source
     exact hv
   have hv := congrArg (fun L : Fermion 2 ≃ₗ[ℂ] Fermion 2 =>
     L (T v)) heq
-  simpa only [transportedGaugeHom, LinearEquiv.trans_apply,
-    T.symm_apply_apply] using hv
+  have htransport :
+      transportedGaugeHom T W g (T v) = T (W g v) := by
+    change T (W g (T.symm (T v))) = T (W g v)
+    rw [T.symm_apply_apply]
+  exact htransport.symm.trans hv
 
 #print axioms transportedGaugeHom
 #print axioms transportedGaugeHom_covariant
