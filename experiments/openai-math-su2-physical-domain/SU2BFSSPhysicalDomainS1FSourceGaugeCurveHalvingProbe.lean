@@ -31,6 +31,8 @@ theorem original_source_curve_half (c : ColorIndex 2) (t : ℝ) :
       sourcePlusIGaugeCurve c (t / 2) =
         sourcePlusIGaugeCurve c t := by
   apply Subtype.ext
+  let : NormedAlgebra ℚ (ColorMatrix 2) :=
+    .restrictScalars ℚ ℂ (ColorMatrix 2)
   let W : ColorMatrix 2 := (Complex.I : ℂ) • pairedAlgebraData.color c
   change NormedSpace.exp ((t / 2) • W) *
     NormedSpace.exp ((t / 2) • W) =
@@ -50,7 +52,9 @@ theorem original_source_curve_neg_eq_inv (c : ColorIndex 2) (t : ℝ) :
   have hprod : sourcePlusIGaugeCurve c t *
       sourcePlusIGaugeCurve c (-t) = 1 := by
     apply Subtype.ext
-    let W : ColorMatrix 2 := (Complex.I : ℂ) • pairedAlgebraData.color c
+    let : NormedAlgebra ℚ (ColorMatrix 2) :=
+    .restrictScalars ℚ ℂ (ColorMatrix 2)
+  let W : ColorMatrix 2 := (Complex.I : ℂ) • pairedAlgebraData.color c
     change NormedSpace.exp (t • W) *
       NormedSpace.exp ((-t) • W) = 1
     rw [neg_smul]
