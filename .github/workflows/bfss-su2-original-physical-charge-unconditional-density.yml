@@ -555,7 +555,7 @@ jobs:
           source "$HOME/.elan/env"
           stem=SU2BFSSPhysicalDomainL6H5E8BFOriginalSourceGraphAndPairedHamiltonianProbe
           p="experiments/openai-math-su2-physical-domain/$stem.lean"
-          test "$(git hash-object "$p")" = "fc217320320afb59dd9d1b999f1e5ca7092cb34b" || {
+          test "$(git hash-object "$p")" = "2f280ec5f84c03c39d70156e8e3053ffca662b42" || {
             echo ORIGINAL_BF_PAIRED_SOURCE_GRAPH_CANDIDATE_DRIFT
             exit 1
           }
