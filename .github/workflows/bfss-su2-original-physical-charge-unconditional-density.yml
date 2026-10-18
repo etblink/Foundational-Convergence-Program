@@ -1,4 +1,4 @@
-name: BFSS SU2 Original Physical Charge Unconditional Domain Density
+name: BFSS SU2 Original Physical Hilbert Charge Adjoint
 
 # Isolated source-pinned joint D2B10C and AZ gate. Do not infer success
 # from a conditional theorem or from an inaccessible historical cache.
@@ -7,7 +7,7 @@ on:
     branches:
       - research/openai-math-su2-s3k-physical-spin-flow
     paths:
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8BAOriginalPhysicalChargeUnconditionalDensityProbe.lean
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6H5E8BBOriginalPhysicalHilbertChargeAdjointProbe.lean
       - .github/workflows/bfss-su2-original-physical-charge-unconditional-density.yml
   workflow_dispatch:
 
@@ -404,11 +404,52 @@ jobs:
           print("L6H5E8BA_ORIGINAL_PHYSICAL_HILBERT_CHARGE_DOMAIN_DENSE_UNCONDITIONAL_KERNEL_PASS")
           PY
 
+      - name: Strictly qualify the original physical Hilbert sixteen-charge adjoint
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainL6H5E8BBOriginalPhysicalHilbertChargeAdjointProbe
+          p="experiments/openai-math-su2-physical-domain/$stem.lean"
+          accepted_candidate=6b7c9746f05f3ae0ff6a88d05d4bd3562d68b56e
+          git fetch --quiet --no-tags --depth=1 origin "$accepted_candidate"
+          test "$(git hash-object "$p")" = "$(git rev-parse "$accepted_candidate:$p")" || {
+            echo ORIGINAL_PHYSICAL_CHARGE_ADJOINT_CANDIDATE_SOURCE_DRIFT
+            exit 1
+          }
+          cp "$p" upstream-math/lean/
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainL6H5E8BAOriginalPhysicalChargeUnconditionalDensityProbe.olean
+          timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+            tee "/tmp/bfss-unconditional-domain-density/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re,pathlib
+          stem="SU2BFSSPhysicalDomainL6H5E8BBOriginalPhysicalHilbertChargeAdjointProbe"
+          s=pathlib.Path("/tmp/bfss-unconditional-domain-density/"+stem+".log").read_text()
+          roots=["originalPhysicalHilbertComplete",
+                 "originalMinimalPhysicalHilbertChargeAdjoint",
+                 "originalMinimalPhysicalHilbertChargeAdjoint_isFormalAdjoint",
+                 "originalMinimalPhysicalHilbertChargeAdjoint_isClosed",
+                 "originalMinimalPhysicalHilbertChargeAdjoint_inner"]
+          matches=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          reports={name:{x.strip() for x in ax.split(',') if x.strip()} for name,ax in matches}
+          ns="FCP.BFSSSU2PhysicalDomainL6H5E8BB."
+          for root in roots:
+              name=ns+root
+              assert name in reports,(name,reports)
+              assert reports[name]<={'propext','Classical.choice','Quot.sound'},(name,reports[name])
+          assert len(reports)==len(roots),(roots,reports)
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-4000:]
+          print("L6H5E8BB_ORIGINAL_PHYSICAL_HILBERT_CHARGE_ADJOINT_FIVE_ROOTS_KERNEL_PASS")
+          PY
+
       - name: Preserve exact source-pinned evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: bfss-su2-source-unconditional-density-${{ github.run_id }}
+          name: bfss-su2-source-original-physical-adjoint-${{ github.run_id }}
           path: |
             /tmp/bfss-physical-charge-domain-density-reduction/
             /tmp/bfss-unconditional-domain-density/
