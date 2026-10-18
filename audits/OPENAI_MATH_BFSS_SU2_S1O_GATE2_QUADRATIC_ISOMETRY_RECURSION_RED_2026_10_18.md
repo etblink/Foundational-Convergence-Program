@@ -1,0 +1,12 @@
+# S1O Gate #2 — real quadratic source succeeds; bundled isometry fails
+
+**2026-10-18 PDT.** `RED__UNBUNDLED_QUADRATIC_FIVE_ROOTS_CLEAN__BUNDLED_ISOMETRY_RECURSION__UNIVERSAL_PROPERTY_REDIRECT`.
+
+- [S1O Original Clifford48 Algebra Action Gate #2](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39162231322), job `117777753174`, full **FAILURE**, source/workflow HEAD `a609bc3d4a3ae5a3b882e19e6fa6ade5a33b9a19`, exact S1O source blob `22addbe895ad885eefa0c7f7c30e2f5d17bcb4c5`.
+- Exact frozen `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean 4.34.1, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`. All S1C/S1J/S1K prerequisites and pins passed; no original proof changed.
+- **Five clean printed declarations** inside a RED file: `source48Quadratic`, `source48Quadratic_eq_dot`, `source48LinearEquiv`, `source48LinearEquiv_apply`, `source48LinearEquiv_preserves_quadratic`. A whole-file strict pass is STILL REQUIRED to qualify a standalone five-root module.
+- First remaining errors are **lines 92 and 97**: maximum recursion depth in `source48Quadratic.IsometryEquiv` bundling, even after qualified explicit `map_app'` named theorem. The downstream `source48CliffordAut` is unknown and `change` times out in `isDefEq` at line 113. These are real Lean/elaboration failures with no mathematical counterexample, but absolutely NOT kernel success.
+- Gate #1's global `dotProduct` namespace and explicit orthogonal-membership parameter errors are repaired and did not recur.
+- **Stop repeating S1O bundling tactics**. The new `S1P0` copies only the five source quadratic declarations into a source-pinned independent module, and `S1P1` uses `CliffordAlgebra.lift` **directly** from the source quadratic-preserving linear map to build the exact normalized Cl48 ALGEBRA homomorphism and 48-generator covariance. It avoids elaborating `QuadraticMap.IsometryEquiv` or defining an automorphism prematurely. This is a structurally different proof path.
+- This new method does NOT yet produce a group representation in `AlgEquiv`, nor a Clifford Spin(48) element/projected covering lift or an independent irreducible complex module. All spectral/physical Hamiltonian goals remain OPEN; a source Clifford-algebra `AlgHom`, even if kernel-qualified, is insufficient.
+- PR #25 draft research only, no merges or upstream/main changes.
