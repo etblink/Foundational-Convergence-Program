@@ -54,7 +54,7 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG4BFermionLinearTransportProbe.lean)" = c6270243d0f61e8ee415e378c0865d2954958472
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG4HExactThetaCovarianceProbe.lean)" = 3ee402e49bbca8d90a232ddf5d34f578814549eb
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ESourceRelativeGaugeCharacterReductionProbe.lean)" = cfee82b7531b00acfcdad4229cefe292c1ed9ca1
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1FSourceGaugeCurveHalvingProbe.lean)" = 768c1de2b95300ff694f5dadf374f4470b297fb7
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1FSourceGaugeCurveHalvingProbe.lean)" = 6af3c30d4d54b0725935740711d641aebe650a20
           echo RELATIVE_CHARACTER_S1E_S1F_SOURCE_BLOB_PINS_VERIFIED
 
       - name: Reclaim disposable space
