@@ -1,5 +1,6 @@
 import SU2BFSSPhysicalDomainS1GExactSourceRelativeCharacterTrivialityProbe
 import SU2BFSSG3AAdjointColorRepresentationProbe
+import Mathlib.LinearAlgebra.UnitaryGroup
 
 /-!
 S1N — the ACTUAL normalized-Pauli SU(2) color adjoint matrix has
