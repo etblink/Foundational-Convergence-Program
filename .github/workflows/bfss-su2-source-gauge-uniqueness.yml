@@ -6,11 +6,6 @@ name: BFSS SU2 Source Gauge Representation Uniqueness
 # Gate #10 was launched at the exact source pin below. Manual-only prevents
 # stale PR25 source diff from repeatedly replaying this expensive check.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-s3k-physical-spin-flow
-    paths:
-      - .github/workflows/bfss-su2-source-gauge-uniqueness.yml
   workflow_dispatch:
 
 permissions:
