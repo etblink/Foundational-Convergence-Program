@@ -41,9 +41,9 @@ noncomputable def source48Quadratic : QuadraticForm ℝ Source48Vector :=
     (fun _ : OriginalMajoranaLabel => (1 : ℝ))
 
 theorem source48Quadratic_eq_dot (v : Source48Vector) :
-    source48Quadratic v = Matrix.dotProduct v v := by
+    source48Quadratic v = dotProduct v v := by
   simp [source48Quadratic, QuadraticMap.weightedSumSquares_apply,
-    Matrix.dotProduct]
+    dotProduct]
 
 /-- The actual source 48-real orthogonal matrix interpreted as a
 linear isomorphism of the EXACT original generator label space. -/
@@ -56,7 +56,7 @@ noncomputable def source48LinearEquiv (g : GaugeGroup 2) :
         Matrix.orthogonalGroup OriginalMajoranaLabel ℝ :=
       (Matrix.mem_specialOrthogonalGroup_iff.mp
         (sourceRealMajoranaSO g).property).1
-    exact (Matrix.mem_orthogonalGroup_iff).mp hmem
+    exact (Matrix.mem_orthogonalGroup_iff OriginalMajoranaLabel ℝ).mp hmem
   exact Matrix.toLin'OfInv
     (sourceRealMajoranaMatrix_orthogonal g) hright
 
@@ -71,27 +71,30 @@ isometry hypothesis or an assumed Spin(48) action. -/
 theorem source48LinearEquiv_preserves_quadratic
     (g : GaugeGroup 2) (v : Source48Vector) :
     source48Quadratic (source48LinearEquiv g v) = source48Quadratic v := by
-  rw [source48LinearEquiv_apply]
-  rw [source48Quadratic_eq_dot, source48Quadratic_eq_dot]
   calc
-    Matrix.dotProduct ((sourceRealMajoranaMatrix g).mulVec v)
-        ((sourceRealMajoranaMatrix g).mulVec v) =
-      Matrix.dotProduct v
+    source48Quadratic (source48LinearEquiv g v) =
+        dotProduct ((sourceRealMajoranaMatrix g).mulVec v)
+          ((sourceRealMajoranaMatrix g).mulVec v) := by
+            rw [source48LinearEquiv_apply, source48Quadratic_eq_dot]
+    _ = dotProduct v
         ((sourceRealMajoranaMatrix g)ᵀ.mulVec
           ((sourceRealMajoranaMatrix g).mulVec v)) :=
-        (Matrix.dotProduct_transpose_mulVec
-          (sourceRealMajoranaMatrix g) v
-          ((sourceRealMajoranaMatrix g).mulVec v)).symm
-    _ = Matrix.dotProduct v v := by
+            (Matrix.dotProduct_transpose_mulVec
+              (sourceRealMajoranaMatrix g) v
+              ((sourceRealMajoranaMatrix g).mulVec v)).symm
+    _ = source48Quadratic v := by
       rw [Matrix.mulVec_mulVec,
-        sourceRealMajoranaMatrix_orthogonal, Matrix.one_mulVec]
+        sourceRealMajoranaMatrix_orthogonal, Matrix.one_mulVec,
+        ← source48Quadratic_eq_dot]
 
 /-- A typed quadratic isometry, built from the exact original
 SU(2)-dependent source matrix and the normalized 48-label Q. -/
 noncomputable def source48QuadraticIsometry (g : GaugeGroup 2) :
     source48Quadratic.IsometryEquiv source48Quadratic where
   toLinearEquiv := source48LinearEquiv g
-  map_app' := source48LinearEquiv_preserves_quadratic g
+  map_app' := by
+    intro v
+    exact source48LinearEquiv_preserves_quadratic g v
 
 /-- The *abstract* normalized Cl(48) algebra autoequivalence
 induced by the original BFSS source gauge transformation. -/

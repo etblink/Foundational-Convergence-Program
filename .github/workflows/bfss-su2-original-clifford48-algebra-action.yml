@@ -53,7 +53,7 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG3CComplexOneParticleUnitaryProbe.lean)" = e555823155d5ce348843acb9eaa9ea6762f636ac
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe.lean)" = 3f845ae219586be47fa76aabc3259027b1bb4bae
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1KActualSO48SourceGaugeHomProbe.lean)" = e7f09cc289bc254aa4b23568dfec70552a0f613c
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1OActualClifford48SourceActionProbe.lean)" = 4cb22d2ea75f1f55e1133fb95af52c2e692b164d
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1OActualClifford48SourceActionProbe.lean)" = 22addbe895ad885eefa0c7f7c30e2f5d17bcb4c5
           echo ORIGINAL_SOURCE_48_REAL_MAJORANA_AND_TYPED_SO48_BLOBS_PINNED
           echo SOURCE_ONE_PARTICLE_AND_MANUSCRIPT_PHASE_PINS_VERIFIED
 
