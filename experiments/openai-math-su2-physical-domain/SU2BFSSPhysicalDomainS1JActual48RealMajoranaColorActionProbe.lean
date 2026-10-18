@@ -98,7 +98,7 @@ theorem sourceRealMajoranaMatrix_orthogonal (g : GaugeGroup 2) :
 24-mode color rotation is duplicated on both real Majoranas. -/
 theorem sourceRealMajoranaMatrix_det_one (g : GaugeGroup 2) :
     (sourceRealMajoranaMatrix g).det = 1 := by
-  change (Matrix.kronecker (oneParticleMatrix g)
+  change ((oneParticleMatrix g) ⊗ₖ
     (1 : Matrix (Fin 2) (Fin 2) ℝ)).det = 1
   rw [Matrix.det_kronecker]
   simp [oneParticleMatrix_det_one]
