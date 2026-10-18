@@ -34,6 +34,10 @@ variable (hV : ∀ (g : GaugeGroup 2) (α : SpinIndex)
       (pairedAlgebraData.adjointCoefficient g A B : ℂ) •
         pairedTheta α B (V g v))
 
+-- Force the explicit covariance premise into each subsequent theorem's context.
+-- Lean otherwise omits section variables absent from their result types.
+include hV
+
 /-- Every same-covariant source gauge implementation agrees on each
 literal source Fermion 2 vector, with no residual scalar ambiguity. -/
 theorem original_source_implementer_unique_apply
