@@ -2,14 +2,6 @@ name: BFSS SU2 Exact Source Character Triviality
 
 # New conditional relative-character theorem, NOT paper Spin48 equivalence.
 on:
-  pull_request:
-    branches:
-      - research/openai-math-su2-s3k-physical-spin-flow
-    paths:
-      - .github/workflows/bfss-su2-exact-source-character-triviality.yml
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ESourceRelativeGaugeCharacterReductionProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1FSourceGaugeCurveHalvingProbe.lean
-      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1GExactSourceRelativeCharacterTrivialityProbe.lean
   workflow_dispatch:
 
 permissions:
