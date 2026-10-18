@@ -106,7 +106,9 @@ theorem relativeGaugeScalar_mul (g h : GaugeGroup 2) :
             rw [relativeGaugeScalar_apply V hV g]
       _ = (relativeGaugeScalar V hV g * relativeGaugeScalar V hV h) •
           fermionGaugeLinearEquiv (g*h) v := by
-            rw [hfgh, smul_smul, mul_comm]
+            rw [hfgh, smul_smul,
+              mul_comm (relativeGaugeScalar V hV h)
+                (relativeGaugeScalar V hV g)]
 
 theorem relativeGaugeScalar_ne_zero (g : GaugeGroup 2) :
     relativeGaugeScalar V hV g ≠ 0 := by

@@ -49,7 +49,7 @@ jobs:
           PY
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe.lean)" = fd5f9e0f3d36a52e3a0222116022a11a83c387d7
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1BRelativeGaugeImplementerProbe.lean)" = 2f508daa4e09989987d7d30000d4853671962621
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1DRelativeGaugeCharacterProbe.lean)" = e3ae5fcdbfb3aff8f95c260693c6037d32ae4135
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1DRelativeGaugeCharacterProbe.lean)" = 99ab414fc5d8d24157a6694c70c3f339b5947aa3
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG4BFermionLinearTransportProbe.lean)" = c6270243d0f61e8ee415e378c0865d2954958472
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG4HExactThetaCovarianceProbe.lean)" = 3ee402e49bbca8d90a232ddf5d34f578814549eb
           echo RELATIVE_CHARACTER_SOURCE_BLOB_PINS_VERIFIED
