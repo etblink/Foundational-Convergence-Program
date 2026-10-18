@@ -19,7 +19,34 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  accepted-source-delta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    outputs:
+      needs_strict: ${{ steps.check.outputs.needs_strict }}
+    steps:
+      - name: Check out current candidate and determine strict proof need
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Skip expensive unchanged accepted S1C source
+        id: check
+        shell: bash
+        run: |
+          set -euo pipefail
+          p=experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe.lean
+          accepted=c5de7c744744212711780aee2d4f9742c002cd84
+          actual="$(git hash-object "$p")"
+          need=false
+          if [ "${{ github.event_name }}" = workflow_dispatch ] || [ "$actual" != "$accepted" ]; then
+            need=true
+          fi
+          echo "S1C_ACCEPTED_SOURCE_BLOB=$accepted"
+          echo "S1C_CURRENT_SOURCE_BLOB=$actual"
+          echo "S1C_STRICT_REQUALIFICATION_REQUIRED=$need"
+          echo "needs_strict=$need" >> "$GITHUB_OUTPUT"
+
   exact-source-su24-determinant:
+    needs: accepted-source-delta
+    if: needs.accepted-source-delta.outputs.needs_strict == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 18
     steps:
