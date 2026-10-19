@@ -47,7 +47,7 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V1StandaloneSpin48AllVectorProbe.lean)" = 1adb9000a3bbad937b1e2fc3bd4bd486c777fdd7
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V4TwoDisjointSpinRotorsCommuteProbe.lean)" = debd4f447d075a2f65817860d156fee8061ce024
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe.lean)" = 6d15a3a76625b3677f132c544f71e5d5eb1dc93c
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe.lean)" = b09940ddbfb30d118ec45ac4b6bb1ba612b6501d
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe.lean)" = 4ae8b38d5601b8c57f09e94c523beb9b4598dcb1
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V2StandaloneSpin48PlaneFlipInvolutionProbe.lean)" = 7a8c80dd7ef8a8772d4ffb9b2611a7bd31096d50
           python3 - <<'PY'
           import json
