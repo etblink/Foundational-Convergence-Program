@@ -49,7 +49,7 @@ jobs:
           PY
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V19OriginalSourceZQuarterAdjointCoefficientBridgeProbe.lean)" = 5d77be869b4df35462af4c66bd5452e5ab908198
           test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean)" = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4
-          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSFullAlgebraDataProbe.lean)" = f85d2ee672e3c6c9b83a5e3db8d21f95492cb724
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSFullAlgebraDataProbe.lean)" = fe3e0b21bb60d74b54c9faf7c066db9b02939405
           echo PINNED_ORIGINAL_OAI_PROVENANCE_VERIFIED_NO_NEW_THEOREM
 
       - name: Reclaim disposable runner space
