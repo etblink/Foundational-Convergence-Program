@@ -14,7 +14,7 @@ original L6H5E8R, but the unnecessary L6H5E8Q quaternion import
 is absent, and the scalar exponential proofs follow original L6H5E8T.
 
 NOT A STRICT ACCEPTED RESULT until a separate exact pinned Lean CI
-compiles this source and audits all eight named roots. This is NOT a
+compiles this source and audits all nine named roots. This is NOT a
 standalone alternative group, global Spin(48) lift, manuscript
 intertwiner, or spectral proof.
 -/
