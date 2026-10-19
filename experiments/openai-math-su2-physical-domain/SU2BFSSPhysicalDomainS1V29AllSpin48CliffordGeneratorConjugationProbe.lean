@@ -28,6 +28,7 @@ namespace FCP.BFSSS1V29
 noncomputable section
 
 open FCP.BFSSS1V0
+open scoped Pointwise
 
 private abbrev Q : QuadraticForm ℝ Source48Vector := source48Quadratic
 private abbrev C := CliffordAlgebra Q
