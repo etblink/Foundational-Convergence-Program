@@ -13,8 +13,10 @@ separate, independently compiled S1V18 source-sized Spin(48) diagonal
 quarter action. The original 8×3 Fock/real-majorana index pairing is
 explicitly identified, not merely equated by dimension.
 
-ALL five roots are UNCOMPILED CANDIDATES until both S1V25 and S1V26
-cache gates complete and a NEW pinned strict CI compiles this file.
+S1V25 and S1V26 are separately accepted and cached. In the first
+joint S1V27 gate, its three label/coefficient roots compiled, but
+both matrix equality roots failed elaboration; these are still
+unqualified until a NEW pinned strict CI compiles this file.
 This establishes ONE original SU(2) group point's 48-real action, not
 a global continuous SU(2)→Spin(48) group lift, independent manuscript
 Clifford-module intertwiner, Hamiltonian domain equivalence or mass gap.
@@ -31,6 +33,7 @@ open OAI.BFSSQuantum
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2GaugeG3A
 open FCP.BFSSSU2GaugeG3B
+open FCP.BFSSSU2GaugeG4M
 open FCP.BFSSSU2PhysicalDomainS1J
 open FCP.BFSSS1V5
 open FCP.BFSSS1V16
@@ -98,9 +101,10 @@ theorem historical_source_quarter_48_matrix_block_entry
           else 0)
         else 0)
       else 0 := by
-    simpa only [standalone_source_label_eq_original] using
-      actualHistoricalQuarter_sourceRealMajoranaMatrix_entry
-        j k s t B A
+    rw [standalone_source_label_eq_original,
+        standalone_source_label_eq_original]
+    exact actualHistoricalQuarter_sourceRealMajoranaMatrix_entry
+      j k s t B A
   rw [hsource]
   by_cases hs : s = t
   · subst t
@@ -148,10 +152,10 @@ theorem historical_source_quarter_48_matrix_eq_independent_spin_quarter :
   let q := sourceBlockColorEquiv.symm k
   have hi : sourceBlockColorLabel p.1 p.2 = i := by
     change sourceBlockColorEquiv (sourceBlockColorEquiv.symm i) = i
-    exact Equiv.apply_symm_apply i
+    exact sourceBlockColorEquiv.apply_symm_apply i
   have hk : sourceBlockColorLabel q.1 q.2 = k := by
     change sourceBlockColorEquiv (sourceBlockColorEquiv.symm k) = k
-    exact Equiv.apply_symm_apply k
+    exact sourceBlockColorEquiv.apply_symm_apply k
   have h := historical_source_quarter_48_matrix_block_entry
     p.1.1 q.1.1 p.1.2 q.1.2 p.2 q.2
   simpa only [hi, hk] using h
