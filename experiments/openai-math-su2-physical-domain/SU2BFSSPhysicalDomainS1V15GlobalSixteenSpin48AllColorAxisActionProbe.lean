@@ -87,7 +87,7 @@ theorem sourceListCliffordProduct_conjugates_selected
           · by_cases hαrest : α ∈ rest
             · have hm : α ∈ β :: rest := by simp [hαrest]
               simp only [if_pos hαrest, if_pos hm, mul_neg, neg_mul]
-              exact congrArg Neg
+              exact congrArg (fun z : C => -z)
                 (sourceColorPlaneRotor_conjugates_other_block β α hβα A)
             · have hm : α ∉ β :: rest := by
                 simp [hβα, Ne.symm hβα, hαrest]
