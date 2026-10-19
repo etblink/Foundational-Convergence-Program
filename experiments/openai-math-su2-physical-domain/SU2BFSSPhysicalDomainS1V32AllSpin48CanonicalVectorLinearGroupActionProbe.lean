@@ -74,7 +74,7 @@ theorem sourceSpin48VectorAction_mul
         ConjAct.toConjAct (spinGroup.toUnits s) •
           (ConjAct.toConjAct (spinGroup.toUnits t) •
             (CliffordAlgebra.ι Q v)) := by
-      rw [map_mul, mul_smul]
+      rw [map_mul, ConjAct.toConjAct_mul, mul_smul]
     _ =
         CliffordAlgebra.ι Q
           (sourceSpin48VectorAction s (sourceSpin48VectorAction t v)) := by
