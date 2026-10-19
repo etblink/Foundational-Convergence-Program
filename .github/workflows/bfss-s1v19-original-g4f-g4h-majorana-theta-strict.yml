@@ -1,0 +1,164 @@
+name: BFSS S1V19 Original G4F to G4H Paired Majorana Theta Covariance Strict Gate
+
+# Trigger ONLY for this workflow file on the isolated research branch.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v-orthogonal-decomposition-isolated-20261018
+    paths:
+      - .github/workflows/bfss-s1v19-original-g4f-g4h-majorana-theta-strict.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v19-original-g4f-g4h-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  actual-original-majorana-theta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 47
+    steps:
+      - name: Checkout isolated unchanged G4F G4G G4H candidates
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Checkout pinned genuine original OAI mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Verify original immutable pins and G4F G4G G4H source hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v19-g4f-g4h
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          j=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in j['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          r=experiments/openai-math-su2-concrete-potential
+          test "$(git hash-object "$r/SU2BFSSG4CFermionOperatorCovarianceProbe.lean")" = 83e3fe5ffc3d521c38f9c20069b96aa6627ece06
+          test "$(git hash-object "$r/SU2BFSSG4DExteriorOccupationIsometryProbe.lean")" = 85c9d998a9e01fbca2d32f5610fe6b7bf925d507
+          test "$(git hash-object "$r/SU2BFSSG4EFermionHilbertUnitaryProbe.lean")" = d29e7acf325db8e9e383b26b8ee6b536c9078676
+          test "$(git hash-object "$r/SU2BFSSG4FRealColorAnnihilatorForwardProbe.lean")" = c633692f73341514efbf1365bd3a7ebcbc4e22f3
+          test "$(git hash-object "$r/SU2BFSSG4GMajoranaModeCovarianceProbe.lean")" = 5343c70f955c630c2f93b050a89d51f094d17440
+          test "$(git hash-object "$r/SU2BFSSG4HExactThetaCovarianceProbe.lean")" = 3ee402e49bbca8d90a232ddf5d34f578814549eb
+          echo ORIGINAL_G4F_G4H_EXACT_SOURCE_PINS_VERIFIED
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean 4.34.1 and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v19-g4f-g4h/toolchain.log; then
+              ok=true; break
+            fi
+            echo PINNED_TOOLCHAIN_TLS_RETRY_$attempt | tee -a /tmp/bfss-s1v19-g4f-g4h/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo PINNED_LEAN_TOOLCHAIN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v19-g4f-g4h/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo ORIGINAL_PINNED_LEAN_MATHLIB_VERIFIED
+
+      - name: Restore accepted original G4E and all genuine OAI caches
+        id: accepted
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v19-isolated-g4e-original-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed on absent accepted G4E Hilbert-unitary prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.accepted.outputs.cache-hit }}" = true || { echo ORIGINAL_ACCEPTED_G4E_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in SU2BFSSG1APairedThetaProbe SU2BFSSG3AAdjointColorRepresentationProbe SU2BFSSG3CComplexOneParticleUnitaryProbe SU2BFSSG4CFermionOperatorCovarianceProbe SU2BFSSG4DExteriorOccupationIsometryProbe SU2BFSSG4EFermionHilbertUnitaryProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "ACCEPTED_ORIGINAL_OLEAN_MISSING=$stem"; exit 1; }
+          done
+          test -s .lake/build/lib/lean/OAI/Analysis/Laughlin/Exterior/SpinUnitary.olean
+          echo ACCEPTED_ORIGINAL_G4E_HILBERT_GAUGE_CACHE_READY
+
+      - name: Strictly compile genuine original G4F G4G G4H and verify all 15 theta roots
+        shell: bash
+        timeout-minutes: 13
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          for stem in SU2BFSSG4FRealColorAnnihilatorForwardProbe SU2BFSSG4GMajoranaModeCovarianceProbe SU2BFSSG4HExactThetaCovarianceProbe; do
+            cp "../../experiments/openai-math-su2-concrete-potential/$stem.lean" "$stem.lean"
+            timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v19-g4f-g4h/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "ORIGINAL_G4F_G4H_OLEAN_MISSING=$stem"; exit 1; }
+          done
+          python3 - <<'PY'
+          import pathlib,re
+          roots={
+            'SU2BFSSG4FRealColorAnnihilatorForwardProbe':('FCP.BFSSSU2GaugeG4F.',[
+              'complexOneParticleMatrix_inv_entry','complexOneParticleMatrix_star_entry',
+              'fermionGauge_cancel_inv','annihilator_fermionGauge_forward']),
+            'SU2BFSSG4GMajoranaModeCovarianceProbe':('FCP.BFSSSU2GaugeG4G.',[
+              'creator_annihilator_combination_covariant','majorana0_linear_apply',
+              'majorana1_phase','majorana1_linear_apply',
+              'majorana0_fermionGauge_covariant','majorana1_fermionGauge_covariant']),
+            'SU2BFSSG4HExactThetaCovarianceProbe':('FCP.BFSSSU2GaugeG4H.',[
+              'complexOneParticleMatrix_paired_block_sum','pairedTheta_even_fermionGauge_covariant',
+              'pairedTheta_odd_fermionGauge_covariant','pairedAlgebraData_fermion_adjoint',
+              'fermion_adjoint_exact_field'])
+          }
+          allowed={'propext','Classical.choice','Quot.sound'}
+          pattern=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
+          for stem,(ns,names) in roots.items():
+            s=pathlib.Path('/tmp/bfss-s1v19-g4f-g4h',stem+'.log').read_text()
+            hits=re.findall(pattern,s)
+            got={name:{v.strip() for v in axioms.split(',') if v.strip()} for name,axioms in hits}
+            assert len(hits)==len(names),(stem,hits,names)
+            for name in names:
+              fq=ns+name
+              assert fq in got and got[fq]<=allowed,(stem,fq,got)
+            assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,(stem,s[-5000:])
+            print(stem,'ORIGINAL_G4F_G4H_AXIOM_CLEAN_PASS',len(names))
+          print('ORIGINAL_SOURCE_G4F_G4H_15_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Save qualified original 48 theta Majorana covariance cache
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v19-isolated-g4h-original-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve first causal source Lean and axiom diagnostic artifacts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v19-g4f-g4h-${{ github.run_id }}
+          path: /tmp/bfss-s1v19-g4f-g4h/
+          if-no-files-found: warn
+          retention-days: 14
