@@ -56,7 +56,7 @@ theorem source48_spin_conjugation_fixes_real_scalar
   calc
     (u : C) * algebraMap ℝ C a * ((u⁻¹ : Cˣ) : C) =
         algebraMap ℝ C a * ((u : C) * ((u⁻¹ : Cˣ) : C)) := by
-      rw [← (Algebra.commutes a (u : C)).eq, mul_assoc]
+      rw [← (Algebra.commutes a (u : C)), mul_assoc]
     _ = algebraMap ℝ C a := by simp
 
 /-- For EVERY genuine Spin48 element and EVERY original source vector,
