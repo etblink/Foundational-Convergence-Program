@@ -1,0 +1,154 @@
+name: BFSS S1V19 Original F3 Invariant And Selectors Strict Gate
+
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v-orthogonal-decomposition-isolated-20261018
+    paths:
+      - .github/workflows/bfss-s1v19-original-fock-f3b4-selectors.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v19-fock-f3b4-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  original-f3b4-selectors:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout original isolated research source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Checkout immutable independent original OAI math source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+      - name: Enforce exact original six CAR sources and pinned Lake environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v19-f3b4
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          d=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib')=='d13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2FermionF3InvariantProbe.lean)" = 5d79bd350ba92e7485153bc36aaeca45489074a2
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2FermionF3RecoveryProbe.lean)" = 2aa2f625d43bffc8c1aa123dcd0edd73802ff42e
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2FermionF3B1OccupationProbe.lean)" = 5f7c472a158095da14b6ba73baebaa45356dda31
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2FermionF3B2BasisActionProbe.lean)" = b71912cfbc2a1a9b0e9a7a567da486dbcc85d172
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2FermionF3B3ProjectorProbe.lean)" = c46623c1a507b2a2340b403cc7b0641af7298742
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2FermionF3B4SelectorProbe.lean)" = 6528da46419671b6fc2ea98b842d22315dab89fb
+          echo PINNED_ORIGINAL_F3B4_6_SOURCES_VERIFIED
+
+      - name: Reclaim disposable runner disk capacity
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore exact original Lean and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v19-f3b4/toolchain.log; then
+              ok=true; break
+            fi
+            echo PINNED_LEAN_TLS_RETRY_$attempt | tee -a /tmp/bfss-s1v19-f3b4/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo PINNED_TOOLCHAIN_INSTALL_FAILED; exit 1; }
+          cd upstream-math/lean
+          timeout 1070s lake exe cache get 2>&1 | tee /tmp/bfss-s1v19-f3b4/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo EXACT_ORIGINAL_LEAN_MATHLIB_READY
+
+      - name: Restore accepted original F2B2 complete CAR and OAI source modules
+        id: fock
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2Fermion*.olean
+          key: bfss-s1v19-isolated-f2b2-complete-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed unless exact complete F2B2 cache is restored
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.fock.outputs.cache-hit }}" = true || { echo ORIGINAL_FOCK_BASE_CACHE_MISSING; exit 1; }
+          for stem in SU2FermionFockProbe SU2FermionF2Probe SU2FermionF2BProbe SU2FermionF2B2Probe; do
+            test -s "upstream-math/lean/.lake/build/lib/lean/$stem.olean"
+          done
+          test -s upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/ContinuumCoulomb/ManyBody/FockNorm.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2FermionF2B2ThetaProbe.olean
+          echo ACCEPTED_ORIGINAL_F2B2_CAR_10_MODULES_RESTORED
+
+      - name: Strictly qualify six original F3 invariant and selector theorem modules
+        shell: bash
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          for stem in SU2FermionF3InvariantProbe SU2FermionF3RecoveryProbe SU2FermionF3B1OccupationProbe SU2FermionF3B2BasisActionProbe SU2FermionF3B3ProjectorProbe SU2FermionF3B4SelectorProbe; do
+            cp "../../experiments/openai-math-su2-concrete-potential/$stem.lean" "$stem.lean"
+            timeout 105s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v19-f3b4/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo ORIGINAL_F3B4_OLEAN_MISSING_$stem; exit 1; }
+          done
+          python3 - <<'PY'
+          import pathlib,re
+          roots={
+            'SU2FermionF3InvariantProbe':['thetaInvariant_majoranaCandidate','thetaInvariant_iff_majoranaCandidate','thetaInvariant_majoranaComponents'],
+            'SU2FermionF3RecoveryProbe':['thetaInvariant_creator_annihilator'],
+            'SU2FermionF3B1OccupationProbe':['thetaInvariant_occupiedMode','thetaInvariant_vacantMode'],
+            'SU2FermionF3B2BasisActionProbe':['occupiedMode_as_fockNumber','occupiedMode_occupationKet','vacantMode_occupationKet'],
+            'SU2FermionF3B3ProjectorProbe':['occupiedMode_idempotent','occupiedMode_mul_comm'],
+            'SU2FermionF3B4SelectorProbe':['selectorSeq_occupationKet','occupationSelector_occupationKet']
+          }
+          pattern=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
+          for stem,rr in roots.items():
+            s=pathlib.Path('/tmp/bfss-s1v19-f3b4',stem+'.log').read_text()
+            hits=re.findall(pattern,s)
+            got={k:{v.strip() for v in vals.split(',') if v.strip()} for k,vals in hits}
+            assert len(hits)==len(rr),(stem,hits,rr)
+            for n in rr:
+              matches=[(name,axioms) for name,axioms in got.items() if name.split('.')[-1]==n]
+              assert len(matches)==1 and matches[0][1]<={'propext','Classical.choice','Quot.sound'},(stem,n,matches)
+            assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,(stem,s[-4500:])
+            print(stem,'ORIGINAL_F3B4_AXIOM_CLEAN_PASS',len(rr))
+          print('ORIGINAL_FOCK_F3_INVARIANT_RECOVERY_B1_B4_13_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Save original F3 invariant and selector source .olean roots
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2Fermion*.olean
+          key: bfss-s1v19-isolated-f3b4-selector-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve compiler first-causal diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v19-f2b2-${{ github.run_id }}
+          path: /tmp/bfss-s1v19-f3b4/
+          if-no-files-found: warn
+          retention-days: 14
