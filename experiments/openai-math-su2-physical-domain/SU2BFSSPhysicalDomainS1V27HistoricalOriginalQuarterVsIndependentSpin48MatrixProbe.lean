@@ -106,38 +106,48 @@ theorem historical_source_quarter_48_matrix_block_entry
     exact actualHistoricalQuarter_sourceRealMajoranaMatrix_entry
       j k s t B A
   rw [hsource]
-  by_cases hs : s = t
-  · subst t
-    by_cases hj : j = k
-    · subst k
-      by_cases hBA : B = A
-      · subst A
-        simp [source48QuarterDiagonalMatrix, Matrix.diagonal_apply,
-          standalone_quarter_coeff_original]
-      · have hneq :
-          sourceBlockColorLabel (j,s) B ≠
-            sourceBlockColorLabel (j,s) A := by
-          intro heq
-          exact hBA (congrArg Prod.snd
-            (sourceBlockColorLabel_injective heq))
-        simp [hs, hj, hBA, source48QuarterDiagonalMatrix,
-          Matrix.diagonal_apply, hneq]
-    · have hneq :
-        sourceBlockColorLabel (j,s) B ≠
-          sourceBlockColorLabel (k,s) A := by
-        intro heq
-        have h := sourceBlockColorLabel_injective heq
-        exact hj (congrArg Prod.fst (congrArg Prod.fst h))
-      simp [hs, hj, source48QuarterDiagonalMatrix,
-        Matrix.diagonal_apply, hneq]
-  · have hneq :
-        sourceBlockColorLabel (j,s) B ≠
-          sourceBlockColorLabel (k,t) A := by
-      intro heq
-      have h := sourceBlockColorLabel_injective heq
-      exact hs (congrArg Prod.snd (congrArg Prod.fst h))
-    simp [hs, source48QuarterDiagonalMatrix,
-      Matrix.diagonal_apply, hneq]
+  -- Compare the FULL 48-real labels first; no ambiguous higher-order
+  -- injectivity application or vanished equalities after subst.
+  by_cases hlabel :
+      sourceBlockColorLabel (j,s) B =
+        sourceBlockColorLabel (k,t) A
+  · have hpacked : ((j,s), B) = ((k,t), A) := by
+      apply sourceBlockColorEquiv.injective
+      exact hlabel
+    have hj : j = k :=
+      congrArg
+        (fun p : RealSpinBlock × ColorLabel => p.1.1) hpacked
+    have hs : s = t :=
+      congrArg
+        (fun p : RealSpinBlock × ColorLabel => p.1.2) hpacked
+    have hBA : B = A :=
+      congrArg
+        (fun p : RealSpinBlock × ColorLabel => p.2) hpacked
+    subst k
+    subst t
+    subst A
+    simp [source48QuarterDiagonalMatrix,
+      standalone_quarter_coeff_original]
+  · have hzero :
+        (if s = t then
+          (if j = k then
+            (if B = A then
+              (if A = (2 : Fin 3) then (1 : ℝ) else -1)
+             else 0)
+           else 0)
+         else 0) = (0 : ℝ) := by
+      by_cases hs : s = t
+      · by_cases hj : j = k
+        · by_cases hBA : B = A
+          · subst t
+            subst k
+            subst A
+            exact (hlabel rfl).elim
+          · simp [hs, hj, hBA]
+        · simp [hs, hj]
+      · simp [hs]
+    rw [hzero]
+    simp [source48QuarterDiagonalMatrix, hlabel]
 
 /-- ORIGINAL named SU2 gauge source z-quarter 48-Majorana REAL matrix
 equals the 48-real diagonal transformation ACTUALLY implemented by
