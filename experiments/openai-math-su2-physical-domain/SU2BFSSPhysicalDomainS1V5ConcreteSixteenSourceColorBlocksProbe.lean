@@ -30,14 +30,19 @@ abbrev RealSpinBlock := Fin 8 × Fin 2
 abbrev ColorLabel := Fin 3
 abbrev SourceLabel := Fin 24 × Fin 2
 
+/-- The explicit exact 8×3 → 24 Fock-mode packing; naming the type
+prevents Lean from inventing metavariables for the inverse sizes. -/
+noncomputable def sourceColorModeEquiv : Fin 8 × Fin 3 ≃ Fin 24 :=
+  finProdFinEquiv
+
 /-- An explicit choice of 16-by-3 real Majorana coordinate ordering.
 The linear array index is color + 3 * complex-spin-pair number;
 the real/imaginary Majorana bit is left unchanged. -/
 noncomputable def sourceBlockColorEquiv :
     (RealSpinBlock × ColorLabel) ≃ SourceLabel where
-  toFun p := (finProdFinEquiv (p.1.1, p.2), p.1.2)
-  invFun p := (((finProdFinEquiv.symm p.1).1, p.2),
-               (finProdFinEquiv.symm p.1).2)
+  toFun p := (sourceColorModeEquiv (p.1.1, p.2), p.1.2)
+  invFun p := (((sourceColorModeEquiv.symm p.1).1, p.2),
+               (sourceColorModeEquiv.symm p.1).2)
   left_inv := by
     rintro ⟨⟨j, s⟩, A⟩
     simp
@@ -81,6 +86,7 @@ theorem sourceBlockColorAxis_other
     exact hpq (sourceBlockColorLabel_injective h)
   simp [sourceBlockColorAxis, Pi.single_apply, hlabel]
 
+#print axioms sourceColorModeEquiv
 #print axioms sourceBlockColorEquiv
 #print axioms sourceBlockColorLabel_injective
 #print axioms sourceBlockColorAxis_self
