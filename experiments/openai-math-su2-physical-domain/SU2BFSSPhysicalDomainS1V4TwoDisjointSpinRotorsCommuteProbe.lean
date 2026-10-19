@@ -77,7 +77,7 @@ theorem sourceSpinPair_coe_comm_of_cross_ortho
   calc
     (A * B) * (Cc * D) = A * (B * (Cc * D)) := by rw [mul_assoc]
     _ = A * ((Cc * D) * B) := by rw [hBCD]
-    _ = (A * (Cc * D)) * B := by rw [mul_assoc]
+    _ = (A * (Cc * D)) * B := by simp only [mul_assoc]
     _ = ((Cc * D) * A) * B := by rw [hACD]
     _ = (Cc * D) * (A * B) := by rw [mul_assoc]
 
