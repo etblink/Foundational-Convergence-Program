@@ -1,0 +1,155 @@
+name: BFSS S1V19 Original F3 Signed Reachability and Irreducibility Strict Gate
+
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v-orthogonal-decomposition-isolated-20261018
+    paths:
+      - .github/workflows/bfss-s1v19-original-fock-f3b7-c2-irreducible.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v19-fock-f3b7-c2-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  original-f3b7-c2-irreducible:
+    runs-on: ubuntu-latest
+    timeout-minutes: 43
+    steps:
+      - name: Checkout original isolated research source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Checkout immutable independent original OAI math source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+      - name: Enforce five original F3B7 through F3C2 signed mode and irreducibility sources and pinned Lake environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v19-f3b7-c2
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          d=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib')=='d13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2FermionF3B7SignedModeProbe.lean)" = a73bfda89554c428a9714cc372a857f11eb7475b
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2FermionF3B8LocalReachabilityProbe.lean)" = 0ee55f31b51e7fbe3074a4278a1addefb6f48a3c
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2FermionF3B9FiniteReachabilityProbe.lean)" = c5c996c2e7a98ab952900c44c3745efa00faa57b
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2FermionF3C1SubmoduleDichotomyProbe.lean)" = 5900cec03dd0eb35688647270fa8809ce3ef2ea3
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2FermionF3C2ThetaFieldsProbe.lean)" = 95cf7e3e59990cd4155bc861fef82b13c0b36150
+          echo PINNED_ORIGINAL_F3B7_C2_5_SOURCES_VERIFIED
+
+      - name: Reclaim disposable runner disk capacity
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore exact original Lean and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v19-f3b7-c2/toolchain.log; then
+              ok=true; break
+            fi
+            echo PINNED_LEAN_TLS_RETRY_$attempt | tee -a /tmp/bfss-s1v19-f3b7-c2/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo PINNED_TOOLCHAIN_INSTALL_FAILED; exit 1; }
+          cd upstream-math/lean
+          timeout 1070s lake exe cache get 2>&1 | tee /tmp/bfss-s1v19-f3b7-c2/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo EXACT_ORIGINAL_LEAN_MATHLIB_READY
+
+      - name: Restore accepted original F3B6 occupation source and OAI modules
+        id: fock
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2Fermion*.olean
+          key: bfss-s1v19-isolated-f3b6-occupation-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed unless original accepted F3B6 occupation cache restored
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.fock.outputs.cache-hit }}" = true || { echo ORIGINAL_F3B6_OCCUPATION_CACHE_MISSING; exit 1; }
+          for stem in SU2FermionFockProbe SU2FermionF2Probe SU2FermionF2BProbe SU2FermionF2B2Probe; do
+            test -s "upstream-math/lean/.lake/build/lib/lean/$stem.olean"
+          done
+          test -s upstream-math/lean/.lake/build/lib/lean/OAI/MathematicalPhysics/ContinuumCoulomb/ManyBody/FockNorm.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2FermionF2B2ThetaProbe.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2FermionF3B4SelectorProbe.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2FermionF3B5CoordinateProbe.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2FermionF3B6NonzeroKetProbe.olean
+          echo ACCEPTED_ORIGINAL_F3B6_OCCUPATION_MODULES_RESTORED
+
+      - name: Strictly qualify five original signed mode/reachability/irreducibility modules
+        shell: bash
+        timeout-minutes: 10
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          for stem in SU2FermionF3B7SignedModeProbe SU2FermionF3B8LocalReachabilityProbe SU2FermionF3B9FiniteReachabilityProbe SU2FermionF3C1SubmoduleDichotomyProbe SU2FermionF3C2ThetaFieldsProbe; do
+            cp "../../experiments/openai-math-su2-concrete-potential/$stem.lean" "$stem.lean"
+            timeout 120s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v19-f3b7-c2/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo ORIGINAL_F3B7_C2_OLEAN_MISSING_$stem; exit 1; }
+          done
+          python3 - <<'PY'
+          import pathlib,re
+          roots={
+            'SU2FermionF3B7SignedModeProbe':['creator_occupationKet','annihilator_occupationKet_of_mem','creationCoefficient_ne_zero_of_not_mem','annihilationCoefficient_ne_zero_of_mem'],
+            'SU2FermionF3B8LocalReachabilityProbe':['thetaInvariant_insert_occupationKet','thetaInvariant_erase_occupationKet'],
+            'SU2FermionF3B9FiniteReachabilityProbe':['thetaInvariant_vacuum_of_occupationKet','thetaInvariant_all_from_vacuum','thetaInvariant_all_occupationKet_of_one'],
+            'SU2FermionF3C1SubmoduleDichotomyProbe':['thetaInvariant_eq_top_of_nonzero','thetaInvariant_bot_or_top'],
+            'SU2FermionF3C2ThetaFieldsProbe':['thetaCandidate_upstream_selfAdjoint','thetaCandidate_upstream_CAR','thetaCandidate_upstream_irreducible']
+          }
+          pattern=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
+          for stem,rr in roots.items():
+            s=pathlib.Path('/tmp/bfss-s1v19-f3b7-c2',stem+'.log').read_text()
+            hits=re.findall(pattern,s)
+            got={k:{v.strip() for v in vals.split(',') if v.strip()} for k,vals in hits}
+            assert len(hits)==len(rr),(stem,hits,rr)
+            for n in rr:
+              matches=[(name,axioms) for name,axioms in got.items() if name.split('.')[-1]==n]
+              assert len(matches)==1 and matches[0][1]<={'propext','Classical.choice','Quot.sound'},(stem,n,matches)
+            assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,(stem,s[-4500:])
+            print(stem,'ORIGINAL_F3B7_C2_AXIOM_CLEAN_PASS',len(rr))
+          print('ORIGINAL_FOCK_F3_B7_C2_REACHABILITY_IRREDUCIBILITY_14_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Save accepted original F3B7 through F3C2 signed reachability and irreducibility source layer
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2Fermion*.olean
+          key: bfss-s1v19-isolated-f3c2-irreducible-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve compiler first-causal diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v19-f3b7-c2-${{ github.run_id }}
+          path: /tmp/bfss-s1v19-f3b7-c2/
+          if-no-files-found: warn
+          retention-days: 14
