@@ -56,8 +56,11 @@ theorem source48_eq_sum_color_axes (v : Source48Vector) :
           (v (sourceBlockColorLabel p.1 p.2)) •
             sourceBlockColorAxis p.1 p.2) ?_
       intro i
-      simp only [sourceBlockColorLabel, sourceBlockColorAxis,
-        Equiv.apply_symm_apply]
+      change (v i) • Pi.single (M := fun _ => ℝ) i 1 =
+        (v (sourceBlockColorEquiv (sourceBlockColorEquiv.symm i))) •
+          Pi.single (M := fun _ => ℝ)
+            (sourceBlockColorEquiv (sourceBlockColorEquiv.symm i)) 1
+      simp only [Equiv.apply_symm_apply]
 
 /-- Explicit real 48-vector, with the exact -,-,+ quarter-turn
 on each of the sixteen indexed three-color coordinate axes. -/
@@ -103,7 +106,10 @@ theorem sourceSixteenColorRotor_conjugates_every_source_vector
         (v (sourceBlockColorLabel p.1 p.2)) •
           (s * CliffordAlgebra.ι Q
             (sourceBlockColorAxis p.1 p.2) * star s) := by
-      simp only [Finset.mul_sum, Finset.sum_mul, mul_smul, smul_mul]
+      simp only [Finset.mul_sum, Finset.sum_mul]
+      apply Finset.sum_congr rfl
+      intro p hp
+      simp only [mul_smul, smul_mul_assoc]
     _ = ∑ p : RealSpinBlock × ColorLabel,
         (v (sourceBlockColorLabel p.1 p.2)) •
           (if p.2 = (2 : Fin 3)
@@ -114,7 +120,12 @@ theorem sourceSixteenColorRotor_conjugates_every_source_vector
       intro p hp
       rw [sourceSixteenColorRotor_conjugates_each_source_axis]
     _ = CliffordAlgebra.ι Q (source48QuarterFlip v) := by
-      simp only [source48QuarterFlip, map_sum, map_smul, map_ite, map_neg]
+      simp only [source48QuarterFlip, map_sum, map_smul]
+      apply Finset.sum_congr rfl
+      intro p hp
+      by_cases h : p.2 = (2 : Fin 3)
+      · simp [h]
+      · simp [h]
 
 #print axioms source48_eq_sum_color_axes
 #print axioms source48QuarterFlip
