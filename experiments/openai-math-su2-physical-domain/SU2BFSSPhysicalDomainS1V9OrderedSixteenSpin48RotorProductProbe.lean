@@ -69,19 +69,19 @@ theorem sourceColorPlaneRotor_comm_list
           (sourceColorPlaneRotor β *
             (rest.map sourceColorPlaneRotor).prod) =
         (sourceColorPlaneRotor α * sourceColorPlaneRotor β) *
-          (rest.map sourceColorPlaneRotor).prod := by rw [mul_assoc]
+          (rest.map sourceColorPlaneRotor).prod := by simp only [mul_assoc]
       _ = (sourceColorPlaneRotor β * sourceColorPlaneRotor α) *
           (rest.map sourceColorPlaneRotor).prod := by
             rw [sourceColorPlaneRotor_comm_all α β]
       _ = sourceColorPlaneRotor β *
           (sourceColorPlaneRotor α *
-            (rest.map sourceColorPlaneRotor).prod) := by rw [mul_assoc]
+            (rest.map sourceColorPlaneRotor).prod) := by simp only [mul_assoc]
       _ = sourceColorPlaneRotor β *
           ((rest.map sourceColorPlaneRotor).prod *
             sourceColorPlaneRotor α) := by rw [ih]
       _ = (sourceColorPlaneRotor β *
           (rest.map sourceColorPlaneRotor).prod) *
-            sourceColorPlaneRotor α := by rw [mul_assoc]
+            sourceColorPlaneRotor α := by simp only [mul_assoc]
 
 /-- The literal source 16-block Spin48 product centralizes every
 one of its block factors (in Spin48, not a commutative surrogate). -/
@@ -90,9 +90,10 @@ theorem sourceSixteenColorRotor_comm_block
     sourceColorPlaneRotor α * sourceSixteenColorRotor =
       sourceSixteenColorRotor * sourceColorPlaneRotor α := by
   unfold sourceSixteenColorRotor sourceOrderedSixteenRotors
-  exact sourceColorPlaneRotor_comm_list α
-    ((List.finRange 16).map
-      (finProdFinEquiv : RealSpinBlock ≃ Fin 16).symm)
+  simpa only [List.map_map, Function.comp_def] using
+    (sourceColorPlaneRotor_comm_list α
+      ((List.finRange 16).map
+        (finProdFinEquiv : RealSpinBlock ≃ Fin 16).symm))
 
 #print axioms sourceColorPlaneRotor_comm_all
 #print axioms sourceOrderedSixteenRotors
