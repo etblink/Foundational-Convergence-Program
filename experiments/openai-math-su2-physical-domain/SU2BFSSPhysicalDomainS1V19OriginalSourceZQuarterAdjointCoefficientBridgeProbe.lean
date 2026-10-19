@@ -80,22 +80,23 @@ theorem original_zquarter_adjoint_coefficient (A B : Fin 3) :
       ((sourceZ sourceQuarterTurnTime : ColorMatrix 2) *
         pairedAlgebraData.color A *
         (sourceZ sourceQuarterTurnTime : ColorMatrix 2).conjTranspose))).re = _
+  have hp (C D : Fin 3) :
+      (Matrix.trace (pairedAlgebraData.color C *
+        pairedAlgebraData.color D)).re =
+        if C = D then (1 : ℝ) else 0 := by
+    rw [pairedAlgebraData_color, pairedAlgebraData_color,
+      FCP.BFSSSU2Full.concreteAlgebraData_color,
+      FCP.BFSSSU2Full.concreteAlgebraData_color,
+      FCP.BFSSSU2.normalizedPauli_trace_pair]
+    split_ifs <;> norm_num
   rw [original_zquarter_conjugates_paired_color A]
   by_cases hA : A = (2 : Fin 3)
-  · subst A
-    simp only [if_pos rfl, if_pos rfl, if_true]
-    rw [pairedAlgebraData_color, pairedAlgebraData_color]
-    simpa only [FCP.BFSSSU2Full.concreteAlgebraData_color,
-      FCP.BFSSSU2.normalizedPauli_trace_pair, eq_comm] using
-      FCP.BFSSSU2.normalizedPauli_trace_pair B (2 : Fin 3)
-  · simp only [if_neg hA]
-    rw [Matrix.mul_neg, Matrix.trace_neg, Complex.neg_re]
-    rw [pairedAlgebraData_color, pairedAlgebraData_color]
-    simp only [FCP.BFSSSU2Full.concreteAlgebraData_color]
-    rw [FCP.BFSSSU2.normalizedPauli_trace_pair]
+  · rw [if_pos hA, hp]
+    simp [hA]
+  · rw [if_neg hA, Matrix.mul_neg, Matrix.trace_neg, Complex.neg_re, hp]
     by_cases hBA : B = A
-    · simp [hBA, hA]
-    · simp [hBA, hA]
+    · simp [hA, hBA]
+    · simp [hA, hBA]
 
 /-- Exact ORIGINAL G3A color matrix at the ORIGINAL source quarter
 turn, B is output row and A is input column. -/
