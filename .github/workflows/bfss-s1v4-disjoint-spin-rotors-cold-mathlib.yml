@@ -71,8 +71,21 @@ jobs:
           set -euo pipefail
           curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
           source "$HOME/.elan/env"
+          # The exact pinned Lean release host intermittently fails TLS. This
+          # bounded loop retries only its immutable versioned toolchain; it
+          # never changes the source pin, Mathlib lockfile, or theorem roots.
+          elan_ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v0/elan-install.log; then
+              elan_ok=true
+              break
+            fi
+            echo "PINNED_LEAN_TLS_DOWNLOAD_RETRY_$attempt" | tee -a /tmp/bfss-s1v0/elan-install.log
+            sleep $((attempt * 6))
+          done
+          test "$elan_ok" = true || { echo PINNED_LEAN_DOWNLOAD_FAILED_AFTER_THREE_ATTEMPTS; exit 1; }
           cd upstream-math/lean
-          timeout 1300s lake exe cache get 2>&1 | tee /tmp/bfss-s1v0/mathlib-cache.log
+          timeout 1250s lake exe cache get 2>&1 | tee /tmp/bfss-s1v0/mathlib-cache.log
           test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
           echo S1V0_PINNED_COLD_MATHLIB_AVAILABLE
