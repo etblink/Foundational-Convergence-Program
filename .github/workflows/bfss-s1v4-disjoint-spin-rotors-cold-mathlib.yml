@@ -54,6 +54,7 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V11SixteenSourceSpin48CenterParityProbe.lean)" = ba4328851907efcb59dee45c6c0a2cecde07fa06
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V12SourceLiteralPauliQuarterSpinSignProbe.lean)" = 20b8708eea4c9c3ec30e3b3c47eea66dcbd19e93
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V14GlobalSixteenSpin48ColorTwoFixationProbe.lean)" = 335d60dcc6552ab4dbbc29f467d919b761f26269
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V15GlobalSixteenSpin48AllColorAxisActionProbe.lean)" = 5ba03549231061a5064625abfe1451b0b7211640
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V2StandaloneSpin48PlaneFlipInvolutionProbe.lean)" = 7a8c80dd7ef8a8772d4ffb9b2611a7bd31096d50
           python3 - <<'PY'
           import json
@@ -426,6 +427,40 @@ jobs:
               assert k in got and got[k]<={'propext','Classical.choice','Quot.sound'},(k,got)
           assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-5000:]
           print('S1V14_SIXTEEN_SPIN48_GLOBAL_COLOR_TWO_FIXATION_4_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Qualify actual sixteen-block Spin48 global action on all 48 source color axes
+        shell: bash
+        timeout-minutes: 8
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1V15GlobalSixteenSpin48AllColorAxisActionProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s ".lake/build/lib/lean/SU2BFSSPhysicalDomainS1V14GlobalSixteenSpin48ColorTwoFixationProbe.olean" || { echo ACCEPTED_S1V14_OLEAN_MISSING; exit 1; }
+          mkdir -p .lake/build/lib/lean
+          timeout 300s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v0/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          stem='SU2BFSSPhysicalDomainS1V15GlobalSixteenSpin48AllColorAxisActionProbe'
+          s=pathlib.Path('/tmp/bfss-s1v0',stem+'.log').read_text()
+          roots=['sourceColorPlaneRotor_conjugates_selected_same',
+                 'sourceListCliffordProduct_conjugates_selected',
+                 'sourceOrderedSpinBlocks_nodup',
+                 'sourceOrderedSpinBlocks_mem',
+                 'sourceSixteenColorRotor_conjugates_selected',
+                 'sourceSixteenColorRotor_conjugates_each_source_axis']
+          pattern=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
+          hits=re.findall(pattern,s)
+          got={k:{t.strip() for t in v.split(',') if t.strip()} for k,v in hits}
+          assert len(hits)==len(roots),(got,roots)
+          for n in roots:
+              k='FCP.BFSSS1V15.'+n
+              assert k in got and got[k]<={'propext','Classical.choice','Quot.sound'},(k,got)
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-5000:]
+          print('S1V15_SIXTEEN_SPIN48_GLOBAL_ALL_48_COLOR_AXES_6_ROOTS_KERNEL_PASS')
           PY
 
       - name: Preserve full first-causal diagnostic
