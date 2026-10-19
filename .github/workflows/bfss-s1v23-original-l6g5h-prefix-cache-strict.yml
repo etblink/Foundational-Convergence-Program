@@ -160,7 +160,10 @@ jobs:
           found={name:{a.strip() for a in ax.split(',') if a.strip()} for name,ax in raw}
           assert len(raw)==len(found)==len(names),(stem,names,list(found))
           for root in names:
-            k=namespace+'.'+root
+            # An original #print axioms may explicitly name an external
+            # upstream OAI constant; never add this file's namespace to it.
+            # Plain local roots still require this file's exact namespace.
+            k=root if '.' in root else namespace+'.'+root
             suffix=re.compile(r'_private\.'+re.escape(stem)+r'\.[0-9]+\.'+re.escape(k))
             hits=[n for n in found if n==k or suffix.fullmatch(n)]
             assert len(hits)==1,(stem,root,hits,list(found))
