@@ -73,6 +73,7 @@ jobs:
           stem=SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe
           cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
           cd upstream-math/lean
+          mkdir -p .lake/build/lib/lean
           timeout 210s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v0/$stem.log"
           test -s ".lake/build/lib/lean/$stem.olean"
           python3 - <<'PY'
