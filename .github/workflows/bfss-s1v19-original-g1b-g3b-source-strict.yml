@@ -1,0 +1,167 @@
+name: BFSS S1V19 Original G1B to G3B Typed Gauge Source Strict Gate
+
+# Isolated original-source closure: exact workflow file path only.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v-orthogonal-decomposition-isolated-20261018
+    paths:
+      - .github/workflows/bfss-s1v19-original-g1b-g3b-source-strict.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v19-original-g1b-g3b-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  exact-original-source-gauge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 47
+    steps:
+      - name: Checkout isolated G-series original source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Checkout exact immutable original OAI mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Verify pinned original source and G1B through G3B Git blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v19-g1b-g3b
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          j=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in j['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          r=experiments/openai-math-su2-concrete-potential
+          test "$(git hash-object "$r/SU2BFSSFullAlgebraDataProbe.lean")" = fe3e0b21bb60d74b54c9faf7c066db9b02939405
+          test "$(git hash-object "$r/SU2BFSSG1APairedThetaProbe.lean")" = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4
+          test "$(git hash-object "$r/SU2BFSSG1BColorAnnihilatorProbe.lean")" = c267bc73b0aee428c612664c164bea40ad85ee62
+          test "$(git hash-object "$r/SU2BFSSG2ABosonGaugeProbe.lean")" = d6165027f0f4782e9ae9ab3a5e7867f4732793bd
+          test "$(git hash-object "$r/SU2BFSSG2BBosonGaugeContinuityProbe.lean")" = 001d0d3c8d01a8b4090c4e5a58fe017263e2f168
+          test "$(git hash-object "$r/SU2BFSSG3AAdjointColorRepresentationProbe.lean")" = c8bbd59782c3116fb514d6aa20d91c607a11c3e7
+          test "$(git hash-object "$r/SU2BFSSG3B24ModeOrthogonalLiftProbe.lean")" = c90b25156ec4d81ee16e5939cd888cc12cdc33a3
+          echo ORIGINAL_G1B_G3B_EXACT_SOURCE_PINS_VERIFIED
+
+      - name: Reclaim disposable runner storage
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Prepare exact pinned Lean and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v19-g1b-g3b/toolchain.log; then
+              ok=true; break
+            fi
+            echo PINNED_TOOLCHAIN_TLS_RETRY_$attempt | tee -a /tmp/bfss-s1v19-g1b-g3b/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo PINNED_LEAN_TOOLCHAIN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v19-g1b-g3b/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo ORIGINAL_PINNED_LEAN_MATHLIB_VERIFIED
+
+      - name: Restore verified F4 G1A original source cache
+        id: original
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v19-isolated-f4g1a-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed on original F4 G1A and OAI upstream prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.original.outputs.cache-hit }}" = true || { echo ACCEPTED_ORIGINAL_F4_G1A_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in SU2BFSSFullAlgebraDataProbe SU2BFSSG1APairedThetaProbe SU2ColorCrossProbe SU2RealGammaProbe SU2FermionF3C2ThetaFieldsProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "ORIGINAL_GAUGE_DEPENDENCY_MISSING=$stem"; exit 1; }
+          done
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/GaugeCore.olean || { echo ORIGINAL_GAUGECORE_OLEAN_MISSING; exit 1; }
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/CovariantFields.olean || { echo ORIGINAL_COVARIANTFIELDS_OLEAN_MISSING; exit 1; }
+          echo ACCEPTED_ORIGINAL_F4_G1A_AND_OAI_COVARIANTFIELDS_RESTORED
+
+      - name: Strictly compile all five unchanged original G1B G2A G2B G3A G3B files
+        shell: bash
+        timeout-minutes: 13
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          for stem in SU2BFSSG1BColorAnnihilatorProbe SU2BFSSG2ABosonGaugeProbe SU2BFSSG2BBosonGaugeContinuityProbe SU2BFSSG3AAdjointColorRepresentationProbe SU2BFSSG3B24ModeOrthogonalLiftProbe; do
+            cp "../../experiments/openai-math-su2-concrete-potential/$stem.lean" "$stem.lean"
+            timeout 150s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v19-g1b-g3b/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "ORIGINAL_GAUGE_MODULE_NOT_COMPILED=$stem"; exit 1; }
+          done
+          python3 - <<'PY'
+          import pathlib,re
+          roots={
+            'SU2BFSSG1BColorAnnihilatorProbe':('FCP.BFSSSU2GaugeG1B.',[
+              'color_annihilator','pairedAlgebraData_color_annihilator']),
+            'SU2BFSSG2ABosonGaugeProbe':('FCP.BFSSSU2GaugeG2A.',[
+              'bosonGaugeEquiv','bosonGaugeEquiv_apply','bosonGauge','bosonGauge_adjoint','bosonGauge_exact_fields']),
+            'SU2BFSSG2BBosonGaugeContinuityProbe':('FCP.BFSSSU2GaugeG2B.',[
+              'bosonGauge_continuous']),
+            'SU2BFSSG3AAdjointColorRepresentationProbe':('FCP.BFSSSU2GaugeG3A.',[
+              'colorUnit_inner','adjointCoefficient_on_basis','adjointCoefficient_one',
+              'adjointCoefficient_mul','adjointCoefficient_orthogonal',
+              'adjointColorMatrix_one','adjointColorMatrix_mul','adjointColorMatrix_orthogonal']),
+            'SU2BFSSG3B24ModeOrthogonalLiftProbe':('FCP.BFSSSU2GaugeG3B.',[
+              'oneParticleMatrix_block','oneParticleMatrix_one','oneParticleMatrix_mul','oneParticleMatrix_orthogonal'])
+          }
+          pattern=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for stem,(ns,rr) in roots.items():
+            s=pathlib.Path('/tmp/bfss-s1v19-g1b-g3b',stem+'.log').read_text()
+            hits=re.findall(pattern,s)
+            got={name:{x.strip() for x in vals.split(',') if x.strip()} for name,vals in hits}
+            assert len(hits)==len(rr),(stem,hits,rr)
+            for name in rr:
+              fq=ns+name
+              assert fq in got and got[fq]<=allowed,(stem,fq,got)
+            assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,(stem,s[-4000:])
+            print(stem,'ORIGINAL_G1B_G3B_AXIOM_CLEAN_PASS',len(rr))
+          print('ORIGINAL_SOURCE_G1B_G3B_20_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Save accepted original paired Fock G1B through G3B source closure
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v19-isolated-g3b-original-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve all compiler and provenance diagnostic logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v19-g1b-g3b-${{ github.run_id }}
+          path: /tmp/bfss-s1v19-g1b-g3b/
+          if-no-files-found: warn
+          retention-days: 14
