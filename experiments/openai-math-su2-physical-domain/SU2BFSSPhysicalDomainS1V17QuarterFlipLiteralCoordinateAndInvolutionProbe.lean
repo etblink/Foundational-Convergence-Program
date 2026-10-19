@@ -50,8 +50,8 @@ theorem source48QuarterFlip_apply_label
         (sourceBlockColorLabel α A) = 0 := by
       simpa only [Prod.fst, Prod.snd] using hz
     by_cases h : p.2 = (2 : Fin 3)
-    · simp [h, hz']
-    · simp [h, hz']
+    · simp only [if_pos h, hz', smul_zero]
+    · simp only [if_neg h, Pi.neg_apply, hz', neg_zero, smul_zero]
   calc
     (∑ p : RealSpinBlock × ColorLabel,
       (v (sourceBlockColorLabel p.1 p.2)) •
