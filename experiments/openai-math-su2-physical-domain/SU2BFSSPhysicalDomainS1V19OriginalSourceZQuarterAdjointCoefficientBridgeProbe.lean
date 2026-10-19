@@ -1,6 +1,7 @@
 import SU2BFSSPhysicalDomainS1GExactSourceRelativeCharacterTrivialityProbe
 import SU2BFSSPhysicalDomainS1LOriginalManuscript48ColorLabelBridgeProbe
 import SU2BFSSPhysicalDomainS1V18QuarterFlipRealMajoranaDiagonalMatrixProbe
+import SU2BFSSPhysicalDomainS1V21OriginalUpstreamAdjointQuarterConditionalProbe
 
 /-!
 BFSS S1V19 — ORIGINAL SOURCE-NAMED SU(2) z-quarter-turn real Majorana
@@ -41,6 +42,7 @@ open FCP.BFSSSU2PhysicalDomainS1J
 open FCP.BFSSS1V5
 open FCP.BFSSS1V12
 open FCP.BFSSS1V18
+open FCP.BFSSS1V21
 
 /-- Exact matrix identity for the ORIGINAL +i gauge source curve;
 the RHS is the same source-literal S1V12 2×2 complex matrix. -/
@@ -76,27 +78,14 @@ theorem original_zquarter_adjoint_coefficient (A B : Fin 3) :
         if B = A then
           (if A = (2 : Fin 3) then (1 : ℝ) else -1)
         else 0 := by
-  change (Matrix.trace (pairedAlgebraData.color B *
-      ((sourceZ sourceQuarterTurnTime : ColorMatrix 2) *
-        pairedAlgebraData.color A *
-        (sourceZ sourceQuarterTurnTime : ColorMatrix 2).conjTranspose))).re = _
-  have hp (C D : Fin 3) :
-      (Matrix.trace (pairedAlgebraData.color C *
-        pairedAlgebraData.color D)).re =
-        if C = D then (1 : ℝ) else 0 := by
-    rw [pairedAlgebraData_color, pairedAlgebraData_color,
-      FCP.BFSSSU2Full.concreteAlgebraData_color,
-      FCP.BFSSSU2Full.concreteAlgebraData_color,
-      FCP.BFSSSU2.normalizedPauli_trace_pair]
-    split_ifs <;> norm_num
-  rw [original_zquarter_conjugates_paired_color A]
-  by_cases hA : A = (2 : Fin 3)
-  · rw [if_pos hA, hp]
-    simp [hA]
-  · rw [if_neg hA, Matrix.mul_neg, Matrix.trace_neg, Complex.neg_re, hp]
-    by_cases hBA : B = A
-    · simp [hA, hBA]
-    · simp [hA, hBA]
+  have hcolor : ∀ C : ColorIndex 2,
+      pairedAlgebraData.color C = FCP.BFSSSU2.normalizedPauli C := by
+    intro C
+    rw [pairedAlgebraData_color,
+      FCP.BFSSSU2Full.concreteAlgebraData_color]
+  exact original_upstream_adjointCoefficient_of_pinned_quarter
+    pairedAlgebraData hcolor (sourceZ sourceQuarterTurnTime)
+    original_zquarter_eq_source_literal A B
 
 /-- Exact ORIGINAL G3A color matrix at the ORIGINAL source quarter
 turn, B is output row and A is input column. -/
