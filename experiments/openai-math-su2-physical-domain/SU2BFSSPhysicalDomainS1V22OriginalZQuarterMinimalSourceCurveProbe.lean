@@ -9,9 +9,13 @@ S1V22 — bounded original +i SU(2) z-curve quarter matrix, no S1G Euler import.
 The actual original `sourcePlusIGaugeCurve` (pinned L6G6X) is applied
 to the actual pairedAlgebraData normalized Pauli generator A=2.
 The matrices, angle, and positive-i convention are unchanged.
-The first two proofs are the source mathematical calculations from
-original L6H5E8R, but the unnecessary L6H5E8Q quaternion import
-is absent, and the scalar exponential proofs follow original L6H5E8T.
+The first two proofs follow the source mathematical calculations from
+original L6H5E8R and the scalar exponential proofs follow original
+L6H5E8T. The L6H5E8Q quaternion import is absent, but the actual
+sourcePlusIGaugeCurve symbol still transitively imports L6G6X→L6G5→
+L6G4 and many historical physical-operator probes. This is a strict
+import reduction, NOT evidence of a cheap compile. See the project
+negative-knowledge audit before dispatching any expensive CI.
 
 NOT A STRICT ACCEPTED RESULT until a separate exact pinned Lean CI
 compiles this source and audits all nine named roots. This is NOT a
