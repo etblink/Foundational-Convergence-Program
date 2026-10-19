@@ -115,7 +115,9 @@ theorem sourceSixteenColorRotor_coe_sq_one :
   rw [sourceSixteenColorRotor_coe]
   have h := sourceListCliffordProduct_sq sourceOrderedSpinBlocks
   rw [sourceOrderedSpinBlocks_length] at h
-  simpa using h
+  have hparity : (-1 : C) ^ 16 = 1 := by norm_num
+  rw [hparity] at h
+  exact h
 
 #print axioms sourceSpinListProduct_coe
 #print axioms sourceColorPlaneRotor_coe_comm_list
