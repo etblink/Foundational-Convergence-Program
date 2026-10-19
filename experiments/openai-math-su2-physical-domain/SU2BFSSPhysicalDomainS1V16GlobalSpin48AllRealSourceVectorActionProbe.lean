@@ -109,7 +109,7 @@ theorem sourceSixteenColorRotor_conjugates_every_source_vector
       simp only [Finset.mul_sum, Finset.sum_mul]
       apply Finset.sum_congr rfl
       intro p hp
-      simp only [mul_smul, smul_mul_assoc]
+      simp only [mul_smul_comm, smul_mul_assoc]
     _ = ∑ p : RealSpinBlock × ColorLabel,
         (v (sourceBlockColorLabel p.1 p.2)) •
           (if p.2 = (2 : Fin 3)
