@@ -51,7 +51,7 @@ jobs:
           r=experiments/openai-math-su2-physical-domain
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V30Real48CliffordGeneratorInjectiveViaExteriorProbe.lean")" = 59d40c5c74cc4803a6a6096cfe5ea87c800bd7f9
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V31CanonicalAllSpin48RealVectorActionProbe.lean")" = d6e025372d9f3a393dbb21ba7700c0bc95fd40f2
-          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V32AllSpin48CanonicalVectorLinearGroupActionProbe.lean")" = 0466e300f30cd4ee902eff933724a7d59db852db
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V32AllSpin48CanonicalVectorLinearGroupActionProbe.lean")" = 602f68275bc00df55573a955264e9a8c1190a5ae
           echo S1V32_EXACT_ORIGINAL_SPIN48_REAL_LINEAR_ACTION_SOURCE_PINNED
 
       - name: Reclaim disposable runner disk
