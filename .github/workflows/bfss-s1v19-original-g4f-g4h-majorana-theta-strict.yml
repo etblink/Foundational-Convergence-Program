@@ -144,7 +144,7 @@ jobs:
                 # Original source says "private theorem majorana1_phase".
                 # Lean #print axioms emits the exact elaborated _private.<module>.<index> qualified constant.
                 # Demand exactly one anchored match; never permit suffix-only or implicit dropping of this root.
-                private_pattern=r'_private\\.SU2BFSSG4GMajoranaModeCovarianceProbe\\.[0-9]+\\.FCP\\.BFSSSU2GaugeG4G\\.majorana1_phase'
+                private_pattern=r'_private\.SU2BFSSG4GMajoranaModeCovarianceProbe\.[0-9]+\.FCP\.BFSSSU2GaugeG4G\.majorana1_phase'
                 matches=[k for k in got if re.fullmatch(private_pattern,k)]
                 assert len(matches)==1,(stem,name,matches,got)
                 fq=matches[0]
