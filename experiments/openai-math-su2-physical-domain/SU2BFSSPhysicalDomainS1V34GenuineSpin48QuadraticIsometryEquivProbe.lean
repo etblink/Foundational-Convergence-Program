@@ -40,12 +40,12 @@ noncomputable def sourceSpin48LinearEquiv (s : spinGroup Q) :
     intro v
     change sourceSpin48VectorAction s⁻¹ (sourceSpin48VectorAction s v) = v
     rw [← FCP.BFSSS1V32.sourceSpin48VectorAction_mul,
-      inv_mul, FCP.BFSSS1V32.sourceSpin48VectorAction_one]
+      inv_mul_cancel, FCP.BFSSS1V32.sourceSpin48VectorAction_one]
   right_inv := by
     intro v
     change sourceSpin48VectorAction s (sourceSpin48VectorAction s⁻¹ v) = v
     rw [← FCP.BFSSS1V32.sourceSpin48VectorAction_mul,
-      mul_inv, FCP.BFSSS1V32.sourceSpin48VectorAction_one]
+      mul_inv_cancel, FCP.BFSSS1V32.sourceSpin48VectorAction_one]
   map_add' := FCP.BFSSS1V31.sourceSpin48VectorAction_add s
   map_smul' := FCP.BFSSS1V32.sourceSpin48VectorAction_smul s
 
@@ -53,9 +53,12 @@ noncomputable def sourceSpin48LinearEquiv (s : spinGroup Q) :
 equivalence which preserves EXACTLY the original real source quadratic
 form Q on Fin24 x Fin2 labels. No hypothetical projection needed. -/
 noncomputable def sourceSpin48QuadraticIsometryEquiv (s : spinGroup Q) :
-    Q.IsometryEquiv Q where
-  toLinearEquiv := sourceSpin48LinearEquiv s
-  map_app' := FCP.BFSSS1V33.sourceSpin48VectorAction_preserves_sourceQ s
+    Q.IsometryEquiv Q :=
+  { sourceSpin48LinearEquiv s with
+    map_app' := by
+      intro v
+      change Q (sourceSpin48VectorAction s v) = Q v
+      exact FCP.BFSSS1V33.sourceSpin48VectorAction_preserves_sourceQ s v }
 
 /-- Composition of original source quadratic isometries follows the
 ACTUAL Spin-group multiplication in the correct order: first t then s.
@@ -68,6 +71,8 @@ theorem sourceSpin48QuadraticIsometryEquiv_mul
         (sourceSpin48QuadraticIsometryEquiv s) := by
   apply DFunLike.ext
   intro v
+  change sourceSpin48VectorAction (s * t) v =
+    sourceSpin48VectorAction s (sourceSpin48VectorAction t v)
   exact FCP.BFSSS1V32.sourceSpin48VectorAction_mul s t v
 
 #print axioms sourceSpin48LinearEquiv
