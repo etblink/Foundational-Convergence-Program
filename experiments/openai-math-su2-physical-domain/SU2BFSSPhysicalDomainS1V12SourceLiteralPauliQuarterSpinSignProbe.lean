@@ -77,11 +77,23 @@ theorem sourceQuarterZLiteral_conjugates_normalized (A : Fin 3) :
         sourceQuarterZLiteral.conjTranspose =
       (if A = (2 : Fin 3) then sourceNormalizedPauliLiteral A
        else -sourceNormalizedPauliLiteral A) := by
+  let k : ℂ := ((Real.sqrt 2 / 2 : ℝ) : ℂ)
   have h := sourceQuarterZLiteral_conjugates_Pauli A
-  unfold sourceNormalizedPauliLiteral
-  simp only [Matrix.mul_smul, Matrix.smul_mul, smul_ite, smul_neg] at *
-  exact congrArg
-    (fun M : C₂ => ((Real.sqrt 2 / 2 : ℝ) : ℂ) • M) h
+  change sourceQuarterZLiteral * (k • sourcePauliLiteral A) *
+      sourceQuarterZLiteral.conjTranspose =
+      (if A = (2 : Fin 3) then k • sourcePauliLiteral A
+       else -(k • sourcePauliLiteral A))
+  calc
+    sourceQuarterZLiteral * (k • sourcePauliLiteral A) *
+        sourceQuarterZLiteral.conjTranspose =
+      k • (sourceQuarterZLiteral * sourcePauliLiteral A *
+        sourceQuarterZLiteral.conjTranspose) := by
+          simp only [Matrix.mul_smul, Matrix.smul_mul]
+    _ = k • (if A = (2 : Fin 3) then sourcePauliLiteral A
+       else -sourcePauliLiteral A) := by rw [h]
+    _ = (if A = (2 : Fin 3) then k • sourcePauliLiteral A
+       else -(k • sourcePauliLiteral A)) := by
+         split_ifs <;> simp
 
 /-- The concrete source-sized Spin48 color-plane rotor produces the
 SAME 0,1,2 color reflection as the original Pauli z-quarter. -/
