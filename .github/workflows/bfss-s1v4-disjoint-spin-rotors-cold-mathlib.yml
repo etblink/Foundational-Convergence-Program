@@ -46,7 +46,8 @@ jobs:
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe.lean)" = 22f3101b243a7b7857d9597b547322174d9281c8
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V1StandaloneSpin48AllVectorProbe.lean)" = 1adb9000a3bbad937b1e2fc3bd4bd486c777fdd7
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V4TwoDisjointSpinRotorsCommuteProbe.lean)" = debd4f447d075a2f65817860d156fee8061ce024
-          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe.lean)" = 830747f5e50dbf12a558b32b594015c2d04d0cff
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe.lean)" = 6d15a3a76625b3677f132c544f71e5d5eb1dc93c
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe.lean)" = b09940ddbfb30d118ec45ac4b6bb1ba612b6501d
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V2StandaloneSpin48PlaneFlipInvolutionProbe.lean)" = 7a8c80dd7ef8a8772d4ffb9b2611a7bd31096d50
           python3 - <<'PY'
           import json
@@ -177,7 +178,7 @@ jobs:
           import pathlib,re
           stem='SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe'
           s=pathlib.Path('/tmp/bfss-s1v0',stem+'.log').read_text()
-          roots=['sourceBlockColorEquiv','sourceBlockColorLabel_injective',
+          roots=['sourceColorModeEquiv','sourceBlockColorEquiv','sourceBlockColorLabel_injective',
                  'sourceBlockColorAxis_self','sourceBlockColorAxis_other']
           pattern=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
           hits=re.findall(pattern,s)
@@ -188,6 +189,36 @@ jobs:
               assert k in got and got[k]<={'propext','Classical.choice','Quot.sound'},(k,got)
           assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-5000:]
           print('S1V5_CONCRETE_SOURCE48_SIXTEEN_COLOR_BLOCK_INDEX_4_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Strictly qualify explicit Q-unit and pairwise orthogonal source48 color axes
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s ".lake/build/lib/lean/SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe.olean" || { echo ACCEPTED_S1V5_OLEAN_MISSING; exit 1; }
+          mkdir -p .lake/build/lib/lean
+          timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v0/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          stem='SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe'
+          s=pathlib.Path('/tmp/bfss-s1v0',stem+'.log').read_text()
+          roots=['source48Quadratic_eq_dot','sourceBlockColorAxis_unit',
+                 'sourceBlockColorAxis_mul_eq_zero','sourceBlockColorAxis_ortho']
+          pattern=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
+          hits=re.findall(pattern,s)
+          got={k:{t.strip() for t in v.split(',') if t.strip()} for k,v in hits}
+          assert len(hits)==len(roots),(got,roots)
+          for n in roots:
+              k='FCP.BFSSS1V6.'+n
+              assert k in got and got[k]<={'propext','Classical.choice','Quot.sound'},(k,got)
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-5000:]
+          print('S1V6_SOURCE48_BLOCK_COLOR_AXES_UNIT_AND_ORTHOGONAL_4_ROOTS_KERNEL_PASS')
           PY
 
       - name: Preserve full first-causal diagnostic
