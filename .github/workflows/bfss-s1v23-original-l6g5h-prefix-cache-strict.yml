@@ -1,0 +1,189 @@
+name: BFSS S1V23 Original L6G5H Physical Source Prefix Strict Cache
+
+# Deliberately bounded first stage of the actual historical L6G6X import chain.
+# Only THIS path on the isolated research branch triggers this gate.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v-orthogonal-decomposition-isolated-20261018
+    paths:
+      - .github/workflows/bfss-s1v23-original-l6g5h-prefix-cache-strict.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v23-original-l6g5h-prefix-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  source-actual-prefix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - name: Checkout exact original source candidates
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Checkout immutable original upstream OAI mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Verify all source hashes and toolchain pins before expensive setup
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v23-l6g5h
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          data=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in data['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          r=experiments/openai-math-su2-physical-domain
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean)" = 5ec0fcb039fb5c1367f72b2bd0f8c05fcd936587
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe.lean")" = b3c4cb1b12c64d3e718d2c547ee29ebac2b18a36
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe.lean")" = 481df011d2e87b31e58efea2b97f81094fc14918
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe.lean")" = 1c155a708930af50534dc9cb540c48319aeae8b2
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe.lean")" = c14c4e591489c5b5500438a4a3334f514b8e16bc
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe.lean")" = e8e3d4c551d7af723bd94701b6282f96a5ec6253
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainL6G5AOriginalKineticGramProbe.lean")" = 592a98c2277d0305596902bd43add6eafdbfefa3
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainL6G5BOriginalComplexKineticColorGramProbe.lean")" = 75b98ef2e590f840cfba36c1ac4ae5d47efc1a37
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainL6G5COriginalKineticDifferentialSquareProbe.lean")" = 0031bed23901ec56c5ba00d7a2d04060038d78cb
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainL6G5DOriginalCoefficientKineticSplitProbe.lean")" = de937285cd0e4061d612c91e75959e0837e553de
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainL6G5EOriginalScalarCoefficientSquareProbe.lean")" = abb3d7cdee706928c99d089745c627f6d9cc94c7
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainL6G5FSourceQuarticPointwiseProbe.lean")" = bd76b3b747c960480f2c097bf11fe1e010043a2f
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainL6G5GOriginalSU2QuarticJacobiProbe.lean")" = fe18cf866ad5889d0efefcd4d98c96f0a951872c
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainL6G5HSourceCenteredGammaGramProbe.lean")" = 74938c1316159f9af40b6d3ed7b2260e1462ab7a
+          echo ORIGINAL_L6G5H_13_SOURCE_IMMUTABLE_BLOBS_VERIFIED
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean 4.34.1 and exact Mathlib sources
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v23-l6g5h/toolchain.log; then
+              ok=true; break
+            fi
+            echo ORIGINAL_PINNED_LEAN_RETRY_$attempt | tee -a /tmp/bfss-s1v23-l6g5h/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo PINNED_ORIGINAL_LEAN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v23-l6g5h/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo ORIGINAL_L6G5H_PINNED_LEAN_MATHLIB_VERIFIED
+
+      - name: Restore accepted G4M source unitary and gauge representation cache
+        id: g4m
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v19-isolated-g4m-original-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed unless actual accepted G4M cache restored exactly
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.g4m.outputs.cache-hit }}" = true || { echo ACCEPTED_G4M_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in SU2BFSSG1APairedThetaProbe SU2BFSSG3CComplexOneParticleUnitaryProbe SU2BFSSG4JExactGaugeDataAssemblyProbe SU2BFSSG4MOriginalPairedSourceZExponentialQuarterProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "MISSING_ACCEPTED_G4M_SOURCE=$stem"; exit 1; }
+          done
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/GaugeCore.olean
+          echo G4M_ACCEPTED_ORIGINAL_SOURCE_CACHE_RECOVERED
+
+      - name: Build missing actual OAI core Clifford Gamma and color prerequisites
+        shell: bash
+        timeout-minutes: 19
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          timeout 1020s lake build OAI.MathematicalPhysics.BFSS.Core \
+            OAI.MathematicalPhysics.BFSS.GammaIdentity \
+            OAI.MathematicalPhysics.BFSS.CliffordSymbols \
+            OAI.MathematicalPhysics.BFSS.ColorMatrices \
+            2>&1 | tee /tmp/bfss-s1v23-l6g5h/upstream-oai.log
+          for stem in Core GammaIdentity CliffordSymbols ColorMatrices; do
+            test -s ".lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/$stem.olean" || { echo "ORIGINAL_OAI_PREREQUISITE_MISSING=$stem"; exit 1; }
+          done
+          echo ORIGINAL_L6G5H_UPSTREAM_OAI_READY
+
+      - name: Compile original source L6G1 through L6G5H and audit every printed root
+        shell: bash
+        timeout-minutes: 28
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          if [ ! -s .lake/build/lib/lean/SU2RealGammaProbe.olean ]; then
+            cp ../../experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean .
+            timeout 330s lake env lean -o .lake/build/lib/lean/SU2RealGammaProbe.olean SU2RealGammaProbe.lean 2>&1 | tee /tmp/bfss-s1v23-l6g5h/SU2RealGammaProbe.log
+            test -s .lake/build/lib/lean/SU2RealGammaProbe.olean
+          fi
+          for stem in SU2BFSSPhysicalDomainL6G1OriginalUpstreamSpinIdentityProbe SU2BFSSPhysicalDomainL6G2OriginalHomogeneousRowFierzProbe SU2BFSSPhysicalDomainL6G3OriginalChargeNormalOrderProbe SU2BFSSPhysicalDomainL6G4AOriginalCoreCalculusProbe SU2BFSSPhysicalDomainL6G4BOriginalCoefficientCommutatorProbe SU2BFSSPhysicalDomainL6G5AOriginalKineticGramProbe SU2BFSSPhysicalDomainL6G5BOriginalComplexKineticColorGramProbe SU2BFSSPhysicalDomainL6G5COriginalKineticDifferentialSquareProbe SU2BFSSPhysicalDomainL6G5DOriginalCoefficientKineticSplitProbe SU2BFSSPhysicalDomainL6G5EOriginalScalarCoefficientSquareProbe SU2BFSSPhysicalDomainL6G5FSourceQuarticPointwiseProbe SU2BFSSPhysicalDomainL6G5GOriginalSU2QuarticJacobiProbe SU2BFSSPhysicalDomainL6G5HSourceCenteredGammaGramProbe; do
+            cp "../../experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+            echo "ORIGINAL_STAGED_SOURCE_COMPILE_BEGIN=$stem"
+            timeout 430s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v23-l6g5h/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "MISSING_ORIGINAL_STAGE_OLEAN=$stem"; exit 1; }
+            STEM="$stem" python3 - <<'PY'
+          import os,pathlib,re
+          stem=os.environ['STEM']
+          src=pathlib.Path(stem+'.lean').read_text()
+          s=pathlib.Path('/tmp/bfss-s1v23-l6g5h',stem+'.log').read_text()
+          nsm=re.findall(r'^namespace (\S+)',src,re.M)
+          assert len(nsm)>=1,(stem,'namespace missing')
+          namespace=nsm[0]
+          names=re.findall(r'^#print axioms (\S+)',src,re.M)
+          assert len(names)>0,(stem,'no original axiom printouts')
+          raw=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          found={name:{a.strip() for a in ax.split(',') if a.strip()} for name,ax in raw}
+          assert len(raw)==len(found)==len(names),(stem,names,list(found))
+          for root in names:
+            k=namespace+'.'+root
+            suffix=re.compile(r'_private\.'+re.escape(stem)+r'\.[0-9]+\.'+re.escape(k))
+            hits=[n for n in found if n==k or suffix.fullmatch(n)]
+            assert len(hits)==1,(stem,root,hits,list(found))
+            assert found[hits[0]]<={'propext','Classical.choice','Quot.sound'},(stem,root,found[hits[0]])
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,(stem,s[-4000:])
+          print('HISTORICAL_ORIGINAL_L6G5H_PREFIX_ROOTS_PASS',stem,len(names))
+          PY
+          done
+          echo ORIGINAL_L6G5H_13_SOURCE_MODULES_AXIOM_QUALIFIED_CACHE_READY
+
+      - name: Save pinned original L6G5H physical source prefix
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v23-isolated-l6g5h-original-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve first causal source and pin logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v23-l6g5h-${{ github.run_id }}
+          path: /tmp/bfss-s1v23-l6g5h/
+          if-no-files-found: warn
+          retention-days: 14
