@@ -51,11 +51,11 @@ theorem source48_spin_conjugation_fixes_real_scalar
     ConjAct.toConjAct (spinGroup.toUnits s) •
       (algebraMap ℝ C a) = algebraMap ℝ C a := by
   let u : Cˣ := spinGroup.toUnits s
-  change (u : C) * algebraMap ℝ C a * (u⁻¹ : C) =
+  change (u : C) * algebraMap ℝ C a * ((u⁻¹ : Cˣ) : C) =
     algebraMap ℝ C a
   calc
-    (u : C) * algebraMap ℝ C a * (u⁻¹ : C) =
-        algebraMap ℝ C a * ((u : C) * (u⁻¹ : C)) := by
+    (u : C) * algebraMap ℝ C a * ((u⁻¹ : Cˣ) : C) =
+        algebraMap ℝ C a * ((u : C) * ((u⁻¹ : Cˣ) : C)) := by
       rw [← (Algebra.commutes a (u : C)).eq, mul_assoc]
     _ = algebraMap ℝ C a := by simp
 
@@ -79,7 +79,7 @@ theorem sourceSpin48VectorAction_preserves_sourceQ
     _ =
         ConjAct.toConjAct (spinGroup.toUnits s) •
           (CliffordAlgebra.ι Q v * CliffordAlgebra.ι Q v) := by
-      rw [smul_mul]
+      rw [smul_mul']
     _ =
         ConjAct.toConjAct (spinGroup.toUnits s) •
           algebraMap ℝ C (Q v) := by
