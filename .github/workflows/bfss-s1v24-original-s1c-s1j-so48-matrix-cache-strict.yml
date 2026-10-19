@@ -1,0 +1,152 @@
+name: BFSS S1V24 Original 24-Mode SU24 and 48-Real SO48 Source Matrix Strict Gate
+
+# Rebuild exact original S1C+S1J source matrix modules on accepted S1V23 cache.
+# This is 13 axiom-qualified roots, NOT independent Spin48 or manuscript equivalence.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v-orthogonal-decomposition-isolated-20261018
+    paths:
+      - .github/workflows/bfss-s1v24-original-s1c-s1j-so48-matrix-cache-strict.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v24-original-s1c-s1j-matrix-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  original-s1c-s1j-so48-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - name: Checkout exact original source candidates
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Checkout immutable original upstream OAI mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Verify all source hashes and toolchain pins before expensive setup
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v24-s1c-s1j
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          data=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in data['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          r=experiments/openai-math-su2-physical-domain
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V23OriginalPlusICurveNativeQuarterBridgeProbe.lean")" = cb29eb6261fc50550cc275bceb5b000619d521b7
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe.lean")" = c5de7c744744212711780aee2d4f9742c002cd84
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe.lean")" = 3f845ae219586be47fa76aabc3259027b1bb4bae
+          echo S1V24_S1C_S1J_TWO_ORIGINAL_SOURCE_BLOBS_PINNED
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean 4.34.1 and exact Mathlib sources
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v24-s1c-s1j/toolchain.log; then
+              ok=true; break
+            fi
+            echo ORIGINAL_PINNED_LEAN_RETRY_$attempt | tee -a /tmp/bfss-s1v24-s1c-s1j/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo PINNED_ORIGINAL_LEAN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v24-s1c-s1j/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo S1V24_S1C_S1J_PINNED_LEAN_MATHLIB_VERIFIED
+
+      - name: Restore strictly accepted S1V23 historical quarter curve and G4M source cache
+        id: accepted_s1v23
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v23-isolated-source-plus-i-quarter-original-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed without exact qualified original S1V23, G3C, and G4M source dependency cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.accepted_s1v23.outputs.cache-hit }}" = true || { echo ORIGINAL_S1V23_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in SU2BFSSPhysicalDomainS1V23OriginalPlusICurveNativeQuarterBridgeProbe SU2BFSSPhysicalDomainL6G6XOriginalSU2GaugeCurveProbe SU2BFSSG3CComplexOneParticleUnitaryProbe SU2BFSSG4MOriginalPairedSourceZExponentialQuarterProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "S1V24_PINNED_SOURCE_DEPENDENCY_MISSING=$stem"; exit 1; }
+          done
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/GaugeCore.olean
+          echo ORIGINAL_S1V24_S1C_S1J_SOURCE_CACHE_READY
+
+      - name: Compile two unchanged original S1C-S1J source modules and validate all thirteen roots
+        shell: bash
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          for stem in SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe; do
+            cp "../../experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+            timeout 320s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v24-s1c-s1j/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "MISSING_S1V24_ORIGINAL_OLEAN=$stem"; exit 1; }
+            STEM="$stem" python3 - <<'PY'
+          import pathlib,re,os
+          stem=os.environ['STEM']
+          src=pathlib.Path(stem+'.lean').read_text()
+          log=pathlib.Path('/tmp/bfss-s1v24-s1c-s1j',stem+'.log').read_text()
+          names=re.findall(r'^#print axioms (\S+)',src,re.M)
+          assert len(names)==(5 if 'S1COneParticle' in stem else 8),(stem,names)
+          ns=re.findall(r'^namespace (\S+)',src,re.M)
+          assert len(ns)==1,(stem,ns)
+          entries=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          found={name:{a.strip() for a in axs.split(',') if a.strip()} for name,axs in entries}
+          assert len(entries)==len(found)==len(names),(stem,names,found)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for root in names:
+            key=root if '.' in root else ns[0]+'.'+root
+            assert key in found and found[key]<=allowed,(stem,key,found)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log,(stem,log[-7000:])
+          print('S1V24_ORIGINAL_TYPED_SOURCE_MODULE_AXIOM_PASS',stem,len(names))
+          PY
+          done
+          echo ORIGINAL_S1V24_S1C_S1J_THIRTEEN_ROOTS_SOURCE_MATRIX_CACHE_PASS
+
+      - name: Save original source S1C S1J SO48 matrix on thirteen-root strict success only
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v24-isolated-source-s1c-s1j-original-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve first causal source and pin logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v23-l6g5h-${{ github.run_id }}
+          path: /tmp/bfss-s1v24-s1c-s1j/
+          if-no-files-found: warn
+          retention-days: 14
