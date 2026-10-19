@@ -46,6 +46,20 @@ theorem standalone_source_label_eq_original
       (colorModeEquiv (j,A),s) := by
   rfl
 
+/-- The 48-real Spin source packing is EXACTLY the original Fock
+Majorana pairing, for ALL actual sixteen original SpinIndex labels.
+This identifies the ORIGINAL `spinPairEquiv` and `pairedLabelEquiv`
+with the standalone 8×2 blocks, not merely equal cardinalities. -/
+theorem standalone_source_label_eq_paired_original
+    (α : SpinIndex) (A : ColorIndex 2) :
+    sourceBlockColorLabel (spinPairEquiv α) A =
+      pairedLabelEquiv (α,A) := by
+  change (sourceColorModeEquiv ((spinPairEquiv α).1,A),
+      (spinPairEquiv α).2) =
+    (colorModeEquiv ((spinPairEquiv α).1,A),
+      (spinPairEquiv α).2)
+  rfl
+
 /-- The source 48-real diagonal quarter matrix's diagonal color
 coefficient at the exact original Fock source index. -/
 theorem standalone_quarter_coeff_original
@@ -138,6 +152,7 @@ theorem original_source_zquarter_48_matrix_eq_spin_quarter :
   simpa only [hi, hk] using h
 
 #print axioms standalone_source_label_eq_original
+#print axioms standalone_source_label_eq_paired_original
 #print axioms standalone_quarter_coeff_original
 #print axioms original_source_quarter_48_matrix_block_entry
 #print axioms original_source_zquarter_48_matrix_eq_spin_quarter
