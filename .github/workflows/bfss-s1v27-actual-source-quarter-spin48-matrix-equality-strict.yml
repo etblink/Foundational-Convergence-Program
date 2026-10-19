@@ -51,7 +51,7 @@ jobs:
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe.lean")" = 3f845ae219586be47fa76aabc3259027b1bb4bae
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V23OriginalPlusICurveNativeQuarterBridgeProbe.lean")" = cb29eb6261fc50550cc275bceb5b000619d521b7
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V25HistoricalSourceQuarter48BlockEntryProbe.lean")" = e9762e418272c0ad8ed9937a4f837f4c5743b1f2
-          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V27HistoricalOriginalQuarterVsIndependentSpin48MatrixProbe.lean")" = a735aa6e34b52b9577e46625f39b825fbd01e6df
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V27HistoricalOriginalQuarterVsIndependentSpin48MatrixProbe.lean")" = d4b20266b01f827eb12ba3c3efff0d7b95c07dce
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V18QuarterFlipRealMajoranaDiagonalMatrixProbe.lean")" = 980109459761da5438ce48aa347d3dacbcf3c82d
           echo S1V27_BOTH_ACTUAL_SOURCE_AND_INDEPENDENT_SPIN48_BLOBS_PINNED
 
