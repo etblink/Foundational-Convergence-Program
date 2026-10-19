@@ -52,7 +52,7 @@ theorem actualHistoricalQuarter_adjointColorMatrix
 
 /-- At every Fock spin-pair (j,k), real Majorana bit (s,t), and
 source color (B,A), the *historical* L6G6X group element has exactly
-the source 48-real +/- block entries. B is ROW/output, A COLUMN/input,
+the source 48-real signed block entries. B is ROW/output, A COLUMN/input,
 matching the exact original S1J matrix and G3B mode ordering. -/
 theorem actualHistoricalQuarter_sourceRealMajoranaMatrix_entry
     (j k : Fin 8) (s t : Fin 2)
