@@ -37,3 +37,15 @@ The previously accepted and unmodified S1V21 `original_upstream_adjointCoefficie
 **Risk / negative knowledge:** Importing `L6G6X` itself is nontrivial: its prior import path goes `L6G6W` → `L6G6V` → `L6G6U` → `L6G6D` (plus original `OAI.GaugeGeometry`). Therefore this cut removes the huge **H5E8Q/Euler/S1F** dependency, not the source-curve differentiability history. Build/cache only required original OAI and Lean modules, hash-pin them, check all axioms, stop on first causal failure. No expensive full original S1G build should be triggered solely by a single local Pauli quarter matrix.
 
 **Boundary:** Even a kernel-green local original SU2 element equality does not imply a global continuous Spin(48) lift, a Hilbert-space Clifford intertwiner, or the BFSS positive mass gap. No merge to main/PR25, no pin drift, no novel assumptions.
+
+## Additional dependency closure verified on 2026-10-19 — avoid a misleading cheap gate
+
+**Material correction to the optimization estimate:** The preceding elimination of `L6H5E8Q` and `S1G` removes one huge transitive import path, but `L6G6XOriginalSU2GaugeCurve` itself still forces a LONG original physical-operator module chain. The full uncompiled candidate source `SU2BFSSPhysicalDomainS1V22OriginalZQuarterMinimalSourceCurveProbe.lean` is mathematically source-exact but **NOT necessarily inexpensive to qualify**.
+
+Connector inspection of actual immutable branch `*.lean` import directives yielded:
+`L6G6X → L6G6W → L6G6V → L6G6U → L6G6D → L6G6C → L6G6B → L6G6A → L6G5W → L6G5V → L6G5U → L6G5T → L6G5S → L6G5R → L6G5Q → L6G5P → L6G5O → L6G5N → L6G5M → L6G5L → L6G5K → L6G5J → L6G5I → L6G5G/F/E/D/C/B/A → L6G4B → L6G4A → L6G3 → original OAI.BFSS.Core`.
+At `L6G5I` there is ALSO the `L6G5H` gamma-Gram branch; at `L6G5A` there is the `L6G2` Fierz branch. This is a **lower bound** on closure, not a claim that no additional imports exist. Thus an attempted fresh isolated Lean build for the *exact original symbol* may require 30+ large source probes and substantial reuse/caching. Blind compilation would waste CI and conflate implementation cost with mathematics.
+
+**Project Lead decision:** Preserve the source-exact S1V22 candidate WITHOUT dispatching a speculative strict gate yet. The next useful bounded accepted-cache progression is G4C/D/E then G4F/G/H exact Majorana covariance. In parallel, consider a **separately named reduced-dependency +i SU(2) curve** on actual `GaugeGroup 2` from G1A, then prove its definitional equality to L6G6X's `sourcePlusIGaugeCurve` when its original import chain is staged/qualified. A reduced-dependency reimplementation is only an intermediate typed candidate, not identical to the original symbol until the equality is proved in Lean. Future source exactness must not be asserted solely from handwritten mathematical sameness.
+
+This is an important case of **negative knowledge**: an import cut that looks efficient at the mathematics level can fail to reduce Lean's transitive compile graph. Avoid green-count pressure; ask whether it discharges an unresolved scientific bridge. No original-source bridge or spectrum claim is upgraded by this note.
