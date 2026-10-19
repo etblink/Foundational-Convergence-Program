@@ -1,0 +1,179 @@
+name: BFSS S1V26 Independent Sixteen-Rotor Spin48 Original-Sized Strict Source Cache
+
+# Rebuild accepted standalone 16-rotor Clifford/Spin48 source-sized source chain
+# ON TOP of accepted actual S1V24 original SU24/SO48 matrix cache.
+# This does not prove a global SU2 Spin lift, only the fixed-point rotor action.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v-orthogonal-decomposition-isolated-20261018
+    paths:
+      - .github/workflows/bfss-s1v26-independent-source-spin48-rotor-prefix-strict.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v26-independent-rotor-prefix-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  independent-source-spin48-prefix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - name: Checkout exact original source candidates
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Checkout immutable original upstream OAI mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Verify all source hashes and toolchain pins before expensive setup
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v26-rotor
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          data=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in data['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          r=experiments/openai-math-su2-physical-domain
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe.lean")" = 3f845ae219586be47fa76aabc3259027b1bb4bae
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe.lean")" = 22f3101b243a7b7857d9597b547322174d9281c8
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V1StandaloneSpin48AllVectorProbe.lean")" = 1adb9000a3bbad937b1e2fc3bd4bd486c777fdd7
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V2StandaloneSpin48PlaneFlipInvolutionProbe.lean")" = 7a8c80dd7ef8a8772d4ffb9b2611a7bd31096d50
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V4TwoDisjointSpinRotorsCommuteProbe.lean")" = debd4f447d075a2f65817860d156fee8061ce024
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe.lean")" = 6d15a3a76625b3677f132c544f71e5d5eb1dc93c
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe.lean")" = 4ae8b38d5601b8c57f09e94c523beb9b4598dcb1
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V8ConcreteSource48SixteenSpinRotorsProbe.lean")" = e22fb0fd376112d76ed1e79c4decd5eb65008465
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V9OrderedSixteenSpin48RotorProductProbe.lean")" = 3d2faad8ad01b4142012036278119079873f587d
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V10SourceColorBlockRotorCentralSignProbe.lean")" = 78379ea6749efa3b1074a3da0bc3c9b1d1682d9f
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V11SixteenSourceSpin48CenterParityProbe.lean")" = ba4328851907efcb59dee45c6c0a2cecde07fa06
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V12SourceLiteralPauliQuarterSpinSignProbe.lean")" = 20b8708eea4c9c3ec30e3b3c47eea66dcbd19e93
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V14GlobalSixteenSpin48ColorTwoFixationProbe.lean")" = 335d60dcc6552ab4dbbc29f467d919b761f26269
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V15GlobalSixteenSpin48AllColorAxisActionProbe.lean")" = 95bdb9560c064618e434ebc9bd932bedfeda8284
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V16GlobalSpin48AllRealSourceVectorActionProbe.lean")" = 51f2299511ecb9d94e4a4b2a3b38299107061711
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V17QuarterFlipLiteralCoordinateAndInvolutionProbe.lean")" = ceac341fe05fbe4d54c45a7c12120c03eb646157
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V18QuarterFlipRealMajoranaDiagonalMatrixProbe.lean")" = 980109459761da5438ce48aa347d3dacbcf3c82d
+          echo S1V26_SIXTEEN_SPIN48_UNMODIFIED_SOURCE_BLOBS_VERIFIED
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean 4.34.1 and exact Mathlib sources
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v26-rotor/toolchain.log; then
+              ok=true; break
+            fi
+            echo ORIGINAL_PINNED_LEAN_RETRY_$attempt | tee -a /tmp/bfss-s1v26-rotor/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo PINNED_ORIGINAL_LEAN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v26-rotor/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo S1V26_SIXTEEN_SPIN48_PINNED_LEAN_MATHLIB_VERIFIED
+
+      - name: Restore strictly accepted source S1V24 SU24 SO48 original matrix cache
+        id: accepted_matrix
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v24-isolated-source-s1c-s1j-original-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed without accepted original S1V24 matrix source cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.accepted_matrix.outputs.cache-hit }}" = true || { echo ORIGINAL_SOURCE_S1V24_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in SU2BFSSPhysicalDomainS1V23OriginalPlusICurveNativeQuarterBridgeProbe SU2BFSSPhysicalDomainS1COneParticleSpecialUnitaryProbe SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe SU2BFSSG4MOriginalPairedSourceZExponentialQuarterProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "S1V26_MISSING_ACCEPTED_ORIGINAL_SOURCE=$stem"; exit 1; }
+          done
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/GaugeCore.olean
+          echo ORIGINAL_S1V26_SOURCE_MATRIX_CACHE_READY
+
+      - name: Strictly rebuild unchanged source-sized sixteen-block Spin48 original-label rotor modules and verify 74 roots
+        shell: bash
+        timeout-minutes: 26
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          for stem in SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe SU2BFSSPhysicalDomainS1V1StandaloneSpin48AllVectorProbe SU2BFSSPhysicalDomainS1V2StandaloneSpin48PlaneFlipInvolutionProbe SU2BFSSPhysicalDomainS1V4TwoDisjointSpinRotorsCommuteProbe SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe SU2BFSSPhysicalDomainS1V8ConcreteSource48SixteenSpinRotorsProbe SU2BFSSPhysicalDomainS1V9OrderedSixteenSpin48RotorProductProbe SU2BFSSPhysicalDomainS1V10SourceColorBlockRotorCentralSignProbe SU2BFSSPhysicalDomainS1V11SixteenSourceSpin48CenterParityProbe SU2BFSSPhysicalDomainS1V12SourceLiteralPauliQuarterSpinSignProbe SU2BFSSPhysicalDomainS1V14GlobalSixteenSpin48ColorTwoFixationProbe SU2BFSSPhysicalDomainS1V15GlobalSixteenSpin48AllColorAxisActionProbe SU2BFSSPhysicalDomainS1V16GlobalSpin48AllRealSourceVectorActionProbe SU2BFSSPhysicalDomainS1V17QuarterFlipLiteralCoordinateAndInvolutionProbe SU2BFSSPhysicalDomainS1V18QuarterFlipRealMajoranaDiagonalMatrixProbe; do
+            cp "../../experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+            echo "BEGIN_S1V26_ROTOR_SOURCE=$stem"
+            timeout 390s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v26-rotor/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "S1V26_MISSING_ORIGINAL_SIZE_ROTOR_OLEAN=$stem"; exit 1; }
+            STEM="$stem" python3 - <<'PY'
+          import pathlib,re,os
+          stem=os.environ['STEM']
+          src=pathlib.Path(stem+'.lean').read_text()
+          log=pathlib.Path('/tmp/bfss-s1v26-rotor',stem+'.log').read_text()
+          names=re.findall(r'^#print axioms (\S+)',src,re.M)
+          ns=re.findall(r'^namespace (\S+)',src,re.M)
+          assert names and len(ns)==1,(stem,names,ns)
+          reports=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          found={key:{a.strip() for a in axioms.split(',') if a.strip()} for key,axioms in reports}
+          assert len(reports)==len(found)==len(names),(stem,names,found)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for name in names:
+            key=name if '.' in name else ns[0]+'.'+name
+            private=re.compile(r'_private\.'+re.escape(stem)+r'\.[0-9]+\.'+re.escape(key))
+            hits=[x for x in found if x==key or private.fullmatch(x)]
+            assert len(hits)==1,(stem,name,hits,found)
+            assert found[hits[0]]<=allowed,(stem,name,found[hits[0]])
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log,(stem,log[-7500:])
+          print('S1V26_INDEPENDENT_SOURCE_ROTOR_MODULE_KERNEL_PASS',stem,len(names))
+          PY
+          done
+          python3 - <<'PY'
+          import pathlib,re
+          logs=list(pathlib.Path('/tmp/bfss-s1v26-rotor').glob('SU2BFSSPhysicalDomainS1V*.log'))
+          counts=[]
+          for log in logs:
+            src=pathlib.Path(log.stem+'.lean').read_text()
+            counts.append(len(re.findall(r'^#print axioms ',src,re.M)))
+          assert len(logs)==16 and sum(counts)==74,(len(logs),counts)
+          print('S1V26_SOURCE_SIZE_SIXTEEN_SPIN48_ROTOR_16_MODULES_74_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Save source-size independent sixteen-rotor Clifford cache only after all 74 roots pass
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v26-isolated-original-size-spin48-rotor-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve first causal source and pin logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v26-rotor-${{ github.run_id }}
+          path: /tmp/bfss-s1v26-rotor/
+          if-no-files-found: warn
+          retention-days: 14
