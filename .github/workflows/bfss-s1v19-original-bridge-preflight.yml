@@ -1,0 +1,73 @@
+name: BFSS S1V19 Original Source Cache Visibility Preflight (NO PROOF)
+
+# This lookup-only preflight does NOT compile Lean and makes NO math claim.
+# Runs ONLY when THIS isolated workflow path is changed on the isolated branch.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v-orthogonal-decomposition-isolated-20261018
+    paths:
+      - .github/workflows/bfss-s1v19-original-bridge-preflight.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v19-original-cache-preflight-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  original-closure-cache-visibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact isolated research sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Check immutable original G3A/S1G/S1J and new S1V19 proof pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG3AAdjointColorRepresentationProbe.lean)" = c8bbd59782c3116fb514d6aa20d91c607a11c3e7
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG3B24ModeOrthogonalLiftProbe.lean)" = c90b25156ec4d81ee16e5939cd888cc12cdc33a3
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1GExactSourceRelativeCharacterTrivialityProbe.lean)" = e1fe07f84e4a1427b5b4d2b534bb32644e87b203
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe.lean)" = 3f845ae219586be47fa76aabc3259027b1bb4bae
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V18QuarterFlipRealMajoranaDiagonalMatrixProbe.lean)" = 980109459761da5438ce48aa347d3dacbcf3c82d
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V19OriginalSourceZQuarterAdjointCoefficientBridgeProbe.lean)" = 5d77be869b4df35462af4c66bd5452e5ab908198
+          echo PINNED_SOURCE_BLOBS_VERIFIED__NO_LEAN_COMPILATION
+
+      - name: Lookup pinned toolchain Mathlib cache without download
+        id: pinned
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          lookup-only: true
+          path: |
+            upstream-math/lean/.lake
+            ~/.elan
+          key: bfss-l6-pinned-env-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Lookup original Fock OAI compiled closure without download
+        id: original
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          lookup-only: true
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-l6g7w-accepted-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G[1-6]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainL6G7[A-W]*Probe.lean', 'experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1[A-B]*Probe.lean', 'experiments/openai-math-su2-concrete-potential/SU2*.lean') }}
+
+      - name: Report access status without asserting math qualification
+        shell: bash
+        env:
+          TOOLCHAIN_HIT: ${{ steps.pinned.outputs.cache-hit }}
+          ORIGINAL_HIT: ${{ steps.original.outputs.cache-hit }}
+        run: |
+          set -euo pipefail
+          echo "PINNED_MATHLIB_CACHE_ACCESSIBLE=$TOOLCHAIN_HIT"
+          echo "ORIGINAL_FOCK_SOURCE_CLOSURE_ACCESSIBLE=$ORIGINAL_HIT"
+          if [ "$TOOLCHAIN_HIT" = true ] && [ "$ORIGINAL_HIT" = true ]; then
+            echo ORIGINAL_SOURCE_BRIDGE_CACHE_PREFLIGHT_CAN_ATTEMPT_STRICT_LEAN
+          else
+            echo ORIGINAL_SOURCE_BRIDGE_CACHE_PREFLIGHT_BLOCKED__SELECT_BOUNDED_COLD_CLOSURE_STRATEGY
+          fi
+          echo PREFLIGHT_ONLY__NO_LEAN_THEOREM_COMPILED__NO_AXIOM_AUDIT
