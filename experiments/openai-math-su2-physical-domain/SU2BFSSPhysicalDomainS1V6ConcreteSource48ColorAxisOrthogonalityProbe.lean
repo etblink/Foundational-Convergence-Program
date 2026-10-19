@@ -36,7 +36,20 @@ theorem sourceBlockColorAxis_unit
     (α : RealSpinBlock) (A : ColorLabel) :
     Q (sourceBlockColorAxis α A) = 1 := by
   rw [source48Quadratic_eq_dot]
-  simp [dotProduct, sourceBlockColorAxis]
+  change (∑ i : SourceLabel,
+      sourceBlockColorAxis α A i * sourceBlockColorAxis α A i) = 1
+  calc
+    (∑ i : SourceLabel,
+      sourceBlockColorAxis α A i * sourceBlockColorAxis α A i) =
+        ∑ i : SourceLabel,
+          (if i = sourceBlockColorLabel α A then (1 : ℝ) else 0) := by
+            apply Finset.sum_congr rfl
+            intro i hi
+            by_cases h : i = sourceBlockColorLabel α A
+            · subst i
+              simp [sourceBlockColorAxis]
+            · simp [sourceBlockColorAxis, h]
+    _ = 1 := by simp
 
 /-- Different exact 48-Majorana coordinates have zero coordinatewise
 product. No arbitrary orthogonality premise is inserted. -/
