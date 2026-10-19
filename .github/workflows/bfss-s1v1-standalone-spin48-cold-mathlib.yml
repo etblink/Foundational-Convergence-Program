@@ -45,6 +45,7 @@ jobs:
           test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe.lean)" = 22f3101b243a7b7857d9597b547322174d9281c8
           test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V1StandaloneSpin48AllVectorProbe.lean)" = 1adb9000a3bbad937b1e2fc3bd4bd486c777fdd7
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V2StandaloneSpin48PlaneFlipInvolutionProbe.lean)" = 7a8c80dd7ef8a8772d4ffb9b2611a7bd31096d50
           python3 - <<'PY'
           import json
           m=json.load(open('upstream-math/lean/lake-manifest.json'))
@@ -125,6 +126,38 @@ jobs:
               assert k in got and got[k]<={'propext','Classical.choice','Quot.sound'},(k,got)
           assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-5000:]
           print('S1V1_SOURCE48_SPIN_ROTOR_ALL_VECTOR_6_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Strictly qualify source48 plane-flip involution from actual Spin rotor
+        shell: bash
+        timeout-minutes: 7
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=SU2BFSSPhysicalDomainS1V2StandaloneSpin48PlaneFlipInvolutionProbe
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          test -s ".lake/build/lib/lean/SU2BFSSPhysicalDomainS1V1StandaloneSpin48AllVectorProbe.olean" || { echo S1V1_ACCEPTED_SPIN_ROTOR_OLEAN_MISSING; exit 1; }
+          mkdir -p .lake/build/lib/lean
+          timeout 270s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v0/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          stem='SU2BFSSPhysicalDomainS1V2StandaloneSpin48PlaneFlipInvolutionProbe'
+          s=pathlib.Path('/tmp/bfss-s1v0',stem+'.log').read_text()
+          roots=['sourcePlaneFlip_ortho_coefficient_first',
+                 'sourcePlaneFlip_ortho_coefficient_second',
+                 'sourcePlaneFlip_complement_fixed',
+                 'sourcePlaneFlip_involution']
+          pattern=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
+          hits=re.findall(pattern,s)
+          got={k:{t.strip() for t in v.split(',') if t.strip()} for k,v in hits}
+          assert len(hits)==len(roots),(got,roots)
+          for n in roots:
+              k='FCP.BFSSS1V2.'+n
+              assert k in got and got[k]<={'propext','Classical.choice','Quot.sound'},(k,got)
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-5000:]
+          print('S1V2_SOURCE48_SPIN_PLANE_FLIP_INVOLUTION_4_ROOTS_KERNEL_PASS')
           PY
 
       - name: Preserve full first-causal diagnostic
