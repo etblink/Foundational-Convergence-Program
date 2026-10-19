@@ -1,0 +1,152 @@
+name: BFSS S1V19 Original G4K GaugeData Quarter Conditional Strict Gate
+
+# This is a conditional theorem about original GaugeGroup/GaugeData,
+# NOT a proof of original L6G6X sourcePlusIGaugeCurve quarter equality.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v-orthogonal-decomposition-isolated-20261018
+    paths:
+      - .github/workflows/bfss-s1v19-original-g4k-gaugedata-quarter-conditional-strict.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v19-original-g4k-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  source-g4k-conditional:
+    runs-on: ubuntu-latest
+    timeout-minutes: 49
+    steps:
+      - name: Checkout unchanged isolated original source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Checkout actual pinned OAI math
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Verify exact pinned original math G4J and new G4K source hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v19-g4k-quarter
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          j=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in j['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          r=experiments/openai-math-su2-concrete-potential
+          test "$(git hash-object "$r/SU2BFSSG4JExactGaugeDataAssemblyProbe.lean")" = dd82ff793918e448a2d91781edb84d273a664cd4
+          test "$(git hash-object "$r/SU2BFSSG4KOriginalGaugeDataQuarterConditionalProbe.lean")" = c34a1568fee5656c77205849c583b86dfdd77d27
+          echo EXACT_G4K_SOURCE_AND_PINNED_MATH_VERIFIED
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore immutable Lean 4.34.1 and pinned Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v19-g4k-quarter/toolchain.log; then
+              ok=true; break
+            fi
+            echo PINNED_LEAN_TLS_RETRY_$attempt | tee -a /tmp/bfss-s1v19-g4k-quarter/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo PINNED_LEAN_TOOLCHAIN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v19-g4k-quarter/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo ORIGINAL_PINNED_G4K_LEAN_MATHLIB_VERIFIED
+
+      - name: Restore exact accepted G4J full original six-field GaugeData cache
+        id: accepted
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v19-isolated-g4j-original-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed unless actual accepted G4J and original G3A G4H cache modules present
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.accepted.outputs.cache-hit }}" = true || { echo ACCEPTED_G4J_SOURCE_CACHE_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          for stem in SU2BFSSG1APairedThetaProbe SU2BFSSG3AAdjointColorRepresentationProbe SU2BFSSG4HExactThetaCovarianceProbe SU2BFSSG4JExactGaugeDataAssemblyProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "ORIGINAL_G4J_CACHE_MISSING=$stem"; exit 1; }
+          done
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/GaugeCore.olean
+          echo ORIGINAL_G4J_NATIVE_SU2_GAUGEDATA_READY
+
+      - name: Compile genuine original GaugeData z-quarter conditional bridge and strictly validate six roots
+        shell: bash
+        timeout-minutes: 10
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=SU2BFSSG4KOriginalGaugeDataQuarterConditionalProbe
+          cp "../../experiments/openai-math-su2-concrete-potential/$stem.lean" "$stem.lean"
+          timeout 480s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v19-g4k-quarter/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean" || { echo ORIGINAL_G4K_NEW_OLEAN_MISSING; exit 1; }
+          python3 - <<'PY'
+          import pathlib,re
+          stem='SU2BFSSG4KOriginalGaugeDataQuarterConditionalProbe'
+          s=pathlib.Path('/tmp/bfss-s1v19-g4k-quarter',stem+'.log').read_text()
+          names=[
+            'originalZQuarterMatrix','originalZQuarter_pauli_conjugates',
+            'originalZQuarter_normalizedPauli_conjugates',
+            'original_paired_adjointCoefficient_of_quarter_matrix',
+            'original_adjointColorMatrix_of_quarter_matrix',
+            'original_pairedGaugeData_fermion_quarter_of_matrix']
+          pattern=r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)"
+          hits=re.findall(pattern,s)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          got={name:{v.strip() for v in axioms.split(',') if v.strip()} for name,axioms in hits}
+          assert len(got)==len(hits)==len(names),(hits,names)
+          for n in names:
+            key='FCP.BFSSSU2GaugeG4K.'+n
+            assert key in got and got[key]<=allowed,(key,got)
+          assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,s[-5500:]
+          print('ORIGINAL_SOURCE_G4K_NATIVE_GAUGEDATA_QUARTER_CONDITIONAL_6_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Save accepted conditional source G4K GaugeData quarter cache
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v19-isolated-g4k-original-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve full first causal source diagnostics for negative knowledge
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v19-g4k-quarter-${{ github.run_id }}
+          path: /tmp/bfss-s1v19-g4k-quarter/
+          if-no-files-found: warn
+          retention-days: 14
