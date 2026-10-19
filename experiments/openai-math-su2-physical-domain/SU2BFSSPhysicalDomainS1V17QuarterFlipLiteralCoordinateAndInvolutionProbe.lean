@@ -46,9 +46,12 @@ theorem source48QuarterFlip_apply_label
           else -sourceBlockColorAxis p.1 p.2)
           (sourceBlockColorLabel α A) = 0 := by
     have hz := sourceBlockColorAxis_other p (α, A) hp
+    have hz' : sourceBlockColorAxis p.1 p.2
+        (sourceBlockColorLabel α A) = 0 := by
+      simpa only [Prod.fst, Prod.snd] using hz
     by_cases h : p.2 = (2 : Fin 3)
-    · simp [h, hz]
-    · simp [h, hz]
+    · simp [h, hz']
+    · simp [h, hz']
   calc
     (∑ p : RealSpinBlock × ColorLabel,
       (v (sourceBlockColorLabel p.1 p.2)) •
@@ -80,10 +83,15 @@ theorem source48QuarterFlip_apply
     source48QuarterFlip v i =
       if (sourceBlockColorEquiv.symm i).2 = (2 : Fin 3)
         then v i else -v i := by
-  simpa only [sourceBlockColorLabel, Equiv.apply_symm_apply] using
-    (source48QuarterFlip_apply_label v
-      (sourceBlockColorEquiv.symm i).1
-      (sourceBlockColorEquiv.symm i).2)
+  have h := source48QuarterFlip_apply_label v
+    (sourceBlockColorEquiv.symm i).1
+    (sourceBlockColorEquiv.symm i).2
+  change source48QuarterFlip v
+      (sourceBlockColorEquiv (sourceBlockColorEquiv.symm i)) =
+    (if (sourceBlockColorEquiv.symm i).2 = (2 : Fin 3)
+      then v (sourceBlockColorEquiv (sourceBlockColorEquiv.symm i))
+      else -v (sourceBlockColorEquiv (sourceBlockColorEquiv.symm i))) at h
+  simpa only [Equiv.apply_symm_apply] using h
 
 /-- The EXACT real-vector half-turn is involutive on all 48-source
 vectors, not merely on basis elements. -/
