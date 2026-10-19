@@ -51,7 +51,7 @@ jobs:
           r=experiments/openai-math-su2-physical-domain
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V31CanonicalAllSpin48RealVectorActionProbe.lean")" = d6e025372d9f3a393dbb21ba7700c0bc95fd40f2
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V32AllSpin48CanonicalVectorLinearGroupActionProbe.lean")" = 602f68275bc00df55573a955264e9a8c1190a5ae
-          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V33Original48SpinQuadraticIsometryProbe.lean")" = e66c1a1e8a417eb400ddb047ae9fdb0e4c80ae14
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V33Original48SpinQuadraticIsometryProbe.lean")" = a6b58b4870d63588d108c5bbc02156c74fc33d9b
           echo S1V33_EXACT_ORIGINAL_SPIN48_QUADRATIC_ISOMETRY_SOURCE_PINNED
 
       - name: Reclaim disposable runner disk
