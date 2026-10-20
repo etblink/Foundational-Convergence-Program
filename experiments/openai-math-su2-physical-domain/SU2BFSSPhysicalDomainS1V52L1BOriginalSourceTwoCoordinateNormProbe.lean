@@ -31,32 +31,32 @@ unfold the 8x3 source mode equivalence or an original Fock operator. -/
 theorem source48Quadratic_two_coordinate_norm
     (i j : SourceLabel) (hij : i ≠ j) (c s : ℝ) :
     source48Quadratic
-        (c • (Pi.single i (1 : ℝ)) - s • (Pi.single j (1 : ℝ))) =
+        (c • (Pi.single i (1 : ℝ) : Source48Vector) -
+         s • (Pi.single j (1 : ℝ) : Source48Vector)) =
       c*c + s*s := by
-  rw [source48Quadratic_eq_dot]
-  change
-      (∑ k : SourceLabel,
-        (c • Pi.single i (1:ℝ) - s • Pi.single j (1:ℝ)) k *
-        (c • Pi.single i (1:ℝ) - s • Pi.single j (1:ℝ)) k) =
-      c*c+s*s
   classical
+  -- Keep the function codomain and application to k explicitly
+  -- typed. Gate #1 left the Pi.single codomain unconstrained and
+  -- Lean reported "Function expected" at both product factors.
+  let v : Source48Vector :=
+    c • (Pi.single i (1 : ℝ) : Source48Vector) -
+    s • (Pi.single j (1 : ℝ) : Source48Vector)
+  change source48Quadratic v = c*c+s*s
+  rw [source48Quadratic_eq_dot]
+  change (∑ k : SourceLabel, v k * v k) = c*c+s*s
   calc
-    (∑ k : SourceLabel,
-       (c • Pi.single i (1:ℝ) - s • Pi.single j (1:ℝ)) k *
-       (c • Pi.single i (1:ℝ) - s • Pi.single j (1:ℝ)) k) =
-      ∑ k : SourceLabel,
-        (if k = i then c*c else if k = j then s*s else 0) := by
-          apply Finset.sum_congr rfl
-          intro k _
-          by_cases hki : k = i
-          · subst k
-            simp [Pi.single_apply, hij, hij.symm]
-            ring
-          · by_cases hkj : k = j
-            · subst k
-              simp [Pi.single_apply, hki, hki.symm]
-              ring
-            · simp [Pi.single_apply, hki, hkj, hki.symm, hkj.symm]
+    (∑ k : SourceLabel, v k * v k) =
+        ∑ k : SourceLabel,
+          (if k = i then c*c else if k = j then s*s else 0) := by
+      apply Finset.sum_congr rfl
+      intro k _
+      by_cases hki : k = i
+      · subst k
+        simp [v, Pi.single_apply, hij, hij.symm] <;> ring
+      · by_cases hkj : k = j
+        · subst k
+          simp [v, Pi.single_apply, hki, hki.symm] <;> ring
+        · simp [v, Pi.single_apply, hki, hkj, hki.symm, hkj.symm]
     _ = c*c+s*s := by
       simp [Finset.sum_ite, hij, hij.symm]
 
@@ -76,10 +76,13 @@ theorem sourceZPlane_firstVector_unit
     have hcolor : (0 : ColorLabel) = 1 := congrArg Prod.snd heq
     exact (by decide : (0 : ColorLabel) ≠ 1) hcolor
   change source48Quadratic
-      (c • Pi.single (sourceBlockColorLabel α 0) (1:ℝ) -
-       s • Pi.single (sourceBlockColorLabel α 1) (1:ℝ)) = 1
-  rw [source48Quadratic_two_coordinate_norm _ _ hij]
-  exact hcs
+      (c • (Pi.single (sourceBlockColorLabel α 0) (1 : ℝ) : Source48Vector) -
+       s • (Pi.single (sourceBlockColorLabel α 1) (1 : ℝ) : Source48Vector)) = 1
+  -- Pass a fully formed equality proof rather than using rw, which
+  -- forced a large concrete source-normalizer on Gate #1.
+  exact (source48Quadratic_two_coordinate_norm
+    (sourceBlockColorLabel α 0)
+    (sourceBlockColorLabel α 1) hij c s).trans hcs
 
 #print axioms source48Quadratic_two_coordinate_norm
 #print axioms sourceZPlane_firstVector_unit
