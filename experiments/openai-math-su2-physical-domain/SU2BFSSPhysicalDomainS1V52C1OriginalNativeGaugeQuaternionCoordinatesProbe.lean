@@ -27,6 +27,7 @@ namespace FCP.BFSSS1V52C1
 noncomputable section
 
 open OAI.BFSSQuantum
+open Matrix
 open FCP.BFSSS1V52B1
 open FCP.BFSSS1V52B3
 
