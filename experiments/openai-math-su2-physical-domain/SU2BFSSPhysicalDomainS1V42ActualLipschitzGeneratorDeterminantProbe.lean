@@ -37,15 +37,19 @@ noncomputable def source48CliffordGeneratorUnit
 /-- The genuinely constructed degree-one Clifford unit belongs to
 the ACTUAL pinned lipschitzGroup, without a surrogate subgroup. -/
 noncomputable def source48CliffordGeneratorLipschitz
-    (a : Source48Vector) [Invertible (Q a)] : lipschitzGroup Q :=
-  ⟨source48CliffordGeneratorUnit a, by
-    change source48CliffordGeneratorUnit a ∈
-      Subgroup.closure ((↑) ⁻¹' Set.range (CliffordAlgebra.ι Q) :
-        Set (CliffordAlgebra Q)ˣ)
-    apply Subgroup.subset_closure
-    change (source48CliffordGeneratorUnit a : CliffordAlgebra Q) ∈
-      Set.range (CliffordAlgebra.ι Q)
-    exact ⟨a, rfl⟩⟩
+    (a : Source48Vector) [Invertible (Q a)] : lipschitzGroup Q := by
+  let u : (CliffordAlgebra Q)ˣ := source48CliffordGeneratorUnit a
+  have hu : (u : CliffordAlgebra Q) = CliffordAlgebra.ι Q a := rfl
+  have hpre :
+      u ∈ ((↑) ⁻¹' Set.range (CliffordAlgebra.ι Q) :
+        Set (CliffordAlgebra Q)ˣ) := by
+    exact ⟨a, hu.symm⟩
+  have hclosure :
+      u ∈ Subgroup.closure
+        ((↑) ⁻¹' Set.range (CliffordAlgebra.ι Q) :
+          Set (CliffordAlgebra Q)ˣ) :=
+    Subgroup.subset_closure hpre
+  exact ⟨u, hclosure⟩
 
 /-- The genuine Lipschitz source action of an invertible ι(Q,a)
 equals exactly the original S1V39 source rank-one matrix action. -/
