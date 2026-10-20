@@ -72,7 +72,16 @@ jobs:
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L2OriginalZPlaneLipschitzMembershipProbe.lean")" = 254d7b6519257120aacf191d4091763f4a564ebf
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L3OriginalZPlaneSpinMembershipProbe.lean")" = 580af4f6c977f51be8a99917184346a0bc62ad36
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7B1NativeZYCoordinateSpinProductProbe.lean")" = fe9701e21ece33b015dd047a8823251af084eb0d
-          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7B2NativeZYZTripleSpinProductProbe.lean")" = 8f8ab0c0e5ab1db45e2a55af3d3d579a8553
+          candidate="$r/SU2BFSSPhysicalDomainS1V52L7B2NativeZYZTripleSpinProductProbe.lean"
+          expected=8f8ab0c0e5ab1db45e2a55af3d3d579a8553
+          test -s "$candidate"
+          committed="$(git rev-parse "HEAD:$candidate")"
+          worktree_filtered="$(git hash-object "$candidate")"
+          worktree_raw="$(git hash-object --no-filters "$candidate")"
+          echo "S1V52L7B2_EXACT_SOURCE_SHA_DIAGNOSTIC expected=$expected committed=$committed filtered=$worktree_filtered raw=$worktree_raw"
+          test "$committed" = "$expected"
+          test "$worktree_raw" = "$expected"
+          git diff --quiet HEAD -- "$candidate"
           echo S1V52L7B2_SOURCE_PINS_AND_ORIGINAL_MATHLIB_PASS
 
       - name: Reclaim disposable runner disk
@@ -169,7 +178,7 @@ jobs:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-s1v52l7b2-native-zyz-spin-auto-norm-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-s1v52l7b2-native-zyz-spin-auto-norm-v3-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
 
       - name: Preserve native ZYZ strict Lean proof diagnostics
         if: always()
