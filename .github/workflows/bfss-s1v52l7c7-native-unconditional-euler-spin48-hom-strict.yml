@@ -80,7 +80,7 @@ jobs:
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C5OriginalNativeZYZCircleFactorsProbe.lean")" = 6d672310ecb682026b85fc16574c1304cd70bd3e
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C6OriginalNativeZeroSafeEulerPhaseBridgeProbe.lean")" = b82ee1c787fb5834620ec897d578202af22be1a9
           candidate="$r/SU2BFSSPhysicalDomainS1V52L7C7OriginalNativeEulerWitnessAndSpinHomProbe.lean"
-          expected=8cd96063d9ceed0bb2f753a042439376fc31bed5
+          expected=581dd3f565f4b32260470f51bf240deac057c1a8
           test -s "$candidate"
           committed="$(git rev-parse "HEAD:$candidate")"
           worktree_filtered="$(git hash-object "$candidate")"
@@ -186,7 +186,7 @@ jobs:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-s1v52l7c7-native-unconditional-euler-spin48-hom-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-s1v52l7c7-native-unconditional-euler-spin48-hom-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
 
       - name: Preserve unconditional native original Euler Spin48 diagnostics
         if: always()
