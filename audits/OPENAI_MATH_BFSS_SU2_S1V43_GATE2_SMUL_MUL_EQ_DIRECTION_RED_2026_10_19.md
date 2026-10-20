@@ -1,0 +1,10 @@
+# S1V43 Gate #2 RED — typed real/Clifford instance repaired; equality orientation reversed
+
+**Disposition:** `S1V43_G2_THREE_OF_FOUR_ROOTS_ALLOWED_AXIOMS__EXPLICIT_TYPES_FIX_SMUL_COMM_CLASS__WRONG_SYMM_DIRECTION_RED__ONE_SORRYAX__NO_CACHE`.
+
+- [S1V43 original source grade determinant parity strict Gate #2 run #39363006514](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39363006514), job `118433281617`, **FAILURE**. Workflow commit `6acfa42d8930ee14c48719ecdba5b3376de2d883`, mathematical candidate commit `1af7b5eb819207a5c494731e80fb357f11576317`, candidate blob `e343fb5482663ac42f8595d11a38238df1dd975c`.
+- Exact original etblink/math pin `adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean `4.34.1`, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`, required source hashes passed; accepted S1V42 cache restored and prerequisite source `.olean` checks passed.
+- Exact first new compiler error line 61:2, `Type mismatch`: The fully typed `(smul_mul_smul_comm ...).symm` has **RHS-to-LHS** direction, whereas the goal is **LHS-to-RHS**. The compiler displayed both exact terms, confirming the mathematical shape is correct and `SMulCommClass` resolution from Gate #1 is fixed by explicit typing. The only mismatch is the unnecessary `.symm`.
+- `source48LipschitzGradeDetParity`, `source48LipschitzGradeDetParity_one` and `source48LipschitzGradeDetParity_generator` each compiled with exactly `[propext, Classical.choice, Quot.sound]`; `source48LipschitzGradeDetParity_mul` printed `sorryAx` and thus is unqualified. The failed whole module is **NOT** accepted; no new cache. Diagnostic artifact `bfss-s1v43-grade-det-parity-39363006514`, ID `12238039411`.
+- Next single-change Gate #3: delete only `.symm` from the fully typed `smul_mul_smul_comm` proof. No change to original source physics, Clifford sign, determinant, quadratic form, proof statements, or dependencies. If further errors arise, preserve their earliest actual compiler cause before rewriting.
+- The inverse-stability, full Lipschitz subgroup closure induction, Spin restriction and determinant +1 remain **open**.
