@@ -55,7 +55,7 @@ jobs:
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V40ActualSource48LipschitzVectorActionProbe.lean")" = 106286d7cc48e326368cfd53b03a48f5e2815260
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V41GenuineLipschitz48RealGLHomProbe.lean")" = 818408f1834ba7798b4129fc3a96cbada5a63089
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V42ActualLipschitzGeneratorDeterminantProbe.lean")" = 0c13c4928e463c5a81ccf812957e0f19b276fccd
-          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V43OriginalLipschitzGradeDetParityInterfacesProbe.lean")" = e343fb5482663ac42f8595d11a38238df1dd975c
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V43OriginalLipschitzGradeDetParityInterfacesProbe.lean")" = 28abd21ab1cc50c57ab7a73e9c7f6824e3a4f4cd
           echo S1V43_ORIGINAL_SOURCE_AND_TOOLCHAIN_PINS_PASS
 
       - name: Reclaim disposable runner disk
