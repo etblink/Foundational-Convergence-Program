@@ -44,8 +44,8 @@ theorem source48Dot_two_coordinate_norm
       simp [v, Pi.single_apply, hij, hij.symm] <;> ring
     · by_cases hkj : k = j
       · subst k
-        simp [v, Pi.single_apply, hki, hki.symm] <;> ring
-      · simp [v, Pi.single_apply, hki, hkj, hki.symm, hkj.symm]
+        simp [v, Pi.single_apply, hki] <;> ring
+      · simp [v, Pi.single_apply, hki, hkj]
   -- Split the two support points into independent sums.
   -- On L1B Gate #3, simp [Finset.sum_ite] left the singleton
   -- filtered-cardinality goal instead of normalizing the sum.
