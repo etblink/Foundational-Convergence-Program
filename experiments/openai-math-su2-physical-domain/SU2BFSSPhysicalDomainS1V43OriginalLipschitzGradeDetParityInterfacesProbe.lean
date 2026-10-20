@@ -62,7 +62,7 @@ theorem source48LipschitzGradeDetParity_mul
     (FCP.BFSSS1V41.sourceLipschitz48OriginalRealDetCharacter x : ℝ)
     (((x : (CliffordAlgebra Q)ˣ) : CliffordAlgebra Q))
     (FCP.BFSSS1V41.sourceLipschitz48OriginalRealDetCharacter y : ℝ)
-    (((y : (CliffordAlgebra Q)ˣ) : CliffordAlgebra Q))).symm
+    (((y : (CliffordAlgebra Q)ˣ) : CliffordAlgebra Q)))
 
 /-- Generator-level grade/determinant compatibility for the TRUE
 original Clifford unit in its TRUE Mathlib Lipschitz subgroup. -/
