@@ -1,0 +1,154 @@
+name: BFSS S1V36 Original Source Spin48 Real Determinant Character Strict Gate
+
+# Restore accepted S1V35 genuine Clifford Spin48-to-GL source cache.
+# Qualify the actual ORIGINAL source real determinant group character,
+# identify its value as the true source automorphism determinant, and
+# prove multiplicativity. Triviality (+1) is a SEPARATE open obligation.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v-orthogonal-decomposition-isolated-20261018
+    paths:
+      - .github/workflows/bfss-s1v36-source-spin48-real-determinant-character-strict.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v36-det-character-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  source-spin48-real-det-character:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - name: Checkout exact original source candidates
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Checkout immutable original upstream OAI mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Verify all source hashes and toolchain pins before expensive setup
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v36-det
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          data=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in data['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          r=experiments/openai-math-su2-physical-domain
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V34GenuineSpin48QuadraticIsometryEquivProbe.lean")" = d6b736c7430f779f679a9674b34dec95f68bf03e
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V35ActualSpin48RealAutomorphismGroupHomProbe.lean")" = 084acd408fc0ccd56572c7cea9483f16d062d4cd
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V36ActualSpin48OriginalRealDeterminantCharacterProbe.lean")" = 20a35e07db60913adafc93b0b842c88d75ae1086
+          echo S1V36_ACTUAL_SOURCE_SPIN48_DET_CHARACTER_BLOBS_PINNED
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean 4.34.1 and exact Mathlib sources
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v36-det/toolchain.log; then
+              ok=true; break
+            fi
+            echo ORIGINAL_PINNED_LEAN_RETRY_$attempt | tee -a /tmp/bfss-s1v36-det/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo PINNED_ORIGINAL_LEAN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v36-det/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo S1V36_PINNED_LEAN_MATHLIB_VERIFIED
+
+      - name: Restore strictly accepted S1V35 original source Spin48 GL homomorphism cache
+        id: accepted_gl
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v35-isolated-original-spin48-real-gl-group-hom-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed unless S1V35 genuine Spin48 source GL hom and original action artifacts exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.accepted_gl.outputs.cache-hit }}" = true || { echo ACCEPTED_S1V35_GL_GROUP_HOM_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe SU2BFSSPhysicalDomainS1V33Original48SpinQuadraticIsometryProbe SU2BFSSPhysicalDomainS1V34GenuineSpin48QuadraticIsometryEquivProbe SU2BFSSPhysicalDomainS1V35ActualSpin48RealAutomorphismGroupHomProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "S1V36_ACCEPTED_SOURCE_DEPENDENCY_MISSING=$stem"; exit 1; }
+          done
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/GaugeCore.olean
+          echo S1V36_ACCEPTED_ORIGINAL_SPIN48_GL_HOM_OLEANS_READY
+
+      - name: Compile and audit three actual source Spin48 original real determinant character roots
+        shell: bash
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=SU2BFSSPhysicalDomainS1V36ActualSpin48OriginalRealDeterminantCharacterProbe
+          cp "../../experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+          timeout 600s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v36-det/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean" || { echo S1V36_ORIGINAL_SOURCE_DET_CHARACTER_OLEAN_MISSING; exit 1; }
+          python3 - <<'PY'
+          import pathlib,re
+          stem='SU2BFSSPhysicalDomainS1V36ActualSpin48OriginalRealDeterminantCharacterProbe'
+          src=pathlib.Path(stem+'.lean').read_text()
+          log=pathlib.Path('/tmp/bfss-s1v36-det',stem+'.log').read_text()
+          names=re.findall(r'^#print axioms (\S+)',src,re.M)
+          expected=['sourceSpin48OriginalRealDetCharacter',
+                    'sourceSpin48OriginalRealDetCharacter_value',
+                    'sourceSpin48OriginalRealDetCharacter_mul']
+          assert names==expected,(stem,names)
+          assert re.findall(r'^namespace (\S+)',src,re.M)==['FCP.BFSSS1V36']
+          reports=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          found={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in reports}
+          assert len(reports)==len(found)==3,(stem,reports)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for name in expected:
+            key='FCP.BFSSS1V36.'+name
+            assert key in found and found[key]<=allowed,(stem,key,found)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log,(stem,log[-9000:])
+          print('S1V36_GENUINE_SOURCE_SPIN48_ORIGINAL_REAL_DET_CHARACTER_3_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Save original source Spin48 real determinant character cache only after all three strict roots
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v36-isolated-source48-real-spin-determinant-character-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve first causal source and pin logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v36-det-character-${{ github.run_id }}
+          path: /tmp/bfss-s1v36-det/
+          if-no-files-found: warn
+          retention-days: 14
