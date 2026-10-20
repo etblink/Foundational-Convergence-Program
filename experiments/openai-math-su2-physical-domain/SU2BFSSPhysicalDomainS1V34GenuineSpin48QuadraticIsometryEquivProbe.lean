@@ -49,7 +49,7 @@ noncomputable def sourceSpin48LinearEquiv (s : spinGroup Q) :
   map_add' := FCP.BFSSS1V31.sourceSpin48VectorAction_add s
   map_smul' := FCP.BFSSS1V32.sourceSpin48VectorAction_smul s
 
-/-- Every genuine source Spin48 element acts via an invertible linear
+/- Every genuine source Spin48 element acts via an invertible linear
 equivalence which preserves EXACTLY the original real source quadratic
 form Q on Fin24 x Fin2 labels. No hypothetical projection needed. -/
 -- Constrain the larger elaboration budget to the packaging declaration,
