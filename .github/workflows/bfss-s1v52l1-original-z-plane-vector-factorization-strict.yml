@@ -63,7 +63,7 @@ jobs:
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C2EOriginalNativeGaugeCliffordUnitHomProbe.lean")" = 0e9cd58f8e6cb3e63a3503a89c2986914a28d3b0
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52S1Original48CliffordQuaternionStarUnitarityProbe.lean")" = 2e817387d174c1962b70675220347dafa5efc351
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52S2Original48CliffordQuaternionEvennessProbe.lean")" = 0aae567e44768e2e1664ae3e79f8ae1f9a54da77
-          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1OriginalZPlaneTwoVectorFactorizationProbe.lean")" = c6f9850cb524372ee98a13f74ed5ada202f0bf55
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1OriginalZPlaneTwoVectorFactorizationProbe.lean")" = 7db362c6f92ba7db01970083c9b54cce3e9c0644
           echo S1V52L1_EXACT_ORIGINAL_48_SOURCE_AND_MATHLIB_SHA_PASS
 
       - name: Reclaim disposable runner disk
@@ -115,7 +115,7 @@ jobs:
           done
           echo S1V52L1_ALL_GENUINE_ORIGINAL_SOURCE_DEPENDENCIES_READY
 
-      - name: Compile and strictly audit two original Z-plane source-vector factor roots
+      - name: Compile and strictly audit three original Z-plane abstract norm and factor roots
         shell: bash
         timeout-minutes: 12
         run: |
@@ -132,27 +132,28 @@ jobs:
           stem='SU2BFSSPhysicalDomainS1V52L1OriginalZPlaneTwoVectorFactorizationProbe'
           src=pathlib.Path(stem+'.lean').read_text()
           log=pathlib.Path('/tmp/bfss-s1v52l1',stem+'.log').read_text()
-          expected=['sourceZPlane_firstVector_unit','sourceZPlane_twoVector_factor']
+          expected=['orthogonalUnitLinearCombination_norm',
+                    'sourceZPlane_firstVector_unit','sourceZPlane_twoVector_factor']
           assert re.findall(r'^#print axioms (\S+)',src,re.M)==expected
           assert re.findall(r'^namespace (\S+)',src,re.M)==['FCP.BFSSS1V52L1']
           reports=re.findall(r"'(FCP\.BFSSS1V52L1\.[^\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
           found={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in reports}
-          assert len(reports)==len(found)==2,reports
+          assert len(reports)==len(found)==3,reports
           allowed={'propext','Classical.choice','Quot.sound'}
           for name in expected:
             key='FCP.BFSSS1V52L1.'+name
             assert key in found and found[key]<=allowed,(key,found)
           assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log,log[-9000:]
-          print('S1V52L1_ORIGINAL48_Z_PLANE_TWO_VECTOR_FACTOR_2_ROOTS_KERNEL_PASS')
+          print('S1V52L1_ORIGINAL48_Z_PLANE_ABSTRACT_NORM_FACTOR_3_ROOTS_KERNEL_PASS')
           PY
 
-      - name: Save qualified S1V52L1 cache only after strict two-root green
+      - name: Save qualified S1V52L1 cache only after strict three-root green
         uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
         with:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-s1v52l1-original48-z-plane-factor-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-s1v52l1-original48-z-plane-abstract-norm-factor-v3-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
 
       - name: Preserve S1V52L1 diagnostic logs for failure analysis
         if: always()
