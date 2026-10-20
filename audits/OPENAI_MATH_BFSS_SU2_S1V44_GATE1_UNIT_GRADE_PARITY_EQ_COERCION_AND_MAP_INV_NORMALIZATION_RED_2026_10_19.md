@@ -1,0 +1,14 @@
+# S1V44 Gate #1 RED — three genuine unit morphism roots pass; two equality-normalization errors
+
+Disposition `S1V44_G1_THREE_UNIT_MORPHISM_ROOTS_CLEAN__GRADE_EQUIV_UNITS_COE_CAST_MISMATCH__INVERSE_MAP_INV_RW_NORMAL_FORM__STRICT_RED_NO_CACHE`.
+
+- [S1V44 strict Gate #1 run #39364746692](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39364746692), job `118438894960`, failed in Lean compilation, workflow commit `d0827065aab974906b1a6e16988a41e95445094d`, candidate commit `7c6e8981bd9139eaff108969c250b066c65f1b77`, candidate Git blob `e6874cf45051a6207ead74af33fb22cb824edaff`.
+- True original etblink/math `adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean 4.34.1, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`; SHA preflight passed, accepted S1V43 cache restored and required compiled source modules checked.
+- Three of five declarations printed only `[propext, Classical.choice, Quot.sound]`: `source48GradeOnUnits`, `source48RealScalarOnUnits`, `source48RealScalarOnUnits_commutes`. This proves algebraic unit-lift scaffolding locally, but source **FAILED** and all S1V44 results remain unaccepted.
+- First causal Lean errors at lines 50 and 55 in `source48LipschitzGradeDetParity_iff_units`: after `simp only`, `CliffordAlgebra.involute` and `AlgHom.toRingHom` (also original private `Q` abbreviation) remained syntactically distinct, as did explicit `algebraMap` and its cast. The equalities are convertible when the exact Clifford and scalar types are supplied, but aggressive rewriting did not close the goal. The theorem reports `sorryAx`.
+- Later dependent inverse root at line 79: `rw [map_inv]` rewrote the RHS determinant before a subsequent `change` tactic, so the requested `δ(x⁻¹)` form was no longer definitionally equal to the **actual new goal** involving `δ(x)⁻¹`. It reports `sorryAx`. No mathematical contradiction is exhibited by these elaboration failures.
+- New cache save was skipped; diagnostic artifact `bfss-s1v44-grade-det-inverse-39364746692`, artifact ID `12239187895`.
+
+**Bounded Gate #2 repair:** inside the unit-group parity iff, replace broad simplification with explicitly typed `Units.ext` and `change` to the identical true Clifford equation in `A`, then use only `Algebra.smul_def` to transport accepted S1V43 equality. For inverse, derive the final equation directly from the pinned central scalar commutation lemma using `simpa only [map_inv, Subgroup.coe_inv]`—do not ask `change` to restore a pre-rewrite form. Preserve all five theorem statements, original 48-real sign conventions, actual Lipschitz subgroup, exact source and toolchain hashes, and the accepted S1V43 cache. Launch one new strict Gate #2 to test these distinct local repairs.
+
+Full inverse preservation, universal parity, Spin orientation, continuous SU(2) lift, independent manuscript bridge and BFSS spectral conclusions are **not qualified** by this red gate. No changes to canonical main or draft PR #25.
