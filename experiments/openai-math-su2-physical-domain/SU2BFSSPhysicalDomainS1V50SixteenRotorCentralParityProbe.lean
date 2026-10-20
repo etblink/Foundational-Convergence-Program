@@ -24,6 +24,7 @@ noncomputable section
 open FCP.BFSSS1V0
 open FCP.BFSSS1V1
 open FCP.BFSSS1V5
+open FCP.BFSSS1V6
 open FCP.BFSSS1V8
 open FCP.BFSSS1V9
 open OAI.BFSSQuantum
@@ -99,7 +100,7 @@ theorem sourceOrderedColorRotors_square
         _ = (-1 : C) * ((-1 : C) ^ rest.length) := by rw [hr, ht]
         _ = (-1 : C) ^ (rest.length + 1) := by
           rw [pow_succ]
-          exact mul_comm _ _
+          exact mul_comm (-1 : C) ((-1 : C) ^ rest.length)
 
 /-- The genuine independent SIXTEEN-factor Spin(48) source rotor has
 exact square +1 IN THE ACTUAL SPIN GROUP. This uses 16 even parity. -/
@@ -110,8 +111,8 @@ theorem sourceSixteenColorRotor_square_one :
       (finProdFinEquiv : RealSpinBlock ≃ Fin 16).symm
   have hrep : sourceSixteenColorRotor =
       (xs.map sourceColorPlaneRotor).prod := by
-    simp [xs, sourceSixteenColorRotor, sourceOrderedSixteenRotors,
-      List.map_map]
+    simp only [sourceSixteenColorRotor, sourceOrderedSixteenRotors,
+      xs, List.map_map, Function.comp_def]
   have hlen : xs.length = 16 := by simp [xs]
   have hsq := sourceOrderedColorRotors_square xs
   rw [hlen] at hsq
