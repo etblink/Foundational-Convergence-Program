@@ -1,4 +1,5 @@
 import SU2BFSSPhysicalDomainS1V52L2OriginalZPlaneLipschitzMembershipProbe
+import SU2BFSSPhysicalDomainS1V52S1Original48CliffordQuaternionStarUnitarityProbe
 
 /-!
 S1V52-L3 — STAGED, UNQUALIFIED original Z-plane quaternion
