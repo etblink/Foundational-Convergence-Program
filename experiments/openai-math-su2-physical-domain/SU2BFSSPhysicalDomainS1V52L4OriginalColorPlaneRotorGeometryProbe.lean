@@ -1,15 +1,16 @@
-import SU2BFSSPhysicalDomainS1V52L3OriginalZPlaneSpinMembershipProbe
+import SU2BFSSPhysicalDomainS1V52L1DOriginalZPlaneSourceAxisUnitProbe
 
 /-!
 S1V52L4 — STAGED, UNQUALIFIED source-exact two-color plane geometry.
 
-The preceding strict L1D result closes the fixed Z-plane. This gate
+The accepted strict L1D result closes the fixed Z-plane. This gate
 proposes a general two-color unit norm and exact two-ι Clifford
 factorization for ANY distinct original color axes, with the same
 original quadratic form and original positive-i bivector orientation.
 
 It is intended to cover the genuine Y-plane (A=2,B=0), not to
 introduce an independent three-dimensional surrogate.
+This geometry module deliberately DOES NOT import L3 Spin membership.
 No theorem is accepted until a separately pinned strict CI.
 -/
 set_option autoImplicit false
