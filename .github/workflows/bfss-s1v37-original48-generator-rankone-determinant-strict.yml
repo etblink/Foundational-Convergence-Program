@@ -48,7 +48,7 @@ jobs:
           PY
           r=experiments/openai-math-su2-physical-domain
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe.lean")" = 22f3101b243a7b7857d9597b547322174d9281c8
-          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V37Original48CliffordGeneratorRankOneDeterminantProbe.lean")" = 40eb2698d67ce4dc490c9b9b0baae5db38684577
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V37Original48CliffordGeneratorRankOneDeterminantProbe.lean")" = 2d3d40134e4eaba80751c62a160d1803f22c828b
           echo S1V37_ORIGINAL_SOURCE_AND_TOOLCHAIN_PINS_PASS
 
       - name: Reclaim disposable runner disk
