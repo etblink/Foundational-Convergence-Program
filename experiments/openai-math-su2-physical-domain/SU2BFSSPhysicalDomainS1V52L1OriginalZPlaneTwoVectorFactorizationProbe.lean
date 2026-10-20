@@ -38,20 +38,30 @@ theorem sourceZPlane_firstVector_unit
     (hcs : c * c + s * s = 1) :
     Q (c • sourceBlockColorAxis α 0 -
       s • sourceBlockColorAxis α 1) = 1 := by
-  let a : Source48Vector := sourceBlockColorAxis α 0
-  let b : Source48Vector := sourceBlockColorAxis α 1
-  have ha : Q a = 1 := sourceBlockColorAxis_unit α 0
-  have hb : Q b = 1 := sourceBlockColorAxis_unit α 1
-  have hab : Q.IsOrtho a b :=
+  -- Deliberately use literal qualified source axes for the imported
+  -- norm/orthogonality certificates. The Gate #1 local-let
+  -- unification through the 48-label source representation exhausted
+  -- max recursion depth; no mathematical condition has changed.
+  have ha : Q (sourceBlockColorAxis α 0) = 1 :=
+    sourceBlockColorAxis_unit α 0
+  have hb : Q (sourceBlockColorAxis α 1) = 1 :=
+    sourceBlockColorAxis_unit α 1
+  have hab : Q.IsOrtho (sourceBlockColorAxis α 0)
+      (sourceBlockColorAxis α 1) :=
     sourceBlockColorAxis_ortho (α,0) (α,1) (by simp)
-  have hzero : QuadraticMap.polar Q a b = 0 := hab.polar_eq_zero
-  change Q (c • a - s • b) = 1
+  have hzero : QuadraticMap.polar Q
+      (sourceBlockColorAxis α 0) (sourceBlockColorAxis α 1) = 0 :=
+    hab.polar_eq_zero
   calc
-    Q (c • a - s • b) =
-        Q (c • a + (-s) • b) := by
+    Q (c • sourceBlockColorAxis α 0 -
+        s • sourceBlockColorAxis α 1) =
+        Q (c • sourceBlockColorAxis α 0 +
+          (-s) • sourceBlockColorAxis α 1) := by
           simp only [neg_smul, sub_eq_add_neg]
-    _ = Q (c • a) + Q ((-s) • b) +
-          QuadraticMap.polar Q (c • a) ((-s) • b) :=
+    _ = Q (c • sourceBlockColorAxis α 0) +
+        Q ((-s) • sourceBlockColorAxis α 1) +
+        QuadraticMap.polar Q (c • sourceBlockColorAxis α 0)
+          ((-s) • sourceBlockColorAxis α 1) :=
       QuadraticMap.map_add Q _ _
     _ = 1 := by
       rw [QuadraticMap.map_smul, QuadraticMap.map_smul,
