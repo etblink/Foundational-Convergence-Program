@@ -1,0 +1,200 @@
+name: BFSS S1V52L9B1 Original Same Block Quaternion Axis Reflection Strict Gate
+
+# Deliberately branch-isolated and single-shot. Only the workflow file
+# triggers a push gate; source and audit commits do NOT automatically run.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-s1v52l9b1-original-same-block-quaternion-axis-reflection-strict.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v52l9b1-same-block-axis-parity-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  original-source-clifford-table:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - name: Checkout original FCP research sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Checkout immutable original upstream BFSS mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Strict original source SHA and toolchain preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v52l9b1
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          data=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in data['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          r=experiments/openai-math-su2-physical-domain
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe.lean")" = 22f3101b243a7b7857d9597b547322174d9281c8
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe.lean")" = 6d15a3a76625b3677f132c544f71e5d5eb1dc93c
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe.lean")" = 4ae8b38d5601b8c57f09e94c523beb9b4598dcb1
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52ASourceEvenCliffordQuaternionTableProbe.lean")" = ad67d8eac5a8147f7ae099c3d9b913db2038f53a
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52B1SourcePauliQuaternionMatrixMultiplicationProbe.lean")" = 8a5558fa127893b6bbb971a8047df4840d74e760
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52B2Original48CliffordQuaternionPolynomialMulProbe.lean")" = 164add0b3a17b9d5417aa3595de841ad5eee33f4
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52B3Original48CliffordQuaternionUnitNormProbe.lean")" = 175d0865ddb413bb02ad29d9ba945be5f0c0639f
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C1OriginalNativeGaugeQuaternionCoordinatesProbe.lean")" = bbb6fd81e68787d236a9919c3a7675230e899818
+          test "$(git hash-object upstream-math/lean/OAI/MathematicalPhysics/BFSS/Core.lean)" = 9882359ced78b0a3bd7e2f057974bd0a031b3e60
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C2ANativeSU2MatrixAdjugateSourceProbe.lean")" = 12144c449ad232bb7aabb6febdafacda09e1fd88
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C2BNativeSU2QuaternionWholeMatrixSourceProbe.lean")" = 77832693be32c9f7ea0df4bf9f848ff27d6ca4f1
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C2CNativeSU2RealQuaternionMatrixBridgeProbe.lean")" = f6041c88ffd986302325c535986ae0684499c1b7
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C2DOriginalNativeSU2QuaternionMultiplicationProbe.lean")" = 92ff4ccc7ace40cf74113168ab27710c18335e4e
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C2EOriginalNativeGaugeCliffordUnitHomProbe.lean")" = 0e9cd58f8e6cb3e63a3503a89c2986914a28d3b0
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52S1Original48CliffordQuaternionStarUnitarityProbe.lean")" = 2e817387d174c1962b70675220347dafa5efc351
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52S2Original48CliffordQuaternionEvennessProbe.lean")" = 0aae567e44768e2e1664ae3e79f8ae1f9a54da77
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1AIsolatedAbstractNormAndOriginalZCliffordFactorProbe.lean")" = 1bf72e69a61eccc882c2e348b7a36a4c572b9e45
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1CIsolatedSource48CoordinateNormProbe.lean")" = 0012268604cbfb8933ed1f1bbf87714c1a850ba2
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1DOriginalZPlaneSourceAxisUnitProbe.lean")" = eac4be30ef5ada8574b0310aa6c2d30db6166255
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L4OriginalColorPlaneRotorGeometryProbe.lean")" = 889882e62666d134fae31ccd2f1397576456bdbc
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L5OriginalYPlaneLipschitzMembershipProbe.lean")" = fb52070ece6b1ff450e0a3d75960e3c1577b4ae1
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L6OriginalYPlaneSpinMembershipProbe.lean")" = 55858cbcedfa4ad98d67e20be42a86316906ad50
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L2OriginalZPlaneLipschitzMembershipProbe.lean")" = 254d7b6519257120aacf191d4091763f4a564ebf
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L3OriginalZPlaneSpinMembershipProbe.lean")" = 580af4f6c977f51be8a99917184346a0bc62ad36
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7B1NativeZYCoordinateSpinProductProbe.lean")" = fe9701e21ece33b015dd047a8823251af084eb0d
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7B2NativeZYZTripleSpinProductProbe.lean")" = 8f8ab0c0e5ab1db45e2a55af3d9c3d3d579a8553
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7B3NativeEulerWitnessSpinHomProbe.lean")" = 8f191d211d3f38497366f87263022096f658a689
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C2NativeOriginalSU2ZeroSafeEulerPolarProbe.lean")" = 530648447820ad001fdc66dad1c100c03e0c13cd
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C3UnitQuaternionToOriginalNativeSU2Probe.lean")" = f35b13579c8c9d3269161c4ff82c433cc3d1eef7
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C4ActualNativeZYZQuaternionFiniteCoefficientsProbe.lean")" = e11f91b96ac184787c9cfa6bfbae162fe2abda44
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C5OriginalNativeZYZCircleFactorsProbe.lean")" = 6d672310ecb682026b85fc16574c1304cd70bd3e
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C6OriginalNativeZeroSafeEulerPhaseBridgeProbe.lean")" = b82ee1c787fb5834620ec897d578202af22be1a9
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C7OriginalNativeEulerWitnessAndSpinHomProbe.lean")" = 581dd3f565f4b32260470f51bf240deac057c1a8
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L8AOriginalDisjointBlockCliffordBivectorCommutationProbe.lean")" = 299a7356165ef72c86080271b85f9ce0dfd0d5b8
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L8BOriginalArbitraryBlockQuaternionCliffordCommutationProbe.lean")" = e6ba7d56e88f15130b562269349d74f3ddb7cd1e
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L8COriginalNativeSpin48CrossBlockImageCommutationProbe.lean")" = b65d0ed645aff4986e3ef787f1f06212130596e1
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L8DOriginalNodupNativeBlockSpin48ListHomProbe.lean")" = 85df90160642947094420de19b37ac4568af8838
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L8EOriginalOrderedSixteenNativeSU2Spin48HomProbe.lean")" = c68e630797f64861d46a54b04bb02b0e9ef33442
+          candidate="$r/SU2BFSSPhysicalDomainS1V52L9B1OriginalSameBlockQuaternionAxisReflectionProbe.lean"
+          expected=d031bfc89030c6ca3ab775e632385e6b00fa0fde
+          test -s "$candidate"
+          committed="$(git rev-parse "HEAD:$candidate")"
+          worktree_filtered="$(git hash-object "$candidate")"
+          worktree_raw="$(git hash-object --no-filters "$candidate")"
+          echo "S1V52L9B1_EXACT_SOURCE_SHA_DIAGNOSTIC expected=$expected committed=$committed filtered=$worktree_filtered raw=$worktree_raw"
+          test "$committed" = "$expected"
+          test "$worktree_raw" = "$expected"
+          git diff --quiet HEAD -- "$candidate"
+          echo S1V52L9B1_SOURCE_PINS_AND_ORIGINAL_MATHLIB_PASS
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore immutable original Lean and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v52l9b1/toolchain.log; then
+              ok=true; break
+            fi
+            echo S1V52L1_PINNED_LEAN_RETRY_$attempt | tee -a /tmp/bfss-s1v52l9b1/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo PINNED_ORIGINAL_LEAN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v52l9b1/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo S1V52L1_PINNED_LEAN_MATHLIB_VERIFIED
+
+      - name: Restore accepted L9B0 same-block axis bivector parity cache
+        id: cacheL9B0
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v52l9b0-original-same-block-axis-parity-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed without accepted original source dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.cacheL9B0.outputs.cache-hit }}" = true || { echo S1V52L9B1_QUALIFIED_L9B0_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/Core.olean || { echo S1V52L9B1_ORIGINAL_BFSS_CORE_OLEAN_MISSING; exit 1; }
+          for stem in SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe SU2BFSSPhysicalDomainS1V52ASourceEvenCliffordQuaternionTableProbe SU2BFSSPhysicalDomainS1V52B1SourcePauliQuaternionMatrixMultiplicationProbe SU2BFSSPhysicalDomainS1V52B2Original48CliffordQuaternionPolynomialMulProbe SU2BFSSPhysicalDomainS1V52B3Original48CliffordQuaternionUnitNormProbe SU2BFSSPhysicalDomainS1V52C1OriginalNativeGaugeQuaternionCoordinatesProbe SU2BFSSPhysicalDomainS1V52C2ANativeSU2MatrixAdjugateSourceProbe SU2BFSSPhysicalDomainS1V52C2BNativeSU2QuaternionWholeMatrixSourceProbe SU2BFSSPhysicalDomainS1V52C2CNativeSU2RealQuaternionMatrixBridgeProbe SU2BFSSPhysicalDomainS1V52C2DOriginalNativeSU2QuaternionMultiplicationProbe SU2BFSSPhysicalDomainS1V52C2EOriginalNativeGaugeCliffordUnitHomProbe SU2BFSSPhysicalDomainS1V52S1Original48CliffordQuaternionStarUnitarityProbe SU2BFSSPhysicalDomainS1V52S2Original48CliffordQuaternionEvennessProbe SU2BFSSPhysicalDomainS1V52L1AIsolatedAbstractNormAndOriginalZCliffordFactorProbe SU2BFSSPhysicalDomainS1V52L1CIsolatedSource48CoordinateNormProbe SU2BFSSPhysicalDomainS1V52L1DOriginalZPlaneSourceAxisUnitProbe SU2BFSSPhysicalDomainS1V52L4OriginalColorPlaneRotorGeometryProbe SU2BFSSPhysicalDomainS1V52L5OriginalYPlaneLipschitzMembershipProbe SU2BFSSPhysicalDomainS1V52L6OriginalYPlaneSpinMembershipProbe SU2BFSSPhysicalDomainS1V52L2OriginalZPlaneLipschitzMembershipProbe SU2BFSSPhysicalDomainS1V52L3OriginalZPlaneSpinMembershipProbe SU2BFSSPhysicalDomainS1V52L7B1NativeZYCoordinateSpinProductProbe SU2BFSSPhysicalDomainS1V52L7B2NativeZYZTripleSpinProductProbe SU2BFSSPhysicalDomainS1V52L7B3NativeEulerWitnessSpinHomProbe SU2BFSSPhysicalDomainS1V52L7C2NativeOriginalSU2ZeroSafeEulerPolarProbe SU2BFSSPhysicalDomainS1V52L7C3UnitQuaternionToOriginalNativeSU2Probe SU2BFSSPhysicalDomainS1V52L7C4ActualNativeZYZQuaternionFiniteCoefficientsProbe SU2BFSSPhysicalDomainS1V52L7C5OriginalNativeZYZCircleFactorsProbe SU2BFSSPhysicalDomainS1V52L7C6OriginalNativeZeroSafeEulerPhaseBridgeProbe SU2BFSSPhysicalDomainS1V52L7C7OriginalNativeEulerWitnessAndSpinHomProbe SU2BFSSPhysicalDomainS1V52L8AOriginalDisjointBlockCliffordBivectorCommutationProbe SU2BFSSPhysicalDomainS1V52L8BOriginalArbitraryBlockQuaternionCliffordCommutationProbe SU2BFSSPhysicalDomainS1V52L8COriginalNativeSpin48CrossBlockImageCommutationProbe SU2BFSSPhysicalDomainS1V52L8DOriginalNodupNativeBlockSpin48ListHomProbe SU2BFSSPhysicalDomainS1V52L8EOriginalOrderedSixteenNativeSU2Spin48HomProbe SU2BFSSPhysicalDomainS1V52L9AOriginalNativeCrossBlockMajoranaCliffordFixationProbe SU2BFSSPhysicalDomainS1V52L9B0OriginalSameBlockBivectorAxisParityProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "S1V52L9B1_REQUIRED_QUALIFIED_OLEAN_MISSING=$stem"; exit 1; }
+          done
+          echo S1V52L9B1_ALL_QUALIFIED_ORIGINAL_SOURCE_DEPENDENCIES_READY
+
+
+
+      - name: Compile three original same block Clifford quaternion star reflection roots
+        shell: bash
+        timeout-minutes: 15
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          mkdir -p .lake/build/lib/lean
+          stem=SU2BFSSPhysicalDomainS1V52L9B1OriginalSameBlockQuaternionAxisReflectionProbe
+          cp "../../experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+          timeout 780s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v52l9b1/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean" || { echo S1V52L9B1_FRESH_SOURCE_OLEAN_MISSING; exit 1; }
+          python3 - <<'PY'
+          import pathlib,re
+          stem="SU2BFSSPhysicalDomainS1V52L9B1OriginalSameBlockQuaternionAxisReflectionProbe"
+          ns="FCP.BFSSS1V52L9B1"
+          expected=[
+            "originalAxis0_star_quaternion_reflection",
+            "originalAxis1_star_quaternion_reflection",
+            "originalAxis2_star_quaternion_reflection"]
+          src=pathlib.Path(stem+".lean").read_text()
+          log=pathlib.Path("/tmp/bfss-s1v52l9b1",stem+".log").read_text()
+          assert re.findall(r'^namespace (\S+)',src,re.M)==[ns]
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==expected
+          rr=re.findall(r"'("+re.escape(ns)+r"\.[^\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          found={k:{x.strip() for x in v.split(",") if x.strip()} for k,v in rr}
+          assert len(rr)==len(found)==len(expected),rr
+          allowed={"propext","Classical.choice","Quot.sound"}
+          for name in expected:
+            key=ns+"."+name
+            assert key in found and found[key]<=allowed,(key,found)
+          assert "sorryAx" not in log and "error:" not in log and "unknownIdentifier" not in log,log[-9000:]
+          print("S1V52L9B1_ORIGINAL_SAME_BLOCK_QUATERNION_STAR_REFLECTION_3_ROOTS_KERNEL_PASS")
+          PY
+
+      - name: Save qualified original same-block quaternion star reflection cache
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v52l9b1-original-same-block-star-reflection-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve original same-block quaternion star reflection diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v52l9b1-same-block-star-reflection-${{ github.run_id }}
+          path: /tmp/bfss-s1v52l9b1/
+          if-no-files-found: warn
