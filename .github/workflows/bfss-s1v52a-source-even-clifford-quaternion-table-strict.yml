@@ -88,6 +88,7 @@ jobs:
           set -euo pipefail
           source "$HOME/.elan/env"
           cd upstream-math/lean
+          mkdir -p .lake/build/lib/lean
           for stem in \
             SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe \
             SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe \
@@ -105,6 +106,7 @@ jobs:
           set -euo pipefail
           source "$HOME/.elan/env"
           cd upstream-math/lean
+          mkdir -p .lake/build/lib/lean
           stem=SU2BFSSPhysicalDomainS1V52ASourceEvenCliffordQuaternionTableProbe
           cp "../../experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
           timeout 600s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v52a/$stem.log"
