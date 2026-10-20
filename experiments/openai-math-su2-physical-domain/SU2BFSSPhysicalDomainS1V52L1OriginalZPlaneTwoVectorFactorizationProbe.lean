@@ -33,42 +33,45 @@ private abbrev C := CliffordAlgebra Q
 
 /-- The exact source 48-Majorana vector generating a Z-plane
 unit quaternion rotor is Q-normalized whenever c²+s²=1. -/
+/-- Generic real quadratic norm calculation: for *any* quadratic
+form on *any* real vector space, a normalized orthogonal pair and a
+circle pair of scalar coefficients yield another unit vector.
+Keeping map_add/polar lemmas abstract avoids evaluating the actual
+48-Majorana indexing and weightedSumSquares in elaboration. -/
+theorem orthogonalUnitLinearCombination_norm
+    {V : Type*} [AddCommGroup V] [Module ℝ V]
+    (q : QuadraticForm ℝ V) (a b : V) (c s : ℝ)
+    (ha : q a = 1) (hb : q b = 1)
+    (hab : q.IsOrtho a b) (hcs : c*c+s*s=1) :
+    q (c • a - s • b) = 1 := by
+  have hpolar : QuadraticMap.polar q a b = 0 := hab.polar_eq_zero
+  calc
+    q (c • a - s • b) =
+        q (c • a + (-s) • b) := by
+          simp only [neg_smul, sub_eq_add_neg]
+    _ = q (c • a) + q ((-s) • b) +
+        QuadraticMap.polar q (c • a) ((-s) • b) :=
+      QuadraticMap.map_add q _ _
+    _ = 1 := by
+      rw [QuadraticMap.map_smul, QuadraticMap.map_smul,
+        QuadraticMap.polar_smul_left,
+        QuadraticMap.polar_smul_right, hpolar]
+      simp only [ha, hb, smul_eq_mul, smul_zero, add_zero]
+      nlinarith [hcs]
+
+/-- The first vector in the genuine original 48-source Z-plane has
+norm one. Instantiate an abstract result with the *exact* accepted
+S1V6 normalized axis and orthogonality certificates. -/
 theorem sourceZPlane_firstVector_unit
     (α : RealSpinBlock) (c s : ℝ)
     (hcs : c * c + s * s = 1) :
     Q (c • sourceBlockColorAxis α 0 -
       s • sourceBlockColorAxis α 1) = 1 := by
-  -- Deliberately use literal qualified source axes for the imported
-  -- norm/orthogonality certificates. The Gate #1 local-let
-  -- unification through the 48-label source representation exhausted
-  -- max recursion depth; no mathematical condition has changed.
-  have ha : Q (sourceBlockColorAxis α 0) = 1 :=
-    sourceBlockColorAxis_unit α 0
-  have hb : Q (sourceBlockColorAxis α 1) = 1 :=
-    sourceBlockColorAxis_unit α 1
-  have hab : Q.IsOrtho (sourceBlockColorAxis α 0)
-      (sourceBlockColorAxis α 1) :=
-    sourceBlockColorAxis_ortho (α,0) (α,1) (by simp)
-  have hzero : QuadraticMap.polar Q
-      (sourceBlockColorAxis α 0) (sourceBlockColorAxis α 1) = 0 :=
-    hab.polar_eq_zero
-  calc
-    Q (c • sourceBlockColorAxis α 0 -
-        s • sourceBlockColorAxis α 1) =
-        Q (c • sourceBlockColorAxis α 0 +
-          (-s) • sourceBlockColorAxis α 1) := by
-          simp only [neg_smul, sub_eq_add_neg]
-    _ = Q (c • sourceBlockColorAxis α 0) +
-        Q ((-s) • sourceBlockColorAxis α 1) +
-        QuadraticMap.polar Q (c • sourceBlockColorAxis α 0)
-          ((-s) • sourceBlockColorAxis α 1) :=
-      QuadraticMap.map_add Q _ _
-    _ = 1 := by
-      rw [QuadraticMap.map_smul, QuadraticMap.map_smul,
-        QuadraticMap.polar_smul_left,
-        QuadraticMap.polar_smul_right, hzero]
-      simp only [ha, hb, smul_eq_mul, smul_zero, add_zero]
-      nlinarith [hcs]
+  exact orthogonalUnitLinearCombination_norm
+    Q (sourceBlockColorAxis α 0) (sourceBlockColorAxis α 1) c s
+    (sourceBlockColorAxis_unit α 0)
+    (sourceBlockColorAxis_unit α 1)
+    (sourceBlockColorAxis_ortho (α,0) (α,1) (by simp)) hcs
 
 /-- A normalized source Z-plane rotor equals exactly the product
 of two ORIGINAL Clifford vector generators, with the +i sign:
@@ -105,6 +108,7 @@ theorem sourceZPlane_twoVector_factor
         rw [haa, hba]
         simp only [smul_neg, sub_neg_eq_add]
 
+#print axioms orthogonalUnitLinearCombination_norm
 #print axioms sourceZPlane_firstVector_unit
 #print axioms sourceZPlane_twoVector_factor
 
