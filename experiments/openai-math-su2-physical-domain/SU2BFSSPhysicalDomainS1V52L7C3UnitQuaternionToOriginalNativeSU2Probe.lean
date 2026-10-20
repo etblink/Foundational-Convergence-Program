@@ -73,8 +73,7 @@ theorem originalSourceQuaternionColorMatrix_det
       ((sourceQuaternionNormSq p : ℝ) : ℂ) := by
   rw [originalSourceQuaternionColorMatrix_complex]
   simp [Matrix.det_fin_two, sourceQuaternionNormSq,
-    Complex.normSq_eq_conj_mul_self, Complex.normSq_apply]
-  ring
+    Complex.I_sq] <;> ring
 
 /-- Genuine Mathlib source special unitary membership follows
 from exact determinant-one norm and adjugate, NOT an axiom. -/
@@ -120,7 +119,6 @@ theorem originalNativeOfUnitQuaternion_coords
       (originalNativeOfUnitQuaternion p hp) = p := by
   cases p with
   | mk a b c d =>
-    apply SourceQuaternionCoords.mk.injEq.mpr
     simp [originalNativeQuaternionCoords,
       originalNativeOfUnitQuaternion,
       sourceQuaternionColorMatrix]
