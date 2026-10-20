@@ -64,7 +64,7 @@ jobs:
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52S1Original48CliffordQuaternionStarUnitarityProbe.lean")" = 2e817387d174c1962b70675220347dafa5efc351
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52S2Original48CliffordQuaternionEvennessProbe.lean")" = 0aae567e44768e2e1664ae3e79f8ae1f9a54da77
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1AIsolatedAbstractNormAndOriginalZCliffordFactorProbe.lean")" = 1bf72e69a61eccc882c2e348b7a36a4c572b9e45
-          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1BOriginalSourceTwoCoordinateNormProbe.lean")" = 4ab05d0d60b3285fd1d6026610a2378eff190f53
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1BOriginalSourceTwoCoordinateNormProbe.lean")" = f747fecb749a03be8f62ebcc84e53c5da19daf91
           echo S1V52L1B_EXACT_ORIGINAL_48_SOURCE_AND_MATHLIB_SHA_PASS
 
       - name: Reclaim disposable runner disk
@@ -116,7 +116,7 @@ jobs:
           done
           echo S1V52L1B_ALL_GENUINE_ORIGINAL_SOURCE_DEPENDENCIES_READY
 
-      - name: Compile and audit two original source48 coordinate norm roots
+      - name: Compile and audit three original dot coordinate and source48 norm roots
         shell: bash
         timeout-minutes: 12
         run: |
@@ -133,27 +133,27 @@ jobs:
           stem='SU2BFSSPhysicalDomainS1V52L1BOriginalSourceTwoCoordinateNormProbe'
           src=pathlib.Path(stem+'.lean').read_text()
           log=pathlib.Path('/tmp/bfss-s1v52l1b',stem+'.log').read_text()
-          expected=['source48Quadratic_two_coordinate_norm','sourceZPlane_firstVector_unit']
+          expected=['source48Dot_two_coordinate_norm','source48Quadratic_two_coordinate_norm','sourceZPlane_firstVector_unit']
           assert re.findall(r'^#print axioms (\S+)',src,re.M)==expected
           assert re.findall(r'^namespace (\S+)',src,re.M)==['FCP.BFSSS1V52L1B']
           reports=re.findall(r"'(FCP\.BFSSS1V52L1B\.[^\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
           found={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in reports}
-          assert len(reports)==len(found)==2,reports
+          assert len(reports)==len(found)==3,reports
           allowed={'propext','Classical.choice','Quot.sound'}
           for name in expected:
             key='FCP.BFSSS1V52L1B.'+name
             assert key in found and found[key]<=allowed,(key,found)
           assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log,log[-9000:]
-          print('S1V52L1B_GENUINE_SOURCE48_TWO_COORDINATE_NORM_2_ROOTS_KERNEL_PASS')
+          print('S1V52L1B_GENUINE_SOURCE48_DOT_COORDINATE_NORM_3_ROOTS_KERNEL_PASS')
           PY
 
-      - name: Save qualified S1V52L1B cache only after strict two-root green
+      - name: Save qualified S1V52L1B cache only after strict three-root green
         uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
         with:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-s1v52l1b-original48-two-coordinate-norm-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-s1v52l1b-original48-two-coordinate-dot-bridge-v3-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
 
       - name: Preserve original source48 L1B diagnostic logs for failure analysis
         if: always()
