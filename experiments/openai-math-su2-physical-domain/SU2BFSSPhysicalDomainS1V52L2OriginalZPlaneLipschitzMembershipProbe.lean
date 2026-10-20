@@ -1,4 +1,4 @@
-import SU2BFSSPhysicalDomainS1V52L1DSourceZPlaneDotFirstNormProbe
+import SU2BFSSPhysicalDomainS1V52L1DOriginalZPlaneSourceAxisUnitProbe
 import Mathlib.LinearAlgebra.CliffordAlgebra.SpinGroup
 
 /-!
@@ -6,7 +6,7 @@ S1V52-L2: SOURCE-EXACT candidate genuine LipschitzGroup membership
 for normalized Z-plane quaternion polynomial in actual ORIGINAL
 48-dimensional Clifford algebra (NOT a surrogate Spin(3) model).
 
-L1 supplies Q-norm-one source vector c*e0-s*e1 and its EXACT Clifford
+Qualified L1D supplies Q-norm-one source vector c*e0-s*e1 and its EXACT Clifford
 factorization with original +i Z-bivector. This module constructs
 two actual units of the original Clifford algebra whose coerced
 values are genuine canonical `CliffordAlgebra.ι source48Quadratic`
@@ -14,7 +14,8 @@ vectors. The pinned Mathlib Lipschitz definition is precisely
 `Subgroup.closure ((↑) ⁻¹' Set.range (ι Q))`; hence the product of
 these units is in the genuine group by subgroup closure.
 
-L2 remains a research candidate until CI kernel+axiom qualification.
+This revised L2 source retains the prior source-exact theorem statements and is
+UNQUALIFIED until independent pinned CI compiler and axiom checks.
 Its theorem is ONLY the Z-plane; Y-plane and exact ZYZ factorization
 of ALL native GaugeGroup 2 elements must be proved separately.
 -/
