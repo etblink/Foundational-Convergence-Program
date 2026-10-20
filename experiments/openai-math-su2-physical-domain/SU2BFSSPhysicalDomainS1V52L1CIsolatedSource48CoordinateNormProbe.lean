@@ -53,8 +53,10 @@ theorem source48Dot_two_coordinate_norm
       (if k = i then c*c else if k = j then s*s else 0) =
       (if k = i then c*c else 0) + (if k = j then s*s else 0) := by
     by_cases hi : k = i
-    · subst k
-      simp [hij.symm]
+    · have hj : k ≠ j := by
+        intro hk
+        exact hij (hi.symm.trans hk)
+      simp [hi, hj]
     · simp [hi]
   calc
     dotProduct
