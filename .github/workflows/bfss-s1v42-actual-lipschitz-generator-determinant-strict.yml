@@ -129,7 +129,7 @@ jobs:
                     'source48ActualLipschitzGenerator_det']
           assert names==expected, names
           assert re.findall(r'^namespace (\S+)',src,re.M)==['FCP.BFSSS1V42']
-          reports=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          reports=re.findall(r"'(FCP\.BFSSS1V42\.[^\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
           found={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in reports}
           assert len(reports)==len(found)==5,reports
           allowed={'propext','Classical.choice','Quot.sound'}
