@@ -29,6 +29,8 @@ namespace FCP.BFSSS1V52L7B0
 noncomputable section
 open OAI.BFSSQuantum
 open Matrix
+open FCP.BFSSS1V0
+open FCP.BFSSS1V5
 open FCP.BFSSSU2GaugeG4M
 open FCP.BFSSS1V52B1
 open FCP.BFSSS1V52C1
@@ -72,12 +74,12 @@ theorem originalNativeZCurve_quaternion_coords (t : ℝ) :
 /-- The literal native original +i Z curve lies in genuine
 source48Quadratic Spin(48) for every source real spin block. -/
 theorem originalNativeZCurve_mem_sourceSpin48
-    (α : FCP.BFSSS1V52A.RealSpinBlock) (t : ℝ) :
+    (α : FCP.BFSSS1V5.RealSpinBlock) (t : ℝ) :
     FCP.BFSSS1V52B2.sourceCliffordQuaternion α
       (originalNativeQuaternionCoords
         (FCP.BFSSSU2PhysicalDomainL6G6X.sourcePlusIGaugeCurve
           (2 : Fin 3) t)) ∈
-        CliffordAlgebra.spinGroup FCP.BFSSS1V0.source48Quadratic := by
+        spinGroup FCP.BFSSS1V0.source48Quadratic := by
   rw [originalNativeZCurve_quaternion_coords]
   have hcs : Real.cos (originalZAngle t) * Real.cos (originalZAngle t) +
       Real.sin (originalZAngle t) * Real.sin (originalZAngle t) = 1 := by
