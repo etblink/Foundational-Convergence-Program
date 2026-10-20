@@ -31,8 +31,6 @@ open FCP.BFSSS1V52A
 private abbrev Q : QuadraticForm ℝ Source48Vector := source48Quadratic
 private abbrev C := CliffordAlgebra Q
 
-/-- The exact source 48-Majorana vector generating a Z-plane
-unit quaternion rotor is Q-normalized whenever c²+s²=1. -/
 /-- Generic real quadratic norm calculation: for *any* quadratic
 form on *any* real vector space, a normalized orthogonal pair and a
 circle pair of scalar coefficients yield another unit vector.
@@ -67,11 +65,20 @@ theorem sourceZPlane_firstVector_unit
     (hcs : c * c + s * s = 1) :
     Q (c • sourceBlockColorAxis α 0 -
       s • sourceBlockColorAxis α 1) = 1 := by
-  exact orthogonalUnitLinearCombination_norm
-    Q (sourceBlockColorAxis α 0) (sourceBlockColorAxis α 1) c s
-    (sourceBlockColorAxis_unit α 0)
-    (sourceBlockColorAxis_unit α 1)
-    (sourceBlockColorAxis_ortho (α,0) (α,1) (by simp)) hcs
+  -- Gate #3 inferred the generic theorem through the concrete Q
+  -- abbreviation and exhausted recursion. Fix all generic inputs,
+  -- and discharge original unit/ortho certificates as separate goals.
+  change source48Quadratic
+    (c • sourceBlockColorAxis α 0 -
+     s • sourceBlockColorAxis α 1) = 1
+  refine orthogonalUnitLinearCombination_norm
+    (V := Source48Vector) (q := source48Quadratic)
+    (a := sourceBlockColorAxis α 0)
+    (b := sourceBlockColorAxis α 1)
+    (c := c) (s := s) ?_ ?_ ?_ hcs
+  · exact sourceBlockColorAxis_unit α 0
+  · exact sourceBlockColorAxis_unit α 1
+  · exact sourceBlockColorAxis_ortho (α,0) (α,1) (by simp)
 
 /-- A normalized source Z-plane rotor equals exactly the product
 of two ORIGINAL Clifford vector generators, with the +i sign:
