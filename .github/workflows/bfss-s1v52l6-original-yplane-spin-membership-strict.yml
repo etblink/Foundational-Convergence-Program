@@ -66,7 +66,7 @@ jobs:
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1AIsolatedAbstractNormAndOriginalZCliffordFactorProbe.lean")" = 1bf72e69a61eccc882c2e348b7a36a4c572b9e45
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1CIsolatedSource48CoordinateNormProbe.lean")" = 0012268604cbfb8933ed1f1bbf87714c1a850ba2
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1DOriginalZPlaneSourceAxisUnitProbe.lean")" = eac4be30ef5ada8574b0310aa6c2d30db6166255
-          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L2OriginalZPlaneLipschitzMembershipProbe.lean")" = 254d7b6519257120aacf191d4091763f4a564ebf
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L4OriginalColorPlaneRotorGeometryProbe.lean")" = 889882e62666d134fae31ccd2f1397576456bdbc
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L5OriginalYPlaneLipschitzMembershipProbe.lean")" = fb52070ece6b1ff450e0a3d75960e3c1577b4ae1
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L6OriginalYPlaneSpinMembershipProbe.lean")" = 55858cbcedfa4ad98d67e20be42a86316906ad50
           echo S1V52L6_EXACT_ORIGINAL_48_SOURCE_AND_MATHLIB_SHA_PASS
@@ -115,7 +115,7 @@ jobs:
           test "${{ steps.cacheL5.outputs.cache-hit }}" = true || { echo S1V52L6_QUALIFIED_L5_CACHE_MISSING; exit 1; }
           cd upstream-math/lean
           test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/Core.olean || { echo S1V52L6_ORIGINAL_BFSS_CORE_OLEAN_MISSING; exit 1; }
-          for stem in SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe SU2BFSSPhysicalDomainS1V52ASourceEvenCliffordQuaternionTableProbe SU2BFSSPhysicalDomainS1V52B1SourcePauliQuaternionMatrixMultiplicationProbe SU2BFSSPhysicalDomainS1V52B2Original48CliffordQuaternionPolynomialMulProbe SU2BFSSPhysicalDomainS1V52B3Original48CliffordQuaternionUnitNormProbe SU2BFSSPhysicalDomainS1V52C1OriginalNativeGaugeQuaternionCoordinatesProbe SU2BFSSPhysicalDomainS1V52C2ANativeSU2MatrixAdjugateSourceProbe SU2BFSSPhysicalDomainS1V52C2BNativeSU2QuaternionWholeMatrixSourceProbe SU2BFSSPhysicalDomainS1V52C2CNativeSU2RealQuaternionMatrixBridgeProbe SU2BFSSPhysicalDomainS1V52C2DOriginalNativeSU2QuaternionMultiplicationProbe SU2BFSSPhysicalDomainS1V52C2EOriginalNativeGaugeCliffordUnitHomProbe SU2BFSSPhysicalDomainS1V52S1Original48CliffordQuaternionStarUnitarityProbe SU2BFSSPhysicalDomainS1V52S2Original48CliffordQuaternionEvennessProbe SU2BFSSPhysicalDomainS1V52L1AIsolatedAbstractNormAndOriginalZCliffordFactorProbe SU2BFSSPhysicalDomainS1V52L1CIsolatedSource48CoordinateNormProbe SU2BFSSPhysicalDomainS1V52L1DOriginalZPlaneSourceAxisUnitProbe SU2BFSSPhysicalDomainS1V52L2OriginalZPlaneLipschitzMembershipProbe SU2BFSSPhysicalDomainS1V52L5OriginalYPlaneLipschitzMembershipProbe; do
+          for stem in SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe SU2BFSSPhysicalDomainS1V52ASourceEvenCliffordQuaternionTableProbe SU2BFSSPhysicalDomainS1V52B1SourcePauliQuaternionMatrixMultiplicationProbe SU2BFSSPhysicalDomainS1V52B2Original48CliffordQuaternionPolynomialMulProbe SU2BFSSPhysicalDomainS1V52B3Original48CliffordQuaternionUnitNormProbe SU2BFSSPhysicalDomainS1V52C1OriginalNativeGaugeQuaternionCoordinatesProbe SU2BFSSPhysicalDomainS1V52C2ANativeSU2MatrixAdjugateSourceProbe SU2BFSSPhysicalDomainS1V52C2BNativeSU2QuaternionWholeMatrixSourceProbe SU2BFSSPhysicalDomainS1V52C2CNativeSU2RealQuaternionMatrixBridgeProbe SU2BFSSPhysicalDomainS1V52C2DOriginalNativeSU2QuaternionMultiplicationProbe SU2BFSSPhysicalDomainS1V52C2EOriginalNativeGaugeCliffordUnitHomProbe SU2BFSSPhysicalDomainS1V52S1Original48CliffordQuaternionStarUnitarityProbe SU2BFSSPhysicalDomainS1V52S2Original48CliffordQuaternionEvennessProbe SU2BFSSPhysicalDomainS1V52L1AIsolatedAbstractNormAndOriginalZCliffordFactorProbe SU2BFSSPhysicalDomainS1V52L1CIsolatedSource48CoordinateNormProbe SU2BFSSPhysicalDomainS1V52L1DOriginalZPlaneSourceAxisUnitProbe SU2BFSSPhysicalDomainS1V52L4OriginalColorPlaneRotorGeometryProbe SU2BFSSPhysicalDomainS1V52L5OriginalYPlaneLipschitzMembershipProbe; do
             test -s ".lake/build/lib/lean/$stem.olean" || { echo "S1V52L6_REQUIRED_QUALIFIED_OLEAN_MISSING=$stem"; exit 1; }
           done
           echo S1V52L6_ALL_GENUINE_ORIGINAL_SOURCE_DEPENDENCIES_READY
@@ -157,7 +157,7 @@ jobs:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-s1v52l6-original-yplane-spin-membership-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-s1v52l6-original-yplane-spin-membership-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
 
       - name: Preserve original Y-plane Spin membership diagnostics
         if: always()
