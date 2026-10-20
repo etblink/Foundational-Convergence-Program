@@ -52,13 +52,17 @@ noncomputable def sourceSpin48LinearEquiv (s : spinGroup Q) :
 /-- Every genuine source Spin48 element acts via an invertible linear
 equivalence which preserves EXACTLY the original real source quadratic
 form Q on Fin24 x Fin2 labels. No hypothetical projection needed. -/
+-- Constrain the larger elaboration budget to the packaging declaration,
+-- not to the accepted original math or the entire Lean module.
+set_option maxRecDepth 2048 in
 noncomputable def sourceSpin48QuadraticIsometryEquiv (s : spinGroup Q) :
-    Q.IsometryEquiv Q :=
-  { sourceSpin48LinearEquiv s with
-    map_app' := by
-      intro v
-      change Q (sourceSpin48VectorAction s v) = Q v
-      exact FCP.BFSSS1V33.sourceSpin48VectorAction_preserves_sourceQ s v }
+    Q.IsometryEquiv Q := by
+  let e : Source48Vector ≃ₗ[ℝ] Source48Vector := sourceSpin48LinearEquiv s
+  have hQ : ∀ v : Source48Vector, Q (e v) = Q v := by
+    intro v
+    change Q (sourceSpin48VectorAction s v) = Q v
+    exact FCP.BFSSS1V33.sourceSpin48VectorAction_preserves_sourceQ s v
+  exact { e with map_app' := hQ }
 
 /-- Composition of original source quadratic isometries follows the
 ACTUAL Spin-group multiplication in the correct order: first t then s.
