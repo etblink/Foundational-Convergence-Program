@@ -23,46 +23,70 @@ noncomputable section
 open FCP.BFSSS1V0
 open FCP.BFSSS1V5
 open FCP.BFSSS1V6
+open Matrix
 
-/-- For two *arbitrary distinct* genuine 48-Majorana coordinates,
-the original quadratic form evaluates directly to c²+s². This proof
-has no generic QuadraticForm map_add instantiation and does not
-unfold the 8x3 source mode equivalence or an original Fock operator. -/
-theorem source48Quadratic_two_coordinate_norm
+/-- Dot-product squared norm of two distinct ORIGINAL 48-label
+Pi.single coordinates.  The result is proved purely by finite
+coordinate arithmetic, NOT by elaborating source48Quadratic. -/
+theorem source48Dot_two_coordinate_norm
     (i j : SourceLabel) (hij : i ≠ j) (c s : ℝ) :
-    source48Quadratic
-        (c • (Pi.single i (1 : ℝ) : Source48Vector) -
-         s • (Pi.single j (1 : ℝ) : Source48Vector)) =
-      c*c + s*s := by
+    dotProduct
+      (c • (Pi.single i (1 : ℝ) : Source48Vector) -
+       s • (Pi.single j (1 : ℝ) : Source48Vector))
+      (c • (Pi.single i (1 : ℝ) : Source48Vector) -
+       s • (Pi.single j (1 : ℝ) : Source48Vector)) = c*c+s*s := by
   classical
-  -- Keep the function codomain and application to k explicitly
-  -- typed. Gate #1 left the Pi.single codomain unconstrained and
-  -- Lean reported "Function expected" at both product factors.
   let v : Source48Vector :=
     c • (Pi.single i (1 : ℝ) : Source48Vector) -
     s • (Pi.single j (1 : ℝ) : Source48Vector)
-  change source48Quadratic v = c*c+s*s
-  rw [source48Quadratic_eq_dot]
-  change (∑ k : SourceLabel, v k * v k) = c*c+s*s
-  calc
-    (∑ k : SourceLabel, v k * v k) =
-        ∑ k : SourceLabel,
-          (if k = i then c*c else if k = j then s*s else 0) := by
-      apply Finset.sum_congr rfl
-      intro k _
-      by_cases hki : k = i
+  have hpoint (k : SourceLabel) :
+      v k * v k = if k = i then c*c else if k = j then s*s else 0 := by
+    by_cases hki : k = i
+    · subst k
+      simp [v, Pi.single_apply, hij, hij.symm] <;> ring
+    · by_cases hkj : k = j
       · subst k
-        simp [v, Pi.single_apply, hij, hij.symm] <;> ring
-      · by_cases hkj : k = j
-        · subst k
-          simp [v, Pi.single_apply, hki, hki.symm] <;> ring
-        · simp [v, Pi.single_apply, hki, hkj, hki.symm, hkj.symm]
+        simp [v, Pi.single_apply, hki, hki.symm] <;> ring
+      · simp [v, Pi.single_apply, hki, hkj, hki.symm, hkj.symm]
+  calc
+    dotProduct
+        (c • (Pi.single i (1 : ℝ) : Source48Vector) -
+         s • (Pi.single j (1 : ℝ) : Source48Vector))
+        (c • (Pi.single i (1 : ℝ) : Source48Vector) -
+         s • (Pi.single j (1 : ℝ) : Source48Vector)) =
+        ∑ k : SourceLabel, v k * v k := by
+          rfl
+    _ = ∑ k : SourceLabel,
+          (if k = i then c*c else if k = j then s*s else 0) := by
+          apply Finset.sum_congr rfl
+          intro k _
+          exact hpoint k
     _ = c*c+s*s := by
-      simp [Finset.sum_ite, hij, hij.symm]
+          simp [Finset.sum_ite, hij, hij.symm]
 
-/-- Instantiate the elementary source coordinate result at the two
-separate actual original color labels for one native real spin block.
-No generic quadratic map unification is attempted. -/
+/-- Bridge the accepted original `source48Quadratic_eq_dot`
+interface to the independent two-coordinate calculation.
+No `change` of source48Quadratic or 48-dimensional structure. -/
+theorem source48Quadratic_two_coordinate_norm
+    (i j : SourceLabel) (hij : i ≠ j) (c s : ℝ) :
+    source48Quadratic
+      (c • (Pi.single i (1 : ℝ) : Source48Vector) -
+       s • (Pi.single j (1 : ℝ) : Source48Vector)) = c*c+s*s := by
+  calc
+    source48Quadratic
+        (c • (Pi.single i (1 : ℝ) : Source48Vector) -
+         s • (Pi.single j (1 : ℝ) : Source48Vector)) =
+      dotProduct
+        (c • (Pi.single i (1 : ℝ) : Source48Vector) -
+         s • (Pi.single j (1 : ℝ) : Source48Vector))
+        (c • (Pi.single i (1 : ℝ) : Source48Vector) -
+         s • (Pi.single j (1 : ℝ) : Source48Vector)) :=
+      source48Quadratic_eq_dot _
+    _ = c*c+s*s := source48Dot_two_coordinate_norm i j hij c s
+
+/-- Specialize the original coordinate norm at two distinct actual
+source block/color labels. Use only a named axis definition rewrite:
+never unfold the concrete source quadratic or its indexing equivalence. -/
 theorem sourceZPlane_firstVector_unit
     (α : RealSpinBlock) (c s : ℝ) (hcs : c*c+s*s=1) :
     source48Quadratic
@@ -75,15 +99,14 @@ theorem sourceZPlane_firstVector_unit
       sourceBlockColorLabel_injective he
     have hcolor : (0 : ColorLabel) = 1 := congrArg Prod.snd heq
     exact (by decide : (0 : ColorLabel) ≠ 1) hcolor
-  change source48Quadratic
-      (c • (Pi.single (sourceBlockColorLabel α 0) (1 : ℝ) : Source48Vector) -
-       s • (Pi.single (sourceBlockColorLabel α 1) (1 : ℝ) : Source48Vector)) = 1
-  -- Pass a fully formed equality proof rather than using rw, which
-  -- forced a large concrete source-normalizer on Gate #1.
-  exact (source48Quadratic_two_coordinate_norm
-    (sourceBlockColorLabel α 0)
-    (sourceBlockColorLabel α 1) hij c s).trans hcs
+  have hcoordinate :
+      source48Quadratic
+        (c • (Pi.single (sourceBlockColorLabel α 0) (1:ℝ) : Source48Vector) -
+         s • (Pi.single (sourceBlockColorLabel α 1) (1:ℝ) : Source48Vector)) = 1 :=
+    (source48Quadratic_two_coordinate_norm _ _ hij c s).trans hcs
+  simpa only [sourceBlockColorAxis] using hcoordinate
 
+#print axioms source48Dot_two_coordinate_norm
 #print axioms source48Quadratic_two_coordinate_norm
 #print axioms sourceZPlane_firstVector_unit
 
