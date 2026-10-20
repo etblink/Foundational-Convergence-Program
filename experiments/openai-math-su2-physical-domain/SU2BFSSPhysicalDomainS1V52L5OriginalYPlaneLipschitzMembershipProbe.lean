@@ -2,22 +2,21 @@ import SU2BFSSPhysicalDomainS1V52L4OriginalColorPlaneRotorGeometryProbe
 import Mathlib.LinearAlgebra.CliffordAlgebra.SpinGroup
 
 /-!
-S1V52-L5: STAGED UNQUALIFIED genuine source-48 candidate genuine LipschitzGroup membership
+S1V52-L5: STAGED UNQUALIFIED genuine source-48 LipschitzGroup membership
 for normalized Y-plane quaternion polynomial in actual ORIGINAL
 48-dimensional Clifford algebra (NOT a surrogate Spin(3) model).
 
 Qualified L4 supplies Q-norm-one source vector c*e2-s*e0 and its EXACT Clifford
-factorization with original +i Z-bivector. This module constructs
+factorization with the literal original +i Y-bivector. This module constructs
 two actual units of the original Clifford algebra whose coerced
 values are genuine canonical `CliffordAlgebra.ι source48Quadratic`
 vectors. The pinned Mathlib Lipschitz definition is precisely
 `Subgroup.closure ((↑) ⁻¹' Set.range (ι Q))`; hence the product of
 these units is in the genuine group by subgroup closure.
 
-This revised L2 source retains the prior source-exact theorem statements and is
-UNQUALIFIED until independent pinned CI compiler and axiom checks.
-Its theorem is ONLY the Y-plane; Y-plane and exact ZYZ factorization
-of ALL native GaugeGroup 2 elements must be proved separately.
+This is an independently staged Y-plane candidate and is UNQUALIFIED
+until strict pinned CI compiler and axiom checks. The all-native original
+SU2 ZYZ factorization and Spin membership remain separate obligations.
 -/
 
 set_option autoImplicit false
