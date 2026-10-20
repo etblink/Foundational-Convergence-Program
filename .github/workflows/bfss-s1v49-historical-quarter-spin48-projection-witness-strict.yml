@@ -1,0 +1,164 @@
+name: BFSS S1V49 Historical Source Quarter Spin48 Projection Witness Strict Gate
+
+# Deliberate branch-isolated single candidate; source/audit edits do not
+# cause CI. The workflow itself is the only push trigger.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v-orthogonal-decomposition-isolated-20261018
+    paths:
+      - .github/workflows/bfss-s1v49-historical-quarter-spin48-projection-witness-strict.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v49-quarter-projection-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  source48-quarter-witness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - name: Checkout original FCP research sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Checkout immutable original upstream BFSS mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Strict original source, SHA and toolchain preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v49
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          data=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in data['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          r=experiments/openai-math-su2-physical-domain
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe.lean")" = 22f3101b243a7b7857d9597b547322174d9281c8
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V37Original48CliffordGeneratorRankOneDeterminantProbe.lean")" = 2d3d40134e4eaba80751c62a160d1803f22c828b
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V38Original48PolarCoefficientBridgeProbe.lean")" = 27ed1e4933499c108ee614b4731a3479a318aa8b
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V39Original48CliffordGeneratorMatrixActionProbe.lean")" = 9a800e9e30f55cf41517dd9ac6098b3a497db607
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V30Real48CliffordGeneratorInjectiveViaExteriorProbe.lean")" = 59d40c5c74cc4803a6a6096cfe5ea87c800bd7f9
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V40ActualSource48LipschitzVectorActionProbe.lean")" = 106286d7cc48e326368cfd53b03a48f5e2815260
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V41GenuineLipschitz48RealGLHomProbe.lean")" = 818408f1834ba7798b4129fc3a96cbada5a63089
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V42ActualLipschitzGeneratorDeterminantProbe.lean")" = 0c13c4928e463c5a81ccf812957e0f19b276fccd
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V43OriginalLipschitzGradeDetParityInterfacesProbe.lean")" = 28abd21ab1cc50c57ab7a73e9c7f6824e3a4f4cd
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V44OriginalLipschitzGradeDetParityInverseProbe.lean")" = ea0186c1a7def6290197d5e5d2da8c656cba88b7
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V45ActualLipschitzGradeDetClosureProbe.lean")" = 337110568c3a27f52580d8ee7a157c9e021575cd
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V46OriginalSpinLipschitzRestrictionBridgeProbe.lean")" = 580e66b7ea3176cf861c46197cb1ac85db9cc4c4
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V47ActualSpin48RealDetOrientationProbe.lean")" = 10015d67ef402692a83e4e8a1ca172225cfaf575
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V48OriginalGaugeSpin48ProjectionFiberProbe.lean")" = c82d3bd763a63ea9469280971754e11c28f84788
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V49HistoricalQuarterActualSpinProjectionWitnessProbe.lean")" = 28d656f4479964977651f95956c35acb52203e3a
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V16GlobalSpin48AllRealSourceVectorActionProbe.lean")" = 51f2299511ecb9d94e4a4b2a3b38299107061711
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V27HistoricalOriginalQuarterVsIndependentSpin48MatrixProbe.lean")" = d4b20266b01f827eb12ba3c3efff0d7b95c07dce
+          echo S1V49_ORIGINAL_SOURCE_AND_TOOLCHAIN_PINS_PASS
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore immutable original Lean and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v49/toolchain.log; then
+              ok=true; break
+            fi
+            echo ORIGINAL_PINNED_LEAN_RETRY_$attempt | tee -a /tmp/bfss-s1v49/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo PINNED_ORIGINAL_LEAN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v49/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo S1V49_PINNED_LEAN_MATHLIB_VERIFIED
+
+      - name: Restore strictly accepted S1V48 original gauge/Spin48 fiber cache
+        id: cache48
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v48-isolated-source48-gauge-spin-fiber-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed without qualified original source geometry
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.cache48.outputs.cache-hit }}" = true || { echo S1V49_ACCEPTED_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe SU2BFSSPhysicalDomainS1V35ActualSpin48RealAutomorphismGroupHomProbe SU2BFSSPhysicalDomainS1V36ActualSpin48OriginalRealDeterminantCharacterProbe SU2BFSSPhysicalDomainS1V37Original48CliffordGeneratorRankOneDeterminantProbe SU2BFSSPhysicalDomainS1V38Original48PolarCoefficientBridgeProbe SU2BFSSPhysicalDomainS1V39Original48CliffordGeneratorMatrixActionProbe SU2BFSSPhysicalDomainS1V30Real48CliffordGeneratorInjectiveViaExteriorProbe SU2BFSSPhysicalDomainS1V40ActualSource48LipschitzVectorActionProbe SU2BFSSPhysicalDomainS1V41GenuineLipschitz48RealGLHomProbe SU2BFSSPhysicalDomainS1V42ActualLipschitzGeneratorDeterminantProbe SU2BFSSPhysicalDomainS1V43OriginalLipschitzGradeDetParityInterfacesProbe SU2BFSSPhysicalDomainS1V44OriginalLipschitzGradeDetParityInverseProbe SU2BFSSPhysicalDomainS1V45ActualLipschitzGradeDetClosureProbe SU2BFSSPhysicalDomainS1V46OriginalSpinLipschitzRestrictionBridgeProbe SU2BFSSPhysicalDomainS1V47ActualSpin48RealDetOrientationProbe SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe SU2BFSSPhysicalDomainS1MSourceSO48GaugeContinuityProbe SU2BFSSPhysicalDomainS1V18QuarterFlipRealMajoranaDiagonalMatrixProbe SU2BFSSPhysicalDomainS1V48OriginalGaugeSpin48ProjectionFiberProbe SU2BFSSPhysicalDomainS1V16GlobalSpin48AllRealSourceVectorActionProbe SU2BFSSPhysicalDomainS1V27HistoricalOriginalQuarterVsIndependentSpin48MatrixProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "S1V49_ACCEPTED_OLEAN_MISSING=$stem"; exit 1; }
+          done
+          echo S1V49_ACCEPTED_ORIGINAL_GEOMETRY_DEPENDENCIES_READY
+
+      - name: Compile and strictly audit three actual historical quarter Spin48 witness roots
+        shell: bash
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=SU2BFSSPhysicalDomainS1V49HistoricalQuarterActualSpinProjectionWitnessProbe
+          cp "../../experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+          timeout 600s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v49/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean" || { echo S1V49_ORIGINAL_ROOT_OLEAN_MISSING; exit 1; }
+          python3 - <<'PY'
+          import pathlib,re
+          stem='SU2BFSSPhysicalDomainS1V49HistoricalQuarterActualSpinProjectionWitnessProbe'
+          src=pathlib.Path(stem+'.lean').read_text()
+          log=pathlib.Path('/tmp/bfss-s1v49',stem+'.log').read_text()
+          names=re.findall(r'^#print axioms (\S+)',src,re.M)
+          expected=['historicalSixteenRotor_canonicalSourceAction',
+                    'historicalSourceQuarter_coversByActualSixteenRotor',
+                    'historicalSourceQuarter_hasActualSpinWitness']
+          assert names==expected, names
+          assert re.findall(r'^namespace (\S+)',src,re.M)==['FCP.BFSSS1V49']
+          reports=re.findall(r"'(FCP\.BFSSS1V49\.[^\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          found={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in reports}
+          assert len(reports)==len(found)==3,reports
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for name in expected:
+            key='FCP.BFSSS1V49.'+name
+            assert key in found and found[key]<=allowed,(key,found)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log,log[-9000:]
+          print('S1V49_HISTORICAL_SOURCE_QUARTER_SPIN48_WITNESS_3_ROOTS_KERNEL_PASS')
+          PY
+
+      - name: Save qualified S1V49 actual historical quarter Spin48 projection witness cache only after strict green
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v49-isolated-source48-historical-quarter-witness-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve source logs for failure diagnosis
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v49-quarter-witness-${{ github.run_id }}
+          path: /tmp/bfss-s1v49/
+          if-no-files-found: warn
