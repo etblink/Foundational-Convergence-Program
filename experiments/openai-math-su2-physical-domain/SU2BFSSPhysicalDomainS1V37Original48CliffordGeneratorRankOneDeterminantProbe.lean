@@ -66,10 +66,23 @@ theorem source48_rankOneConjugationMatrix_det
     (h : ell ⬝ᵥ a = (2 : ℝ)) :
     (source48_rankOneConjugationMatrix a ell).det = (-1 : ℝ) := by
   unfold source48_rankOneConjugationMatrix
-  rw [Matrix.det_neg,
-    Matrix.det_one_add_replicateCol_mul_replicateRow (ι := Fin 1),
-    neg_dotProduct, h]
-  norm_num [Source48Label, Fintype.card_prod]
+  have hmatrix :
+      (1 + Matrix.replicateCol (Fin 1) a *
+        Matrix.replicateRow (Fin 1) (-ell)).det =
+        1 + (-ell) ⬝ᵥ a := by
+    exact Matrix.det_one_add_replicateCol_mul_replicateRow
+      (ι := Fin 1) a (-ell)
+  calc
+    (-(1 + Matrix.replicateCol (Fin 1) a *
+      Matrix.replicateRow (Fin 1) (-ell))).det =
+        (-1 : ℝ) ^ Fintype.card Source48Label *
+          (1 + Matrix.replicateCol (Fin 1) a *
+            Matrix.replicateRow (Fin 1) (-ell)).det := Matrix.det_neg _
+    _ = (-1 : ℝ) ^ Fintype.card Source48Label *
+          (1 + (-ell) ⬝ᵥ a) := by rw [hmatrix]
+    _ = -1 := by
+      rw [neg_dotProduct, h]
+      norm_num [Source48Label, Fintype.card_prod]
 
 #print axioms source48_polar_inverse_self
 #print axioms source48_clifford_generator_conjugation
