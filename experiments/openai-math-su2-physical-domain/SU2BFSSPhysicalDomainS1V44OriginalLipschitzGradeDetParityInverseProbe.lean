@@ -47,14 +47,17 @@ theorem source48LipschitzGradeDetParity_iff_units (x : lipschitzGroup Q) :
   constructor
   · intro hx
     apply Units.ext
-    simpa only [source48GradeOnUnits, source48RealScalarOnUnits,
-      Units.coe_map, Units.val_mul, Algebra.smul_def,
-      FCP.BFSSS1V43.source48LipschitzGradeDetParity] using hx
+    change CliffordAlgebra.involute (((x : Aˣ) : A)) =
+      algebraMap ℝ A ((δ x : ℝ)) * (((x : Aˣ) : A))
+    simpa only [FCP.BFSSS1V43.source48LipschitzGradeDetParity,
+      Algebra.smul_def] using hx
   · intro hx
     have hh := congrArg (fun u : Aˣ => (u : A)) hx
-    simpa only [source48GradeOnUnits, source48RealScalarOnUnits,
-      Units.coe_map, Units.val_mul, Algebra.smul_def,
-      FCP.BFSSS1V43.source48LipschitzGradeDetParity] using hh
+    change CliffordAlgebra.involute (((x : Aˣ) : A)) =
+      algebraMap ℝ A ((δ x : ℝ)) * (((x : Aˣ) : A)) at hh
+    change CliffordAlgebra.involute (((x : Aˣ) : A)) =
+      (δ x : ℝ) • (((x : Aˣ) : A))
+    simpa only [Algebra.smul_def] using hh
 
 /-- The actual grade-involute / true source Lipschitz determinant relation
 holds under the inverse of an ARBITRARY genuine Lipschitz element on which
@@ -75,11 +78,8 @@ theorem source48LipschitzGradeDetParity_inv
       mul_inv_rev _ _
     _ = source48RealScalarOnUnits (δ x⁻¹) *
           ((x⁻¹ : lipschitzGroup Q) : Aˣ) := by
-      rw [map_inv]
-      change (x : Aˣ)⁻¹ * source48RealScalarOnUnits ((δ x)⁻¹) =
-        source48RealScalarOnUnits (δ (x⁻¹ : lipschitzGroup Q)) * (x : Aˣ)⁻¹
-      rw [map_inv]
-      exact (source48RealScalarOnUnits_commutes ((δ x)⁻¹) ((x : Aˣ)⁻¹)).symm
+      simpa only [map_inv, Subgroup.coe_inv] using
+        (source48RealScalarOnUnits_commutes ((δ x)⁻¹) ((x : Aˣ)⁻¹)).symm
 
 #print axioms source48GradeOnUnits
 #print axioms source48RealScalarOnUnits
