@@ -54,7 +54,7 @@ jobs:
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52B1SourcePauliQuaternionMatrixMultiplicationProbe.lean")" = 8a5558fa127893b6bbb971a8047df4840d74e760
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52B2Original48CliffordQuaternionPolynomialMulProbe.lean")" = 164add0b3a17b9d5417aa3595de841ad5eee33f4
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52B3Original48CliffordQuaternionUnitNormProbe.lean")" = 175d0865ddb413bb02ad29d9ba945be5f0c0639f
-          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C1OriginalNativeGaugeQuaternionCoordinatesProbe.lean")" = ccebccdfb27a5eaf7f6a80f94209ecff8eba2461
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C1OriginalNativeGaugeQuaternionCoordinatesProbe.lean")" = bbb6fd81e68787d236a9919c3a7675230e899818
           test "$(git hash-object upstream-math/lean/OAI/MathematicalPhysics/BFSS/Core.lean)" = 9882359ced78b0a3bd7e2f057974bd0a031b3e60
           echo S1V52C1_EXACT_ORIGINAL_GAUGE_CORE_AND_SOURCE_SHA_PASS
 
