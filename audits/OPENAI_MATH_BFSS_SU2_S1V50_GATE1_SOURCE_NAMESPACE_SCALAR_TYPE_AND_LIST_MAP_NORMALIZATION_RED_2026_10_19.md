@@ -1,0 +1,16 @@
+# S1V50 Gate #1 RED — three bounded original Clifford parity Lean defects
+
+**Disposition:** `S1V50_G1_FIRST_TRUE_ORTHOGONAL_CLIFFORD_PAIR_SQUARE_ROOT_COMPILES__SOURCE_NAMESPACE_MISSING__UNTYPED_MUL_COMM__ORDERED_LIST_MAP_NORMALIZATION__DEPENDENT_SORRYAX__NO_CACHE`.
+
+- [Actual S1V50 strict run #39373529855](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39373529855), job `118466452959`, **FAILURE**, checkout `6ae7e6a1a678a71ec0d3f0a862d320a71dfd743f`. Candidate `3a63973661d29ec0d694d89e4ade108fbd5568d2`, exact source blob `5a18a25c8981b967441a0067c30b345726c23dec`.
+- Exact immutable original `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean `4.34.1`, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612` passed source SHA preflight. Accepted S1V49 cache restored and original compiled dependencies checked nonempty.
+- **One genuinely compiling root:** `FCP.BFSSS1V50.sourceOrthogonalSpinPair_square_neg_one`: for any original two Q-unit orthogonal Clifford generators `a,b`, `(ι(a)ι(b))²=-1`. Its own axiom report was only `[propext, Classical.choice, Quot.sound]`.
+- **First causal failure** at lines 69–70: `sourceBlockColorAxis_unit` not found because the original qualified declaration lives in namespace `FCP.BFSSS1V6`, which S1V8 opens but S1V50 forgot. This is not an unproved Q-unit hypothesis; add the real source namespace.
+- **Independent second causal failure** at line 102: `exact mul_comm _ _` leaves both arguments and hence the commutative magma instance unresolved. The intended equation follows from `pow_succ` in the actual Clifford algebra `C`; supply `mul_comm (-1 : C) ((-1 : C) ^ rest.length)` with explicitly typed arguments.
+- **Independent third causal failure** at lines 112–114: `simp` left source S1V9's `List.map (fun α => sourceColorPlaneRotor (finProdFinEquiv.symm α)) (List.finRange 16)` versus the associatively remapped `List.map (sourceColorPlaneRotor ∘ finProdFinEquiv.symm) (List.finRange 16)`. Supply `List.map_map` plus explicit `Function.comp_def` or normalize both sides through an exact typed list-map equality, instead of unfolding concrete rotors.
+- All downstream roots (`sourceColorPlaneRotor_square_neg_one`, `sourceOrderedColorRotors_square`, `sourceSixteenColorRotor_square_one`, `historicalQuarterSquare_coveredBySpinIdentity`) reported `sorryAx` contamination and are **NOT accepted**. No S1V50 cache saved. Artifact `bfss-s1v50-sixteen-parity-39373529855`, ID `12242775733`, preserved.
+- **Scientific claim unchanged:** local orthogonal rotor square `-1`; concrete sixteen-rotor square `+1` through actual ordered Spin product; actual historical quarter square covered by original Spin identity. No unproved global lift, SU2 central identity, topological covering, or BFSS spectral assertion.
+
+**Gate #2 bounded change:** add the qualified original S1V6 namespace, explicitly type commutativity and normalize the list-map composition. Preserve all five theorem statements, source pins, qualified S1V49 prerequisite, axiom validator and no-sorry acceptance. If a new compiler cause emerges, preserve it separately.
+
+Documentation-only commit on isolated branch. Canonical main, upstream math and draft PR #25 unchanged.
