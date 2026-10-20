@@ -64,7 +64,7 @@ jobs:
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52S1Original48CliffordQuaternionStarUnitarityProbe.lean")" = 2e817387d174c1962b70675220347dafa5efc351
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52S2Original48CliffordQuaternionEvennessProbe.lean")" = 0aae567e44768e2e1664ae3e79f8ae1f9a54da77
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1AIsolatedAbstractNormAndOriginalZCliffordFactorProbe.lean")" = 1bf72e69a61eccc882c2e348b7a36a4c572b9e45
-          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1CIsolatedSource48CoordinateNormProbe.lean")" = bfe773ec4c9b0198cf950b7cbdf461cc3c002aa2
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1CIsolatedSource48CoordinateNormProbe.lean")" = 0012268604cbfb8933ed1f1bbf87714c1a850ba2
           echo S1V52L1C_EXACT_ORIGINAL_48_SOURCE_AND_MATHLIB_SHA_PASS
 
       - name: Reclaim disposable runner disk
@@ -153,7 +153,7 @@ jobs:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-s1v52l1c-original48-isolated-coordinate-dot-norm-v3-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-s1v52l1c-original48-isolated-coordinate-dot-norm-v4-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
 
       - name: Preserve original source48 L1B diagnostic logs for failure analysis
         if: always()
