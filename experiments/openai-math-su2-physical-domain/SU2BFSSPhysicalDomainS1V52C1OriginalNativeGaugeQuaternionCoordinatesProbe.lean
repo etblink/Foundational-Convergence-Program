@@ -81,8 +81,9 @@ theorem originalNativeQuaternion_norm_one (g : GaugeGroup 2) :
         _ = 1 := h00
     apply Complex.ofReal_injective
     simpa only [Complex.ofReal_add, Complex.ofReal_one] using hcast
-  simpa [sourceQuaternionNormSq, originalNativeQuaternionCoords,
-    Complex.normSq_apply] using hnorm
+  rw [Complex.normSq_apply, Complex.normSq_apply] at hnorm
+  dsimp [sourceQuaternionNormSq, originalNativeQuaternionCoords]
+  nlinarith [hnorm]
 
 #print axioms originalNativeQuaternion_u
 #print axioms originalNativeQuaternion_v
