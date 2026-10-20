@@ -20,6 +20,7 @@ set_option maxHeartbeats 350000
 namespace FCP.BFSSS1V42
 noncomputable section
 
+open Matrix
 open FCP.BFSSS1V0
 open FCP.BFSSS1V40
 
