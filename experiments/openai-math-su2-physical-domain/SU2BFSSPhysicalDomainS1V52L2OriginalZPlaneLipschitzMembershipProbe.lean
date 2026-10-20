@@ -1,4 +1,4 @@
-import SU2BFSSPhysicalDomainS1V52L1OriginalZPlaneTwoVectorFactorizationProbe
+import SU2BFSSPhysicalDomainS1V52L1BOriginalSourceTwoCoordinateNormProbe
 import Mathlib.LinearAlgebra.CliffordAlgebra.SpinGroup
 
 /-!
@@ -31,7 +31,8 @@ open FCP.BFSSS1V52A
 open FCP.BFSSS1V52B1
 open FCP.BFSSS1V52B2
 open FCP.BFSSS1V52B3
-open FCP.BFSSS1V52L1
+open FCP.BFSSS1V52L1A
+open FCP.BFSSS1V52L1B
 
 private abbrev Q : QuadraticForm ℝ Source48Vector := source48Quadratic
 private abbrev C := CliffordAlgebra Q
@@ -40,12 +41,22 @@ private abbrev C := CliffordAlgebra Q
 with its inverse exactly equal to itself by Q(v)=1. -/
 noncomputable def sourceZPlaneFirstUnit (α : RealSpinBlock)
     (c s : ℝ) (hcs : c*c + s*s = 1) : Cˣ := by
-  let v : Source48Vector :=
-    c • sourceBlockColorAxis α 0 - s • sourceBlockColorAxis α 1
-  have hv : Q v = 1 := sourceZPlane_firstVector_unit α c s hcs
-  have hsq : CliffordAlgebra.ι Q v * CliffordAlgebra.ι Q v = (1 : C) := by
-    rw [CliffordAlgebra.ι_sq_scalar, hv, map_one]
-  exact ⟨CliffordAlgebra.ι Q v, CliffordAlgebra.ι Q v, hsq, hsq⟩
+  -- Use the literal original 48-Majorana source expression,
+  -- avoiding the let-bound local norm unification that Gate L1#1
+  -- proved too expensive for elaboration.
+  have hsq :
+      CliffordAlgebra.ι Q
+        (c • sourceBlockColorAxis α 0 - s • sourceBlockColorAxis α 1) *
+      CliffordAlgebra.ι Q
+        (c • sourceBlockColorAxis α 0 - s • sourceBlockColorAxis α 1) =
+      (1 : C) := by
+    rw [CliffordAlgebra.ι_sq_scalar,
+      sourceZPlane_firstVector_unit α c s hcs, map_one]
+  exact ⟨CliffordAlgebra.ι Q
+            (c • sourceBlockColorAxis α 0 - s • sourceBlockColorAxis α 1),
+         CliffordAlgebra.ι Q
+            (c • sourceBlockColorAxis α 0 - s • sourceBlockColorAxis α 1),
+         hsq, hsq⟩
 
 theorem sourceZPlaneFirstUnit_coe (α : RealSpinBlock)
     (c s : ℝ) (hcs : c*c + s*s = 1) :
