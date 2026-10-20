@@ -76,7 +76,7 @@ jobs:
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7B3NativeEulerWitnessSpinHomProbe.lean")" = 8f191d211d3f38497366f87263022096f658a689
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C2NativeOriginalSU2ZeroSafeEulerPolarProbe.lean")" = 530648447820ad001fdc66dad1c100c03e0c13cd
           candidate="$r/SU2BFSSPhysicalDomainS1V52L7C3UnitQuaternionToOriginalNativeSU2Probe.lean"
-          expected=7d82668c0bf544ccd1ff45e8356eb8fc81b9582a
+          expected=f35b13579c8c9d3269161c4ff82c433cc3d1eef7
           test -s "$candidate"
           committed="$(git rev-parse "HEAD:$candidate")"
           worktree_filtered="$(git hash-object "$candidate")"
@@ -182,7 +182,7 @@ jobs:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-s1v52l7c3-original-quat-to-native-su2-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-s1v52l7c3-original-quat-to-native-su2-v3-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
 
       - name: Preserve source unit quaternion native SU2 diagnostic logs
         if: always()
