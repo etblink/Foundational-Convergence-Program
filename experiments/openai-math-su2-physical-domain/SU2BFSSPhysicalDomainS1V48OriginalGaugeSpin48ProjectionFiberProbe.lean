@@ -88,7 +88,7 @@ theorem sourceSpin48CoversActualGauge_inv
           ((FCP.BFSSSU2PhysicalDomainS1J.sourceRealMajoranaMatrix g⁻¹).mulVec v) :=
         hs _
       _ = v := by
-        rw [← Matrix.mulVec_mulVec,
+        rw [Matrix.mulVec_mulVec,
           ← FCP.BFSSSU2PhysicalDomainS1J.sourceRealMajoranaMatrix_mul,
           mul_inv_cancel,
           FCP.BFSSSU2PhysicalDomainS1J.sourceRealMajoranaMatrix_one,
