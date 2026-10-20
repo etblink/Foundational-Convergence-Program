@@ -50,7 +50,7 @@ jobs:
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe.lean")" = 22f3101b243a7b7857d9597b547322174d9281c8
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe.lean")" = 6d15a3a76625b3677f132c544f71e5d5eb1dc93c
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe.lean")" = 4ae8b38d5601b8c57f09e94c523beb9b4598dcb1
-          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52B1SourceEvenCliffordQuaternionTableProbe.lean")" = ad67d8eac5a8147f7ae099c3d9b913db2038f53a
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52ASourceEvenCliffordQuaternionTableProbe.lean")" = ad67d8eac5a8147f7ae099c3d9b913db2038f53a
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52B1SourcePauliQuaternionMatrixMultiplicationProbe.lean")" = 8a5558fa127893b6bbb971a8047df4840d74e760
           echo S1V52B1_ORIGINAL_GEOMETRY_TOOLCHAIN_AND_SOURCE_SHA_PASS
 
