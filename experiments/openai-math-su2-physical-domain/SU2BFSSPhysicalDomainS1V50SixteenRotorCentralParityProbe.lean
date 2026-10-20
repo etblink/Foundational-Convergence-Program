@@ -100,7 +100,7 @@ theorem sourceOrderedColorRotors_square
         _ = (-1 : C) * ((-1 : C) ^ rest.length) := by rw [hr, ht]
         _ = (-1 : C) ^ (rest.length + 1) := by
           rw [pow_succ]
-          exact mul_comm (-1 : C) ((-1 : C) ^ rest.length)
+          simp only [neg_one_mul, mul_neg_one]
 
 /-- The genuine independent SIXTEEN-factor Spin(48) source rotor has
 exact square +1 IN THE ACTUAL SPIN GROUP. This uses 16 even parity. -/
