@@ -33,7 +33,7 @@ theorem source48ActualGeneratorPreimage_gradeDetParity
   change (u : A) ∈ Set.range (CliffordAlgebra.ι Q) at hu
   obtain ⟨a, ha⟩ := hu
   letI : Invertible (CliffordAlgebra.ι Q a) := by
-    rw [← ha]
+    rw [ha]
     exact u.invertible
   letI : Invertible (Q a) :=
     CliffordAlgebra.invertibleOfInvertibleι Q a
@@ -44,7 +44,7 @@ theorem source48ActualGeneratorPreimage_gradeDetParity
     apply Subtype.ext
     apply Units.ext
     change (u : A) = CliffordAlgebra.ι Q a
-    exact ha
+    exact ha.symm
   rw [hsame]
   exact FCP.BFSSS1V43.source48LipschitzGradeDetParity_generator a
 
