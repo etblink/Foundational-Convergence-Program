@@ -39,7 +39,7 @@ theorem source48_rankOne_mulVec
     exact Matrix.replicateRow_mulVec_eq_const (ι := Fin 1) (-ell) b
   rw [hrow]
   ext i
-  simp only [Matrix.mulVec, Matrix.dotProduct, Matrix.replicateCol_apply,
+  simp only [Matrix.mulVec, dotProduct, Matrix.replicateCol_apply,
     Fin.sum_univ_one, Pi.smul_apply, smul_eq_mul]
   ring
 
