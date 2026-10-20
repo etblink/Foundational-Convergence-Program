@@ -1,0 +1,12 @@
+# S1V52 L7C3 Gate #2 — RED, determinant ring-normalization order
+
+**Disposition:** `L7C3_GATE2_RED__ONLY_DETERMINANT_COMPLEX_I_SQUARED_GOAL__CONSTRUCTOR_REPAIR_PASSED__SOURCE_PINS_PASS__L7C2_CACHE_RESTORED__NO_NEW_ROOTS`.
+
+- [Gate #2 GitHub Actions run #39495563905](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39495563905), job `118879603917`, FAILURE on `1e26d8694c0b7eb8241eb1a1dddb6150671c347d`.
+- Exact updated L7C3 source Git blob `7d82668c0bf544ccd1ff45e8356eb8fc81b9582a`; frozen native type `OAI.BFSSQuantum.GaugeGroup 2`, original positive-i B1 source quaternion matrix, exact source pins, Lean 4.34.1 and Mathlib pin all PASS. L7C2 cached source .olean closure restored; failure occurred at Lean.
+- The former constructor equality unknown-identifier / no-goals error is **absent**: replacing `SourceQuaternionCoords.mk.injEq.mpr` with `cases p; simp [originalNativeQuaternionCoords, originalNativeOfUnitQuaternion, sourceQuaternionColorMatrix]` compiled without compiler diagnostics.
+- Only error is line 73:46, the determinant target `↑p.a ^ 2 - ↑p.b ^ 2 * Complex.I ^ 2 - Complex.I ^ 2 * ↑p.d ^ 2 + ↑p.c ^ 2 = ↑p.a ^ 2 + ↑p.b ^ 2 + ↑p.c ^ 2 + ↑p.d ^ 2`. The preceding `simp [.. Complex.I_sq] <;> ring` did **not** rewrite the problem because `ring` subsequently changed products of `I` into `I ^ 2`. The compiler warns the `Complex.I_sq` simp argument is unused. `ring` normalization needs to occur BEFORE `I^2=-1` rewriting, then remaining algebra can be solved by `ring`. Do not repeat merely including `Complex.I_sq` in the first `simp`.
+- First two source declarations `originalQuaternionComplexMatrix_adjugate`, `originalSourceQuaternionColorMatrix_complex` had the three permitted axioms only. The determinant and dependent subsequent definitions reported `sorryAx`. Zero of six roots accepted; accepted S1V52 local count remains **106**, no L7C3 cache saved.
+- Next isolated Gate #3 must preserve exact source/mathlib BFSS pins, L7C2 cached closure, six exact root identities, allowed-axiom/no-sorry validator, and fresh unique cache key. Fix only the determinant tactic order; do not change the original normalized quaternion matrix, source gauge group, theorem types or physical assertions.
+
+This is negative knowledge about Lean tactics, **not** a mathematical contradiction. The unconditional original `GaugeGroup 2 →* spinGroup source48Quadratic` remains open.
