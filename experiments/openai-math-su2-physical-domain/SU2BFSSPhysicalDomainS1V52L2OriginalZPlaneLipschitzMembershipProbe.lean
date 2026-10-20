@@ -1,4 +1,5 @@
 import SU2BFSSPhysicalDomainS1V52L1OriginalZPlaneTwoVectorFactorizationProbe
+import Mathlib.LinearAlgebra.CliffordAlgebra.SpinGroup
 
 /-!
 S1V52-L2: SOURCE-EXACT candidate genuine LipschitzGroup membership
