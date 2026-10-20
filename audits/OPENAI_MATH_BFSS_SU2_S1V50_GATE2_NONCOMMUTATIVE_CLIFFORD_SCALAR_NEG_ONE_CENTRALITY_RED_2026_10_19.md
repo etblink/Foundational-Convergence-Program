@@ -1,0 +1,14 @@
+# S1V50 Gate #2 RED — typed Cliff(48) multiplication is NOT commutative; scalar -1 centrality required
+
+**Disposition:** `S1V50_G2_TWO_TRUE_SOURCE_CLIFFORD_ROTOR_SQUARE_ROOTS_AXIOM_CLEAN__NAMESPACE_AND_LIST_MAP_REPAIRED__COMM_MAGMA_C_CANNOT_BE_SYNTHESIZED__NONCOMMUTATIVE_ALGEBRA__DEPENDENT_SORRYAX__NO_CACHE`.
+
+- [S1V50 strict Gate #2 #39374378442](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39374378442), job `118469094607`, **RED**. Exact source/workflow commit `aea7a1c6b0bd3bfa78ed4f7946b8e100d4bd49cd`; candidate repair `433f9185556cc244dfdfa1990dead894a82adafc`; candidate blob `ee3511e321c10208a3bde4e224e683db265c3657`.
+- Pinned original BFSS math `adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean `4.34.1`, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612` verified; previous S1V49 cache hit and exact nonempty original `.olean` dependencies verified. Source/CI validator unchanged.
+- TWO true source original roots now compile with permitted axioms only: `FCP.BFSSS1V50.sourceOrthogonalSpinPair_square_neg_one` and `sourceColorPlaneRotor_square_neg_one`. These establish local Clifford square `-1` and its genuine original 16-block specialization. The S1V6 namespace correction WORKED.
+- The earlier S1V50 Gate #1 list `List.map_map` normalization failure disappeared after exact typed `Function.comp_def` rewrite. No new error at that proof site.
+- Earliest remaining failure, line 103, is **mathematically significant for proof engineering**: `exact mul_comm (-1 : C) ((-1 : C) ^ rest.length)` requires `CommMagma C`. **No such instance exists** because `C = CliffordAlgebra source48Quadratic` is not generally commutative. Gate #1's untyped `mul_comm _ _` first hid the false assumption behind unresolved metavariables; typing arguments in Gate #2 revealed the actual noncommutative structure. Do NOT posit `CommMagma C` or use global `mul_comm` on Clifford elements.
+- The needed specific equality **is still true**: `(-1 : C) * ((-1 : C)^n) = ((-1 : C)^n) * (-1 : C)` because `(-1)*x = -x = x*(-1)` in any ring, including noncommutative Clifford algebra. Prove only this exact scalar-centrality fact via pinned `neg_one_mul` and `mul_neg_one` (after `pow_succ`). No theorem, signs, original source labels, or assumptions change.
+- Downstream list-product, 16-square and historical quarter-square roots inherit `sorryAx`, and whole S1V50 module is **not accepted**. Cache save skipped, failure artifact `bfss-s1v50-sixteen-parity-39374378442` ID `12243265587` uploaded.
+- Strict Gate #3: replace ONLY final list-induction scalar sign reordering; no alteration of the already compiled first two true original roots or independent geometry/Spin definitions.
+
+No universal continuous SU2→Spin48 lift, abstract covering space, or BFSS positive-spectrum/mass gap follows from this conditional parity proof, even if Gate #3 qualifies. Main, math upstream, draft PR #25 remain unchanged.
