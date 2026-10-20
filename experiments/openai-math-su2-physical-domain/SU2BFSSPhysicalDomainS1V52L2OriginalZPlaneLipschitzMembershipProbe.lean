@@ -1,4 +1,4 @@
-import SU2BFSSPhysicalDomainS1V52L1BOriginalSourceTwoCoordinateNormProbe
+import SU2BFSSPhysicalDomainS1V52L1DSourceZPlaneDotFirstNormProbe
 import Mathlib.LinearAlgebra.CliffordAlgebra.SpinGroup
 
 /-!
@@ -32,7 +32,7 @@ open FCP.BFSSS1V52B1
 open FCP.BFSSS1V52B2
 open FCP.BFSSS1V52B3
 open FCP.BFSSS1V52L1A
-open FCP.BFSSS1V52L1B
+open FCP.BFSSS1V52L1D
 
 private abbrev Q : QuadraticForm ℝ Source48Vector := source48Quadratic
 private abbrev C := CliffordAlgebra Q
