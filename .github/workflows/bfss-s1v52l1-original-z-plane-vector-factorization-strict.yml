@@ -63,7 +63,7 @@ jobs:
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C2EOriginalNativeGaugeCliffordUnitHomProbe.lean")" = 0e9cd58f8e6cb3e63a3503a89c2986914a28d3b0
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52S1Original48CliffordQuaternionStarUnitarityProbe.lean")" = 2e817387d174c1962b70675220347dafa5efc351
           test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52S2Original48CliffordQuaternionEvennessProbe.lean")" = 0aae567e44768e2e1664ae3e79f8ae1f9a54da77
-          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1OriginalZPlaneTwoVectorFactorizationProbe.lean")" = 2eac8424336459f96120ce1a6752e5a44899c835
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1OriginalZPlaneTwoVectorFactorizationProbe.lean")" = c6f9850cb524372ee98a13f74ed5ada202f0bf55
           echo S1V52L1_EXACT_ORIGINAL_48_SOURCE_AND_MATHLIB_SHA_PASS
 
       - name: Reclaim disposable runner disk
