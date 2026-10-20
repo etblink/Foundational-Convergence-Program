@@ -66,7 +66,8 @@ theorem source48_rankOneConjugationMatrix_det
     (h : ell ⬝ᵥ a = (2 : ℝ)) :
     (source48_rankOneConjugationMatrix a ell).det = (-1 : ℝ) := by
   unfold source48_rankOneConjugationMatrix
-  rw [Matrix.det_neg, Matrix.det_one_add_replicateCol_mul_replicateRow,
+  rw [Matrix.det_neg,
+    Matrix.det_one_add_replicateCol_mul_replicateRow (ι := Fin 1),
     neg_dotProduct, h]
   norm_num [Source48Label, Fintype.card_prod]
 
