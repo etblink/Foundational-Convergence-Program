@@ -38,13 +38,32 @@ theorem finitePositiveIZDiagonal_exp_quaternion (θ : ℝ) :
         (![((θ : ℂ) * Complex.I), -((θ : ℂ) * Complex.I)] : Fin 2 → ℂ)) =
     sourceQuaternionColorMatrix
       (⟨Real.cos θ, Real.sin θ, 0, 0⟩ : SourceQuaternionCoords) := by
-  rw [Matrix.exp_diagonal, Pi.exp_def]
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [sourceQuaternionColorMatrix, Matrix.diagonal_apply,
-      Complex.exp_eq_exp_ℂ, Complex.exp_ofReal_mul_I,
-      ← Complex.ofReal_neg, ← Complex.ofReal_mul] <;>
+  let d : Fin 2 → ℂ :=
+    ![((θ : ℂ) * Complex.I), -((θ : ℂ) * Complex.I)]
+  have hp : Complex.exp ((θ : ℂ) * Complex.I) =
+      (Real.cos θ : ℂ) + (Real.sin θ : ℂ) * Complex.I :=
+    Complex.exp_ofReal_mul_I θ
+  have hn : Complex.exp (-((θ : ℂ) * Complex.I)) =
+      (Real.cos θ : ℂ) - (Real.sin θ : ℂ) * Complex.I := by
+    rw [show -((θ : ℂ) * Complex.I) =
+          (((-θ : ℝ) : ℂ) * Complex.I) by push_cast; ring]
+    rw [Complex.exp_ofReal_mul_I]
+    simp only [Real.cos_neg, Real.sin_neg, Complex.ofReal_neg]
     ring
+  calc
+    NormedSpace.exp (Matrix.diagonal
+        (![((θ : ℂ) * Complex.I), -((θ : ℂ) * Complex.I)] :
+           Fin 2 → ℂ)) =
+      Matrix.diagonal (fun i => Complex.exp (d i)) := by
+        change NormedSpace.exp (Matrix.diagonal d) = _
+        rw [Matrix.exp_diagonal, Pi.exp_def]
+        simp only [Complex.exp_eq_exp_ℂ]
+    _ = sourceQuaternionColorMatrix
+        (⟨Real.cos θ, Real.sin θ, 0, 0⟩ : SourceQuaternionCoords) := by
+          rw [sourcePositiveIZQuaternionMatrix]
+          ext i j
+          fin_cases i <;> fin_cases j <;>
+            simp [d, Matrix.diagonal_apply, hp, hn]
 
 #print axioms finitePositiveIZDiagonal_exp_quaternion
 end
