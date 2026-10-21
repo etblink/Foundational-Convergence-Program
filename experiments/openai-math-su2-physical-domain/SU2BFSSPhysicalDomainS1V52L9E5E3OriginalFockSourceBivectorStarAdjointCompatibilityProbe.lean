@@ -63,9 +63,26 @@ theorem originalFockCliffordAlgHom_star_sourceBivector
               originalFockCliffordAlgHom_generator]
     _ = star (originalFockGammaRealLinear u *
           originalFockGammaRealLinear v) := by
-            rw [star_mul,
-              (originalFockGammaRealLinear_selfAdjoint u).star_eq,
-              (originalFockGammaRealLinear_selfAdjoint v).star_eq]
+            -- Gate E2 negative knowledge: on original Fock operators
+            -- generic star_mul can pick the wrong star instance.
+            -- Use the exact Hilbert-adjoint anti-multiplicativity.
+            have hadj :
+                ContinuousLinearMap.adjoint
+                    (originalFockGammaRealLinear u *
+                      originalFockGammaRealLinear v) =
+                  originalFockGammaRealLinear v *
+                    originalFockGammaRealLinear u := by
+              change ContinuousLinearMap.adjoint
+                  (originalFockGammaRealLinear u ∘L
+                    originalFockGammaRealLinear v) =
+                originalFockGammaRealLinear v ∘L
+                  originalFockGammaRealLinear u
+              rw [ContinuousLinearMap.adjoint_comp,
+                (originalFockGammaRealLinear_selfAdjoint v).adjoint_eq,
+                (originalFockGammaRealLinear_selfAdjoint u).adjoint_eq]
+            exact (ContinuousLinearMap.star_eq_adjoint
+              (originalFockGammaRealLinear u *
+                originalFockGammaRealLinear v)).trans hadj |>.symm
     _ = star (originalFockCliffordAlgHom
           (CliffordAlgebra.ι Q u * CliffordAlgebra.ι Q v)) := by
             rw [map_mul, originalFockCliffordAlgHom_generator,
