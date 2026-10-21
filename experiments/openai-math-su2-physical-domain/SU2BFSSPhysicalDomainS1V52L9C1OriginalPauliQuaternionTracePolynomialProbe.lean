@@ -45,16 +45,17 @@ theorem originalPauliQuaternion_trace_polynomial
         (sourceQuaternionColorMatrix p * pauli A *
           (sourceQuaternionColorMatrix p).conjTranspose)) =
       ((2 : ℝ) * originalQuaternionAdjointPolynomial p B A : ℂ) := by
-  -- Gate #3 left the literal row-vector product (ᵥ*) unevaluated.
-  -- Expand BOTH vecMul and dotProduct, in addition to mul_apply,
-  -- before reducing complex real/imag parts to real polynomial ring.
-  -- The Pauli basis, native quaternion matrix, and theorem are unchanged.
+  -- Gate #4 reduced all vecMul/dotProduct operations to actual
+  -- two-entry vectors. Their values still sat under vecHead/vecTail
+  -- and the bundled complex starRingEnd. Reduce those EXACT
+  -- evaluators as well, then run commutative real polynomial ring.
   fin_cases B <;> fin_cases A <;>
     apply Complex.ext <;>
     simp [originalQuaternionAdjointPolynomial, pauli,
       sourceQuaternionColorMatrix,
       Matrix.trace, Matrix.mul_apply, Matrix.vecMul, Matrix.dotProduct,
-      Matrix.conjTranspose_apply,
+      Matrix.vecHead, Matrix.vecTail, Matrix.conjTranspose_apply,
+      starRingEnd_apply,
       Fin.sum_univ_two, Complex.star_def, pow_two,
       Complex.mul_re, Complex.mul_im, Complex.add_re, Complex.add_im,
       Complex.sub_re, Complex.sub_im, Complex.neg_re, Complex.neg_im,
