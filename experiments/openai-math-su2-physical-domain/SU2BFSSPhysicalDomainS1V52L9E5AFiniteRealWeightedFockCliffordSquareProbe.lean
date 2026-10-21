@@ -42,11 +42,27 @@ theorem finiteRealWeightedFockClifford_square
     (∑ i ∈ s, c i * c i) • (1 : FockOp) := by
   classical
   let X : ι → FockOp := fun i => c i • γ i
+  -- L9E5A Gate #1: REAL coefficient action on an original complex-
+  -- linear Fock operator does not synthesize a direct
+  -- IsScalarTower ℝ FockOp FockOp / SMulCommClass instance.
+  -- Transport the actual real multiplication through the pinned
+  -- Complex.coe_smul lemma; then use the existing qualified complex
+  -- smul_mul_smul operator instance without changing any coefficient.
+  have hreal_mul (a b : ℝ) (x y : FockOp) :
+      (a • x) * (b • y) = (a * b) • (x * y) := by
+    calc
+      (a • x) * (b • y) =
+          ((a : ℂ) • x) * ((b : ℂ) • y) := by
+            simp only [Complex.coe_smul]
+      _ = ((a : ℂ) * (b : ℂ)) • (x * y) := by
+            rw [smul_mul_smul]
+      _ = (a * b) • (x * y) := by
+            rw [← Complex.ofReal_mul, Complex.coe_smul]
   have hdiagX (i : ι) :
       X i * X i = (c i * c i) • (1 : FockOp) := by
     change (c i • γ i) * (c i • γ i) =
       (c i * c i) • (1 : FockOp)
-    rw [smul_mul_smul, hdiag i]
+    rw [hreal_mul, hdiag i]
   have hcrossX (i j : ι) (hij : i ≠ j) :
       X i * X j + X j * X i = 0 := by
     change (c i • γ i) * (c j • γ j) +
@@ -56,16 +72,19 @@ theorem finiteRealWeightedFockClifford_square
           (c j • γ j) * (c i • γ i) =
         (c i * c j) • (γ i * γ j) +
           (c i * c j) • (γ j * γ i) := by
-            rw [smul_mul_smul, smul_mul_smul,
+            rw [hreal_mul (c i) (c j) (γ i) (γ j),
+              hreal_mul (c j) (c i) (γ j) (γ i),
               mul_comm (c j) (c i)]
       _ = (c i * c j) • (γ i * γ j + γ j * γ i) :=
         (smul_add (c i * c j) (γ i * γ j) (γ j * γ i)).symm
-      _ = 0 := by rw [hanti i j hij]; simp
+      _ = 0 := by rw [hanti i j hij, smul_zero]
   have hsum (t : Finset ι) :
       (∑ i ∈ t, X i) * (∑ i ∈ t, X i) =
         (∑ i ∈ t, c i * c i) • (1 : FockOp) := by
     induction t using Finset.induction_on with
-    | empty => simp
+    | empty =>
+        simp only [Finset.sum_empty, zero_mul]
+        exact (zero_smul ℝ (1 : FockOp)).symm
     | @insert i t hi ih =>
         have hcrossSum :
             X i * (∑ j ∈ t, X j) +
