@@ -60,7 +60,14 @@ theorem originalFockGammaRealLinear_selfAdjoint
         exact IsSelfAdjoint.zero FockOp
     | @insert p s hp ih =>
         rw [Finset.sum_insert hp]
-        exact (hterm p).add ih
+        -- Avoid overloaded IsSelfAdjoint.add elaborating a second
+        -- incompatible star instance for original Fock endomorphisms.
+        -- Unfold ONLY the actual target operator star equality.
+        change star ((v p : ℂ) • γ p +
+          s.sum (fun q => (v q : ℂ) • γ q)) =
+          ((v p : ℂ) • γ p +
+            s.sum (fun q => (v q : ℂ) • γ q))
+        rw [star_add, (hterm p).star_eq, ih.star_eq]
   have hrealToComplex :
       (∑ p : SourceLabel, (v p) • γ p) =
         (∑ p : SourceLabel, (v p : ℂ) • γ p) := by
