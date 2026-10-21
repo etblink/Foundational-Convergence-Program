@@ -54,15 +54,13 @@ theorem originalNormalizedFockMajorana_sq_one
     dsimp [t]
     simpa using (pairedTheta_CAR
       (spinPairEquiv.symm α) (spinPairEquiv.symm α) A A)
+  -- The pinned Mathlib two_smul lemma converts the complex
+  -- scalar 2 to the two identical ORIGINAL Fock operator products,
+  -- directly matching the accepted delta-one CAR. Avoid rw
+  -- [add_smul] on an already elaborated scalar expression.
   have hdouble : (2 : ℂ) • (t * t) =
-      (1 : Fermion 2 →L[ℂ] Fermion 2) := by
-    calc
-      (2 : ℂ) • (t * t) =
-          ((1 : ℂ) + 1) • (t * t) := by norm_num
-      _ = (1 : ℂ) • (t * t) + (1 : ℂ) • (t * t) := by
-        rw [add_smul]
-      _ = t * t + t * t := by simp
-      _ = 1 := hcar
+      (1 : Fermion 2 →L[ℂ] Fermion 2) :=
+    (two_smul ℂ (t * t)).trans hcar
   have hsqrt : ((↑(Real.sqrt 2) : ℂ) *
       (↑(Real.sqrt 2) : ℂ)) = (2 : ℂ) := by
     exact_mod_cast Real.mul_self_sqrt (by norm_num : (0 : ℝ) ≤ 2)
