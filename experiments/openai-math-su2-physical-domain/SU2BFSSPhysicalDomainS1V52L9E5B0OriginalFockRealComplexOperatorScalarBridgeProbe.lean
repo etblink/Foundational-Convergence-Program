@@ -30,10 +30,10 @@ No surrogate operator module or axiom is introduced. -/
 theorem originalFockOperator_real_smul_eq_complex_smul
     (a : ℝ) (T : FockOp) :
     a • T = (a : ℂ) • T := by
-  ext ψ
-  -- Establish equality on the original actual Fock vectors,
-  -- not by asking Lean for a nonexistent direct real/endomorphism
-  -- scalar-tower multiplication typeclass.
+  -- Gate #1's broad `ext ψ` over-expanded into PiLp coordinates.
+  -- Stop specifically at ContinuousLinearMap extensionality.
+  apply ContinuousLinearMap.ext
+  intro ψ
   simp only [ContinuousLinearMap.smul_apply]
   exact (Complex.coe_smul a (T ψ)).symm
 
