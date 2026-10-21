@@ -69,21 +69,18 @@ noncomputable def originalFockGammaRealLinear :
             (sourceBlockColorEquiv.symm p).2) := by
           apply Finset.sum_congr rfl
           intro p hp
-          exact add_smul (v p) (w p) _
+          exact add_smul (v p) (w p)
+            (originalNormalizedFockMajorana
+              (sourceBlockColorEquiv.symm p).1
+              (sourceBlockColorEquiv.symm p).2)
       _ = _ := Finset.sum_add_distrib
   map_smul' := by
     intro c v
-    -- Both sides are the SAME original finite sum after reducing
-    -- real pointwise scalar multiplication and RingHom.id ℝ.
-    change (∑ p : SourceLabel, (c * v p : ℝ) •
-        originalNormalizedFockMajorana
-          (sourceBlockColorEquiv.symm p).1
-          (sourceBlockColorEquiv.symm p).2) =
-      (∑ p : SourceLabel, (c * v p : ℝ) •
-        originalNormalizedFockMajorana
-          (sourceBlockColorEquiv.symm p).1
-          (sourceBlockColorEquiv.symm p).2)
-    rfl
+    -- Normalize the ACTUAL map_smul' target rather than
+    -- invoking change across Pi.smul_apply, RingHom.id ℝ and
+    -- Finset.smul_sum, none of which is definitional reduction.
+    simp only [Pi.smul_apply, RingHom.id_apply,
+      Finset.smul_sum, smul_smul, smul_eq_mul]
 
 /-- This genuine real-linear Fock generator map sends each
 ORIGINAL source 48-real Majorana coordinate axis to the
@@ -109,22 +106,14 @@ theorem originalFockGammaRealLinear_sourceAxis
     rw [hlabel]
   · intro p hp hneq
     have hzero : sourceBlockColorAxis α A p = 0 := by
-      change (if p = sourceBlockColorLabel α A
-        then (1 : ℝ) else 0) = 0
+      -- L9E4 Gate #2: sourceBlockColorAxis is a Pi.single
+      -- source coordinate, not syntactically its if expression.
+      simp only [sourceBlockColorAxis, Pi.single_apply]
       exact if_neg hneq
-    change (sourceBlockColorAxis α A p) •
-      originalNormalizedFockMajorana
-        (sourceBlockColorEquiv.symm p).1
-        (sourceBlockColorEquiv.symm p).2 = 0
-    calc
-      (sourceBlockColorAxis α A p) •
-          originalNormalizedFockMajorana
-            (sourceBlockColorEquiv.symm p).1
-            (sourceBlockColorEquiv.symm p).2 =
-        (0 : ℝ) • originalNormalizedFockMajorana
-          (sourceBlockColorEquiv.symm p).1
-          (sourceBlockColorEquiv.symm p).2 := by rw [hzero]
-      _ = 0 := zero_smul ℝ _
+    -- The original target is an ℝ-scaled original Fock operator.
+    -- Let simp see its exact operator type instead of an
+    -- unconstrained zero_smul metavariable.
+    simp [hzero]
   · intro hnot
     exact False.elim (hnot (Finset.mem_univ _))
 
