@@ -26,6 +26,7 @@ noncomputable section
 
 open FCP.BFSSS1V0
 open FCP.BFSSS1V52L9E5F20B
+open scoped TensorProduct
 
 private abbrev Q : QuadraticForm ℝ Source48Vector := source48Quadratic
 private abbrev A := CliffordAlgebra (Q.baseChange ℂ)
