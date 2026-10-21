@@ -45,9 +45,9 @@ theorem originalNativeSameBlockSpinClifford_axis0
     (α : RealSpinBlock) (g : GaugeGroup 2) :
     ((originalNativeGaugeSpinHom α g : spinGroup Q) : C) *
       E α 0 * star ((originalNativeGaugeSpinHom α g : spinGroup Q) : C) =
-      (adjointColorMatrix g 0 0) • E α 0 +
-      (adjointColorMatrix g 1 0) • E α 1 +
-      (adjointColorMatrix g 2 0) • E α 2 := by
+      (adjointColorMatrix g (0 : Fin 3) (0 : Fin 3)) • E α 0 +
+      (adjointColorMatrix g (1 : Fin 3) (0 : Fin 3)) • E α 1 +
+      (adjointColorMatrix g (2 : Fin 3) (0 : Fin 3)) • E α 2 := by
   simp only [originalNativeGaugeSpinHom_coe,
     originalNativeAdjointColorMatrix_eq_quaternion]
   simpa [originalQuaternionAdjointPolynomial] using
@@ -59,9 +59,9 @@ theorem originalNativeSameBlockSpinClifford_axis1
     (α : RealSpinBlock) (g : GaugeGroup 2) :
     ((originalNativeGaugeSpinHom α g : spinGroup Q) : C) *
       E α 1 * star ((originalNativeGaugeSpinHom α g : spinGroup Q) : C) =
-      (adjointColorMatrix g 0 1) • E α 0 +
-      (adjointColorMatrix g 1 1) • E α 1 +
-      (adjointColorMatrix g 2 1) • E α 2 := by
+      (adjointColorMatrix g (0 : Fin 3) (1 : Fin 3)) • E α 0 +
+      (adjointColorMatrix g (1 : Fin 3) (1 : Fin 3)) • E α 1 +
+      (adjointColorMatrix g (2 : Fin 3) (1 : Fin 3)) • E α 2 := by
   simp only [originalNativeGaugeSpinHom_coe,
     originalNativeAdjointColorMatrix_eq_quaternion]
   simpa [originalQuaternionAdjointPolynomial] using
@@ -73,9 +73,9 @@ theorem originalNativeSameBlockSpinClifford_axis2
     (α : RealSpinBlock) (g : GaugeGroup 2) :
     ((originalNativeGaugeSpinHom α g : spinGroup Q) : C) *
       E α 2 * star ((originalNativeGaugeSpinHom α g : spinGroup Q) : C) =
-      (adjointColorMatrix g 0 2) • E α 0 +
-      (adjointColorMatrix g 1 2) • E α 1 +
-      (adjointColorMatrix g 2 2) • E α 2 := by
+      (adjointColorMatrix g (0 : Fin 3) (2 : Fin 3)) • E α 0 +
+      (adjointColorMatrix g (1 : Fin 3) (2 : Fin 3)) • E α 1 +
+      (adjointColorMatrix g (2 : Fin 3) (2 : Fin 3)) • E α 2 := by
   simp only [originalNativeGaugeSpinHom_coe,
     originalNativeAdjointColorMatrix_eq_quaternion]
   simpa [originalQuaternionAdjointPolynomial] using
