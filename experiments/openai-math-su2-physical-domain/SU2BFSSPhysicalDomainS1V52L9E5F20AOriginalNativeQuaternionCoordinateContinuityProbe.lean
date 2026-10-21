@@ -1,6 +1,5 @@
 import SU2BFSSPhysicalDomainS1V52L9E5F19AOriginalNativeFockFullL2GaugePhysicalBridgeProbe
 import SU2BFSSPhysicalDomainS1V52L7C7OriginalNativeEulerWitnessAndSpinHomProbe
-import SU2BFSSPhysicalDomainS1MSourceSO48GaugeContinuityProbe
 
 /-!
 S1V52-L9E5F20A — exact native quaternion-coordinate continuity
