@@ -44,12 +44,15 @@ theorem originalNativeSameBlockSpin48Vector_axis_all
       (originalNativeGaugeSpinHom α g) (sourceBlockColorAxis α A) =
       ∑ B : Fin 3,
         (adjointColorMatrix g B A) • sourceBlockColorAxis α B := by
+  -- Fin.cases exposes constructor proof terms ⟨0, _⟩, etc.
+  -- Full Fin simplification identifies these with the *original*
+  -- numeral-index source theorem, not an altered color representation.
   fin_cases A
-  · simpa only [Fin.sum_univ_three] using
+  · simpa [Fin.sum_univ_three] using
       (originalNativeSameBlockSpin48Vector_axis0 α g)
-  · simpa only [Fin.sum_univ_three] using
+  · simpa [Fin.sum_univ_three] using
       (originalNativeSameBlockSpin48Vector_axis1 α g)
-  · simpa only [Fin.sum_univ_three] using
+  · simpa [Fin.sum_univ_three] using
       (originalNativeSameBlockSpin48Vector_axis2 α g)
 
 /-- Crucial induction invariant for ordered sixteen-block projection:
@@ -62,10 +65,15 @@ theorem originalNativeDisjointBlockSpin48Vector_fixes_colorCombination
       (originalNativeGaugeSpinHom β g)
       (∑ A : Fin 3, c A • sourceBlockColorAxis α A) =
       ∑ A : Fin 3, c A • sourceBlockColorAxis α A := by
+  -- First distribute the genuine source Spin48 action over the
+  -- three REAL color components. The distinct-block hypothesis
+  -- must be passed explicitly in each source fixation rewrite.
   simp only [Fin.sum_univ_three,
     FCP.BFSSS1V31.sourceSpin48VectorAction_add,
-    FCP.BFSSS1V32.sourceSpin48VectorAction_smul,
-    originalNativeDisjointBlockSpin48Vector_fixes]
+    FCP.BFSSS1V32.sourceSpin48VectorAction_smul]
+  rw [originalNativeDisjointBlockSpin48Vector_fixes α β hab 0 g,
+      originalNativeDisjointBlockSpin48Vector_fixes α β hab 1 g,
+      originalNativeDisjointBlockSpin48Vector_fixes α β hab 2 g]
 
 #print axioms originalNativeSameBlockSpin48Vector_axis_all
 #print axioms originalNativeDisjointBlockSpin48Vector_fixes_colorCombination
