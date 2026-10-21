@@ -59,6 +59,10 @@ theorem originalNativeSixteenFock_normalizedMajorana_color_covariance
   simpa only [map_sum, map_smul,
     originalFockGammaRealLinear_sourceAxis] using h
 
+-- Qualified original-source imported lemmas, independently checked
+-- here but NOT counted as new F16 roots.
+#print axioms FCP.BFSSS1V52L9D8.originalSourceRealMajoranaMatrix_mulVec_sourceAxis
+#print axioms FCP.BFSSS1V52L9E4.originalFockGammaRealLinear_sourceAxis
 #print axioms originalNativeSixteenFock_normalizedMajorana_color_covariance
 
 end
