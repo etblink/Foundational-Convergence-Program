@@ -1,5 +1,6 @@
 import SU2BFSSPhysicalDomainS1V52L9E5A2FiniteComplexWeightedFockCliffordSquareProbe
 import SU2BFSSPhysicalDomainS1V52L9E5B0OriginalFockRealComplexOperatorScalarBridgeProbe
+import Mathlib.Basic.Complex.BigOperators
 
 /-!
 L9E5B — STAGED, UNQUALIFIED exact original BFSS all-vector
@@ -65,19 +66,24 @@ theorem originalFockGammaRealLinear_sq (v : Source48Vector) :
         originalNormalizedFockMajorana
           (sourceBlockColorEquiv.symm p).1
           (sourceBlockColorEquiv.symm p).2 = 0
-    simpa only [if_neg hnot, zero_smul] using
-      (originalNormalizedFockMajorana_pairwise_CAR
-        (sourceBlockColorEquiv.symm p).1
-        (sourceBlockColorEquiv.symm q).1
-        (sourceBlockColorEquiv.symm p).2
-        (sourceBlockColorEquiv.symm q).2)
+    -- Gate #1: normalized original CAR gives zero COMPLEX-scalar
+    -- multiplication on an actual original complex Fock operator.
+    -- Discharge the operator zero separately with the typed lemma.
+    calc
+      _ = (0 : ℂ) • (1 : FockOp) := by
+        simpa only [if_neg hnot] using
+          (originalNormalizedFockMajorana_pairwise_CAR
+            (sourceBlockColorEquiv.symm p).1
+            (sourceBlockColorEquiv.symm q).1
+            (sourceBlockColorEquiv.symm p).2
+            (sourceBlockColorEquiv.symm q).2)
+      _ = 0 := zero_smul ℂ (1 : FockOp)
   have hcomplex :
       (∑ p : SourceLabel, cc p • γ p) *
         (∑ p : SourceLabel, cc p • γ p) =
       (∑ p : SourceLabel, cc p * cc p) • (1 : FockOp) := by
-    simpa only [Finset.sum_univ] using
-      finiteComplexWeightedFockClifford_square
-        (Finset.univ : Finset SourceLabel) cc γ hdiag hanti
+    exact finiteComplexWeightedFockClifford_square
+      (Finset.univ : Finset SourceLabel) cc γ hdiag hanti
   have hrealToComplex :
       (∑ p : SourceLabel, (v p) • γ p) =
         (∑ p : SourceLabel, cc p • γ p) := by
@@ -87,7 +93,17 @@ theorem originalFockGammaRealLinear_sq (v : Source48Vector) :
   have hcoeff :
       (∑ p : SourceLabel, cc p * cc p) =
         ((∑ p : SourceLabel, v p * v p : ℝ) : ℂ) := by
-    simp only [cc, ← Complex.ofReal_mul, map_sum]
+    calc
+      (∑ p : SourceLabel, cc p * cc p) =
+          ∑ p : SourceLabel, ((v p * v p : ℝ) : ℂ) := by
+            apply Finset.sum_congr rfl
+            intro p hp
+            change (v p : ℂ) * (v p : ℂ) =
+              ((v p * v p : ℝ) : ℂ)
+            exact (Complex.ofReal_mul (v p) (v p)).symm
+      _ = ((∑ p : SourceLabel, v p * v p : ℝ) : ℂ) :=
+        (Complex.ofReal_sum (Finset.univ : Finset SourceLabel)
+          (fun p => v p * v p)).symm
   calc
     originalFockGammaRealLinear v *
         originalFockGammaRealLinear v =
