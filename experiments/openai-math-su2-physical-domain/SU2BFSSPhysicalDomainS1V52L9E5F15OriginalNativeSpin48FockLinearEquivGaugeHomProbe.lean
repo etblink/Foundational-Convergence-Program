@@ -42,7 +42,7 @@ equivalence; the inverse is its accepted Hilbert adjoint. -/
 noncomputable def originalNativeSixteenFockLinearEquiv
     (g : GaugeGroup 2) : Fermion 2 ≃ₗ[ℂ] Fermion 2 where
   toFun := originalNativeFockOp g
-  invFun := star (originalNativeFockOp g)
+  invFun := (star (originalNativeFockOp g) : FockOp)
   left_inv := by
     intro v
     change (star (originalNativeFockOp g) * originalNativeFockOp g) v = v
