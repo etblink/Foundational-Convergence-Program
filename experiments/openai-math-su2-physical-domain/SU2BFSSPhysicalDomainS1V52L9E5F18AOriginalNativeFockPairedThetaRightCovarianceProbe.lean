@@ -1,5 +1,6 @@
 import SU2BFSSPhysicalDomainS1V52L9E5F17OriginalNativeFockUnscaledPairedThetaColorCovarianceProbe
 import SU2BFSSPhysicalDomainS1V52L9E5F11OriginalNativeSixteenSpin48FockTwoSidedUnitarityProbe
+import SU2BFSSPhysicalDomainS1V52L9E5B0OriginalFockRealComplexOperatorScalarBridgeProbe
 
 /-!
 L9E5F18A — prospective, UNQUALIFIED until independently compiled.
@@ -32,6 +33,7 @@ open FCP.BFSSS1V52L8E
 open FCP.BFSSS1V52L9E5C1
 open FCP.BFSSS1V52L9E5F11
 open FCP.BFSSS1V52L9E5F17
+open FCP.BFSSS1V52L9E5B0
 open FCP.BFSSSU2GaugeG1A
 open FCP.BFSSSU2GaugeG3A
 
@@ -77,10 +79,22 @@ theorem originalNativeSixteenFock_pairedTheta_right_covariance
         congrArg (fun T : FockOp => T * U) hconj
     _ = ∑ B : Fin 3, (adjointColorMatrix g B A) •
           (pairedTheta (spinPairEquiv.symm α) B * U) := by
-        simp only [Finset.sum_mul, smul_mul_assoc]
+        rw [Finset.sum_mul]
+        apply Finset.sum_congr rfl
+        intro B _
+        let r : ℝ := adjointColorMatrix g B A
+        let T : FockOp := pairedTheta (spinPairEquiv.symm α) B
+        change (r • T) * U = r • (T * U)
+        calc
+          (r • T) * U = ((r : ℂ) • T) * U := by
+            rw [originalFockOperator_real_smul_eq_complex_smul]
+          _ = (r : ℂ) • (T * U) := by rw [smul_mul_assoc]
+          _ = r • (T * U) :=
+            (originalFockOperator_real_smul_eq_complex_smul r (T * U)).symm
 
 #print axioms FCP.BFSSS1V52L9E5F17.originalNativeSixteenFock_pairedTheta_conjugation
 #print axioms FCP.BFSSS1V52L9E5F11.originalNativeSixteenSpin48Fock_adjoint_mul
+#print axioms FCP.BFSSS1V52L9E5B0.originalFockOperator_real_smul_eq_complex_smul
 #print axioms originalNativeSixteenFock_pairedTheta_right_covariance
 
 end
