@@ -69,7 +69,19 @@ theorem originalSourceRealMajoranaMatrix_mulVec_sourceAxis
       · rintro ⟨rfl, rfl⟩
         rfl
     simp only [sourceBlockColorAxis, Pi.single_apply]
-    rw [hlabel]
+    -- The two if-conditions are logically equivalent, but rewriting
+    -- the proposition with rw fails because the Decidable instance
+    -- of ite depends on the actual *original* equality proposition.
+    -- Case-split instead; both conditions reduce definitionally.
+    by_cases h : α = β ∧ B = C
+    · have heq : sourceBlockColorLabel β C =
+          sourceBlockColorLabel α B := hlabel.mpr h
+      simp only [if_pos heq, if_pos h]
+    · have hne : ¬ (sourceBlockColorLabel β C =
+          sourceBlockColorLabel α B) := by
+        intro heq
+        exact h (hlabel.mp heq)
+      simp only [if_neg hne, if_neg h]
   -- Compute only the three ORIGINAL color coordinates. Restrict
   -- simplification to this scalar sum, not original BFSS definitions.
   simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul]
