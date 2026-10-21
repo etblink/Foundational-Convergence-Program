@@ -62,8 +62,11 @@ theorem originalComplexCliffordFockAlgHom_generator
         (fun _a _x => Algebra.commutes _ _))
           (1 ⊗ₜ[ℝ] (CliffordAlgebra.ι Q) v) =
         originalFockGammaRealLinear v := by
-    rw [Algebra.TensorProduct.lift_tmul, map_one, one_mul]
-    exact originalFockCliffordAlgHom_generator v
+    change (Algebra.ofId ℂ FockOp) (1 : ℂ) *
+        originalFockCliffordAlgHom (CliffordAlgebra.ι Q v) =
+          originalFockGammaRealLinear v
+    simpa only [map_one, one_mul] using
+      originalFockCliffordAlgHom_generator v
   simpa only [originalComplexCliffordFockAlgHom, AlgHom.coe_comp,
     Function.comp_apply, CliffordAlgebra.toBaseChange_ι] using hpure
 
