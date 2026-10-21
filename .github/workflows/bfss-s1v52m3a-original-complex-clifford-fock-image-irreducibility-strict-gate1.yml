@@ -1,0 +1,159 @@
+name: BFSS S1V52M3A Original Complex Clifford Fock Image Irreducibility Strict Gate 1
+
+# Single targeted gate, no incidental CI on source/audit commits.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-s1v52m3a-original-complex-clifford-fock-image-irreducibility-strict-gate1.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v52m3a-complex-clifford-image-irreducibility-gate1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  independent-majorana-intertwiner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact research source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Checkout frozen source mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Check exact original source and pinned source/theorem SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v52m3a
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          d=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          target=experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52M3AOriginalComplexCliffordActionImageIrreducibilityProbe.lean
+          expected=ca640e2667a1574cca750a76fb8eaab34f5e59a0
+          committed="$(git rev-parse "HEAD:$target")"
+          filtered="$(git hash-object --path="$target" "$target")"
+          raw="$(git hash-object --no-filters "$target")"
+          echo "M3A_SOURCE_SHA expected=$expected committed=$committed filtered=$filtered raw=$raw"
+          test "$expected" = "$committed" && test "$expected" = "$filtered" && test "$expected" = "$raw"
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean)" = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4 || { echo M3A_QUALIFIED_G1A_SOURCE_PIN_FAIL; exit 1; }
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20FOriginalSpin48TopologicalGroupInverseContinuityProbe.lean)" = c5f863e1948db15cf3d3058b1f5c3be51ee6ae45 || { echo M3A_F20F_PARENT_PIN_FAIL; exit 1; }
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52M1IndependentNonzeroMajoranaIntertwinerEquivProbe.lean)" = 25be5cc9c7a4d14417fe9e9275e4bd36ef3d62e9 || { echo M3A_PARENT_M1_SOURCE_PIN_FAIL; exit 1; }
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5C1OriginalFockCliffordAlgebraUniversalLiftProbe.lean)" = 91313c5e622577fd12fa4ce7ec59f457a816ae3a || { echo M3A_ORIGINAL_REAL_FOCK_CLIFFORD_SOURCE_PIN_FAIL; exit 1; }
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E4OriginalFockRealLinearCliffordGeneratorMapProbe.lean)" = b0035401f5b75b4f9d07622842b1fb05de5cac8d || { echo M3A_L9E4_GAMMA_NAMESPACE_SOURCE_PIN_FAIL; exit 1; }
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52M2OriginalComplexifiedCliffordFockRepresentationProbe.lean)" = fa67dfde6cb6a21a97180797bdf5e917e0b417d2 || { echo M3A_PARENT_M2_SOURCE_PIN_FAIL; exit 1; }
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E2OriginalFockMajoranaSourceCliffordAxisNormalizationProbe.lean)" = 9d4ca3a4795ab1febfc44fcad90516a3dce22c4e || { echo M3A_NORMALIZED_ORIGINAL_FOCK_MAJORANA_PIN_FAIL; exit 1; }
+          echo M3A_ORIGINAL_SOURCE_AND_TOOLCHAIN_PINS_PASS
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v52m3a/toolchain.log; then
+              ok=true; break
+            fi
+            echo M3A_PINNED_LEAN_RETRY_$attempt | tee -a /tmp/bfss-s1v52m3a/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo M3A_PINNED_LEAN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v52m3a/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo M3A_PINNED_LEAN_MATHLIB_PASS
+
+      - name: Restore strict accepted M2 complexified original Clifford Fock action cache
+        id: cacheM2
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v52m2-complexified-original-clifford-fock-v4-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed on exact qualified M2 and original irreducible Clifford action
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.cacheM2.outputs.cache-hit }}" = true || { echo M3A_M2_ACCEPTED_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/Core.olean || { echo M3A_ORIGINAL_BFSS_CORE_MISSING; exit 1; }
+          test -s .lake/build/lib/lean/SU2BFSSG1APairedThetaProbe.olean || { echo M3A_ORIGINAL_G1A_IRREDUCIBILITY_OLEAN_MISSING; exit 1; }
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1V52L9E5F20FOriginalSpin48TopologicalGroupInverseContinuityProbe.olean || { echo M3A_QUALIFIED_F20F_SOURCE_OLEAN_MISSING; exit 1; }
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1V52M1IndependentNonzeroMajoranaIntertwinerEquivProbe.olean || { echo M3A_QUALIFIED_M1_OLEAN_MISSING; exit 1; }
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1V52L9E5C1OriginalFockCliffordAlgebraUniversalLiftProbe.olean || { echo M3A_QUALIFIED_REAL_CLIFFORD_FOCK_OLEAN_MISSING; exit 1; }
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainS1V52M2OriginalComplexifiedCliffordFockRepresentationProbe.olean || { echo M3A_QUALIFIED_M2_CLIFFORD_FOCK_OLEAN_MISSING; exit 1; }
+          echo M3A_ORIGINAL_COMPLEXIFICATION_PARENTS_READY
+
+      - name: Compile true original complex Clifford Fock image invariant-submodule irreducibility
+        shell: bash
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=SU2BFSSPhysicalDomainS1V52M3AOriginalComplexCliffordActionImageIrreducibilityProbe
+          cp "../../experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+          timeout 660s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v52m3a/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean" || { echo M3A_FRESH_SOURCE_OLEAN_MISSING; exit 1; }
+          python3 - <<'PY'
+          import pathlib,re
+          stem="SU2BFSSPhysicalDomainS1V52M3AOriginalComplexCliffordActionImageIrreducibilityProbe"
+          ns="FCP.BFSSS1V52M3A"
+          root="originalComplexCliffordFock_image_irreducible"
+          src=pathlib.Path(stem+'.lean').read_text()
+          log=pathlib.Path('/tmp/bfss-s1v52m3a',stem+'.log').read_text()
+          assert re.findall(r'^namespace (\S+)',src,re.M)==[ns]
+          assert re.findall(r'^theorem (\S+)',src,re.M)==[root]
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==[root]
+          rr=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          report={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in rr}
+          assert len(rr)==len(report)==1,rr
+          ax=report[ns+'.'+root]
+          assert ax <= {'propext','Classical.choice','Quot.sound'},ax
+          assert 'error:' not in log and 'sorryAx' not in log and 'unknownIdentifier' not in log, log[-9000:]
+          print('M3A_REAL_SOURCE_COMPLEX_CLIFFORD_IMAGE_IRREDUCIBLE_ONE_ROOT_STRICT_PASS')
+          PY
+
+      - name: Save qualified original complex Clifford action image irreducibility cache
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v52m3a-original-clifford-fock-image-irreducible-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve M3A original Clifford image irreducibility diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v52m3a-${{ github.run_id }}
+          path: /tmp/bfss-s1v52m3a
+          if-no-files-found: ignore
