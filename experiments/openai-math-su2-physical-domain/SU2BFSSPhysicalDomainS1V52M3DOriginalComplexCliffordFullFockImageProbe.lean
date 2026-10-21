@@ -29,7 +29,6 @@ private abbrev Q : QuadraticForm ℝ Source48Vector := source48Quadratic
 private abbrev A := CliffordAlgebra (Q.baseChange ℂ)
 private abbrev V := Fermion 2
 private abbrev FockOp := V →L[ℂ] V
-private abbrev B := Module.End A V
 
 local instance : Module A V :=
   originalComplexCliffordFockModule
@@ -37,6 +36,9 @@ local instance : IsScalarTower ℂ A V :=
   originalComplexCliffordFockModule_scalarTower
 local instance : IsSimpleModule A V :=
   originalComplexCliffordFockModule_simple
+
+private abbrev B := Module.End A V
+
 local instance : Module.Finite B V :=
   originalComplexCliffordFock_finiteOverEnd
 
