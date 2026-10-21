@@ -70,15 +70,32 @@ theorem originalNormalizedFockMajorana_pairwise_CAR
   have hsqrt : ((↑(Real.sqrt 2) : ℂ) *
       (↑(Real.sqrt 2) : ℂ)) = (2 : ℂ) := by
     exact_mod_cast Real.mul_self_sqrt (by norm_num : (0 : ℝ) ≤ 2)
-  change ((↑(Real.sqrt 2) : ℂ) • x) *
-      ((↑(Real.sqrt 2) : ℂ) • y) +
-      ((↑(Real.sqrt 2) : ℂ) • y) *
-      ((↑(Real.sqrt 2) : ℂ) • x) =
+  -- First aggregate the two original Fock operator products
+  -- with the *explicitly typed same complex scalar*. Reverse
+  -- rewriting smul_add directly on elaborated √2 terms failed in
+  -- Gate #1 despite the visible identical coefficients.
+  let c : ℂ := ↑(Real.sqrt 2)
+  have hc2 : c * c = (2 : ℂ) := hsqrt
+  change (c • x) * (c • y) + (c • y) * (c • x) =
       (if α = β ∧ A = B then (2 : ℂ) else 0) •
         (1 : Fermion 2 →L[ℂ] Fermion 2)
-  rw [smul_mul_smul, smul_mul_smul, ← smul_add, hsqrt, hcar]
-  by_cases hab : α = β ∧ A = B <;>
-    simp [hab, smul_smul]
+  calc
+    (c • x) * (c • y) + (c • y) * (c • x) =
+        (c * c) • (x * y + y * x) := by
+      calc
+        (c • x) * (c • y) + (c • y) * (c • x) =
+            (c * c) • (x * y) + (c * c) • (y * x) := by
+              rw [smul_mul_smul, smul_mul_smul]
+        _ = (c * c) • (x * y + y * x) :=
+          (smul_add (c * c) (x * y) (y * x)).symm
+    _ = (2 : ℂ) • (x * y + y * x) := by rw [hc2]
+    _ = (2 : ℂ) •
+          ((if α = β ∧ A = B then (1 : ℂ) else 0) •
+            (1 : Fermion 2 →L[ℂ] Fermion 2)) := by rw [hcar]
+    _ = (if α = β ∧ A = B then (2 : ℂ) else 0) •
+          (1 : Fermion 2 →L[ℂ] Fermion 2) := by
+      by_cases hab : α = β ∧ A = B <;>
+        simp [hab, smul_smul]
 
 #print axioms originalNormalizedFockMajorana_pairwise_CAR
 
