@@ -54,7 +54,7 @@ theorem originalComplexCliffordFock_fullImage :
       map_smul' := by
         intro b v
         obtain ⟨c, rfl⟩ := originalComplexCliffordFock_scalarCommutant.2 b
-        simpa only [algebraMap_smul] using f.map_smul c v }
+        simpa only [RingHom.id_apply, algebraMap_smul] using f.map_smul c v }
   obtain ⟨a, ha⟩ :=
     (Module.Finite.toModuleEnd_moduleEnd_surjective
       (R := A) (M := V)) g
