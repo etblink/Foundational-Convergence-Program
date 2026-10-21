@@ -44,9 +44,21 @@ private abbrev sourceBivector (p : SourcePair) : C :=
 private abbrev sourceEvenWord (ps : List SourcePair) : C :=
   (ps.map sourceBivector).prod
 
-private abbrev sourceEvenRealCombination
+-- Keep this definition opaque in the large induction proof.
+-- Its two recurrence equations are proved once, separately.
+private def sourceEvenRealCombination
     (terms : List (ℝ × List SourcePair)) : C :=
   (terms.map (fun t => t.1 • sourceEvenWord t.2)).sum
+
+private theorem sourceEvenRealCombination_nil :
+    sourceEvenRealCombination ([] : List (ℝ × List SourcePair)) = (0 : C) := by
+  simp only [sourceEvenRealCombination, List.map_nil, List.sum_nil]
+
+private theorem sourceEvenRealCombination_cons
+    (p : ℝ × List SourcePair) (ps : List (ℝ × List SourcePair)) :
+    sourceEvenRealCombination (p :: ps) =
+      p.1 • sourceEvenWord p.2 + sourceEvenRealCombination ps := by
+  simp only [sourceEvenRealCombination, List.map_cons, List.sum_cons]
 
 /-- The genuine original Clifford-to-Fock representation
 intertwines source Clifford star and Fock Hilbert adjoint on
@@ -60,9 +72,8 @@ theorem originalFockCliffordAlgHom_star_finiteRealBivectorWordSum
       (sourceEvenRealCombination terms)) := by
   induction terms with
   | nil =>
-      simpa only [sourceEvenRealCombination,
-        List.map_nil, List.sum_nil] using
-        originalFockCliffordAlgHom_star_zero
+      rw [sourceEvenRealCombination_nil]
+      exact originalFockCliffordAlgHom_star_zero
   | cons p ps ih =>
       have hword :
           originalFockCliffordAlgHom (star (sourceEvenWord p.2)) =
@@ -75,12 +86,11 @@ theorem originalFockCliffordAlgHom_star_finiteRealBivectorWordSum
               (p.1 • sourceEvenWord p.2)) :=
         originalFockCliffordAlgHom_star_real_smul_of
           p.1 (sourceEvenWord p.2) hword
-      simpa only [sourceEvenRealCombination,
-        List.map_cons, List.sum_cons] using
-        (originalFockCliffordAlgHom_star_add_of
-          (p.1 • sourceEvenWord p.2)
-          ((ps.map (fun t => t.1 • sourceEvenWord t.2)).sum)
-          hscalar ih)
+      rw [sourceEvenRealCombination_cons]
+      exact originalFockCliffordAlgHom_star_add_of
+        (p.1 • sourceEvenWord p.2)
+        (sourceEvenRealCombination ps)
+        hscalar ih
 
 #print axioms originalFockCliffordAlgHom_star_finiteRealBivectorWordSum
 
