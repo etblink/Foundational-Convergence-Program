@@ -60,14 +60,30 @@ theorem originalFockGammaRealLinear_selfAdjoint
         exact IsSelfAdjoint.zero FockOp
     | @insert p s hp ih =>
         rw [Finset.sum_insert hp]
-        -- Avoid overloaded IsSelfAdjoint.add elaborating a second
-        -- incompatible star instance for original Fock endomorphisms.
-        -- Unfold ONLY the actual target operator star equality.
-        change star ((v p : ℂ) • γ p +
-          s.sum (fun q => (v q : ℂ) • γ q)) =
-          ((v p : ℂ) • γ p +
-            s.sum (fun q => (v q : ℂ) • γ q))
-        rw [star_add, (hterm p).star_eq, ih.star_eq]
+        -- The Fock endomorphism star is DEFINITIONALLY its adjoint.
+        -- Use pinned map_add of the actual conjugate-linear adjoint
+        -- equivalence, not generic star_add (wrong inferred star).
+        change ContinuousLinearMap.adjoint
+          (((v p : ℂ) • γ p) +
+            s.sum (fun q => (v q : ℂ) • γ q)) =
+          ((v p : ℂ) • γ p) +
+            s.sum (fun q => (v q : ℂ) • γ q)
+        calc
+          ContinuousLinearMap.adjoint
+              (((v p : ℂ) • γ p) +
+                s.sum (fun q => (v q : ℂ) • γ q)) =
+            ContinuousLinearMap.adjoint ((v p : ℂ) • γ p) +
+              ContinuousLinearMap.adjoint
+                (s.sum (fun q => (v q : ℂ) • γ q)) := by
+                  exact map_add
+                    (ContinuousLinearMap.adjoint :
+                      FockOp ≃ₗᵢ⋆[ℂ] FockOp)
+                    ((v p : ℂ) • γ p)
+                    (s.sum (fun q => (v q : ℂ) • γ q))
+          _ = ((v p : ℂ) • γ p) +
+                s.sum (fun q => (v q : ℂ) • γ q) := by
+                  exact congrArg₂ (· + ·)
+                    (hterm p).star_eq ih.star_eq
   have hrealToComplex :
       (∑ p : SourceLabel, (v p) • γ p) =
         (∑ p : SourceLabel, (v p : ℂ) • γ p) := by
