@@ -49,7 +49,7 @@ theorem originalSourceClifford_star_continuous :
     (CliffordAlgebra.involute (Q := Q)).toLinearMap.continuous_of_finiteDimensional
   have hr : Continuous (fun x : C => CliffordAlgebra.reverse x) :=
     (CliffordAlgebra.reverse (Q := Q)).continuous_of_finiteDimensional
-  simpa only [CliffordAlgebra.star_def] using hr.comp hi
+  simpa only [CliffordAlgebra.star_def, Function.comp_def] using hr.comp hi
 
 /-- Inversion of the GENUINE original `spinGroup Q` is continuous in
 its inherited Clifford PBW real-vector topology. -/
