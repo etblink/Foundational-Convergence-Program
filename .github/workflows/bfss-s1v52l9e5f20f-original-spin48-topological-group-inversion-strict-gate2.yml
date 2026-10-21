@@ -1,0 +1,160 @@
+name: BFSS S1V52L9E5F20F Original Spin48 Topological Group Inversion Strict Gate 2
+
+# Isolated source/strict workflow; changes to the candidate or audits do not auto-run CIs.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-s1v52l9e5f20f-original-spin48-topological-group-inversion-strict-gate2.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v52l9e5f20f-native-topological-spin-group-gate2-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  source-spin48-topological-group:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout original BFSS research branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Checkout immutable original upstream BFSS source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Verify exact original source blob SHA and pinned toolchain manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v52l9e5f20f
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          d=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20FOriginalSpin48TopologicalGroupInverseContinuityProbe.lean)" = c5f863e1948db15cf3d3058b1f5c3be51ee6ae45 || { echo F20F_SOURCE_SHA_MISMATCH=SU2BFSSPhysicalDomainS1V52L9E5F20FOriginalSpin48TopologicalGroupInverseContinuityProbe; exit 1; }
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20EOriginalNativeSpin48SixteenBlockLiftContinuityProbe.lean)" = ef70725c57b9a32bb8c3e43bb66d33ba90926ec4 || { echo F20F_SOURCE_SHA_MISMATCH=SU2BFSSPhysicalDomainS1V52L9E5F20EOriginalNativeSpin48SixteenBlockLiftContinuityProbe; exit 1; }
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20DOriginalRealCliffordMultiplicationContinuousProbe.lean)" = 2dccac1617e0c13d83e6a04a8f5b43ae09330add || { echo F20F_SOURCE_SHA_MISMATCH=SU2BFSSPhysicalDomainS1V52L9E5F20DOriginalRealCliffordMultiplicationContinuousProbe; exit 1; }
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20COriginalSourceCliffordCoordinateNormQuaternionContinuityProbe.lean)" = 19e9d64f673fb02d62c93f8c9cfab3f888bcce7f || { echo F20F_SOURCE_SHA_MISMATCH=SU2BFSSPhysicalDomainS1V52L9E5F20COriginalSourceCliffordCoordinateNormQuaternionContinuityProbe; exit 1; }
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20BOriginalSource48CliffordPBWBasisFiniteDimensionalProbe.lean)" = 6e4c78fd31f9781267659313a8a0edfedd65e9ad || { echo F20F_SOURCE_SHA_MISMATCH=SU2BFSSPhysicalDomainS1V52L9E5F20BOriginalSource48CliffordPBWBasisFiniteDimensionalProbe; exit 1; }
+          target=experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20FOriginalSpin48TopologicalGroupInverseContinuityProbe.lean
+          expected=c5f863e1948db15cf3d3058b1f5c3be51ee6ae45
+          committed="$(git rev-parse "HEAD:$target")"
+          filtered="$(git hash-object --path="$target" "$target")"
+          raw="$(git hash-object --no-filters "$target")"
+          echo "F20F_SOURCE_SHA expected=$expected committed=$committed filtered=$filtered raw=$raw"
+          test "$expected" = "$committed" && test "$expected" = "$filtered" && test "$expected" = "$raw"
+          echo F20F_REAL_ORIGINAL_SOURCE_TOOLCHAIN_PINS_PASS
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore original pinned Lean and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v52l9e5f20f/toolchain.log; then
+              ok=true; break
+            fi
+            echo F20F_PINNED_LEAN_RETRY_$attempt | tee -a /tmp/bfss-s1v52l9e5f20f/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo F20F_PINNED_LEAN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v52l9e5f20f/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo F20F_EXACT_ORIGINAL_LEAN_MATHLIB_PASS
+
+      - name: Restore accepted F20E native original Spin48 lift continuity cache
+        id: cacheF20E
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v52l9e5f20e-original-native-spin48-sixteen-lift-continuity-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Require exact accepted original source dependency cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.cacheF20E.outputs.cache-hit }}" = true || { echo F20F_QUALIFIED_F20E_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/Core.olean || { echo F20F_ORIGINAL_OAI_BFSS_CORE_MISSING; exit 1; }
+          for stem in SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe SU2BFSSPhysicalDomainS1V52L9E5F20BOriginalSource48CliffordPBWBasisFiniteDimensionalProbe SU2BFSSPhysicalDomainS1V52L9E5F20COriginalSourceCliffordCoordinateNormQuaternionContinuityProbe SU2BFSSPhysicalDomainS1V52L9E5F20DOriginalRealCliffordMultiplicationContinuousProbe SU2BFSSPhysicalDomainS1V52L9E5F20EOriginalNativeSpin48SixteenBlockLiftContinuityProbe SU2BFSSPhysicalDomainS1V52L8EOriginalOrderedSixteenNativeSU2Spin48HomProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "F20F_REQUIRED_QUALIFIED_NATIVE_SPIN48_OLEAN_MISSING=$stem"; exit 1; }
+          done
+          echo F20F_EXACT_NATIVE_SPIN48_AND_PBW_TOPOLOGY_OLEANS_READY
+
+      - name: Compile original Clifford star inversion and genuine Spin48 topological group
+        shell: bash
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=SU2BFSSPhysicalDomainS1V52L9E5F20FOriginalSpin48TopologicalGroupInverseContinuityProbe
+          cp "../../experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+          timeout 660s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v52l9e5f20f/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean" || { echo F20F_FRESH_TOP_SPIN_GROUP_SOURCE_OLEAN_MISSING; exit 1; }
+          python3 - <<'PY'
+          import pathlib,re
+          stem="SU2BFSSPhysicalDomainS1V52L9E5F20FOriginalSpin48TopologicalGroupInverseContinuityProbe"
+          ns="FCP.BFSSS1V52L9E5F20F"
+          roots=["originalSourceClifford_star_continuous",
+                 "originalSourceSpin48_inv_continuous"]
+          inst="originalSourceSpin48IsTopologicalGroup"
+          src=pathlib.Path(stem+'.lean').read_text()
+          log=pathlib.Path('/tmp/bfss-s1v52l9e5f20f',stem+'.log').read_text()
+          assert re.findall(r'^namespace (\S+)',src,re.M)==[ns]
+          assert re.findall(r'^theorem (\S+)',src,re.M)==roots
+          assert re.findall(r'^noncomputable instance (\S+)',src,re.M)==[inst]
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==roots+[inst]
+          rr=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          results={k:{a.strip() for a in v.split(',') if a.strip()} for k,v in rr}
+          assert len(rr)==len(results)==3,rr
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for name in roots+[inst]:
+            k=ns+'.'+name
+            assert k in results and results[k]<=allowed,(k,results)
+          assert 'error:' not in log and 'sorryAx' not in log and 'unknownIdentifier' not in log,log[-9000:]
+          print('F20F_GENUINE_ORIGINAL_SPIN48_TOPOLOGICAL_GROUP_TWO_THEOREMS_AXIOMS_PASS')
+          PY
+
+      - name: Save qualified original Spin48 topological group source cache
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v52l9e5f20f-original-spin48-topological-group-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve F20F original topological-group diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v52l9e5f20f-${{ github.run_id }}
+          path: /tmp/bfss-s1v52l9e5f20f
+          if-no-files-found: ignore
