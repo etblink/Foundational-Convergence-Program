@@ -69,10 +69,23 @@ theorem originalSourceCliffordQuaternion_continuous
     (originalNativeQuaternionCoords g).b • sourceZBivector α +
     (originalNativeQuaternionCoords g).c • sourceYBivector α +
     (originalNativeQuaternionCoords g).d • sourceXBivector α)
-  exact (((ha.smul continuous_const).add
-    (hb.smul continuous_const)).add
-    (hc.smul continuous_const)).add
-    (hd.smul continuous_const)
+  have h1 : Continuous (fun g : GaugeGroup 2 =>
+      (originalNativeQuaternionCoords g).a • (1 : C)) :=
+    ha.smul (continuous_const :
+      Continuous (fun _ : GaugeGroup 2 => (1 : C)))
+  have hZ : Continuous (fun g : GaugeGroup 2 =>
+      (originalNativeQuaternionCoords g).b • sourceZBivector α) :=
+    hb.smul (continuous_const :
+      Continuous (fun _ : GaugeGroup 2 => (sourceZBivector α : C)))
+  have hY : Continuous (fun g : GaugeGroup 2 =>
+      (originalNativeQuaternionCoords g).c • sourceYBivector α) :=
+    hc.smul (continuous_const :
+      Continuous (fun _ : GaugeGroup 2 => (sourceYBivector α : C)))
+  have hX : Continuous (fun g : GaugeGroup 2 =>
+      (originalNativeQuaternionCoords g).d • sourceXBivector α) :=
+    hd.smul (continuous_const :
+      Continuous (fun _ : GaugeGroup 2 => (sourceXBivector α : C)))
+  exact ((h1.add hZ).add hY).add hX
 
 /-- The underlying actual ORIGINAL native Spin48 block's Clifford
 element varies continuously in the explicit real PBW norm topology.
