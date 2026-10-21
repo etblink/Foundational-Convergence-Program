@@ -38,8 +38,10 @@ private abbrev C := CliffordAlgebra Q
 source 48-coordinate exterior basis via pinned Mathlib's
 real-linear Clifford/exterior equivalence. -/
 noncomputable def originalSourceCliffordPBWBasis :
-    Module.Basis (Finset Source48Label) ℝ C :=
-  ((Pi.basisFun ℝ Source48Label).ExteriorAlgebra).map
+    Module.Basis (Finset Source48Label) ℝ C := by
+  classical
+  letI : LinearOrder Source48Label := linearOrderOfSTO WellOrderingRel
+  exact ((Pi.basisFun ℝ Source48Label).ExteriorAlgebra).map
     (CliffordAlgebra.equivExterior Q).symm
 
 /-- The ACTUAL source 48-real Clifford algebra is finite-dimensional
