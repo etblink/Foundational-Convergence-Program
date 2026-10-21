@@ -76,6 +76,12 @@ theorem originalNativeSixteenSpinHom_coversActualGauge
       ext j
       by_cases hj : j = sourceBlockColorLabel α A <;>
         simp [sourceBlockColorAxis, Pi.single_apply, hj]
+    -- The displayed Pi.single uses the original source equivalence,
+    -- whereas hsingle uses sourceBlockColorLabel, its definitionally
+    -- equal name. Expose the SAME original label on both sides before
+    -- asking rw to match; no physical or index conversion is changed.
+    change spinAction (Pi.single (sourceBlockColorLabel α A) x) =
+      fockAction (Pi.single (sourceBlockColorLabel α A) x)
     rw [hsingle, map_smul, map_smul]
     change x • FCP.BFSSS1V31.sourceSpin48VectorAction
       (originalNativeSixteenSpinHom g) (sourceBlockColorAxis α A) =
