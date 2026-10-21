@@ -42,7 +42,13 @@ preserves star at the source ZERO. -/
 theorem originalFockCliffordAlgHom_star_zero :
     originalFockCliffordAlgHom (star (0 : C)) =
       star (originalFockCliffordAlgHom (0 : C)) := by
+  -- Gate #1 left 0 = star 0 because the generic star_zero
+  -- rewrite did not target the actual original Fock adjoint.
   simp only [star_zero, map_zero]
+  change (0 : FockOp) =
+    ContinuousLinearMap.adjoint (0 : FockOp)
+  exact (map_zero (ContinuousLinearMap.adjoint :
+    FockOp ≃ₗᵢ⋆[ℂ] FockOp)).symm
 
 /-- Compatibility with source Clifford star and the actual
 Fock Hilbert adjoint is additive IF each summand is compatible.
