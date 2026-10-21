@@ -1,0 +1,341 @@
+name: BFSS S1V52L9E5A2 Typed Complex Zero Fock Operator Strict Gate 2
+
+# Deliberately branch-isolated and single-shot. Only the workflow file
+# triggers a push gate; source and audit commits do NOT automatically run.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-s1v52l9e5a2-complex-weighted-fock-clifford-square-strict-gate2.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v52l9e5a2-original-fock-complex-zero-gate2-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  original-source-clifford-table:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - name: Checkout original FCP research sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Checkout immutable original upstream BFSS mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Strict original source SHA and toolchain preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v52l9e5a2
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          data=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in data['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          r=experiments/openai-math-su2-physical-domain
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe.lean")" = 22f3101b243a7b7857d9597b547322174d9281c8
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe.lean")" = 6d15a3a76625b3677f132c544f71e5d5eb1dc93c
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe.lean")" = 4ae8b38d5601b8c57f09e94c523beb9b4598dcb1
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52ASourceEvenCliffordQuaternionTableProbe.lean")" = ad67d8eac5a8147f7ae099c3d9b913db2038f53a
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52B1SourcePauliQuaternionMatrixMultiplicationProbe.lean")" = 8a5558fa127893b6bbb971a8047df4840d74e760
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52B2Original48CliffordQuaternionPolynomialMulProbe.lean")" = 164add0b3a17b9d5417aa3595de841ad5eee33f4
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52B3Original48CliffordQuaternionUnitNormProbe.lean")" = 175d0865ddb413bb02ad29d9ba945be5f0c0639f
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C1OriginalNativeGaugeQuaternionCoordinatesProbe.lean")" = bbb6fd81e68787d236a9919c3a7675230e899818
+          test "$(git hash-object upstream-math/lean/OAI/MathematicalPhysics/BFSS/Core.lean)" = 9882359ced78b0a3bd7e2f057974bd0a031b3e60
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C2ANativeSU2MatrixAdjugateSourceProbe.lean")" = 12144c449ad232bb7aabb6febdafacda09e1fd88
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C2BNativeSU2QuaternionWholeMatrixSourceProbe.lean")" = 77832693be32c9f7ea0df4bf9f848ff27d6ca4f1
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C2CNativeSU2RealQuaternionMatrixBridgeProbe.lean")" = f6041c88ffd986302325c535986ae0684499c1b7
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C2DOriginalNativeSU2QuaternionMultiplicationProbe.lean")" = 92ff4ccc7ace40cf74113168ab27710c18335e4e
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52C2EOriginalNativeGaugeCliffordUnitHomProbe.lean")" = 0e9cd58f8e6cb3e63a3503a89c2986914a28d3b0
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52S1Original48CliffordQuaternionStarUnitarityProbe.lean")" = 2e817387d174c1962b70675220347dafa5efc351
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52S2Original48CliffordQuaternionEvennessProbe.lean")" = 0aae567e44768e2e1664ae3e79f8ae1f9a54da77
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1AIsolatedAbstractNormAndOriginalZCliffordFactorProbe.lean")" = 1bf72e69a61eccc882c2e348b7a36a4c572b9e45
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1CIsolatedSource48CoordinateNormProbe.lean")" = 0012268604cbfb8933ed1f1bbf87714c1a850ba2
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L1DOriginalZPlaneSourceAxisUnitProbe.lean")" = eac4be30ef5ada8574b0310aa6c2d30db6166255
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L4OriginalColorPlaneRotorGeometryProbe.lean")" = 889882e62666d134fae31ccd2f1397576456bdbc
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L5OriginalYPlaneLipschitzMembershipProbe.lean")" = fb52070ece6b1ff450e0a3d75960e3c1577b4ae1
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L6OriginalYPlaneSpinMembershipProbe.lean")" = 55858cbcedfa4ad98d67e20be42a86316906ad50
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L2OriginalZPlaneLipschitzMembershipProbe.lean")" = 254d7b6519257120aacf191d4091763f4a564ebf
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L3OriginalZPlaneSpinMembershipProbe.lean")" = 580af4f6c977f51be8a99917184346a0bc62ad36
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7B1NativeZYCoordinateSpinProductProbe.lean")" = fe9701e21ece33b015dd047a8823251af084eb0d
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7B2NativeZYZTripleSpinProductProbe.lean")" = 8f8ab0c0e5ab1db45e2a55af3d9c3d3d579a8553
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7B3NativeEulerWitnessSpinHomProbe.lean")" = 8f191d211d3f38497366f87263022096f658a689
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C2NativeOriginalSU2ZeroSafeEulerPolarProbe.lean")" = 530648447820ad001fdc66dad1c100c03e0c13cd
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C3UnitQuaternionToOriginalNativeSU2Probe.lean")" = f35b13579c8c9d3269161c4ff82c433cc3d1eef7
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C4ActualNativeZYZQuaternionFiniteCoefficientsProbe.lean")" = e11f91b96ac184787c9cfa6bfbae162fe2abda44
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C5OriginalNativeZYZCircleFactorsProbe.lean")" = 6d672310ecb682026b85fc16574c1304cd70bd3e
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C6OriginalNativeZeroSafeEulerPhaseBridgeProbe.lean")" = b82ee1c787fb5834620ec897d578202af22be1a9
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L7C7OriginalNativeEulerWitnessAndSpinHomProbe.lean")" = 581dd3f565f4b32260470f51bf240deac057c1a8
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L8AOriginalDisjointBlockCliffordBivectorCommutationProbe.lean")" = 299a7356165ef72c86080271b85f9ce0dfd0d5b8
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L8BOriginalArbitraryBlockQuaternionCliffordCommutationProbe.lean")" = e6ba7d56e88f15130b562269349d74f3ddb7cd1e
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L8COriginalNativeSpin48CrossBlockImageCommutationProbe.lean")" = b65d0ed645aff4986e3ef787f1f06212130596e1
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L8DOriginalNodupNativeBlockSpin48ListHomProbe.lean")" = 85df90160642947094420de19b37ac4568af8838
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L8EOriginalOrderedSixteenNativeSU2Spin48HomProbe.lean")" = c68e630797f64861d46a54b04bb02b0e9ef33442
+          # Preserve exact original native upstream dependencies, not only the top-level Pauli file.
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2ColorCrossProbe.lean)" = 399e9380ba1c679dc173a9dec0ac21e09d7757fd
+          test "$(git hash-object upstream-math/lean/OAI/MathematicalPhysics/BFSS/GammaWords.lean)" = d12051e70de679f5458dbd456667a32c7b407ce4
+          test "$(git hash-object upstream-math/lean/OAI/MathematicalPhysics/BFSS/GammaIdentity.lean)" = 45e58da900a7691b88e5760a483b8adff1c7f015
+          test "$(git hash-object upstream-math/lean/OAI/MathematicalPhysics/BFSS/MassIdentity.lean)" = 331351401561e09a661068e83eb34cb6d8a96138
+          test "$(git hash-object upstream-math/lean/OAI/MathematicalPhysics/BFSS/CliffordSymbols.lean)" = cc01379653404c4ede3d551fd8d823e079543b21
+          test "$(git hash-object upstream-math/lean/OAI/MathematicalPhysics/BFSS/PotentialBasis.lean)" = bc9b526284166efcba5a8e296adc79ba88e6764d
+          test "$(git hash-object upstream-math/lean/OAI/Analysis/CharacterCriterion/Definitions.lean)" = 4807a54ff13db29ad5efc8a2c1e56ae1f0982936
+          test "$(git hash-object upstream-math/lean/OAI/Analysis/CharacterCriterion/Pauli.lean)" = 90c211b8635762030bfd6666e9293a237b474cff
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9C1OriginalPauliQuaternionTracePolynomialProbe.lean")" = ebcc4f090b6a0a9a30fbb63b69447f0f4836241c
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9C3OriginalNativeColorAdjointMatrixBridgeProbe.lean")" = 6fe96f77a8b65e2f49b5c62617fb6e8312f0ab7e
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9B4OriginalSameBlockQuaternionConjugationProbe.lean")" = 870d94eee33327b478c7647f1d504899dac26322
+          # Pins exact accepted original local Spin(48) native Clifford source
+          # and actual S1V29–S1V31 Clifford-generator source-real extraction.
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9D1OriginalNativeSameBlockSpinCliffordAdjointProbe.lean")" = 650ca5209db713059f0b6552defb6291fcbbb878
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V29AllSpin48CliffordGeneratorConjugationProbe.lean")" = 2483cb5646b8df2b5958cee2d02769de2018ab7f
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V30Real48CliffordGeneratorInjectiveViaExteriorProbe.lean")" = 59d40c5c74cc4803a6a6096cfe5ea87c800bd7f9
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V31CanonicalAllSpin48RealVectorActionProbe.lean")" = d6e025372d9f3a393dbb21ba7700c0bc95fd40f2
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9AOriginalNativeCrossBlockMajoranaCliffordFixationProbe.lean")" = eb71ae6f24efd00ba947db4441c94a04c0f87c96
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9D2OriginalNativeSameBlockSpin48RealVectorActionProbe.lean")" = 46857ea2fa4caf9f78d8acc7e9bf9442bb88ba30
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9D3OriginalNativeDisjointBlockSpin48RealVectorFixationProbe.lean")" = 24f637813fd8946671999393d2b0f0f3cdf5149c
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V32AllSpin48CanonicalVectorLinearGroupActionProbe.lean")" = 602f68275bc00df55573a955264e9a8c1190a5ae
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9D4OriginalNativeBlockSpin48RealVectorColorCombinationProbe.lean")" = 87314f811e769649c64a35b24d576d5a46a49843
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L8DOriginalNodupNativeBlockSpin48ListHomProbe.lean")" = 85df90160642947094420de19b37ac4568af8838
+          # Verify the actual original Fock matrix and qualified label-bridge inputs.
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe.lean")" = 3f845ae219586be47fa76aabc3259027b1bb4bae
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9D0ActualFockSpinBlockSourceLabelEqualityProbe.lean")" = 66918befce71660a3df8050de2386e4fac0ed86a
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG3B24ModeOrthogonalLiftProbe.lean)" = c90b25156ec4d81ee16e5939cd888cc12cdc33a3
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9D7OriginalNativeFockMajorana48MatrixBlockEntryProbe.lean")" = 192dcc23c937efe612ce314a8a96df557d6b2ad6
+          # Independent strict source pins: actual native 16-block Spin48
+          # action, original Fock mulVec action, and source fiber predicate.
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9D6OriginalNativeSixteenSpin48SourceAxisActionProbe.lean")" = 3e7f60c3baa19d4fdbe5830c2a64a02a93fd3518
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9D8OriginalFockMajorana48SourceBasisMulVecProbe.lean")" = c2dabb1d9f6e1574b947b5f5940a9d427649a2a2
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V48OriginalGaugeSpin48ProjectionFiberProbe.lean")" = c82d3bd763a63ea9469280971754e11c28f84788
+          # Parent L9D9 source must match independently accepted
+          # universal original native Spin48 gauge projection.
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9D9OriginalNativeSixteenSpin48ActualGaugeUniversalProjectionProbe.lean")" = a0195adbc3fb8019a2d962ab566326dabaf90088
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9E1OriginalNativeSixteenSpin48UniversalCliffordConjugationProbe.lean")" = d62909cef3a7d44e970d243258465bb4a8f88da7
+          test "$(git hash-object experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean)" = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4
+          # Parent L9E2 is strictly accepted and SHA-pinned.
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9E2OriginalFockMajoranaSourceCliffordAxisNormalizationProbe.lean")" = 9d4ca3a4795ab1febfc44fcad90516a3dce22c4e
+          # Exact qualified parent source is immutable within this gate.
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9E3OriginalFockNormalizedMajoranaPairwiseCliffordCARProbe.lean")" = d32931786da9cace4c198cc864f853173e068dad
+          test "$(git hash-object "$r/SU2BFSSPhysicalDomainS1V52L9E4OriginalFockRealLinearCliffordGeneratorMapProbe.lean")" = b0035401f5b75b4f9d07622842b1fb05de5cac8d
+          candidate="$r/SU2BFSSPhysicalDomainS1V52L9E5A2FiniteComplexWeightedFockCliffordSquareProbe.lean"
+          expected=e5e47eecfae169372eb677d5454a0cabafaedb31
+          test -s "$candidate"
+          committed="$(git rev-parse "HEAD:$candidate")"
+          worktree_filtered="$(git hash-object "$candidate")"
+          worktree_raw="$(git hash-object --no-filters "$candidate")"
+          echo "S1V52L9E5A2_EXACT_SOURCE_SHA_DIAGNOSTIC expected=$expected committed=$committed filtered=$worktree_filtered raw=$worktree_raw"
+          test "$committed" = "$expected"
+          test "$worktree_raw" = "$expected"
+          git diff --quiet HEAD -- "$candidate"
+          echo S1V52L9E5A2_SOURCE_PINS_AND_ORIGINAL_MATHLIB_PASS
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore immutable original Lean and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v52l9e5a2/toolchain.log; then
+              ok=true; break
+            fi
+            echo S1V52L1_PINNED_LEAN_RETRY_$attempt | tee -a /tmp/bfss-s1v52l9e5a2/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo PINNED_ORIGINAL_LEAN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v52l9e5a2/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo S1V52L1_PINNED_LEAN_MATHLIB_VERIFIED
+
+      - name: Restore qualified L9E4 original Fock real-linear gamma map cache
+        id: cacheL9E4
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v52l9e4-original-fock-real-linear-gamma-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed without accepted original source dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.cacheL9E4.outputs.cache-hit }}" = true || { echo S1V52L9E5A2_QUALIFIED_L9E4_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/Core.olean || { echo S1V52L9E5A2_ORIGINAL_BFSS_CORE_OLEAN_MISSING; exit 1; }
+          for stem in SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe SU2BFSSPhysicalDomainS1V6ConcreteSource48ColorAxisOrthogonalityProbe SU2BFSSPhysicalDomainS1V52ASourceEvenCliffordQuaternionTableProbe SU2BFSSPhysicalDomainS1V52B1SourcePauliQuaternionMatrixMultiplicationProbe SU2BFSSPhysicalDomainS1V52B2Original48CliffordQuaternionPolynomialMulProbe SU2BFSSPhysicalDomainS1V52B3Original48CliffordQuaternionUnitNormProbe SU2BFSSPhysicalDomainS1V52C1OriginalNativeGaugeQuaternionCoordinatesProbe SU2BFSSPhysicalDomainS1V52C2ANativeSU2MatrixAdjugateSourceProbe SU2BFSSPhysicalDomainS1V52C2BNativeSU2QuaternionWholeMatrixSourceProbe SU2BFSSPhysicalDomainS1V52C2CNativeSU2RealQuaternionMatrixBridgeProbe SU2BFSSPhysicalDomainS1V52C2DOriginalNativeSU2QuaternionMultiplicationProbe SU2BFSSPhysicalDomainS1V52C2EOriginalNativeGaugeCliffordUnitHomProbe SU2BFSSPhysicalDomainS1V52S1Original48CliffordQuaternionStarUnitarityProbe SU2BFSSPhysicalDomainS1V52S2Original48CliffordQuaternionEvennessProbe SU2BFSSPhysicalDomainS1V52L1AIsolatedAbstractNormAndOriginalZCliffordFactorProbe SU2BFSSPhysicalDomainS1V52L1CIsolatedSource48CoordinateNormProbe SU2BFSSPhysicalDomainS1V52L1DOriginalZPlaneSourceAxisUnitProbe SU2BFSSPhysicalDomainS1V52L4OriginalColorPlaneRotorGeometryProbe SU2BFSSPhysicalDomainS1V52L5OriginalYPlaneLipschitzMembershipProbe SU2BFSSPhysicalDomainS1V52L6OriginalYPlaneSpinMembershipProbe SU2BFSSPhysicalDomainS1V52L2OriginalZPlaneLipschitzMembershipProbe SU2BFSSPhysicalDomainS1V52L3OriginalZPlaneSpinMembershipProbe SU2BFSSPhysicalDomainS1V52L7B1NativeZYCoordinateSpinProductProbe SU2BFSSPhysicalDomainS1V52L7B2NativeZYZTripleSpinProductProbe SU2BFSSPhysicalDomainS1V52L7B3NativeEulerWitnessSpinHomProbe SU2BFSSPhysicalDomainS1V52L7C2NativeOriginalSU2ZeroSafeEulerPolarProbe SU2BFSSPhysicalDomainS1V52L7C3UnitQuaternionToOriginalNativeSU2Probe SU2BFSSPhysicalDomainS1V52L7C4ActualNativeZYZQuaternionFiniteCoefficientsProbe SU2BFSSPhysicalDomainS1V52L7C5OriginalNativeZYZCircleFactorsProbe SU2BFSSPhysicalDomainS1V52L7C6OriginalNativeZeroSafeEulerPhaseBridgeProbe SU2BFSSPhysicalDomainS1V52L7C7OriginalNativeEulerWitnessAndSpinHomProbe SU2BFSSPhysicalDomainS1V52L8AOriginalDisjointBlockCliffordBivectorCommutationProbe SU2BFSSPhysicalDomainS1V52L8BOriginalArbitraryBlockQuaternionCliffordCommutationProbe SU2BFSSPhysicalDomainS1V52L8COriginalNativeSpin48CrossBlockImageCommutationProbe SU2BFSSPhysicalDomainS1V52L8DOriginalNodupNativeBlockSpin48ListHomProbe SU2BFSSPhysicalDomainS1V52L8EOriginalOrderedSixteenNativeSU2Spin48HomProbe SU2BFSSPhysicalDomainS1V52L9AOriginalNativeCrossBlockMajoranaCliffordFixationProbe SU2BFSSPhysicalDomainS1V52L9B0OriginalSameBlockBivectorAxisParityProbe SU2BFSSPhysicalDomainS1V52L9B1OriginalSameBlockQuaternionAxisReflectionProbe SU2BFSSPhysicalDomainS1V52L9B2OriginalQuaternionReflectionCoefficientProbe SU2BFSSPhysicalDomainS1V52L9B3OriginalBivectorOnAxisReductionProbe SU2BFSSPhysicalDomainS1V52L9B4OriginalSameBlockQuaternionConjugationProbe SU2ColorCrossProbe SU2BFSSPhysicalDomainS1V52L9C1OriginalPauliQuaternionTracePolynomialProbe SU2BFSSPhysicalDomainS1V52L9C2OriginalNormalizedPauliQuaternionTraceProbe SU2BFSSPhysicalDomainS1V52L9C3OriginalNativeColorAdjointMatrixBridgeProbe SU2BFSSG3AAdjointColorRepresentationProbe SU2BFSSPhysicalDomainS1V52L9D1OriginalNativeSameBlockSpinCliffordAdjointProbe SU2BFSSPhysicalDomainS1V52L9AOriginalNativeCrossBlockMajoranaCliffordFixationProbe SU2BFSSPhysicalDomainS1V52L9D2OriginalNativeSameBlockSpin48RealVectorActionProbe SU2BFSSPhysicalDomainS1V52L9D3OriginalNativeDisjointBlockSpin48RealVectorFixationProbe SU2BFSSPhysicalDomainS1V52L9D4OriginalNativeBlockSpin48RealVectorColorCombinationProbe SU2BFSSPhysicalDomainS1V52L8DOriginalNodupNativeBlockSpin48ListHomProbe SU2BFSSG1APairedThetaProbe SU2BFSSPhysicalDomainS1V52L9D7OriginalNativeFockMajorana48MatrixBlockEntryProbe SU2BFSSPhysicalDomainS1V52L9D8OriginalFockMajorana48SourceBasisMulVecProbe SU2BFSSPhysicalDomainS1V52L9D9OriginalNativeSixteenSpin48ActualGaugeUniversalProjectionProbe SU2BFSSPhysicalDomainS1V52L9E1OriginalNativeSixteenSpin48UniversalCliffordConjugationProbe SU2BFSSG1APairedThetaProbe SU2BFSSPhysicalDomainS1V52L9E2OriginalFockMajoranaSourceCliffordAxisNormalizationProbe SU2BFSSPhysicalDomainS1V52L9E3OriginalFockNormalizedMajoranaPairwiseCliffordCARProbe SU2BFSSPhysicalDomainS1V52L9E4OriginalFockRealLinearCliffordGeneratorMapProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "S1V52L9E5A2_REQUIRED_QUALIFIED_OLEAN_MISSING=$stem"; exit 1; }
+          done
+          echo S1V52L9E5A2_ALL_QUALIFIED_ORIGINAL_SOURCE_DEPENDENCIES_READY
+
+
+
+      - name: Restore exact original Pauli transitive OAI modules from pinned upstream source
+        shell: bash
+        timeout-minutes: 20
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          for stem in \
+            OAI/MathematicalPhysics/BFSS/GammaWords \
+            OAI/MathematicalPhysics/BFSS/GammaIdentity \
+            OAI/MathematicalPhysics/BFSS/MassIdentity \
+            OAI/MathematicalPhysics/BFSS/CliffordSymbols \
+            OAI/MathematicalPhysics/BFSS/PotentialBasis \
+            OAI/Analysis/CharacterCriterion/Definitions \
+            OAI/Analysis/CharacterCriterion/Pauli
+          do
+            mkdir -p ".lake/build/lib/lean/$(dirname "$stem")"
+            if test -s ".lake/build/lib/lean/$stem.olean"; then
+              echo "S1V52L9E5A2_GATE2_PINNED_UPSTREAM_ALREADY_CACHED=$stem"
+            else
+              timeout 360s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee -a /tmp/bfss-s1v52l9e5a2/qualified-original-oai-dependencies.log
+              test -s ".lake/build/lib/lean/$stem.olean" || { echo "S1V52L9E5A2_GATE2_UPSTREAM_OLEAN_MISSING=$stem"; exit 1; }
+              echo "S1V52L9E5A2_GATE2_PINNED_UPSTREAM_SOURCE_COMPILED=$stem"
+            fi
+          done
+
+      - name: Compile exact original source normalized Pauli foundation (pinned)
+        shell: bash
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=SU2ColorCrossProbe
+          cp "../../experiments/openai-math-su2-concrete-potential/$stem.lean" "$stem.lean"
+          timeout 630s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v52l9e5a2/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean" || { echo S1V52L9E5A2_ORIGINAL_PAULI_OLEAN_MISSING; exit 1; }
+          echo S1V52L9E5A2_EXACT_PINNED_PAULI_SOURCE_READY
+
+      - name: Compile exact original source Spin48 real-vector action dependency closure if missing
+        shell: bash
+        timeout-minutes: 26
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          # The native L9D1 cache may already contain all genuine S1V31
+          # source-real 48-vector foundations. Never assume so: restore
+          # missing original FCP imports in their real topological order.
+          python3 - <<'PY'
+          import pathlib
+          sources={}
+          for directory in ("openai-math-su2-physical-domain","openai-math-su2-concrete-potential"):
+            for p in (pathlib.Path("experiments")/directory).glob("SU2*.lean"):
+              assert p.stem not in sources,("Duplicate source module",p.stem)
+              sources[p.stem]=p
+          marked=set()
+          visiting=set()
+          order=[]
+          def visit(stem):
+            if stem in marked:return
+            assert stem not in visiting,("Source dependency cycle",stem)
+            assert stem in sources,("Missing actual FCP module",stem)
+            visiting.add(stem)
+            for line in sources[stem].read_text().splitlines():
+              if line.startswith("import "):
+                for dep in line[7:].split():
+                  if dep.startswith("SU2"):visit(dep)
+            visiting.remove(stem)
+            marked.add(stem)
+            order.append(stem)
+          visit("SU2BFSSPhysicalDomainS1V52L9D6OriginalNativeSixteenSpin48SourceAxisActionProbe")
+          visit("SU2BFSSPhysicalDomainS1V48OriginalGaugeSpin48ProjectionFiberProbe")
+          visit("SU2BFSSPhysicalDomainS1V52L9D8OriginalFockMajorana48SourceBasisMulVecProbe")
+          out=pathlib.Path("/tmp/bfss-s1v52l9e5a2/source-spin48-vector-import-order.txt")
+          out.write_text("\n".join(order)+"\n")
+          print("S1V52L9E5A2_ACTUAL_ORIGINAL_REAL_VECTOR_DAG="+",".join(order))
+          PY
+          while IFS= read -r stem; do
+            relative=$(find experiments/openai-math-su2-concrete-potential experiments/openai-math-su2-physical-domain -maxdepth 1 -name "$stem.lean" -print -quit)
+            test -n "$relative" && test -s "$relative" || { echo "S1V52L9E5A2_SOURCE_DEPENDENCY_MISSING=$stem"; exit 1; }
+            cp "$relative" "upstream-math/lean/$stem.lean"
+            cd upstream-math/lean
+            if test -s ".lake/build/lib/lean/$stem.olean"; then
+              echo "S1V52L9E5A2_QUALIFIED_ORIGINAL_DEPENDENCY_REUSED=$stem"
+            else
+              timeout 420s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v52l9e5a2/$stem.log"
+              test -s ".lake/build/lib/lean/$stem.olean" || { echo "S1V52L9E5A2_ACTUAL_ORIGINAL_OLEAN_MISSING=$stem"; exit 1; }
+              if grep -Eq "(sorryAx|error:|unknownIdentifier)" "/tmp/bfss-s1v52l9e5a2/$stem.log"; then
+                echo "S1V52L9E5A2_ORIGINAL_SOURCE_COMPILE_REJECTED=$stem"; exit 1
+              fi
+              echo "S1V52L9E5A2_ACTUAL_ORIGINAL_SOURCE_COMPILED=$stem"
+            fi
+            cd ../..
+          done < /tmp/bfss-s1v52l9e5a2/source-spin48-vector-import-order.txt
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS1V30Real48CliffordGeneratorInjectiveViaExteriorProbe.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS1V31CanonicalAllSpin48RealVectorActionProbe.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS1V32AllSpin48CanonicalVectorLinearGroupActionProbe.olean
+          echo S1V52L9E5A2_GENUINE_SOURCE_REAL_VECTOR_IMPORT_CLOSURE_READY
+
+      - name: Compile finite COMPLEX-weighted original Fock CAR contraction helper
+        shell: bash
+        timeout-minutes: 15
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          mkdir -p .lake/build/lib/lean
+          stem=SU2BFSSPhysicalDomainS1V52L9E5A2FiniteComplexWeightedFockCliffordSquareProbe
+          cp "../../experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+          timeout 780s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v52l9e5a2/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean" || { echo S1V52L9E5A2_FRESH_SOURCE_OLEAN_MISSING; exit 1; }
+          python3 - <<'PY'
+          import pathlib,re
+          stem="SU2BFSSPhysicalDomainS1V52L9E5A2FiniteComplexWeightedFockCliffordSquareProbe"
+          ns="FCP.BFSSS1V52L9E5A2"
+          expected=[
+            "finiteComplexWeightedFockClifford_square"]
+          src=pathlib.Path(stem+".lean").read_text()
+          log=pathlib.Path("/tmp/bfss-s1v52l9e5a2",stem+".log").read_text()
+          assert re.findall(r'^namespace (\S+)',src,re.M)==[ns]
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==expected
+          rr=re.findall(r"'("+re.escape(ns)+r"\.[^\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          found={k:{x.strip() for x in v.split(",") if x.strip()} for k,v in rr}
+          assert len(rr)==len(found)==len(expected),rr
+          allowed={"propext","Classical.choice","Quot.sound"}
+          for name in expected:
+            key=ns+"."+name
+            assert key in found and found[key]<=allowed,(key,found)
+          assert "sorryAx" not in log and "error:" not in log and "unknownIdentifier" not in log,log[-9000:]
+          print("S1V52L9E5A2_FINITE_COMPLEX_WEIGHTED_FOCK_SQUARE_1_ROOT_KERNEL_PASS")
+          PY
+
+      - name: Save qualified finite real-weighted Fock CAR contraction cache
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v52l9e5a2-complex-weighted-clifford-square-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve finite weighted CAR contraction diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v52l9e5a2-fock-real-linear-gamma-${{ github.run_id }}
+          path: /tmp/bfss-s1v52l9e5a2/
+          if-no-files-found: warn
