@@ -1,15 +1,16 @@
-import SU2BFSSPhysicalDomainS1V52L9E5AFiniteRealWeightedFockCliffordSquareProbe
+import SU2BFSSPhysicalDomainS1V52L9E5A2FiniteComplexWeightedFockCliffordSquareProbe
+import SU2BFSSPhysicalDomainS1V52L9E5B0OriginalFockRealComplexOperatorScalarBridgeProbe
 
 /-!
-L9E5B — STAGED, UNQUALIFIED original BFSS 48-real Fock square.
+L9E5B — STAGED, UNQUALIFIED exact original BFSS all-vector
+Clifford quadratic-square. The two explicitly visible prerequisites
+are an independently checked abstract COMPLEX finite CAR contraction
+(L9E5A2) and a separately checked REAL→COMPLEX scalar compatibility
+lemma on the ACTUAL original Fock operator (L9E5B0).
 
-The mathematical target is source-exact. It uses the REAL original
-Source48Vector = (Fin 24 × Fin 2) → ℝ, the accepted exact original
-16×3 ↔ 48 source-Fock label equivalence, and the positive sqrt(2)
-normalization of actual pairedTheta on original Fermion 2.
-
-This is NOT an accepted theorem until a later, separately pinned
-strict source/axiom gate verifies it, after L9E5A itself qualifies.
+No admitted scalar-tower instances or surrogate operator modules.
+This file is NOT certified until both parents and its own exact
+source specialization pass strict Lean/axiom validation.
 -/
 
 set_option autoImplicit false
@@ -17,22 +18,18 @@ set_option maxHeartbeats 400000
 
 namespace FCP.BFSSS1V52L9E5B
 noncomputable section
-
 open OAI.BFSSQuantum
 open FCP.BFSSS1V0
 open FCP.BFSSS1V5
 open FCP.BFSSS1V52L9E2
 open FCP.BFSSS1V52L9E3
 open FCP.BFSSS1V52L9E4
-open FCP.BFSSS1V52L9E5A
+open FCP.BFSSS1V52L9E5A2
+open FCP.BFSSS1V52L9E5B0
 
 private abbrev FockOp := Fermion 2 →L[ℂ] Fermion 2
 
-/-- The exact ORIGINAL real-linear Fock gamma map obeys Q(v) on
-ALL source vectors, not merely the 48 axes. This is the required
-quadratic property for an eventual universal CliffordAlgebra.lift. -/
-theorem originalFockGammaRealLinear_sq
-    (v : Source48Vector) :
+theorem originalFockGammaRealLinear_sq (v : Source48Vector) :
     originalFockGammaRealLinear v *
       originalFockGammaRealLinear v =
         (source48Quadratic v) • (1 : FockOp) := by
@@ -41,6 +38,7 @@ theorem originalFockGammaRealLinear_sq
     originalNormalizedFockMajorana
       (sourceBlockColorEquiv.symm p).1
       (sourceBlockColorEquiv.symm p).2
+  let cc (p : SourceLabel) : ℂ := (v p : ℂ)
   have hdiag (p : SourceLabel) :
       γ p * γ p = (1 : FockOp) :=
     originalNormalizedFockMajorana_sq_one
@@ -73,25 +71,44 @@ theorem originalFockGammaRealLinear_sq
         (sourceBlockColorEquiv.symm q).1
         (sourceBlockColorEquiv.symm p).2
         (sourceBlockColorEquiv.symm q).2)
-  have hfinite :
-      (∑ p : SourceLabel, (v p) • γ p) *
-        (∑ p : SourceLabel, (v p) • γ p) =
-      (∑ p : SourceLabel, v p * v p) • (1 : FockOp) := by
+  have hcomplex :
+      (∑ p : SourceLabel, cc p • γ p) *
+        (∑ p : SourceLabel, cc p • γ p) =
+      (∑ p : SourceLabel, cc p * cc p) • (1 : FockOp) := by
     simpa only [Finset.sum_univ] using
-      finiteRealWeightedFockClifford_square
-        (Finset.univ : Finset SourceLabel) v γ hdiag hanti
+      finiteComplexWeightedFockClifford_square
+        (Finset.univ : Finset SourceLabel) cc γ hdiag hanti
+  have hrealToComplex :
+      (∑ p : SourceLabel, (v p) • γ p) =
+        (∑ p : SourceLabel, cc p • γ p) := by
+    apply Finset.sum_congr rfl
+    intro p hp
+    exact originalFockOperator_real_smul_eq_complex_smul (v p) (γ p)
+  have hcoeff :
+      (∑ p : SourceLabel, cc p * cc p) =
+        ((∑ p : SourceLabel, v p * v p : ℝ) : ℂ) := by
+    simp only [cc, ← Complex.ofReal_mul, map_sum]
   calc
     originalFockGammaRealLinear v *
         originalFockGammaRealLinear v =
       (∑ p : SourceLabel, (v p) • γ p) *
         (∑ p : SourceLabel, (v p) • γ p) := by
           rfl
-    _ = (∑ p : SourceLabel, v p * v p) • (1 : FockOp) := hfinite
+    _ = (∑ p : SourceLabel, cc p • γ p) *
+          (∑ p : SourceLabel, cc p • γ p) := by
+            rw [hrealToComplex]
+    _ = (∑ p : SourceLabel, cc p * cc p) •
+          (1 : FockOp) := hcomplex
+    _ = (∑ p : SourceLabel, v p * v p) •
+          (1 : FockOp) := by
+            rw [hcoeff]
+            exact
+              (originalFockOperator_real_smul_eq_complex_smul
+                (∑ p : SourceLabel, v p * v p) (1 : FockOp)).symm
     _ = (source48Quadratic v) • (1 : FockOp) := by
           rw [FCP.BFSSS1V6.source48Quadratic_eq_dot]
           rfl
 
 #print axioms originalFockGammaRealLinear_sq
-
 end
 end FCP.BFSSS1V52L9E5B
