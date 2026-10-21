@@ -29,6 +29,7 @@ noncomputable section
 
 open OAI.BFSSQuantum
 open FCP.BFSSS1V0
+open FCP.BFSSS1V52L9E4
 open FCP.BFSSS1V52L9E5C1
 open FCP.BFSSS1V52L9E5B
 open scoped TensorProduct
