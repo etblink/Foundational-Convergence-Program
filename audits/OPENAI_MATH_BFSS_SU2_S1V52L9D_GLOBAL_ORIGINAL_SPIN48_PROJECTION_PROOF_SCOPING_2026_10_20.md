@@ -1,0 +1,30 @@
+# S1V52L9D — source-exact global native Spin(48) Majorana projection: proof scoping
+
+## Verified dependency boundary (no new theorem claimed)
+
+1. **Accepted L9C3 Gate #2:** source `pairedAlgebraData.adjointCoefficient g A B` and original G3A `adjointColorMatrix g B A` equal the source Clifford quaternion polynomial for actual original `g : GaugeGroup 2`; 181 cumulative roots. Exact qualified parent cache `bfss-s1v52l9c3-native-bfss-adjoint-color-v1-adc7f124-lean4341-d13f23b-Linux-X64`.
+2. **L9D1 candidate** `SU2BFSSPhysicalDomainS1V52L9D1OriginalNativeSameBlockSpinCliffordAdjointProbe.lean`, pinned source blob `88a8628c502033ea6b688f8de9f1fe78a2bbb6f6`: three actual native original-source Spin48 Clifford axes with **the source adjointColorMatrix**. Strict [Gate #1 run #39529248320](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39529248320) launched, qualification still pending as of scoping.
+3. **L9D0 independent candidate** `SU2BFSSPhysicalDomainS1V52L9D0ActualFockSpinBlockSourceLabelEqualityProbe.lean`, pinned source blob `66918befce71660a3df8050de2386e4fac0ed86a`: the identical `S1V5.sourceBlockColorLabel` and `G1A.pairedLabelEquiv (spinPairEquiv.symm α,A)` indices. [Gate #1 run #39529425280](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39529425280), qualification pending. This has no logical dependency on L9D1.
+4. Historical accepted exact source L9A theorem `originalNativeDisjointAxis_Spin48_conj_fixes`: a spin element from block β fixes an original Clifford Majorana generator in a *different* block α. Accepted L8E `originalNativeSixteenSpinHom : GaugeGroup 2 →* spinGroup source48Quadratic` is the ordered (not commutative Finset) product of 16 actual block homs.
+5. Previously source-qualified S1V31 `sourceSpin48VectorAction_clifford_generator` and S1V32 `sourceSpin48VectorAction_mul`, `_smul`, `_one` identify the canonical genuine Spin48 real-vector action by injectivity of original Clifford `ι`. Source S1V49 `historicalSixteenRotor_canonicalSourceAction` shows the exact lemma/proof pattern `sourceSpin48VectorAction_clifford_generator` → definitional `rfl` for Spin unit conjugation → original Clifford generator identity → original `ι` injectivity.
+
+## Remaining exact mathematical proof tasks, not yet discharged
+
+**A. Local native Spin vector action.** Using L9D1 (when qualified), apply S1V31 `sourceSpin48VectorAction_clifford_generator`, the definitional equality `ConjAct.toConjAct (spinGroup.toUnits s) • x = (s:C)*x*star (s:C)`, and S1V30 source Clifford generator injectivity. Prove for any source block α, input A that the actual source `sourceSpin48VectorAction (originalNativeGaugeSpinHom α g) (sourceBlockColorAxis α A)` is the sum `∑ B, (adjointColorMatrix g B A) • sourceBlockColorAxis α B` with original B=output, A=input. This is **stronger** than L9D1's Clifford equality and requires an explicit real-vector proof.
+
+**B. Cross-block action.** Transport source L9A's exact source Clifford fixation through S1V31 and injectivity to prove `sourceSpin48VectorAction (originalNativeGaugeSpinHom β g) (sourceBlockColorAxis α A) = sourceBlockColorAxis α A` when α ≠ β. Extend from axes to same-block real linear combinations using S1V31/S1V32 linearity.
+
+**C. Ordered sixteen-fold action.** Use the actual `originalNativeSixteenSpinBlocks` list, its `Nodup` proof, and L8E's `originalNativeSixteenSpinHom_apply`. Prove via `List.prod` induction and S1V32 multiplication action that fifteen disjoint factors fix the α axes (and their transformed linear combinations), while the single α factor applies the genuine native `adjointColorMatrix` color rotation. Avoid simplifying a monolithic 16×48 expression: use local lemmas and the accepted list construction. Track multiplication order, since generic Spin group factors are NOT presumed commutative.
+
+**D. Actual original Fock matrix basis action.** Using L9D0 identity, S1J `sourceRealMajoranaMatrix_entry` and G3B `oneParticleMatrix_block`, prove that on every original source block-color basis `sourceBlockColorAxis α A`, the exact `sourceRealMajoranaMatrix g` produces the same `∑ B, adjointColorMatrix g B A • sourceBlockColorAxis α B`. The complex spin-pair bit must remain unchanged and other paired labels must vanish. Do not substitute a new block index equivalence.
+
+**E. Global projection.** Extend basis equality to arbitrary `v : Source48Vector` using the explicit source `sourceBlockColorEquiv` and linearity of the **genuine** Spin48 real vector action and original real majorana matrix `mulVec`. Establish the previously source-defined exact predicate `FCP.BFSSS1V48.sourceSpin48CoversActualGauge g (FCP.BFSSS1V52L8E.originalNativeSixteenSpinHom g)` for every original `g : GaugeGroup 2`. That is the **actual global group-homomorphic Spin48 projection** goal, not just an abstract partial lift.
+
+## Boundaries and negative knowledge
+
+- The accepted local Clifford and real color coefficients do not automatically prove global projection: source-vector extraction, all 16 ordered factors, original paired mode labeling, and exact matrix action still need their own Lean obligations.
+- S1V49 qualifies ONE historical source plus-i quarter witness, not all g. S1V48 only proves coverage predicate compatibility, not existence at all g.
+- The five early L9C1 red gates demonstrate that nested full-source matrix expansions can hide small rewrite failures; prefer named finite matrix and real-vector lemmata, with isolated strict compiler feedback. L9C3 Gate #1 historical cache missing was infrastructure; Gate #2's source-exact import DAG was successful.
+- A global abstract Spin48 group hom with correct SO48 projection does **not** by itself establish continuous representation, concrete Fock implementing unitary, original unbounded BFSS Hamiltonian equality, or a spectral-gap theorem.
+
+No changes to canonical `main`, immutable upstream `etblink/math`, or draft PR #25. This is research handoff/scoping, not proof acceptance.
