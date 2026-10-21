@@ -58,6 +58,11 @@ theorem originalNativeSixteenSpinFock_unitary_majorana_covariance
   rw [originalNativeSixteenSpin48_star_fock_adjoint g] at h
   exact h
 
+-- Additional dependency audit: these two are imported original
+-- algebraic-covariance roots, NOT new F13 declarations. Exact
+-- source hash and allowed axioms must be independently visible.
+#print axioms FCP.BFSSS1V52L9E5D1.originalFockCliffordAlgHom_conj_generator
+#print axioms FCP.BFSSS1V52L9E5D1.originalNativeSpinFock_clifford_generator_covariance
 #print axioms originalNativeSixteenSpinFock_unitary_majorana_covariance
 
 end
