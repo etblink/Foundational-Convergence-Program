@@ -51,25 +51,37 @@ theorem originalSourceRealMajoranaMatrix_mulVec_sourceAxis
     (∑ B : Fin 3, (adjointColorMatrix g B A) •
       sourceBlockColorAxis α B) (sourceBlockColorLabel β C)
   rw [originalSourceRealMajoranaMatrix_sourceBlock_entry]
+  -- Exact original source-label injectivity reduces the ONE
+  -- coordinate indicator; avoid unfolding the whole Fock index
+  -- equivalence or relying on nonexistent Prod.mk.inj_iff.mp.
   have hcoord (B : Fin 3) :
       sourceBlockColorAxis α B (sourceBlockColorLabel β C) =
         if α = β ∧ B = C then (1 : ℝ) else 0 := by
     have hlabel :
-        (sourceBlockColorLabel α B = sourceBlockColorLabel β C) ↔
+        (sourceBlockColorLabel β C = sourceBlockColorLabel α B) ↔
           (α = β ∧ B = C) := by
       constructor
       · intro h
-        exact Prod.mk.inj_iff.mp (sourceBlockColorLabel_injective h)
+        have hp : (β, C) = (α, B) :=
+          sourceBlockColorLabel_injective h
+        exact ⟨(congrArg Prod.fst hp).symm,
+          (congrArg Prod.snd hp).symm⟩
       · rintro ⟨rfl, rfl⟩
         rfl
-    simp [sourceBlockColorAxis, Pi.single_apply, hlabel]
-  simp only [Finset.sum_apply, Pi.smul_apply]
+    simp only [sourceBlockColorAxis, Pi.single_apply]
+    rw [hlabel]
+  -- Compute only the three ORIGINAL color coordinates. Restrict
+  -- simplification to this scalar sum, not original BFSS definitions.
+  simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul]
   simp_rw [hcoord]
   by_cases hab : β = α
-  · have hba : α = β := hab.symm
-    simp [hab, hba]
+  · subst β
+    simp only [eq_self_iff_true, true_and, ite_true,
+      mul_ite, mul_one, mul_zero]
+    simp
   · have hba : α ≠ β := Ne.symm hab
-    simp [hab, hba]
+    simp only [hab, hba, false_and, ite_false,
+      mul_zero, Finset.sum_const_zero]
 
 #print axioms originalSourceRealMajoranaMatrix_mulVec_sourceAxis
 
