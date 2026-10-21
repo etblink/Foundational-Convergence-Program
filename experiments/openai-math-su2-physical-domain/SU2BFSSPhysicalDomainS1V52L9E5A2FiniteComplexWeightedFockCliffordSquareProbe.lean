@@ -55,7 +55,8 @@ theorem finiteComplexWeightedFockClifford_square
         (smul_add (c i * c j) (γ i * γ j) (γ j * γ i)).symm
       _ = 0 := by
         rw [hanti i j hij]
-        exact smul_zero (c i * c j)
+        exact (smul_zero (c i * c j) :
+          (c i * c j) • (0 : FockOp) = 0)
   have hsum (t : Finset ι) :
       (∑ i ∈ t, X i) * (∑ i ∈ t, X i) =
         (∑ i ∈ t, c i * c i) • (1 : FockOp) := by
