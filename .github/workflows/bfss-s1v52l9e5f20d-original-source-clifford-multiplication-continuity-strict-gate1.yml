@@ -1,0 +1,158 @@
+name: BFSS S1V52L9E5F20D Original Source Clifford Multiplication Continuity Strict Gate 1
+
+# Branch/path isolated strict gate; source/audit commits do not run this workflow.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-s1v52l9e5f20d-original-source-clifford-multiplication-continuity-strict-gate1.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-s1v52l9e5f20d-source-clifford-mul-gate1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  original-source-clifford-multiplication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact original source research branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Checkout immutable original upstream BFSS math
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Verify exact source SHA and original pinned toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v52l9e5f20d
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          d=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20DOriginalRealCliffordMultiplicationContinuousProbe.lean)" = 2dccac1617e0c13d83e6a04a8f5b43ae09330add || { echo F20D_SOURCE_PIN_MISMATCH=SU2BFSSPhysicalDomainS1V52L9E5F20DOriginalRealCliffordMultiplicationContinuousProbe; exit 1; }
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20COriginalSourceCliffordCoordinateNormQuaternionContinuityProbe.lean)" = 19e9d64f673fb02d62c93f8c9cfab3f888bcce7f || { echo F20D_SOURCE_PIN_MISMATCH=SU2BFSSPhysicalDomainS1V52L9E5F20COriginalSourceCliffordCoordinateNormQuaternionContinuityProbe; exit 1; }
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20BOriginalSource48CliffordPBWBasisFiniteDimensionalProbe.lean)" = 6e4c78fd31f9781267659313a8a0edfedd65e9ad || { echo F20D_SOURCE_PIN_MISMATCH=SU2BFSSPhysicalDomainS1V52L9E5F20BOriginalSource48CliffordPBWBasisFiniteDimensionalProbe; exit 1; }
+          test "$(git hash-object experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20AOriginalNativeQuaternionCoordinateContinuityProbe.lean)" = f76b71b1b47227bd75727b997064e381f016e913 || { echo F20D_SOURCE_PIN_MISMATCH=SU2BFSSPhysicalDomainS1V52L9E5F20AOriginalNativeQuaternionCoordinateContinuityProbe; exit 1; }
+          target=experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20DOriginalRealCliffordMultiplicationContinuousProbe.lean
+          expected=2dccac1617e0c13d83e6a04a8f5b43ae09330add
+          committed="$(git rev-parse "HEAD:$target")"
+          filtered="$(git hash-object --path="$target" "$target")"
+          raw="$(git hash-object --no-filters "$target")"
+          echo "F20D_EXACT_SHA expected=$expected committed=$committed filtered=$filtered raw=$raw"
+          test "$expected" = "$committed" && test "$expected" = "$filtered" && test "$expected" = "$raw"
+          echo F20D_ORIGINAL_SOURCE_TOOLCHAIN_PINS_PASS
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean and Mathlib revision
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v52l9e5f20d/toolchain.log; then
+              ok=true; break
+            fi
+            echo F20D_LEAN_RETRY_$attempt | tee -a /tmp/bfss-s1v52l9e5f20d/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo F20D_PINNED_LEAN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v52l9e5f20d/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo F20D_PINNED_ORIGINAL_LEAN_MATHLIB_PASS
+
+      - name: Restore accepted F20C original Clifford topology and block continuity cache
+        id: cacheF20C
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v52l9e5f20c-source-clifford-pbw-norm-quaternion-continuity-v3-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed on original F20C qualified cache or missing source modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.cacheF20C.outputs.cache-hit }}" = true || { echo F20D_QUALIFIED_F20C_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/Core.olean || { echo F20D_REAL_BFSS_CORE_MISSING; exit 1; }
+          for stem in SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe SU2BFSSPhysicalDomainS1V52L9E5F20AOriginalNativeQuaternionCoordinateContinuityProbe SU2BFSSPhysicalDomainS1V52L9E5F20BOriginalSource48CliffordPBWBasisFiniteDimensionalProbe SU2BFSSPhysicalDomainS1V52L9E5F20COriginalSourceCliffordCoordinateNormQuaternionContinuityProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "F20D_QUALIFIED_ORIGINAL_MODULE_MISSING=$stem"; exit 1; }
+          done
+          echo F20D_F20C_ORIGINAL_REAL_CLIFFORD_CACHE_HIT
+
+      - name: Compile actual source Clifford joint multiplication continuity
+        shell: bash
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=SU2BFSSPhysicalDomainS1V52L9E5F20DOriginalRealCliffordMultiplicationContinuousProbe
+          cp "../../experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20DOriginalRealCliffordMultiplicationContinuousProbe.lean" "$stem.lean"
+          timeout 660s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v52l9e5f20d/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean" || { echo F20D_FRESH_ORIGINAL_SOURCE_OLEAN_MISSING; exit 1; }
+          python3 - <<'PY'
+          import pathlib,re
+          stem="SU2BFSSPhysicalDomainS1V52L9E5F20DOriginalRealCliffordMultiplicationContinuousProbe"
+          ns="FCP.BFSSS1V52L9E5F20D"
+          root="originalSourceClifford_mul_continuous"
+          inst="originalSourceCliffordContinuousMul"
+          source=pathlib.Path(stem+'.lean').read_text()
+          log=pathlib.Path('/tmp/bfss-s1v52l9e5f20d',stem+'.log').read_text()
+          assert re.findall(r'^namespace (\S+)',source,re.M)==[ns]
+          assert re.findall(r'^theorem (\S+)',source,re.M)==[root]
+          assert re.findall(r'^noncomputable instance (\S+)',source,re.M)==[inst]
+          assert re.findall(r'^#print axioms (\S+)',source,re.M)==[root,inst]
+          rr=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          reports={k:{v.strip() for v in axioms.split(',') if v.strip()} for k,axioms in rr}
+          assert len(rr)==len(reports)==2,rr
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for n in [root,inst]:
+            k=ns+'.'+n
+            assert k in reports and reports[k]<=allowed,(k,reports)
+          assert 'error:' not in log and 'sorryAx' not in log and 'unknownIdentifier' not in log, log[-9000:]
+          print('F20D_REAL_ORIGINAL_SOURCE_CLIFFORD_JOINT_MUL_CONTINUITY_ONE_THEOREM_STRICT_AXIOMS_PASS')
+          PY
+
+      - name: Save qualified source Clifford multiplication continuity cache
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v52l9e5f20d-original-clifford-mul-continuity-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve F20D original Clifford multiplication diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s1v52l9e5f20d-${{ github.run_id }}
+          path: /tmp/bfss-s1v52l9e5f20d
+          if-no-files-found: ignore
