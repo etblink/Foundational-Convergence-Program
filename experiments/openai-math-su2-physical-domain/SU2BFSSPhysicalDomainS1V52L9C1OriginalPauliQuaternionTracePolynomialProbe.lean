@@ -36,8 +36,28 @@ def originalQuaternionAdjointPolynomial
     2*p.a*p.c+2*p.b*p.d,       -2*p.a*p.d+2*p.b*p.c,    p.a^2+p.b^2-p.c^2-p.d^2
   ]
 
-/-- The nine EXACT original source unnormalized Pauli traces.
-The source normalization transport to pairedAlgebraData is separate. -/
+/-- The genuine original source positive-i quaternion conjugates each
+literal Pauli matrix into the *same source* Pauli basis, with B output
+and A input. Proved by 12 finite 2×2 matrix-entry calculations rather
+than the previously failed nested four-matrix trace simplification. -/
+theorem originalPauliQuaternion_matrix_conjugation
+    (p : SourceQuaternionCoords) (A : Fin 3) :
+    sourceQuaternionColorMatrix p * pauli A *
+      (sourceQuaternionColorMatrix p).conjTranspose =
+      ∑ B : Fin 3,
+        (originalQuaternionAdjointPolynomial p B A : ℂ) • pauli B := by
+  ext i j
+  fin_cases A <;> fin_cases i <;> fin_cases j <;>
+    norm_num [pauli, sourceQuaternionColorMatrix,
+      originalQuaternionAdjointPolynomial,
+      Matrix.mul_apply, Matrix.smul_apply, Matrix.conjTranspose_apply,
+      Fin.sum_univ_two, Fin.sum_univ_three,
+      Complex.star_def, Complex.I_sq, Complex.I_mul_I] <;>
+    ring_nf <;> norm_num [Complex.I_sq] <;> ring
+
+/-- The exact unnormalized original Pauli trace follows from the
+source matrix-conjugation theorem and the previously accepted,
+source-normalization-free Pauli trace orthogonality theorem. -/
 theorem originalPauliQuaternion_trace_polynomial
     (p : SourceQuaternionCoords) (B A : Fin 3) :
     Matrix.trace
@@ -45,24 +65,22 @@ theorem originalPauliQuaternion_trace_polynomial
         (sourceQuaternionColorMatrix p * pauli A *
           (sourceQuaternionColorMatrix p).conjTranspose)) =
       ((2 : ℝ) * originalQuaternionAdjointPolynomial p B A : ℂ) := by
-  -- Gate #4 reduced all vecMul/dotProduct operations to actual
-  -- two-entry vectors. Their values still sat under vecHead/vecTail
-  -- and the bundled complex starRingEnd. Reduce those EXACT
-  -- evaluators as well, then run commutative real polynomial ring.
-  fin_cases B <;> fin_cases A <;>
-    apply Complex.ext <;>
-    simp [originalQuaternionAdjointPolynomial, pauli,
-      sourceQuaternionColorMatrix,
-      Matrix.trace, Matrix.mul_apply, Matrix.vecMul, Matrix.dotProduct,
-      Matrix.vecHead, Matrix.vecTail, Matrix.conjTranspose_apply,
-      starRingEnd_apply,
-      Fin.sum_univ_two, Complex.star_def, pow_two,
-      Complex.mul_re, Complex.mul_im, Complex.add_re, Complex.add_im,
-      Complex.sub_re, Complex.sub_im, Complex.neg_re, Complex.neg_im,
-      Complex.conj_re, Complex.conj_im,
-      Complex.I_re, Complex.I_im] <;>
-    ring
+  calc
+    Matrix.trace
+      (pauli B * (sourceQuaternionColorMatrix p * pauli A *
+        (sourceQuaternionColorMatrix p).conjTranspose)) =
+      ∑ C : Fin 3,
+        (originalQuaternionAdjointPolynomial p C A : ℂ) *
+          Matrix.trace (pauli B * pauli C) := by
+            rw [originalPauliQuaternion_matrix_conjugation,
+              Matrix.mul_sum, Matrix.trace_sum]
+            simp only [Matrix.mul_smul, Matrix.trace_smul, smul_eq_mul]
+    _ = ((2 : ℝ) * originalQuaternionAdjointPolynomial p B A : ℂ) := by
+      simp only [pauli_trace_pair]
+      simp [mul_ite, Finset.sum_ite_eq', eq_comm]
+      ring
 
+#print axioms originalPauliQuaternion_matrix_conjugation
 #print axioms originalPauliQuaternion_trace_polynomial
 
 end
