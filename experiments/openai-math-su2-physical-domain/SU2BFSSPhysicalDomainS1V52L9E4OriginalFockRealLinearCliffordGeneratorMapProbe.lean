@@ -110,10 +110,15 @@ theorem originalFockGammaRealLinear_sourceAxis
       -- source coordinate, not syntactically its if expression.
       simp only [sourceBlockColorAxis, Pi.single_apply]
       exact if_neg hneq
-    -- The original target is an ℝ-scaled original Fock operator.
-    -- Let simp see its exact operator type instead of an
-    -- unconstrained zero_smul metavariable.
-    simp [hzero]
+    -- The original ℝ-scaled Fock continuous-linear operator has
+    -- a concrete zero-scalar identity, not an inferred metavariable.
+    -- Gate #3's simp [hzero] did not close this exact goal.
+    rw [hzero]
+    exact zero_smul ℝ
+      (originalNormalizedFockMajorana
+        (sourceBlockColorEquiv.symm p).1
+        (sourceBlockColorEquiv.symm p).2 :
+          Fermion 2 →L[ℂ] Fermion 2)
   · intro hnot
     exact False.elim (hnot (Finset.mem_univ _))
 
