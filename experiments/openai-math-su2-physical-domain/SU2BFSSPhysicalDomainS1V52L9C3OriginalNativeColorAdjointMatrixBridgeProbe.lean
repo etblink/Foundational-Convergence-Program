@@ -1,4 +1,5 @@
 import SU2BFSSPhysicalDomainS1V52L9C2OriginalNormalizedPauliQuaternionTraceProbe
+import SU2BFSSPhysicalDomainS1V52C2CNativeSU2RealQuaternionMatrixBridgeProbe
 import SU2BFSSG3AAdjointColorRepresentationProbe
 
 /-!
