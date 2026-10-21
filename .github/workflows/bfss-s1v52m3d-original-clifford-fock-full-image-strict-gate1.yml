@@ -1,0 +1,151 @@
+name: BFSS S1V52M3D Original Complex Clifford Full Fock Image Strict Gate 1
+
+# Exact source-only target, manual single-path workflow gate.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-s1v52m3d-original-clifford-fock-full-image-strict-gate1.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-m3d-source-schur-gate1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  original-schur-commutant:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact accepted M3B research ancestry
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Checkout immutable BFSS mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Pin original sources and exact isolated M3D candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-s1v52m3d
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          d=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          test "$(git rev-parse 'HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52M3AOriginalComplexCliffordActionImageIrreducibilityProbe.lean')" = ca640e2667a1574cca750a76fb8eaab34f5e59a0
+          test "$(git rev-parse 'HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52M2OriginalComplexifiedCliffordFockRepresentationProbe.lean')" = fa67dfde6cb6a21a97180797bdf5e917e0b417d2
+          git fetch --no-tags --depth=1 origin research/fcp-m3d-clifford-full-image-20261021
+          test "$(git rev-parse FETCH_HEAD)" = 320c4e5832eac40bde1fb77e6b008982ab379306
+          git show "FETCH_HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52M3DOriginalComplexCliffordFullFockImageProbe.lean" > /tmp/bfss-s1v52m3d/SU2BFSSPhysicalDomainS1V52M3DOriginalComplexCliffordFullFockImageProbe.lean
+          test "$(git hash-object --no-filters /tmp/bfss-s1v52m3d/SU2BFSSPhysicalDomainS1V52M3DOriginalComplexCliffordFullFockImageProbe.lean)" = 1f83f46cec3e697533c93733d44d3c2904bf0fb1
+          echo M3D_ORIGINAL_UPSTREAM_AND_EXACT_CANDIDATE_PINS_PASS
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean toolchain and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-s1v52m3d/toolchain.log; then
+              ok=true; break
+            fi
+            echo M3D_PINNED_LEAN_RETRY_$attempt | tee -a /tmp/bfss-s1v52m3d/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo M3D_PINNED_LEAN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-s1v52m3d/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo M3D_PINNED_LEAN_MATHLIB_PASS
+
+      - name: Restore qualified M3B original Clifford action cache
+        id: cacheM3C
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-fcp-m3c-original-fock-schur-finite-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail closed on accepted original Clifford and M3B objects
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.cacheM3C.outputs.cache-hit }}" = true || { echo M3D_QUALIFIED_M3B_CACHE_MISS; exit 1; }
+          cd upstream-math/lean
+          for root in OAI/MathematicalPhysics/BFSS/Core SU2BFSSG1APairedThetaProbe SU2BFSSPhysicalDomainS1V52M2OriginalComplexifiedCliffordFockRepresentationProbe SU2BFSSPhysicalDomainS1V52M3AOriginalComplexCliffordActionImageIrreducibilityProbe SU2BFSSPhysicalDomainS1V52M3BOriginalComplexCliffordSimpleModuleProbe SU2BFSSPhysicalDomainS1V52M3COriginalCliffordFockSchurAndFiniteProbe; do
+            test -s ".lake/build/lib/lean/$root.olean" || { echo "M3D_QUALIFIED_PARENT_OLEAN_MISSING: $root"; exit 1; }
+          done
+          echo M3D_ORIGINAL_M3B_QUALIFIED_CACHE_READY
+
+      - name: Compile exact M3D complexified original Clifford full Fock image
+        shell: bash
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=SU2BFSSPhysicalDomainS1V52M3DOriginalComplexCliffordFullFockImageProbe
+          cp "/tmp/bfss-s1v52m3d/$stem.lean" "$stem.lean"
+          timeout 660s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-s1v52m3d/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean" || { echo M3D_FRESH_SOURCE_OLEAN_MISSING; exit 1; }
+          python3 - <<'PY'
+          import pathlib,re
+          stem="SU2BFSSPhysicalDomainS1V52M3DOriginalComplexCliffordFullFockImageProbe"
+          ns="FCP.BFSSS1V52M3D"
+          roots=["originalComplexCliffordFock_fullImage"]
+          src=pathlib.Path(stem+'.lean').read_text()
+          log=pathlib.Path('/tmp/bfss-s1v52m3d',stem+'.log').read_text()
+          assert re.findall(r'^namespace (\S+)',src,re.M)==[ns]
+          assert re.findall(r'^theorem (\S+)',src,re.M)==roots
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==roots
+          rr=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          report={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in rr}
+          assert len(rr)==len(report)==1,rr
+          for root in roots:
+            ax=report[ns+'.'+root]
+            assert ax <= {'propext','Classical.choice','Quot.sound'},(root,ax)
+          assert 'error:' not in log and 'sorryAx' not in log and 'unknownIdentifier' not in log,log[-9000:]
+          print('M3D_ACTUAL_SOURCE_CLIFFORD_FULL_FOCK_IMAGE_ONE_ROOT_STRICT_PASS')
+          PY
+
+      - name: Save qualified M3D source cache
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-fcp-m3d-original-full-image-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve M3D exact-source diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-m3d-gate1-${{ github.run_id }}
+          path: /tmp/bfss-s1v52m3d
+          if-no-files-found: ignore
