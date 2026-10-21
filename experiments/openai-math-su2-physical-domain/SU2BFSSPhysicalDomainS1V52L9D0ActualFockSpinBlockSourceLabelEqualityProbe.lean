@@ -1,10 +1,10 @@
-import SU2BFSSPhysicalDomainS1V52L9D1OriginalNativeSameBlockSpinCliffordAdjointProbe
-import SU2BFSSPhysicalDomainS1JActual48RealMajoranaColorActionProbe
+import SU2BFSSPhysicalDomainS1V5ConcreteSixteenSourceColorBlocksProbe
+import SU2BFSSG1APairedThetaProbe
 
 /-!
 S1V52L9D0 — STAGED, UNQUALIFIED original BFSS Fock/Spin48
 Majorana LABEL equality. This is the concrete source-label bridge
-needed AFTER source color-adjoint and same-block conjugation.
+independent of source color-adjoint and Spin48 conjugation.
 
 S1V5.sourceBlockColorLabel encodes RealSpinBlock=(Fin8×Fin2),
 A=(Fin3), with original sourceColorModeEquiv=finProdFinEquiv.
@@ -13,8 +13,8 @@ through spinPairEquiv and colorModeEquiv=finProdFinEquiv. This
 theorem identifies these literal index packings in the original
 Fin24×Fin2 source space, without hypothesizing a new index map.
 
-STAGED ONLY: neither L9C3 nor L9D1 is accepted at this writing,
-and this module is not a strict-CI-accepted root. Original
+STAGED ONLY: this source-label statement remains unqualified until
+its own strict source-pinned CI and axiom validator. Original
 48-dimensional Spin projection and physical spectral claims remain
 distinct unproved obligations.
 -/
