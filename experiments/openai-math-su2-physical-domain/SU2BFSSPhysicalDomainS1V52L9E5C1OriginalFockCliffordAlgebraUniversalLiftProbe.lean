@@ -51,7 +51,11 @@ noncomputable def originalFockCliffordAlgHom :
         (source48Quadratic v) • (1 : FockOp) :=
           originalFockGammaRealLinear_sq v
       _ = algebraMap ℝ FockOp (source48Quadratic v) := by
-        rw [Algebra.smul_def, mul_one]
+        exact
+          (Algebra.algebraMap_eq_smul_one
+            (source48Quadratic v) :
+              (algebraMap ℝ FockOp) (source48Quadratic v) =
+                (source48Quadratic v) • (1 : FockOp)).symm
   exact CliffordAlgebra.lift source48Quadratic ⟨f, hq⟩
 
 /-- The universal representation sends every original real source
