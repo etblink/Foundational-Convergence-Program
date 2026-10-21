@@ -55,8 +55,17 @@ theorem finiteComplexWeightedFockClifford_square
         (smul_add (c i * c j) (γ i * γ j) (γ j * γ i)).symm
       _ = 0 := by
         rw [hanti i j hij]
+        -- Gate #2 exposed a mismatch between a generic
+        -- SMulZeroClass instance and the *actual*
+        -- ContinuousLinearMap.instSMul on original Fock operators.
+        -- The scalar-zero equation is established pointwise in the
+        -- genuine Fock module, without manufacturing a new instance.
+        apply ContinuousLinearMap.ext
+        intro ψ
+        simp only [ContinuousLinearMap.smul_apply,
+          ContinuousLinearMap.zero_apply]
         exact (smul_zero (c i * c j) :
-          (c i * c j) • (0 : FockOp) = 0)
+          (c i * c j) • (0 : Fermion 2) = 0)
   have hsum (t : Finset ι) :
       (∑ i ∈ t, X i) * (∑ i ∈ t, X i) =
         (∑ i ∈ t, c i * c i) • (1 : FockOp) := by
