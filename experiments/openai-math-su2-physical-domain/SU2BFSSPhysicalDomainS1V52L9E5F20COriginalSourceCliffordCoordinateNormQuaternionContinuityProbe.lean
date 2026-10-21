@@ -30,6 +30,7 @@ noncomputable section
 open OAI.BFSSQuantum
 open FCP.BFSSS1V0
 open FCP.BFSSS1V5
+open FCP.BFSSS1V52A
 open FCP.BFSSS1V52B1
 open FCP.BFSSS1V52B2
 open FCP.BFSSS1V52C1
