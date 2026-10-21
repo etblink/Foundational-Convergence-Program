@@ -1,0 +1,18 @@
+# S1V52L9E4 — original Fock real-linear 48-gamma source map Gate #2 RED
+
+**Independent classification:** `L9E4_GATE2_RED__ZERO_NEW_ROOTS__L9E3_QUALIFIED_PAIRWISE_CAR_CACHE_HIT__FOUR_EXACT_TYPED_REAL_LINEARITY_AND_SOURCE_AXIS_ELABORATION_ERRORS__202_ACCEPTED`.
+
+- [Strict GitHub Actions run #39549290385](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39549290385), job `119054543071`, completed FAILURE at exact workflow SHA `4d51c4c9e9688d87a1751c79ee9304cbfe946a8a`.
+- Candidate source `experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E4OriginalFockRealLinearCliffordGeneratorMapProbe.lean`, Git blob `30e37a961c0b92506b7560b43a2f2d5988a53abe`.
+- Original immutable upstream `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean 4.34.1, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`. Source/toolchain SHA preflight and exact original Pauli/source transitive closure passed; qualified L9E3 parent cache HIT `bfss-s1v52l9e3-original-fock-pairwise-clifford-car-v1-adc7f124-lean4341-d13f23b-Linux-X64`.
+- Four detailed Lean proof errors; preserve exact negative knowledge:
+  1. Line 72, `exact add_smul (v p) (w p) _`: stuck `Module ℝ ?m.224` due to the under-specified operator argument. Explicitly supply `originalNormalizedFockMajorana (sourceBlockColorEquiv.symm p).1 (sourceBlockColorEquiv.symm p).2`, which has the actual `Fermion 2 →L[ℂ] Fermion 2` operator type.
+  2. Line 78, `change` failed: proposed identical `∑ (c * v p) • Γ_p` terms are not definitionally equal to the actual `∑ ((c • v) p) • Γ_p = (RingHom.id ℝ) c • ∑ (v p) • Γ_p`. Require target rewriting `Pi.smul_apply`, `RingHom.id_apply`, `Finset.smul_sum`, `smul_smul`, and `smul_eq_mul`, not raw `change`.
+  3. Line 112, direct `change (if p = sourceBlockColorLabel α A then 1 else 0)=0` failed because `sourceBlockColorAxis α A p` is definitionally represented through the original `Pi.single`. Expand `sourceBlockColorAxis, Pi.single_apply` with `simp only`, then apply exact `hneq : p ≠ sourceBlockColorLabel α A`.
+  4. Line 127, `exact zero_smul ℝ _` failed with underdetermined `Module ℝ ?m`, though the actual target was `(0:ℝ) • originalNormalizedFockMajorana ... = 0`. Use typed operator term or `simp` after established coordinate zero.
+- `#print axioms` of `originalFockGammaRealLinear_sourceAxis` reported `[propext, sorryAx, Classical.choice, Quot.sound]`; zero accepted. No qualified L9E4 cache. Diagnostic artifact `bfss-s1v52l9e4-fock-real-linear-gamma-39549290385`, id `12323415600`.
+- Gate #1 RED [run #39548325103](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39548325103) established four earlier unresolved distributivity/coordinate goals. Gate #2 clarified the *exact* typeclass and definitional causes, and did not establish a new mathematical obstruction.
+- Keep **unchanged** the actual original Fermion 2 operators, `√2` normalization, exact 16×3 block-color to original 48-real source labels, real-linear map definition, and theorem statement.
+- Next narrow Gate #3: type the additivity multiplier concretely; use `simp only` to bridge actual Pi/RingHom/finite-sum scalar normalization; rewrite the real source singleton via its true definition; finish the vanished term with full type inference. The all-vector source quadratic identity, CliffordAlgebra.lift to actual original Fock, continuity, physical unitary, Hamiltonian-domain/spectral claims remain OPEN.
+
+Canon `main`, upstream math and draft PR #25 unchanged.
