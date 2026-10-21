@@ -45,12 +45,21 @@ theorem originalPauliQuaternion_trace_polynomial
         (sourceQuaternionColorMatrix p * pauli A *
           (sourceQuaternionColorMatrix p).conjTranspose)) =
       ((2 : ℝ) * originalQuaternionAdjointPolynomial p B A : ℂ) := by
+  -- First reduce every original 2×2 matrix trace to its actual entries.
+  -- Split complex equality BEFORE normalizing: the nine cases then become
+  -- elementary real polynomial identities, avoiding the Gate #2 ring_nf
+  -- failure caused by incompletely simplified complex expressions.
   fin_cases B <;> fin_cases A <;>
+    apply Complex.ext <;>
     simp [originalQuaternionAdjointPolynomial, pauli,
       sourceQuaternionColorMatrix,
       Matrix.trace, Matrix.mul_apply, Matrix.conjTranspose_apply,
-      Fin.sum_univ_two, Complex.star_def, Complex.I_sq] <;>
-    ring_nf <;> norm_num [Complex.I_sq] <;> ring
+      Fin.sum_univ_two, Complex.star_def,
+      Complex.mul_re, Complex.mul_im, Complex.add_re, Complex.add_im,
+      Complex.sub_re, Complex.sub_im, Complex.neg_re, Complex.neg_im,
+      Complex.conj_re, Complex.conj_im,
+      Complex.I_re, Complex.I_im] <;>
+    ring
 
 #print axioms originalPauliQuaternion_trace_polynomial
 
