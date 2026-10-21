@@ -72,7 +72,7 @@ theorem independent_nonzero_majorana_intertwiner_equiv
     intro hbot
     have hv : T₀ v₀ ∈ T₀.range := ⟨v₀, rfl⟩
     rw [hbot] at hv
-    exact hnonzero (Submodule.mem_bot.mp hv)
+    exact hnonzero ((Submodule.mem_bot ℂ).mp hv)
   have hrange : T₀.range = ⊤ := by
     rcases pairedTheta_irreducible T₀.range hrangeStable with hbot | htop
     · exact (hrangeNeBot hbot).elim
