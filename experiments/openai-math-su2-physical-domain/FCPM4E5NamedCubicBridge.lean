@@ -1,4 +1,4 @@
-import FCPM4E5SourceOuterEquality
+import FCPM4E5RawSourceCertificates
 
 /-!
 M4E5 diagnostic D: independent cubic-to-NAMED source operator
@@ -37,7 +37,12 @@ theorem independentCubic_named_source_intertwining
     independentSmoothTransport J (independentCubicCharge color gamma theta α f) =
       originalSourceCubicPart pairedAlgebraData α
         (independentSmoothTransport J f) := by
-  exact independentCubicCharge_intertwining color gamma theta J hColor hGamma hJ α f
+  exact (independentCubicCharge_intertwining
+    color gamma theta J hColor hGamma hJ α f).trans
+    (congrArg
+      (fun T : SmoothCore 2 →ₗ[ℂ] SmoothCore 2 =>
+        T (independentSmoothTransport J f))
+      (originalSourceCubicPart_eq_sum pairedAlgebraData α).symm)
 
 #print axioms independentCubic_named_source_intertwining
 
