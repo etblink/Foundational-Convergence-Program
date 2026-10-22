@@ -94,7 +94,7 @@ theorem independent_original_generator_unitary
     have hcomm : ∀ α C w, G (pairedTheta α C w) = pairedTheta α C (G w) := by
       intro α C w
       have h := hG (e.symm (α, C)) w
-      simpa only [source, e.apply_symm_apply] using h
+      simpa only [source, e.apply_symm_apply, ContinuousLinearMap.coe_coe] using h
     obtain ⟨c, hc⟩ :=
       FCP.BFSSSU2PhysicalDomainS1A.pairedTheta_commutant_scalar G hcomm
     refine ⟨c, ?_⟩
@@ -127,7 +127,8 @@ theorem independent_original_generator_unitary
   refine ⟨U.symm, ?_⟩
   intro α C w
   have h : U (pairedTheta α C (U.symm w)) = theta α C w := by
-    simpa only [source, target, e.apply_symm_apply, U.apply_symm_apply] using
+    simpa only [source, target, e.apply_symm_apply, U.apply_symm_apply,
+      ContinuousLinearMap.coe_coe] using
       hU (e.symm (α, C)) (U.symm w)
   have hh := congrArg U.symm h
   simpa only [U.symm_apply_apply] using hh.symm
