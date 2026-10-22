@@ -192,7 +192,12 @@ jobs:
             # Lean private theorems are emitted under a generated _private prefix.
             assert any(n==name or n.endswith('.'+name) for n in seen),('MISSING_SOURCE_DECLARATION',stem,name,list(seen))
           assert 'error:' not in log and 'sorryAx' not in log and 'unknownIdentifier' not in log, ('COMPILER_ERROR_OR_SORRY',stem,log[-1500:])
-          assert 'warning:' not in log,('UNEXPECTED_LEAN_WARNING',stem,log[-1000:])
+          # Lake emits auxiliary-package working-tree status before Lean runs.
+          # Reuse the exact M3J/M4F5 filter; Lean warnings remain fatal via warningAsError.
+          lake_status_warning = r"warning: [A-Za-z0-9_-]+: repository '[^']+' has local changes"
+          unexpected = [line for line in log.splitlines()
+                        if 'warning:' in line and not re.fullmatch(lake_status_warning, line)]
+          assert not unexpected,('UNEXPECTED_LEAN_WARNING',stem,unexpected)
           print('SOURCE_EXACT_STRICT_AXIOMS_PASS',stem,len(reports))
           PY
           echo M4F1_D3B_RECOVERY_GATE1_EXACT_VALIDATOR_PREPARED
