@@ -1,0 +1,201 @@
+name: BFSS S1V52M3J Independent Original Fock Unitary Strict Gate 1
+
+# Isolated intended gate: only a push modifying THIS workflow on the qualified
+# research branch triggers the job. No workflow_dispatch / global source triggers.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-s1v52m3j-independent-original-unitary-strict-gate1.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-m3j-original-independent-unitary-gate1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  independent-original-generator-unitary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout source research branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Checkout immutable original BFSS mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Verify pins and exact original/G1A/S1A/M3I provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-m3j-gate1
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json
+          d=json.load(open('upstream-math/lean/lake-manifest.json'))
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          PY
+          python3 - <<'PY'
+          import pathlib, subprocess, hashlib, json
+          root=pathlib.Path('experiments/openai-math-su2-physical-domain')
+          check={
+           'SU2BFSSPhysicalDomainS1V52M2OriginalComplexifiedCliffordFockRepresentationProbe.lean':'fa67dfde6cb6a21a97180797bdf5e917e0b417d2',
+           'SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe.lean':'fd5f9e0f3d36a52e3a0222116022a11a83c387d7',
+          }
+          for name, sha in check.items():
+           got=subprocess.check_output(['git','rev-parse','HEAD:'+str(root/name)],text=True).strip()
+           assert got==sha,(name,got,sha)
+          g1='experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean'
+          assert subprocess.check_output(['git','rev-parse','HEAD:'+g1],text=True).strip()=='4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4'
+          # M3I is intentionally sourced from a distinct accepted immutable commit.
+          subprocess.run(['git','fetch','--no-tags','--depth=1','origin',
+            'research/fcp-m3i-original-clifford-fock-algebra-equivalence-20261021'],check=True)
+          got=subprocess.check_output(['git','rev-parse','FETCH_HEAD'],text=True).strip()
+          assert got=='beeb331836bb13a92c275f06f61337a6b97c0ada',('M3I_HEAD_MISMATCH',got)
+          m3i_path='experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52M3IOriginalComplexCliffordFockAlgebraEquivProbe.lean'
+          m3i_blob=subprocess.check_output(['git','rev-parse','FETCH_HEAD:'+m3i_path],text=True).strip()
+          assert m3i_blob=='300df1d7c886b636f2cfc206ac36f8b97f91d4b4',('M3I_SOURCE_BLOB_MISMATCH',m3i_blob)
+          generic={
+           'FCPM3JRankOneModuleExistence.lean':'d4d3bd1952dfd04e4dc1f97da15da5868630e90a3c2b55668e41bb05c8a13baa',
+           'FCPM3JIndependentCliffordAction.lean':'18f93a8698da15483901918ac394e64a79f7d19fb9a89a15841e32d08cde4862',
+           'FCPM3KHilbertNormalization.lean':'1e8509d0086d49a702be5dde6dd2239d3024cb8073e5bbe737aa5bd2e6981ab0',
+           'FCPM3LUnitaryCliffordModuleExistence.lean':'1b439abaca56406c8e3331e1c93eb014f2e4d7e768af9ab115d0c29d801eea98',
+           'SU2BFSSPhysicalDomainS1V52M3JIndependentUnitaryExistenceProbe.lean':'e10e3ce1b88698c38d98ccd7ada4c8d18c34f8af0df9b80424b52cc161990a67',
+          }
+          for name,sha in generic.items():
+           b=(root/name).read_bytes()
+           assert hashlib.sha256(b).hexdigest()==sha, (name,'SOURCE_CHANGED_NO_NEW_AUDIT')
+          print('M3J_LITERAL_SOURCE_AND_MANUSCRIPT_LABEL_PINS_PASS')
+          PY
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore original pinned Lean 4.34.1 and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-m3j-gate1/toolchain.log; then
+              ok=true; break
+            fi
+            echo M3J_PINNED_LEAN_RETRY_$attempt | tee -a /tmp/bfss-m3j-gate1/toolchain.log
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo M3J_PINNED_LEAN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-m3j-gate1/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo M3J_PINNED_TOOLCHAIN_PASS
+
+      - name: Restore qualified accepted M3I algebra-equivalence cache
+        id: cacheM3I
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-fcp-m3i-original-clifford-algebra-equiv-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Reject absent or unqualified M3I ancestry
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.cacheM3I.outputs.cache-hit }}" = true || { echo M3J_QUALIFIED_M3I_CACHE_MISS; exit 1; }
+          cd upstream-math/lean
+          for root in OAI/MathematicalPhysics/BFSS/Core SU2BFSSG1APairedThetaProbe SU2BFSSPhysicalDomainS1V52M2OriginalComplexifiedCliffordFockRepresentationProbe SU2BFSSPhysicalDomainS1V52M3DOriginalComplexCliffordFullFockImageProbe SU2BFSSPhysicalDomainS1V52M3HOriginalComplexCliffordFockFaithfulProbe SU2BFSSPhysicalDomainS1V52M3IOriginalComplexCliffordFockAlgebraEquivProbe; do
+            test -s ".lake/build/lib/lean/$root.olean" || { echo "M3J_QUALIFIED_PARENT_OLEAN_MISSING: $root"; exit 1; }
+          done
+          echo M3J_QUALIFIED_M3I_PARENT_READY
+
+      - name: Freshly compile source algebraic scalar commutant and four generic existence modules
+        shell: bash
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          src="$GITHUB_WORKSPACE/experiments/openai-math-su2-physical-domain"
+          # S1A is compiled afresh from the unchanged, pinned original proof.
+          for stem in SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe FCPM3JRankOneModuleExistence FCPM3JIndependentCliffordAction FCPM3KHilbertNormalization FCPM3LUnitaryCliffordModuleExistence; do
+            cp "$src/$stem.lean" "$stem.lean"
+            timeout 550s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-m3j-gate1/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean" || exit 1
+          done
+          echo M3J_FIVE_PREREQUISITE_FRESH_LEAN_COMPILES_PASS
+
+      - name: Strictly compile the actual original generator-preserving unitary existence theorem
+        shell: bash
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=SU2BFSSPhysicalDomainS1V52M3JIndependentUnitaryExistenceProbe
+          cp "$GITHUB_WORKSPACE/experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+          timeout 660s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-m3j-gate1/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('SU2BFSSPhysicalDomainS1V52M3JIndependentUnitaryExistenceProbe.lean').read_text()
+          log=Path('/tmp/bfss-m3j-gate1/SU2BFSSPhysicalDomainS1V52M3JIndependentUnitaryExistenceProbe.log').read_text()
+          ns='FCP.BFSSS1V52M3JIndependent'
+          assert re.findall(r'^namespace (\S+)',src,re.M)==[ns]
+          assert re.findall(r'^theorem (\S+)',src,re.M)==['independent_original_generator_unitary']
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==['sourceToManuscriptLabel','independent_original_generator_unitary']
+          reports=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          reports={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in reports}
+          assert set(reports)=={ns+'.sourceToManuscriptLabel',ns+'.independent_original_generator_unitary'},reports
+          for root,axioms in reports.items():
+            assert axioms <= {'propext','Classical.choice','Quot.sound'},(root,axioms)
+          assert 'error:' not in log and 'sorryAx' not in log and 'unknownIdentifier' not in log
+          for module in ('SU2BFSSPhysicalDomainS1ASchurScalarCommutantProbe','FCPM3JRankOneModuleExistence','FCPM3JIndependentCliffordAction','FCPM3KHilbertNormalization','FCPM3LUnitaryCliffordModuleExistence'):
+            s=Path(module+'.lean').read_text()
+            l=Path('/tmp/bfss-m3j-gate1',module+'.log').read_text()
+            rr=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",l)
+            keys={k for k,_ in rr}
+            assert len(rr)==len(keys)==len(re.findall(r'^#print axioms (\S+)',s,re.M)),(module,rr)
+            assert all(set(a.strip() for a in v.split(',') if a.strip()) <= {'propext','Classical.choice','Quot.sound'} for _,v in rr),module
+            assert 'error:' not in l and 'sorryAx' not in l and 'warning:' not in l,module
+          print('M3J_ACTUAL_INDEPENDENT_ORIGINAL_GENERATOR_UNITARY_ONE_ROOT_STRICT_PASS')
+          PY
+
+      - name: Save qualified strict M3J cache
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+          key: bfss-fcp-m3j-independent-original-unitary-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve all source-exact diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-m3j-gate1-${{ github.run_id }}
+          path: /tmp/bfss-m3j-gate1
+          if-no-files-found: ignore
