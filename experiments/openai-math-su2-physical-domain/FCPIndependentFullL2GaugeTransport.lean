@@ -73,7 +73,8 @@ theorem fiberTransport_bosonPullback
   calc
     (A.compLp (Lp.compMeasurePreserving b hb v)) x =
         A ((Lp.compMeasurePreserving b hb v) x) := hl
-    _ = A (v (b x)) := by rw [hp]
+    _ = A (v (b x)) := by
+      simpa only [Function.comp_apply] using congrArg A hp
     _ = (A.compLp v) (b x) := hm.symm
     _ = (Lp.compMeasurePreserving b hb (A.compLp v)) x := hr.symm
 
