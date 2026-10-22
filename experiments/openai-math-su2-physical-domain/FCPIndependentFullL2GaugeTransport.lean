@@ -26,7 +26,7 @@ variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
 variable [FiniteDimensional ℂ E]
 
 private abbrev μ := (volume : Measure (Boson 2))
-private abbrev IndependentFullL2 := Lp E 2 μ
+private abbrev IndependentFullL2 (E : Type*) [NormedAddCommGroup E] := Lp E 2 μ
 
 variable (theta : SpinIndex → ColorIndex 2 → Module.End ℂ E)
 variable (hCAR : ∀ α β A B,
@@ -37,7 +37,7 @@ variable (hHermitian : ∀ α A, (theta α A).IsSymmetric)
 /-- The exact ORIGINAL bosonic inverse pullback with the independently
 constructed, J-free M4B fermionic Spin gauge action. -/
 def independentFullL2GaugePairCLM (g : GaugeGroup 2) :
-    IndependentFullL2 →L[ℂ] IndependentFullL2 :=
+    IndependentFullL2 E →L[ℂ] IndependentFullL2 E :=
   ((independentOriginalGaugeHom theta hCAR hHermitian g).toContinuousLinearEquiv.toContinuousLinearMap.compLpL
     2 μ).comp
   ((Lp.compMeasurePreservingₗᵢ ℂ (pairedGaugeData.boson g⁻¹)
@@ -46,14 +46,14 @@ def independentFullL2GaugePairCLM (g : GaugeGroup 2) :
 /-- Constant-fiber map from arbitrary eligible independent Majorana
 Hilbert module to the actual original BFSS source FullL2 2. -/
 def fiberTransport (J : E ≃ₗᵢ[ℂ] Fermion 2) :
-    IndependentFullL2 →L[ℂ] FullL2 2 :=
+    IndependentFullL2 E →L[ℂ] FullL2 2 :=
   J.toContinuousLinearEquiv.toContinuousLinearMap.compLpL 2 μ
 
 /-- Crucial Lp naturality: constant fiber maps commute with the
 source's literal measure-preserving bosonic pullback. -/
 theorem fiberTransport_bosonPullback
     (J : E ≃ₗᵢ[ℂ] Fermion 2) (g : GaugeGroup 2)
-    (v : IndependentFullL2) :
+    (v : IndependentFullL2 E) :
     fiberTransport J
       ((Lp.compMeasurePreservingₗᵢ ℂ (pairedGaugeData.boson g)
         (pairedGaugeData.boson g).measurePreserving).toContinuousLinearMap v) =
@@ -82,7 +82,7 @@ spatial L² space, with no choice of L² representatives. -/
 theorem fiberTransport_fermionGauge
     (J : E ≃ₗᵢ[ℂ] Fermion 2)
     (hJ : ∀ α A w, J (theta α A w) = pairedTheta α A (J w))
-    (g : GaugeGroup 2) (v : IndependentFullL2) :
+    (g : GaugeGroup 2) (v : IndependentFullL2 E) :
     fiberTransport J
       (((independentOriginalGaugeHom theta hCAR hHermitian g).toContinuousLinearEquiv.toContinuousLinearMap).compLpL 2 μ v) =
       pairedGaugeData.fiberAction g (fiberTransport J v) := by
@@ -119,7 +119,7 @@ inverse-bosonic-pullback convention, not just finite Fock fibers. -/
 theorem independentFullL2Gauge_intertwining
     (J : E ≃ₗᵢ[ℂ] Fermion 2)
     (hJ : ∀ α A w, J (theta α A w) = pairedTheta α A (J w))
-    (g : GaugeGroup 2) (v : IndependentFullL2) :
+    (g : GaugeGroup 2) (v : IndependentFullL2 E) :
     fiberTransport J (independentFullL2GaugePairCLM theta hCAR hHermitian g v) =
       pairedGaugeData.fiberAction g
         (pairedGaugeData.bosonPullback g⁻¹ (fiberTransport J v)) := by
