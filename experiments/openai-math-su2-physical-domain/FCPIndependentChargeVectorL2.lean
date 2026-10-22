@@ -21,6 +21,7 @@ open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2GaugeG1A
 open FCP.IndependentSmoothCore
 open FCP.IndependentFullL2GaugeTransport
+open MeasureTheory
 
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
 variable [FiniteDimensional ℂ E]
