@@ -17,6 +17,7 @@ namespace FCP.IndependentSmoothCore
 noncomputable section
 
 open OAI.BFSSQuantum
+open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2GaugeG1A FCP.BFSSSU2GaugeG4J
 open FCP.IndependentPhysicalSpace
 open FCP.IndependentFullL2GaugeTransport
@@ -28,32 +29,32 @@ private abbrev μ := (volume : Measure (Boson 2))
 
 /-- Independent smooth compactly supported E-valued functions on the
 original (not renamed) bosonic configuration space. -/
-abbrev IndependentSmoothCore (E : Type*) [NormedAddCommGroup E]
+abbrev IndependentTestCore (E : Type*) [NormedAddCommGroup E]
     [InnerProductSpace ℂ E] :=
   TestFunction (⊤ : TopologicalSpace.Opens (Boson 2)) E ⊤
 
 /-- L2 inclusion built from the independent function's own compact
 support and integrability, before choosing any J. -/
-def independentCoreToL2 : IndependentSmoothCore E →ₗ[ℂ] Lp E 2 μ where
+def independentCoreToL2 : IndependentTestCore E →ₗ[ℂ] Lp E 2 μ where
   toFun f := (f.continuous.memLp_of_hasCompactSupport f.hasCompactSupport).toLp f
   map_add' _ _ := MeasureTheory.MemLp.toLp_add _ _
   map_smul' scalar _ := MeasureTheory.MemLp.toLp_const_smul scalar _
 
 /-- Actual AE representative equation, not pointwise identification
 of an arbitrary Lp equivalence class. -/
-theorem independentCoreToL2_ae (f : IndependentSmoothCore E) :
+theorem independentCoreToL2_ae (f : IndependentTestCore E) :
     (independentCoreToL2 f : Boson 2 → E) =ᵐ[μ] f :=
   MemLp.coeFn_toLp (f.continuous.memLp_of_hasCompactSupport f.hasCompactSupport)
 
 /-- Fiberwise smooth test-function transport via the pinned Mathlib
 postcomposition map. The source target is the literal SmoothCore 2. -/
 def independentSmoothTransport (J : E ≃ₗᵢ[ℂ] Fermion 2) :
-    IndependentSmoothCore E →L[ℂ] SmoothCore 2 :=
+    IndependentTestCore E →L[ℂ] SmoothCore 2 :=
   TestFunction.postcompCLM J.toContinuousLinearEquiv.toContinuousLinearMap
 
 /-- Direct equality on concrete smooth-function evaluations. -/
 theorem independentSmoothTransport_apply (J : E ≃ₗᵢ[ℂ] Fermion 2)
-    (f : IndependentSmoothCore E) (x : Boson 2) :
+    (f : IndependentTestCore E) (x : Boson 2) :
     independentSmoothTransport J f x = J (f x) := by
   rfl
 
@@ -61,7 +62,7 @@ theorem independentSmoothTransport_apply (J : E ≃ₗᵢ[ℂ] Fermion 2)
 L2 quotient embeddings, proved by AE representatives, not by
 identifying representatives with arbitrary Lp classes. -/
 theorem independentSmoothTransport_coreToL2
-    (J : E ≃ₗᵢ[ℂ] Fermion 2) (f : IndependentSmoothCore E) :
+    (J : E ≃ₗᵢ[ℂ] Fermion 2) (f : IndependentTestCore E) :
     fiberTransport J (independentCoreToL2 f) =
       coreToL2 (independentSmoothTransport J f) := by
   apply Lp.ext_iff.mpr
@@ -88,7 +89,7 @@ variable (hHermitian : ∀ α A, (theta α A).IsSymmetric)
 
 /-- Independent invariant test-function submodule, defined by pulling back
 the independently defined gauge kernel through the independent core embedding. -/
-def independentInvariantCore : Submodule ℂ (IndependentSmoothCore E) :=
+def independentInvariantCore : Submodule ℂ (IndependentTestCore E) :=
   (independentPhysicalSpace theta hCAR hHermitian).comap independentCoreToL2
 
 /-- Original smooth invariant-core membership iff independent smooth
@@ -97,7 +98,7 @@ The source is literal pairedGaugeData.invariantCore. -/
 theorem independentInvariantCore_iff_source
     (J : E ≃ₗᵢ[ℂ] Fermion 2)
     (hJ : ∀ α A w, J (theta α A w) = pairedTheta α A (J w))
-    (f : IndependentSmoothCore E) :
+    (f : IndependentTestCore E) :
     f ∈ independentInvariantCore theta hCAR hHermitian ↔
       independentSmoothTransport J f ∈ pairedGaugeData.invariantCore := by
   change independentCoreToL2 f ∈ independentPhysicalSpace theta hCAR hHermitian ↔
@@ -106,6 +107,7 @@ theorem independentInvariantCore_iff_source
   exact independentPhysicalSpace_iff_source theta hCAR hHermitian J hJ
     (independentCoreToL2 f)
 
+#print axioms IndependentTestCore
 #print axioms independentCoreToL2
 #print axioms independentCoreToL2_ae
 #print axioms independentSmoothTransport
