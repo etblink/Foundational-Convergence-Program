@@ -40,7 +40,7 @@ theorem fiberTransport_left_inverse
     ((J.symm.toContinuousLinearEquiv.toContinuousLinearMap.compLpL 2 μ)
       (fiberTransport J v)) x = J.symm ((fiberTransport J v) x) := hb
     _ = J.symm (J (v x)) := by
-      simpa only [fiberTransport] using congrArg J.symm hf
+      exact congrArg J.symm hf
     _ = v x := J.symm_apply_apply _
 
 /-- The source-to-independent fiberwise inverse is also a right inverse
