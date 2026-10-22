@@ -54,7 +54,7 @@ theorem independentCoordinateDerivative_intertwining
     (i : SpaceIndex) (A : ColorIndex 2)
     (f : IndependentTestCore E) :
     independentSmoothTransport J (independentCoordinateDerivative i A f) =
-      pairedAlgebraData.coordinateDerivative i A (independentSmoothTransport J f) := by
+      coordinateDerivative i A (independentSmoothTransport J f) := by
   apply DFunLike.ext
   intro x
   rw [independentSmoothTransport_apply,
