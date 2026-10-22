@@ -60,7 +60,10 @@ theorem independentCharge_intertwining
     color gamma theta J hColor hGamma hJ α f
   simp only [independentCharge, LinearMap.add_apply, map_add]
   rw [hk, hc]
-  simp only [AlgebraData.charge, LinearMap.add_apply]
+  conv_rhs =>
+    rw [AlgebraData.charge]
+    rw [LinearMap.add_apply]
+  rfl
 
 #print axioms independentCharge
 #print axioms independentCharge_intertwining
