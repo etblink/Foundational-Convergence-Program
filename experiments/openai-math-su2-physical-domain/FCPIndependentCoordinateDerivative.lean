@@ -80,7 +80,7 @@ theorem independentCoordinateDerivative_intertwining
   have hc :
       fderiv ℝ (L ∘ (f : Boson 2 → E)) x =
         L.comp (fderiv ℝ (f : Boson 2 → E) x) := by
-    rw [fderiv_comp L.differentiableAt hf, ContinuousLinearMap.fderiv]
+    exact ((L.hasFDerivAt).comp x hf.hasFDerivAt).fderiv
   rw [hc]
   rfl
 
