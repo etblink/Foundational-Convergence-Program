@@ -37,8 +37,7 @@ theorem independentCubic_named_source_intertwining
     independentSmoothTransport J (independentCubicCharge color gamma theta α f) =
       originalSourceCubicPart pairedAlgebraData α
         (independentSmoothTransport J f) := by
-  simpa only [originalSourceCubicPart] using
-    (independentCubicCharge_intertwining color gamma theta J hColor hGamma hJ α f)
+  exact independentCubicCharge_intertwining color gamma theta J hColor hGamma hJ α f
 
 #print axioms independentCubic_named_source_intertwining
 
