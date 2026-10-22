@@ -47,7 +47,6 @@ theorem originalFockContinuousEnd_finrank :
       rw [Module.finrank_linearMap]
     _ = 2 ^ 48 := by
       rw [originalFock_finrank, ← pow_add]
-      norm_num
 
 /-- The ACTUAL base-changed original Clifford algebra and the
 ACTUAL full continuous-linear source Fock endomorphism algebra have
