@@ -49,9 +49,9 @@ def fiberTransport (J : E ≃ₗᵢ[ℂ] Fermion 2) :
     IndependentFullL2 E →L[ℂ] FullL2 2 :=
   J.toContinuousLinearEquiv.toContinuousLinearMap.compLpL 2 μ
 
+omit [FiniteDimensional ℂ E] in
 /-- Crucial Lp naturality: constant fiber maps commute with the
 source's literal measure-preserving bosonic pullback. -/
-omit [FiniteDimensional ℂ E] in
 theorem fiberTransport_bosonPullback
     (J : E ≃ₗᵢ[ℂ] Fermion 2) (g : GaugeGroup 2)
     (v : IndependentFullL2 E) :
