@@ -30,7 +30,7 @@ noncomputable section
 
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
-open FCP.BFSSSU2GaugeG1A
+open FCP.BFSSSU2GaugeG1A FCP.BFSSSU2GaugeG4J
 open FCP.IndependentSmoothCore
 open FCP.IndependentFullL2GaugeTransport
 open MeasureTheory
@@ -156,7 +156,10 @@ theorem sourceOriginalRestrictedCoreGraph_eq_independent_image
         _ = ((coreToL2.comp pairedGaugeData.invariantCore.subtype).prod
               (pairedAlgebraData.chargeVector.comp
                 pairedGaugeData.invariantCore.subtype)) g :=
-            congrArg _ hf
+            congrArg
+              ((coreToL2.comp pairedGaugeData.invariantCore.subtype).prod
+                (pairedAlgebraData.chargeVector.comp
+                  pairedGaugeData.invariantCore.subtype)) hf
         _ = q := hg
   · rintro ⟨p, hp, rfl⟩
     rcases hp with ⟨f, rfl⟩
