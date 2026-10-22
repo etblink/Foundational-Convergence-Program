@@ -105,7 +105,19 @@ theorem independent_original_axis_intertwining
       (originalLabelledTheta_CAR theta hCAR)
       (CliffordAlgebra.ι Q (Pi.single p (1 : ℝ))) w) =
     originalFockCliffordAlgHom (CliffordAlgebra.ι Q (Pi.single p (1 : ℝ))) (J w)
-  rw [cliffordAction_axis, hsource]
+  have haxis :
+      cliffordAction (originalLabelledTheta theta)
+        (originalLabelledTheta_CAR theta hCAR)
+        (CliffordAlgebra.ι Q (Pi.single p (1 : ℝ))) =
+          (Real.sqrt 2 : ℂ) • originalLabelledTheta theta p := by
+    -- S1V0's Q and the generic coordinateQuadratic have identical
+    -- unit weights and source labels, but rw uses insufficient transparency.
+    change cliffordAction (originalLabelledTheta theta)
+      (originalLabelledTheta_CAR theta hCAR)
+      (CliffordAlgebra.ι (coordinateQuadratic (R := ℝ) (I := SourceLabel))
+        (Pi.single p (1 : ℝ))) = _
+    exact cliffordAction_axis _ _ p
+  rw [haxis, hsource]
   change J ((Real.sqrt 2 : ℂ) •
       theta (sourceToManuscriptLabel p).1 (sourceToManuscriptLabel p).2 w) =
     (Real.sqrt 2 : ℂ) • pairedTheta (spinPairEquiv.symm q.1) q.2 (J w)
