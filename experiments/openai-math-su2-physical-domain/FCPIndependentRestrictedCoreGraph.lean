@@ -1,8 +1,7 @@
-import FCPIndependentFullCoreGraphClosure
-import FCPIndependentInvariantSmoothEquiv
+import FCPRestrictedGraphInputCut
 
 /-!
-M4F6A — PROSPECTIVE / UNCOMPILED candidate.
+M4F6 — PROSPECTIVE input-restriction proof architecture.
 
 Actual original BFSS SU(2) *gauge-restricted smooth-core* sixteen-charge
 graph equals the image of an independently defined gauge-restricted
@@ -35,6 +34,8 @@ open FCP.IndependentSmoothCore
 open FCP.IndependentFullL2GaugeTransport
 open MeasureTheory
 open Set
+open FCP.IndependentPhysicalSpace
+open FCP.RestrictedGraphInputCut
 
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
 variable [FiniteDimensional ℂ E]
@@ -70,10 +71,11 @@ def sourceOriginalRestrictedCoreGraph :
       (pairedAlgebraData.chargeVector.comp
         pairedGaugeData.invariantCore.subtype))
 
-/-- Pointwise input-and-sixteen-output equality on the actual
-independent invariant test core. This does not require assuming
-that the independent charge preserves invariant-core membership. -/
-theorem independentRestrictedGraph_transport_apply
+
+/-- The independent invariant core is the preimage of its own physical
+space. Characterize its graph by input membership, without converting
+any concrete invariant-core equivalence inside a source charge map. -/
+theorem independentRestrictedCoreGraph_eq_input_cut
     (color : ColorIndex 2 → ColorMatrix 2)
     (gamma : SpaceIndex → GammaMatrix)
     (theta : SpinIndex → ColorIndex 2 → Module.End ℂ E)
@@ -81,37 +83,28 @@ theorem independentRestrictedGraph_transport_apply
       theta α A * theta β B + theta β B * theta α A =
         (if α = β ∧ A = B then (1 : ℂ) else 0) •
           (1 : Module.End ℂ E))
-    (hHermitian : ∀ α A, (theta α A).IsSymmetric)
-    (J : E ≃ₗᵢ[ℂ] Fermion 2)
-    (hColor : color = pairedAlgebraData.color)
-    (hGamma : gamma = pairedAlgebraData.gamma)
-    (hJ : ∀ α A w, J (theta α A w) = pairedTheta α A (J w))
-    (f : independentInvariantCore theta hCAR hHermitian) :
-    (independentGraphTransportHomeomorph J)
-        (((independentCoreToL2.comp
-          (independentInvariantCore theta hCAR hHermitian).subtype).prod
-          ((independentChargeVector color gamma theta).comp
-            (independentInvariantCore theta hCAR hHermitian).subtype)) f) =
-      ((coreToL2.comp pairedGaugeData.invariantCore.subtype).prod
-        (pairedAlgebraData.chargeVector.comp
-          pairedGaugeData.invariantCore.subtype))
-        (independentInvariantCoreLinearEquiv
-          theta hCAR hHermitian J hJ f) := by
-  change
-    (fiberTransport J (independentCoreToL2 f.val),
-      fun α : SpinIndex =>
-        fiberTransport J (independentChargeVector color gamma theta f.val α)) =
-      (coreToL2 (independentSmoothTransport J f.val),
-        pairedAlgebraData.chargeVector (independentSmoothTransport J f.val))
-  apply Prod.ext
-  · exact independentSmoothTransport_coreToL2 J f.val
-  · exact independentChargeVector_all_components_intertwining
-      color gamma theta J hColor hGamma hJ f.val
+    (hHermitian : ∀ α A, (theta α A).IsSymmetric) :
+    (independentRestrictedCoreGraph color gamma theta hCAR hHermitian :
+      Set (Lp E 2 μ × (SpinIndex → Lp E 2 μ))) =
+      {p | p ∈ independentFullCoreGraph color gamma theta ∧
+        p.1 ∈ independentPhysicalSpace theta hCAR hHermitian} := by
+  unfold independentRestrictedCoreGraph independentFullCoreGraph independentInvariantCore
+  exact core_graph_input_cut independentCoreToL2
+    (independentChargeVector color gamma theta)
+    (independentPhysicalSpace theta hCAR hHermitian)
 
-/-- Exact set-theoretic equality of the two genuine
-GAUGE-RESTRICTED original and independent smooth-core charge graphs.
-The inverse witness uses the *accepted* two-sided invariant smooth-core
-equivalence, not source-graph surjectivity assumed as a hypothesis. -/
+/-- The literal original restricted core graph has precisely the
+original full-core graph and original physical-input constraint. -/
+theorem sourceOriginalRestrictedCoreGraph_eq_input_cut :
+    (sourceOriginalRestrictedCoreGraph :
+      Set (FullL2 2 × (SpinIndex → FullL2 2))) =
+      {p | p ∈ pairedAlgebraData.fullCoreGraph ∧
+        p.1 ∈ pairedGaugeData.physicalSpace} := by
+  unfold sourceOriginalRestrictedCoreGraph
+  exact original_core_graph_input_cut pairedAlgebraData pairedGaugeData
+
+/-- Exact original restricted graph transport, using already qualified
+unrestricted graph equality and physical-input equivalence. -/
 theorem sourceOriginalRestrictedCoreGraph_eq_independent_image
     (color : ColorIndex 2 → ColorMatrix 2)
     (gamma : SpaceIndex → GammaMatrix)
@@ -131,42 +124,41 @@ theorem sourceOriginalRestrictedCoreGraph_eq_independent_image
         (independentRestrictedCoreGraph
           color gamma theta hCAR hHermitian : Set
             (Lp E 2 μ × (SpinIndex → Lp E 2 μ))) := by
-  ext q
-  constructor
-  · intro hq
-    rcases hq with ⟨g, hg⟩
-    let T := independentInvariantCoreLinearEquiv
-      theta hCAR hHermitian J hJ
-    let f := T.symm g
-    have hf : T f = g := T.apply_symm_apply g
-    let p : Lp E 2 μ × (SpinIndex → Lp E 2 μ) :=
-      ((independentCoreToL2.comp
-        (independentInvariantCore theta hCAR hHermitian).subtype).prod
-        ((independentChargeVector color gamma theta).comp
-          (independentInvariantCore theta hCAR hHermitian).subtype)) f
-    refine ⟨p, ?_, ?_⟩
-    · exact ⟨f, rfl⟩
-    · calc
-        (independentGraphTransportHomeomorph J) p =
-          ((coreToL2.comp pairedGaugeData.invariantCore.subtype).prod
-            (pairedAlgebraData.chargeVector.comp
-              pairedGaugeData.invariantCore.subtype)) (T f) := by
-                exact independentRestrictedGraph_transport_apply
-                  color gamma theta hCAR hHermitian J hColor hGamma hJ f
-        _ = ((coreToL2.comp pairedGaugeData.invariantCore.subtype).prod
-              (pairedAlgebraData.chargeVector.comp
-                pairedGaugeData.invariantCore.subtype)) g :=
-            congrArg
-              ((coreToL2.comp pairedGaugeData.invariantCore.subtype).prod
-                (pairedAlgebraData.chargeVector.comp
-                  pairedGaugeData.invariantCore.subtype)) hf
-        _ = q := hg
-  · rintro ⟨p, hp, rfl⟩
-    rcases hp with ⟨f, rfl⟩
-    refine ⟨(independentInvariantCoreLinearEquiv
-      theta hCAR hHermitian J hJ f), ?_⟩
-    exact (independentRestrictedGraph_transport_apply
-      color gamma theta hCAR hHermitian J hColor hGamma hJ f).symm
+  have hPhysical (p : Lp E 2 μ × (SpinIndex → Lp E 2 μ)) :
+      p.1 ∈ independentPhysicalSpace theta hCAR hHermitian ↔
+        (independentGraphTransportHomeomorph J p).1 ∈
+          pairedGaugeData.physicalSpace := by
+    exact independentPhysicalSpace_iff_source theta hCAR hHermitian J hJ p.1
+  have hFull :
+      (pairedAlgebraData.fullCoreGraph :
+        Set (FullL2 2 × (SpinIndex → FullL2 2))) =
+      (independentGraphTransportHomeomorph J) ''
+        (independentFullCoreGraph color gamma theta :
+          Set (Lp E 2 μ × (SpinIndex → Lp E 2 μ))) := by
+    exact sourceFullCoreGraph_eq_independent_image
+      color gamma theta J hColor hGamma hJ
+  calc
+    (sourceOriginalRestrictedCoreGraph :
+        Set (FullL2 2 × (SpinIndex → FullL2 2))) =
+      {q | q ∈ pairedAlgebraData.fullCoreGraph ∧
+        q.1 ∈ pairedGaugeData.physicalSpace} :=
+      sourceOriginalRestrictedCoreGraph_eq_input_cut
+    _ = (independentGraphTransportHomeomorph J) ''
+        {p | p ∈ independentFullCoreGraph color gamma theta ∧
+          p.1 ∈ independentPhysicalSpace theta hCAR hHermitian} :=
+      image_input_cut (independentGraphTransportHomeomorph J)
+        (independentFullCoreGraph color gamma theta : Set _)
+        (pairedAlgebraData.fullCoreGraph : Set _)
+        (fun p => p.1 ∈ independentPhysicalSpace theta hCAR hHermitian)
+        (fun q => q.1 ∈ pairedGaugeData.physicalSpace) hFull hPhysical
+    _ = (independentGraphTransportHomeomorph J) ''
+        (independentRestrictedCoreGraph color gamma theta hCAR hHermitian :
+          Set (Lp E 2 μ × (SpinIndex → Lp E 2 μ))) :=
+      congrArg
+        (fun S : Set (Lp E 2 μ × (SpinIndex → Lp E 2 μ)) =>
+          (independentGraphTransportHomeomorph J) '' S)
+        (independentRestrictedCoreGraph_eq_input_cut
+          color gamma theta hCAR hHermitian).symm
 
 /-- Exact equality of closures of the genuine GAUGE-RESTRICTED
 smooth-core graph relations. Still not an operator closability or
@@ -211,7 +203,8 @@ theorem sourceOriginalRestrictedCoreGraph_closure_eq_independent_image_closure
 
 #print axioms independentRestrictedCoreGraph
 #print axioms sourceOriginalRestrictedCoreGraph
-#print axioms independentRestrictedGraph_transport_apply
+#print axioms independentRestrictedCoreGraph_eq_input_cut
+#print axioms sourceOriginalRestrictedCoreGraph_eq_input_cut
 #print axioms sourceOriginalRestrictedCoreGraph_eq_independent_image
 #print axioms sourceOriginalRestrictedCoreGraph_closure_eq_independent_image_closure
 

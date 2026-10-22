@@ -1,0 +1,232 @@
+name: BFSS M4F6 Input Restricted Graph Image And Closure Strict Gate 2
+
+# Isolated research branch, exact self-path trigger only.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-m4f6-input-cut-restricted-core-graph-gate2.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-m4f6-input-cut-restricted-core-graph-gate2-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  restricted-core-transport:
+    runs-on: ubuntu-latest
+    timeout-minutes: 36
+    steps:
+      - name: Checkout isolated research sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Checkout immutable original BFSS mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Fail-closed exact original and candidate source provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import pathlib,subprocess,json
+          d=json.loads(pathlib.Path('upstream-math/lean/lake-manifest.json').read_text())
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          p=pathlib.Path('experiments/openai-math-su2-physical-domain')
+          blobs={
+            'FCPIndependentFullSmoothCharge.lean':'4fa31d97ddfbb80e3258070caccd7b0a6b0bc874',
+            'FCPIndependentChargeVectorL2.lean':'6492f4b08181020f611f7d7d4b751394805420d2',
+            'FCPIndependentFullCoreGraph.lean':'2139e7fc9e7b9d5bf99ec57d096686078b8ffdf7',
+            'FCPIndependentFullCoreGraphImage.lean':'06e98a1b867f21577b5b74033e411d27ba688985',
+            'FCPIndependentGraphTransportHomeomorph.lean':'8455a6c42f23b2d08f7945188fe5b8ca9e75ac4b',
+            'FCPIndependentFullCoreGraphClosure.lean':'a6aacf285206ba79f331bf2c6818fc0b7df1a6e4',
+            'FCPIndependentInvariantSmoothEquiv.lean':'5083f0ce9bfb43f616a9c3e5dc286887bd073de4',
+            'FCPIndependentRestrictedCoreGraph.lean':'9d492475be251f5414ad1758cfa810d1f92fb235',
+            'FCPRestrictedGraphInputCut.lean':'cbcb667d15fccd67eaa185a69eb8b476546d977d',
+          }
+          for name,sha in blobs.items():
+            file=p/name
+            assert subprocess.check_output(['git','rev-parse','HEAD:'+str(file)],text=True).strip() == sha,(name,'git source pin')
+            assert subprocess.check_output(['git','hash-object','--no-filters',str(file)],text=True).strip() == sha,(name,'working source pin')
+          for candidate in ['FCPRestrictedGraphInputCut.lean','FCPIndependentRestrictedCoreGraph.lean']:
+            s=(p/candidate).read_text()
+            assert 'sorryAx' not in s and '\nsorry' not in s and '\nadmit' not in s and '\naxiom ' not in s
+          print('M4F6_INPUT_CUT_GRAPH_GATE2_EXACT_SOURCE_PASS')
+          PY
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean 4.34.1 and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/toolchain.log; then ok=true; break; fi
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo M4F6_INPUT_CUT_GRAPH_GATE2_PINNED_TOOLCHAIN_PASS
+
+      - name: Restore M4F5 qualified original source and graph cache
+        id: m4f5cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullSmoothCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentChargeVectorL2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphImage.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentGraphTransportHomeomorph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphClosure.olean
+          key: bfss-fcp-m4f5-unrestricted-graph-closure-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Verify exact accepted source import closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.m4f5cache.outputs.cache-hit }}" = true || { echo M4F6_M4F5_QUALIFIED_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in OAI/MathematicalPhysics/BFSS/Core OAI/MathematicalPhysics/BFSS/GaugeCore SU2BFSSG4JExactGaugeDataAssemblyProbe FCPIndependentFullSmoothCharge FCPIndependentChargeVectorL2 FCPIndependentSmoothCore FCPIndependentInvariantSmoothEquiv FCPIndependentFullCoreGraph FCPIndependentFullCoreGraphImage FCPIndependentGraphTransportHomeomorph FCPIndependentFullCoreGraphClosure; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "M4F6_REQUIRED_PARENT_OLEAN_MISSING=$stem"; exit 1; }
+          done
+          echo M4F6_INPUT_CUT_GRAPH_GATE2_QUALIFIED_PARENT_CLOSURE_PASS
+
+      - name: Compile FCPRestrictedGraphInputCut and strictly audit 3 declarations
+        shell: bash
+        timeout-minutes: 3
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=FCPRestrictedGraphInputCut
+          cp "$GITHUB_WORKSPACE/experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+          echo "M4F6_INPUT_CUT_GATE2_GENERIC_AND_ORIGINAL_INPUT_CUT_BEGIN" | tee -a /tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/stages.log
+          /usr/bin/time -f 'DIAG_RESOURCE_TIME %e CPU %P MAX_RSS_KB %M' -o "/tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/$stem.resource" \
+            timeout --signal=TERM --kill-after=5s 105s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" >"/tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/$stem.log" 2>&1 || {
+              code=$?
+              echo "M4F6_INPUT_CUT_GATE2_GENERIC_AND_ORIGINAL_INPUT_CUT_LEAN_EXIT_$code"
+              tail -n 80 "/tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/$stem.log"
+              exit "$code"
+            }
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          stem='FCPRestrictedGraphInputCut'
+          src=Path(stem+'.lean').read_text()
+          log=Path('/tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/'+stem+'.log').read_text()
+          names=["core_graph_input_cut","image_input_cut","original_core_graph_input_cut"]
+          ns='FCP.RestrictedGraphInputCut'
+          assert re.findall(r'^namespace (\S+)',src,re.M)==[ns]
+          assert re.findall(r'^(?:def|theorem|abbrev) (\S+)',src,re.M)==names
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==names
+          reports=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          seen={k:{a.strip() for a in v.split(',') if a.strip()} for k,v in reports}
+          assert len(reports)==len(seen)==len(names),('AXIOM_REPORT_COUNT',reports)
+          assert set(seen)=={ns+'.'+n for n in names},('DECLARATION_MISMATCH',list(seen))
+          assert all(s <= {'propext','Classical.choice','Quot.sound'} for s in seen.values()),('FORBIDDEN_AXIOMS',seen)
+          assert 'error:' not in log and 'sorryAx' not in log and 'unknownIdentifier' not in log
+          unexpected=[line for line in log.splitlines() if 'warning:' in line and not re.fullmatch(r"warning: [A-Za-z0-9_-]+: repository '[^']+' has local changes",line)]
+          assert not unexpected,('UNEXPECTED_WARNING',unexpected)
+          for name,axioms in seen.items():
+            print(name, 'axioms:', sorted(axioms))
+          print('M4F6_INPUT_CUT_GATE2_GENERIC_AND_ORIGINAL_INPUT_CUT_STRICT_PASS')
+          PY
+          cat "/tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/$stem.resource"
+          echo "M4F6_INPUT_CUT_GATE2_GENERIC_AND_ORIGINAL_INPUT_CUT_PASS" | tee -a /tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/stages.log
+
+      - name: Compile FCPIndependentRestrictedCoreGraph and strictly audit 6 declarations
+        shell: bash
+        timeout-minutes: 3
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=FCPIndependentRestrictedCoreGraph
+          cp "$GITHUB_WORKSPACE/experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+          echo "M4F6_INPUT_CUT_GATE2_RESTRICTED_IMAGE_AND_CLOSURE_BEGIN" | tee -a /tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/stages.log
+          /usr/bin/time -f 'DIAG_RESOURCE_TIME %e CPU %P MAX_RSS_KB %M' -o "/tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/$stem.resource" \
+            timeout --signal=TERM --kill-after=5s 105s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" >"/tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/$stem.log" 2>&1 || {
+              code=$?
+              echo "M4F6_INPUT_CUT_GATE2_RESTRICTED_IMAGE_AND_CLOSURE_LEAN_EXIT_$code"
+              tail -n 80 "/tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/$stem.log"
+              exit "$code"
+            }
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          stem='FCPIndependentRestrictedCoreGraph'
+          src=Path(stem+'.lean').read_text()
+          log=Path('/tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/'+stem+'.log').read_text()
+          names=["independentRestrictedCoreGraph","sourceOriginalRestrictedCoreGraph","independentRestrictedCoreGraph_eq_input_cut","sourceOriginalRestrictedCoreGraph_eq_input_cut","sourceOriginalRestrictedCoreGraph_eq_independent_image","sourceOriginalRestrictedCoreGraph_closure_eq_independent_image_closure"]
+          ns='FCP.IndependentSmoothSupercharge'
+          assert re.findall(r'^namespace (\S+)',src,re.M)==[ns]
+          assert re.findall(r'^(?:def|theorem|abbrev) (\S+)',src,re.M)==names
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==names
+          reports=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          seen={k:{a.strip() for a in v.split(',') if a.strip()} for k,v in reports}
+          assert len(reports)==len(seen)==len(names),('AXIOM_REPORT_COUNT',reports)
+          assert set(seen)=={ns+'.'+n for n in names},('DECLARATION_MISMATCH',list(seen))
+          assert all(s <= {'propext','Classical.choice','Quot.sound'} for s in seen.values()),('FORBIDDEN_AXIOMS',seen)
+          assert 'error:' not in log and 'sorryAx' not in log and 'unknownIdentifier' not in log
+          unexpected=[line for line in log.splitlines() if 'warning:' in line and not re.fullmatch(r"warning: [A-Za-z0-9_-]+: repository '[^']+' has local changes",line)]
+          assert not unexpected,('UNEXPECTED_WARNING',unexpected)
+          for name,axioms in seen.items():
+            print(name, 'axioms:', sorted(axioms))
+          print('M4F6_INPUT_CUT_GATE2_RESTRICTED_IMAGE_AND_CLOSURE_STRICT_PASS')
+          PY
+          cat "/tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/$stem.resource"
+          echo "M4F6_INPUT_CUT_GATE2_RESTRICTED_IMAGE_AND_CLOSURE_PASS" | tee -a /tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2/stages.log
+
+      - name: Save qualified M4F6 restricted core graph objects
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+          key: bfss-fcp-m4f6-restricted-core-graph-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve source-exact logs, validator and resource diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-m4f6-input-cut-restricted-core-graph-gate2-${{ github.run_id }}
+          path: /tmp/bfss-m4f6-input-cut-restricted-core-graph-gate2
+          if-no-files-found: warn
