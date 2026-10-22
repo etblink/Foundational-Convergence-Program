@@ -7,7 +7,7 @@ E-valued smooth compactly supported BFSS test functions.
 The operator is defined directly from the 48 independent Hermitian
 Majorana maps, without selecting J or transporting a source charge.
 The accepted M3J generator-preserving unitary is used only in the
-theorem proving source-exact fermionic test-function intertwining.
+proof establishing source-exact fermionic test-function intertwining.
 This is the first building block for the independent kinetic and cubic
 BFSS supercharge expressions. No full supercharge/graph/domain
 or spectral identity is asserted.
