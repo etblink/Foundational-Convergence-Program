@@ -46,7 +46,11 @@ def independentPhysicalLinearEquiv
     ⟨(fiberTransportUnitary J).symm v.val,
       (independentPhysicalSpace_iff_source theta hCAR hHermitian J hJ
         ((fiberTransportUnitary J).symm v.val)).mpr
-          (by simpa only [(fiberTransportUnitary J).apply_symm_apply] using v.prop)⟩
+          (by
+            have hright :
+                (fiberTransportUnitary J) ((fiberTransportUnitary J).symm v.val) = v.val :=
+              (fiberTransportUnitary J).apply_symm_apply v.val
+            exact hright.symm ▸ v.prop)⟩
   left_inv := by
     intro v
     apply Subtype.ext
