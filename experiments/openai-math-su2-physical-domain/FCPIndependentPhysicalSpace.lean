@@ -72,6 +72,7 @@ theorem independentPhysicalSpace_mem_iff (v : Lp E 2 μ) :
           independentFermionAction theta hCAR hHermitian g v := by
   simp only [independentPhysicalSpace, Submodule.mem_iInf,
     LinearMap.mem_ker, LinearMap.sub_apply, sub_eq_zero]
+  rfl
 
 /-- Exact two-way identification of independently defined physical gauge
 constraints with the ORIGINAL source GaugeData.physicalSpace. The unitary J
