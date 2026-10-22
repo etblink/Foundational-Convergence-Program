@@ -1,4 +1,4 @@
-import FCPM4E5SourceOuterEquality
+import FCPM4E5RawSourceCertificates
 
 /-!
 M4E5 diagnostic C: independent kinetic-to-NAMED source operator
@@ -36,7 +36,12 @@ theorem independentKinetic_named_source_intertwining
     independentSmoothTransport J (independentKineticCharge gamma theta α f) =
       originalSourceKineticPart pairedAlgebraData α
         (independentSmoothTransport J f) := by
-  exact independentKineticCharge_intertwining gamma theta J hGamma hJ α f
+  exact (independentKineticCharge_intertwining
+    gamma theta J hGamma hJ α f).trans
+    (congrArg
+      (fun T : SmoothCore 2 →ₗ[ℂ] SmoothCore 2 =>
+        T (independentSmoothTransport J f))
+      (originalSourceKineticPart_eq_sum pairedAlgebraData α).symm)
 
 #print axioms independentKinetic_named_source_intertwining
 
