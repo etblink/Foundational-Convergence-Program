@@ -53,6 +53,7 @@ Formal acceptance requires more than a successful-looking workflow:
 - Record the compiler/prover version, dependency pins, source revision, and qualified build provenance **in the scoped evidence record**, not this guide.
 - Require real compilation or kernel acceptance, complete prerequisite closure, and an explicit axiom/assumption audit. Reject proof holes, unauthorized axioms, stale cache provenance, and unsupported promotion of partial results.
 - Treat caching as a performance tool, not an independent source of truth. Reuse accepted artifacts when their provenance matches the active environment.
+- **GitHub Actions cache reuse requires matching cache version, not just matching text key:** the cache version also depends on the save/restore path specification and compression mechanism. Preserve the exact qualified save-path contract when restoring a proof cache, and distinguish a cache-version mismatch from missing historical proof acceptance.
 
 Where formal proof is not the appropriate standard, use equally explicit empirical protocols, frozen comparison criteria, uncertainty disclosures, and independent checks. Do not mistake CI success for scientific confirmation.
 
