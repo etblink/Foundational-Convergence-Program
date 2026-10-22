@@ -36,8 +36,7 @@ theorem independentKinetic_named_source_intertwining
     independentSmoothTransport J (independentKineticCharge gamma theta α f) =
       originalSourceKineticPart pairedAlgebraData α
         (independentSmoothTransport J f) := by
-  simpa only [originalSourceKineticPart] using
-    (independentKineticCharge_intertwining gamma theta J hGamma hJ α f)
+  exact independentKineticCharge_intertwining gamma theta J hGamma hJ α f
 
 #print axioms independentKinetic_named_source_intertwining
 
