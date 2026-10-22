@@ -32,9 +32,9 @@ theorem fiberTransport_left_inverse
     (J.symm.toContinuousLinearEquiv.toContinuousLinearMap.compLpL 2 μ)
       (fiberTransport J v) = v := by
   apply Lp.ext_iff.mpr
-  have hforward := (J.toContinuousLinearEquiv.toContinuousLinearMap).coeFn_compLpL 2 μ v
+  have hforward := (J.toContinuousLinearEquiv.toContinuousLinearMap).coeFn_compLpL v
   have hback := (J.symm.toContinuousLinearEquiv.toContinuousLinearMap).coeFn_compLpL
-    2 μ (fiberTransport J v)
+    (fiberTransport J v)
   filter_upwards [hforward, hback] with x hf hb
   calc
     ((J.symm.toContinuousLinearEquiv.toContinuousLinearMap.compLpL 2 μ)
@@ -49,9 +49,9 @@ theorem fiberTransport_right_inverse
     fiberTransport J
       ((J.symm.toContinuousLinearEquiv.toContinuousLinearMap.compLpL 2 μ) v) = v := by
   apply Lp.ext_iff.mpr
-  have hback := (J.symm.toContinuousLinearEquiv.toContinuousLinearMap).coeFn_compLpL 2 μ v
+  have hback := (J.symm.toContinuousLinearEquiv.toContinuousLinearMap).coeFn_compLpL v
   have hforward := (J.toContinuousLinearEquiv.toContinuousLinearMap).coeFn_compLpL
-    2 μ ((J.symm.toContinuousLinearEquiv.toContinuousLinearMap.compLpL 2 μ) v)
+    ((J.symm.toContinuousLinearEquiv.toContinuousLinearMap.compLpL 2 μ) v)
   filter_upwards [hback, hforward] with x hb hf
   calc
     (fiberTransport J
