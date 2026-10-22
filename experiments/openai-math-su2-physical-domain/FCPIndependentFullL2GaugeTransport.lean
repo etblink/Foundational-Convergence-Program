@@ -67,7 +67,7 @@ theorem fiberTransport_bosonPullback
   have hleft := A.coeFn_compLp (Lp.compMeasurePreserving b hb v)
   have hpull := Lp.coeFn_compMeasurePreserving v hb
   have hright := Lp.coeFn_compMeasurePreserving (A.compLp v) hb
-  have hmid := (A.coeFn_compLp v).comp_tendsto
+  have hmid := (A.coeFn_compLp' v).comp_tendsto
     hb.quasiMeasurePreserving.tendsto_ae
   filter_upwards [hleft, hpull, hright, hmid] with x hl hp hr hm
   calc
