@@ -3,6 +3,14 @@
 **Date:** October 22, 2026 PDT.
 **Disposition:** `M4E5_GATE2_RED__RUNNER_SHUTDOWN_SIGNAL_EXIT143_DURING_COMPILE__LEAN_VERDICT_NOT_OBTAINED__ZERO_ROOTS__286_CUMULATIVE`.
 
+## Supplemental finding: second Gate #2 run also terminated
+
+GitHub independently identifies **two distinct Gate #2 run IDs**, both first attempts, on exactly the same workflow and source head `7aaf5c1f1049f28a4e84569d200a701090070dea`. The second is [run #39812868385](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39812868385), job `119951175940`, created at `2026-10-22T16:18:14Z`; the first `#39812844570` was created at `16:18:04Z`. They are **separate simultaneously triggered runs**, not GitHub retry attempts (each `run_attempt=1`).
+
+Original second-run compiler execution began at `16:37:31Z` and terminated at `16:45:24Z` after roughly 7m53s, again with the exact runner shutdown signal and process exit **143**, without Lean theorem/axiom reports or a compiler error. Thus **neither Gate #2 run established a Lean verdict**. Both remain red, both **0 roots**. The similar approximately-eight-minute termination intervals warrant investigation of runner/resource constraints or non-terminating simplification, but logs cannot distinguish the root cause; do not represent suspected resource exhaustion or proof nontermination as confirmed.
+
+This second finding was discovered after the initial audit and after the isolated Gate #3 had already been submitted. The next Gate #3 proof deliberately avoids recursively simplifying the source's large sum. No duplicate unchanged source should be run again.
+
 ## Independent original CI evidence
 
 - [GitHub Actions strict Gate #2 run #39812844570](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39812844570), job `119943434832`, attempt 1, overall `completed/failure`.
