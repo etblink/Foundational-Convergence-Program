@@ -25,7 +25,7 @@
   ```
 - New qualified compilation cache saved: `bfss-fcp-m4e1-fermion-core-action-v2-adc7f124-lean4341-d13f23b-Linux-X64`.
 - Original diagnostic artifact `bfss-m4e1-gate2-39800642749`, GitHub artifact ID `12436440235`, uploaded successfully.
-- **Workflow-status qualification:** When independently checked, GitHub's aggregate run endpoint still intermittently reported `in_progress` despite its job being definitively `completed/success`, all 14 expected job steps concluded, strict acceptance marker, artifact upload, and cache save. Similar result-aggregation delays were observed in M4D3 on the same day. This audit's acceptance is based on full successful job and original Lean/compiler evidence; do not invent an aggregate completion timestamp or claim to have personally observed a green aggregate run before API reconciliation.
+- **Workflow-status qualification and final reconciliation:** The GitHub aggregate run endpoint initially reported `in_progress` despite its job definitively `completed/success`, all expected job steps concluded, strict acceptance marker, artifact upload, and cache save. At a subsequent independent check, the exact overall run **#39800642749** was verified **`completed/success`**, with GitHub `updated_at=2026-10-22T15:12:15Z`. This reconciles the whole-workflow qualification; the earlier lag was result aggregation, not failed mathematical compilation.
 
 ## Exact mathematics established
 
