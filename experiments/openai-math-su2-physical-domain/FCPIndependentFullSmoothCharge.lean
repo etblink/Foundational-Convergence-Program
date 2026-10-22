@@ -12,6 +12,12 @@ The exact source identification is a separate theorem, using only
 strictly accepted M4E3 kinetic and M4E4B cubic summand bridges.
 No physical gauge-core charge restriction, closed graph/domain,
 Hamiltonian operator equality or spectral conclusion is implied.
+
+Proof architecture: a targeted calc chain reassembles the outer sum
+of the two original summands without unfolding the internal multi-index
+sums of AlgebraData.charge. This avoids the definitional reduction
+explosion that caused previous gates to hit recursion depth or runner
+resource limits.
 -/
 
 set_option autoImplicit false
@@ -42,7 +48,11 @@ def independentCharge
 
 /-- Exact identification with the LITERAL original AlgebraData.charge,
 simultaneously valid for all sixteen α, on the independent smooth
-core under exact color, gamma, and Majorana generator matching. -/
+core under exact color, gamma, and Majorana generator matching.
+
+The proof uses only the accepted component intertwining theorems and
+the outer additivity of the transport and of AlgebraData.charge;
+it never expands the large internal sums. -/
 theorem independentCharge_intertwining
     (color : ColorIndex 2 → ColorMatrix 2)
     (gamma : SpaceIndex → GammaMatrix)
@@ -58,12 +68,42 @@ theorem independentCharge_intertwining
     gamma theta J hGamma hJ α f
   have hc := independentCubicCharge_intertwining
     color gamma theta J hColor hGamma hJ α f
-  simp only [independentCharge, LinearMap.add_apply, map_add]
-  rw [hk, hc]
-  conv_rhs =>
-    rw [AlgebraData.charge]
-    rw [LinearMap.add_apply]
-  rfl
+  calc
+    independentSmoothTransport J (independentCharge color gamma theta α f)
+      = independentSmoothTransport J
+          ((independentKineticCharge gamma theta α +
+            independentCubicCharge color gamma theta α) f) := by
+        rw [independentCharge]
+    _ = independentSmoothTransport J (independentKineticCharge gamma theta α f) +
+        independentSmoothTransport J (independentCubicCharge color gamma theta α f) := by
+        rw [map_add]
+    _ = (∑ i : SpaceIndex, ∑ A : ColorIndex 2, ∑ β : SpinIndex,
+          (-Complex.I * (pairedAlgebraData.gamma i α β : ℂ)) •
+            ((pairedAlgebraData.fermionAction β A).comp
+              (coordinateDerivative i A)))
+          (independentSmoothTransport J f) +
+        (∑ i : SpaceIndex, ∑ j : SpaceIndex, ∑ A : ColorIndex 2,
+          ∑ B : ColorIndex 2, ∑ C : ColorIndex 2, ∑ β : SpinIndex,
+          (((1 / 2 : ℝ) * pairedAlgebraData.structureConstant A B C *
+            pairedAlgebraData.gammaTwo i j α β : ℝ) : ℂ) •
+            ((pairedAlgebraData.fermionAction β A).comp
+              ((position i B).comp (position j C))))
+          (independentSmoothTransport J f) := by
+        rw [hk, hc]
+    _ = ((∑ i : SpaceIndex, ∑ A : ColorIndex 2, ∑ β : SpinIndex,
+          (-Complex.I * (pairedAlgebraData.gamma i α β : ℂ)) •
+            ((pairedAlgebraData.fermionAction β A).comp
+              (coordinateDerivative i A))) +
+        (∑ i : SpaceIndex, ∑ j : SpaceIndex, ∑ A : ColorIndex 2,
+          ∑ B : ColorIndex 2, ∑ C : ColorIndex 2, ∑ β : SpinIndex,
+          (((1 / 2 : ℝ) * pairedAlgebraData.structureConstant A B C *
+            pairedAlgebraData.gammaTwo i j α β : ℝ) : ℂ) •
+            ((pairedAlgebraData.fermionAction β A).comp
+              ((position i B).comp (position j C)))))
+          (independentSmoothTransport J f) := by
+        rw [LinearMap.add_apply]
+    _ = pairedAlgebraData.charge α (independentSmoothTransport J f) := by
+        rw [← AlgebraData.charge]
 
 #print axioms independentCharge
 #print axioms independentCharge_intertwining
