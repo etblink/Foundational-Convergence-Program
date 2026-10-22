@@ -1,0 +1,195 @@
+name: BFSS M4B Independent Original Gauge Representation Strict Gate 1
+
+# Single source-exact gate: only this workflow path on the isolated research
+# branch can trigger; source/audit-only changes do not trigger this gate.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-m4b-independent-original-gauge-bridge-strict-gate1.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-m4b-independent-original-gauge-gate1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  independent-original-clifford-intertwining:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - name: Checkout isolated research sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Checkout immutable original BFSS mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Fail-closed original-source and candidate provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-m4b-gate1
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY_CHECK'
+          import pathlib,hashlib,subprocess,json
+          d=json.loads(pathlib.Path('upstream-math/lean/lake-manifest.json').read_text())
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          root=pathlib.Path('experiments/openai-math-su2-physical-domain')
+          old={
+            'SU2BFSSPhysicalDomainS1V52M3JIndependentUnitaryExistenceProbe.lean':'1cd42b286a18abf6e7f8c2348949f8de3748151c',
+            'FCPM3JIndependentCliffordAction.lean':'6f9312093df1fa155203ca2c4371237932298e20',
+            'SU2BFSSPhysicalDomainS1V52L9E5C1OriginalFockCliffordAlgebraUniversalLiftProbe.lean':'91313c5e622577fd12fa4ce7ec59f457a816ae3a',
+            'SU2BFSSPhysicalDomainS1V52L9E4OriginalFockRealLinearCliffordGeneratorMapProbe.lean':'b0035401f5b75b4f9d07622842b1fb05de5cac8d',
+            'SU2BFSSPhysicalDomainS1V52L9E5F18COriginalNativeFockSourceGaugeIdentificationProbe.lean':'159dcb0a2d1ef45e3894f33eae851166faba0fb3',
+            'SU2BFSSPhysicalDomainS1V52L9E5F18BOriginalNativeFockSourceVectorCovarianceProbe.lean':'b34e174c752925398a182587f15d8b4997ce0c08',
+            'SU2BFSSPhysicalDomainS1V52L8EOriginalOrderedSixteenNativeSU2Spin48HomProbe.lean':'c68e630797f64861d46a54b04bb02b0e9ef33442',
+            'SU2BFSSPhysicalDomainS1V52L9E1OriginalNativeSixteenSpin48UniversalCliffordConjugationProbe.lean':'d62909cef3a7d44e970d243258465bb4a8f88da7',
+          }
+          for name,sha in old.items():
+            assert subprocess.check_output(['git','rev-parse','HEAD:'+str(root/name)],text=True).strip()==sha, ('ACCEPTED_SOURCE_CHANGED',name)
+          new={
+            'FCPIndependentCliffordIntertwining.lean':'0ac8b615b2006895acd7d74e82a59099848b3c1f54388353a7627d21896b4a38',
+            'FCPIndependentSpinRealization.lean':'08ea65c3496d8e64a49a2c8205326e48ca7d2fd2625173c40255f1d03a3fb971',
+            'FCPIndependentMajoranaAction.lean':'9f15de012b5a9ac2410f21beadb775df8226d8d0cd6b5c9f833b25a2838f4ff0',
+            'FCPIndependentOriginalCliffordBridge.lean':'9070514fc8eac01bb6873fbbc40b0bed1dedae0e413a98b5875191f5275b4393',
+            'FCPIndependentOriginalGaugeBridge.lean':'41ca4064191d702a4375a14fb644bae47441bda7430f76d68b26cfd48d32deb2',
+          }
+          for name,sha in new.items():
+            b=(root/name).read_bytes()
+            assert hashlib.sha256(b).hexdigest()==sha, ('M4A_CANDIDATE_CHANGED',name)
+            assert subprocess.check_output(['git','hash-object','--no-filters',str(root/name)],text=True).strip()==subprocess.check_output(['git','rev-parse','HEAD:'+str(root/name)],text=True).strip(),('WORKTREE_DIRTY',name)
+          print('M4B_SOURCE_EXACT_PROVENANCE_PASS')
+          PY_CHECK
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore original Lean 4.34.1 and pinned Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-m4b-gate1/toolchain.log; then ok=true; break; fi
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo M4B_PINNED_LEAN_UNAVAILABLE; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-m4b-gate1/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo M4B_PINNED_TOOLCHAIN_PASS
+
+      - name: Restore qualified original F18C native Fock gauge identification cache
+        id: cacheF18C
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v52l9e5f18c-original-source-gauge-identification-v4-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Restore qualified M4A real Clifford intertwining cache
+        id: cacheM4A
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+          key: bfss-fcp-m4a-independent-real-clifford-bridge-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Confirm qualified M4A and F18C source closures
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.cacheF18C.outputs.cache-hit }}" = true || { echo M4B_F18C_QUALIFIED_CACHE_MISS; exit 1; }
+          test "${{ steps.cacheM4A.outputs.cache-hit }}" = true || { echo M4B_M4A_QUALIFIED_CACHE_MISS; exit 1; }
+          cd upstream-math/lean
+          for stem in \
+            OAI/MathematicalPhysics/BFSS/Core \
+            SU2BFSSPhysicalDomainS1V52L8EOriginalOrderedSixteenNativeSU2Spin48HomProbe \
+            SU2BFSSPhysicalDomainS1V52L9E1OriginalNativeSixteenSpin48UniversalCliffordConjugationProbe \
+            SU2BFSSPhysicalDomainS1V52L9E5C1OriginalFockCliffordAlgebraUniversalLiftProbe \
+            SU2BFSSPhysicalDomainS1V52L9E5F15OriginalNativeSpin48FockLinearEquivGaugeHomProbe \
+            SU2BFSSPhysicalDomainS1V52L9E5F18BOriginalNativeFockSourceVectorCovarianceProbe \
+            SU2BFSSPhysicalDomainS1V52L9E5F18COriginalNativeFockSourceGaugeIdentificationProbe \
+            SU2BFSSPhysicalDomainS1V52M3JIndependentUnitaryExistenceProbe \
+            FCPIndependentCliffordIntertwining \
+            FCPIndependentSpinRealization \
+            FCPIndependentMajoranaAction \
+            FCPIndependentOriginalCliffordBridge; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "M4B_QUALIFIED_SOURCE_OLEAN_MISSING=$stem"; exit 1; }
+          done
+          echo M4B_TWO_ACCEPTED_SOURCE_CLOSURES_READY
+      - name: Strictly compile actual independent original gauge comparison
+        shell: bash
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=FCPIndependentOriginalGaugeBridge
+          cp "$GITHUB_WORKSPACE/experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+          timeout 660s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-m4b-gate1/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY_ASSERT'
+          from pathlib import Path
+          import re
+          ns='FCP.IndependentOriginalGaugeBridge'
+          stem='FCPIndependentOriginalGaugeBridge'
+          source=Path(stem+'.lean').read_text()
+          log=Path('/tmp/bfss-m4b-gate1',stem+'.log').read_text()
+          expected=['independentOriginalGaugeHom','independent_original_gauge_real_covariance',
+                    'independent_original_gauge_intertwining','exists_independent_original_gauge_unitary']
+          assert re.findall(r'^namespace (\S+)',source,re.M)==[ns]
+          assert re.findall(r'^#print axioms (\S+)',source,re.M)==expected
+          assert re.findall(r'^(?:def|theorem) (\S+)',source,re.M)==expected
+          reports=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          actual={k:{x.strip() for x in v.split(',') if x.strip()} for k,v in reports}
+          assert len(reports)==len(actual)==len(expected),(reports,'DUPLICATE_OR_MISSING_REPORTS')
+          assert set(actual)=={ns+'.'+x for x in expected},('AXIOM_DECLARATION_MISMATCH',actual)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          assert all(x<=allowed for x in actual.values()),('FORBIDDEN_AXIOM',actual)
+          assert 'sorryAx' not in log and 'error:' not in log and 'unknownIdentifier' not in log,('LEAN_ERROR',log[-6500:])
+          lake_status=r"warning: [A-Za-z0-9_-]+: repository '[^']+' has local changes"
+          unexpected=[line for line in log.splitlines() if 'warning:' in line and not re.fullmatch(lake_status,line)]
+          assert not unexpected,('UNEXPECTED_WARNING',unexpected)
+          assert ns+'.exists_independent_original_gauge_unitary' in actual
+          print('M4B_INDEPENDENT_ORIGINAL_SU2_GAUGE_UNITARY_ONE_ROOT_STRICT_PASS')
+          PY_ASSERT
+      - name: Save qualified independent original SU2 gauge cache
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+          key: bfss-fcp-m4b-independent-original-gauge-unitary-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Preserve M4B source-exact diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-m4b-gate1-${{ github.run_id }}
+          path: /tmp/bfss-m4b-gate1
+          if-no-files-found: ignore
