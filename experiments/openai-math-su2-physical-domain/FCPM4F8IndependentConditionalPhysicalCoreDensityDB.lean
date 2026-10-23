@@ -112,6 +112,7 @@ theorem independentInvariantCoreL2_closure_eq_physical_of_source
       rw [hphys] at hv
       exact hv
     have hcl := hsourcePhysicalSubset hvsource
+    change F.symm (F v) ∈ closure S at hcl
     simpa only [F.symm_apply_apply] using hcl
 
 #print axioms independentInvariantCoreL2_closure_eq_physical_of_source
