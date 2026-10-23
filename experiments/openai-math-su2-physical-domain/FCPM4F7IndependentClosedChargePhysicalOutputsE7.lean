@@ -35,6 +35,25 @@ variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
 variable [FiniteDimensional ℂ E]
 private abbrev μ := (volume : Measure (Boson 2))
 
+/-- Abstract typed range-output lemma. No BFSS object is expanded inside
+the existential product-map witness elimination or output projection. -/
+private theorem abstract_range_prod_output_mem
+    {V X Y : Type*}
+    [AddCommGroup V] [Module ℂ V]
+    [AddCommGroup X] [Module ℂ X]
+    [AddCommGroup Y] [Module ℂ Y]
+    (F : V →ₗ[ℂ] X)
+    (Q : V →ₗ[ℂ] (SpinIndex → Y))
+    (P : Submodule ℂ Y)
+    (hQ : ∀ (v : V) (β : SpinIndex), (Q v) β ∈ P)
+    (p : X × (SpinIndex → Y))
+    (hp : p ∈ (LinearMap.range (F.prod Q) :
+      Set (X × (SpinIndex → Y))))
+    (α : SpinIndex) : p.2 α ∈ P := by
+  rcases hp with ⟨v, rfl⟩
+  exact hQ v α
+
+
 /-- Every independently defined smooth charge preserves the native
 physical Hilbert subspace on genuine independent invariant smooth-core
 sections. This small typed helper composes the accepted M4F1 S2 theorem
@@ -114,9 +133,22 @@ theorem independentPhysicalInputCutClosedChargeColumn_output_physical
       (Set.ext_iff.mp
         (FCP.M4F7IndependentLiteralRestrictedGraphBridgeE3.independentPhysicalInputCutCoreGraph_eq_literalRestrictedRange
           color gamma theta hCAR hHermitian) q).mp hq
-    rcases hliteral with ⟨f, rfl⟩
-    exact independentInvariantCoreChargeVector_output_physical
-      color gamma theta hCAR hHermitian J hColor hGamma hJ f α
+    have hMap :
+        ∀ (f : independentInvariantCore theta hCAR hHermitian)
+          (β : SpinIndex),
+          (((independentChargeVector color gamma theta).comp
+            (independentInvariantCore theta hCAR hHermitian).subtype) f) β ∈
+              independentPhysicalSpace theta hCAR hHermitian := by
+      intro f β
+      exact independentInvariantCoreChargeVector_output_physical
+        color gamma theta hCAR hHermitian J hColor hGamma hJ f β
+    exact abstract_range_prod_output_mem
+      (independentCoreToL2.comp
+        (independentInvariantCore theta hCAR hHermitian).subtype)
+      ((independentChargeVector color gamma theta).comp
+        (independentInvariantCore theta hCAR hHermitian).subtype)
+      (independentPhysicalSpace theta hCAR hHermitian)
+      hMap q hliteral α
   have hclosure := closure_minimal hcore hclosed
   rw [FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutClosedChargeColumn_graph_eq
     color gamma theta hCAR hHermitian J hColor hGamma hJ,
