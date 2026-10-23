@@ -21,8 +21,7 @@ noncomputable section
 
 variable {I V X Y : Type*}
 variable [AddCommGroup V] [Module ℂ V]
-variable [AddCommGroup X] [Module ℂ X] [TopologicalSpace X]
-variable [AddCommGroup Y] [Module ℂ Y] [TopologicalSpace Y]
+variable [AddCommGroup Y] [Module ℂ Y]
 
 /-- Exact all-coordinate output constraint for an abstract complex
 physical submodule; no charge formula is inserted. -/
@@ -31,11 +30,13 @@ def allOutputConstraint (P : Submodule ℂ Y) :
   {p | ∀ i : I, p.2 i ∈ P}
 
 /-- Unfold only the small abstract output predicate. -/
-omit [AddCommGroup X] [Module ℂ X] [TopologicalSpace X] [TopologicalSpace Y] in
 theorem mem_allOutputConstraint_iff
     (P : Submodule ℂ Y) (p : X × (I → Y)) :
     p ∈ allOutputConstraint (I := I) P ↔
       ∀ i : I, p.2 i ∈ P := Iff.rfl
+
+variable [AddCommGroup X] [Module ℂ X] [TopologicalSpace X]
+variable [TopologicalSpace Y]
 
 /-- For any supplied opaque relation G, exact equality to the
 original product-range closure transfers all output membership. -/
