@@ -37,3 +37,12 @@ The Project Lead created the isolated self-path workflow `.github/workflows/bfss
 The new workflow preserves immutable upstream/mathlib pins, checks the exact Git blob identity of every untouched candidate (G4K8D–G4K9D, G4K10A, D3A, D3B and independent M4F1), restores the accepted M4F5 cache and the **matching-path saved** Gate #4 G4K8C cache, verifies required `.olean` imports, and compiles one module at a time with `-DwarningAsError=false`, capturing complete source/compiler output and axiom inventories. It **does not save any proof cache**, does not bypass genuine Lean errors or source proof-hole checks, and **must not count any new theorem roots even if green**. This run is a deliberate change of diagnostic method, not a relaxed version of the acceptance gate.
 
 The future decision depends on the *actual* first diagnostic and full warning inventory, not on a speculative pre-edit of all later source files.
+
+
+## Diagnostic-wrapper defect and bounded correction (separate from Gate #4)
+
+The initial non-acceptance warning-inventory [run #39882273445](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39882273445) **completed/failure before Lean**. Job `120182169492` reached the source-provenance preflight and failed with `TypeError: bad operand type for unary -: 'list'`. The generated Python `rows=[...]` used a YAML-style `- [stem,dir,sha]` instead of Python tuple/list entries. The frozen source hashes were **not disproved**; this was a tool-generation syntax mistake. No compiler or graph result is inferred from this run.
+
+The correction [commit `b6c4ebc3e98b752ef25887975acefb0214ad9970`](https://github.com/etblink/Foundational-Convergence-Program/commit/b6c4ebc3e98b752ef25887975acefb0214ad9970) replaced exactly twelve incorrect generated list rows with Python `(stem,dir,sha),` tuple rows. It preserves pinned source hashes, the accepted M4F5/G4K8C restore contracts, no cache save, ordinary-warning diagnostic policy, and exact self-file workflow trigger. [Corrected diagnostic run #39882478306](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39882478306) was **in progress** when this addendum was authored; **no compilation, qualified result, or new theorem is yet asserted**.
+
+**Process feedback:** even non-acceptance diagnostics need pre-CI syntax and generated-script checks. A wrapper red must be classified and preserved, not misrepresented as progress on D3B.
