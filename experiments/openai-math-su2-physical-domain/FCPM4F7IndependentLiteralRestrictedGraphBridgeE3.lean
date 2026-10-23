@@ -93,13 +93,11 @@ theorem independentPhysicalInputCutCoreGraph_eq_literalRestrictedRange
         Set (Lp E 2 μ × (SpinIndex → Lp E 2 μ))) := by
   apply Set.ext
   intro p
-  rw [independentPhysicalInputCutCoreGraph_mem_iff
-    color gamma theta hCAR hHermitian p]
-  have hC2 :=
-    FCP.M4F6IndependentGraphInputCut.independentCoreGraph_eq_physicalInputCut
-      color gamma theta hCAR hHermitian
-  rw [hC2]
-  rfl
+  exact (independentPhysicalInputCutCoreGraph_mem_iff
+    color gamma theta hCAR hHermitian p).trans
+    ((Set.ext_iff.mp
+      (FCP.M4F6IndependentGraphInputCut.independentCoreGraph_eq_physicalInputCut
+        color gamma theta hCAR hHermitian) p).symm)
 
 /-- The actual E2 independently defined J-free physical-input-cut
 closed sixteen-charge operator has exactly the SET closure of the literal
