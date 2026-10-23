@@ -101,46 +101,10 @@ theorem independentPhysicalInputCutCoreGraph_eq_literalRestrictedRange
   rw [hC2]
   rfl
 
-/-- Closure equivalence of the exact E2 named independent physical-input
-smooth-core graph and the original literal restricted smooth-core graph.
-This is a set-level closure equality; no new hidden domain assertion. -/
-theorem independentPhysicalInputCutClosure_eq_literalRestrictedClosure
-    (color : ColorIndex 2 → ColorMatrix 2)
-    (gamma : SpaceIndex → GammaMatrix)
-    (theta : SpinIndex → ColorIndex 2 → Module.End ℂ E)
-    (hCAR : ∀ α β A B,
-      theta α A * theta β B + theta β B * theta α A =
-        (if α = β ∧ A = B then (1 : ℂ) else 0) •
-          (1 : Module.End ℂ E))
-    (hHermitian : ∀ α A, (theta α A).IsSymmetric) :
-    (FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutCoreGraph
-      color gamma theta hCAR hHermitian).topologicalClosure =
-    (LinearMap.range
-      ((independentCoreToL2.comp
-        (independentInvariantCore theta hCAR hHermitian).subtype).prod
-        ((independentChargeVector color gamma theta).comp
-          (independentInvariantCore theta hCAR hHermitian).subtype)).topologicalClosure := by
-  apply Submodule.ext
-  intro p
-  have hSet := congrArg closure
-    (independentPhysicalInputCutCoreGraph_eq_literalRestrictedRange
-      color gamma theta hCAR hHermitian)
-  have hp := congrArg (fun T : Set (Lp E 2 μ × (SpinIndex → Lp E 2 μ)) => p ∈ T) hSet
-  -- Both native topological closures have precisely their set closures.
-  rw [← Submodule.topologicalClosure_coe
-    (FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutCoreGraph
-      color gamma theta hCAR hHermitian)] at hp
-  rw [← Submodule.topologicalClosure_coe
-    (LinearMap.range
-      ((independentCoreToL2.comp
-        (independentInvariantCore theta hCAR hHermitian).subtype).prod
-        ((independentChargeVector color gamma theta).comp
-          (independentInvariantCore theta hCAR hHermitian).subtype)))] at hp
-  exact propext_iff.mp hp
-
-/-- The genuine E2 independent J-free physical-input-cut operator has
-EXACTLY the closure of the literal sixteen-charge gauge-invariant smooth
-core graph. No source-transported operator or maximal-domain claim. -/
+/-- The actual E2 independently defined J-free physical-input-cut
+closed sixteen-charge operator has exactly the SET closure of the literal
+independent gauge-invariant smooth-core graph. The original physical
+Hilbert domain and outputs remain distinct downstream obligations. -/
 theorem independentPhysicalInputCutClosedChargeColumn_graph_eq_literal
     (color : ColorIndex 2 → ColorMatrix 2)
     (gamma : SpaceIndex → GammaMatrix)
@@ -154,26 +118,24 @@ theorem independentPhysicalInputCutClosedChargeColumn_graph_eq_literal
     (hColor : color = pairedAlgebraData.color)
     (hGamma : gamma = pairedAlgebraData.gamma)
     (hJ : ∀ α A w, J (theta α A w) = pairedTheta α A (J w)) :
-    (FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutClosedChargeColumn
-      color gamma theta hCAR hHermitian).graph =
-    (LinearMap.range
-      ((independentCoreToL2.comp
-        (independentInvariantCore theta hCAR hHermitian).subtype).prod
-        ((independentChargeVector color gamma theta).comp
-          (independentInvariantCore theta hCAR hHermitian).subtype)).topologicalClosure := by
-  calc
-    (FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutClosedChargeColumn
-      color gamma theta hCAR hHermitian).graph =
-      (FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutCoreGraph
-        color gamma theta hCAR hHermitian).topologicalClosure :=
-      FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutClosedChargeColumn_graph_eq
-        color gamma theta hCAR hHermitian J hColor hGamma hJ
-    _ = _ := independentPhysicalInputCutClosure_eq_literalRestrictedClosure
-      color gamma theta hCAR hHermitian
+    ((FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutClosedChargeColumn
+      color gamma theta hCAR hHermitian).graph :
+        Set (Lp E 2 μ × (SpinIndex → Lp E 2 μ))) =
+      closure (LinearMap.range
+        ((independentCoreToL2.comp
+          (independentInvariantCore theta hCAR hHermitian).subtype).prod
+          ((independentChargeVector color gamma theta).comp
+            (independentInvariantCore theta hCAR hHermitian).subtype)) :
+          Set (Lp E 2 μ × (SpinIndex → Lp E 2 μ))) := by
+  rw [FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutClosedChargeColumn_graph_eq
+    color gamma theta hCAR hHermitian J hColor hGamma hJ]
+  rw [Submodule.topologicalClosure_coe]
+  exact congrArg closure
+    (independentPhysicalInputCutCoreGraph_eq_literalRestrictedRange
+      color gamma theta hCAR hHermitian)
 
 #print axioms independentPhysicalInputCutCoreGraph_mem_iff
 #print axioms independentPhysicalInputCutCoreGraph_eq_literalRestrictedRange
-#print axioms independentPhysicalInputCutClosure_eq_literalRestrictedClosure
 #print axioms independentPhysicalInputCutClosedChargeColumn_graph_eq_literal
 
 end
