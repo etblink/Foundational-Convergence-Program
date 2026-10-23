@@ -58,7 +58,7 @@ jobs:
             'FCPIndependentInvariantSmoothEquiv.lean':'5083f0ce9bfb43f616a9c3e5dc286887bd073de4',
             'FCPIndependentRestrictedCoreGraph.lean':'9d492475be251f5414ad1758cfa810d1f92fb235',
             'FCPRestrictedGraphInputCut.lean':'cbcb667d15fccd67eaa185a69eb8b476546d977d',
-            'FCPRestrictedGraphInputCertificates.lean':'7c78e6b889529b9f89bad50b40f8871a48d15cab',
+            'FCPRestrictedGraphInputCertificates.lean':'174cd91c8cff9c1e353d5f51529a5afd7b03f6c1',
           }
           for name,sha in blobs.items():
             file=p/name
@@ -249,7 +249,7 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
             upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
             upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCertificates.olean
-          key: bfss-fcp-m4f6-input-cut-applications-7c78e6b8-diag2-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-fcp-m4f6-input-cut-applications-174cd91c-diag3-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
 
       - name: Preserve source-exact logs, validator and resource diagnostics
         if: always()
