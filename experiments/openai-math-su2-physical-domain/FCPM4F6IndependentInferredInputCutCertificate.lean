@@ -38,17 +38,13 @@ def independentInferredGraphInputCut
     (gamma : SpaceIndex → GammaMatrix)
     (theta : SpinIndex → ColorIndex 2 → Module.End ℂ E)
     (hCAR : ∀ α β A B,
-      theta α A * theta β B + theta β B + 0 =
+      theta α A * theta β B + theta β B * theta α A =
         (if α = β ∧ A = B then (1 : ℂ) else 0) •
           (1 : Module.End ℂ E))
     (hHermitian : ∀ α A, (theta α A).IsSymmetric) :=
   core_graph_input_cut independentCoreToL2
     (independentChargeVector color gamma theta)
-    (independentPhysicalSpace theta
-      (by
-        intro α β A B
-        simpa only [add_zero] using hCAR α β A B)
-      hHermitian)
+    (independentPhysicalSpace theta hCAR hHermitian)
 
 #print axioms independentInferredGraphInputCut
 #check independentInferredGraphInputCut
