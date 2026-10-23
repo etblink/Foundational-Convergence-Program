@@ -10,7 +10,7 @@ definitions and source-specialization obligations are not replaced.
 
 set_option autoImplicit false
 set_option maxHeartbeats 600000
-set_option diagnostics true
+set_option linter.defProp false
 
 namespace FCP.RestrictedGraphInputCertificates
 noncomputable section
@@ -25,8 +25,7 @@ open FCP.RestrictedGraphInputCut
 /-- Deliberately inferred result type; no expected graph alias is
 used while elaborating the same independent-map application.
 The diagnostic uses a definition to infer its Prop-valued result type;
-the standard defProp style linter is disabled for this one command only. -/
-set_option linter.defProp false in
+the diagnostic-file defProp style linter is disabled.  -/
 def independentInputCutApplication
     {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
     [FiniteDimensional ℂ E]
@@ -45,7 +44,6 @@ def independentInputCutApplication
 /-- Same paired-source application as the failed concrete bridge,
 elaborated without an expected expanded graph-equality type.
 The diagnostic uses a definition so that no explicit theorem type is imposed. -/
-set_option linter.defProp false in
 def originalInputCutApplication :=
   original_core_graph_input_cut pairedAlgebraData pairedGaugeData
 
