@@ -20,7 +20,7 @@ is claimed.
 -/
 
 set_option autoImplicit false
-set_option maxHeartbeats 100000
+set_option maxHeartbeats 600000
 
 namespace FCP.M4F8IndependentE2ConditionalPhysicalDomainDenseDD
 noncomputable section
@@ -61,14 +61,35 @@ theorem independentE2_smoothInvariantCore_input_mem_actual_domain
         color gamma theta hCAR hHermitian).domain := by
   let x := independentInvariantCoreToL2 theta hCAR hHermitian f
   let y := independentChargeVector color gamma theta f.val
-  have hraw :
-      (x, y) ∈
+  -- Name the exact independent graph map before providing its range witness.
+  -- This avoids reducing the full sixteen-charge formula during witness search.
+  let graphMap : independentInvariantCore theta hCAR hHermitian →ₗ[ℂ]
+      (Lp E 2 μ × (SpinIndex → Lp E 2 μ)) :=
+    (independentCoreToL2.comp
+      (independentInvariantCore theta hCAR hHermitian).subtype).prod
+      ((independentChargeVector color gamma theta).comp
+        (independentInvariantCore theta hCAR hHermitian).subtype)
+  have hgraphMap :
+      graphMap f ∈
         FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutCoreGraph
           color gamma theta hCAR hHermitian := by
     apply (Set.ext_iff.mp
       (FCP.M4F7IndependentLiteralRestrictedGraphBridgeE3.independentPhysicalInputCutCoreGraph_eq_literalRestrictedRange
-        color gamma theta hCAR hHermitian) (x, y)).2
-    exact ⟨f, rfl⟩
+        color gamma theta hCAR hHermitian) (graphMap f)).2
+    change graphMap f ∈ (LinearMap.range graphMap : Set _)
+    exact LinearMap.mem_range_self graphMap f
+  have hpair : (x, y) = graphMap f := by
+    apply Prod.ext
+    · change independentInvariantCoreToL2 theta hCAR hHermitian f =
+        independentCoreToL2 f.val
+      rfl
+    · rfl
+  have hraw :
+      (x, y) ∈
+        FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutCoreGraph
+          color gamma theta hCAR hHermitian := by
+    rw [hpair]
+    exact hgraphMap
   have hclosed :
       (x, y) ∈
         (FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutClosedChargeColumn
