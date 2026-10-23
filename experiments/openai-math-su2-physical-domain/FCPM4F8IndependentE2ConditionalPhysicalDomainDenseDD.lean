@@ -59,10 +59,8 @@ theorem independentE2_smoothInvariantCore_input_mem_actual_domain
     independentInvariantCoreToL2 theta hCAR hHermitian f ∈
       (FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutClosedChargeColumn
         color gamma theta hCAR hHermitian).domain := by
-  let x := independentInvariantCoreToL2 theta hCAR hHermitian f
-  let y := independentChargeVector color gamma theta f.val
-  -- Name the exact independent graph map before providing its range witness.
-  -- This avoids reducing the full sixteen-charge formula during witness search.
+  -- Use the ACTUAL independent smooth graph map as the witness.
+  -- The operator-domain question uses only its first (input) coordinate.
   let graphMap : independentInvariantCore theta hCAR hHermitian →ₗ[ℂ]
       (Lp E 2 μ × (SpinIndex → Lp E 2 μ)) :=
     (independentCoreToL2.comp
@@ -78,25 +76,20 @@ theorem independentE2_smoothInvariantCore_input_mem_actual_domain
         color gamma theta hCAR hHermitian) (graphMap f)).2
     change graphMap f ∈ (LinearMap.range graphMap : Set _)
     exact LinearMap.mem_range_self graphMap f
-  have hpair : (x, y) = graphMap f := by
-    apply Prod.ext
-    · change independentInvariantCoreToL2 theta hCAR hHermitian f =
-        independentCoreToL2 f.val
-      rfl
-    · rfl
-  have hraw :
-      (x, y) ∈
-        FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutCoreGraph
-          color gamma theta hCAR hHermitian := by
-    rw [hpair]
-    exact hgraphMap
   have hclosed :
-      (x, y) ∈
+      graphMap f ∈
         (FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutClosedChargeColumn
           color gamma theta hCAR hHermitian).graph := by
     rw [FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutClosedChargeColumn_graph_eq
       color gamma theta hCAR hHermitian J hColor hGamma hJ]
-    exact Submodule.le_topologicalClosure _ hraw
+    exact Submodule.le_topologicalClosure _ hgraphMap
+  have hfirst :
+      (graphMap f).1 =
+        independentInvariantCoreToL2 theta hCAR hHermitian f := by
+    change independentCoreToL2 f.val =
+      independentInvariantCoreToL2 theta hCAR hHermitian f
+    rfl
+  rw [← hfirst]
   exact LinearPMap.mem_domain_of_mem_graph hclosed
 
 /-- True physical-subtype Hilbert-norm density of the domain of the
