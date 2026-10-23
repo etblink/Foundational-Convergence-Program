@@ -73,6 +73,14 @@ A wall-clock timeout without a diagnostic does not identify a particular bad tac
 
 Before the next expensive attempt, state what *new evidence* it can produce, what would make you stop, and which successful artifacts it will reuse. Prefer a single discriminating test over a battery of speculative retries.
 
+### Exploratory diagnostics versus final formal acceptance
+
+**Use two distinct gates for different questions.** During *exploration*, the goal is to learn the earliest true cause of failure at minimal cost: perform syntax/command-layout checks before expensive CI; compile bounded examples while **recording** ordinary warnings instead of automatically failing on every style/deprecation warning; inspect the complete compiler log or preserved artifact, not merely the final N lines; and classify warnings, parsing failures, elaboration/conversion failures, mathematical obligations, validation bugs, and resource/infrastructure failures separately. Never hide `sorry`, `admit`, unauthorized `axiom`, or a failed compiler exit behind permissive diagnostics.
+
+During *formal acceptance*, restore fail-closed policy: exact immutable source and accepted dependency closure, the intended theorem statement and proof (not a weaker inferred surrogate), successful Lean/kernel compilation, exact declaration-list and axiom audit, no proof holes, full validator completion, no unexpected warnings, and controlled `-DwarningAsError=true` where used by the qualified formal gate. An exploratory green is **never** a proof acceptance.
+
+Do not spend repeated full CI cycles repairing the *diagnostic wrapper* when it is not testing the target theorem. After two wrapper-level reds with no new information on the real mathematical obligation, stop, repair or discard the wrapper offline, and choose a direct source-interface test before spending another full gate. Require the next gate to state the exact new mathematical or compilation uncertainty it can discriminate. Keep original per-module logs accessible as artifacts; verbose diagnostics are opt-in and must not bury the first error beneath a printed tail. Compatibility warnings in historically accepted source modules should be handled through scoped, source-pinned, exact-diff recovery adapters rather than reinterpreted as a counterexample to old mathematics.
+
 ## 6. Research prioritization and resource discipline
 
 Prefer **scientific uncertainty resolved per unit of effort** over workflow counts, LOC, proof complexity, or a pleasing project-status narrative. Reuse existing literature, project sources, qualified lemmas, and reproducible caches without turning preparation into avoidance of the actual research question.
