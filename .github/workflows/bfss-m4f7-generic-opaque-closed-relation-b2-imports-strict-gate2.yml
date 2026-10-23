@@ -101,7 +101,7 @@ jobs:
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
-          stem=FCPM4F7GenericOpaqueClosedRelationBridge
+          stem=FCPM4F7GenericOpaqueClosedRelationBridgeImports
           cp "$GITHUB_WORKSPACE/experiments/openai-math-su2-physical-domain/$stem.lean" "upstream-math/lean/$stem.lean"
           cd upstream-math/lean
           /usr/bin/time -f 'DIAG_RESOURCE_TIME %e CPU %P MAX_RSS_KB %M' -o "/tmp/bfss-m4f7-generic-opaque-closed-relation-b2-imports-strict-gate2/$stem.resource" \
@@ -117,7 +117,7 @@ jobs:
           python3 - <<'PY'
           import re
           from pathlib import Path
-          stem='FCPM4F7GenericOpaqueClosedRelationBridge'
+          stem='FCPM4F7GenericOpaqueClosedRelationBridgeImports'
           src=Path(stem+'.lean').read_text()
           log=Path('/tmp/bfss-m4f7-generic-opaque-closed-relation-b2-imports-strict-gate2/'+stem+'.log').read_text()
           ns='FCP.M4F7GenericOpaqueClosedRelationBridge'
