@@ -1,10 +1,10 @@
-import FCPM4F7IndependentRestrictedClosedGraphVertical
+import FCPM4F7IndependentRestrictedClosedGraphVerticalC1Cut
 import Mathlib.Topology.Algebra.Module.LinearPMap
 
 /-!
-M4F7 V2 — CONTINGENT genuine independent minimal closed joint-charge
-column as a Mathlib LinearPMap. V1 vertical-fiber theorem is REQUIRED
-and not yet qualified at the time this source is staged.
+M4F7 V2 — prospective genuine independent minimal closed joint-charge
+column as a Mathlib LinearPMap. The exact V1 vertical-fiber theorem
+was strictly accepted at the C1Cut Gate #2 under the same hypotheses.
 
 Unlike a free-standing closed linear relation, the new partial linear
 operator has a genuinely single-valued graph. Its graph remains the
