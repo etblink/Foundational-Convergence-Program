@@ -23,7 +23,10 @@ open FCP.IndependentPhysicalSpace
 open FCP.RestrictedGraphInputCut
 
 /-- Deliberately inferred result type; no expected graph alias is
-used while elaborating the same independent-map application. -/
+used while elaborating the same independent-map application.
+The diagnostic uses a definition to infer its Prop-valued result type;
+the standard defProp style linter is disabled for this one command only. -/
+set_option linter.defProp false in
 def independentInputCutApplication
     {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
     [FiniteDimensional ℂ E]
@@ -40,8 +43,10 @@ def independentInputCutApplication
     (independentPhysicalSpace theta hCAR hHermitian)
 
 /-- Same paired-source application as the failed concrete bridge,
-elaborated without an expected expanded graph-equality type. -/
-theorem originalInputCutApplication :=
+elaborated without an expected expanded graph-equality type.
+The diagnostic uses a definition so that no explicit theorem type is imposed. -/
+set_option linter.defProp false in
+def originalInputCutApplication :=
   original_core_graph_input_cut pairedAlgebraData pairedGaugeData
 
 #print independentInputCutApplication
