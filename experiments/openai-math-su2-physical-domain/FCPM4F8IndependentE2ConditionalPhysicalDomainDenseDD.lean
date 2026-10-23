@@ -65,7 +65,9 @@ theorem independentE2_smoothInvariantCore_input_mem_actual_domain
       (x, y) ∈
         FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutCoreGraph
           color gamma theta hCAR hHermitian := by
-    rw [FCP.M4F7IndependentLiteralRestrictedGraphBridgeE3.independentPhysicalInputCutCoreGraph_eq_literalRestrictedRange]
+    apply (Set.ext_iff.mp
+      (FCP.M4F7IndependentLiteralRestrictedGraphBridgeE3.independentPhysicalInputCutCoreGraph_eq_literalRestrictedRange
+        color gamma theta hCAR hHermitian) (x, y)).2
     exact ⟨f, rfl⟩
   have hclosed :
       (x, y) ∈
