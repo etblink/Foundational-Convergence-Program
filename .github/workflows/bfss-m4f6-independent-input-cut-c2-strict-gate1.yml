@@ -1,0 +1,217 @@
+name: BFSS M4F6 Independent Graph Input Cut C2 Strict Gate 1
+
+# Isolated research branch, exact self-path trigger only.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-m4f6-independent-input-cut-c2-strict-gate1.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-m4f6-independent-input-cut-c2-strict-gate1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  restricted-core-transport:
+    runs-on: ubuntu-latest
+    timeout-minutes: 36
+    steps:
+      - name: Checkout isolated research sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Checkout immutable original BFSS mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Fail-closed exact original and candidate source provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-m4f6-independent-input-cut-c2-strict-gate1
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import pathlib,subprocess,json
+          d=json.loads(pathlib.Path('upstream-math/lean/lake-manifest.json').read_text())
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          p=pathlib.Path('experiments/openai-math-su2-physical-domain')
+          blobs={
+            'FCPIndependentFullSmoothCharge.lean':'4fa31d97ddfbb80e3258070caccd7b0a6b0bc874',
+            'FCPIndependentChargeVectorL2.lean':'6492f4b08181020f611f7d7d4b751394805420d2',
+            'FCPIndependentFullCoreGraph.lean':'2139e7fc9e7b9d5bf99ec57d096686078b8ffdf7',
+            'FCPIndependentFullCoreGraphImage.lean':'06e98a1b867f21577b5b74033e411d27ba688985',
+            'FCPIndependentGraphTransportHomeomorph.lean':'8455a6c42f23b2d08f7945188fe5b8ca9e75ac4b',
+            'FCPIndependentFullCoreGraphClosure.lean':'a6aacf285206ba79f331bf2c6818fc0b7df1a6e4',
+            'FCPIndependentInvariantSmoothEquiv.lean':'5083f0ce9bfb43f616a9c3e5dc286887bd073de4',
+            'FCPM4F6PairedSourceGraphInputCut.lean':'c217d66cf9e8ccf39b64aab6488fe62b11447beb',
+            'FCPM4F6IndependentGraphInputCut.lean':'4db1bbd1685555a3c00efd836577186782ff08bb',
+            'FCPRestrictedGraphInputCut.lean':'cbcb667d15fccd67eaa185a69eb8b476546d977d',
+          }
+          for name,sha in blobs.items():
+            file=p/name
+            assert subprocess.check_output(['git','rev-parse','HEAD:'+str(file)],text=True).strip() == sha,(name,'git source pin')
+            assert subprocess.check_output(['git','hash-object','--no-filters',str(file)],text=True).strip() == sha,(name,'working source pin')
+          for candidate in ['FCPRestrictedGraphInputCut.lean','FCPM4F6PairedSourceGraphInputCut.lean','FCPM4F6IndependentGraphInputCut.lean']:
+            s=(p/candidate).read_text()
+            assert 'sorryAx' not in s and '\nsorry' not in s and '\nadmit' not in s and '\naxiom ' not in s
+          print('M4F6_C2_GATE1_EXACT_SOURCE_PASS')
+          PY
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean 4.34.1 and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-m4f6-independent-input-cut-c2-strict-gate1/toolchain.log; then ok=true; break; fi
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-m4f6-independent-input-cut-c2-strict-gate1/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo M4F6_C2_GATE1_PINNED_TOOLCHAIN_PASS
+
+      - name: Restore M4F5 qualified original source and graph cache
+        id: m4f5cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullSmoothCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentChargeVectorL2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphImage.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentGraphTransportHomeomorph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphClosure.olean
+          key: bfss-fcp-m4f5-unrestricted-graph-closure-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Verify exact accepted source import closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.m4f5cache.outputs.cache-hit }}" = true || { echo M4F6_M4F5_QUALIFIED_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in OAI/MathematicalPhysics/BFSS/Core OAI/MathematicalPhysics/BFSS/GaugeCore SU2BFSSG4JExactGaugeDataAssemblyProbe FCPIndependentFullSmoothCharge FCPIndependentChargeVectorL2 FCPIndependentSmoothCore FCPIndependentInvariantSmoothEquiv FCPIndependentFullCoreGraph FCPIndependentFullCoreGraphImage FCPIndependentGraphTransportHomeomorph FCPIndependentFullCoreGraphClosure; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "M4F6_REQUIRED_PARENT_OLEAN_MISSING=$stem"; exit 1; }
+          done
+          echo M4F6_C2_GATE1_QUALIFIED_PARENT_CLOSURE_PASS
+
+
+      - name: Restore strictly qualified C1 source and generic input-cut certificate cache
+        id: c1cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+          key: bfss-fcp-m4f6-paired-source-cut-c1-c217d66c-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Require exact accepted C1 parent proof and literal independent graph closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.c1cache.outputs.cache-hit }}" = true || { echo QUALIFIED_C1_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in FCPRestrictedGraphInputCut FCPM4F6PairedSourceGraphInputCut FCPIndependentFullSmoothCharge FCPIndependentChargeVectorL2 FCPIndependentFullCoreGraph FCPIndependentFullCoreGraphClosure FCPIndependentSmoothCore FCPIndependentPhysicalUnitary; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo QUALIFIED_C1_PARENT_OLEAN_MISSING=$stem; exit 1; }
+          done
+          echo M4F6_C2_GATE1_SAVED_GENERIC_AND_C1_SOURCE_PROOFS_VERIFIED
+
+      - name: Fresh strict J-free independent input-cut certificate
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=FCPM4F6IndependentGraphInputCut
+          cp "$GITHUB_WORKSPACE/experiments/openai-math-su2-physical-domain/$stem.lean" "upstream-math/lean/$stem.lean"
+          cd upstream-math/lean
+          /usr/bin/time -f 'DIAG_RESOURCE_TIME %e CPU %P MAX_RSS_KB %M' -o "/tmp/bfss-m4f6-independent-input-cut-c2-strict-gate1/$stem.resource" \
+            timeout --signal=TERM --kill-after=5s 125s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" >"/tmp/bfss-m4f6-independent-input-cut-c2-strict-gate1/$stem.log" 2>&1 || {
+              code=$?
+              echo M4F6_C2_INDEPENDENT_CERTIFICATE_FAILED_EXIT=$code
+              grep -n 'error:' "/tmp/bfss-m4f6-independent-input-cut-c2-strict-gate1/$stem.log" | head -n 20 || true
+              tail -n 85 "/tmp/bfss-m4f6-independent-input-cut-c2-strict-gate1/$stem.log"
+              cat "/tmp/bfss-m4f6-independent-input-cut-c2-strict-gate1/$stem.resource" || true
+              exit "$code"
+            }
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          stem='FCPM4F6IndependentGraphInputCut'
+          log=Path('/tmp/bfss-m4f6-independent-input-cut-c2-strict-gate1/'+stem+'.log').read_text()
+          source=Path(stem+'.lean').read_text()
+          ns='FCP.M4F6IndependentGraphInputCut'
+          decl='independentCoreGraph_eq_physicalInputCut'
+          assert re.findall(r'^namespace (\S+)',source,re.M)==[ns]
+          assert re.findall(r'^theorem (\S+)',source,re.M)==[decl]
+          assert re.findall(r'^#print axioms (\S+)',source,re.M)==[decl]
+          reports=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          seen={k:{a.strip() for a in v.split(',') if a.strip()} for k,v in reports}
+          assert len(reports)==len(seen)==1,('REPORT_COUNT',reports)
+          assert set(seen)=={ns+'.'+decl},('WRONG_THEOREM',seen)
+          assert all(x<={'propext','Classical.choice','Quot.sound'} for x in seen.values()),('FORBIDDEN_AXIOMS',seen)
+          assert not any(s in log for s in ['error:','sorryAx','unknownIdentifier']),('LEAN_FAILURE',log[-2000:])
+          warnings=[line for line in log.splitlines() if 'warning:' in line and not re.fullmatch(r"warning: [A-Za-z0-9_-]+: repository '[^']+' has local changes",line)]
+          assert not warnings,('LEAN_WARNINGS',warnings)
+          print('M4F6_C2_INDEPENDENT_INPUT_CUT_ONE_ROOT_STRICT_AXIOMS_PASS',seen)
+          PY
+          cat "/tmp/bfss-m4f6-independent-input-cut-c2-strict-gate1/$stem.resource"
+          echo M4F6_C2_ONE_ROOT_FORMALLY_ACCEPTABLE_STRICT_PASS
+
+      - name: Save qualified independent graph input-cut certificate only on total success
+        if: success()
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCut.olean
+          key: bfss-fcp-m4f6-independent-cut-c2-4db1bbd1-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve complete original C2 compiler and resource evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-m4f6-independent-input-cut-c2-${{ github.run_id }}
+          path: /tmp/bfss-m4f6-independent-input-cut-c2-strict-gate1
+          if-no-files-found: warn
