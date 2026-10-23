@@ -242,20 +242,20 @@ jobs:
           b=(p/'FCPM4F6IndependentGraphInputCutNamedAlias.lean').read_text()
           old_import='import FCPRestrictedGraphInputCut'
           new_import='import FCPM4F6GenericNamedAliasInputCut\nimport FCPM4F6IndependentLiteralAliasBoundary'
-          old_proof='''  exact core_graph_input_cut
-    independentCoreToL2
-    (independentChargeVector color gamma theta)
-    (independentPhysicalSpace theta hCAR hHermitian)'''
-          new_proof='''  exact FCP.M4F6GenericNamedAliasInputCut.core_graph_input_cut_with_named_aliases
-    (independentCoreToL2 (E := E))
-    (independentChargeVector color gamma theta)
-    (independentPhysicalSpace theta hCAR hHermitian)
-    (independentInvariantCore theta hCAR hHermitian)
-    (independentFullCoreGraph color gamma theta)
-    (FCP.M4F6IndependentLiteralAliasBoundary.independentInvariantCore_eq_actualComap
-      theta hCAR hHermitian)
-    (FCP.M4F6IndependentLiteralAliasBoundary.independentFullCoreGraph_eq_actualRange
-      color gamma theta)'''
+          old_proof=('  exact core_graph_input_cut\n'
+                     '    independentCoreToL2\n'
+                     '    (independentChargeVector color gamma theta)\n'
+                     '    (independentPhysicalSpace theta hCAR hHermitian)')
+          new_proof=('  exact FCP.M4F6GenericNamedAliasInputCut.core_graph_input_cut_with_named_aliases\n'
+                     '    (independentCoreToL2 (E := E))\n'
+                     '    (independentChargeVector color gamma theta)\n'
+                     '    (independentPhysicalSpace theta hCAR hHermitian)\n'
+                     '    (independentInvariantCore theta hCAR hHermitian)\n'
+                     '    (independentFullCoreGraph color gamma theta)\n'
+                     '    (FCP.M4F6IndependentLiteralAliasBoundary.independentInvariantCore_eq_actualComap\n'
+                     '      theta hCAR hHermitian)\n'
+                     '    (FCP.M4F6IndependentLiteralAliasBoundary.independentFullCoreGraph_eq_actualRange\n'
+                     '      color gamma theta)')
           assert a.count(old_import)==1 and a.count(old_proof)==1
           expected=a.replace(old_import,new_import,1).replace(old_proof,new_proof,1)
           assert b==expected,('ORIGINAL_C2_STATEMENT_DRIFT_OR_UNAPPROVED_DIFF',)
