@@ -106,7 +106,7 @@ theorem literalRestrictedClosedGraphSet_eq
       ((independentCoreToL2.comp
         (independentInvariantCore theta hCAR hHermitian).subtype).prod
         ((independentChargeVector color gamma theta).comp
-          (independentInvariantCore theta hCAR hHermitian).subtype)) := by
+          (independentInvariantCore theta hCAR hHermitian).subtype))) := by
   rfl
 
 #print axioms literalRestrictedCoreGraphRelation
