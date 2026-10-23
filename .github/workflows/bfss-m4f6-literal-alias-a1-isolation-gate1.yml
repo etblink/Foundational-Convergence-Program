@@ -44,7 +44,7 @@ jobs:
           test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
           test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
           python3 - <<'PY'
-          import pathlib,subprocess,json
+          import pathlib,subprocess,json,re
           d=json.loads(pathlib.Path('upstream-math/lean/lake-manifest.json').read_text())
           assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
           p=pathlib.Path('experiments/openai-math-su2-physical-domain')
@@ -65,10 +65,30 @@ jobs:
             file=p/name
             assert subprocess.check_output(['git','rev-parse','HEAD:'+str(file)],text=True).strip() == sha,(name,'git source pin')
             assert subprocess.check_output(['git','hash-object','--no-filters',str(file)],text=True).strip() == sha,(name,'working source pin')
+          def lean_code_only(text):
+            # Lean nested block comments, including documentation, are NOT code.
+            out=[]
+            depth=0
+            i=0
+            while i < len(text):
+              if text.startswith('/-',i):
+                depth+=1
+                i+=2
+              elif depth and text.startswith('-/',i):
+                depth-=1
+                i+=2
+              else:
+                c=text[i]
+                if depth==0 or c=='\n':
+                  out.append(c)
+                i+=1
+            assert depth==0,('UNTERMINATED_LEAN_COMMENT',)
+            return '\n'.join(line.split('--',1)[0] for line in ''.join(out).splitlines())
           for candidate in ['FCPRestrictedGraphInputCut.lean','FCPM4F6PairedSourceGraphInputCut.lean','FCPM4F6IndependentGraphInputCut.lean','FCPM4F6IndependentLiteralAliasBoundary.lean']:
-            s=(p/candidate).read_text()
-            assert 'sorryAx' not in s and '\nsorry' not in s and '\nadmit' not in s and '\naxiom ' not in s
-          print('M4F6_ALIAS_A1_EXACT_SOURCE_PASS')
+            source=(p/candidate).read_text()
+            code=lean_code_only(source)
+            assert not re.search(r'(?m)^[ \t]*(?:sorry|admit|axiom)\b|\bsorryAx\b',code),('UNAPPROVED_LEAN_CODE',candidate)
+          print('M4F6_ALIAS_A1_COMMENT_AWARE_EXACT_SOURCE_PASS')
           PY
 
       - name: Reclaim disposable runner disk
