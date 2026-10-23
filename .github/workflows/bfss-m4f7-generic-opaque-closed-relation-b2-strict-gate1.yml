@@ -1,0 +1,148 @@
+name: BFSS M4F7 Generic Opaque Closed Relation B2 Strict Gate 1
+
+# Isolated research branch, exact self-path trigger only.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-m4f7-generic-opaque-closed-relation-b2-strict-gate1.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-m4f7-generic-opaque-closed-relation-b2-strict-gate1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  restricted-core-transport:
+    runs-on: ubuntu-latest
+    timeout-minutes: 36
+    steps:
+      - name: Checkout isolated research sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Checkout immutable original BFSS mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Exact candidate and immutable Mathlib provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-m4f7-generic-opaque-closed-relation-b2-strict-gate1
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import pathlib,subprocess,json,re
+          d=json.loads(pathlib.Path('upstream-math/lean/lake-manifest.json').read_text())
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib')=='d13f23b723b8a846827a245b89c10fc7d3f11612'
+          path=pathlib.Path('experiments/openai-math-su2-physical-domain/FCPM4F7GenericOpaqueClosedRelationBridge.lean')
+          sha='4c27d57e391d02127eb527cbf7e8915be9ac650d'
+          assert subprocess.check_output(['git','rev-parse','HEAD:'+str(path)],text=True).strip()==sha
+          assert subprocess.check_output(['git','hash-object','--no-filters',str(path)],text=True).strip()==sha
+          src=path.read_text()
+          assert src.startswith('import Mathlib.Topology.Algebra.Module.LinearPMap\n')
+          assert 'set_option autoImplicit false' in src
+          assert 'maxRecDepth' not in src
+          # The candidate is a generic lemma only, with no actual BFSS symbols.
+          assert not any(t in src for t in ['independentChargeVector','pairedAlgebraData','independentInvariantCore','FCPIndependent','sorryAx'])
+          code=src.split('noncomputable section',1)[1]
+          assert not re.search(r'(?m)^[ \t]*(?:sorry|admit|axiom)\b',code)
+          names=['topologicalClosure_vertical_of_set','topologicalClosure_toLinearPMap_graph_eq','topologicalClosure_toLinearPMap_isClosed']
+          assert re.findall(r'^theorem (\S+)',src,re.M)==names
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==names
+          print('M4F7_B2_GATE1_PINNED_GENERIC_ONLY_SOURCE_PASS')
+          PY
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean 4.34.1 and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-m4f7-generic-opaque-closed-relation-b2-strict-gate1/toolchain.log; then ok=true; break; fi
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-m4f7-generic-opaque-closed-relation-b2-strict-gate1/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo M4F7_B2_GATE1_PINNED_TOOLCHAIN_PASS
+
+      - name: Fresh strict abstract closed relation and genuine LinearPMap proofs
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=FCPM4F7GenericOpaqueClosedRelationBridge
+          cp "$GITHUB_WORKSPACE/experiments/openai-math-su2-physical-domain/$stem.lean" "upstream-math/lean/$stem.lean"
+          cd upstream-math/lean
+          /usr/bin/time -f 'DIAG_RESOURCE_TIME %e CPU %P MAX_RSS_KB %M' -o "/tmp/bfss-m4f7-generic-opaque-closed-relation-b2-strict-gate1/$stem.resource" \
+            timeout --signal=TERM --kill-after=5s 105s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" >"/tmp/bfss-m4f7-generic-opaque-closed-relation-b2-strict-gate1/$stem.log" 2>&1 || {
+              code=$?
+              echo M4F7_B2_GATE1_GENERIC_LEAN_EXIT=$code
+              grep -n 'error:' "/tmp/bfss-m4f7-generic-opaque-closed-relation-b2-strict-gate1/$stem.log" | head -n 25 || true
+              tail -n 85 "/tmp/bfss-m4f7-generic-opaque-closed-relation-b2-strict-gate1/$stem.log"
+              cat "/tmp/bfss-m4f7-generic-opaque-closed-relation-b2-strict-gate1/$stem.resource" || true
+              exit "$code"
+            }
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          stem='FCPM4F7GenericOpaqueClosedRelationBridge'
+          src=Path(stem+'.lean').read_text()
+          log=Path('/tmp/bfss-m4f7-generic-opaque-closed-relation-b2-strict-gate1/'+stem+'.log').read_text()
+          ns='FCP.M4F7GenericOpaqueClosedRelationBridge'
+          names=['topologicalClosure_vertical_of_set','topologicalClosure_toLinearPMap_graph_eq','topologicalClosure_toLinearPMap_isClosed']
+          assert re.findall(r'^theorem (\S+)',src,re.M)==names
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==names
+          reports=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          axioms={n:{x.strip() for x in atom.split(',') if x.strip()} for n,atom in reports}
+          assert len(reports)==len(axioms)==3,('REPORT_CARDINALITY',reports)
+          assert set(axioms)=={ns+'.'+name for name in names},('EXACT_ROOT_NAMES',axioms)
+          assert all(v <= {'propext','Classical.choice','Quot.sound'} for v in axioms.values()),('AXIOM_WHITELIST',axioms)
+          assert 'error:' not in log and 'sorryAx' not in log
+          warns=[w for w in log.splitlines() if 'warning:' in w and not re.fullmatch(r"warning: [A-Za-z0-9_-]+: repository '[^']+' has local changes",w)]
+          assert not warns,('UNEXPECTED_WARNINGS',warns)
+          print('M4F7_B2_GATE1_THREE_GENERIC_OPAQUE_CLOSED_RELATION_SUPPORT_ROOTS_STRICT_PASS_NO_CONCRETE_V2',axioms)
+          PY
+          cat "/tmp/bfss-m4f7-generic-opaque-closed-relation-b2-strict-gate1/$stem.resource"
+
+      - name: Cache strictly qualified generic B2 proof module only on complete success
+        if: success()
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueClosedRelationBridge.olean
+          key: bfss-fcp-m4f7-generic-opaque-closed-relation-b2-4c27d57e-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve original B2 compiler and resource evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-m4f7-generic-opaque-b2-${{ github.run_id }}
+          path: /tmp/bfss-m4f7-generic-opaque-closed-relation-b2-strict-gate1
+          if-no-files-found: warn
