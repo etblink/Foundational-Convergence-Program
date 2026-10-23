@@ -31,6 +31,7 @@ def allOutputConstraint (P : Submodule ℂ Y) :
   {p | ∀ i : I, p.2 i ∈ P}
 
 /-- Unfold only the small abstract output predicate. -/
+omit [AddCommGroup X] [Module ℂ X] [TopologicalSpace X] [TopologicalSpace Y] in
 theorem mem_allOutputConstraint_iff
     (P : Submodule ℂ Y) (p : X × (I → Y)) :
     p ∈ allOutputConstraint (I := I) P ↔
