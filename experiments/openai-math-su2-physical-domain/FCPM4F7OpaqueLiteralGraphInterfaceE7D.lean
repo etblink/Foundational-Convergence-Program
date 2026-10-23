@@ -107,7 +107,11 @@ theorem literalRestrictedClosedGraphSet_eq
         (independentInvariantCore theta hCAR hHermitian).subtype).prod
         ((independentChargeVector color gamma theta).comp
           (independentInvariantCore theta hCAR hHermitian).subtype))) := by
-  rfl
+  unfold literalRestrictedClosedGraphSet
+  exact congrArg
+    (fun S : Submodule ℂ (Lp E 2 μ × (SpinIndex → Lp E 2 μ)) =>
+      closure (S : Set (Lp E 2 μ × (SpinIndex → Lp E 2 μ))))
+    (literalRestrictedCoreGraphRelation_eq color gamma theta hCAR hHermitian)
 
 #print axioms literalRestrictedCoreGraphRelation
 #print axioms literalRestrictedClosedGraphSet
