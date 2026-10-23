@@ -1,0 +1,520 @@
+name: BFSS M4F7 Named Restricted Independent Vertical B5 Strict Gate 1
+
+# Isolated research branch, exact self-path trigger only.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-m4f7-named-restricted-vertical-b5-strict-gate1.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-m4f7-named-restricted-vertical-b5-strict-gate1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  restricted-core-transport:
+    runs-on: ubuntu-latest
+    timeout-minutes: 36
+    steps:
+      - name: Checkout isolated research sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Checkout immutable original BFSS mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Fail-closed exact original and candidate source provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-m4f7-named-restricted-vertical-b5-strict-gate1
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import pathlib,subprocess,json,re
+          d=json.loads(pathlib.Path('upstream-math/lean/lake-manifest.json').read_text())
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          p=pathlib.Path('experiments/openai-math-su2-physical-domain')
+          blobs={
+            'FCPIndependentFullSmoothCharge.lean':'4fa31d97ddfbb80e3258070caccd7b0a6b0bc874',
+            'FCPIndependentChargeVectorL2.lean':'6492f4b08181020f611f7d7d4b751394805420d2',
+            'FCPIndependentFullCoreGraph.lean':'2139e7fc9e7b9d5bf99ec57d096686078b8ffdf7',
+            'FCPIndependentFullCoreGraphImage.lean':'06e98a1b867f21577b5b74033e411d27ba688985',
+            'FCPIndependentGraphTransportHomeomorph.lean':'8455a6c42f23b2d08f7945188fe5b8ca9e75ac4b',
+            'FCPIndependentFullCoreGraphClosure.lean':'a6aacf285206ba79f331bf2c6818fc0b7df1a6e4',
+            'FCPIndependentInvariantSmoothEquiv.lean':'5083f0ce9bfb43f616a9c3e5dc286887bd073de4',
+            'FCPM4F6PairedSourceGraphInputCut.lean':'c217d66cf9e8ccf39b64aab6488fe62b11447beb',
+            'FCPM4F6IndependentGraphInputCut.lean':'4db1bbd1685555a3c00efd836577186782ff08bb',
+            'FCPM4F6IndependentLiteralAliasBoundary.lean':'88a0cfdf5c5a4e407906462a56f62b9df9281ea0',
+            'FCPM4F6GenericNamedAliasInputCut.lean':'b826575e5c39739a49e2797c02b79024c9f7e692',
+            'FCPM4F6IndependentGraphInputCutNamedAlias.lean':'976ca4ed439f63566d49611566299d66d33a5fd1',
+            'FCPM4F6RestrictedGraphImageC3.lean':'b9d707d8a9ca1100fda35872ebbfeb83c56dbd2a',
+            'FCPM4F6RestrictedGraphClosureC4.lean':'7a248ff92d8f1d3e7ee7cbf9e94b7addf5db5e0d',
+            'FCPM4F7IndependentRestrictedClosedGraphVertical.lean':'6b607a8276fa5f787e94473ca47f874c3b69d7b8',
+            'FCPM4F7IndependentRestrictedClosedGraphVerticalC1Cut.lean':'71a0b11174a1c5beef4ad674a0ac1666ec35347c',
+            'FCPM4F7IndependentClosedChargeOperatorV2.lean':'571890437e52ce1a0e2de7267862a8a69f5f00be',
+            'FCPM4F7IndependentClosedGraphAliasA2.lean':'87c3804ed5602bc2e3365489d556bb8314138780',
+            'FCPM4F7IndependentClosedGraphAliasA3.lean':'f38ff58df7afe69562c3059c71b7c2f7d7a28e60',
+            'FCPM4F7FullClosedGraphVerticalB4CoeAlign.lean':'2b485db6576f37cd13acd861eb9549d26f49bc51',
+            'FCPM4F7NamedRestrictedVerticalB5.lean':'d88febcd86d196490696bce76bf79b564a594976',
+            'FCPRestrictedGraphInputCut.lean':'cbcb667d15fccd67eaa185a69eb8b476546d977d',
+          }
+          for name,sha in blobs.items():
+            file=p/name
+            assert subprocess.check_output(['git','rev-parse','HEAD:'+str(file)],text=True).strip() == sha,(name,'git source pin')
+            assert subprocess.check_output(['git','hash-object','--no-filters',str(file)],text=True).strip() == sha,(name,'working source pin')
+          def lean_code_only(text):
+            # Lean nested block comments, including documentation, are NOT code.
+            out=[]
+            depth=0
+            i=0
+            while i < len(text):
+              if text.startswith('/-',i):
+                depth+=1
+                i+=2
+              elif depth and text.startswith('-/',i):
+                depth-=1
+                i+=2
+              else:
+                c=text[i]
+                if depth==0 or c=='\n':
+                  out.append(c)
+                i+=1
+            assert depth==0,('UNTERMINATED_LEAN_COMMENT',)
+            return '\n'.join(line.split('--',1)[0] for line in ''.join(out).splitlines())
+          for candidate in ['FCPRestrictedGraphInputCut.lean','FCPM4F6PairedSourceGraphInputCut.lean','FCPM4F6IndependentGraphInputCut.lean','FCPM4F6IndependentLiteralAliasBoundary.lean','FCPM4F6GenericNamedAliasInputCut.lean','FCPM4F6IndependentGraphInputCutNamedAlias.lean','FCPM4F6RestrictedGraphImageC3.lean','FCPM4F6RestrictedGraphClosureC4.lean','FCPM4F7IndependentRestrictedClosedGraphVertical.lean','FCPM4F7IndependentRestrictedClosedGraphVerticalC1Cut.lean','FCPM4F7IndependentClosedChargeOperatorV2.lean','FCPM4F7IndependentClosedGraphAliasA2.lean','FCPM4F7IndependentClosedGraphAliasA3.lean','FCPM4F7FullClosedGraphVerticalB4CoeAlign.lean','FCPM4F7NamedRestrictedVerticalB5.lean']:
+            source=(p/candidate).read_text()
+            code=lean_code_only(source)
+            assert not re.search(r'(?m)^[ \t]*(?:sorry|admit|axiom)\b|\bsorryAx\b',code),('UNAPPROVED_LEAN_CODE',candidate)
+          print('M4F7_B5_GATE1_COMMENT_AWARE_EXACT_SOURCE_PASS')
+          PY
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean 4.34.1 and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-m4f7-named-restricted-vertical-b5-strict-gate1/toolchain.log; then ok=true; break; fi
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-m4f7-named-restricted-vertical-b5-strict-gate1/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo M4F7_B5_GATE1_PINNED_TOOLCHAIN_PASS
+
+      - name: Restore M4F5 qualified original source and graph cache
+        id: m4f5cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullSmoothCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentChargeVectorL2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphImage.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentGraphTransportHomeomorph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphClosure.olean
+          key: bfss-fcp-m4f5-unrestricted-graph-closure-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Verify exact accepted source import closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.m4f5cache.outputs.cache-hit }}" = true || { echo M4F6_M4F5_QUALIFIED_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in OAI/MathematicalPhysics/BFSS/Core OAI/MathematicalPhysics/BFSS/GaugeCore SU2BFSSG4JExactGaugeDataAssemblyProbe FCPIndependentFullSmoothCharge FCPIndependentChargeVectorL2 FCPIndependentSmoothCore FCPIndependentInvariantSmoothEquiv FCPIndependentFullCoreGraph FCPIndependentFullCoreGraphImage FCPIndependentGraphTransportHomeomorph FCPIndependentFullCoreGraphClosure; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "M4F6_REQUIRED_PARENT_OLEAN_MISSING=$stem"; exit 1; }
+          done
+          echo M4F7_B5_GATE1_QUALIFIED_PARENT_CLOSURE_PASS
+
+
+      - name: Restore strictly qualified C1 source and generic input-cut certificate cache
+        id: c1cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+          key: bfss-fcp-m4f6-paired-source-cut-c1-c217d66c-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Require exact accepted C1 parent proof and literal independent graph closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.c1cache.outputs.cache-hit }}" = true || { echo QUALIFIED_C1_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in FCPRestrictedGraphInputCut FCPM4F6PairedSourceGraphInputCut FCPIndependentFullSmoothCharge FCPIndependentChargeVectorL2 FCPIndependentFullCoreGraph FCPIndependentFullCoreGraphClosure FCPIndependentSmoothCore FCPIndependentPhysicalUnitary; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo QUALIFIED_C1_PARENT_OLEAN_MISSING=$stem; exit 1; }
+          done
+          echo M4F7_B5_GATE1_SAVED_GENERIC_AND_C1_SOURCE_PROOFS_VERIFIED
+
+
+
+
+      - name: Restore strictly accepted A1 literal alias certificates as separately qualified parent
+        id: a1cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+          key: bfss-fcp-m4f6-literal-alias-a1-88a0cfdf-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail-closed exact A1 parent source and reusable opaque map closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.a1cache.outputs.cache-hit }}" = true || { echo QUALIFIED_A1_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in FCPM4F6IndependentLiteralAliasBoundary FCPRestrictedGraphInputCut FCPM4F6PairedSourceGraphInputCut FCPIndependentFullCoreGraph FCPIndependentSmoothCore FCPIndependentChargeVectorL2; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo M4F6_B1_MISSING_PARENT=$stem; exit 1; }
+          done
+          echo M4F7_B5_GATE1_STRICT_PARENT_IMPORT_CLOSURE_PASS
+
+
+      - name: Restore qualified B1 abstract alias-graph theorem and both A1 concrete aliases
+        id: b1cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+          key: bfss-fcp-m4f6-generic-named-alias-b1-b826575e-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Verify qualified B1 named alias certificate and original imported dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.b1cache.outputs.cache-hit }}" = true || { echo QUALIFIED_B1_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in FCPM4F6GenericNamedAliasInputCut FCPM4F6IndependentLiteralAliasBoundary FCPRestrictedGraphInputCut FCPM4F6PairedSourceGraphInputCut FCPIndependentFullCoreGraph FCPIndependentSmoothCore FCPIndependentChargeVectorL2 FCPIndependentPhysicalSpace; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo M4F6_C2_B1_IMPORT_OLEAN_MISSING=$stem; exit 1; }
+          done
+          echo M4F7_B5_GATE1_QUALIFIED_A1_B1_C1_IMPORT_CLOSURE_PASS
+
+
+      - name: Restore qualified C2 exact independent input-cut and predecessor closure
+        id: c2cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCutNamedAlias.olean
+          key: bfss-fcp-m4f6-independent-c2-named-alias-976ca4ed-gate4-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Require qualified C2, C1, physical-space, and unrestricted transport sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.c2cache.outputs.cache-hit }}" = true || { echo QUALIFIED_C2_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in FCPM4F6IndependentGraphInputCutNamedAlias FCPM4F6PairedSourceGraphInputCut FCPM4F6GenericNamedAliasInputCut FCPM4F6IndependentLiteralAliasBoundary FCPRestrictedGraphInputCut FCPIndependentPhysicalSpace FCPIndependentFullCoreGraphImage FCPIndependentGraphTransportHomeomorph; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo QUALIFIED_C2_IMPORT_CLOSURE_MISSING=$stem; exit 1; }
+          done
+          echo M4F7_B5_GATE1_C2_C1_M4C3_M4F4_STRICT_IMPORT_CLOSURE_PASS
+
+
+      - name: Restore strictly accepted C3 restricted graph image qualified certificate
+        id: c3cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCutNamedAlias.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6RestrictedGraphImageC3.olean
+          key: bfss-fcp-m4f6-restricted-graph-image-c3-b9d707d8-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Require exact accepted C3 and homeomorphism import closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.c3cache.outputs.cache-hit }}" = true || { echo QUALIFIED_C3_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in FCPM4F6RestrictedGraphImageC3 FCPM4F6IndependentGraphInputCutNamedAlias FCPM4F6PairedSourceGraphInputCut FCPM4F6IndependentLiteralAliasBoundary FCPM4F6GenericNamedAliasInputCut FCPIndependentGraphTransportHomeomorph FCPIndependentFullCoreGraphClosure FCPIndependentPhysicalSpace; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo M4F6_C4_C3_IMPORT_OLEAN_MISSING=$stem; exit 1; }
+          done
+          echo M4F7_B5_GATE1_ACCEPTED_C3_AND_HOMEOMORPHISM_IMPORT_CLOSURE_PASS
+
+      - name: Fail-closed literal restricted graph closure statement and topology proof review
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('experiments/openai-math-su2-physical-domain')
+          src=(p/'FCPM4F6RestrictedGraphClosureC4.lean').read_text()
+          predecessor=(p/'FCPM4F6RestrictedGraphImageC3.lean').read_text()
+          namespace='FCP.M4F6RestrictedGraphClosureC4'
+          theorem='sourceRestrictedCoreGraph_closure_eq_independent_image_closure'
+          assert src.startswith('import FCPM4F6RestrictedGraphImageC3\n')
+          assert re.findall(r'^namespace (\S+)',src,re.M)==[namespace]
+          assert re.findall(r'^theorem (\S+)',src,re.M)==[theorem]
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==[theorem]
+          assert re.findall(r'^#check (\S+)',src,re.M)==[theorem]
+          hc=lambda s: re.search(r'    \(hCAR : ∀ α β A B,[\s\S]*?    \(hHermitian :',s).group(0)
+          assert hc(src)==hc(predecessor),('ORIGINAL_C3_C4_CAR_HYPOTHESES_DIFFER',)
+          assert '    (hJ : ∀ α A w, J (theta α A w) = pairedTheta α A (J w)) :' in src
+          assert src.count('pairedGaugeData.invariantCore.subtype')>=2
+          assert src.count('independentInvariantCore theta hCAR hHermitian')>=2
+          assert src.count('independentGraphTransportHomeomorph J')>=3
+          assert 'congrArg closure' in src
+          assert 'FCP.M4F6RestrictedGraphImageC3.sourceRestrictedCoreGraph_eq_independent_image' in src
+          assert ').image_closure' in src
+          assert not re.search(r'(?m)^[ \t]*set_option[ \t]+maxRecDepth',src)
+          assert not re.search(r'(?m)^[ \t]*(?:sorry|admit|axiom)\b',src.split('noncomputable section',1)[1])
+          print('M4F7_B5_GATE1_EXACT_CLOSURE_AND_SOURCE_PREMISES_PASS')
+          PY
+
+      - name: Restore exact C4 accepted closed relation transport cache
+        id: c4cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCutNamedAlias.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6RestrictedGraphImageC3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6RestrictedGraphClosureC4.olean
+          key: bfss-fcp-m4f6-restricted-graph-closure-c4-7a248ff9-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+
+      - name: Restore accepted V1 vertical-fiber proof and full prior strict closure
+        id: v1cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCutNamedAlias.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6RestrictedGraphImageC3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6RestrictedGraphClosureC4.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentRestrictedClosedGraphVerticalC1Cut.olean
+          key: bfss-fcp-m4f7-independent-vertical-v1-c1cut-71a0b111-gate2-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+
+
+
+      - name: Restore strictly qualified J-free concrete A3 named closed graph and closedness
+        id: a3cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCutNamedAlias.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6RestrictedGraphImageC3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6RestrictedGraphClosureC4.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentRestrictedClosedGraphVerticalC1Cut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentClosedGraphAliasA3.olean
+          key: bfss-fcp-m4f7-closed-graph-a3-f38ff58d-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Restore independently accepted B4 unrestricted closed graph vertical theorem
+        id: b4cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphImage.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentGraphTransportHomeomorph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphClosure.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7FullClosedGraphVerticalB4CoeAlign.olean
+          key: bfss-fcp-m4f7-full-closed-vertical-b4-coealign-2b485db6-gate2-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail-closed original physical input cut and named restricted closed graph theorem
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.a3cache.outputs.cache-hit }}" = true || { echo QUALIFIED_A3_CACHE_MISSING; exit 1; }
+          test "${{ steps.b4cache.outputs.cache-hit }}" = true || { echo QUALIFIED_B4_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for f in FCPM4F7IndependentClosedGraphAliasA3 FCPM4F7FullClosedGraphVerticalB4CoeAlign FCPM4F6IndependentGraphInputCutNamedAlias FCPIndependentFullCoreGraph OAI/MathematicalPhysics/BFSS/Core; do
+            test -s ".lake/build/lib/lean/$f.olean" || { echo M4F7_B5_IMPORTED_CERTIFICATE_MISSING=$f; exit 1; }
+          done
+          cd "$GITHUB_WORKSPACE"
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          p=Path('experiments/openai-math-su2-physical-domain')
+          src=(p/'FCPM4F7NamedRestrictedVerticalB5.lean').read_text()
+          a3=(p/'FCPM4F7IndependentClosedGraphAliasA3.lean').read_text()
+          b4=(p/'FCPM4F7FullClosedGraphVerticalB4CoeAlign.lean').read_text()
+          c2=(p/'FCPM4F6IndependentGraphInputCutNamedAlias.lean').read_text()
+          car=lambda x: re.search(r'    \(hCAR : ∀ α β A B,[\s\S]*?    \(hHermitian :',x).group(0)
+          assert car(src)==car(a3)==car(c2),('ORIGINAL_CAR_HYPOTHESIS_DRIFT',)
+          assert src.startswith('import FCPM4F7IndependentClosedGraphAliasA3\nimport FCPM4F7FullClosedGraphVerticalB4CoeAlign\nimport FCPM4F6IndependentGraphInputCutNamedAlias\n')
+          assert re.findall(r'^namespace (\S+)',src,re.M)==['FCP.M4F7NamedRestrictedVerticalB5']
+          assert re.findall(r'^theorem (\S+)',src,re.M)==['namedIndependentRestrictedClosedGraph_vertical']
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==['namedIndependentRestrictedClosedGraph_vertical']
+          assert re.findall(r'^#check (\S+)',src,re.M)==['namedIndependentRestrictedClosedGraph_vertical']
+          assert 'independentCoreGraph_eq_physicalInputCut' in c2
+          assert 'independentFullCoreGraph_closure_vertical' in b4
+          assert 'FCP.M4F6IndependentGraphInputCut.independentCoreGraph_eq_physicalInputCut' in src
+          assert 'FCP.M4F7FullClosedGraphVerticalB4.independentFullCoreGraph_closure_vertical' in src
+          assert 'FCP.M4F7IndependentClosedGraphAliasA3.independentRestrictedClosedGraph' in src
+          assert 'Submodule.topologicalClosure_mono' in src
+          assert 'independentRestrictedClosedGraph_set_eq_literal' not in src
+          assert not re.search(r'(?m)^[ \t]*set_option[ \t]+maxRecDepth',src)
+          assert not re.search(r'(?m)^[ \t]*(?:sorry|admit|axiom)\b',src.split('noncomputable section',1)[1])
+          print('M4F7_B5_GATE1_TRUE_A3_NAMED_RESTRICTED_GRAPH_VIA_C2_AND_B4_SOURCE_PREFLIGHT_PASS')
+          PY
+
+      - name: Fresh strict original independent named closed graph vertical certificate
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=FCPM4F7NamedRestrictedVerticalB5
+          cp "$GITHUB_WORKSPACE/experiments/openai-math-su2-physical-domain/$stem.lean" "upstream-math/lean/$stem.lean"
+          cd upstream-math/lean
+          mkdir -p .lake/build/lib/lean
+          /usr/bin/time -f 'DIAG_RESOURCE_TIME %e CPU %P MAX_RSS_KB %M' -o "/tmp/bfss-m4f7-named-restricted-vertical-b5-strict-gate1/$stem.resource" \
+            timeout --signal=TERM --kill-after=5s 105s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" >"/tmp/bfss-m4f7-named-restricted-vertical-b5-strict-gate1/$stem.log" 2>&1 || {
+              code=$?
+              echo M4F7_B5_GATE1_FRESH_LEAN_EXIT=$code
+              grep -n 'error:' "/tmp/bfss-m4f7-named-restricted-vertical-b5-strict-gate1/$stem.log" | head -n 24 || true
+              tail -n 85 "/tmp/bfss-m4f7-named-restricted-vertical-b5-strict-gate1/$stem.log"
+              cat "/tmp/bfss-m4f7-named-restricted-vertical-b5-strict-gate1/$stem.resource" || true
+              exit "$code"
+            }
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('FCPM4F7NamedRestrictedVerticalB5.lean').read_text()
+          log=Path('/tmp/bfss-m4f7-named-restricted-vertical-b5-strict-gate1/FCPM4F7NamedRestrictedVerticalB5.log').read_text()
+          full='FCP.M4F7NamedRestrictedVerticalB5.namedIndependentRestrictedClosedGraph_vertical'
+          assert re.findall(r'^theorem (\S+)',src,re.M)==['namedIndependentRestrictedClosedGraph_vertical']
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==['namedIndependentRestrictedClosedGraph_vertical']
+          reports=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          ax={n:{w.strip() for w in raw.split(',') if w.strip()} for n,raw in reports}
+          assert len(reports)==len(ax)==1,('REPORT_COUNT',reports)
+          assert set(ax)=={full},('EXACT_THEOREM_NAME',ax)
+          assert all(v <= {'propext','Classical.choice','Quot.sound'} for v in ax.values()),('UNAUTHORIZED_AXIOMS',ax)
+          assert 'error:' not in log and 'sorryAx' not in log and 'unknownIdentifier' not in log
+          warnings=[line for line in log.splitlines() if 'warning:' in line and not re.fullmatch(r"warning: [A-Za-z0-9_-]+: repository '[^']+' has local changes",line)]
+          assert not warnings,('UNEXPECTED_LEAN_WARNINGS',warnings)
+          print('M4F7_B5_GATE1_ACTUAL_NAMED_INDEPENDENT_RESTRICTED_CLOSED_GRAPH_VERTICAL_ONE_ROOT_STRICT_PASS',ax)
+          PY
+          cat "/tmp/bfss-m4f7-named-restricted-vertical-b5-strict-gate1/$stem.resource"
+
+      - name: Save qualified concrete B5 named closed graph vertical certificate only after strict success
+        if: success()
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCutNamedAlias.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6RestrictedGraphImageC3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6RestrictedGraphClosureC4.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentRestrictedClosedGraphVerticalC1Cut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentClosedGraphAliasA3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7FullClosedGraphVerticalB4CoeAlign.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedRestrictedVerticalB5.olean
+          key: bfss-fcp-m4f7-named-restricted-vertical-b5-d88febcd-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve original B5 compiler and resource diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-m4f7-named-restricted-vertical-b5-${{ github.run_id }}
+          path: /tmp/bfss-m4f7-named-restricted-vertical-b5-strict-gate1
+          if-no-files-found: warn
