@@ -96,8 +96,8 @@ theorem independentPhysicalInputCutClosedChargeColumn_input_physical
       {q : Lp E 2 μ × (SpinIndex → Lp E 2 μ) |
         q.1 ∈ independentPhysicalSpace theta hCAR hHermitian} := by
     intro q hq
-    exact (FCP.M4F7IndependentLiteralRestrictedGraphBridgeE3.independentPhysicalInputCutCoreGraph_mem_iff
-      color gamma theta hCAR hHermitian q).mp hq |>.2
+    exact ((FCP.M4F7IndependentLiteralRestrictedGraphBridgeE3.independentPhysicalInputCutCoreGraph_mem_iff
+      color gamma theta hCAR hHermitian q).mp hq).2
   have hclosure := closure_minimal hcore hclosed
   rw [FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutClosedChargeColumn_graph_eq
     color gamma theta hCAR hHermitian J hColor hGamma hJ,
