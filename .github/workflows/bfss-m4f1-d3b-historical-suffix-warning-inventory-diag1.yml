@@ -49,18 +49,18 @@ jobs:
           manifest=json.loads(pathlib.Path('upstream-math/lean/lake-manifest.json').read_text())
           assert next(x['rev'] for x in manifest['packages'] if x['name']=='mathlib')=='d13f23b723b8a846827a245b89c10fc7d3f11612'
           rows=[
-            - ["SU2BFSSG4K8DPositiveCouplingAlternativeProbe","experiments/openai-math-su2-concrete-potential","6b2402e1c1364ae7cc48b908fccfee01ee741972"]
-            - ["SU2BFSSG4K8E1MasslessPotentialParityProbe","experiments/openai-math-su2-concrete-potential","12b85a0d3e6b09f6a166a5fa12ce693ec1e8415c"]
-            - ["SU2BFSSG4K8E2KineticOddParityProbe","experiments/openai-math-su2-concrete-potential","1b20b65c53d116ab4193fd968c0b559c7afce346"]
-            - ["SU2BFSSG4K8E3CoreNoncancellationProbe","experiments/openai-math-su2-concrete-potential","819d6f26f43bdce221482feb0d48b2a62042665a"]
-            - ["SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe","experiments/openai-math-su2-concrete-potential","5e5f10f4c79f45f4b2bb4d6cdf1dbe71573616dd"]
-            - ["SU2BFSSG4K9BSourcePairAndChargeReductionProbe","experiments/openai-math-su2-concrete-potential","3bc2712a1c56e86e9e996dcee3052409e23a2e73"]
-            - ["SU2BFSSG4K9COrderedPairCoefficientProbe","experiments/openai-math-su2-concrete-potential","de0c447a73990b1beb271fb2afc14dc5b4e20318"]
-            - ["SU2BFSSG4K9DSourcePotentialMultiplierProbe","experiments/openai-math-su2-concrete-potential","0695420e4e1d6fbe8accdc4aee9df6dd2d52d1ca"]
-            - ["SU2BFSSG4K10ASourceClosedJointChargeGraphProbe","experiments/openai-math-su2-concrete-potential","65d86984f7c216950fbc96812bd011d9d09e968e"]
-            - ["SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe","experiments/openai-math-su2-physical-domain","32b525602dd6c0266f8b78b2349fc62639e577c2"]
-            - ["SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe","experiments/openai-math-su2-physical-domain","1aedd8b251c8b04f02f9d71e35594a8cc482d79b"]
-            - ["FCPIndependentInvariantCharge","experiments/openai-math-su2-physical-domain","d04d0fcd08a01e7797d4fffee8fcef9666641976"]
+            ("SU2BFSSG4K8DPositiveCouplingAlternativeProbe","experiments/openai-math-su2-concrete-potential","6b2402e1c1364ae7cc48b908fccfee01ee741972"),
+            ("SU2BFSSG4K8E1MasslessPotentialParityProbe","experiments/openai-math-su2-concrete-potential","12b85a0d3e6b09f6a166a5fa12ce693ec1e8415c"),
+            ("SU2BFSSG4K8E2KineticOddParityProbe","experiments/openai-math-su2-concrete-potential","1b20b65c53d116ab4193fd968c0b559c7afce346"),
+            ("SU2BFSSG4K8E3CoreNoncancellationProbe","experiments/openai-math-su2-concrete-potential","819d6f26f43bdce221482feb0d48b2a62042665a"),
+            ("SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe","experiments/openai-math-su2-concrete-potential","5e5f10f4c79f45f4b2bb4d6cdf1dbe71573616dd"),
+            ("SU2BFSSG4K9BSourcePairAndChargeReductionProbe","experiments/openai-math-su2-concrete-potential","3bc2712a1c56e86e9e996dcee3052409e23a2e73"),
+            ("SU2BFSSG4K9COrderedPairCoefficientProbe","experiments/openai-math-su2-concrete-potential","de0c447a73990b1beb271fb2afc14dc5b4e20318"),
+            ("SU2BFSSG4K9DSourcePotentialMultiplierProbe","experiments/openai-math-su2-concrete-potential","0695420e4e1d6fbe8accdc4aee9df6dd2d52d1ca"),
+            ("SU2BFSSG4K10ASourceClosedJointChargeGraphProbe","experiments/openai-math-su2-concrete-potential","65d86984f7c216950fbc96812bd011d9d09e968e"),
+            ("SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe","experiments/openai-math-su2-physical-domain","32b525602dd6c0266f8b78b2349fc62639e577c2"),
+            ("SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe","experiments/openai-math-su2-physical-domain","1aedd8b251c8b04f02f9d71e35594a8cc482d79b"),
+            ("FCPIndependentInvariantCharge","experiments/openai-math-su2-physical-domain","d04d0fcd08a01e7797d4fffee8fcef9666641976"),
           ]
           assert len(rows)==len({r[0] for r in rows})==12
           for stem,dir,sha in rows:
