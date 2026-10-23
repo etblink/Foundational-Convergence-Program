@@ -3,9 +3,9 @@ import FCPM4F6RestrictedGraphImageC3
 /-!
 M4F6 C4 — CONTINGENT strict-candidate source-exact restricted graph CLOSURE.
 
-This file depends on the unaccepted C3 restricted graph-image theorem.
-It is staged for source review only: no CI is launched and no principal
-root is claimed. Accepting C3 first is an explicit prerequisite.
+This file depends on the separately accepted strict C3 restricted
+graph-image theorem. Its own C4 closure result remains a candidate
+and requires a separate source-pinned kernel and axiom gate.
 
 The result concerns closure of the literal BFSS smooth-core joint
 sixteen-charge GRAPH RELATION under the 17-slot fiber homeomorphism.
