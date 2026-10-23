@@ -41,7 +41,7 @@ def independentInputCutApplication
 
 /-- Same paired-source application as the failed concrete bridge,
 elaborated without an expected expanded graph-equality type. -/
-def originalInputCutApplication :=
+theorem originalInputCutApplication :=
   original_core_graph_input_cut pairedAlgebraData pairedGaugeData
 
 #print independentInputCutApplication
