@@ -62,18 +62,22 @@ theorem independentChargeVector_comp_invariantCore_output_physical
     (((independentChargeVector color gamma theta).comp
       (independentInvariantCore theta hCAR hHermitian).subtype) f) α ∈
         independentPhysicalSpace theta hCAR hHermitian := by
-  change independentChargeVector color gamma theta f.val α ∈
-    independentPhysicalSpace theta hCAR hHermitian
-  have hq :=
-    FCP.IndependentSmoothSupercharge.independentCharge_mem_invariantCore
-      color gamma theta hCAR hHermitian J hColor hGamma hJ α f
-  change independentCoreToL2
-    (independentCharge color gamma theta α f.val) ∈
-      independentPhysicalSpace theta hCAR hHermitian at hq
-  change independentCoreToL2
-    (independentCharge color gamma theta α f.val) ∈
-      independentPhysicalSpace theta hCAR hHermitian
-  exact hq
+  have hSmooth :
+      independentChargeVector color gamma theta f.val α ∈
+        independentPhysicalSpace theta hCAR hHermitian := by
+    have hq :=
+      FCP.IndependentSmoothSupercharge.independentCharge_mem_invariantCore
+        color gamma theta hCAR hHermitian J hColor hGamma hJ α f
+    change independentCoreToL2
+      (independentCharge color gamma theta α f.val) ∈
+        independentPhysicalSpace theta hCAR hHermitian at hq
+    change independentCoreToL2
+      (independentCharge color gamma theta α f.val) ∈
+        independentPhysicalSpace theta hCAR hHermitian
+    exact hq
+  have hsubtype :
+      (independentInvariantCore theta hCAR hHermitian).subtype f = f.val := rfl
+  simpa only [LinearMap.comp_apply, hsubtype] using hSmooth
 
 #print axioms independentChargeVector_comp_invariantCore_output_physical
 #check independentChargeVector_comp_invariantCore_output_physical
