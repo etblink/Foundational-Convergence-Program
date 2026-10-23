@@ -173,7 +173,7 @@ jobs:
         uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
         with:
           path: |
-upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
             upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
             upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
@@ -231,7 +231,7 @@ upstream-math/lean/.lake/build/lib/lean/OAI
         uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
         with:
           path: |
-upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
             upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
             upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
