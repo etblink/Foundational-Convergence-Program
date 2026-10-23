@@ -1,0 +1,419 @@
+name: BFSS M4F1 Source Specialization S1 Strict Gate 1
+
+# Deliberate single-path gate: source/audit/handoff commits cannot trigger this.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-m4f1-source-specialization-s1-strict-gate1.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-m4f1-source-specialization-s1-strict-gate1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  recover-original-gauge-and-independent-charge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58
+    steps:
+      - name: Checkout isolated research source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Checkout pinned original BFSS mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Fail-closed original source and historic proof hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-m4f1-source-specialization-s1-strict-gate1
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,subprocess
+          d=json.loads(Path('upstream-math/lean/lake-manifest.json').read_text())
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          root=Path('experiments/openai-math-su2-physical-domain')
+          expected={
+            'FCPIndependentOriginalGaugeBridge.lean':'f0258c3b68d3a64dab300ce3c32b1d3a5ab23e35',
+            'FCPIndependentOriginalCliffordBridge.lean':'193c41c4437c413a87db7442ba725230afdf39ec',
+            'FCPIndependentFullL2GaugeTransport.lean':'5e34611df34e14358c3d0509931ecd1f9cf555b7',
+            'FCPIndependentFullL2Unitary.lean':'12ee07bf3b189c252fa54867e60f71cba532c574',
+            'FCPIndependentPhysicalSpace.lean':'795f4cbcb15e1c86f5adabbf5cc8cc93c1f0a890',
+            'FCPIndependentPhysicalUnitary.lean':'5dc225ed1e9433451ba1aeda11fc50ba9feb110f',
+            'FCPIndependentSmoothCore.lean':'0041e511625bee6cb72e3896e97c99d7f722efd5',
+            'FCPIndependentInvariantSmoothEquiv.lean':'5083f0ce9bfb43f616a9c3e5dc286887bd073de4',
+            'FCPIndependentGaugePointwise.lean':'3b6edba2ab7bd2c3757f9d2d4b191478521d5c2c',
+            'FCPIndependentSmoothSuperchargeFermion.lean':'425f5187324d3b7a7d67f54af0f0ff51b7b661e4',
+            'FCPIndependentCoordinateDerivative.lean':'3c0e4fd84bb473e75a01fb6cadfd9e3aaf7f73f5',
+            'FCPIndependentKineticCharge.lean':'175acf89e2f540927423d1776802f5bc673ccce2',
+            'FCPIndependentPosition.lean':'4e75da8f49c9d752445cd1fc09b33861674ab088',
+            'FCPIndependentCubicCharge.lean':'fd1526cddf92845adf004c6b4fbb4a052d6e1746',
+            'FCPIndependentFullSmoothCharge.lean':'4fa31d97ddfbb80e3258070caccd7b0a6b0bc874',
+            'FCPIndependentChargeVectorL2.lean':'6492f4b08181020f611f7d7d4b751394805420d2',
+            'FCPIndependentFullCoreGraph.lean':'2139e7fc9e7b9d5bf99ec57d096686078b8ffdf7',
+            'FCPIndependentFullCoreGraphImage.lean':'06e98a1b867f21577b5b74033e411d27ba688985',
+            'FCPIndependentGraphTransportHomeomorph.lean':'8455a6c42f23b2d08f7945188fe5b8ca9e75ac4b',
+            'FCPIndependentFullCoreGraphClosure.lean':'a6aacf285206ba79f331bf2c6818fc0b7df1a6e4',
+            'SU2BFSSPhysicalDomainS1V52M3JIndependentUnitaryExistenceProbe.lean':'1cd42b286a18abf6e7f8c2348949f8de3748151c',
+            'SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.lean':'32b525602dd6c0266f8b78b2349fc62639e577c2',
+            'SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.lean':'1aedd8b251c8b04f02f9d71e35594a8cc482d79b',
+            'FCPIndependentInvariantCharge.lean':'d04d0fcd08a01e7797d4fffee8fcef9666641976'
+          }
+          for name,sha in expected.items():
+            p=root/name
+            assert subprocess.check_output(['git','rev-parse','HEAD:'+str(p)],text=True).strip()==sha,(name,sha)
+            assert subprocess.check_output(['git','hash-object','--no-filters',str(p)],text=True).strip()==sha,(name,'working tree drift')
+          g4j='experiments/openai-math-su2-concrete-potential/SU2BFSSG4JExactGaugeDataAssemblyProbe.lean'
+          assert subprocess.check_output(['git','rev-parse','HEAD:'+g4j],text=True).strip() == 'dd82ff793918e448a2d91781edb84d273a664cd4'
+          original=Path('experiments/openai-math-su2-concrete-potential/SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe.lean').read_text()
+          adapter=root/'recovery/SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe.lean'
+          assert subprocess.check_output(['git','rev-parse','HEAD:'+str(adapter)],text=True).strip()=='994e89ee88bc9566232c7a85001d878d5aaf2bff'
+          assert subprocess.check_output(['git','hash-object','--no-filters',str(adapter)],text=True).strip()=='994e89ee88bc9566232c7a85001d878d5aaf2bff'
+          assert original.count('push_neg at hn')==1
+          assert adapter.read_text()==original.replace('push_neg at hn','push Not at hn',1)
+          original8=Path('experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8ANonzeroDerivativeProbe.lean')
+          adapter8=root/'recovery/SU2BFSSG4K8ANonzeroDerivativeProbe.lean'
+          assert subprocess.check_output(['git','rev-parse','HEAD:'+str(original8)],text=True).strip()=='0d9bd739a46caecbc7159ec29161c96d7f553c77'
+          assert subprocess.check_output(['git','hash-object','--no-filters',str(original8)],text=True).strip()=='0d9bd739a46caecbc7159ec29161c96d7f553c77'
+          assert subprocess.check_output(['git','rev-parse','HEAD:'+str(adapter8)],text=True).strip()=='cf0736c8012e2a9b792c6cceee41b7f7911cc180'
+          assert subprocess.check_output(['git','hash-object','--no-filters',str(adapter8)],text=True).strip()=='cf0736c8012e2a9b792c6cceee41b7f7911cc180'
+          assert original8.read_text().count('rw [EuclideanSpace.norm_single]')==1
+          assert adapter8.read_text()==original8.read_text().replace('rw [EuclideanSpace.norm_single]','rw [PiLp.norm_single]',1)
+          originalC=Path('experiments/openai-math-su2-concrete-potential/SU2BFSSG4K8CZeroParameterChargeProbe.lean')
+          adapterC=root/'recovery/SU2BFSSG4K8CZeroParameterChargeProbe.lean'
+          assert subprocess.check_output(['git','rev-parse','HEAD:'+str(originalC)],text=True).strip()=='50168eda495f5c59cc2db9d14dce7bfee7e839e7'
+          assert subprocess.check_output(['git','hash-object','--no-filters',str(originalC)],text=True).strip()=='50168eda495f5c59cc2db9d14dce7bfee7e839e7'
+          assert subprocess.check_output(['git','rev-parse','HEAD:'+str(adapterC)],text=True).strip()=='9f802fdf79096890e143565793777512b12c1b28'
+          assert subprocess.check_output(['git','hash-object','--no-filters',str(adapterC)],text=True).strip()=='9f802fdf79096890e143565793777512b12c1b28'
+          oldSimp='  simp [IsSMulApply.smul_apply, ContinuousLinearMap.smul_apply]'
+          assert originalC.read_text().count(oldSimp)==1
+          assert adapterC.read_text()==originalC.read_text().replace(oldSimp,'  simp',1)
+
+          extra_adapters=[
+            ["SU2BFSSG4K8DPositiveCouplingAlternativeProbe","experiments/openai-math-su2-concrete-potential","6b2402e1c1364ae7cc48b908fccfee01ee741972","987285d0129a53e795cc40b0d3c098b51b5c3d79","  simp [IsSMulApply.smul_apply]","  simp"],
+            ["SU2BFSSG4K8E1MasslessPotentialParityProbe","experiments/openai-math-su2-concrete-potential","12b85a0d3e6b09f6a166a5fa12ce693ec1e8415c","b77af74ae116683fc4c89d3fb01422c0c481555f","    simp [IsSMulApply.smul_apply]","    simp"],
+            ["SU2BFSSG4K8E2KineticOddParityProbe","experiments/openai-math-su2-concrete-potential","1b20b65c53d116ab4193fd968c0b559c7afce346","380e1e90248e9fc7baa3101154aa2aec367eb8cc","ContinuousLinearMap.neg_apply","neg_apply"],
+            ["SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe","experiments/openai-math-su2-physical-domain","32b525602dd6c0266f8b78b2349fc62639e577c2","434c09c0f8b5b75b626918c329465fe5a4927ce5","ContinuousLinearMap.smul_apply","smul_apply"],
+            ["FCPIndependentInvariantCharge","experiments/openai-math-su2-physical-domain","d04d0fcd08a01e7797d4fffee8fcef9666641976","1152c5c31013bff6bd5a4bd8cbc8d3e53a4f54b7","open FCP.BFSSSU2GaugeG1A\n","open FCP.BFSSSU2GaugeG1A FCP.BFSSSU2GaugeG4J\n"],
+          ]
+          for name, directory, historical_sha, adapter_sha, old_expr, new_expr in extra_adapters:
+            historical=Path(directory)/(name+'.lean')
+            adapter=root/'recovery'/(name+'.lean')
+            assert subprocess.check_output(['git','rev-parse','HEAD:'+str(historical)],text=True).strip()==historical_sha,('original source',name)
+            assert subprocess.check_output(['git','hash-object','--no-filters',str(historical)],text=True).strip()==historical_sha,('original worktree',name)
+            assert subprocess.check_output(['git','rev-parse','HEAD:'+str(adapter)],text=True).strip()==adapter_sha,('recovered source',name)
+            assert subprocess.check_output(['git','hash-object','--no-filters',str(adapter)],text=True).strip()==adapter_sha,('recovered worktree',name)
+            source=historical.read_text()
+            assert source.count(old_expr)==1,('nonunique source patch',name)
+            assert adapter.read_text()==source.replace(old_expr,new_expr,1),('non-exact one-change adapter',name)
+          print('M4F1_SOURCE_S1_GATE1_FIVE_EXACT_SOURCE_ADAPTERS_PASS')
+          print('M4F1_SOURCE_S1_GATE1_EXACT_G4K8C_SOURCE_ADAPTER_PASS')
+          print('M4F1_SOURCE_S1_GATE1_EXACT_G4K8A_SOURCE_ADAPTER_PASS')
+          print('M4F1_SOURCE_S1_GATE1_EXACT_G4K7_SYNTAX_ADAPTER_PASS')
+          print('M4F1_SOURCE_S1_GATE1_FROZEN_ORIGINAL_AND_CANDIDATE_SOURCE_PASS')
+          PY
+          qualified=1fbd0db2af96914d20b8750bfbbeb3af6770a491
+          git fetch --quiet --no-tags --depth=1 origin "$qualified"
+          for stem in SU2BFSSG4K1PhysicalSpaceCoreProbe SU2BFSSG4K2ANonzeroVacuumRadialProfileProbe SU2BFSSG4K2BNonzeroPhysicalL2Probe SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe SU2BFSSG4K4ClosedChargeGraphProbe SU2BFSSG4K5ConcreteEnergyDensityProbe SU2BFSSG4K6PhysicalTrialEnergyLowerProbe SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe SU2BFSSG4K8ANonzeroDerivativeProbe SU2BFSSG4K8BNonzeroCoordinateL2Probe SU2BFSSG4K8CZeroParameterChargeProbe SU2BFSSG4K8DPositiveCouplingAlternativeProbe SU2BFSSG4K8E1MasslessPotentialParityProbe SU2BFSSG4K8E2KineticOddParityProbe SU2BFSSG4K8E3CoreNoncancellationProbe SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe SU2BFSSG4K9BSourcePairAndChargeReductionProbe SU2BFSSG4K9COrderedPairCoefficientProbe SU2BFSSG4K9DSourcePotentialMultiplierProbe; do
+            p="experiments/openai-math-su2-concrete-potential/$stem.lean"
+            test "$(git hash-object --no-filters "$p")" = "$(git rev-parse "$qualified:$p")" || {
+              echo "HISTORIC_QUALIFIED_G4_SOURCE_MISMATCH=$p"; exit 1;
+            }
+          done
+          p=experiments/openai-math-su2-concrete-potential/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.lean
+          test "$(git hash-object --no-filters "$p")" = 65d86984f7c216950fbc96812bd011d9d09e968e
+          echo M4F1_SOURCE_S1_GATE1_HISTORICAL_G4K1_TO_G4K10A_SOURCE_PASS
+
+      - name: Pin the isolated original-source specialization statement before toolchain setup
+        shell: bash
+        run: |
+          set -euo pipefail
+          p=experiments/openai-math-su2-physical-domain/FCPM4F1PairedSourceSpecialization.lean
+          test "$(git rev-parse HEAD:"$p")" = 3340c823c511a4202f2d15711a3d1b4396445230
+          test "$(git hash-object --no-filters "$p")" = 3340c823c511a4202f2d15711a3d1b4396445230
+          grep -qx 'import SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe' <(head -n 1 "$p")
+          if grep -Eq '(^|[[:space:]])(sorry|admit)[[:space:]]|sorryAx' "$p"; then
+            echo SOURCE_SPECIALIZATION_PROOF_HOLE_REJECTED
+            exit 1
+          fi
+          echo M4F1_SOURCE_SPECIALIZATION_S1_GATE1_CANDIDATE_SOURCE_EXACT_PASS
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore original Lean 4.34.1 and pinned Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-m4f1-source-specialization-s1-strict-gate1/toolchain.log; then ok=true; break; fi
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-m4f1-source-specialization-s1-strict-gate1/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo M4F1_SOURCE_S1_GATE1_TOOLCHAIN_PASS
+
+      - name: Restore accepted M4F5 qualified source and independent graph cache
+        id: cacheM4F5
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullSmoothCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentChargeVectorL2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphImage.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentGraphTransportHomeomorph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphClosure.olean
+          key: bfss-fcp-m4f5-unrestricted-graph-closure-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Check source qualified cache closure before any new proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.cacheM4F5.outputs.cache-hit }}" = true || { echo M4F5_PARENT_QUALIFIED_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in OAI/MathematicalPhysics/BFSS/Core OAI/MathematicalPhysics/BFSS/GaugeCore SU2BFSSG4JExactGaugeDataAssemblyProbe SU2BFSSPhysicalDomainS1V52M3JIndependentUnitaryExistenceProbe FCPIndependentFullSmoothCharge FCPIndependentSmoothCore FCPIndependentInvariantSmoothEquiv FCPIndependentFullCoreGraphClosure; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo "ACCEPTED_PARENT_OLEAN_MISSING=$stem"; exit 1; }
+          done
+          echo M4F1_SOURCE_S1_GATE1_M4F5_SOURCE_CLOSURE_PASS
+
+      - name: Restore pinned original prerequisite compilation checkpoint
+        id: originalPrereqCache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: upstream-math/lean/.lake/build/lib/lean/OAI
+          key: bfss-fcp-m4f1-original-prerequisites-gate2-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Build historical qualified source dependency prerequisites
+        shell: bash
+        timeout-minutes: 15
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          for module in OAI.MathematicalPhysics.BFSS.KineticMeasures OAI.MathematicalPhysics.BFSS.CovariantFields OAI.MathematicalPhysics.BFSS.ProfileEnergy OAI.MathematicalPhysics.BFSS.ClosedProfiles; do
+            target=".lake/build/lib/lean/$(printf '%s' "$module" | tr . /).olean"
+            if test ! -s "$target"; then
+              echo "BUILD_PINNED_UPSTREAM=$module"
+              timeout 480s lake build "$module" >"/tmp/bfss-m4f1-source-specialization-s1-strict-gate1/upstream-$(basename "$target").log" 2>&1 || {
+                tail -n 60 "/tmp/bfss-m4f1-source-specialization-s1-strict-gate1/upstream-$(basename "$target").log"; exit 1;
+              }
+            fi
+            test -s "$target"
+          done
+          echo M4F1_SOURCE_S1_GATE1_PINNED_UPSTREAM_PREREQUISITES_PASS
+
+      - name: Preserve pinned original prerequisite compilation checkpoint
+        if: success() && steps.originalPrereqCache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: upstream-math/lean/.lake/build/lib/lean/OAI
+          key: bfss-fcp-m4f1-original-prerequisites-gate2-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Establish strict source report validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/bfss-m4f1-source-specialization-s1-strict-gate1/strict_validate.py <<'PY'
+          from pathlib import Path
+          import re,sys
+          stem=sys.argv[1]
+          src=Path(stem+'.lean').read_text()
+          log=Path('/tmp/bfss-m4f1-source-specialization-s1-strict-gate1/'+stem+'.log').read_text()
+          expects=re.findall(r'^#print axioms (\S+)',src,re.M)
+          reports=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          assert expects,('MISSING_SOURCE_AXIOM_REPORTS',stem)
+          assert len(reports)==len(expects),('SOURCE_AX_REPORT_COUNT',stem,len(expects),reports)
+          seen={}
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for name,s in reports:
+            assert name not in seen,('DUPLICATE_AXIOM_NAME',name)
+            seen[name]={x.strip() for x in s.split(',') if x.strip()}
+            assert seen[name] <= allowed,('UNAUTHORIZED_AXIOM',name,seen[name])
+          for name in expects:
+            # Lean private theorems are emitted under a generated _private prefix.
+            assert any(n==name or n.endswith('.'+name) for n in seen),('MISSING_SOURCE_DECLARATION',stem,name,list(seen))
+          assert 'error:' not in log and 'sorryAx' not in log and 'unknownIdentifier' not in log, ('COMPILER_ERROR_OR_SORRY',stem,log[-1500:])
+          # Lake emits auxiliary-package working-tree status before Lean runs.
+          # Reuse the exact M3J/M4F5 filter; Lean warnings remain fatal via warningAsError.
+          lake_status_warning = r"warning: [A-Za-z0-9_-]+: repository '[^']+' has local changes"
+          unexpected = [line for line in log.splitlines()
+                        if 'warning:' in line and not re.fullmatch(lake_status_warning, line)]
+          assert not unexpected,('UNEXPECTED_LEAN_WARNING',stem,unexpected)
+          print('SOURCE_EXACT_STRICT_AXIOMS_PASS',stem,len(reports))
+          PY
+          echo M4F1_SOURCE_S1_GATE1_EXACT_VALIDATOR_PREPARED
+
+      - name: Restore strictly qualified original G4 source-closure cache
+        id: g4cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+          key: bfss-fcp-m4f1-recovered-g4-994e89ee-cf0736c8-9f802fdf-987285d0-b77af74a-380e1e90-gate5-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Require exact previously certified G4K9D and M4F5 closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.g4cache.outputs.cache-hit }}" = true || { echo QUALIFIED_G4_PARENT_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe SU2BFSSG4K8CZeroParameterChargeProbe SU2BFSSG4K8DPositiveCouplingAlternativeProbe SU2BFSSG4K9DSourcePotentialMultiplierProbe FCPIndependentFullSmoothCharge FCPIndependentSmoothCore; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo QUALIFIED_G4_PARENT_OBJECT_MISSING=$stem; exit 1; }
+          done
+          test -s .lake/build/lib/lean/OAI/MathematicalPhysics/BFSS/CovariantFields.olean
+          echo M4F1_S1_PARENT_G4_SOURCE_CLOSURE_PASS
+
+      - name: Restore independently qualified source D3B import checkpoint
+        id: d3bcache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+          key: bfss-fcp-m4f1-qualified-d3b-source-s1-parent-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Compile genuine source G4K10A D3A D3B strictly without independent charge modules
+        if: steps.d3bcache.outputs.cache-hit != 'true'
+        shell: bash
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          original=experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.lean
+          adapter=experiments/openai-math-su2-physical-domain/recovery/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.lean
+          test "$(git rev-parse HEAD:"$original")" = 32b525602dd6c0266f8b78b2349fc62639e577c2
+          test "$(git rev-parse HEAD:"$adapter")" = 434c09c0f8b5b75b626918c329465fe5a4927ce5
+          test "$(git hash-object --no-filters "$original")" = 32b525602dd6c0266f8b78b2349fc62639e577c2
+          test "$(git hash-object --no-filters "$adapter")" = 434c09c0f8b5b75b626918c329465fe5a4927ce5
+          python3 - <<'PY'
+          from pathlib import Path
+          base=Path('experiments/openai-math-su2-physical-domain')
+          original=(base/'SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.lean').read_text()
+          adapter=(base/'recovery/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.lean').read_text()
+          assert original.count('ContinuousLinearMap.smul_apply')==1
+          assert adapter==original.replace('ContinuousLinearMap.smul_apply','smul_apply',1)
+          print('D3A_SOURCE_ADAPTER_SINGLE_LINE_EXACT_PASS')
+          PY
+          test "$(git hash-object --no-filters experiments/openai-math-su2-concrete-potential/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.lean)" = 65d86984f7c216950fbc96812bd011d9d09e968e
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.lean)" = 1aedd8b251c8b04f02f9d71e35594a8cc482d79b
+          cp "experiments/openai-math-su2-concrete-potential/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.lean" "upstream-math/lean/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.lean"
+          cp "$adapter" "upstream-math/lean/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.lean"
+          cp "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.lean" "upstream-math/lean/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.lean"
+          cd upstream-math/lean
+          for stem in SU2BFSSG4K10ASourceClosedJointChargeGraphProbe SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe; do
+            echo STRICT_ORIGINAL_SOURCE_MODULE=$stem
+            timeout --signal=TERM --kill-after=5s 170s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" >"/tmp/bfss-m4f1-source-specialization-s1-strict-gate1/$stem.log" 2>&1 || {
+              code=$?
+              grep -n 'error:' "/tmp/bfss-m4f1-source-specialization-s1-strict-gate1/$stem.log" | head -n 10 || true
+              tail -n 65 "/tmp/bfss-m4f1-source-specialization-s1-strict-gate1/$stem.log"
+              exit "$code"
+            }
+            test -s ".lake/build/lib/lean/$stem.olean"
+            python3 /tmp/bfss-m4f1-source-specialization-s1-strict-gate1/strict_validate.py "$stem"
+          done
+          echo M4F1_SOURCE_S1_GATE1_ORIGINAL_D3B_FIVE_DECLARATIONS_STRICT_PASS
+
+      - name: Verify exact original source D3B qualified import closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe.olean
+          test -s upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.olean
+          echo M4F1_SOURCE_S1_GATE1_ORIGINAL_D3B_OLEAN_CLOSURE_PASS
+
+      - name: Save strict original D3B prerequisite checkpoint before experimental proof
+        if: success() && steps.d3bcache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+          key: bfss-fcp-m4f1-qualified-d3b-source-s1-parent-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Test isolated paired original-source core preservation without independent transport
+        shell: bash
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=FCPM4F1PairedSourceSpecialization
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" "upstream-math/lean/$stem.lean"
+          cd upstream-math/lean
+          test -s .lake/build/lib/lean/SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe.olean
+          /usr/bin/time -f 'WALL_SECONDS %e CPU %P MAX_RSS_KB %M' -o "/tmp/bfss-m4f1-source-specialization-s1-strict-gate1/$stem.resource" \
+            timeout --signal=TERM --kill-after=5s 110s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" >"/tmp/bfss-m4f1-source-specialization-s1-strict-gate1/$stem.log" 2>&1 || {
+              code=$?
+              echo M4F1_SOURCE_S1_ISOLATED_SPECIALIZATION_FAILED_EXIT=$code
+              grep -n 'error:' "/tmp/bfss-m4f1-source-specialization-s1-strict-gate1/$stem.log" | head -n 15 || true
+              tail -n 75 "/tmp/bfss-m4f1-source-specialization-s1-strict-gate1/$stem.log"
+              cat "/tmp/bfss-m4f1-source-specialization-s1-strict-gate1/$stem.resource" || true
+              exit "$code"
+            }
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 /tmp/bfss-m4f1-source-specialization-s1-strict-gate1/strict_validate.py "$stem"
+          cat "/tmp/bfss-m4f1-source-specialization-s1-strict-gate1/$stem.resource"
+          echo M4F1_SOURCE_S1_EXACT_SPECIALIZATION_ONE_ROOT_STRICT_AXIOMS_PASS
+
+      - name: Preserve qualified isolated source-specialization certificate cache if and only if strict
+        if: success()
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1PairedSourceSpecialization.olean
+          key: bfss-fcp-m4f1-qualified-source-s1-3340c823-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Upload original-source diagnostic and resource logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-m4f1-source-specialization-s1-gate1-${{ github.run_id }}
+          path: /tmp/bfss-m4f1-source-specialization-s1-strict-gate1
+          if-no-files-found: warn
