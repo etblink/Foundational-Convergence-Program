@@ -1,0 +1,20 @@
+# BFSS M4F9 H4B1 Gate #1 — red: dropped source matching witnesses and source graph SetLike membership alignment
+
+**Disposition:** `M4F9_H4B1_GATE1_RED__H4A_QUALIFIED_PARENT_HIT__LEAN_REACHED_FORWARD_NATIVE_GRAPH__MISSING_HCOLOR_HGAMMA__SETLIKE_MEM_COE_TYPE_MISMATCH__WHNF_HEARTBEAT__ZERO_ACCEPTED`.
+
+**Original strict workflow:** [run #40077329561](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40077329561), job **120823403544**, `completed/failure`. Event/workflow commit **165bccdee03b7d3679d707267488235742a82b0c**, original candidate `experiments/openai-math-su2-physical-domain/FCPM4F9H4B1NativeSourceIndependentGraphInclusion.lean`, exact candidate Git blob **61cd830dc791f7fcfe9409572ee3fd9fe6d77099**; original workflow `.github/workflows/bfss-m4f9-h4b1-native-source-independent-graph-inclusion-strict-gate1.yml` exact workflow Git blob **7cd50708d678b773841ade631df73347c712baa1**. Original [unfiltered diagnostics artifact #12553393130](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40077329561/artifacts/12553393130), ZIP SHA256 **3d1d57221fd39d24183bdff5c997a2e2ce6430fe914b7bea765bd389b5fc44f1**.
+
+Pinned original `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean **4.34.1**, Mathlib **d13f23b723b8a846827a245b89c10fc7d3f11612** passed source checks and restoration. Strict H4A exact parent cache `bfss-fcp-m4f9-h4a-native-physical-coordinates-7504f36e-gate1-v1-adc7f124-lean4341-d13f23b-Linux-X64` **hit and restored**. H3B2, H4A, H2B and literal fiber transport `.olean` ancestry all verified present. Failure is NOT missing infrastructure or a missing accepted source theorem.
+
+**Original Lean first errors:**
+- `FCPM4F9H4B1NativeSourceIndependentGraphInclusion.lean:97:42` unknown identifier `hColor`.
+- `...lean:97:49` unknown identifier `hGamma`.
+- `...lean:122:4` source graph membership mismatch after `simpa only [hhilbert] using hsrc`: `hsrc` has membership in the **coerced Set** `↑(pairedGaugeData.deformedModelGraph 1 0)`, but expected membership in native `pairedGaugeData.deformedModelGraph 1 0`. Graph objects are the same source named graph, but the fixed `simp only` did not reconcile the membership wrappers.
+- `...lean:46:0` deterministic `whnf` timeout at **200000 heartbeats** while elaborating the failed enclosing theorem.
+- The post-error `does not depend on any axioms` line is **not a meaningful theorem axiom report** and MUST NOT be treated as acceptance.
+
+**Classification:** Lean elaboration/proof parameter scoping plus an exact Set-vs-Submodule membership interface mismatch. No mathematical counterexample. Gate #1 **0/1 formally accepted**, **no H4B1 qualified cache saved**. The already accepted H4A three support roots and H3B2 four support roots are unaffected; working principal root tally **309 unchanged**.
+
+**Minimal next correction:** insert explicit `include color gamma hColor hGamma` before theorem to prevent proof-only section hypotheses from disappearing (known source-specific Lean behavior). Replace broad final `simpa only [hhilbert] using hsrc` by typed `rw [hhilbert]`, then explicitly `change` the goal to membership in `(pairedGaugeData.deformedModelGraph 1 0 : Set ...)`, and `exact hsrc`. Do not change source graph operators or weaken matching witnesses. Run ONE distinct Gate #2 with exact new candidate Git blob and mandatory accepted H4A archive. If further resource failure persists after these errors are removed, isolate a typed SetLike graph-membership lemma before increasing heartbeats. Do not count any theorem unless fresh Lean, exact allowed axioms and complete saved cache all pass.
+
+The intended mathematics remains: actual independently defined native E2 physical Hilbert graph transports into ACTUAL source-defined AY native physical Hilbert graph. Reverse implication, entire-domain equality, adjoints, normalized self-adjoint Hamiltonian and positive eigenvalues remain separate. No change to canonical main, pinned upstream source or draft PR #25.
