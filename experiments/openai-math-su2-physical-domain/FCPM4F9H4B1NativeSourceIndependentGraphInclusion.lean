@@ -1,4 +1,5 @@
 import FCPM4F9H4ANativeHilbertAmbientCoordinateTransport
+import FCPM4F9H4B1ASourceNamedNativeGraphMembership
 
 /-!
 M4F9 H4B1 — first genuine NATIVE physical Hilbert graph inclusion:
@@ -103,33 +104,17 @@ theorem nativeIndependentGraph_mem_sourceGraph
       fun α : SpinIndex => ((p.2 α : independentPhysicalSpace theta hCAR hHermitian) : Lp E 2 μ)), ?_, ?_⟩
     · exact ⟨q, hq, hq_ambient⟩
     · exact (nativePair_eq_ambientFiberTransport theta hCAR hHermitian J hJ p).symm
-  have hhilbert :
-      originalMinimalHilbertOutputEquiv
-        (pairedPhysicalHilbertOutputsToOriginalAmbient
-          (independentPhysicalHilbertOutputUnitary
-            theta hCAR hHermitian J hJ p.2)) =
-      (fun α : SpinIndex =>
-        (((independentPhysicalHilbertOutputUnitary
-            theta hCAR hHermitian J hJ p.2) α :
-          pairedGaugeData.physicalSpace) : FullL2 2)) := by
-    rfl
-  have hsourceAY :
+  have hNative :
       (independentPhysicalUnitary theta hCAR hHermitian J hJ p.1,
-        pairedPhysicalHilbertOutputsToOriginalAmbient
-          (independentPhysicalHilbertOutputUnitary
-            theta hCAR hHermitian J hJ p.2)) ∈
-      (originalMinimalPhysicalHilbertChargeColumn
-        pairedAlgebraData pairedGaugeData).graph := by
-    rw [originalMinimalPhysicalHilbertChargeColumn_graph_eq]
-    apply (originalMinimalPhysicalHilbertChargeGraph_mem_source_iff
-      pairedAlgebraData pairedGaugeData _).mpr
-    rw [hhilbert]
-    change _ ∈
-      (pairedGaugeData.deformedModelGraph 1 0 :
-        Set (FullL2 2 × (SpinIndex → FullL2 2)))
-    exact hsrc
+        independentPhysicalHilbertOutputUnitary
+          theta hCAR hHermitian J hJ p.2) ∈
+      pairedOriginalPhysicalHilbertChargeGraph :=
+    (FCP.M4F9H4B1ASourceNamedNativeGraphMembership.pairedNativeSourcePhysicalGraph_mem_source_iff
+      (independentPhysicalUnitary theta hCAR hHermitian J hJ p.1,
+        independentPhysicalHilbertOutputUnitary
+          theta hCAR hHermitian J hJ p.2)).mpr hsrc
   rw [pairedOriginalNativePhysicalHilbertChargeColumn_graph_eq]
-  exact (pairedOriginalPhysicalHilbertChargeGraph_mem_iff _).mpr hsourceAY
+  exact hNative
 
 #print axioms nativeIndependentGraph_mem_sourceGraph
 end
