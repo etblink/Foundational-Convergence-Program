@@ -20,6 +20,7 @@ open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2GaugeG1A FCP.BFSSSU2GaugeG4J
 open FCP.IndependentPhysicalSpace
 open FCP.IndependentSmoothSupercharge
+open FCP.IndependentFullL2GaugeTransport
 open FCP.M4F9H4ANativeHilbertAmbientCoordinateTransport
 open MeasureTheory Set
 
