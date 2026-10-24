@@ -74,9 +74,8 @@ theorem nativeSourceGraph_mem_independentGraph
   have hOutput : V v = p.2 :=
     LinearPMap.mem_graph_snd_inj'
       pairedOriginalNativePhysicalHilbertChargeColumn hForward hp hInput
-  have hLift : V.symm p.2 = v := by
-    rw [← hOutput]
-    exact V.symm_apply_apply v
+  have hLift : V.symm p.2 = v :=
+    (congrArg V.symm hOutput).symm.trans (V.symm_apply_apply v)
   change (U.symm p.1, V.symm p.2) ∈
       (independentActualE2NativeHilbertChargeColumn
         theta hCAR hHermitian color gamma).graph
