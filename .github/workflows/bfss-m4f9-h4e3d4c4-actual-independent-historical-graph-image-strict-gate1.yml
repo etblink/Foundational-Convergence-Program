@@ -202,8 +202,7 @@ jobs:
           test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/FCPM4F9H4E3D4BIndependentNormalizedHistoricalHamiltonianAction.lean)" = 50e5c4ea46f87f8d95363e5332481ddef1da0109
           test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/FCPM4F9H4E3D4AIndependentNormalizedPhysicalHamiltonianDomain.lean)" = fbafdbf4f32f1a09ffe113636cdf966178cd0fb7
           base=upstream-math/lean/.lake/build/lib/lean
-          for stem in FCPM4F9H4E3D4C3GenericUnitaryPartialGraphImageEquality FCPM4F9H4E3D4C2ActualIndependentHistoricalUnitaryGraphEquivalence FCPM4F9H4E3D4C1GenericUnitaryPartialGraphEquivalence FCPM4F9H4E3D4BIndependentNormalizedHistoricalHamiltonianAction FCPM4F9H4E3D4AIndependentNormalizedPhysicalHamiltonianDomain FCPM4F9H4E3D4D1NativeHistoricalExactPartialOperator; do
-            if [[ "$stem" == FCPM4F9H4E3D4D1NativeHistoricalExactPartialOperator ]]; then continue; fi
+          for stem in FCPM4F9H4E3D4C3GenericUnitaryPartialGraphImageEquality FCPM4F9H4E3D4C2ActualIndependentHistoricalUnitaryGraphEquivalence FCPM4F9H4E3D4C1GenericUnitaryPartialGraphEquivalence FCPM4F9H4E3D4BIndependentNormalizedHistoricalHamiltonianAction FCPM4F9H4E3D4AIndependentNormalizedPhysicalHamiltonianDomain; do
             test -s "$base/$stem.olean" || { echo H4E3D4C4_MISSING_QUALIFIED_PARENT_OLEAN=$stem; exit 1; }
           done
           echo BFSS_H4E3D4C4_C3_C2_C1_D4B_D4A_SOURCE_GRAPH_ANCESTRY_PASS
