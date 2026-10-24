@@ -46,7 +46,9 @@ theorem hilbertPhysicalOutputsToActualOutputs_continuous :
         (fun α : SpinIndex => (v α : Lp E 2 μ))) := by
     apply continuous_pi
     intro α
-    exact continuous_subtype_val.comp (PiLp.continuous_apply α)
+    exact continuous_subtype_val.comp
+      (PiLp.continuous_apply
+        (fun _ : SpinIndex => independentPhysicalSpace theta hCAR hHermitian) α)
   exact hraw.subtype_mk (fun v =>
     (hilbertPhysicalOutputsToActualOutputs theta hCAR hHermitian v).property)
 
