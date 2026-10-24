@@ -95,8 +95,14 @@ theorem nativeAdjoint_forward_domain_action :
       theta hCAR hHermitian color gamma J hColor hGamma hJ
       (x : independentPhysicalSpace theta hCAR hHermitian) x.property
   simpa only [f,g,U,V] using
-    (FCP.M4F9H4D2AGenericNativeHilbertAdjointForward.adjoint_forward_domain_action
-      f g U V hf hg hFwd hRev hAct y hy)
+    (letI : CompleteSpace (independentPhysicalSpace theta hCAR hHermitian) :=
+       FCP.M4F9H4D3AIndependentPhysicalHilbertComplete.independentPhysicalSpace_complete
+         theta hCAR hHermitian J hJ;
+     letI : CompleteSpace pairedGaugeData.physicalSpace :=
+       FCP.BFSSSU2PhysicalDomainL6H5E8BB.originalPhysicalHilbertComplete
+         pairedAlgebraData pairedGaugeData;
+     FCP.M4F9H4D2AGenericNativeHilbertAdjointForward.adjoint_forward_domain_action
+       f g U V hf hg hFwd hRev hAct y hy)
 
 #print axioms nativeAdjoint_forward_domain_action
 end
