@@ -1,0 +1,16 @@
+# BFSS M4F8 DE3C — original G4K9D, G4K10A, D1 source ancestry fully requalified
+
+**Disposition:** `DE3C_GATE1_ORIGINAL_K9D_K10A_D1_14_OF_14_STRICT_ACCEPTED__CURRENT_BRANCH_SOURCE_NAMED_ANCESTRY_RESTORED__308_PRINCIPAL_HELD`.
+
+[Original Actions run #40054613563](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40054613563), job `120755700117`, `completed/success`, workflow commit `e537ab4739c0270d6cde3ea83816a477c082e18e`, original diagnostics artifact [#12545142494](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40054613563/artifacts/12545142494), digest `sha256:fd8d7d3c10ee05fda08a662bf0ef9a2833e704785e3421d53366627b836bc045`.
+
+Frozen `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean 4.34.1, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`; exact qualified DE3B 48-path cache restored: `bfss-fcp-m4f8-de3b-g4k9bc-source-unchanged-b3bc2712-gate1-v1-adc7f124-lean4341-d13f23b-Linux-X64`. No original math source changes. Three fresh Lean imports compiled in strict dependency order:
+
+- `SU2BFSSG4K9DSourcePotentialMultiplierProbe.lean` exact blob `0695420e4e1d6fbe8accdc4aee9df6dd2d52d1ca`: **4/4** reports. One original private helper uses the original compiler-generated name `_private.SU2BFSSG4K9DSourcePotentialMultiplierProbe.0.FCP.BFSSSU2GaugeG4K9D.sourcePotentialCoefficientExpanded`; three public source theorems `sourcePotentialMultipliers_equal`, `sourceUnconditionalCoreCharge_equal`, `sourceUnconditionalCoreForm_equal`.
+- `SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.lean` exact blob `65d86984f7c216950fbc96812bd011d9d09e968e`: **5/5** reports, including `sourceChargeMap_equal`, `sourceChargeVector_equal`, `sourceCoreGraph_equal`, `sourceClosedJointChargeGraph_equal`, `sourceClosedJointChargeDomain_iff`.
+- `SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.lean` exact blob `c601d5888e24d0a9bc8f62f2bff368fc29299b5d`: **5/5** reports, including `sourceGaugeRestrictedGraphMap_equal`, `sourceGaugeRestrictedClosedGraph_equal`, `sourceGaugeRestrictedClosedDomain_iff`, `sourceGaugeRestrictedCoreForm_equal`, `sourceGaugeRestrictedGraph_le_full`.
+
+All fourteen original theorem reports have exactly the permitted `[propext, Classical.choice, Quot.sound]`, no errors, no `sorryAx`, no unapproved warnings. Complete acceptance marker `M4F8_DE3C_GATE1_ORIGINAL_K9D_K10A_D1_FOURTEEN_STRICT_REPORTS_PASS`. Three resource records: K9D 12.05s / 6964576 KB; K10A 11.57s / 6965804 KB; D1 13.47s / 6975116 KB. Cache save qualified:
+`bfss-fcp-m4f8-de3c-k9d-k10a-d1-source-unchanged-0695420e-gate1-v1-adc7f124-lean4341-d13f23b-Linux-X64`, 51-path archive.
+
+**Mathematical consequence:** The historical D1 `G.deformedModelGraph 1 0 = originalRestrictedClosedGraph M G` now has a truly qualified current-branch import path back through original G4K9D/G4K10A, with only the original K9A irrelevant parity-chain import replaced by the byte-identical original proof with a minimal pinned source import. This reopens E5 and the stronger DE4 *named* source closed graph equivalence, but neither is accepted without a new strict gate. Hamiltonian operator/domain/form and any spectral gap remain separate unproved bridges. Fourteen original-source support declarations qualified; **308 principal** unchanged.
