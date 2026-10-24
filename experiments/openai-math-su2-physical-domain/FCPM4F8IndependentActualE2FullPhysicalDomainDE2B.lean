@@ -98,10 +98,14 @@ theorem independentActualE2FullPhysicalChargeColumn_domain_iff
         ((u : Lp E 2 μ), (y : SpinIndex → Lp E 2 μ)) ∈
           (FCP.M4F7IndependentPhysicalInputCutOperatorE2.independentPhysicalInputCutClosedChargeColumn
             color gamma theta hCAR hHermitian).graph := by
-      apply (FCP.M4F8IndependentActualE2FullPhysicalGraphRebaseDE2.independentActualE2FullPhysicalGraph_mem_iff
-        color gamma theta hCAR hHermitian _).mp
-      rw [← FCP.M4F8IndependentActualE2FullPhysicalGraphRebaseDE2.independentActualE2FullPhysicalChargeColumn_graph_eq]
-      exact hy
+      have hrebased :
+          (u, y) ∈
+            FCP.M4F8IndependentActualE2FullPhysicalGraphRebaseDE2.independentActualE2FullPhysicalGraph
+              color gamma theta hCAR hHermitian := by
+        rw [← FCP.M4F8IndependentActualE2FullPhysicalGraphRebaseDE2.independentActualE2FullPhysicalChargeColumn_graph_eq]
+        exact hy
+      exact (FCP.M4F8IndependentActualE2FullPhysicalGraphRebaseDE2.independentActualE2FullPhysicalGraph_mem_iff
+        color gamma theta hCAR hHermitian (u, y)).mp hrebased
     exact (LinearPMap.mem_domain_iff).mpr
       ⟨(y : SpinIndex → Lp E 2 μ), hp⟩
   · intro hu
@@ -117,16 +121,16 @@ theorem independentActualE2FullPhysicalChargeColumn_domain_iff
         y ∈
           FCP.M4F8IndependentActualE2FullPhysicalGraphRebaseDE2.independentActualPhysicalOutputs
             theta hCAR hHermitian := by
-      change ∀ α : SpinIndex,
-        y α ∈ independentPhysicalSpace theta hCAR hHermitian
-      exact hphysical
+      change y ∈ Submodule.pi Set.univ
+        (fun (_ : SpinIndex) => independentPhysicalSpace theta hCAR hHermitian)
+      exact (Submodule.mem_pi).mpr (fun α _ => hphysical α)
     let v : FCP.M4F8IndependentActualE2FullPhysicalGraphRebaseDE2.independentActualPhysicalOutputs
         theta hCAR hHermitian := ⟨y, hyphysical⟩
     apply (LinearPMap.mem_domain_iff).mpr
     refine ⟨v, ?_⟩
     rw [FCP.M4F8IndependentActualE2FullPhysicalGraphRebaseDE2.independentActualE2FullPhysicalChargeColumn_graph_eq]
     exact (FCP.M4F8IndependentActualE2FullPhysicalGraphRebaseDE2.independentActualE2FullPhysicalGraph_mem_iff
-      color gamma theta hCAR hHermitian _).mpr hy
+      color gamma theta hCAR hHermitian (u, v)).mpr hy
 
 /-- UNCONDITIONAL norm density of the actual fully J-free physical
 16-charge column's domain, under original CAR/Hermitian and source
