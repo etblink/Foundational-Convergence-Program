@@ -1,0 +1,19 @@
+# M4F8 DE4 original named source ↔ actual independent physical E2 graph — Gate #1 verified red
+
+**Disposition:** `DE4_GATE1_RED__QUALIFIED_E4_ANCESTRY_C4_OLEAN_MISSING__NO_LEAN_THEOREM_ELABORATION__308_HELD`.
+
+[Original GitHub Actions run #40055443805](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40055443805), job `120757303307`, `completed/failure`, exact workflow/source HEAD `c72dac7f353e7510185a1f88234285be3917b1d9`. Original diagnostic artifact [#12545206789](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40055443805/artifacts/12545206789) SHA256 `ad9ff24975cd09ee1da76523d14ed05455050ffcc3ff091414269d6ade3c5ea4`. DE4 unchanged proof source leaf `experiments/openai-math-su2-physical-domain/FCPM4F8OriginalNamedFullPhysicalGraphDE4.lean`, Git blob `9aa96f043ad6ad0da33abab170b46a76c4c20c9d`.
+
+**What passed:** frozen original `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean 4.34.1, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`, source SHA validation, both separately qualified parent archive hits:
+- DE3 `bfss-fcp-m4f8-de3-physical-source-graph-96ccf495-gate3-v1-adc7f124-lean4341-d13f23b-Linux-X64` (47 path entries).
+- DE3C `bfss-fcp-m4f8-de3c-k9d-k10a-d1-source-unchanged-0695420e-gate1-v1-adc7f124-lean4341-d13f23b-Linux-X64` (51 path entries).
+
+**Actual blocking compiler diagnostic:** `FCPM4F8OriginalNamedFullPhysicalGraphDE4.lean:1:0: error: unknown module prefix 'FCPM4F6RestrictedGraphClosureC4'`, no file `FCPM4F6RestrictedGraphClosureC4.olean` in Lean module search path; `M4F8_DE4_GATE1_FRESH_LEAN_EXIT=1`; 9.18s and MAX_RSS_KB 2261260. The resulting source theorem was never elaborated; there are no valid strict DE4 axiom reports; no new accepted root and no DE4 cache save.
+
+**Causal source tracing:** DE3 imports the previously accepted E4 theorem leaf, which in turn depends on the C4 restricted-graph closure module. The DE3 `save` cache archive enumerated 47 direct paths but omitted the upstream E4 ancestry C4/C3 `.olean` files. The previously accepted E4 [run #39991737922](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/39991737922) archive contract includes `FCPM4F6RestrictedGraphImageC3.olean`, `FCPM4F6RestrictedGraphClosureC4.olean` and source-dependent E3. The E4 original source path is `experiments/openai-math-su2-physical-domain/FCPM4F6RestrictedGraphClosureC4.lean`, Git blob `7a248ff92d8f1d3e7ee7cbf9e94b7addf5db5e0d`.
+
+**Minimal fix:** Gate #2 must add an exact restore (restore before DE3 and DE3C, to avoid overwriting newer source objects) of E4's separately qualified cache `bfss-fcp-m4f7-e4-physical-closed-graph-transport-75f06cc3-gate2-v1-adc7f124-lean4341-d13f23b-Linux-X64`, matching its complete original 24-entry saved path contract. Fail closed on exact restore-hit AND presence of C3, C4, E3 and E4 original ancestor `.olean` files, plus DE3 and D1 and frozen source object checks. Preserve unchanged DE4 theorem blob `9aa96f043ad6ad0da33abab170b46a76c4c20c9d` and exact principal theorem statement. Validator must inspect exactly one named theorem report, only `propext/Classical.choice/Quot.sound`, no `sorryAx`, Lean errors or unknown warnings, and save complete resulting cache including original E4 closure ancestry.
+
+**No physical inference:** This is a Lean import closure failure, not a counterexample, **but also not a mathematical success**. Original full-source closure and named gauge-restricted graph equality are separate accepted DE3/D1 roots; their composition is NOT yet accepted as DE4. No self-adjoint physical Hamiltonian, equality of normalized forms, (T†T) operator, or spectral gap follows.
+
+**Ledger:** 308 accepted principal roots, unchanged; canonical `main` and original mathematical source untouched. Preserve this red gate verbatim.
