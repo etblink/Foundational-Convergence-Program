@@ -1,0 +1,20 @@
+# BFSS M4F9 H3A Gate1 — strict original source passes, exact H2D2B cache missing; no H3A compilation
+
+**Disposition:** `M4F9_H3A_GATE1_RED__EXACT_H2D2B_CACHE_NOT_FOUND__AY_BF_H1_SOURCE_ANCESTRY_NOT_IN_H2D2B_MANIFEST__NO_LEAN_COMPILATION__ZERO_OF_ONE_ACCEPTED`.
+
+Original [GitHub Actions run #40067619394](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40067619394), job `120794066879`, completed/failure, head `0b3bcd2b91a2180c3d710378f4afd88ecaef8b20`, original diagnostic [artifact #12550570527](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40067619394/artifacts/12550570527), sha256 `f63e285ddb1db004474ca3528c95f3afca4e010704cfd5ac0c187fb575c7937a`. Pinned original `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean 4.34.1, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`; exact uncompiled H3A source blob `0756480f7269145c72592c7083c2b6e8ab85c698`. Original source-hash and theorem inventory preflight `M4F9_H3A_ORIGINAL_AY_PHYSICAL_OUTPUT_CONSTRAINT_ONE_ROOT_SOURCE_PASS` passed.
+
+Original runner restore diagnostic:
+```
+Cache not found for input keys:
+bfss-fcp-m4f9-h2d2b-native-e2-physical-closed-graph-c61be772-gate1-v1-adc7f124-lean4341-d13f23b-Linux-X64
+H2D2B_ACCEPTED_H2D2A_CACHE_MISSING
+Process completed with exit code 1
+```
+The error marker was inherited without renaming from H2D2B workflow and is misleading: the actual missing key was H2D2B, not H2D2A. No H3A Lean compilation attempted, no axiom output, no saved cache, 0/1 accepted. This does NOT undo the separately audited H2D2B strict accepted gate [#40066841158](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40066841158), job `120791781929`, which previously emitted success-only saved key `bfss-fcp-m4f9-h2d2b-native-e2-physical-closed-graph-c61be772-gate1-v1-adc7f124-lean4341-d13f23b-Linux-X64`. The archive is not findable on this H3A runner, and cannot be assumed available just because the earlier upload succeeded.
+
+**Separate antecedent problem detected on inspecting manifests:** H2D2B's accepted compilation cache includes original `SU2*.olean` pattern but the saved step did not compile newer original AY/BF/H1 source Hamiltonian objects. H3A imports `SU2BFSSPhysicalDomainL6H5E8BFOriginalSourceGraphAndPairedHamiltonianProbe`, requiring strict original AY/BF and source-H modules. The H3A Gate1 parent-check loop requires AY/BF/BH, but the H2D2B archive manifest does NOT guarantee them. A cache hit alone would have led to a second fail-closed ancestry failure. Correct gate2 must use **separately qualified original H1 source Hamiltonian cache** `bfss-fcp-m4f9-h1-original-source-hamiltonian-ay-bh-05a54077-gate2-v1-adc7f124-lean4341-d13f23b-Linux-X64`, alongside accepted independent H2D2A/H2D2B cache. Original AY source blob `050f744b3d00b0424fd59192340b98ed2b51406c`, BF blob `2f280ec5f84c03c39d70156e8e3053ffca662b42`. H1 [source-ancestry Gate2 #40059276124](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40059276124) previously strictly accepted AY→BH source H lineage.
+
+**Bounded recovery:** Exact H1 source cache restoration first, H2D2A native E2 cache restoration separately, H2D2B saved cache preferred but if missing, fresh-compile **unchanged, previously accepted, blob-pinned H2D2B** from source on H2D2A/H1 parents under `-DwarningAsError=true` and check its sole full name and permitted axioms. Do not promote H3A until the ACTUAL H3A source is freshly compiled against both qualified source and independent sources, its actual one theorem axiom inventory passes, and a complete combined cache is saved. Gate2 should explicitly distinguish original H1 parent missing, H2D2A parent missing, and optional H2D2B cache not restored. No hypotheses, original source graph, operator definitions, normalization or charge tensor can be changed for a green.
+
+**H3A remains unaccepted;** original H2D2B accepted, BFSS principal tally 309 unchanged, canonical main/pinned math/PR #25 unchanged. Preserve this Gate1 red as operational negative knowledge.
