@@ -1,0 +1,21 @@
+# BFSS M4F9 H2D2B Gate1 — actual independent E2 native physical Hilbert closed graph strictly accepted
+
+**Disposition:** `M4F9_H2D2B_GATE1_TRUE_ACTUAL_NATIVE_PHYSICAL_HILBERT_E2_CLOSED_GRAPH_ONE_ROOT_STRICT_ACCEPTED__SOURCE_PHYSICAL_CHARGE_INTERTWINING_NEXT`.
+
+**Independently verified original GitHub evidence:** [strict run #40066841158](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40066841158), job `120791781929`, completed/success, exact workflow HEAD `8bc26672e723f94e0a472fc62b0c8cebd629d982`; original proof/provenance [artifact #12548739676](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40066841158/artifacts/12548739676), SHA256 `2da96bf0f8249fa7815b294845d4bf648e7b657ca8561c72e439fe5bb2a07ca1`. Frozen etblink/math `adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean v4.34.1, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`. H2D2B candidate `experiments/openai-math-su2-physical-domain/FCPM4F9H2D2BNativeHilbertE2ClosedGraph.lean`, exact Git blob `c61be772168804578f978990fdd8527b41d64610`.
+
+Original source and strict theorem inventory preflight passed; fully accepted H2D2A cache `bfss-fcp-m4f9-h2d2a-native-hilbert-continuity-density-e66be19c-gate4-v1-adc7f124-lean4341-d13f23b-Linux-X64` restored, DE2B original closedness and H2D1/H2C/H2B/H2A/H1/DE4 ancestor .olean objects checked. Fresh Lean `-DwarningAsError=true` completed with one exact root and no unclassified theorem error/warning; 11 precisely qualified Lake vendored-dependency local-change warnings. Exact accepted report:
+```
+'FCP.M4F9H2D2BNativeHilbertE2ClosedGraph.independentActualE2NativeHilbertChargeColumn_isClosed'
+depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+No `sorryAx`, new strict marker `M4F9_H2D2B_ACTUAL_NATIVE_E2_PHYSICAL_HILBERT_CLOSED_GRAPH_ONE_ROOT_STRICT_PASS`, and complete qualified reusable cache **saved**:
+`bfss-fcp-m4f9-h2d2b-native-e2-physical-closed-graph-c61be772-gate1-v1-adc7f124-lean4341-d13f23b-Linux-X64`.
+
+**Mathematics proved:** The genuinely independent J-free actual physical E2 charge partial operator `H2C.independentActualE2NativeHilbertChargeColumn` between true physical Hilbert input and native sixteen-coordinate `PiLp 2` physical Hilbert output has a closed graph in the actual Hilbert product norm under source matching witness J, hColor, hGamma, hJ. It is not a source-defined replacement: H2C literal original J-free graph is rewritten to the H2B comap of the original independently accepted DE2 graph, and closedness is pulled back using DE2B's qualified `IsClosed` and H2D2A's accepted continuity of actual Hilbert→DE2 physical-output inclusion. Accepted H2D2A also proves native E2 natural domain is dense under the same hypotheses; hence the operator is **closed and densely defined** under the named hypotheses. Neither closedness nor density asserts that the operator is self-adjoint, or that normalized source H agrees with native independent H.
+
+**Prior reds preserved:** H2D2A strict Gates #1/#2/#3 failed distinct Lean identifier/implicit-family/exponent elaboration issues and remain separate audits. H2D2A Gate4 2/2 and H2D2B Gate1 1/1 separately accepted with nonconflated strict caches.
+
+**Next:** Identify original paired source sixteen-charge AY/H1 genuine physical input and original ambient `PiLp 2` output against independent H2C operator, using H2A sixteen-output physical unitary + original M4C3B independent physical unitary, the exact original DE4 graph/DE3A/source E2 matching, with **typed physical-output inclusion** into ambient source full-L² Hilbert outputs. Do not assert that the physical output subspace equals all of original ambient source output. Prove exact graph membership/domain for the conjugate on source physical inputs before adjoint transport and normalized `H=(1/16)T†T`. The source paired physical H1 Hamiltonian and future independent normalized physical H still require separate operator-theoretic identification. No spectral-gap/mass-gap claim.
+
+**Ledger/governance:** One H2D2B SUPPORT root accepted; working principal BFSS theorem tally **309 unchanged**. Pinned original math, FCP canonical `main`, draft PR #25 untouched. Preserve negative knowledge; truth over CI-green count.
