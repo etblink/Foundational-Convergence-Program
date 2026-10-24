@@ -107,7 +107,15 @@ theorem nativeAdjointSquare_action_intertwine :
   refine ⟨hz,hGx,?_⟩
   change g.adjoint ⟨g ⟨U x,hz⟩,hGx⟩ =
     U (f.adjoint ⟨f ⟨x,hx⟩,hFx⟩)
-  simpa only [hChargeAction] using hAdjAction
+  have hArgEq :
+      (⟨V (f ⟨x,hx⟩),hVy⟩ : g.adjoint.domain) =
+      ⟨g ⟨U x,hz⟩,hGx⟩ :=
+    Subtype.ext hChargeAction
+  calc
+    g.adjoint ⟨g ⟨U x,hz⟩,hGx⟩ =
+        g.adjoint ⟨V (f ⟨x,hx⟩),hVy⟩ :=
+      congrArg (fun w : g.adjoint.domain => g.adjoint w) hArgEq.symm
+    _ = U (f.adjoint ⟨f ⟨x,hx⟩,hFx⟩) := hAdjAction
 
 #print axioms nativeAdjointSquare_action_intertwine
 end
