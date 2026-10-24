@@ -36,8 +36,8 @@ theorem originalRestrictedClosedGraph_coe_eq_explicitClosure :
         (pairedAlgebraData.chargeVector.comp
           pairedGaugeData.invariantCore.subtype)) :
         Set (FullL2 2 × (SpinIndex → FullL2 2))) := by
-  unfold FCP.BFSSSU2PhysicalDomainD1.originalRestrictedClosedGraph
-  exact Submodule.topologicalClosure_coe _
+  simp only [FCP.BFSSSU2PhysicalDomainD1.originalRestrictedClosedGraph,
+    Submodule.topologicalClosure_coe]
 
 /-- This is only the ORIGINAL named source deformedModelGraph closure,
 with no independently constructed operator or transport on either side. -/
