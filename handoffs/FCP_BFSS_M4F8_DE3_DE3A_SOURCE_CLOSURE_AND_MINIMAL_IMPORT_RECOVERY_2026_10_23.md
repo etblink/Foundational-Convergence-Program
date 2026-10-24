@@ -72,3 +72,21 @@ Original exact `SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe → SU2BFSSG4K
 3. DE3C `bfss-fcp-m4f8-de3c-k9d-k10a-d1-source-unchanged-0695420e-gate1-v1-adc7f124-lean4341-d13f23b-Linux-X64`, **51 exact saved paths**.
 
 All three cache-hit flags mandatory, key import .oleans verified before LEAN. DE4 mathematical source remains **identical** `9aa96f043ad6ad0da33abab170b46a76c4c20c9d`; original BFSS/Mathlib pins retained; fresh one-root permitted axiom validator unchanged. Successful Gate #2 must save complete 56-path combined archive including C3 and C4 and exact DE4 leaf. **Do not accept DE4 until its strict validator and cache both complete successfully.** In particular no equivalence with exact normalized Hamiltonian or gap asserted. Principal BFSS ledger **308** unchanged; canonical `main` unchanged.
+
+
+## DE4 Gate #2 compiler-red and bounded Gate #3 proof correction — current status
+
+**Verified original red:** [run #40055971101](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40055971101), job `120758923195`, `completed/failure`, workflow `95dadd80b5cb0e44025b187d79829c09df9250c2`, diagnostic artifact [#12545129289](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40055971101/artifacts/12545129289). E4, DE3, DE3C archives hit using exact prior saved paths; C3/C4 and all source D1 imports resolved. Original DE4 source blob `9aa96f043ad6ad0da33abab170b46a76c4c20c9d` then failed at Lean source **line 85 column 6**, `change` of the huge original closed gauge graph into explicit Set closure: **maximum recursion depth has been reached**. The broken `#print axioms` report includes `sorryAx`. Root **not accepted**, no cache saved; mathematical equivalence **not disproved**. Original red preserved in `audits/FCP_BFSS_M4F8_DE4_GATE2_NAMED_ORIGINAL_SOURCE_GRAPH_CHANGE_RECURSION_RED_2026_10_23.md`, commit `a96943a890c55a6f9594831c8644c753e1b254b4`.
+
+**Bounded Gate #3 remediation:** Keep theorem *statement*, source original math, representation and J assumptions, and E4/DE3/DE3C exact pinned caches unchanged. Replace expensive `change` of giant graph expressions with:
+```lean
+  rw [hD1]
+  simp only [FCP.BFSSSU2PhysicalDomainD1.originalRestrictedClosedGraph,
+    Submodule.topologicalClosure_coe]
+  exact
+    FCP.M4F8IndependentActualPhysicalGraphSourceTransportDE3.sourceRestrictedClosure_eq_actualFullPhysicalE2Graph_image
+      color gamma theta hCAR hHermitian J hColor hGamma hJ
+```
+The `hD1` source named graph identification was already qualified by original D1. The final exact closure theorem was accepted in DE3. Current DE4 source Git blob `6c58ee94e0dd1d4f2b932080353bbac431da45e8`, source proof-only correction commit `9bb9d1bbc29a5892747c3bd3a55a53e17043ccee`.
+
+**New Gate #3:** [run #40056382248](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40056382248), workflow commit `26072cb3b1b9f71784b5a165bd0d2ce1069f0fd9`; queued at last check. Requires fresh DE4 kernel build, exactly 1 allowed-axiom report without `sorryAx` or unapproved warnings, and new 56-entry combined cache save `bfss-fcp-m4f8-de4-named-original-source-graph-6c58ee94-gate3-v1-adc7f124-lean4341-d13f23b-Linux-X64`. A further proof/tactic diagnostic **must not** be misrepresented as mathematical acceptance. If red, preserve original log and adapt locally; resist unchecked `maxRecDepth` increase without source-specific evidence. Principal ledger **308** held. No Hamiltonian or spectrum claim; canonical `main` unchanged.
