@@ -36,7 +36,7 @@ variable (J : E ≃ₗᵢ[ℂ] Fermion 2)
 variable (hColor : color = pairedAlgebraData.color)
 variable (hGamma : gamma = pairedAlgebraData.gamma)
 variable (hJ : ∀ α A w, J (theta α A w) = pairedTheta α A (J w))
-include color gamma hColor hGamma
+include theta hCAR hHermitian color gamma J hColor hGamma hJ
 
 /-- Exact entire native original AY sixteen-output source Hilbert
 charge natural domain is dense, using the original source Haar proof;
