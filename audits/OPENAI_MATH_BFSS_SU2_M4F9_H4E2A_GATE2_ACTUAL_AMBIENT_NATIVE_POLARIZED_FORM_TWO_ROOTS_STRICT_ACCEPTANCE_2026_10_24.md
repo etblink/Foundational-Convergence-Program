@@ -41,7 +41,7 @@ BFSS_M4F9_H4E2A_ACTUAL_AMBIENT_NATIVE_POLARIZED_FORM_TWO_ROOTS_STRICT_PASS
 
 ## Mathematical content and scope ceiling
 
-Let (T_a) denote the **actual original** paired AY ambient FullL2-output sixteen-charge partial operator, (T_n) the **original source** native physical-output sixteen-charge partial operator, and (I) the actual physical-to-ambient output inclusion from H3B1. On the exact native charge domain, accepted H4E1B establishes (T_a u = I(T_nu)), and accepted H4E1A establishes (⟨I y,I z⟩=⟨y,z⟩). Gate #2 therefore kernel-verifies, for every (u,v\in\operatorname{Dom}(T_n)),
+Let $T_a$ denote the **actual original** paired AY ambient FullL2-output sixteen-charge partial operator, $T_n$ the **original source** native physical-output sixteen-charge partial operator, and $I$ the actual physical-to-ambient output inclusion from H3B1. On the exact native charge domain, accepted H4E1B establishes $T_a u = I(T_nu)$, and accepted H4E1A establishes $\langle I y,I z\rangle=\langle y,z\rangle$. Gate #2 therefore kernel-verifies, for every $u,v\in\operatorname{Dom}(T_n)$,
 
 ```text
 inner_C(T_a u, T_a v) = inner_C(T_n u, T_n v)
@@ -49,9 +49,9 @@ inner_C(T_a u, T_a v) = inner_C(T_n u, T_n v)
     = (1/16) * inner_C(T_n u, T_n v)
 ```
 
-The **source** (1/16) coefficient and full *polarized* complex pairing are preserved, not merely the diagonal norm. The proof uses a typed `congrArg₂` at the outer Hilbert inner product and `Eq.trans` with the accepted isometric pairing; it does not unfold or alter the enormous original AY graph.
+The **source** $1/16$ coefficient and full *polarized* complex pairing are preserved, not merely the diagonal norm. The proof uses a typed `congrArg₂` at the outer Hilbert inner product and `Eq.trans` with the accepted isometric pairing; it does not unfold or alter the enormous original AY graph.
 
-**Not proved here:** reverse ambient/native natural-domain equality; equality of full closed forms on that entire common domain; ambient and native Hilbert adjoint or adjoint-square domain/action equality; equality with the historical separately source-defined normalized Hamiltonian; unconditional identification with the independent manuscript model; Spin(9) sector analysis, nonzero eigenvalues, positivity gap, or spectral compactness. In particular, (I) is an **isometric inclusion, not a surjective unitary onto FullL2**. H3B2 already offers reverse-domain correspondence **under explicit original-independent representation-matching hypotheses**; these must not be silently erased.
+**Not proved here:** reverse ambient/native natural-domain equality; equality of full closed forms on that entire common domain; ambient and native Hilbert adjoint or adjoint-square domain/action equality; equality with the historical separately source-defined normalized Hamiltonian; unconditional identification with the independent manuscript model; Spin(9) sector analysis, nonzero eigenvalues, positivity gap, or spectral compactness. In particular, $I$ is an **isometric inclusion, not a surjective unitary onto FullL2**. H3B2 already offers reverse-domain correspondence **under explicit original-independent representation-matching hypotheses**; these must not be silently erased.
 
 **Accounting:** two strictly accepted support roots. Do not add automatically to the historical principal-root tally (309 at DE4); first reconcile principal/support criteria against exact audits.
 
@@ -65,4 +65,4 @@ The **source** (1/16) coefficient and full *polarized* complex pairing are prese
 
 Establish **exact ambient/native natural-domain equivalence under the expressly required H3B2 witnesses**, then lift H4E2A to an equality of closed source charge forms on this complete common domain. Use the accepted original historical self-adjoint normalized Hamiltonian interfaces (H1/H5E8BE/BH/D2B28) to prove equality of the actual associated operators with **exact domains and actions**, or isolate any missing closure, density, or weak-form premise. Preserve the separately qualified independent Hilbert charge transports H4C2C/D/H4D4A/B for the eventual independent-to-historical comparison.
 
-Parallel adversarial spectral inquiry remains independent. Neither this green nor equality of (T^*T) would imply the claimed Spin(9) spectral conclusion without separate global domain, symmetry, coercivity, and nonzero-sector arguments.
+Parallel adversarial spectral inquiry remains independent. Neither this green nor equality of $T^*T$ would imply the claimed Spin(9) spectral conclusion without separate global domain, symmetry, coercivity, and nonzero-sector arguments.
