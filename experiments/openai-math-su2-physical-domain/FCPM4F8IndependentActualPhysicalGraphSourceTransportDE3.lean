@@ -40,6 +40,10 @@ variable (color : ColorIndex 2 → ColorMatrix 2)
   (hGamma : gamma = pairedAlgebraData.gamma)
   (hJ : ∀ α A w, J (theta α A w) = pairedTheta α A (J w))
 
+-- These proof witnesses do not occur in the first theorem proposition.
+-- Force them into both theorem contexts; do not alter graph statements.
+include J hColor hGamma hJ
+
 /-- Exact graph of E2, not an extension, is the physical graph image
 through both its original, independently defined subtype inclusions. -/
 theorem actualE2AmbientGraph_eq_fullPhysicalGraph_image :
