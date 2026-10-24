@@ -258,7 +258,7 @@ jobs:
           assert len(reports)==len(ax)==2 and set(ax)==expected,('EXACT_TWO_ROOTS',reports)
           assert all(v <= {'propext','Classical.choice','Quot.sound'} for v in ax.values()),('FORBIDDEN_AXIOMS',ax)
           assert 'sorryAx' not in s and 'error:' not in s
-                    known = r"warning: [A-Za-z0-9_-]+: repository '[^']*/upstream-math/lean/\.lake/packages/[A-Za-z0-9_-]+' has local changes"
+          known = r"warning: [A-Za-z0-9_-]+: repository '[^']*/upstream-math/lean/\.lake/packages/[A-Za-z0-9_-]+' has local changes"
           warnings=[z for z in s.splitlines() if 'warning:' in z]
           unexpected=[z for z in warnings if not re.fullmatch(known,z)]
           assert not unexpected,('UNEXPECTED_WARNINGS',unexpected)
