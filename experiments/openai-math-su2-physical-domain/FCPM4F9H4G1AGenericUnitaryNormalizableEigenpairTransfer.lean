@@ -50,7 +50,7 @@ theorem genericUnitaryPartialEigenpair_exists_iff
   · rintro ⟨y,hy,hyne,heig⟩
     let x : X := U.symm y
     have hUx : U x = y := U.apply_symm_apply y
-    have hx : x ∈ A.domain := (hDom x).mpr (hUx ▸ hy)
+    have hx : x ∈ A.domain := (hDom x).mpr (by simpa only [hUx] using hy)
     obtain ⟨hy',hAct⟩ := hAction x hx
     have hSub : (⟨U x,hy'⟩ : B.domain) = ⟨y,hy⟩ :=
       Subtype.ext hUx
