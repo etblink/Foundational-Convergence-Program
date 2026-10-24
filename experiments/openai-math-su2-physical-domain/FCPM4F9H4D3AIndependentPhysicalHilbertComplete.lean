@@ -24,6 +24,7 @@ variable (hCAR : ∀ α β A B,
 variable (hHermitian : ∀ α A, (theta α A).IsSymmetric)
 variable (J : E ≃ₗᵢ[ℂ] Fermion 2)
 variable (hJ : ∀ α A w, J (theta α A w) = pairedTheta α A (J w))
+include J hJ
 
 theorem independentPhysicalSpace_complete :
     CompleteSpace (independentPhysicalSpace theta hCAR hHermitian) := by
