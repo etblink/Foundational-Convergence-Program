@@ -44,11 +44,16 @@ theorem pairedOriginalAYAmbientNative_inner_charge_eq
         ⟨v, pairedOriginalAmbientCharge_domain_ofNative v hv⟩) =
     inner ℂ (pairedOriginalNativePhysicalHilbertChargeColumn ⟨u,hu⟩)
       (pairedOriginalNativePhysicalHilbertChargeColumn ⟨v,hv⟩) := by
-  rw [pairedOriginalAmbientCharge_action_ofNative u hu,
-      pairedOriginalAmbientCharge_action_ofNative v hv]
-  exact FCP.M4F9H4E1AOriginalAmbientOutputInnerBridge.pairedPhysicalHilbertOutputsToOriginalAmbient_inner
-    (pairedOriginalNativePhysicalHilbertChargeColumn ⟨u,hu⟩)
-    (pairedOriginalNativePhysicalHilbertChargeColumn ⟨v,hv⟩)
+  have hpair :=
+    congrArg₂
+      (fun a b : PiLp 2 (fun _ : SpinIndex => FullL2 2) =>
+        inner ℂ a b)
+      (pairedOriginalAmbientCharge_action_ofNative u hu)
+      (pairedOriginalAmbientCharge_action_ofNative v hv)
+  exact hpair.trans
+    (FCP.M4F9H4E1AOriginalAmbientOutputInnerBridge.pairedPhysicalHilbertOutputsToOriginalAmbient_inner
+      (pairedOriginalNativePhysicalHilbertChargeColumn ⟨u,hu⟩)
+      (pairedOriginalNativePhysicalHilbertChargeColumn ⟨v,hv⟩))
 
 /-- Exact paper/source 1/16 normalization of the physical charge-energy
 polarized form, for the unchanged historical original AY source charge.
