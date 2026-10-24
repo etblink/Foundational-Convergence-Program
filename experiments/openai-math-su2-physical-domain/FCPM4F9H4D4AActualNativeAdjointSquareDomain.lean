@@ -64,6 +64,14 @@ theorem nativeAdjointSquare_naturalDomain_iff :
           pairedOriginalNativePhysicalHilbertChargeColumn
             ⟨independentPhysicalUnitary theta hCAR hHermitian J hJ x,hz⟩ ∈
               pairedOriginalNativePhysicalHilbertChargeColumn.adjoint.domain) := by
+  refine
+    (letI : CompleteSpace (independentPhysicalSpace theta hCAR hHermitian) :=
+       FCP.M4F9H4D3AIndependentPhysicalHilbertComplete.independentPhysicalSpace_complete
+         theta hCAR hHermitian J hJ;
+     letI : CompleteSpace pairedGaugeData.physicalSpace :=
+       FCP.BFSSSU2PhysicalDomainL6H5E8BB.originalPhysicalHilbertComplete
+         pairedAlgebraData pairedGaugeData;
+     ?_)
   intro x
   let f := independentActualE2NativeHilbertChargeColumn
     theta hCAR hHermitian color gamma
