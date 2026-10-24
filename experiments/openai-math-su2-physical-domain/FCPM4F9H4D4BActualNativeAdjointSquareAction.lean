@@ -10,7 +10,7 @@ domain requires x ∈ T.domain AND T x ∈ T.adjoint.domain.
 No historical ambient-output AY normalized Hamiltonian is identified.
 -/
 set_option autoImplicit false
-set_option maxHeartbeats 200000
+set_option maxHeartbeats 800000
 
 namespace FCP.M4F9H4D4BActualNativeAdjointSquareAction
 noncomputable section
