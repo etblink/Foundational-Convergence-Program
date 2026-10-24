@@ -72,15 +72,20 @@ theorem pairedSourceNamedClosedGraph_eq_actualIndependentFullPhysicalGraph_image
         (S : Set (FullL2 2 × (SpinIndex → FullL2 2))))
       (FCP.BFSSSU2PhysicalDomainD1.sourceGaugeRestrictedClosedGraph_equal
         pairedAlgebraData pairedGaugeData)
-  -- Convert the original named restricted graph to its source-defined
-  -- submodule closure, then use the explicit coe-to-closure identity.
-  -- Avoid a large dependent definitional `change` on the entire graph.
-  rw [hD1]
-  simp only [FCP.BFSSSU2PhysicalDomainD1.originalRestrictedClosedGraph,
-    Submodule.topologicalClosure_coe]
-  exact
-    FCP.M4F8IndependentActualPhysicalGraphSourceTransportDE3.sourceRestrictedClosure_eq_actualFullPhysicalE2Graph_image
-      color gamma theta hCAR hHermitian J hColor hGamma hJ
+  -- Keep the named D1 closure as the intermediate expression. The
+  -- explicit simplifier handles the Set/submodule bridge syntactically;
+  -- do not ask `exact` to unfold the enormous original BFSS graph.
+  calc
+    (pairedGaugeData.deformedModelGraph 1 0 :
+      Set (FullL2 2 × (SpinIndex → FullL2 2))) =
+      (FCP.BFSSSU2PhysicalDomainD1.originalRestrictedClosedGraph
+        pairedAlgebraData pairedGaugeData :
+          Set (FullL2 2 × (SpinIndex → FullL2 2))) := hD1
+    _ = _ := by
+      simpa only [FCP.BFSSSU2PhysicalDomainD1.originalRestrictedClosedGraph,
+        Submodule.topologicalClosure_coe] using
+        (FCP.M4F8IndependentActualPhysicalGraphSourceTransportDE3.sourceRestrictedClosure_eq_actualFullPhysicalE2Graph_image
+          color gamma theta hCAR hHermitian J hColor hGamma hJ)
 
 #print axioms pairedSourceNamedClosedGraph_eq_actualIndependentFullPhysicalGraph_image
 
