@@ -17,6 +17,7 @@ noncomputable section
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2GaugeG1A FCP.BFSSSU2GaugeG4J
+open FCP.BFSSSU2PhysicalDomainL6H5E8BB
 open FCP.BFSSSU2PhysicalDomainL6H5E8BC
 open FCP.BFSSSU2PhysicalDomainD2B28
 open FCP.M4F9H3B2OriginalAYNativePhysicalHilbertChargeColumn
