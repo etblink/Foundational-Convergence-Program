@@ -75,6 +75,30 @@ theorem pairedOriginalNativePhysicalHilbertChargeColumn_graph_eq :
   exact Submodule.toLinearPMap_graph_eq _
     pairedOriginalPhysicalHilbertChargeGraph_vertical
 
+/-!
+A bounded projection interface: the domain of the partial linear map
+built from the H3B1 physical graph is the first-coordinate projection
+of that graph. Prove this independently of the original AY source.
+This avoids rewriting an enormous closed-source graph in the final
+natural-domain proof. It is a supporting proof, not a fifth principal root.
+-/
+private theorem nativeDomain_iff_exists_physicalGraph
+    (u : pairedGaugeData.physicalSpace) :
+    u ∈ pairedOriginalNativePhysicalHilbertChargeColumn.domain ↔
+      ∃ v : PiLp 2 (fun _ : SpinIndex => pairedGaugeData.physicalSpace),
+        (u, v) ∈ pairedOriginalPhysicalHilbertChargeGraph := by
+  change u ∈ pairedOriginalPhysicalHilbertChargeGraph.toLinearPMap.domain ↔ _
+  rw [Submodule.toLinearPMap_domain]
+  constructor
+  · intro hu
+    rcases (Submodule.mem_map).mp hu with ⟨p, hp, hpu⟩
+    rcases p with ⟨x, v⟩
+    change x = u at hpu
+    subst x
+    exact ⟨v, hp⟩
+  · rintro ⟨v, hv⟩
+    exact (Submodule.mem_map).mpr ⟨(u, v), hv, rfl⟩
+
 -- Matching original-independent CAR and gauge witnesses only enter the
 -- *theorem* discharging the real AY graph output physicality; they do
 -- not enter either source-side charge or graph definitions.
@@ -91,8 +115,7 @@ theorem pairedOriginalNativePhysicalHilbertChargeColumn_domain_iff
         pairedAlgebraData pairedGaugeData).domain := by
   constructor
   · intro hu
-    obtain ⟨v,hv⟩ := (LinearPMap.mem_domain_iff).mp hu
-    rw [pairedOriginalNativePhysicalHilbertChargeColumn_graph_eq] at hv
+    obtain ⟨v, hv⟩ := (nativeDomain_iff_exists_physicalGraph u).mp hu
     exact (LinearPMap.mem_domain_iff).mpr
       ⟨pairedPhysicalHilbertOutputsToOriginalAmbient v,
         (pairedOriginalPhysicalHilbertChargeGraph_mem_iff (u,v)).mp hv⟩
@@ -115,10 +138,7 @@ theorem pairedOriginalNativePhysicalHilbertChargeColumn_domain_iff
     have hphysical : (u,v) ∈ pairedOriginalPhysicalHilbertChargeGraph :=
       (pairedOriginalPhysicalHilbertChargeGraph_mem_iff (u,v)).mpr
         (by simpa only [hv] using hw)
-    have hnative :
-        (u,v) ∈ pairedOriginalNativePhysicalHilbertChargeColumn.graph :=
-      pairedOriginalNativePhysicalHilbertChargeColumn_graph_eq.symm ▸ hphysical
-    exact (LinearPMap.mem_domain_iff).mpr ⟨v,hnative⟩
+    exact (nativeDomain_iff_exists_physicalGraph u).mpr ⟨v, hphysical⟩
 
 #print axioms pairedOriginalPhysicalHilbertChargeGraph_vertical
 #print axioms pairedOriginalNativePhysicalHilbertChargeColumn
