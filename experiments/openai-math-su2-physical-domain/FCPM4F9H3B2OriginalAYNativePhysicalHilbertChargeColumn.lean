@@ -112,11 +112,13 @@ theorem pairedOriginalNativePhysicalHilbertChargeColumn_domain_iff
       apply PiLp.ext
       intro α
       rfl
-    apply (LinearPMap.mem_domain_iff).mpr
-    refine ⟨v,?_⟩
-    rw [pairedOriginalNativePhysicalHilbertChargeColumn_graph_eq]
-    apply (pairedOriginalPhysicalHilbertChargeGraph_mem_iff (u,v)).mpr
-    simpa only [hv] using hw
+    have hphysical : (u,v) ∈ pairedOriginalPhysicalHilbertChargeGraph :=
+      (pairedOriginalPhysicalHilbertChargeGraph_mem_iff (u,v)).mpr
+        (by simpa only [hv] using hw)
+    have hnative :
+        (u,v) ∈ pairedOriginalNativePhysicalHilbertChargeColumn.graph :=
+      pairedOriginalNativePhysicalHilbertChargeColumn_graph_eq.symm ▸ hphysical
+    exact (LinearPMap.mem_domain_iff).mpr ⟨v,hnative⟩
 
 #print axioms pairedOriginalPhysicalHilbertChargeGraph_vertical
 #print axioms pairedOriginalNativePhysicalHilbertChargeColumn
