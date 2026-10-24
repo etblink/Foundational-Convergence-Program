@@ -1,0 +1,13 @@
+# M4F8 DE3 Gate #2 — fresh Lean run, post-compiler validator wrong log path (RED)
+
+**Disposition:** `DE3_GATE2_RED__DE2B_STALE_VALIDATOR_LOG_FILENAME__FRESH_LEAN_RAN__NO_STRICT_AXIOM_VERDICT__PRINCIPAL_308_HELD`.
+
+Original [run #40053635247](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40053635247) job `120751618212`, completed/failure, exact source/workflow head `886812c335240642ea336f5ee8712751d852be48`, source blob `96ccf49549c5a313546b24e3577b6bc6110b78eb`. Original artifact [#12544511611](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40053635247/artifacts/12544511611) digest `sha256:feed43a8c3507e6db3219b52dd80c45e0c3f7753401cb65ea9da2d6b181d1f7f`.
+
+**What passed:** frozen original mathematics pins; exact DE2B 45-path cache hit `bfss-fcp-m4f8-de2b-closed-domain-dense-fc5f27b4-gate3-v1-adc7f124-lean4341-d13f23b-Linux-X64`; exact E4 24-path cache hit `bfss-fcp-m4f7-e4-physical-closed-graph-transport-75f06cc3-gate2-v1-adc7f124-lean4341-d13f23b-Linux-X64`; independent ancestor .olean files, source pin preflight. Fresh Lean invoked for `FCPM4F8IndependentActualPhysicalGraphSourceTransportDE3` with `-o` and completed its shell invocation, enabling continuation to the validator. No compiler stderr failure was reported.
+
+**First causal failure:** The Python post-compiler validator still opened `/tmp/bfss-m4f8-de3-actual-physical-source-graph-transport-strict-gate2/FCPM4F8IndependentActualE2FullPhysicalDomainDE2B.log`, a stale template filename, even though the preceding shell compiled the DE3 module and wrote `FCPM4F8IndependentActualPhysicalGraphSourceTransportDE3.log`. Python `Path.read_text` line 3 raised `FileNotFoundError: [Errno 2] No such file or directory` for the nonexistent DE2B log. Axiom reports therefore **not inspected** and no new cache saved. This is a strict-gate infrastructure failure, NOT a mathematical red; however fresh compilation without axiom validation is **insufficient** for theorem acceptance.
+
+**Correction:** Gate #3 must change *only* the validator's log filename to the actual DE3 stem; retain full source blob, both exact parent caches, immutable original and Mathlib pins, two-root allowed axiom reports, and strict fresh Lean compilation. Also correct the inherited GitHub workflow concurrency group if desired, without claiming retroactive serialization. Once 2/2 strict reports and cache save verified, accept DE3 as source literal restricted graph correspondence, never as yet named `deformedModelGraph` operator or Hamiltonian.
+
+Both DE3 Gate1 compiler-proofs scope errors and Gate2 validator filename error stay preserved. **308 principal** unchanged at this red.
