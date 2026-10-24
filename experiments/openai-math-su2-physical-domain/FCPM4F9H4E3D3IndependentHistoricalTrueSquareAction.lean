@@ -12,7 +12,7 @@ with exact complex-linear scalar (1/16). No additional hypothesis,
 proxy operator, or claim about spectrum or BFSS mass gap.
 -/
 set_option autoImplicit false
-set_option maxHeartbeats 240000
+set_option maxHeartbeats 800000
 
 namespace FCP.M4F9H4E3D3IndependentHistoricalTrueSquareAction
 noncomputable section
