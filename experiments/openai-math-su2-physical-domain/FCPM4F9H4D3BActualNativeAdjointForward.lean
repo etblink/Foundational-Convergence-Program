@@ -41,11 +41,17 @@ include color gamma hColor hGamma
 /-- Genuine native source AY adjoint domain and action transport
 of the ACTUAL independent J-free sixteen-charge Hilbert adjoint,
 without modifying either originally defined charge. -/
-theorem nativeAdjoint_forward_domain_action
-    (y : PiLp 2 (fun _ : SpinIndex =>
-      independentPhysicalSpace theta hCAR hHermitian))
-    (hy : y ∈ (independentActualE2NativeHilbertChargeColumn
-      theta hCAR hHermitian color gamma).adjoint.domain) :
+theorem nativeAdjoint_forward_domain_action :
+    letI : CompleteSpace (independentPhysicalSpace theta hCAR hHermitian) :=
+      FCP.M4F9H4D3AIndependentPhysicalHilbertComplete.independentPhysicalSpace_complete
+        theta hCAR hHermitian J hJ
+    letI : CompleteSpace pairedGaugeData.physicalSpace :=
+      FCP.BFSSSU2PhysicalDomainL6H5E8BB.originalPhysicalHilbertComplete
+        pairedAlgebraData pairedGaugeData
+    ∀ (y : PiLp 2 (fun _ : SpinIndex =>
+        independentPhysicalSpace theta hCAR hHermitian))
+      (hy : y ∈ (independentActualE2NativeHilbertChargeColumn
+        theta hCAR hHermitian color gamma).adjoint.domain),
     ∃ hVy : independentPhysicalHilbertOutputUnitary
           theta hCAR hHermitian J hJ y ∈
         pairedOriginalNativePhysicalHilbertChargeColumn.adjoint.domain,
@@ -61,6 +67,7 @@ theorem nativeAdjoint_forward_domain_action
   letI : CompleteSpace pairedGaugeData.physicalSpace :=
     FCP.BFSSSU2PhysicalDomainL6H5E8BB.originalPhysicalHilbertComplete
       pairedAlgebraData pairedGaugeData
+  intro y hy
   let f := independentActualE2NativeHilbertChargeColumn
     theta hCAR hHermitian color gamma
   let g := pairedOriginalNativePhysicalHilbertChargeColumn
