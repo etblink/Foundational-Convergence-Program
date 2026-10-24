@@ -26,6 +26,19 @@ open FCP.M4F9H2CActualE2NativeHilbertChargeColumn
 open FCP.M4F9H3B2OriginalAYNativePhysicalHilbertChargeColumn
 open MeasureTheory Set
 
+/-- Generic normalized complex-Hilbert unitary transport.
+Keep the 1/16 linearity proof OUT of the huge concrete AY source type. -/
+private theorem normalizedIsometryIntertwine
+    {X Y : Type*}
+    [NormedAddCommGroup X] [InnerProductSpace ℂ X]
+    [NormedAddCommGroup Y] [InnerProductSpace ℂ Y]
+    (U : X ≃ₗᵢ[ℂ] Y) {a : X} {b : Y} (h : b = U a) :
+    (1 / 16 : ℂ) • b = U ((1 / 16 : ℂ) • a) := by
+  calc
+    (1 / 16 : ℂ) • b = (1 / 16 : ℂ) • U a :=
+      congrArg ((1 / 16 : ℂ) • ·) h
+    _ = U ((1 / 16 : ℂ) • a) := (map_smul U (1 / 16 : ℂ) a).symm
+
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
 variable [FiniteDimensional ℂ E]
 variable (theta : SpinIndex → ColorIndex 2 → Module.End ℂ E)
@@ -87,16 +100,12 @@ theorem independentNativeAdjointSquare_action_historical :
   obtain ⟨hh,hHistAction⟩ :=
     FCP.M4F9H4E3B2GenericAdjointWeakFormHistoricalAction.pairedNativeAdjointSquare_action_eq_historical
       theta hCAR hHermitian color gamma J hColor hGamma hJ (U x) hz hGx
-  refine ⟨hh,?_⟩
-  calc
-    pairedSU2PhysicalHamiltonian ⟨U x,hh⟩ =
-        (1 / 16 : ℂ) • g.adjoint ⟨g ⟨U x,hz⟩,hGx⟩ :=
-      hHistAction
-    _ = (1 / 16 : ℂ) •
-        U (f.adjoint ⟨f ⟨x,hx⟩,hFx⟩) :=
-      congrArg ((1 / 16 : ℂ) • ·) hAdjAction
-    _ = U ((1 / 16 : ℂ) • f.adjoint ⟨f ⟨x,hx⟩,hFx⟩) :=
-      (map_smul U (1 / 16 : ℂ) _).symm
+  have hNormalized :
+      (1 / 16 : ℂ) • g.adjoint ⟨g ⟨U x,hz⟩,hGx⟩ =
+        U ((1 / 16 : ℂ) • f.adjoint ⟨f ⟨x,hx⟩,hFx⟩) :=
+    normalizedIsometryIntertwine U hAdjAction
+  refine ⟨hh, ?_⟩
+  exact hHistAction.trans hNormalized
 
 #print axioms independentNativeAdjointSquare_action_historical
 end
