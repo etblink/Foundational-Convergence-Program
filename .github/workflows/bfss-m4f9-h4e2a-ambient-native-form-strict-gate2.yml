@@ -1,0 +1,322 @@
+name: BFSS M4F9 H4E2A Actual AY Ambient-Native Polarized Form Strict Gate 2
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-m4f9-h4e2a-ambient-native-form-strict-gate2.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: bfss-m4f9-h4e2a-ambient-native-form-gate2-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  native-hilbert-coordinate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout exact research branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Checkout pinned original mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+      - name: H4E2A exact polarized Hilbert form source preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-m4f9-h4e2a-gate2
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import json,pathlib,re,subprocess
+          d=json.loads(pathlib.Path('upstream-math/lean/lake-manifest.json').read_text())
+          assert next(x['rev'] for x in d['packages'] if x['name']=='mathlib')=='d13f23b723b8a846827a245b89c10fc7d3f11612'
+          p=pathlib.Path('experiments/openai-math-su2-physical-domain/FCPM4F9H4E2AOriginalAYAmbientNativePolarizedForm.lean')
+          h='7f1ee93f25b29289f84e2a1fe9c7742b86f78a6f'
+          assert subprocess.check_output(['git','rev-parse','HEAD:'+str(p)],text=True).strip()==h
+          assert subprocess.check_output(['git','hash-object','--no-filters',str(p)],text=True).strip()==h
+          s=p.read_text()
+          assert s.startswith('import FCPM4F9H4E1BOriginalAYAmbientChargeAction'+chr(10))
+          assert re.findall(r'(?m)^namespace (\S+)',s)==['FCP.M4F9H4E2AOriginalAYAmbientNativePolarizedForm']
+          assert re.findall(r'(?m)^#print axioms (\S+)',s)==[
+            'pairedOriginalAYAmbientNative_inner_charge_eq',
+            'pairedOriginalAYAmbientNative_normalizedForm_eq']
+          assert 'pairedOriginalAmbientCharge_action_ofNative' in s
+          assert 'pairedPhysicalHilbertOutputsToOriginalAmbient_inner' in s
+          assert '(1 / 16 : ℂ) *' in s and 'pairedOriginalNativePhysicalHilbertChargeColumn.domain' in s
+          assert not re.search(r'(?m)^\s*(?:sorry|admit|axiom)\b|\bsorryAx\b',s)
+          print('BFSS_H4E2A_ACTUAL_SOURCE_EXACT_FORM_PREFLIGHT_PASS')
+          PY
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+      - name: Restore frozen Lean and exact Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1; then ok=true; break; fi
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get > /tmp/bfss-m4f9-h4e2a-gate2/mathlib.log 2>&1 || {
+            tail -n 100 /tmp/bfss-m4f9-h4e2a-gate2/mathlib.log
+            exit 1
+          }
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+      - name: Restore qualified H4E1B ambient source action and full ancestry
+        id: parent
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullSmoothCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentChargeVectorL2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphImage.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentGraphTransportHomeomorph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphClosure.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7FullClosedGraphVerticalB4CoeAlign.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueClosedRelationBridgeImports.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentFullClosedChargeOperatorE1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalInputCutOperatorE2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCutNamedAlias.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6RestrictedGraphImageC3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6RestrictedGraphClosureC4.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralRestrictedGraphBridgeE3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7PhysicalGraphTransportE4.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentClosedChargePhysicalInputE6.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1PairedSourceSpecialization.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1TypedIndependentInvariantCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentChargeOutputTypedE7A.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericClosedRangeOutputsE7G.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7OpaqueLiteralGraphInterfaceE7D.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentNamedSmoothGraphMapsE7K.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedSmoothGraphIdentityE7K2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedClosedSmoothGraphIdentityE7K3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueOutputConstraintE7H.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalOutputPredicateE7I.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedConditionalPhysicalOutputBridgeE7L.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralClosedPhysicalOutputsE7M.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedGraphNamedBridgeE7N1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedPhysicalOutputsE7N2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentInvariantCoreL2ImageDA.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentConditionalPhysicalCoreDensityDB.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentE2ConditionalPhysicalDomainDenseDD.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentE2UnconditionalPhysicalDomainDenseDC.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1B.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1C.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2FullPhysicalGraphRebaseDE2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2FullPhysicalDomainDE2B.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualPhysicalGraphSourceTransportDE3.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9BSourcePairAndChargeReductionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9COrderedPairCoefficientProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9DSourcePotentialMultiplierProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8OriginalNamedFullPhysicalGraphDE4.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8DE4SourceSetClosureDiagnostic.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H2BPhysicalHilbertE2GraphRebase.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H2APhysicalHilbertOutputUnitary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H2CActualE2NativeHilbertChargeColumn.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H2D1ActualE2HilbertOutputDomainEquivalence.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H2D2ANativeHilbertE2ContinuityAndDensity.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H2D2BNativeHilbertE2ClosedGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H3AOriginalPairedPhysicalChargeOutputConstraint.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H3B1OriginalAYNativePhysicalHilbertGraphRebase.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H3B2OriginalAYNativePhysicalHilbertChargeColumn.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4ANativeHilbertAmbientCoordinateTransport.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4B1BNativeNamedSourceAmbientGraphForward.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4B1ASourceNamedNativeGraphMembership.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4B1CNativeSourceGraphForward.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C1ANamedSourceAmbientIndependentInputWitness.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C1BSourceDomainIndependentNativeRecovery.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C2A1GenericPartialGraphReverse.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C2A2ActualNativeReverseFromGeneric.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C2BExactNativeChargeGraphConjugacy.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C2CExactNativeChargeNaturalDomain.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C2DExactNativeChargeAction.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D1OriginalNativeHilbertChargeDomainDense.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D2AGenericNativeHilbertAdjointForward.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D2BGenericNativeHilbertAdjointReverse.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D3AIndependentPhysicalHilbertComplete.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D3BActualNativeAdjointForward.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D3CActualNativeAdjointReverse.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D3DActualNativeAdjointDomainIff.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D4AActualNativeAdjointSquareDomain.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D4BActualNativeAdjointSquareAction.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4E1AOriginalAmbientOutputInnerBridge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4E1BOriginalAYAmbientChargeAction.olean
+          key: bfss-fcp-m4f9-h4e1b-action-74ab69c3-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Verify accepted H4E1B charge action and H4E1A isometric pairing
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.parent.outputs.cache-hit }}" = true || { echo H4E2A_H4E1B_ACCEPTED_PARENT_CACHE_MISSING; exit 1; }
+          base=upstream-math/lean/.lake/build/lib/lean
+          for stem in FCPM4F9H4E1BOriginalAYAmbientChargeAction FCPM4F9H4E1AOriginalAmbientOutputInnerBridge FCPM4F9H3B2OriginalAYNativePhysicalHilbertChargeColumn; do
+            test -s "$base/$stem.olean" || { echo "H4E2A_PARENT_MISSING_OLEAN=$stem"; exit 1; }
+          done
+          echo BFSS_H4E2A_H4E1B_ACCEPTED_PARENT_PASS
+      - name: Fresh H4E2A actual AY ambient/native normalized polarized form
+        shell: bash
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          stem=FCPM4F9H4E2AOriginalAYAmbientNativePolarizedForm
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          timeout 240s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-m4f9-h4e2a-gate2/$stem.log"
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('/tmp/bfss-m4f9-h4e2a-gate2/FCPM4F9H4E2AOriginalAYAmbientNativePolarizedForm.log').read_text()
+          ns='FCP.M4F9H4E2AOriginalAYAmbientNativePolarizedForm.'
+          roots=['pairedOriginalAYAmbientNative_inner_charge_eq','pairedOriginalAYAmbientNative_normalizedForm_eq']
+          reports=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          got={n:{t.strip() for t in a.split(',') if t.strip()} for n,a in reports}
+          assert len(reports)==len(got)==2 and set(got)=={ns+n for n in roots},('H4E2A_WRONG_ROOTS',reports)
+          for name,axioms in got.items():
+              assert axioms <= {'propext','Classical.choice','Quot.sound'},(name,axioms)
+          known={'belyi','formal-schemes','elliptic-curves','tempered-fundamental-groups','oka','orbicurve-cores','pi1','heights','genl','tate-curves-theta','iut'}
+          filtered=[]
+          for line in s.splitlines():
+              m=re.fullmatch(r"warning: ([a-z0-9-]+): repository '([^']+)' has local changes",line)
+              if m and m.group(1) in known and m.group(2).endswith('/upstream-math/lean/.lake/packages/'+m.group(1)): continue
+              filtered.append(line)
+          checked='\n'.join(filtered)
+          assert not any(t in checked for t in ('sorryAx','error:','warning:','unknownIdentifier')),checked[-5000:]
+          print('BFSS_M4F9_H4E2A_ACTUAL_AMBIENT_NATIVE_POLARIZED_FORM_TWO_ROOTS_STRICT_PASS')
+          PY
+      - name: Save qualified H4E2A ambient/native polarized forms and full ancestry
+        if: success()
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullSmoothCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentChargeVectorL2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphImage.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentGraphTransportHomeomorph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphClosure.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7FullClosedGraphVerticalB4CoeAlign.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueClosedRelationBridgeImports.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentFullClosedChargeOperatorE1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalInputCutOperatorE2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCutNamedAlias.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6RestrictedGraphImageC3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6RestrictedGraphClosureC4.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralRestrictedGraphBridgeE3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7PhysicalGraphTransportE4.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentClosedChargePhysicalInputE6.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1PairedSourceSpecialization.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1TypedIndependentInvariantCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentChargeOutputTypedE7A.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericClosedRangeOutputsE7G.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7OpaqueLiteralGraphInterfaceE7D.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentNamedSmoothGraphMapsE7K.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedSmoothGraphIdentityE7K2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedClosedSmoothGraphIdentityE7K3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueOutputConstraintE7H.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalOutputPredicateE7I.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedConditionalPhysicalOutputBridgeE7L.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralClosedPhysicalOutputsE7M.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedGraphNamedBridgeE7N1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedPhysicalOutputsE7N2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentInvariantCoreL2ImageDA.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentConditionalPhysicalCoreDensityDB.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentE2ConditionalPhysicalDomainDenseDD.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentE2UnconditionalPhysicalDomainDenseDC.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1B.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1C.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2FullPhysicalGraphRebaseDE2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2FullPhysicalDomainDE2B.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualPhysicalGraphSourceTransportDE3.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9BSourcePairAndChargeReductionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9COrderedPairCoefficientProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9DSourcePotentialMultiplierProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8OriginalNamedFullPhysicalGraphDE4.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8DE4SourceSetClosureDiagnostic.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H2BPhysicalHilbertE2GraphRebase.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H2APhysicalHilbertOutputUnitary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H2CActualE2NativeHilbertChargeColumn.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H2D1ActualE2HilbertOutputDomainEquivalence.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H2D2ANativeHilbertE2ContinuityAndDensity.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H2D2BNativeHilbertE2ClosedGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H3AOriginalPairedPhysicalChargeOutputConstraint.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H3B1OriginalAYNativePhysicalHilbertGraphRebase.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H3B2OriginalAYNativePhysicalHilbertChargeColumn.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4ANativeHilbertAmbientCoordinateTransport.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4B1BNativeNamedSourceAmbientGraphForward.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4B1ASourceNamedNativeGraphMembership.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4B1CNativeSourceGraphForward.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C1ANamedSourceAmbientIndependentInputWitness.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C1BSourceDomainIndependentNativeRecovery.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C2A1GenericPartialGraphReverse.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C2A2ActualNativeReverseFromGeneric.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C2BExactNativeChargeGraphConjugacy.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C2CExactNativeChargeNaturalDomain.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4C2DExactNativeChargeAction.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D1OriginalNativeHilbertChargeDomainDense.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D2AGenericNativeHilbertAdjointForward.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D2BGenericNativeHilbertAdjointReverse.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D3AIndependentPhysicalHilbertComplete.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D3BActualNativeAdjointForward.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D3CActualNativeAdjointReverse.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D3DActualNativeAdjointDomainIff.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D4AActualNativeAdjointSquareDomain.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4D4BActualNativeAdjointSquareAction.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4E1AOriginalAmbientOutputInnerBridge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4E1BOriginalAYAmbientChargeAction.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F9H4E2AOriginalAYAmbientNativePolarizedForm.olean
+          key: bfss-fcp-m4f9-h4e2a-form-7f1ee93f-gate2-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Preserve original unfiltered Lean diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-m4f9-h4e2a-gate2-${{ github.run_id }}
+          path: /tmp/bfss-m4f9-h4e2a-gate2/
+          if-no-files-found: warn
+          retention-days: 30
