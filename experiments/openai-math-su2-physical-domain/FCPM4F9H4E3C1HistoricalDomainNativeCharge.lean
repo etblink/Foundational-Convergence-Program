@@ -75,12 +75,10 @@ theorem historicalHamiltonian_domain_subset_nativeCharge :
   have hSourceCharge : u ∈
       (originalMinimalPhysicalHilbertChargeColumn
         pairedAlgebraData pairedGaugeData).domain := by
-    change u ∈ (naturalComp
-      (originalMinimalPhysicalHilbertChargeAdjoint
-        pairedAlgebraData pairedGaugeData)
-      (originalMinimalPhysicalHilbertChargeColumn
-        pairedAlgebraData pairedGaugeData)).domain at hSourceSquare
-    exact naturalComp_domain_le hSourceSquare
+    obtain ⟨hCharge,_⟩ :=
+      (originalMinimalPhysicalHilbertChargeAdjointSquare_domain
+        pairedAlgebraData pairedGaugeData u).mp hSourceSquare
+    exact hCharge
   exact (pairedOriginalAYAmbientNative_fullNaturalDomain_iff
     theta hCAR hHermitian color gamma J hColor hGamma hJ u).mp hSourceCharge
 
