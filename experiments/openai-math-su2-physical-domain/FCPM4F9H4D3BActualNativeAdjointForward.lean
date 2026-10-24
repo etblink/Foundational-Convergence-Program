@@ -61,10 +61,10 @@ theorem nativeAdjoint_forward_domain_action :
         independentPhysicalUnitary theta hCAR hHermitian J hJ
           ((independentActualE2NativeHilbertChargeColumn
             theta hCAR hHermitian color gamma).adjoint ⟨y,hy⟩) := by
-  letI : CompleteSpace (independentPhysicalSpace theta hCAR hHermitian) :=
+  haveI : CompleteSpace (independentPhysicalSpace theta hCAR hHermitian) :=
     FCP.M4F9H4D3AIndependentPhysicalHilbertComplete.independentPhysicalSpace_complete
       theta hCAR hHermitian J hJ
-  letI : CompleteSpace pairedGaugeData.physicalSpace :=
+  haveI : CompleteSpace pairedGaugeData.physicalSpace :=
     FCP.BFSSSU2PhysicalDomainL6H5E8BB.originalPhysicalHilbertComplete
       pairedAlgebraData pairedGaugeData
   intro y hy
@@ -91,6 +91,7 @@ theorem nativeAdjoint_forward_domain_action :
     intro z hz
     apply (FCP.M4F9H4C2CExactNativeChargeNaturalDomain.nativeIndependentDomain_mem_iff_sourceDomain
       theta hCAR hHermitian color gamma J hColor hGamma hJ (U.symm z)).mpr
+    change U (U.symm z) ∈ g.domain
     simpa only [U.apply_symm_apply z] using hz
   have hAct : ∀ x : f.domain,
       V (f x) = g ⟨U (x : independentPhysicalSpace
