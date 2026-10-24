@@ -61,12 +61,6 @@ theorem nativeAdjoint_forward_domain_action :
         independentPhysicalUnitary theta hCAR hHermitian J hJ
           ((independentActualE2NativeHilbertChargeColumn
             theta hCAR hHermitian color gamma).adjoint ⟨y,hy⟩) := by
-  haveI : CompleteSpace (independentPhysicalSpace theta hCAR hHermitian) :=
-    FCP.M4F9H4D3AIndependentPhysicalHilbertComplete.independentPhysicalSpace_complete
-      theta hCAR hHermitian J hJ
-  haveI : CompleteSpace pairedGaugeData.physicalSpace :=
-    FCP.BFSSSU2PhysicalDomainL6H5E8BB.originalPhysicalHilbertComplete
-      pairedAlgebraData pairedGaugeData
   intro y hy
   let f := independentActualE2NativeHilbertChargeColumn
     theta hCAR hHermitian color gamma
