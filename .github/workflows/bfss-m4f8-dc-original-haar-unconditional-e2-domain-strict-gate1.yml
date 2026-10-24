@@ -1,0 +1,542 @@
+name: BFSS M4F8 DC Original Haar Unconditional Actual E2 Physical Domain Strict Gate 1
+
+# Isolated research branch, exact self-path trigger only.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-m4f8-dc-original-haar-unconditional-e2-domain-strict-gate1.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-m4f8-dc-original-haar-unconditional-e2-domain-strict-gate1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  restricted-core-transport:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - name: Checkout isolated research sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Checkout immutable original BFSS mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+
+      - name: Fail-closed exact original and candidate source provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-m4f8-dd-e2-conditional-physical-domain-density-strict-gate5
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          python3 - <<'PY'
+          import pathlib,subprocess,json,re
+          d=json.loads(pathlib.Path('upstream-math/lean/lake-manifest.json').read_text())
+          assert next(p['rev'] for p in d['packages'] if p['name']=='mathlib') == 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+          p=pathlib.Path('experiments/openai-math-su2-physical-domain')
+          blobs={
+            'FCPIndependentFullSmoothCharge.lean':'4fa31d97ddfbb80e3258070caccd7b0a6b0bc874',
+            'FCPIndependentChargeVectorL2.lean':'6492f4b08181020f611f7d7d4b751394805420d2',
+            'FCPIndependentFullCoreGraph.lean':'2139e7fc9e7b9d5bf99ec57d096686078b8ffdf7',
+            'FCPIndependentFullCoreGraphImage.lean':'06e98a1b867f21577b5b74033e411d27ba688985',
+            'FCPIndependentGraphTransportHomeomorph.lean':'8455a6c42f23b2d08f7945188fe5b8ca9e75ac4b',
+            'FCPIndependentFullCoreGraphClosure.lean':'a6aacf285206ba79f331bf2c6818fc0b7df1a6e4',
+            'FCPIndependentInvariantSmoothEquiv.lean':'5083f0ce9bfb43f616a9c3e5dc286887bd073de4',
+            'FCPM4F6PairedSourceGraphInputCut.lean':'c217d66cf9e8ccf39b64aab6488fe62b11447beb',
+            'FCPM4F6IndependentGraphInputCut.lean':'4db1bbd1685555a3c00efd836577186782ff08bb',
+            'FCPM4F6IndependentLiteralAliasBoundary.lean':'88a0cfdf5c5a4e407906462a56f62b9df9281ea0',
+            'FCPM4F6GenericNamedAliasInputCut.lean':'b826575e5c39739a49e2797c02b79024c9f7e692',
+            'FCPM4F6IndependentGraphInputCutNamedAlias.lean':'976ca4ed439f63566d49611566299d66d33a5fd1',
+            'FCPM4F6RestrictedGraphImageC3.lean':'b9d707d8a9ca1100fda35872ebbfeb83c56dbd2a',
+            'FCPM4F6RestrictedGraphClosureC4.lean':'7a248ff92d8f1d3e7ee7cbf9e94b7addf5db5e0d',
+            'FCPM4F7IndependentRestrictedClosedGraphVertical.lean':'6b607a8276fa5f787e94473ca47f874c3b69d7b8',
+            'FCPM4F7IndependentRestrictedClosedGraphVerticalC1Cut.lean':'71a0b11174a1c5beef4ad674a0ac1666ec35347c',
+            'FCPM4F7IndependentClosedChargeOperatorV2.lean':'571890437e52ce1a0e2de7267862a8a69f5f00be',
+            'FCPM4F7IndependentClosedGraphAliasA2.lean':'87c3804ed5602bc2e3365489d556bb8314138780',
+            'FCPM4F7IndependentClosedGraphAliasA3.lean':'f38ff58df7afe69562c3059c71b7c2f7d7a28e60',
+            'FCPM4F7FullClosedGraphVerticalB4.lean':'03a51889a1060e7407bdecab607b4bfa2e7b3070',
+            'FCPM4F7FullClosedGraphVerticalB4CoeAlign.lean':'2b485db6576f37cd13acd861eb9549d26f49bc51',
+            'FCPRestrictedGraphInputCut.lean':'cbcb667d15fccd67eaa185a69eb8b476546d977d',
+          }
+          for name,sha in blobs.items():
+            file=p/name
+            assert subprocess.check_output(['git','rev-parse','HEAD:'+str(file)],text=True).strip() == sha,(name,'git source pin')
+            assert subprocess.check_output(['git','hash-object','--no-filters',str(file)],text=True).strip() == sha,(name,'working source pin')
+          def lean_code_only(text):
+            # Lean nested block comments, including documentation, are NOT code.
+            out=[]
+            depth=0
+            i=0
+            while i < len(text):
+              if text.startswith('/-',i):
+                depth+=1
+                i+=2
+              elif depth and text.startswith('-/',i):
+                depth-=1
+                i+=2
+              else:
+                c=text[i]
+                if depth==0 or c=='\n':
+                  out.append(c)
+                i+=1
+            assert depth==0,('UNTERMINATED_LEAN_COMMENT',)
+            return '\n'.join(line.split('--',1)[0] for line in ''.join(out).splitlines())
+          for candidate in ['FCPRestrictedGraphInputCut.lean','FCPM4F6PairedSourceGraphInputCut.lean','FCPM4F6IndependentGraphInputCut.lean','FCPM4F6IndependentLiteralAliasBoundary.lean','FCPM4F6GenericNamedAliasInputCut.lean','FCPM4F6IndependentGraphInputCutNamedAlias.lean','FCPM4F6RestrictedGraphImageC3.lean','FCPM4F6RestrictedGraphClosureC4.lean','FCPM4F7IndependentRestrictedClosedGraphVertical.lean','FCPM4F7IndependentRestrictedClosedGraphVerticalC1Cut.lean','FCPM4F7IndependentClosedChargeOperatorV2.lean','FCPM4F7IndependentClosedGraphAliasA2.lean','FCPM4F7IndependentClosedGraphAliasA3.lean','FCPM4F7FullClosedGraphVerticalB4.lean','FCPM4F7FullClosedGraphVerticalB4CoeAlign.lean']:
+            source=(p/candidate).read_text()
+            code=lean_code_only(source)
+            assert not re.search(r'(?m)^[ \t]*(?:sorry|admit|axiom)\b|\bsorryAx\b',code),('UNAPPROVED_LEAN_CODE',candidate)
+          print('M4F8_DD_GATE5_PARENT_SOURCE_PASS')
+          PY
+
+      - name: Reclaim disposable runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+
+      - name: Restore pinned Lean 4.34.1 and Mathlib
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-m4f8-dd-e2-conditional-physical-domain-density-strict-gate5/toolchain.log; then ok=true; break; fi
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-m4f8-dd-e2-conditional-physical-domain-density-strict-gate5/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo M4F7_DD_GATE5_PINNED_TOOLCHAIN_PASS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      - name: Restore strict-qualified DD actual E2 conditional domain density ancestry
+        id: ddcache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullSmoothCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentChargeVectorL2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphImage.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentGraphTransportHomeomorph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphClosure.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7FullClosedGraphVerticalB4CoeAlign.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueClosedRelationBridgeImports.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentFullClosedChargeOperatorE1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalInputCutOperatorE2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCutNamedAlias.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralRestrictedGraphBridgeE3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentClosedChargePhysicalInputE6.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1PairedSourceSpecialization.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1TypedIndependentInvariantCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentChargeOutputTypedE7A.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericClosedRangeOutputsE7G.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7OpaqueLiteralGraphInterfaceE7D.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentNamedSmoothGraphMapsE7K.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedSmoothGraphIdentityE7K2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedClosedSmoothGraphIdentityE7K3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueOutputConstraintE7H.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalOutputPredicateE7I.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedConditionalPhysicalOutputBridgeE7L.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralClosedPhysicalOutputsE7M.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedGraphNamedBridgeE7N1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedPhysicalOutputsE7N2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentInvariantCoreL2ImageDA.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentConditionalPhysicalCoreDensityDB.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentE2ConditionalPhysicalDomainDenseDD.olean
+          key: bfss-fcp-m4f8-dd-e2-physical-domain-2dd18079-gate5-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Fail-closed DC and exact original source bridge provenance preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.ddcache.outputs.cache-hit }}" = true || { echo M4F8_DC_GATE1_DD_QUALIFIED_CACHE_MISSING; exit 1; }
+          cd upstream-math/lean
+          for stem in OAI/MathematicalPhysics/BFSS/ClosedProfiles FCPM4F8IndependentE2ConditionalPhysicalDomainDenseDD SU2BFSSG4JExactGaugeDataAssemblyProbe; do
+            test -s ".lake/build/lib/lean/$stem.olean" || { echo M4F8_DC_GATE1_REQUIRED_ANCESTOR_OLEAN_MISSING=$stem; exit 1; }
+          done
+          cd "$GITHUB_WORKSPACE"
+          python3 - <<'PY'
+          import re, subprocess
+          from pathlib import Path
+          f=Path('experiments/openai-math-su2-physical-domain/FCPM4F8IndependentE2UnconditionalPhysicalDomainDenseDC.lean')
+          source='bac97ce908456a400a3e74919367a9e2f12ba1c8'
+          assert subprocess.check_output(['git','rev-parse','HEAD:'+str(f)],text=True).strip()==source
+          assert subprocess.check_output(['git','hash-object','--no-filters',str(f)],text=True).strip()==source
+          t=f.read_text()
+          assert t.startswith('import FCPM4F8IndependentE2ConditionalPhysicalDomainDenseDD\nimport SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe\n')
+          assert re.findall(r'^theorem (\S+)',t,re.M)==[
+            'sourceHaar_coreL2_set_closure_eq_physical',
+            'independentE2_actual_closed_domain_dense_in_physical'
+          ]
+          assert re.findall(r'^#print axioms (\S+)',t,re.M)==[
+            'sourceHaar_coreL2_set_closure_eq_physical',
+            'independentE2_actual_closed_domain_dense_in_physical'
+          ]
+          assert 'sourceCoreNormClosure_eq_physical_unconditional' in t
+          assert 'independentE2_actual_closed_domain_dense_in_physical_of_source' in t
+          assert not re.search(r'(?m)^[ \t]*(?:sorry|admit|axiom)\b|\bsorryAx\b',t)
+          assert 'hsource :' not in t.split('theorem independentE2_actual_closed_domain_dense_in_physical',1)[-1]
+          print('M4F8_DC_GATE1_ACTUAL_HAAR_AND_DD_IMPORT_BRIDGE_FROZEN_PASS')
+          PY
+
+      - name: Rebuild historical qualified G4K9D and G4K10A dependency closure from exact sources
+        shell: bash
+        timeout-minutes: 36
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          qualified9d=1fbd0db2af96914d20b8750bfbbeb3af6770a491
+          qualified10a=6eeb4293abcc1cf3a111ff5c511f708cb5ed320a
+          git fetch --quiet --no-tags --depth=1 origin "$qualified9d"
+          git fetch --quiet --no-tags --depth=1 origin "$qualified10a"
+          base=upstream-math/lean/.lake/build/lib/lean
+          test -s "$base/SU2BFSSG4JExactGaugeDataAssemblyProbe.olean" || {
+            echo SOURCE_G4J_ACCEPTED_PREREQUISITE_MISSING
+            exit 1
+          }
+          stems=(
+            SU2BFSSG4K1PhysicalSpaceCoreProbe
+            SU2BFSSG4K2ANonzeroVacuumRadialProfileProbe
+            SU2BFSSG4K2BNonzeroPhysicalL2Probe
+            SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe
+            SU2BFSSG4K4ClosedChargeGraphProbe
+            SU2BFSSG4K5ConcreteEnergyDensityProbe
+            SU2BFSSG4K6PhysicalTrialEnergyLowerProbe
+            SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe
+            SU2BFSSG4K8ANonzeroDerivativeProbe
+            SU2BFSSG4K8BNonzeroCoordinateL2Probe
+            SU2BFSSG4K8CZeroParameterChargeProbe
+            SU2BFSSG4K8DPositiveCouplingAlternativeProbe
+            SU2BFSSG4K8E1MasslessPotentialParityProbe
+            SU2BFSSG4K8E2KineticOddParityProbe
+            SU2BFSSG4K8E3CoreNoncancellationProbe
+            SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe
+            SU2BFSSG4K9BSourcePairAndChargeReductionProbe
+            SU2BFSSG4K9COrderedPairCoefficientProbe
+            SU2BFSSG4K9DSourcePotentialMultiplierProbe
+            SU2BFSSG4K10ASourceClosedJointChargeGraphProbe
+          )
+          test "${#stems[@]}" -eq 20
+          for stem in "${stems[@]}"; do
+            p="experiments/openai-math-su2-concrete-potential/$stem.lean"
+            expected="$qualified9d"
+            if [ "$stem" = SU2BFSSG4K10ASourceClosedJointChargeGraphProbe ]; then
+              expected="$qualified10a"
+            fi
+            test "$(git hash-object "$p")" = "$(git rev-parse "$expected:$p")" || {
+              echo "PINNED_G4K_ACCEPTED_SOURCE_DRIFT=$p"
+              exit 1
+            }
+            cp "$p" upstream-math/lean/
+          done
+          mkdir -p /tmp/bfss-unconditional-domain-density
+          cd upstream-math/lean
+          for module in OAI.MathematicalPhysics.BFSS.KineticMeasures OAI.MathematicalPhysics.BFSS.CovariantFields OAI.MathematicalPhysics.BFSS.ProfileEnergy; do
+            dest=".lake/build/lib/lean/$(printf '%s' "$module" | tr . /).olean"
+            if ! test -s "$dest"; then
+              echo "REBUILDING_PINNED_ORIGINAL_SOURCE=$module"
+              timeout 480s lake build "$module" 2>&1 | tee "/tmp/bfss-unconditional-domain-density/upstream-$(basename "$dest").log"
+              test -s "$dest"
+            fi
+          done
+          for stem in "${stems[@]}"; do
+            echo "REBUILDING_EXACT_ACCEPTED_G4K_SOURCE=$stem"
+            timeout 240s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 |
+              tee "/tmp/bfss-unconditional-domain-density/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean"
+          done
+          python3 - <<'PY'
+          import pathlib,re
+          d=pathlib.Path('/tmp/bfss-unconditional-domain-density')
+          stems='''SU2BFSSG4K1PhysicalSpaceCoreProbe
+          SU2BFSSG4K2ANonzeroVacuumRadialProfileProbe
+          SU2BFSSG4K2BNonzeroPhysicalL2Probe
+          SU2BFSSG4K3NonzeroSmoothInvariantCoreProbe
+          SU2BFSSG4K4ClosedChargeGraphProbe
+          SU2BFSSG4K5ConcreteEnergyDensityProbe
+          SU2BFSSG4K6PhysicalTrialEnergyLowerProbe
+          SU2BFSSG4K7EnergySumOfSquaresCorrectionProbe
+          SU2BFSSG4K8ANonzeroDerivativeProbe
+          SU2BFSSG4K8BNonzeroCoordinateL2Probe
+          SU2BFSSG4K8CZeroParameterChargeProbe
+          SU2BFSSG4K8DPositiveCouplingAlternativeProbe
+          SU2BFSSG4K8E1MasslessPotentialParityProbe
+          SU2BFSSG4K8E2KineticOddParityProbe
+          SU2BFSSG4K8E3CoreNoncancellationProbe
+          SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe
+          SU2BFSSG4K9BSourcePairAndChargeReductionProbe
+          SU2BFSSG4K9COrderedPairCoefficientProbe
+          SU2BFSSG4K9DSourcePotentialMultiplierProbe
+          SU2BFSSG4K10ASourceClosedJointChargeGraphProbe'''.split()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for stem in stems:
+              s=(d/(stem+'.log')).read_text()
+              assert 'sorryAx' not in s and 'error:' not in s and 'unknownIdentifier' not in s,stem
+              reports=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",s)
+              assert reports,('G4K_MISSING_AXIOM_REPORTS',stem)
+              for name,ax in reports:
+                  assert {a.strip() for a in ax.split(',') if a.strip()}<=allowed,(stem,name,ax)
+          leaf=(d/(stems[-1]+'.log')).read_text()
+          for name in ['sourceChargeMap_equal','sourceChargeVector_equal','sourceCoreGraph_equal','sourceClosedJointChargeGraph_equal','sourceClosedJointChargeDomain_iff']:
+              assert 'FCP.BFSSSU2GaugeG4K10A.'+name in leaf,name
+          print('G4K9D_AND_G4K10A_BYTE_IDENTICAL_SOURCE_20_MODULE_REBUILD_AXIOM_PASS')
+          PY
+
+      - name: Rebuild source-qualified Gate 28 and Gate 47 Haar prerequisites in same Lean environment
+        shell: bash
+        timeout-minutes: 33
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          qualified28=b3f22a8dd3edea0d68436b20bcdc63e0dbac56ab
+          qualified47=d50fe847096df7cf981173cd69787392d8d3d268
+          git fetch --quiet --no-tags --depth=1 origin "$qualified28"
+          git fetch --quiet --no-tags --depth=1 origin "$qualified47"
+          before=(
+            SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe
+            SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe
+            SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe
+            SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe
+            SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe
+            SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe
+            SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe
+            SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe
+            SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe
+            SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe
+            SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe
+            SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe
+          )
+          after=(
+            SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe
+            SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe
+            SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe
+            SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe
+            SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe
+            SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe
+            SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe
+            SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe
+            SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe
+            SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe
+          )
+          test "${#before[@]}" -eq 12
+          test "${#after[@]}" -eq 10
+          for stem in "${before[@]}"; do
+            p="experiments/openai-math-su2-physical-domain/$stem.lean"
+            test "$(git hash-object "$p")" = "$(git rev-parse "$qualified28:$p")" || {
+              echo "GATE28_ACCEPTED_SOURCE_DRIFT=$p"
+              exit 1
+            }
+          done
+          for stem in "${after[@]}"; do
+            p="experiments/openai-math-su2-physical-domain/$stem.lean"
+            test "$(git hash-object "$p")" = "$(git rev-parse "$qualified47:$p")" || {
+              echo "GATE47_ACCEPTED_SOURCE_DRIFT=$p"
+              exit 1
+            }
+          done
+          original=upstream-math/lean/.lake/build/lib/lean
+          test -s "$original/SU2BFSSG4K10ASourceClosedJointChargeGraphProbe.olean" || {
+            echo PINNED_G4K10A_ACCEPTED_DEPENDENCY_NOT_IN_L6_CACHE
+            exit 1
+          }
+          test -s "$original/SU2BFSSG4K9DSourcePotentialMultiplierProbe.olean"
+          test -s "$original/OAI/MathematicalPhysics/BFSS/ClosedProfiles.olean"
+          echo GATE28_AND_GATE47_EXACT_SOURCE_HASHES_AND_G4K_DEPS_PASS
+          mkdir -p /tmp/bfss-unconditional-domain-density
+          for stem in "${before[@]}" "${after[@]}"; do
+            cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          done
+          if ! test -s "$original/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean"; then
+            echo COMPILING_PINNED_RVM_SMOOTH_INTEGRAL
+            mkdir -p "$original/OAI/Analysis/VlasovMaxwell/Regularity"
+            cd upstream-math/lean
+            timeout 180s lake env lean -o ".lake/build/lib/lean/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean" OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.lean 2>&1 | tee /tmp/bfss-unconditional-domain-density/pinned-rvm.log
+            cd ../..
+            test -s "$original/OAI/Analysis/VlasovMaxwell/Regularity/SmoothIntegral.olean"
+          fi
+          cd upstream-math/lean
+          for stem in "${before[@]}" "${after[@]}"; do
+            echo "REBUILDING_EXACT_HAAR_SOURCE=$stem"
+            timeout 180s lake env lean -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" 2>&1 | tee "/tmp/bfss-unconditional-domain-density/$stem.log"
+            test -s ".lake/build/lib/lean/$stem.olean"
+          done
+          python3 - <<'PY'
+          import pathlib,re
+          d=pathlib.Path('/tmp/bfss-unconditional-domain-density')
+          stems='''SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe
+          SU2BFSSPhysicalDomainD3AKineticGaugeContractionProbe
+          SU2BFSSPhysicalDomainD3BFullChargeGaugePreservationProbe
+          SU2BFSSPhysicalDomainD2AClosedPhysicalGraphProbe
+          SU2BFSSPhysicalDomainD2B1SourceHaarEquivariantAverageProbe
+          SU2BFSSPhysicalDomainD2B2HaarAverageContinuitySupportProbe
+          SU2BFSSPhysicalDomainD2B3SmoothHaarReductionProbe
+          SU2BFSSPhysicalDomainD2B3JJointOperatorSmoothHaarProbe
+          SU2BFSSPhysicalDomainD2B4SourceSmoothInvariantCoreProbe
+          SU2BFSSPhysicalDomainD2B5SourceProjectionAlgebraProbe
+          SU2BFSSPhysicalDomainD2B6SourceFullL2GaugeActionProbe
+          SU2BFSSPhysicalDomainD2B7SourceFullL2GaugeIsometryAndFixednessProbe
+          SU2BFSSPhysicalDomainD2B8AFixedPointSpaceProbe
+          SU2BFSSPhysicalDomainD2B8BFermionContinuousReductionProbe
+          SU2BFSSPhysicalDomainD2B8CBosonStrongContinuityProbe
+          SU2BFSSPhysicalDomainD2B9AFullL2HaarExistenceBoundProbe
+          SU2BFSSPhysicalDomainD2B9BFullL2HaarCLMProbe
+          SU2BFSSPhysicalDomainD2B9CGenuineGaugeHaarProjectionProbe
+          SU2BFSSPhysicalDomainD2B10AProjectedSmoothCoreDensityProbe
+          SU2BFSSPhysicalDomainD2B10B1JointHaarFubiniIntegrabilityProbe
+          SU2BFSSPhysicalDomainD2B10B2SmoothTestInnerFubiniProbe
+          SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe'''.split()
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for stem in stems:
+              txt=(d/(stem+'.log')).read_text()
+              assert 'sorryAx' not in txt and 'error:' not in txt,stem
+              reports=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",txt)
+              assert reports, ('NO_AXIOM_REPORTS',stem)
+              for name,axes in reports:
+                  assert {a.strip() for a in axes.split(',')}<=allowed,(stem,name,axes)
+          leaf=(d/(stems[-1]+'.log')).read_text()
+          for name in ['sourceFullHaarAverageCLM_testInner_eq','sourceFullHaarAverageCLM_coreToL2_compat','sourceCoreNormClosure_eq_physical_unconditional']:
+              assert "FCP.BFSSSU2PhysicalDomainD2B10C."+name in leaf,name
+          print("D2B10C_HAAR_CLOSURE_22_MODULES_REBUILT_AND_AXIOMS_CLEAN_PASS")
+          PY
+
+      - name: Strict DC exact original Haar theorem discharge into the genuine independent E2 domain
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          mkdir -p /tmp/bfss-unconditional-domain-density
+          stem=FCPM4F8IndependentE2UnconditionalPhysicalDomainDenseDC
+          cp "experiments/openai-math-su2-physical-domain/$stem.lean" upstream-math/lean/
+          cd upstream-math/lean
+          for ancestor in FCPM4F8IndependentE2ConditionalPhysicalDomainDenseDD SU2BFSSPhysicalDomainD2B10CFullHaarCoreCompatibilityAndDensityProbe OAI/MathematicalPhysics/BFSS/ClosedProfiles; do
+            test -s ".lake/build/lib/lean/$ancestor.olean" || { echo DC_GATE1_ANCESTOR_MISSING=$ancestor; exit 1; }
+          done
+          /usr/bin/time -f 'DC_RESOURCE_TIME %e CPU %P MAX_RSS_KB %M' -o "/tmp/bfss-unconditional-domain-density/$stem.resource" \
+            timeout --signal=TERM --kill-after=5s 210s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" >"/tmp/bfss-unconditional-domain-density/$stem.log" 2>&1 || {
+              ec=$?
+              echo M4F8_DC_GATE1_LEAN_EXIT=$ec
+              grep -n 'error:' "/tmp/bfss-unconditional-domain-density/$stem.log" | head -n 22 || true
+              tail -n 110 "/tmp/bfss-unconditional-domain-density/$stem.log"
+              cat "/tmp/bfss-unconditional-domain-density/$stem.resource" || true
+              exit "$ec"
+            }
+          test -s ".lake/build/lib/lean/$stem.olean"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('/tmp/bfss-unconditional-domain-density/FCPM4F8IndependentE2UnconditionalPhysicalDomainDenseDC.log').read_text()
+          names={
+            'FCP.M4F8IndependentE2UnconditionalPhysicalDomainDenseDC.sourceHaar_coreL2_set_closure_eq_physical',
+            'FCP.M4F8IndependentE2UnconditionalPhysicalDomainDenseDC.independentE2_actual_closed_domain_dense_in_physical'
+          }
+          r=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+          ax={n:{t.strip() for t in a.split(',') if t.strip()} for n,a in r}
+          assert len(r)==len(ax)==2 and set(ax)==names,('DC_UNEXPECTED_ROOTS',r)
+          assert all(a <= {'propext','Classical.choice','Quot.sound'} for a in ax.values()),('DC_FORBIDDEN_AXIOMS',ax)
+          assert 'sorryAx' not in s and 'error:' not in s
+          warns=[v for v in s.splitlines() if 'warning:' in v and not re.fullmatch(r"warning: [A-Za-z0-9_-]+: repository '[^']+' has local changes",v)]
+          assert not warns,('DC_UNEXPECTED_WARNINGS',warns)
+          print('M4F8_DC_GATE1_ACTUAL_INDEPENDENT_E2_UNCONDITIONAL_HAAR_PHYSICAL_DOMAIN_DENSITY_TWO_SUPPORT_THEOREMS_STRICT_PASS',ax)
+          PY
+          cat "/tmp/bfss-unconditional-domain-density/$stem.resource"
+
+      - name: Save qualified original Haar and DD joint unconditional DC ancestry
+        if: success()
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullSmoothCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentChargeVectorL2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphImage.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentGraphTransportHomeomorph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphClosure.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7FullClosedGraphVerticalB4CoeAlign.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueClosedRelationBridgeImports.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentFullClosedChargeOperatorE1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalInputCutOperatorE2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCutNamedAlias.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralRestrictedGraphBridgeE3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentClosedChargePhysicalInputE6.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1PairedSourceSpecialization.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1TypedIndependentInvariantCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentChargeOutputTypedE7A.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericClosedRangeOutputsE7G.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7OpaqueLiteralGraphInterfaceE7D.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentNamedSmoothGraphMapsE7K.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedSmoothGraphIdentityE7K2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedClosedSmoothGraphIdentityE7K3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueOutputConstraintE7H.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalOutputPredicateE7I.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedConditionalPhysicalOutputBridgeE7L.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralClosedPhysicalOutputsE7M.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedGraphNamedBridgeE7N1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedPhysicalOutputsE7N2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentInvariantCoreL2ImageDA.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentConditionalPhysicalCoreDensityDB.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentE2ConditionalPhysicalDomainDenseDD.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentE2UnconditionalPhysicalDomainDenseDC.olean
+          key: bfss-fcp-m4f8-dc-haar-join-bac97ce9-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Preserve full historical-source rebuild logs and DC original strict diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-m4f8-dc-haar-join-${{ github.run_id }}
+          path: /tmp/bfss-unconditional-domain-density
+          if-no-files-found: warn
+
