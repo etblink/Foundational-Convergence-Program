@@ -1,5 +1,5 @@
 import FCPM4F8IndependentActualPhysicalGraphSourceTransportDE3
-import SU2BFSSPhysicalDomainD1RestrictedSourceGraphProbe
+import FCPM4F8DE4SourceSetClosureDiagnostic
 
 /-!
 BFSS M4F8 DE4 — PROSPECTIVE source-NAMED restricted graph identity with
@@ -61,31 +61,14 @@ theorem pairedSourceNamedClosedGraph_eq_actualIndependentFullPhysicalGraph_image
         ((p.1 : Lp E 2 μ), (p.2 : SpinIndex → Lp E 2 μ))) ''
         ((FCP.M4F8IndependentActualE2FullPhysicalGraphRebaseDE2.independentActualE2FullPhysicalChargeColumn
           color gamma theta hCAR hHermitian).graph : Set _)) := by
-  have hD1 :
-      (pairedGaugeData.deformedModelGraph 1 0 :
-        Set (FullL2 2 × (SpinIndex → FullL2 2))) =
-      (FCP.BFSSSU2PhysicalDomainD1.originalRestrictedClosedGraph
-        pairedAlgebraData pairedGaugeData :
-        Set (FullL2 2 × (SpinIndex → FullL2 2))) :=
-    congrArg
-      (fun S : Submodule ℂ (FullL2 2 × (SpinIndex → FullL2 2)) =>
-        (S : Set (FullL2 2 × (SpinIndex → FullL2 2))))
-      (FCP.BFSSSU2PhysicalDomainD1.sourceGaugeRestrictedClosedGraph_equal
-        pairedAlgebraData pairedGaugeData)
-  -- Keep the named D1 closure as the intermediate expression. The
-  -- explicit simplifier handles the Set/submodule bridge syntactically;
-  -- do not ask `exact` to unfold the enormous original BFSS graph.
-  calc
-    (pairedGaugeData.deformedModelGraph 1 0 :
-      Set (FullL2 2 × (SpinIndex → FullL2 2))) =
-      (FCP.BFSSSU2PhysicalDomainD1.originalRestrictedClosedGraph
-        pairedAlgebraData pairedGaugeData :
-          Set (FullL2 2 × (SpinIndex → FullL2 2))) := hD1
-    _ = _ := by
-      simpa only [FCP.BFSSSU2PhysicalDomainD1.originalRestrictedClosedGraph,
-        Submodule.topologicalClosure_coe] using
-        (FCP.M4F8IndependentActualPhysicalGraphSourceTransportDE3.sourceRestrictedClosure_eq_actualFullPhysicalE2Graph_image
-          color gamma theta hCAR hHermitian J hColor hGamma hJ)
+  -- Compose two already source-exact graph equalities, without
+  -- unfolding any original 17-slot submodule closure in this theorem.
+  -- The first equality is separately source-only and must be strictly
+  -- qualified BEFORE the present DE4 theorem is itself validated.
+  exact
+    (FCP.M4F8DE4SourceSetClosureDiagnostic.pairedSourceNamedGraph_eq_explicitRestrictedClosure).trans
+      (FCP.M4F8IndependentActualPhysicalGraphSourceTransportDE3.sourceRestrictedClosure_eq_actualFullPhysicalE2Graph_image
+        color gamma theta hCAR hHermitian J hColor hGamma hJ)
 
 #print axioms pairedSourceNamedClosedGraph_eq_actualIndependentFullPhysicalGraph_image
 
