@@ -1,0 +1,19 @@
+# BFSS M4F9 H4E3B Gate #3 — direct formal-adjoint weak form still hits WHNF
+
+**Date:** 2026-10-24 (Pacific). **Disposition:** STRICT RED — 0/2 accepted new roots.
+
+- [Run #40131049315](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40131049315), job `120982634672`, `completed/failure`, trigger commit `af744a190a261d5073097d1189b47950a18bbc08`.
+- Candidate source `experiments/openai-math-su2-physical-domain/FCPM4F9H4E3BNativeActualAdjointSquareHistoricalAction.lean`, immutable Gate #3 blob `7bcabee8f9e7a06808ba89ab3bde85edf6a18ae2`, commit `90dc8f88685b92d0281927e72257801b61493284`.
+- Verified pinned original source `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean 4.34.1, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`, source hashes, and qualified H4E3A child cache restoration `bfss-fcp-m4f9-h4e3a-weak-form-8297bb91-gate2-v1-adc7f124-lean4341-d13f23b-Linux-X64`. Required historic and H4D1 ancestor `.olean` files present; exact preflight passed.
+- **First actual Gate #3 compiler error** at new source line 132:10: `(deterministic) timeout at whnf, maximum number of heartbeats (240000)` while inferring `one_sixteenth_inner_smul _ _` for the enormous source-native partial-adjoint expression under the normalized form proof.
+- **Second compiler error**, line 88:0, same deterministic `whnf` heartbeat exhaustion during elaboration of the second declaration, `pairedNativeAdjointSquare_action_eq_historical`. This may be secondary to the failed proof term, but both are independently logged.
+- The earlier unused binder strict-linter error at line 56 is gone. The previously missing BC `naturalComp` names are resolved. First theorem `pairedNativeNormalizedAdjointSquare_iff_historicalRepresentingVector` again prints only `propext, Classical.choice, Quot.sound`, but strict whole-file compilation fails. Second theorem prints `does not depend on any axioms` **only because it did not successfully elaborate**. Do not promote either theorem or count a new root from this gate. Child cache was **not saved**.
+- Raw artifact `bfss-m4f9-h4e3b-gate3-40131049315`, ID `12574084097`, zip SHA-256 `2cab67189b4beb505e51450051a5c7adf0f8f0ae013d923a996bd1c3e68e9e5c`.
+
+## Research decision
+
+Three distinct negative observations are now preserved: (1) missing source BC namespace (Gate #1); (2) unused theorem binder plus broad naturalComp square-action WHNF timeout (Gate #2); (3) even after replacing nested square rewriting with direct formal-adjoint weak form, elaborating `one_sixteenth_inner_smul _ _` for actual full source AY Hilbert outputs reaches the WHNF heartbeat limit (Gate #3).
+
+The first H4E3B theorem is already **repeatably kernel-compiled with whitelist-only axioms** in Gate #2 and Gate #3 but cannot be accepted while batched with red second theorem under a single strict gate. Next valuable discriminating change is a **single-root source-exact gate** that fully qualifies `pairedNativeNormalizedAdjointSquare_iff_historicalRepresentingVector` in isolation and saves it as reusable parent `.olean`; do not relabel an intermediate axiom report as standalone acceptance. Then prove the historical native square action in a separate module and gate, reusing first theorem and the qualified historical native-form theorem; this isolates whether WHNF failure is induced by enormous repeated elaboration in one file. Prefer a typed generic adjoint-scalar weak-form helper instead of asking Lean to synthesize arbitrary implicit instances from `one_sixteenth_inner_smul _ _`. Do not raise heartbeats blindly or define a proxy charge/Hamiltonian.
+
+The H4E3A historical weak-form root and H4E2B native/ambient domain+form roots remain accepted. The true source/native partial operator `naturalComp T_n.adjoint T_n`, genuine two-stage domain and 1/16 normalization are unchanged. No full Hamiltonian or spectral claim established at this gate.
