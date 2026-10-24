@@ -40,13 +40,15 @@ from genuine Hilbert PiLp 2 (no identification with sup-product norm). -/
 theorem hilbertPhysicalOutputsToActualOutputs_continuous :
     Continuous (hilbertPhysicalOutputsToActualOutputs
       theta hCAR hHermitian) := by
-  apply continuous_iff_continuous_subtype_val.mpr
-  change Continuous (fun v : PiLp 2 (fun _ : SpinIndex =>
-      independentPhysicalSpace theta hCAR hHermitian) =>
-    (fun α : SpinIndex => (v α : Lp E 2 μ)))
-  apply continuous_pi
-  intro α
-  exact continuous_subtype_val.comp (PiLp.continuous_apply α)
+  have hraw :
+      Continuous (fun v : PiLp 2 (fun _ : SpinIndex =>
+        independentPhysicalSpace theta hCAR hHermitian) =>
+        (fun α : SpinIndex => (v α : Lp E 2 μ))) := by
+    apply continuous_pi
+    intro α
+    exact continuous_subtype_val.comp (PiLp.continuous_apply α)
+  exact hraw.subtype_mk (fun v =>
+    (hilbertPhysicalOutputsToActualOutputs theta hCAR hHermitian v).property)
 
 variable (color : ColorIndex 2 → ColorMatrix 2)
 variable (gamma : SpaceIndex → GammaMatrix)
