@@ -117,8 +117,25 @@ theorem pairedOriginalNativeWeakForm_iff_historicalHamiltonian
     theta hCAR hHermitian color gamma J hColor hGamma hJ u hu w
   have hhistorical :=
     pairedOriginalPhysicalNormalizedHamiltonian_weakForm_iff ⟨u,hau⟩ w
-  rw [← pairedOriginalPhysicalNormalizedHamiltonian_eq_historical]
-  exact hform.trans hhistorical
+  /- Avoid rewriting inside the entire dependent natural-domain
+     proposition. Congruence on the exact BH source operator identity
+     yields precisely the equality of *representing vector* properties. -/
+  have hRepresentingVectorEq :
+      (∃ h : u ∈ pairedOriginalPhysicalNormalizedHamiltonian.domain,
+        w = pairedOriginalPhysicalNormalizedHamiltonian ⟨u,h⟩) =
+      (∃ hh : u ∈ pairedSU2PhysicalHamiltonian.domain,
+        w = pairedSU2PhysicalHamiltonian ⟨u,hh⟩) :=
+    congrArg
+      (fun T : pairedGaugeData.physicalSpace →ₗ.[ℂ]
+          pairedGaugeData.physicalSpace =>
+        ∃ h : u ∈ T.domain, w = T ⟨u,h⟩)
+      pairedOriginalPhysicalNormalizedHamiltonian_eq_historical
+  constructor
+  · intro hn
+    exact Eq.mp hRepresentingVectorEq (hhistorical.mp (hform.mp hn))
+  · intro hh
+    exact hform.mpr (hhistorical.mpr
+      (Eq.mpr hRepresentingVectorEq hh))
 
 #print axioms pairedOriginalNativeWeakForm_iff_ambient
 #print axioms pairedOriginalNativeWeakForm_iff_historicalHamiltonian
