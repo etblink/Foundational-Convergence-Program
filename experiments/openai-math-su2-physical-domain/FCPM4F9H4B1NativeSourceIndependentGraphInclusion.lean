@@ -43,6 +43,10 @@ variable (hColor : color = pairedAlgebraData.color)
 variable (hGamma : gamma = pairedAlgebraData.gamma)
 variable (hJ : ∀ α A w, J (theta α A w) = pairedTheta α A (J w))
 
+-- Matching hColor/hGamma occur in the proof rather than the proposition.
+-- Keep all source-exact representation witnesses explicitly in scope.
+include color gamma hColor hGamma
+
 /-- Full native independent → source AY physical graph inclusion.
 The SOURCE graph is exactly the H3B2 source-defined AY operator graph;
 the INDEPENDENT graph is the H2C genuinely J-free E2 operator graph.
@@ -119,7 +123,11 @@ theorem nativeIndependentGraph_mem_sourceGraph
     rw [originalMinimalPhysicalHilbertChargeColumn_graph_eq]
     apply (originalMinimalPhysicalHilbertChargeGraph_mem_source_iff
       pairedAlgebraData pairedGaugeData _).mpr
-    simpa only [hhilbert] using hsrc
+    rw [hhilbert]
+    change _ ∈
+      (pairedGaugeData.deformedModelGraph 1 0 :
+        Set (FullL2 2 × (SpinIndex → FullL2 2)))
+    exact hsrc
   rw [pairedOriginalNativePhysicalHilbertChargeColumn_graph_eq]
   exact (pairedOriginalPhysicalHilbertChargeGraph_mem_iff _).mpr hsourceAY
 
