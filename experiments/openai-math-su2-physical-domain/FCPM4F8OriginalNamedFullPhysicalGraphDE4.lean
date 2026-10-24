@@ -72,37 +72,15 @@ theorem pairedSourceNamedClosedGraph_eq_actualIndependentFullPhysicalGraph_image
         (S : Set (FullL2 2 × (SpinIndex → FullL2 2))))
       (FCP.BFSSSU2PhysicalDomainD1.sourceGaugeRestrictedClosedGraph_equal
         pairedAlgebraData pairedGaugeData)
-  calc
-    (pairedGaugeData.deformedModelGraph 1 0 :
-      Set (FullL2 2 × (SpinIndex → FullL2 2))) =
-      (FCP.BFSSSU2PhysicalDomainD1.originalRestrictedClosedGraph
-        pairedAlgebraData pairedGaugeData : Set _) := hD1
-    _ = closure (LinearMap.range
-      ((coreToL2.comp pairedGaugeData.invariantCore.subtype).prod
-        (pairedAlgebraData.chargeVector.comp
-          pairedGaugeData.invariantCore.subtype)) :
-        Set (FullL2 2 × (SpinIndex → FullL2 2))) := by
-      change
-        ((LinearMap.range
-          ((coreToL2.comp pairedGaugeData.invariantCore.subtype).prod
-            (pairedAlgebraData.chargeVector.comp
-              pairedGaugeData.invariantCore.subtype))).topologicalClosure :
-          Set (FullL2 2 × (SpinIndex → FullL2 2))) =
-        closure (LinearMap.range
-          ((coreToL2.comp pairedGaugeData.invariantCore.subtype).prod
-            (pairedAlgebraData.chargeVector.comp
-              pairedGaugeData.invariantCore.subtype)) :
-          Set (FullL2 2 × (SpinIndex → FullL2 2)))
-      exact Submodule.topologicalClosure_coe _
-    _ = (independentGraphTransportHomeomorph J) ''
-      ((fun p : independentPhysicalSpace theta hCAR hHermitian ×
-        FCP.M4F8IndependentActualE2FullPhysicalGraphRebaseDE2.independentActualPhysicalOutputs
-          theta hCAR hHermitian =>
-        ((p.1 : Lp E 2 μ), (p.2 : SpinIndex → Lp E 2 μ))) ''
-        ((FCP.M4F8IndependentActualE2FullPhysicalGraphRebaseDE2.independentActualE2FullPhysicalChargeColumn
-          color gamma theta hCAR hHermitian).graph : Set _)) :=
-      FCP.M4F8IndependentActualPhysicalGraphSourceTransportDE3.sourceRestrictedClosure_eq_actualFullPhysicalE2Graph_image
-        color gamma theta hCAR hHermitian J hColor hGamma hJ
+  -- Convert the original named restricted graph to its source-defined
+  -- submodule closure, then use the explicit coe-to-closure identity.
+  -- Avoid a large dependent definitional `change` on the entire graph.
+  rw [hD1]
+  simp only [FCP.BFSSSU2PhysicalDomainD1.originalRestrictedClosedGraph,
+    Submodule.topologicalClosure_coe]
+  exact
+    FCP.M4F8IndependentActualPhysicalGraphSourceTransportDE3.sourceRestrictedClosure_eq_actualFullPhysicalE2Graph_image
+      color gamma theta hCAR hHermitian J hColor hGamma hJ
 
 #print axioms pairedSourceNamedClosedGraph_eq_actualIndependentFullPhysicalGraph_image
 
