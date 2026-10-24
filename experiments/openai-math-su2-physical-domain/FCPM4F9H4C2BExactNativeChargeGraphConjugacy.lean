@@ -1,4 +1,4 @@
-import FCPM4F9H4C2ANativeSourceReverseChargeGraph
+import FCPM4F9H4C2A2ActualNativeReverseFromGeneric
 
 /-!
 BFSS M4F9 H4C2B — exact TWO-SIDED graph equivalence of ACTUAL
@@ -54,7 +54,7 @@ theorem nativeIndependentGraph_mem_iff_sourceGraph
       theta hCAR hHermitian color gamma J hColor hGamma hJ p hp
   · intro hp
     have hrev :=
-      FCP.M4F9H4C2ANativeSourceReverseChargeGraph.nativeSourceGraph_mem_independentGraph
+      FCP.M4F9H4C2A2ActualNativeReverseFromGeneric.nativeSourceGraph_mem_independentGraph
         theta hCAR hHermitian color gamma J hColor hGamma hJ
         (independentPhysicalUnitary theta hCAR hHermitian J hJ p.1,
           independentPhysicalHilbertOutputUnitary
