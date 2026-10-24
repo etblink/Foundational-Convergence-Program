@@ -50,7 +50,7 @@ theorem hilbertPhysicalOutputsToActualOutputs_surjective :
       (y : SpinIndex → Lp E 2 μ) α ∈
         independentPhysicalSpace theta hCAR hHermitian :=
     (Submodule.mem_pi).mp hy α (Set.mem_univ α)
-  refine ⟨toLp 2 (fun α : SpinIndex =>
+  refine ⟨WithLp.toLp 2 (fun α : SpinIndex =>
       (⟨(y : SpinIndex → Lp E 2 μ) α, hcoords α⟩ :
         independentPhysicalSpace theta hCAR hHermitian)), ?_⟩
   apply Subtype.ext
