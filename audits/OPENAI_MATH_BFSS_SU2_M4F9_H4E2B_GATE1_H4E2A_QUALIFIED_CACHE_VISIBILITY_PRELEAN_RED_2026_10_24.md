@@ -22,3 +22,14 @@ Error: Process completed with exit code 1.
 - Experimental adaptation for a genuinely discriminating Gate #2: use the previously restored *H4E1B* strictly accepted parent cache and recompile the **exact strictly accepted H4E2A source blob** under strict Lean and axiom validation in the *same job* before compiling H4E2B. This reduces dependence on the inaccessible cross-run H4E2A child cache. If H4E1B itself is now inaccessible, stop again at provenance, preserve precise evidence and do not misclassify the proof candidate.
 - Preserve H4E2A Gate #1 earlier `isDefEq` red and the subsequent H4E2A Gate #2 actual green independently. Do not overwrite or reclassify them.
 - **Scientific scope** of H4E2B remains: under H3B2 matching hypotheses, full AY original ambient/native charge-domain equivalence and exact normalized polarized charge form on that common entire natural domain. No Hamiltonian equivalence or spectral conclusion.
+
+## Follow-up diagnosis after Gate #2 success
+
+Direct comparison of the **exact workflow cache path manifests** at the two immutable revisions revealed a concrete **cache-version mismatch candidate**, not merely an unexplained key-visibility anomaly:
+
+- H4E2A Gate #2 saved the key with **89** path entries, ending in `FCPM4F9H4E2AOriginalAYAmbientNativePolarizedForm.olean`.
+- H4E2B Gate #1 requested that same textual key with **88** path entries, ending instead in `FCPM4F9H4E1BOriginalAYAmbientChargeAction.olean`; it omitted the H4E2A compiled child.
+- GitHub Actions cache compatibility depends on the effective path/compression version as well as the textual key. Hence an identical textual key does **not** establish that Gate #1 requested the cache version saved by H4E2A. The path mismatch is a concrete, reproducible defect and a strong explanation for the reported miss; no private cache-backend telemetry was obtained to prove it was the only factor.
+- H4E2B Gate #2 recovered from an older H4E1B cache with a compatible path manifest, recompiled the immutable accepted H4E2A and compiled H4E2B in one runner. [Gate #2 run #40127243850](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40127243850) passed 2/2 H4E2B roots with whitelist-only axioms and saved a new child cache. The original Gate #1 remains red.
+
+**Successor rule:** when cloning or changing GitHub cache restore workflows, diff *both the textual key and the exact path manifest* against the corresponding qualified save workflow. Never equate a cache miss with revoked theorem acceptance.
