@@ -44,6 +44,10 @@ variable (hColor : color = pairedAlgebraData.color)
 variable (hGamma : gamma = pairedAlgebraData.gamma)
 variable (hJ : ∀ α A w, J (theta α A w) = pairedTheta α A (J w))
 
+-- The DE4 original/independent source matching witnesses are essential
+-- theorem hypotheses even though the source-only conclusion does not name them.
+include theta hCAR hHermitian color gamma J hColor hGamma hJ
+
 /-- Each output of the ACTUAL original AY paired gauge-minimal
 physical Hilbert charge belongs to the original physical subspace.
 This theorem uses named DE4 graph image, not an unproved output
