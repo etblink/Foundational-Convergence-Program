@@ -53,7 +53,7 @@ theorem pairedNativeNormalizedAdjointSquare_iff_historicalRepresentingVector :
     letI : CompleteSpace pairedGaugeData.physicalSpace :=
       originalPhysicalHilbertComplete pairedAlgebraData pairedGaugeData
     ∀ (u : pairedGaugeData.physicalSpace)
-      (hu : u ∈ pairedOriginalNativePhysicalHilbertChargeColumn.domain)
+      (_hu : u ∈ pairedOriginalNativePhysicalHilbertChargeColumn.domain)
       (w : pairedGaugeData.physicalSpace),
     (∃ hs : u ∈ (naturalComp
           pairedOriginalNativePhysicalHilbertChargeColumn.adjoint
@@ -107,21 +107,35 @@ theorem pairedNativeAdjointSquare_action_eq_historical :
      ?_)
   intro u hu hOut
   let g := pairedOriginalNativePhysicalHilbertChargeColumn
-  have hSq : u ∈ (naturalComp g.adjoint g).domain :=
-    (naturalComp_mem_domain).mpr ⟨hu,hOut⟩
-  have hAction :
-      (naturalComp g.adjoint g) ⟨u,hSq⟩ =
-        g.adjoint ⟨g ⟨u,hu⟩,hOut⟩ := by
-    rw [naturalComp_apply]
-  have hRep :
-      (∃ hs : u ∈ (naturalComp g.adjoint g).domain,
-        (1 / 16 : ℂ) • g.adjoint ⟨g ⟨u,hu⟩,hOut⟩ =
-          (1 / 16 : ℂ) • (naturalComp g.adjoint g) ⟨u,hs⟩) :=
-    ⟨hSq, congrArg ((1 / 16 : ℂ) • ·) hAction.symm⟩
-  obtain ⟨hh,hEq⟩ :=
-    (pairedNativeNormalizedAdjointSquare_iff_historicalRepresentingVector
-      theta hCAR hHermitian color gamma J hColor hGamma hJ u hu
-      ((1 / 16 : ℂ) • g.adjoint ⟨g ⟨u,hu⟩,hOut⟩)).mp hRep
+  have hd : Dense (g.domain : Set pairedGaugeData.physicalSpace) := by
+    exact FCP.M4F9H4D1OriginalNativeHilbertChargeDomainDense.pairedOriginalNativePhysicalHilbertChargeColumn_domain_dense
+      theta hCAR hHermitian color gamma J hColor hGamma hJ
+  have hAdjForm : ∀ v : g.domain,
+      inner ℂ (g.adjoint ⟨g ⟨u,hu⟩,hOut⟩)
+          (v : pairedGaugeData.physicalSpace) =
+        inner ℂ (g ⟨u,hu⟩) (g v) := by
+    intro v
+    exact LinearPMap.adjoint_isFormalAdjoint hd
+      ⟨g ⟨u,hu⟩,hOut⟩ v
+  have hWeak : ∀ v : g.domain,
+      inner ℂ ((1 / 16 : ℂ) •
+          g.adjoint ⟨g ⟨u,hu⟩,hOut⟩)
+            (v : pairedGaugeData.physicalSpace) =
+        (1 / 16 : ℂ) * inner ℂ (g ⟨u,hu⟩) (g v) := by
+    intro v
+    calc
+      inner ℂ ((1 / 16 : ℂ) • g.adjoint ⟨g ⟨u,hu⟩,hOut⟩)
+          (v : pairedGaugeData.physicalSpace) =
+        (1 / 16 : ℂ) *
+          inner ℂ (g.adjoint ⟨g ⟨u,hu⟩,hOut⟩)
+            (v : pairedGaugeData.physicalSpace) :=
+          one_sixteenth_inner_smul _ _
+      _ = (1 / 16 : ℂ) * inner ℂ (g ⟨u,hu⟩) (g v) :=
+        congrArg ((1 / 16 : ℂ) * ·) (hAdjForm v)
+  have hHist := pairedOriginalNativeWeakForm_iff_historicalHamiltonian
+    theta hCAR hHermitian color gamma J hColor hGamma hJ u hu
+      ((1 / 16 : ℂ) • g.adjoint ⟨g ⟨u,hu⟩,hOut⟩)
+  obtain ⟨hh,hEq⟩ := hHist.mp (by simpa only [g] using hWeak)
   exact ⟨hh,hEq.symm⟩
 
 #print axioms pairedNativeNormalizedAdjointSquare_iff_historicalRepresentingVector
