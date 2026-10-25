@@ -1,0 +1,28 @@
+# BFSS S3L5I2B Gate48 #1 — exact original source kinetic charge bridge STRICTLY ACCEPTED
+
+**Project Lead independent primary-source CI verification, 2026-10-25.** Exactly TWO genuine new original mathematical theorem declarations accepted in unmodified S3L5I2B. The 40 additional accepted original-source theorem reports are strict recompilation of already accepted ancestry, not 40 globally new roots. The literal source kinetic charge is now identified, but the actual paired 48-Majorana fiber premise remains separately unproved in the source I2B theorem.
+
+## Immutable source and accepted compiler evidence
+
+- [Completed successful GitHub Actions run #40205325107](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40205325107), job `121204898643`; original workflow/source Git research SHA `f3087d938d46e1a0932fb9e6806add200140ee70`. All frozen source checks, Lean 4.34.1, pinned Mathlib, cache recovery, fresh warning-as-error compilation, exact axiom validation, real .olean, source evidence artifact and new qualified cache-save completed successfully.
+- Frozen original BFSS math `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`; Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`. Canonical S3L5I2B `experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5I2BOriginalSourceKineticChargeBridgeProbe.lean`, immutable exact Git SHA `09b6db43c107f7c297c840eb6d654b454817dc55`. No source theorem edits, surrogate Fock models or new axioms.
+- Qualified Gate47 direct source cache MISS; independently accepted qualified Gate23 original S3E2 ancestor cache HIT. True original R4A source import DAG has 116 modules with 40 initially unavailable source objects. Exactly 21 original-statement source modules compiled afresh in genuine dependency order, S3L1(1), S3L3A(1), B(1), C(2), D(1), E(1), S3L4B(6), S3L4C(4), S3E(3), S3L4D(4), S3L5A(1), S3L5B(1), S3L5C(2), S3L5D(1), S3L5F(2), S3L5G(1), S3L0(1), S3L5H(4), S3L5I1(2), S3L5I2A(1), **S3L5I2B(2)** = **42** original-source theorem reports. Previously qualified proof-only source compatibility candidates S3L3A/B/C/D/E/S3L4B/S3E independently verified as exact source-statement preserving SHA/worktree and whole-file single-proof replacement variants.
+- All source modules strictly compiled `lake env lean -DwarningAsError=true` and exact source `#print axioms` reports contained only `propext, Classical.choice, Quot.sound`, NO `sorryAx`, source warnings/errors or missing real compiled .olean. Actual new S3L5I2B compiler **10.442 seconds**; S3L5I2A **30.064 seconds**, source S3E **90.655 seconds** under its measured 240s limit, source S3L4D **60.735 seconds** under 85s. Full bounded source checkpoint passed.
+```text
+BFSS_S3L5I2B_KINETIC_BRIDGE_GATE48_V33_STRICT_SOURCE_CHECKPOINT_PASS_NEW_COMPILED_MODULES 21
+GATE48_ORIGINAL_S3L5I2B_SOURCE_KINETIC_BRIDGE_STRICTLY_COMPILED_PAIRED_R4A_R4D_UNPROVED
+```
+- **Qualified child original source cache SAVED successfully**:
+```text
+bfss-fcp-s3l5i2b-bridge-10a197a5-gate48-v1-adc7f124-lean4341-d13f23b-Linux-X64
+```
+- [Original job logs, axioms, provenance artifact #12603713357](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40205325107/artifacts/12603713357), ZIP SHA256 `9c254d395f514216953d81a3e7f1b20c3c5af712f89a6c2efa9741c45bad91cf`.
+
+## Two genuine new original S3L5I2B theorems, mathematical boundary
+
+1. `FCP.BFSSSU2PhysicalDomainS3L5I2B.kineticWeightedSum_eq_sourceKineticCharge` proves definitional literal equality `kineticWeightedSum M α = sourceKineticCharge M α` via `rfl`. `sourceKineticCharge` is source-defined original BFSS kinetic summand (not the full source supercharge or Hamiltonian). This closes the named-source kinetic formula matching step, with original complex `-i` gamma, true `AlgebraData.fermionAction` and coordinate derivative terms.
+2. `sourceCombined_comm_sourceKineticCharge_of_fiber` transports the proven original weighted sum commutator into the **literal** source `sourceKineticCharge M α`, but retains an **EXPLICIT bounded Fock-fiber covariance premise** `∀γ A, [K,M.theta γ A]=∑β d γ β • M.theta β A`. No conditional theorem is misrepresented as unconditional physical spin covariance.
+
+**Next source-ordered original proof step:** S3L5I3, `SU2BFSSPhysicalDomainS3L5I3ActualPairedKineticChargeProbe.lean`, canonical unchanged blob `67276dbf96974a0709ba5ab6159fde48cdd8d60c`, one theorem `pairedActualCombined_comm_sourceKineticCharge_response`. It instantiates exactly the accepted original S3L5I2B source identity with actual `pairedAlgebraData`, actual 48-Majorana `pairedFermionPlaneSpinGenerator`, and **discharges the visible Fock premise using the separately qualified original S3L4D `pairedActualFockSpin_comm_source_theta`**. Its right-hand side is still the uncontracted indexed `kineticWeightedResponse`, **NOT** yet the final free-spinor `-J` gamma coefficient contraction. Original S3L5J-series coefficient/reindex, source cubic K-series, original R4A/R4D, full physical 16-charge Spin9 and BFSS positive normalizable eigenpair remain open.
+
+Gate49 must restore qualified Gate48 cache with 21 real antecedent .olean or qualified independent original Gate23 source cache and strictly rebuild all 21 accepted original source modules before attempting S3L5I3. Preserve pinned original mathematics/Lean/Mathlib, exact canonical Git/source SHA and prior proof-only byte-diff checks, source warning-as-error, only three permitted axioms, no sorry, bounded 85s (S3E separately 240s), real objects, original logs artifact, and cache save only on strict full pass. Frozen upstream math, canonical main and draft PR25 unchanged.
