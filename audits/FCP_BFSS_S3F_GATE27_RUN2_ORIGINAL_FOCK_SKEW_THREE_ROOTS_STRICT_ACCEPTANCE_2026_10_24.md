@@ -1,7 +1,7 @@
 # BFSS S3F Gate27 #2 — original Fock spin-plane skew-adjointness, THREE genuine source roots STRICTLY ACCEPTED
 
 **Project Lead independent verification: October 24 PDT / October 25 UTC 2026.**
-**New original S3F source roots: 3/3 ACCEPTED.** Separate previous Gate23 and Gate25 source gates each accepted three different roots: nine distinct newly accepted roots across those three gates; do not extrapolate an aggregate historical root total without ledger reconciliation.
+**Current recovery-chain S3F proof roots: 3/3 strictly requalified.** These EXACT three mathematical S3F declarations on the same ORIGINAL source Git blob `8da1181cf698caded890d3cdc17645f3e4b3c33b` had already been accepted historically in S3F Gate #145, [run #38087735640](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38087735640), on October 10. Gate27 provides a new independent strict verification and robust parent-cache rebuild pathway, NOT three new mathematical additions to the program-wide theorem ledger. Likewise Gate25 requalified three historically accepted S3E Gate #136 theorems. Across Gates23/25/27, NINE proofs passed in this recovery sequence, but they are NOT nine historically novel unique roots; global counts must deduplicate by full declaration identity and existing accepted ancestry.
 
 ## Immutable provenance and completed end-to-end acceptance
 
