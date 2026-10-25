@@ -8,7 +8,7 @@ and mathematical statement preservation before compiling canonical modules.
 Strict checkpoint: no R4A/R4D root is accepted unless explicitly compiled.
 Requires pinned original mathematics and a qualified parent source cache.
 """
-import pathlib,re,subprocess,sys,shutil,time
+import pathlib,re,subprocess,sys,shutil,time,hashlib
 from collections import defaultdict
 
 TARGET="SU2BFSSPhysicalDomainS3L5K2R4DNamedSourceAssemblyProbe"
@@ -753,7 +753,7 @@ def main():
         print(PREFIX+"_BATCH_OBJECT_MISSING",flush=True);return 13
     (logs/"qualified-batch.txt").write_text("\n".join(
         n+" "+data[n][2]+(" PROOF_ONLY_COMPAT "+PIN_COMPAT_S3L3A if n==PATCH_STEM else "")+(" PROOF_ONLY_COMPAT "+PIN_COMPAT_S3L3B if n==PATCH_STEM_B else "")+(" PROOF_ONLY_COMPAT "+PIN_COMPAT_S3L3C if n==PATCH_STEM_C else "")+(" PROOF_ONLY_COMPAT "+PIN_COMPAT_S3L3D if n==PATCH_STEM_D else "")+(" PROOF_ONLY_COMPAT "+PIN_COMPAT_S3L3E if n==PATCH_STEM_E else "")+(" PROOF_ONLY_COMPAT "+PIN_COMPAT_S3L4B if n==PATCH_STEM_L4B else "")+(" PROOF_ONLY_COMPAT "+PIN_COMPAT_S3E if n==PATCH_STEM_S3E else "")+(" PROOF_ONLY_COMPAT "+PIN_COMPAT_J1 if n=="SU2BFSSPhysicalDomainS3L5J1SourceSpatialReindexAndGammaCoefficientProbe" else "")+(" PROOF_ONLY_COMPAT "+PIN_COMPAT_J6 if n=="SU2BFSSPhysicalDomainS3L5J6SourceOrbitalFixedIndexReindexProbe" else "")+(" PROOF_ONLY_COMPAT "+PIN_COMPAT_J8 if n=="SU2BFSSPhysicalDomainS3L5J8PairedComplexResponseCoefficientContractionProbe" else "")+(" PROOF_ONLY_COMPAT "+PIN_COMPAT_S3L2 if n=="SU2BFSSPhysicalDomainS3L2SourceGammaTwoSpatialCovarianceProbe" else "")+(" PROOF_ONLY_COMPAT "+PIN_COMPAT_R3A if n=="SU2BFSSPhysicalDomainS3L5K2R3AOriginalGammaTwoSpatialReindexProbe" else "")+(" PROOF_ONLY_COMPAT "+PIN_COMPAT_R2B if n=="SU2BFSSPhysicalDomainS3L5K2R2BOrderedSourcePositionPairReindexProbe" else "")
-        for n in batch)+"\n")
+        for n in batch)+("\n" if batch else ""))
     assert len(order)==126,"R4D_SOURCE_GRAPH_NO_LONGER_126"
     for n in order:
         if n==TARGET:continue
@@ -764,6 +764,19 @@ def main():
         print(PREFIX+"_R4D_UNEXPECTEDLY_COMPILED_IN_ANCESTRY_GATE",flush=True)
         return 17
     (logs/"qualified-full-125-ancestor-names.txt").write_text("\n".join(n for n in order if n!=TARGET)+"\n")
+    bundle=logs/"checkpoint-oleans"
+    bundle.mkdir(parents=True,exist_ok=False)
+    binary_hashes=[]
+    for n in order:
+        if n==TARGET:continue
+        p=targetdir/(n+".olean")
+        packed=bundle/(n+".olean")
+        shutil.copyfile(p,packed)
+        digest=hashlib.sha256(p.read_bytes()).hexdigest()
+        binary_hashes.append(n+" "+digest+" "+data[n][2])
+    assert len(binary_hashes)==125,"BINARY_ANCESTRY_MANIFEST_INCOMPLETE"
+    (logs/"checkpoint-olean-sha256-sourceblobs.txt").write_text("\n".join(binary_hashes)+"\n")
+    print(PREFIX+"_EXACT_125_OLEAN_BINARY_PROVENANCE_BUNDLE_CREATED",len(binary_hashes),flush=True)
     print(PREFIX+"_ALL_125_REAL_R4D_ANCESTORS_STRICTLY_QUALIFIED_TARGET_NOT_ATTEMPTED",flush=True)
     print(PREFIX+"_PASS_NEW_COMPILED_MODULES",len(batch),flush=True)
     return 0
