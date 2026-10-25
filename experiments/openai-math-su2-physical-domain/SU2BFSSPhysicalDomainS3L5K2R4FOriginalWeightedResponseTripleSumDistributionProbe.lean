@@ -32,7 +32,7 @@ open FCP.BFSSSU2PhysicalDomainS3L5K2R4C2
 original fermionic and spatial triple sums; all gamma and color weights,
 operator ordering, and position variations are unchanged. -/
 theorem pairedOriginalCubicFixedColor_responseWeightedTripleSum_distribute
-    (i j : SpaceIndex) (hij : i ≠ j) (α : SpinIndex)
+    (i j : SpaceIndex) (_hij : i ≠ j) (α : SpinIndex)
     (A B C : ColorIndex 2) :
     (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
       (((originalCubicStructureWeight A B C *
