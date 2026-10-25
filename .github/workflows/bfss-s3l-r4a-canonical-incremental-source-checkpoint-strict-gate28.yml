@@ -43,7 +43,7 @@ jobs:
           import json,pathlib,subprocess
           manifest=json.loads(pathlib.Path("upstream-math/lean/lake-manifest.json").read_text())
           assert next(p["rev"] for p in manifest["packages"] if p["name"]=="mathlib")=="d13f23b723b8a846827a245b89c10fc7d3f11612"
-          pinned={"experiments/openai-math-su2-physical-domain/BFSS_S3L_R4A_SOURCE_ORDERED_INCREMENTAL_V5_2026_10_24.py":"71886b91dd561b8eeade5fdb9b8af08ae3591f45","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2R4AThreeIndexOriginalSourceSumTransportProbe.lean":"ef803c1b5c62a819e568c5a645c5e622ec1a0d6f","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3ASourcePositionDerivativeCommutatorProbe.lean":"aa47f20d0c14374659aee0bf24c6361e464386ad","experiments/openai-math-su2-physical-domain/recovery/S3L3AOriginalSourceProofOnlyDeprecationGate28V4.lean":"a1586fdcbadd829ac7d57cfb4f8c2dab7ae655c1","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe.lean":"19a7eb6a710fe6d4b531dc0eefba7ee27ed21dca","experiments/openai-math-su2-physical-domain/recovery/S3L3BOriginalSourceProofOnlyDeprecationGate28V5.lean":"a3db8402e4ba03aed837d722c37523b3581fd2bd"}
+          pinned={"experiments/openai-math-su2-physical-domain/BFSS_S3L_R4A_SOURCE_ORDERED_INCREMENTAL_V6_2026_10_24.py":"79474d8fcd5853d310e95a93a5b3ddd87abd9623","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2R4AThreeIndexOriginalSourceSumTransportProbe.lean":"ef803c1b5c62a819e568c5a645c5e622ec1a0d6f","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3ASourcePositionDerivativeCommutatorProbe.lean":"aa47f20d0c14374659aee0bf24c6361e464386ad","experiments/openai-math-su2-physical-domain/recovery/S3L3AOriginalSourceProofOnlyDeprecationGate28V4.lean":"a1586fdcbadd829ac7d57cfb4f8c2dab7ae655c1","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe.lean":"19a7eb6a710fe6d4b531dc0eefba7ee27ed21dca","experiments/openai-math-su2-physical-domain/recovery/S3L3BOriginalSourceProofOnlyCaseSplitGate28V6.lean":"75af029434de4a633acbda65e89200a8c43d564a"}
           for path,sha in pinned.items():
               assert subprocess.check_output(["git","rev-parse","HEAD:"+path],text=True).strip()==sha,("BAD_SOURCE_GIT_BLOB",path)
               assert subprocess.check_output(["git","hash-object","--no-filters",path],text=True).strip()==sha,("MUTATED_WORKTREE",path)
@@ -343,10 +343,10 @@ jobs:
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
-          python3 experiments/openai-math-su2-physical-domain/BFSS_S3L_R4A_SOURCE_ORDERED_INCREMENTAL_V5_2026_10_24.py "$(pwd)/upstream-math/lean" "/tmp/bfss-s3l-r4a-gate28" 2>&1 | tee /tmp/bfss-s3l-r4a-gate28/build-summary.log
+          python3 experiments/openai-math-su2-physical-domain/BFSS_S3L_R4A_SOURCE_ORDERED_INCREMENTAL_V6_2026_10_24.py "$(pwd)/upstream-math/lean" "/tmp/bfss-s3l-r4a-gate28" 2>&1 | tee /tmp/bfss-s3l-r4a-gate28/build-summary.log
           test -s /tmp/bfss-s3l-r4a-gate28/qualified-batch.txt
           test -s /tmp/bfss-s3l-r4a-gate28/source-manifest.txt
-          grep -q "BFSS_S3L_R4A_INCREMENTAL_V5_SOURCE_CHECKPOINT_PASS_NEW_COMPILED_MODULES" /tmp/bfss-s3l-r4a-gate28/build-summary.log
+          grep -q "BFSS_S3L_R4A_INCREMENTAL_V6_SOURCE_CHECKPOINT_PASS_NEW_COMPILED_MODULES" /tmp/bfss-s3l-r4a-gate28/build-summary.log
           echo GATE28_QUALIFIED_CANONICAL_INCREMENTAL_SOURCE_CHECKPOINT_PASS_R4D_UNPROVED
       - name: Save only validated canonical R4A import-ancestry checkpoint
         if: success()
@@ -471,7 +471,7 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3DActualFermionSpinQuadraticGeneratorProbe.olean
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3E1ActualSameColorFermionicBilinearCommSourceProbe.olean
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3E2SameColorActualGammaCoefficientContractionProbe.olean
-          key: bfss-fcp-s3l-r4a-canonical-proofcompat-71886b91-gate28-v3-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-fcp-s3l-r4a-canonical-proofcompat-79474d8f-gate28-v4-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
       - name: Preserve canonical R4A import manifest proof logs and first negative evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
