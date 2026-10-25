@@ -28,13 +28,38 @@ def main():
     p=paths[TARGET][0]
     assert git("rev-parse","HEAD:"+str(p))==SHA
     assert git("hash-object","--no-filters",str(p))==SHA
-    order=[];mark={};data={};deps={}
+    order=[];mark={};data={};deps={};collisions=[]
+    def canonical_source(stem):
+        candidates=paths[stem]
+        if len(candidates)==1:
+            return candidates[0]
+        # A recovery source is a distinct historical variant and must not
+        # silently shadow the original non-recovery experiment source.
+        originals=[p for p in candidates if "recovery" not in p.parts]
+        if len(originals)!=1:
+            raise ValueError("UNRESOLVED_DUPLICATE_ORIGINAL "+stem+" "+str(candidates))
+        canonical=originals[0]
+        def declaration_tail(path):
+            src=path.read_text()
+            n=src.find("\nnamespace ")
+            if n<0:raise ValueError("DUPLICATE_SOURCE_WITHOUT_NAMESPACE "+str(path))
+            return src[n:]
+        declaration=declaration_tail(canonical)
+        for alt in candidates:
+            if alt==canonical:continue
+            if declaration_tail(alt)!=declaration:
+                raise ValueError("CONFLICTING_DUPLICATE_DECLARATION "+stem+" "+str(canonical)+" "+str(alt))
+            collisions.append((stem,str(canonical),git("rev-parse","HEAD:"+str(canonical)),
+                               str(alt),git("rev-parse","HEAD:"+str(alt))))
+            print(PREFIX+"_CANONICAL_NON_RECOVERY_SOURCE",stem,str(canonical),
+                  "IGNORED_EQUIVALENT_DECLARATION_VARIANT",str(alt),flush=True)
+        return canonical
     def visit(stem):
         if mark.get(stem)==2:return
         if mark.get(stem)==1:raise ValueError("IMPORT_CYCLE "+stem)
-        if len(paths[stem])!=1:raise ValueError("AMBIGUOUS_SOURCE "+stem)
+        p=canonical_source(stem)
         mark[stem]=1
-        p=paths[stem][0];src=p.read_text()
+        src=p.read_text()
         h=git("hash-object","--no-filters",str(p))
         if h!=git("rev-parse","HEAD:"+str(p)):
             raise ValueError("SOURCE_MUTATION "+stem)
@@ -45,6 +70,8 @@ def main():
             if dep in paths:visit(dep)
         mark[stem]=2;order.append(stem)
     visit(TARGET)
+    (logs/"duplicate-source-provenance.txt").write_text(
+        "\n".join(" | ".join(record) for record in collisions)+"\n")
     targetdir=math/".lake/build/lib/lean"
     missing=[n for n in order if not (targetdir/(n+".olean")).is_file()]
     (logs/"source-manifest.txt").write_text(
