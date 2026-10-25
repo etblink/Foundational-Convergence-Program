@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+"""Requalify at most FIVE missing canonical original S3L source imports in dependency order.
+
+V2 canonical-only policy: choose unique non-recovery file and log every
+other Git source variant with SHA and theorem-body divergence. Never use a
+recovery proof to replace a canonical proof; let pinned Lean test it.
+
+Strict checkpoint: no R4A/R4D root is accepted unless explicitly compiled.
+Requires pinned original mathematics and a qualified parent source cache.
+"""
+import pathlib,re,subprocess,sys,shutil,time
+from collections import defaultdict
+
+TARGET="SU2BFSSPhysicalDomainS3L5K2R4AThreeIndexOriginalSourceSumTransportProbe"
+SHA="ef803c1b5c62a819e568c5a645c5e622ec1a0d6f"
+PREFIX="BFSS_S3L_R4A_INCREMENTAL_V3_SOURCE_CHECKPOINT"
+LIMIT=5
+ALLOWED={"propext","Classical.choice","Quot.sound"}
+def git(*argv):
+    return subprocess.check_output(["git",*argv],text=True).strip()
+
+def main():
+    if len(sys.argv)!=3:
+        raise ValueError("usage: script ORIGINAL_LEAN_ROOT LOG_DIR")
+    math=pathlib.Path(sys.argv[1]).resolve()
+    logs=pathlib.Path(sys.argv[2]).resolve()
+    logs.mkdir(parents=True,exist_ok=True)
+    paths=defaultdict(list)
+    for p in pathlib.Path("experiments").rglob("*.lean"):
+        paths[p.stem].append(p)
+    if len(paths[TARGET])!=1:
+        raise ValueError("target source missing or duplicated")
+    p=paths[TARGET][0]
+    assert git("rev-parse","HEAD:"+str(p))==SHA
+    assert git("hash-object","--no-filters",str(p))==SHA
+    order=[];mark={};data={};deps={};collisions=[]
+    def canonical_source(stem):
+        candidates=paths[stem]
+        if len(candidates)==1:
+            return candidates[0]
+        # A recovery source is a distinct historical variant and must not
+        # silently shadow the original non-recovery experiment source.
+        originals=[p for p in candidates if "recovery" not in p.parts]
+        if len(originals)!=1:
+            raise ValueError("UNRESOLVED_DUPLICATE_ORIGINAL "+stem+" "+str(candidates))
+        canonical=originals[0]
+        def declaration_tail(path):
+            src=path.read_text()
+            n=src.find("\nnamespace ")
+            if n<0:raise ValueError("DUPLICATE_SOURCE_WITHOUT_NAMESPACE "+str(path))
+            return src[n:]
+        declaration=declaration_tail(canonical)
+        for alt in candidates:
+            if alt==canonical:continue
+            # Competing recovery proofs may deliberately use different Lean
+            # tactics. They are not interchangeable with canonical code.
+            # Record their divergence, but NEVER import/copy/use recovery.
+            same=declaration_tail(alt)==declaration
+            status=("SAME_DECLARATION_BODY" if same
+                    else "DIFFERENT_DECLARATION_OR_PROOF_BODY")
+            collisions.append((stem,str(canonical),git("rev-parse","HEAD:"+str(canonical)),
+                               str(alt),git("rev-parse","HEAD:"+str(alt)),status))
+            print(PREFIX+"_CANONICAL_NON_RECOVERY_SOURCE",stem,str(canonical),
+                  "IGNORED_RECOVERY_VARIANT",str(alt),status,flush=True)
+        return canonical
+    def visit(stem):
+        if mark.get(stem)==2:return
+        if mark.get(stem)==1:raise ValueError("IMPORT_CYCLE "+stem)
+        p=canonical_source(stem)
+        mark[stem]=1
+        src=p.read_text()
+        h=git("hash-object","--no-filters",str(p))
+        if h!=git("rev-parse","HEAD:"+str(p)):
+            raise ValueError("SOURCE_MUTATION "+stem)
+        ds=[x for m in re.findall(r"(?m)^import\s+([^\n]+)",src)
+              for x in m.split() if not x.startswith("--")]
+        data[stem]=(p,src,h);deps[stem]=ds
+        for dep in ds:
+            if dep in paths:visit(dep)
+        mark[stem]=2;order.append(stem)
+    visit(TARGET)
+    (logs/"duplicate-source-provenance.txt").write_text(
+        "\n".join(" | ".join(record) for record in collisions)+"\n")
+    targetdir=math/".lake/build/lib/lean"
+    missing=[n for n in order if not (targetdir/(n+".olean")).is_file()]
+    (logs/"source-manifest.txt").write_text(
+        "\n".join(n+" "+data[n][2]+(" REBUILD" if n in missing else " CACHED")
+                  for n in order)+"\n")
+    print(PREFIX+"_IMPORT_CLOSURE",len(order),"MISSING",len(missing),flush=True)
+    for n in missing:print(PREFIX+"_MISSING",n,data[n][2],flush=True)
+    if len(missing)>80:
+        print(PREFIX+"_BOUNDED_STOP_TOO_MANY_MODULES",len(missing),flush=True)
+        return 3
+    batch=missing[:LIMIT]
+    print(PREFIX+"_SELECTED_QUALIFIED_BATCH",",".join(batch),flush=True)
+    for n in order:
+        p,src,_=data[n]
+        if re.search(r"(?m)^[ \t]*(?:sorry|admit|axiom)(?:\s|$)|\bsorryAx\b",src):
+            print(PREFIX+"_FORBIDDEN_SOURCE",n,flush=True);return 4
+        shutil.copyfile(p,math/(n+".lean"))
+    start=time.monotonic()
+    for n in order:
+        if n not in batch:continue
+        if time.monotonic()-start>520:
+            print(PREFIX+"_TOTAL_RESOURCE_BOUND",n,flush=True);return 5
+        for dep in deps[n]:
+            if dep in paths and not (targetdir/(dep+".olean")).is_file():
+                print(PREFIX+"_MISSING_DIRECT_IMPORT",n,dep,flush=True);return 6
+        p,src,_=data[n]
+        expected=re.findall(r"(?m)^#print axioms (\S+)",src)
+        if not expected:
+            print(PREFIX+"_MISSING_AXIOM_REPORT",n,flush=True);return 7
+        cmd=["timeout","--signal=TERM","--kill-after=5s","85s","lake","env","lean",
+             "-DwarningAsError=true","-o",str(targetdir/(n+".olean")),n+".lean"]
+        print(PREFIX+"_COMPILE_BEGIN",n,flush=True)
+        r=subprocess.run(cmd,cwd=math,text=True,stdout=subprocess.PIPE,
+                         stderr=subprocess.STDOUT)
+        (logs/(n+".log")).write_text(r.stdout)
+        if r.returncode:
+            print(PREFIX+"_FIRST_LEAN_ERROR",n,"exit",r.returncode,flush=True)
+            print(r.stdout[-11000:],flush=True);return 8
+        reports=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",r.stdout)
+        actual=[name.rsplit(".",1)[-1] for name,_ in reports]
+        if actual!=expected:
+            print(PREFIX+"_REPORT_MISMATCH",n,expected,actual,flush=True);return 9
+        for name,a in reports:
+            axioms={x.strip() for x in a.split(",") if x.strip()}
+            if not axioms<=ALLOWED:
+                print(PREFIX+"_BAD_AXIOMS",name,axioms,flush=True);return 10
+        pkgstatus=re.compile(r"warning: ([a-z0-9-]+): repository '([^']+)' has local changes")
+        for line in r.stdout.splitlines():
+            match=pkgstatus.fullmatch(line)
+            if match and match.group(2).endswith("/upstream-math/lean/.lake/packages/"+match.group(1)):
+                continue
+            if "warning:" in line:
+                print(PREFIX+"_UNAPPROVED_WARNING",n,line,flush=True);return 11
+        if any(x in r.stdout for x in ("sorryAx","error:","unknownIdentifier")):
+            print(PREFIX+"_UNAPPROVED_COMPILER_ERROR",n,flush=True);return 11
+        if not (targetdir/(n+".olean")).is_file():
+            print(PREFIX+"_NO_COMPILED_OBJECT",n,flush=True);return 12
+        print(PREFIX+"_FRESH_QUALIFIED",n,"roots",len(actual),flush=True)
+    if not all((targetdir/(n+".olean")).is_file() for n in batch):
+        print(PREFIX+"_BATCH_OBJECT_MISSING",flush=True);return 13
+    (logs/"qualified-batch.txt").write_text("\n".join(n+" "+data[n][2] for n in batch)+"\n")
+    if (targetdir/(TARGET+".olean")).is_file():
+        print(PREFIX+"_R4A_ROOT_ACTUALLY_COMPILED",flush=True)
+    else:
+        print(PREFIX+"_INCREMENTAL_CHECKPOINT_ONLY_R4A_NOT_ACCEPTED",flush=True)
+    print(PREFIX+"_PASS_NEW_COMPILED_MODULES",len(batch),flush=True)
+    return 0
+
+if __name__=="__main__":
+    sys.exit(main())
