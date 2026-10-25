@@ -43,7 +43,7 @@ jobs:
           import json,pathlib,subprocess
           manifest=json.loads(pathlib.Path("upstream-math/lean/lake-manifest.json").read_text())
           assert next(p["rev"] for p in manifest["packages"] if p["name"]=="mathlib")=="d13f23b723b8a846827a245b89c10fc7d3f11612"
-          pinned={"experiments/openai-math-su2-physical-domain/BFSS_S3L3CD_GATE30_PARENT_OR_RECOMPILE_V10_2026_10_24.py":"6f643edf34e7296faab9519164bcf21e0612cbca","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2R4AThreeIndexOriginalSourceSumTransportProbe.lean":"ef803c1b5c62a819e568c5a645c5e622ec1a0d6f","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3ASourcePositionDerivativeCommutatorProbe.lean":"aa47f20d0c14374659aee0bf24c6361e464386ad","experiments/openai-math-su2-physical-domain/recovery/S3L3AOriginalSourceProofOnlyDeprecationGate28V4.lean":"a1586fdcbadd829ac7d57cfb4f8c2dab7ae655c1","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe.lean":"19a7eb6a710fe6d4b531dc0eefba7ee27ed21dca","experiments/openai-math-su2-physical-domain/recovery/S3L3BOriginalSourceIsolatedConditionSimpGate29V8.lean":"77e1f88788981fa0a34134e5e0670be624d5ba61","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3CSourceOrbitalPositionCommutatorProbe.lean":"25b4c92b94b6d2e1f708eeb446ec5fda094400f1","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe.lean":"dc3badcb9731872359d457dfd7c91cebb5aaff25"}
+          pinned={"experiments/openai-math-su2-physical-domain/BFSS_S3L3CD_PROOF_ONLY_COMPAT_V11_2026_10_25.py":"73a48ac79e0abce52645a34eb9532475f07a7d67","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L5K2R4AThreeIndexOriginalSourceSumTransportProbe.lean":"ef803c1b5c62a819e568c5a645c5e622ec1a0d6f","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3ASourcePositionDerivativeCommutatorProbe.lean":"aa47f20d0c14374659aee0bf24c6361e464386ad","experiments/openai-math-su2-physical-domain/recovery/S3L3AOriginalSourceProofOnlyDeprecationGate28V4.lean":"a1586fdcbadd829ac7d57cfb4f8c2dab7ae655c1","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3BSourceOperatorHeisenbergProbe.lean":"19a7eb6a710fe6d4b531dc0eefba7ee27ed21dca","experiments/openai-math-su2-physical-domain/recovery/S3L3BOriginalSourceIsolatedConditionSimpGate29V8.lean":"77e1f88788981fa0a34134e5e0670be624d5ba61","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3CSourceOrbitalPositionCommutatorProbe.lean":"25b4c92b94b6d2e1f708eeb446ec5fda094400f1","experiments/openai-math-su2-physical-domain/recovery/S3L3COriginalSourceUnusedSimpCleanupGate30V11.lean":"37cee76fc35963ec2675503afe3e8ee17e8d6293","experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3L3DSourceMixedDerivativeCommutatorProbe.lean":"dc3badcb9731872359d457dfd7c91cebb5aaff25"}
           for path,sha in pinned.items():
               assert subprocess.check_output(["git","rev-parse","HEAD:"+path],text=True).strip()==sha,("BAD_SOURCE_GIT_BLOB",path)
               assert subprocess.check_output(["git","hash-object","--no-filters",path],text=True).strip()==sha,("MUTATED_WORKTREE",path)
@@ -350,10 +350,10 @@ jobs:
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
-          python3 experiments/openai-math-su2-physical-domain/BFSS_S3L3CD_GATE30_PARENT_OR_RECOMPILE_V10_2026_10_24.py "$(pwd)/upstream-math/lean" "/tmp/bfss-s3l3cd-gate30" 2>&1 | tee /tmp/bfss-s3l3cd-gate30/build-summary.log
+          python3 experiments/openai-math-su2-physical-domain/BFSS_S3L3CD_PROOF_ONLY_COMPAT_V11_2026_10_25.py "$(pwd)/upstream-math/lean" "/tmp/bfss-s3l3cd-gate30" 2>&1 | tee /tmp/bfss-s3l3cd-gate30/build-summary.log
           test -s /tmp/bfss-s3l3cd-gate30/qualified-batch.txt
           test -s /tmp/bfss-s3l3cd-gate30/source-manifest.txt
-          grep -q "BFSS_S3L3CD_GATE30_V10_STRICT_SOURCE_CHECKPOINT_PASS_NEW_COMPILED_MODULES" /tmp/bfss-s3l3cd-gate30/build-summary.log
+          grep -q "BFSS_S3L3CD_GATE30_V11_STRICT_SOURCE_CHECKPOINT_PASS_NEW_COMPILED_MODULES" /tmp/bfss-s3l3cd-gate30/build-summary.log
           echo GATE30_SOURCE_S3L3C_S3L3D_STRICTLY_COMPILED_R4A_R4D_UNPROVED
       - name: Save only validated S3L3C D canonical source ancestry cache
         if: success()
@@ -478,7 +478,7 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3DActualFermionSpinQuadraticGeneratorProbe.olean
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3E1ActualSameColorFermionicBilinearCommSourceProbe.olean
             upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS3E2SameColorActualGammaCoefficientContractionProbe.olean
-          key: bfss-fcp-s3l3cd-parentsafe-6f643edf-gate30-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-fcp-s3l3cd-proofcompat-73a48ac7-gate30-v3-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
       - name: Preserve canonical R4A import manifest proof logs and first negative evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
