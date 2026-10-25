@@ -50,19 +50,8 @@ jobs:
           assert subprocess.check_output(["git","rev-parse","HEAD:"+".github/workflows/bfss-s3l-s3e2-native-selector-source-coefficient-strict-gate23.yml"],text=True).strip()=="a454ad3eb45ec56b6594d577c8b88d36c4fe4cf6","ORIGINAL_GATE25_WORKFLOW_CHANGED"
           current=pathlib.Path("experiments/openai-math-su2-physical-domain/recovery/SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbeV3Gate25PointwiseSub.lean").read_text()
           previous=pathlib.Path("experiments/openai-math-su2-physical-domain/recovery/SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbeV2Gate24.lean").read_text()
-          before="""    _ = (∑ α : SpinIndex, ((J α γ : ℝ) : ℂ) • pairedTheta α C) -
-        (∑ β : SpinIndex, ((J γ β : ℝ) : ℂ) • pairedTheta β C) := by
-      simp only [sub_smul, Finset.sum_sub_distrib]"""
-          after="""    _ = ∑ α : SpinIndex,
-          (((J α γ : ℝ) : ℂ) • pairedTheta α C -
-           ((J γ α : ℝ) : ℂ) • pairedTheta α C) := by
-      apply Finset.sum_congr rfl
-      intro α _
-      exact sub_smul (((J α γ : ℝ) : ℂ))
-        (((J γ α : ℝ) : ℂ)) (pairedTheta α C)
-    _ = (∑ α : SpinIndex, ((J α γ : ℝ) : ℂ) • pairedTheta α C) -
-        (∑ β : SpinIndex, ((J γ β : ℝ) : ℂ) • pairedTheta β C) := by
-      rw [Finset.sum_sub_distrib]"""
+          before="\n".join(["    _ = (∑ α : SpinIndex, ((J α γ : ℝ) : ℂ) • pairedTheta α C) -","        (∑ β : SpinIndex, ((J γ β : ℝ) : ℂ) • pairedTheta β C) := by","      simp only [sub_smul, Finset.sum_sub_distrib]"])
+          after="\n".join(["    _ = ∑ α : SpinIndex,","          (((J α γ : ℝ) : ℂ) • pairedTheta α C -","           ((J γ α : ℝ) : ℂ) • pairedTheta α C) := by","      apply Finset.sum_congr rfl","      intro α _","      exact sub_smul (((J α γ : ℝ) : ℂ))","        (((J γ α : ℝ) : ℂ)) (pairedTheta α C)","    _ = (∑ α : SpinIndex, ((J α γ : ℝ) : ℂ) • pairedTheta α C) -","        (∑ β : SpinIndex, ((J γ β : ℝ) : ℂ) • pairedTheta β C) := by","      rw [Finset.sum_sub_distrib]"])
           assert previous.count(before)==1 and current==previous.replace(before,after),"GATE25_PROOF_DIFF_NOT_EXACTLY_TARGETED"
           assert subprocess.check_output(["git","rev-parse","HEAD:"+".github/workflows/bfss-s3l-s3e-original-spin-plane-rotation-strict-gate24.yml"],text=True).strip()=="f0160aa900bfa22ff304c4ce82fb35b79a858bdc","GATE25_NEGATIVE_WORKFLOW_NOT_PRESERVED"
           first=pathlib.Path("experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS3EActualFermionSpinRotationLawProbe.lean").read_text()
