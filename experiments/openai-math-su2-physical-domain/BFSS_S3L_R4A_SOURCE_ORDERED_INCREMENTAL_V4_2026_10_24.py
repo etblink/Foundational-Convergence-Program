@@ -20,8 +20,8 @@ CANONICAL_S3L3A="experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDoma
 COMPAT_S3L3A="experiments/openai-math-su2-physical-domain/recovery/S3L3AOriginalSourceProofOnlyDeprecationGate28V4.lean"
 PIN_CANONICAL_S3L3A="aa47f20d0c14374659aee0bf24c6361e464386ad"
 PIN_COMPAT_S3L3A="a1586fdcbadd829ac7d57cfb4f8c2dab7ae655c1"
-OLD_PROOF="  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,\\n    ContinuousLinearMap.smulRight_apply]"
-NEW_PROOF="  simp only [add_apply, smul_apply,\\n    ContinuousLinearMap.smulRight_apply]"
+OLD_PROOF="  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,\n    ContinuousLinearMap.smulRight_apply]"
+NEW_PROOF="  simp only [add_apply, smul_apply,\n    ContinuousLinearMap.smulRight_apply]"
 ALLOWED={"propext","Classical.choice","Quot.sound"}
 def git(*argv):
     return subprocess.check_output(["git",*argv],text=True).strip()
@@ -43,9 +43,9 @@ def main():
     assert canonical_text.count(OLD_PROOF)==1,"ORIGINAL_S3L3A_PATCH_ANCHOR_NOT_UNIQUE"
     assert recovered_text==canonical_text.replace(OLD_PROOF,NEW_PROOF),"S3L3A_PATCH_NOT_EXACT_PROOF_ONLY"
     (logs/"S3L3A-proof-only-source-provenance.txt").write_text(
-      "CANONICAL "+str(canonical_patch)+" "+PIN_CANONICAL_S3L3A+"\\n"
-      "COMPAT "+str(compat_patch)+" "+PIN_COMPAT_S3L3A+"\\n"
-      "EXACT_DIFFERENCE deprecated add_apply/smul_apply names only\\n")
+      "CANONICAL "+str(canonical_patch)+" "+PIN_CANONICAL_S3L3A+"\n"
+      "COMPAT "+str(compat_patch)+" "+PIN_COMPAT_S3L3A+"\n"
+      "EXACT_DIFFERENCE deprecated add_apply/smul_apply names only\n")
     print(PREFIX+"_PROOF_ONLY_S3L3A_DECLARATION_IDENTICAL",flush=True)
     paths=defaultdict(list)
     for p in pathlib.Path("experiments").rglob("*.lean"):
