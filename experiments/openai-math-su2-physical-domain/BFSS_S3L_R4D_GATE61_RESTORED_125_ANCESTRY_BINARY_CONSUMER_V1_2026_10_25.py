@@ -72,8 +72,10 @@ def verify(repo,math,oleans,audit,logs):
     listing=command("git","-C",str(repo),"ls-tree","-r",REPO_RUN_SHA,
                     "--","experiments/openai-math-su2-physical-domain",
                     "experiments/openai-math-su2-concrete-potential")
+    upstream_listing=command("git","-C",str(math.parent),"ls-tree","-r",MATH_SHA,
+                             "--","lean")
     blobs={}
-    for record in listing.splitlines():
+    for record in (listing+"\n"+upstream_listing).splitlines():
         head,sep,path=record.partition("\t")
         if not sep:continue
         attrs=head.split()
@@ -111,9 +113,12 @@ def verify(repo,math,oleans,audit,logs):
         if hashlib.sha256(aud.read_bytes()).hexdigest()!=h:
             fail("SECOND_ARTIFACT_SHA256_MISMATCH",n)
         dest=targetdir/(n+".olean")
-        if dest.exists() and hashlib.sha256(dest.read_bytes()).hexdigest()!=h:
-            fail("RESTORED_CACHE_CONFLICT_WITH_PINNED_ARTIFACT",n)
+        # The old Gate23 base might carry different binary builds of the
+        # same original module. Replace with the coherent Gate60 archive;
+        # always verify the resulting bytes against its exact manifest.
         shutil.copyfile(src,dest)
+        if hashlib.sha256(dest.read_bytes()).hexdigest()!=h:
+            fail("RESTORED_OBJECT_DIGEST_MISMATCH",n)
     print(PREFIX+"_ALL_125_PINNED_BINARY_OBJECTS_RESTORED_AND_HASH_VERIFIED",flush=True)
     # The certified ancestry alone is not enough: the original imports must
     # genuinely be kernel readable under the frozen Lean toolchain and Mathlib.
