@@ -1,7 +1,7 @@
 # BFSS S3E Gate 25 #3 — original full-color spin-plane rotation STRICT ACCEPTANCE
 
 **Project Lead independent verification: October 24 PDT / October 25 UTC, 2026.**
-**New ACTUAL original S3E source roots: 3/3 accepted.** Gate23 accepted a different three S3E2 roots; the cumulative contribution of these two gates is six new source roots, not a claim about the full historical cumulative ledger.
+**Current recovery-chain S3E source proofs: 3/3 strictly requalified.** These exact three mathematical declarations were already accepted in the historical S3E Gate #136 run [#38084929931](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38084929931) on October 10, with original source blob `2066ef5a07f55b20149b4aa9ac45488988719773`. Gate25 is a new independent strict gate/recovery-path proof with the same theorem signatures, NOT three novel additions to the program-wide mathematical ledger. Gate23's S3E2 coefficient theorems are separately accepted, and must be deduplicated by theorem identity when forming aggregate totals.
 
 ## Evidence, source identity, and qualified cache
 
