@@ -68,8 +68,8 @@ jobs:
           done
           test "$ok" = true
           cd upstream-math/lean
-          timeout 1080s lake exe cache get > /tmp/bfss-s3f-original-gate27/mathlib.log 2>&1 || {
-            tail -n 100 /tmp/bfss-s3f-original-gate27/mathlib.log
+          timeout 1080s lake exe cache get > /tmp/bfss-s3l-r4a-gate28/mathlib.log 2>&1 || {
+            tail -n 100 /tmp/bfss-s3l-r4a-gate28/mathlib.log
             exit 1
           }
           test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
