@@ -370,7 +370,7 @@ jobs:
           s=pathlib.Path("/tmp/bfss-s3f-original-gate27/accepted_s3e_rebuild.log").read_text()
           prefix="FCP.BFSSSU2PhysicalDomainS3E."
           expected=[prefix+n for n in ("pairedSpinQuadraticColor_comm_raw","pairedSpinQuadraticColor_comm_skew","pairedFermionPlaneSpinGenerator_comm_theta")]
-          actual=re.findall(r"'([^']+)' (?:depends on axioms: \\[([^\\]]*)\\]|does not depend on any axioms)",s)
+          actual=re.findall(r"'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
           assert [n for n,_ in actual]==expected,("MISSING_GATE25_SOURCE_THEOREMS",actual)
           for n,raw in actual:
               axioms={a.strip() for a in raw.split(",") if a.strip()}
