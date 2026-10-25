@@ -71,7 +71,7 @@ jobs:
           new="simp only [ite_eq_right hnot, ite_eq_right hnot', sub_zero] at h"
           assert original_text.count(old)==1
           assert original_text.replace(old,new)==adapter.read_text(),("SOURCE_ADAPTER_NOT_ONE_LINE",adapter_git)
-          assert len(re.findall(r"(?m)^#print axioms \\S+",adapter.read_text()))==3
+          assert len(re.findall(r"(?m)^#print axioms \S+",adapter.read_text()))==3
           print("BFSS_S3L_S3CD_GATE11_REAL_SOURCE_EXACT_PREFLIGHT_PASS")
           print("BFSS_S3L_S3CD_GATE11_EXACT_ONE_LINE_IF_NEG_TO_ITE_EQ_RIGHT_ADAPTER_PINNED")
           PY
