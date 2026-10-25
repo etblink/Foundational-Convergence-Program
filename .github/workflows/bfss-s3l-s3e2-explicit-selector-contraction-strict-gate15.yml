@@ -69,9 +69,9 @@ jobs:
           adapter=(base/"recovery/SU2BFSSPhysicalDomainS3E2SameColorActualGammaCoefficientContractionProbe.lean").read_text()
           expected=source
           changed=[
-            ("  intro α _\\n  simp\\n","  intro α _\\n  simp only [smul_ite, smul_zero]\\n  simp\\n"),
-            ("      intro β _\\n      simp\\n","      intro β _\\n      simp only [smul_ite, smul_zero]\\n      simp\\n"),
-            ("      rw [sub_smul]\\n","      exact (sub_smul (((J α γ : ℝ) : ℂ))\\n        (((J γ α : ℝ) : ℂ)) (pairedTheta α A)).symm\\n"),
+            ("  intro α _\n  simp\n","  intro α _\n  simp only [smul_ite, smul_zero]\n  simp\n"),
+            ("      intro β _\n      simp\n","      intro β _\n      simp only [smul_ite, smul_zero]\n      simp\n"),
+            ("      rw [sub_smul]\n","      exact (sub_smul (((J α γ : ℝ) : ℂ))\n        (((J γ α : ℝ) : ℂ)) (pairedTheta α A)).symm\n"),
           ]
           for original_tactic,replacement in changed:
               assert expected.count(original_tactic)==1,("MISSING_PROOF_TACTIC",original_tactic)
