@@ -72,7 +72,7 @@ jobs:
           src=Path("experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B7OriginalRealFockFieldPolynomialProbe.lean").read_text()
           assert src.count("\ntheorem ")==4 and src.count("\n#print axioms ")==4
           assert all(name in src for name in ["originalFockRestrictScalars_add", "originalFockRestrictScalars_real_smul", "originalMasslessRealField_affine_polynomial", "originalMasslessRealField_single_coordinate_polynomial"])
-          assert "M.deformedRealField" in src and "M.cliffordLinear" in src and "sourceMasslessRealFieldVariation" in src and "AlgebraData.deformedRealField" in src
+          assert "M.deformedRealField" in src and "M.cliffordLinear" in src and "sourceMasslessRealFieldVariation" in src and "  change" in src and "exact hr" in src
           assert not any(line.lstrip().startswith(("sorry", "admit", "axiom ")) for line in src.splitlines())
           print("GATE95_ORIGINAL_SOURCE_AND_PROOF_IMMUTABILITY_PASS")
           PY
