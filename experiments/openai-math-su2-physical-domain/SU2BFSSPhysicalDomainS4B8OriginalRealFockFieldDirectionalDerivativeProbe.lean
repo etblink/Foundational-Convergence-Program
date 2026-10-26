@@ -61,11 +61,9 @@ theorem originalMasslessRealField_line_hasDerivAt
     hasDerivAt_const (0 : ℝ) (M.deformedRealField 1 0 α x)
   -- Assemble only after discharging the scalar and CLM-valued derivatives.
   rw [hpoly]
+  -- Gate96 #6 shows 'convert' already closes the goal; no tactic
+  -- fallback is reachable under warning-as-error strict compilation.
   convert ((hconst.add hlin).add hquad) using 1
-  all_goals
-    first
-    | (funext t; rfl)
-    | simp
 
 /-- Actual source Fréchet derivative in the real Fock CLM carrier. -/
 theorem originalMasslessRealField_fderiv_direction
