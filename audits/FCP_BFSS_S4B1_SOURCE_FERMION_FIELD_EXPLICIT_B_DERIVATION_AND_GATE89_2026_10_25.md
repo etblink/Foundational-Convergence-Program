@@ -109,3 +109,19 @@ The previous `nsmul_eq_mul` inside a broad `simp only` prematurely changed natur
 **Gate89 #4** [run #40278526727](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40278526727), source+workflow exact-blob atomic commit `ad0d103a5f64eb8780c02c2423e2c8f47685c405`, keeps BOTH proposition statements and source origins identical, but performs `Matrix.sub_apply` and `Matrix.smul_apply` before calling real-scalar normalization, and removes unused `Pi.smul_apply`. This precise controlled test is pending terminal strict kernel/axiom verdict. It also ran the improved preflight self-test with the contradictory-hash regression, qualified at workflow level (not Lean).
 
 **Additional verifier distinction to preserve:** `lake env lean` on the pinned cache prints predictable third-party package repository-state messages of the form `warning: package: repository '.../.lake/packages/package' has local changes`. The current Gate89 candidate validator rejects any `warning:` unconditionally and may produce a **false strict red even when the actual declaration compiles**. If such a case occurs, allowlist **only** those exact package-state lines using an anchored regex; continue rejecting all candidate Lean warnings and any sorryAx. Do not claim acceptance from a green mathematical compiler if the strict workflow itself rejected the candidate; repair and rerun the validator with the same immutable statements.
+
+
+## Gate89 #4 strict red — last elementary scalar normalization isolated
+
+[Run #40278526727](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40278526727), job `121426422947`, completed/failure, not accepted. The updated paired-hash workflow regression preflight passed. Frozen original `Core` and `GammaWords` compiled freshly. The entire gamma-term and index normalization in the new proof passed. **Only one terminal matrix-entry goal remained**:
+
+```text
+α β : Spin
+⊢ 9 * G j α β - G j α β = 8 * G j α β
+```
+
+The existing `norm_num [nsmul_eq_mul]` normalized matrix entries correctly but did not finish a symbolic linear polynomial; both declarations retained `sorryAx`. This is now a **fully discriminating** proof-engineering normal-form defect, not a question of original CAR identities or a sixfold source commutator recursion.
+
+**Gate89 #5:** proof-only `ring` after `norm_num` and two immutable source pin updates in source+workflow commit `ccb324e52086eceabee5d3c09eb1a695a33c2e41`; no theorem statement, gamma convention or original source modification. [Run #40279188758](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40279188758) launched, terminal verdict pending this audit snapshot. Strict compiler output must be inspected separately. The added candidate-warning classifier in this gate includes over-escaped regex backslashes for the pinned Lake-package state-warning pattern and will NOT match the known dependency warnings; if the Lean roots compile but the workflow rejects only those warnings, correct the *validator alone* and repeat with exact original candidate SHA, never misreport that result as Lean proof failure.
+
+**Procedural governance:** preserve the original separate gate red causes (#1 Lean proof, #2 contradictory source pin, #3 Lean scalar normalization, #4 final ring, #5 candidate-warning regex if applicable). The original 77-root S3L series remains unchanged until a real successful strict Lean gate qualifies new S4B1 roots. All-time principal ledger remains separate.
