@@ -1,0 +1,82 @@
+name: BFSS Form Spin9 B Tensor Exact Gate 88
+
+# Source-matched FINITE coefficient test, NOT a Lean theorem acceptance.
+# Distinct from the halted E2A/E3B/E3C giant source commutator gate family.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-form-spin9-b-tensor-exact-gate88.yml
+      - experiments/openai-math-su2-physical-domain/BFSS_ORIGINAL_FERMION_FIELD_DIRECT_SPIN9_FORM_COVARIANCE_EXACT_CHECK_2026_10_25.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-form-spin9-b-tensor-gate88-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  exact-original-fermion-tensor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout research branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Checkout immutable original BFSS Core and DeformedCharge source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean/OAI/MathematicalPhysics/BFSS/Core.lean
+            lean/OAI/MathematicalPhysics/BFSS/DeformedCharge.lean
+          sparse-checkout-cone-mode: false
+      - name: Verify original mathematical identities and immutable file pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C upstream-math rev-parse HEAD)" = "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
+          test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/Core.lean)" = "9882359ced78b0a3bd7e2f057974bd0a031b3e60"
+          test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/DeformedCharge.lean)" = "c27c913c44090100f0c714e3eb34e25205f4d2d3"
+          test -s upstream-math/lean/OAI/MathematicalPhysics/BFSS/Core.lean
+          test -s upstream-math/lean/OAI/MathematicalPhysics/BFSS/DeformedCharge.lean
+          grep -Fq 'def charge (α : SpinIndex)' upstream-math/lean/OAI/MathematicalPhysics/BFSS/Core.lean
+          grep -Fq 'def coreForm (f : SmoothCore N)' upstream-math/lean/OAI/MathematicalPhysics/BFSS/Core.lean
+          grep -Fq 'lemma averaged_core_energy (h m : ℝ)' upstream-math/lean/OAI/MathematicalPhysics/BFSS/DeformedCharge.lean
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/BFSS_ORIGINAL_FERMION_FIELD_DIRECT_SPIN9_FORM_COVARIANCE_EXACT_CHECK_2026_10_25.py)" = "155e982b15fffa195f0e6e561982ee4015bdce9a"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/BFSS_ORIGINAL_FERMION_FIELD_DIRECT_SPIN9_FORM_COVARIANCE_EXACT_CHECK_2026_10_25.py)" = "155e982b15fffa195f0e6e561982ee4015bdce9a"
+          echo GATE88_ORIGINAL_MATH_AND_RESEARCH_SCRIPT_BYTE_PINS_PASS
+      - name: Prepare pinned isolated finite-check Python dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/bfss-form-gate88
+          /tmp/bfss-form-gate88/bin/python -m pip install --disable-pip-version-check --only-binary=:all: numpy==2.3.4 PyYAML==6.0.3
+      - name: Validate workflow YAML and execute exact 48-label coefficient check
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/bfss-form-gate88/bin/python tools/bfss_gate_workflow_preflight.py --self-test
+          /tmp/bfss-form-gate88/bin/python tools/bfss_gate_workflow_preflight.py .github/workflows/bfss-form-spin9-b-tensor-exact-gate88.yml
+          /tmp/bfss-form-gate88/bin/python -m py_compile experiments/openai-math-su2-physical-domain/BFSS_ORIGINAL_FERMION_FIELD_DIRECT_SPIN9_FORM_COVARIANCE_EXACT_CHECK_2026_10_25.py
+          mkdir -p /tmp/bfss-form-gate88-evidence
+          /tmp/bfss-form-gate88/bin/python experiments/openai-math-su2-physical-domain/BFSS_ORIGINAL_FERMION_FIELD_DIRECT_SPIN9_FORM_COVARIANCE_EXACT_CHECK_2026_10_25.py | tee /tmp/bfss-form-gate88-evidence/exact-coefficients.log
+          grep -Fxq "SPATIAL_COVARIANCE_LIE_AND_EXACT_QUARTER_TURNS_PASS 972" /tmp/bfss-form-gate88-evidence/exact-coefficients.log
+          grep -Fxq "GAUGE_COVARIANCE_LIE_AND_EXACT_QUARTER_TURNS_PASS 81" /tmp/bfss-form-gate88-evidence/exact-coefficients.log
+          grep -Fxq "SPATIAL_GAUGE_LABEL_GENERATORS_COMMUTE_PASS 108" /tmp/bfss-form-gate88-evidence/exact-coefficients.log
+          grep -Fq "BOUNDARY: no global Spin48 action, quadratic-form domain or spectral theorem certified" /tmp/bfss-form-gate88-evidence/exact-coefficients.log
+          echo GATE88_SOURCE_FERMION_TENSOR_EXACT_FINITE_CHECK_PASS_NO_LEAN_THEOREM
+      - name: Preserve exact form-covariance verification evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-form-spin9-b-tensor-gate88-${{ github.run_id }}
+          path: /tmp/bfss-form-gate88-evidence/
+          if-no-files-found: warn
