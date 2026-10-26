@@ -39,7 +39,7 @@ theorem originalComplexFieldVariation_gammaColorTheta
             M.gammaTwo k j α q.1) := by
     rcases q with ⟨β,D⟩
     exact originalSourceMasslessVariation_actual_reduced M x k A D α β
-  simpa only [originalComplexFieldVariation_theta, hcoef]
+  simp only [originalComplexFieldVariation_theta, hcoef]
 
 /-- Entire genuine source fermionic contraction in the exact original
 kinetic-before-potential ordered theta products, retaining -i and 1/16.
@@ -67,7 +67,7 @@ theorem originalComplexFermionContraction_gammaColorTheta
     rcases p with ⟨k,A⟩
     rcases q with ⟨β,D⟩
     exact originalSourceMasslessVariation_actual_reduced M x k A D α β
-  simpa only [originalComplexFermionContraction_gammaTheta, hcoef]
+  simp only [originalComplexFermionContraction_gammaTheta, hcoef]
 
 #print axioms originalComplexFieldVariation_gammaColorTheta
 #print axioms originalComplexFermionContraction_gammaColorTheta
