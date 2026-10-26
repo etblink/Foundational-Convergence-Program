@@ -12,3 +12,9 @@ Original immutable BFSS mathematics: `etblink/math@adc7f1241b42e322a6451854ab7e4
 Parent G4K9A/B/C cache restoration, original BFSS core fresh compilation, accepted S4B3–S4B7 strict compilation, candidate fresh warning-as-error Lean, exact three `#print axioms`, no `sorryAx`, source Git SHA/worktree and saved raw logs are mandatory. A red must be diagnosed from the first causal error; no theorem promotion on syntax alone.
 
 **Scientific stop:** even a green proves only a source Fréchet derivative coefficient. It does not prove `MixedEnergy.remainderField` contraction, manuscript `B(x)` matching, global physical Spin(9) invariance, compactness or positive spectral eigenpairs. Canonical main, original mathematics and PR25 unchanged. Preserve negative knowledge.
+
+## Gate96 #1 strictly RED — inherited display title blocked YAML preflight, no Lean
+
+[Run #40333693999](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40333693999), job `121609465911`, completed **failure before installing Lean or compiling any theorem**. Exact candidate/source blob preflight passed, and the workflow preflight's own test passed. Its actual run correctly rejected the copied workflow header `BFSS Form Original Real Fock Field Strict Gate 95` because the new file ends with `gate96.yml`: `ValueError: Workflow title/gate mismatch`. **No S4B8 root accepted, no math failure diagnosed.** The mathematical candidate remains byte-for-byte `60d993a847c2fc1304be03e9ba72df2d987b351a`.
+
+**Gate96 #2 prospective workflow-only recovery:** correct title to `BFSS Form Original Real Fock Derivative Strict Gate 96` and the stale introductory comment, without changing the candidate, source pins, parent proof closure, original mathematics, strict compiler checks or axiom whitelist. Stop and inspect first original compiler diagnostic if the candidate fails. Preserve the Gate96 #1 preflight red as negative knowledge.

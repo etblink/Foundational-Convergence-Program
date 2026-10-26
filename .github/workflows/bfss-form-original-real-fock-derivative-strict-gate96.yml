@@ -1,6 +1,6 @@
-name: BFSS Form Original Real Fock Field Strict Gate 95
+name: BFSS Form Original Real Fock Derivative Strict Gate 96
 
-# Source massless deformedPotentialCoefficients polynomial via qualified original G4K9C + S4B4, not Fock operator fderiv.
+# Source-real Fock directional derivative via exact S4B7 polynomial and original ContDiff; not the physical remainder-field identity.
 # Direct Lean 4.34.1 compilation with pinned Core / MassiveCoercivity / ColorMatrices ancestry,
 # fresh source/S4B3 oleans and exact axiom audit; no E3B/E3C sixfold ancestry.
 on:
