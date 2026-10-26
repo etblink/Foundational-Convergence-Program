@@ -29,9 +29,8 @@ theorem originalBoson_single_coordinate_weighted
           intro p _hp
           by_cases h : p = (k,A)
           · subst p
-            simp [PiLp.single_apply]
-          · have h' : (k,A) ≠ p := Ne.symm h
-            simp [PiLp.single_apply, h, h']
+            simp
+          · simp [h]
     _ = F (k,A) := by simp
 
 /-- Exact same source original selector, now in the nested spatial/color
