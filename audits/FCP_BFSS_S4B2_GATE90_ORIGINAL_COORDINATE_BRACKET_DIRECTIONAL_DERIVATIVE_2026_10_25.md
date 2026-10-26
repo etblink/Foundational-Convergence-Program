@@ -74,3 +74,19 @@ The only two new Lean diagnostics:
 - Candidate line 72 attempted a second tactic bullet after Lean had already closed the final product-rule `convert` obligation, causing `No goals to be solved`. This means product-rule normalization made real progress, but its proof script was **not warning/error clean**. `#print axioms` still reported `sorryAx` for all three declarations. **0 accepted roots; no mathematical contradiction.**
 
 **Gate90 #3** proof-only correction committed atomically with both source Git-blob pins in commit `ea909ccd978750157c85eee95f4e7c82b5f2ee6e`, candidate blob `d8e41ae7819bdebfb22aeedd149078b0d7d784c2`, workflow blob `3ac98ffb389511c210d43697e7494873fa2578f1`. No proposition or original source modification. Uses `simpa only [Pi.add_apply, zero_add, one_mul]` to align the genuine scalar polynomial functions; uses a goal-safe `convert hh using 1 <;> (try (funext t)) <;> simp [Pi.mul_apply] <;> ring` instead of assuming a fixed number of residual obligations. [Actions run #40283521229](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40283521229) launched; its terminal result and exact axiom reports must be independently verified. These are ordinary bounded Lean normalization adjustments, **not** the previously stopped E3B/E3C recursion tactics.
+
+
+## Gate90 #3 terminal strict RED — stop direct HasDerivAt formulation
+
+[Run #40283521229](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40283521229), job `121441841177`, completed/failure. Frozen source and all three original ancestors again compiled freshly and source hashes passed; candidate `#print axioms` reports included `sorryAx` for all three roots, so **0 new roots accepted**. The #2 scalar pointwise functional mismatch was corrected, but a **new instance mismatch** arose even for `HasDerivAt` on the real scalar expression:
+
+```text
+HasDerivAt.add ... has codomain real algebra from
+Real.normedAddCommGroup.toAddCommGroup,
+but original expected HasDerivAt uses
+Real.instAddCommGroup / Semiring.toModule.
+```
+
+There was also a genuine strict linter rejection `linter.unnecessarySeqFocus` on the goal-safe `<;>` tactic sequence. These are not mathematical counterexamples, but are meaningful repeated **proof-interface fragility**. Project Lead explicitly **stopped** serial direct `HasDerivAt` syntax variations instead of disabling lint or increasing recursion.
+
+The new [S4B3 Gate91 source-first polynomial audit](FCP_BFSS_S4B3_GATE91_SOURCE_COLOR_BRACKET_EXACT_POLYNOMIAL_STOP_RULE_2026_10_25.md) defines the stronger exact quadratic finite-difference relation `Bracket(x+t v)=Bracket(x)+t DBracket_x(v)+t²Bracket(v)` in genuine `AlgebraData N` and `Boson N`. It uses no calculus instance. It preserves Gate90 all three reds and aims to recover the mathematically necessary derivative coefficient from original source algebra before any downstream Fock operator correspondence. No Gate90 theorem is retrospectively admitted.
