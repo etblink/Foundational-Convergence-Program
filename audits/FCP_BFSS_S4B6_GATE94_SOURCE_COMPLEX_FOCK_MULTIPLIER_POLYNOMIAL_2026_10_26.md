@@ -72,3 +72,40 @@ Earliest actual Lean error was line 28:74 in `sourceCliffordLinear_add`:
 Broad `simp only [AlgebraData.cliffordLinear,Pi.add_apply,Complex.ofReal_add,add_smul,Finset.sum_add_distrib]` did not discharge this sum; strict linter additionally rejected unused `add_smul` and `Finset.sum_add_distrib`. Consequently `sourceCliffordLinear_add`, the general potential multiplier theorem and single-coordinate theorem reported `sorryAx`. Crucially, `sourceCliffordLinear_real_smul` DID compile with only `[propext,Classical.choice,Quot.sound]`, but is not a new formally accepted root because the whole gate was red. This is a finite-sum normalization issue, **not** a counterexample to Fock operator scalar-linearity or an unqualified mathematical source. No new axioms or changes to original source.
 
 **Gate94 #3** [run #40293891442](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40293891442) tests a structural correction: at each *actual original FermionIndex* first prove `((a p:ℂ)+(b p:ℂ)) • M.theta p = (a p:ℂ) • M.theta p + (b p:ℂ) • M.theta p` with explicit `add_smul` and typed `Finset.sum_congr`, then assemble the two operator sums through `Finset.sum_add_distrib`. This is the same small typed proof architecture that succeeded at S4B4 Gate92. Candidate source/strict workflow changed atomically at `4361b76d582b597567073254a740c83a07fc918d` to source Git blob `5273bd3053c38b1948ed064b801b8ac4ed03087f` and gate workflow blob `aa3fb562a923cc28ade2437dcdfd7457b8cf64f2`. **No theorem statements changed; no roots accepted pending completed strict #3.** Original Gate94 #1 and #2 remain separately red.
+
+
+## FINAL QUALIFIED ACCEPTANCE — Gate94 #3 original complex Fock source polynomial (+4 roots)
+
+**Supersedes all earlier pending-status entries.** [GitHub Actions run #40293891442](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40293891442), job `121475152288`, independently verified **completed/success** with all strict steps passed. Exact source+workflow acceptance HEAD `4361b76d582b597567073254a740c83a07fc918d`, candidate Git blob `5273bd3053c38b1948ed064b801b8ac4ed03087f`, workflow blob `aa3fb562a923cc28ade2437dcdfd7457b8cf64f2`; original `etblink/math@adc7f124...` source and canonical FCP `main` unchanged.
+
+Provenance: original `Core` (1,281,224 bytes), `MassiveCoercivity` (1,201,000 bytes), `ColorMatrices` (425,920 bytes) compiled FRESH under Lean4.34.1 and pinned Mathlib. Qualified original G4K9A/B/C cache exact historical save-path contract restored fail-closed. Previously accepted S4B3 (112,336 bytes), S4B4 (145,528 bytes) and S4B5 (46,784 bytes) **compiled FRESH again** with allowed-axiom checks and proper literal original source. Exact proof-source blob SHA checked against commit and checked-out worktree.
+
+```text
+GATE94_ACCEPTED_S4B3_PARENT_FRESH_PASS 112336
+GATE94_ACCEPTED_S4B4_PARENT_FRESH_PASS 145528
+GATE94_ACCEPTED_S4B5_PARENT_FRESH_PASS 46784
+GATE94_CANDIDATE_SOURCE_WARNINGS []
+GATE94_COMPILER_EXIT 0 AXIOM_REPORTS [
+ ('FCP.BFSSSU2PhysicalDomainS4B6.sourceCliffordLinear_add',
+  {'propext','Classical.choice','Quot.sound'}),
+ ('FCP.BFSSSU2PhysicalDomainS4B6.sourceCliffordLinear_real_smul',
+  {'propext','Classical.choice','Quot.sound'}),
+ ('FCP.BFSSSU2PhysicalDomainS4B6.originalMasslessPotentialMultiplier_affine_polynomial',
+  {'propext','Classical.choice','Quot.sound'}),
+ ('FCP.BFSSSU2PhysicalDomainS4B6.originalMasslessPotentialMultiplier_single_coordinate_polynomial',
+  {'propext','Classical.choice','Quot.sound'})
+]
+GATE94_ORIGINAL_SOURCE_POTENTIAL_MULTIPLIER_FOUR_ROOTS_STRICT_PASS
+```
+
+Exactly **four new S4B6 strict theorem roots**; no `sorryAx`, no candidate Lean warnings, no errors, compiler exit 0 and nonempty candidate `.olean`. Original compiler/ancestor logs and new `.olean`: [artifact #12637922213](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40293891442/artifacts/12637922213).
+
+**Mathematical scope:** the source Clifford coefficient sum is proved additive and real-homogeneous in the actual original complex-linear Fermion continuous-operator type. The genuine source `M.deformedPotentialMultiplier 1 0` has the exact real-bosonic affine quadratic operator identity with complex scalar transport, using the accepted explicit original `deformedPotentialCoefficients` expansion and its source gamma/color signs. A single actual bosonic coordinate direction is also certified. The source-original `sourceMasslessPotentialVariation` function is currently `private` in the accepted source file; external successor code should introduce a PUBLIC *definitionally identical* source coefficient function and prove its bridge instead of relying on private names.
+
+**Not proved:** real `M.deformedRealField 1 0` operator equality, its Fréchet derivative in real CLM topology, `MixedEnergy.remainderField`, source manuscript `B(x)`, physical Spin9 closed-form invariance, normalizable positive eigenstates or BFSS mass gap.
+
+**Preserve negative knowledge:** Gate94 #1 was preflight red from stale imported-source-name assertion. Gate94 #2 was actual Lean red: broad simp failed to distribute original complex operator `Finset.sum` and linter warned unused arguments; only real scalar-homogeneity root was axiom clean, not admitted from red job. Gate94 #3 fixed **only the proof architecture**, using typed `Finset.sum_congr` over original `FermionIndex N`, `add_smul` at each original Majorana term, then finite-sum distribution; theorem statements unchanged.
+
+**Scoped root accounting:** S4B1 Gate89 +2; S4B3 Gate91 +2; S4B4 Gate92 +2; S4B5 Gate93 +2; S4B6 Gate94 **+4**. Total new S4 series **12**. Original S3L through Gate82 remains separately 77; do not invent global accepted principal total.
+
+**Next research bridge:** use actual original `ContinuousLinearMap.restrictScalars ℝ` (source `DeformedCharge.lean`) on this exact complex-operator identity, first proving source complex-to-real operator-additivity and *real scalar compatibility*, then a publicly usable original real field polynomial. Only then consider a rigorously typed derivative or source B field equivalence.
