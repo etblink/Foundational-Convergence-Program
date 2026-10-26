@@ -114,6 +114,23 @@ def self_test() -> None:
             pass  # Expected parser failure: invalid YAML scalar indentation.
         else:
             raise AssertionError("Invalid multiline block indentation not caught")
+        # Regression: Gate89 #2 had contradictory pins for one file.
+        good.write_text(
+            "name: BFSS Example Strict Gate 87\\non:\\n  workflow_dispatch:\\n"
+            "jobs:\\n  verify:\\n    runs-on: ubuntu-latest\\n"
+            "    steps:\\n      - run: |\\n"
+            '          test "$(git rev-parse HEAD:foo.py)" = "' + "a"*40 + '"\\n'
+            '          test "$(git hash-object --no-filters foo.py)" = "' + "b"*40 + '"\\n',
+            encoding="utf-8",
+        )
+        try:
+            audit(good)
+        except ValueError as e:
+            assert "source hash mismatch" in str(e)
+        else:
+            raise AssertionError("Contradictory source pins not caught")
+        good.write_text(good.read_text().replace("b"*40, "a"*40))
+        audit(good)
     print("WORKFLOW_PREFLIGHT_SELF_TEST_PASS")
 
 
