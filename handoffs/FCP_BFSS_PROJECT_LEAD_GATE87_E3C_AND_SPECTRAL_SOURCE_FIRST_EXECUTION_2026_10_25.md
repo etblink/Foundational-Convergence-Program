@@ -166,3 +166,22 @@ Original source `Core`, `MassiveCoercivity`, and `ColorMatrices` are compiled fr
 **Gate90 #2** source+workflow exact-blob atomic repair commit `845da37ffd6550a36fe27c69691a5a91e1991be7`, candidate blob `68b3d0c37dcab6fccab57a60eb3cdaa75ef8f48a`, workflow blob `a4f0912ba236bc8327fa18c5b5fc8c1690c59639`. The proof now differentiates the ORIGINAL **scalar** affine coordinate `t ↦ x(p)+t*v(p)` and uses source `PiLp.add_apply`/`PiLp.smul_apply` to transport this scalar proof; the remaining product-rule comparison is discharged explicitly via function extensionality and real polynomial ring normalization. No theorem statement or original math hash altered. [Run #40282671921](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40282671921) is executing as of this succession note; treat its terminal status as authoritative and retain 0 new S4B2 roots until verified.
 
 [Detailed Gate90 proof/failure audit](../audits/FCP_BFSS_S4B2_GATE90_ORIGINAL_COORDINATE_BRACKET_DIRECTIONAL_DERIVATIVE_2026_10_25.md). This new result, even if qualified, supplies the original quadratic bosonic derivative **only**. The next major target remains the precise `fderiv ℝ` of the original real-linear `M.deformedRealField 1 0`, then the source `M.deformedFermionField 1 0 = B_manuscript` including certified S4B1 factor eight, color antisymmetry, exact `-i` kinetic coefficient, and `restrictScalars ℝ`. Global Spin9 on physical closed forms and any positive normalizable spectral claim remain open.
+
+
+## Gate90 terminal stop; Gate91 source polynomial pivot
+
+**AUTHORITATIVE UPDATE:** original Gate90 `HasDerivAt` derivative attempt is **RED on all #1–#3**, **0/3 accepted roots**; all original `Core`, `MassiveCoercivity`, `ColorMatrices` ancestoral builds and immutable pins passed in each completed run.
+
+- [Gate90 #1](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40281792044): proof-instance mismatch `PiLp.normedSpace` vs `WithLp.instModule` in vector derivative, plus unsolved function/ring normalizations.
+- [Gate90 #2](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40282671921): vector mismatch eliminated, remaining scalar `Pi.add_apply` function equality and `No goals to be solved` surplus tactic.
+- [Gate90 #3](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40283521229): even scalar `HasDerivAt` elaboration selected `Real.normedAddCommGroup.toAddCommGroup` whereas expected original derivative used `Real.instAddCommGroup`; strict unnecessary sequence-focus linter also red. No math counterexample found. Stop another series of `simpa`/`convert` calculus-instance experiments.
+
+Project Lead changed to a **stronger source-exact interface**: [S4B3 two-theorem Gate91 candidate](../experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B3OriginalBracketPolynomialExpansionProbe.lean) proves for actual original `M.coordinateBracketAll` the exact polynomial
+```text
+Bracket_M(x+t v) = Bracket_M(x)
+    + t * sum_B,C f_(ABC)*(v_iB x_jC + x_iB v_jC)
+    + t² * Bracket_M(v)
+```
+and specializes v to the original `EuclideanSpace.single (k,D) 1`. All source color/index/finite-sum types remain genuine; no HasDerivAt instance and no invented physical result. Exact candidate source blob `86e28972f8e0008372380ea5210adb13217ca2bc`, source+gate initial commit `bd31f78a6868c3a57c0ce63ba5fd6648ad1b4dc6`. [Gate91 #1](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40284530938) launched and passed source-pin/workflow-preflight as of this handoff; **do not count roots until terminal strict green**.
+
+[Gate90 full negative-knowledge audit](../audits/FCP_BFSS_S4B2_GATE90_ORIGINAL_COORDINATE_BRACKET_DIRECTIONAL_DERIVATIVE_2026_10_25.md) and [Gate91 polynomial source-first audit](../audits/FCP_BFSS_S4B3_GATE91_SOURCE_COLOR_BRACKET_EXACT_POLYNOMIAL_STOP_RULE_2026_10_25.md) preserve provenance and stopping decision. Accepted S4B1 Gate89 #6 stays +2; original scoped S3L remains 77. Next target still the **typed** original `deformedRealField 1 0` coefficient derivative followed by `deformedFermionField 1 0=B_manuscript`; the polynomial is a load-bearing prerequisite, not that full operator result.
