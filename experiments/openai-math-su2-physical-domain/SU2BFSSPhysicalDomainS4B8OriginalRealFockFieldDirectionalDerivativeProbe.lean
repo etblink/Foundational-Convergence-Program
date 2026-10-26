@@ -38,16 +38,16 @@ theorem originalMasslessRealField_line_hasDerivAt
       first
       | (funext t; simp [Pi.pow_apply])
       | norm_num
-  -- Lift the independently normalized scalar derivative to the actual
-  -- original real continuous-linear Fock operator.
+  -- Type the raw source quadratic derivative *before* reducing its
+  -- zero scalar coefficient. No broad simplicial normalization.
+  have hquadRaw : HasDerivAt
+      (fun t : ℝ => t ^ 2 • M.deformedRealField 1 0 α v)
+      ((0 : ℝ) • M.deformedRealField 1 0 α v) (0 : ℝ) := by
+    exact hpow.smul_const (M.deformedRealField 1 0 α v)
   have hquad : HasDerivAt
       (fun t : ℝ => t ^ 2 • M.deformedRealField 1 0 α v)
       (0 : Fermion N →L[ℝ] Fermion N) (0 : ℝ) := by
-    convert (hpow.smul_const (M.deformedRealField 1 0 α v)) using 1
-    all_goals
-      first
-      | rfl
-      | simp
+    simpa only [zero_smul] using hquadRaw
   have hconst : HasDerivAt
       (fun _ : ℝ => M.deformedRealField 1 0 α x)
       (0 : Fermion N →L[ℝ] Fermion N) (0 : ℝ) :=
@@ -86,9 +86,8 @@ theorem originalMasslessRealField_fderiv_direction
       simpa only [zero_smul, add_zero] using hdiff.hasFDerivAt
     convert (hdiff0.comp_hasDerivAt (0 : ℝ) hpath) using 1
     all_goals
-      first
-      | (funext t; rfl)
-      | simp
+      funext t
+      rfl
   exact hchain.unique (originalMasslessRealField_line_hasDerivAt M x v α)
 
 /-- Source coordinate derivative, not an assumed proxy gamma field. -/
