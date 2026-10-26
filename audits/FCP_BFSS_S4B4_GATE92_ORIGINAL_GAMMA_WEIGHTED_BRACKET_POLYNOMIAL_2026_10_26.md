@@ -66,3 +66,32 @@ The **first mathematical proof-normal-form diagnostic** was an explicit unsolved
 **Gate92 #3 changes the proof interface itself** in commit `fb4276e44b2db57954a75c1255c0bbabd1b4c64a`, candidate blob `2ed79184d19ba0ddc024952f91871ee8c4fc3ea9`, workflow blob `abbbb2f91e9ada61b5616909f014de481733bd8e`, both original theorem statements unchanged. It first applies accepted S4B3 **at one fixed spatial pair `(i,j)`** and proves by real `ring` the gamma-weighted polynomial for that one original scalar. It then assembles this original finite family using nested typed `Finset.sum_congr`, explicitly `Finset.sum_add_distrib` and factoring with `←Finset.mul_sum` only on source terms where the factor has already been placed outside gamma entry. Finally one ordinary real polynomial identity composes the exact source `1/2` multiplier. This is the tested `structure → specialization → composition` architecture from the [Evergreen guidance](../handoffs/FCP_PROJECT_LEAD_EVERGREEN_RESEARCH_GUIDANCE_0_1_0.md), not a retry with the same proof term.
 
 [Gate92 #3 Actions run #40288496769](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40288496769) launched. Strict accepted-root count **remains 0 for S4B4** until terminal success and clean axiom reports. If the typed `hsum` step still fails, preserve its first compiler goal and assess whether the original finite index simplification is worth another gate versus direct use of the already accepted G4K9C interface.
+
+
+## Definitive terminal qualification — Gate92 #3 STRICT PASS (+2 source theorem roots)
+
+**AUTHORITATIVE FINAL STATUS over earlier pending notes.** [GitHub Actions run #40288496769](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40288496769), job `121457761366`, independently verified **completed/success** with every workflow step passing. The accepted source+workflow candidate commit `fb4276e44b2db57954a75c1255c0bbabd1b4c64a`, exact candidate blob `2ed79184d19ba0ddc024952f91871ee8c4fc3ea9`, exact strict gate workflow blob `abbbb2f91e9ada61b5616909f014de481733bd8e`. Original `etblink/math@adc7f124...` hashes, frozen Lean4.34.1 and Mathlib `d13f23b...`, source preflight, candidate/worktree duplicate SHA checks and warning classifier self-test passed.
+
+All three original `Core`, `MassiveCoercivity`, `ColorMatrices` source modules freshly compiled (1,281,224 / 1,201,000 / 425,920 byte oleans). **The accepted S4B3 parent was ALSO freshly compiled and re-audited at its accepted exact source blob**: `GATE92_ACCEPTED_S4B3_PARENT_FRESH_PASS 112336`.
+
+```text
+GATE92_ORIGINAL_SOURCE_AND_PROOF_IMMUTABILITY_PASS
+GATE92_ACCEPTED_S4B3_PARENT_FRESH_PASS 112336
+GATE92_LAKE_NOTICE_FILTER_SELF_TEST_PASS
+GATE92_CANDIDATE_SOURCE_WARNINGS []
+GATE92_COMPILER_EXIT 0 AXIOM_REPORTS [
+  ('FCP.BFSSSU2PhysicalDomainS4B4.originalGammaWeightedBracket_affine_polynomial',
+   {'Quot.sound','Classical.choice','propext'}),
+  ('FCP.BFSSSU2PhysicalDomainS4B4.originalGammaWeightedBracket_single_coordinate_polynomial',
+   {'Quot.sound','Classical.choice','propext'})
+]
+GATE92_ORIGINAL_SOURCE_GAMMA_WEIGHTED_POLYNOMIAL_TWO_ROOTS_STRICT_PASS
+```
+
+Both sets exactly `{propext,Classical.choice,Quot.sound}`, **no sorryAx or unexpected candidate Lean warnings**, compiler exit 0, nonempty .olean. Preserved compiler logs and new oleans: [strict run artifact #12635470716](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40288496769/artifacts/12635470716).
+
+**Two newly accepted S4B4 roots.** The proof is source-typed at the genuine `AlgebraData N` `coordinateBracketAll` and `gammaTwo`, with original half coefficient, and includes the actual original coordinate direction. Its mathematical statement has not been weakened or changed from Gate92 #1. It still does **not** establish the derivative of the source continuous-linear Fock operator, `deformedFermionField=B(x)`, or a positive normalizable eigenstate.
+
+**Negative knowledge remains:** Gate92 #1 red from distributing t inside nested color sums; Gate92 #2 red from an unused inverse sum simplifier and unmatched opaque sum atoms. The successful #3 uses a *genuinely smaller typed proof interface* at each original spatial pair, then nested `Finset.sum_congr` and explicit factored source sums. Retain both prior reds and their `sorryAx` diagnostics. This validates the evergreen strategy of structure → original source specialization → discharge → composition.
+
+**Separate scoped counts:** original S3L through Gate82 77 accepted; S4B1 Gate89 +2 accepted; S4B3 Gate91 +2 accepted; **S4B4 Gate92 +2 accepted**. No unreconciled all-time principal-root total is claimed. Future source bridge must import the already qualified G4K9C `sourceMasslessCoefficient_eq_halfOriginalOrdered` to identify this scalar expression with the genuine `deformedPotentialCoefficients 1 0`, then G4K9D `deformedPotentialMultiplier 1 0 = bracketMultiplier` and the exact complex-to-real operator conversions. The form-invariance and spectral-existence claims remain open.
