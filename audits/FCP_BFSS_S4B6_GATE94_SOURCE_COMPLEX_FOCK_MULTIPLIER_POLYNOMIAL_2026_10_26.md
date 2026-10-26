@@ -55,3 +55,20 @@ If Gate94 qualifies, next source task is transporting this exact **complex-linea
 [Run #40292651664](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40292651664), job `121471126110`, **completed/failure before Lean installation**, so **0/4 new roots accepted and no mathematical diagnostic**. Original commit/source/worktree SHA and frozen source file checks passed; the preflight Python assertion failed because it had been cloned from Gate93 and still demanded literal text `originalMasslessPotentialCoefficient_single_coordinate_polynomial` inside the new Gate94 source file. The Gate94 theorem uses the *accepted affine coefficient theorem* to derive its own single-coordinate **multiplier** result and does not need to mention Gate93's single-coordinate source theorem. This mismatch was solely an over-specific validator requirement.
 
 **Gate94 #2** workflow-only correction `04e19596fdeb7fd92e93ccb76896b3ad4a41717a`, workflow SHA `40549a1dceb8008ea520016a00d5e7926f7f532a`. Candidate original Lean blob **unchanged** `089fd924cab82eadb17660a801a4512b0c1b4702`; original maths source / accepted G4K9C and Gate91–93 source files and theorem statements unchanged. Preflight now checks the four **actual new theorem names** in the candidate. [Actions run #40292893617](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40292893617) launched, terminal strict verdict pending. If this run reaches compiler and fails, read the earliest original Lean goal, preserve Gate94 #1 separate as infrastructure/preflight red. Historical accepted roots remain unchanged until strict completed/success.
+
+
+## Gate94 #2 strict red — Clifford finite-sum additivity bottleneck
+
+[Run #40292893617](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40292893617), job `121471904851`, completed **failure** after passing immutable source and workflow preflight, frozen toolchain and historically qualified G4K9A/B/C cache; freshly compiled original Core/MassiveCoercivity/ColorMatrices and accepted S4B3, S4B4, S4B5 parents with exact permitted-axiom reports. The candidate compiler exited 1, and **0/4 new roots accepted**.
+
+Earliest actual Lean error was line 28:74 in `sourceCliffordLinear_add`:
+
+```text
+⊢ ∑ p, (↑(a p)+↑(b p)) • M.theta p.1 p.2 =
+    (∑ p, ↑(a p) • M.theta p.1 p.2) +
+    (∑ p, ↑(b p) • M.theta p.1 p.2)
+```
+
+Broad `simp only [AlgebraData.cliffordLinear,Pi.add_apply,Complex.ofReal_add,add_smul,Finset.sum_add_distrib]` did not discharge this sum; strict linter additionally rejected unused `add_smul` and `Finset.sum_add_distrib`. Consequently `sourceCliffordLinear_add`, the general potential multiplier theorem and single-coordinate theorem reported `sorryAx`. Crucially, `sourceCliffordLinear_real_smul` DID compile with only `[propext,Classical.choice,Quot.sound]`, but is not a new formally accepted root because the whole gate was red. This is a finite-sum normalization issue, **not** a counterexample to Fock operator scalar-linearity or an unqualified mathematical source. No new axioms or changes to original source.
+
+**Gate94 #3** [run #40293891442](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40293891442) tests a structural correction: at each *actual original FermionIndex* first prove `((a p:ℂ)+(b p:ℂ)) • M.theta p = (a p:ℂ) • M.theta p + (b p:ℂ) • M.theta p` with explicit `add_smul` and typed `Finset.sum_congr`, then assemble the two operator sums through `Finset.sum_add_distrib`. This is the same small typed proof architecture that succeeded at S4B4 Gate92. Candidate source/strict workflow changed atomically at `4361b76d582b597567073254a740c83a07fc918d` to source Git blob `5273bd3053c38b1948ed064b801b8ac4ed03087f` and gate workflow blob `aa3fb562a923cc28ade2437dcdfd7457b8cf64f2`. **No theorem statements changed; no roots accepted pending completed strict #3.** Original Gate94 #1 and #2 remain separately red.
