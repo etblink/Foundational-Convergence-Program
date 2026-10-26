@@ -32,3 +32,19 @@ For all triples with distinct indices, `s_a s_b s_c = -1`, hence `f'_{abc}=-sqrt
 4. If Gate111 is accepted, count only its exact source-coefficient root. A manuscript `B(x)` typed operator identification requires the further concrete color-orientation, CAR, and source-operator bridges. No global Spin(9) reduction or spectral existence follows.
 
 **Validation status:** source definitions inspected directly; the signed-basis argument is mathematical reasoning recorded for adverse testing, not yet formalized or accepted by the strict Lean pipeline. Scope is a universal-claim falsification boundary and suggested minimal future diagnostic, not a theorem ledger increment. Preserve the contrary candidate, if proposed, as negative knowledge.
+
+## Existing exact source-color bridge to reuse — avoid duplicate formalization
+
+A direct read of the research-branch Lean source identified a prior, **conditional and correctly scoped** theorem in `experiments/openai-math-su2-concrete-potential/SU2ColorCrossProbe.lean`:
+
+```lean
+FCP.BFSSSU2.algebraData_structureConstant_of_pauli_color
+  (M : AlgebraData 2)
+  (hcolor : ∀ a : ColorIndex 2, M.color a = normalizedPauli a)
+  (a b c : Fin 3) :
+  M.structureConstant a b c = Real.sqrt 2 * epsilon3 a b c
+```
+
+The file also gives `normalizedPauli_structureConstant_trace` and `normalizedPauli_realBracket`, with the source's `-i[·,·]` convention. `SU2BFSSPhysicalDomainL6G5GOriginalSU2QuarticJacobiProbe.lean` already uses the exact theorem to prove `sourceSU2Bracket_eq_cross M hcolor`; `SU2BFSSPhysicalDomainL6G5LSourcePauliCyclicCoefficientProbe.lean` reuses this in a concrete cyclic wedge coefficient theorem. `SU2BFSSFullAlgebraDataProbe.lean` explicitly defines `concreteAlgebraData.color := normalizedPauli`, potentially discharging `hcolor` by definitional equality for that specific source instance.
+
+**Project Lead prioritization correction:** Do **not** create a new general Pauli/epsilon normalization proof. Inspect strict qualification and exact import/cache ancestry of these existing modules, apply the accepted source theorem to the actually paired original `AlgebraData 2` (proving or quoting `hcolor` for that exact instance), and concentrate new effort on the unclosed finite operator sums, theta ordering/CAR, and identification with manuscript `B(x)`. No claim of new accepted roots follows from discovering an existing lemma in a source file without rechecking its gate provenance.
