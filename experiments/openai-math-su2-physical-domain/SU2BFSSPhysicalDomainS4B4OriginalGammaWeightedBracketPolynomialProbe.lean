@@ -46,11 +46,62 @@ theorem originalGammaWeightedBracket_affine_polynomial
     t^2 * ((1 / 2 : ℝ) *
       (∑ i : SpaceIndex, ∑ j : SpaceIndex,
         M.coordinateBracketAll v i j A * M.gammaTwo i j α β)) := by
-  simp_rw [originalCoordinateBracketAll_affine_polynomial M x v t]
-  -- Keep the real scalar t OUTSIDE the original nested finite sums;
-  -- Gate92 #1 expanded it under the color indices before ring.
-  simp only [add_mul, Finset.sum_add_distrib, ← Finset.mul_sum]
-  all_goals ring
+  -- Unlike Gate92 #1/#2, first establish a typed equation for
+  -- EACH original spatial (i,j) pair. Ring then sees real scalars,
+  -- not unmatched opaque Finset.sum expressions.
+  have hterm (i j : SpaceIndex) :
+      M.coordinateBracketAll (x + t • v) i j A * M.gammaTwo i j α β =
+        M.coordinateBracketAll x i j A * M.gammaTwo i j α β +
+        t * ((∑ B : ColorIndex N, ∑ C : ColorIndex N,
+          M.structureConstant A B C *
+            (v (i,B) * x (j,C) + x (i,B) * v (j,C))) *
+          M.gammaTwo i j α β) +
+        t^2 * (M.coordinateBracketAll v i j A * M.gammaTwo i j α β) := by
+    rw [originalCoordinateBracketAll_affine_polynomial M x v t i j A]
+    ring
+  have hsum :
+      (∑ i : SpaceIndex, ∑ j : SpaceIndex,
+        M.coordinateBracketAll (x + t • v) i j A * M.gammaTwo i j α β) =
+      (∑ i : SpaceIndex, ∑ j : SpaceIndex,
+        M.coordinateBracketAll x i j A * M.gammaTwo i j α β) +
+      t * (∑ i : SpaceIndex, ∑ j : SpaceIndex,
+        (∑ B : ColorIndex N, ∑ C : ColorIndex N,
+          M.structureConstant A B C *
+            (v (i,B) * x (j,C) + x (i,B) * v (j,C))) *
+          M.gammaTwo i j α β) +
+      t^2 * (∑ i : SpaceIndex, ∑ j : SpaceIndex,
+        M.coordinateBracketAll v i j A * M.gammaTwo i j α β) := by
+    calc
+      _ = ∑ i : SpaceIndex, ∑ j : SpaceIndex,
+        (M.coordinateBracketAll x i j A * M.gammaTwo i j α β +
+          t * ((∑ B : ColorIndex N, ∑ C : ColorIndex N,
+            M.structureConstant A B C *
+              (v (i,B) * x (j,C) + x (i,B) * v (j,C))) *
+            M.gammaTwo i j α β) +
+          t^2 * (M.coordinateBracketAll v i j A * M.gammaTwo i j α β)) := by
+            apply Finset.sum_congr rfl
+            intro i _
+            apply Finset.sum_congr rfl
+            intro j _
+            exact hterm i j
+      _ = _ := by
+        simp only [Finset.sum_add_distrib, ← Finset.mul_sum]
+  calc
+    (1 / 2 : ℝ) *
+      (∑ i : SpaceIndex, ∑ j : SpaceIndex,
+        M.coordinateBracketAll (x + t • v) i j A * M.gammaTwo i j α β) =
+      (1 / 2 : ℝ) * (
+        (∑ i : SpaceIndex, ∑ j : SpaceIndex,
+          M.coordinateBracketAll x i j A * M.gammaTwo i j α β) +
+        t * (∑ i : SpaceIndex, ∑ j : SpaceIndex,
+          (∑ B : ColorIndex N, ∑ C : ColorIndex N,
+            M.structureConstant A B C *
+              (v (i,B) * x (j,C) + x (i,B) * v (j,C))) *
+            M.gammaTwo i j α β) +
+        t^2 * (∑ i : SpaceIndex, ∑ j : SpaceIndex,
+          M.coordinateBracketAll v i j A * M.gammaTwo i j α β)) := by
+            rw [hsum]
+    _ = _ := by ring
 
 /-- The original EuclideanSpace.single specialization, retaining the
 true source Spin/Color indices, ordered-pair 1/2, and exact quadratic
