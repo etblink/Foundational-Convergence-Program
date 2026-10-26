@@ -37,3 +37,46 @@ Upon strict acceptance, next task is the genuine operator bridge using the alrea
 Previous original S3L scoped 77 accepted through Gate82; S4B1 Gate89 +2, S4B3 Gate91 +2, S4B4 Gate92 +2 accepted. **S4B5 currently +0 until terminal Gate93 qualification.** Do not invent total principal roots, global Spin9 physical action or positive BFSS eigenstates.
 
 Methodology: [Evergreen Project Lead guide](../handoffs/FCP_PROJECT_LEAD_EVERGREEN_RESEARCH_GUIDANCE_0_1_0.md) specifies source integrity, negative feedback, architecture changes instead of repeated brute force, and separate mathematical/physical acceptance. Keep it free of gate-specific dated details.
+
+
+## FINAL STRICT ACCEPTANCE — Gate93 #1 two new original-source roots
+
+**Supersedes any earlier Gate93 pending language.** [GitHub Actions run #40290445277](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40290445277), job `121463982412`, **completed/success** on source+gate commit `19abcecc48c2b9c61da1cdb7d08193931da835d8`. Candidate Git blob `f2701b1e07f3d3bcae69a3e81a5bfa015c28a68d`, strict workflow blob `8727973bd3921b58b271f5d2f3816b432f660590`, unchanged from initial submission. Original source pins, exact Git commit/worktree candidate and four parent-source blob hashes, frozen Lean4.34.1 and Mathlib, and workflow YAML/preflight tests passed.
+
+**G4K9C cache source closure qualified:** same research branch as [historical strictly accepted DE3B run #40053689877](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40053689877), using its exact text cache key, exact save-path/version contract and the restored original `ClosedProfiles`, G4K9A/B/C ancestor oleans. The fail-closed cache stage passed `GATE93_ACCEPTED_G4K9C_CACHE_PROVENANCE_PASS`.
+
+Original pinned Core/MassiveCoercivity/ColorMatrices freshly compiled to nonempty .olean files. Both previously accepted source S4B3 and S4B4 files were **again freshly compiled and axiom-audited**, with markers `GATE93_ACCEPTED_S4B3_PARENT_FRESH_PASS 112336` and `GATE93_ACCEPTED_S4B4_PARENT_FRESH_PASS 145528`.
+
+Exact original log:
+
+```text
+GATE93_ORIGINAL_SOURCE_AND_PROOF_IMMUTABILITY_PASS
+GATE93_FROZEN_TOOLCHAIN_AND_MATHLIB_PASS
+GATE93_ACCEPTED_G4K9C_CACHE_PROVENANCE_PASS
+GATE93_ORIGINAL_SOURCE_FRESH_COMPILED OAI.MathematicalPhysics.BFSS.Core 1281224
+GATE93_ORIGINAL_SOURCE_FRESH_COMPILED OAI.MathematicalPhysics.BFSS.MassiveCoercivity 1201000
+GATE93_ORIGINAL_SOURCE_FRESH_COMPILED OAI.MathematicalPhysics.BFSS.ColorMatrices 425920
+GATE93_ACCEPTED_S4B3_PARENT_FRESH_PASS 112336
+GATE93_ACCEPTED_S4B4_PARENT_FRESH_PASS 145528
+GATE93_LAKE_NOTICE_FILTER_SELF_TEST_PASS
+GATE93_CANDIDATE_SOURCE_WARNINGS []
+GATE93_COMPILER_EXIT 0 AXIOM_REPORTS [
+ ('FCP.BFSSSU2GaugeG4K9C.sourceMasslessCoefficient_eq_halfOriginalOrdered',
+  {'propext','Classical.choice','Quot.sound'}),
+ ('FCP.BFSSSU2PhysicalDomainS4B5.originalMasslessPotentialCoefficient_affine_polynomial',
+  {'propext','Classical.choice','Quot.sound'}),
+ ('FCP.BFSSSU2PhysicalDomainS4B5.originalMasslessPotentialCoefficient_single_coordinate_polynomial',
+  {'propext','Classical.choice','Quot.sound'})
+]
+GATE93_ORIGINAL_SOURCE_MASSLESS_COEFFICIENT_TWO_ROOTS_STRICT_PASS
+```
+
+The **first** report belongs to the historically accepted G4K9C theorem and is NOT counted a new root. Exactly **two newly accepted source S4B5 Lean theorem roots** are the original massless coefficient affine and single-coordinate polynomial identities. All three report exactly the permitted axioms; no `sorryAx`, compiler errors or source Lean warnings; new candidate olean nonempty; every GitHub job step passed. [Original compiler/ancestor and olean artifact #12636142723](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40290445277/artifacts/12636142723).
+
+### Mathematical implication and hard boundary
+
+This is an unconditional, source-exact **real scalar coefficient** identity for original `M.deformedPotentialCoefficients 1 0`, with all exact color structure constants, gammaTwo ordering, (1/2) normalization and actual bosonic real coordinate. It moves the S4B4 result into the *actual potential coefficient* through qualified G4K9C, rather than an unproved alias. The proof does NOT identify the real-linear Fock operator derivative, its natural operator topology, the original `deformedFermionField 1 0`, physical closed Spin9 action or a positive eigenpair.
+
+**Root accounting:** S4B1 Gate89 +2, S4B3 Gate91 +2, S4B4 Gate92 +2, S4B5 Gate93 +2 newly accepted within S4 stream; previous S3L historical 77 through Gate82 remains a separately scoped count. Historical accepted G4K9C was re-audited, not double-counted. No unreconciled all-FCP principal count.
+
+**Next research direction:** compose the true coefficient polynomial through the original `cliffordLinear` `→L[ℂ]` and `restrictScalars ℝ` maps to reach `M.deformedRealField 1 0`, with source-defined operator domains and complex/real normalization. Import G4K9D when the original massless bracket multiplier source identity is directly needed. Do not overstate B(x) or spectral claims.
