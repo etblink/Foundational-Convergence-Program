@@ -46,8 +46,8 @@ jobs:
           test "$(cat upstream-math/lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
           test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/Core.lean)" = "9882359ced78b0a3bd7e2f057974bd0a031b3e60"
           test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/GammaWords.lean)" = "d12051e70de679f5458dbd456667a32c7b407ce4"
-          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B1OriginalGammaFermionContractionProbe.lean)" = "bbeae5475fd4be6e9a587dafb67f28c552fd7df9"
-          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B1OriginalGammaFermionContractionProbe.lean)" = "bbeae5475fd4be6e9a587dafb67f28c552fd7df9"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B1OriginalGammaFermionContractionProbe.lean)" = "8993ca98b89d6164a5d93c13d9c76f33ece48ba0"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B1OriginalGammaFermionContractionProbe.lean)" = "8993ca98b89d6164a5d93c13d9c76f33ece48ba0"
           python3 - <<'PY'
           import json
           from pathlib import Path

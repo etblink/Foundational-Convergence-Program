@@ -54,9 +54,8 @@ theorem sourceGammaTwo_contract
           simp
     _ = (8 : ℝ) • G j := by
           ext α β
-          simp only [Matrix.sub_apply, Matrix.smul_apply, Pi.smul_apply,
-            nsmul_eq_mul]
-          ring
+          simp only [Matrix.sub_apply, Matrix.smul_apply]
+          norm_num [nsmul_eq_mul]
 
 /-- The SAME contraction in the concrete original pinned source
 AlgebraData matrix types and original gammaTwo definition. -/
