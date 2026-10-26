@@ -94,3 +94,18 @@ If Gate89 is red, record its **first actual compiler issue** rather than guessin
 **Gate89 #2** [GitHub Actions #40277712823](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40277712823) completed failure **BEFORE** Lean: new candidate commit-blob equality passed, but copied worktree hash-object pin still expected the original `aec9bb5…` blob. This is a proof-gate **infrastructure red** caused by incomplete pin update, not a proof counterexample or a Lean parser error. We preserve it as a lesson that immutable source checks must be updated *as an audited set*, not only one occurrence.
 
 **Gate89 #3**: workflow-only fix in commit `944036e1efc69ea4453a1f69b0986e738a6b5935` changed the remaining worktree blob pin to `bbeae5475fd4be6e9a587dafb67f28c552fd7df9`; exact mathematical candidate unchanged from Gate89 #2. [GitHub Actions #40277856118](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40277856118) launched; record its terminal compiler verdict separately rather than assuming acceptance from a successful preflight. Scoped strict accepted-root count is unchanged until that verdict is independently verified.
+
+
+## Gate89 #3 diagnosed from original Lean output
+
+[Run #40277856118](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40277856118), job `121424348922`, completed/failure after valid preflight, frozen Lean/Mathlib restoration, and freshly qualified original `Core.olean` / `GammaWords.olean`. The ambiguous `gammaTwo` and deprecated simplifier from #1 were resolved. The only remaining mathematical compiler error was at the final matrix-entry normalization:
+
+```text
+⊢ (↑9 * G j) α β - G j α β = G j α β * 8
+```
+
+The previous `nsmul_eq_mul` inside a broad `simp only` prematurely changed natural matrix nsmul to matrix-level multiplication. A separate warning-as-error was the unused `Pi.smul_apply` simplifier. These do NOT challenge the nine-dimensional Clifford identity. Both candidate theorem reports again contained `sorryAx`; **0 accepted roots**.
+
+**Gate89 #4** [run #40278526727](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40278526727), source+workflow exact-blob atomic commit `ad0d103a5f64eb8780c02c2423e2c8f47685c405`, keeps BOTH proposition statements and source origins identical, but performs `Matrix.sub_apply` and `Matrix.smul_apply` before calling real-scalar normalization, and removes unused `Pi.smul_apply`. This precise controlled test is pending terminal strict kernel/axiom verdict. It also ran the improved preflight self-test with the contradictory-hash regression, qualified at workflow level (not Lean).
+
+**Additional verifier distinction to preserve:** `lake env lean` on the pinned cache prints predictable third-party package repository-state messages of the form `warning: package: repository '.../.lake/packages/package' has local changes`. The current Gate89 candidate validator rejects any `warning:` unconditionally and may produce a **false strict red even when the actual declaration compiles**. If such a case occurs, allowlist **only** those exact package-state lines using an anchored regex; continue rejecting all candidate Lean warnings and any sorryAx. Do not claim acceptance from a green mathematical compiler if the strict workflow itself rejected the candidate; repair and rerun the validator with the same immutable statements.
