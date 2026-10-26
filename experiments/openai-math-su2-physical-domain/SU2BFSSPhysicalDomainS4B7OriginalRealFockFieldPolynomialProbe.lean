@@ -73,8 +73,15 @@ theorem originalMasslessRealField_affine_polynomial
     originalFockRestrictScalars_add,
     originalFockRestrictScalars_real_smul,
     originalFockRestrictScalars_real_smul] at hr
-  simpa only [AlgebraData.deformedRealField,
-    sourceMasslessRealFieldVariation] using hr
+  -- The predecessor hides its coefficient behind a private definition.
+  -- Compare the exact source operator types by definitional equality,
+  -- rather than simplifying one coefficient while leaving the other opaque.
+  change
+    M.deformedRealField 1 0 α (x + t • v) =
+      M.deformedRealField 1 0 α x +
+      t • sourceMasslessRealFieldVariation M x v α +
+      t^2 • M.deformedRealField 1 0 α v at hr
+  exact hr
 
 /-- Genuine original EuclideanSpace.single direction, in the REAL
 continuous-linear source operator type without unjustified fderiv. -/
