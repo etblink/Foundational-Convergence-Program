@@ -1,0 +1,80 @@
+import SU2BFSSPhysicalDomainS4B7OriginalRealFockFieldPolynomialProbe
+
+/-! S4B8: first genuine original real-Fock field directional derivative;
+source operator, gamma, color, fermion, and bosonic spaces unchanged.
+Not the full fermionic remainder field or a spectral theorem. -/
+
+set_option autoImplicit false
+namespace FCP.BFSSSU2PhysicalDomainS4B8
+noncomputable section
+open OAI.BFSSQuantum
+open OAI.BFSSQuantum.AlgebraData
+open FCP.BFSSSU2PhysicalDomainS4B7
+
+/-- Derivative on every genuine source bosonic affine line. -/
+theorem originalMasslessRealField_line_hasDerivAt
+    {N : ℕ} (M : AlgebraData N) (x v : Boson N) (α : SpinIndex) :
+    HasDerivAt (fun t : ℝ => M.deformedRealField 1 0 α (x + t • v))
+      (sourceMasslessRealFieldVariation M x v α) (0 : ℝ) := by
+  have hpoly :
+      (fun t : ℝ => M.deformedRealField 1 0 α (x + t • v)) =
+      (fun t : ℝ => M.deformedRealField 1 0 α x +
+        t • sourceMasslessRealFieldVariation M x v α +
+        t ^ 2 • M.deformedRealField 1 0 α v) := by
+    funext t
+    exact originalMasslessRealField_affine_polynomial M x v t α
+  have hlin : HasDerivAt
+      (fun t : ℝ => t • sourceMasslessRealFieldVariation M x v α)
+      (sourceMasslessRealFieldVariation M x v α) (0 : ℝ) := by
+    simpa using
+      ((hasDerivAt_id (0 : ℝ)).smul_const
+        (sourceMasslessRealFieldVariation M x v α))
+  have hpow : HasDerivAt (fun t : ℝ => t ^ 2) (0 : ℝ) (0 : ℝ) := by
+    simpa using ((hasDerivAt_id (0 : ℝ)).pow 2)
+  have hquad : HasDerivAt
+      (fun t : ℝ => t ^ 2 • M.deformedRealField 1 0 α v)
+      (0 : Fermion N →L[ℝ] Fermion N) (0 : ℝ) := by
+    simpa using (hpow.smul_const (M.deformedRealField 1 0 α v))
+  have hconst : HasDerivAt
+      (fun _ : ℝ => M.deformedRealField 1 0 α x)
+      (0 : Fermion N →L[ℝ] Fermion N) (0 : ℝ) :=
+    hasDerivAt_const (0 : ℝ) (M.deformedRealField 1 0 α x)
+  rw [hpoly]
+  simpa only [Pi.add_apply, zero_add, add_zero] using
+    ((hconst.add hlin).add hquad)
+
+/-- Actual source Fréchet derivative in the real Fock CLM carrier. -/
+theorem originalMasslessRealField_fderiv_direction
+    {N : ℕ} (M : AlgebraData N) (x v : Boson N) (α : SpinIndex) :
+    fderiv ℝ (M.deformedRealField 1 0 α) x v =
+      sourceMasslessRealFieldVariation M x v α := by
+  have hpath : HasDerivAt (fun t : ℝ => x + t • v) v (0 : ℝ) := by
+    simpa only [Pi.add_apply, zero_add, add_zero] using
+      ((hasDerivAt_const (0 : ℝ) x).add
+        ((hasDerivAt_id (0 : ℝ)).smul_const v))
+  have hdiff : DifferentiableAt ℝ (M.deformedRealField 1 0 α) x :=
+    (M.deformedRealField_contDiff 1 0 α).differentiable (by simp) x
+  have hchain : HasDerivAt
+      (fun t : ℝ => M.deformedRealField 1 0 α (x + t • v))
+      (fderiv ℝ (M.deformedRealField 1 0 α) x v) (0 : ℝ) := by
+    simpa only [Function.comp_def, zero_smul, add_zero] using
+      (hdiff.hasFDerivAt.comp_hasDerivAt (0 : ℝ) hpath)
+  exact hchain.unique (originalMasslessRealField_line_hasDerivAt M x v α)
+
+/-- Source coordinate derivative, not an assumed proxy gamma field. -/
+theorem originalMasslessRealField_single_coordinate_fderiv
+    {N : ℕ} (M : AlgebraData N) (x : Boson N)
+    (α : SpinIndex) (k : SpaceIndex) (D : ColorIndex N) :
+    fderiv ℝ (M.deformedRealField 1 0 α) x
+        (EuclideanSpace.single (k,D) (1 : ℝ)) =
+      sourceMasslessRealFieldVariation M x
+        (EuclideanSpace.single (k,D) (1 : ℝ)) α := by
+  exact originalMasslessRealField_fderiv_direction M x
+    (EuclideanSpace.single (k,D) (1 : ℝ)) α
+
+#print axioms originalMasslessRealField_line_hasDerivAt
+#print axioms originalMasslessRealField_fderiv_direction
+#print axioms originalMasslessRealField_single_coordinate_fderiv
+
+end
+end FCP.BFSSSU2PhysicalDomainS4B8
