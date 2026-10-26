@@ -21,3 +21,20 @@ Independently verified [run #40389025365](https://github.com/etblink/Foundationa
 This is a strict tactic-linter failure, *not* a wrong coordinate-selector theorem or invalid source basis behavior. Both candidate roots remain **unaccepted (0/2)**; scoped S4 accepted **35**. Original logs and compiled objects in [artifact #12681924839](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40389025365/artifacts/12681924839).
 
 **Gate104 attempt #2 prospective**: exactly replace coincidence `simp [PiLp.single_apply]` with `simp`; noncoincidence `have h' ...; simp [PiLp.single_apply,h,h']` with `simp [h]`, following original Lean compiler suggestions. Same actual source `Boson N` carrier, true `EuclideanSpace.single`, theorem statements, proofs' structure, two axiom names and all source mathematics. New source Git blob `b3b91708f45bca87cfd6f4bc538adf86c51445a2`. Update the **two** strict candidate source pins and the static source preflight check (guard `Finset.sum_congr` rather than a redundant tactic `PiLp.single_apply`); no weakening of warnings-as-errors, original-source pins, or permitted axioms. Paired strict workflow blob `5f9ec864bfc228636c081937f0d051ef37624045`. This has **not yet passed CI**. No unqualified B(x), physical Spin(9), spectral theorem or whole-program counts. Canonical `main`, immutable original math and PR #25 unchanged.
+
+## Gate104 #2 FINAL STRICT ACCEPTANCE — actual original boson coordinate selectors
+
+**2026-10-26 Project Lead independently verified** [Actions run #40391161131](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40391161131), job `121812192055`, research commit `f226a14bcb37e922970e36c8427a861606419ae1`, `completed/success`, against original Lean output. Original `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, frozen Lean 4.34.1 and Mathlib `d13f23b`, original source Git SHA and manifest pins, G4K9C qualified source cache preflight, immutable source all passed. Original BFSS Core, MassiveCoercivity, ColorMatrices, MixedEnergy, DeformedCharge, GammaWords, ColorLie and accepted S4B3–S4B15 proofs were freshly compiled with allowed axioms (S4B15 `.olean` 75624 bytes). Candidate source Git blob `b3b91708f45bca87cfd6f4bc538adf86c51445a2`, strict workflow Git blob `5f9ec864bfc228636c081937f0d051ef37624045`.
+
+Decisive original compiler verification:
+```text
+GATE104_CANDIDATE_SOURCE_WARNINGS []
+GATE104_COMPILER_EXIT 0 AXIOM_REPORTS [
+ ('FCP.BFSSSU2PhysicalDomainS4B16.originalBoson_single_coordinate_weighted', {'Quot.sound', 'propext', 'Classical.choice'}),
+ ('FCP.BFSSSU2PhysicalDomainS4B16.originalBoson_single_coordinate_nested', {'Quot.sound', 'propext', 'Classical.choice'})]
+GATE104_ORIGINAL_SOURCE_COORDINATE_SELECTOR_TWO_ROOTS_STRICT_PASS
+```
+
+**Gate104 #2 strictly accepts 2/2 candidate roots; scoped S4 total 35 → 37.** Both the original EuclideanSpace.single (k,A) genuine bosonic single-coordinate selector and the original nested spatial/color sum thereof are now strictly verified; not synthetic `if`-based surrogates. Gate104 #1 [run 40389025365](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40389025365) remains red and preserved: 3 unused simplifier arguments with existing complete proof goals and permitted axioms. Attempt #2 only removed the unused tactics and adjusted the exact source guard; original mathematical statements, pin discipline, warning-as-error, strict axiom policy and source unchanged.
+
+**Next boundary:** substitute actual original coordinate direction `EuclideanSpace.single (k,A) 1` into the already-accepted S4B11 public `sourceMasslessComplexVariationCoefficient M x v α q` and derive a non-opaque, explicitly signed gamma/color coefficient using the Gate103 signed pair and now accepted Gate104 selector. The last identity is not yet strictly qualified; do not infer manuscript `B(x)`, Spin(9) closed-domain claims or spectral existence. Scoped tally only, global historical tally not reconciled. Canonical `main`, original source and draft PR #25 unaffected.
