@@ -39,7 +39,7 @@ theorem originalSourceGammaTwo_spinor_entry_contraction
     have h := congrArg (fun T : GammaMatrix => T β δ)
       (originalSourceGammaTwo_nine_direction_sum M j)
     simpa only [Matrix.sum_apply, Matrix.mul_apply,
-      Matrix.smul_apply, nsmul_eq_mul] using h
+      Matrix.smul_apply, nsmul_eq_mul, Nat.cast_ofNat] using h
   calc
     _ = ∑ k : SpaceIndex, ∑ α : SpinIndex,
           M.gamma k β α * M.gammaTwo k j α δ := by
