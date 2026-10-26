@@ -83,3 +83,14 @@ These equations establish the **ordinary source CAR/polynomial mathematical iden
 3. Only thereafter use the original normalized form identity to prove an actual source physical smooth-core `Spin(9)` form invariance theorem, conditionally on the true global action being constructed. Import accepted source G4K9D, do not reprove it.
 
 If Gate89 is red, record its **first actual compiler issue** rather than guessing a mathematics counterexample or raising recursion/heartbeat limits. The previous full 6-index E3B/E3C proof family remains paused. No new spectral claims or physical mass gap result follow from a green S4B1.
+
+
+## Gate89 immutable negative evidence — separately classified failures
+
+**Gate89 #1** [GitHub Actions #40276967009](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40276967009), job `121421646388`, completed failure. Frozen source Core and GammaWords both compiled FRESH (`Core.olean` size 1,281,224; `GammaWords.olean` size 738,648), toolchain and mathlib pins passed. Lean candidate line 42 failed `Ambiguous term gammaTwo` between `AlgebraData.gammaTwo` and `OAI.BFSSGamma.gammaTwo`; line 44 reported deprecated `if_neg` under warning-as-error; line 57 `module` failed on a non-normalized natural-smul vs real-smul goal (`1=0`). Both candidate theorem axiom reports included `sorryAx`. **0 roots accepted.** This was NOT an E3B/E3C recursion failure.
+
+**Repair commit** `b6ce0f2f6ebe2bfb7694b5c3255d860b24b9e0c0` atomically updated the exact same theorem statements, using qualified `OAI.BFSSGamma.gammaTwo`, nondeprecated `ite_eq_right` and an explicit source-matrix-entry scalar normalization. Candidate new blob `bbeae5475fd4be6e9a587dafb67f28c552fd7df9`. No source gamma hypothesis, spatial dimension, or original mathematical repo changed.
+
+**Gate89 #2** [GitHub Actions #40277712823](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40277712823) completed failure **BEFORE** Lean: new candidate commit-blob equality passed, but copied worktree hash-object pin still expected the original `aec9bb5…` blob. This is a proof-gate **infrastructure red** caused by incomplete pin update, not a proof counterexample or a Lean parser error. We preserve it as a lesson that immutable source checks must be updated *as an audited set*, not only one occurrence.
+
+**Gate89 #3**: workflow-only fix in commit `944036e1efc69ea4453a1f69b0986e738a6b5935` changed the remaining worktree blob pin to `bbeae5475fd4be6e9a587dafb67f28c552fd7df9`; exact mathematical candidate unchanged from Gate89 #2. [GitHub Actions #40277856118](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40277856118) launched; record its terminal compiler verdict separately rather than assuming acceptance from a successful preflight. Scoped strict accepted-root count is unchanged until that verdict is independently verified.
