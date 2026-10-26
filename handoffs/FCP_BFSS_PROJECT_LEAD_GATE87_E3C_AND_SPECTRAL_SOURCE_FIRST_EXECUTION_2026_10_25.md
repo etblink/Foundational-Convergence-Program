@@ -147,3 +147,22 @@ Next source-typed mathematical target, if #6 is accepted: one-coordinate derivat
 [Detailed immutable acceptance audit](../audits/FCP_BFSS_S4B1_GATE89_6_SOURCE_GAMMA_CONTRACTION_TWO_ROOTS_STRICT_ACCEPTANCE_2026_10_25.md), commit `f829f747c435b338834453c3ec1c3a7561a330cc`, plus [gate source derivation/history](../audits/FCP_BFSS_S4B1_SOURCE_FERMION_FIELD_EXPLICIT_B_DERIVATION_AND_GATE89_2026_10_25.md). Evidence artifact `12631208364`.
 
 **Immediate successor operation:** next independent formal target is the original `deformedRealField 1 0` single-coordinate derivative with accepted G4K9D original multiplier equality and source `MixedEnergy.remainderField`. Then prove the actual typed real-linear `deformedFermionField 1 0 = B_manuscript` with color sign and 1/2 coefficient. Keep all source pins, negative gate lessons, and no unauthorized physical-eigenvalue promotion.
+
+
+## Successor continuation — S4B2 Gate90 original coordinate-bracket derivative
+
+After strict Gate89 #6 **+2 accepted original gamma contraction roots**, Project Lead advanced the genuinely original bosonic color-bracket factor of the fermionic-field identity, not another E3B/E3C sixfold simplification.
+
+[S4B2 exact original-source Lean candidate](../experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B2OriginalCoordinateBracketDirectionalDerivativeProbe.lean) and [Gate90 strict source-and-axiom workflow](../.github/workflows/bfss-form-original-bracket-derivative-strict-gate90.yml) target the actual `M.coordinateBracketAll` definition from immutable `etblink/math` `ColorMatrices.lean`, for original `AlgebraData N` and `Boson N=EuclideanSpace ℝ (Fin9 × ColorIndex N)`. Three declarations attempt the original affine real coordinate derivative, the source full bracket's directional derivative, and its actual one-coordinate `EuclideanSpace.single` specialization. Exact identity:
+```text
+  (d/dt)|_(t=0) coordinateBracketAll(x+t*v,i,j,A)
+     = sum_B sum_C structureConstant(A,B,C) *
+           (v(i,B)*x(j,C) + x(i,B)*v(j,C)).
+```
+Original source `Core`, `MassiveCoercivity`, and `ColorMatrices` are compiled fresh at frozen Lean 4.34.1, Mathlib `d13f23b...`, original `etblink/math@adc7f124...`, with strict source hash and axiom validation. No unrealized Fock operator/fderiv equivalence is assumed.
+
+**Gate90 #1** [run #40281792044](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40281792044), job `121436493681`, strict **RED**, 0/3 roots. All three original ancestor modules compiled successfully. Lean reported implicit module-instance mismatch `PiLp.normedSpace` vs `WithLp.instModule` while converting original `Boson N` vector `HasDerivAt` to `EuclideanSpace.proj`. This matches **known negative knowledge from L6G7N**; never reconstruct a second vector module instance for the actual Boson. Two further `convert` function and scalar equalities also failed; no evidence of a mathematical inconsistency. All three declarations contained `sorryAx`.
+
+**Gate90 #2** source+workflow exact-blob atomic repair commit `845da37ffd6550a36fe27c69691a5a91e1991be7`, candidate blob `68b3d0c37dcab6fccab57a60eb3cdaa75ef8f48a`, workflow blob `a4f0912ba236bc8327fa18c5b5fc8c1690c59639`. The proof now differentiates the ORIGINAL **scalar** affine coordinate `t ↦ x(p)+t*v(p)` and uses source `PiLp.add_apply`/`PiLp.smul_apply` to transport this scalar proof; the remaining product-rule comparison is discharged explicitly via function extensionality and real polynomial ring normalization. No theorem statement or original math hash altered. [Run #40282671921](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40282671921) is executing as of this succession note; treat its terminal status as authoritative and retain 0 new S4B2 roots until verified.
+
+[Detailed Gate90 proof/failure audit](../audits/FCP_BFSS_S4B2_GATE90_ORIGINAL_COORDINATE_BRACKET_DIRECTIONAL_DERIVATIVE_2026_10_25.md). This new result, even if qualified, supplies the original quadratic bosonic derivative **only**. The next major target remains the precise `fderiv ℝ` of the original real-linear `M.deformedRealField 1 0`, then the source `M.deformedFermionField 1 0 = B_manuscript` including certified S4B1 factor eight, color antisymmetry, exact `-i` kinetic coefficient, and `restrictScalars ℝ`. Global Spin9 on physical closed forms and any positive normalizable spectral claim remain open.
