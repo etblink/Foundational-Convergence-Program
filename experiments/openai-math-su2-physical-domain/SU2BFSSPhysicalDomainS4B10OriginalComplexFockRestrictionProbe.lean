@@ -33,10 +33,20 @@ theorem originalComplexFockRestriction_sum
     ((∑ i : ι, F i) : Fermion N →L[ℂ] Fermion N).restrictScalars ℝ =
       ∑ i : ι, (F i).restrictScalars ℝ := by
   classical
-  apply ContinuousLinearMap.ext
-  intro z
-  change (∑ i : ι, F i) z = ∑ i : ι, (F i) z
-  simp only [Finset.sum_apply]
+  -- Do not use 'change' through opaque restrictScalars. Prove finite
+  -- sum transport by induction using the accepted source addition bridge.
+  have h (s : Finset ι) :
+      (s.sum F).restrictScalars ℝ =
+        s.sum (fun i => (F i).restrictScalars ℝ) := by
+    induction s using Finset.induction_on with
+    | empty =>
+        simp only [Finset.sum_empty]
+        apply ContinuousLinearMap.ext
+        intro z
+        rfl
+    | @insert i s hi ih =>
+        simp only [Finset.sum_insert hi, originalFockRestrictScalars_add, ih]
+  exact h Finset.univ
 
 /-- Source gamma/color variation with the original Clifford theta action,
 before changing from complex-linear to real-linear Fock operators. -/
@@ -111,7 +121,16 @@ theorem originalMasslessFermionField_complexRestriction
               (EuclideanSpace.single p 1) α)) :
         Fermion N →L[ℂ] Fermion N).restrictScalars ℝ
   rw [hsum]
-  exact (originalFockRestrictScalars_real_smul _ (1 / 16 : ℝ)).symm
+  -- The original real scalar 1/16 and its complex embedding must be
+  -- identified propositionally; do not leave the complex CLM implicit.
+  have hscalar : ((1 / 16 : ℝ) : ℂ) = (1 / 16 : ℂ) := by
+    norm_num
+  rw [← hscalar]
+  exact (originalFockRestrictScalars_real_smul
+    (∑ α : SpinIndex, ∑ p : SpaceIndex × ColorIndex N,
+      ((-Complex.I) • M.kineticComplexSymbol α p) *
+        sourceMasslessComplexFieldVariation M x
+          (EuclideanSpace.single p 1) α) (1 / 16 : ℝ)).symm
 
 #print axioms originalComplexFockRestriction_mul
 #print axioms originalComplexFockRestriction_sum
