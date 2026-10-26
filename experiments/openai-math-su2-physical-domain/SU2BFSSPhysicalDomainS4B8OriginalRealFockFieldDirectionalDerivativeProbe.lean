@@ -30,18 +30,24 @@ theorem originalMasslessRealField_line_hasDerivAt
       ((hasDerivAt_id (0 : ℝ)).smul_const
         (sourceMasslessRealFieldVariation M x v α))
   have hpow : HasDerivAt (fun t : ℝ => t ^ 2) (0 : ℝ) (0 : ℝ) := by
-    simpa using ((hasDerivAt_id (0 : ℝ)).pow 2)
+    have hpowSource := ((hasDerivAt_id (0 : ℝ)).pow 2)
+    -- The source derivation is (id ^ 2), i.e. pointwise function power.
+    -- Compare the exact function before normalizing algebra instances.
+    change HasDerivAt (fun t : ℝ => t ^ 2) (0 : ℝ) (0 : ℝ) at hpowSource
+    exact hpowSource
   have hquad : HasDerivAt
       (fun t : ℝ => t ^ 2 • M.deformedRealField 1 0 α v)
       (0 : Fermion N →L[ℝ] Fermion N) (0 : ℝ) := by
-    simpa using (hpow.smul_const (M.deformedRealField 1 0 α v))
+    convert (hpow.smul_const (M.deformedRealField 1 0 α v)) using 1
+      <;> simp only [zero_smul]
   have hconst : HasDerivAt
       (fun _ : ℝ => M.deformedRealField 1 0 α x)
       (0 : Fermion N →L[ℝ] Fermion N) (0 : ℝ) :=
     hasDerivAt_const (0 : ℝ) (M.deformedRealField 1 0 α x)
   rw [hpoly]
-  simpa only [Pi.add_apply, zero_add, add_zero] using
-    ((hconst.add hlin).add hquad)
+  -- Avoid the implicit Pi-addition instance mismatch in a blanket simpa.
+  convert ((hconst.add hlin).add hquad) using 1
+    <;> simp only [Pi.add_apply, zero_add, add_zero]
 
 /-- Actual source Fréchet derivative in the real Fock CLM carrier. -/
 theorem originalMasslessRealField_fderiv_direction
@@ -49,16 +55,21 @@ theorem originalMasslessRealField_fderiv_direction
     fderiv ℝ (M.deformedRealField 1 0 α) x v =
       sourceMasslessRealFieldVariation M x v α := by
   have hpath : HasDerivAt (fun t : ℝ => x + t • v) v (0 : ℝ) := by
-    simpa only [Pi.add_apply, zero_add, add_zero] using
-      ((hasDerivAt_const (0 : ℝ) x).add
-        ((hasDerivAt_id (0 : ℝ)).smul_const v))
+    convert ((hasDerivAt_const (0 : ℝ) x).add
+      ((hasDerivAt_id (0 : ℝ)).smul_const v)) using 1
+      <;> simp only [Pi.add_apply, id_eq, one_smul, zero_add]
   have hdiff : DifferentiableAt ℝ (M.deformedRealField 1 0 α) x :=
     (M.deformedRealField_contDiff 1 0 α).differentiable (by simp) x
   have hchain : HasDerivAt
       (fun t : ℝ => M.deformedRealField 1 0 α (x + t • v))
       (fderiv ℝ (M.deformedRealField 1 0 α) x v) (0 : ℝ) := by
-    simpa only [Function.comp_def, zero_smul, add_zero] using
-      (hdiff.hasFDerivAt.comp_hasDerivAt (0 : ℝ) hpath)
+    -- The chain rule requires the exact line base point x + 0 • v.
+    have hdiff0 : HasFDerivAt (M.deformedRealField 1 0 α)
+        (fderiv ℝ (M.deformedRealField 1 0 α) x)
+        (x + (0 : ℝ) • v) := by
+      simpa only [zero_smul, add_zero] using hdiff.hasFDerivAt
+    convert (hdiff0.comp_hasDerivAt (0 : ℝ) hpath) using 1
+      <;> simp only [Function.comp_def, zero_smul, add_zero]
   exact hchain.unique (originalMasslessRealField_line_hasDerivAt M x v α)
 
 /-- Source coordinate derivative, not an assumed proxy gamma field. -/
