@@ -47,8 +47,8 @@ jobs:
           test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/Core.lean)" = "9882359ced78b0a3bd7e2f057974bd0a031b3e60"
           test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/MassiveCoercivity.lean)" = "1a9a8fe629e69f3946602a786c2e63c2ca354462"
           test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/ColorMatrices.lean)" = "1c1c2a838c48c0aea2a1c1640da5d412f22e3f0c"
-          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B3OriginalBracketPolynomialExpansionProbe.lean)" = "86e28972f8e0008372380ea5210adb13217ca2bc"
-          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B3OriginalBracketPolynomialExpansionProbe.lean)" = "86e28972f8e0008372380ea5210adb13217ca2bc"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B3OriginalBracketPolynomialExpansionProbe.lean)" = "c80d85164247e6631fb1b0d7e4da2aca48c6af32"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B3OriginalBracketPolynomialExpansionProbe.lean)" = "c80d85164247e6631fb1b0d7e4da2aca48c6af32"
           python3 - <<'PY'
           import json
           from pathlib import Path

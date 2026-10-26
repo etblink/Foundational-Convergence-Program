@@ -64,7 +64,6 @@ theorem originalCoordinateBracketAll_affine_polynomial
             ring
     _ = _ := by
       simp only [Finset.sum_add_distrib, Finset.mul_sum]
-      ring
 
 /-- Original single-coordinate specialization, with the original
 EuclideanSpace.single and its exact coincident-index behavior retained. -/
