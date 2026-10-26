@@ -13,6 +13,7 @@ noncomputable section
 open scoped BigOperators
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
+open FCP.BFSSSU2PhysicalDomainS4B10
 open FCP.BFSSSU2PhysicalDomainS4B11
 open FCP.BFSSSU2PhysicalDomainS4B19
 
