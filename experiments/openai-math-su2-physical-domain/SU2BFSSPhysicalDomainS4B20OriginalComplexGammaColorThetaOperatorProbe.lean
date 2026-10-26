@@ -29,8 +29,17 @@ theorem originalComplexFieldVariation_gammaColorTheta
         (((∑ j : SpaceIndex, ∑ C : ColorIndex N,
            M.structureConstant q.2 A C * x (j,C) *
              M.gammaTwo k j α q.1 : ℝ) : ℂ)) • M.theta q.1 q.2 := by
-  simp only [originalComplexFieldVariation_theta,
-    originalSourceMasslessVariation_actual_reduced]
+  -- The source coefficient theorem is indexed by the explicit
+  -- original pair (β,D); give the simplifier a genuine FermionIndex map.
+  have hcoef (q : FermionIndex N) :
+      sourceMasslessComplexVariationCoefficient M x
+        (EuclideanSpace.single (k,A) (1 : ℝ)) α q =
+        (∑ j : SpaceIndex, ∑ C : ColorIndex N,
+          M.structureConstant q.2 A C * x (j,C) *
+            M.gammaTwo k j α q.1) := by
+    rcases q with ⟨β,D⟩
+    exact originalSourceMasslessVariation_actual_reduced M x k A D α β
+  simpa only [originalComplexFieldVariation_theta, hcoef]
 
 /-- Entire genuine source fermionic contraction in the exact original
 kinetic-before-potential ordered theta products, retaining -i and 1/16.
@@ -46,8 +55,19 @@ theorem originalComplexFermionContraction_gammaColorTheta
             (((∑ j : SpaceIndex, ∑ C : ColorIndex N,
               M.structureConstant q.2 p.2 C * x (j,C) *
                 M.gammaTwo p.1 j α q.1 : ℝ) : ℂ)) • M.theta q.1 q.2)) := by
-  simp only [originalComplexFermionContraction_gammaTheta,
-    originalSourceMasslessVariation_actual_reduced]
+  -- Expose BOTH original source pairs, p=(k,A) and q=(β,D).
+  -- This remains the exact kinetic-before-potential operator, not CAR.
+  have hcoef (α : SpinIndex) (p : SpaceIndex × ColorIndex N)
+      (q : FermionIndex N) :
+      sourceMasslessComplexVariationCoefficient M x
+        (EuclideanSpace.single p (1 : ℝ)) α q =
+        (∑ j : SpaceIndex, ∑ C : ColorIndex N,
+          M.structureConstant q.2 p.2 C * x (j,C) *
+            M.gammaTwo p.1 j α q.1) := by
+    rcases p with ⟨k,A⟩
+    rcases q with ⟨β,D⟩
+    exact originalSourceMasslessVariation_actual_reduced M x k A D α β
+  simpa only [originalComplexFermionContraction_gammaTheta, hcoef]
 
 #print axioms originalComplexFieldVariation_gammaColorTheta
 #print axioms originalComplexFermionContraction_gammaColorTheta

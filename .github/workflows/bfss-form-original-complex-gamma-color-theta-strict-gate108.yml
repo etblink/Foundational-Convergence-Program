@@ -47,8 +47,8 @@ jobs:
           test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/Core.lean)" = "9882359ced78b0a3bd7e2f057974bd0a031b3e60"
           test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/MassiveCoercivity.lean)" = "1a9a8fe629e69f3946602a786c2e63c2ca354462"
           test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/ColorMatrices.lean)" = "1c1c2a838c48c0aea2a1c1640da5d412f22e3f0c"
-          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B20OriginalComplexGammaColorThetaOperatorProbe.lean)" = "0a66019379df860e83b5ad439d0354080887c3c2"
-          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B20OriginalComplexGammaColorThetaOperatorProbe.lean)" = "0a66019379df860e83b5ad439d0354080887c3c2"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B20OriginalComplexGammaColorThetaOperatorProbe.lean)" = "4f368028e4c617f9c5daf4971a4fc287b0659075"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B20OriginalComplexGammaColorThetaOperatorProbe.lean)" = "4f368028e4c617f9c5daf4971a4fc287b0659075"
           test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B6OriginalMasslessPotentialMultiplierPolynomialProbe.lean)" = "5273bd3053c38b1948ed064b801b8ac4ed03087f"
           test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B6OriginalMasslessPotentialMultiplierPolynomialProbe.lean)" = "5273bd3053c38b1948ed064b801b8ac4ed03087f"
           test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B5OriginalMasslessCoefficientPolynomialProbe.lean)" = "f2701b1e07f3d3bcae69a3e81a5bfa015c28a68d"
@@ -102,7 +102,7 @@ jobs:
           src=Path("experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B20OriginalComplexGammaColorThetaOperatorProbe.lean").read_text()
           assert src.count("\ntheorem ")==2 and src.count("\n#print axioms ")==2
           assert all(name in src for name in ["originalComplexFieldVariation_gammaColorTheta","originalComplexFermionContraction_gammaColorTheta"])
-          assert "sourceMasslessComplexFermionContraction" in src and "sourceMasslessComplexFieldVariation" in src and "originalSourceMasslessVariation_actual_reduced" in src and "originalComplexFermionContraction_gammaTheta" in src and "open FCP.BFSSSU2PhysicalDomainS4B10" in src
+          assert "sourceMasslessComplexFermionContraction" in src and "sourceMasslessComplexFieldVariation" in src and "originalSourceMasslessVariation_actual_reduced" in src and "originalComplexFermionContraction_gammaTheta" in src and "open FCP.BFSSSU2PhysicalDomainS4B10" in src and "have hcoef" in src
           assert not any(line.lstrip().startswith(("sorry", "admit", "axiom ")) for line in src.splitlines())
           print("GATE108_ORIGINAL_SOURCE_AND_PROOF_IMMUTABILITY_PASS")
           PY
