@@ -1,0 +1,49 @@
+# BFSS S3L R4O Project Lead — rigorous 76–79 retrospective and source-safe E2A recovery plan
+**2026-10-25 PDT. Research branch only. This handoff is not an accepted proof.**
+
+## 1. Ground truth before modifying anything
+- Frozen original BFSS `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean `4.34.1`, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`. Accept only fresh authentic original module `.olean`, successful strict `lake env lean -DwarningAsError=true`, exact fully qualified `#print axioms`, allowed `{propext, Classical.choice, Quot.sound}`, and no `sorryAx` or unauthorized warnings. Preserve all original BFSS gamma, scalar, Majorana, generator, position factors, order, domains and hypotheses.
+- **75 new accepted theorem roots across Gates51–75**, not FCP all-time total. Gate75 R4N truly proves the original sixfold *source response* as color-first gamma-coefficient response. It is not yet the actual source cubic-charge commutator or full sixteen supercharge Spin(9) covariance.
+- Historical unconditional K2D3 original source single-factor commutator exists; E1A–E1D transport with abstract `SourceEnd` and original six BFSS index types exists. The missing boundary is E2A `pairedActualCubicSixfold_comm_of_pointwise` with the **literal giant original source operator specialization**. E2B then discharges its visible pointwise premise using accepted K2D3. R4O then composes E2B with R4N using source-correct weights. `sourceCubicCharge` identification still distinct.
+
+## 2. The actual 76–79 history, exact first causal failure
+
+| Gate | Immutable evidence | First failure and implication | Accepted new roots |
+|---|---|---|---|
+| 76 | [#40259258982](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40259258982) | K2D2 `trace` tactic rejected by `linter.unusedTactic` under warnings-as-errors. No E2A/E2B/R4O attempt | 0 |
+| 77 | [#40260228151](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40260228151) | K2D2 source trace-only recovery preflight passed, then Python `root = "theorem "` shadowed a diagnostic directory `Path`; TypeError. No K2D2 Lean attempt | 0 |
+| 78 | [#40261107961](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40261107961) | Broad renumbering accidentally transformed immutable `NoTraceGate77V1.lean` filenames into nonexistent `NoTraceGate78V1.lean`. Failed source pin validation *before Lean environment and math*. 0 artifacts. | 0 |
+| 79 | [#40262100428](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40262100428) | Source paths restored. All 125 old original source objects, R4D and R4I–R4N passed. **Seven** historical K2D1/K2D2/K2D3/E1A/E1B/E1C/E1D modules strict-compilation PASS. Original E2A proof hits `maximum recursion depth` at `exact sourceComm_originalSixfoldIndices_of ...`; `sorryAx` in failed declaration. E2B and R4O not attempted | 0 |
+
+**Classification matters:** 76–78 pure infrastructure/instrumentation failures, 79 a real Lean original-expression elaboration bottleneck. None refutes the mathematical proposition; none accepts it.
+
+## 3. Confirmed previous methods that actually work
+1. **Type-index generic lemma → pinned original finite-index specialization → exact literal BFSS identity → composition of sealed compiled theorem roots**, with every new bridge independently checked. R4D Gate69 joined two literal sealed steps using `Eq.trans`; R4H Gate68 successful variant B used **two named rewrites** instead of expanding `congrArg₂`; R4I–R4N Gates70–75 proved operator additivity, sixfold weights, generic order exchange, exact weighted specialization, then a concise three-theorem trans chain. Source input expressions unchanged.
+2. **Classify compiler first cause**: outdated namespace/Lean simplifier, unused instrumentation, missing .olean/cache, Python script, real elaboration recursion/heartbeat, kernel deterministic timeout, and mathematical missing hypothesis require different remedies. A green `#print axioms` on a failed declaration is not green.
+3. **Immutable ancestry/source manifest and proof-only diffs:** original source SHA, genuine source `.olean` SHA, exact fallback Gate23, independent Gate60 manifest and Gate69 import smoke are verified. Removing a true no-op `trace` while preserving exact proposition is legitimate. Current six recovery `NoTraceGate77V1` sources passed byte-exact parity at Gate79.
+4. **Bounded small scopes and incremental accepted producer artifacts:** avoid duplicating the entire R4I–R4N recompilation as a prerequisite for another diagnostic of E2A. Separate a small E2A producer, save seven correct compiled ancestors (even on E2A red) and then the accepted E2A `.olean`. A later E2B/R4O *consumer* must hash-check the producer and source imports independently.
+5. **Positive evidence is not a physical result:** K2D3 proves a literal factor identity; E2A is conditional; E2B aims for unconditional sixfold operator; R4O is still a weighted monomial sum rather than automatically `sourceCubicCharge`. Closed-domain, full Spin9, and bound state existence remain separate.
+
+## 4. Repeated failures and their new prohibitions
+- Same direct literal sixfold `exact` proof failed in historical [E2A #3](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/38201125995) **and** modern Gate79. Re-running unchanged tactic is not research progress. Historical named E2C1 sixfold hit `whnf` heartbeat; E2D1 named single-factor hit recursion; explicit E2E rewriting did not universally cure it. Avoid another large named-term `rfl`/`simpa`/unfold permutation with no distinct diagnostic hypothesis.
+- Repeated raising maxRecDepth/heartbeats to silence a genuine mismatch or kernel timeout is not an acceptable *default*. A strictly scoped, **pre-registered single bounded resource diagnostic** can distinguish elaborator budget from a harder definitional issue; it must compile the *unchanged proposition*, satisfy exactly the standard axiom whitelist, and be recorded as a budget method rather than a new mathematical lemma.
+- Never bulk replace `GateNN` inside immutable **filenames, source identifiers, recovery references, source SHA manifests, imported module names or artifact producer coordinates**. Only workflow display name, filename, temp-log prefix, explicit concurrency and markers may change. Before committing, statically compare every path/hash in both manifest and ancestry JSON spec to the actual immutable branch Git tree and run an exact **reverse-transform** purity check.
+- Never let validator variable names shadow `root`, `source`, `stem` or path objects. Offline static checks must parse and exercise path/manifest consistency *before* a 7-minute CI run.
+- Do not requalify a previously accepted seven-module source ancestor chain in every downstream probe when a separate **provenance-preserving archive** can be consumed. Upload logs and `.olean` even when a later conditional theorem fails; the archive's mere existence does not qualify its later failed theorem.
+- Red workflow stage or `sorryAx` means 0 new accepted roots; prequalified dependencies remain intact but are not added to ledger again.
+
+## 5. New stop-rule and pre-registered execution
+
+**Gate80, E2A only:** Restore original qualified 125-object ancestry; compile exactly K2D1, K2D2, K2D3, E1A–E1D, with the original proofs or exact one-line trace recoveries and standard strict axioms. Produce an independent artifact with each of the seven genuinely compiled ancestors and their compiler logs, even if a subsequent E2A candidate fails. Do not compile R4I–R4N or attempt R4O in this gate.
+
+Test **two alternative proof-only forms of the exact frozen original K2E2A theorem**, each with byte-exact original theorem statement, original module basename and fresh `.olean`:
+- Candidate **A** staged *typed* original `SourceEnd` generator `G`, six-index operator families `T/R`, explicit pointwise h, and abstract transport theorem. This tests whether reducing inference scope avoids old giant exact term elaboration; it may fail at the named pointwise bridge. Record first compiler error precisely.
+- Candidate **B**, only if A fails, leaves the original exact `sourceComm_originalSixfoldIndices_of` proof unchanged except deleting no-op trace and wrapping the theorem in locally scoped `maxRecDepth 2048`, with a strict timeout. This is a **controlled resource-discrimination attempt**, not an unbounded quota increase or acceptance without kernel checks.
+- A compiler exit 0, one exact full-name axiom report within whitelist, no `sorryAx`, and authentic module `.olean` makes one of these proof-only source variants acceptable as E2A. Store selected variant and both logs, plus its hash.
+- If **both** fail, stop the `exact`/resource family; inspect the first causal goals and construct a different proof representation (product-index operator family, source endomorphism sum interface with separately proven source equality) without hiding an original hypothesis. Do not launch E2B/R4O until E2A strict acceptance.
+
+**Gate81, only after accepted Gate80:** Consume E2A and seven ancestors with exact verified provenance, restore R4N from its qualified Gate75 root, compile true original K2E2B with separately audited no-op trace removal and discharge h from K2D3, then attempt literal R4O from E2B and R4N. If R4O itself fails, preserve its original diagnostic as next mathematical frontier; do not change any physical source.
+
+**Scientific stop:** Any purported original commutator whose 1/2 scalar factor, `gammaTwo`, structure constants, 48-Majorana action, physical domain or Spin9 sign is weakened is rejected, regardless of green CI.
+
+Canonical `main`, draft PR #25 and immutable original mathematical source remain untouched. All historical red diagnostics remain preserved.
