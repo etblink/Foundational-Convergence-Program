@@ -11,6 +11,26 @@ open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainS4B7
 
+/-- Generic normed-real-space quadratic derivative. By proving zero scalar
+multiplication in the SAME NormedSpace instance as the derivative, we avoid
+the incompatible elaborations of the concrete source operator zero. -/
+private theorem real_quadratic_smul_hasDerivAt
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] (a : E) :
+    HasDerivAt (fun t : ℝ => t ^ 2 • a) (0 : E) (0 : ℝ) := by
+  have hpow : HasDerivAt (fun t : ℝ => t ^ 2) (0 : ℝ) (0 : ℝ) := by
+    have hp := ((hasDerivAt_id (0 : ℝ)).pow 2)
+    convert hp using 1
+    all_goals
+      first
+      | (funext t; simp [Pi.pow_apply])
+      | norm_num
+  have hraw : HasDerivAt (fun t : ℝ => t ^ 2 • a)
+      ((0 : ℝ) • a) (0 : ℝ) := hpow.smul_const a
+  have hzero : ((0 : ℝ) • a) = (0 : E) :=
+    zero_smul ℝ a
+  rw [hzero] at hraw
+  exact hraw
+
 /-- Derivative on every genuine source bosonic affine line. -/
 theorem originalMasslessRealField_line_hasDerivAt
     {N : ℕ} (M : AlgebraData N) (x v : Boson N) (α : SpinIndex) :
@@ -29,25 +49,12 @@ theorem originalMasslessRealField_line_hasDerivAt
     simpa using
       ((hasDerivAt_id (0 : ℝ)).smul_const
         (sourceMasslessRealFieldVariation M x v α))
-  -- Isolate the scalar square derivative before lifting into Fock CLMs.
-  -- This is a propositionally normalized identity, not a kernel 'change'.
-  have hpow : HasDerivAt (fun t : ℝ => t ^ 2) (0 : ℝ) (0 : ℝ) := by
-    have hp := ((hasDerivAt_id (0 : ℝ)).pow 2)
-    convert hp using 1
-    all_goals
-      first
-      | (funext t; simp [Pi.pow_apply])
-      | norm_num
-  -- Type the raw source quadratic derivative *before* reducing its
-  -- zero scalar coefficient. No broad simplicial normalization.
-  have hquadRaw : HasDerivAt
-      (fun t : ℝ => t ^ 2 • M.deformedRealField 1 0 α v)
-      ((0 : ℝ) • M.deformedRealField 1 0 α v) (0 : ℝ) := by
-    exact hpow.smul_const (M.deformedRealField 1 0 α v)
+  -- The operator-valued scalar derivative is instantiated only AFTER
+  -- its real normed-space zero identity has been proved generically.
   have hquad : HasDerivAt
       (fun t : ℝ => t ^ 2 • M.deformedRealField 1 0 α v)
-      (0 : Fermion N →L[ℝ] Fermion N) (0 : ℝ) := by
-    simpa only [zero_smul] using hquadRaw
+      (0 : Fermion N →L[ℝ] Fermion N) (0 : ℝ) :=
+    real_quadratic_smul_hasDerivAt (M.deformedRealField 1 0 α v)
   have hconst : HasDerivAt
       (fun _ : ℝ => M.deformedRealField 1 0 α x)
       (0 : Fermion N →L[ℝ] Fermion N) (0 : ℝ) :=
