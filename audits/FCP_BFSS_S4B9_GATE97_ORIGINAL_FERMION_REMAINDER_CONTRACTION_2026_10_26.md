@@ -16,3 +16,20 @@ Candidate blob `4da5780b101dfb40dcf17a84ceefc29142a0d6d7`, new strict workflow `
 
 ## Boundary
 Even complete success identifies only the original source-defined massless fermionic remainder-field contraction. It does **not** identify the Oct-2026 manuscript physical `B(x)`, prove closed physical Spin(9) action, form-domain coercivity, branch universal weight statements, existence of a nonzero reducing high-isotype, a positive eigenpair, or a mass gap. Failure is evidence and must be logged with first causal diagnostic, immutable run ID and source blobs; no automatic promotion. Canonical `main`, original source mathematics and draft PR #25 remain untouched.
+
+## Gate97 #1 FINAL STRICT PASS — two source-exact fermion remainder roots
+
+Independent Project Lead inspection of [run 40365451342](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40365451342), job `121721783802`, original compiler log: `completed/success` at immutable research commit `3217bea156f95f5228e789fce579f82dc53a42fb`. No prerequisite was silently substituted. Original BFSS `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean 4.34.1, Mathlib d13f23b, and source SHA preflight passed. Exact qualified G4K9C cache provenance passed. Original `OAI.MathematicalPhysics.BFSS.Core`, `MassiveCoercivity`, `ColorMatrices`, `MixedEnergy`, and `DeformedCharge` freshly compiled; parent S4B3–S4B8 theorem modules and axiom reports freshly qualified, including Gate96 accepted derivative parent `.olean` 487912 bytes. New source candidate blob `4da5780b101dfb40dcf17a84ceefc29142a0d6d7` and strict workflow blob `bbbc5a8a20dfc628ba6e482220e25cf20e52d493` unchanged.
+
+Original compiler acceptance summary:
+```
+GATE97_CANDIDATE_SOURCE_WARNINGS []
+GATE97_COMPILER_EXIT 0 AXIOM_REPORTS [
+ ('FCP.BFSSSU2PhysicalDomainS4B9.originalMasslessDeformedFermionField_contraction', {'Classical.choice', 'Quot.sound', 'propext'}),
+ ('FCP.BFSSSU2PhysicalDomainS4B9.originalMasslessDeformedFermionField_apply', {'Classical.choice', 'Quot.sound', 'propext'})]
+GATE97_ORIGINAL_SOURCE_FERMION_REMAINDER_TWO_ROOTS_STRICT_PASS
+```
+
+**2/2 principal theorem roots accepted, scoped S4 total 19 → 21.** The strict workflow required fresh candidate Lean `.olean`, no `sorryAx`, warnings-as-errors, exactly the two names above, only `propext, Classical.choice, Quot.sound` axioms, and exact source/git provenance. The first theorem states literal original `M.deformedFermionField 1 0 x = (1/16:ℝ) • ∑ α ∑ p (M.kineticSkewSymbol α p * sourceMasslessRealFieldVariation M x (EuclideanSpace.single p 1) α)`; the second establishes pointwise action on an actual source Fock vector. It *does not* identify the October manuscript's explicit `B(x)`, prove actual global physical Spin(9) closed-domain invariance or existence of positive-energy normalizable eigenstates. Preserve all Gate96 #1–#7 red history separately as qualified negative knowledge, and do not conflate 21 scoped S4 roots with a global historical theorem count.
+
+**Next scientific validation:** exact October manuscript's `B(x)` coefficient, gamma/color normalization, scalar restrictions and operator multiplication must be compared to the just-proved source contraction. Do not infer equality merely from schematic physical identities, and do not prematurely promote a full eigenpair or global mass gap. Canonical FCP `main`, original mathematical source, and draft PR #25 remain unchanged.
