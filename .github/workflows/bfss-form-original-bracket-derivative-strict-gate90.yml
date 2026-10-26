@@ -47,8 +47,8 @@ jobs:
           test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/Core.lean)" = "9882359ced78b0a3bd7e2f057974bd0a031b3e60"
           test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/MassiveCoercivity.lean)" = "1a9a8fe629e69f3946602a786c2e63c2ca354462"
           test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/ColorMatrices.lean)" = "1c1c2a838c48c0aea2a1c1640da5d412f22e3f0c"
-          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B2OriginalCoordinateBracketDirectionalDerivativeProbe.lean)" = "68b3d0c37dcab6fccab57a60eb3cdaa75ef8f48a"
-          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B2OriginalCoordinateBracketDirectionalDerivativeProbe.lean)" = "68b3d0c37dcab6fccab57a60eb3cdaa75ef8f48a"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B2OriginalCoordinateBracketDirectionalDerivativeProbe.lean)" = "d8e41ae7819bdebfb22aeedd149078b0d7d784c2"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B2OriginalCoordinateBracketDirectionalDerivativeProbe.lean)" = "d8e41ae7819bdebfb22aeedd149078b0d7d784c2"
           python3 - <<'PY'
           import json
           from pathlib import Path

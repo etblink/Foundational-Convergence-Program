@@ -33,8 +33,9 @@ theorem originalBosonAffine_coordinate_deriv
   -- Differentiate the true ORIGINAL scalar coordinate function.
   have hscalar :
       HasDerivAt (fun t : ℝ => x p + t * v p) (v p) 0 := by
-    convert ((hasDerivAt_const (0 : ℝ) (x p)).add
-      ((hasDerivAt_id (0 : ℝ)).mul_const (v p))) using 1 <;> simp
+    simpa only [Pi.add_apply, zero_add, one_mul] using
+      ((hasDerivAt_const (0 : ℝ) (x p)).add
+        ((hasDerivAt_id (0 : ℝ)).mul_const (v p)))
   simpa only [PiLp.add_apply, PiLp.smul_apply, smul_eq_mul] using hscalar
 
 /-- The literal pinned original coordinateBracketAll differentiated in
@@ -64,12 +65,8 @@ theorem originalCoordinateBracketAll_directional_deriv
   have hi := originalBosonAffine_coordinate_deriv x v (i,B)
   have hj := originalBosonAffine_coordinate_deriv x v (j,C)
   have hh := (hi.mul hj).const_mul (M.structureConstant A B C)
-  convert hh using 1
-  · funext t
-    simp only [Pi.mul_apply]
-    ring
-  · simp only [zero_smul, add_zero]
-    ring
+  convert hh using 1 <;> (try (funext t)) <;>
+    simp [Pi.mul_apply] <;> ring
 
 /-- Exact single-coordinate directional specialization. Retain the
 original EuclideanSpace.single, including both coincident-index cases,
