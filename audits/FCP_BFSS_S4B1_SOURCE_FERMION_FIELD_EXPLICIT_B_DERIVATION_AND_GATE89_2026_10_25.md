@@ -146,3 +146,25 @@ No `sorryAx`, no candidate Lean error or candidate Lean warning; an output `.ole
 **Governance decision:** count Gate89 #5 as **Lean kernel mathematics verified but strict gate not accepted**. It is inappropriate to mark the entire gate green manually or to record two accepted proof roots before a fully successful rerun.
 
 **Gate89 #6** [run #40279920302](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40279920302), workflow-only commit `83531bf78b512a5e4020f150b35603eba9942414`; exact source theorem Git blob remains `930ad9453cf51219530b717fecdb42be9c646550` without any proof changes. The new validator accepts **only** warnings of the exact anchored format `warning: PACKAGE: repository '.../upstream-math/lean/.lake/packages/PACKAGE' has local changes` with identical package identifiers on both sides; it explicitly checks a valid package warning, an invalid mismatched-package warning, and a simulated Lean file warning. It still requires compiler success, exactly two expected named axiom reports, axioms contained in `{propext,Classical.choice,Quot.sound}`, absence of `sorryAx` and `error:`, no other warnings, and a nonempty new `.olean`. **Do not infer outcome before terminal CI.**
+
+
+## Definitive terminal outcome — Gate89 #6 TWO roots strictly accepted
+
+The [separate exact Gate89 #6 acceptance audit](FCP_BFSS_S4B1_GATE89_6_SOURCE_GAMMA_CONTRACTION_TWO_ROOTS_STRICT_ACCEPTANCE_2026_10_25.md) supersedes all earlier *pending* statuses in this file.
+
+[GitHub Actions run #40279920302](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40279920302), job `121430746988`, **completed/success** on workflow commit `83531bf78b512a5e4020f150b35603eba9942414`. Candidate proof Git blob unchanged from the Lean-clean but workflow-red Gate89 #5: `930ad9453cf51219530b717fecdb42be9c646550`. Exact verifier output:
+
+```text
+GATE89_LAKE_NOTICE_FILTER_SELF_TEST_PASS
+GATE89_IGNORED_LAKE_PACKAGE_STATE_NOTICES 11
+GATE89_CANDIDATE_SOURCE_WARNINGS []
+GATE89_COMPILER_EXIT 0 AXIOM_REPORTS [
+  ('FCP.BFSSSU2PhysicalDomainS4B1.sourceGammaTwo_contract',
+    {'Quot.sound','propext','Classical.choice'}),
+  ('FCP.BFSSSU2PhysicalDomainS4B1.originalSourceGammaTwo_contract',
+    {'Quot.sound','propext','Classical.choice'})
+]
+GATE89_ORIGINAL_SOURCE_GAMMA_CONTRACTION_TWO_ROOTS_STRICT_PASS
+```
+
+**Two new S4B1 Lean roots accepted.** The existing original S3L 77-root scoped series is unchanged. The full explicit original source fermionic-field B equality remains unproved in Lean; the original derivation here is its source-faithful next input. All earlier red gates are preserved with their true compiler/infrastructure classifications.
