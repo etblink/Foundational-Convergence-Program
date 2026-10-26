@@ -59,7 +59,31 @@ theorem pairedOriginalCubicFixedColorResponse_firstStep_named
            (pairedAlgebraData.fermionAction γ A).comp
             ((position (N := 2) k B).comp
               (sourcePositionVariation i j l C)))) := by
-  calc    _ = (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,      (((originalCubicStructureWeight A B C *        pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) •        (sourceCubicFermionVariation i j γ A).comp          ((position (N := 2) k B).comp (position (N := 2) l C))) +        (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,      (((originalCubicStructureWeight A B C *        pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) •        ((pairedAlgebraData.fermionAction γ A).comp          ((sourcePositionVariation i j k B).comp            (position (N := 2) l C)) +         (pairedAlgebraData.fermionAction γ A).comp          ((position (N := 2) k B).comp            (sourcePositionVariation i j l C)))) :=      pairedOriginalCubicFixedColor_responseWeightedTripleSum_distribute        i j hij α A B C    _ = _ := congrArg      (fun T : SourceEnd => (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,      (((originalCubicStructureWeight A B C *        pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) •        (sourceCubicFermionVariation i j γ A).comp          ((position (N := 2) k B).comp (position (N := 2) l C))) + T)      (pairedOriginalCubicFixedColor_spatialWeightedTripleSum_reindex        i j α A B C)
+  calc
+    _ = (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
+      (((originalCubicStructureWeight A B C *
+        pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) •
+        (sourceCubicFermionVariation i j γ A).comp
+          ((position (N := 2) k B).comp (position (N := 2) l C))) +
+        (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
+      (((originalCubicStructureWeight A B C *
+        pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) •
+        ((pairedAlgebraData.fermionAction γ A).comp
+          ((sourcePositionVariation i j k B).comp
+            (position (N := 2) l C)) +
+         (pairedAlgebraData.fermionAction γ A).comp
+          ((position (N := 2) k B).comp
+            (sourcePositionVariation i j l C)))) :=
+      pairedOriginalCubicFixedColor_responseWeightedTripleSum_distribute
+        i j hij α A B C
+    _ = _ := congrArg
+      (fun T : SourceEnd => (∑ k : SpaceIndex, ∑ l : SpaceIndex, ∑ γ : SpinIndex,
+      (((originalCubicStructureWeight A B C *
+        pairedAlgebraData.gammaTwo k l α γ : ℝ) : ℂ)) •
+        (sourceCubicFermionVariation i j γ A).comp
+          ((position (N := 2) k B).comp (position (N := 2) l C))) + T)
+      (pairedOriginalCubicFixedColor_spatialWeightedTripleSum_reindex
+        i j α A B C)
 
 #print axioms pairedOriginalCubicFixedColorResponse_firstStep_named
 end
