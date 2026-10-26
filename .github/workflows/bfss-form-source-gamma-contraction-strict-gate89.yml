@@ -47,7 +47,7 @@ jobs:
           test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/Core.lean)" = "9882359ced78b0a3bd7e2f057974bd0a031b3e60"
           test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/GammaWords.lean)" = "d12051e70de679f5458dbd456667a32c7b407ce4"
           test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B1OriginalGammaFermionContractionProbe.lean)" = "bbeae5475fd4be6e9a587dafb67f28c552fd7df9"
-          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B1OriginalGammaFermionContractionProbe.lean)" = "aec9bb5415299cf8a0b13be238f7a8aa2a7cc324"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B1OriginalGammaFermionContractionProbe.lean)" = "bbeae5475fd4be6e9a587dafb67f28c552fd7df9"
           python3 - <<'PY'
           import json
           from pathlib import Path
