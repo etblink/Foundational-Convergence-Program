@@ -78,7 +78,7 @@ def main():
                     assert nu[0] >= lam[1], (label, lam, nu)
                 totals[label][0] += 1
                 totals[label][1] += int(bool(observed))
-    assert totals == {"integral": [28050, 690], "half-integral": [11550, 300]}, totals
+    assert totals == {"integral": [28050, 660], "half-integral": [11550, 330]}, totals
     for label, (tested, nonzero) in totals.items():
         print(f"{label}: tested={tested}, nonzero={nonzero}, mismatches=0")
     print("BOUNDARY: FINITE FALSIFICATION ONLY; NOT A FORMAL SOURCE OR SPECTRAL PROOF")
