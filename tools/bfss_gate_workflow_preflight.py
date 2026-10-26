@@ -60,6 +60,27 @@ def audit(path: Path) -> None:
                 raise ValueError(f"Malformed job step {step!r}")
             if "run" in step and not isinstance(step["run"], str):
                 raise ValueError(f"Non-string run: block in job {job}")
+    # The historical Gate89 #2 copied the commit blob pin but forgot its
+    # matching worktree blob pin. A checked-in source cannot have two hashes.
+    pins: dict[str, dict[str, str]] = {}
+    for kind, pattern in (
+        ("commit", r'git rev-parse HEAD:([^\\s)]+)\\)"\\s*=\\s*"([0-9a-f]{40})"'),
+        ("worktree", r'git hash-object --no-filters ([^\\s)]+)\\)"\\s*=\\s*"([0-9a-f]{40})"'),
+    ):
+        for match in re.finditer(pattern, src):
+            file_path, sha = match.groups()
+            slot = pins.setdefault(file_path, {})
+            if kind in slot and slot[kind] != sha:
+                raise ValueError(f"Conflicting {kind} pins for {file_path}")
+            slot[kind] = sha
+    for file_path, pair in pins.items():
+        if "commit" in pair and "worktree" in pair:
+            if pair["commit"] != pair["worktree"]:
+                raise ValueError(
+                    f"Commit/worktree source hash mismatch for {file_path}: "
+                    f"{pair['commit']} != {pair['worktree']}"
+                )
+
     print(f"WORKFLOW_SOURCE_PREFLIGHT_PASS gate={gate} path={path}")
 
 
