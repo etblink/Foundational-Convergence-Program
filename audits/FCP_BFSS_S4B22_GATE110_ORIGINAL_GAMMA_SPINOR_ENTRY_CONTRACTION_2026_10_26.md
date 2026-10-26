@@ -48,3 +48,23 @@ but is expected to have type
 Gate110 #1 had failed to expand the matrix-valued spatial sum due to inappropriate `_root_.sum_apply`. Attempt #2 correctly used the genuine pinned `Matrix.sum_apply`, and the **entire desired pair of original spatial/spinor indices, gamma multiplication and order now agree** (bound variable names `c,j_1` vs `k,α` are alpha-equivalent). The remaining mismatch is the *unreduced natural-to-real cast* from `(8:ℕ) • M.gamma j` after `nsmul_eq_mul`, rendered `↑8` on the right versus the literal real numeral `8`. There is no counterexample to the source gamma contraction.
 
 **Gate110 #3 minimum remedy, still unaccepted**: add only the pinned Lean `Nat.cast_ofNat` normalization to the existing `simpa only [Matrix.sum_apply, Matrix.mul_apply, Matrix.smul_apply, nsmul_eq_mul]` list, preserving the original theorem, original `AlgebraData` gamma symmetry, all strict toolchain/source/parent SHA pins and axioms/warning controls. New candidate source SHA `78a0272bb9e222aaeb574f8dcdbacf8860769e48`, workflow Git blob `688b0cbba8eb9472e631c116c9f9c3a36b120482` (only two exact candidate source SHA pins updated). Until completed independently verified green, **no new accepted roots**, scoped S4=46. Future failure is diagnostic evidence; do not suppress linter or `sorryAx`. Original SU(2) color-to-epsilon and ordered theta CAR reduction to manuscript `B(x)`, physical Spin9 and spectral existence remain open. Canonical `main`, original BFSS math, draft PR #25 unchanged.
+
+## Gate110 #3 FINAL STRICT ACCEPTANCE — source gamma spinor-entry contraction
+
+**Independently verified by Project Lead 2026-10-26:** [Actions run #40415974159](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40415974159), job `121898276770`, research candidate `5c5c57d0cbdb74d159b9cd3bd6c739f6f5f5595b`, `completed/success`, against original compiler log. Immutable `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, exact source blob/manifest pins, frozen Lean 4.34.1 and Mathlib d13f23b, qualified G4K9C source ancestry and all SHA checks passed. Original BFSS Core, MassiveCoercivity, ColorMatrices, MixedEnergy, DeformedCharge, GammaWords and ColorLie and every accepted S4B3–S4B21 parent freshly compiled, S4B21 parent .olean 81040 bytes. Candidate source Git blob `78a0272bb9e222aaeb574f8dcdbacf8860769e48`, workflow Git blob `688b0cbba8eb9472e631c116c9f9c3a36b120482`, successful fresh candidate .olean, zero candidate warnings, exact axiom validation.
+
+Actual compiler evidence:
+```text
+GATE110_CANDIDATE_SOURCE_WARNINGS []
+GATE110_COMPILER_EXIT 0 AXIOM_REPORTS [
+ ('FCP.BFSSSU2PhysicalDomainS4B22.originalSourceGammaTwo_spinor_entry_contraction', {'Quot.sound', 'propext', 'Classical.choice'})]
+GATE110_ORIGINAL_GAMMA_SPINOR_ENTRY_CONTRACTION_ONE_ROOT_STRICT_PASS
+```
+**Gate110 #3 one/one principal root strictly accepted, scoped S4 46 → 47.** The real source `M.gamma_symmetric k`, actual `M.gammaTwo k j`, accepted S4B13 nine-direction matrix contraction and pinned Mathlib `Matrix.sum_apply`, `Matrix.mul_apply`, `Nat.cast_ofNat` establish `∑ k α, M.gamma k α β * M.gammaTwo k j α δ = (8 : ℝ) * M.gamma j β δ` at true original 16-spinor component order. No synthetic gamma matrices, no false color normalization, no fermion CAR reordering. This closes the gamma-index contraction only, **NOT the original ordered CLM product's full coefficient rearrangement** or the manuscript `B(x)` typed operator equality.
+
+Negative knowledge remains auditable:
+- #1 [run #40412709683](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40412709683): root red; `_root_.sum_apply` didn't expand matrix-valued sum.
+- #2 [run #40414346563](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40414346563): root red; correct `Matrix.sum_apply` left only `↑8` versus `8 : ℝ` natural cast in the scalar RHS.
+- #3: `Nat.cast_ofNat` normalized the genuine original source RHS, no axiom or linter weakening.
+
+**Next substantive workstream**: inspect exact source `M.structureConstant` and pinned SU(2) Pauli source representation `N=2` for strict original `f_{abc}=√2 ε_{abc}` normalization, including index orientation; separately test source ordered Majorana-bilinear coefficient indexing against manuscript's `B(x)`. Never postulate an equality of ordered fermion products from a scalar gamma theorem. Do not claim physical Spin9 closed-form covariance, spectral ground-state existence or mass gap. Scoped count 47 distinct from unreconciled global roots; canonical main, immutable source and draft PR #25 unchanged.
