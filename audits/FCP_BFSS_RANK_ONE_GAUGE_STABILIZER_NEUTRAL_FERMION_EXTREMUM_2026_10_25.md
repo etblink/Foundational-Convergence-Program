@@ -76,3 +76,8 @@ Companion source [`bfss_rank_one_gauge_stabilizer_fermion_extremum_check_2026_10
 This finding leaves intact the previously derived conditional source estimate `lambda_2>14` and method-relative `m=8` stop bound. It does not prove `16sqrt(2)` is the global supremum of `||B(X)||/A(X)`, nor validate all source spectral steps, nor establish positive eigenpair existence or a full BFSS mass gap.
 
 **Governance:** preserve canonical FCP main, original `etblink/math`, research proof gate records, and draft PR #25. No new Lean root and no automatic CI gate are claimed here.
+
+
+## Independent historical character consistency cross-check
+
+The residual SO2-charge-zero subspace dimension in the **full** Fock module is `binomial(16,8)*2^8 = 3,294,720`. This exactly matches the coefficient `[z^0]=3,294,720` in the previously published exact original SU2×Spin9 Fock character computation [complete Fock decomposition](../experiments/openai-math-su2-physical-domain/BFSS_COMPLETE_SU2_SINGLET_FOCK_SPIN9_DECOMPOSITION_AND_K18_WITNESS_0_1_0.md). The **true SU2-invariant subspace** is much smaller: `[z^0]-[z^2]=3,294,720-2,928,640=366,080`. This independently confirms the important distinction: zero weight for a **single residual gauge circle** is not sufficient for global SU2 singlet status. The extremal rank-one 256-dimensional eigenspace is proven residual-circle neutral; no global-SU2 invariant vector is inferred merely from this count.
