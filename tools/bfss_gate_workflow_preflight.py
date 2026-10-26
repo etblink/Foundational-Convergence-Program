@@ -116,11 +116,11 @@ def self_test() -> None:
             raise AssertionError("Invalid multiline block indentation not caught")
         # Regression: Gate89 #2 had contradictory pins for one file.
         good.write_text(
-            "name: BFSS Example Strict Gate 87\\non:\\n  workflow_dispatch:\\n"
-            "jobs:\\n  verify:\\n    runs-on: ubuntu-latest\\n"
-            "    steps:\\n      - run: |\\n"
-            '          test "$(git rev-parse HEAD:foo.py)" = "' + "a"*40 + '"\\n'
-            '          test "$(git hash-object --no-filters foo.py)" = "' + "b"*40 + '"\\n',
+            "name: BFSS Example Strict Gate 87\non:\n  workflow_dispatch:\n"
+            "jobs:\n  verify:\n    runs-on: ubuntu-latest\n"
+            "    steps:\n      - run: |\n"
+            '          test "$(git rev-parse HEAD:foo.py)" = "' + "a"*40 + '"\n'
+            '          test "$(git hash-object --no-filters foo.py)" = "' + "b"*40 + '"\n',
             encoding="utf-8",
         )
         try:
