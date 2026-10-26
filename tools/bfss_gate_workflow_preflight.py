@@ -64,8 +64,8 @@ def audit(path: Path) -> None:
     # matching worktree blob pin. A checked-in source cannot have two hashes.
     pins: dict[str, dict[str, str]] = {}
     for kind, pattern in (
-        ("commit", r'git rev-parse HEAD:([^\\s)]+)\\)"\\s*=\\s*"([0-9a-f]{40})"'),
-        ("worktree", r'git hash-object --no-filters ([^\\s)]+)\\)"\\s*=\\s*"([0-9a-f]{40})"'),
+        ("commit", r'git rev-parse HEAD:([^\s)]+)\)"\s*=\s*"([0-9a-f]{40})"'),
+        ("worktree", r'git hash-object --no-filters ([^\s)]+)\)"\s*=\s*"([0-9a-f]{40})"'),
     ):
         for match in re.finditer(pattern, src):
             file_path, sha = match.groups()
