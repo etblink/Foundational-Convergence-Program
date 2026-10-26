@@ -56,6 +56,7 @@ theorem sourceGammaTwo_contract
           ext α β
           simp only [Matrix.sub_apply, Matrix.smul_apply]
           norm_num [nsmul_eq_mul]
+          ring
 
 /-- The SAME contraction in the concrete original pinned source
 AlgebraData matrix types and original gammaTwo definition. -/
