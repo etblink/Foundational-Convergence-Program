@@ -26,8 +26,20 @@ theorem sourceCliffordLinear_add
     {N : ℕ} (M : AlgebraData N)
     (a b : FermionIndex N → ℝ) :
     M.cliffordLinear (a + b) = M.cliffordLinear a + M.cliffordLinear b := by
-  simp only [AlgebraData.cliffordLinear, Pi.add_apply, Complex.ofReal_add,
-    add_smul, Finset.sum_add_distrib]
+  simp only [AlgebraData.cliffordLinear, Pi.add_apply, Complex.ofReal_add]
+  -- Avoid leaving the complex-operator sum as two opaque Finset atoms.
+  -- Prove distributivity at each actual original FermionIndex first.
+  calc
+    (∑ p : FermionIndex N,
+      ((a p : ℂ) + (b p : ℂ)) • M.theta p.1 p.2) =
+      ∑ p : FermionIndex N,
+        ((a p : ℂ) • M.theta p.1 p.2 +
+          (b p : ℂ) • M.theta p.1 p.2) := by
+            apply Finset.sum_congr rfl
+            intro p _
+            exact add_smul (a p : ℂ) (b p : ℂ) (M.theta p.1 p.2)
+    _ = _ := by
+      rw [Finset.sum_add_distrib]
 
 /-- Real scalar multiplication in source coefficient functions becomes
 the original complex scalar acting on the complex-linear Fermion operator. -/
