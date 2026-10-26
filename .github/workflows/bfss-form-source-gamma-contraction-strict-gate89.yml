@@ -134,10 +134,21 @@ jobs:
           matched=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",data)
           allowed={"propext","Classical.choice","Quot.sound"}
           normalized=[(name,{a.strip() for a in s.split(",") if a.strip()}) for name,s in matched]
+          # Known pinned Lake-package working-tree-state notices are
+          # not candidate Lean diagnostics. Enforce identical package names.
+          # Everything else containing "warning:" remains a strict failure.
+          lakeNotice=re.compile(
+              r"warning: (?P<package>[a-z0-9-]+): repository '[^']*/upstream-math/lean/[.]lake/packages/(?P=package)' has local changes")
+          assert lakeNotice.fullmatch(
+              "warning: belyi: repository '/tmp/upstream-math/lean/.lake/packages/belyi' has local changes")
+          assert not lakeNotice.fullmatch(
+              "warning: belyi: repository '/tmp/upstream-math/lean/.lake/packages/iut' has local changes")
+          assert not lakeNotice.fullmatch("Candidate.lean:3:1: warning: unused simp argument")
+          print("GATE89_LAKE_NOTICE_FILTER_SELF_TEST_PASS",flush=True)
+          lakeNotices=[line for line in data.splitlines() if lakeNotice.fullmatch(line)]
           sourceWarnings=[line for line in data.splitlines()
-              if "warning:" in line and not re.fullmatch(
-                  r"warning: ([a-z0-9-]+): repository '.*/upstream-math/lean/\\.lake/packages/\\1' has local changes",
-                  line)]
+              if "warning:" in line and not lakeNotice.fullmatch(line)]
+          print("GATE89_IGNORED_LAKE_PACKAGE_STATE_NOTICES",len(lakeNotices),flush=True)
           print("GATE89_CANDIDATE_SOURCE_WARNINGS",sourceWarnings,flush=True)
           verified=(p.returncode==0 and len(normalized)==2
              and [name for name,_ in normalized]==expected
