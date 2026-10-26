@@ -125,3 +125,24 @@ The existing `norm_num [nsmul_eq_mul]` normalized matrix entries correctly but d
 **Gate89 #5:** proof-only `ring` after `norm_num` and two immutable source pin updates in source+workflow commit `ccb324e52086eceabee5d3c09eb1a695a33c2e41`; no theorem statement, gamma convention or original source modification. [Run #40279188758](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40279188758) launched, terminal verdict pending this audit snapshot. Strict compiler output must be inspected separately. The added candidate-warning classifier in this gate includes over-escaped regex backslashes for the pinned Lake-package state-warning pattern and will NOT match the known dependency warnings; if the Lean roots compile but the workflow rejects only those warnings, correct the *validator alone* and repeat with exact original candidate SHA, never misreport that result as Lean proof failure.
 
 **Procedural governance:** preserve the original separate gate red causes (#1 Lean proof, #2 contradictory source pin, #3 Lean scalar normalization, #4 final ring, #5 candidate-warning regex if applicable). The original 77-root S3L series remains unchanged until a real successful strict Lean gate qualifies new S4B1 roots. All-time principal ledger remains separate.
+
+
+## Gate89 #5 original compiler evidence: MATHEMATICS PASS / STRICT WORKFLOW RED
+
+[Run #40279188758](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40279188758), job `121428459445`, completed **failure**. This is NOT a proof failure. All frozen file/version preflights, Mathlib restoration and fresh compilation of `Core` (1,281,224-byte object) and `GammaWords` (738,648-byte object) succeeded. **The candidate Lean compiler exited 0** and emitted precisely:
+
+```text
+GATE89_COMPILER_EXIT 0
+AXIOM_REPORTS [
+  ('FCP.BFSSSU2PhysicalDomainS4B1.sourceGammaTwo_contract',
+      {'Classical.choice','propext','Quot.sound'}),
+  ('FCP.BFSSSU2PhysicalDomainS4B1.originalSourceGammaTwo_contract',
+      {'Classical.choice','propext','Quot.sound'})
+]
+```
+
+No `sorryAx`, no candidate Lean error or candidate Lean warning; an output `.olean` artifact was uploaded: [run artifact 12631772116](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40279188758/artifacts/12631772116). **The strict validator refused acceptance** because its newly added regular expression was overescaped and failed to recognize eleven benign *Lake external package directory state* warnings such as `warning: belyi: repository '.../upstream-math/lean/.lake/packages/belyi' has local changes`. The runner correctly reported `GATE89_CANDIDATE_SOURCE_WARNINGS` with those eleven entries and therefore marked strict red.
+
+**Governance decision:** count Gate89 #5 as **Lean kernel mathematics verified but strict gate not accepted**. It is inappropriate to mark the entire gate green manually or to record two accepted proof roots before a fully successful rerun.
+
+**Gate89 #6** [run #40279920302](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40279920302), workflow-only commit `83531bf78b512a5e4020f150b35603eba9942414`; exact source theorem Git blob remains `930ad9453cf51219530b717fecdb42be9c646550` without any proof changes. The new validator accepts **only** warnings of the exact anchored format `warning: PACKAGE: repository '.../upstream-math/lean/.lake/packages/PACKAGE' has local changes` with identical package identifiers on both sides; it explicitly checks a valid package warning, an invalid mismatched-package warning, and a simulated Lean file warning. It still requires compiler success, exactly two expected named axiom reports, axioms contained in `{propext,Classical.choice,Quot.sound}`, absence of `sorryAx` and `error:`, no other warnings, and a nonempty new `.olean`. **Do not infer outcome before terminal CI.**
