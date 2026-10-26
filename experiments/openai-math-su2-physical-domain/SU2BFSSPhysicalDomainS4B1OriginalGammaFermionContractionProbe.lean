@@ -39,9 +39,9 @@ theorem sourceGammaTwo_contract
         G j - (if i = j then G j else 0) := by
     by_cases hij : i = j
     · subst i
-      simp [gammaTwo]
+      simp [OAI.BFSSGamma.gammaTwo]
     · rw [gammaTwo_alt G hG]
-      simp only [if_neg hij, zero_smul, sub_zero]
+      simp only [ite_eq_right hij, zero_smul, sub_zero]
       rw [← Matrix.mul_assoc, gamma_sq G hG i, one_mul]
   calc
     (∑ i : Space, G i * gammaTwo G i j) =
@@ -53,8 +53,10 @@ theorem sourceGammaTwo_contract
           rw [Finset.sum_sub_distrib]
           simp
     _ = (8 : ℝ) • G j := by
-          simp only [nsmul_eq_mul]
-          module
+          ext α β
+          simp only [Matrix.sub_apply, Matrix.smul_apply, Pi.smul_apply,
+            nsmul_eq_mul]
+          ring
 
 /-- The SAME contraction in the concrete original pinned source
 AlgebraData matrix types and original gammaTwo definition. -/
