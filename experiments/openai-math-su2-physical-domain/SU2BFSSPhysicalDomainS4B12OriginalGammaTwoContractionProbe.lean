@@ -1,4 +1,5 @@
 import SU2BFSSPhysicalDomainS4B11OriginalComplexGammaThetaExpansionProbe
+import OAI.MathematicalPhysics.BFSS.GammaWords
 
 /-!
 S4B12: source-original gamma-two matrix contraction, before spatial sum.
@@ -18,7 +19,7 @@ theorem originalSourceGammaTwo_alternate
     M.gammaTwo k j =
       M.gamma k * M.gamma j -
         (if k = j then (1 : ℝ) else 0) • (1 : GammaMatrix) := by
-  have h := BFSSGamma.gammaTwo_alt M.gamma M.gamma_clifford k j
+  have h := OAI.BFSSGamma.gammaTwo_alt M.gamma M.gamma_clifford k j
   change M.gammaTwo k j =
       M.gamma k * M.gamma j -
         (if k = j then (1 : ℝ) else 0) • (1 : GammaMatrix) at h
@@ -33,12 +34,15 @@ theorem originalSourceGammaTwo_left_contraction
       if k = j then (0 : GammaMatrix) else M.gamma j := by
   by_cases hkj : k = j
   · subst j
-    simp only [if_pos rfl]
-    simp [AlgebraData.gammaTwo]
-  · rw [if_neg hkj]
-    have h := originalSourceGammaTwo_alternate M k j
-    simp only [if_neg hkj, zero_smul, sub_zero] at h
-    rw [h, ← mul_assoc, BFSSGamma.gamma_sq M.gamma M.gamma_clifford k, one_mul]
+    have hdiag : M.gammaTwo k k = 0 := by
+      unfold AlgebraData.gammaTwo
+      simp only [sub_self, smul_zero]
+    rw [hdiag, mul_zero]
+    simp
+  · have h := originalSourceGammaTwo_alternate M k j
+    simp only [ite_eq_right hkj, zero_smul, sub_zero] at h
+    rw [h, ← mul_assoc, OAI.BFSSGamma.gamma_sq M.gamma M.gamma_clifford k, one_mul]
+    simp only [ite_eq_right hkj]
 
 #print axioms originalSourceGammaTwo_alternate
 #print axioms originalSourceGammaTwo_left_contraction
