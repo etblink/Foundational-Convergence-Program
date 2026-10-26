@@ -1,0 +1,316 @@
+name: BFSS Form Original Massless Coefficient Strict Gate 93
+
+# Source massless deformedPotentialCoefficients polynomial via qualified original G4K9C + S4B4, not Fock operator fderiv.
+# Direct Lean 4.34.1 compilation with pinned Core / MassiveCoercivity / ColorMatrices ancestry,
+# fresh source/S4B3 oleans and exact axiom audit; no E3B/E3C sixfold ancestry.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-form-original-massless-coefficient-strict-gate93.yml
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B5OriginalMasslessCoefficientPolynomialProbe.lean
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-form-original-polynomial-gate93-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  exact-source-bracket-lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout pinned research branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Checkout immutable original BFSS Lean mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+      - name: Verify exact source identities, source blobs and manifest pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C upstream-math rev-parse HEAD)" = "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
+          test "$(cat upstream-math/lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
+          test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/Core.lean)" = "9882359ced78b0a3bd7e2f057974bd0a031b3e60"
+          test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/MassiveCoercivity.lean)" = "1a9a8fe629e69f3946602a786c2e63c2ca354462"
+          test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/ColorMatrices.lean)" = "1c1c2a838c48c0aea2a1c1640da5d412f22e3f0c"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B5OriginalMasslessCoefficientPolynomialProbe.lean)" = "f2701b1e07f3d3bcae69a3e81a5bfa015c28a68d"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B5OriginalMasslessCoefficientPolynomialProbe.lean)" = "f2701b1e07f3d3bcae69a3e81a5bfa015c28a68d"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B4OriginalGammaWeightedBracketPolynomialProbe.lean)" = "2ed79184d19ba0ddc024952f91871ee8c4fc3ea9"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B4OriginalGammaWeightedBracketPolynomialProbe.lean)" = "2ed79184d19ba0ddc024952f91871ee8c4fc3ea9"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.lean)" = "5e5f10f4c79f45f4b2bb4d6cdf1dbe71573616dd"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.lean)" = "5e5f10f4c79f45f4b2bb4d6cdf1dbe71573616dd"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9BSourcePairAndChargeReductionProbe.lean)" = "3bc2712a1c56e86e9e996dcee3052409e23a2e73"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9BSourcePairAndChargeReductionProbe.lean)" = "3bc2712a1c56e86e9e996dcee3052409e23a2e73"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9COrderedPairCoefficientProbe.lean)" = "de0c447a73990b1beb271fb2afc14dc5b4e20318"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9COrderedPairCoefficientProbe.lean)" = "de0c447a73990b1beb271fb2afc14dc5b4e20318"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B3OriginalBracketPolynomialExpansionProbe.lean)" = "c80d85164247e6631fb1b0d7e4da2aca48c6af32"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B3OriginalBracketPolynomialExpansionProbe.lean)" = "c80d85164247e6631fb1b0d7e4da2aca48c6af32"
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path("upstream-math/lean")
+          manifest=json.loads((root/"lake-manifest.json").read_text())
+          assert next(p["rev"] for p in manifest["packages"] if p["name"]=="mathlib")=="d13f23b723b8a846827a245b89c10fc7d3f11612"
+          src=Path("experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B5OriginalMasslessCoefficientPolynomialProbe.lean").read_text()
+          assert src.count("\ntheorem ")==2 and src.count("\n#print axioms ")==3
+          assert "originalMasslessPotentialCoefficient_affine_polynomial" in src and "originalMasslessPotentialCoefficient_single_coordinate_polynomial" in src
+          assert "M.deformedPotentialCoefficients" in src and "M.gammaTwo" in src and "M.structureConstant" in src and "sourceMasslessCoefficient_eq_halfOriginalOrdered" in src
+          assert not any(line.lstrip().startswith(("sorry", "admit", "axiom ")) for line in src.splitlines())
+          print("GATE93_ORIGINAL_SOURCE_AND_PROOF_IMMUTABILITY_PASS")
+          PY
+      - name: Validate self-test and Gate93 YAML before heavy Lean work
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/bfss-gate93-venv
+          /tmp/bfss-gate93-venv/bin/python -m pip install --disable-pip-version-check --only-binary=:all: PyYAML==6.0.3
+          /tmp/bfss-gate93-venv/bin/python tools/bfss_gate_workflow_preflight.py --self-test
+          /tmp/bfss-gate93-venv/bin/python tools/bfss_gate_workflow_preflight.py .github/workflows/bfss-form-original-massless-coefficient-strict-gate93.yml
+      - name: Restore source pinned Lean and mathlib binary cache
+        shell: bash
+        timeout-minutes: 19
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-gate93
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1; then ok=true; break; fi
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true
+          cd upstream-math/lean
+          timeout 920s lake exe cache get > /tmp/bfss-gate93/mathlib-cache.log 2>&1 || {
+            tail -n 70 /tmp/bfss-gate93/mathlib-cache.log; exit 1;
+          }
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo GATE93_FROZEN_TOOLCHAIN_AND_MATHLIB_PASS
+      - name: Restore exact qualified historical G4K9A/B/C source ancestry
+        id: g4k9ccache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullSmoothCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentChargeVectorL2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphImage.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentGraphTransportHomeomorph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphClosure.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7FullClosedGraphVerticalB4CoeAlign.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueClosedRelationBridgeImports.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentFullClosedChargeOperatorE1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalInputCutOperatorE2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCutNamedAlias.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralRestrictedGraphBridgeE3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentClosedChargePhysicalInputE6.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1PairedSourceSpecialization.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1TypedIndependentInvariantCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentChargeOutputTypedE7A.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericClosedRangeOutputsE7G.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7OpaqueLiteralGraphInterfaceE7D.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentNamedSmoothGraphMapsE7K.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedSmoothGraphIdentityE7K2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedClosedSmoothGraphIdentityE7K3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueOutputConstraintE7H.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalOutputPredicateE7I.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedConditionalPhysicalOutputBridgeE7L.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralClosedPhysicalOutputsE7M.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedGraphNamedBridgeE7N1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedPhysicalOutputsE7N2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentInvariantCoreL2ImageDA.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentConditionalPhysicalCoreDensityDB.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentE2ConditionalPhysicalDomainDenseDD.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentE2UnconditionalPhysicalDomainDenseDC.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1B.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1C.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2FullPhysicalGraphRebaseDE2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2FullPhysicalDomainDE2B.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9BSourcePairAndChargeReductionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9COrderedPairCoefficientProbe.olean
+          key: bfss-fcp-m4f8-de3b-g4k9bc-source-unchanged-b3bc2712-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Fail closed on G4K9C original source cache provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.g4k9ccache.outputs.cache-hit }}" = "true" || {
+            echo GATE93_QUALIFIED_ORIGINAL_G4K9C_CACHE_NOT_RESTORED
+            exit 1
+          }
+          for stem in OAI/MathematicalPhysics/BFSS/ClosedProfiles \
+            SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe \
+            SU2BFSSG4K9BSourcePairAndChargeReductionProbe \
+            SU2BFSSG4K9COrderedPairCoefficientProbe; do
+            test -s "upstream-math/lean/.lake/build/lib/lean/$stem.olean" || {
+              echo GATE93_ACCEPTED_SOURCE_ANCESTOR_MISSING="$stem"
+              exit 1
+            }
+          done
+          echo GATE93_ACCEPTED_G4K9C_CACHE_PROVENANCE_PASS
+      - name: Freshly compile three original BFSS source ancestor modules and candidate
+        shell: bash
+        timeout-minutes: 8
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          mkdir -p /tmp/bfss-gate93
+          python3 - <<'PY'
+          import pathlib,subprocess,re
+          work=pathlib.Path("upstream-math/lean")
+          lib=work/".lake/build/lib/lean"
+          for mod in ["OAI.MathematicalPhysics.BFSS.Core","OAI.MathematicalPhysics.BFSS.MassiveCoercivity","OAI.MathematicalPhysics.BFSS.ColorMatrices"]:
+              rel=mod.replace(".","/")
+              obj=lib/(rel+".olean")
+              obj.parent.mkdir(parents=True,exist_ok=True)
+              if obj.exists(): obj.unlink()  # fresh source compile, never foreign object
+              path=rel+".lean"
+              log=pathlib.Path("/tmp/bfss-gate93")/(rel.replace("/","_")+".log")
+              with log.open("w") as o:
+                  p=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true","-o",
+                                    ".lake/build/lib/lean/"+rel+".olean",path],cwd=work,stdout=o,stderr=subprocess.STDOUT)
+              if p.returncode or not obj.is_file() or not obj.stat().st_size:
+                  print(log.read_text()[-4000:],flush=True)
+                  raise SystemExit("GATE93_ORIGINAL_"+mod+"_FRESH_COMPILE_RED")
+              print("GATE93_ORIGINAL_SOURCE_FRESH_COMPILED",mod,obj.stat().st_size,flush=True)
+          # Freshly compile and audit the EXACT previously accepted S4B3 parent.
+          parentStem="SU2BFSSPhysicalDomainS4B3OriginalBracketPolynomialExpansionProbe"
+          parentSource=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentStem+".lean")
+          (work/(parentStem+".lean")).write_bytes(parentSource.read_bytes())
+          parentObj=lib/(parentStem+".olean")
+          if parentObj.exists(): parentObj.unlink()
+          parentLog=pathlib.Path("/tmp/bfss-gate93/strict-parent-s4b3.log")
+          with parentLog.open("w") as o:
+              parentRun=subprocess.run(
+                ["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                 "-o",".lake/build/lib/lean/"+parentStem+".olean",parentStem+".lean"],
+                cwd=work,stdout=o,stderr=subprocess.STDOUT)
+          parentData=parentLog.read_text()
+          parentExpected=[
+            "FCP.BFSSSU2PhysicalDomainS4B3.originalCoordinateBracketAll_affine_polynomial",
+            "FCP.BFSSSU2PhysicalDomainS4B3.originalCoordinateBracketAll_single_coordinate_polynomial"]
+          parentReports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentData)
+          parentOk=(parentRun.returncode==0
+            and [name for name,_ in parentReports]==parentExpected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentReports)
+            and "sorryAx" not in parentData and "error:" not in parentData
+            and parentObj.is_file() and parentObj.stat().st_size>0)
+          if not parentOk:
+              print("GATE93_ACCEPTED_S4B3_PARENT_FRESH_RED",flush=True)
+              print(parentData[-4000:],flush=True)
+              raise SystemExit(1)
+          print("GATE93_ACCEPTED_S4B3_PARENT_FRESH_PASS",parentObj.stat().st_size,flush=True)
+          # Freshly recompile accepted S4B4 from its immutable Git blob.
+          parentB4Stem="SU2BFSSPhysicalDomainS4B4OriginalGammaWeightedBracketPolynomialProbe"
+          parentB4Source=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB4Stem+".lean")
+          (work/(parentB4Stem+".lean")).write_bytes(parentB4Source.read_bytes())
+          parentB4Obj=lib/(parentB4Stem+".olean")
+          if parentB4Obj.exists(): parentB4Obj.unlink()
+          parentB4Log=pathlib.Path("/tmp/bfss-gate93/strict-parent-s4b4.log")
+          with parentB4Log.open("w") as o:
+              parentB4Run=subprocess.run(
+                ["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                 "-o",".lake/build/lib/lean/"+parentB4Stem+".olean",parentB4Stem+".lean"],
+                 cwd=work,stdout=o,stderr=subprocess.STDOUT)
+          parentB4Data=parentB4Log.read_text()
+          parentB4Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B4.originalGammaWeightedBracket_affine_polynomial",
+            "FCP.BFSSSU2PhysicalDomainS4B4.originalGammaWeightedBracket_single_coordinate_polynomial"]
+          parentB4Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB4Data)
+          parentB4OK=(parentB4Run.returncode==0
+            and [n for n,_ in parentB4Reports]==parentB4Expected
+            and all({a.strip() for a in ax.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,ax in parentB4Reports)
+            and "sorryAx" not in parentB4Data and "error:" not in parentB4Data
+            and parentB4Obj.is_file() and parentB4Obj.stat().st_size>0)
+          if not parentB4OK:
+              print("GATE93_ACCEPTED_S4B4_PARENT_FRESH_RED",flush=True)
+              print(parentB4Data[-4000:],flush=True)
+              raise SystemExit(1)
+          print("GATE93_ACCEPTED_S4B4_PARENT_FRESH_PASS",parentB4Obj.stat().st_size,flush=True)
+          stem="SU2BFSSPhysicalDomainS4B5OriginalMasslessCoefficientPolynomialProbe"
+          src=pathlib.Path("experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B5OriginalMasslessCoefficientPolynomialProbe.lean")
+          (work/(stem+".lean")).write_bytes(src.read_bytes())
+          obj=lib/(stem+".olean")
+          if obj.exists(): obj.unlink()
+          log=pathlib.Path("/tmp/bfss-gate93/strict-candidate.log")
+          cmd=["timeout","120s","lake","env","lean","-DwarningAsError=true",
+               "-o",".lake/build/lib/lean/"+stem+".olean",stem+".lean"]
+          with log.open("w") as o:
+              p=subprocess.run(cmd,cwd=work,stdout=o,stderr=subprocess.STDOUT)
+          data=log.read_text()
+          expected=[
+             "FCP.BFSSSU2GaugeG4K9C.sourceMasslessCoefficient_eq_halfOriginalOrdered",
+             "FCP.BFSSSU2PhysicalDomainS4B5.originalMasslessPotentialCoefficient_affine_polynomial",
+             "FCP.BFSSSU2PhysicalDomainS4B5.originalMasslessPotentialCoefficient_single_coordinate_polynomial",
+          ]
+          matched=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",data)
+          allowed={"propext","Classical.choice","Quot.sound"}
+          normalized=[(name,{a.strip() for a in s.split(",") if a.strip()}) for name,s in matched]
+          # Known pinned Lake-package working-tree-state notices are
+          # not candidate Lean diagnostics. Enforce identical package names.
+          # Everything else containing "warning:" remains a strict failure.
+          lakeNotice=re.compile(
+              r"warning: (?P<package>[a-z0-9-]+): repository '[^']*/upstream-math/lean/[.]lake/packages/(?P=package)' has local changes")
+          assert lakeNotice.fullmatch(
+              "warning: belyi: repository '/tmp/upstream-math/lean/.lake/packages/belyi' has local changes")
+          assert not lakeNotice.fullmatch(
+              "warning: belyi: repository '/tmp/upstream-math/lean/.lake/packages/iut' has local changes")
+          assert not lakeNotice.fullmatch("Candidate.lean:3:1: warning: unused simp argument")
+          print("GATE93_LAKE_NOTICE_FILTER_SELF_TEST_PASS",flush=True)
+          lakeNotices=[line for line in data.splitlines() if lakeNotice.fullmatch(line)]
+          sourceWarnings=[line for line in data.splitlines()
+              if "warning:" in line and not lakeNotice.fullmatch(line)]
+          print("GATE93_IGNORED_LAKE_PACKAGE_STATE_NOTICES",len(lakeNotices),flush=True)
+          print("GATE93_CANDIDATE_SOURCE_WARNINGS",sourceWarnings,flush=True)
+          verified=(p.returncode==0 and len(normalized)==3
+             and [name for name,_ in normalized]==expected
+             and all(ax<=allowed for _,ax in normalized)
+             and "sorryAx" not in data and "error:" not in data
+             and not sourceWarnings
+             and obj.is_file() and obj.stat().st_size>0)
+          print("GATE93_COMPILER_EXIT",p.returncode,"AXIOM_REPORTS",normalized,flush=True)
+          if not verified:
+              print("GATE93_SOURCE_MASSLESS_COEFFICIENT_STRICT_RED",flush=True)
+              print(data[-5000:],flush=True)
+              raise SystemExit(1)
+          print("GATE93_ORIGINAL_SOURCE_MASSLESS_COEFFICIENT_TWO_ROOTS_STRICT_PASS",flush=True)
+          PY
+      - name: Preserve Gate93 original source and candidate compiler logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-form-original-massless-coefficient-gate93-${{ github.run_id }}
+          path: |
+            /tmp/bfss-gate93/*.log
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B3OriginalBracketPolynomialExpansionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B4OriginalGammaWeightedBracketPolynomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B5OriginalMasslessCoefficientPolynomialProbe.olean
+          if-no-files-found: warn
