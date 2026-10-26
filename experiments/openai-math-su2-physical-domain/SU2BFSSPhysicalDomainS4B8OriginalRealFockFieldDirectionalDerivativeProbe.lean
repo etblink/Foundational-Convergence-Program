@@ -29,35 +29,51 @@ theorem originalMasslessRealField_line_hasDerivAt
     simpa using
       ((hasDerivAt_id (0 : ℝ)).smul_const
         (sourceMasslessRealFieldVariation M x v α))
+  -- Isolate the scalar square derivative before lifting into Fock CLMs.
+  -- This is a propositionally normalized identity, not a kernel 'change'.
   have hpow : HasDerivAt (fun t : ℝ => t ^ 2) (0 : ℝ) (0 : ℝ) := by
-    have hpowSource := ((hasDerivAt_id (0 : ℝ)).pow 2)
-    -- The source derivation is (id ^ 2), i.e. pointwise function power.
-    -- Compare the exact function before normalizing algebra instances.
-    change HasDerivAt (fun t : ℝ => t ^ 2) (0 : ℝ) (0 : ℝ) at hpowSource
-    exact hpowSource
+    have hp := ((hasDerivAt_id (0 : ℝ)).pow 2)
+    convert hp using 1
+    all_goals
+      first
+      | (funext t; simp [Pi.pow_apply])
+      | norm_num
+  -- Lift the independently normalized scalar derivative to the actual
+  -- original real continuous-linear Fock operator.
   have hquad : HasDerivAt
       (fun t : ℝ => t ^ 2 • M.deformedRealField 1 0 α v)
       (0 : Fermion N →L[ℝ] Fermion N) (0 : ℝ) := by
     convert (hpow.smul_const (M.deformedRealField 1 0 α v)) using 1
-      <;> simp only [zero_smul]
+    all_goals
+      first
+      | rfl
+      | simp
   have hconst : HasDerivAt
       (fun _ : ℝ => M.deformedRealField 1 0 α x)
       (0 : Fermion N →L[ℝ] Fermion N) (0 : ℝ) :=
     hasDerivAt_const (0 : ℝ) (M.deformedRealField 1 0 α x)
+  -- Assemble only after discharging the scalar and CLM-valued derivatives.
   rw [hpoly]
-  -- Avoid the implicit Pi-addition instance mismatch in a blanket simpa.
   convert ((hconst.add hlin).add hquad) using 1
-    <;> simp only [Pi.add_apply, zero_add, add_zero]
+  all_goals
+    first
+    | (funext t; rfl)
+    | simp
 
 /-- Actual source Fréchet derivative in the real Fock CLM carrier. -/
 theorem originalMasslessRealField_fderiv_direction
     {N : ℕ} (M : AlgebraData N) (x v : Boson N) (α : SpinIndex) :
     fderiv ℝ (M.deformedRealField 1 0 α) x v =
       sourceMasslessRealFieldVariation M x v α := by
+  -- Keep Pi-addition out of the derivative elaborator: identify the
+  -- functions by extensionality rather than hoping for blanket simp.
   have hpath : HasDerivAt (fun t : ℝ => x + t • v) v (0 : ℝ) := by
     convert ((hasDerivAt_const (0 : ℝ) x).add
       ((hasDerivAt_id (0 : ℝ)).smul_const v)) using 1
-      <;> simp only [Pi.add_apply, id_eq, one_smul, zero_add]
+    all_goals
+      first
+      | (funext t; rfl)
+      | simp
   have hdiff : DifferentiableAt ℝ (M.deformedRealField 1 0 α) x :=
     (M.deformedRealField_contDiff 1 0 α).differentiable (by simp) x
   have hchain : HasDerivAt
@@ -69,7 +85,10 @@ theorem originalMasslessRealField_fderiv_direction
         (x + (0 : ℝ) • v) := by
       simpa only [zero_smul, add_zero] using hdiff.hasFDerivAt
     convert (hdiff0.comp_hasDerivAt (0 : ℝ) hpath) using 1
-      <;> simp only [Function.comp_def, zero_smul, add_zero]
+    all_goals
+      first
+      | (funext t; rfl)
+      | simp
   exact hchain.unique (originalMasslessRealField_line_hasDerivAt M x v α)
 
 /-- Source coordinate derivative, not an assumed proxy gamma field. -/
