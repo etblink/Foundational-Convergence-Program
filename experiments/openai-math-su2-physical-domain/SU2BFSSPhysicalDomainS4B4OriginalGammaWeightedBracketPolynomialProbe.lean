@@ -47,8 +47,10 @@ theorem originalGammaWeightedBracket_affine_polynomial
       (∑ i : SpaceIndex, ∑ j : SpaceIndex,
         M.coordinateBracketAll v i j A * M.gammaTwo i j α β)) := by
   simp_rw [originalCoordinateBracketAll_affine_polynomial M x v t]
-  simp only [add_mul, Finset.sum_add_distrib, Finset.mul_sum]
-  ring
+  -- Keep the real scalar t OUTSIDE the original nested finite sums;
+  -- Gate92 #1 expanded it under the color indices before ring.
+  simp only [add_mul, Finset.sum_add_distrib, ← Finset.mul_sum]
+  all_goals ring
 
 /-- The original EuclideanSpace.single specialization, retaining the
 true source Spin/Color indices, ordered-pair 1/2, and exact quadratic
