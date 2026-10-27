@@ -150,7 +150,7 @@ jobs:
           log=pathlib.Path('/tmp/bfss-f21a/lean.log').read_text()
           reports=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
           allowed={'propext','Classical.choice','Quot.sound'}
-          warnings=re.findall(r'^.*\\.lean:\\d+:\\d+: warning:.*
+          warnings=[line for line in log.splitlines() if ".lean:" in line and ": warning:" in line]
           obj=pathlib.Path('.lake/build/lib/lean/SU2BFSSPhysicalDomainS1V52L9E5F21AOriginalSpin48SourceVectorActionJointContinuityProbe.olean')
           good=(int(os.environ['COMPILER_EXIT'])==0 and [name for name,_ in reports]==expected
             and all({a.strip() for a in v.split(',') if a.strip()}<=allowed for _,v in reports)
