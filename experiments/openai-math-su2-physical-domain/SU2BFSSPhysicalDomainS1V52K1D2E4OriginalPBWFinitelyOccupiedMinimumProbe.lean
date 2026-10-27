@@ -61,7 +61,8 @@ theorem originalSourcePBWLeastOccupied_le_every_supported_coordinate
     (hI : I ∈ (FCP.BFSSS1V52K1D2C.originalSourceExteriorPBWBasis.repr x).support)
     (k : Source48Label) (hk : k ∈ I) :
     (originalSourcePBWOccupiedLabels x).min' hocc ≤ k := by
-  exact Finset.min'_le _ (originalSourcePBWSupportedIndex_member_occupied x I hI k hk)
+  exact Finset.min'_le _ k
+    (originalSourcePBWSupportedIndex_member_occupied x I hI k hk)
 
 #print axioms originalSourcePBWSupportedIndex_member_occupied
 #print axioms originalSourcePBWLeastOccupied_le_every_supported_coordinate
