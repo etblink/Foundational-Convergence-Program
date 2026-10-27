@@ -1,5 +1,4 @@
 import SU2BFSSPhysicalDomainS4B34ConcretePauliPairedManuscriptBProbe
-import SU2BFSSConcretePotentialProbe
 
 /-!
 BFSS S4B35 — source-exact Pauli-paired bosonic potential and smooth-core

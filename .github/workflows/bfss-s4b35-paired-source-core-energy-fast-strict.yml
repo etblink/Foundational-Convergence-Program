@@ -50,8 +50,8 @@ jobs:
             experiments/openai-math-su2-physical-domain \
             experiments/openai-math-su2-concrete-potential \
             ':(exclude)experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe.lean'
-          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe.lean)" = "c9d7c5bea1b54e3a8d61c6ec3dcbf9759aa97d8e"
-          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe.lean)" = "c9d7c5bea1b54e3a8d61c6ec3dcbf9759aa97d8e"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe.lean)" = "77a1a79f12a7cfdf68f47b6a2420633c1958731f"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe.lean)" = "77a1a79f12a7cfdf68f47b6a2420633c1958731f"
           test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B34ConcretePauliPairedManuscriptBProbe.lean)" = "299c3a52dac98e4e6c78884935c14a8744644174"
           test "$(git -C upstream-math rev-parse HEAD)" = "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
           test "$(cat upstream-math/lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
