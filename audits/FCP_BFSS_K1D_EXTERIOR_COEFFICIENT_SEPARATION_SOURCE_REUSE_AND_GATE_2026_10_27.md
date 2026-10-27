@@ -101,3 +101,15 @@ The misleading first-gate `bfss-k1c...` cache prefix is now **corrected by a gen
 - `originalSourceSpin48_trivialAction_exteriorCoordinateContractions_zero`: combine the new source coordinate-dual identity and accepted K1D0 to kill EVERY original source exterior coordinate contraction.
 
 [Strict K1D1 workflow #40498190392](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40498190392) checks TWO **independently qualified accepted binary ancestries** before compilation: K1D0 correct cache and S1V38 historical accepted `bfss-s1v38-isolated-source48-polar-coefficient-v1-adc7f124-lean4341-d13f23b-Linux-X64` cache. If either has expired, record a cache failure only. Mathematical statement, root count, and fresh Lean status MUST be verified from terminal run logs, not guessed. This intermediate theorem still does NOT prove exterior coordinate coefficient-separation/scalar common kernel.
+
+
+## K1D1 Gate 1 — explicit historical S1V38 cache miss, zero roots
+
+[Actions #40498190392](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40498190392), job `122168899477`, **RED** at precompiler ancestry. Original frozen math/S1V38/K1D1/K1D0 source blob pins passed. Current K1D0 source cache **restored successfully**, but the independently historically accepted S1V38 cache key `bfss-s1v38-isolated-source48-polar-coefficient-v1-adc7f124-lean4341-d13f23b-Linux-X64` was unavailable:
+```text
+Cache not found for input keys: bfss-s1v38-isolated-source48-polar-coefficient-v1-adc7f124-lean4341-d13f23b-Linux-X64
+K1D1_S1V38_CACHE_MISSING
+```
+**No new K1D1 Lean declarations compiled; +0 K1D1 roots.** This is binary-cache provenance, not a counterexample to the exact original polar-coordinate theorem.
+
+**Recovery decision:** Source K1D1 theorem statements remain unchanged. Before rebuilding any accepted S1V38 source, test whether the currently **available qualified K1D0 cache** already contains a nonempty original `S1V38.olean`. Remove the unnecessarily strict requirement that a *particular* S1V38 cache key must hit, but retain exact S1V38 Git source blob pin and fail closed unless its compiled `.olean` is actually present. If not present, record that specific missing artifact, and recover accepted S1V38 source and its predecessor chain separately. Do not silently synthesize substitute source facts or call a cache miss a mathematical red.
