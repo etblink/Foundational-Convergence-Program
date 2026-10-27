@@ -1,6 +1,6 @@
 # BFSS S4B26 — exact source gamma/theta CLM product distribution (Gate114)
 
-**Status at launch: UNACCEPTED research candidate; strict Gate114 pending.** Strictly accepted scoped S4 roots: **50** through independent verified Gate113; do not count S4B26 before an exact axiom-certified compiler pass.
+**Status: Gate114 #1 RED, no new theorem accepted; subsequent repair attempts must be independently verified.** Strictly accepted scoped S4 roots: **50** through independent verified Gate113; do not count S4B26 before an exact axiom-certified compiler pass.
 
 ## Why this gate
 
@@ -34,3 +34,21 @@ If Gate114 is red, inspect first causal log and isolate whether original source,
 ## Scientific boundary
 
 This is **only bilinear expansion** of the true source continuous-linear endomorphisms. It does **not** incorporate `(-i)/16`, contract `k,α` within full `theta` sum, compose the Gate113 sign under operator indices, define/prove manuscript `B(x)`, restrict to real fermionic field, or establish any spectral eigenstates. Those are later, separate accepted obligations. Keep `main`, prior sealed Lean blobs, upstream `math`, and PR #25 unchanged.
+
+
+## Gate114 #1 — independently verified RED, first causal failure
+
+[Run #40428966837](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40428966837), job `121941696439`, exact head `e57b641b22e877aa91cc75d2abc2ecc58d783eed`, completed **failure**. All immutable-source hashes, YAML preflight, qualified cache, pinned Lean/Mathlib, original upstream files, and fresh strictly accepted S4B3 through S4B25 parents passed. Candidate S4B26 fresh compiler exit **1**. Decisive diagnostics from actual compiler output:
+
+```text
+GATE114_ACCEPTED_S4B25_PARENT_FRESH_PASS 69944
+GATE114_CANDIDATE_SOURCE_WARNINGS []
+GATE114_COMPILER_EXIT 1 AXIOM_REPORTS [('FCP.BFSSSU2PhysicalDomainS4B26.originalGammaTheta_operator_product_distribution', {'propext', 'sorryAx', 'Quot.sound', 'Classical.choice'})]
+GATE114_ORIGINAL_THETA_OPERATOR_PRODUCT_DISTRIBUTION_STRICT_RED
+SU2BFSSPhysicalDomainS4B26OriginalGammaThetaOperatorProductDistributionProbe.lean:35:45: error: unsolved goals
+SU2BFSSPhysicalDomainS4B26OriginalGammaThetaOperatorProductDistributionProbe.lean:37:35: error: This simp argument is unused: smul_smul
+```
+
+The residual goal, after source-defined complex operator multiplication and coefficient migration, has `∑ q, c(q) • (∑ β, gamma(β) • (theta[β,A] * theta[q]))` on the left versus `∑ β, ∑ q, (gamma(β) * c(q)) • (theta[β,A] * theta[q])` on the right. This is a **specific missing finite-sum scalar distribution / commutation proof step**, not a demonstrated failure of the underlying identity. A single automated simplification pass omits `Finset.smul_sum`, leaves `smul_smul` unused, and does not commute the independent q/β sums. No new root is accepted; scoped S4 stays **50**.
+
+**Corrective architecture:** first source-typed `Finset.sum_mul`, `Finset.mul_sum`, `smul_mul_assoc`, `mul_smul_comm`; then `Finset.smul_sum` and `smul_smul` after the intermediate form actually appears; then `Finset.sum_comm` and a local scalar `mul_comm` in each summand. Preserve the exact statement, original matrix/fermion sources, theta factor order, all accepted parent blobs and strict compiler/axiom policy. Change only the candidate proof and its two matching workflow SHA guards. The result must still pass a fresh strict Gate114 run.
