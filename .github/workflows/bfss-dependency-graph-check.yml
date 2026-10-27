@@ -1,0 +1,42 @@
+# Research-branch-only static graph integrity, NOT a Lean theorem acceptance gate.
+name: BFSS Lean Source Dependency Graph Integrity
+
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - 'tools/bfss_dependency_graph.py'
+      - 'meta/bfss-dependency-qualification.json'
+      - 'meta/BFSS_LEAN_DEPENDENCY_GRAPH.md'
+      - '.github/workflows/bfss-dependency-graph-check.yml'
+      - 'experiments/**/*.lean'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-import-graph:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact research source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Validate standalone Python graph tool
+        run: |
+          python3 -m py_compile tools/bfss_dependency_graph.py
+          python3 tools/bfss_dependency_graph.py
+      - name: Check exact source Git blobs against reviewed qualification receipts
+        run: |
+          python3 tools/bfss_dependency_graph.py --check-evidence
+      - name: Generate F21A prerequisite graph from actual original module imports
+        run: |
+          python3 tools/bfss_dependency_graph.py \
+            --focus SU2BFSSPhysicalDomainS1V52L9E5F21AOriginalSpin48SourceVectorActionJointContinuityProbe \
+            --direction deps --depth 5 --format markdown > "${RUNNER_TEMP}/bfss-f21a-source-graph.md"
+          grep -q "F21AOriginalSpin48SourceVectorActionJointContinuity" "${RUNNER_TEMP}/bfss-f21a-source-graph.md"
+          cat "${RUNNER_TEMP}/bfss-f21a-source-graph.md"
+      - name: Print non-acceptance integrity sentinel
+        run: |
+          echo BFSS_SOURCE_IMPORT_GRAPH_AND_QUALIFICATION_PINS_PASS_NO_LEAN_ROOTS
