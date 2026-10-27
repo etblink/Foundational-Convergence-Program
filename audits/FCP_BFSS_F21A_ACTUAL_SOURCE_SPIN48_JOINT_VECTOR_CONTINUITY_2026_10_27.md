@@ -82,3 +82,31 @@ GitHub [run #40483450448](https://github.com/etblink/Foundational-Convergence-Pr
 Commit [f40d53a7](https://github.com/etblink/Foundational-Convergence-Program/commit/f40d53a7bee1e4b5867ab6343e5cedf648a6f8a2) reconstructs the entire strict CI YAML from Gate #3's already validated 177-line file. An independent line comparison confirms exactly **three** modified lines: F21A candidate Git blob now `87f554d93022d9dd3cc779947699ba0a599fae9b` in exact source preflight, a plain `log.splitlines()` filter that captures only source-located Lean warning diagnostics, and a source-hashed `v2` binary cache key. Native Lean warning-as-error, exact original frozen source/toolchain, source qualified F20F and L9D9 caches, precisely two named Lean roots, zero `sorryAx`, permitted axioms only, and successful candidate `.olean` remain mandatory. The erroneous workflow duplicates were entirely discarded. GitHub now recognized the workflow by its configured title and launched [Gate #6 run #40484231446](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40484231446), proving YAML parse/dispatch was restored; **not a proof success** until CI completes.
 
 All CI failures are preserved, no accepted root count changes until a green strict run. Previously accepted S4 roots: **63**.
+
+## Gate #6 — formally accepted, two source-exact F21A roots
+
+**Verified strict GREEN:** [run #40484231446](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40484231446), job 122121881493, original workflow commit f40d53a7bee1e4b5867ab6343e5cedf648a6f8a2. Completed 2026-10-27, 09:53:28–09:58:36 UTC, in **5m 08s**. Original candidate Git blob 87f554d93022d9dd3cc779947699ba0a599fae9b.
+
+The full immutable original source, Lean 4.34.1/Mathlib d13f23b, source-qualified F20F PBW Spin48 topological-group v2 cache, L9D9 native Spin48 projection cache, and fresh original S1V30/S1V31 parent consumer all qualified. Literal compiler evidence:
+
+```
+F21A_COMPILER_EXIT 0
+FCP.BFSSS1V52L9E5F21A.originalSourceCliffordGenerator_closedEmbedding:
+  axioms [propext, Classical.choice, Quot.sound]
+FCP.BFSSS1V52L9E5F21A.originalSourceSpin48VectorAction_joint_continuous:
+  axioms [propext, Classical.choice, Quot.sound]
+WARNINGS []
+F21A_GENUINE_SPIN48_REAL_VECTOR_JOINT_CONTINUITY_TWO_ROOTS_STRICT_PASS
+```
+
+Zero sorryAx, exactly two expected source roots, native compilation and nonempty candidate olean. Correct source-bound cache saved:
+
+```
+bfss-f21a-original-spin48-vector-continuity-87f554d93022d9dd3cc779947699ba0a599fae9b-v2-adc7f124-lean4341-d13f23b-Linux-X64
+```
+
+Provenance artifact [12723989064](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40484231446/artifacts/12723989064), zip SHA256 77d483d0af8f1547a0f4fd2c490f55fa6d1aeb613e6feeb1f8f9b283b28849f2.
+
+**Mathematics:** (1) genuine source Clifford degree-one real-vector inclusion is a closed topological embedding in actual PBW topology; (2) original native Clifford Spin48 conjugation action on the same 48-real vectors is jointly continuous. No alternate SO48 source or topology was substituted. **New F21A roots +2. The independently tracked S4 total remains 63.**
+
+**Scientific stop:** does not establish the continuous Spin48-to-SO48 two-sheeted covering (kernel exactly two central signs, surjectivity, local covering), nor the source Spin9 lift, actual physical form symmetry, coercivity or positive normalizable eigenstates. Preserve previous F21A Gates #1–#5 as separate failed cache/proof/YAML attempts.
