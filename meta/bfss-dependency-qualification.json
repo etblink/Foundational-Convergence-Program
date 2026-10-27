@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "scope": "Partial high-value BFSS acceptance receipts for the 2026-10-27 frontier. NOT a complete list of accepted Lean modules, and not a source of theorem truth independent of linked logs.",
+  "frozen_math": "etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+  "lean": "4.34.1",
+  "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "qualified": [
+    {
+      "path": "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V30Real48CliffordGeneratorInjectiveViaExteriorProbe.lean",
+      "blob_sha": "59d40c5c74cc4803a6a6096cfe5ea87c800bd7f9",
+      "basis": "historical-audit-recorded",
+      "source_url": "https://github.com/etblink/Foundational-Convergence-Program/blob/research/openai-math-su2-s1v52-global-lift-scoping-20261019/audits/OPENAI_MATH_BFSS_SU2_S1V30_SOURCE48_CLIFFORD_GENERATOR_INJECTIVITY_2_ROOTS_GATE1_ACCEPTANCE_2026_10_19.md",
+      "roots": [
+        "source48_cliffordGenerator_equivExterior",
+        "source48_cliffordGenerator_injective"
+      ]
+    },
+    {
+      "path": "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V35ActualSpin48RealAutomorphismGroupHomProbe.lean",
+      "blob_sha": "084acd408fc0ccd56572c7cea9483f16d062d4cd",
+      "basis": "historical-audit-recorded",
+      "source_url": "https://github.com/etblink/Foundational-Convergence-Program/blob/research/openai-math-su2-s1v52-global-lift-scoping-20261019/audits/OPENAI_MATH_BFSS_SU2_S1V35_ACTUAL_SPIN48_TO_REAL48_GL_HOM_3_ROOTS_GATE1_ACCEPTANCE_2026_10_19.md",
+      "roots": [
+        "sourceSpin48LinearEquiv_one",
+        "sourceSpin48LinearEquiv_mul",
+        "sourceSpin48LinearEquivHom"
+      ]
+    },
+    {
+      "path": "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V47ActualSpin48RealDetOrientationProbe.lean",
+      "blob_sha": "10015d67ef402692a83e4e8a1ca172225cfaf575",
+      "basis": "historical-audit-recorded",
+      "source_url": "https://github.com/etblink/Foundational-Convergence-Program/blob/research/openai-math-su2-s1v52-global-lift-scoping-20261019/audits/OPENAI_MATH_BFSS_SU2_S1V47_ORIGINAL_SPIN48_REAL_DETERMINANT_ONE_4_ROOTS_GATE1_ACCEPTANCE_2026_10_19.md",
+      "roots": [
+        "source48OriginalClifford_nontrivial",
+        "source48OriginalRealScalarUnits_injective",
+        "sourceSpin48ActualLipschitzDetCharacter_one",
+        "sourceSpin48OriginalRealDetCharacter_one"
+      ]
+    },
+    {
+      "path": "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9D9OriginalNativeSixteenSpin48ActualGaugeUniversalProjectionProbe.lean",
+      "blob_sha": "a0195adbc3fb8019a2d962ab566326dabaf90088",
+      "basis": "historical-audit-recorded",
+      "source_url": "https://github.com/etblink/Foundational-Convergence-Program/blob/research/openai-math-su2-s1v52-global-lift-scoping-20261019/audits/OPENAI_MATH_BFSS_SU2_S1V52L9D9_ORIGINAL_NATIVE_UNIVERSAL_SPIN48_GAUGE_PROJECTION_1_ROOT_GATE2_ACCEPTANCE_2026_10_21.md",
+      "roots": [
+        "originalNativeSixteenSpinHom_coversActualGauge"
+      ]
+    },
+    {
+      "path": "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F21AOriginalSpin48SourceVectorActionJointContinuityProbe.lean",
+      "blob_sha": "87f554d93022d9dd3cc779947699ba0a599fae9b",
+      "basis": "strict-log-inspected",
+      "source_url": "https://github.com/etblink/Foundational-Convergence-Program/blob/research/openai-math-su2-s1v52-global-lift-scoping-20261019/audits/FCP_BFSS_F21A_ACTUAL_SOURCE_SPIN48_JOINT_VECTOR_CONTINUITY_2026_10_27.md",
+      "strict_run_url": "https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40484231446",
+      "roots": [
+        "originalSourceCliffordGenerator_closedEmbedding",
+        "originalSourceSpin48VectorAction_joint_continuous"
+      ]
+    },
+    {
+      "path": "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe.lean",
+      "blob_sha": "77a1a79f12a7cfdf68f47b6a2420633c1958731f",
+      "basis": "historical-audit-recorded",
+      "source_url": "https://github.com/etblink/Foundational-Convergence-Program/blob/research/openai-math-su2-s1v52-global-lift-scoping-20261019/audits/FCP_BFSS_S4B35_FAST_LEAF_2026_10_27.md",
+      "strict_run_url": "https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40466480310",
+      "roots": [
+        "pairedBosonicPotential_eq_wedge",
+        "pairedOriginalSmoothCoreEnergy_eq_manuscript"
+      ]
+    },
+    {
+      "path": "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B36ActualPhysicalClosedFormPauliManuscriptProbe.lean",
+      "blob_sha": "81dd44eec7c24790d87493496fc6f50eae0a0e8e",
+      "basis": "historical-audit-recorded",
+      "source_url": "https://github.com/etblink/Foundational-Convergence-Program/blob/research/openai-math-su2-s1v52-global-lift-scoping-20261019/audits/FCP_BFSS_S4B36_REAL_PHYSICAL_CLOSED_FORM_PAULI_B_2026_10_27.md",
+      "strict_run_url": "https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40472176948",
+      "roots": [
+        "pairedSourceClosedPhysicalEnergy_on_invariantCore_eq_PauliB",
+        "pairedExplicitPauliCoreEnergy_nonneg_on_invariantCore"
+      ]
+    }
+  ]
+}
