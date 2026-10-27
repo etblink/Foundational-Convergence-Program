@@ -33,8 +33,17 @@ theorem originalGammaTheta_operator_product_distribution
         ((sourceMasslessComplexVariationCoefficient M x
           (EuclideanSpace.single (k,A) (1 : ℝ)) α q : ℝ) : ℂ)) •
           (M.theta β A * M.theta q.1 q.2) := by
+  -- Gate114 #1: multiplication distribution stops at a q-outer / beta-inner
+  -- sum of complex smul operators. Finish distribution before reindexing.
   simp only [Finset.sum_mul, Finset.mul_sum,
-    smul_mul_assoc, mul_smul_comm, smul_smul]
+    smul_mul_assoc, mul_smul_comm]
+  simp only [Finset.smul_sum, smul_smul]
+  rw [Finset.sum_comm]
+  apply Finset.sum_congr rfl
+  intro β _hβ
+  apply Finset.sum_congr rfl
+  intro q _hq
+  rw [mul_comm]
 
 #print axioms originalGammaTheta_operator_product_distribution
 
