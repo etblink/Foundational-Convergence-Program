@@ -1,6 +1,6 @@
 # BFSS S4B25 — exact source gamma/field variation in manuscript-signed color order
 
-**October 26, 2026: unaccepted Gate113 candidate.** Gate112 already strictly accepted one new theorem in [run #40425991456](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40425991456), job `121931904190`, bringing scoped S4 unique accepted roots to **49**. This audit tracks the next bounded theorem and its strict workflow separately. A new run is **not** an accepted root until its completed compiler and axiom audit have been inspected.
+**Historical pre-acceptance checkpoint; Gate113 is now strictly accepted, as independently verified below.** Gate112 already strictly accepted one new theorem in [run #40425991456](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40425991456), job `121931904190`, bringing scoped S4 unique accepted roots to **49**. This audit tracks the next bounded theorem and its strict workflow separately. A new run is **not** an accepted root until its completed compiler and axiom audit have been inspected.
 
 ## Exact target proposition
 
@@ -25,3 +25,20 @@ The proof must consume **both** accepted roots: S4B23 genuine gamma contraction 
 After source kinetic–variation scalar contraction, the original ordered complex fermionic remainder has an overall `(-i)/16` prefactor. The now-signed coefficient is `(-8) f[C,A,D] x gamma`, yielding the manuscript's proposed `+i/2` **once the actual continuous-linear operator finite sums are expanded and reassembled with original theta order**. Gate113 cannot by itself justify that distribution, real/complex scalar restriction, full physical (B(x)) identification, closed quadratic form or Spin(9) spectral existence. Those are the next scientific obligations, not implications of this candidate.
 
 The October 5 source manuscript is frozen at Git blob `12c5fffb5f90b48856f60fb0e93c18e2490c5f1b`; its `B(x)` is specified at manuscript lines 236–250. Canonical `main`, original source, and draft PR #25 are unchanged.
+
+
+## Gate113 completed: 1/1 principal theorem root strictly ACCEPTED
+
+The completed [GitHub Actions run #40427649530](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40427649530), job `121937328937`, conclusion `success`, exact run HEAD `b85dc8afaf3ee51af396f91e3aebb69cf6910c80`, was independently checked using original runner/compiler logs. Source and git-blob provenance, frozen Lean 4.34.1 / Mathlib, qualified original G4K9C ancestry, fresh upstream source, S4B3–S4B24 parents, exact new `.olean`, warnings/axiom policy all passed. Decisive stdout:
+
+```text
+GATE113_ACCEPTED_S4B23_PARENT_FRESH_PASS 112560
+GATE113_ACCEPTED_S4B24_PARENT_FRESH_PASS 20016
+GATE113_CANDIDATE_SOURCE_WARNINGS []
+GATE113_COMPILER_EXIT 0 AXIOM_REPORTS [('FCP.BFSSSU2PhysicalDomainS4B25.originalSourceVariationCoefficient_manuscript_signed', {'propext', 'Classical.choice', 'Quot.sound'})]
+GATE113_ORIGINAL_MANUSCRIPT_SIGNED_GAMMA_ONE_ROOT_STRICT_PASS
+```
+
+**Accepted S4 scoped unique principal roots: 49 → 50 (+1 S4B25).** Original source files and recompiled S4B3–S4B24 dependencies are not recountable new roots. Candidate Git blob `75ad185023d7901f4ce932feb72e80c145fb9794` remained unchanged; no `sorryAx`, non-whitelisted axioms, Lean source warnings or compiler errors.
+
+**New proof-engineering / scientific step:** produce a typed continuous-linear Fock-operator bilinear expansion of the actual source kinetic gamma/theta sum and original variation theta sum. This allows strictly finite-sum reindexing of the scalar coefficient from Gate113 with `(-Complex.I)/16`, then the actual real restriction from S4B21. Preserve theta multiplication order and do not claim operator identity until this algebra passes its own strict CI.
