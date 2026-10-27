@@ -27,7 +27,7 @@ jobs:
           sparse-checkout: |
             lean
           sparse-checkout-cone-mode: true
-      - name: Exact original candidate and three roots preflight
+      - name: Exact original candidate and two theorem roots preflight
         shell: bash
         run: |
           set -euo pipefail
@@ -54,7 +54,7 @@ jobs:
           assert not re.search(r'^\s*(?:sorry|native_decide|axiom)\b',s,re.M) and 'sorryAx' not in s
           print('K1D0_SOURCE_TWO_ROOTS_PINNED_PASS')
           PY
-      - name: Restore qualified exact K1A cache
+      - name: Restore qualified exact K1C ancestry cache
         id: parent
         uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
         with:
@@ -122,8 +122,8 @@ jobs:
             and not warnings and 'error:' not in log and 'sorryAx' not in log
             and obj.is_file() and obj.stat().st_size>0)
           print('K1D0_COMPILER_EXIT',os.environ['COMPILER_EXIT'],'REPORTS',reports,'WARNINGS',warnings)
-          if not good: raise SystemExit('K1D0_THREE_ORIGINAL_SOURCE_ROOTS_STRICT_RED')
-          print('K1D0_ORIGINAL_CLIFFORD_POLAR_CONTRACTION_TWO_ROOTS_STRICT_PASS')
+          if not good: raise SystemExit('K1D0_TWO_ORIGINAL_SOURCE_ROOTS_STRICT_RED')
+          print('K1D0_ORIGINAL_CLIFFORD_EXTERIOR_TRANSPORT_TWO_ROOTS_STRICT_PASS')
           PY
       - name: Save qualified original K1D0 compiled binary
         uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
@@ -131,7 +131,7 @@ jobs:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-k1c-original-polar-contraction-c3a96cb1abd32e3cfaa82ed515224bb958e2c4eb-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-k1d0-original-clifford-exterior-transport-c3a96cb1abd32e3cfaa82ed515224bb958e2c4eb-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
       - name: Preserve precise failure and success evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
