@@ -73,3 +73,34 @@ Canonical main, frozen `etblink/math`, draft PR #25 and spectral-eigenstate stat
 [Run 40459248663](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40459248663), head `71a0e23562f65488f5ea016b53aa20e8d7117c91`, job `122039769831`, completed red. Original source/Mathlib pins, accepted S4B3–S4B33 ancestry and all 27 concrete Pauli/Fock/paired source-parent modules freshly qualified again. **The first candidate error is** `SU2BFSSPhysicalDomainS4B34ConcretePauliPairedManuscriptBProbe.lean:50:8: error: (kernel) deterministic timeout` inside `manuscriptCoordinateBComplex_eq_pauliNormalizedBComplex`; subsequent `unknown constant` at line 62 is dependent. The axiom report included the unqualified theorem root itself, not a passing proof. Accepted S4 root count stays **58**.
 
 The `simp_rw [hf]` under six nested finite sums is a **plausible, not kernel-instrumented proven** source of the reduction blowup; making the original `AlgebraData` record opaque alone did not suffice. Adopt the earlier successful S4B33 explicit finite-sum congruence technique. The next source keeps the generic lemma statement, the public S4B34 theorem statement/proof, true `M.gamma/M.theta` representation and all frozen upstream objects unchanged. It changes only the private lemma's proof: congruence under `(Complex.I / 2) • _`, six explicit `Finset.sum_congr` binders `b β δ c i a`, then a **leaf-only** `rw [hf a b c]`. Source blob `299c3a52dac98e4e6c78884935c14a8744644174` replaces `ad93e6f60d30fc819ec2c6111112fd75e4320560`; workflow and audit are committed **atomically** with source. This gate is a compiler candidate only until qualified fresh compilation and strict axiom checks pass.
+
+## Gate122 run 40461814814 — strict acceptance
+
+**FORMALLY ACCEPTED — ONE NEW GENUINE SOURCE-BOUND PRINCIPAL THEOREM ROOT.**
+
+- Original GitHub Actions run: [40461814814](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40461814814), attempt 1, job `122047943637` (`exact-source-bracket-lean`), `completed/success`, run started **2026-10-27T06:33:29Z**, finished **06:52:19Z**; measured run wall-clock **18m 50s**.
+- Exact qualified proof commit: [`4d0738f4c00cad9e0e5e314df3680ff1647080a7`](https://github.com/etblink/Foundational-Convergence-Program/commit/4d0738f4c00cad9e0e5e314df3680ff1647080a7). Candidate source path `experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B34ConcretePauliPairedManuscriptBProbe.lean`; exact blob SHA `299c3a52dac98e4e6c78884935c14a8744644174`; Gate122 workflow blob `e9f68b717037d2b8dc712c44e0736919bf0892f0`. Original upstream BFSS `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`; Lean 4.34.1; Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`. The workflow checked its exact two source blob pins.
+- Original log reports `GATE122_ORIGINAL_SOURCE_AND_PROOF_IMMUTABILITY_PASS`; original upstream OAI source, source-hashed historical G4K9C cache provenance, S4B3–S4B33 fresh original-source parent chain, three concrete upstream dependencies, and **all 27 concrete original Pauli/gamma/Fock/paired-AlgebraData source parents** compiled and checked. Do not count restored or requalified parents again.
+- Original Lean terminal report (not inferred from a green badge): `GATE122_CANDIDATE_SOURCE_WARNINGS []`; `GATE122_COMPILER_EXIT 0 AXIOM_REPORTS [('FCP.BFSSSU2PhysicalDomainS4B34.concretePauliPairedRealFockField_eq_B', {'propext', 'Quot.sound', 'Classical.choice'})]`; `GATE122_CONCRETE_PAULI_PAIRED_MANUSCRIPT_B_ONE_ROOT_STRICT_PASS`. Native candidate `.olean` and strict expected root were checked by the workflow. **No `sorryAx`, unexpected root, or additional axiom was accepted.**
+- Preserved logs artifact: [GitHub Actions artifact 12715184123](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40461814814/artifacts/12715184123), name `bfss-form-concrete-pauli-paired-manuscript-b-gate122-40461814814`.
+
+### Exact accepted mathematical scope
+
+For every actual BFSS bosonic coordinate `x : OAI.BFSSQuantum.Boson 2`, the genuinely source-defined paired spin-Fock `pairedAlgebraData : OAI.BFSSQuantum.AlgebraData 2` satisfies
+
+```lean
+pairedAlgebraData.deformedFermionField 1 0 x =
+  (concretePauliPairedBComplex x).restrictScalars ℝ
+```
+
+Here `concretePauliPairedBComplex` retains the original complex Fock operator, the paired theta and original nine-gamma representation, and the positively oriented `Real.sqrt 2 * epsilon3` structure constant. The previously accepted arbitrary-color original `B(x)` identity S4B33 and the actual paired Pauli color data discharge all relevant premises rather than assuming the concrete physical conclusion. The **successful proof maneuver**, compared to the earlier kernel-timeout candidate, is a small *opaque generic* coefficient lemma with a `congrArg` under the scalar and six explicit `Finset.sum_congr rfl` steps, ending with the **leaf** `rw [hf a b c]`. This preserves the public theorem statement and avoids a wide `simp_rw` under the genuine Fock carrier.
+
+**Accounting:** previously accepted S4 roots 58; Gate122 strictly adds **+1**, bringing **S4 to 59**. Gate122 preceding reds (procedural original-stage timeout, candidate reduction overflow, and stale source-pin preflight) stay classified as negative knowledge; they are not repealed or counted as partial proofs.
+
+**Explicit limits:** No full equality of the closed physical BFSS Hamiltonian, physical-space domain/graph conjugacy, spectral coercivity, compact resolvent, or even a single positive normalizable physical eigenpair follows from this source-component theorem. It does not prove the program's infinite-eigenstate existence target.
+
+### Runtime and follow-on procedure
+
+The successful run was **18m 50s**. The log shows first stage restored the G4K9C ancestry and freshly compiled original sources through S4B33 (finished ~06:45:14Z); the second stage freshly compiled the three upstream inputs and 27 concrete source parents (last ~06:52:05Z), and candidate passed ~06:52:14Z. This gives direct evidence that a *large fraction of routine future gate time* can potentially be eliminated by an independently accepted, source-hashed `.olean` checkpoint for unchanged parent ancestry.
+
+**Do not turn this ACCEPTED red/green workflow into a historical rewrite.** The next implementation boundary is a **separate, fail-closed parent-checkpoint qualification lane**, validated by original source hashes, exact pins, accepted-root/axiom inventory and fresh Lean import-consumer; subsequent leaf gates compile their newly changed source, not all unchanged parents. Preserve full fresh closure audits for milestone/pin changes. Do not treat the diagnostic output of any red run as a qualified cache.
