@@ -84,3 +84,12 @@ Path `SU2BFSSPhysicalDomainS1V52K1D2BOriginalExteriorWordNonzeroEraseContraction
 [Strict K1D2B Gate1 #40512802963](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40512802963), launched with exact K1D2A qualified cache and one-root axiom checks. **ZERO K1D2B roots accepted until its original terminal compiler and cache proof are verified.**
 
 Still open *after* K1D2B would be identifying F20B's exact `Finset Source48Label` exterior basis words with the chosen sorted original coordinate lists and using `List.erase` uniqueness to isolate coefficients; then prove the scalar common kernel. Do not equate nonzero erasure of a word with scalar classification of an arbitrary multivector.
+
+
+## K1D2B Gate 1 — actual Lean elaboration red, one root rejected
+
+[GitHub Actions #40512802963](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40512802963), job `122218684106`, terminal RED after actual frozen original source, qualified K1D2A cache/ancestry, Lean 4.34.1 and Mathlib restoration passed. Candidate source blob `4729b2fc79048454ca476aabdf3150d2dba29ac0`, one intended theorem.
+
+First real compiler error at line 54: `simpa [heq] using hj` retained the disjunction `j=k ∨ j∈ks` even though `heq:k≠j`; explicit case analysis is needed. Second fatal warning-as-error at line 65: unused `mul_smul_comm` in simplifier arguments. One theorem printed `[propext,sorryAx,Classical.choice,Quot.sound]`, so **zero K1D2B theorem roots accepted**. This does not refute a sign-like nonzero erasure coefficient. The first-causal errors are proposition elaboration and strict lint.
+
+**Gate 2 correction:** source blob `9a0a119273e3215f05105344ac64f0a9c74853ac`, author commit `bcdf637566a2eb168e30c901622a3cdb389c6f13`, replaces only membership `simpa` with `rcases List.mem_cons.mp hj` and discharges its impossible `j=k` branch using `heq`; removes only the unused `mul_smul_comm` argument. No theorem/hypothesis/source change. Workflow source hash and distinct qualified cache key pinned by `8a9c19b015467c48a297463e1759cd332d60e2c7`. Read Gate 2's actual completed strict compiler/axiom/binary result before promoting.
