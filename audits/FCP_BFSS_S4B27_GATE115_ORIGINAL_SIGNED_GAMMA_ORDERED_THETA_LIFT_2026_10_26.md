@@ -1,6 +1,6 @@
 # FCP/BFSS S4B27 — signed original gamma contraction over ordered Fock theta product (Gate115)
 
-**Gate115 #1 and #2 RED; Gate115 #3 pinned-Mathlib exact coercion lemma candidate pending, not yet accepted.** Unique strictly accepted scoped S4 principal roots: **51** through independently verified Gate114 #4 ([run #40431852374](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40431852374); new theorem `FCP.BFSSSU2PhysicalDomainS4B26.originalGammaTheta_operator_product_distribution`; original source blob `1e414c3901fc3309ca29c9b8040f0387beb9f5e6`). Acceptance of S4B27 must not be inferred from a commit, a preflight green, a parent recompile, or this preregistration.
+**Gate115 #1 and #2 RED preserved; Gate115 #3 rigorously ACCEPTED — see final audit below.** Unique strictly accepted scoped S4 principal roots: **51** through independently verified Gate114 #4 ([run #40431852374](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40431852374); new theorem `FCP.BFSSSU2PhysicalDomainS4B26.originalGammaTheta_operator_product_distribution`; original source blob `1e414c3901fc3309ca29c9b8040f0387beb9f5e6`). Acceptance of S4B27 must not be inferred from a commit, a preflight green, a parent recompile, or this preregistration.
 
 ## Actual new theorem
 
@@ -54,3 +54,18 @@ The original Fock CLM proof was not reached: failure is wholly inside the new **
 ## Gate115 #3 — exact pinned coercion theorem recovery candidate
 
 Replace only helper's unsuccessful `congr 1; simp only [map_sum]` with `simp only [Complex.ofReal_sum]`; preserve target theorem, the generic real/complex module lemma, all original source-defined operators and order, exact source SHA protection, and all previously accepted theorem roots. Proof-only new source Git blob `947fb0e81954a1e02f30a82fe72c1de26e90d0b5`; prior #2 blob `b3881e95d6a05ca0acd27ce63e2418119fac3be3` remains in its immutable CI run. Source, both strict workflow SHA guards, and audit are committed atomically. **Pending full strict CI**, so unique accepted scoped S4 roots remain **51**, target 52 only on an independently checked green.
+
+
+## Gate115 #3 — STRICT ACCEPTANCE, exact original Fock theta lift
+
+I independently verified complete [run #40436827113](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40436827113), job `121967388281`, `completed/success`, exact runner source HEAD `4eeb6d928b9e2b8c44bb9569fb9c3a3f3b5946b9` (attempt 1 on this source). The original runner/compiler log confirms source SHA and immutable original mathematics checks `GATE115_ORIGINAL_SOURCE_AND_PROOF_IMMUTABILITY_PASS`, frozen Lean 4.34.1 and Mathlib `GATE115_FROZEN_TOOLCHAIN_AND_MATHLIB_PASS`, qualified G4K9C original cache `GATE115_ACCEPTED_G4K9C_CACHE_PROVENANCE_PASS`, fresh accepted S4B3–S4B26 ancestors (last `GATE115_ACCEPTED_S4B26_PARENT_FRESH_PASS 112592`), new candidate `.olean`, no candidate warnings and exact named theorem whitelist:
+
+```text
+GATE115_CANDIDATE_SOURCE_WARNINGS []
+GATE115_COMPILER_EXIT 0 AXIOM_REPORTS [('FCP.BFSSSU2PhysicalDomainS4B27.originalSourceVariation_signed_orderedTheta_lift', {'propext', 'Classical.choice', 'Quot.sound'})]
+GATE115_ORIGINAL_SIGNED_GAMMA_ORDERED_THETA_LIFT_ONE_ROOT_STRICT_PASS
+```
+
+**Formally accept 1/1 new unique principal S4 root: 51 → 52.** Do **not** recount original BFSS source, generic private helper as a separate principal theorem, or freshly compiled S4B3–S4B26 modules. Source candidate immutable Git blob `947fb0e81954a1e02f30a82fe72c1de26e90d0b5` at accepted commit `4eeb6d928b9e2b8c44bb9569fb9c3a3f3b5946b9`.
+
+**Preserved negative knowledge:** Gate115 #1 failed at source CLM sum `simp` under implicit PiLp type transparency; Gate115 #2 exposed generic coercion `simp only [map_sum]` failure; exact pinned Mathlib `Complex.ofReal_sum` resolved the second. The accepted result holds on the **actual source operator theta product**, not a proxy scalar module. The original source Fock remainder, `(-i)/16` prefactor, full finite-sum color/spin contractions, manuscript `B(x)`, operator domains, and positive-eigenstate existence remain separate subsequent proof obligations.
