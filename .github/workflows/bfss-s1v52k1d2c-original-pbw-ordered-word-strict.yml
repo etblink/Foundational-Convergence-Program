@@ -35,7 +35,7 @@ jobs:
           test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
           test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
           for entry in \
-            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2COriginalExteriorPBWBasisOrderedWordProbe.lean:a4f6717bd5ed72e04ec23595818cde2f64cbd860" \
+            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2COriginalExteriorPBWBasisOrderedWordProbe.lean:4adcc4bd72975c720f6114002e63af0a9c8f5a1d" \
             "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2AOriginalExteriorCoordinateWordContractionProbe.lean:6797e53e43abf6e94c76612f91617169e224e831" \
             "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20BOriginalSource48CliffordPBWBasisFiniteDimensionalProbe.lean:6e4c78fd31f9781267659313a8a0edfedd65e9ad"; do
             f="${entry%%:*}"; expected="${entry#*:}"
@@ -131,7 +131,7 @@ jobs:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-k1d2c-original-pbw-ordered-word-a4f6717bd5ed72e04ec23595818cde2f64cbd860-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-k1d2c-original-pbw-ordered-word-4adcc4bd72975c720f6114002e63af0a9c8f5a1d-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
       - name: Preserve precise failure and success evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
