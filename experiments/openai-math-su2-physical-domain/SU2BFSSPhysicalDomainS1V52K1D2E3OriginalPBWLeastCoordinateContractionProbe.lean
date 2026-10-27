@@ -30,6 +30,12 @@ open FCP.BFSSS1V52K1D2A
 private abbrev E := ExteriorAlgebra ℝ Source48Vector
 private abbrev Q0 : QuadraticForm ℝ Source48Vector := 0
 
+local instance : LinearOrder Source48Label := by
+  classical
+  exact linearOrderOfSTO WellOrderingRel
+local instance : LE Source48Label :=
+  (instDistribLatticeOfLinearOrder (α := Source48Label)).toSemilatticeInf.toLE
+
 /-- Exact genuine finite-subset PBW basis contraction at its LEAST
 original source label is the PBW basis of its erased index,
 with coefficient precisely +1 and no sign convention guess. -/
