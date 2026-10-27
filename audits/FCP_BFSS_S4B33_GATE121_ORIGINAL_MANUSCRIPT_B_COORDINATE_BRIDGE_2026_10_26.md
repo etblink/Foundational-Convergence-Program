@@ -1,6 +1,6 @@
 # BFSS S4B33 — literal October 5 manuscript B(x) coordinate and original real source Fock field bridge
 
-**Status: Gate121 #1 and #2 strict RED preserved; Gate121 #3 comprehensive syntax-only correction candidate, NOT ACCEPTED. Strictly accepted S4 unique principal roots: 57**, after independently verified [Gate120 run #40447095577](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40447095577), job `122000849241`, original source SHA `ba33abbde49fb44aa62b5569d66304688149c0cd` and acceptance audit `ce1e679d419398f946ae30320f3635bbf4f6719b`.
+**Gate121 #1 and #2 strict RED preserved; Gate121 #3 STRICTLY ACCEPTED — see terminal audit below. Historical pre-gate total was 57 roots.**, after independently verified [Gate120 run #40447095577](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40447095577), job `122000849241`, original source SHA `ba33abbde49fb44aa62b5569d66304688149c0cd` and acceptance audit `ce1e679d419398f946ae30320f3635bbf4f6719b`.
 
 ## Independent primary-manuscript source crosswalk
 
@@ -52,3 +52,18 @@ The previous #1 `hSum` parsing problem is fixed and its theorem source proceeds 
 The exact two single-character fixes are: in the `hComplex` LHS change `(M.theta β b * M.theta q.1 q.2))) =` to `(M.theta β b * M.theta q.1 q.2)))) =`; in the downstream `calc` source coefficient write `M.gamma i β q.1) : ℝ) : ℂ) •`, matching the independently accepted Gate120 original complex coefficient cast rather than the unclosed `M.gamma i β q.1 : ℝ) : ℂ) •`. The source `hSum` left unchanged. Static independent parenthesis balances for `hSum`, `hComplex` and `calc` type fragments now equal zero.
 
 New candidate Git blob `8a15adf69545cee0e5d3b676def3e61342305663` replaces failed immutable candidate `f7765c68d666a7037e0c375b19712f164e61e790`; both exact source-tree/worktree SHA preflight references updated in the same atomic commit. All indexed color/gamma/Pauli source statements, manuscript TeX blob `12c5fffb5f90b48856f60fb0e93c18e2490c5f1b`, source operator identities and permitted axioms remain unchanged. **Not accepted** until full terminal strict Lean exit 0, warning list `[]`, one expected named root axiom set subset `propext, Classical.choice, Quot.sound`, no `sorryAx`. S4 **57**.
+
+
+## Gate121 #3 — STRICT acceptance of basis-covariant source/manuscript B operator bridge
+
+Independently verified original [GitHub Actions run #40451491131](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40451491131), job `122015002515`, exact immutable candidate HEAD `041a101c14424bf783e1b597c472f928b45051ae`, terminal `completed/success`. The frozen original BFSS source `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, manuscript TeX blob `12c5fffb5f90b48856f60fb0e93c18e2490c5f1b`, pinned Lean 4.34.1/Mathlib, qualified G4K9C cache, and full fresh accepted S4B3–S4B32 ancestry qualified; immediate parent `GATE121_ACCEPTED_S4B32_PARENT_FRESH_PASS 74360`. The new S4B33 theorem and actual original Fock `.olean` compile without errors or warnings. Terminal original runner output:
+
+```text
+GATE121_CANDIDATE_SOURCE_WARNINGS []
+GATE121_COMPILER_EXIT 0 AXIOM_REPORTS [('FCP.BFSSSU2PhysicalDomainS4B33.originalRealFockField_eq_manuscript_coordinate_B', {'propext', 'Quot.sound', 'Classical.choice'})]
+GATE121_ORIGINAL_MANUSCRIPT_B_COORDINATE_BRIDGE_ONE_ROOT_STRICT_PASS
+```
+
+**Formally accept exactly one unique scoped S4 principal theorem root: 57 → 58.** Exact accepted S4B33 original candidate source blob `8a15adf69545cee0e5d3b676def3e61342305663`. Private generic product-index and coefficient-sum helper and all recompiled parent modules do not count as new principal roots. The complete source real-linear original `M.deformedFermionField 1 0 x` is proved equal to `(manuscriptCoordinateBComplex M x).restrictScalars ℝ` for arbitrary genuine original `M : AlgebraData N`, `x : Boson N`. The independently transcribed `manuscriptCoordinateBComplex` has all six source indices, true original `M.structureConstant a b c` and original `M.gamma`, `M.theta`, exact manuscript `+i/2`, no Majorana reordering. The two strict failed gates and their distinct malformed-parentheses diagnostics are retained above with immutable Git hashes; no new axioms, `sorryAx` or source modifications.
+
+**Scope limitation:** this is the *basis-covariant* match to the October 5 manuscript's fermionic multiplication term. The original `AlgebraData N` is an assumed abstract but original-compatible source carrier and does not itself select the paper's concrete SU(2) Pauli handedness or construct/identify an irreducible concrete 48-Majorana implementation. Original real core operator domain/source closed quadratic form/physical gauge action, full B(x) form integration and positive normalizable eigenstate existence remain distinct verification targets. No claim of manuscript proof, mass gap, or eigenstates follows from this strict success.
