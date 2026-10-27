@@ -32,8 +32,9 @@ theorem originalSourceExteriorPBWBasis_empty_eq_one :
     (Pi.basisFun ℝ Source48Label).ExteriorAlgebra
       (∅ : Finset Source48Label) = (1 : E) := by
   classical
-  simp [ExteriorAlgebra.basis_apply, ExteriorAlgebra.ιMulti_family,
-    ExteriorAlgebra.ιMulti_zero_apply]
+  simp only [ExteriorAlgebra.basis_apply, Finset.card_empty,
+    ExteriorAlgebra.ιMulti_family]
+  exact ExteriorAlgebra.ιMulti_zero_apply ℝ _
 
 /-- Erasure is injective on finite subsets which contain the
 same literal source coordinate j. No global enumeration is needed. -/
