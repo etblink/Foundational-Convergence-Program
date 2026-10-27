@@ -38,18 +38,26 @@ theorem originalSourceClifford_gradedCommutator_eq_polarContraction
       CliffordAlgebra.contractLeft (Q.polarBilin v) x := by
   induction x using CliffordAlgebra.left_induction with
   | algebraMap r =>
-      rw [map_algebraMap, CliffordAlgebra.contractLeft_algebraMap]
-      rw [Algebra.commutes]
+      have hr :
+          CliffordAlgebra.involute (algebraMap ℝ C r) =
+            algebraMap ℝ C r :=
+        (CliffordAlgebra.involute : C →ₐ[ℝ] C).commutes r
+      rw [hr, CliffordAlgebra.contractLeft_algebraMap]
+      rw [Algebra.commutes r (CliffordAlgebra.ι Q v)]
       exact sub_self _
   | add x y hx hy =>
-      simp only [mul_add, map_add, add_mul, sub_add_sub_comm]
-      rw [hx, hy]
+      simp only [mul_add, map_add, add_mul]
+      rw [← hx, ← hy]
+      abel
   | ι_mul u x hx =>
       rw [map_mul, CliffordAlgebra.involute_ι,
         CliffordAlgebra.contractLeft_ι_mul]
-      rw [CliffordAlgebra.ι_mul_ι_comm]
-      simp only [neg_mul, sub_mul, mul_sub]
-      simp only [hx, ← Algebra.smul_def]
+      rw [← mul_assoc (CliffordAlgebra.ι Q v)
+        (CliffordAlgebra.ι Q x) u,
+        CliffordAlgebra.ι_mul_ι_comm v x]
+      rw [← hx]
+      simp only [neg_mul, sub_mul, mul_sub, Algebra.smul_def,
+        QuadraticMap.polarBilin_apply_apply]
       noncomm_ring
 
 /-- For an original EVEN Clifford element, the commutator with every
@@ -59,8 +67,8 @@ theorem originalSourceClifford_evenCommutator_eq_polarContraction
     (hx : x ∈ CliffordAlgebra.even Q) :
     CliffordAlgebra.ι Q v * x - x * CliffordAlgebra.ι Q v =
       CliffordAlgebra.contractLeft (Q.polarBilin v) x := by
-  rw [← CliffordAlgebra.involute_eq_of_mem_even hx]
-  exact originalSourceClifford_gradedCommutator_eq_polarContraction v x
+  simpa only [CliffordAlgebra.involute_eq_of_mem_even hx]
+    using originalSourceClifford_gradedCommutator_eq_polarContraction v x
 
 /-- An original Spin48 group element in K1A's REAL vector-action
 kernel is annihilated by ALL native polar contractions. -/
