@@ -286,3 +286,21 @@ Procedural directive for successors: *start by querying the existing module depe
 This infrastructure cycle contributes **zero new Lean theorem roots**. At the creation of this entry the first static workflow run may still be executing; check its actual terminal result before calling the graph-automation gate qualified. The mathematical next task remains source-exact KERNEL-PBW-1 and the independent spectral falsification track.
 
 **Superseding graph-check acceptance:** [GitHub Actions #40489118724](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40489118724) completed **success** on source commit `329e8f86a0962b67b6118a5054a8d4fa57a8be05`, job `122138292530`. Actual log: **842** local Lean files indexed including recovery; **7** manually reviewed source blob acceptance pins verified; F21A prerequisite graph generated; explicit `NO_LEAN_ROOTS` sentinel. Source-graph **infrastructure qualified**, mathematical proof count unchanged.
+
+
+## Successor checkpoint — K1A strict kernel commutant accepted (October 27, 2026)
+
+Project Lead applied the [source-generated Lean dependency map](../meta/BFSS_LEAN_DEPENDENCY_GRAPH.md) to isolate K1A and K1B without redundant ancestor rebuilding. Four K1A strict gates were executed:
+
+- [#40490331847](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40490331847): red, a validator falsely flagged a comment word as an axiom.
+- [#40490522781](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40490522781): red, F21A cache restored but lacked the separately accepted S1S rotor binary. The joint candidate was split into independent K1A and staged K1B. Superseded combined file was deleted.
+- [#40490974369](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40490974369): red, first true Lean proof, exposed two precise private-Q and coerced Clifford-star rewrite mismatches, with sorryAx rejected.
+- [#40491802270](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40491802270): **strict PASS**, job 122147301377, source blob 5d1117d1f469a3a76a78c3c4ae4b8896b18b1b7a; accepted exactly **ONE** root:
+  FCP.BFSSS1V52K1A.originalSourceSpin48_trivialAction_iff_generator_commutes.
+  Fresh compiled binary, original F21A parent cache, Lean 4.34.1/Mathlib d13f23b, propext/Classical.choice/Quot.sound only, binary saved.
+
+[Complete first-causal audit and cache key](../audits/FCP_BFSS_K1A_SOURCE_SPIN48_KERNEL_COMMUTANT_GATE_CYCLE_2026_10_27.md).
+
+**Mathematics:** the kernel of the original Spin48 vector action is now rigorously identified with the subset of original Spin48 Clifford elements commuting with ALL original degree-one generators. This does **not** yet identify that commutant as the two central signs. K1B negative sign remains staged/unqualified until source-qualified S1S binary import is recovered. The indispensable next proof is **KERNEL-PBW-1**, the exact even PBW commutant-scalar coefficient theorem using F20B's real-linear basis and explicit ordered multiplication/contract correction. Then prove the two-sign kernel, original SO image, covering, source Spin9 lift and closed physical-domain invariance separately; the independent spectral falsification lane is not discharged.
+
+The partial evidence registry was increased from 7 to **8** source-hash-pinned accepted entries; the full source import tree scanner still indexes 842 Lean files. Neither graph CI nor earlier K1A red gates adds theorem roots. S4 remains its distinct 63-root family and F21A its distinct two roots; add K1A **+1** in its own branch of accepted results. Canonical main and frozen original etblink/math unchanged.
