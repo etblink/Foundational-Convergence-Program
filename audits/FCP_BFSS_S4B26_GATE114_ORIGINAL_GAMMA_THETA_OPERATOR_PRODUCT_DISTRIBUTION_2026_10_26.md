@@ -75,3 +75,20 @@ SU2BFSSPhysicalDomainS4B26OriginalGammaThetaOperatorProductDistributionProbe.lea
 ```
 
 The literal `rw [mul_comm]` searches/reconstructs a semireducible continuous-linear-map motive and fails. This is an elaboration/transparency error, **not** a counterexample. Rather than changing the carrier, theorem, imported source, or transparency flags, explicitly prove the scalar equality and transport it using `congrArg (fun z : ℂ => z • ((M.theta β A * M.theta q.1 q.2) : Fermion N →L[ℂ] Fermion N))` with an exact scalar `mul_comm` witness. Avoid the failing `rw` tactic entirely. No root is accepted, S4 still **50**.
+
+
+## Gate114 #4 — typed congrArg repair, atomic proof/SHA commit
+
+[Commit e382713b](https://github.com/etblink/Foundational-Convergence-Program/commit/e382713b924f85dcb4832a0c10976008f0a29406) was applied as a **single atomic Git tree/ref update** containing (1) proof-only modification to the S4B26 source and (2) both exact workflow Git blob/worktree SHA guards, avoiding the intervening source-SHA mismatch of Gate114 #2. Exact repaired candidate blob `1e414c3901fc3309ca29c9b8040f0387beb9f5e6`; workflow blob `b1cbcb04861346a1b62f47222e0e5fa7f9ff8f7c`. Accepted parents and immutable original source untouched.
+
+Instead of the failed general `rw [mul_comm]` under a semireducible continuous-linear-map carrier, the new proof transports **only the scalar commutativity equality** through the **explicitly annotated genuine source operator**:
+
+```lean
+  exact congrArg
+    (fun z : ℂ =>
+      z • ((M.theta β A * M.theta q.1 q.2) :
+        Fermion N →L[ℂ] Fermion N))
+    (mul_comm _ _)
+```
+
+This preserves the unchanged proposed theorem and original theta order. [Gate114 run #40431852374](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40431852374) launched for this atomic commit. **Pending at the audit update; no theorem acceptance.** The only valid acceptance is full completed source/provenance/preflight/Lean/axiom success for exact S4B26 root; scoped S4 still **50**.
