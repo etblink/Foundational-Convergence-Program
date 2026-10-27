@@ -41,3 +41,17 @@ For positive nondegenerate `Q`, the polar functionals span the dual of the actua
 ## Immutable provenance and negative results
 
 Frozen `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean **4.34.1**, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`. The strict gate must restore exact accepted K1A binary, verify source blobs, compile a genuine candidate `.olean`, audit three exact root names and axiom whitelist, and preserve all red logs and saved cache provenance. On a compiler red, diagnose the first exact type/rewrite error rather than weaken statements or hide failed proofs.
+
+## Gate 1 — CI #40493780580, strict rejection at Lean elaboration
+
+[Run #40493780580](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40493780580), job `122153960826`, **red**. The exact original source, Mathlib revision, candidate blob, accepted K1A binary cache and required source `.olean` files all passed; toolchain restoration and fresh Lean compilation were reached. Errors in original candidate blob `f7b5e3f0a1f432a9fa6c02178a59b394eb1c5580`:
+
+- Line 41: `map_algebraMap` is not an available unqualified rewrite name at this pinned environment; use a typed `(CliffordAlgebra.involute : C →ₐ[ℝ] C).commutes r` algebra-map equation instead.
+- Line 46: `rw [hx, hy]` failed because `mul_add` unfolded the expression into an unreassociated sum; explicitly replace RHS by IHs then use additive abelian normalization.
+- Line 50: the input constructor has `ι(v) * (ι(x) * u)`; first reassociate to `(ι(v)*ι(x))*u` before applying `CliffordAlgebra.ι_mul_ι_comm`. Use the original polar functional and do not add a factor of two.
+- Line 45: the `sub_add_sub_comm` simp argument was unused under warning-as-error and must be removed.
+- Line 63: backward rewriting `involute x=x` transformed additional occurrences of `x` in the goal. Instead simplify the *general theorem* forward using `involute_eq_of_mem_even`.
+
+All three candidate roots printed `sorryAx`; **zero roots accepted**. These are first-causal proof-engineering errors, not a mathematical counterexample to the graded identity. Do not mark Gate 1 green.
+
+**Gate 2 repair:** candidate blob `7334a3616740b902c9e42231efc97ed7566ad8c2`, mathematical theorem names/hypotheses and source unchanged, exact typed algebra-map equation, reassociation, forward parity simplification. Workflow source and cache key both pinned to this new blob. Gate 2 must be independently read for its actual run ID/status; the link is a placeholder until verified, **not evidence of an accepted theorem**.
