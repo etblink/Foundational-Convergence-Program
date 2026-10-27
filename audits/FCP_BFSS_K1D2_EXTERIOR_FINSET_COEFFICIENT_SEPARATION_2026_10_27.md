@@ -218,3 +218,38 @@ First compiler error: after unfolding the *actual* original F20B exterior basis 
 [Actions #40531343645](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40531343645), job `122284669102`, terminal RED on candidate blob `60aa138d7c55bb3375a9c7b1147eb4583c17fcd4`. Fresh Lean reached proof after frozen source and qualified K1D2A ancestry. Exact compiler error at the one `originalSourceExteriorPBWBasis_empty_eq_one` proof's terminal `exact ExteriorAlgebra.ιMulti_zero_apply ℝ _`: the lemma takes `v : Fin 0 → M` as its explicit argument, **NOT `R`**. Positional `ℝ` therefore had type `Type` where a zero-length vector family was expected. This is an arity/implicit-argument proof-engineering red, not a mathematical negative result. The second `originalSourceFinset_erase_injective_at_present_label` declaration printed only permitted axioms and remained not gate-accepted. **No K1D2D roots admitted.**
 
 Gate3 candidate blob `b494be954703d29b9d70ad934546bebf9a55cbcf`, proof commit `61d43ff624691686c6ae2d4b42b18f273ac6f65b`, changes ONLY `exact ExteriorAlgebra.ιMulti_zero_apply ℝ _` to `exact ExteriorAlgebra.ιMulti_zero_apply (R := ℝ) _`; source theorem statements, original F20B source well-order, frozen math and accepted ancestor remain unchanged. Workflow exact candidate pin `7db454821a444b71ad4c6d3f8e5faa2e37b98fa1`. Check terminal original Lean compiler and axiom reports before acceptance.
+
+
+## K1D2D Gate 3 final accepted original source unit/erase pair
+
+[GitHub Actions #40532466604](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40532466604), job `122288688003`, terminal SUCCESS, exact frozen candidate source blob `b494be954703d29b9d70ad934546bebf9a55cbcf`, accepted qualified K1D2A/F20B ancestry, pinned Lean 4.34.1/Mathlib `d13f23b...`, fresh nonempty `.olean`, no warnings/sorryAx, both exact roots allowed only `[propext, Classical.choice, Quot.sound]`:
+```text
+FCP.BFSSS1V52K1D2D.originalSourceExteriorPBWBasis_empty_eq_one
+FCP.BFSSS1V52K1D2D.originalSourceFinset_erase_injective_at_present_label
+K1D2D_COMPILER_EXIT 0
+K1D2D_ORIGINAL_EMPTY_UNIT_ERASE_INJECTIVITY_TWO_ROOTS_STRICT_PASS
+Cache saved with key:
+bfss-k1d2d-original-empty-unit-erase-injective-b494be954703d29b9d70ad934546bebf9a55cbcf-v1-adc7f124-lean4341-d13f23b-Linux-X64
+```
+**Exactly +2 genuine roots accepted**, strictly different from Gate1's unsolved zero-fold product and Gate2's incorrect explicit `R` argument; those original reds remain permanent evidence. Mathematically this proves scalar unit equals the genuine F20B-style exterior basis `B∅`, and `I.erase j=J.erase j` for j in both original finite indices forces `I=J`. Neither alone establishes arbitrary exterior scalar common kernel. The curated evidence registry now has **15** qualified modules after this acceptance.
+
+## K1D2E1 original PBW basis absent-coordinate contraction accepted
+
+[GitHub Actions #40534646714](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40534646714), source blob `52b5ce32275839dc2bde947e29ad2e03ed108bb2`, strict original frozen source Lean/Mathlib, restored independently qualified K1D2C and K1D2D binary caches, fresh nonempty `.olean`, zero warnings/sorryAx, two permitted-axiom roots:
+```text
+FCP.BFSSS1V52K1D2E1.originalSourcePBWOrderedLabels_mem_finset
+FCP.BFSSS1V52K1D2E1.originalSourceExteriorPBWBasis_coordinateContraction_zero_of_not_mem
+K1D2E1_COMPILER_EXIT 0
+K1D2E1_ORIGINAL_PBW_ABSENT_COORDINATE_TWO_ROOTS_STRICT_PASS
+Cache saved with key:
+bfss-k1d2e1-original-pbw-absent-coordinate-52b5ce32275839dc2bde947e29ad2e03ed108bb2-v1-adc7f124-lean4341-d13f23b-Linux-X64
+```
+**+2 new genuine original PBW source roots:** all labels actually present in F20B's exact ordered PBW word lie in its original finite index; a coordinate j absent from I annihilates `B I` under the actual exterior contraction. This directly qualifies the zero column of the needed coordinate-contraction matrix, beyond K1D2A's earlier list-word-only result. Total qualified exact source blobs **16** after E1; the graph CI is a separate zero-root infrastructure check.
+
+## K1D2E2 least-coordinate first/erased ordered-list candidate — still unqualified
+
+`SU2BFSSPhysicalDomainS1V52K1D2E2OriginalPBWLeastCoordinateHeadProbe.lean`, source Git blob `246bbaa21191f0c976f479ae5ae2cb578729dea5`, stages two source-exact statements:
+- `originalSourcePBWOrderedLabels_eq_finsetSort`: exact `List.ofFn` enumeration built from the genuine `I.orderEmbOfFin rfl` equals the *canonical sorted list* under the **same original frozen F20B `linearOrderOfSTO WellOrderingRel`**.
+- `originalSourcePBWOrderedLabels_cons_of_least`: if j∈I and j≤all elements of I, the actual ordered word indexed by I is exactly `j :: ordered(I.erase j)`, with no guessed source basis permutation.
+
+[Strict Gate1 #40535506460](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40535506460) restores independently accepted C and D source-hash caches; the two target roots remain **unaccepted pending terminal exact compiler/axiom/binary evidence**. Combined with E1's absent-label result and the accepted K1D2A leading-label derivative, E2 is intended to allow a globally least occupied coordinate argument on any finite PBW expansion without expanding all 2^48 basis terms. Even E2 success is **not** the finished arbitrary-element scalar-line proof.
