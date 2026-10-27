@@ -23,7 +23,7 @@ open FCP.BFSSS1V0
 
 private abbrev E := ExteriorAlgebra ℝ Source48Vector
 private abbrev Q0 : QuadraticForm ℝ Source48Vector := 0
-private abbrev B : Basis (Finset Source48Label) ℝ E :=
+private abbrev B : Module.Basis (Finset Source48Label) ℝ E :=
   FCP.BFSSS1V52K1D2C.originalSourceExteriorPBWBasis
 
 local instance : LinearOrder Source48Label := by
@@ -71,7 +71,7 @@ theorem originalSourcePBWLeastContraction_coefficient
           exact hJI
             (FCP.BFSSS1V52K1D2D.originalSourceFinset_erase_injective_at_present_label
               j J I hjJ hj he)
-        simp [Basis.repr_self_apply, hJI, herase]
+        simp [Module.Basis.repr_self_apply, hJI, herase]
     · have hJI : J ≠ I := by
         intro he
         subst J
