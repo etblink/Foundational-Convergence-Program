@@ -120,3 +120,14 @@ K1D1_S1V38_CACHE_MISSING
 [Actions #40498476000](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40498476000), source/workflow commit `03db6c3e08e5fcb29f3d9e8371cc754e4e9e453d`, keeps the **unchanged K1D1 candidate blob** `81a8b8163bc12b61427fde260fc2778a9cb20097` and the same literal original source theorem statements. It corrects only Gate 1's overconstrained cache provenance condition: explicitly restores the accepted K1D0 cache and attempts the accepted historical S1V38 cache, but permits S1V38's verified nonempty `.olean` to originate in the already qualified K1D0 binary ancestry.
 
 **Actual completed source/ancestry observations:** preflight source blob pins passed; exact K1D0 cache restored; dedicated S1V38 cache reported unavailable; the fail-closed test of the actual S1V38 compiled module **passed** in the accepted K1D0 cache. This qualifies the *input ancestry*, NOT the K1D1 theorem; fresh Lean compilation, two exact roots, permitted axioms, and candidate binary save require separate terminal gate verification. Do not claim K1D1 accepted merely from this.
+
+
+## K1D1 Gate 2 — actual Lean source extensionality red, no roots
+
+[GitHub Actions #40498476000](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40498476000), job `122169858348`, terminal RED after exact K1D0/S1V38 compiled ancestry, original-source pins and pinned toolchain/Mathlib passed. Genuine Lean candidate compile reached source blob `81a8b8163bc12b61427fde260fc2778a9cb20097`. The source `ext v` tactic over-applied extensionality recursively to an equality of linear maps, making the introduced `v` a `Source48Label` rather than the intended `Source48Vector`. The failure at line 37 was exactly:
+```text
+Application type mismatch: v has type Source48Label but is expected Source48Vector
+```
+Both candidate theorems had `sorryAx` in rejected axiom reports. **No K1D1 accepted roots.** This is a controlled Lean proof-engineering defect; it is not evidence against the original polar identity.
+
+**Gate 3 correction:** source `ext v` is replaced by the explicitly bounded `apply LinearMap.ext; intro v`; source blob `8bfca13f5ba81e77773c391de6114273023f0bb1`. Statements, original Q/source labels, pinned imports, and proof after the first typed extensionality step are unchanged. Workflow exact candidate pin and save key updated at `9a26d77d768c694e622669c04c848a135f018df5`; Gate 3 must be checked for the actual run ID/terminal result before any acceptance (link is provisional until confirmed).
