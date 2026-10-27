@@ -75,3 +75,30 @@ I independently evaluated the candidate graded-commutator identity on every orde
 `n=1: 2; n=2: 8; n=4: 64; n=6: 384; n=8: 2048` exact basis cases.
 
 This checks signs and absence of an erroneous factor of two in a finite surrogate family, **not** the original 48-dimensional source identification, Lean declaration, CI qualification, or scalar-commutant theorem. No accepted roots from this check.
+
+## Gate 2 — FORMAL ACCEPTANCE of three source-exact theorem roots
+
+**[GitHub Actions #40494768705](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40494768705), job `122157309697`, completed SUCCESS.** Exact candidate Git blob `7334a3616740b902c9e42231efc97ed7566ad8c2`. Research-run source checkout, frozen original `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Lean 4.34.1, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`, **qualified K1A parent cache**, required original source compiled objects, fresh compilation, nonempty new `.olean`, and three printed axiom reports all passed.
+
+The accepted exact source declarations are:
+
+```lean
+FCP.BFSSS1V52K1C.originalSourceClifford_gradedCommutator_eq_polarContraction
+FCP.BFSSS1V52K1C.originalSourceClifford_evenCommutator_eq_polarContraction
+FCP.BFSSS1V52K1C.originalSourceSpin48_trivialAction_polarContractions_zero
+```
+
+Every one depends on **only** `propext`, `Classical.choice`, `Quot.sound`; no `sorryAx`, warnings, or Lean errors. Original job log:
+
+```text
+K1C_COMPILER_EXIT 0
+K1C_ORIGINAL_CLIFFORD_POLAR_CONTRACTION_THREE_ROOTS_STRICT_PASS
+Cache saved with key:
+bfss-k1c-original-polar-contraction-7334a3616740b902c9e42231efc97ed7566ad8c2-v1-adc7f124-lean4341-d13f23b-Linux-X64
+```
+
+**Accepted scientific result:** For the actual original source 48-real Clifford algebra, its graded commutator with any original generator is the exact native polar contraction; even elements specialize to the ordinary commutator; a Spin element with trivial original 48-vector action is annihilated by all actual source polar contractions. This is a source-qualified **structural reduction** and adds **+3 real Lean theorem roots**. It supersedes the earlier 'in-progress' status while keeping Gate 1 rejected and preserving its concrete compiler failures.
+
+**Still open and unproved:** all-contractions-zero ⇒ element lies in scalar line (K1D); original coordinate/polar-dual spanning and exterior coefficient extraction; actual original Spin negative scalar K1B; full kernel `{±1}`; Spin→SO surjectivity/covering; global Spin(9) lift, closed physical q-form invariance, high-sector coercivity, and positive normalizable eigenstate theorem. No K1D or physical root may be counted from K1C.
+
+The historical accepted F21A family remains +2, S4's separate family remains 63, and K1A remains +1. This operation adds **K1C +3** only; do not double count imported roots.
