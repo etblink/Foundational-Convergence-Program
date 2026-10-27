@@ -34,7 +34,7 @@ theorem originalSourceExteriorPBWBasis_empty_eq_one :
   classical
   simp only [ExteriorAlgebra.basis_apply, Finset.card_empty,
     ExteriorAlgebra.ιMulti_family]
-  exact ExteriorAlgebra.ιMulti_zero_apply ℝ _
+  exact ExteriorAlgebra.ιMulti_zero_apply (R := ℝ) _
 
 /-- Erasure is injective on finite subsets which contain the
 same literal source coordinate j. No global enumeration is needed. -/
