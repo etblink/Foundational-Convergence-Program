@@ -293,3 +293,30 @@ No compiler warnings, no `sorryAx`, nonempty native compiled object and the exac
 `bfss-k1d2e4-original-pbw-finite-minimum-96adf2cf80e5dd81c71220e0cb811cf9b8494cf3-v1-adc7f124-lean4341-d13f23b-Linux-X64`.
 
 **Precisely +2 new accepted original PBW source roots**, following the predecessor [40538317916](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40538317916) red for a misplaced `Finset.min'_le` argument. The original source well-order and theorem signatures were unchanged; no infrastructure-only green is counted. K1D2A–E2 had **12** accepted roots, so K1D2A–E4 now has **14** with E3 still unqualified at this audit checkpoint. Do not silently count E3. The scalar-common-kernel theorem remains unproved.
+
+## K1D2E3 successor Gate 2 — original least coordinate contraction STRICT ACCEPTED, +1
+
+[GitHub Actions #40542776547](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40542776547), job `122325276525`, completed **success**. The exact source blob `05e8a4703fcfedb3fbb0d27b9b0c84e655ee130c` passed the full pinned Lean compiler and parent-cache gate. Strict log:
+
+```
+'FCP.BFSSS1V52K1D2E3.originalSourceExteriorPBWBasis_contraction_erase_of_least'
+depends on axioms: [propext, Classical.choice, Quot.sound]
+K1D2E3_COMPILER_EXIT 0
+K1D2E3_ORIGINAL_PBW_LEAST_CONTRACTION_ONE_ROOT_STRICT_PASS
+```
+
+No errors or warnings and a genuine compiled `.olean` and accepted source-hash-qualified cache save:
+`bfss-k1d2e3-original-pbw-least-contraction-05e8a4703fcfedb3fbb0d27b9b0c84e655ee130c-v1-adc7f124-lean4341-d13f23b-Linux-X64`.
+
+This accepts **+1** genuine original F20B PBW source theorem after the prior red for nonexistent `Finset.not_mem_erase`. Combined with K1D2E4's +2 qualified roots, the cumulative K1D2A–E4 subtotal is **15**, with neither the coefficient isolation nor scalar-common-kernel theorem accepted as of the new F1 initial staging.
+
+## K1D2F1 — new original basis coefficient-isolation strict probe (PENDING)
+
+The active research branch stages a single substantive candidate root, `FCP.BFSSS1V52K1D2F1.originalSourcePBWLeastContraction_coefficient`, in
+`experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2F1OriginalPBWLeastContractionCoefficientProbe.lean`, exact source blob `d7a4062b0076c3eae1bd9fd58644183a29486a66`.
+
+Candidate statement: for any genuine original exterior element `x`, any original F20B coordinate `j` bounded above by **all** occupied-label coordinates of all actual `B.repr x` supported finite-subset indices, and any supported `I` containing `j`, the coefficient of the original contraction at the erased basis index `I.erase j` is exactly `B.repr x I`. Proof decomposes via exact `Basis.linearCombination_repr`, finite `Finsupp.sum`, genuine E1/E3 basis derivatives, and D's injectivity of erasure; no invented multiplication law for `equivExterior`, surrogate ordering, or full `2^48` enumeration.
+
+Two workflow revisions exist because the first workflow commit [`2f76bc31`](https://github.com/etblink/Foundational-Convergence-Program/commit/2f76bc31c792a4612195ef2616c8273b5f5cee33) retained the inherited **compiler root audit list** from E3. This is an **infrastructure root-list mismatch**, not a mathematical failure, and was immediately repaired in [`cb472898`](https://github.com/etblink/Foundational-Convergence-Program/commit/cb472898fae290c94568c7b708bc57f93c682673), without changing the F1 candidate theorem. Use **[strict run 40546529211](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40546529211)** as the corrected F1 gate. The superseded [40546481592](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40546481592) must not be cited as theorem acceptance. Preserve both outcomes.
+
+Actual F1 Lean proof acceptance remains **PENDING**; +0 F1 roots accepted until a clean terminal strict compiler/axiom/cache pass. Next step conditional on F1: use E4's least occupied coordinate to show every supported nonempty PBW coefficient must vanish if every original coordinate contraction vanishes; then identify the remaining empty-index coefficient using D's exact `B ∅ = 1`. Spin(48) two-sign kernel and physical BFSS claims remain separate.
