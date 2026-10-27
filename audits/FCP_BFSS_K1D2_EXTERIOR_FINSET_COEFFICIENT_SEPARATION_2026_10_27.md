@@ -60,3 +60,27 @@ K1D2A_COMPILER_EXIT 1
 ```
 
 Because source compiled non-cleanly, **all three candidate roots remain UNACCEPTED**; no binary was saved. Not a mathematical counterexample. The smallest safe correction removes only those two unneeded simp arguments. Source after exact two-line correction: Git blob `6797e53e43abf6e94c76612f91617169e224e831`, author commit `4ef1196d7e48cefcd46ed1fa1e0c9cdd9f0fb744`. Workflow source pin and cache key corrected at commit `d63cfb477b61c1df3b0b81a4d558041382e0421f`; corrects a stale TWO_ROOTS diagnostic to THREE_ROOTS, without touching mathematical theorem statements. [Gate2 Actions #40511851424](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40511851424) launched; check exact original terminal compiler/axiom outcome before accepting three source proofs.
+
+
+## K1D2A Gate 2 — strict acceptance of three original-word contraction roots
+
+[GitHub Actions #40511851424](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40511851424), job `122215542975`, **completed SUCCESS at job level** on candidate blob `6797e53e43abf6e94c76612f91617169e224e831`. The original mathematical source and frozen pinned environment remained unchanged from Gate1. Exact accepted K1D1 binary and F20B ancestors restored, fresh Lean 4.34.1 compiled a nonempty `.olean`, source warning-as-error clean, exactly three `#print axioms` roots with only `propext`, `Classical.choice`, `Quot.sound`, no `sorryAx`. Exact original CI compiler log:
+```text
+FCP.BFSSS1V52K1D2A.originalExteriorCoordinateWord_cons
+FCP.BFSSS1V52K1D2A.originalExteriorCoordinateWord_contraction_zero_of_not_mem
+FCP.BFSSS1V52K1D2A.originalExteriorCoordinateWord_leading_contraction
+K1D2A_COMPILER_EXIT 0
+K1D2A_ORIGINAL_EXTERIOR_WORD_CONTRACTION_THREE_ROOTS_STRICT_PASS
+Cache saved with key:
+bfss-k1d2a-original-exterior-word-contraction-6797e53e43abf6e94c76612f91617169e224e831-v1-adc7f124-lean4341-d13f23b-Linux-X64
+```
+
+**+3 new genuine source-exact theorem roots**. The Gate1 lint red is preserved. These are ordered-list word identities, not full finite exterior `Finset` basis scalar separation. This file is added to the partial reviewed acceptance registry as its **12th** source-hash-pinned receipt, not three new files.
+
+## K1D2B next source-typed finite erasure proposal (still unaccepted)
+
+Path `SU2BFSSPhysicalDomainS1V52K1D2BOriginalExteriorWordNonzeroEraseContractionProbe.lean`, source Git blob `4729b2fc79048454ca476aabdf3150d2dba29ac0`. Proposes a **single** structurally stronger theorem `originalExteriorCoordinateWord_contract_present_nonzero_erase`: for a `List Source48Label` of distinct original labels and `j∈xs`, the literal coordinate contraction is `c • word(xs.erase j)` for some **nonzero** `c:ℝ`. Induction on the actual list uses K1D2A's leading-contraction and absent-contraction lemmas; when `j` is not at head, derivative recursively incurs a negative scalar. No guessed order, surrogate source or enumeration.
+
+[Strict K1D2B Gate1 #40512802963](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40512802963), launched with exact K1D2A qualified cache and one-root axiom checks. **ZERO K1D2B roots accepted until its original terminal compiler and cache proof are verified.**
+
+Still open *after* K1D2B would be identifying F20B's exact `Finset Source48Label` exterior basis words with the chosen sorted original coordinate lists and using `List.erase` uniqueness to isolate coefficients; then prove the scalar common kernel. Do not equate nonzero erasure of a word with scalar classification of an arbitrary multivector.
