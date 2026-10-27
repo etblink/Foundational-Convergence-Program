@@ -123,3 +123,24 @@ Source-import ancestry: K1A → F21A → S1V31 and its S1V30 ancestors, with F20
 ### Latest generated graph qualification after K1A/K1B source split
 
 [GitHub Actions #40492708297](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40492708297), job 122150366622, completed success on October 27, 2026. Actual run log: **844** BFSS Lean files indexed (including recovery); **8** reviewed source-blob acceptance receipts verified. The earlier 842-module statistic above is a correct *prior* checkpoint, superseded for current inventory size by 844. This CI adds **zero** Lean theorem roots. The one new K1A mathematical root was separately qualified by [#40491802270](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40491802270).
+
+## K1C strict source polar contraction acceptance — October 27, 2026
+
+**[K1C Actions #40494768705](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40494768705), job 122157309697, completed strict green: 3/3 fresh theorem roots.** Exact accepted source module `SU2BFSSPhysicalDomainS1V52K1COriginalSpin48CliffordPolarContractionProbe.lean`, blob `7334a3616740b902c9e42231efc97ed7566ad8c2`. Pinned K1A accepted parent restored; only `propext`, `Classical.choice`, `Quot.sound` reported, nonempty new binary saved. No physical theorem promoted. Curated source-evidence manifest now has **nine** reviewed pins.
+
+```mermaid
+flowchart LR
+  K1C["K1C: source graded commutator = polar contraction"] --> K1A["K1A: trivial Spin48 action iff Clifford commutation"]
+  K1C --> CON["Pinned Mathlib: CliffordAlgebra.Contraction"]
+  K1A --> F21A["F21A: source Spin48 joint vector-action continuity"]
+  F21A --> S31["S1V31: original Clifford generator action"]
+  F21A --> F20F["F20F: source Clifford Spin48 topological group"]
+  K1D["K1D: all source polar contractions vanish => scalar [OPEN]"] -. mathematical dependency .-> K1C
+  K1D -. exterior basis bridge .-> F20B["F20B: exact source Clifford / exterior real basis"]
+```
+
+The K1D dotted edges represent **mathematical requirements not current Lean imports**; the solid edges are actual direct source import links. Source exact quadratic polarization from S1V38 (`polar Q a b = 2*(a ⬝ᵥ b)`) is a reusable original-source qualification candidate to recover by precise binary ancestry rather than reproving or assuming an unrelated Euclidean identification.
+
+**Next proof gate:** prove via the existing F20B real-linear exterior basis that annihilation by all coordinate contractions kills every positive exterior-degree coefficient. `changeForm_contractLeft` permits linear contraction transport without illicitly treating `equivExterior` as an algebra homomorphism. Then use positive original Q to show the original polar functionals span the required coordinate duals. **No new Spin48 `{±1}` kernel theorem until that separation and K1B negative central sign are strictly qualified.**
+
+[Complete K1C Gate 1 red → Gate 2 green audit](../audits/FCP_BFSS_K1C_ORIGINAL_POLAR_CONTRACTION_REDUCTION_2026_10_27.md).
