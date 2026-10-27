@@ -253,3 +253,10 @@ bfss-k1d2e1-original-pbw-absent-coordinate-52b5ce32275839dc2bde947e29ad2e03ed108
 - `originalSourcePBWOrderedLabels_cons_of_least`: if j∈I and j≤all elements of I, the actual ordered word indexed by I is exactly `j :: ordered(I.erase j)`, with no guessed source basis permutation.
 
 [Strict Gate1 #40535506460](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40535506460) restores independently accepted C and D source-hash caches; the two target roots remain **unaccepted pending terminal exact compiler/axiom/binary evidence**. Combined with E1's absent-label result and the accepted K1D2A leading-label derivative, E2 is intended to allow a globally least occupied coordinate argument on any finite PBW expansion without expanding all 2^48 basis terms. Even E2 success is **not** the finished arbitrary-element scalar-line proof.
+
+
+## K1D2E2 Gate 1 — exact source ordering inconsistency exposed (zero accepted roots)
+
+[Run #40535506460](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40535506460) FAILED fresh Lean after independently qualified C/D ancestry. Source blob `246bbaa21191f0c976f479ae5ae2cb578729dea5`. The source `I.sort` selected the global product-label comparison `Prod.instLE_mathlib` while `I.orderEmbOfFin` used F20B's accepted `linearOrderOfSTO WellOrderingRel`. The compiler explicitly printed both incompatible `LE` instances. Anonymous sort `(· ≤ ·)` also lacked `Std.Total`, and a supposed `Finset.not_mem_erase` constant did not exist. Both roots were rejected with `sorryAx`, no binary saved.
+
+Gate2 retains the original mathematical statements but adds a file-local `LE Source48Label` instance derived from the *same F20B LinearOrder*, uses the named `LE.le` relation rather than a new anonymous comparison, and discharges erase nonmembership by simplification. New source blob `ed3b405c1a1f7b33e44199ad5a635c3926d6b721`, workflow pin commit `98704203fa98ae21404dda8fc0d8a466862d0721`. Require fresh strict compiler/axiom proof; no new roots claimed yet.
