@@ -23,3 +23,27 @@ Next candidate removes only `import SU2BFSSConcretePotentialProbe`; the exact tw
 ### Successful infrastructure finding
 
 The actual checkpoint was separately accepted [run #40464747798](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40464747798) with 58 original artifact binaries, imported source roots and strict kernel consumer. S4B35 was able to restore the cache and verify genuine accepted imports on this first live consumer attempt. Its ~5m setup/restore before candidate failure is an observed performance result; the hoped-for proof-runtime reduction must be assessed only after a fully checked theorem gate. The closed original Hamiltonian/operator-domain/spectral target remains open.
+
+## Gate #2 run 40466480310 — strict acceptance of both S4B35 roots
+
+**VERIFIED GREEN — TWO ORIGINAL-SOURCE ROOTS ACCEPTED, +2 to S4 cumulative 61.** Completed [GitHub Actions run 40466480310](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40466480310), attempt 1, original head `a5fcb556ca73e9264931d5ce63f96c802363efc1`, job `122063005201`, wall-clock **4m 34s** (started 2026-10-27T07:19:59Z, updated 07:24:33Z UTC). Candidate original Git blob **`77a1a79f12a7cfdf68f47b6a2420633c1958731f`**, source path `experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe.lean`. Gate #1 failed on a redundant uncompiled import; Gate #2 removed only that import, leaving proof and theorem bodies unchanged.
+
+The strict log confirms preflight exact two names and source hashes, successfully qualified independent Gate122 cache producer run `40464747798`, original G4K9C cache restoration, strict S4B34 accepted source-cache restoration, and newly compiled original-leaf source with a fresh nonempty `.olean`. Decisive original compiler report:
+
+```
+FCP_BFSS_S4B35_COMPILER_EXIT 0 REPORTS [
+ ('FCP.BFSSSU2PhysicalDomainS4B35.pairedBosonicPotential_eq_wedge',
+  'propext, Classical.choice, Quot.sound'),
+ ('FCP.BFSSSU2PhysicalDomainS4B35.pairedOriginalSmoothCoreEnergy_eq_manuscript',
+  'propext, Classical.choice, Quot.sound')
+] WARNINGS []
+FCP_BFSS_S4B35_PAIRED_SMOOTH_CORE_TWO_ROOTS_STRICT_PASS
+```
+
+**Scope:** (1) Real `pairedAlgebraData.deformedBosonicPotential 1 0 x` equals the positively oriented normalized Pauli sum of squared color minors; (2) for `f : SmoothCore 2`, frozen upstream source `pairedAlgebraData.averaged_core_energy 1 0 f`, accepted B(x) field identity and Pauli potential yield the literal `(1/16)∑α‖deformedCoreCharge α f‖²` expression as kinetic derivative square plus the integral of the true Pauli bosonic potential and the genuine real-restricted paired manuscript B(x) Fock-field expectation. No closed physical Hilbert operator, coercivity at infinity, compact resolvent or positive normalizable eigenstate is established.
+
+**Runtime:** last full Gate122 run 40461814814 18m 50s; first successful S4B35 cached-leaf run **4m 34s**, observed **75.75%** shorter wall-clock and approximately 4.12× throughput for this different proof task. First red cached-leaf run took 5m 16s including setup and missing-module failure. This is not a controlled benchmark of equal theorem workloads; tooling and source/data integrity still matter more than speed.
+
+### Post-acceptance cache-key defect — label corrected without changing theorem
+
+The newly compiled S4B35 leaf was saved successfully in the accepted run but named using the **stale pre-repair candidate** prefix `c9d7c5bea1b5`. This is an infrastructure provenance-label defect, NOT a Lean failure or a defect in the accepted theorem statement/proof, whose actual blob is `77a1a79f12a7cfdf68f47b6a2420633c1958731f`. Do **not** use the old misnamed leaf cache in new research gates. The separate qualified S4B34 ancestry cache is unaffected. This follow-on workflow-only source-binding repair changes the leaf `actions/cache/save` key to `bfss-fcp-s4b35-paired-source-energy-77a1a79f12a7cfdf68f47b6a2420633c1958731f-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}`, and asks the normal strict workflow to rerun unchanged Lean mathematics to save the correctly named artifact. Do not count the same two roots again if it succeeds. The historical run and erroneous cache key remain audit-visible for reproducibility.

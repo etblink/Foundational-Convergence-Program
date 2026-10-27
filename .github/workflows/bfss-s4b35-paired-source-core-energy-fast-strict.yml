@@ -252,7 +252,7 @@ jobs:
         uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
         with:
           path: upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe.olean
-          key: bfss-fcp-s4b35-paired-source-energy-c9d7c5bea1b5-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-fcp-s4b35-paired-source-energy-77a1a79f12a7cfdf68f47b6a2420633c1958731f-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
       - name: Preserve full fast leaf compile evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
