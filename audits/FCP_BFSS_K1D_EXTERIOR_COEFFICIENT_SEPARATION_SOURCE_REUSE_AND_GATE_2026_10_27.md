@@ -147,3 +147,10 @@ hsingle : Pi.single j 1 ⬝ᵥ v = v j
 Neither of the two K1D1 roots was accepted; both rejected with `sorryAx`. **This is a remaining symbolic real arithmetic proof closure, not a source/polar identity counterexample**. Do not weaken the theorem or promote either root.
 
 **Gate 4 correction decision:** change ONLY the final `norm_num` tactic on this source-side identity to `ring`, an exact real polynomial normalizer. Keep source type, both theorem signatures, source Q, polar conventions, qualified binary keys and axiom validator unchanged. Bind workflow preflight and resulting distinct cache key to the new candidate Git blob. The gate must run to terminal status before acceptance.
+
+
+## K1D1 Gate 4 — exact symbolic-ring correction launched
+
+Following the first-causal Gate 3 arithmetic goal `2 * (1 / 2 * v j) = v j`, the source candidate changes only the final tactic `norm_num` to `ring` after `rw [hsingle]`. Source Git blob now `46cd08ee5124dae7160f6fa2135b9b01c73b1030`, authoring commit `03c71a05be6838f15619aaa313e2223c7ebbf0b0`, workflow pin commit `014d937cb97010368061b70a4bbb827b9e6069fc`. The original source, two theorem statements, frozen original math, K1D0 and S1V38 source declarations, and accepted axiom whitelist are unchanged.
+
+[GitHub Actions Gate #40503702666](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40503702666), job `122187529298`, passed source-pinned preflight and compiled ancestry recovery; pinned toolchain/Mathlib restoration followed. **Accept neither K1D1 theorem until this run has completed fresh Lean compilation, exact two `#print axioms` reports without `sorryAx`, and saved its properly source-hash-pinned `.olean` binary.** The last checked status was in progress. This is a bounded tactic repair, not a new hypothesis or claim.
