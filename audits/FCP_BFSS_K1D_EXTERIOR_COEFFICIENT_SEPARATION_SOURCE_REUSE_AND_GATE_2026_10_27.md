@@ -50,3 +50,23 @@ To formalize this, prefer small typed lemmas in order: (1) `d_j` on literal coor
 ## Unproved later steps
 
 K1B negative Spin sign (compiled S1S rotor ancestry remains separate), two-sign actual Spin48 kernel, SO48 surjectivity, global double cover, original Spin9 lift, source gauge commutation, closed physical form invariance, uniform spectral coercivity and positive eigenvectors all remain open. This research note adds **zero** Lean roots independent of its subsequently qualified gates. Preserve original failed gates and cite their source and job IDs; never count green source-graph checks as new theorems.
+
+
+## K1D0 Gate 1 — two genuinely accepted original-source Lean theorem roots
+
+[GitHub Actions #40496553407](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40496553407), job `122163366215`, completed SUCCESS on original source blob `c3a96cb1abd32e3cfaa82ed515224bb958e2c4eb`, with pinned etblink/math `adc7f124...`, Lean 4.34.1, Mathlib `d13f23b...`, restored qualified K1C cache and actual F20B, K1C, K1A ancestor `.olean` files. A fresh native compile generated a nonempty `.olean`, checked two exact root names and disallowed extra axioms/warnings/sorryAx.
+
+```text
+'FCP.BFSSS1V52K1D0.originalSourceClifford_exterior_contractLeft_transport'
+depends on axioms: [propext, Classical.choice, Quot.sound]
+'FCP.BFSSS1V52K1D0.originalSourceSpin48_trivialAction_exteriorPolarContractions_zero'
+depends on axioms: [propext, Classical.choice, Quot.sound]
+K1D0_COMPILER_EXIT 0
+K1D0_ORIGINAL_CLIFFORD_POLAR_CONTRACTION_TWO_ROOTS_STRICT_PASS
+```
+
+**Formal acceptance:** +2 NEW genuine original-source theorem roots. This is a transport/reduction, not full K1D exterior coefficient separation. Nothing about the whole Spin48 kernel classification, covering, or physical BFSS eigenstates is admitted.
+
+**Infrastructure issue independently spotted post-acceptance:** The Gate 1 binary save used a semantically misleading cache-key prefix `bfss-k1c-original-polar-contraction-c3a96cb1...` for the *K1D0* accepted blob. This did NOT affect fresh proof compilation or its theorem validity, but the cache name would mislead successors and reuse. Do not silently call it a correctly named K1D0 key. The workflow has been repaired in commit `4b07063614fadee76c2a62f1f9b469c511b583b5` to use the distinct unambiguous key `bfss-k1d0-original-clifford-exterior-transport-c3a96cb1abd32e3cfaa82ed515224bb958e2c4eb-v1-adc7f124-lean4341-d13f23b-Linux-X64`; it also fixes the stale run-step/diagnostic labels. Reproduction Gate 2 [run #40497329075](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40497329075) was triggered by the workflow-only correction, preserving the EXACT mathematical candidate blob unchanged. Verify its actual terminal status before stating that a correctly named cache exists.
+
+**Next genuine theorem requirement:** common kernel of all original coordinate contractions on the exterior algebra is the scalar line, via the real `Module.Basis.ExteriorAlgebra` basis and `Finset.erase` coefficient injection. Separately qualify that literal original positive polar functionals span these coordinate duals. K1B negative scalar element and downstream claims remain open.
