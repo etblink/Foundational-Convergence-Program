@@ -153,3 +153,10 @@ Then for **every basis subset `J` in the support**, either (i) `j∉J`, so `d_j�
 Both K1D2C roots were rejected with `sorryAx`; no new accepted theorem. The change is not a mathematical counterexample.
 
 **Gate 3 exact correction:** `local instance ... := by classical; exact linearOrderOfSTO WellOrderingRel`, eliminate the obsolete `Finset.sort` listMap rewrite, and normalize `List.ofFn_eq_map`, `List.map_map`, `Pi.basisFun_apply` directly. New source blob `4adcc4bd72975c720f6114002e63af0a9c8f5a1d`, author commit `fffc2e1e3e96bb5c45d3e80a4bca8d4d955a02b8`. Workflow source pin updated at `c752cbf8784157c8160da8a258d5042acd25772e`. Statements and real original ordered F20B basis unchanged. Require terminal original Lean compiler/axiom/binary evidence before formal acceptance.
+
+
+## K1D2C Gate 3 pending verified-run handoff — exact current blocker
+
+The actual source-pinned workflow [Actions #40516712399](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40516712399), job `122232329359`, was independently checked in GitHub after authoring commit `c752cbf8784157c8160da8a258d5042acd25772e`. **The job remained queued**, so no compiler/axiom result exists yet in the observed record. Exact prospective module blob `4adcc4bd72975c720f6114002e63af0a9c8f5a1d`. Preserve K1D2C as **UNACCEPTED, 0 roots** until that job has a successful terminal proof result; no progress claim is authorized by a queued or green graph-only run.
+
+Project Lead critical path after this gate: verify the original exact local PBW order identity and Nodup; then formalize the finite-support coefficient-minimal-label argument (smallest original source label occurring in any supported nonempty exterior-basis index), with leading derivative (+1), absent derivative zero, injectivity of `I.erase j` restricted to `j∈I`, and scalar basis `∅`. Even after that K1B actual negative Spin scalar and 2-sign kernel require separate strict qualification.
