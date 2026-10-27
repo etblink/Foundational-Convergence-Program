@@ -116,3 +116,37 @@ New bounded original-source gate [script](../experiments/openai-math-su2-physica
 [Diagnostic run 40478255063](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40478255063) used source-unmodified preflight tracing and failed on the **very first** `G1A.pairedLabelEquiv` expected Git blob. Original job trace independently reports `git rev-parse HEAD:.../SU2BFSSG1APairedThetaProbe.lean = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4`, while workflow mistakenly expected `4f8fb05a35c1d625746931b7ff0361b7ffc2ec4` (missing an `f` after the `4f8fb` sequence). Earlier Gate #1's silent failing `test` is fully explained. The true immutable source blob was never modified and agrees with prior direct original source inspection.
 
 **Exact fix:** change ONLY the incorrect expected G1A blob in the workflow to `4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4`, retain command-level preflight diagnostics and all scientific equations/assertions. The erroneously transcribed SHA in this running audit note is corrected to the actual value; Git history retains the earlier notes. Both failed runs attempted **zero scientific matrix identities**. Accepted S4 roots remain **63**, no new global Spin9 or Lean theorem. Recheck the next CI result without presuming success.
+
+## Gate #3 run 40478381697 — accepted finite original Fock-order transport
+
+**GREEN, source-exact finite arithmetic, +0 Lean roots**. [Run #40478381697](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40478381697), job `122102186451`, source/workflow commit `7762170f7189622638ef3d32341b5c4e3739f059`, completed success. This is the SAME mathematical checker source `30eb22f8d8523a25329a1229adac4cbf9f2cad4a` as the initial two red attempts, which were both preflight-only and have now been explained by a one-character incorrect G1A immutable expected SHA. Correct original accepted G1A Git blob is **`4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4`**, gamma blob `5ec0fcb039fb5c1367f72b2bd0f8c05fcd936587`, S4B36 source `81dd44eec7c24790d87493496fc6f50eae0a0e8e`. Pin provenance and exact original TeX passed. All matrices use exact integer arithmetic in pinned numpy 2.3.4. Original runner log and [artifact #12720814178](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40478381697/artifacts/12720814178) preserve the results:
+
+```
+ORIGINAL_PAIRED_FOCK_SOURCE_LABEL_EXACT_PINS_PASS
+ORIGINAL_LABEL_NUMPY_PIN_PASS 2.3.4
+ORIGINAL_G1A_PAIRED_LABEL_FOCK_MODE_MAJOR_PERMUTATION_PASS 48
+NATIVE_FOCK_BASIS_VS_COLOR_MAJOR_DIFFER 44
+UNTRANSPORTED_COLOR_MAJOR_B_FIELD_SOURCE_IDENTITY_FALSIFIED 27
+ORIGINAL_MODE_SOURCE_SPIN9_CENTER_LABEL_MINUS_IDENTITY_PASS 36
+ORIGINAL_MODE_PAIRED_B_SPATIAL_COVARIANCE_PASS 972
+ORIGINAL_MODE_PAIRED_SO9_BRACKETS_PASS 1296
+ORIGINAL_MODE_PAIRED_B_GAUGE_COVARIANCE_PASS 81
+ORIGINAL_MODE_GAUGE_SPIN_GENERATORS_COMMUTE_PASS 108
+ORIGINAL_PAIRED_FOCK_48_LABEL_SPIN9_B_TRANSPORT_SOURCE_FINITE_PASS
+```
+
+### What the original source-label result establishes
+
+The true `G1A.pairedLabelEquiv` label order is Fock-mode-major, `(α=2j+q,a) ↦ (3j+a,q)` in `Fin24×Fin2`, flattened as `2(3j+a)+q`. The earlier convenient matrix label is color-major `16a+α`. Their exact finite permutation `P` moves 44 of 48 slots. The false statement that *untransported* color-major B tensors are literally matrices on the accepted source Clifford order is disproved for **all 27 nonzero source B coefficient tensors**. The correct transported tensor `P T Pᵀ` passes every 36-plane source spinor/gauge Lie and quarter-turn case, all 1296 bracket tests, and central-label sign checks. This is a genuine **source-interface correction**, not a change to the Hamiltonian or a falsification of the covariance identity.
+
+### Standard mathematical integration path (ordinary mathematics only, not Lean-certified)
+
+The verified real symmetric `Γ_i` with `Γ_iΓ_j+Γ_jΓ_i=2δ_ij` give skew matrices `K_rs=-Γ_rΓ_s/2`. The exact finite checks verify `[K_rs,K_pq]` matches the standard `so(9)` brackets and `[K_rs,Γ_i]` matches the spatial vector action. By bilinearity these identities specify a Lie algebra hom `dS: so(9)→so(16)`. **Standard Lie integration** for a simply connected domain `Spin(9)` would uniquely integrate `dS` to `S:Spin(9)→SO(16)`, where gamma covariance follows by equality of the induced infinitesimal actions and connectedness. This is an ordinary mathematical consequence of the standard finite-dimensional Lie group theorem, not a construction inside the pinned Lean model.
+
+Compose `S` on exactly **three** color copies of the real 16-dimensional spinor, and conjugate by the verified original paired-label permutation `P`. This yields a continuous hom `ρ: Spin(9)→SO(48)` in the exact original `Fin24×Fin2` Euclidean label coordinates, with `ρ(g)=P(I₃⊗S_g)Pᵀ`. Since `Spin(9)` is simply connected and classical `Spin(48)→SO(48)` is a double covering, **standard path lifting** uniquely yields a based continuous group hom `\widetilde ρ: Spin(9)→Spin(48)`. Because `ρ` commutes with the *true* source SU2 adjoint color label representation, and both genuine continuous source lifts originate in connected groups, their lifted commutator takes values in discrete `{±1}` and equals identity at the pair of identity elements, so it is identically identity.
+
+This classical route supports existence on abstract standard compact Lie groups **if the original source gamma/Lie identifications and canonical Euclidean Spin(48) topology are used**. It does **not** identify the abstract classical covering with the particular pinned Lean `spinGroup source48Quadratic` subtype and PBW topology; the repo currently has the topological-group construction but has not qualified its entire covering-space API. Nor does it establish that every resulting Clifford spin element acts as a unitary on the original `Fermion 2` with the exact G1A normalization/source gauge hom identification, nor physical `FullL2` group action, nor source full-closed-form Spin9 covariance. The central `-1∈Spin(9)` must act by `-I48` on source labels, so **no `SO(9)` quotient shortcut is valid**; the preexisting 36-plane Pfaffian checks constrain its Fock parity orientation, conditional on the exact implemented lift.
+
+**Next formal science gate (do not shortcut):** qualify the canonical real positive-definite `Q=source48Quadratic` source Spin48→SO48 **continuous two-sheeted covering** in the same pinned Mathlib subtype topology, or clearly document a Mathlib covering API obstruction. Then define the actual source `Spin(9)` domain and real16 spinor group hom, integrate/lift, transport along G1A's `pairedLabelEquiv`, use accepted source native Spin48 Fock algebra hom and source gauge bridge. A generic group hom lemma with an assumed lift or mere finite matrix commutation is NOT this missing theorem.
+
+**Accounting:** S4 roots remain **63**; this Gate #3 changes neither mathematical source nor formal proof ancestry and proves no positive normalizable physical eigenstates. The two failed 40478064068 and 40478255063 outcomes are audited as provenance transcription failures, not mathematical counterexamples.
