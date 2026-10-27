@@ -47,3 +47,16 @@ For arbitrary `x:E`, expand using `B.repr`'s finite support. Fix nonempty `I` an
 ## Scientific admission boundary
 
 K1D2A alone is not K1D2B. K1D2B alone will not automatically establish the original Spin48 kernel `{±1}`: the scalar Clifford/Spin inclusion and genuine negative central Spin representative (K1B) are separately required. SO48 image/covering, source-exact global Spin9, actual physical BFSS symmetry and positive spectral existence remain distinct missing results. `main` and frozen `etblink/math` remain untouched.
+
+
+## K1D2A Gate 1 — rejected under warning-as-error, no theorem roots
+
+[Actions #40510963306](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40510963306), job `122212441527`, terminal RED, source blob `b99cd7c09b2c44e5282db7cd1549c5fa425d06a2`. Immutable source, qualified K1D1 cache, original ancestry, pinned Lean 4.34.1/Mathlib and fresh compiler all passed. All three theorem declarations printed only `propext`, `Classical.choice`, `Quot.sound` (no `sorryAx`) but Lean rejected the source due to **two strictly fatal unused `simp` arguments**:
+
+```text
+line 63: unused simp argument Pi.single_apply; recommend simp [hjk]
+line 81: unused simp argument Pi.single_apply; recommend simp
+K1D2A_COMPILER_EXIT 1
+```
+
+Because source compiled non-cleanly, **all three candidate roots remain UNACCEPTED**; no binary was saved. Not a mathematical counterexample. The smallest safe correction removes only those two unneeded simp arguments. Source after exact two-line correction: Git blob `6797e53e43abf6e94c76612f91617169e224e831`, author commit `4ef1196d7e48cefcd46ed1fa1e0c9cdd9f0fb744`. Workflow source pin and cache key corrected at commit `d63cfb477b61c1df3b0b81a4d558041382e0421f`; corrects a stale TWO_ROOTS diagnostic to THREE_ROOTS, without touching mathematical theorem statements. [Gate2 Actions #40511851424](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40511851424) launched; check exact original terminal compiler/axiom outcome before accepting three source proofs.
