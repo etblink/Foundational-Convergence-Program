@@ -28,7 +28,9 @@ open FCP.BFSSS1V52K1D2A
 private abbrev E := ExteriorAlgebra ℝ Source48Vector
 
 -- File-local exact ordering, identical to F20B's private `letI`.
-local instance : LinearOrder Source48Label := linearOrderOfSTO WellOrderingRel
+local instance : LinearOrder Source48Label := by
+  classical
+  exact linearOrderOfSTO WellOrderingRel
 
 /-- The EXACT exterior basis on the original 48-label space used
 before the genuine F20B Clifford/exterior real-linear equivalence. -/
@@ -56,10 +58,9 @@ theorem originalSourceExteriorPBWBasis_eq_originalCoordinateWord
   rw [ExteriorAlgebra.ιMulti_apply]
   simp only [originalExteriorCoordinateWord,
     Set.powersetCard.prodEquiv_symm_apply,
-    Set.powersetCard.ofFinEmbEquiv_symm_apply]
-  rw [List.ofFn_eq_map]
-  rw [← Finset.listMap_orderEmbOfFin_finRange I rfl]
-  simp only [List.map_map]
+    Set.powersetCard.ofFinEmbEquiv_symm_apply,
+    List.ofFn_eq_map, List.map_map, Function.comp_apply,
+    Pi.basisFun_apply]
 
 /-- Ordered original PBW basis label words have no repetitions. -/
 theorem originalSourceExteriorPBWOrderedLabels_nodup
