@@ -49,3 +49,26 @@ The failed theorem printed `[propext, sorryAx, Classical.choice, Quot.sound]`, s
 **Gate 4 correction, unchanged mathematical statement:** New proof blob `5d1117d1f469a3a76a78c3c4ae4b8896b18b1b7a` uses the exact imported theorem as a local equation, rewrites the concrete conjugation action before a *typed* `change` to the actual original Clifford elements, and names two genuine source facts `spinGroup.star_mul_self_of_mem s.property` and `spinGroup.mul_star_self_of_mem s.property` matching Clifford star on the actual `(s : C)`. No axioms, theorem hypotheses, source mathematics or F21A parent were changed. Workflow pins the new source blob and saves a distinct binary key only on actual strict acceptance.
 
 [Gate 4 #40491802270](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40491802270), staged at research HEAD `44329841cc5e2ae3457641572e0353edf088b037`; inspect its terminal Lean logs before acceptance. **New strictly accepted K1A roots at this checkpoint: zero**.
+
+## Gate 4 — FINAL FORMAL ACCEPTANCE, one genuinely new source root
+
+**[GitHub Actions #40491802270](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40491802270), job `122147301377`: completed/success.** The exact research-branch source checkout, frozen original mathematics `adc7f124...`, Lean **4.34.1**, Mathlib **d13f23b...**, K1A candidate Git blob `5d1117d1f469a3a76a78c3c4ae4b8896b18b1b7a`, and F21A accepted binary restored and passed preflight.
+
+Fresh compilation was successful with a nonempty `.olean`, no source warnings, and the exact one-root axiom output:
+
+```text
+'FCP.BFSSS1V52K1A.originalSourceSpin48_trivialAction_iff_generator_commutes'
+depends on axioms: [propext, Classical.choice, Quot.sound]
+K1A_EXIT 0
+K1A_ORIGINAL_SPIN48_KERNEL_COMMUTANT_STRICT_PASS
+```
+
+The cache-save step also completed successfully, key:
+
+```text
+bfss-k1a-original-source-kernel-commutant-5d1117d1f469a3a76a78c3c4ae4b8896b18b1b7a-v1-adc7f124-lean4341-d13f23b-Linux-X64
+```
+
+**Result:** exactly **+1 qualified theorem root** in K1A, not the full kernel. K1B stays staged and strictly unqualified because the F21A binary cache has no original S1S `.olean`. The indispensable scalar-commutant lemma remains KERNEL-PBW-1; then source negative central unit and kernel-two-sign equality, image, covering, Spin9, and spectral completion are separate. This formal acceptance **supersedes** the earlier running/unaccepted status sentences in this historical ledger while preserving all three failed gates as negative knowledge.
+
+The source-derived graph's partial acceptance manifest now records this accepted blob and gate as its eighth source identity. Do not count the three earlier reds as proof successes or add the historical S1S six roots again.
