@@ -330,3 +330,18 @@ Actual F1 Lean proof acceptance remains **PENDING**; +0 F1 roots accepted until 
 
 Do not count an F1 theorem root unless 40547612682 (or a later exact-source strict successor) completes with compiler exit 0, correct single `#print axioms` report, no unapproved axioms or warnings, and qualified `.olean` cache. Already accepted K1D2A–E4 subtotal remains **15**.
 
+## K1D2F1 typed-contraction coefficient Gate 4 — finite-sum application boundary (RED, zero accepted roots)
+
+[Run 40547612682](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40547612682) compiled the fully typed original PBW coefficient-isolation probe from exact blob `c4463e9f1ea199ca830f985fa6e705c7ee3beae3`. All original-source/Mathlib/cache ancestry preflights passed. Compiler exit was **1**, showing one genuine unfinished proof step and two strict warning-as-error simp arguments:
+
+```
+line 93:63: unsolved goals
+⊢ (∑ x ∈ c.support, B.repr (d (c x • B x))) (I.erase j)
+     = ∑ J ∈ c.support, (B.repr (d (c J • B J))) (I.erase j)
+line 76:14: unused simp argument Module.Basis.repr_self_apply
+line 94:39: unused simp argument Finsupp.sum_apply
+```
+
+The actual generic `Finsupp.sum_apply` is **not** the right evaluator: here the outer expression is the pointwise application of a **Finset sum of Finsupp functions**, which requires `Finset.sum_apply`. The accepted framework already supplied all other basis contraction and erasure steps. The failed compiler emitted `sorryAx`, so **zero F1 roots accepted**; this is an unfinished elaboration/sum-interface proof, not a mathematical counterexample.
+
+The narrow correction at commit [`cc38b5c3`](https://github.com/etblink/Foundational-Convergence-Program/commit/cc38b5c3e9695566487373eaa88d8e59b52a52aa) replaces `simp only [Finsupp.sum, map_sum, Finsupp.sum_apply]` with `simp only [Finsupp.sum, map_sum, Finset.sum_apply]`, and removes the already-automatic `Module.Basis.repr_self_apply` simp argument. **No theorem statement, source basis order, frozen original code or previously accepted theorem was changed.** New exact source blob `a9c20d7c3a12ca76e08ae09956e18be960f0754e`; pinned strict workflow commit [`30daae82`](https://github.com/etblink/Foundational-Convergence-Program/commit/30daae8290e075aa31521bfcd60a3df1bd050401); successor strict [run 40548726373](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40548726373) initiated. Await actual terminal strict logs before any F1 acceptance.
