@@ -54,7 +54,21 @@ private theorem manuscriptCoordinateBComplex_eq_pauliNormalizedBComplex
         Real.sqrt 2 * FCP.BFSSSU2.epsilon3 a b c) :
     manuscriptCoordinateBComplex M x = pauliNormalizedBComplex M x := by
   unfold manuscriptCoordinateBComplex pauliNormalizedBComplex
-  simp_rw [hf]
+  apply congrArg
+    (fun T : Fermion 2 →L[ℂ] Fermion 2 => (Complex.I / 2 : ℂ) • T)
+  apply Finset.sum_congr rfl
+  intro b _hb
+  apply Finset.sum_congr rfl
+  intro β _hβ
+  apply Finset.sum_congr rfl
+  intro δ _hδ
+  apply Finset.sum_congr rfl
+  intro c _hc
+  apply Finset.sum_congr rfl
+  intro i _hi
+  apply Finset.sum_congr rfl
+  intro a _ha
+  rw [hf a b c]
 
 /-- Genuine constructed N=2 source massless real fermion field equals
 the normalized +i/2 Pauli-epsilon B(x) in the original Fock operator
