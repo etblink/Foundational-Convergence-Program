@@ -141,3 +141,15 @@ A simpler exact mathematical argument is available even without deploying K1D2B'
 Then for **every basis subset `J` in the support**, either (i) `j∉J`, so `d_j⌋(B J)=0` by the K1D2A absent-label rule, or (ii) `j∈J` and **j is the first ordered label of J**, so `d_j⌋(B J)=B(J.erase j)` **with scalar +1** by the K1D2A matching-leading rule. No general signed deletion is required in this one derivative. For any fixed `J` containing j, `J↦J.erase j` is injective. Therefore the exterior coefficient at `I.erase j` in `d_j⌋x` equals `c_I` for each supported I containing j. The hypothesis `d_j⌋x=0` forces `c_I=0`, contradicting nonempty support. Hence x has only `∅` coefficient and is scalar.
 
 **Formal obligation list remains strict:** identify true `B I` with the same-order `originalExteriorCoordinateWord` (K1D2C pending); prove sorted-list head/erase for the global least occupied label; prove finite `Finsupp` support union and existence of global minimum; prove `Basis.repr` coefficient uniqueness and `B∅=1`. This is a mathematical **plan**, not a kernel-checked K1D scalar theorem. It is more economical than a full signed contraction matrix and avoids accidental source basis order assumptions. K1D2B's accepted nonzero-erasure lemma remains independently useful, especially if the minimal-support strategy hits proof-interface issues.
+
+
+## K1D2C Gate 2 — genuine original ordering typeclass/cast red, zero roots
+
+[GitHub Actions #40515773704](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40515773704), job `122229217793`, terminal RED after exact source, accepted K1D2A cache, pinned Lean 4.34.1 and Mathlib restored. Candidate source blob `a4f6717bd5ed72e04ec23595818cde2f64cbd860`. Two precise first-causal issues:
+
+1. File-local `local instance : LinearOrder Source48Label := linearOrderOfSTO WellOrderingRel` lacked the **classical decidable** instance needed to construct the exact source well-order, reported as `failed to synthesize DecidableRel WellOrderingRel`. Original F20B already invoked `classical` before `letI`; the new source must do likewise.
+2. The old `rw [← Finset.listMap_orderEmbOfFin_finRange ...]` no longer matches after switching to a direct `List.ofFn` order embedding. Lean's elaborated basis word exposed a subtype/cardinality cast ambiguity if forced through that obsolete rewrite. Do not assume an alternate ordering or hide the mismatch.
+
+Both K1D2C roots were rejected with `sorryAx`; no new accepted theorem. The change is not a mathematical counterexample.
+
+**Gate 3 exact correction:** `local instance ... := by classical; exact linearOrderOfSTO WellOrderingRel`, eliminate the obsolete `Finset.sort` listMap rewrite, and normalize `List.ofFn_eq_map`, `List.map_map`, `Pi.basisFun_apply` directly. New source blob `4adcc4bd72975c720f6114002e63af0a9c8f5a1d`, author commit `fffc2e1e3e96bb5c45d3e80a4bca8d4d955a02b8`. Workflow source pin updated at `c752cbf8784157c8160da8a258d5042acd25772e`. Statements and real original ordered F20B basis unchanged. Require terminal original Lean compiler/axiom/binary evidence before formal acceptance.
