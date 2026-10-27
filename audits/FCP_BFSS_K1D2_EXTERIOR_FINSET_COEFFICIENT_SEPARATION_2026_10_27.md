@@ -353,3 +353,17 @@ Staged research-branch source [`SU2BFSSPhysicalDomainS1V52K1D2F2OriginalPBWAllCo
 Its one candidate root, `originalSourcePBWAllContractions_zero_implies_no_occupied_labels`, assumes every original 48-label coordinate contraction of an actual exterior element vanishes and aims to prove the exact E4 occupied-label Finset equals `∅`. The proof selects the global original least occupied label and applies F1's exact coefficient-recovery theorem to a supported basis index containing it, contradicting `Finsupp.mem_support_iff`. The mathematical scalar identification using `B ∅ = 1` remains the *subsequent* step.
 
 **F2 is deliberately only STAGED**. No F2 strict workflow was started before qualified F1 cache existence, no F2 proof was compiled, and no new theorem root was accepted. The corresponding source dependency graph passing is infrastructure-only.
+
+## K1D2F1 actual Finsupp-valued finite-sum application interface, Gate 5
+
+The [40548726373 strict run](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40548726373) for source `a9c20d7c3a12ca76e08ae09956e18be960f0754e` finished **RED**, compiler exit 1. The earlier superfluous `Module.Basis.repr_self_apply` simp warning was resolved, but the one original finite-sum goal remained. Crucially, `Finset.sum_apply` was **unused**; compiler emitted `sorryAx`. Root acceptance **+0**. This proves the sum-interface error was not addressed by unprimed `Finset.sum_apply`.
+
+The source-pinned Mathlib at `d13f23b`, file `Mathlib/Algebra/BigOperators/Finsupp/Basic.lean`, specifically defines:
+```lean
+theorem Finset.sum_apply' :
+  (∑ k ∈ s, f k) i = ∑ k ∈ s, f k i := by
+  exact map_sum (Finsupp.applyAddHom i) f s
+```
+This statement **literally matches** the unresolved subgoal of pointwise evaluation of a finite sum in the Finsupp-valued `B.repr` codomain; it is not the unprimed function-valued `Finset.sum_apply`, nor generic `Finsupp.sum_apply`. The next source, blob `1c7b4543ca810a4017767ee79d1a0a5942c130cd`, commit [`bcb32bc4`](https://github.com/etblink/Foundational-Convergence-Program/commit/bcb32bc4513ff9311205a6dd828fa357c032398d), replaces the unused simp argument with an explicit `rw [Finset.sum_apply']` immediately after the proven `Finsupp.sum` and `map_sum` reductions. Workflow pin commit [`9a8b76e7`](https://github.com/etblink/Foundational-Convergence-Program/commit/9a8b76e7f351421b62b3e046d79a7fdab71747f3); [strict run 40550171138](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40550171138) initiated.
+
+The original theorem is **unchanged**. This is a targeted source-library theorem correction, not weakened warning policy or new axioms. F1 remains UNACCEPTED until the terminal strict gate succeeds with an actual compiled `.olean` and permitted-axiom output. F2 remains only STAGED.
