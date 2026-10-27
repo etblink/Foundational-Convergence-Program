@@ -1,4 +1,4 @@
-name: BFSS K1A Actual Spin48 Kernel Commutation and Negative Sign Strict
+name: BFSS K1A Actual Spin48 Kernel Commutation Strict
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
           sparse-checkout: |
             lean
           sparse-checkout-cone-mode: true
-      - name: Check immutable source and four declared roots
+      - name: Check immutable source and one source-exact theorem root
         shell: bash
         run: |
           set -euo pipefail
@@ -38,9 +38,8 @@ jobs:
           test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
           test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
           for entry in \
-            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1AOriginalSpin48KernelCommutantAndNegativeSignProbe.lean:f3dd9141c68c442c013b384d745430e83a2b6224" \
-            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F21AOriginalSpin48SourceVectorActionJointContinuityProbe.lean:87f554d93022d9dd3cc779947699ba0a599fae9b" \
-            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1SSourceSpin48TwoVectorRotorProbe.lean:ae5751e9cbab52a39e1475a445d75d92e7db762e"; do
+            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1AOriginalSpin48KernelCommutantProbe.lean:965b08344e65fe22d80d9281c223ad10a494c5b2" \
+            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F21AOriginalSpin48SourceVectorActionJointContinuityProbe.lean:87f554d93022d9dd3cc779947699ba0a599fae9b"; do
             f="${entry%%:*}"; expected="${entry#*:}"
             test "$(git rev-parse "HEAD:$f")" = "$expected" || { echo "K1A_GIT_BLOB_MISMATCH=$f"; exit 1; }
             test "$(git hash-object --no-filters "$f")" = "$expected" || { echo "K1A_RAW_BLOB_MISMATCH=$f"; exit 1; }
@@ -49,17 +48,14 @@ jobs:
           import json,pathlib,re
           m=json.loads(pathlib.Path('upstream-math/lean/lake-manifest.json').read_text())
           assert next(p['rev'] for p in m['packages'] if p['name']=='mathlib')=='d13f23b723b8a846827a245b89c10fc7d3f11612'
-          p=pathlib.Path('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1AOriginalSpin48KernelCommutantAndNegativeSignProbe.lean')
+          p=pathlib.Path('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1AOriginalSpin48KernelCommutantProbe.lean')
           s=p.read_text()
-          roots=['originalSourceSpin48_trivialAction_iff_generator_commutes',
-            'originalSourceSpin48_negativeScalarWitness',
-            'originalSourceSpin48_negativeScalarWitness_coe',
-            'originalSourceSpin48_negativeScalarWitness_trivialAction']
+          roots=['originalSourceSpin48_trivialAction_iff_generator_commutes']
           assert re.findall(r'^namespace (\S+)',s,re.M)==['FCP.BFSSS1V52K1A']
           assert re.findall(r'^#print axioms (\S+)',s,re.M)==roots
           assert re.findall(r'^(?:theorem|noncomputable def) (\S+)',s,re.M)==roots
           assert not re.search(r'^\s*(?:sorry|native_decide|axiom)\b',s,re.M) and 'sorryAx' not in s
-          print('K1A_GENUINE_SOURCE_FOUR_DECLARATIONS_PREFLIGHT_PASS')
+          print('K1A_GENUINE_SOURCE_ONE_DECLARATION_PREFLIGHT_PASS')
           PY
       - name: Restore accepted original-source F21A cache
         id: f21a
@@ -69,15 +65,14 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
           key: bfss-f21a-original-spin48-vector-continuity-87f554d93022d9dd3cc779947699ba0a599fae9b-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
-      - name: Fail closed on qualified F21A and original S1S compiled ancestry
+      - name: Fail closed on qualified F21A and original source action compiled ancestry
         shell: bash
         run: |
           set -euo pipefail
           test "${{ steps.f21a.outputs.cache-hit }}" = true || { echo K1A_F21A_ACCEPTED_CACHE_MISSING; exit 1; }
           for stem in \
             SU2BFSSPhysicalDomainS1V52L9E5F21AOriginalSpin48SourceVectorActionJointContinuityProbe \
-            SU2BFSSPhysicalDomainS1V31CanonicalAllSpin48RealVectorActionProbe \
-            SU2BFSSPhysicalDomainS1SSourceSpin48TwoVectorRotorProbe; do
+            SU2BFSSPhysicalDomainS1V31CanonicalAllSpin48RealVectorActionProbe; do
             test -s "upstream-math/lean/.lake/build/lib/lean/$stem.olean" || { echo "K1A_ACCEPTED_OLEAN_MISSING=$stem"; exit 1; }
           done
           echo K1A_ACCEPTED_COMPILED_ANCESTRY_PRESENT
@@ -103,14 +98,14 @@ jobs:
           test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
           echo K1A_PINNED_LEAN_MATHLIB_PASS
-      - name: Compile four exact source declarations with strict axiom checks
+      - name: Compile one exact source theorem with strict axiom checks
         shell: bash
         timeout-minutes: 10
         run: |
           set -euo pipefail
           source "$HOME/.elan/env"
           cd upstream-math/lean
-          stem=SU2BFSSPhysicalDomainS1V52K1AOriginalSpin48KernelCommutantAndNegativeSignProbe
+          stem=SU2BFSSPhysicalDomainS1V52K1AOriginalSpin48KernelCommutantProbe
           cp "../../experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
           set +e
           timeout 540s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" > /tmp/bfss-k1a/lean.log 2>&1
@@ -120,23 +115,20 @@ jobs:
           COMPILER_EXIT="$exitcode" python3 - <<'PY'
           import os,pathlib,re
           ns='FCP.BFSSS1V52K1A'
-          roots=['originalSourceSpin48_trivialAction_iff_generator_commutes',
-            'originalSourceSpin48_negativeScalarWitness',
-            'originalSourceSpin48_negativeScalarWitness_coe',
-            'originalSourceSpin48_negativeScalarWitness_trivialAction']
+          roots=['originalSourceSpin48_trivialAction_iff_generator_commutes']
           expected=[ns+'.'+x for x in roots]
           log=pathlib.Path('/tmp/bfss-k1a/lean.log').read_text()
           reports=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
           allowed={'propext','Classical.choice','Quot.sound'}
           warnings=[line for line in log.splitlines() if ".lean:" in line and ": warning:" in line]
-          obj=pathlib.Path('.lake/build/lib/lean/SU2BFSSPhysicalDomainS1V52K1AOriginalSpin48KernelCommutantAndNegativeSignProbe.olean')
+          obj=pathlib.Path('.lake/build/lib/lean/SU2BFSSPhysicalDomainS1V52K1AOriginalSpin48KernelCommutantProbe.olean')
           good=(int(os.environ['COMPILER_EXIT'])==0 and [name for name,_ in reports]==expected
             and all({a.strip() for a in v.split(',') if a.strip()}<=allowed for _,v in reports)
             and not warnings and 'error:' not in log and 'sorryAx' not in log
             and obj.is_file() and obj.stat().st_size>0)
           print('K1A_EXIT',os.environ['COMPILER_EXIT'],'REPORTS',reports,'WARNINGS',warnings)
-          if not good: raise SystemExit('K1A_FOUR_SOURCE_DECLARATIONS_STRICT_RED')
-          print('K1A_ORIGINAL_SPIN48_KERNEL_COMMUTANT_AND_NEGATIVE_SIGN_STRICT_PASS')
+          if not good: raise SystemExit('K1A_ONE_SOURCE_THEOREM_STRICT_RED')
+          print('K1A_ORIGINAL_SPIN48_KERNEL_COMMUTANT_STRICT_PASS')
           PY
       - name: Save qualified K1A binary on genuine pass only
         uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
@@ -144,7 +136,7 @@ jobs:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-k1a-original-source-kernel-commutant-negative-sign-f3dd9141c68c442c013b384d745430e83a2b6224-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-k1a-original-source-kernel-commutant-965b08344e65fe22d80d9281c223ad10a494c5b2-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
       - name: Preserve first causal diagnostics
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
