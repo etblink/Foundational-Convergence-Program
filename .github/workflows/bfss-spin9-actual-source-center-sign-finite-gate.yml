@@ -1,0 +1,62 @@
+name: BFSS Actual Source Spin9 Gamma Center Exact Finite Gate
+
+# This is an exact adversarial original-source calculation, NOT a Lean gate.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-spin9-actual-source-center-sign-finite-gate.yml
+      - experiments/openai-math-su2-physical-domain/bfss_actual_source_gamma_spin9_center_exact_2026_10_27.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-source-gamma-center-adversarial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout source-bound FCP research
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Checkout original frozen BFSS manuscript
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            preprints/Positive-eigenvalues-of-the-relative-SU-2-BFSS-Hamiltonian-October-5-2026/build
+          sparse-checkout-cone-mode: false
+      - name: Fail closed on exact Lean source and original manuscript
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean)" = 5ec0fcb039fb5c1367f72b2bd0f8c05fcd936587
+          test "$(git hash-object --no-filters experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean)" = 5ec0fcb039fb5c1367f72b2bd0f8c05fcd936587
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean)" = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/bfss_actual_source_gamma_spin9_center_exact_2026_10_27.py)" = 6430043cadc977e98c6b7cd3d64058f56ee899e2
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/bfss_actual_source_gamma_spin9_center_exact_2026_10_27.py)" = 6430043cadc977e98c6b7cd3d64058f56ee899e2
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(git -C upstream-math rev-parse HEAD:preprints/Positive-eigenvalues-of-the-relative-SU-2-BFSS-Hamiltonian-October-5-2026/build/positive-eigenvalues-relative-su2-bfss.tex)" = 12c5fffb5f90b48856f60fb0e93c18e2490c5f1b
+          python3 -m py_compile experiments/openai-math-su2-physical-domain/bfss_actual_source_gamma_spin9_center_exact_2026_10_27.py
+          echo ORIGINAL_GAMMA_SOURCE_AND_FINITE_PROGRAM_PINS_PASS
+      - name: Independently verify literal gamma Lie planes and Spin9 central Pfaffians
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -B experiments/openai-math-su2-physical-domain/bfss_actual_source_gamma_spin9_center_exact_2026_10_27.py --source experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean | tee /tmp/bfss-actual-gamma-center.log
+          grep -qx 'LITERAL_SOURCE_SPIN9_PLANE_LIE_AND_DOUBLE_PFAFFIAN_PASS 36' /tmp/bfss-actual-gamma-center.log
+          grep -qx 'GAUGE_SU2_TRUE_SINGLET_EVEN_ODD_PARITY_COUNTS_PASS 183040 183040' /tmp/bfss-actual-gamma-center.log
+          echo ACTUAL_ORIGINAL_SOURCE_FINITE_CENTER_CONSTRAINT_PASS_NO_NEW_LEAN_ROOT
+      - name: Preserve finite test evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-actual-spin9-center-${{ github.run_id }}
+          path: /tmp/bfss-actual-gamma-center.log
+          if-no-files-found: warn
