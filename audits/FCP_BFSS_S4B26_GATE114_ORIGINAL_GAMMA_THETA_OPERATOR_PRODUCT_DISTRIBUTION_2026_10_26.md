@@ -61,3 +61,17 @@ The residual goal, after source-defined complex operator multiplication and coef
 - The exact workflow-source SHA guards were then both repinned in [commit 33c2fb07](https://github.com/etblink/Foundational-Convergence-Program/commit/33c2fb073db6f45af060a2560aa5e506361b3a1e), launching the intended [Gate114 run #40430447057](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40430447057). **Pending at this documentation point.** The new test still requires full source provenance, freshly recompiled accepted S4B3–S4B25, exact one-root compiler/axiom audit, and no unexpected warnings.
 
 **S4 accepted roots remain 50 until the fully pinned run is independently checked.** Neither workflow green counts nor candidate commits alone qualify the theorem.
+
+
+## Gate114 #3 — source-exact parents green, Lean scalar rw motive red
+
+Independently verified completed [run #40430447057](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40430447057), job `121946643041`, head `33c2fb073db6f45af060a2560aa5e506361b3a1e`, result **failure**. Both source and worktree SHA checks, immutable original-source checkout, workflow preflight, exact G4K9C provenance, fresh source, and accepted S4B3 through S4B25 parent compilation were green. In particular `GATE114_ACCEPTED_S4B25_PARENT_FRESH_PASS 69944`, `GATE114_CANDIDATE_SOURCE_WARNINGS []`. The new theorem reached the **single** final scalar commutativity subgoal, demonstrating the prior q/β sum distribution issue was resolved. Compiler reported:
+
+```text
+GATE114_COMPILER_EXIT 1 AXIOM_REPORTS [('FCP.BFSSSU2PhysicalDomainS4B26.originalGammaTheta_operator_product_distribution', {'propext', 'Quot.sound', 'Classical.choice', 'sorryAx'})]
+SU2BFSSPhysicalDomainS4B26OriginalGammaThetaOperatorProductDistributionProbe.lean:46:6: error: Tactic `rewrite` failed: motive is not type correct
+... TopologicalSpace (PiLp 2 fun x => ℂ) ... expected TopologicalSpace (Fermion N)
+... Goal: (c * gamma) • (theta_β,A * theta_q) = (gamma * c) • (theta_β,A * theta_q)
+```
+
+The literal `rw [mul_comm]` searches/reconstructs a semireducible continuous-linear-map motive and fails. This is an elaboration/transparency error, **not** a counterexample. Rather than changing the carrier, theorem, imported source, or transparency flags, explicitly prove the scalar equality and transport it using `congrArg (fun z : ℂ => z • ((M.theta β A * M.theta q.1 q.2) : Fermion N →L[ℂ] Fermion N))` with an exact scalar `mul_comm` witness. Avoid the failing `rw` tactic entirely. No root is accepted, S4 still **50**.
