@@ -73,7 +73,7 @@ theorem originalSourcePBWLeastContraction_coefficient
           exact hJI
             (FCP.BFSSS1V52K1D2D.originalSourceFinset_erase_injective_at_present_label
               j J I hjJ hj he)
-        simp [Module.Basis.repr_self_apply, hJI, herase]
+        simp [hJI, herase]
     · have hJI : J ≠ I := by
         intro he
         subst J
@@ -91,7 +91,7 @@ theorem originalSourcePBWLeastContraction_coefficient
     B.repr (d x) (I.erase j) =
         B.repr (d (c.sum fun J a => a • B J)) (I.erase j) := by rw [hsum]
     _ = ∑ J ∈ c.support, B.repr (d (c J • B J)) (I.erase j) := by
-      simp only [Finsupp.sum, map_sum, Finsupp.sum_apply]
+      simp only [Finsupp.sum, map_sum, Finset.sum_apply]
     _ = ∑ J ∈ c.support, (if J = I then c I else 0) := by
       apply Finset.sum_congr rfl
       intro J hJ
