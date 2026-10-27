@@ -1,6 +1,6 @@
 # FCP/BFSS S4B27 — signed original gamma contraction over ordered Fock theta product (Gate115)
 
-**Gate115 #1 RED; Gate115 #2 typed-sum recovery candidate pending, not yet accepted.** Unique strictly accepted scoped S4 principal roots: **51** through independently verified Gate114 #4 ([run #40431852374](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40431852374); new theorem `FCP.BFSSSU2PhysicalDomainS4B26.originalGammaTheta_operator_product_distribution`; original source blob `1e414c3901fc3309ca29c9b8040f0387beb9f5e6`). Acceptance of S4B27 must not be inferred from a commit, a preflight green, a parent recompile, or this preregistration.
+**Gate115 #1 and #2 RED; Gate115 #3 pinned-Mathlib exact coercion lemma candidate pending, not yet accepted.** Unique strictly accepted scoped S4 principal roots: **51** through independently verified Gate114 #4 ([run #40431852374](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40431852374); new theorem `FCP.BFSSSU2PhysicalDomainS4B26.originalGammaTheta_operator_product_distribution`; original source blob `1e414c3901fc3309ca29c9b8040f0387beb9f5e6`). Acceptance of S4B27 must not be inferred from a commit, a preflight green, a parent recompile, or this preregistration.
 
 ## Actual new theorem
 
@@ -39,3 +39,18 @@ The failure is at the **first transport of a double real-to-complex coerced scal
 ## Gate115 #2 — atomic source/CI proof attempt
 
 New candidate Git blob `b3881e95d6a05ca0acd27ce63e2418119fac3be3`; previous red source `a699148fbe188526a97c5a4ac6a250994a8abd4d` immutable in run #40433827449. Candidate and two workflow SHA guards committed together in one Git tree to prevent intermediate stale-SHA run. Strict recompile and exact theorem axiom audit required; success **not yet claimed**. Scoped S4 root count **51** until verified terminal green.
+
+
+## Gate115 #2 — source-exact parents green; generic helper cast rewrite RED
+
+Independently verified terminal [run #40435545398](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40435545398), job `121963228004`, HEAD `274949931a715bef466d3887cdd0342c8add634f`: **failure**. Immutable mathematics, workflow preflight, pinned Lean 4.34.1 and Mathlib, G4K9C provenance, fresh original modules and accepted S4B3–S4B26 all passed (`GATE115_ACCEPTED_S4B26_PARENT_FRESH_PASS 112592`). Candidate `GATE115_CANDIDATE_SOURCE_WARNINGS []`, `GATE115_COMPILER_EXIT 1`; named root's axiom report contains `sorryAx`, so **0** new roots. Compiler first cause:
+
+```text
+SU2BFSSPhysicalDomainS4B27OriginalSignedGammaContractionOrderedThetaLiftProbe.lean:34:6: error: `simp` made no progress
+```
+
+The original Fock CLM proof was not reached: failure is wholly inside the new **generic helper** `doubleSum_realCast_smul` after a `congr 1`, where `simp only [map_sum]` does not recognize the real→complex coercion over nested sums. Directly inspected **pinned** mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`, file `Mathlib/Basic/Complex/BigOperators.lean`, Git blob `8726b21970f99de2ad13ba4ec14f68ad00e463df`; the `@[simp, norm_cast]` theorem `Complex.ofReal_sum (s : Finset α) (f : α → ℝ)` explicitly states the finite-sum cast identity. This is a rewrite-pattern/proof-method failure, not evidence against the theorem. Do not classify #1 or #2 as accepted.
+
+## Gate115 #3 — exact pinned coercion theorem recovery candidate
+
+Replace only helper's unsuccessful `congr 1; simp only [map_sum]` with `simp only [Complex.ofReal_sum]`; preserve target theorem, the generic real/complex module lemma, all original source-defined operators and order, exact source SHA protection, and all previously accepted theorem roots. Proof-only new source Git blob `947fb0e81954a1e02f30a82fe72c1de26e90d0b5`; prior #2 blob `b3881e95d6a05ca0acd27ce63e2418119fac3be3` remains in its immutable CI run. Source, both strict workflow SHA guards, and audit are committed atomically. **Pending full strict CI**, so unique accepted scoped S4 roots remain **51**, target 52 only on an independently checked green.

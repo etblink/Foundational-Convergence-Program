@@ -30,8 +30,9 @@ private theorem doubleSum_realCast_smul
     _ = (∑ i : ι, ∑ j : κ, ((f i j : ℝ) : ℂ)) • v := by
       simp only [Finset.sum_smul]
     _ = _ := by
-      congr 1
-      simp only [map_sum]
+      -- Pinned Mathlib's dedicated real-to-complex finite-sum cast;
+      -- unlike generic map_sum this unfolds the actual coercion notation.
+      simp only [Complex.ofReal_sum]
 
 /-- Source-exact signed gamma contraction lifted over the ACTUAL ordered
 original theta product. The coefficient is still the original source
