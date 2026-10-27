@@ -372,3 +372,20 @@ Exact roots: `FCP.BFSSS1V52K1D1.originalSourcePolar_halfSingle_eq_coordinateDual
 **Mathematical exact state:** K1A+K1C+K1D0+K1D1 now establish a chain from literal original Spin(48) trivial real-vector action → Clifford commutation → polar contraction vanishing → exterior transport → every original coordinate contraction vanishing. The **remaining K1D2 finite exterior coefficient-separation theorem is unproved**; derive scalar line from vanishing coordinate contractions with the F20B exact original exterior basis `Finset (Fin 24 × Fin 2)`. Then and only then classify the original even Clifford commutant, recover K1B source negative central Spin scalar and two-sign kernel, and separately tackle source SO covering and Spin9 construction. All actual BFSS physical/spectral existence claims remain unproved.
 
 Curated strict acceptance receipts now **11** source-hash-pinned modules; the graph scan remains an import inventory, not theorem acceptance. This K1D1 cycle adds **+2 only** (K1D0 +2 was previous, K1C +3 previous, K1A +1 previous). Original frozen etblink/math and canonical main unchanged.
+
+
+## K1D2A successor checkpoint — original coordinate exterior word contractions qualified (2026-10-27)
+
+**[Strict Gate #40511851424](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40511851424), job 122215542975, fresh Lean compiler PASS +3 source-exact roots.** Candidate source Git blob `6797e53e43abf6e94c76612f91617169e224e831`. Frozen original mathematics/Lean 4.34.1/Mathlib d13f23b, qualified K1D1 cache, exact three `#print axioms` reports only `propext`, `Classical.choice`, `Quot.sound`, no `sorryAx`, no warnings, compiled `.olean` and saved original source-hash-bound binary:
+```text
+bfss-k1d2a-original-exterior-word-contraction-6797e53e43abf6e94c76612f91617169e224e831-v1-adc7f124-lean4341-d13f23b-Linux-X64
+```
+
+Three accepted genuine Lean declarations in `FCP.BFSSS1V52K1D2A`:
+`originalExteriorCoordinateWord_cons` (first generator in literal word), `originalExteriorCoordinateWord_contraction_zero_of_not_mem` (zero when j absent), `originalExteriorCoordinateWord_leading_contraction` (erases matching leading j if j absent from tail). These are **not** scalar coefficient separation. The rejected Gate1 [#40510963306](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40510963306) was caused solely by two unused simp arguments under strict warning-as-error, fixed without altering theorem statements. Preserve both outcomes in [K1D2 canonical audit](../audits/FCP_BFSS_K1D2_EXTERIOR_FINSET_COEFFICIENT_SEPARATION_2026_10_27.md).
+
+**Next independent source leaf, staged not accepted:** `K1D2B` `originalExteriorCoordinateWord_contract_present_nonzero_erase` for a Nodup original coordinate list, j present, contraction = a **nonzero real** scalar times word with j erased. Source blob `4729b2fc79048454ca476aabdf3150d2dba29ac0`. [Strict Gate #40512802963](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40512802963) restores accepted K1D2A compiled ancestry and tests one new root. Do not call K1D2B accepted without exact compiler/axiom/terminal-job evidence.
+
+**The full user-selected K1D2 theorem still open:** relate F20B original `Module.Basis.ExteriorAlgebra` at finite subset `I : Finset (Fin 24 × Fin 2)` to an original ordered coordinate word; use the signed (nonzero) erasure formula to prove all nonempty basis coefficients vanish under every coordinate contraction. Then identify `B ∅ = 1`, yielding common contraction kernel=scalar. This requires no guessed label flattening, no multiplicativity of `equivExterior`, and no `2^48` enumeration. K1B actual negative Spin central sign and all global/spectral claims remain separate unproved matters.
+
+Dependency qualification register has **12 reviewed accepted source blobs** after K1D2A. Canonical `main` and frozen `etblink/math` unchanged. K1D2A contributes **+3 new**; K1D2B contributes **zero** until separately qualified.
