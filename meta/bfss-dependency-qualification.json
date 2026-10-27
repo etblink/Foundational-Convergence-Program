@@ -116,6 +116,17 @@
       ]
     },
     {
+      "path": "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2DOriginalExteriorPBWEmptyAndEraseInjectivityProbe.lean",
+      "blob_sha": "b494be954703d29b9d70ad934546bebf9a55cbcf",
+      "basis": "strict-log-inspected",
+      "source_url": "https://github.com/etblink/Foundational-Convergence-Program/blob/research/openai-math-su2-s1v52-global-lift-scoping-20261019/audits/FCP_BFSS_K1D2_EXTERIOR_FINSET_COEFFICIENT_SEPARATION_2026_10_27.md",
+      "strict_run_url": "https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40532466604",
+      "roots": [
+        "originalSourceExteriorPBWBasis_empty_eq_one",
+        "originalSourceFinset_erase_injective_at_present_label"
+      ]
+    },
+    {
       "path": "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9D9OriginalNativeSixteenSpin48ActualGaugeUniversalProjectionProbe.lean",
       "blob_sha": "a0195adbc3fb8019a2d962ab566326dabaf90088",
       "basis": "historical-audit-recorded",
