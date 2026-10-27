@@ -324,3 +324,6 @@ bfss-k1c-original-polar-contraction-7334a3616740b902c9e42231efc97ed7566ad8c2-v1-
 **Other scope remains open:** staged K1B negative real central Spin witness lacks recovered S1S binary, so neither full `{±1}` kernel nor surjectivity/covering/Spin9/physical form symmetry/eigenstates is accepted. K1A +1, K1C +3 are genuinely distinct newly accepted roots; F21A earlier +2, S4 separately 63. Curated dependency evidence manifest now has nine source-hash-pinned acceptance records. Do not count graph-tool CI as mathematics or promote finite small-dimension sign checks to source proofs.
 
 Canonical `main` and frozen original `etblink/math` untouched. Preserve **one authoritative audit per gate family**, the source-derived dependency map for navigation, and this handoff for future successors.
+
+
+**K1C successor graph integrity independently verified:** [Actions #40495680188](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40495680188), job 122160395315, terminal SUCCESS. Actual log: **845** local Lean files indexed including recovery and **9** source-Git-blob qualified receipts validated; K1C's accepted `7334a361...` blob remains exact, no Lean theorem roots contributed by the graph tool. This supersedes the previous **844/8** inventory checkpoint; those earlier values remain accurate for their dated commits.
