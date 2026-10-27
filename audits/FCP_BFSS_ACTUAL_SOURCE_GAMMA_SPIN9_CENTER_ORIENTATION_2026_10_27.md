@@ -62,3 +62,36 @@ The experiment attempts independent falsifiers:
 All checks are exact signed 64-bit integer arithmetic with entries within small bounds; numpy==2.3.4 is pinned and zero tolerances are used. Strict GitHub workflow `.github/workflows/bfss-spin9-actual-source-bfield-lie-covariance-finite-gate.yml` checks exact source and program Git blobs and fails closed. Source gamma matrices and all accepted mathematical proofs are unchanged.
 
 **Hard stop:** even a fully green run would establish only exact *finite generator/field tensor* algebra. It would not construct or qualify a globally continuous `Spin(9)→Spin(48)` source homomorphism; establish its Fock action or gauge commutation as a genuine unitary group representation; prove invariance on the complete closed physical form domain; or establish a sector coercivity/eigenvalue theorem. If red, preserve exact first mismatched source plane/tensor/commutator; do not edit gamma or color epsilon to seek green. Cumulative accepted S4 count remains **63**.
+
+## Verified run 40476717798 — literal original paired B tensor and Spin(9) Lie covariance
+
+**VERIFIED FINITE EXACT GREEN; ZERO NEW LEAN ROOTS.** [GitHub Actions run #40476717798](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40476717798) with job `122096645129`, attempt 1, source/workflow commit `7e03d2e05e3665437b861f585a9e863316fd7dd6`, completed success in **18 seconds** (08:53:42–08:54:00 UTC, 2026-10-27). Native source pin step and numpy `2.3.4` pin step both passed. No Lean compiler was invoked and no strict theorem was declared.
+
+This new check composes the actual original signed-permutation `FCP.BFSSGamma9.gamma` on the paired source (not the older alternate Gate88 Cl9 basis) with the genuine `f_abc = sqrt(2)*epsilon_abc` orientation coefficient `T_(a,i)[bβ,cδ]=epsilon_abc*gamma_i[βδ]`. The original Git SHA source identifiers were independently checked: actual gamma `5ec0fcb039fb5c1367f72b2bd0f8c05fcd936587`, paired theta `4f8fb05a35c1d625746931b7ff0361b7ffc2ec4`, accepted S4B36 `81dd44eec7c24790d87493496fc6f50eae0a0e8e`, older exact gamma parser `6430043cadc977e98c6b7cd3d64058f56ee899e2`, new exact finite script `9eb39ebb0fb3a01a6df91f5efb9bf4223bb0aac4`, original math `adc7f124`, TeX `12c5fffb`. Frozen sources and S4 theorem root count were not altered.
+
+The original Actions log reports, exactly:
+
+```
+ACTUAL_BFIELD_SPIN9_EXACT_SOURCE_AND_SCRIPT_PINS_PASS
+SOURCE_COVARIANCE_NUMPY_PIN_PASS 2.3.4
+ACTUAL_48_LABEL_PAIRED_B_FIELD_EPSILON_GAMMA_SOURCE_TENSORS_PASS 27
+SOURCE_SPINOR_QUARTER_TURN_REVERSED_SIGN_FALSIFIED_DIFF_4
+SOURCE_LITERAL_SPINOR_SO9_LIE_BRACKETS_PASS 1296
+ACTUAL_SOURCE_SPATIAL_B_LIE_AND_QUARTER_TURNS_PASS 972
+ACTUAL_SOURCE_GAUGE_B_LIE_AND_QUARTER_TURNS_PASS 81
+ACTUAL_SOURCE_SPATIAL_GAUGE_GENERATOR_COMMUTATION_PASS 108
+ZERO_NEW_LEAN_ROOTS_GLOBAL_SPIN9_LIFT_AND_SPECTRAL_SECTORS_UNPROVED
+ACTUAL_SOURCE_SPIN9_BFIELD_FINITE_COVARIANCE_STRICT_PASS_NO_LEAN_ROOT
+```
+
+Full job source log and artifact: [12720124996](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40476717798/artifacts/12720124996). Exact program source and workflow: [source verifier](../experiments/openai-math-su2-physical-domain/bfss_actual_source_gamma_bfield_spin9_lie_covariance_2026_10_27.py) and [bounded gate](../.github/workflows/bfss-spin9-actual-source-bfield-lie-covariance-finite-gate.yml).
+
+### Genuine new finding and falsifiable next seam
+
+The exact 9-dimensional spinor plane Lie generators `K_{rs}=-gamma_r gamma_s/2` now satisfy **all 1296 pairwise Lie algebra commutator relations** for the original gamma matrices; the resulting original real 48-label tensor-factor source action `I3 ⊗ K` commutes infinitesimally with original gauge color generators `J3 ⊗ I16`. All literal `B(x)` coefficients also transform exactly under the finite 90-degree generating plane rotations and infinitesimal Lie actions. A purposely inverted quarter-turn convention fails with integer discrepancy 4, preserving a useful negative control.
+
+This **strengthens**, but does not end, the original-model argument for integrating the spinor-label Lie representation into the genuine globally continuous `Spin(9)→Spin(48)` source group lift and implementing it on the real 48-Majorana Fock module. The compact simply connected Spin9 integration/lifting and connectedness/discrete-covering argument are reasonable *ordinary mathematical routes* requiring exact source group, continuity, Clifford Fock identification and central calibration; **neither a full Lie group action nor any physical operator/form is established by this finite CI test**. The source closed charge energy identity on the invariant core was separately accepted at S4B36, but is not a substitute for global form-unitary symmetry or reducing spectral isotypes.
+
+**Highest-value next actual proof:** construct the genuine group homomorphism from the original 16-spinor source representation into original 48 real Clifford-label Spin48, with source basis/order, `-1` center and continuous topology proved. Transport through the accepted original native Fock Spin48 hom and check literal gauge commutation; then prove `D_g` preserves original physical smooth core and exact form using the paired source `V,B,∇` identity rather than revisiting stalled full cubic multi-index assembly. Keep `Spin9` rather than incorrectly quotienting to `SO9`, because gauge-singlet Fock odd parity exists. Only after actual form-norm symmetry should high-spin type restriction, fixed-slice oscillator and physical closed coercivity be asserted.
+
+**Classification:** independent original-source finite exact diagnostic +0 Lean roots, **63 cumulative S4**. No positive normalizable physical BFSS eigenstates proved.
