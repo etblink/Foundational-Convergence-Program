@@ -91,7 +91,8 @@ theorem originalSourcePBWLeastContraction_coefficient
     B.repr (d x) (I.erase j) =
         B.repr (d (c.sum fun J a => a • B J)) (I.erase j) := by rw [hsum]
     _ = ∑ J ∈ c.support, B.repr (d (c J • B J)) (I.erase j) := by
-      simp only [Finsupp.sum, map_sum, Finset.sum_apply]
+      simp only [Finsupp.sum, map_sum]
+      rw [Finset.sum_apply']
     _ = ∑ J ∈ c.support, (if J = I then c I else 0) := by
       apply Finset.sum_congr rfl
       intro J hJ
