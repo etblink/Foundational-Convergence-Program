@@ -174,27 +174,3 @@ jobs:
           name: bfss-f21a-source-real-continuity-${{ github.run_id }}
           path: /tmp/bfss-f21a
           if-no-files-found: warn
-,log,re.M)
-          obj=pathlib.Path('.lake/build/lib/lean/SU2BFSSPhysicalDomainS1V52L9E5F21AOriginalSpin48SourceVectorActionJointContinuityProbe.olean')
-          good=(int(os.environ['COMPILER_EXIT'])==0 and [name for name,_ in reports]==expected
-            and all({a.strip() for a in v.split(',') if a.strip()}<=allowed for _,v in reports)
-            and not warnings and 'error:' not in log and 'sorryAx' not in log
-            and obj.is_file() and obj.stat().st_size>0)
-          print('F21A_COMPILER_EXIT',os.environ['COMPILER_EXIT'],'REPORTS',reports,'WARNINGS',warnings)
-          if not good: raise SystemExit('F21A_TWO_SOURCE_ROOTS_STRICT_RED')
-          print('F21A_GENUINE_SPIN48_REAL_VECTOR_JOINT_CONTINUITY_TWO_ROOTS_STRICT_PASS')
-          PY
-      - name: Save qualified new source-bound F21A binary
-        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
-        with:
-          path: |
-            upstream-math/lean/.lake/build/lib/lean/OAI
-            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-f21a-original-spin48-vector-continuity-87f554d93022d9dd3cc779947699ba0a599fae9b-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
-      - name: Preserve exact diagnostic evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: bfss-f21a-source-real-continuity-${{ github.run_id }}
-          path: /tmp/bfss-f21a
-          if-no-files-found: warn
