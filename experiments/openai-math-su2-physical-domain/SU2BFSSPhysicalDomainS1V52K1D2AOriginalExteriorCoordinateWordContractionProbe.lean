@@ -60,7 +60,7 @@ theorem originalExteriorCoordinateWord_contraction_zero_of_not_mem
       have hcoord :
           (LinearMap.proj j : Module.Dual ℝ Source48Vector)
             (Pi.single k (1 : ℝ) : Source48Vector) = 0 := by
-        simp [Pi.single_apply, hjk]
+        simp [hjk]
       rw [hcoord, ih hks]
       simp
 
@@ -78,7 +78,7 @@ theorem originalExteriorCoordinateWord_leading_contraction
   have hcoord :
       (LinearMap.proj j : Module.Dual ℝ Source48Vector)
         (Pi.single j (1 : ℝ) : Source48Vector) = 1 := by
-    simp [Pi.single_apply]
+    simp
   rw [hcoord,
     originalExteriorCoordinateWord_contraction_zero_of_not_mem j xs hj]
   simp
