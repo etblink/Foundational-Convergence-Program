@@ -32,6 +32,21 @@ theorem originalSourceSpin48_trivialAction_iff_generator_commutes
     (∀ v : Source48Vector,
       (s : C) * CliffordAlgebra.ι Q v =
         CliffordAlgebra.ι Q v * (s : C)) := by
+  have hstar : star (s : C) * (s : C) = 1 :=
+    spinGroup.star_mul_self_of_mem s.property
+  have hunit : (s : C) * star (s : C) = 1 :=
+    spinGroup.mul_star_self_of_mem s.property
+  have hsrc (v : Source48Vector) :
+      CliffordAlgebra.ι Q
+          (FCP.BFSSS1V31.sourceSpin48VectorAction s v) =
+        (s : C) * CliffordAlgebra.ι Q v * star (s : C) := by
+    have h := FCP.BFSSS1V31.sourceSpin48VectorAction_clifford_generator s v
+    rw [ConjAct.units_smul_def, ConjAct.ofConjAct_toConjAct] at h
+    change
+      CliffordAlgebra.ι Q
+        (FCP.BFSSS1V31.sourceSpin48VectorAction s v) =
+        (s : C) * CliffordAlgebra.ι Q v * star (s : C) at h
+    exact h
   constructor
   · intro h v
     have hc :
@@ -41,21 +56,13 @@ theorem originalSourceSpin48_trivialAction_iff_generator_commutes
         CliffordAlgebra.ι Q v =
           CliffordAlgebra.ι Q
             (FCP.BFSSS1V31.sourceSpin48VectorAction s v) := by rw [h v]
-        _ = (s : C) * CliffordAlgebra.ι Q v * star (s : C) := by
-          simpa only [ConjAct.units_smul_def,
-            ConjAct.ofConjAct_toConjAct] using
-            FCP.BFSSS1V31.sourceSpin48VectorAction_clifford_generator s v
+        _ = _ := hsrc v
     have hc' := congrArg (fun x : C => x * (s : C)) hc
-    simpa only [mul_assoc, spinGroup.coe_star_mul_self, mul_one] using hc'.symm
+    simpa only [mul_assoc, hstar, mul_one] using hc'.symm
   · intro h v
     apply FCP.BFSSS1V30.source48_cliffordGenerator_injective
-    rw [FCP.BFSSS1V31.sourceSpin48VectorAction_clifford_generator]
-    rw [ConjAct.units_smul_def, ConjAct.ofConjAct_toConjAct]
-    change (s : C) * CliffordAlgebra.ι Q v * star (s : C) =
-      CliffordAlgebra.ι Q v
-    rw [h v, mul_assoc, spinGroup.coe_mul_star_self, mul_one]
-
-
+    rw [hsrc v]
+    rw [h v, mul_assoc, hunit, mul_one]
 #print axioms originalSourceSpin48_trivialAction_iff_generator_commutes
 
 end
