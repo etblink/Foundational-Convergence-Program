@@ -39,6 +39,16 @@
       ]
     },
     {
+      "path": "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1AOriginalSpin48KernelCommutantProbe.lean",
+      "blob_sha": "5d1117d1f469a3a76a78c3c4ae4b8896b18b1b7a",
+      "basis": "strict-log-inspected",
+      "source_url": "https://github.com/etblink/Foundational-Convergence-Program/blob/research/openai-math-su2-s1v52-global-lift-scoping-20261019/audits/FCP_BFSS_K1A_SOURCE_SPIN48_KERNEL_COMMUTANT_GATE_CYCLE_2026_10_27.md",
+      "strict_run_url": "https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40491802270",
+      "roots": [
+        "originalSourceSpin48_trivialAction_iff_generator_commutes"
+      ]
+    },
+    {
       "path": "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9D9OriginalNativeSixteenSpin48ActualGaugeUniversalProjectionProbe.lean",
       "blob_sha": "a0195adbc3fb8019a2d962ab566326dabaf90088",
       "basis": "historical-audit-recorded",
