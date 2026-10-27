@@ -68,3 +68,40 @@ The existing original verified `experiments/openai-math-su2-concrete-potential/S
 Next candidate adds only `import SU2BFSSG4JExactGaugeDataAssemblyProbe` and `open FCP.BFSSSU2GaugeG4J` to fix theorem elaboration scope. It retains both public theorem statements and proof bodies **byte-identical** below their declaration lines. Its exact source blob changes from `1ae3ece9bc3916c089f4aded9f814c8642b0de1b` to `81dd44eec7c24790d87493496fc6f50eae0a0e8e`, workflow preflight (two original candidate SHA checks) and new leaf cache key are updated together. The workflow now explicitly requires the actual `SU2BFSSG4JExactGaugeDataAssemblyProbe.olean` object in qualified restored provenance and compiles a *native consumer* importing G4J to check `FCP.BFSSSU2GaugeG4J.pairedGaugeData` before the candidate. A missing cache object must be reported as dependency failure, not fixed by widening assumptions. The associated `isDefEq` timeout is treated as provisional until the first valid gauge-typed elaboration is seen.
 
 The genuinely original source-closed physical form is evaluated *only* at the original gauge-invariant smooth core. This stage is not a new spectral eigenstate existence result. Green CI must still be checked for exact roots, allowed axioms, warnings and candidate object before any count changes.
+
+## Gate #4 — formally accepted, 40472176948, 2026-10-27
+
+**EXACT ORIGINAL-SOURCE GREEN: TWO NEW PRINCIPAL S4 ROOTS.** [Run #40472176948](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40472176948), job `122081658310`, attempt 1, accepted source/workflow commit `fb27ba44a6c8688ace3d2627511400845bae004d`, completed `success`. Wall time **5m 17s**, 2026-10-27T08:14:50Z through 08:20:07Z.
+
+The source and proof were compiled by genuine Lean 4.34.1 from frozen `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`. Exact S4B36 source blob is `81dd44eec7c24790d87493496fc6f50eae0a0e8e`. Original source pins, Green provenance for producers, historical G4K9C, historical H4G1B exact physical Hilbert charge ancestry, S4B34 concrete paired Fock source cache and properly source-hashed S4B35 leaf cache all passed. The native consumer successfully imported accepted D2B14 closed charge form, accepted S4B35 paired source energy, and actual `FCP.BFSSSU2GaugeG4J.pairedGaugeData`.
+
+The decisive compiler evidence is:
+
+```
+FCP_BFSS_S4B36_COMPILER_EXIT 0 ROOT_AXIOMS [
+ ('FCP.BFSSSU2PhysicalDomainS4B36.pairedSourceClosedPhysicalEnergy_on_invariantCore_eq_PauliB',
+  'propext, Classical.choice, Quot.sound'),
+ ('FCP.BFSSSU2PhysicalDomainS4B36.pairedExplicitPauliCoreEnergy_nonneg_on_invariantCore',
+  'propext, Classical.choice, Quot.sound')
+] WARNINGS []
+FCP_BFSS_S4B36_GENUINE_CLOSED_PHYSICAL_PauliB_TWO_ROOTS_STRICT_PASS
+```
+
+The full fresh candidate object was nonempty and the accepted cache-save step passed:
+
+```
+bfss-fcp-s4b36-real-physical-closed-form-81dd44eec7c24790d87493496fc6f50eae0a0e8e-v1-adc7f124-lean4341-d13f23b-Linux-X64
+```
+
+GitHub retained the original run logs/artifact [12719421805](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40472176948/artifacts/12719421805), uploaded 08:20:03Z.
+
+### Exact accepted scientific statement and accounting
+
+1. On every (f : pairedGaugeData.invariantCore), the **actual original source closed physical charge energy** `sourceClosedPhysicalChargeEnergy pairedAlgebraData pairedGaugeData`, evaluated at the native embedded `sourceCoreInClosedChargeDomain pairedAlgebraData pairedGaugeData f`, is equal to the `pairedExplicitPauliCoreEnergy f.val` expression. The latter is original (\tfrac12\sum_p\|\partial_p f\|^2) plus the integral of **the genuine Pauli color wedge-square bosonic potential** and the **paired real Fock (B(x))** fermionic expectation. Normalizations and true source types are not changed.
+2. That full explicit expression is **nonnegative on the original invariant smooth core**, because it agrees with the source closed charge-column norm-square. The fermionic integrand is not independently declared positive, and **no strictly positive gap** is proved.
+
+Accepted S4 roots: 61 before Gate #4, **+2 = 63 uniquely accepted S4 roots**. The initial three S4B36 red attempts remain separately recorded as an import-closure failure, a Python verification syntax error, and a real Lean declaration-scope failure. They are negative knowledge, not three mathematical failures of the verified theorem.
+
+**Limits, not optional caveats:** Gate #4 establishes an identity at the *original invariant smooth-core embedding* of the actual closed gauge physical charge form. It does **not** show the Pauli/Fock coordinate integral remains a literal expression on all of the completed closed form domain or proves the representation-theoretic Spin(9) sector restrictions, uniform valley coercivity, compact resolvent, discrete positive eigenvalues, or infinitely many normalizable positive physical eigenvectors. Other preexisting accepted Hamiltonian/graph and eigenpair *transfer* infrastructure is not an existence proof.
+
+**Next Project Lead scientific target:** do not build more Hamiltonian infrastructure. Confront the frozen manuscript’s Spin(9)→Spin(8) representation branching, exact 16 transverse oscillator and exclusion (n\le m), the global closed-sector projection and form-domain invariance, and the asserted uniform lower coercivity. Prioritize an independently refutable missing lemma/counterexample and a small exact source gate over additional operator wrapping. Preserve and disclose whichever outcome actually occurs.
