@@ -53,8 +53,16 @@ theorem originalSourceSpin48VectorAction_joint_continuous :
     rw [sourceSpin48VectorAction_clifford_generator,
         ConjAct.units_smul_def]
     rfl
+  have hcomp : Continuous
+      ((CliffordAlgebra.ι Q) ∘
+        (fun p : spinGroup Q × Source48Vector =>
+          sourceSpin48VectorAction p.1 p.2)) := by
+    change Continuous (fun p : spinGroup Q × Source48Vector =>
+      CliffordAlgebra.ι Q (sourceSpin48VectorAction p.1 p.2))
+    rw [heq]
+    exact hmul
   exact originalSourceCliffordGenerator_closedEmbedding.isEmbedding.continuous_iff.mpr
-    (heq ▸ hmul)
+    hcomp
 
 #print axioms originalSourceCliffordGenerator_closedEmbedding
 #print axioms originalSourceSpin48VectorAction_joint_continuous

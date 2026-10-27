@@ -42,3 +42,27 @@ bfss-s1v52l9d9-native-universal-spin48-projection-v1-adc7f124-lean4341-d13f23b-L
 That dependency chain is closer to F21A's **actual imported native real vector action** than S1V34. Gate #3 replaces the unavailable S1V34 restore with the L9D9 accepted-source restore, retains the independently green F20F v2 restore, and moves both cache restore and fail-closed `.olean` existence checks ahead of disk removal and Lean/Mathlib installation. The expensive toolchain may start **only if both cache hits and all three actual source ancestor modules exist**. If L9D9 cache has expired or modules are absent, this will be an early and precisely attributed infrastructure failure, not a theory rejection. If source ancestry is present, the existing native parent consumer and exact fresh F21A Lean compilation (two allowed-axiom roots, no warnings, `sorryAx` rejection) remain unchanged. Workflow-only change: candidate Lean proof blob `b029b35a827e099d000d6966c69a7bb7fc84b2a6` remains exact.
 
 Do not claim the source Spin48→SO48 2-sheeted covering or source Spin9 lift even on successful F21A continuity; those are later separate obligations.
+
+## Gate #3 — native original Lean proof failure, source not accepted
+
+[GitHub Actions run #40482566368](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40482566368), job `122116266108`, source/head `3b482fe906f3250f376d8b862ae6508ee5e3d3e2`, completed RED after **both** original qualified cache restores (F20F v2 and L9D9), pinned Lean/Mathlib restoration, and fresh native consumer of genuine original `S1V30`/`S1V31` with exact source action. Unlike Gates #1 and #2, Gate #3 reached the literal F21A Lean proof.
+
+The exact original Lean compiler diagnostic:
+```
+SU2BFSSPhysicalDomainS1V52L9E5F21A...lean:57:5:
+error: invalid `▸` notation, expected result type of cast is
+  Continuous (⇑(CliffordAlgebra.ι Q) ∘ fun p =>
+    sourceSpin48VectorAction p.1 p.2)
+but equality heq has type
+  (fun p => CliffordAlgebra.ι Q (sourceSpin48VectorAction p.1 p.2))
+    = (fun p => ↑p.1 * CliffordAlgebra.ι Q p.2 * star ↑p.1)
+```
+Exact `#print axioms`: root `originalSourceCliffordGenerator_closedEmbedding` has only `propext`, `Classical.choice`, `Quot.sound` (compiled successfully); `originalSourceSpin48VectorAction_joint_continuous` contains **`sorryAx`**, so not accepted. Gate3 accepted **0 new F21A roots** under strict two-root policy. Cumulative previously accepted S4 **63** unchanged; no spectral existence result.
+
+### Bounded Gate #4 repair and log classifier clarification
+
+Preserve the exact two theorem declarations, first root/proof, source topo and Clifford imports; replace only the second root's invalid transport `(heq ▸ hmul)` with an explicit named composition continuity proof `hcomp`: use `change Continuous (fun p => CliffordAlgebra.ι Q (sourceSpin48VectorAction p.1 p.2))`, then `rw [heq]` and `exact hmul`, finally apply the already-qualified original closed embedding `.isEmbedding.continuous_iff.mpr hcomp`. This is a proof elaboration/definitional alignment repair, not a new premise or altered mathematical statement. Frozen accepted parents are untouched.
+
+The original workflow strict verifier's `warnings=re.findall(r'^.*warning:.*$',log,re.M)` swept up unrelated Lake package-status messages such as `warning: belyi: repository ... has local changes`. That is not the candidate Lean compiler diagnostic; keeping it would reject even otherwise clean strict Lean results. Gate #4 narrows the *collected warning report* to source-located Lean warnings using `^.*\\.lean:\\d+:\\d+: warning:`; **the actual Lean command still includes `-DwarningAsError=true`**, all compiler errors are rejected, only `propext`/`Classical.choice`/`Quot.sound` are allowed, `sorryAx` is forbidden, and successful native candidate `.olean` is mandatory. Unrelated Lake warnings remain visible in verbatim Actions logs. The accepted original source hash guard and exact two-root names are preserved; corrected source blob is `87f554d93022d9dd3cc779947699ba0a599fae9b`. Cache key is bumped v2, bound exactly to the corrected source blob.
+
+No exact F21A roots are accepted until an independently green new strict run attests both.
