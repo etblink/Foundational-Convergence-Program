@@ -36,7 +36,9 @@ local instance : LE Source48Label :=
 under contraction at the globally least supported source coordinate. -/
 theorem originalSourcePBWLeastContraction_coefficient
     (x : E) (j : Source48Label)
-    (hmin : ∀ J ∈ (B.repr x).support, ∀ k ∈ J, j ≤ k)
+    (hmin : ∀ (J : Finset Source48Label),
+      J ∈ (B.repr x).support →
+      ∀ (k : Source48Label), k ∈ J → j ≤ k)
     (I : Finset Source48Label)
     (hI : I ∈ (B.repr x).support) (hj : j ∈ I) :
     B.repr
