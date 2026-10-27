@@ -51,8 +51,8 @@ jobs:
             experiments/openai-math-su2-concrete-potential \
             ':(exclude)experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe.lean' \
             ':(exclude)experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B36ActualPhysicalClosedFormPauliManuscriptProbe.lean'
-          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B36ActualPhysicalClosedFormPauliManuscriptProbe.lean)" = "1ae3ece9bc3916c089f4aded9f814c8642b0de1b"
-          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B36ActualPhysicalClosedFormPauliManuscriptProbe.lean)" = "1ae3ece9bc3916c089f4aded9f814c8642b0de1b"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B36ActualPhysicalClosedFormPauliManuscriptProbe.lean)" = "81dd44eec7c24790d87493496fc6f50eae0a0e8e"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B36ActualPhysicalClosedFormPauliManuscriptProbe.lean)" = "81dd44eec7c24790d87493496fc6f50eae0a0e8e"
           test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe.lean)" = "77a1a79f12a7cfdf68f47b6a2420633c1958731f"
           test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainD2B14ExactClosedChargeQuadraticEnergyProbe.lean)" = "e7f22ea071bfe87b3afa8cb65a5dcd598334ae8a"
           test "$(git -C upstream-math rev-parse HEAD)" = "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
@@ -317,6 +317,7 @@ jobs:
           test "${{ steps.acceptedS4B34.outputs.cache-hit }}" = "true"
           test "${{ steps.acceptedS4B35.outputs.cache-hit }}" = "true"
           for name in SU2BFSSPhysicalDomainD2B14ExactClosedChargeQuadraticEnergyProbe \
+            SU2BFSSG4JExactGaugeDataAssemblyProbe \
             SU2BFSSPhysicalDomainS4B34ConcretePauliPairedManuscriptBProbe \
             SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe; do
             test -s "upstream-math/lean/.lake/build/lib/lean/$name.olean" || {
@@ -329,6 +330,8 @@ jobs:
           cat > BFSSS4B36ExactParentsImport.lean <<'LEAN'
           import SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe
           import SU2BFSSPhysicalDomainD2B14ExactClosedChargeQuadraticEnergyProbe
+          import SU2BFSSG4JExactGaugeDataAssemblyProbe
+          #check FCP.BFSSSU2GaugeG4J.pairedGaugeData
           #print axioms FCP.BFSSSU2PhysicalDomainS4B35.pairedOriginalSmoothCoreEnergy_eq_manuscript
           #print axioms FCP.BFSSSU2PhysicalDomainD2B14.sourceClosedPhysicalChargeEnergy_on_sourceCore_eq_massless
           LEAN
@@ -389,7 +392,7 @@ jobs:
         uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
         with:
           path: upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B36ActualPhysicalClosedFormPauliManuscriptProbe.olean
-          key: bfss-fcp-s4b36-real-physical-closed-form-1ae3ece9bc3916c089f4aded9f814c8642b0de1b-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-fcp-s4b36-real-physical-closed-form-81dd44eec7c24790d87493496fc6f50eae0a0e8e-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
       - name: Preserve strict source parent/novel compiler evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

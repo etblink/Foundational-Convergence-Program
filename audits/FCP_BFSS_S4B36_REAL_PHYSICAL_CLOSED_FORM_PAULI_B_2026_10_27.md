@@ -44,3 +44,27 @@ SyntaxError: invalid syntax
 The workflow's multiline `good=p.returncode==0 and ...` expression failed to wrap the full conjunctive predicate in parentheses across lines. No fresh `S4B36` theorem elaboration, native candidate `.olean` or axiom report exists. Therefore **0 new roots**; cumulative S4 **61**. This is a CI Python syntax error, *not* a theorem failure, counterexample, or statement that the closed physical form follows.
 
 **Bounded correction:** wrap the complete `good=(...)` verifier predicate in proper parentheses while retaining both exact roots, all source and axiom restrictions, and unchanged Lean statement/proof blob `1ae3ece9bc3916c089f4aded9f814c8642b0de1b`. Add a lightweight **pre-heavy-toolchain embedded Python AST parser** to detect this class of error before substantial CI cost: require exactly four `python3 - <<'PY'` workflow scripts and `ast.parse` each. This parser is an extra early fail-closed lint check; it is not a substitute for native Lean acceptance. Observe the next CI compiler first error and record it rather than presuming the closed physical bridge is proved.
+
+## Gate #3 run 40471212992 — genuine Lean scope failure, no roots
+
+[GitHub Actions #40471212992](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40471212992), commit `25538d167883c7dd6f0dc50369453776597de782`, job `122078500193`, **5m 09s**, completed red. Early AST preflight proved **all four embedded Python scripts parse**. Source pins, Lean 4.34.1/Mathlib, original mathematical source `etblink/math@adc7f124`, all four accepted caches, strict original closed-charge D2B14 and Pauli S4B35 native import consumer passed. For the first time, the candidate was passed to Lean.
+
+First genuine candidate diagnostic:
+
+```
+SU2BFSSPhysicalDomainS4B36...lean:52:9: unknown identifier pairedGaugeData.invariantCore
+:53:55, :54:56, :57:55, :58:58, :61:28:
+  unknown identifier pairedGaugeData
+:60:8: (deterministic) timeout at isDefEq (200000 heartbeats)
+ROOT_AXIOMS: both targets include sorryAx
+```
+
+**No roots accepted; S4 cumulative 61.** The heartbeat failure occurs after unresolved type-level gauge identifier errors, so is not evidence that increasing maxHeartbeats is appropriate. The first source failure is missing an explicitly imported actual gauge datum, not an abstract mathematical refutation. The original Pauli/Fock source identity and closed physical form were accepted independently in prior gates.
+
+### Minimal science-preserving correction for Gate #4
+
+The existing original verified `experiments/openai-math-su2-concrete-potential/SU2BFSSG4JExactGaugeDataAssemblyProbe.lean` defines *exactly* `FCP.BFSSSU2GaugeG4J.pairedGaugeData : pairedAlgebraData.GaugeData` (the actual six-field normalized SU2 gauge datum, not a surrogate). In the failing S4B36 file, `pairedGaugeData` was used unqualified with `autoImplicit false` and no import/open for `FCP.BFSSSU2GaugeG4J`.
+
+Next candidate adds only `import SU2BFSSG4JExactGaugeDataAssemblyProbe` and `open FCP.BFSSSU2GaugeG4J` to fix theorem elaboration scope. It retains both public theorem statements and proof bodies **byte-identical** below their declaration lines. Its exact source blob changes from `1ae3ece9bc3916c089f4aded9f814c8642b0de1b` to `81dd44eec7c24790d87493496fc6f50eae0a0e8e`, workflow preflight (two original candidate SHA checks) and new leaf cache key are updated together. The workflow now explicitly requires the actual `SU2BFSSG4JExactGaugeDataAssemblyProbe.olean` object in qualified restored provenance and compiles a *native consumer* importing G4J to check `FCP.BFSSSU2GaugeG4J.pairedGaugeData` before the candidate. A missing cache object must be reported as dependency failure, not fixed by widening assumptions. The associated `isDefEq` timeout is treated as provisional until the first valid gauge-typed elaboration is seen.
+
+The genuinely original source-closed physical form is evaluated *only* at the original gauge-invariant smooth core. This stage is not a new spectral eigenstate existence result. Green CI must still be checked for exact roots, allowed axioms, warnings and candidate object before any count changes.

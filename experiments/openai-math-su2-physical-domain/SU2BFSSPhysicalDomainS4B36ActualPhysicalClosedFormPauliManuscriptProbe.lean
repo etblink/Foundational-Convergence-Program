@@ -1,5 +1,6 @@
 import SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe
 import SU2BFSSPhysicalDomainD2B14ExactClosedChargeQuadraticEnergyProbe
+import SU2BFSSG4JExactGaugeDataAssemblyProbe
 
 /-!
 BFSS S4B36 — ACTUAL ORIGINAL closed gauge-physical charge energy,
@@ -27,6 +28,7 @@ open MeasureTheory
 open OAI.BFSSQuantum
 open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2GaugeG1A
+open FCP.BFSSSU2GaugeG4J
 open FCP.BFSSSU2PhysicalDomainD2B14
 open FCP.BFSSSU2PhysicalDomainS4B34
 open FCP.BFSSSU2PhysicalDomainS4B35
