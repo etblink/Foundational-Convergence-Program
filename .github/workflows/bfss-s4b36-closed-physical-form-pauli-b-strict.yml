@@ -69,6 +69,15 @@ jobs:
             "pairedSourceClosedPhysicalEnergy_on_invariantCore_eq_PauliB",
             "pairedExplicitPauliCoreEnergy_nonneg_on_invariantCore"]
           assert "sorry" not in s and "native_decide" not in s
+          # Parse every embedded workflow Python script *before* downloading
+          # Mathlib and four binary caches, to avoid six-minute syntax reds.
+          import ast,textwrap
+          workflow=pathlib.Path(".github/workflows/bfss-s4b36-closed-physical-form-pauli-b-strict.yml").read_text()
+          pythonBlocks=re.findall(r"(?ms)^          python3 - <<'PY'\n(.*?)^          PY$",workflow)
+          assert len(pythonBlocks)==4,("EMBEDDED_SCRIPT_COUNT_CHANGED",len(pythonBlocks))
+          for n,script in enumerate(pythonBlocks):
+            ast.parse(textwrap.dedent(script),filename=f"bfss_s4b36_ci_script_{n}.py")
+          print("FCP_BFSS_S4B36_FOUR_EMBEDDED_PYTHON_SCRIPTS_PARSE_PASS")
           print("FCP_BFSS_S4B36_FROZEN_SOURCES_EXACT_TWO_CANDIDATES_PASS")
           PY
       - name: Independently confirm strict green producer checkpoints
@@ -366,9 +375,10 @@ jobs:
           allowed={"propext","Classical.choice","Quot.sound"}
           notices=re.compile(r"warning: (?P<package>[a-z0-9-]+): repository '[^']*/upstream-math/lean/[.]lake/packages/(?P=package)' has local changes")
           warnings=[line for line in data.splitlines() if "warning:" in line and not notices.fullmatch(line)]
-          good=p.returncode==0 and [n for n,_ in roots]==expected and all(
-            {a.strip() for a in t.split(",") if a.strip()}<=allowed for _,t in roots) and not warnings and
-            "sorryAx" not in data and "error:" not in data and obj.is_file() and obj.stat().st_size>0
+          good=(p.returncode==0 and [n for n,_ in roots]==expected and all(
+            {a.strip() for a in t.split(",") if a.strip()}<=allowed for _,t in roots)
+            and not warnings and "sorryAx" not in data and "error:" not in data
+            and obj.is_file() and obj.stat().st_size>0)
           print("FCP_BFSS_S4B36_COMPILER_EXIT",p.returncode,"ROOT_AXIOMS",roots,"WARNINGS",warnings,flush=True)
           if not good:
             print("FCP_BFSS_S4B36_STRICT_RED",data[-6500:],flush=True)

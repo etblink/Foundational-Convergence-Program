@@ -27,3 +27,20 @@ The new [S4B36 candidate source](../experiments/openai-math-su2-physical-domain/
 ## Independent spectral stop line
 
 Existing fully accepted H5E8BF/D2B28 self-adjoint Hamiltonians and H4G1B conditional eigenpair transfer mean more operator packaging has low information gain. After the S4B36 physical-form bridge is qualified (or its exact missing dependency is recorded), prioritize the frozen manuscript's independently refutable S3→S4→S5 branch restriction, physical Spin(9) form-sector invariance and uniform closed-sector coercivity. Positive normalizable eigenstates are still **unproved**.
+
+## Gate #2: Python verifier syntax red — strictly procedural
+
+[Run 40470172889](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40470172889), source commit `757f89c692c4fbe87962144796aeaf8dc15710a5`, job `122075127068`, completed **failure**, 2026-10-27 07:56:29–08:03:00 UTC (**6m 31s**). Preflight SHA/original source/checkpoint producers, Lean 4.34.1 + Mathlib, **four source-qualified parent caches** (historical G4K9C, H4G1B actual physical charge, S4B34 combined real Pauli-Fock, S4B35 correct-blob leaf) and **fresh native D2B14 + S4B35 accepted root import** all passed.
+
+Actual first new-candidate step **did not start Lean**. Its embedded Python verifier raised:
+
+```
+File "<stdin>", line 21
+  {a.strip() for a in t.split(",") if a.strip()}<=allowed for _,t in roots) and not warnings and
+                                                                                             ^
+SyntaxError: invalid syntax
+```
+
+The workflow's multiline `good=p.returncode==0 and ...` expression failed to wrap the full conjunctive predicate in parentheses across lines. No fresh `S4B36` theorem elaboration, native candidate `.olean` or axiom report exists. Therefore **0 new roots**; cumulative S4 **61**. This is a CI Python syntax error, *not* a theorem failure, counterexample, or statement that the closed physical form follows.
+
+**Bounded correction:** wrap the complete `good=(...)` verifier predicate in proper parentheses while retaining both exact roots, all source and axiom restrictions, and unchanged Lean statement/proof blob `1ae3ece9bc3916c089f4aded9f814c8642b0de1b`. Add a lightweight **pre-heavy-toolchain embedded Python AST parser** to detect this class of error before substantial CI cost: require exactly four `python3 - <<'PY'` workflow scripts and `ast.parse` each. This parser is an extra early fail-closed lint check; it is not a substitute for native Lean acceptance. Observe the next CI compiler first error and record it rather than presuming the closed physical bridge is proved.
