@@ -35,7 +35,7 @@ jobs:
           test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
           test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
           for entry in \
-            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1COriginalSpin48CliffordPolarContractionProbe.lean:f7b5e3f0a1f432a9fa6c02178a59b394eb1c5580" \
+            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1COriginalSpin48CliffordPolarContractionProbe.lean:7334a3616740b902c9e42231efc97ed7566ad8c2" \
             "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1AOriginalSpin48KernelCommutantProbe.lean:5d1117d1f469a3a76a78c3c4ae4b8896b18b1b7a"; do
             f="${entry%%:*}"; expected="${entry#*:}"
             test "$(git rev-parse "HEAD:$f")" = "$expected" || { echo "K1C_GIT_BLOB_MISMATCH=$f"; exit 1; }
@@ -130,7 +130,7 @@ jobs:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-k1c-original-polar-contraction-f7b5e3f0a1f432a9fa6c02178a59b394eb1c5580-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-k1c-original-polar-contraction-7334a3616740b902c9e42231efc97ed7566ad8c2-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
       - name: Preserve precise failure and success evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
