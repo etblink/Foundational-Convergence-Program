@@ -22,18 +22,39 @@ open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainS4B33
 open FCP.BFSSSU2GaugeG1A
 
-/-- Independent exact Pauli-oriented manuscript formula on the ACTUAL
-spin-paired 48-Majorana complex Fock representation. Neither the
-source gamma nor theta is replaced by a proxy representation. -/
-def concretePauliPairedBComplex (x : Boson 2) :
+/-- A source-carrier Pauli-epsilon B(x) expression parameterized by
+an OAI BFSS AlgebraData 2, with its true gamma and theta. It makes no
+universal assertion about the color orientation of that AlgebraData.
+Its purpose is to keep the large paired concrete record opaque during
+the finite-sum coefficient-substitution proof. -/
+private def pauliNormalizedBComplex (M : AlgebraData 2) (x : Boson 2) :
     Fermion 2 →L[ℂ] Fermion 2 :=
   (Complex.I / 2 : ℂ) •
     (∑ b : ColorIndex 2, ∑ β : SpinIndex,
       ∑ δ : SpinIndex, ∑ c : ColorIndex 2,
       ∑ i : SpaceIndex, ∑ a : ColorIndex 2,
         (((Real.sqrt 2 * FCP.BFSSSU2.epsilon3 a b c) *
-           x (i,a) * pairedAlgebraData.gamma i β δ : ℝ) : ℂ) •
-          (pairedAlgebraData.theta β b * pairedAlgebraData.theta δ c))
+           x (i,a) * M.gamma i β δ : ℝ) : ℂ) •
+          (M.theta β b * M.theta δ c))
+
+/-- The independently transcribed positively oriented manuscript B(x)
+on the ACTUAL paired 48-Majorana Fock representation. This is an
+explicit special case of the source-carrier formula, not a proxy. -/
+def concretePauliPairedBComplex (x : Boson 2) :
+    Fermion 2 →L[ℂ] Fermion 2 :=
+  pauliNormalizedBComplex pairedAlgebraData x
+
+/-- Substitute the signed Pauli structure constants while M remains
+OPAQUE. This isolates the six finite sums from the much larger
+definitional reductions of the concrete paired AlgebraData fields. -/
+private theorem manuscriptCoordinateBComplex_eq_pauliNormalizedBComplex
+    (M : AlgebraData 2) (x : Boson 2)
+    (hf : ∀ a b c : ColorIndex 2,
+      M.structureConstant a b c =
+        Real.sqrt 2 * FCP.BFSSSU2.epsilon3 a b c) :
+    manuscriptCoordinateBComplex M x = pauliNormalizedBComplex M x := by
+  unfold manuscriptCoordinateBComplex pauliNormalizedBComplex
+  simp_rw [hf]
 
 /-- Genuine constructed N=2 source massless real fermion field equals
 the normalized +i/2 Pauli-epsilon B(x) in the original Fock operator
@@ -54,8 +75,10 @@ theorem concretePauliPairedRealFockField_eq_B
       pairedAlgebraData hcolor a b c
   have hB : manuscriptCoordinateBComplex pairedAlgebraData x =
       concretePauliPairedBComplex x := by
-    unfold manuscriptCoordinateBComplex concretePauliPairedBComplex
-    simp_rw [hf]
+    change manuscriptCoordinateBComplex pairedAlgebraData x =
+      pauliNormalizedBComplex pairedAlgebraData x
+    exact manuscriptCoordinateBComplex_eq_pauliNormalizedBComplex
+      pairedAlgebraData x hf
   calc
     pairedAlgebraData.deformedFermionField 1 0 x =
         (manuscriptCoordinateBComplex pairedAlgebraData x).restrictScalars ℝ :=
