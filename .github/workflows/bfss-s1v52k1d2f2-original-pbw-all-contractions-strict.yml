@@ -1,0 +1,131 @@
+name: BFSS K1D2F2 Original PBW All Contractions Strict
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-s1v52k1d2f2-original-pbw-all-contractions-strict.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  k1d2f2-original-occupancy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 42
+    steps:
+      - name: Checkout exact research source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Checkout original pinned mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+      - name: Pin original K1D2F1 theorem and one new F2 root
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-k1d2f2
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2F2OriginalPBWAllContractionsNoOccupiedLabelsProbe.lean)" = 0dc59f0b2b5fe38f761bac4277049498a67d2871
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2F2OriginalPBWAllContractionsNoOccupiedLabelsProbe.lean)" = 0dc59f0b2b5fe38f761bac4277049498a67d2871
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2F1OriginalPBWLeastContractionCoefficientProbe.lean)" = 1c7b4543ca810a4017767ee79d1a0a5942c130cd
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2E4OriginalPBWFinitelyOccupiedMinimumProbe.lean)" = 96adf2cf80e5dd81c71220e0cb811cf9b8494cf3
+          python3 - <<'PY'
+          import json,pathlib,re
+          m=json.loads(pathlib.Path('upstream-math/lean/lake-manifest.json').read_text())
+          assert next(p['rev'] for p in m['packages'] if p['name']=='mathlib')=='d13f23b723b8a846827a245b89c10fc7d3f11612'
+          src=pathlib.Path('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2F2OriginalPBWAllContractionsNoOccupiedLabelsProbe.lean').read_text()
+          root='originalSourcePBWAllContractions_zero_implies_no_occupied_labels'
+          assert re.findall(r'^namespace (\S+)',src,re.M)==['FCP.BFSSS1V52K1D2F2']
+          assert re.findall(r'^theorem (\S+)',src,re.M)==[root]
+          assert re.findall(r'^#print axioms (\S+)',src,re.M)==[root]
+          assert not re.search(r'^\s*(sorry|axiom|native_decide)\b',src,re.M)
+          print('K1D2F2_ORIGINAL_ONE_ROOT_SOURCE_PIN_PASS')
+          PY
+      - name: Restore independently qualified K1D2F1 compiled ancestry
+        id: qualified
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-k1d2f1-original-pbw-least-contraction-1c7b4543ca810a4017767ee79d1a0a5942c130cd-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Require actual qualified ancestor artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.qualified.outputs.cache-hit }}" = true || { echo K1D2F2_K1D2F1_QUALIFIED_CACHE_MISSING; exit 1; }
+          for stem in \
+            SU2BFSSPhysicalDomainS1V52K1D2F1OriginalPBWLeastContractionCoefficientProbe \
+            SU2BFSSPhysicalDomainS1V52K1D2E4OriginalPBWFinitelyOccupiedMinimumProbe \
+            SU2BFSSPhysicalDomainS1V52K1D2E3OriginalPBWLeastCoordinateContractionProbe \
+            SU2BFSSPhysicalDomainS1V52K1D2COriginalExteriorPBWBasisOrderedWordProbe; do
+            test -s "upstream-math/lean/.lake/build/lib/lean/$stem.olean" || { echo "K1D2F2_ANCESTOR_OLEAN_MISSING=$stem"; exit 1; }
+          done
+          echo K1D2F2_ACCEPTED_SOURCE_BINARY_ANCESTRY_PASS
+      - name: Prepare pinned Lean 4.34.1 and Mathlib
+        shell: bash
+        timeout-minutes: 26
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          timeout 180s elan toolchain install leanprover/lean4:v4.34.1
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo K1D2F2_PINNED_LEAN_ENV_PASS
+      - name: Compile original F2 candidate and audit axioms
+        shell: bash
+        timeout-minutes: 10
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=SU2BFSSPhysicalDomainS1V52K1D2F2OriginalPBWAllContractionsNoOccupiedLabelsProbe
+          cp "../../experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+          set +e
+          timeout 540s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" > /tmp/bfss-k1d2f2/lean.log 2>&1
+          ec=$?
+          set -e
+          cat /tmp/bfss-k1d2f2/lean.log
+          COMPILER_EXIT="$ec" python3 - <<'PY'
+          import os,pathlib,re
+          log=pathlib.Path('/tmp/bfss-k1d2f2/lean.log').read_text()
+          wanted='FCP.BFSSS1V52K1D2F2.originalSourcePBWAllContractions_zero_implies_no_occupied_labels'
+          reports=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          bad=[l for l in log.splitlines() if '.lean:' in l and ': warning:' in l]
+          obj=pathlib.Path('.lake/build/lib/lean/SU2BFSSPhysicalDomainS1V52K1D2F2OriginalPBWAllContractionsNoOccupiedLabelsProbe.olean')
+          allowed={'propext','Classical.choice','Quot.sound'}
+          ok=(int(os.environ['COMPILER_EXIT'])==0 and [n for n,_ in reports]==[wanted] and
+            all({v.strip() for v in a.split(',') if v.strip()}<=allowed for _,a in reports) and
+            not bad and 'error:' not in log and 'sorryAx' not in log and
+            obj.is_file() and obj.stat().st_size>0)
+          print('K1D2F2_COMPILER_EXIT',os.environ['COMPILER_EXIT'],'REPORTS',reports,'WARNINGS',bad)
+          if not ok: raise SystemExit('K1D2F2_ORIGINAL_ONE_ROOT_STRICT_RED')
+          print('K1D2F2_ORIGINAL_PBW_ALL_CONTRACTIONS_ONE_ROOT_STRICT_PASS')
+          PY
+      - name: Preserve independently qualified F2 compiled object
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-k1d2f2-original-pbw-all-contractions-0dc59f0b2b5fe38f761bac4277049498a67d2871-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Archive both failure and success logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-k1d2f2-original-pbw-${{ github.run_id }}
+          path: /tmp/bfss-k1d2f2
+          if-no-files-found: warn

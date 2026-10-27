@@ -367,3 +367,34 @@ theorem Finset.sum_apply' :
 This statement **literally matches** the unresolved subgoal of pointwise evaluation of a finite sum in the Finsupp-valued `B.repr` codomain; it is not the unprimed function-valued `Finset.sum_apply`, nor generic `Finsupp.sum_apply`. The next source, blob `1c7b4543ca810a4017767ee79d1a0a5942c130cd`, commit [`bcb32bc4`](https://github.com/etblink/Foundational-Convergence-Program/commit/bcb32bc4513ff9311205a6dd828fa357c032398d), replaces the unused simp argument with an explicit `rw [Finset.sum_apply']` immediately after the proven `Finsupp.sum` and `map_sum` reductions. Workflow pin commit [`9a8b76e7`](https://github.com/etblink/Foundational-Convergence-Program/commit/9a8b76e7f351421b62b3e046d79a7fdab71747f3); [strict run 40550171138](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40550171138) initiated.
 
 The original theorem is **unchanged**. This is a targeted source-library theorem correction, not weakened warning policy or new axioms. F1 remains UNACCEPTED until the terminal strict gate succeeds with an actual compiled `.olean` and permitted-axiom output. F2 remains only STAGED.
+
+
+## October 27 reentry after owner math integration: F1 GREEN, F2 exact one-root gate launched
+
+[Strict run 40550171138](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40550171138),
+job `122351441024`, completed **SUCCESS**. It compiled the exact original
+`K1D2F1` source blob `1c7b4543ca810a4017767ee79d1a0a5942c130cd`
+with **COMPILER_EXIT 0**, no warnings or `sorryAx`, exact one declaration
+`FCP.BFSSS1V52K1D2F1.originalSourcePBWLeastContraction_coefficient`,
+and only `propext`, `Classical.choice`, `Quot.sound`.
+Marker `K1D2F1_ORIGINAL_PBW_LEAST_COEFFICIENT_ONE_ROOT_STRICT_PASS`,
+qualified compiled cache saved; this is **+1 accepted source-exact theorem
+root**, bringing K1D2A–F1 cumulative accepted roots from 15 to **16**.
+Earlier F1 failures and the decisive primed `Finset.sum_apply'` repair
+remain intact as negative knowledge.
+
+Next **F2**, the already-staged unchanged source blob
+`0dc59f0b2b5fe38f761bac4277049498a67d2871`, has been supplied
+with an independent workflow `.github/workflows/bfss-s1v52k1d2f2-original-pbw-all-contractions-strict.yml` (blob `3fac701338b2192d21136444061299b23dad9e8a`).
+It restores only the accepted original F1 compiled cache and qualified
+ancestry, preserves `etblink/math@adc7f124`, Lean 4.34.1/Mathlib
+`d13f23b`, checks source blob pins, compiles the actual original F2
+Finset-occupancy theorem freshly, and requires zero compiler diagnostics
+and exactly one permitted-axiom theorem root before saving its own cache.
+**No F2 acceptance is claimed until its terminal strict gate succeeds.**
+
+This is the resumed FCP original exterior scalar-kernel research frontier.
+The separately owner-controlled `etblink/math` community alignment is
+already usable at 27 qualified contributed modules, with one bounded
+bivector proof still undergoing CI. No upstream community PR or owner main
+merges are required before continuing FCP research.
