@@ -42,7 +42,7 @@ theorem originalSourcePolar_halfSingle_eq_coordinateDual
       (Pi.single j (1 : ℝ) : Source48Vector) ⬝ᵥ v = v j := by
     simp [dotProduct, Pi.single_apply]
   rw [hsingle]
-  norm_num
+  ring
 
 /-- Every original Spin48 element in the genuine source vector
 action kernel is killed by EACH original exterior coordinate-dual
