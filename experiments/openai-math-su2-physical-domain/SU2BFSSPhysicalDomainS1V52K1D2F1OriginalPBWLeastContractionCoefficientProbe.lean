@@ -74,7 +74,8 @@ theorem originalSourcePBWLeastContraction_coefficient
         simp [Basis.repr_self_apply, hJI, herase]
     · have hJI : J ≠ I := by
         intro he
-        exact hjJ (he ▸ hj)
+        subst J
+        exact hjJ hj
       change B.repr
         (CliffordAlgebra.contractLeft (Q := Q0)
           (LinearMap.proj j : Module.Dual ℝ Source48Vector)
