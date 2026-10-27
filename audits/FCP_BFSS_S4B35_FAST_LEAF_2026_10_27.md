@@ -47,3 +47,24 @@ FCP_BFSS_S4B35_PAIRED_SMOOTH_CORE_TWO_ROOTS_STRICT_PASS
 ### Post-acceptance cache-key defect — label corrected without changing theorem
 
 The newly compiled S4B35 leaf was saved successfully in the accepted run but named using the **stale pre-repair candidate** prefix `c9d7c5bea1b5`. This is an infrastructure provenance-label defect, NOT a Lean failure or a defect in the accepted theorem statement/proof, whose actual blob is `77a1a79f12a7cfdf68f47b6a2420633c1958731f`. Do **not** use the old misnamed leaf cache in new research gates. The separate qualified S4B34 ancestry cache is unaffected. This follow-on workflow-only source-binding repair changes the leaf `actions/cache/save` key to `bfss-fcp-s4b35-paired-source-energy-77a1a79f12a7cfdf68f47b6a2420633c1958731f-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}`, and asks the normal strict workflow to rerun unchanged Lean mathematics to save the correctly named artifact. Do not count the same two roots again if it succeeds. The historical run and erroneous cache key remain audit-visible for reproducibility.
+
+## Gate #3 run 40467255128 — source-bound cache-key qualification
+
+**VERIFIED GREEN — infrastructure/provenance acceptance, +0 scientific roots.**
+
+- [GitHub Actions run 40467255128](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40467255128), job `122065556443`, attempt 1, commit `1adbd547213c2e0c2d631ebe720fed07376154f3`, completed `success`. Started **2026-10-27T07:27:45Z**, completed **07:32:44Z** (4m 59s wall clock).
+- Source proofs and original source blob **unchanged** from Gate #2: `experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B35PairedSourceSmoothCoreEnergyProbe.lean`, Git SHA `77a1a79f12a7cfdf68f47b6a2420633c1958731f`; source revisions `etblink/math@adc7f124...`, Lean **4.34.1**, Mathlib `d13f23b...` unchanged. Only workflow-cache label changed.
+- All exact source/pins, independent accepted S4B34 cache producer attestation, historical G4K9C cache restoration, independently qualified combined S4B34 original Pauli/Fock cache restoration, and fresh native accepted-parent import passed.
+- Strict candidate log: `FCP_BFSS_S4B35_COMPILER_EXIT 0`; precisely `FCP.BFSSSU2PhysicalDomainS4B35.pairedBosonicPotential_eq_wedge` and `FCP.BFSSSU2PhysicalDomainS4B35.pairedOriginalSmoothCoreEnergy_eq_manuscript`, each only `propext`, `Classical.choice`, `Quot.sound`; `WARNINGS []`; `FCP_BFSS_S4B35_PAIRED_SMOOTH_CORE_TWO_ROOTS_STRICT_PASS`.
+- Original Actions log explicitly states the **corrected cache has been saved**:
+
+```
+Cache saved with key:
+bfss-fcp-s4b35-paired-source-energy-77a1a79f12a7cfdf68f47b6a2420633c1958731f-v2-adc7f124-lean4341-d13f23b-Linux-X64
+```
+
+The earlier `c9d7c5bea1b5` leaf cache is an **invalid provenance label** for the accepted source and must not be reused; the new exact-blob key is the sole qualified S4B35 leaf cache from this sequence. Gate #3 repeats both already accepted roots, **not two new discoveries**; cumulative S4 strictly accepted remains **61**.
+
+**Observed speed:** full Gate122 18m 50s; strictly green cached leaf Gate #2 4m 34s; correctly keyed cache qualification Gate #3 4m 59s. Distinct proof workloads prohibit claiming an exact controlled speedup, but repeated 4–5 minute compiled-leaf success validates the architecture's operational advantage.
+
+**Research boundary:** the two genuine source-derived original smooth-core equalities are accepted. Physical invariant-space closed quadratic-form/domain identification, essential self-adjointness, compactness, and positive normalizable eigenstates are NOT accepted or implied. Next bound should inspect the available source-defined physical projection and closure/domain machinery and identify the *first* exact missing statement before proving a new leaf.
