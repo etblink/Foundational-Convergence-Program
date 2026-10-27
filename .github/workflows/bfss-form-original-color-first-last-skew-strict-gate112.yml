@@ -1,4 +1,4 @@
-name: BFSS Form Original Full Source Variation Gamma Contraction Strict Gate 111
+name: BFSS Form Original Color First Last Skew Strict Gate 112
 
 # Prove first/last skew for actual original structureConstant using exact ColorLie trace ancestry; no manuscript B(x) operator equality.
 # Direct Lean 4.34.1 compilation with pinned Core / MassiveCoercivity / ColorMatrices ancestry,
@@ -802,7 +802,7 @@ jobs:
                   cwd=work,stdout=out,stderr=subprocess.STDOUT)
           parentB23Data=parentB23Log.read_text()
           parentB23Expected=["FCP.BFSSSU2PhysicalDomainS4B23.originalSourceVariationCoefficient_full_gamma_spinor_contraction"]
-          parentB23Reports=re.findall(r"'([^']+)' depends on axioms:\\s*\\[([^\\]]*)\\]",parentB23Data)
+          parentB23Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB23Data)
           parentB23OK=(parentB23Run.returncode==0
               and [name for name,_ in parentB23Reports]==parentB23Expected
               and all({a.strip() for a in axs.split(",") if a.strip()}<=
