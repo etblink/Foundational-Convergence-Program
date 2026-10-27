@@ -128,7 +128,7 @@ jobs:
           cat /tmp/bfss-k1d2f1/lean.log
           COMPILER_EXIT="$exitcode" python3 - <<'PY'
           import os,pathlib,re
-          roots=['originalSourceExteriorPBWBasis_contraction_erase_of_least']
+          roots=['originalSourcePBWLeastContraction_coefficient']
           expected=['FCP.BFSSS1V52K1D2F1.'+x for x in roots]
           log=pathlib.Path('/tmp/bfss-k1d2f1/lean.log').read_text()
           reports=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
