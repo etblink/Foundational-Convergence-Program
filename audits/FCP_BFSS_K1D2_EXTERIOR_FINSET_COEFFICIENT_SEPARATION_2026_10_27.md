@@ -104,3 +104,22 @@ Two statements, still unaccepted:
 2. `originalSourceExteriorPBWOrderedLabels_nodup` — the same original finite-label list is repetition-free, enabling the K1D2B nonzero-erasure lemma.
 
 This is an **independent branch** from the K1D2B erasure proof; it imports strictly qualified K1D2A and accepted F20B, so it can run without treating the still-staged K1D2B as proved. [Strict CI #40514167527](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40514167527), source-hash-pinned against the accepted K1D2A cache and frozen original Mathlib, was launched; all claims remain unqualified until terminal fresh Lean/axiom evidence. An actual Lean mismatch in the PBW/ordered-list identity would be a valuable *source-definition or proof-interface* finding and must not be papered over by switching to a different order.
+
+
+## K1D2B Gate 2 — final strict acceptance of genuine nonzero erasure theorem
+
+[GitHub Actions #40513783572](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40513783572), job `122222245808`, completed **SUCCESS** at the exact original candidate Git blob `9a0a119273e3215f05105344ac64f0a9c74853ac`. Pinned original Lean 4.34.1 and Mathlib `d13f23b...`, exact accepted K1D2A source cache and ancestry, fresh new nonempty `.olean`, one exact `#print axioms` root with only `propext`, `Classical.choice`, `Quot.sound` and zero warnings/sorryAx passed. Compiler record:
+```text
+'FCP.BFSSS1V52K1D2B.originalExteriorCoordinateWord_contract_present_nonzero_erase'
+depends on axioms: [propext, Classical.choice, Quot.sound]
+K1D2B_COMPILER_EXIT 0
+K1D2B_ORIGINAL_EXTERIOR_NONZERO_ERASURE_ONE_ROOT_STRICT_PASS
+Cache saved with key:
+bfss-k1d2b-original-exterior-nonzero-erasure-9a0a119273e3215f05105344ac64f0a9c74853ac-v1-adc7f124-lean4341-d13f23b-Linux-X64
+```
+
+**Exactly +1 NEW genuine original-source theorem root.** For any `xs : List Source48Label` with `xs.Nodup` and `j∈xs`, the exact original exterior `LinearMap.proj j` contraction of `originalExteriorCoordinateWord xs` equals `c • originalExteriorCoordinateWord (xs.erase j)` for a **proved (c:ℝ) with (c ≠ 0)**. No surrogate basis, no 2^48 enumeration, no assumed scalar commutant. This is the essential noncancellation ingredient for the original F20B `Finset` coefficient extraction, **not that extraction itself**. The source acceptance registry now has **13** reviewed source hash pins (K1D2A + K1D2B, historical prior 11).
+
+The original K1D2B Gate 1 [#40512802963](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40512802963) remains red, with its exact list-membership `j=k∨j∈ks` error, an unused simplifier argument, and rejected `sorryAx`. Gate2 changed only the proof and source hash, not the theorem statement.
+
+**Pending independent K1D2C:** exact source F20B exterior PBW basis `Finset` indexed ↔ original ordered word. Even if K1D2C succeeds, the common-contraction kernel scalar theorem still needs a strict coefficient-extraction and scalar `B∅=1` proof.
