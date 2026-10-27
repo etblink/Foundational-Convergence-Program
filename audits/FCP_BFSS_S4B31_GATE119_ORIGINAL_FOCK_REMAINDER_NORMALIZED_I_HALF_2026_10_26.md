@@ -1,6 +1,6 @@
 # BFSS S4B31 — genuine original Fock remainder coefficient +i/2 normalization, Gate119
 
-**Status: strict Gate119 theorem CANDIDATE, not accepted.** Prior **55** unique accepted scoped S4 principal roots, through independently verified [Gate118 run #40441374836](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40441374836), job 121982272913, original source `FCP.BFSSSU2PhysicalDomainS4B30.originalComplexFermionContraction_full_signed_source`, immutable candidate Git blob `6a43c9a36b556acaa3d7f3b3bd1dd26704c686b0`. The Gate118 acceptance audit contains its exact original compiler/axiom evidence.
+**Status: Gate119 #1 verified RED; Gate119 #2 narrowly repaired candidate pending strict verification.** Prior **55** unique accepted scoped S4 principal roots, through independently verified [Gate118 run #40441374836](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40441374836), job 121982272913, original source `FCP.BFSSSU2PhysicalDomainS4B30.originalComplexFermionContraction_full_signed_source`, immutable candidate Git blob `6a43c9a36b556acaa3d7f3b3bd1dd26704c686b0`. The Gate118 acceptance audit contains its exact original compiler/axiom evidence.
 
 ## Scientifically exact new theorem
 
@@ -25,3 +25,20 @@ Private uncounted `signedPhase_normalize` proves the exact scalar identity on an
 ## Scientific limits
 
 This gate, even if accepted, **does not identify the original real** `M.deformedFermionField 1 0 x` with the October 5 relative SU(2) BFSS manuscript's actual (B(x)) formulation, nor settle source/material basis/color normalizations or physical operator spectral existence. A following gate must qualify the real-linear `restrictScalars ℝ` identity using accepted S4B10 and actual source structure constants, then compare to source manuscript, preserving operator domains and negative knowledge. Canonical main, upstream mathematical source and draft PR #25 stay unchanged.
+
+
+## Gate119 #1 — verified RED, exact first compiler diagnostics
+
+[GitHub Actions run #40442932493](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40442932493), job `121987295912`, HEAD `3f25048aaf00ecc57c4dda40076a9ef07fccaeaa`, terminal `completed/failure`. Original frozen BFSS source, strict workflow and SHA provenance, pinned Lean 4.34.1/Mathlib, qualified G4K9C cache, source imports and all accepted S4B3–S4B30 parent theorem/axiom checks passed. Last parent `GATE119_ACCEPTED_S4B30_PARENT_FRESH_PASS 173576`. Fresh candidate warnings `[]` but `GATE119_COMPILER_EXIT 1`, single named proposed root's axiom report includes `sorryAx`; **0** new roots and accepted S4 remains **55**. Compiler first causes:
+
+```text
+SU2BFSSPhysicalDomainS4B31OriginalFockRemainderNormalizedIHalfProbe.lean:31:43: error: unsolved goals
+⊢ (1 / 16 * (-Complex.I * ↑(-8 * r))) • v = (1 / 16 * -Complex.I * ↑(-8 * r)) • v
+SU2BFSSPhysicalDomainS4B31OriginalFockRemainderNormalizedIHalfProbe.lean:96:6: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached
+```
+
+The first is an associativity mismatch in a generic opaque complex module after `smul_smul`; it calls for `mul_assoc`, **not** altered -i/16/-8 factors or a source hypothesis. The second happens when Lean elaborates the full original PiLp complex CLM application of the private triple-sum normalization lemma without explicit generic index/carrier types. It indicates a proof-engineering elaboration cost, **not** that the mathematical identity is false. Preserve both errors as first-class negative knowledge, no blanket timeout/heartbeats/axiom relaxation and no green acceptance.
+
+## Gate119 #2 — proof-only, SHA-pinned narrow recovery
+
+Single atomic candidate/workflow/audit source update. New candidate git blob `7c0f8d366f55081e7de425921b855281270d90e1`; previous attempted candidate `f6206be25dadc36ef4fd865d853d8263cf7cfc26` retained by immutable red run. Proof now explicitly simplifies `[smul_smul, mul_assoc]` in the scalar helper; and specifies `I := ColorIndex N`, `J := SpinIndex`, `K := FermionIndex N`, `V := Fermion N →L[ℂ] Fermion N` before applying the generic triple-sum lemma to the full source expression. Exact physical theorem statement and real/complex source coefficients are unchanged, as are all accepted parent root blobs and strict checks. **Not accepted until terminal exact Lean/axiom gate passes**; S4 remains 55.

@@ -29,7 +29,7 @@ private theorem signedPhase_normalize
   calc
     _ = (((1 / 16 : ℂ) * (-Complex.I)) *
           (((-8 : ℝ) * r : ℝ) : ℂ)) • v := by
-          simp only [smul_smul]
+          simp only [smul_smul, mul_assoc]
     _ = ((Complex.I / 2 : ℂ) * (r : ℂ)) • v := by
           exact congrArg (fun z : ℂ => z • v) (by
             rw [Complex.ofReal_mul]
@@ -93,7 +93,12 @@ theorem originalComplexFermionContraction_normalized_i_half
                     (M.theta β A * M.theta q.1 q.2)) :=
           originalComplexFermionContraction_full_signed_source M x
     _ = _ :=
+      -- Fix all abstract index and carrier types before elaborating the
+      -- original large source Fock expression; avoid speculative instance
+      -- search during higher-order metavariable assignment.
       signedPhase_normalize_triple
+        (I := ColorIndex N) (J := SpinIndex) (K := FermionIndex N)
+        (V := Fermion N →L[ℂ] Fermion N)
         (fun A β q =>
           ∑ j : SpaceIndex, ∑ C : ColorIndex N,
             M.structureConstant C A q.2 *
