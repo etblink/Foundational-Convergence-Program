@@ -272,3 +272,15 @@ The mathematical kernel candidate is that the **actual** Clifford Spin(48) vecto
 The independent spectral S3→S4→S5 falsification track remains **open**. The frozen manuscript explicitly assumes the global source Spin(9) representation and closed form q covariance before type restriction; neither finite covariance checks nor the new kernel argument discharges it. Continue independent counterexample search on original gauge-physical slices and uniform closed-domain estimates; do not promote any conditional local oscillator calculation to a spectral theorem.
 
 **Immutable accounting:** F21A new accepted 2; S4 accepted 63; this analytic operation **+0**; positive normalizable original BFSS eigenstates not established. Canonical \`main\`, original \`etblink/math\` revision and draft PR #25 unchanged.
+
+## Dependency graph and acceptance provenance registry — successor update (2026-10-27)
+
+A new **source-derived, maintained Lean import graph** is now the preferred way to inspect reusable ancestry before proposing a theorem:
+- [BFSS Lean dependency map and reuse registry](../meta/BFSS_LEAN_DEPENDENCY_GRAPH.md) — readable overview, concrete interface boundaries and next proof obligations.
+- [Source dependency generator](../tools/bfss_dependency_graph.py) — scans both BFSS experimental trees (including recovery), computes forward/reverse import closure and Git blob SHA, outputs Mermaid, DOT, Markdown or JSON. It does **not** infer proof dependency/acceptance from imports.
+- [Partial reviewed qualification receipts](../meta/bfss-dependency-qualification.json) — exact source-blobs and linked original acceptance records for **seven** strategically reusable modules, consciously not a complete acceptance ledger.
+- [Research branch static graph check](../.github/workflows/bfss-dependency-graph-check.yml) — checks script syntax, source pins and a generated F21A ancestry view on selected research-branch changes. Its success is **not** a Lean root acceptance.
+
+Procedural directive for successors: *start by querying the existing module dependency graph and acceptance audit before creating any new Lean file*. A full original proof and physical-meaning bridge still must be discharged even if the imported interface exists; source definition-level mistakes and stale accepted blob SHAs should fail closed. Preserve theorem status in the strict audit and only small reviewed evidence pointers in the registry. Never append current individual gate results to the evergreen research guide.
+
+This infrastructure cycle contributes **zero new Lean theorem roots**. At the creation of this entry the first static workflow run may still be executing; check its actual terminal result before calling the graph-automation gate qualified. The mathematical next task remains source-exact KERNEL-PBW-1 and the independent spectral falsification track.
