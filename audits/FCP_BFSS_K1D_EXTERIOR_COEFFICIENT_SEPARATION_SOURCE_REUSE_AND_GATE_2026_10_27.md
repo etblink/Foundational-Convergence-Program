@@ -113,3 +113,10 @@ K1D1_S1V38_CACHE_MISSING
 **No new K1D1 Lean declarations compiled; +0 K1D1 roots.** This is binary-cache provenance, not a counterexample to the exact original polar-coordinate theorem.
 
 **Recovery decision:** Source K1D1 theorem statements remain unchanged. Before rebuilding any accepted S1V38 source, test whether the currently **available qualified K1D0 cache** already contains a nonempty original `S1V38.olean`. Remove the unnecessarily strict requirement that a *particular* S1V38 cache key must hit, but retain exact S1V38 Git source blob pin and fail closed unless its compiled `.olean` is actually present. If not present, record that specific missing artifact, and recover accepted S1V38 source and its predecessor chain separately. Do not silently synthesize substitute source facts or call a cache miss a mathematical red.
+
+
+## K1D1 Gate 2 — source-blob-preserving ancestry route confirmed
+
+[Actions #40498476000](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40498476000), source/workflow commit `03db6c3e08e5fcb29f3d9e8371cc754e4e9e453d`, keeps the **unchanged K1D1 candidate blob** `81a8b8163bc12b61427fde260fc2778a9cb20097` and the same literal original source theorem statements. It corrects only Gate 1's overconstrained cache provenance condition: explicitly restores the accepted K1D0 cache and attempts the accepted historical S1V38 cache, but permits S1V38's verified nonempty `.olean` to originate in the already qualified K1D0 binary ancestry.
+
+**Actual completed source/ancestry observations:** preflight source blob pins passed; exact K1D0 cache restored; dedicated S1V38 cache reported unavailable; the fail-closed test of the actual S1V38 compiled module **passed** in the accepted K1D0 cache. This qualifies the *input ancestry*, NOT the K1D1 theorem; fresh Lean compilation, two exact roots, permitted axioms, and candidate binary save require separate terminal gate verification. Do not claim K1D1 accepted merely from this.
