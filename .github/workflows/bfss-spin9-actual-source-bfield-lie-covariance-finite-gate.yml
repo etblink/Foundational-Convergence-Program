@@ -1,0 +1,79 @@
+name: BFSS Actual Source Spin9 B-Field Lie and Gauge Covariance Finite Gate
+
+# Exact integer finite-source adversarial test, zero new Lean roots.
+# It does NOT certify an original global Spin9-to-Spin48 group lift.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-spin9-actual-source-bfield-lie-covariance-finite-gate.yml
+      - experiments/openai-math-su2-physical-domain/bfss_actual_source_gamma_bfield_spin9_lie_covariance_2026_10_27.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  literal-source-b-field-covariance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout source-bound FCP research
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Checkout original frozen BFSS manuscript
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            preprints/Positive-eigenvalues-of-the-relative-SU-2-BFSS-Hamiltonian-October-5-2026/build
+          sparse-checkout-cone-mode: false
+      - name: Fail closed on original source and exact diagnostic script
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean)" = 5ec0fcb039fb5c1367f72b2bd0f8c05fcd936587
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean)" = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B36ActualPhysicalClosedFormPauliManuscriptProbe.lean)" = 81dd44eec7c24790d87493496fc6f50eae0a0e8e
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/bfss_actual_source_gamma_spin9_center_exact_2026_10_27.py)" = 6430043cadc977e98c6b7cd3d64058f56ee899e2
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/bfss_actual_source_gamma_bfield_spin9_lie_covariance_2026_10_27.py)" = 9eb39ebb0fb3a01a6df91f5efb9bf4223bb0aac4
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/bfss_actual_source_gamma_bfield_spin9_lie_covariance_2026_10_27.py)" = 9eb39ebb0fb3a01a6df91f5efb9bf4223bb0aac4
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(git -C upstream-math rev-parse HEAD:preprints/Positive-eigenvalues-of-the-relative-SU-2-BFSS-Hamiltonian-October-5-2026/build/positive-eigenvalues-relative-su2-bfss.tex)" = 12c5fffb5f90b48856f60fb0e93c18e2490c5f1b
+          python3 -m py_compile experiments/openai-math-su2-physical-domain/bfss_actual_source_gamma_bfield_spin9_lie_covariance_2026_10_27.py
+          echo ACTUAL_BFIELD_SPIN9_EXACT_SOURCE_AND_SCRIPT_PINS_PASS
+      - name: Install pinned array engine for exact integer matrix products
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --user 'numpy==2.3.4'
+          python3 - <<'PY'
+          import numpy
+          assert numpy.__version__=="2.3.4"
+          print("SOURCE_COVARIANCE_NUMPY_PIN_PASS",numpy.__version__)
+          PY
+      - name: Check actual Pauli B source tensor Lie algebra, finite quarter turns and gauge commutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -B experiments/openai-math-su2-physical-domain/bfss_actual_source_gamma_bfield_spin9_lie_covariance_2026_10_27.py \
+            --gamma-source experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean \
+            | tee /tmp/bfss-actual-source-bfield-spin9.log
+          grep -qx 'ACTUAL_SOURCE_SPATIAL_B_LIE_AND_QUARTER_TURNS_PASS 972' /tmp/bfss-actual-source-bfield-spin9.log
+          grep -qx 'SOURCE_LITERAL_SPINOR_SO9_LIE_BRACKETS_PASS 1296' /tmp/bfss-actual-source-bfield-spin9.log
+          grep -qx 'ACTUAL_SOURCE_GAUGE_B_LIE_AND_QUARTER_TURNS_PASS 81' /tmp/bfss-actual-source-bfield-spin9.log
+          grep -qx 'ACTUAL_SOURCE_SPATIAL_GAUGE_GENERATOR_COMMUTATION_PASS 108' /tmp/bfss-actual-source-bfield-spin9.log
+          grep -qx 'SOURCE_SPINOR_QUARTER_TURN_REVERSED_SIGN_FALSIFIED_DIFF_4' /tmp/bfss-actual-source-bfield-spin9.log
+          echo ACTUAL_SOURCE_SPIN9_BFIELD_FINITE_COVARIANCE_STRICT_PASS_NO_LEAN_ROOT
+      - name: Preserve source-exact finite mathematical evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-actual-source-spin9-bfield-${{ github.run_id }}
+          path: /tmp/bfss-actual-source-bfield-spin9.log
+          if-no-files-found: warn
