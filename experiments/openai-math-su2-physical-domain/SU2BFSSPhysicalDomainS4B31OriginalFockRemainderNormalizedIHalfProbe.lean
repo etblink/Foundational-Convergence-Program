@@ -33,7 +33,7 @@ private theorem signedPhase_normalize
     _ = ((Complex.I / 2 : ℂ) * (r : ℂ)) • v := by
           exact congrArg (fun z : ℂ => z • v) (by
             rw [Complex.ofReal_mul]
-            norm_num <;> ring)
+            norm_num; ring)
     _ = _ := by
           simp only [smul_smul]
 

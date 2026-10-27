@@ -1,6 +1,6 @@
 # BFSS S4B31 — genuine original Fock remainder coefficient +i/2 normalization, Gate119
 
-**Status: Gate119 #1 verified RED; Gate119 #2 narrowly repaired candidate pending strict verification.** Prior **55** unique accepted scoped S4 principal roots, through independently verified [Gate118 run #40441374836](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40441374836), job 121982272913, original source `FCP.BFSSSU2PhysicalDomainS4B30.originalComplexFermionContraction_full_signed_source`, immutable candidate Git blob `6a43c9a36b556acaa3d7f3b3bd1dd26704c686b0`. The Gate118 acceptance audit contains its exact original compiler/axiom evidence.
+**Status: Gate119 #1 and #2 red preserved; Gate119 #3 exact linter-only correction pending strict verification.** Prior **55** unique accepted scoped S4 principal roots, through independently verified [Gate118 run #40441374836](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40441374836), job 121982272913, original source `FCP.BFSSSU2PhysicalDomainS4B30.originalComplexFermionContraction_full_signed_source`, immutable candidate Git blob `6a43c9a36b556acaa3d7f3b3bd1dd26704c686b0`. The Gate118 acceptance audit contains its exact original compiler/axiom evidence.
 
 ## Scientifically exact new theorem
 
@@ -42,3 +42,19 @@ The first is an associativity mismatch in a generic opaque complex module after 
 ## Gate119 #2 — proof-only, SHA-pinned narrow recovery
 
 Single atomic candidate/workflow/audit source update. New candidate git blob `7c0f8d366f55081e7de425921b855281270d90e1`; previous attempted candidate `f6206be25dadc36ef4fd865d853d8263cf7cfc26` retained by immutable red run. Proof now explicitly simplifies `[smul_smul, mul_assoc]` in the scalar helper; and specifies `I := ColorIndex N`, `J := SpinIndex`, `K := FermionIndex N`, `V := Fermion N →L[ℂ] Fermion N` before applying the generic triple-sum lemma to the full source expression. Exact physical theorem statement and real/complex source coefficients are unchanged, as are all accepted parent root blobs and strict checks. **Not accepted until terminal exact Lean/axiom gate passes**; S4 remains 55.
+
+
+## Gate119 #2 — fully proved core, strict RED solely from tactic lint
+
+Independently verified terminal [run #40444501413](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40444501413), job `121992427318`, exact SHA `cd84a3b33231d1ea2da8a814148bb303d78dbe0e`, concluded **failure**. All immutable original BFSS/Mathlib SHA checks, pinned Lean 4.34.1, qualified G4K9C original ancestry, fresh original source modules and accepted S4B3–S4B30 parent roots passed (including `GATE119_ACCEPTED_S4B30_PARENT_FRESH_PASS 173576`). The source theorem's **exact axiom report** contains only `propext`, `Classical.choice`, `Quot.sound`, without `sorryAx`. This confirms the previous scalar-association and large original Fock-carrier elaboration failures have been eliminated. Nevertheless, `GATE119_COMPILER_EXIT 1`, and Lean reports at line 36:
+
+```text
+error: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+```
+
+Cause is specifically `norm_num <;> ring` in the *private generic scalar helper*. **Do not** disable linters, increase heartbeats, accept a red as green, alter the source field identity, modify the theorem statement or increase root count. The proposed correction changes this *single proof-tactic operator* to Lean's requested `norm_num; ring`, preserving both operations and all other source proof text verbatim. The exact successful axiom report from a process with exit 1 is encouraging but **does not constitute strict acceptance**.
+
+## Gate119 #3 — atomic exact linter correction
+
+Proof-only candidate Git blob `5f51edf3d29528374988f08ef2adaab33dfffc2a` replacing `7c0f8d366f55081e7de425921b855281270d90e1`, two strict workflow source-identity SHA guards updated atomically, audit updated in same commit. All original source SHA, expected principal theorem name and qualified parents remain locked. Strict gate must return complete `completed/success`, compiler exit 0, `GATE119_CANDIDATE_SOURCE_WARNINGS []`, one exact named root with only allowed axioms, no `sorryAx` and no errors before promoting accepted scoped S4 roots **55 → 56**. As of this audit, unique accepted count remains **55**.
