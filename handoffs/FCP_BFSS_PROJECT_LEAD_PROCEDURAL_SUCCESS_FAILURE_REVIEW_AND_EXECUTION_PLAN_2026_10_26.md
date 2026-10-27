@@ -306,3 +306,21 @@ Project Lead applied the [source-generated Lean dependency map](../meta/BFSS_LEA
 The partial evidence registry was increased from 7 to **8** source-hash-pinned accepted entries; the latest graph integrity run indexes 844 Lean files after adding K1A and K1B. Neither graph CI nor earlier K1A red gates adds theorem roots. S4 remains its distinct 63-root family and F21A its distinct two roots; add K1A **+1** in its own branch of accepted results. Canonical main and frozen original etblink/math unchanged.
 
 **Post-acceptance dependency check:** [Actions #40492708297](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40492708297), job 122150366622, completed success. Original job log: **844** Lean files indexed including recovery, **8** qualified source-Git-blob evidence pins verified, source-derived F21A ancestry generated, explicit NO_LEAN_ROOTS sentinel. This checks graph/memory integrity, adds no separate proof roots.
+
+## Project Lead successor checkpoint — K1C accepted, K1D exterior separation next (2026-10-27)
+
+**NEW strictly accepted genuine original source Lean mathematics, +3 roots.** K1C `SU2BFSSPhysicalDomainS1V52K1COriginalSpin48CliffordPolarContractionProbe.lean`, blob `7334a3616740b902c9e42231efc97ed7566ad8c2`, [GitHub Actions Gate 2 #40494768705](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40494768705), job `122157309697`, completed success. Pinned Mathlib d13f23b/Lean 4.34.1, qualified K1A source cache, fresh nonempty compiled .olean, and exact three axiom reports `[propext, Classical.choice, Quot.sound]`, no sorryAx or warnings. Accepted cache:
+
+```text
+bfss-k1c-original-polar-contraction-7334a3616740b902c9e42231efc97ed7566ad8c2-v1-adc7f124-lean4341-d13f23b-Linux-X64
+```
+
+**What is now rigorously proved in actual original Clifford source:** `originalSourceClifford_gradedCommutator_eq_polarContraction` (all source Clifford x), `originalSourceClifford_evenCommutator_eq_polarContraction` (even x), `originalSourceSpin48_trivialAction_polarContractions_zero` (kernel membership implies every original polar contraction vanishes). Together with accepted K1A `originalSourceSpin48_trivialAction_iff_generator_commutes`, this reduces the actual original Spin48 vector-action kernel to a source-specific **common polar contraction kernel**.
+
+**Rejected predecessor Gate 1:** [Actions #40493780580](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40493780580) red with exact Lean rewrite/name/reassociation failures and sorryAx; preserved in [complete K1C audit](../audits/FCP_BFSS_K1C_ORIGINAL_POLAR_CONTRACTION_REDUCTION_2026_10_27.md), never retroactively green.
+
+**Next Project Lead natural mathematical experiment:** K1D all-polar-contractions-zero ⇒ scalar. Use source F20B `Module.Basis.ExteriorAlgebra` indexed by original `Finset Source48Label`, pinned Mathlib `changeForm_contractLeft`, exterior `ιMulti_family`, and coordinate contractions to isolate coefficients of every nonempty finite subset. To turn source polar contractions into coordinate-dual contractions use historical original S1V38 `source48_polar_eq_two_dot` with explicit `(1/2) • Pi.single j 1`, checking exact qualified `.olean` availability before import. The Clifford/exterior equivalence is **linear, not multiplicative**. A candidate should first qualify a small distinct-wedge contraction coefficient lemma; no global 48-dimensional basis expansion tactic. Keep source original pairedMajorana order intact for downstream Fock/Spin9.
+
+**Other scope remains open:** staged K1B negative real central Spin witness lacks recovered S1S binary, so neither full `{±1}` kernel nor surjectivity/covering/Spin9/physical form symmetry/eigenstates is accepted. K1A +1, K1C +3 are genuinely distinct newly accepted roots; F21A earlier +2, S4 separately 63. Curated dependency evidence manifest now has nine source-hash-pinned acceptance records. Do not count graph-tool CI as mathematics or promote finite small-dimension sign checks to source proofs.
+
+Canonical `main` and frozen original `etblink/math` untouched. Preserve **one authoritative audit per gate family**, the source-derived dependency map for navigation, and this handoff for future successors.
