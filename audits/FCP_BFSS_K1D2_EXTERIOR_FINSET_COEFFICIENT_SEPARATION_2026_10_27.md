@@ -169,3 +169,14 @@ Project Lead critical path after this gate: verify the original exact local PBW 
 One remaining unsolved Lean goal in `originalSourceExteriorPBWBasis_eq_originalCoordinateWord`: a list product of `Pi.single` generators indexed by `((↑(Set.powersetCard.ofCard rfl)).orderEmbOfFin ...)` must equal the same product indexed by `I.orderEmbOfFin rfl`, with `I:Finset Source48Label`. Both are the actual F20B ordered embedding; the left includes a redundant `ofCard` wrapper. The theorem had `sorryAx` in the rejected run; **0 new K1D2C roots**.
 
 **Gate 4 bounded repair:** reduce the genuine `Set.powersetCard.ofCard`/ordered embedding representation (pinned `ofCard` is a subtype constructor `⟨I, ...⟩`, and `Set.powersetCard.ofFinEmbEquiv_symm_apply` gives literal `Finset.orderEmbOfFin`), then discharge the remaining equality by definitional equality. The original F20B well-order and actual source labels remain unchanged. If `rfl` does not normalize the implicit cast, inspect the exact new compiler goal and replace with explicit `Set.powersetCard.val_ofCard` rewriting; avoid any new axiom or alternative ordering.
+
+
+## Independent K1D2D source Finset foundations — staged, not admitted
+
+A second strictly scoped proof slice is now proposed without importing still-unqualified K1D2C. The candidate `SU2BFSSPhysicalDomainS1V52K1D2DOriginalExteriorPBWEmptyAndEraseInjectivityProbe.lean`, Git blob `6e8c864af957532e04c108cadf6eff96965a3ad4`, depends only on previously accepted source K1D2A and F20B plus pinned Mathlib. It preserves F20B's exact `linearOrderOfSTO WellOrderingRel` and states:
+- `originalSourceExteriorPBWBasis_empty_eq_one`: the original exterior PBW basis element at `∅ : Finset Source48Label` is exactly `1:E` (not merely proportional or equal after an unqualified algebra equivalence).
+- `originalSourceFinset_erase_injective_at_present_label`: for `j∈I,J`, `I.erase j=J.erase j` implies `I=J`, via literal `Finset.insert_erase`, which is required for coefficient uniqueness.
+
+[Original source-hash-pinned strict K1D2D Gate1 #40529951449](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40529951449) launched. These two new roots are *not yet accepted*. Distinguish source-level truth from CI outcome and add to curated graph/acceptance receipt only after exact Lean compiler+axiom+cache qualification. K1D2D and K1D2C are independent, parallel **necessary but not sufficient** components for the original finite-support scalar-line theorem.
+
+[Original K1D2C Gate4 #40529606061](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40529606061) tests exact source candidate `99ab3f78e12a31c365f83c1577db852327d3bc3a`, changing only final definitional equality `rfl` on the already normalized basis-to-ordered-word identities, with original F20B order and statements intact. Keep all three prior K1D2C reds independent and unaccepted.
