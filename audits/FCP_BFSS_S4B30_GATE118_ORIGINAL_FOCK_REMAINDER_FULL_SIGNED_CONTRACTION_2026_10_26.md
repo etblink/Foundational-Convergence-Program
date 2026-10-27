@@ -1,6 +1,6 @@
 # BFSS S4B30 — original complex Fock remainder full source-signed gamma contraction (Gate118)
 
-**Status: Gate118 candidate, NOT ACCEPTED.** Unique strictly accepted S4 principal roots **54**, through independently verified [Gate117 run #40439797607](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40439797607), job `121977138770`, root `FCP.BFSSSU2PhysicalDomainS4B29.originalComplexFermionContraction_contractible_source_order`. Its immutable acceptance record is retained separately.
+**Historical preregistration retained. Gate118 is now strictly ACCEPTED — see final audit.** Unique strictly accepted S4 principal roots **54**, through independently verified [Gate117 run #40439797607](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40439797607), job `121977138770`, root `FCP.BFSSSU2PhysicalDomainS4B29.originalComplexFermionContraction_contractible_source_order`. Its immutable acceptance record is retained separately.
 
 ## Mathematical target
 
@@ -15,3 +15,18 @@ This directly **composes the accepted Gate117 full genuine source Fock operator 
 ## Scientific stop boundary
 
 Even success would identify only the *complex Fock remainder* with its fully source-signed finite sum, not yet the direct manuscript `B(x)` field in the original *real* Hilbert carrier. Further theorem(s): fold `(-i)/16 × (-8) = +i/2` with exact complex scalar distributivity; reindex manuscript color/gamma notation and relate original `M.deformedFermionField 1 0 x` by accepted S4B10/S4B21 real restriction; inspect exact manuscript `B(x)` normalization and color basis, then physical self-adjoint/domain and positive normalizable eigenpair existence. Canonical main, original upstream math and draft PR #25 unchanged.
+
+
+## Gate118 exact strict acceptance — 1/1 original complex source operator root
+
+Independently verified completed [run #40441374836](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40441374836), job `121982272913`, `completed/success`, exact run HEAD `91b1df40bf91898d13ac1092a3c8ed009b70a32b`. Original runner/compiler output confirms SHA-immutable original source, frozen `etblink/math@adc7f1241b42e322a6451854ab7e4b4c146bf78a`, pinned Lean 4.34.1/Mathlib, exact qualified G4K9C cache provenance, freshly rebuilt original and accepted S4B3–S4B29 source roots, accepted parent `GATE118_ACCEPTED_S4B29_PARENT_FRESH_PASS 150976`, and exact one-root S4B30 `.olean` with no Lean source warnings. Terminal compiler evidence:
+
+```text
+GATE118_CANDIDATE_SOURCE_WARNINGS []
+GATE118_COMPILER_EXIT 0 AXIOM_REPORTS [('FCP.BFSSSU2PhysicalDomainS4B30.originalComplexFermionContraction_full_signed_source', {'Quot.sound', 'Classical.choice', 'propext'})]
+GATE118_ORIGINAL_COMPLEX_REMAINDER_FULL_SIGNED_ONE_ROOT_STRICT_PASS
+```
+
+**ACCEPT exactly +1 unique principal S4 theorem root: 54 → 55.** Accepted S4B30 exact source git blob `6a43c9a36b556acaa3d7f3b3bd1dd26704c686b0`. No `sorryAx`, extra source hypotheses, proxy mathematical carrier or weakened identity. Freshly compiled parent modules and the generic private helper are *not* additional principal roots.
+
+**Mathematical consequence:** The actual `sourceMasslessComplexFermionContraction M x : Fermion N →L[ℂ] Fermion N` is now identified with its complete signed source structure-constant, gamma and ordered Fock-theta bilinear, at the original `1/16`, `-Complex.I`, and derived `-8` factors. The independently proven original color sign, real gamma contraction and full complex operator reindexing are integrated, not merely separately available. Do not claim numerical simplification to `+Complex.I/2` without its own Lean statement; the real-linear original `M.deformedFermionField 1 0 x` and October 5 manuscript `B(x)` remain separate targets, as does positive normalizable eigenstate existence.
