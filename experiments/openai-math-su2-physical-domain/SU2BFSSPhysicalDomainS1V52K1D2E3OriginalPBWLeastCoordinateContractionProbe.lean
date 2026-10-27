@@ -50,9 +50,10 @@ theorem originalSourceExteriorPBWBasis_contraction_erase_of_least
   have htail :
       j ∉ FCP.BFSSS1V52K1D2C.originalSourceExteriorPBWOrderedLabels (I.erase j) := by
     intro h
-    exact (Finset.not_mem_erase j I)
-      (FCP.BFSSS1V52K1D2E1.originalSourcePBWOrderedLabels_mem_finset
-        (I.erase j) j h)
+    have he : j ∈ I.erase j :=
+      FCP.BFSSS1V52K1D2E1.originalSourcePBWOrderedLabels_mem_finset
+        (I.erase j) j h
+    simp at he
   rw [FCP.BFSSS1V52K1D2C.originalSourceExteriorPBWBasis_eq_originalCoordinateWord]
   rw [FCP.BFSSS1V52K1D2E2.originalSourcePBWOrderedLabels_cons_of_least
     I j hj hmin]
