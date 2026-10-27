@@ -32,7 +32,8 @@ theorem originalSourcePolar_halfSingle_eq_coordinateDual
     (j : Source48Label) :
     Q.polarBilin ((1 / 2 : ℝ) • (Pi.single j (1 : ℝ) : Source48Vector)) =
       (LinearMap.proj j : Module.Dual ℝ Source48Vector) := by
-  ext v
+  apply LinearMap.ext
+  intro v
   change QuadraticMap.polar Q
     ((1 / 2 : ℝ) • (Pi.single j (1 : ℝ) : Source48Vector)) v = v j
   rw [FCP.BFSSS1V38.source48_polar_eq_two_dot]
