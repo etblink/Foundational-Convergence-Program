@@ -35,7 +35,7 @@ jobs:
           test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
           test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
           for entry in \
-            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D1OriginalPolarCoordinateExteriorContractionProbe.lean:81a8b8163bc12b61427fde260fc2778a9cb20097" \
+            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D1OriginalPolarCoordinateExteriorContractionProbe.lean:8bfca13f5ba81e77773c391de6114273023f0bb1" \
             "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D0OriginalCliffordExteriorContractionTransportProbe.lean:c3a96cb1abd32e3cfaa82ed515224bb958e2c4eb" \
             "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V38Original48PolarCoefficientBridgeProbe.lean:27ed1e4933499c108ee614b4731a3479a318aa8b"; do
             f="${entry%%:*}"; expected="${entry#*:}"
@@ -142,7 +142,7 @@ jobs:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-k1d1-original-polar-coordinate-dual-81a8b8163bc12b61427fde260fc2778a9cb20097-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-k1d1-original-polar-coordinate-dual-8bfca13f5ba81e77773c391de6114273023f0bb1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
       - name: Preserve diagnostics for successor
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
