@@ -154,3 +154,28 @@ Neither of the two K1D1 roots was accepted; both rejected with `sorryAx`. **This
 Following the first-causal Gate 3 arithmetic goal `2 * (1 / 2 * v j) = v j`, the source candidate changes only the final tactic `norm_num` to `ring` after `rw [hsingle]`. Source Git blob now `46cd08ee5124dae7160f6fa2135b9b01c73b1030`, authoring commit `03c71a05be6838f15619aaa313e2223c7ebbf0b0`, workflow pin commit `014d937cb97010368061b70a4bbb827b9e6069fc`. The original source, two theorem statements, frozen original math, K1D0 and S1V38 source declarations, and accepted axiom whitelist are unchanged.
 
 [GitHub Actions Gate #40503702666](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40503702666), job `122187529298`, passed source-pinned preflight and compiled ancestry recovery; pinned toolchain/Mathlib restoration followed. **Accept neither K1D1 theorem until this run has completed fresh Lean compilation, exact two `#print axioms` reports without `sorryAx`, and saved its properly source-hash-pinned `.olean` binary.** The last checked status was in progress. This is a bounded tactic repair, not a new hypothesis or claim.
+
+
+## K1D1 Gate 4 — FINAL STRICT ACCEPTANCE, two source-exact roots
+
+[Actions run #40503702666](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40503702666), job `122187529298`, terminal **SUCCESS**. Source candidate Git blob `46cd08ee5124dae7160f6fa2135b9b01c73b1030`, source-pinned original mathematical revision, Lean 4.34.1, Mathlib d13f23b, qualified K1D0 binary and actual S1V38 compiled original polar theorem ancestry were verified. The theorem statements were UNCHANGED from previously rejected gates; the only Gate 4 proof change was final arithmetic tactic `norm_num → ring`.
+
+Exact strictly accepted roots:
+```text
+FCP.BFSSS1V52K1D1.originalSourcePolar_halfSingle_eq_coordinateDual
+FCP.BFSSS1V52K1D1.originalSourceSpin48_trivialAction_exteriorCoordinateContractions_zero
+K1D1_EXIT 0
+K1D1_ORIGINAL_POLAR_COORDINATE_DUAL_TWO_ROOTS_STRICT_PASS
+```
+Each exact root printed only `[propext, Classical.choice, Quot.sound]` with no `sorryAx` and no Lean source warnings; a nonempty fresh `.olean` was produced. Successful immutable qualified binary cache:
+```text
+bfss-k1d1-original-polar-coordinate-dual-46cd08ee5124dae7160f6fa2135b9b01c73b1030-v1-adc7f124-lean4341-d13f23b-Linux-X64
+```
+
+**Mathematical conclusion:** the original 48-coordinate half-unit source vector yields the exact corresponding polar linear functional, and an original Spin(48) element in the actual source real-vector action kernel maps to an exterior element annihilated by **each** coordinate contraction. This is **+2 new theorem roots**, separate from K1D0's +2 and K1C's +3. The K1D1 Gate 1 dedicated-cache failure, Gate 2 extensionality red, and Gate 3 symbolic `norm_num` arithmetic red remain permanent first-causal findings and are **not** accepted or double counted.
+
+**Strictly open after this acceptance:** the original finite-subset exterior-basis coefficient-separation theorem
+`(∀ j, contractLeft (LinearMap.proj j) x=0) ⇒ ∃ c : ℝ, x=algebraMap ℝ E c`.
+No such source theorem has been compiled yet. Therefore even Clifford center scalar, actual source Spin48 kernel `{±1}`, K1B negative-sign witness, covering, original global Spin9, source-physical form invariance, and positive normalizable eigenstate existence are still separate unproved obligations. All scientific nonclaims remain unchanged.
+
+The curated graph receipt manifest now contains **11** source-hash-pinned qualified modules. K1D1 is added only after original terminal logs and accepted binary were examined.
