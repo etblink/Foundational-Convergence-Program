@@ -75,7 +75,7 @@ jobs:
         run: |
           set -euo pipefail
           test "${{ steps.d0.outputs.cache-hit }}" = true || { echo K1D1_K1D0_CACHE_MISSING; exit 1; }
-          test "${{ steps.s38.outputs.cache-hit }}" = true || { echo K1D1_S1V38_CACHE_MISSING; exit 1; }
+          echo K1D1_S1V38_DEDICATED_CACHE_HIT=${{ steps.s38.outputs.cache-hit }}
           for stem in \
             SU2BFSSPhysicalDomainS1V52K1D0OriginalCliffordExteriorContractionTransportProbe \
             SU2BFSSPhysicalDomainS1V52K1COriginalSpin48CliffordPolarContractionProbe \
@@ -84,7 +84,7 @@ jobs:
             SU2BFSSPhysicalDomainS1V0StandaloneOrthogonalGeometryProbe; do
             test -s "upstream-math/lean/.lake/build/lib/lean/$stem.olean" || { echo "K1D1_ACTUAL_SOURCE_OLEAN_MISSING=$stem"; exit 1; }
           done
-          echo K1D1_TWO_ACCEPTED_ANCESTRIES_PRESENT
+          echo K1D1_TWO_ACCEPTED_SOURCE_OLEANS_PRESENT
       - name: Free runner disk
         run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
       - name: Restore pinned Lean 4.34.1 and Mathlib
