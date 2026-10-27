@@ -79,3 +79,25 @@ K1D0_ORIGINAL_CLIFFORD_POLAR_CONTRACTION_TWO_ROOTS_STRICT_PASS
 bfss-s1v38-isolated-source48-polar-coefficient-v1-adc7f124-lean4341-d13f23b-Linux-X64
 ```
 This antecedent is mathematical accepted source, **not** a new K1D theorem. K1D1 may *reuse* it to show `(Q.polarBilin ((1/2) • Pi.single j 1)) w = w j`; before importing the module, first check binary availability on the intended runner and restore that exact cache or independently reconstruct its qualified original ancestry. A missing cache is a binary dependency gap, not a refutation. Do not reimplement S1V38's polar-equals-two-dot theorem or substitute a nonoriginal quadratic form.
+
+
+## K1D0 Gate 2 — independently accepted source-identical requalification and correct binary cache
+
+[GitHub Actions #40497329075](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40497329075), job `122165964702`, terminal **SUCCESS**. Reverified exactly the *unchanged* accepted candidate blob `c3a96cb1abd32e3cfaa82ed515224bb958e2c4eb`, original pinned math, K1C accepted binary ancestry, fresh Lean 4.34.1 compiler, two exact roots with only `propext`, `Classical.choice`, `Quot.sound`, no warnings/sorryAx, nonempty compiled `.olean`.
+
+```text
+K1D0_COMPILER_EXIT 0
+K1D0_ORIGINAL_CLIFFORD_EXTERIOR_TRANSPORT_TWO_ROOTS_STRICT_PASS
+Cache saved with key:
+bfss-k1d0-original-clifford-exterior-transport-c3a96cb1abd32e3cfaa82ed515224bb958e2c4eb-v1-adc7f124-lean4341-d13f23b-Linux-X64
+```
+
+The misleading first-gate `bfss-k1c...` cache prefix is now **corrected by a genuine source-identical requalified run**, not relabeled after the fact. This is a duplicate strict acceptance of the same two roots, **NOT two additional mathematical roots**. Future successors should restore the source-bound **K1D0** cache above, not the earlier mislabeled Gate 1 binary.
+
+## K1D1 next bounded candidate (not yet accepted)
+
+`SU2BFSSPhysicalDomainS1V52K1D1OriginalPolarCoordinateExteriorContractionProbe.lean`, source blob `81a8b8163bc12b61427fde260fc2778a9cb20097`, is staged with exactly two new statements:
+- `originalSourcePolar_halfSingle_eq_coordinateDual`: literal `(Q.polarBilin ((1/2) • Pi.single j 1)) = (LinearMap.proj j : Module.Dual ℝ Source48Vector)`, using historically strict S1V38 polar=2*dot.
+- `originalSourceSpin48_trivialAction_exteriorCoordinateContractions_zero`: combine the new source coordinate-dual identity and accepted K1D0 to kill EVERY original source exterior coordinate contraction.
+
+[Strict K1D1 workflow #40498190392](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40498190392) checks TWO **independently qualified accepted binary ancestries** before compilation: K1D0 correct cache and S1V38 historical accepted `bfss-s1v38-isolated-source48-polar-coefficient-v1-adc7f124-lean4341-d13f23b-Linux-X64` cache. If either has expired, record a cache failure only. Mathematical statement, root count, and fresh Lean status MUST be verified from terminal run logs, not guessed. This intermediate theorem still does NOT prove exterior coordinate coefficient-separation/scalar common kernel.
