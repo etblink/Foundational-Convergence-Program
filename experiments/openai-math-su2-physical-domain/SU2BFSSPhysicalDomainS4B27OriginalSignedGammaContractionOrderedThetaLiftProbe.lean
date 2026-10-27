@@ -17,6 +17,22 @@ open OAI.BFSSQuantum.AlgebraData
 open FCP.BFSSSU2PhysicalDomainS4B11
 open FCP.BFSSSU2PhysicalDomainS4B25
 
+/-- Abstract two-index sum of coerced real scalar multiplications.
+Keep the module abstract so Finset.sum_smul and map_sum do not unfold
+the original Fock PiLp continuous-linear endomorphism carrier. -/
+private theorem doubleSum_realCast_smul
+    {ι κ V : Type*} [Fintype ι] [Fintype κ]
+    [AddCommMonoid V] [Module ℂ V]
+    (f : ι → κ → ℝ) (v : V) :
+    (∑ i : ι, ∑ j : κ, ((f i j : ℝ) : ℂ) • v) =
+      (((∑ i : ι, ∑ j : κ, f i j) : ℝ) : ℂ) • v := by
+  calc
+    _ = (∑ i : ι, ∑ j : κ, ((f i j : ℝ) : ℂ)) • v := by
+      simp only [Finset.sum_smul]
+    _ = _ := by
+      congr 1
+      simp only [map_sum]
+
 /-- Source-exact signed gamma contraction lifted over the ACTUAL ordered
 original theta product. The coefficient is still the original source
 field-variation coefficient, and the color sign is source-verified. -/
@@ -38,7 +54,12 @@ theorem originalSourceVariation_signed_orderedTheta_lift
             sourceMasslessComplexVariationCoefficient M x
               (EuclideanSpace.single (k,A) (1 : ℝ)) α (δ,D)) : ℝ) : ℂ) •
           (M.theta β A * M.theta δ D) := by
-        simp only [map_sum, Finset.sum_smul]
+        exact doubleSum_realCast_smul
+          (fun k α =>
+            M.gamma k α β *
+              sourceMasslessComplexVariationCoefficient M x
+                (EuclideanSpace.single (k,A) (1 : ℝ)) α (δ,D))
+          ((M.theta β A * M.theta δ D) : Fermion N →L[ℂ] Fermion N)
     _ = _ :=
       congrArg
         (fun r : ℝ =>

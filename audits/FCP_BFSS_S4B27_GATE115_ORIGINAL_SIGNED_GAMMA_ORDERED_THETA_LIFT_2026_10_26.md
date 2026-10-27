@@ -1,6 +1,6 @@
 # FCP/BFSS S4B27 — signed original gamma contraction over ordered Fock theta product (Gate115)
 
-**Status: new theorem candidate, strict CI pending.** Unique strictly accepted scoped S4 principal roots: **51** through independently verified Gate114 #4 ([run #40431852374](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40431852374); new theorem `FCP.BFSSSU2PhysicalDomainS4B26.originalGammaTheta_operator_product_distribution`; original source blob `1e414c3901fc3309ca29c9b8040f0387beb9f5e6`). Acceptance of S4B27 must not be inferred from a commit, a preflight green, a parent recompile, or this preregistration.
+**Gate115 #1 RED; Gate115 #2 typed-sum recovery candidate pending, not yet accepted.** Unique strictly accepted scoped S4 principal roots: **51** through independently verified Gate114 #4 ([run #40431852374](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40431852374); new theorem `FCP.BFSSSU2PhysicalDomainS4B26.originalGammaTheta_operator_product_distribution`; original source blob `1e414c3901fc3309ca29c9b8040f0387beb9f5e6`). Acceptance of S4B27 must not be inferred from a commit, a preflight green, a parent recompile, or this preregistration.
 
 ## Actual new theorem
 
@@ -21,3 +21,21 @@ Proof strategy is deliberately narrow: `simp only [map_sum, Finset.sum_smul]` fo
 ## Scientific boundary
 
 The accepted Gate114 theorem remains genuinely operator-valued, but Gate115 alone supplies only **one signed contracted coefficient lifted onto a fixed original ordered theta product**. A later separate theorem must connect this to the entirety of the original source `sourceMasslessComplexFermionContraction` with the correct `(-Complex.I)/16` factor, sum interchanges, real restriction to `M.deformedFermionField 1 0 x`, and the manuscript's matrix-valued `B(x)` definition. The later physical operator domain, quadratic form equivalence, and unproved positive normalizable eigenstate existence remain distinct. No change is made to canonical `main`, frozen upstream `math`, accepted source proof blobs, or PR #25.
+
+
+## Gate115 #1 — independently verified strict RED
+
+[Run #40433827449](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40433827449), job `121957645204`, frozen candidate HEAD `2f63c9a85a943e37ed9ad126096d7220a20696d6`, concluded **failure**. Source hashes, original source, YAML preflight, Lean 4.34.1 / pinned Mathlib, G4K9C original cache provenance, all original BFSS dependencies, and freshly compiled accepted S4B3–S4B26 passed. Last accepted parent `GATE115_ACCEPTED_S4B26_PARENT_FRESH_PASS 112592`. Candidate compiler exit 1, `GATE115_CANDIDATE_SOURCE_WARNINGS []`. Exact report:
+
+```text
+GATE115_COMPILER_EXIT 1 AXIOM_REPORTS [('FCP.BFSSSU2PhysicalDomainS4B27.originalSourceVariation_signed_orderedTheta_lift', {'propext', 'sorryAx', 'Classical.choice', 'Quot.sound'})]
+GATE115_ORIGINAL_SIGNED_GAMMA_ORDERED_THETA_LIFT_STRICT_RED
+SU2BFSSPhysicalDomainS4B27OriginalSignedGammaContractionOrderedThetaLiftProbe.lean:41:8: error: `simp` made no progress
+Note: The target expression is not type-correct under the `implicit` transparency level ... function expected M.gamma k α
+```
+
+The failure is at the **first transport of a double real-to-complex coerced scalar sum through the actual Fock continuous-linear operator**. The accepted Gate113 real scalar contraction was not reached. This is a Lean normalization/elaboration obstacle under a PiLp CLM, not a mathematical contradiction or original-source defect; the result is **unaccepted**, accepted unique S4 roots remain **51**. Preserve this negative knowledge. The proposed fix is a private, generic `Fintype`-indexed complex-module lemma `doubleSum_realCast_smul`, with `Finset.sum_smul` and `map_sum` evaluated on an opaque module variable. Apply its result explicitly to the source `Fermion N →L[ℂ] Fermion N` and retain the existing typed `congrArg` applied to accepted Gate113. Neither the target root statement nor original physics source nor accepted ancestors change.
+
+## Gate115 #2 — atomic source/CI proof attempt
+
+New candidate Git blob `b3881e95d6a05ca0acd27ce63e2418119fac3be3`; previous red source `a699148fbe188526a97c5a4ac6a250994a8abd4d` immutable in run #40433827449. Candidate and two workflow SHA guards committed together in one Git tree to prevent intermediate stale-SHA run. Strict recompile and exact theorem axiom audit required; success **not yet claimed**. Scoped S4 root count **51** until verified terminal green.
