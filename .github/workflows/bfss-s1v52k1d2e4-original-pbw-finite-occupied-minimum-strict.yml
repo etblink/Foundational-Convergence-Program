@@ -1,0 +1,153 @@
+name: BFSS K1D2E4 Actual PBW Finite Support Least Coordinate Strict
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-s1v52k1d2e4-original-pbw-finite-occupied-minimum-strict.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  k1d2e4-transport:
+    runs-on: ubuntu-latest
+    timeout-minutes: 42
+    steps:
+      - name: Checkout exact research source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Checkout pinned original mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+      - name: Exact original candidate and two theorem roots preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-k1d2e4
+          test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
+          for entry in \
+            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2E4OriginalPBWFinitelyOccupiedMinimumProbe.lean:857909dbc4424f01b193606a176f666c47bb28d1" \
+            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2COriginalExteriorPBWBasisOrderedWordProbe.lean:99ab3f78e12a31c365f83c1577db852327d3bc3a" \
+            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2DOriginalExteriorPBWEmptyAndEraseInjectivityProbe.lean:b494be954703d29b9d70ad934546bebf9a55cbcf" \
+            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2AOriginalExteriorCoordinateWordContractionProbe.lean:6797e53e43abf6e94c76612f91617169e224e831" \
+            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9E5F20BOriginalSource48CliffordPBWBasisFiniteDimensionalProbe.lean:6e4c78fd31f9781267659313a8a0edfedd65e9ad"; do
+            f="${entry%%:*}"; expected="${entry#*:}"
+            test "$(git rev-parse "HEAD:$f")" = "$expected" || { echo "K1D2E4_GIT_BLOB_MISMATCH=$f"; exit 1; }
+            test "$(git hash-object --no-filters "$f")" = "$expected" || { echo "K1D2E4_RAW_BLOB_MISMATCH=$f"; exit 1; }
+          done
+          python3 - <<'PY'
+          import json,pathlib,re
+          m=json.loads(pathlib.Path('upstream-math/lean/lake-manifest.json').read_text())
+          assert next(p['rev'] for p in m['packages'] if p['name']=='mathlib')=='d13f23b723b8a846827a245b89c10fc7d3f11612'
+          s=pathlib.Path('experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2E4OriginalPBWFinitelyOccupiedMinimumProbe.lean').read_text()
+          roots=['originalSourcePBWSupportedIndex_member_occupied','originalSourcePBWLeastOccupied_le_every_supported_coordinate']
+          assert re.findall(r'^namespace (\S+)',s,re.M)==['FCP.BFSSS1V52K1D2E4']
+          assert re.findall(r'^theorem (\S+)',s,re.M)==roots
+          assert re.findall(r'^#print axioms (\S+)',s,re.M)==roots
+          assert not re.search(r'^\s*(?:sorry|native_decide|axiom)\b',s,re.M) and 'sorryAx' not in s
+          print('K1D2E4_SOURCE_TWO_ROOTS_PINNED_PASS')
+          PY
+      - name: Restore strictly accepted K1D2C original PBW basis cache
+        id: basis
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-k1d2c-original-pbw-ordered-word-99ab3f78e12a31c365f83c1577db852327d3bc3a-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Restore strictly accepted K1D2D original empty unit cache
+        id: unit
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-k1d2d-original-empty-unit-erase-injective-b494be954703d29b9d70ad934546bebf9a55cbcf-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Fail closed on actual compiled accepted ancestry
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.basis.outputs.cache-hit }}" = true || { echo K1D2E4_K1D2C_QUALIFIED_CACHE_MISSING; exit 1; }
+          test "${{ steps.unit.outputs.cache-hit }}" = true || { echo K1D2E4_K1D2D_QUALIFIED_CACHE_MISSING; exit 1; }
+          for stem in \
+            SU2BFSSPhysicalDomainS1V52K1D2COriginalExteriorPBWBasisOrderedWordProbe \
+            SU2BFSSPhysicalDomainS1V52K1D2DOriginalExteriorPBWEmptyAndEraseInjectivityProbe \
+            SU2BFSSPhysicalDomainS1V52K1D2AOriginalExteriorCoordinateWordContractionProbe \
+            SU2BFSSPhysicalDomainS1V52L9E5F20BOriginalSource48CliffordPBWBasisFiniteDimensionalProbe; do
+            test -s "upstream-math/lean/.lake/build/lib/lean/$stem.olean" || { echo "K1D2E4_PARENT_OLEAN_MISSING=$stem"; exit 1; }
+          done
+          echo K1D2E4_ORIGINAL_SOURCE_K1D2A_AND_F20B_ANCESTRY_PASS
+      - name: Free runner disk
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+      - name: Install pinned Lean 4.34.1 and restore frozen Mathlib cache
+        shell: bash
+        timeout-minutes: 24
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1 2>&1 | tee -a /tmp/bfss-k1d2e4/toolchain.log; then ok=true; break; fi
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true || { echo K1D2E4_LEAN_TOOLCHAIN_MISSING; exit 1; }
+          cd upstream-math/lean
+          timeout 1080s lake exe cache get 2>&1 | tee /tmp/bfss-k1d2e4/mathlib.log
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo K1D2E4_PINNED_ENV_PASS
+      - name: Fresh compile actual two source roots and audit axioms
+        shell: bash
+        timeout-minutes: 10
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          cd upstream-math/lean
+          stem=SU2BFSSPhysicalDomainS1V52K1D2E4OriginalPBWFinitelyOccupiedMinimumProbe
+          cp "../../experiments/openai-math-su2-physical-domain/$stem.lean" "$stem.lean"
+          set +e
+          timeout 540s lake env lean -DwarningAsError=true -o ".lake/build/lib/lean/$stem.olean" "$stem.lean" > /tmp/bfss-k1d2e4/lean.log 2>&1
+          exitcode=$?
+          set -e
+          cat /tmp/bfss-k1d2e4/lean.log
+          COMPILER_EXIT="$exitcode" python3 - <<'PY'
+          import os,pathlib,re
+          roots=['originalSourcePBWSupportedIndex_member_occupied','originalSourcePBWLeastOccupied_le_every_supported_coordinate']
+          expected=['FCP.BFSSS1V52K1D2E4.'+x for x in roots]
+          log=pathlib.Path('/tmp/bfss-k1d2e4/lean.log').read_text()
+          reports=re.findall(r"'([^'\n]+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",log)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          warnings=[l for l in log.splitlines() if '.lean:' in l and ': warning:' in l]
+          obj=pathlib.Path('.lake/build/lib/lean/SU2BFSSPhysicalDomainS1V52K1D2E4OriginalPBWFinitelyOccupiedMinimumProbe.olean')
+          good=(int(os.environ['COMPILER_EXIT'])==0 and [name for name,_ in reports]==expected
+            and all({a.strip() for a in v.split(',') if a.strip()}<=allowed for _,v in reports)
+            and not warnings and 'error:' not in log and 'sorryAx' not in log
+            and obj.is_file() and obj.stat().st_size>0)
+          print('K1D2E4_COMPILER_EXIT',os.environ['COMPILER_EXIT'],'REPORTS',reports,'WARNINGS',warnings)
+          if not good: raise SystemExit('K1D2E4_TWO_ORIGINAL_SOURCE_ROOTS_STRICT_RED')
+          print('K1D2E4_ORIGINAL_PBW_FINITE_MINIMUM_TWO_ROOTS_STRICT_PASS')
+          PY
+      - name: Save qualified original K1D2E4 compiled binary
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-k1d2e4-original-pbw-finite-minimum-857909dbc4424f01b193606a176f666c47bb28d1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Preserve precise failure and success evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-k1d2e4-exterior-word-${{ github.run_id }}
+          path: /tmp/bfss-k1d2e4
+          if-no-files-found: warn
