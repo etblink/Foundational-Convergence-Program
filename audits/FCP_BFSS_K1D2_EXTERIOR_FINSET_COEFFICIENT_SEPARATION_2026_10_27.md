@@ -180,3 +180,25 @@ A second strictly scoped proof slice is now proposed without importing still-unq
 [Original source-hash-pinned strict K1D2D Gate1 #40529951449](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40529951449) launched. These two new roots are *not yet accepted*. Distinguish source-level truth from CI outcome and add to curated graph/acceptance receipt only after exact Lean compiler+axiom+cache qualification. K1D2D and K1D2C are independent, parallel **necessary but not sufficient** components for the original finite-support scalar-line theorem.
 
 [Original K1D2C Gate4 #40529606061](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40529606061) tests exact source candidate `99ab3f78e12a31c365f83c1577db852327d3bc3a`, changing only final definitional equality `rfl` on the already normalized basis-to-ordered-word identities, with original F20B order and statements intact. Keep all three prior K1D2C reds independent and unaccepted.
+
+
+## K1D2C Gate 4 — FINAL source-exact acceptance of two F20B ordered-basis roots
+
+[Actions #40529606061](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40529606061), job `122278481137`, **completed SUCCESS** on unchanged statement pair and candidate source Git blob `99ab3f78e12a31c365f83c1577db852327d3bc3a`. Actual original `etblink/math@adc7f124`, Lean 4.34.1, Mathlib d13f23b, qualified K1D2A cache and accepted F20B ancestry passed, followed by fresh clean Lean source compilation, exact `#print axioms` reports limited to `[propext, Classical.choice, Quot.sound]`, no `sorryAx` or warnings, and genuine nonempty `.olean` binary save:
+```text
+K1D2C_COMPILER_EXIT 0
+K1D2C_ORIGINAL_PBW_ORDERED_WORD_TWO_ROOTS_STRICT_PASS
+Cache saved with key:
+bfss-k1d2c-original-pbw-ordered-word-99ab3f78e12a31c365f83c1577db852327d3bc3a-v1-adc7f124-lean4341-d13f23b-Linux-X64
+```
+
+**Exactly TWO NEW genuine source-exact Lean theorem roots:**
+```text
+FCP.BFSSS1V52K1D2C.originalSourceExteriorPBWBasis_eq_originalCoordinateWord
+FCP.BFSSS1V52K1D2C.originalSourceExteriorPBWOrderedLabels_nodup
+```
+The actual exterior PBW basis indexed by `Finset Source48Label` corresponds to the ordered list of genuine original source Majorana coordinate generators in the exact `linearOrderOfSTO WellOrderingRel` basis, rather than a presumed lexicographic/color-major representation. The list's no-duplicates property is strictly qualified.
+
+Gate4 resolved the one remaining definitionally equal `powersetCard.ofCard` ordered-embedding representation by `rfl` **after** the pinned Mathlib basis and list normalizations. The three earlier RED gates (#40514167527, #40515773704, #40516712399) remain actual failures and are *not* double-counted or relabeled. The curated qualified source-hash registry now contains **14** reviewed modules, K1D2C +2.
+
+**NOT ACCEPTED by this gate:** no full arbitrary exterior multivector coordinate coefficient-separation/scalar-line theorem has been proved. Combine now **accepted** K1D2A coordinate contractions, K1D2B nonzero erasure, K1D2C exact basis↔ordered word, and independent K1D2D empty-unit + erasure-injectivity (if qualified), to prove the finite-support coefficient result. Do not promote source Spin48 centralizer/kernel or BFSS spectral physical statements.
