@@ -1139,6 +1139,21 @@ jobs:
               print(parentB33Data[-4500:],flush=True)
               raise SystemExit(1)
           print("GATE122_ACCEPTED_S4B33_PARENT_FRESH_PASS",parentB33Obj.stat().st_size,flush=True)
+          PY
+      # Run 40453573129 reached all S4B33 proofs and only three of 27
+      # concrete parents before its 11-minute composite step expired.
+      # Split the stage without changing source, root, or axiom contracts.
+      - name: Freshly qualify concrete Pauli/Fock source and strictly audit S4B34
+        shell: bash
+        timeout-minutes: 19
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          mkdir -p /tmp/bfss-gate122
+          python3 - <<'PY'
+          import pathlib,subprocess,re
+          work=pathlib.Path("upstream-math/lean")
+          lib=work/".lake/build/lib/lean"
 
           # Independently pin and freshly compile the EXISTING concrete
           # N=2 Pauli, Spin9 and 48-Majorana Fock ancestry. Topological
