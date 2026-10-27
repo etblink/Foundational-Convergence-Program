@@ -28,6 +28,11 @@ local instance : LinearOrder Source48Label := by
   classical
   exact linearOrderOfSTO WellOrderingRel
 
+-- The product label type also has a pre-existing product order. Force
+-- its LE to be the SAME noncomputable F20B well-order as above.
+local instance : LE Source48Label :=
+  (instDistribLatticeOfLinearOrder (α := Source48Label)).toSemilatticeInf.toLE
+
 /-- The frozen original PBW ordered label list is literally the
 canonical sorted Finset under the SAME original source well-order. -/
 theorem originalSourcePBWOrderedLabels_eq_finsetSort
@@ -56,7 +61,7 @@ theorem originalSourcePBWOrderedLabels_cons_of_least
   calc
     I.sort = (insert j (I.erase j)).sort := by rw [Finset.insert_erase hj]
     _ = j :: (I.erase j).sort := by
-      exact Finset.sort_insert (r := (· ≤ ·)) hmin' (Finset.not_mem_erase j I)
+      exact Finset.sort_insert (r := LE.le) hmin' (by simp)
 
 #print axioms originalSourcePBWOrderedLabels_eq_finsetSort
 #print axioms originalSourcePBWOrderedLabels_cons_of_least
