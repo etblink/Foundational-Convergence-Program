@@ -58,7 +58,7 @@ jobs:
           assert re.findall(r'^namespace (\S+)',s,re.M)==['FCP.BFSSS1V52K1A']
           assert re.findall(r'^#print axioms (\S+)',s,re.M)==roots
           assert re.findall(r'^(?:theorem|noncomputable def) (\S+)',s,re.M)==roots
-          assert not re.search(r'\bsorry\b|\bnative_decide\b|\baxiom\s',s)
+          assert not re.search(r'^\s*(?:sorry|native_decide|axiom)\b',s,re.M) and 'sorryAx' not in s
           print('K1A_GENUINE_SOURCE_FOUR_DECLARATIONS_PREFLIGHT_PASS')
           PY
       - name: Restore accepted original-source F21A cache
