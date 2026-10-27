@@ -1,0 +1,305 @@
+name: BFSS S4B34 Accepted Parent Binary Checkpoint Qualification
+
+# No theorem acceptance is inferred from restoring a binary. Admission requires
+# the already green Gate122 source/axiom run, exact accepted source tree,
+# original pinned math/toolchain, explicit artifact membership and native Lean
+# kernel import consumer. This is a separate provenance checkpoint lane.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-s4b34-qualified-parent-checkpoint.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: bfss-s4b34-source-checkpoint-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  accepted-source-checkpoint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout frozen research source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Checkout immutable original BFSS mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+      - name: Fail closed on original-source or candidate drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          accepted="4d0738f4c00cad9e0e5e314df3680ff1647080a7"
+          git merge-base --is-ancestor "$accepted" HEAD
+          git diff --quiet "$accepted" HEAD -- experiments/openai-math-su2-physical-domain experiments/openai-math-su2-concrete-potential
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B34ConcretePauliPairedManuscriptBProbe.lean)" = "299c3a52dac98e4e6c78884935c14a8744644174"
+          test "$(git rev-parse "$accepted":.github/workflows/bfss-form-concrete-pauli-paired-manuscript-b-strict-gate122.yml)" = "e9f68b717037d2b8dc712c44e0736919bf0892f0"
+          test "$(git -C upstream-math rev-parse HEAD)" = "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
+          test "$(cat upstream-math/lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          m=json.loads(Path("upstream-math/lean/lake-manifest.json").read_text())
+          assert next(p["rev"] for p in m["packages"] if p["name"]=="mathlib")=="d13f23b723b8a846827a245b89c10fc7d3f11612"
+          PY
+          echo FCP_BFSS_CHECKPOINT_ORIGINAL_SOURCE_EXACT_PASS
+      - name: Attest accepted Gate122 producer run and artifact identity
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-checkpoint
+          curl -fsSL --retry 3 -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/etblink/Foundational-Convergence-Program/actions/runs/40461814814" > /tmp/bfss-checkpoint/producer-run.json
+          curl -fsSL --retry 3 -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/etblink/Foundational-Convergence-Program/actions/runs/40461814814/artifacts?per_page=100" > /tmp/bfss-checkpoint/producer-artifacts.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("/tmp/bfss-checkpoint")
+          run=json.loads((p/"producer-run.json").read_text())
+          assert (run["id"],run["conclusion"],run["status"],run["head_sha"],run["run_attempt"]) == (
+            40461814814,"success","completed","4d0738f4c00cad9e0e5e314df3680ff1647080a7",1)
+          matches=[a for a in json.loads((p/"producer-artifacts.json").read_text())["artifacts"]
+            if a["id"]==12715184123 and a["name"]=="bfss-form-concrete-pauli-paired-manuscript-b-gate122-40461814814"]
+          assert len(matches)==1 and not matches[0]["expired"],"NO_ACCEPTED_ARTIFACT"
+          digest=matches[0].get("digest")
+          if digest is not None:
+            assert digest=="sha256:1ef5833863948150ea600b613f9ec8b3cd5b645f57f5667b81b1fe2daebe05c1"
+          (p/"producer-attestation.json").write_text(json.dumps({
+             "producer_run":run["id"],"run_sha":run["head_sha"],"accepted_artifact":matches[0]["id"],
+             "artifact_digest":digest,"lean":"4.34.1",
+             "mathlib":"d13f23b723b8a846827a245b89c10fc7d3f11612"
+          },sort_keys=True,indent=2))
+          print("FCP_BFSS_CHECKPOINT_GREEN_PRODUCER_AND_ARTIFACT_ATTESTED")
+          PY
+      - name: Download exact accepted Gate122 compiled-source artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: bfss-form-concrete-pauli-paired-manuscript-b-gate122-40461814814
+          run-id: 40461814814
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: /tmp/bfss-checkpoint/admitted-artifact
+      - name: Restore pinned Lean/Mathlib binary environment
+        shell: bash
+        timeout-minutes: 19
+        run: |
+          set -euo pipefail
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1; then ok=true; break; fi
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true
+          cd upstream-math/lean
+          timeout 920s lake exe cache get > /tmp/bfss-checkpoint/mathlib-cache.log 2>&1 || {
+            tail -n 70 /tmp/bfss-checkpoint/mathlib-cache.log; exit 1;
+          }
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo FCP_BFSS_CHECKPOINT_PINNED_MATHLIB_PASS
+      - name: Restore exact qualified historical G4K9A/B/C source ancestry
+        id: g4k9ccache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullSmoothCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentChargeVectorL2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphImage.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentGraphTransportHomeomorph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphClosure.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7FullClosedGraphVerticalB4CoeAlign.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueClosedRelationBridgeImports.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentFullClosedChargeOperatorE1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalInputCutOperatorE2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCutNamedAlias.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralRestrictedGraphBridgeE3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentClosedChargePhysicalInputE6.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1PairedSourceSpecialization.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1TypedIndependentInvariantCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentChargeOutputTypedE7A.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericClosedRangeOutputsE7G.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7OpaqueLiteralGraphInterfaceE7D.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentNamedSmoothGraphMapsE7K.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedSmoothGraphIdentityE7K2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedClosedSmoothGraphIdentityE7K3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueOutputConstraintE7H.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalOutputPredicateE7I.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedConditionalPhysicalOutputBridgeE7L.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralClosedPhysicalOutputsE7M.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedGraphNamedBridgeE7N1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedPhysicalOutputsE7N2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentInvariantCoreL2ImageDA.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentConditionalPhysicalCoreDensityDB.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentE2ConditionalPhysicalDomainDenseDD.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentE2UnconditionalPhysicalDomainDenseDC.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1B.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1C.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2FullPhysicalGraphRebaseDE2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2FullPhysicalDomainDE2B.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9BSourcePairAndChargeReductionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9COrderedPairCoefficientProbe.olean
+          key: bfss-fcp-m4f8-de3b-g4k9bc-source-unchanged-b3bc2712-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Check historical G4K9C cache and install EXACT 58 admitted objects
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.g4k9ccache.outputs.cache-hit }}" = true
+          for stem in OAI/MathematicalPhysics/BFSS/ClosedProfiles \
+             SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe \
+             SU2BFSSG4K9BSourcePairAndChargeReductionProbe \
+             SU2BFSSG4K9COrderedPairCoefficientProbe; do
+            test -s "upstream-math/lean/.lake/build/lib/lean/$stem.olean"
+          done
+          python3 - <<'PY'
+          import pathlib,re,subprocess,hashlib,json,shutil
+          producer=subprocess.check_output(["git","show","4d0738f4c00cad9e0e5e314df3680ff1647080a7:.github/workflows/bfss-form-concrete-pauli-paired-manuscript-b-strict-gate122.yml"],text=True)
+          artifact_part=producer.split("      - name: Preserve Gate122 original source and candidate compiler logs",1)[1]
+          names=re.findall(r"^\s+upstream-math/lean/\.lake/build/lib/lean/([A-Za-z0-9_]+\.olean)$",artifact_part,re.M)
+          assert len(names)==58 and len(set(names))==58,("SOURCE_ARTIFACT_EXPECTATION_CHANGED",len(names))
+          assert "SU2BFSSPhysicalDomainS4B34ConcretePauliPairedManuscriptBProbe.olean" in names
+          assert "SU2BFSSG1APairedThetaProbe.olean" in names
+          root=pathlib.Path("/tmp/bfss-checkpoint/admitted-artifact")
+          objects=list(root.rglob("*.olean"))
+          found={}
+          for obj in objects:
+            if obj.name in names:
+              assert obj.name not in found,("DUPLICATE_OLEAN",obj.name)
+              assert obj.is_file() and obj.stat().st_size>0
+              found[obj.name]=obj
+          assert set(found)==set(names),("MISSING_OR_UNEXPECTED_OBJECTS",sorted(set(names)-set(found)),len(found))
+          dest=pathlib.Path("upstream-math/lean/.lake/build/lib/lean")
+          dest.mkdir(parents=True,exist_ok=True)
+          manifest={}
+          for name in sorted(names):
+            target=dest/name
+            shutil.copyfile(found[name],target)
+            assert target.stat().st_size>0
+            manifest[name]={"size":target.stat().st_size,
+                "sha256":hashlib.sha256(target.read_bytes()).hexdigest()}
+          p=pathlib.Path("/tmp/bfss-checkpoint")
+          (p/"accepted-oleans-manifest.json").write_text(json.dumps(manifest,sort_keys=True,indent=2))
+          print("FCP_BFSS_ACCEPTED_GATE122_58_COMPILED_BINARY_OBJECTS_PROVENANCE_PASS",flush=True)
+          PY
+      - name: Complete missing native source closure and independently compile import consumer
+        shell: bash
+        timeout-minutes: 15
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          python3 - <<'PY'
+          import pathlib,subprocess,re
+          work=pathlib.Path("upstream-math/lean")
+          logroot=pathlib.Path("/tmp/bfss-checkpoint")
+          # Native upstream OAI proof imports must come from the frozen source,
+          # not be invented as external private axioms.
+          targets=[
+            "OAI.MathematicalPhysics.BFSS.Core",
+            "OAI.MathematicalPhysics.BFSS.MassiveCoercivity",
+            "OAI.MathematicalPhysics.BFSS.ColorMatrices",
+            "OAI.MathematicalPhysics.BFSS.MixedEnergy",
+            "OAI.MathematicalPhysics.BFSS.DeformedCharge",
+            "OAI.MathematicalPhysics.BFSS.GammaWords",
+            "OAI.MathematicalPhysics.BFSS.ColorLie",
+            "OAI.MathematicalPhysics.BFSS.PotentialBasis",
+            "OAI.Analysis.CharacterCriterion.Pauli",
+            "OAI.MathematicalPhysics.ContinuumCoulomb.ManyBody.FockNorm",
+          ]
+          for t in targets:
+            log=logroot/("upstream-"+t.replace(".","_")+".log")
+            with log.open("w") as out:
+              proc=subprocess.run(["timeout","240s","lake","build",t],cwd=work,stdout=out,stderr=subprocess.STDOUT)
+            assert proc.returncode==0,("UPSTREAM_NATIVE_BUILD_FAILED",t,log.read_text()[-4500:])
+            print("FCP_BFSS_CHECKPOINT_NATIVE_UPSTREAM_PASS",t,flush=True)
+          # B7 was not included in original Gate122 artifact path list;
+          # explicitly fill this single missing original accepted parent.
+          b7="SU2BFSSPhysicalDomainS4B7OriginalRealFockFieldPolynomialProbe"
+          src=pathlib.Path("experiments/openai-math-su2-physical-domain")/(b7+".lean")
+          (work/(b7+".lean")).write_bytes(src.read_bytes())
+          out=logroot/"missing-B7-native.log"
+          with out.open("w") as stream:
+            p=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+              "-o",".lake/build/lib/lean/"+b7+".olean",b7+".lean"],cwd=work,stdout=stream,stderr=subprocess.STDOUT)
+          data=out.read_text()
+          expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B7.originalFockRestrictScalars_add",
+            "FCP.BFSSSU2PhysicalDomainS4B7.originalFockRestrictScalars_real_smul",
+            "FCP.BFSSSU2PhysicalDomainS4B7.originalMasslessRealField_affine_polynomial",
+            "FCP.BFSSSU2PhysicalDomainS4B7.originalMasslessRealField_single_coordinate_polynomial"]
+          got=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",data)
+          assert p.returncode==0 and [n for n,_ in got]==expected and "sorryAx" not in data and "error:" not in data
+          assert all({a.strip() for a in z.split(",") if a.strip()} <=
+             {"propext","Classical.choice","Quot.sound"} for _,z in got)
+          assert (work/".lake/build/lib/lean"/(b7+".olean")).stat().st_size>0
+          # No new scientific theorem: just kernel import and axiom audit of
+          # Gate122's previously accepted exact root.
+          consumer=work/"BFSSAcceptedS4B34ParentCacheConsumer.lean"
+          consumer.write_text("""import SU2BFSSPhysicalDomainS4B34ConcretePauliPairedManuscriptBProbe
+          #check FCP.BFSSSU2PhysicalDomainS4B34.concretePauliPairedRealFockField_eq_B
+          #print axioms FCP.BFSSSU2PhysicalDomainS4B34.concretePauliPairedRealFockField_eq_B
+          """)
+          log=logroot/"native-consumer.log"
+          with log.open("w") as out:
+            p=subprocess.run(["timeout","140s","lake","env","lean","-DwarningAsError=true",
+               "-o",".lake/build/lib/lean/BFSSAcceptedS4B34ParentCacheConsumer.olean",
+               consumer.name],cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          data=log.read_text()
+          reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",data)
+          required="FCP.BFSSSU2PhysicalDomainS4B34.concretePauliPairedRealFockField_eq_B"
+          notices=re.compile(r"warning: (?P<package>[a-z0-9-]+): repository '[^']*/upstream-math/lean/[.]lake/packages/(?P=package)' has local changes")
+          warnings=[s for s in data.splitlines() if "warning:" in s and not notices.fullmatch(s)]
+          assert p.returncode==0 and [z for z,_ in reports]==[required],("BAD_CONSUMER",data[-5500:])
+          assert all({a.strip() for a in z.split(",") if a.strip()} <=
+            {"propext","Classical.choice","Quot.sound"} for _,z in reports)
+          assert "sorryAx" not in data and "error:" not in data and not warnings,("UNEXPECTED_DIAGNOSTIC",warnings)
+          assert (work/".lake/build/lib/lean/BFSSAcceptedS4B34ParentCacheConsumer.olean").stat().st_size>0
+          print("FCP_BFSS_GATE122_ACCEPTED_ROOT_KERNEL_CONSUMER_STRICT_PASS",flush=True)
+          PY
+      - name: Save independently qualified source-exact S4B34 parent checkpoint
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/BFSSAcceptedS4B34ParentCacheConsumer.olean
+          key: bfss-fcp-s4b34-accepted-gate122-source-4d0738f4-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Preserve source-checkpoint provenance, full manifest and consumer logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-s4b34-accepted-checkpoint-${{ github.run_id }}
+          path: |
+            /tmp/bfss-checkpoint/*.json
+            /tmp/bfss-checkpoint/*.log
+          if-no-files-found: warn
