@@ -275,3 +275,21 @@ Both source-import-graph integrity workflows triggered by the source changes com
 Let `B` be the **original** F20B-compatible exterior basis, `c := B.repr x`, and `S := c.support`. Assuming an occupied nonempty basis index, choose the least original occupied label `j` using E4. By E1, the original coordinate contraction annihilates each supported `B J` with `j ∉ J`. By E4's global minimum bound and E3, it sends each supported `B J` containing `j` **exactly** to `B (J.erase j)` with coefficient +1. By the accepted D erasure-injectivity theorem, `J.erase j = I.erase j` for `j ∈ I ∩ J` forces `J=I`. Thus the coordinate of the contracted `x` at `I.erase j` must equal `c I`. If every coordinate contraction of `x` is zero, every supported nonempty `I` is impossible; use accepted `B ∅ = 1` to conclude `x` is scalar.
 
 The next strict gate should **first** prove the exact `Basis.repr` coefficient formula for finite support (using `Basis.linearCombination_repr`, `Finsupp.sum`/localized `Finset.sum_eq_single`, `Basis.repr_self_apply`, and `LinearMap.map_sum/map_smul`), then compose the arbitrary-element scalar theorem. Do not expand a formal sum over all `2^48` basis subsets; `S` is finite. No `equivExterior` multiplicativity is allowed. If E3 or E4 remains red, repair its first compiler error **before** a dependent scalar-kernel gate. K1B, the Spin48 two-sign kernel, covering, global Spin9, and BFSS spectrum stay separate and unproved.
+
+## K1D2E4 successor Gate 2 — exact finite-support occupied minimum STRICT ACCEPTED, +2
+
+[GitHub Actions #40542794712](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40542794712), job `122325342746`, completed **success**. The exact E4 source Git blob `96adf2cf80e5dd81c71220e0cb811cf9b8494cf3` passed the frozen original-source/pinned Mathlib checks and independently qualified K1D2C/D ancestry. The fresh original Lean compiler log reads:
+
+```
+'FCP.BFSSS1V52K1D2E4.originalSourcePBWSupportedIndex_member_occupied'
+depends on axioms: [propext, Classical.choice, Quot.sound]
+'FCP.BFSSS1V52K1D2E4.originalSourcePBWLeastOccupied_le_every_supported_coordinate'
+depends on axioms: [propext, Classical.choice, Quot.sound]
+K1D2E4_COMPILER_EXIT 0
+K1D2E4_ORIGINAL_PBW_FINITE_MINIMUM_TWO_ROOTS_STRICT_PASS
+```
+
+No compiler warnings, no `sorryAx`, nonempty native compiled object and the exact successful source-hash-qualified cache save:
+`bfss-k1d2e4-original-pbw-finite-minimum-96adf2cf80e5dd81c71220e0cb811cf9b8494cf3-v1-adc7f124-lean4341-d13f23b-Linux-X64`.
+
+**Precisely +2 new accepted original PBW source roots**, following the predecessor [40538317916](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40538317916) red for a misplaced `Finset.min'_le` argument. The original source well-order and theorem signatures were unchanged; no infrastructure-only green is counted. K1D2A–E2 had **12** accepted roots, so K1D2A–E4 now has **14** with E3 still unqualified at this audit checkpoint. Do not silently count E3. The scalar-common-kernel theorem remains unproved.
