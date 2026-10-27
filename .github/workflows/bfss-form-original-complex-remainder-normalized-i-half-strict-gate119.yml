@@ -1,0 +1,1087 @@
+name: BFSS Form Original Complex Remainder Normalized I Half Strict Gate 119
+
+# Source genuine Fock operator coefficient normalization: -i/16 times -8 equals +i/2.
+# Direct Lean 4.34.1 compilation with pinned Core / MassiveCoercivity / ColorMatrices ancestry,
+# fresh source/S4B3 oleans and exact axiom audit; no E3B/E3C sixfold ancestry.
+on:
+  push:
+    branches:
+      - research/openai-math-su2-s1v52-global-lift-scoping-20261019
+    paths:
+      - .github/workflows/bfss-form-original-complex-remainder-normalized-i-half-strict-gate119.yml
+      - experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B31OriginalFockRemainderNormalizedIHalfProbe.lean
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bfss-form-original-complex-remainder-normalized-i-half-gate119-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  exact-source-bracket-lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout pinned research branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Checkout immutable original BFSS Lean mathematics
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: etblink/math
+          ref: adc7f1241b42e322a6451854ab7e4b4c146bf78a
+          path: upstream-math
+          persist-credentials: false
+          sparse-checkout: |
+            lean
+          sparse-checkout-cone-mode: true
+      - name: Verify exact source identities, source blobs and manifest pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C upstream-math rev-parse HEAD)" = "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
+          test "$(cat upstream-math/lean/lean-toolchain)" = "leanprover/lean4:v4.34.1"
+          test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/Core.lean)" = "9882359ced78b0a3bd7e2f057974bd0a031b3e60"
+          test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/MassiveCoercivity.lean)" = "1a9a8fe629e69f3946602a786c2e63c2ca354462"
+          test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/ColorMatrices.lean)" = "1c1c2a838c48c0aea2a1c1640da5d412f22e3f0c"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B23OriginalSourceVariationFullGammaContractionProbe.lean)" = "6fb1edd75cf1b4f8e6355c083a514945ce22f3ad"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B23OriginalSourceVariationFullGammaContractionProbe.lean)" = "6fb1edd75cf1b4f8e6355c083a514945ce22f3ad"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B24OriginalColorFirstLastSkewProbe.lean)" = "fbd55472ce131fd4eec602711c24dd301958cc3b"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B24OriginalColorFirstLastSkewProbe.lean)" = "fbd55472ce131fd4eec602711c24dd301958cc3b"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B25OriginalManuscriptSignedGammaCoefficientProbe.lean)" = "75ad185023d7901f4ce932feb72e80c145fb9794"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B25OriginalManuscriptSignedGammaCoefficientProbe.lean)" = "75ad185023d7901f4ce932feb72e80c145fb9794"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B26OriginalGammaThetaOperatorProductDistributionProbe.lean)" = "1e414c3901fc3309ca29c9b8040f0387beb9f5e6"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B26OriginalGammaThetaOperatorProductDistributionProbe.lean)" = "1e414c3901fc3309ca29c9b8040f0387beb9f5e6"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B27OriginalSignedGammaContractionOrderedThetaLiftProbe.lean)" = "947fb0e81954a1e02f30a82fe72c1de26e90d0b5"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B27OriginalSignedGammaContractionOrderedThetaLiftProbe.lean)" = "947fb0e81954a1e02f30a82fe72c1de26e90d0b5"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B28OriginalComplexFermionRemainderFullOrderedThetaExpansionProbe.lean)" = "c7fb36ecaca01203c0a1099b523c5ee8863550e4"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B28OriginalComplexFermionRemainderFullOrderedThetaExpansionProbe.lean)" = "c7fb36ecaca01203c0a1099b523c5ee8863550e4"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B29OriginalFermionRemainderContractibleSumOrderProbe.lean)" = "cba42f85d74fd425ca26041eb3a232bee8f1059d"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B29OriginalFermionRemainderContractibleSumOrderProbe.lean)" = "cba42f85d74fd425ca26041eb3a232bee8f1059d"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B30OriginalFockRemainderFullySignedContractionProbe.lean)" = "6a43c9a36b556acaa3d7f3b3bd1dd26704c686b0"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B30OriginalFockRemainderFullySignedContractionProbe.lean)" = "6a43c9a36b556acaa3d7f3b3bd1dd26704c686b0"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B31OriginalFockRemainderNormalizedIHalfProbe.lean)" = "f6206be25dadc36ef4fd865d853d8263cf7cfc26"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B31OriginalFockRemainderNormalizedIHalfProbe.lean)" = "f6206be25dadc36ef4fd865d853d8263cf7cfc26"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B6OriginalMasslessPotentialMultiplierPolynomialProbe.lean)" = "5273bd3053c38b1948ed064b801b8ac4ed03087f"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B6OriginalMasslessPotentialMultiplierPolynomialProbe.lean)" = "5273bd3053c38b1948ed064b801b8ac4ed03087f"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B5OriginalMasslessCoefficientPolynomialProbe.lean)" = "f2701b1e07f3d3bcae69a3e81a5bfa015c28a68d"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B5OriginalMasslessCoefficientPolynomialProbe.lean)" = "f2701b1e07f3d3bcae69a3e81a5bfa015c28a68d"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B4OriginalGammaWeightedBracketPolynomialProbe.lean)" = "2ed79184d19ba0ddc024952f91871ee8c4fc3ea9"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B4OriginalGammaWeightedBracketPolynomialProbe.lean)" = "2ed79184d19ba0ddc024952f91871ee8c4fc3ea9"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.lean)" = "5e5f10f4c79f45f4b2bb4d6cdf1dbe71573616dd"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.lean)" = "5e5f10f4c79f45f4b2bb4d6cdf1dbe71573616dd"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9BSourcePairAndChargeReductionProbe.lean)" = "3bc2712a1c56e86e9e996dcee3052409e23a2e73"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9BSourcePairAndChargeReductionProbe.lean)" = "3bc2712a1c56e86e9e996dcee3052409e23a2e73"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9COrderedPairCoefficientProbe.lean)" = "de0c447a73990b1beb271fb2afc14dc5b4e20318"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-concrete-potential/SU2BFSSG4K9COrderedPairCoefficientProbe.lean)" = "de0c447a73990b1beb271fb2afc14dc5b4e20318"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B3OriginalBracketPolynomialExpansionProbe.lean)" = "c80d85164247e6631fb1b0d7e4da2aca48c6af32"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B3OriginalBracketPolynomialExpansionProbe.lean)" = "c80d85164247e6631fb1b0d7e4da2aca48c6af32"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B7OriginalRealFockFieldPolynomialProbe.lean)" = "2ba2efa2b93a67b534c99a8deb558c2db71e3f2e"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B7OriginalRealFockFieldPolynomialProbe.lean)" = "2ba2efa2b93a67b534c99a8deb558c2db71e3f2e"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B8OriginalRealFockFieldDirectionalDerivativeProbe.lean)" = "7bf2ca5f9b02a3b17f91c1e5fd84dd29278fcd30"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B8OriginalRealFockFieldDirectionalDerivativeProbe.lean)" = "7bf2ca5f9b02a3b17f91c1e5fd84dd29278fcd30"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B9OriginalFermionRemainderContractionProbe.lean)" = "4da5780b101dfb40dcf17a84ceefc29142a0d6d7"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B9OriginalFermionRemainderContractionProbe.lean)" = "4da5780b101dfb40dcf17a84ceefc29142a0d6d7"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B10OriginalComplexFockRestrictionProbe.lean)" = "e9e2718e1a3e7f26ec48bff11b54372ff119c701"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B10OriginalComplexFockRestrictionProbe.lean)" = "e9e2718e1a3e7f26ec48bff11b54372ff119c701"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B11OriginalComplexGammaThetaExpansionProbe.lean)" = "e16355efa140ec9cb69d164b146696ec272b6e85"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B11OriginalComplexGammaThetaExpansionProbe.lean)" = "e16355efa140ec9cb69d164b146696ec272b6e85"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B12OriginalGammaTwoContractionProbe.lean)" = "e9b31b8b98626d552e2f2b880fa607d06c861dd7"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B12OriginalGammaTwoContractionProbe.lean)" = "e9b31b8b98626d552e2f2b880fa607d06c861dd7"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B13OriginalGammaTwoNineDirectionProbe.lean)" = "0a9e3092f962ad15acc914f4935b87ad59b874e4"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B13OriginalGammaTwoNineDirectionProbe.lean)" = "0a9e3092f962ad15acc914f4935b87ad59b874e4"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B14OriginalGammaColorSkewProbe.lean)" = "b18fc39438fc98aea088bfd20f7ee950dfa1a45c"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B14OriginalGammaColorSkewProbe.lean)" = "b18fc39438fc98aea088bfd20f7ee950dfa1a45c"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B15OriginalGammaColorSignedPairProbe.lean)" = "7b4bbb1e7f261ddec99778396211f4badbbb34c1"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B15OriginalGammaColorSignedPairProbe.lean)" = "7b4bbb1e7f261ddec99778396211f4badbbb34c1"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B16OriginalBosonCoordinateSelectorProbe.lean)" = "b3b91708f45bca87cfd6f4bc538adf86c51445a2"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B16OriginalBosonCoordinateSelectorProbe.lean)" = "b3b91708f45bca87cfd6f4bc538adf86c51445a2"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B17OriginalFieldVariationSelectorHalvesProbe.lean)" = "ea02a6497c5876c82132e874f388c6633f4a752b"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B17OriginalFieldVariationSelectorHalvesProbe.lean)" = "ea02a6497c5876c82132e874f388c6633f4a752b"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B18OriginalFieldCoefficientQuadrupleReorderProbe.lean)" = "86069cb3b5faba32871eee755edd2c4d272e7c56"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B18OriginalFieldCoefficientQuadrupleReorderProbe.lean)" = "86069cb3b5faba32871eee755edd2c4d272e7c56"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B19OriginalMasslessVariationCoefficientProbe.lean)" = "964d2d5f1ba8f6558100935e98b65f962162a1d2"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B19OriginalMasslessVariationCoefficientProbe.lean)" = "964d2d5f1ba8f6558100935e98b65f962162a1d2"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B20OriginalComplexGammaColorThetaOperatorProbe.lean)" = "853670f993789f020453eb79b427cc2237b4c4ad"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B20OriginalComplexGammaColorThetaOperatorProbe.lean)" = "853670f993789f020453eb79b427cc2237b4c4ad"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B21OriginalRealFermionFieldGammaColorThetaProbe.lean)" = "35a86b378c1711d986ea5eda950677e2cc112f56"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B21OriginalRealFermionFieldGammaColorThetaProbe.lean)" = "35a86b378c1711d986ea5eda950677e2cc112f56"
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B22OriginalGammaSpinorEntryContractionProbe.lean)" = "78a0272bb9e222aaeb574f8dcdbacf8860769e48"
+          test "$(git hash-object --no-filters experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B22OriginalGammaSpinorEntryContractionProbe.lean)" = "78a0272bb9e222aaeb574f8dcdbacf8860769e48"
+          test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/ColorLie.lean)" = "3c4bbd6b4a3ba21a0f05892e90665a8c2033640c"
+          test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/GammaWords.lean)" = "d12051e70de679f5458dbd456667a32c7b407ce4"
+          test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/DeformedCharge.lean)" = "c27c913c44090100f0c714e3eb34e25205f4d2d3"
+          test "$(git -C upstream-math rev-parse HEAD:lean/OAI/MathematicalPhysics/BFSS/MixedEnergy.lean)" = "cc00f5b2ce4bb1811162e4bf2d9c773a9779ef8e"
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path("upstream-math/lean")
+          manifest=json.loads((root/"lake-manifest.json").read_text())
+          assert next(p["rev"] for p in manifest["packages"] if p["name"]=="mathlib")=="d13f23b723b8a846827a245b89c10fc7d3f11612"
+          src=Path("experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B31OriginalFockRemainderNormalizedIHalfProbe.lean").read_text()
+          assert src.count("\ntheorem ")==1 and src.count("\n#print axioms ")==1
+          assert all(name in src for name in ["originalComplexFermionContraction_normalized_i_half"])
+          assert "sourceMasslessComplexFermionContraction" in src and "originalComplexFermionContraction_full_signed_source" in src and "signedPhase_normalize_triple" in src and "M.theta" in src
+          assert not any(line.lstrip().startswith(("sorry", "admit", "axiom ")) for line in src.splitlines())
+          print("GATE119_ORIGINAL_SOURCE_AND_PROOF_IMMUTABILITY_PASS")
+          PY
+      - name: Validate self-test and Gate119 YAML before heavy Lean work
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/bfss-gate119-venv
+          /tmp/bfss-gate119-venv/bin/python -m pip install --disable-pip-version-check --only-binary=:all: PyYAML==6.0.3
+          /tmp/bfss-gate119-venv/bin/python tools/bfss_gate_workflow_preflight.py --self-test
+          /tmp/bfss-gate119-venv/bin/python tools/bfss_gate_workflow_preflight.py .github/workflows/bfss-form-original-complex-remainder-normalized-i-half-strict-gate119.yml
+      - name: Restore source pinned Lean and mathlib binary cache
+        shell: bash
+        timeout-minutes: 19
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bfss-gate119
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/powershell /opt/hostedtoolcache/CodeQL /usr/share/swift
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          ok=false
+          for attempt in 1 2 3; do
+            if timeout 150s elan toolchain install leanprover/lean4:v4.34.1; then ok=true; break; fi
+            sleep $((attempt * 6))
+          done
+          test "$ok" = true
+          cd upstream-math/lean
+          timeout 920s lake exe cache get > /tmp/bfss-gate119/mathlib-cache.log 2>&1 || {
+            tail -n 70 /tmp/bfss-gate119/mathlib-cache.log; exit 1;
+          }
+          test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
+          echo GATE119_FROZEN_TOOLCHAIN_AND_MATHLIB_PASS
+      - name: Restore exact qualified historical G4K9A/B/C source ancestry
+        id: g4k9ccache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM3*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependent*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4E5*.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullSmoothCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentChargeVectorL2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphImage.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentGraphTransportHomeomorph.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPIndependentFullCoreGraphClosure.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7FullClosedGraphVerticalB4CoeAlign.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueClosedRelationBridgeImports.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentFullClosedChargeOperatorE1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalInputCutOperatorE2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPRestrictedGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6PairedSourceGraphInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentLiteralAliasBoundary.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6GenericNamedAliasInputCut.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F6IndependentGraphInputCutNamedAlias.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralRestrictedGraphBridgeE3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentClosedChargePhysicalInputE6.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1PairedSourceSpecialization.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F1TypedIndependentInvariantCharge.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentChargeOutputTypedE7A.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericClosedRangeOutputsE7G.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7OpaqueLiteralGraphInterfaceE7D.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentNamedSmoothGraphMapsE7K.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedSmoothGraphIdentityE7K2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedClosedSmoothGraphIdentityE7K3.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7GenericOpaqueOutputConstraintE7H.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentPhysicalOutputPredicateE7I.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7NamedConditionalPhysicalOutputBridgeE7L.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentLiteralClosedPhysicalOutputsE7M.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedGraphNamedBridgeE7N1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F7IndependentActualClosedPhysicalOutputsE7N2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentInvariantCoreL2ImageDA.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentConditionalPhysicalCoreDensityDB.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentE2ConditionalPhysicalDomainDenseDD.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentE2UnconditionalPhysicalDomainDenseDC.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1B.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2PhysicalInputRebaseDE1C.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2FullPhysicalGraphRebaseDE2.olean
+            upstream-math/lean/.lake/build/lib/lean/FCPM4F8IndependentActualE2FullPhysicalDomainDE2B.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9BSourcePairAndChargeReductionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSG4K9COrderedPairCoefficientProbe.olean
+          key: bfss-fcp-m4f8-de3b-g4k9bc-source-unchanged-b3bc2712-gate1-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Fail closed on G4K9C original source cache provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.g4k9ccache.outputs.cache-hit }}" = "true" || {
+            echo GATE119_QUALIFIED_ORIGINAL_G4K9C_CACHE_NOT_RESTORED
+            exit 1
+          }
+          for stem in OAI/MathematicalPhysics/BFSS/ClosedProfiles \
+            SU2BFSSG4K9ASourceChargeCoefficientCrosswalkProbe \
+            SU2BFSSG4K9BSourcePairAndChargeReductionProbe \
+            SU2BFSSG4K9COrderedPairCoefficientProbe; do
+            test -s "upstream-math/lean/.lake/build/lib/lean/$stem.olean" || {
+              echo GATE119_ACCEPTED_SOURCE_ANCESTOR_MISSING="$stem"
+              exit 1
+            }
+          done
+          echo GATE119_ACCEPTED_G4K9C_CACHE_PROVENANCE_PASS
+      - name: Freshly compile original ancestry, accepted parents and actual full variation gamma contraction
+        shell: bash
+        timeout-minutes: 11
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          mkdir -p /tmp/bfss-gate119
+          python3 - <<'PY'
+          import pathlib,subprocess,re
+          work=pathlib.Path("upstream-math/lean")
+          lib=work/".lake/build/lib/lean"
+          for mod in ["OAI.MathematicalPhysics.BFSS.Core","OAI.MathematicalPhysics.BFSS.MassiveCoercivity","OAI.MathematicalPhysics.BFSS.ColorMatrices","OAI.MathematicalPhysics.BFSS.MixedEnergy","OAI.MathematicalPhysics.BFSS.DeformedCharge","OAI.MathematicalPhysics.BFSS.GammaWords","OAI.MathematicalPhysics.BFSS.ColorLie"]:
+              rel=mod.replace(".","/")
+              obj=lib/(rel+".olean")
+              obj.parent.mkdir(parents=True,exist_ok=True)
+              if obj.exists(): obj.unlink()  # fresh source compile, never foreign object
+              path=rel+".lean"
+              log=pathlib.Path("/tmp/bfss-gate119")/(rel.replace("/","_")+".log")
+              with log.open("w") as o:
+                  p=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true","-o",
+                                    ".lake/build/lib/lean/"+rel+".olean",path],cwd=work,stdout=o,stderr=subprocess.STDOUT)
+              if p.returncode or not obj.is_file() or not obj.stat().st_size:
+                  print(log.read_text()[-4000:],flush=True)
+                  raise SystemExit("GATE119_ORIGINAL_"+mod+"_FRESH_COMPILE_RED")
+              print("GATE119_ORIGINAL_SOURCE_FRESH_COMPILED",mod,obj.stat().st_size,flush=True)
+          # Freshly compile and audit the EXACT previously accepted S4B3 parent.
+          parentStem="SU2BFSSPhysicalDomainS4B3OriginalBracketPolynomialExpansionProbe"
+          parentSource=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentStem+".lean")
+          (work/(parentStem+".lean")).write_bytes(parentSource.read_bytes())
+          parentObj=lib/(parentStem+".olean")
+          if parentObj.exists(): parentObj.unlink()
+          parentLog=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b3.log")
+          with parentLog.open("w") as o:
+              parentRun=subprocess.run(
+                ["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                 "-o",".lake/build/lib/lean/"+parentStem+".olean",parentStem+".lean"],
+                cwd=work,stdout=o,stderr=subprocess.STDOUT)
+          parentData=parentLog.read_text()
+          parentExpected=[
+            "FCP.BFSSSU2PhysicalDomainS4B3.originalCoordinateBracketAll_affine_polynomial",
+            "FCP.BFSSSU2PhysicalDomainS4B3.originalCoordinateBracketAll_single_coordinate_polynomial"]
+          parentReports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentData)
+          parentOk=(parentRun.returncode==0
+            and [name for name,_ in parentReports]==parentExpected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentReports)
+            and "sorryAx" not in parentData and "error:" not in parentData
+            and parentObj.is_file() and parentObj.stat().st_size>0)
+          if not parentOk:
+              print("GATE119_ACCEPTED_S4B3_PARENT_FRESH_RED",flush=True)
+              print(parentData[-4000:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B3_PARENT_FRESH_PASS",parentObj.stat().st_size,flush=True)
+          # Freshly recompile accepted S4B4 from its immutable Git blob.
+          parentB4Stem="SU2BFSSPhysicalDomainS4B4OriginalGammaWeightedBracketPolynomialProbe"
+          parentB4Source=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB4Stem+".lean")
+          (work/(parentB4Stem+".lean")).write_bytes(parentB4Source.read_bytes())
+          parentB4Obj=lib/(parentB4Stem+".olean")
+          if parentB4Obj.exists(): parentB4Obj.unlink()
+          parentB4Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b4.log")
+          with parentB4Log.open("w") as o:
+              parentB4Run=subprocess.run(
+                ["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                 "-o",".lake/build/lib/lean/"+parentB4Stem+".olean",parentB4Stem+".lean"],
+                 cwd=work,stdout=o,stderr=subprocess.STDOUT)
+          parentB4Data=parentB4Log.read_text()
+          parentB4Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B4.originalGammaWeightedBracket_affine_polynomial",
+            "FCP.BFSSSU2PhysicalDomainS4B4.originalGammaWeightedBracket_single_coordinate_polynomial"]
+          parentB4Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB4Data)
+          parentB4OK=(parentB4Run.returncode==0
+            and [n for n,_ in parentB4Reports]==parentB4Expected
+            and all({a.strip() for a in ax.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,ax in parentB4Reports)
+            and "sorryAx" not in parentB4Data and "error:" not in parentB4Data
+            and parentB4Obj.is_file() and parentB4Obj.stat().st_size>0)
+          if not parentB4OK:
+              print("GATE119_ACCEPTED_S4B4_PARENT_FRESH_RED",flush=True)
+              print(parentB4Data[-4000:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B4_PARENT_FRESH_PASS",parentB4Obj.stat().st_size,flush=True)
+          # Freshly certify exact accepted S4B5 coefficient parent.
+          parentB5Stem="SU2BFSSPhysicalDomainS4B5OriginalMasslessCoefficientPolynomialProbe"
+          parentB5Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB5Stem+".lean")
+          (work/(parentB5Stem+".lean")).write_bytes(parentB5Src.read_bytes())
+          parentB5Obj=lib/(parentB5Stem+".olean")
+          if parentB5Obj.exists(): parentB5Obj.unlink()
+          parentB5Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b5.log")
+          with parentB5Log.open("w") as out:
+              parentB5Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB5Stem+".olean",parentB5Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB5Data=parentB5Log.read_text()
+          parentB5Expected=[
+            "FCP.BFSSSU2GaugeG4K9C.sourceMasslessCoefficient_eq_halfOriginalOrdered",
+            "FCP.BFSSSU2PhysicalDomainS4B5.originalMasslessPotentialCoefficient_affine_polynomial",
+            "FCP.BFSSSU2PhysicalDomainS4B5.originalMasslessPotentialCoefficient_single_coordinate_polynomial"]
+          parentB5Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB5Data)
+          parentB5OK=(parentB5Run.returncode==0 and
+            [n for n,_ in parentB5Reports]==parentB5Expected and
+            all({v.strip() for v in ax.split(",") if v.strip()}<=
+              {"propext","Classical.choice","Quot.sound"} for _,ax in parentB5Reports)
+            and "sorryAx" not in parentB5Data and "error:" not in parentB5Data
+            and parentB5Obj.is_file() and parentB5Obj.stat().st_size>0)
+          if not parentB5OK:
+              print("GATE119_ACCEPTED_S4B5_PARENT_FRESH_RED",flush=True)
+              print(parentB5Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B5_PARENT_FRESH_PASS",parentB5Obj.stat().st_size,flush=True)
+          # Recompile and axiom-audit exact accepted S4B6 complex operator parent.
+          parentB6Stem="SU2BFSSPhysicalDomainS4B6OriginalMasslessPotentialMultiplierPolynomialProbe"
+          parentB6Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB6Stem+".lean")
+          (work/(parentB6Stem+".lean")).write_bytes(parentB6Src.read_bytes())
+          parentB6Obj=lib/(parentB6Stem+".olean")
+          if parentB6Obj.exists(): parentB6Obj.unlink()
+          parentB6Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b6.log")
+          with parentB6Log.open("w") as o:
+              parentB6Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB6Stem+".olean",parentB6Stem+".lean"],
+                cwd=work,stdout=o,stderr=subprocess.STDOUT)
+          parentB6Data=parentB6Log.read_text()
+          parentB6Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B6.sourceCliffordLinear_add",
+            "FCP.BFSSSU2PhysicalDomainS4B6.sourceCliffordLinear_real_smul",
+            "FCP.BFSSSU2PhysicalDomainS4B6.originalMasslessPotentialMultiplier_affine_polynomial",
+            "FCP.BFSSSU2PhysicalDomainS4B6.originalMasslessPotentialMultiplier_single_coordinate_polynomial"]
+          parentB6Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB6Data)
+          parentB6OK=(parentB6Run.returncode==0
+            and [n for n,_ in parentB6Reports]==parentB6Expected
+            and all({a.strip() for a in ax.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,ax in parentB6Reports)
+            and "sorryAx" not in parentB6Data and "error:" not in parentB6Data
+            and parentB6Obj.is_file() and parentB6Obj.stat().st_size>0)
+          if not parentB6OK:
+              print("GATE119_ACCEPTED_S4B6_PARENT_FRESH_RED",flush=True)
+              print(parentB6Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B6_PARENT_FRESH_PASS",parentB6Obj.stat().st_size,flush=True)
+          # Freshly compile and axiom-audit the EXACT accepted S4B7 parent.
+          parentB7Stem="SU2BFSSPhysicalDomainS4B7OriginalRealFockFieldPolynomialProbe"
+          parentB7Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB7Stem+".lean")
+          (work/(parentB7Stem+".lean")).write_bytes(parentB7Src.read_bytes())
+          parentB7Obj=lib/(parentB7Stem+".olean")
+          if parentB7Obj.exists(): parentB7Obj.unlink()
+          parentB7Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b7.log")
+          with parentB7Log.open("w") as out:
+              parentB7Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB7Stem+".olean",parentB7Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB7Data=parentB7Log.read_text()
+          parentB7Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B7.originalFockRestrictScalars_add",
+            "FCP.BFSSSU2PhysicalDomainS4B7.originalFockRestrictScalars_real_smul",
+            "FCP.BFSSSU2PhysicalDomainS4B7.originalMasslessRealField_affine_polynomial",
+            "FCP.BFSSSU2PhysicalDomainS4B7.originalMasslessRealField_single_coordinate_polynomial"]
+          parentB7Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB7Data)
+          parentB7OK=(parentB7Run.returncode==0
+            and [name for name,_ in parentB7Reports]==parentB7Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB7Reports)
+            and "sorryAx" not in parentB7Data and "error:" not in parentB7Data
+            and parentB7Obj.is_file() and parentB7Obj.stat().st_size>0)
+          if not parentB7OK:
+              print("GATE119_ACCEPTED_S4B7_PARENT_FRESH_RED",flush=True)
+              print(parentB7Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B7_PARENT_FRESH_PASS",parentB7Obj.stat().st_size,flush=True)
+          # Strictly recompile the just-accepted Gate96 original real-Fock derivative parent.
+          parentB8Stem="SU2BFSSPhysicalDomainS4B8OriginalRealFockFieldDirectionalDerivativeProbe"
+          parentB8Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB8Stem+".lean")
+          (work/(parentB8Stem+".lean")).write_bytes(parentB8Src.read_bytes())
+          parentB8Obj=lib/(parentB8Stem+".olean")
+          if parentB8Obj.exists(): parentB8Obj.unlink()
+          parentB8Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b8.log")
+          with parentB8Log.open("w") as out:
+              parentB8Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB8Stem+".olean",parentB8Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB8Data=parentB8Log.read_text()
+          parentB8Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B8.originalMasslessRealField_line_hasDerivAt",
+            "FCP.BFSSSU2PhysicalDomainS4B8.originalMasslessRealField_fderiv_direction",
+            "FCP.BFSSSU2PhysicalDomainS4B8.originalMasslessRealField_single_coordinate_fderiv"]
+          parentB8Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB8Data)
+          parentB8OK=(parentB8Run.returncode==0
+            and [name for name,_ in parentB8Reports]==parentB8Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB8Reports)
+            and "sorryAx" not in parentB8Data and "error:" not in parentB8Data
+            and parentB8Obj.is_file() and parentB8Obj.stat().st_size>0)
+          if not parentB8OK:
+              print("GATE119_ACCEPTED_S4B8_PARENT_FRESH_RED",flush=True)
+              print(parentB8Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B8_PARENT_FRESH_PASS",parentB8Obj.stat().st_size,flush=True)
+          # Fresh qualified Gate97 actual massless fermionic remainder-field parent.
+          parentB9Stem="SU2BFSSPhysicalDomainS4B9OriginalFermionRemainderContractionProbe"
+          parentB9Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB9Stem+".lean")
+          (work/(parentB9Stem+".lean")).write_bytes(parentB9Src.read_bytes())
+          parentB9Obj=lib/(parentB9Stem+".olean")
+          if parentB9Obj.exists(): parentB9Obj.unlink()
+          parentB9Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b9.log")
+          with parentB9Log.open("w") as out:
+              parentB9Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB9Stem+".olean",parentB9Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB9Data=parentB9Log.read_text()
+          parentB9Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B9.originalMasslessDeformedFermionField_contraction",
+            "FCP.BFSSSU2PhysicalDomainS4B9.originalMasslessDeformedFermionField_apply"]
+          parentB9Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB9Data)
+          parentB9OK=(parentB9Run.returncode==0
+            and [name for name,_ in parentB9Reports]==parentB9Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB9Reports)
+            and "sorryAx" not in parentB9Data and "error:" not in parentB9Data
+            and parentB9Obj.is_file() and parentB9Obj.stat().st_size>0)
+          if not parentB9OK:
+              print("GATE119_ACCEPTED_S4B9_PARENT_FRESH_RED",flush=True)
+              print(parentB9Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B9_PARENT_FRESH_PASS",parentB9Obj.stat().st_size,flush=True)
+          # Freshly recompile exact accepted Gate98 original complex restriction parent.
+          parentB10Stem="SU2BFSSPhysicalDomainS4B10OriginalComplexFockRestrictionProbe"
+          parentB10Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB10Stem+".lean")
+          (work/(parentB10Stem+".lean")).write_bytes(parentB10Src.read_bytes())
+          parentB10Obj=lib/(parentB10Stem+".olean")
+          if parentB10Obj.exists(): parentB10Obj.unlink()
+          parentB10Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b10.log")
+          with parentB10Log.open("w") as out:
+              parentB10Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB10Stem+".olean",parentB10Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB10Data=parentB10Log.read_text()
+          parentB10Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B10.originalComplexFockRestriction_mul",
+            "FCP.BFSSSU2PhysicalDomainS4B10.originalComplexFockRestriction_sum",
+            "FCP.BFSSSU2PhysicalDomainS4B10.originalMasslessFermionField_complexRestriction"]
+          parentB10Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB10Data)
+          parentB10OK=(parentB10Run.returncode==0
+            and [name for name,_ in parentB10Reports]==parentB10Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB10Reports)
+            and "sorryAx" not in parentB10Data and "error:" not in parentB10Data
+            and parentB10Obj.is_file() and parentB10Obj.stat().st_size>0)
+          if not parentB10OK:
+              print("GATE119_ACCEPTED_S4B10_PARENT_FRESH_RED",flush=True)
+              print(parentB10Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B10_PARENT_FRESH_PASS",parentB10Obj.stat().st_size,flush=True)
+          # Exact accepted Gate99 gamma-theta source parent, freshly compiled.
+          parentB11Stem="SU2BFSSPhysicalDomainS4B11OriginalComplexGammaThetaExpansionProbe"
+          parentB11Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB11Stem+".lean")
+          (work/(parentB11Stem+".lean")).write_bytes(parentB11Src.read_bytes())
+          parentB11Obj=lib/(parentB11Stem+".olean")
+          if parentB11Obj.exists(): parentB11Obj.unlink()
+          parentB11Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b11.log")
+          with parentB11Log.open("w") as out:
+              parentB11Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB11Stem+".olean",parentB11Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB11Data=parentB11Log.read_text()
+          parentB11Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B11.originalKineticComplexSymbol_gammaTheta",
+            "FCP.BFSSSU2PhysicalDomainS4B11.originalComplexFieldVariation_theta",
+            "FCP.BFSSSU2PhysicalDomainS4B11.originalComplexFermionContraction_gammaTheta"]
+          parentB11Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB11Data)
+          parentB11OK=(parentB11Run.returncode==0
+            and [name for name,_ in parentB11Reports]==parentB11Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB11Reports)
+            and "sorryAx" not in parentB11Data and "error:" not in parentB11Data
+            and parentB11Obj.is_file() and parentB11Obj.stat().st_size>0)
+          if not parentB11OK:
+              print("GATE119_ACCEPTED_S4B11_PARENT_FRESH_RED",flush=True)
+              print(parentB11Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B11_PARENT_FRESH_PASS",parentB11Obj.stat().st_size,flush=True)
+          # Strictly recompile the exact original Gate100 Clifford parent.
+          parentB12Stem="SU2BFSSPhysicalDomainS4B12OriginalGammaTwoContractionProbe"
+          parentB12Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB12Stem+".lean")
+          (work/(parentB12Stem+".lean")).write_bytes(parentB12Src.read_bytes())
+          parentB12Obj=lib/(parentB12Stem+".olean")
+          if parentB12Obj.exists(): parentB12Obj.unlink()
+          parentB12Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b12.log")
+          with parentB12Log.open("w") as out:
+              parentB12Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB12Stem+".olean",parentB12Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB12Data=parentB12Log.read_text()
+          parentB12Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B12.originalSourceGammaTwo_alternate",
+            "FCP.BFSSSU2PhysicalDomainS4B12.originalSourceGammaTwo_left_contraction"]
+          parentB12Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB12Data)
+          parentB12OK=(parentB12Run.returncode==0
+            and [name for name,_ in parentB12Reports]==parentB12Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB12Reports)
+            and "sorryAx" not in parentB12Data and "error:" not in parentB12Data
+            and parentB12Obj.is_file() and parentB12Obj.stat().st_size>0)
+          if not parentB12OK:
+              print("GATE119_ACCEPTED_S4B12_PARENT_FRESH_RED",flush=True)
+              print(parentB12Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B12_PARENT_FRESH_PASS",parentB12Obj.stat().st_size,flush=True)
+          # Freshly compile and qualify exact accepted Gate101 nine-direction parent.
+          parentB13Stem="SU2BFSSPhysicalDomainS4B13OriginalGammaTwoNineDirectionProbe"
+          parentB13Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB13Stem+".lean")
+          (work/(parentB13Stem+".lean")).write_bytes(parentB13Src.read_bytes())
+          parentB13Obj=lib/(parentB13Stem+".olean")
+          if parentB13Obj.exists(): parentB13Obj.unlink()
+          parentB13Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b13.log")
+          with parentB13Log.open("w") as out:
+              parentB13Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB13Stem+".olean",parentB13Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB13Data=parentB13Log.read_text()
+          parentB13Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B13.originalSpin9_excluding_one_matrix_sum",
+            "FCP.BFSSSU2PhysicalDomainS4B13.originalSourceGammaTwo_nine_direction_sum"]
+          parentB13Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB13Data)
+          parentB13OK=(parentB13Run.returncode==0
+            and [name for name,_ in parentB13Reports]==parentB13Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB13Reports)
+            and "sorryAx" not in parentB13Data and "error:" not in parentB13Data
+            and parentB13Obj.is_file() and parentB13Obj.stat().st_size>0)
+          if not parentB13OK:
+              print("GATE119_ACCEPTED_S4B13_PARENT_FRESH_RED",flush=True)
+              print(parentB13Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B13_PARENT_FRESH_PASS",parentB13Obj.stat().st_size,flush=True)
+          # Strictly recompile both accepted Gate102 original source skew roots.
+          parentB14Stem="SU2BFSSPhysicalDomainS4B14OriginalGammaColorSkewProbe"
+          parentB14Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB14Stem+".lean")
+          (work/(parentB14Stem+".lean")).write_bytes(parentB14Src.read_bytes())
+          parentB14Obj=lib/(parentB14Stem+".olean")
+          if parentB14Obj.exists(): parentB14Obj.unlink()
+          parentB14Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b14.log")
+          with parentB14Log.open("w") as out:
+              parentB14Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB14Stem+".olean",parentB14Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB14Data=parentB14Log.read_text()
+          parentB14Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B14.originalSourceGammaTwo_skew",
+            "FCP.BFSSSU2PhysicalDomainS4B14.originalSourceStructureConstant_last_two_skew"]
+          parentB14Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB14Data)
+          parentB14OK=(parentB14Run.returncode==0
+            and [name for name,_ in parentB14Reports]==parentB14Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB14Reports)
+            and "sorryAx" not in parentB14Data and "error:" not in parentB14Data
+            and parentB14Obj.is_file() and parentB14Obj.stat().st_size>0)
+          if not parentB14OK:
+              print("GATE119_ACCEPTED_S4B14_PARENT_FRESH_RED",flush=True)
+              print(parentB14Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B14_PARENT_FRESH_PASS",parentB14Obj.stat().st_size,flush=True)
+          # Freshly check accepted Gate103 genuine signed gamma/color pair roots.
+          parentB15Stem="SU2BFSSPhysicalDomainS4B15OriginalGammaColorSignedPairProbe"
+          parentB15Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB15Stem+".lean")
+          (work/(parentB15Stem+".lean")).write_bytes(parentB15Src.read_bytes())
+          parentB15Obj=lib/(parentB15Stem+".olean")
+          if parentB15Obj.exists(): parentB15Obj.unlink()
+          parentB15Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b15.log")
+          with parentB15Log.open("w") as out:
+              parentB15Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB15Stem+".olean",parentB15Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB15Data=parentB15Log.read_text()
+          parentB15Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B15.originalSourceGammaColor_signed_pair",
+            "FCP.BFSSSU2PhysicalDomainS4B15.originalSourceGammaColor_signed_pair_sum"]
+          parentB15Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB15Data)
+          parentB15OK=(parentB15Run.returncode==0
+            and [name for name,_ in parentB15Reports]==parentB15Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB15Reports)
+            and "sorryAx" not in parentB15Data and "error:" not in parentB15Data
+            and parentB15Obj.is_file() and parentB15Obj.stat().st_size>0)
+          if not parentB15OK:
+              print("GATE119_ACCEPTED_S4B15_PARENT_FRESH_RED",flush=True)
+              print(parentB15Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B15_PARENT_FRESH_PASS",parentB15Obj.stat().st_size,flush=True)
+          # Freshly compile exact accepted Gate104 original bosonic selectors.
+          parentB16Stem="SU2BFSSPhysicalDomainS4B16OriginalBosonCoordinateSelectorProbe"
+          parentB16Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB16Stem+".lean")
+          (work/(parentB16Stem+".lean")).write_bytes(parentB16Src.read_bytes())
+          parentB16Obj=lib/(parentB16Stem+".olean")
+          if parentB16Obj.exists(): parentB16Obj.unlink()
+          parentB16Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b16.log")
+          with parentB16Log.open("w") as out:
+              parentB16Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB16Stem+".olean",parentB16Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB16Data=parentB16Log.read_text()
+          parentB16Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B16.originalBoson_single_coordinate_weighted",
+            "FCP.BFSSSU2PhysicalDomainS4B16.originalBoson_single_coordinate_nested"]
+          parentB16Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB16Data)
+          parentB16OK=(parentB16Run.returncode==0
+            and [name for name,_ in parentB16Reports]==parentB16Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB16Reports)
+            and "sorryAx" not in parentB16Data and "error:" not in parentB16Data
+            and parentB16Obj.is_file() and parentB16Obj.stat().st_size>0)
+          if not parentB16OK:
+              print("GATE119_ACCEPTED_S4B16_PARENT_FRESH_RED",flush=True)
+              print(parentB16Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B16_PARENT_FRESH_PASS",parentB16Obj.stat().st_size,flush=True)
+          # Freshly compile and axiom-qualify accepted Gate105 original two selector halves.
+          parentB17Stem="SU2BFSSPhysicalDomainS4B17OriginalFieldVariationSelectorHalvesProbe"
+          parentB17Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB17Stem+".lean")
+          (work/(parentB17Stem+".lean")).write_bytes(parentB17Src.read_bytes())
+          parentB17Obj=lib/(parentB17Stem+".olean")
+          if parentB17Obj.exists(): parentB17Obj.unlink()
+          parentB17Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b17.log")
+          with parentB17Log.open("w") as out:
+              parentB17Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB17Stem+".olean",parentB17Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB17Data=parentB17Log.read_text()
+          parentB17Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B17.originalFieldVariation_first_selector_sum",
+            "FCP.BFSSSU2PhysicalDomainS4B17.originalFieldVariation_second_selector_sum"]
+          parentB17Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB17Data)
+          parentB17OK=(parentB17Run.returncode==0
+            and [name for name,_ in parentB17Reports]==parentB17Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB17Reports)
+            and "sorryAx" not in parentB17Data and "error:" not in parentB17Data
+            and parentB17Obj.is_file() and parentB17Obj.stat().st_size>0)
+          if not parentB17OK:
+              print("GATE119_ACCEPTED_S4B17_PARENT_FRESH_RED",flush=True)
+              print(parentB17Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B17_PARENT_FRESH_PASS",parentB17Obj.stat().st_size,flush=True)
+          # Freshly compile and strictly axiom-qualify Gate106 true source-order halves.
+          parentB18Stem="SU2BFSSPhysicalDomainS4B18OriginalFieldCoefficientQuadrupleReorderProbe"
+          parentB18Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB18Stem+".lean")
+          (work/(parentB18Stem+".lean")).write_bytes(parentB18Src.read_bytes())
+          parentB18Obj=lib/(parentB18Stem+".olean")
+          if parentB18Obj.exists(): parentB18Obj.unlink()
+          parentB18Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b18.log")
+          with parentB18Log.open("w") as out:
+              parentB18Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB18Stem+".olean",parentB18Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB18Data=parentB18Log.read_text()
+          parentB18Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B18.originalFieldVariation_first_original_order_selector",
+            "FCP.BFSSSU2PhysicalDomainS4B18.originalFieldVariation_second_original_order_selector"]
+          parentB18Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB18Data)
+          parentB18OK=(parentB18Run.returncode==0
+            and [name for name,_ in parentB18Reports]==parentB18Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB18Reports)
+            and "sorryAx" not in parentB18Data and "error:" not in parentB18Data
+            and parentB18Obj.is_file() and parentB18Obj.stat().st_size>0)
+          if not parentB18OK:
+              print("GATE119_ACCEPTED_S4B18_PARENT_FRESH_RED",flush=True)
+              print(parentB18Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B18_PARENT_FRESH_PASS",parentB18Obj.stat().st_size,flush=True)
+          # Strictly freshly compile and axiom-qualify accepted Gate107 original coefficient.
+          parentB19Stem="SU2BFSSPhysicalDomainS4B19OriginalMasslessVariationCoefficientProbe"
+          parentB19Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB19Stem+".lean")
+          (work/(parentB19Stem+".lean")).write_bytes(parentB19Src.read_bytes())
+          parentB19Obj=lib/(parentB19Stem+".olean")
+          if parentB19Obj.exists(): parentB19Obj.unlink()
+          parentB19Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b19.log")
+          with parentB19Log.open("w") as out:
+              parentB19Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB19Stem+".olean",parentB19Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB19Data=parentB19Log.read_text()
+          parentB19Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B19.originalSourceMasslessVariation_actual_signed_pair",
+            "FCP.BFSSSU2PhysicalDomainS4B19.originalSourceMasslessVariation_actual_reduced"]
+          parentB19Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB19Data)
+          parentB19OK=(parentB19Run.returncode==0
+            and [name for name,_ in parentB19Reports]==parentB19Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB19Reports)
+            and "sorryAx" not in parentB19Data and "error:" not in parentB19Data
+            and parentB19Obj.is_file() and parentB19Obj.stat().st_size>0)
+          if not parentB19OK:
+              print("GATE119_ACCEPTED_S4B19_PARENT_FRESH_RED",flush=True)
+              print(parentB19Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B19_PARENT_FRESH_PASS",parentB19Obj.stat().st_size,flush=True)
+          # Freshly compile and strictly qualify accepted Gate108 exact original complex Fock operator roots.
+          parentB20Stem="SU2BFSSPhysicalDomainS4B20OriginalComplexGammaColorThetaOperatorProbe"
+          parentB20Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB20Stem+".lean")
+          (work/(parentB20Stem+".lean")).write_bytes(parentB20Src.read_bytes())
+          parentB20Obj=lib/(parentB20Stem+".olean")
+          if parentB20Obj.exists(): parentB20Obj.unlink()
+          parentB20Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b20.log")
+          with parentB20Log.open("w") as out:
+              parentB20Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB20Stem+".olean",parentB20Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB20Data=parentB20Log.read_text()
+          parentB20Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B20.originalComplexFieldVariation_gammaColorTheta",
+            "FCP.BFSSSU2PhysicalDomainS4B20.originalComplexFermionContraction_gammaColorTheta"]
+          parentB20Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB20Data)
+          parentB20OK=(parentB20Run.returncode==0
+            and [name for name,_ in parentB20Reports]==parentB20Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB20Reports)
+            and "sorryAx" not in parentB20Data and "error:" not in parentB20Data
+            and parentB20Obj.is_file() and parentB20Obj.stat().st_size>0)
+          if not parentB20OK:
+              print("GATE119_ACCEPTED_S4B20_PARENT_FRESH_RED",flush=True)
+              print(parentB20Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B20_PARENT_FRESH_PASS",parentB20Obj.stat().st_size,flush=True)
+          # Strictly rebuild the accepted Gate109 actual real-linear source fermionic field theorem.
+          parentB21Stem="SU2BFSSPhysicalDomainS4B21OriginalRealFermionFieldGammaColorThetaProbe"
+          parentB21Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB21Stem+".lean")
+          (work/(parentB21Stem+".lean")).write_bytes(parentB21Src.read_bytes())
+          parentB21Obj=lib/(parentB21Stem+".olean")
+          if parentB21Obj.exists(): parentB21Obj.unlink()
+          parentB21Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b21.log")
+          with parentB21Log.open("w") as out:
+              parentB21Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB21Stem+".olean",parentB21Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB21Data=parentB21Log.read_text()
+          parentB21Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B21.originalMasslessRealFermionField_gammaColorTheta"]
+          parentB21Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB21Data)
+          parentB21OK=(parentB21Run.returncode==0
+            and [name for name,_ in parentB21Reports]==parentB21Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB21Reports)
+            and "sorryAx" not in parentB21Data and "error:" not in parentB21Data
+            and parentB21Obj.is_file() and parentB21Obj.stat().st_size>0)
+          if not parentB21OK:
+              print("GATE119_ACCEPTED_S4B21_PARENT_FRESH_RED",flush=True)
+              print(parentB21Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B21_PARENT_FRESH_PASS",parentB21Obj.stat().st_size,flush=True)
+          # Strictly freshly compile and axiom-qualify accepted Gate110 original gamma spinor contraction.
+          parentB22Stem="SU2BFSSPhysicalDomainS4B22OriginalGammaSpinorEntryContractionProbe"
+          parentB22Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB22Stem+".lean")
+          (work/(parentB22Stem+".lean")).write_bytes(parentB22Src.read_bytes())
+          parentB22Obj=lib/(parentB22Stem+".olean")
+          if parentB22Obj.exists(): parentB22Obj.unlink()
+          parentB22Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b22.log")
+          with parentB22Log.open("w") as out:
+              parentB22Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                "-o",".lake/build/lib/lean/"+parentB22Stem+".olean",parentB22Stem+".lean"],
+                cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB22Data=parentB22Log.read_text()
+          parentB22Expected=[
+            "FCP.BFSSSU2PhysicalDomainS4B22.originalSourceGammaTwo_spinor_entry_contraction"]
+          parentB22Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB22Data)
+          parentB22OK=(parentB22Run.returncode==0
+            and [name for name,_ in parentB22Reports]==parentB22Expected
+            and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB22Reports)
+            and "sorryAx" not in parentB22Data and "error:" not in parentB22Data
+            and parentB22Obj.is_file() and parentB22Obj.stat().st_size>0)
+          if not parentB22OK:
+              print("GATE119_ACCEPTED_S4B22_PARENT_FRESH_RED",flush=True)
+              print(parentB22Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B22_PARENT_FRESH_PASS",parentB22Obj.stat().st_size,flush=True)
+          # Strictly recompile and axiom-audit Gate111's accepted exact source theorem.
+          parentB23Stem="SU2BFSSPhysicalDomainS4B23OriginalSourceVariationFullGammaContractionProbe"
+          parentB23Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB23Stem+".lean")
+          (work/(parentB23Stem+".lean")).write_bytes(parentB23Src.read_bytes())
+          parentB23Obj=lib/(parentB23Stem+".olean")
+          if parentB23Obj.exists(): parentB23Obj.unlink()
+          parentB23Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b23.log")
+          with parentB23Log.open("w") as out:
+              parentB23Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                  "-o",".lake/build/lib/lean/"+parentB23Stem+".olean",parentB23Stem+".lean"],
+                  cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB23Data=parentB23Log.read_text()
+          parentB23Expected=["FCP.BFSSSU2PhysicalDomainS4B23.originalSourceVariationCoefficient_full_gamma_spinor_contraction"]
+          parentB23Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB23Data)
+          parentB23OK=(parentB23Run.returncode==0
+              and [name for name,_ in parentB23Reports]==parentB23Expected
+              and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB23Reports)
+              and "sorryAx" not in parentB23Data and "error:" not in parentB23Data
+              and parentB23Obj.is_file() and parentB23Obj.stat().st_size>0)
+          if not parentB23OK:
+              print("GATE119_ACCEPTED_S4B23_PARENT_FRESH_RED",flush=True)
+              print(parentB23Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B23_PARENT_FRESH_PASS",parentB23Obj.stat().st_size,flush=True)
+          # Strictly recompile the accepted S4B24 first/last color skew root.
+          parentB24Stem="SU2BFSSPhysicalDomainS4B24OriginalColorFirstLastSkewProbe"
+          parentB24Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB24Stem+".lean")
+          (work/(parentB24Stem+".lean")).write_bytes(parentB24Src.read_bytes())
+          parentB24Obj=lib/(parentB24Stem+".olean")
+          if parentB24Obj.exists(): parentB24Obj.unlink()
+          parentB24Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b24.log")
+          with parentB24Log.open("w") as out:
+              parentB24Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                  "-o",".lake/build/lib/lean/"+parentB24Stem+".olean",parentB24Stem+".lean"],
+                  cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB24Data=parentB24Log.read_text()
+          parentB24Expected=["FCP.BFSSSU2PhysicalDomainS4B24.originalSourceStructureConstant_first_last_skew"]
+          parentB24Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB24Data)
+          parentB24OK=(parentB24Run.returncode==0
+              and [name for name,_ in parentB24Reports]==parentB24Expected
+              and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB24Reports)
+              and "sorryAx" not in parentB24Data and "error:" not in parentB24Data
+              and parentB24Obj.is_file() and parentB24Obj.stat().st_size>0)
+          if not parentB24OK:
+              print("GATE119_ACCEPTED_S4B24_PARENT_FRESH_RED",flush=True)
+              print(parentB24Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B24_PARENT_FRESH_PASS",parentB24Obj.stat().st_size,flush=True)
+          # Freshly compile/audit the exact newly accepted Gate113 source-signed theorem.
+          parentB25Stem="SU2BFSSPhysicalDomainS4B25OriginalManuscriptSignedGammaCoefficientProbe"
+          parentB25Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB25Stem+".lean")
+          (work/(parentB25Stem+".lean")).write_bytes(parentB25Src.read_bytes())
+          parentB25Obj=lib/(parentB25Stem+".olean")
+          if parentB25Obj.exists(): parentB25Obj.unlink()
+          parentB25Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b25.log")
+          with parentB25Log.open("w") as out:
+              parentB25Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                  "-o",".lake/build/lib/lean/"+parentB25Stem+".olean",parentB25Stem+".lean"],
+                  cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB25Data=parentB25Log.read_text()
+          parentB25Expected=["FCP.BFSSSU2PhysicalDomainS4B25.originalSourceVariationCoefficient_manuscript_signed"]
+          parentB25Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB25Data)
+          parentB25OK=(parentB25Run.returncode==0
+              and [name for name,_ in parentB25Reports]==parentB25Expected
+              and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB25Reports)
+              and "sorryAx" not in parentB25Data and "error:" not in parentB25Data
+              and parentB25Obj.is_file() and parentB25Obj.stat().st_size>0)
+          if not parentB25OK:
+              print("GATE119_ACCEPTED_S4B25_PARENT_FRESH_RED",flush=True)
+              print(parentB25Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B25_PARENT_FRESH_PASS",parentB25Obj.stat().st_size,flush=True)
+          # Source-immutable accepted Gate114 B26: genuine original complex Fock bilinear.
+          parentB26Stem="SU2BFSSPhysicalDomainS4B26OriginalGammaThetaOperatorProductDistributionProbe"
+          parentB26Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB26Stem+".lean")
+          (work/(parentB26Stem+".lean")).write_bytes(parentB26Src.read_bytes())
+          parentB26Obj=lib/(parentB26Stem+".olean")
+          if parentB26Obj.exists(): parentB26Obj.unlink()
+          parentB26Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b26.log")
+          with parentB26Log.open("w") as out:
+              parentB26Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                  "-o",".lake/build/lib/lean/"+parentB26Stem+".olean",parentB26Stem+".lean"],
+                  cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB26Data=parentB26Log.read_text()
+          parentB26Expected=["FCP.BFSSSU2PhysicalDomainS4B26.originalGammaTheta_operator_product_distribution"]
+          parentB26Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB26Data)
+          parentB26OK=(parentB26Run.returncode==0
+              and [name for name,_ in parentB26Reports]==parentB26Expected
+              and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB26Reports)
+              and "sorryAx" not in parentB26Data and "error:" not in parentB26Data
+              and parentB26Obj.is_file() and parentB26Obj.stat().st_size>0)
+          if not parentB26OK:
+              print("GATE119_ACCEPTED_S4B26_PARENT_FRESH_RED",flush=True)
+              print(parentB26Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B26_PARENT_FRESH_PASS",parentB26Obj.stat().st_size,flush=True)
+          # Fresh S4B27: strict source signed coefficient lift into actual theta.
+          parentB27Stem="SU2BFSSPhysicalDomainS4B27OriginalSignedGammaContractionOrderedThetaLiftProbe"
+          parentB27Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB27Stem+".lean")
+          (work/(parentB27Stem+".lean")).write_bytes(parentB27Src.read_bytes())
+          parentB27Obj=lib/(parentB27Stem+".olean")
+          if parentB27Obj.exists(): parentB27Obj.unlink()
+          parentB27Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b27.log")
+          with parentB27Log.open("w") as out:
+              parentB27Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                  "-o",".lake/build/lib/lean/"+parentB27Stem+".olean",parentB27Stem+".lean"],
+                  cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB27Data=parentB27Log.read_text()
+          parentB27Expected=["FCP.BFSSSU2PhysicalDomainS4B27.originalSourceVariation_signed_orderedTheta_lift"]
+          parentB27Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB27Data)
+          parentB27OK=(parentB27Run.returncode==0
+              and [name for name,_ in parentB27Reports]==parentB27Expected
+              and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB27Reports)
+              and "sorryAx" not in parentB27Data and "error:" not in parentB27Data
+              and parentB27Obj.is_file() and parentB27Obj.stat().st_size>0)
+          if not parentB27OK:
+              print("GATE119_ACCEPTED_S4B27_PARENT_FRESH_RED",flush=True)
+              print(parentB27Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B27_PARENT_FRESH_PASS",parentB27Obj.stat().st_size,flush=True)
+          # Fresh accepted Gate116 parent S4B28: true -i/16 original Fock operator.
+          parentB28Stem="SU2BFSSPhysicalDomainS4B28OriginalComplexFermionRemainderFullOrderedThetaExpansionProbe"
+          parentB28Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB28Stem+".lean")
+          (work/(parentB28Stem+".lean")).write_bytes(parentB28Src.read_bytes())
+          parentB28Obj=lib/(parentB28Stem+".olean")
+          if parentB28Obj.exists(): parentB28Obj.unlink()
+          parentB28Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b28.log")
+          with parentB28Log.open("w") as out:
+              parentB28Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                  "-o",".lake/build/lib/lean/"+parentB28Stem+".olean",parentB28Stem+".lean"],
+                  cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB28Data=parentB28Log.read_text()
+          parentB28Expected=["FCP.BFSSSU2PhysicalDomainS4B28.originalComplexFermionContraction_full_orderedTheta_expansion"]
+          parentB28Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB28Data)
+          parentB28OK=(parentB28Run.returncode==0
+              and [name for name,_ in parentB28Reports]==parentB28Expected
+              and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB28Reports)
+              and "sorryAx" not in parentB28Data and "error:" not in parentB28Data
+              and parentB28Obj.is_file() and parentB28Obj.stat().st_size>0)
+          if not parentB28OK:
+              print("GATE119_ACCEPTED_S4B28_PARENT_FRESH_RED",flush=True)
+              print(parentB28Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B28_PARENT_FRESH_PASS",parentB28Obj.stat().st_size,flush=True)
+          # Fresh accepted Gate117 parent S4B29: true -i/16 contractible source Fock sum.
+          parentB29Stem="SU2BFSSPhysicalDomainS4B29OriginalFermionRemainderContractibleSumOrderProbe"
+          parentB29Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB29Stem+".lean")
+          (work/(parentB29Stem+".lean")).write_bytes(parentB29Src.read_bytes())
+          parentB29Obj=lib/(parentB29Stem+".olean")
+          if parentB29Obj.exists(): parentB29Obj.unlink()
+          parentB29Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b29.log")
+          with parentB29Log.open("w") as out:
+              parentB29Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                  "-o",".lake/build/lib/lean/"+parentB29Stem+".olean",parentB29Stem+".lean"],
+                  cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB29Data=parentB29Log.read_text()
+          parentB29Expected=["FCP.BFSSSU2PhysicalDomainS4B29.originalComplexFermionContraction_contractible_source_order"]
+          parentB29Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB29Data)
+          parentB29OK=(parentB29Run.returncode==0
+              and [name for name,_ in parentB29Reports]==parentB29Expected
+              and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB29Reports)
+              and "sorryAx" not in parentB29Data and "error:" not in parentB29Data
+              and parentB29Obj.is_file() and parentB29Obj.stat().st_size>0)
+          if not parentB29OK:
+              print("GATE119_ACCEPTED_S4B29_PARENT_FRESH_RED",flush=True)
+              print(parentB29Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B29_PARENT_FRESH_PASS",parentB29Obj.stat().st_size,flush=True)
+          # Fresh accepted Gate118 original signed source Fock operator.
+          parentB30Stem="SU2BFSSPhysicalDomainS4B30OriginalFockRemainderFullySignedContractionProbe"
+          parentB30Src=pathlib.Path("experiments/openai-math-su2-physical-domain/"+parentB30Stem+".lean")
+          (work/(parentB30Stem+".lean")).write_bytes(parentB30Src.read_bytes())
+          parentB30Obj=lib/(parentB30Stem+".olean")
+          if parentB30Obj.exists(): parentB30Obj.unlink()
+          parentB30Log=pathlib.Path("/tmp/bfss-gate119/strict-parent-s4b30.log")
+          with parentB30Log.open("w") as out:
+              parentB30Run=subprocess.run(["timeout","120s","lake","env","lean","-DwarningAsError=true",
+                  "-o",".lake/build/lib/lean/"+parentB30Stem+".olean",parentB30Stem+".lean"],
+                  cwd=work,stdout=out,stderr=subprocess.STDOUT)
+          parentB30Data=parentB30Log.read_text()
+          parentB30Expected=["FCP.BFSSSU2PhysicalDomainS4B30.originalComplexFermionContraction_full_signed_source"]
+          parentB30Reports=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",parentB30Data)
+          parentB30OK=(parentB30Run.returncode==0
+              and [name for name,_ in parentB30Reports]==parentB30Expected
+              and all({a.strip() for a in axs.split(",") if a.strip()}<=
+                    {"propext","Classical.choice","Quot.sound"} for _,axs in parentB30Reports)
+              and "sorryAx" not in parentB30Data and "error:" not in parentB30Data
+              and parentB30Obj.is_file() and parentB30Obj.stat().st_size>0)
+          if not parentB30OK:
+              print("GATE119_ACCEPTED_S4B30_PARENT_FRESH_RED",flush=True)
+              print(parentB30Data[-4500:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ACCEPTED_S4B30_PARENT_FRESH_PASS",parentB30Obj.stat().st_size,flush=True)
+          stem="SU2BFSSPhysicalDomainS4B31OriginalFockRemainderNormalizedIHalfProbe"
+          src=pathlib.Path("experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B31OriginalFockRemainderNormalizedIHalfProbe.lean")
+          (work/(stem+".lean")).write_bytes(src.read_bytes())
+          obj=lib/(stem+".olean")
+          if obj.exists(): obj.unlink()
+          log=pathlib.Path("/tmp/bfss-gate119/strict-candidate.log")
+          cmd=["timeout","120s","lake","env","lean","-DwarningAsError=true",
+               "-o",".lake/build/lib/lean/"+stem+".olean",stem+".lean"]
+          with log.open("w") as o:
+              p=subprocess.run(cmd,cwd=work,stdout=o,stderr=subprocess.STDOUT)
+          data=log.read_text()
+          expected=[
+             "FCP.BFSSSU2PhysicalDomainS4B31.originalComplexFermionContraction_normalized_i_half",
+          ]
+          matched=re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]",data)
+          allowed={"propext","Classical.choice","Quot.sound"}
+          normalized=[(name,{a.strip() for a in s.split(",") if a.strip()}) for name,s in matched]
+          # Known pinned Lake-package working-tree-state notices are
+          # not candidate Lean diagnostics. Enforce identical package names.
+          # Everything else containing "warning:" remains a strict failure.
+          lakeNotice=re.compile(
+              r"warning: (?P<package>[a-z0-9-]+): repository '[^']*/upstream-math/lean/[.]lake/packages/(?P=package)' has local changes")
+          assert lakeNotice.fullmatch(
+              "warning: belyi: repository '/tmp/upstream-math/lean/.lake/packages/belyi' has local changes")
+          assert not lakeNotice.fullmatch(
+              "warning: belyi: repository '/tmp/upstream-math/lean/.lake/packages/iut' has local changes")
+          assert not lakeNotice.fullmatch("Candidate.lean:3:1: warning: unused simp argument")
+          print("GATE119_LAKE_NOTICE_FILTER_SELF_TEST_PASS",flush=True)
+          lakeNotices=[line for line in data.splitlines() if lakeNotice.fullmatch(line)]
+          sourceWarnings=[line for line in data.splitlines()
+              if "warning:" in line and not lakeNotice.fullmatch(line)]
+          print("GATE119_IGNORED_LAKE_PACKAGE_STATE_NOTICES",len(lakeNotices),flush=True)
+          print("GATE119_CANDIDATE_SOURCE_WARNINGS",sourceWarnings,flush=True)
+          verified=(p.returncode==0 and len(normalized)==1
+             and [name for name,_ in normalized]==expected
+             and all(ax<=allowed for _,ax in normalized)
+             and "sorryAx" not in data and "error:" not in data
+             and not sourceWarnings
+             and obj.is_file() and obj.stat().st_size>0)
+          print("GATE119_COMPILER_EXIT",p.returncode,"AXIOM_REPORTS",normalized,flush=True)
+          if not verified:
+              print("GATE119_ORIGINAL_COMPLEX_REMAINDER_NORMALIZED_I_HALF_STRICT_RED",flush=True)
+              print(data[-5000:],flush=True)
+              raise SystemExit(1)
+          print("GATE119_ORIGINAL_COMPLEX_REMAINDER_NORMALIZED_I_HALF_ONE_ROOT_STRICT_PASS",flush=True)
+          PY
+      - name: Preserve Gate119 original source and candidate compiler logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bfss-form-original-complex-remainder-normalized-i-half-gate119-${{ github.run_id }}
+          path: |
+            /tmp/bfss-gate119/*.log
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B3OriginalBracketPolynomialExpansionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B4OriginalGammaWeightedBracketPolynomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B5OriginalMasslessCoefficientPolynomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B6OriginalMasslessPotentialMultiplierPolynomialProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B8OriginalRealFockFieldDirectionalDerivativeProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B9OriginalFermionRemainderContractionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B10OriginalComplexFockRestrictionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B11OriginalComplexGammaThetaExpansionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B12OriginalGammaTwoContractionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B13OriginalGammaTwoNineDirectionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B14OriginalGammaColorSkewProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B15OriginalGammaColorSignedPairProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B16OriginalBosonCoordinateSelectorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B17OriginalFieldVariationSelectorHalvesProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B18OriginalFieldCoefficientQuadrupleReorderProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B19OriginalMasslessVariationCoefficientProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B20OriginalComplexGammaColorThetaOperatorProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B21OriginalRealFermionFieldGammaColorThetaProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B22OriginalGammaSpinorEntryContractionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B23OriginalSourceVariationFullGammaContractionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B24OriginalColorFirstLastSkewProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B25OriginalManuscriptSignedGammaCoefficientProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B26OriginalGammaThetaOperatorProductDistributionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B27OriginalSignedGammaContractionOrderedThetaLiftProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B28OriginalComplexFermionRemainderFullOrderedThetaExpansionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B29OriginalFermionRemainderContractibleSumOrderProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B30OriginalFockRemainderFullySignedContractionProbe.olean
+            upstream-math/lean/.lake/build/lib/lean/SU2BFSSPhysicalDomainS4B31OriginalFockRemainderNormalizedIHalfProbe.olean
+          if-no-files-found: warn
