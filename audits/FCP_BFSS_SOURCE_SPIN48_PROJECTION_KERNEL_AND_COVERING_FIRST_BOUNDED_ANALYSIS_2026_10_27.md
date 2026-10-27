@@ -127,3 +127,20 @@ No kernel/image/covering conclusion, source global Spin(9) action, closed physic
 **Track B remains independent:** challenge the source's Spin(9)→Spin(8) restriction, exact transverse oscillator low-level exclusion, and uniform closed *gauge-physical* high-type coercivity estimate. A coherent counterexample here is more important than a successful projection gate.
 
 **Accounting at this note:** S4 separately accepted root family = **63**; F21A newly accepted roots = **2**; **this operation adds 0**. No global physical eigenstate theorem is admitted.
+
+
+## 8. Pinned Mathlib audit — actual first proof interface (same research cycle)
+
+This is a **direct source inspection** at the frozen Mathlib revision \`d13f23b723b8a846827a245b89c10fc7d3f11612\`, not an assumption based on a modern documentation page.
+
+1. [\`CliffordAlgebra/SpinGroup.lean\`](https://github.com/leanprover-community/mathlib4/blob/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/LinearAlgebra/CliffordAlgebra/SpinGroup.lean) (415 lines at this pin) defines the original Spin carrier and its Clifford unit representation. Its contents do **not** contain a \`spinToSpecialOrthogonal\` or general covering theorem. Do not import a similarly named theorem from a newer, different library and claim that the pinned accepted source already has it. The current research branch's original S1V31–S1V47 interfaces remain necessary.
+2. [\`CliffordAlgebra/Contraction.lean\`](https://github.com/leanprover-community/mathlib4/blob/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean), lines 281–287, contains \`changeForm_ι_mul\` and \`changeForm_ι_mul_ι\`. The latter explicitly reads
+   \[
+   \mathrm{changeForm}(\iota_Q(m_1)\iota_Q(m_2))
+   =\iota_{Q'}(m_1)\iota_{Q'}(m_2)-B(m_1,m_2).
+   \]
+   Lines 346–354 define \`equivExterior\` as \`changeFormEquiv changeForm.associated_neg_proof\`, a **module equivalence**. This gives a concrete proof mechanism: when the original coordinate vectors are pairwise Q-orthogonal, the bilinear correction vanishes for each distinct-coordinate multiplication. Prove the ordered distinct-vector induction in Lean, rather than illegally rewriting \`map_mul\` for \`equivExterior\`.
+3. The next source-exact proof should first verify \`equivExterior\` sends **the ordered product** of original distinct \`ι Q (Pi.single j 1)\` generators to the corresponding ordered exterior wedge. Its induction uses \`changeForm_ι_mul\` and vanishing of the contraction on a wedge of coordinate vectors excluding \`j\`. This is the precise *F20B PBW multiplication bridge* needed for K2.
+4. Only then transport the even commutator coefficients into the F20B coordinate functionals. The commutator formula, coefficient injectivity for fixed \`j\`, scalar extraction, unitary signs, and construction of the negative Spin unit are separate smaller roots; do not stack everything into a single elaboration-heavy declaration.
+
+**Disposition:** This source inspection sharpens KERNEL-PBW-1 and rules out both a nonexistent pinned library-cover shortcut and a nonmultiplicative \`equivExterior\` rewrite. It adds **0 Lean roots**, changes no accepted source, and does not claim that the ordered-wedge induction has already compiled.
