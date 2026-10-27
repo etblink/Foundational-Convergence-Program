@@ -259,3 +259,16 @@ Next progress discriminator: actual compiler output (if parent cache passes); re
 F20F actual PBW topological Spin48 and L9D9 actual native Spin48 all-vector caches restored, original parent imports qualified, new binary saved as bfss-f21a-original-spin48-vector-continuity-87f554d93022d9dd3cc779947699ba0a599fae9b-v2-adc7f124-lean4341-d13f23b-Linux-X64. Original diagnostic artifact 12723989064 and precise Gates #1–#5 red provenance in [F21A canonical audit](../audits/FCP_BFSS_F21A_ACTUAL_SOURCE_SPIN48_JOINT_VECTOR_CONTINUITY_2026_10_27.md).
 
 **Accounting:** two *new F21A* accepted roots; separately counted S4 roots remain **63**. Now target genuine continuous Spin48-to-SO48 projection, exact two-sign kernel, SO48 surjectivity and local double covering. Original Mathlib SpinGroup definitions do not automatically discharge these. Continuous Spin9-to-Spin48 source lift, genuine Fock/gauge relation and physical closed energy covariance still require independent proofs. No positive normalizable original BFSS eigenstates established.
+
+
+## Successor restart — 2026-10-27 kernel-first projection scope
+
+**Supersedes only the next-action route, not historical acceptance.** Following accepted F21A #40484231446 (+2 F21A roots, S4 separately 63), the incoming Project Lead opened one new source-grounded analysis:
+
+[\`FCP_BFSS_SOURCE_SPIN48_PROJECTION_KERNEL_AND_COVERING_FIRST_BOUNDED_ANALYSIS_2026_10_27.md\`](../audits/FCP_BFSS_SOURCE_SPIN48_PROJECTION_KERNEL_AND_COVERING_FIRST_BOUNDED_ANALYSIS_2026_10_27.md).
+
+The mathematical kernel candidate is that the **actual** Clifford Spin(48) vector projection has kernel precisely the two central signs. An even PBW commutant argument reduces every trivial-action element to a scalar, and Spin unitarity restricts to ±1; the negative sign has a genuine source \`S1S.sourceSpinPair u (-u)\` realization. **No new Lean theorem or CI qualification has occurred.** The current formal obstacle is proving the ordered distinct-generator monomial/exterior correspondence for the *actual* F20B PBW basis. Pinned Mathlib \`Contraction.lean\` supplies \`changeForm_ι_mul\` with a bilinear correction term; \`equivExterior\` is only linear and must not be treated as multiplicative. The pinned \`SpinGroup.lean\` supplies no \`spinToSpecialOrthogonal\` or global covering theorem. First qualify a small exact PBW multiplication/commutator interface, then the scalar kernel, then source-specific pair-rotor surjectivity and compactness/open-map covering. No fresh gate is authorized merely by this note; static source/type preflight and meaningful distinct proof goals come first.
+
+The independent spectral S3→S4→S5 falsification track remains **open**. The frozen manuscript explicitly assumes the global source Spin(9) representation and closed form q covariance before type restriction; neither finite covariance checks nor the new kernel argument discharges it. Continue independent counterexample search on original gauge-physical slices and uniform closed-domain estimates; do not promote any conditional local oscillator calculation to a spectral theorem.
+
+**Immutable accounting:** F21A new accepted 2; S4 accepted 63; this analytic operation **+0**; positive normalizable original BFSS eigenstates not established. Canonical \`main\`, original \`etblink/math\` revision and draft PR #25 unchanged.
