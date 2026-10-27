@@ -93,3 +93,14 @@ Still open *after* K1D2B would be identifying F20B's exact `Finset Source48Label
 First real compiler error at line 54: `simpa [heq] using hj` retained the disjunction `j=k ∨ j∈ks` even though `heq:k≠j`; explicit case analysis is needed. Second fatal warning-as-error at line 65: unused `mul_smul_comm` in simplifier arguments. One theorem printed `[propext,sorryAx,Classical.choice,Quot.sound]`, so **zero K1D2B theorem roots accepted**. This does not refute a sign-like nonzero erasure coefficient. The first-causal errors are proposition elaboration and strict lint.
 
 **Gate 2 correction:** source blob `9a0a119273e3215f05105344ac64f0a9c74853ac`, author commit `bcdf637566a2eb168e30c901622a3cdb389c6f13`, replaces only membership `simpa` with `rcases List.mem_cons.mp hj` and discharges its impossible `j=k` branch using `heq`; removes only the unused `mul_smul_comm` argument. No theorem/hypothesis/source change. Workflow source hash and distinct qualified cache key pinned by `8a9c19b015467c48a297463e1759cd332d60e2c7`. Read Gate 2's actual completed strict compiler/axiom/binary result before promoting.
+
+
+## K1D2C independent accepted-F20B order bridge candidate (unqualified pending strict gate)
+
+To avoid assuming that original source 48-label ordering equals any color-major/lexicographic surrogate, candidate module `SU2BFSSPhysicalDomainS1V52K1D2COriginalExteriorPBWBasisOrderedWordProbe.lean`, blob `99a897829fbbc4fd69e678e6524fdf7e5c87b5cd`, **reuses the exact noncomputable local order `linearOrderOfSTO WellOrderingRel` found in accepted F20B**. It defines an exterior `Module.Basis (Finset Source48Label) ℝ E` exactly as F20B did before `equivExterior.symm`, plus the corresponding sorted finite-list of original source coordinate labels.
+
+Two statements, still unaccepted:
+1. `originalSourceExteriorPBWBasis_eq_originalCoordinateWord` — identifies every actual F20B-style exterior basis word at `I` with the ordered coordinate exterior word of the SAME local well-order, using pinned `ExteriorAlgebra.basis_apply` and the `Finset.orderEmbOfFin` enumeration.
+2. `originalSourceExteriorPBWOrderedLabels_nodup` — the same original finite-label list is repetition-free, enabling the K1D2B nonzero-erasure lemma.
+
+This is an **independent branch** from the K1D2B erasure proof; it imports strictly qualified K1D2A and accepted F20B, so it can run without treating the still-staged K1D2B as proved. [Strict CI #40514167527](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40514167527), source-hash-pinned against the accepted K1D2A cache and frozen original Mathlib, was launched; all claims remain unqualified until terminal fresh Lean/axiom evidence. An actual Lean mismatch in the PBW/ordered-list identity would be a valuable *source-definition or proof-interface* finding and must not be papered over by switching to a different order.
