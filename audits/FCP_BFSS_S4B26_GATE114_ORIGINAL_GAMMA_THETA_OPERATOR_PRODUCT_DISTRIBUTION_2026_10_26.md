@@ -1,6 +1,6 @@
 # BFSS S4B26 — exact source gamma/theta CLM product distribution (Gate114)
 
-**Status: Gate114 #1 RED, no new theorem accepted; subsequent repair attempts must be independently verified.** Strictly accepted scoped S4 roots: **50** through independent verified Gate113; do not count S4B26 before an exact axiom-certified compiler pass.
+**Historical failed Gate114 attempts retained. Gate114 #4 is now strictly ACCEPTED; see acceptance section below.** Strictly accepted scoped S4 roots: **50** through independent verified Gate113; do not count S4B26 before an exact axiom-certified compiler pass.
 
 ## Why this gate
 
@@ -92,3 +92,18 @@ Instead of the failed general `rw [mul_comm]` under a semireducible continuous-l
 ```
 
 This preserves the unchanged proposed theorem and original theta order. [Gate114 run #40431852374](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40431852374) launched for this atomic commit. **Pending at the audit update; no theorem acceptance.** The only valid acceptance is full completed source/provenance/preflight/Lean/axiom success for exact S4B26 root; scoped S4 still **50**.
+
+
+## Gate114 #4 — STRICTLY ACCEPTED, 1/1 root
+
+Independent terminal verification of [run #40431852374](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40431852374), job `121951180205`, status **completed / success**, exact run HEAD `e382713b924f85dcb4832a0c10976008f0a29406`. The exact original job/compiler log confirms immutability `GATE114_ORIGINAL_SOURCE_AND_PROOF_IMMUTABILITY_PASS`, pinned `GATE114_FROZEN_TOOLCHAIN_AND_MATHLIB_PASS`, accepted original source G4K9C cache ancestry `GATE114_ACCEPTED_G4K9C_CACHE_PROVENANCE_PASS`, fresh recompile of accepted S4B3 through S4B25 (last parent `GATE114_ACCEPTED_S4B25_PARENT_FRESH_PASS 69944`), genuine original complex CLM candidate compile, and exact theorem/axiom whitelist:
+
+```text
+GATE114_CANDIDATE_SOURCE_WARNINGS []
+GATE114_COMPILER_EXIT 0 AXIOM_REPORTS [('FCP.BFSSSU2PhysicalDomainS4B26.originalGammaTheta_operator_product_distribution', {'propext', 'Quot.sound', 'Classical.choice'})]
+GATE114_ORIGINAL_THETA_OPERATOR_PRODUCT_DISTRIBUTION_ONE_ROOT_STRICT_PASS
+```
+
+**Accept 1 new unique principal S4 root: 50 → 51.** Do not recount original upstream or the freshly compiled accepted parent modules. Exact accepted source candidate Git blob `1e414c3901fc3309ca29c9b8040f0387beb9f5e6`, from atomic proof/SHA commit `e382713b924f85dcb4832a0c10976008f0a29406`. Do not erase historical Gate114 #1 (missing smul-sum and q/β interchange), intermediate stale-SHA red, or Gate114 #3 (ill-typed rewrite motive). Both original theta-factor ordering and `Fermion N →L[ℂ] Fermion N` carrier are genuine, not surrogate scalar operations. Last step using `congrArg` with typed genuine continuous linear map resolved the final issue without nonstandard axioms.
+
+**Next qualified step:** embed the accepted S4B25 **scalar** gamma/variation coefficient contraction into the accepted S4B26 **operator-valued** expansion through an explicit finite-sum scalar-to-complex-operator transport and original theta products. Preserve `(-Complex.I)`, `1/16`, source Fock theta order, and signed source color reindex. Operator/manuscript B(x), closed-domain and positive eigenstate claims remain unproved.
