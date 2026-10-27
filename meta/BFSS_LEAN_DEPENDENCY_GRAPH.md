@@ -144,3 +144,17 @@ The K1D dotted edges represent **mathematical requirements not current Lean impo
 **Next proof gate:** prove via the existing F20B real-linear exterior basis that annihilation by all coordinate contractions kills every positive exterior-degree coefficient. `changeForm_contractLeft` permits linear contraction transport without illicitly treating `equivExterior` as an algebra homomorphism. Then use positive original Q to show the original polar functionals span the required coordinate duals. **No new Spin48 `{±1}` kernel theorem until that separation and K1B negative central sign are strictly qualified.**
 
 [Complete K1C Gate 1 red → Gate 2 green audit](../audits/FCP_BFSS_K1C_ORIGINAL_POLAR_CONTRACTION_REDUCTION_2026_10_27.md).
+
+
+## K1D0 source Clifford-to-exterior contraction transport — accepted October 27, 2026
+
+[Actions #40496553407](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40496553407), job `122163366215`: **+2 strictly accepted source-exact theorem roots**, candidate blob `c3a96cb1abd32e3cfaa82ed515224bb958e2c4eb`, genuine frozen Lean 4.34.1/Mathlib d13f23b, restored K1C/K1A/F20B compiled ancestors, fresh `.olean`, no warnings/sorryAx, `[propext, Classical.choice, Quot.sound]` only:
+
+- `FCP.BFSSS1V52K1D0.originalSourceClifford_exterior_contractLeft_transport`
+- `FCP.BFSSS1V52K1D0.originalSourceSpin48_trivialAction_exteriorPolarContractions_zero`
+
+Direct source imports: `K1D0 → K1C` and `K1D0 → F20B`. K1C supplies graded/polar contraction reduction from actual source vector action; F20B supplies the exact original real Clifford PBW/exterior basis. The **verified** Clifford-to-exterior transport depends on Mathlib's `changeForm_contractLeft` and `equivExterior`, which is **linear, NOT an algebra homomorphism**.
+
+**Still OPEN K1D1:** prove actual original coordinate polar functionals span coordinate duals and each finite-subset exterior basis coefficient is isolated by some source contraction. The user-specified full K1D scalar-commutant claim, K1B negative Spin sign, 2-sign kernel, covering, global Spin9, and physical spectral results are **not** qualified by K1D0. [Read exact gate audit](../audits/FCP_BFSS_K1D_EXTERIOR_COEFFICIENT_SEPARATION_SOURCE_REUSE_AND_GATE_2026_10_27.md).
+
+**Provenance caution:** Gate 1 saved a correctly compiled K1D0 artifact under a misleading `bfss-k1c...` *cache-name prefix*. It did not alter acceptance, but the workflow was corrected to save a source-correct K1D0 key in a new verification gate; inspect its terminal status before claiming that key exists. The curated acceptance manifest includes this source as its **10th** qualifying receipt.
