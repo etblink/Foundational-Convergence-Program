@@ -35,7 +35,7 @@ jobs:
           test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
           test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
           for entry in \
-            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2E3OriginalPBWLeastCoordinateContractionProbe.lean:844cd036b7ef727f64d52cf20d5f89543b45d134" \
+            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2E3OriginalPBWLeastCoordinateContractionProbe.lean:05e8a4703fcfedb3fbb0d27b9b0c84e655ee130c" \
             "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2E1OriginalPBWBasisAbsentCoordinateContractionProbe.lean:52b5ce32275839dc2bde947e29ad2e03ed108bb2" \
             "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2E2OriginalPBWLeastCoordinateHeadProbe.lean:ed3b405c1a1f7b33e44199ad5a635c3926d6b721" \
             "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2COriginalExteriorPBWBasisOrderedWordProbe.lean:99ab3f78e12a31c365f83c1577db852327d3bc3a" \
@@ -56,7 +56,7 @@ jobs:
           assert re.findall(r'^theorem (\S+)',s,re.M)==roots
           assert re.findall(r'^#print axioms (\S+)',s,re.M)==roots
           assert not re.search(r'^\s*(?:sorry|native_decide|axiom)\b',s,re.M) and 'sorryAx' not in s
-          print('K1D2E3_SOURCE_TWO_ROOTS_PINNED_PASS')
+          print('K1D2E3_SOURCE_ONE_ROOT_PINNED_PASS')
           PY
       - name: Restore strictly accepted K1D2E1 absent PBW coordinate cache
         id: basis
@@ -145,7 +145,7 @@ jobs:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-k1d2e3-original-pbw-least-contraction-844cd036b7ef727f64d52cf20d5f89543b45d134-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-k1d2e3-original-pbw-least-contraction-05e8a4703fcfedb3fbb0d27b9b0c84e655ee130c-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
       - name: Preserve precise failure and success evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
