@@ -1,6 +1,6 @@
 # BFSS S4B33 — literal October 5 manuscript B(x) coordinate and original real source Fock field bridge
 
-**Status: Gate121 #1 strict RED; Gate121 #2 single-token parser correction candidate, NOT ACCEPTED. Strictly accepted S4 unique principal roots: 57**, after independently verified [Gate120 run #40447095577](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40447095577), job `122000849241`, original source SHA `ba33abbde49fb44aa62b5569d66304688149c0cd` and acceptance audit `ce1e679d419398f946ae30320f3635bbf4f6719b`.
+**Status: Gate121 #1 and #2 strict RED preserved; Gate121 #3 comprehensive syntax-only correction candidate, NOT ACCEPTED. Strictly accepted S4 unique principal roots: 57**, after independently verified [Gate120 run #40447095577](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40447095577), job `122000849241`, original source SHA `ba33abbde49fb44aa62b5569d66304688149c0cd` and acceptance audit `ce1e679d419398f946ae30320f3635bbf4f6719b`.
 
 ## Independent primary-manuscript source crosswalk
 
@@ -33,3 +33,22 @@ Cause independently counted from the source: the `have hSum` LHS starts with a p
 ## Gate121 #2 — source-identical one-character parser recovery
 
 The single source change is `(M.theta β b * M.theta q.1 q.2)) =` → `(M.theta β b * M.theta q.1 q.2))) =` at line 89 of the `hSum` type. Balanced-parentheses check confirms zero unmatched parentheses in the proposition. New exact Git blob `f7765c68d666a7037e0c375b19712f164e61e790` (previous immutable failed blob `8e69ce262444e15237fd847e6f1de48e716b09f5` untouched); both CI candidate SHA guards updated atomically with the immutable negative audit. No theorem statement, manuscript transcription, original source, proof tactics, axiom whitelist, or accepted parent changes. Qualification requires a terminal **completed/success** strict run, compiler exit 0, warning list empty, one exact root allowed axioms `propext`, `Classical.choice`, `Quot.sound`, no `sorryAx` and a real fresh `.olean`. Do not promote beyond 57 until then.
+
+
+## Gate121 #2 — verified terminal RED; second malformed source proposition
+
+[GitHub Actions run #40450067450](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40450067450), job `122010458985`, exact HEAD `f620d451c0d6edfaad06ee08e1a59873873955ef`, `completed/failure`, all immutable original source and manuscript TeX SHA preflights, qualified G4K9C source cache and frozen Lean/Mathlib passed; all original source and accepted S4B3–S4B32 parents freshly compiled, including `GATE121_ACCEPTED_S4B32_PARENT_FRESH_PASS 74360`. Candidate source warnings `[]`; compiler exit **1** with forbidden `sorryAx`. Original first compiler diagnostics:
+
+```text
+SU2BFSSPhysicalDomainS4B33OriginalManuscriptBCoordinateOperatorBridgeProbe.lean:113:40: error: unexpected token ':='; expected ')', ',' or ':'
+SU2BFSSPhysicalDomainS4B33OriginalManuscriptBCoordinateOperatorBridgeProbe.lean:82:62: error: unsolved goals
+case hComplex
+```
+
+The previous #1 `hSum` parsing problem is fixed and its theorem source proceeds to `hComplex`. A source-only parenthesis audit shows `have hComplex :` left expression (lines 105–113) opens one more `(` than it closes. The final `calc` intermediate (lines 119–127) independently also has one unmatched opening parenthesis in the inner sum/coefficient annotations. That `calc` parsing defect had not yet surfaced because earlier `hComplex` syntax stopped elaboration. Do not waste another expensive strict run on just one detected error.
+
+## Gate121 #3 — two literal parenthesis closures, no math change
+
+The exact two single-character fixes are: in the `hComplex` LHS change `(M.theta β b * M.theta q.1 q.2))) =` to `(M.theta β b * M.theta q.1 q.2)))) =`; in the downstream `calc` source coefficient write `M.gamma i β q.1) : ℝ) : ℂ) •`, matching the independently accepted Gate120 original complex coefficient cast rather than the unclosed `M.gamma i β q.1 : ℝ) : ℂ) •`. The source `hSum` left unchanged. Static independent parenthesis balances for `hSum`, `hComplex` and `calc` type fragments now equal zero.
+
+New candidate Git blob `8a15adf69545cee0e5d3b676def3e61342305663` replaces failed immutable candidate `f7765c68d666a7037e0c375b19712f164e61e790`; both exact source-tree/worktree SHA preflight references updated in the same atomic commit. All indexed color/gamma/Pauli source statements, manuscript TeX blob `12c5fffb5f90b48856f60fb0e93c18e2490c5f1b`, source operator identities and permitted axioms remain unchanged. **Not accepted** until full terminal strict Lean exit 0, warning list `[]`, one expected named root axiom set subset `propext, Classical.choice, Quot.sound`, no `sorryAx`. S4 **57**.

@@ -109,7 +109,7 @@ theorem originalRealFockField_eq_manuscript_coordinate_B
             (((∑ i : SpaceIndex, ∑ a : ColorIndex N,
               M.structureConstant a b q.2 * x (i,a) *
                 M.gamma i β q.1 : ℝ) : ℂ) •
-                  (M.theta β b * M.theta q.1 q.2))) =
+                  (M.theta β b * M.theta q.1 q.2)))) =
         manuscriptCoordinateBComplex M x := by
     unfold manuscriptCoordinateBComplex
     exact congrArg
@@ -122,7 +122,7 @@ theorem originalRealFockField_eq_manuscript_coordinate_B
           ∑ q : FermionIndex N,
             (((∑ i : SpaceIndex, ∑ a : ColorIndex N,
               M.structureConstant a b q.2 * x (i,a) *
-                M.gamma i β q.1 : ℝ) : ℂ) •
+                M.gamma i β q.1) : ℝ) : ℂ) •
                   (M.theta β b * M.theta q.1 q.2)))
         : Fermion N →L[ℂ] Fermion N).restrictScalars ℝ :=
         originalMasslessRealFermionField_normalized_i_half M x
