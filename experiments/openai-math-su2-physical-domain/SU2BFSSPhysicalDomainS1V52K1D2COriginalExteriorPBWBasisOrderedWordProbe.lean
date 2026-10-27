@@ -61,6 +61,7 @@ theorem originalSourceExteriorPBWBasis_eq_originalCoordinateWord
     Set.powersetCard.ofFinEmbEquiv_symm_apply,
     List.ofFn_eq_map, List.map_map, Function.comp_apply,
     Pi.basisFun_apply]
+  rfl
 
 /-- Ordered original PBW basis label words have no repetitions. -/
 theorem originalSourceExteriorPBWOrderedLabels_nodup
