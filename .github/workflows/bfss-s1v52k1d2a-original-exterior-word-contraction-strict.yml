@@ -35,7 +35,7 @@ jobs:
           test "$(git -C upstream-math rev-parse HEAD)" = adc7f1241b42e322a6451854ab7e4b4c146bf78a
           test "$(cat upstream-math/lean/lean-toolchain)" = leanprover/lean4:v4.34.1
           for entry in \
-            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2AOriginalExteriorCoordinateWordContractionProbe.lean:b99cd7c09b2c44e5282db7cd1549c5fa425d06a2" \
+            "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D2AOriginalExteriorCoordinateWordContractionProbe.lean:6797e53e43abf6e94c76612f91617169e224e831" \
             "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D1OriginalPolarCoordinateExteriorContractionProbe.lean:46cd08ee5124dae7160f6fa2135b9b01c73b1030" \
             "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D0OriginalCliffordExteriorContractionTransportProbe.lean:c3a96cb1abd32e3cfaa82ed515224bb958e2c4eb"; do
             f="${entry%%:*}"; expected="${entry#*:}"
@@ -122,7 +122,7 @@ jobs:
             and not warnings and 'error:' not in log and 'sorryAx' not in log
             and obj.is_file() and obj.stat().st_size>0)
           print('K1D2A_COMPILER_EXIT',os.environ['COMPILER_EXIT'],'REPORTS',reports,'WARNINGS',warnings)
-          if not good: raise SystemExit('K1D2A_TWO_ORIGINAL_SOURCE_ROOTS_STRICT_RED')
+          if not good: raise SystemExit('K1D2A_THREE_ORIGINAL_SOURCE_ROOTS_STRICT_RED')
           print('K1D2A_ORIGINAL_EXTERIOR_WORD_CONTRACTION_THREE_ROOTS_STRICT_PASS')
           PY
       - name: Save qualified original K1D2A compiled binary
@@ -131,7 +131,7 @@ jobs:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-k1d2a-original-exterior-word-contraction-b99cd7c09b2c44e5282db7cd1549c5fa425d06a2-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-k1d2a-original-exterior-word-contraction-6797e53e43abf6e94c76612f91617169e224e831-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
       - name: Preserve precise failure and success evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
