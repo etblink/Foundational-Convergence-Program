@@ -72,6 +72,17 @@
       ]
     },
     {
+      "path": "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52K1D1OriginalPolarCoordinateExteriorContractionProbe.lean",
+      "blob_sha": "46cd08ee5124dae7160f6fa2135b9b01c73b1030",
+      "basis": "strict-log-inspected",
+      "source_url": "https://github.com/etblink/Foundational-Convergence-Program/blob/research/openai-math-su2-s1v52-global-lift-scoping-20261019/audits/FCP_BFSS_K1D_EXTERIOR_COEFFICIENT_SEPARATION_SOURCE_REUSE_AND_GATE_2026_10_27.md",
+      "strict_run_url": "https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40503702666",
+      "roots": [
+        "originalSourcePolar_halfSingle_eq_coordinateDual",
+        "originalSourceSpin48_trivialAction_exteriorCoordinateContractions_zero"
+      ]
+    },
+    {
       "path": "experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS1V52L9D9OriginalNativeSixteenSpin48ActualGaugeUniversalProjectionProbe.lean",
       "blob_sha": "a0195adbc3fb8019a2d962ab566326dabaf90088",
       "basis": "historical-audit-recorded",
