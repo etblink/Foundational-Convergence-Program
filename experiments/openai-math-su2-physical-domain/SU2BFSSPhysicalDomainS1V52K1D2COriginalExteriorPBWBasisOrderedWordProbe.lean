@@ -27,20 +27,19 @@ open FCP.BFSSS1V52K1D2A
 
 private abbrev E := ExteriorAlgebra ℝ Source48Vector
 
+-- File-local exact ordering, identical to F20B's private `letI`.
+local instance : LinearOrder Source48Label := linearOrderOfSTO WellOrderingRel
+
 /-- The EXACT exterior basis on the original 48-label space used
 before the genuine F20B Clifford/exterior real-linear equivalence. -/
 noncomputable def originalSourceExteriorPBWBasis :
-    Module.Basis (Finset Source48Label) ℝ E := by
-  classical
-  letI : LinearOrder Source48Label := linearOrderOfSTO WellOrderingRel
-  exact (Pi.basisFun ℝ Source48Label).ExteriorAlgebra
+    Module.Basis (Finset Source48Label) ℝ E :=
+  (Pi.basisFun ℝ Source48Label).ExteriorAlgebra
 
 /-- Finite labels sorted using the exact original F20B local well-order. -/
 noncomputable def originalSourceExteriorPBWOrderedLabels
-    (I : Finset Source48Label) : List Source48Label := by
-  classical
-  letI : LinearOrder Source48Label := linearOrderOfSTO WellOrderingRel
-  exact I.sort (· ≤ ·)
+    (I : Finset Source48Label) : List Source48Label :=
+  List.ofFn (fun i : Fin I.card => I.orderEmbOfFin rfl i)
 
 /-- Exact F20B exterior PBW monomial equals its ordered original
 source Majorana coordinate exterior word. -/
@@ -49,13 +48,13 @@ theorem originalSourceExteriorPBWBasis_eq_originalCoordinateWord
     originalSourceExteriorPBWBasis I =
       originalExteriorCoordinateWord (originalSourceExteriorPBWOrderedLabels I) := by
   classical
-  letI : LinearOrder Source48Label := linearOrderOfSTO WellOrderingRel
   change (Pi.basisFun ℝ Source48Label).ExteriorAlgebra I =
-    originalExteriorCoordinateWord (I.sort (· ≤ ·))
+    originalExteriorCoordinateWord
+      (List.ofFn (fun i : Fin I.card => I.orderEmbOfFin rfl i))
   rw [ExteriorAlgebra.basis_apply]
   unfold ExteriorAlgebra.ιMulti_family
   rw [ExteriorAlgebra.ιMulti_apply]
-  simp only [originalExteriorCoordinateWord, Pi.basisFun_apply,
+  simp only [originalExteriorCoordinateWord,
     Set.powersetCard.prodEquiv_symm_apply,
     Set.powersetCard.ofFinEmbEquiv_symm_apply]
   rw [List.ofFn_eq_map]
@@ -67,9 +66,9 @@ theorem originalSourceExteriorPBWOrderedLabels_nodup
     (I : Finset Source48Label) :
     (originalSourceExteriorPBWOrderedLabels I).Nodup := by
   classical
-  letI : LinearOrder Source48Label := linearOrderOfSTO WellOrderingRel
-  change (I.sort (· ≤ ·)).Nodup
-  exact Finset.sort_nodup I (· ≤ ·)
+  change (List.ofFn (fun i : Fin I.card =>
+    I.orderEmbOfFin rfl i)).Nodup
+  exact List.nodup_ofFn.mpr (I.orderEmbOfFin rfl).injective
 
 #print axioms originalSourceExteriorPBWBasis_eq_originalCoordinateWord
 #print axioms originalSourceExteriorPBWOrderedLabels_nodup
