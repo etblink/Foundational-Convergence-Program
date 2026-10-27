@@ -86,20 +86,20 @@ jobs:
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
           key: bfss-s1v52l9e5f20f-original-spin48-topological-group-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
-      - name: Restore qualified actual original Spin48 source vector ancestry
-        id: s1v35
+      - name: Restore qualified S1V34 original source real vector ancestry
+        id: s1v34
         uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: |
             upstream-math/lean/.lake/build/lib/lean/OAI
             upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-s1v35-isolated-original-spin48-real-gl-group-hom-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+          key: bfss-s1v34-isolated-spin48-quadratic-isometry-equiv-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
       - name: Verify genuine accepted source modules with native Lean consumer
         shell: bash
         run: |
           set -euo pipefail
           test "${{ steps.f20f.outputs.cache-hit }}" = true || { echo F21A_F20F_QUALIFIED_CACHE_MISSING; exit 1; }
-          test "${{ steps.s1v35.outputs.cache-hit }}" = true || { echo F21A_S1V35_QUALIFIED_CACHE_MISSING; exit 1; }
+          test "${{ steps.s1v34.outputs.cache-hit }}" = true || { echo F21A_S1V34_QUALIFIED_CACHE_MISSING; exit 1; }
           cd upstream-math/lean
           for stem in SU2BFSSPhysicalDomainS1V52L9E5F20FOriginalSpin48TopologicalGroupInverseContinuityProbe SU2BFSSPhysicalDomainS1V31CanonicalAllSpin48RealVectorActionProbe SU2BFSSPhysicalDomainS1V30Real48CliffordGeneratorInjectiveViaExteriorProbe; do
             test -s ".lake/build/lib/lean/$stem.olean" || { echo "F21A_ACCEPTED_ANCESTOR_MISSING=$stem"; exit 1; }
