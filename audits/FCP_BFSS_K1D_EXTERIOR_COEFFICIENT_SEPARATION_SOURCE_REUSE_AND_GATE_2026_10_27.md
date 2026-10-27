@@ -131,3 +131,19 @@ Application type mismatch: v has type Source48Label but is expected Source48Vect
 Both candidate theorems had `sorryAx` in rejected axiom reports. **No K1D1 accepted roots.** This is a controlled Lean proof-engineering defect; it is not evidence against the original polar identity.
 
 **Gate 3 correction:** source `ext v` is replaced by the explicitly bounded `apply LinearMap.ext; intro v`; source blob `8bfca13f5ba81e77773c391de6114273023f0bb1`. Statements, original Q/source labels, pinned imports, and proof after the first typed extensionality step are unchanged. Workflow exact candidate pin and save key updated at `9a26d77d768c694e622669c04c848a135f018df5`; Gate 3 must be checked for the actual run ID/terminal result before any acceptance (link is provisional until confirmed).
+
+
+## K1D1 Gate 3 — source symbolic arithmetic red, 0 theorem roots
+
+[GitHub Actions #40499528674](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40499528674), job `122173421914`, concluded **failure** after all exact source, original `etblink/math`, accepted K1D0/S1V38 compiled ancestry, and pinned Lean/Mathlib checks **passed**.
+
+The revised source `8bfca13f5ba81e77773c391de6114273023f0bb1` **eliminated the prior accidental repeated `ext` error**: Lean now correctly introduces `v : Source48Vector`. At the final `norm_num` of the first declaration, Lean reported just one elementary field equality:
+```text
+j : Source48Label
+v : Source48Vector
+hsingle : Pi.single j 1 ⬝ᵥ v = v j
+⊢ 2 * (1 / 2 * v j) = v j
+```
+Neither of the two K1D1 roots was accepted; both rejected with `sorryAx`. **This is a remaining symbolic real arithmetic proof closure, not a source/polar identity counterexample**. Do not weaken the theorem or promote either root.
+
+**Gate 4 correction decision:** change ONLY the final `norm_num` tactic on this source-side identity to `ring`, an exact real polynomial normalizer. Keep source type, both theorem signatures, source Q, polar conventions, qualified binary keys and axiom validator unchanged. Bind workflow preflight and resulting distinct cache key to the new candidate Git blob. The gate must run to terminal status before acceptance.
