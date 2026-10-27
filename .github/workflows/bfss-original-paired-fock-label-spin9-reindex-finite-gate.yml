@@ -37,7 +37,7 @@ jobs:
         run: |
           set -euxo pipefail
           trap 'echo "SOURCE_REINDEX_PREFLIGHT_FAILED_LINE=$LINENO" >&2' ERR
-          test "$(git rev-parse HEAD:experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean)" = 4f8fb05a35c1d625746931b7ff0361b7ffc2ec4
+          test "$(git rev-parse HEAD:experiments/openai-math-su2-concrete-potential/SU2BFSSG1APairedThetaProbe.lean)" = 4f8fbf05a35c1d625746931b7ff0361b7ffc2ec4
           test "$(git rev-parse HEAD:experiments/openai-math-su2-concrete-potential/SU2RealGammaProbe.lean)" = 5ec0fcb039fb5c1367f72b2bd0f8c05fcd936587
           test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/SU2BFSSPhysicalDomainS4B36ActualPhysicalClosedFormPauliManuscriptProbe.lean)" = 81dd44eec7c24790d87493496fc6f50eae0a0e8e
           test "$(git rev-parse HEAD:experiments/openai-math-su2-physical-domain/bfss_actual_source_gamma_spin9_center_exact_2026_10_27.py)" = 6430043cadc977e98c6b7cd3d64058f56ee899e2
