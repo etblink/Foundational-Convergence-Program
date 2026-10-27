@@ -86,7 +86,7 @@ theorem originalRealFockField_eq_manuscript_coordinate_B
           (((∑ i : SpaceIndex, ∑ a : ColorIndex N,
             M.structureConstant a b q.2 * x (i,a) *
               M.gamma i β q.1 : ℝ) : ℂ) •
-                (M.theta β b * M.theta q.1 q.2)) =
+                (M.theta β b * M.theta q.1 q.2))) =
       (∑ b : ColorIndex N, ∑ β : SpinIndex,
         ∑ δ : SpinIndex, ∑ c : ColorIndex N,
         ∑ i : SpaceIndex, ∑ a : ColorIndex N,

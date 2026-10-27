@@ -1,6 +1,6 @@
 # BFSS S4B33 — literal October 5 manuscript B(x) coordinate and original real source Fock field bridge
 
-**Status: Gate121 preregistered candidate, NOT ACCEPTED. Strictly accepted S4 unique principal roots: 57**, after independently verified [Gate120 run #40447095577](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40447095577), job `122000849241`, original source SHA `ba33abbde49fb44aa62b5569d66304688149c0cd` and acceptance audit `ce1e679d419398f946ae30320f3635bbf4f6719b`.
+**Status: Gate121 #1 strict RED; Gate121 #2 single-token parser correction candidate, NOT ACCEPTED. Strictly accepted S4 unique principal roots: 57**, after independently verified [Gate120 run #40447095577](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40447095577), job `122000849241`, original source SHA `ba33abbde49fb44aa62b5569d66304688149c0cd` and acceptance audit `ce1e679d419398f946ae30320f3635bbf4f6719b`.
 
 ## Independent primary-manuscript source crosswalk
 
@@ -17,3 +17,19 @@ Exact correspondence with strictly accepted Gate120 RHS: paper `a = C` (bosonic 
 [Gate121 strict workflow](../.github/workflows/bfss-form-original-manuscript-b-coordinate-bridge-strict-gate121.yml) preserves upstream immutable TeX/Lean source, Lean 4.34.1 and exact pinned Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`, G4K9C cache provenance, full fresh original source and accepted S4B3–S4B32 parent compilation (separate strict S4B32 parent theorem/axiom audit), candidate `8e69ce262444e15237fd847e6f1de48e716b09f5` Git-tree/worktree SHA double pin, candidate warning-as-error compile/new olean, **exactly one** source principal theorem with only `propext`, `Classical.choice`, `Quot.sound` and no `sorryAx`. A completed independently verified green may add exactly **one new scoped principal S4 root, 57→58**. Any red adds zero and is classified from first original Lean diagnostic.
 
 **Scientific stop:** even strict acceptance does not construct the concrete positively oriented Pauli `AlgebraData 2` or a unitary identification with the manuscript's fixed Clifford module. Nor does it prove a global Spin9 action on the full physical closed form, true B operator equivalence on all closed graph domains, or any positive normalizable eigenpair. Those remain separate falsifiable proof obligations. Canonical main and original frozen upstream are untouched.
+
+
+## Gate121 #1 — strict RED; failed source syntax isolated
+
+Independently verified terminal [run #40448827399](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40448827399), job `122006443138`, exact immutable HEAD `e7d40ed39dd65c9d59a04f64c09d8ce4e568ebe4`, completed/failure. Source mathematical SHA/manuscript TeX blob `12c5fffb5f90b48856f60fb0e93c18e2490c5f1b`, original etblink/math, Lean 4.34.1, Mathlib, G4K9C qualified parent and all newly compiled S4B3–S4B32 accepted proofs passed. Last accepted parent `GATE121_ACCEPTED_S4B32_PARENT_FRESH_PASS 74360`. The candidate reported `GATE121_CANDIDATE_SOURCE_WARNINGS []`, `GATE121_COMPILER_EXIT 1`, named-root axiom report includes `sorryAx` because it was not parsed/proved. First exact errors:
+
+```text
+SU2BFSSPhysicalDomainS4B33OriginalManuscriptBCoordinateOperatorBridgeProbe.lean:95:42: error: unexpected token ':='; expected ')', ',' or ':'
+SU2BFSSPhysicalDomainS4B33OriginalManuscriptBCoordinateOperatorBridgeProbe.lean:82:62: error: unsolved goals
+```
+
+Cause independently counted from the source: the `have hSum` LHS starts with a parenthesized finite `(∑ b, ...)` at line 84 but closes only the inner `(M.theta β b * M.theta q.1 q.2)` and scalar parentheses at line 89, not the outer summation wrapper. At line 95 the equality is consequently still missing one `)`, so Lean cannot parse the intended term, creating the derivative unsolved goal. This is a syntax error, not a counterexample to the independent six-index B(x) statement. No accepted principal S4 root: **57 remains**.
+
+## Gate121 #2 — source-identical one-character parser recovery
+
+The single source change is `(M.theta β b * M.theta q.1 q.2)) =` → `(M.theta β b * M.theta q.1 q.2))) =` at line 89 of the `hSum` type. Balanced-parentheses check confirms zero unmatched parentheses in the proposition. New exact Git blob `f7765c68d666a7037e0c375b19712f164e61e790` (previous immutable failed blob `8e69ce262444e15237fd847e6f1de48e716b09f5` untouched); both CI candidate SHA guards updated atomically with the immutable negative audit. No theorem statement, manuscript transcription, original source, proof tactics, axiom whitelist, or accepted parent changes. Qualification requires a terminal **completed/success** strict run, compiler exit 0, warning list empty, one exact root allowed axioms `propext`, `Classical.choice`, `Quot.sound`, no `sorryAx` and a real fresh `.olean`. Do not promote beyond 57 until then.
