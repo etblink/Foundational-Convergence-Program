@@ -67,3 +67,11 @@ Pin [ExteriorAlgebra/Basis.lean](https://github.com/leanprover-community/mathlib
 **Source polarity bridge:** existing genuine S1V38 declaration `FCP.BFSSS1V38.source48_polar_eq_two_dot` states `polar Q a b = 2*(a ⬝ᵥ b)` for the exact original `Source48Label` type. Thus `a=(1/2) • Pi.single j 1` gives the coordinate dual `b ↦ b j`. Do **not** prove this from an arbitrary assumed Euclidean representation or infer S1V38 compiled binary availability from the K1A cache; identify and restore its separately qualified ancestry if a new gate imports it.
 
 **Falsifiers:** failure to derive a coordinate contraction from the actual weighted-sum-squares quadratic, failure to identify F20B's exact basis with the exterior ordered products, or a nonzero exterior grade surviving all coordinate contractions. None has yet been formally ruled out by a fresh Lean K1D gate. This is the next bounded theorem plan, not a new accepted claim.
+
+## Independent small-dimensional exact sign control (not a source Lean gate)
+
+I independently evaluated the candidate graded-commutator identity on every ordered Clifford basis monomial and every coordinate generator for Euclidean Clifford dimensions `n ∈ {1,2,4,6,8}`, using exact integer signs and bitmasks. For bitsets `I,J`, the Clifford word multiplication sign was computed by inversion parity `sum_k I_k * popcount(J_{<k}) mod 2`, and the polar-contraction coefficient for a basis word containing `j` was computed as `2*(-1)^popcount(I_{<j})`. The equality `e_j e_I - (-1)^|I| e_I e_j = 2 ι_{e_j}(e_I)` passed all coordinate/monomial pairs:
+
+`n=1: 2; n=2: 8; n=4: 64; n=6: 384; n=8: 2048` exact basis cases.
+
+This checks signs and absence of an erroneous factor of two in a finite surrogate family, **not** the original 48-dimensional source identification, Lean declaration, CI qualification, or scalar-commutant theorem. No accepted roots from this check.
