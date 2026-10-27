@@ -43,7 +43,14 @@ theorem originalGammaTheta_operator_product_distribution
   intro β _hβ
   apply Finset.sum_congr rfl
   intro q _hq
-  rw [mul_comm]
+  -- Avoid the generic rw motive, which unfolds the continuous-linear-map
+  -- carrier incorrectly at implicit transparency. Lift a typed scalar
+  -- commutativity equality through the fixed source operator instead.
+  exact congrArg
+    (fun z : ℂ =>
+      z • ((M.theta β A * M.theta q.1 q.2) :
+        Fermion N →L[ℂ] Fermion N))
+    (mul_comm _ _)
 
 #print axioms originalGammaTheta_operator_product_distribution
 
