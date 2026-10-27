@@ -54,6 +54,35 @@ jobs:
           assert 'sorry' not in s and 'native_decide' not in s
           print('F21A_ORIGINAL_SOURCE_EXACT_PINS_AND_TWO_ROOTS_PASS')
           PY
+      - name: Restore qualified original source Spin48 PBW topological group
+        id: f20f
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v52l9e5f20f-original-spin48-topological-group-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Restore original S1V52L9D9 qualified native Spin48 all-vector ancestry
+        id: l9d9
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            upstream-math/lean/.lake/build/lib/lean/OAI
+            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
+          key: bfss-s1v52l9d9-native-universal-spin48-projection-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
+      - name: Qualify both saved ancestry caches before expensive Lean setup
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ steps.f20f.outputs.cache-hit }}" = true || { echo F21A_F20F_QUALIFIED_CACHE_MISSING; exit 1; }
+          test "${{ steps.l9d9.outputs.cache-hit }}" = true || { echo F21A_L9D9_QUALIFIED_SOURCE_ACTION_CACHE_MISSING; exit 1; }
+          for stem in \
+            SU2BFSSPhysicalDomainS1V52L9E5F20FOriginalSpin48TopologicalGroupInverseContinuityProbe \
+            SU2BFSSPhysicalDomainS1V31CanonicalAllSpin48RealVectorActionProbe \
+            SU2BFSSPhysicalDomainS1V30Real48CliffordGeneratorInjectiveViaExteriorProbe; do
+            test -s "upstream-math/lean/.lake/build/lib/lean/$stem.olean" || { echo "F21A_SOURCE_ANCESTRY_MODULE_MISSING=$stem"; exit 1; }
+          done
+          echo F21A_ORIGINAL_F20F_AND_L9D9_ANCESTRY_CACHE_BOUND_PASS
       - name: Reclaim runner disk
         shell: bash
         run: |
@@ -78,28 +107,12 @@ jobs:
           test "$(lake env lean --version | grep -oE '4\.34\.1')" = 4.34.1
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = d13f23b723b8a846827a245b89c10fc7d3f11612
           echo F21A_PINNED_LEAN_MATHLIB_PASS
-      - name: Restore qualified original source Spin48 PBW topological group
-        id: f20f
-        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
-        with:
-          path: |
-            upstream-math/lean/.lake/build/lib/lean/OAI
-            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-s1v52l9e5f20f-original-spin48-topological-group-v2-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
-      - name: Restore qualified S1V34 original source real vector ancestry
-        id: s1v34
-        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
-        with:
-          path: |
-            upstream-math/lean/.lake/build/lib/lean/OAI
-            upstream-math/lean/.lake/build/lib/lean/SU2*.olean
-          key: bfss-s1v34-isolated-spin48-quadratic-isometry-equiv-v1-adc7f124-lean4341-d13f23b-${{ runner.os }}-${{ runner.arch }}
       - name: Verify genuine accepted source modules with native Lean consumer
         shell: bash
         run: |
           set -euo pipefail
           test "${{ steps.f20f.outputs.cache-hit }}" = true || { echo F21A_F20F_QUALIFIED_CACHE_MISSING; exit 1; }
-          test "${{ steps.s1v34.outputs.cache-hit }}" = true || { echo F21A_S1V34_QUALIFIED_CACHE_MISSING; exit 1; }
+          test "${{ steps.l9d9.outputs.cache-hit }}" = true || { echo F21A_L9D9_QUALIFIED_SOURCE_ACTION_CACHE_MISSING; exit 1; }
           cd upstream-math/lean
           for stem in SU2BFSSPhysicalDomainS1V52L9E5F20FOriginalSpin48TopologicalGroupInverseContinuityProbe SU2BFSSPhysicalDomainS1V31CanonicalAllSpin48RealVectorActionProbe SU2BFSSPhysicalDomainS1V30Real48CliffordGeneratorInjectiveViaExteriorProbe; do
             test -s ".lake/build/lib/lean/$stem.olean" || { echo "F21A_ACCEPTED_ANCESTOR_MISSING=$stem"; exit 1; }
