@@ -105,3 +105,16 @@ The generator scans every `.lean` file under the two experimental trees, indexes
 ### First actual graph-integrity qualification — October 27, 2026
 
 [GitHub Actions #40489118724](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40489118724), job `122138292530`, **strictly green for this static tooling scope**. The original job log reports `Indexed 842 local Lean files` (including the recovery subtree), `Verified 7 Git blob qualification pins`, a generated F21A import-ancestry Mermaid graph, and `BFSS_SOURCE_IMPORT_GRAPH_AND_QUALIFICATION_PINS_PASS_NO_LEAN_ROOTS`. This verifies the graph tool executed on the actual research checkout and its curated source-pins matched the current checked-out files. It is **not** a Lean kernel compilation or proof-acceptance certificate; new mathematical roots **0**.
+
+
+## K1A accepted source leaf — October 27, 2026
+
+[Strict CI Gate #40491802270](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40491802270) accepted one new source-exact Lean theorem in SU2BFSSPhysicalDomainS1V52K1AOriginalSpin48KernelCommutantProbe.lean, Git blob 5d1117d1f469a3a76a78c3c4ae4b8896b18b1b7a:
+
+**FCP.BFSSS1V52K1A.originalSourceSpin48_trivialAction_iff_generator_commutes**
+
+Source-import ancestry: K1A → F21A → S1V31 and its S1V30 ancestors, with F20F through F21A. The theorem says trivial original Spin(48) vector action is equivalent to commuting with every original Clifford degree-one generator. Its only reported axioms are propext, Classical.choice, Quot.sound. The source gate compiled freshly, produced a nonempty binary and saved a hash-qualified cache. It does NOT prove the even Clifford commutant scalar, full two-sign kernel, image, or covering. The curated acceptance manifest now includes this eighth source identity.
+
+**K1B is separately staged and unqualified:** SU2BFSSPhysicalDomainS1V52K1BOriginalSpin48NegativeCentralSignProbe.lean consumes K1A and historically accepted S1S rotor, but the F21A cache does not contain the compiled S1S binary. Recover compatible exact S1S ancestry before any K1B strict gate. Do not conflate an accepted theorem with binary availability. Preserve failure causes in [the K1A gate-cycle audit](../audits/FCP_BFSS_K1A_SOURCE_SPIN48_KERNEL_COMMUTANT_GATE_CYCLE_2026_10_27.md).
+
+**Next mathematical target:** original 48-label ordered Clifford/exterior PBW coefficient interface, then even commutant scalar. The exact pinned changeForm_ι_mul contains the contraction correction; never treat equivExterior as multiplicative. Independent physical/spectral adversarial work remains open.
