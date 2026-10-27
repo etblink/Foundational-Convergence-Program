@@ -118,3 +118,8 @@ Source-import ancestry: K1A → F21A → S1V31 and its S1V30 ancestors, with F20
 **K1B is separately staged and unqualified:** SU2BFSSPhysicalDomainS1V52K1BOriginalSpin48NegativeCentralSignProbe.lean consumes K1A and historically accepted S1S rotor, but the F21A cache does not contain the compiled S1S binary. Recover compatible exact S1S ancestry before any K1B strict gate. Do not conflate an accepted theorem with binary availability. Preserve failure causes in [the K1A gate-cycle audit](../audits/FCP_BFSS_K1A_SOURCE_SPIN48_KERNEL_COMMUTANT_GATE_CYCLE_2026_10_27.md).
 
 **Next mathematical target:** original 48-label ordered Clifford/exterior PBW coefficient interface, then even commutant scalar. The exact pinned changeForm_ι_mul contains the contraction correction; never treat equivExterior as multiplicative. Independent physical/spectral adversarial work remains open.
+
+
+### Latest generated graph qualification after K1A/K1B source split
+
+[GitHub Actions #40492708297](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40492708297), job 122150366622, completed success on October 27, 2026. Actual run log: **844** BFSS Lean files indexed (including recovery); **8** reviewed source-blob acceptance receipts verified. The earlier 842-module statistic above is a correct *prior* checkpoint, superseded for current inventory size by 844. This CI adds **zero** Lean theorem roots. The one new K1A mathematical root was separately qualified by [#40491802270](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40491802270).
