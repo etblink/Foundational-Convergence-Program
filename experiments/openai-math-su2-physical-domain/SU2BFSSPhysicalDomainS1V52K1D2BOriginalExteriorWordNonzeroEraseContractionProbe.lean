@@ -51,7 +51,9 @@ theorem originalExteriorCoordinateWord_contract_present_nonzero_erase
         simpa using
           originalExteriorCoordinateWord_leading_contraction j ks hn
       · have hmem : j ∈ ks := by
-          simpa [heq] using hj
+          rcases List.mem_cons.mp hj with h | h
+          · exact False.elim (heq h.symm)
+          · exact h
         obtain ⟨c, hc, hw⟩ := ih hndks hmem
         refine ⟨-c, neg_ne_zero.mpr hc, ?_⟩
         rw [originalExteriorCoordinateWord_cons]
@@ -62,7 +64,7 @@ theorem originalExteriorCoordinateWord_contract_present_nonzero_erase
           simp [heq]
         rw [hzero, hw]
         simp [originalExteriorCoordinateWord_cons, heq,
-          mul_smul_comm, neg_smul]
+          neg_smul]
 
 #print axioms originalExteriorCoordinateWord_contract_present_nonzero_erase
 
