@@ -36,3 +36,16 @@ Instead of another large reconstruction, K1A was separated to import **only F21A
 Successful K1A proves **only** equality of the kernel predicate with the original Clifford commutation predicate. It does not prove the commutant is scalar; the critical even-PBW commutant-to-scalar lemma KERNEL-PBW-1 remains open. K1B's negative sign, two-sign kernel classification, SO image, two-sheeted covering, global Spin9, physical q-invariance, coercivity and eigenstate existence all remain separately open unless later strictly qualified. A green infrastructure graph run does not contribute roots.
 
 **Status at writing:** K1A Gate #40490974369 in progress; **new strictly accepted K1A roots: 0**. Update this note with the exact compiler/axiom disposition before promoting any root.
+
+## Gate 3 — CI #40490974369, genuine Lean source elaboration red
+
+[Run #40490974369](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40490974369), job `122144515599`, completed failure **after successfully restoring** exact frozen source, the accepted F21A cache, its S1V31 compiled dependency, and Lean 4.34.1/Mathlib at the exact revision. The actual Lean compiler reports two errors in original proof blob `965b08344e65fe22d80d9281c223ad10a494c5b2`:
+
+1. At the attempted `simpa only [ConjAct.units_smul_def, ConjAct.ofConjAct_toConjAct]`, the imported original S1V31 theorem still mentions its own private `Q✝` abbreviation and the `toUnits` inverse, while the goal uses K1A's `Q` and Clifford `star`. The restricted simplifier did not discharge their conversion.
+2. A rewrite via `spinGroup.coe_mul_star_self` failed to match the target `↑s * star ↑s`; the lemma's presented coerced `star s` form was syntactically different from the goal.
+
+The failed theorem printed `[propext, sorryAx, Classical.choice, Quot.sound]`, so it is **unaccepted**. These are exact type/rewrite-interface proof deficits, **not a mathematical counterexample** to the original all-generator commutant equivalence. This is the first full Lean verdict.
+
+**Gate 4 correction, unchanged mathematical statement:** New proof blob `5d1117d1f469a3a76a78c3c4ae4b8896b18b1b7a` uses the exact imported theorem as a local equation, rewrites the concrete conjugation action before a *typed* `change` to the actual original Clifford elements, and names two genuine source facts `spinGroup.star_mul_self_of_mem s.property` and `spinGroup.mul_star_self_of_mem s.property` matching Clifford star on the actual `(s : C)`. No axioms, theorem hypotheses, source mathematics or F21A parent were changed. Workflow pins the new source blob and saves a distinct binary key only on actual strict acceptance.
+
+[Gate 4 #40491802270](https://github.com/etblink/Foundational-Convergence-Program/actions/runs/40491802270), staged at research HEAD `44329841cc5e2ae3457641572e0353edf088b037`; inspect its terminal Lean logs before acceptance. **New strictly accepted K1A roots at this checkpoint: zero**.
